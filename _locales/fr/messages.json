@@ -1,0 +1,212 @@
+{
+	"addFolder": {
+		"message": "Ajouter dossier...",
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
+	},
+	"addPage": {
+		"message": "Ajouter a la page courante ",
+		"description": "2013.01.23"
+	},
+	"addSeparator": {
+		"message": "Ajouter séparateur",
+		"description": "2013.07.26 | Refer to Firefox Bookmark menu"
+	},
+	"alert_bookmarklet": {
+		"message": "Vous n'avez pas encore activé bookmarklet .\nVoulez-vous l'activer dans la page d'options ?",
+		"description": "2013.08.12"
+	},
+	"askOpenAll": {
+		"message": "Vous êtes sur le point d'ouvrir $bkmarkCount$ favoris.\nÊtes-vous sûr de vouloir continuer ?",
+		"description": "2013.01.29 | Refer to Firefox Bookmark menu",
+		"placeholders": {
+			"bkmarkCount": {
+				"content": "$1"
+			}
+		}
+	},
+	"cancel": {
+		"message": "Annuler",
+		"description": "2013.01.30"
+	},
+	"confirm": {
+		"message": "Confirmer",
+		"description": "2013.01.30"
+	},
+	"copy": {
+		"message": "Copier",
+		"description": "2013.07.07 | Refer to Chrome Bookmark manager"
+	},
+	"cut": {
+		"message": "Couper",
+		"description": "2013.07.07 | Refer to Chrome Bookmark manager"
+	},
+	"default": {
+		"message": "Défaut",
+		"description": "2013.03.26"
+	},
+	"del": {
+		"message": "Supprimer",
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
+	},
+	"edit": {
+		"message": "Éditer ...",
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
+	},
+	"extDesc": {
+		"message": "Une méthode plus efficace pour visualiser et gérer votre menu de favoris.",
+		"description": "2013.01.21"
+	},
+	"newFolder": {
+		"message": "Nouveau dossier",
+		"description": "2013.01.28 | Refer to Chrome Bookmark manager"
+	},
+	"noBkmark": {
+		"message": "Cliquez ici pour ajouter des favoris :-)",
+		"description": "2013.01.22"
+	},
+	"noResult": {
+		"message": "Aucun favoris en doublon",
+		"description": "2013.01.27"
+	},
+	"openAll": {
+		"message": "Ouvrir tous les favoris",
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
+	},
+	"openAllInI": {
+		"message": "Ouvrir tous les favoris dans la fenêtre navigation privée",
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
+	},
+	"openAllInN": {
+		"message": "Ouvrir tous les favoris dans une nouvelle fenêtre",
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
+	},
+	"openInB": {
+		"message": "Ouvrir dans un onglet en arrière-plan",
+		"description": "2013.01.23"
+	},
+	"openInI": {
+		"message": "Ouvrez dans la fenêtre navigation privée",
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
+	},
+	"openInN": {
+		"message": "Ouvrir dans une nouvelle fenêtre",
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
+	},
+	"opt_bookmarklet": {
+		"message": "Bookmarklet supporté :<br>(Javascript Bookmark Script)",
+		"description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
+	},
+	"opt_clickByLeft": {
+		"message": "Clic gauche pour ouvrir favoris dans :",
+		"description": "2013.06.01"
+	},
+	"opt_clickByLeftCtrl": {
+		"message": "Ctrl + Clic gauche pour ouvrir favoris dans :",
+		"description": "2013.06.01"
+	},
+	"opt_clickByLeftShift": {
+		"message": "Shift + Clic gauche pour ouvrir favoris dans :",
+		"description": "2013.06.01"
+	},
+	"opt_clickByMiddle": {
+		"message": "Clic central pour ouvrir favoris dans :",
+		"description": "2013.06.01"
+	},
+	"opt_clickOption": {
+		"message": "onglet actuel|onglet actuel (w/o closing PmB)|nouvel onglet|onglet d'arrière-plan|onglet d'arrière-plan (w/o closing PmB)|nouvelle fenêtre|navigation privée",
+		"description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+	},
+	"opt_defExpand": {
+		"message": "Dossier expansion par défaut :",
+		"description": "2013.07.30"
+	},
+	"opt_defExpandOpt": {
+		"message": "|Barre favoris|Autre favoris|Mobile favoris",
+		"description": "2013.07.30 - Don't remove '|'"
+	},
+	"opt_error": {
+		"message": "Mauvaise option saisie $fieldNum$",
+		"description": "2013.03.27",
+		"placeholders": {
+			"fieldNum": {
+				"content": "$1"
+			}
+		}
+	},
+	"opt_fontSize": {
+		"message": "Taille police :<br>(12 - 30px)",
+		"description": "2013.07.26"
+	},
+	"opt_hideMobile": {
+		"message": "Cacher le dossier \"Mobile favoris\" s’il existe :",
+		"description": "2013.03.24"
+	},
+	"opt_maxResults": {
+		"message": "Nombre maximum de résultats de recherche :<br>(10 - 200)",
+		"description": "2013.03.24"
+	},
+	"opt_no": {
+		"message": "Non",
+		"description": "2013.03.27"
+	},
+	"opt_opFolderBy": {
+		"message": "Ouvrir le dossier avec clic gauche :",
+		"description": "2013.06.29"
+	},
+	"opt_rememberPos": {
+		"message": "Se souvenir de la dernière position :",
+		"description": "2014.02.24"
+	},
+	"opt_saved": {
+		"message": "Sauver",
+		"description": "2013.03.27"
+	},
+	"opt_searchTarget": {
+		"message": "Requêtes de recherche autorisés :",
+		"description": "2013.09.11"
+	},
+	"opt_searchTargetOpt": {
+		"message": "Le titre et URL|titre seulement",
+		"description": "2013.09.11"
+	},
+	"opt_setWidth": {
+		"message": "Largeur du panneau :<br>(100 - 399px)",
+		"description": "2013.03.24"
+	},
+	"opt_tooltip": {
+		"message": "Afficher info-bulle contenant des informations sur les favoris :",
+		"description": "2013.03.24"
+	},
+	"opt_warnOpenMany": {
+		"message": "Avertir lors de l'ouverture de plusieurs onglets qui pourrait ralentir Chrome :",
+		"description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
+	},
+	"opt_yes": {
+		"message": "Oui",
+		"description": "2013.03.27"
+	},
+	"options": {
+		"message": "Options",
+		"description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
+	},
+	"paste": {
+		"message": "Coller",
+		"description": "2013.07.7 | Refer to Chrome Bookmark manager"
+	},
+	"rename": {
+		"message": "Renommer",
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
+	},
+	"search": {
+		"message": "Rechercher",
+		"description": "2013.01.10"
+	},
+	"showInFolder": {
+		"message": "Afficher dans le dossier",
+		"description": "2014.03.21 | Refer to Chrome Bookmark manager"
+	},
+	"sortByName": {
+		"message": "Trier par nom",
+		"description": "2013.09.17 | Refer to Firefox Bookmark menu"
+	}
+}
