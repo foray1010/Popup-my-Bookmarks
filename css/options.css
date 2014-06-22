@@ -1,176 +1,194 @@
 body {
-	color: #222;
-	font: 12px sans-serif;
+    background: #fff;
+    color: #222;
+    font: 12px sans-serif;
+    margin: 0;
 }
 button {
-	color: #555;
-	background: #eee;
-	border: 1px solid #999;
-	cursor: pointer;
-	padding: 3px 5px;
+    background: #eee;
+    border: 0;
+    color: #555;
+    cursor: pointer;
+    padding: 4px 8px;
 }
 button:hover {
-	border-color: #222;
-	color: #222;
+    color: #0092fa;
 }
 input {
-	outline: 0;
-	text-align: right;
+    margin: 0;
+    outline: 0;
+    padding: 2px;
+    text-align: right;
 }
 input[type='number'] {
-	border: 2px solid #3792fa;
-	padding-right: 2px;
-	width: 50px;
+    border: 1px solid #0092fa;
+    padding-right: 4px;
+    width: 50px;
 }
 select {
-	border: 2px solid #3792fa;
-	outline: 0;
+    background: #fff;
+    border: 1px solid #0092fa;
+    margin: 0;
+    outline: 0;
+    padding: 1px;
 }
 .footer-hr {
-	background: #fa9115;
-	border: 0;
-	height: 2px;
-	margin: 0 auto;
-	width: 680px;
+    background: #fa9115;
+    border: 0;
+    height: 1px;
+    margin: 0 auto;
+    width: 700px;
 }
 .link {
-	color: #3792fa;
-	cursor: pointer;
-	font-weight: bold;
-	text-decoration: none;
+    color: #0092fa;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
 }
 .link:hover {
-	color: #fa9115;
+    color: #fa9115;
 }
 .logo_memo {
-	height: 18px;
+    height: 18px;
 }
 .opt_desc {
-	text-align: right;
-	width: 380px;
+    text-align: right;
+    width: 390px;
 }
 .opt_input {
-	padding-left: 20px;
+    padding-left: 20px;
 }
 .selectbox {
-	text-align: center;
+    background: #fff;
+    border: 1px solid currentcolor;
+    color: #0092fa;
+    display: table;
+    height: 20px;
+    position: relative;
+    text-align: center;
+    -webkit-user-select: none;
+    -webkit-transition: none .4s;
+    width: 80px;
 }
-.selectbox_bg {
-	position: absolute;
-	-webkit-transition: all 500ms;
-	z-index: 1;
+.selectbox-cover {
+    background: currentcolor;
+    height: 100%;
+    position: absolute;
+    -webkit-transition-duration: inherit;
+    -webkit-transition-property: left;
 }
-.selectbox_box {
-	position: absolute;
-	z-index: 2;
+.selectbox-item {
+    cursor: pointer;
+    display: table-cell;
+    position: relative;
+    -webkit-transition-duration: inherit;
+    -webkit-transition-property: color;
+    vertical-align: middle;
 }
-.selectbox_item {
-	color: #bbb;
-	cursor: pointer;
-	display: table-cell;
-	-webkit-transition: all 500ms;
-	vertical-align: middle;
+.selectbox-item-active {
+    color: #fff;
+    cursor: default;
 }
 .opt_desc,
 .opt_input {
-	display: table-cell;
-	height: 40px;
-	vertical-align: middle;
+    display: table-cell;
+    height: 40px;
+    vertical-align: middle;
 }
 #container {
-	border: 2px solid #784c00;
-	height: 690px;
-	position: absolute;
-	top: 0; right: 0; bottom: 0; left: 0; margin: auto;
-	width: 700px;
+    border: 1px solid #784c00;
+    height: 785px;
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0; margin: auto;
+    width: 720px;
 }
 #donate_desc {
-	float: left;
-	width: 400px;
+    float: left;
+    width: 400px;
 }
 #donate_img {
-	float: left;
-	height: 47px;
-	width: 160px;
+    float: left;
+    height: 47px;
+    width: 160px;
 }
 #donation {
-	height: 47px;
-	margin: auto;
-	padding: 10px 0 20px;
-	width: 560px;
+    height: 47px;
+    margin: auto;
+    padding: 10px 0 20px;
+    width: 560px;
 }
 #footer {
-	bottom: 0;
-	position: absolute;
-	width: 100%;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
 }
 #logo_book {
-	background: #784c00;
-	height: 80px;
-	left: 0;
-	position: absolute;
-	top: 0;
-	width: 62px;
+    background: #784c00;
+    height: 80px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 62px;
 }
 #logo_box {
-	cursor: default;
-	height: 80px;
-	-webkit-user-select: none;
+    cursor: default;
+    height: 80px;
+    -webkit-user-select: none;
 }
 #logo_memo1 {
-	background: #3792fa;
+    background: #0092fa;
 }
 #logo_memo2 {
-	background: #fa9115;
+    background: #fa9115;
 }
 #logo_memo3 {
-	background: #6cb;
+    background: #6cb;
 }
 #logo_memo4 {
-	background: #e77;
+    background: #e77;
 }
 #logo_title {
-	background: url(../img/opt_title.png) no-repeat center center;
-	height: 69px;
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 638px;
-}
-#opt_box{
-	margin: 6px auto 0;
+    background: url(../img/opt_title.png) no-repeat center center;
+    height: 69px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 658px;
 }
 #opt_button {
-	float: right;
-	margin: 5px 50px 10px 0;
+    float: right;
+    margin: -7px 50px 10px 0;
+}
+#opt_msg_box {
+    margin-right: 5px;
 }
 #star-five {
-	margin: 32px 6px;
-	-webkit-transform: rotate(35deg);
-	width: 0;
+    margin: 32px 6px;
+    -webkit-transform: rotate(35deg);
+    width: 0;
 }
 #star-five:before {
-	border-width: 0 6px 20px 6px;
-	content: '';
-	left: -16px;
-	position: absolute;
-	top: -14px;
-	-webkit-transform: rotate(-35deg);
+    border-width: 0 6px 20px 6px;
+    content: '';
+    left: -16px;
+    position: absolute;
+    top: -14px;
+    -webkit-transform: rotate(-35deg);
 }
 #star-five:after {
-	content: '';
-	left: -26px;
-	position: absolute;
-	top: 0px;
-	-webkit-transform: rotate(-70deg);
+    content: '';
+    left: -26px;
+    position: absolute;
+    top: 0px;
+    -webkit-transform: rotate(-70deg);
 }
 #star-five,
 #star-five:after {
-	border-width: 0 25px 18px 25px;
+    border-width: 0 25px 18px 25px;
 }
 #star-five,
 #star-five:before,
 #star-five:after {
-	border-color: #fc0 transparent;
-	border-style: solid;
+    border-color: #fc0 transparent;
+    border-style: solid;
 }
