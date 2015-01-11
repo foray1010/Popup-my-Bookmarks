@@ -1,8 +1,7 @@
 {
   "name": "Popup-my-Bookmarks",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A more efficient way to view and manage your bookmarks menu.",
   "devDependencies": {
     "coffee-script": "*",
     "fs-extra": "*",
@@ -18,6 +17,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "foray1010",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/foray1010/Popup-my-Bookmarks.git"
+  },
+  "license": "MIT"
 }
