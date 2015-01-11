@@ -1,0 +1,8 @@
+# temporarily folder
+__*
+
+# Dependency directory
+node_modules
+
+# zip for release
+*.zip
