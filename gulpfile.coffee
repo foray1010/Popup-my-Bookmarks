@@ -91,7 +91,7 @@ gulp.task 'compile-main', ['compile-init'], ->
   compileLang 'html', compile_path
   compileLang 'js', compile_path
 
-gulp.task 'compile-others', ['compile-main'], ->
+gulp.task 'compile-others', ['compile-init'], ->
   compileManifest compile_path, (manifest_json) ->
     manifest_json.version = argv.version
 
@@ -99,7 +99,7 @@ gulp.task 'compile-others', ['compile-main'], ->
     fs.copySync file_name, compile_path + '/' + file_name
   fs.copySync resources_path + '/img', compile_path + '/img'
 
-gulp.task 'compile-zip', ['compile-others'], ->
+gulp.task 'compile-zip', ['compile-main', 'compile-others'], ->
   gulp.src(compile_path + '/**')
     .pipe(plugins.zip(argv.version + '.zip'))
     .pipe(gulp.dest('.'))
