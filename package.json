@@ -1,0 +1,23 @@
+{
+  "name": "Popup-my-Bookmarks",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "coffee-script": "*",
+    "fs-extra": "*",
+    "gulp": "*",
+    "gulp-jade": "*",
+    "gulp-load-plugins": "*",
+    "gulp-stylus": "*",
+    "gulp-uglify": "*",
+    "gulp-zip": "*",
+    "yamljs": "*",
+    "yargs": "*"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

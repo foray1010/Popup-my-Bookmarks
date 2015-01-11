@@ -34,11 +34,11 @@
 	},
 	"copy": {
 		"message": "복사",
-		"description": "2013.07.7 | Refer to Chrome Bookmark manager"
+		"description": "2013.07.07 | Refer to Chrome Bookmark manager"
 	},
 	"cut": {
 		"message": "잘라내기",
-		"description": "2013.07.7 | Refer to Chrome Bookmark manager"
+		"description": "2013.07.07 | Refer to Chrome Bookmark manager"
 	},
 	"default": {
 		"message": "기본값",
@@ -153,12 +153,16 @@
 		"message": "클릭으로 폴더 열기:",
 		"description": "2013.06.29"
 	},
+	"opt_rememberPos": {
+		"message": "마지막 위치 기억",
+		"description": "2014.02.24"
+	},
 	"opt_saved": {
 		"message": "저장됨",
 		"description": "2013.03.27"
 	},
 	"opt_searchTarget": {
-		"message": "검색 가능 대상",
+		"message": "검색 가능 대상:",
 		"description": "2013.09.11"
 	},
 	"opt_searchTargetOpt": {
@@ -196,6 +200,10 @@
 	"search": {
 		"message": "검색",
 		"description": "2013.01.10"
+	},
+	"showInFolder": {
+		"message": "폴더로 보기",
+		"description": "2014.03.21 | Refer to Chrome Bookmark manager"
 	},
 	"sortByName": {
 		"message": "이름으로 정렬",

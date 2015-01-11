@@ -1,105 +1,192 @@
 'use strict';
-!function(window) {
-  //shorter function
+!function(window, document, undefined) {
+  // shorter function
   var _getMsg = chrome.i18n.getMessage;
   var _storage = chrome.storage.sync;
 
-  //pre-pre-defined
-  var OPEN_BMK_WAYS = getSelectQueue('clickOption');
-  var BOOLEAN_WAYS = [true, false];
+  // options choices
+  var BOOLEAN_CHOICES = [true, false];
+  var OPEN_BOOKMARK_CHOICES = getSelectQueue('clickOption');
 
-  //pre-defined
-  var OPTIONS_TO_DEL = ['opNewTab'];
-  var OPTIONS_QUEUE = [
-        'bookmarklet', 'defExpand', 'hideMobile', 'setWidth', 'fontSize', 'searchTarget', 'maxResults', 'tooltip', 'warnOpenMany',
-        'clickByLeft', 'clickByLeftCtrl', 'clickByLeftShift', 'clickByMiddle', 'opFolderBy', 'rememberPos'
-      ];
-  var OPTIONS_PERMISSION = {
-        'bookmarklet': ['http://*/', 'https://*/']
-      };
-  var OPTIONS_CHOICES = [
-        BOOLEAN_WAYS, getSelectQueue('defExpandOpt'), BOOLEAN_WAYS, [100, 399], [12, 30], getSelectQueue('searchTargetOpt'), [10, 200], BOOLEAN_WAYS, BOOLEAN_WAYS,
-        OPEN_BMK_WAYS, OPEN_BMK_WAYS, OPEN_BMK_WAYS, OPEN_BMK_WAYS, BOOLEAN_WAYS, BOOLEAN_WAYS
-      ];
-  var DEFAULT_VALUES = [
-        false, 1, false, 280, 12, 0, 50, false, true,
-        0, 4, 5, 2, false, false
-      ];
+  // options
+  var OPTIONS = [
+    {
+      name: 'bookmarklet',
+      choices: BOOLEAN_CHOICES,
+      defaultValue: false,
+      permissions: ['http://*/', 'https://*/']
+    },
+    {
+      name: 'defExpand',
+      choices: getSelectQueue('defExpandOpt'),
+      defaultValue: 1
+    },
+    {
+      name: 'hideMobile',
+      choices: BOOLEAN_CHOICES,
+      defaultValue: false
+    },
+    {
+      name: 'setWidth',
+      choices: [100, 399],
+      defaultValue: 280
+    },
+    {
+      name: 'fontSize',
+      choices: [12, 30],
+      defaultValue: 12
+    },
+    {
+      name: 'fontFamily',
+      choices: ['monospace', 'sans-serif', 'serif', 'Arial', 'Comic Sans MS', 'Georgia', 'Lucida Sans Unicode', 'Tahoma', 'Trebuchet MS', 'Verdana'],
+      defaultValue: 'sans-serif',
+      type: 'input-select'
+    },
+    {
+      name: 'searchTarget',
+      choices: getSelectQueue('searchTargetOpt'),
+      defaultValue: 0
+    },
+    {
+      name: 'maxResults',
+      choices: [10, 200],
+      defaultValue: 50
+    },
+    {
+      name: 'tooltip',
+      choices: BOOLEAN_CHOICES,
+      defaultValue: false
+    },
+    {
+      name: 'warnOpenMany',
+      choices: BOOLEAN_CHOICES,
+      defaultValue: true
+    },
+    {
+      name: 'clickByLeft',
+      choices: OPEN_BOOKMARK_CHOICES,
+      defaultValue: 0
+    },
+    {
+      name: 'clickByLeftCtrl',
+      choices: OPEN_BOOKMARK_CHOICES,
+      defaultValue: 4
+    },
+    {
+      name: 'clickByLeftShift',
+      choices: OPEN_BOOKMARK_CHOICES,
+      defaultValue: 5
+    },
+    {
+      name: 'clickByMiddle',
+      choices: OPEN_BOOKMARK_CHOICES,
+      defaultValue: 2
+    },
+    {
+      name: 'opFolderBy',
+      choices: BOOLEAN_CHOICES,
+      defaultValue: false
+    },
+    {
+      name: 'rememberPos',
+      choices: BOOLEAN_CHOICES,
+      defaultValue: false
+    }
+  ];
 
-  // Element
-  var _doc = document;
-  var OPTIONS_BOX = id$('opt_box');
-  var OPTIONS_BUTTON = id$('opt_button').tag$('button');
+  // elements
+  var OPTIONS_BOX = id$('opt-box');
+  var OPTIONS_BUTTON = id$('opt-button').tag$('button');
 
-  _doc.title = _getMsg('options') + ' - ' + _doc.title;
-  //// reset the container style if the height of window is too short
-  rePosContainer();
-  window.on('resize', rePosContainer);
-  ////
+  // set HTML title
+  document.title = _getMsg('options') + ' - ' + document.title;
+
+  // reset the container position if the height of window is too short
+  resetContainer();
+  window.on('resize', resetContainer);
+
   getSetting();
 
-  OPTIONS_BUTTON[0].addText(_getMsg('confirm')).on('click', function() {
-    var new_options = {};
+  // confirm button
+  OPTIONS_BUTTON[0]
+    .addText(_getMsg('confirm'))
+    .on('click', function() {
+      var new_options = {};
 
-    OPTIONS_QUEUE.ascEach(function(option_name, option_num) {
-      var option_choices = OPTIONS_CHOICES[option_num];
-      var option_value = id$(option_name).value;
+      try {
+        OPTIONS.ascEach(function(option, option_num) {
+          var option_name = option.name;
+          var option_choices = option.choices;
+          var option_value = id$(option_name).value;
 
-      switch (typeof option_choices[0]) {
-        case 'boolean':
-          option_value = option_value === 'true';
-          setPermission(option_name, option_value);
-          break;
-        case 'number':
-          option_value = parseInt(option_value);
-          if (isNaN(option_value) || option_value < option_choices[0] || option_value > option_choices[1]) {
-            genMsgBoxWhenConfirm(_getMsg('opt_error', option_num + 1 + ''));
-            return new_options = false;
+          switch (option.type || typeof option_choices[0]) {
+            case 'boolean':
+              option_value = option_value === 'true';
+              setPermission(option.permissions, option_name, option_value);
+              break;
+            case 'input-select':
+              option_value = option_value.trim();
+              break;
+            case 'number':
+              option_value *= 1;
+              if (isNaN(option_value) || option_value < option_choices[0] || option_value > option_choices[1]) {
+                throw _getMsg('opt_error', option_num + 1 + '');
+              }
+              break;
+            case 'string':
+              option_value *= 1;
           }
-          break;
-        default: //case 'string'
-          option_value = parseInt(option_value);
+          new_options[option_name] = option_value;
+        });
+
+        _storage.set(new_options);
+        genMsgBoxWhenConfirm(_getMsg('opt_saved'));
+      } catch(e) {
+        genMsgBoxWhenConfirm(e);
       }
-      new_options[option_name] = option_value;
     });
 
-    if (new_options !== false) {
-      _storage.set(new_options);
-      genMsgBoxWhenConfirm(_getMsg('opt_saved'));
-    }
-  });
-
-  OPTIONS_BUTTON[1].addText(_getMsg('default')).on('click', function() {
-    _storage.clear(function() {
-      location.reload();
+  // cancel button
+  OPTIONS_BUTTON[1]
+    .addText(_getMsg('default'))
+    .on('click', function() {
+      _storage.clear(function() {
+        window.location.reload();
+      });
     });
-  });
 
-  id$('donate_here').on('click', function() {
-    tag$('input', id$('donate_img'))[2].click();
+  // donation
+  id$('donate-here').on('click', function() {
+    id$('donate-img').tag$('input')[2].click();
   });
 
   function checkSetting(storage_obj) {
     var new_options = {};
 
-    OPTIONS_QUEUE.ascEach(function(option_name, option_num) {
-      if (storage_obj[option_name] === void 0) {
-        storage_obj[option_name] = new_options[option_name] = DEFAULT_VALUES[option_num];
-        setPermission(option_name, new_options[option_name]);
+    OPTIONS.ascEach(function(option) {
+      var option_name = option.name;
+      if (storage_obj[option_name] === undefined) {
+        storage_obj[option_name] = new_options[option_name] = option.defaultValue;
+
+        // to remove unnecessary permissions
+        setPermission(option.permissions, option_name, new_options[option_name]);
       }
     });
+
     if (!new_options.isEmpty()) {
-      _storage.remove(OPTIONS_TO_DEL);
       _storage.set(new_options);
     }
   }
 
   function genMsgBoxWhenConfirm(msg_text) {
-    var msg_box = new$('span').addText(msg_text).appendTo(id$('opt_msg_box').clear());
+    var opt_msg_box = id$('opt-msg-box').clear();
+    var msg_box = new$('span')
+      .addText(msg_text)
+      .appendTo(opt_msg_box);
+
     setTimeout(function() {
       opacityAnim(msg_box, -1);
     }, 3000);
-    return msg_box;
   }
 
   function genSelectBox(input_addr, box_values, default_value) {
@@ -114,32 +201,38 @@
 
     //// generate element needed
     var selectbox = input_addr.parentNode.new$('div').addClass('selectbox');
-    var cover_box = selectbox.new$('div').addClass('selectbox-cover').css('width', width_of_button + '%');
+    var cover_box = selectbox.new$('div')
+      .addClass('selectbox-cover')
+      .css('width', width_of_button + '%');
     ////
 
     var selectbox_item_active = 'selectbox-item-active';
 
     var setActiveOption = function(option_button) {
-          var button_index = option_button.index() - 1; // -1 to ignore the background element
-          cover_box.style.left = button_index * width_of_button + '%';
-          option_button.addClass(selectbox_item_active);
-          input_addr.value = box_values[button_index];
-        };
+      var button_index = option_button.index() - 1; // -1 to ignore the background element
+
+      option_button.addClass(selectbox_item_active);
+      cover_box.style.left = button_index * width_of_button + '%';
+
+      input_addr.value = box_values[button_index];
+    };
 
     box_values.ascEach(function(value) {
-      var button_text = typeof value !== 'boolean' ? value : _getMsg('opt_' + (value === true ? 'yes' : 'no'));
-      var option_button = selectbox.new$('div').addClass('selectbox-item').css('width', width_of_button + '%').addText(button_text);
+      var button_text = typeof value !== 'boolean' ? value : _getMsg(value ? 'opt_yes' : 'opt_no');
+
+      var option_button = selectbox.new$('div')
+        .addClass('selectbox-item')
+        .css('width', width_of_button + '%')
+        .addText(button_text)
+        .on('click', function() {
+          if (!this.hvClass(selectbox_item_active)) {
+            selectbox.class$(selectbox_item_active)[0].rmClass(selectbox_item_active);
+            setActiveOption(this);
+          }
+        });
 
       if (value === default_value) {
         setActiveOption(option_button);
-      }
-    });
-
-    selectbox.on('click', function(event) {
-      var _target = event.target;
-      if (_target.hvClass('selectbox-item')) {
-        selectbox.class$(selectbox_item_active)[0].rmClass(selectbox_item_active);
-        setActiveOption(event.target);
       }
     });
 
@@ -154,24 +247,35 @@
     _storage.get(null, function(storage_obj) {
       checkSetting(storage_obj);
 
-      OPTIONS_QUEUE.ascEach(function(option_name, option_num) {
+      OPTIONS.ascEach(function(option) {
+        var option_name = option.name;
+        var option_choice = option.choices;
+
         var option_value = storage_obj[option_name];
-        var option_choice = OPTIONS_CHOICES[option_num];
 
         var option_box = OPTIONS_BOX.new$('div');
-        var option_desc = option_box.new$('div');
-        var option_field = option_box.new$('div').addClass('opt_input');
+
+        var option_desc = option_box.new$('div').addClass('opt-desc');
+        var option_field = option_box.new$('div').addClass('opt-input');
         var option_input;
 
-        option_desc.prop({
-          className: 'opt_desc',
-          innerHTML: _getMsg('opt_' + option_name)
-        });
+        option_desc.innerHTML = _getMsg('opt_' + option_name);
 
-        switch (typeof option_choice[0]) {
+        switch (option.type || typeof option_choice[0]) {
           case 'boolean':
             option_input = option_field.new$('input');
             genSelectBox(option_input, option_choice, option_value);
+            break;
+          case 'input-select':
+            option_input = option_field.new$('select');
+            option_choice.ascEach(function(choice, choice_num) {
+              if (choice !== '') {
+                option_input.new$('option').prop({
+                  selected: choice === option_value,
+                  innerText: choice
+                });
+              }
+            });
             break;
           case 'number':
             option_input = option_field.new$('input').prop({
@@ -181,13 +285,13 @@
               value: option_value
             });
             break;
-          default: //case 'string'
+          case 'string':
             option_input = option_field.new$('select');
             option_choice.ascEach(function(choice, choice_num) {
               if (choice !== '') {
                 option_input.new$('option').prop({
                   value: choice_num,
-                  selected: choice_num === option_value ? true : false,
+                  selected: choice_num === option_value,
                   innerText: choice
                 });
               }
@@ -199,7 +303,7 @@
     });
   }
 
-  function rePosContainer() {
+  function resetContainer() {
     var pos_val = window.innerHeight < container.offsetHeight ? 'auto' : '';
 
     container.css({
@@ -208,23 +312,23 @@
     });
   }
 
-  function setPermission(option_name, option_value) {
-    if (OPTIONS_PERMISSION.hv(option_name)) {
+  function setPermission(option_permissions, option_name, option_value) {
+    if (option_permissions) {
       var tmp_obj = {
-            permissions: [],
-            origins: []
-          };
+        permissions: [],
+        origins: []
+      };
 
-      OPTIONS_PERMISSION[option_name].ascEach(function(permission) {
+      option_permissions.ascEach(function(permission) {
         tmp_obj[permission.hv('://') ? 'origins' : 'permissions'].push(permission);
       });
 
-      chrome.permissions[option_value ? 'request' : 'remove'](tmp_obj, function(success) {
-        if (!success) {
-          id$(option_name).nextElementSibling.class$('selectbox-item')[!option_value ? 0 : 1].click();
+      chrome.permissions[option_value ? 'request' : 'remove'](tmp_obj, function(is_success) {
+        if (!is_success) {
+          id$(option_name).parentNode.class$('selectbox-item')[option_value ? 1 : 0].click();
           OPTIONS_BUTTON[0].click();
         }
       });
     }
   }
-}(this);
+}(this, document);
