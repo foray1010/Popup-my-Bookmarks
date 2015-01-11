@@ -1,0 +1,37 @@
+doctype html
+meta(charset="utf-8")
+title Popup my Bookmarks
+link(rel="stylesheet", href="css/pmb.css")
+
+body.panel-width
+  div#sub.panel-width
+  div#main.panel-width
+    div#searchbox
+      img#search-img(src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAsklEQVR42mNggIKGlq5UIL4CxP+B+B0QtwMxGwM2AJRYClUIws+R2LeAmAddcQJU8gIQq0LFeIB4GlR8K7qGJ1AJfiw2w5wojSwIEniCw6l1UHkfZMFfQPwFh4bNUA16yIIwt3aiKfaAih9HN0UAiN/AJIG4A4hXIIXUMSBmRdckC8T7kBTBgvQdlH0diIWxuVkL5EEgtoTyFZFsfwDEYgyEAFCRPJKm9wzEAKimh0D8DABuHq/4QpP4dwAAAABJRU5ErkJggg==", alt="", draggable="false")
+      input#search-input(type="search", tabindex="-1")
+
+  div#menu-cover.ninja(hidden)
+  div#menu(hidden)
+
+  div#editor.panel-width(hidden)
+    span#edit-title &nbsp;
+    input(type="text")
+    input(type="text")
+    button
+    button
+
+  div#preload(hidden)
+    div.box-template
+      div.headbox
+        div.head-title
+        div.head-close
+      div.folderlist
+
+    p.bkmark(draggable="true")
+      img.icon(src="" alt="" draggable="false")
+      span
+
+    div#drag-place
+
+script(src="js/common.js")
+script(src="js/pmb.js")

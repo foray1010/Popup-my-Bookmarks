@@ -6,29 +6,14 @@ var initTimeout;
   var obj_proto = Object.prototype;
   var _doc = document;
   var _math = Math;
-  
+
   var TIMEOUT_HANDLER = {};
-  
+
   /* Public Functions */
   initTimeout = function(timeout_name, fn, timeout) {
     clearTimeout(TIMEOUT_HANDLER[timeout_name]);
     TIMEOUT_HANDLER[timeout_name] = setTimeout(fn, timeout);
   };
-  
-  // function protoFnHandler(fn) {
-  //   return function() {
-  //     var _arg = arguments;
-  //     var _this = this;
-  //     if (_arg[1] === void 0) {
-  //       _arg[0].propEach(function() {
-  //         fn.apply(_this, arguments);
-  //       });
-  //     } else {
-  //       fn.apply(_this, _arg);
-  //     }
-  //     return _this;
-  //   };
-  // }
 
   /* Object.prototype */
   obj_proto.propEach = function(fn) {
@@ -36,10 +21,10 @@ var initTimeout;
          prop_name = prop_arr.shift();
          fn(prop_name, this[prop_name])) {}
   };
-  
+
   obj_proto.prop = function(val1, val2) {
     var _this = this;
-    if (val2 === void 0) {
+    if (val2 === undefined) {
       val1.propEach(function(dna, heredity) {
         if (!isObj(heredity) || heredity === null) {
           _this[dna] = heredity;
@@ -81,34 +66,11 @@ var initTimeout;
     hv:
       function(i) {
         var _this = this;
-        return _this.indexOf ? _this.indexOf(i) > -1 : _this[i] !== void 0;
+        return _this.indexOf ? _this.indexOf(i) >= 0 : _this[i] !== undefined;
       },
     isEmpty:
       function() {
         return Object.keys(this).length === 0;
-      },
-    // toggle:
-    //   function(prop_name, val1, val2) {
-    //     var _this = this, current_val = _this[prop_name];
-    //     if (current_val === val1) {
-    //       _this[prop_name] = val2;
-    //     } else if(current_val === val2) {
-    //       _this[prop_name] = val1;
-    //     }
-    //     return _this[prop_name];
-    //   },
-    rmProp:
-      function(i) {
-        var _this = this;
-        var _action = function(i) {
-              delete _this[i];
-            };
-        if (isArr(i)) {
-          i.ascEach(_action);
-        } else {
-          _action(i);
-        }
-        return _this;
       },
     /* Event Management */
     clickByButton:
@@ -125,32 +87,32 @@ var initTimeout;
         var mouse_xy;
         var _this = this.on({
               mousemove: function(event) {
-                mouse_xy = [event.x, event.y];
-                if (!event_timer) {
-                  mousemove_fn(mouse_xy);
-                }
-              },
-              mouseout: function() {
-                clearTimeout(event_timer);
-                event_timer = null;
-              }
-            });
+            mouse_xy = [event.x, event.y];
+            if (!event_timer) {
+              mousemove_fn(mouse_xy);
+            }
+          },
+          mouseout: function() {
+            clearTimeout(event_timer);
+            event_timer = null;
+          }
+        });
         var mousemove_fn = function(mouse_xy_org) {
-              var is_xy_not_allow = function(x_or_y) {
-                    return (_math.abs(mouse_xy[x_or_y] - mouse_xy_org[x_or_y]) < xy_range) === is_inside_range;
-                  };
-              event_timer = setTimeout(function() {
-                if (_doc.contains(_this)) {
-                  if (is_inside_range ? is_xy_not_allow(0) && is_xy_not_allow(1) : is_xy_not_allow(0) || is_xy_not_allow(1)) {
-                    fn(event);
-                    event_timer = null;
-                  } else {
-                    mousemove_fn(mouse_xy);
-                  }
-                }
-              }, timeout);
-            };
-        if (is_inside_range === void 0) {
+          var is_xy_not_allow = function(x_or_y) {
+            return (_math.abs(mouse_xy[x_or_y] - mouse_xy_org[x_or_y]) < xy_range) === is_inside_range;
+          };
+          event_timer = setTimeout(function() {
+            if (_doc.contains(_this)) {
+              if (is_inside_range ? is_xy_not_allow(0) && is_xy_not_allow(1) : is_xy_not_allow(0) || is_xy_not_allow(1)) {
+                fn(event);
+                event_timer = null;
+              } else {
+                mousemove_fn(mouse_xy);
+              }
+            }
+          }, timeout);
+        };
+        if (is_inside_range === undefined) {
           is_inside_range = false;
         }
         return _this;
@@ -159,10 +121,10 @@ var initTimeout;
       function(events, event_fn, bubble) {
         var _this = this;
         var addEvent = function(event_name, event_fn, bubble) {
-              _this.addEventListener(event_name, event_fn, bubble);
-            };
+          _this.addEventListener(event_name, event_fn, bubble);
+        };
 
-        if (event_fn === void 0) {
+        if (event_fn === undefined) {
           events.propEach(addEvent);
         } else {
           addEvent(events, event_fn, bubble);
@@ -173,14 +135,25 @@ var initTimeout;
       function(events, event_fn, bubble) {
         var _this = this;
         var event_tmp_fn = function(e) {
-              event_fn(e);
-              _this.removeEventListener(events, event_tmp_fn);
-            };
+          event_fn(e);
+          _this.removeEventListener(events, event_tmp_fn);
+        };
 
         return _this.on(events, event_tmp_fn, bubble);
+      },
+    ready:
+      function(fn) {
+        var _doc = this;
+        if (/^loaded|^c/.test(_doc.readyState)) {
+          fn();
+        } else {
+          _doc.once('DOMContentLoaded', function() {
+            fn();
+          });
+        }
       }
   });
-  
+
   /* HTMLElement.prototype */
   HTMLElement.prototype.prop({
     /* Element Management */
@@ -204,47 +177,60 @@ var initTimeout;
         return this;
       },
     after:
-      function(after) {
-        var _this = this, next_sibling = after.nextSibling;
-        return next_sibling ? _this.before(next_sibling) : _this.appendTo(after.parentNode);
+      function(after_element) {
+        var _this = this, next_sibling = after_element.nextSibling;
+        return next_sibling ? _this.before(next_sibling) : _this.appendTo(after_element.parentNode);
+      },
+    attr:
+      function(val1, val2) {
+        var _this = this;
+        var _action = function(name, val) {
+          _this.setAttribute(name, val);
+        };
+        if (val2 === undefined) {
+          val1.propEach(_action);
+        } else {
+          _action(val1, val2);
+        }
+        return _this;
       },
     appendTo:
       function(father) {
         return father.appendChild(this);
       },
     before:
-      function(before) {
+      function(before_element) {
         var father, sons;
-        if (typeof before == 'number') {
+        if (typeof before_element == 'number') {
           sons = (father = this.parentNode).children;
-          before = sons[before < 0 ? sons.length - 1 + before : before];
+          before_element = sons[before_element < 0 ? sons.length - 1 + before_element : before_element];
         } else {
-          father = before.parentNode;
+          father = before_element.parentNode;
         }
-        return father.insertBefore(this, before);
+        return father.insertBefore(this, before_element);
       },
     clear:
       function() {
         for (var father = this, sacrifice; sacrifice = father.firstChild; father.removeChild(sacrifice)) {}
         return father;
       },
-    cloneTo:  
+    cloneTo:
       function(father, grandson) {
-        return this.cloneNode(grandson !== false ? true : false).appendTo(father);
+        return this.cloneNode(grandson !== false).appendTo(father);
       },
     data:
       function(name, val) {
         var _this = this;
         var setDataset = function(name, val) {
-              _this.dataset[name] = val;
-            };
-        
+          _this.dataset[name] = val;
+        };
+
         if (isObj(name)) {
           name.propEach(setDataset);
           return _this;
         }
-        
-        if (val !== void 0) {
+
+        if (val !== undefined) {
           if (val === null) {
             delete _this.dataset[name];
           } else {
@@ -252,7 +238,7 @@ var initTimeout;
           }
           return _this;
         }
-        
+
         return _this.dataset[name];
       },
     first:
@@ -273,7 +259,26 @@ var initTimeout;
       },
     rm:
       function() {
-        _doc.contains(this) && this.parentNode.removeChild(this); // start from Chrome 24 -> this.remove()
+        var _this = this;
+        _doc.contains(_this) && _this.parentNode.removeChild(_this);
+      },
+    selectText:
+      function() {
+        var _this = this;
+
+        if (_this.tagName === 'INPUT') {
+          _this.setSelectionRange(0, _this.value.length);
+        } else {
+          var range = document.createRange();
+          var selection = window.getSelection();
+
+          range.selectNodeContents(_this);
+
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+
+        return _this;
       },
     val:
       function(new_value) {
@@ -295,7 +300,7 @@ var initTimeout;
       },
     toggleClass:
       function(class_name, switcher) {
-        return classListFn(this, switcher === void 0 ? 'toggle' : switcher ? 'add' : 'remove', class_name);
+        return classListFn(this, switcher === undefined ? 'toggle' : switcher ? 'add' : 'remove', class_name);
       },
     /* Style Management */
     css:
@@ -306,7 +311,7 @@ var initTimeout;
     hide:
       function(param) {
         var _this = this;
-        
+
         if (isArr(param)) {
           param.ascEach(function(is_hide, child_num) {
             _this.children[child_num].hide(is_hide);
@@ -314,7 +319,7 @@ var initTimeout;
         } else {
           _this.hidden = param !== false;
         }
-        
+
         return _this;
       },
     opacity:
@@ -334,7 +339,7 @@ var initTimeout;
         return _doc.activeElement === this;
       }
   });
-  
+
   /* Array.prototype */
   Array.prototype.prop({
     max:
@@ -376,7 +381,7 @@ var initTimeout;
         return _this;
       }
   });
-  
+
   /* String.prototype */
   String.prototype.repeat = function(times) {
     var result = '', string = this;
@@ -390,7 +395,7 @@ var initTimeout;
     }
     return result;
   };
-  
+
   /* Private function */
   function classListFn(_this, fn_name, class_name) {
     _this.classList[fn_name](class_name);
@@ -419,51 +424,140 @@ function tag$(friend, fb) {
   return (fb || document).getElementsByTagName(friend);
 }
 
-//Element function
-function getRealTop(son) { //this code can be better
+// AJAX
+var ajax = (function() {
+  var genQueryString = function(data) {
+    var query = [];
+    for (var key in data) {
+      query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+    }
+
+    return query.join('&');
+  };
+
+  var send = function(method, data, options) {
+    //// preassign value to options
+    var empty_fn = function() {};
+
+    var async = options.async !== undefined ? options.async : true;
+    var response_type = options.type;
+    var url = options.url;
+
+    var complete = options.complete || empty_fn;
+    var error = options.error || empty_fn;
+    var success = options.success || empty_fn;
+    ////
+
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.open(method, url, async);
+
+    if (response_type) {
+      xmlhttp.responseType = response_type;
+    }
+
+    if (method == 'POST') {
+      xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    }
+
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState === 4) {
+        var response = xmlhttp.response;
+
+        if (xmlhttp.status === 200) {
+          success(response);
+        } else {
+          error(response);
+        }
+
+        complete();
+      }
+    };
+
+    xmlhttp.send(data);
+  };
+
+  return {
+    get: function(options) {
+      var querystring = genQueryString(options.data);
+      if (querystring) {
+        options.url += '?' + querystring;
+      }
+
+      send('GET', null, options);
+    },
+    post: function(options) {
+      var querystring = genQueryString(options.data);
+
+      send('POST', querystring, options);
+    }
+  };
+})();
+////
+
+// Element function
+var css$ = (function() {
+  var getSheet = function() {
+    var _jets_css = '_jets-css';
+    var style_element = id$(_jets_css) || document.head.new$('style').prop('id', _jets_css);
+    return style_element.sheet;
+  };
+
+  var set = function(css_name, style_list) {
+    var _action = function(css_name, style_list) {
+      var sheet = getSheet();
+      style_list.propEach(function(prop_name, prop_val) {
+        sheet.addRule(css_name, prop_name + ':' + prop_val);
+      });
+    };
+
+    if (style_list === undefined) {
+      css_name.propEach(_action);
+    } else {
+      _action(css_name, style_list);
+    }
+  };
+
+  var unsetAll = function() {
+    var sheet = getSheet();
+    sheet.rules.descEach(function(rule_num) {
+      sheet.deleteRule(rule_num);
+    });
+  };
+
+  return {
+    set: set,
+    unsetAll: unsetAll
+  };
+})();
+
+function getRealTop(son) { // this code can be better
   for (var top = son.offsetTop;
        (son = son.parentNode).tagName !== 'BODY';
-       //find firstChild's offset to identify if it is position: absolute
-       top += (son.firstElementChild.offsetTop === 0 ? son.offsetTop : 0) - son.scrollTop) {}
+       // find firstChild's offset to identify if it is position: absolute
+       top += (son.first().offsetTop === 0 ? son.offsetTop : 0) - son.scrollTop) {}
   return top;
-}
-
-function setCSS(css_name, style_list) {
-  var _action = function(css_name, style_list) {
-        style_list.propEach(function(prop_name, prop_val) {
-          sheet.addRule(css_name, prop_name + ':' + prop_val);
-        });
-      };
-  var _jets_css = '_jets-css';
-  var sheet_element = id$(_jets_css) || document.head.new$('style').prop({ id: _jets_css });
-  var sheet = sheet_element.sheet;
-  
-  if (style_list === void 0) {
-    css_name.propEach(_action);
-  } else {
-    _action(css_name, style_list);
-  }
 }
 
 function update$(swelldom, vogue, catwalk, max_models) {
   var outdated_list = [];
   var updated_list = [];
-  
+
   swelldom.children.ascEach(function(jeans) {
     if (jeans.id !== '') {
       outdated_list.push(jeans.id);
     }
   });
-  
+
   vogue.ascEach(function(jeans) {
     updated_list.push(jeans.id);
   }, max_models);
-  
+
   outdated_list.diff(updated_list)
     .ascEach(function(old_school) {
       id$(old_school).rm();
     });
-  
+
   updated_list.diff(outdated_list)
     .ascEach(function(season) {
       catwalk(vogue[updated_list.indexOf(season)]);
@@ -511,22 +605,3 @@ function opacityAnim(hollowman, end, timer) {
 
   hollowman.opacity(end);
 }
-
-// function scrollAnim(scroller, expected_height) {
-//   function _anim() {
-//     scroller.scrollTop = (now += jump);
-//     if (--timer) {
-//       setTimeout(_anim, 20);
-//     }
-//   }
-
-//   var hill = (expected_height || scroller.scrollHeight) - scroller.clientHeight;
-//   var now = scroller.scrollTop;
-//   var jump;
-//   var timer = 5;
-
-//   if (hill !== now) {
-//     jump = -~((hill - now) / timer);
-//     setTimeout(_anim, 20);
-//   }
-// }

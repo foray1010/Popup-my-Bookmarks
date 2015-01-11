@@ -1,0 +1,197 @@
+body
+  background: #fff
+  color: #222
+  font: 12px sans-serif
+  margin: 0
+
+button
+  background: #eee
+  border: 0
+  color: #555
+  cursor: pointer
+  padding: 4px 8px
+  margin: 0 0 0 3px
+
+  &:hover
+    color: #0092fa
+
+input
+  margin: 0
+  outline: 0
+  padding: 2px
+  text-align: right
+
+  &[type="number"]
+    border: 1px solid #0092fa
+    padding-right: 4px
+    width: 50px
+
+select
+  background: #fff
+  border: 1px solid #0092fa
+  margin: 0
+  outline: 0
+  padding: 1px
+
+.footer-hr
+  background: #fa9115
+  border: 0
+  height: 1px
+  margin: 0 auto
+  width: 700px
+
+.link
+  color: #0092fa
+  cursor: pointer
+  font-weight: bold
+  text-decoration: none
+
+.link:hover
+  color: #fa9115
+
+.logo-memo
+  height: 18px
+
+.opt-desc
+  text-align: right
+  width: 390px
+
+.opt-input
+  padding-left: 20px
+
+.selectbox
+  background: #fff
+  border: 1px solid currentcolor
+  color: #0092fa
+  display: table
+  height: 20px
+  position: relative
+  text-align: center
+  -webkit-user-select: none
+  -webkit-transition: none .4s
+  width: 80px
+
+.selectbox-cover
+  background: currentcolor
+  height: 100%
+  position: absolute
+  -webkit-transition-duration: inherit
+  -webkit-transition-property: left
+
+.selectbox-item
+  cursor: pointer
+  display: table-cell
+  position: relative
+  -webkit-transition-duration: inherit
+  -webkit-transition-property: color
+  vertical-align: middle
+
+.selectbox-item-active
+  color: #fff
+  cursor: default
+
+.opt-desc,
+.opt-input
+  display: table-cell
+  height: 38px
+  vertical-align: middle
+
+#container
+  border: 1px solid #784c00
+  height: 790px
+  width: 720px
+
+  // vertical & horizontal center
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  margin: auto
+
+#donate-desc
+  float: left
+  width: 400px
+
+#donate-img
+  float: left
+  height: 47px
+  width: 160px
+
+#donation
+  height: 47px
+  margin: auto
+  padding: 10px 0 20px
+  width: 560px
+
+#footer
+  bottom: 0
+  position: absolute
+  width: 100%
+
+#logo-book
+  background: #784c00
+  height: 80px
+  left: 0
+  position: absolute
+  top: 0
+  width: 62px
+
+#logo-box
+  cursor: default
+  height: 80px
+  -webkit-user-select: none
+
+#logo-memo1
+  background: #0092fa
+
+#logo-memo2
+  background: #fa9115
+
+#logo-memo3
+  background: #6cb
+
+#logo-memo4
+  background: #e77
+
+#logo-title
+  background: url(../img/opt_title.png) no-repeat center center
+  height: 69px
+  position: absolute
+  right: 0
+  top: 0
+  width: 658px
+
+#opt-button
+  float: right
+  margin: -7px 50px 10px 0
+
+#star-five
+  margin: 32px 6px
+  -webkit-transform: rotate(35deg)
+  width: 0
+
+  &:before
+    border-width: 0 6px 20px 6px
+    content: ""
+    left: -16px
+    position: absolute
+    top: -14px
+    -webkit-transform: rotate(-35deg)
+
+  &:after
+    content: ""
+    left: -26px
+    position: absolute
+    top: 0px
+    -webkit-transform: rotate(-70deg)
+
+  &,
+  &:after
+    border-width: 0 25px 18px 25px
+
+  &,
+  &:before,
+  &:after
+    border-color: #fc0 transparent
+    border-style: solid

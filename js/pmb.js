@@ -1,14 +1,13 @@
 'use strict';
 chrome.storage.sync.get(null, function(STORAGE) {
-  //// shorter global
+  // shorter global
   var _bookmark = chrome.bookmarks;
   var _getMsg = chrome.i18n.getMessage;
   var _localStorage = localStorage;
   var _tab = chrome.tabs;
   var _win = chrome.windows;
-  ////
 
-  //// storage (eg. options)
+  // storage (e.g. options)
   var BOOKMARKLET = STORAGE.bookmarklet;
   var DEF_EXPAND = STORAGE.defExpand;
   var FONT_SIZE = STORAGE.fontSize;
@@ -22,18 +21,14 @@ chrome.storage.sync.get(null, function(STORAGE) {
   var SET_WIDTH = STORAGE.setWidth;
   var TOOLTIP = STORAGE.tooltip;
   var WARN_OPEN_MANY = STORAGE.warnOpenMany;
-  ////
 
-  //// pre-defined
+  // pre-defined
   var BOX = [];
   var BOX_PID = [DEF_EXPAND + '']; //store the parentId of each box
   var COPY_CUT_ITEM = {
-        id: null,
-        isCut: false
-      };
-  ///// attr: data's text
-  var DATATEXT_BOX_NUM = 'box_num';
-  /////
+    id: null,
+    isCut: false
+  };
   var DRAG_ITEM = null;
   var EDITOR_CREATE;
   var HEIGHT_LIST = [];
@@ -48,9 +43,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
   var ON_MOD_KEY;
   var SEPARATE_THIS = 'http://separatethis.com/';
   var TARGET_ITEM;
-  ////
 
-  //// id
+  // attr: data's text
+  var DATATEXT_BOX_NUM = 'box_num';
+
+  // id
   var BODY = document.body;
   var CONTAINER = [id$('main'), id$('sub')];
   var DRAG_PLACE = id$('drag-place');
@@ -59,29 +56,25 @@ chrome.storage.sync.get(null, function(STORAGE) {
   var MENU_COVER = id$('menu-cover');
   var PRELOAD = id$('preload');
   var SEARCH_INPUT = id$('search-input');
-  ////
 
-  //// preload
+  // preload
   var BOX_TEMPLATE = PRELOAD.class$('box-template')[0];
-  var ITEM = PRELOAD.class$('folder')[0];
-  var NOBKMARK = PRELOAD.class$('no-bkmark')[0].addText(_getMsg('noBkmark'));
-  var NORESULT = PRELOAD.class$('no-result')[0].addText(_getMsg('noResult'));
-  ////
+  var ITEM = PRELOAD.class$('bkmark')[0];
+  var NOBKMARK = new$('p').addClass('no-bkmark').addText(_getMsg('noBkmark'));
+  var NORESULT = new$('div').addClass('no-result').addText(_getMsg('noResult'));
 
-  //// if first run
-  if (REMEMBER_POS === void 0) {
+  // if first run
+  if (REMEMBER_POS === undefined) {
     openOptions();
   }
-  ////
 
-  //// Render
-  setCSS(".panel-width", {
+  // Render
+  css$.set('.panel-width', {
     'width': SET_WIDTH + 'px'
   });
   genFirstBox();
-  ////
 
-  /* Search Function */
+  // Initiate search
   window.once('resize', focusSearchInput); // hack to stimulate autofocus because it can't be used with tabIndex="-1"
   SEARCH_INPUT.on('input', function() {
     // to avoid searching when user is still typing
@@ -91,16 +84,15 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   /* Temp Function */
   !function() {
-    var editor_button = EDITOR.tag$('button');
-    var font_size_px = FONT_SIZE + 'px';
-
     /* Set CSS */
-    setCSS('body', {
+    var font_size_px = FONT_SIZE + 'px';
+    var separator_height_px = (FONT_SIZE > 16 ? FONT_SIZE : 18) / 2 + 'px';
+    css$.set('body', {
       'font-size': font_size_px
     });
 
     if (FONT_SIZE > 16) {
-      setCSS({
+      css$.set({
         '.folderlist > p': {
           'height': font_size_px,
           'line-height': font_size_px
@@ -111,8 +103,16 @@ chrome.storage.sync.get(null, function(STORAGE) {
       });
     }
 
+    css$.set('.folderlist > p.separator', {
+      'height': separator_height_px,
+      'line-height': separator_height_px
+    });
+
+
     /* Editor */
-    //// confirm editing
+    var editor_button = EDITOR.tag$('button');
+
+    // confirm editing
     editor_button[0]
       .addText(_getMsg('confirm'))
       .clickByButton(0, function() {
@@ -143,21 +143,18 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
         hideMenu();
       });
-    ////
 
-    //// cancel editing
+    // cancel editing
     editor_button[1]
       .addText(_getMsg('cancel'))
       .clickByButton(0, hideMenu);
-    ////
 
-    //// type 'Enter' on input tag
+    // type 'Enter' on input tag
     EDITOR.on('keydown', function(event) {
       if (event.keyCode === 13) {
         editor_button[0].click();
       }
     });
-    ////
   }();
 
   /* Generate Menu */
@@ -472,7 +469,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function expandWidth(expand) {
     if (IS_EXPANDED !== expand) {
       IS_EXPANDED = expand;
-      modBodyW(getNowWidth());
+      modBodyWidth(getNowWidth());
     }
   }
 
@@ -518,6 +515,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function genItem(box_num, node) {
     var new_item = ITEM.cloneTo(getBoxList(box_num));
+    var icon = new_item.first();
+
     var title = node.title;
     var url = node.url;
 
@@ -526,17 +525,24 @@ chrome.storage.sync.get(null, function(STORAGE) {
     setItemText(new_item, title, url);
 
     if (url) {
-      new_item.className = 'bkmark';
-
+      // new_item.data('type', 'bkmark');
       if (url !== SEPARATE_THIS) {
         // for Bookmark
-        new_item.first().src = 'chrome://favicon/' + url;
+        icon.src = 'chrome://favicon/' + url;
+
         setTooltip(new_item, title, url);
       } else {
         // for Separator
         new_item.addClass('separator');
       }
+    } else {
+      // for folder
+      new_item.className = 'folder';
+      // new_item.data('type', 'bkmark');
+      icon.src = 'img/folder.png';
     }
+
+    // new_item.appendTo(getBoxList(box_num));
 
     return new_item;
   }
@@ -621,8 +627,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function hideMenu(is_hide_cover) {
     opacityAnim(MENU, 0);
     //// to reset width and height because they may be changed when the width and height are not enough for displaying menu
-    modBodyW(getNowWidth());
-    modBodyH(getMaxHeight());
+    modBodyWidth(getNowWidth());
+    modBodyHeight(getMaxHeight());
     ////
 
     if (is_hide_cover !== false) {
@@ -649,10 +655,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
     if (REMEMBER_POS && LAST_PID.length > 0) {
       LAST_PID.ascEach(function(folder_id, box_num) {
         var fn_after_open = function() {
-              if (LAST_SCROLL[box_num]) {
-                getBoxList(box_num).scrollTop = NOW_SCROLL_TOP[box_num] = LAST_SCROLL[box_num] * 1;
-              }
-            };
+          if (LAST_SCROLL[box_num]) {
+            getBoxList(box_num).scrollTop = NOW_SCROLL_TOP[box_num] = LAST_SCROLL[box_num] * 1;
+          }
+        };
 
         if (box_num === 0) {
           if (DEF_EXPAND != folder_id) {
@@ -719,11 +725,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
     hideMenu();
   }
 
-  function modBodyH(new_height) {
+  function modBodyHeight(new_height) {
     BODY.style.height = new_height + 'px';
   }
 
-  function modBodyW(new_width) {
+  function modBodyWidth(new_width) {
     BODY.style.width = new_width + 'px';
   }
 
@@ -780,7 +786,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         });
       }
 
-      close();
+      window.close();
     });
   }
 
@@ -790,7 +796,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
 
     _bookmark.getChildren(id, function(twig) {
-      if (twig === void 0) {
+      if (twig === undefined) {
         return false;
       }
 
@@ -849,18 +855,18 @@ chrome.storage.sync.get(null, function(STORAGE) {
     } else {
       _bookmark.getSubTree(node_id, function(node) {
         var copy_child_fn = function(folder_list, folder_id) {
-              folder_list.children.ascEach(function(bkmark) {
-                _bookmark.create({
-                  parentId: folder_id,
-                  title: bkmark.title,
-                  url: bkmark.url
-                }, function(new_item) {
-                  if (!bkmark.url) {
-                    copy_child_fn(bkmark, new_item.id);
-                  }
-                });
-              });
-            };
+          folder_list.children.ascEach(function(bkmark) {
+            _bookmark.create({
+              parentId: folder_id,
+              title: bkmark.title,
+              url: bkmark.url
+            }, function(new_item) {
+              if (!bkmark.url) {
+                copy_child_fn(bkmark, new_item.id);
+              }
+            });
+          });
+        };
 
         node = node[0];
         createItem(node.title, node.url, function(folder_id) {
@@ -923,7 +929,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     savLastPID();
     savLastScroll();
 
-    modBodyH(getMaxHeight());
+    modBodyHeight(getMaxHeight());
   }
 
   function savLastPID() {
@@ -936,8 +942,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
     if (REMEMBER_POS) {
       var last_scroll = 'lastScroll';
       var save_fn = function() {
-            _localStorage.setItem(last_scroll, NOW_SCROLL_TOP.join());
-          };
+        _localStorage.setItem(last_scroll, NOW_SCROLL_TOP.join());
+      };
       if (target) {
         initTimeout(last_scroll, function() {
           NOW_SCROLL_TOP[target.data(DATATEXT_BOX_NUM) * 1] = target.scrollTop;
@@ -1048,7 +1054,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     var input_field = EDITOR.tag$('input');
 
     id$('edit-title').innerText = _getMsg(url ? 'edit' : 'rename').replace('...', '');
-    input_field[0].val(title).focus();
+    input_field[0].val(title).selectText().focus();
     input_field[1].val(url).hide(!url);
   }
 
@@ -1073,7 +1079,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     body_height = list_height + search_height + header_height + footer_height;
     HEIGHT_LIST[box_num] = body_height > MAX_HEIGHT ? MAX_HEIGHT : body_height;
-    modBodyH(getMaxHeight());
+    modBodyHeight(getMaxHeight());
   }
 
   function setItemText(item, title, url) {
@@ -1086,11 +1092,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
     var now_height = getNowHeight();
 
     if (menu_height > now_height) {
-      modBodyH(menu_height);
+      modBodyHeight(menu_height);
     }
 
     if (menu_width > BODY.offsetWidth) {
-      modBodyW(menu_width);
+      modBodyWidth(menu_width);
     }
 
     setBottomRight(
@@ -1110,25 +1116,26 @@ chrome.storage.sync.get(null, function(STORAGE) {
     if (IS_SEARCHING) {
       var breadcrumb_arr = [];
       var getBreadcrumb = function(bread_id) {
-            _bookmark.get(bread_id, function(node) {
-              if (node === void 0) {
-                return false;
-              }
+        _bookmark.get(bread_id, function(node) {
+          if (node === undefined) {
+            return false;
+          }
 
-              node = node[0];
+          node = node[0];
 
-              if (node.id !== item.id && node.id != 0) {
-                breadcrumb_arr.unshift(node.title);
-              }
+          if (node.id !== item.id && node.id != 0) {
+            breadcrumb_arr.unshift(node.title);
+          }
 
-              if (node.parentId !== void 0) {
-                getBreadcrumb(node.parentId);
-              } else {
-                tooltip_arr.unshift(breadcrumb_arr.join(' > '));
-                item.title = tooltip_arr.join('\n');
-              }
-            });
-          };
+          if (node.parentId !== undefined) {
+            getBreadcrumb(node.parentId);
+          } else {
+            tooltip_arr.unshift(breadcrumb_arr.join(' > '));
+            item.title = tooltip_arr.join('\n');
+          }
+        });
+      };
+
       getBreadcrumb(item.id);
     } else if (tooltip_arr.length > 0) {
       item.title = tooltip_arr.join('\n');
@@ -1152,8 +1159,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function sortByName(parent_id) {
     _bookmark.getChildren(parent_id, function(child_list) {
       var gen_bkmark_list = function() {
-            return separated_child_list[separated_child_list.length] = [[/* Separators */], [/* Folders */], [/* Bookmarks */]];
-          };
+        return separated_child_list[separated_child_list.length] = [[/* Separators */], [/* Folders */], [/* Bookmarks */]];
+      };
 
       var new_child_list = [];
       var now_box_list = getBoxList(getBoxNum(TARGET_ITEM));

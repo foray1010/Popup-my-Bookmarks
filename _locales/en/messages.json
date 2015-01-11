@@ -141,6 +141,10 @@
 		"message": "Font size:<br>(12 - 30px)",
 		"description": "2013.07.26"
 	},
+	"opt_fontFamily": {
+		"message": "Font family:",
+		"description": "2013.07.26"
+	},
 	"opt_hideMobile": {
 		"message": "Hide folder \"Mobile bookmarks\" if exists:",
 		"description": "2013.03.24"
