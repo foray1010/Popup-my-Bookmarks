@@ -1,4 +1,7 @@
 ## 3.1.0 (unreleased)
+Options:
+  - Font family (suggested by Leebeaut Paul and David Bryant)
+
 Improvements:
   - Dragging is now much easier (a problem since the previous version)
 
