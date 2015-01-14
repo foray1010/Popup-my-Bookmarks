@@ -96,7 +96,7 @@ gulp.task 'compile-others', ['compile-init'], ->
   compileManifest compile_path, (manifest_json) ->
     manifest_json.version = argv.version
 
-  for file_name in ['font', '_locales', 'license.txt']
+  for file_name in ['font', '_locales', 'LICENSE']
     fs.copySync file_name, path.join(compile_path, file_name)
   fs.copySync path.join(resources_path, 'img'), path.join(compile_path, 'img')
 
