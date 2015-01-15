@@ -38,7 +38,8 @@ Popup my Bookmarks is a Chrome extension aims at providing a more efficient way 
 
 2. dev
    > gulp dev
-   - To make a temporary folder "__dev" for you to load unpacked extension
+
+   To make a temporary folder "__dev" for you to load unpacked extension
    - *.styl and *.jade will be watched and compiled to *.css or *.html once you edit
    - "__dev/js" will be soft-linked to "./js"
 
