@@ -38,7 +38,19 @@
     },
     {
       name: 'fontFamily',
-      choices: ['monospace', 'sans-serif', 'serif', 'Arial', 'Comic Sans MS', 'Georgia', 'Lucida Sans Unicode', 'Tahoma', 'Trebuchet MS', 'Verdana'],
+      choices: [
+        'monospace',
+        'sans-serif',
+        'serif',
+        'ArchivoNarrow',
+        'Arial',
+        'Comic Sans MS',
+        'Georgia',
+        'Lucida Sans Unicode',
+        'Tahoma',
+        'Trebuchet MS',
+        'Verdana'
+      ],
       defaultValue: 'sans-serif',
       type: 'input-select'
     },
