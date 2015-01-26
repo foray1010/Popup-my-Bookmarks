@@ -209,11 +209,6 @@ var initTimeout;
         }
         return father.insertBefore(this, before_element);
       },
-    clear:
-      function() {
-        for (var father = this, sacrifice; sacrifice = father.firstChild; father.removeChild(sacrifice)) {}
-        return father;
-      },
     cloneTo:
       function(father, grandson) {
         return this.cloneNode(grandson !== false).appendTo(father);
@@ -240,6 +235,11 @@ var initTimeout;
         }
 
         return _this.dataset[name];
+      },
+    empty:
+      function() {
+        for (var father = this, sacrifice; sacrifice = father.firstChild; father.removeChild(sacrifice)) {}
+        return father;
       },
     first:
       function() {
