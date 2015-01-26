@@ -191,7 +191,7 @@
   }
 
   function genMsgBoxWhenConfirm(msg_text) {
-    var opt_msg_box = id$('opt-msg-box').clear();
+    var opt_msg_box = id$('opt-msg-box').empty();
     var msg_box = new$('span')
       .addText(msg_text)
       .appendTo(opt_msg_box);
