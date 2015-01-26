@@ -11,6 +11,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   var BOOKMARKLET = STORAGE.bookmarklet;
   var DEF_EXPAND = STORAGE.defExpand;
   var FONT_SIZE = STORAGE.fontSize;
+  var FONT_FAMILY = STORAGE.fontFamily;
   var HIDE_MOBILE = STORAGE.hideMobile;
   var MAX_RESULTS = STORAGE.maxResults;
   var OP_FOLDER_BY = STORAGE.opFolderBy;
@@ -87,8 +88,19 @@ chrome.storage.sync.get(null, function(STORAGE) {
     /* Set CSS */
     var font_size_px = FONT_SIZE + 'px';
     var separator_height_px = (FONT_SIZE > 16 ? FONT_SIZE : 18) / 2 + 'px';
+
+    // if the font family's name has whitespace, use quote to embed it
+    var font_family = FONT_FAMILY.split(',').map(function(x) {
+        x = x.trim();
+        if (x.hv(' ')) {
+          x = '"' + x + '"';
+        }
+        return x;
+      })
+      .join(',');
+
     css$.set('body', {
-      'font-size': font_size_px
+      'font': font_size_px + ' ' + font_family
     });
 
     if (FONT_SIZE > 16) {
@@ -103,7 +115,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       });
     }
 
-    css$.set('.folderlist > p.separator', {
+    css$.set('.folderlist > .separator', {
       'height': separator_height_px,
       'line-height': separator_height_px
     });
