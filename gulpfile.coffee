@@ -6,6 +6,7 @@ path = require 'path'
 plugins = require('gulp-load-plugins')()
 yamljs = require 'yamljs'
 
+
 # language config
 lang =
   css:
@@ -29,12 +30,6 @@ compile_path = '__compile'
 dev_path = '__dev'
 resources_path = '_resources'
 
-initDir = (dir_path) ->
-  rmdirp dir_path
-
-  fs.mkdirSync dir_path
-  fs.mkdirSync path.join(dir_path, lang.css.dest)
-  fs.mkdirSync path.join(dir_path, lang.js.dest)
 
 # recursively remove folder if exist
 rmdirp = (path) ->
@@ -65,8 +60,21 @@ watchLang = (lang_name, dest_dir, options) ->
   gulp.watch getSourcePath(this_lang), (event) ->
     compileLangHandler this_lang, event.path, dest_dir, options
 
+# initiate the output folder
+initDir = (dir_path) ->
+  rmdirp dir_path
+
+  fs.mkdirSync dir_path
+  fs.mkdirSync path.join(dir_path, lang.css.dest)
+  fs.mkdirSync path.join(dir_path, lang.js.dest)
+
+
+# default when no task
+gulp.task 'default', ['help']
+
+
 # user guideline
-gulp.task 'default', ->
+gulp.task 'help', ->
   console.log """
 
 1. gulp compile --version x.y.z.ddmm
@@ -75,6 +83,7 @@ gulp.task 'default', ->
 Please type 'npm install' in this directory before first use
 
 """
+
 
 # compile and zip PmB
 gulp.task 'compile-init', ->
@@ -103,6 +112,7 @@ gulp.task 'compile-zip', ['compile-main', 'compile-others'], ->
 
 gulp.task 'compile', ['compile-zip'], ->
   rmdirp compile_path # useless after zipped
+
 
 # create a 'watched' folder for testing
 gulp.task 'dev', ->
