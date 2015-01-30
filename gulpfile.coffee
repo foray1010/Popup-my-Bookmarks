@@ -87,8 +87,11 @@ Please type 'npm install' in this directory before first use
 
 # compile and zip PmB
 gulp.task 'compile-init', ->
-  if argv.version is undefined
-    throw 'You need to input a version number x.y.z.ddmm'
+  version_filter = (x) -> "#{parseInt x}" is "#{x}" and x >= 0 and x <= 65535
+  if argv.version is undefined or
+     argv.version.split('.').length isnt 4 or
+     argv.version.split('.').filter(version_filter).length isnt 4
+    throw 'You need to input a version number x.y.z.ddmm, each number between 0 - 65535'
 
   initDir compile_path
 
