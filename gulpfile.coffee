@@ -69,10 +69,6 @@ watchLang = (lang_name, dest_dir, options) ->
 gulp.task 'default', ->
   console.log """
 
-*************************************
-*** Currently, for Linux/Mac only ***
-*************************************
-
 1. gulp compile --version x.y.z.ddmm
 2. gulp dev
 
@@ -118,7 +114,7 @@ gulp.task 'dev', ->
   # for js only (no compile, just soft link)
   js_dest_path = path.join(dev_path, lang.js.dest)
   rmdirp js_dest_path
-  fs.symlinkSync path.join('..', lang.js.source), js_dest_path
+  fs.symlink path.join('..', lang.js.source), js_dest_path, 'dir'
 
   compileManifest dev_path, (manifest_json) ->
     manifest_json.name += '(dev)'
