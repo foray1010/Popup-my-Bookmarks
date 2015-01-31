@@ -124,10 +124,6 @@
 		"message": "默认展开资料夹:",
 		"description": "2013.07.30"
 	},
-	"opt_defExpandOpt": {
-		"message": "|書籤列|其他書籤|行動版書籤",
-		"description": "2013.07.30"
-	},
 	"opt_error": {
 		"message": "错误输入: 设置$fieldNum$",
 		"description": "2013.03.28",

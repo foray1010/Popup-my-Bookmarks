@@ -124,10 +124,6 @@
 		"message": "預設展開資料夾:",
 		"description": "2013.07.30"
 	},
-	"opt_defExpandOpt": {
-		"message": "|書籤列|其他書籤|行動版書籤",
-		"description": "2013.07.30"
-	},
 	"opt_error": {
 		"message": "錯誤輸入: 設定$fieldNum$",
 		"description": "2013.03.27",

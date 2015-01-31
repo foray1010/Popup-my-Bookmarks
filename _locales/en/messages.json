@@ -124,10 +124,6 @@
 		"message": "Default expanded folder:",
 		"description": "2013.07.30"
 	},
-	"opt_defExpandOpt": {
-		"message": "|Bookmarks bar|Other bookmarks|Mobile bookmarks",
-		"description": "2013.07.30 - Don't remove '|'"
-	},
 	"opt_error": {
 		"message": "Wrong input on option $fieldNum$",
 		"description": "2013.03.27",
