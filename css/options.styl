@@ -40,6 +40,23 @@ select
   margin: 0 auto
   width: 700px
 
+.input-select-box
+  border: 1px solid #0092fa
+  position: relative
+
+  & > *
+    border: 0
+
+  & > input
+    box-sizing: border-box
+    height: 100%
+    left: 0
+    padding: 4px
+    position: absolute
+    text-align: left
+    top: 0
+    width: -webkit-calc(100% - 20px)
+
 .link
   color: #0092fa
   cursor: pointer
@@ -53,11 +70,23 @@ select
   height: 18px
 
 .opt-desc
+.opt-input
+  display: table-cell
+  height: 38px
+  vertical-align: middle
+
+.opt-desc
   text-align: right
   width: 390px
 
 .opt-input
   padding-left: 20px
+
+.opt-desc
+.opt-input
+  display: table-cell
+  height: 38px
+  vertical-align: middle
 
 .selectbox
   background: #fff
@@ -89,12 +118,6 @@ select
 .selectbox-item-active
   color: #fff
   cursor: default
-
-.opt-desc,
-.opt-input
-  display: table-cell
-  height: 38px
-  vertical-align: middle
 
 #container
   border: 1px solid #784c00
@@ -186,12 +209,12 @@ select
     top: 0px
     -webkit-transform: rotate(-70deg)
 
-  &,
+  &
   &:after
     border-width: 0 25px 18px 25px
 
-  &,
-  &:before,
+  &
+  &:before
   &:after
     border-color: #fc0 transparent
     border-style: solid
