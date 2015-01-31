@@ -2,6 +2,9 @@
 Options:
   - Font family (suggested by Leebeaut Paul and David Bryant)
 
+Changes:
+  - The options of 'Default expanded folder' are now depended on the root folders you have
+
 Improvements:
   - Dragging is now much easier (a problem since the previous version)
 
