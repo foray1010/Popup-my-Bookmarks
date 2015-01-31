@@ -53,6 +53,32 @@
     }
   }
 
+  function genInputSelectBox(option_field, option_choices, selected_value) {
+    var input_select_box = option_field.new$('div').addClass('input-select-box');
+
+    var option_input = input_select_box.new$('input').attr({
+      'type': 'text',
+      'value': selected_value
+    });
+    var option_select = input_select_box.new$('select');
+
+    option_choices.ascEach(function(choice) {
+      if (choice !== '') {
+        option_select.new$('option').prop({
+          selected: choice === selected_value,
+          innerText: choice
+        });
+      }
+    });
+
+    option_select.on('change', function() {
+      option_input.value = option_select.value;
+      option_input.focus();
+    });
+
+    return option_input;
+  }
+
   function genMsgBoxWhenConfirm(msg_text) {
     var opt_msg_box = id$('opt-msg-box').empty();
     var msg_box = new$('span')
@@ -70,7 +96,7 @@
 
       OPTIONS.ascEach(function(option) {
         var option_name = option.name;
-        var option_choice = option.choices;
+        var option_choices = option.choices;
 
         var option_value = storage_obj[option_name];
 
@@ -82,33 +108,24 @@
 
         option_desc.innerHTML = _getMsg('opt_' + option_name);
 
-        switch (option.type || typeof option_choice[0]) {
+        switch (option.type || typeof option_choices[0]) {
           case 'boolean':
-            option_input = option_field.new$('input');
-            genSelectBox(option_input, option_choice, option_value);
+            option_input = genSelectBox(option_field, option_choices, option_value);
             break;
           case 'input-select':
-            option_input = option_field.new$('select');
-            option_choice.ascEach(function(choice, choice_num) {
-              if (choice !== '') {
-                option_input.new$('option').prop({
-                  selected: choice === option_value,
-                  innerText: choice
-                });
-              }
-            });
+            option_input = genInputSelectBox(option_field, option_choices, option_value);
             break;
           case 'number':
             option_input = option_field.new$('input').prop({
               type: 'number',
-              min: option_choice[0],
-              max: option_choice[1],
+              min: option_choices[0],
+              max: option_choices[1],
               value: option_value
             });
             break;
           case 'string':
             option_input = option_field.new$('select');
-            option_choice.ascEach(function(choice, choice_num) {
+            option_choices.ascEach(function(choice, choice_num) {
               if (choice !== '') {
                 option_input.new$('option').prop({
                   value: choice_num,
@@ -124,35 +141,28 @@
     });
   }
 
-  function genSelectBox(input_addr, box_values, default_value) {
-    //// set input for save selected data
-    if (input_addr.tagName !== 'INPUT') {
-      input_addr = input_addr.new$('input');
-    }
-    input_addr.type = 'hidden';
-    ////
+  function genSelectBox(option_field, option_choices, selected_value) {
+    var selectbox_item_active = 'selectbox-item-active';
+    var width_of_button = 100 / option_choices.length;
 
-    var width_of_button = 100 / box_values.length;
+    var setActiveOption = function(option_button) {
+      var button_index = option_button.index() - 2; // -2 to ignore the input and background element
+
+      option_button.addClass(selectbox_item_active);
+      cover_box.style.left = button_index * width_of_button + '%';
+
+      hidden_input.value = option_choices[button_index];
+    };
 
     //// generate element needed
-    var selectbox = input_addr.parentNode.new$('div').addClass('selectbox');
+    var selectbox = option_field.new$('div').addClass('selectbox');
+    var hidden_input = selectbox.new$('input').attr('type', 'hidden');
     var cover_box = selectbox.new$('div')
       .addClass('selectbox-cover')
       .css('width', width_of_button + '%');
     ////
 
-    var selectbox_item_active = 'selectbox-item-active';
-
-    var setActiveOption = function(option_button) {
-      var button_index = option_button.index() - 1; // -1 to ignore the background element
-
-      option_button.addClass(selectbox_item_active);
-      cover_box.style.left = button_index * width_of_button + '%';
-
-      input_addr.value = box_values[button_index];
-    };
-
-    box_values.ascEach(function(value) {
+    option_choices.ascEach(function(value) {
       var button_text = typeof value !== 'boolean' ? value : _getMsg(value ? 'opt_yes' : 'opt_no');
 
       var option_button = selectbox.new$('div')
@@ -166,12 +176,12 @@
           }
         });
 
-      if (value === default_value) {
+      if (value === selected_value) {
         setActiveOption(option_button);
       }
     });
 
-    return selectbox;
+    return hidden_input;
   }
 
   function getOptionsAndGenTable() {
