@@ -1,3 +1,12 @@
+# temporarily files
+## for Mac
+**/.DS_Store
+**/._*
+
+## for Windows
+**/Desktop.ini
+**/Thumbs.db
+
 # temporarily folder
 __*
 
