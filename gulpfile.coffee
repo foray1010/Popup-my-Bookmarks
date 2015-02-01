@@ -31,6 +31,10 @@ dev_path = '__dev'
 resources_path = '_resources'
 
 
+mkdirp = (path) ->
+  if not fs.existsSync path
+    fs.mkdirSync path
+
 # recursively remove folder if exist
 rmdirp = (path) ->
   if fs.existsSync path
@@ -39,6 +43,8 @@ rmdirp = (path) ->
 # language handlers
 compileLang = (lang_name, dest_dir, options) ->
   this_lang = lang[lang_name]
+
+  mkdirp path.join(dest_dir, this_lang.dest)
 
   compileLangHandler this_lang, getSourcePath(this_lang), dest_dir, options
 compileLangHandler = (this_lang, source_path, dest_dir, options) ->
@@ -63,10 +69,7 @@ watchLang = (lang_name, dest_dir, options) ->
 # initiate the output folder
 initDir = (dir_path) ->
   rmdirp dir_path
-
   fs.mkdirSync dir_path
-  fs.mkdirSync path.join(dir_path, lang.css.dest)
-  fs.mkdirSync path.join(dir_path, lang.js.dest)
 
 
 # default when no task
@@ -100,12 +103,12 @@ gulp.task 'compile-main', ['compile-init'], ->
   compileLang 'js', compile_path
 
 gulp.task 'compile-others', ['compile-init'], ->
-  compileManifest compile_path, (manifest_json) ->
-    manifest_json.version = argv.version
-
   for file_name in ['font', '_locales', 'LICENSE']
     fs.copySync file_name, path.join(compile_path, file_name)
   fs.copySync path.join(resources_path, 'img'), path.join(compile_path, 'img')
+
+  compileManifest compile_path, (manifest_json) ->
+    manifest_json.version = argv.version
 
 gulp.task 'compile-zip', ['compile-main', 'compile-others'], ->
   gulp.src path.join(compile_path, '**')
@@ -123,15 +126,10 @@ gulp.task 'dev', ->
   watchLang 'css', dev_path
   watchLang 'html', dev_path, pretty: true
 
-  # for js only (no compile, just soft link)
-  js_dest_path = path.join(dev_path, lang.js.dest)
-  rmdirp js_dest_path
-  fs.symlink path.join('..', lang.js.source), js_dest_path, 'dir'
+  for file_name in ['font', '_locales', lang.js.source]
+    fs.symlink path.join('..', file_name), path.join(dev_path, file_name), 'dir'
+  fs.symlink path.join('..', resources_path, 'img-dev'), path.join(dev_path, 'img'), 'dir'
 
   compileManifest dev_path, (manifest_json) ->
     manifest_json.name += '(dev)'
     manifest_json.version = '0.0.0.0'
-
-  for file_name in ['font', '_locales']
-    fs.copySync file_name, path.join(dev_path, file_name)
-  fs.copySync path.join(resources_path, 'img-dev'), path.join(dev_path, 'img')
