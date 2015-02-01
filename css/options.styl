@@ -1,37 +1,10 @@
 body
-  background: #fff
-  color: #222
   font: 12px sans-serif
-  margin: 0
 
-button
-  background: #eee
-  border: 0
-  color: #555
-  cursor: pointer
-  padding: 4px 8px
-  margin: 0 0 0 3px
-
-  &:hover
-    color: #0092fa
-
-input
-  margin: 0
-  outline: 0
-  padding: 2px
-  text-align: right
-
-  &[type="number"]
-    border: 1px solid #0092fa
-    padding-right: 4px
-    width: 50px
-
-select
-  background: #fff
-  border: 1px solid #0092fa
-  margin: 0
-  outline: 0
+input[type="number"]
   padding: 1px
+  text-align: right
+  width: 50px
 
 .footer-hr
   background: #fa9115
@@ -45,7 +18,7 @@ select
   position: relative
 
   & > *
-    border: 0
+    border: 0 !important
 
   & > input
     box-sizing: border-box
@@ -63,8 +36,8 @@ select
   font-weight: bold
   text-decoration: none
 
-.link:hover
-  color: #fa9115
+  &:hover
+    color: #fa9115
 
 .logo-memo
   height: 18px
@@ -81,12 +54,6 @@ select
 
 .opt-input
   padding-left: 20px
-
-.opt-desc
-.opt-input
-  display: table-cell
-  height: 38px
-  vertical-align: middle
 
 .selectbox
   background: #fff
@@ -178,7 +145,7 @@ select
   background: #e77
 
 #logo-title
-  background: url(../img/opt_title.png) no-repeat center center
+  background: url(/img/opt_title.png) no-repeat center center
   height: 69px
   position: absolute
   right: 0
@@ -187,7 +154,7 @@ select
 
 #opt-button
   float: right
-  margin: -7px 50px 10px 0
+  margin: -10px 50px 10px 0
 
 #star-five
   margin: 32px 6px

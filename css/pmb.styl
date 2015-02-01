@@ -1,42 +1,23 @@
 @font-face
   font-family: ArchivoNarrow
-  src: url(../font/ArchivoNarrow-Regular.otf)
+  src: url(/font/ArchivoNarrow-Regular.otf)
 
 body
-  background: #fff
-  color: #222
-  margin: 0
   overflow: hidden
   -webkit-user-select: none
-
-button
-  background: #eee
-  border: 0
-  color: #555
-  cursor: pointer
-  outline: 0
-  padding: 4px 8px
-  margin: 3px 0 0 3px
-
-  &:focus,
-  &:hover
-    color: #0092fa
 
 div
   cursor: default
 
-input
-  outline: 0
+input[type="text"]
+  border-color: #ccc
+  box-sizing: border-box
+  margin: 3px 0 0
+  padding: 2px
+  width: 100%
 
-  &[type="text"]
-    border: 1px solid #ccc
-    box-sizing: border-box
-    padding: 2px
-    margin: 3px 0 0
-    width: 100%
-
-    &:focus
-      border-color: #0092fa
+  &:focus
+    border-color: #0092fa
 
 p
   border: 1px solid transparent
@@ -91,7 +72,7 @@ p
     left: 9px
     width: 12px
 
-  &:before,
+  &:before
   &:after
     background: #fff
     content: ""
@@ -118,7 +99,6 @@ p
   position: absolute
   top: 0
   width: 100%
-  z-index: 0
 
 .no-result
   padding: 3px 0
@@ -132,8 +112,8 @@ p
   padding: 0 1px !important
   text-overflow: clip
 
-.separator > img
-  width: 0
+  & > img
+    width: 0
 
 .the-end
   background: #fa9115
@@ -160,6 +140,13 @@ p
   text-align: right
 
 #main
+#sub
+  background: #fff
+  height: 100%
+  overflow: hidden
+  position: absolute
+
+#main
   right: 0
 
 #menu
@@ -178,8 +165,7 @@ p
     padding-top: 3px
 
 #menu-cover
-  background: #fff
-  opacity: .3
+  background: rgba(255, 255, 255, .3)
 
 #search-img
   float: left
@@ -200,34 +186,26 @@ p
 #sub
   left: 0
 
+  & .folderlist:after
+  & .headbox
+  & .the-end
+    background: #0092fa
+
 // no text overflow
-p,
+p
 .head-title
   overflow: hidden
   text-overflow: ellipsis
   white-space: nowrap
 
-.selected,
+.selected
 #menu p:not(.grey-item):hover
   background: #eee
   border-color: #ddd
 
-.headbox,
+.headbox
 #searchbox
   margin-bottom: 2px
-
-#main,
-#sub
-  background: #fff
-  height: 100%
-  overflow: hidden
-  position: absolute
-
-#sub
-  & .folderlist:after,
-  & .headbox,
-  & .the-end
-    background: #0092fa
 
 ::-webkit-scrollbar
   background: #fff
@@ -247,7 +225,6 @@ p,
 
 ::-webkit-search-cancel-button
   -webkit-appearance: none
-  content: url(../img/cancel.png)
+  content: url(/img/cancel.png)
   height: 10px
   width: 14px
-

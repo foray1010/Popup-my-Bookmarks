@@ -1,7 +1,8 @@
 doctype html
 meta(charset="utf-8")
 title Popup my Bookmarks
-link(rel="stylesheet", href="css/pmb.css")
+each x in ["common", "pmb"]
+  link(rel="stylesheet", href="css/#{x}.css")
 
 body.panel-width
   div#sub.panel-width
@@ -28,10 +29,10 @@ body.panel-width
       div.folderlist
 
     p.bkmark(draggable="true")
-      img.icon(src="" alt="" draggable="false")
+      img.icon(src="", alt="", draggable="false")
       span
 
     div#drag-place
 
-script(src="js/common.js")
-script(src="js/pmb.js")
+each x in ["common", "pmb"]
+  script(src="js/#{x}.js")
