@@ -1,7 +1,8 @@
 doctype html
 meta(charset="utf-8")
 title Popup my Bookmarks
-link(rel="stylesheet", href="css/options.css")
+each x in ["common", "options"]
+  link(rel="stylesheet", href="css/#{x}.css")
 
 div#container
   div#logo-box
@@ -32,5 +33,5 @@ div#container
         span#donate-here.link PayPal
         | !
 
-script(src="js/common.js")
-script(src="js/options.js")
+each x in ["common", "options"]
+  script(src="js/#{x}.js")
