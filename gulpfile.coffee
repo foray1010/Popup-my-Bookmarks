@@ -66,6 +66,21 @@ watchLang = (lang_name, dest_dir, options) ->
   gulp.watch getSourcePath(this_lang), (event) ->
     compileLangHandler this_lang, event.path, dest_dir, options
 
+# markdown handler
+getMarkdownData = (title_list) ->
+  md_source = path.join resources_path, 'markdown'
+
+  data_list = []
+  for title in title_list
+    file_data = fs.readFileSync path.join(md_source, "#{title}.md"), 'utf-8'
+    data_list.push """
+## #{title}
+
+#{file_data}
+"""
+
+  return data_list.join '\n\n'
+
 # initiate the output folder
 initDir = (dir_path) ->
   rmdirp dir_path
@@ -78,14 +93,7 @@ gulp.task 'default', ['help']
 
 # user guideline
 gulp.task 'help', ->
-  console.log """
-
-1. gulp compile --version x.y.z.ddmm
-2. gulp dev
-
-Please type 'npm install' in this directory before first use
-
-"""
+  console.log '\n' + getMarkdownData(['Developer guide']) + '\n'
 
 
 # compile and zip PmB
@@ -133,3 +141,36 @@ gulp.task 'dev', ->
   compileManifest dev_path, (manifest_json) ->
     manifest_json.name += '(dev)'
     manifest_json.version = '0.0.0.0'
+
+# generate markdown file
+gulp.task 'md', ->
+  file_name = argv.make
+
+  switch (file_name)
+    when '__store.md'
+      file_data = getMarkdownData([
+        'Popup my Bookmarks'
+        'Plan to do'
+        'What you can help'
+        'Q&A'
+      ])
+
+      # remove first three lines
+      file_data = file_data.replace /.+\n\n.+\n/, ''
+
+      # remove style of subheader
+      file_data = file_data.replace /##### /g, ''
+
+    when 'README.md'
+      file_data = getMarkdownData([
+        'Popup my Bookmarks'
+        'Developer guide'
+        'Plan to do'
+        'What you can help'
+        'Q&A'
+      ])
+
+    else
+      throw "Unknown markdown file: #{file_name}"
+
+  fs.writeFile file_name, file_data
