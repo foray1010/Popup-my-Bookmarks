@@ -3,6 +3,7 @@
   src: url(/font/ArchivoNarrow-Regular.otf)
 
 body
+  background: #fff
   overflow: hidden
   -webkit-user-select: none
 
@@ -21,11 +22,12 @@ input[type="text"]
 
 p
   border: 1px solid transparent
+  color: #222
   cursor: default
   margin: 0
 
 .box-template
-  background: #fff
+  background: inherit
   position: absolute
   width: 100%
 
@@ -35,7 +37,7 @@ p
   &:after
     content: ""
     display: block
-    background: #fa9115
+    background: currentcolor
     margin-top: 2px
     height: 2px
 
@@ -48,7 +50,7 @@ p
   color: #bbb
 
 .headbox
-  background: #fa9115
+  background: currentcolor
   height: 30px
 
 .head-close
@@ -101,11 +103,12 @@ p
   width: 100%
 
 .no-result
+  color: #222
   padding: 3px 0
   text-align: center
 
 .rootfolder
-  color: #fa9115
+  color: inherit !important
 
 .separator
   color: #bbb
@@ -116,7 +119,7 @@ p
     width: 0
 
 .the-end
-  background: #fa9115
+  background: currentcolor
   border: 0
   height: 2px
   margin: 2px 0 0
@@ -141,12 +144,13 @@ p
 
 #main
 #sub
-  background: #fff
+  background: inherit
   height: 100%
   overflow: hidden
   position: absolute
 
 #main
+  color: #fa9115
   right: 0
 
 #menu
@@ -173,6 +177,7 @@ p
 
 #search-input
   -webkit-appearance: none
+  background: transparent
   border: 0
   float: left
   height: 100%
@@ -184,12 +189,8 @@ p
   height: 21px
 
 #sub
+  color: #0092fa
   left: 0
-
-  & .folderlist:after
-  & .headbox
-  & .the-end
-    background: #0092fa
 
 // no text overflow
 p
@@ -198,17 +199,17 @@ p
   text-overflow: ellipsis
   white-space: nowrap
 
+.headbox
+#searchbox
+  margin-bottom: 2px
+
 .selected
 #menu p:not(.grey-item):hover
   background: #eee
   border-color: #ddd
 
-.headbox
-#searchbox
-  margin-bottom: 2px
-
 ::-webkit-scrollbar
-  background: #fff
+  background: transparent
   height: 5px
   width: 7px
 
