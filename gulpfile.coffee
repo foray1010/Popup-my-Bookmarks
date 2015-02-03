@@ -31,20 +31,11 @@ dev_path = '__dev'
 resources_path = '_resources'
 
 
-mkdirp = (path) ->
-  if not fs.existsSync path
-    fs.mkdirSync path
-
-# recursively remove folder if exist
-rmdirp = (path) ->
-  if fs.existsSync path
-    fs.removeSync path
-
 # language handlers
 compileLang = (lang_name, dest_dir, options) ->
   this_lang = lang[lang_name]
 
-  mkdirp path.join(dest_dir, this_lang.dest)
+  fs.mkdirs path.join(dest_dir, this_lang.dest)
 
   compileLangHandler this_lang, getSourcePath(this_lang), dest_dir, options
 compileLangHandler = (this_lang, source_path, dest_dir, options) ->
@@ -83,7 +74,7 @@ getMarkdownData = (title_list) ->
 
 # initiate the output folder
 initDir = (dir_path) ->
-  rmdirp dir_path
+  fs.removeSync dir_path
   fs.mkdirSync dir_path
 
 
@@ -124,7 +115,7 @@ gulp.task 'compile-zip', ['compile-main', 'compile-others'], ->
     .pipe gulp.dest('.')
 
 gulp.task 'compile', ['compile-zip'], ->
-  rmdirp compile_path # useless after zipped
+  fs.removeSync compile_path # useless after zipped
 
 
 # create a 'watched' folder for testing
@@ -141,6 +132,7 @@ gulp.task 'dev', ->
   compileManifest dev_path, (manifest_json) ->
     manifest_json.name += '(dev)'
     manifest_json.version = '0.0.0.0'
+
 
 # generate markdown file
 gulp.task 'md', ->
