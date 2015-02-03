@@ -35,7 +35,7 @@ resources_path = '_resources'
 compileLang = (lang_name, dest_dir, options) ->
   this_lang = lang[lang_name]
 
-  fs.mkdirs path.join(dest_dir, this_lang.dest)
+  fs.mkdirsSync path.join(dest_dir, this_lang.dest)
 
   compileLangHandler this_lang, getSourcePath(this_lang), dest_dir, options
 compileLangHandler = (this_lang, source_path, dest_dir, options) ->
