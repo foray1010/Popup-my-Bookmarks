@@ -1,9 +1,9 @@
 ##### Before you start
-1. Install [Node.js](https://github.com/joyent/node) or [io.js](https://github.com/iojs/io.js) by:
-  - [nvm](https://github.com/creationix/nvm) (Linux/Mac)
-  - [Official website](http://nodejs.org/download/) (Windows)
+1. Install [Node.js](//github.com/joyent/node) or [io.js](//github.com/iojs/io.js) via:
+  - [nvm](//github.com/creationix/nvm) (Linux/Mac)
+  - [Node.js](//nodejs.org/download) or [io.js](//iojs.org) official website (Windows)
 
-2. Install [gulp.js](https://github.com/gulpjs/gulp)
+2. Install [gulp.js](//github.com/gulpjs/gulp)
 
    > npm install -g gulp
 
