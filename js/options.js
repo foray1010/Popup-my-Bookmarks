@@ -11,6 +11,7 @@
   var OPTIONS_BOX = id$('opt-box');
   var OPTIONS_BUTTON = id$('opt-button').tag$('button');
 
+
   // set HTML title
   document.title = _getMsg('options') + ' - ' + document.title;
 
@@ -34,6 +35,7 @@
   id$('donate-here').on('click', function() {
     id$('donate-img').tag$('input')[2].click();
   });
+
 
   function checkOptions(storage_obj) {
     var new_options = {};

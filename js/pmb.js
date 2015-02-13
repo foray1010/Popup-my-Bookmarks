@@ -64,18 +64,17 @@ chrome.storage.sync.get(null, function(STORAGE) {
   var NOBKMARK = new$('p').addClass('no-bkmark').addText(_getMsg('noBkmark'));
   var NORESULT = new$('div').addClass('no-result').addText(_getMsg('noResult'));
 
+
   // if first run
   if (REMEMBER_POS === undefined) {
     openOptions();
   }
 
-  // Render
-  css$.set('.panel-width', {
-    'width': SET_WIDTH + 'px'
-  });
+  // render
+  initStyleOptions();
   genFirstBox();
 
-  // Initiate search
+  // initiate search
   window.once('resize', focusSearchInput); // hack to stimulate autofocus because it can't be used with tabIndex="-1"
   SEARCH_INPUT.on('input', function() {
     // to avoid searching when user is still typing
@@ -83,96 +82,14 @@ chrome.storage.sync.get(null, function(STORAGE) {
   });
   SEARCH_INPUT.placeholder = _getMsg('search');
 
-  /* Temp Function */
-  !function() {
-    /* Set CSS */
-    var font_size_px = FONT_SIZE + 'px';
-    var separator_height_px = (FONT_SIZE > 16 ? FONT_SIZE : 18) / 2 + 'px';
-
-    // if the font family's name has whitespace, use quote to embed it
-    var font_family = FONT_FAMILY.split(',').map(function(x) {
-        x = x.trim();
-        if (x.hv(' ')) {
-          x = '"' + x + '"';
-        }
-        return x;
-      })
-      .join(',');
-
-    css$.set('body', {
-      'font': font_size_px + ' ' + font_family
-    });
-
-    if (FONT_SIZE > 16) {
-      css$.set({
-        '.folderlist > p': {
-          'height': font_size_px,
-          'line-height': font_size_px
-        },
-        '.icon': {
-          'width': font_size_px
-        }
-      });
-    }
-
-    css$.set('.folderlist > .separator', {
-      'height': separator_height_px,
-      'line-height': separator_height_px
-    });
-
-
-    /* Editor */
-    var editor_button = EDITOR.tag$('button');
-
-    // confirm editing
-    editor_button[0]
-      .addText(_getMsg('confirm'))
-      .clickByButton(0, function() {
-        var editor_input = EDITOR.tag$('input');
-        var next_box;
-        var title = editor_input[0].value;
-        var url;
-
-        if (EDITOR_CREATE) {
-          createItem(title);
-        } else {
-          if (isFolder(TARGET_ITEM)) {
-            next_box = BOX[getBoxNum(TARGET_ITEM) + 1];
-            if (next_box) {
-              next_box.class$('head-title')[0].innerText = title;
-            }
-          } else {
-            url = editor_input[1].value;
-            setTooltip(TARGET_ITEM, title, url);
-          }
-
-          _bookmark.update(TARGET_ITEM.id, {
-            title: title,
-            url: url
-          });
-          setItemText(TARGET_ITEM, title, url);
-        }
-
-        hideMenu();
-      });
-
-    // cancel editing
-    editor_button[1]
-      .addText(_getMsg('cancel'))
-      .clickByButton(0, hideMenu);
-
-    // type 'Enter' on input tag
-    EDITOR.on('keydown', function(event) {
-      if (event.keyCode === 13) {
-        editor_button[0].click();
-      }
-    });
-  }();
-
-  /* Generate Menu */
+  // generate menu
   genMenu();
-  MENU_COVER.clickByButton(0, hideMenu);
+  MENU_COVER.on('click', hideMenu);
 
+  // initiate editor
+  initEditor();
+
+  // event delegation
   BODY.on({
     click:
       function(event) {
@@ -336,7 +253,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
       }
   });
 
-  /* PmB Functions */
+
+  // functions
   function clickSwitcher(mouse_button, url) {
     var switcher;
     if (mouse_button === 0) {
@@ -537,24 +455,20 @@ chrome.storage.sync.get(null, function(STORAGE) {
     setItemText(new_item, title, url);
 
     if (url) {
-      // new_item.data('type', 'bkmark');
       if (url !== SEPARATE_THIS) {
-        // for Bookmark
+        // for bookmarks
         icon.src = 'chrome://favicon/' + url;
 
         setTooltip(new_item, title, url);
       } else {
-        // for Separator
+        // for separators
         new_item.addClass('separator');
       }
     } else {
-      // for folder
+      // for folders
       new_item.className = 'folder';
-      // new_item.data('type', 'bkmark');
       icon.src = 'img/folder.png';
     }
-
-    // new_item.appendTo(getBoxList(box_num));
 
     return new_item;
   }
@@ -649,6 +563,98 @@ chrome.storage.sync.get(null, function(STORAGE) {
       TARGET_ITEM.rmClass('selected');
       SEARCH_INPUT.focus();
     }
+  }
+
+  function initEditor() {
+    var editor_button = EDITOR.tag$('button');
+
+    // confirm editing
+    editor_button[0]
+      .addText(_getMsg('confirm'))
+      .on('click', function() {
+        var editor_input = EDITOR.tag$('input');
+        var next_box;
+        var title = editor_input[0].value;
+        var url;
+
+        if (EDITOR_CREATE) {
+          createItem(title);
+        } else {
+          if (isFolder(TARGET_ITEM)) {
+            next_box = BOX[getBoxNum(TARGET_ITEM) + 1];
+            if (next_box) {
+              next_box.class$('head-title')[0].innerText = title;
+            }
+          } else {
+            url = editor_input[1].value;
+            setTooltip(TARGET_ITEM, title, url);
+          }
+
+          _bookmark.update(TARGET_ITEM.id, {
+            title: title,
+            url: url
+          });
+          setItemText(TARGET_ITEM, title, url);
+        }
+
+        hideMenu();
+      });
+
+    // cancel editing
+    editor_button[1]
+      .addText(_getMsg('cancel'))
+      .on('click', hideMenu);
+
+    // type 'Enter' on input tag
+    EDITOR.on('keydown', function(event) {
+      if (event.keyCode === 13) {
+        editor_button[0].click();
+      }
+    });
+  }
+
+  function initStyleOptions() {
+    var font_size_px = FONT_SIZE + 'px';
+    var separator_height_px = (FONT_SIZE > 16 ? FONT_SIZE : 18) / 2 + 'px';
+
+    // if the font family's name has whitespace, use quote to embed it
+    var font_family = FONT_FAMILY.split(',').map(function(x) {
+        x = x.trim();
+        if (x.hv(' ')) {
+          x = '"' + x + '"';
+        }
+        return x;
+      })
+      .join(',');
+
+
+    // set panel(#main, #sub) width
+    css$.set('.panel-width', {
+      'width': SET_WIDTH + 'px'
+    });
+
+
+    // set font size
+    css$.set('body', {
+      'font': font_size_px + ' ' + font_family
+    });
+
+    if (FONT_SIZE > 16) {
+      css$.set({
+        '.folderlist > p': {
+          'height': font_size_px,
+          'line-height': font_size_px
+        },
+        '.icon': {
+          'width': font_size_px
+        }
+      });
+    }
+
+    css$.set('.folderlist > .separator', {
+      'height': separator_height_px,
+      'line-height': separator_height_px
+    });
   }
 
   function isFolder(item) {
@@ -837,7 +843,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         };
 
         genNinja(pre_box_num)
-          .clickByButton(0, folder_cover_fn)
+          .on('click', folder_cover_fn)
           .hoverTimeout(folder_cover_fn, 300, 10);
       }
 
