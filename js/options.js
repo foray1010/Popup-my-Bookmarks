@@ -63,12 +63,10 @@
     var option_select = input_select_box.new$('select');
 
     option_choices.ascEach(function(choice) {
-      if (choice !== '') {
-        option_select.new$('option').prop({
-          selected: choice === selected_value,
-          innerText: choice
-        });
-      }
+      option_select.new$('option').prop({
+        selected: choice === selected_value,
+        innerText: choice
+      });
     });
 
     option_select.on('change', function() {
@@ -126,7 +124,7 @@
           case 'string':
             option_input = option_field.new$('select');
             option_choices.ascEach(function(choice, choice_num) {
-              if (choice !== '') {
+              if (choice !== undefined) {
                 option_input.new$('option').prop({
                   value: choice_num,
                   selected: choice_num === option_value,
@@ -199,8 +197,9 @@
       },
       {
         name: 'defExpand',
-        choices: null, // set on the next step
-        defaultValue: 1
+        choices: [], // set on the next step
+        defaultValue: 1,
+        type: 'string'
       },
       {
         name: 'hideMobile',
@@ -288,17 +287,10 @@
     ];
 
     // get the root folders' title and set as the choices of 'defExpand'
-    chrome.bookmarks.getChildren('0', function(tree) {
-      var bookmark_titles = tree.map(function(x) {
-        return x.title;
-      });
-
-      OPTIONS.ascEach(function(option) {
-        if (option.name === 'defExpand') {
-          // as '' will be skipped, the value will start from 1
-          option.choices = [''].concat(bookmark_titles);
-          return false;
-        }
+    chrome.bookmarks.getChildren('0', function(rootfolders) {
+      var def_expand_choices = OPTIONS.filter(function(x) { return x.name === 'defExpand'; })[0].choices;
+      rootfolders.ascEach(function(this_folder) {
+        def_expand_choices[this_folder.id * 1] = this_folder.title;
       });
 
       // as it is an async function, generate table here
