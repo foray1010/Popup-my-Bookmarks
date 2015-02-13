@@ -12,3 +12,5 @@ Popup my Bookmarks is a Chrome extension aims at providing a more efficient way 
 - Save 24px of your vertical workspace (Rock on Chromebook!)
 
 - No background running application, save your memory and privacy!
+
+Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG.md
