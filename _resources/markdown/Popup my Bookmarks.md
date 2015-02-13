@@ -1,4 +1,4 @@
-Popup my Bookmarks is a Chrome extension aims at providing a more efficient way to view and manage your bookmarks menu:
+[Popup my Bookmarks](//chrome.google.com/webstore/detail/popup-my-bookmarks/mppflflkbbafeopeoeigkbbdjdbeifni) is a Chrome extension aims at providing a more efficient way to view and manage your bookmarks menu:
 - Firefox / IE-like bookmarks menu
 
 - Display bookmark trees side by side
