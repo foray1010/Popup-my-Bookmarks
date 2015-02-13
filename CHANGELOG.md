@@ -6,6 +6,9 @@ Changes:
   - The options of 'Default expanded folder' are now depended on the root folders you have
   - Highlight the default folder name when creating a new folder (Inspired by Dennis Long)
 
+Bugfixes:
+  - Fix wrong index when setting option 'Default expanded folder' in Opera
+
 Improvements:
   - Dragging is now much easier (a problem since the previous version)
 
