@@ -75,14 +75,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
   genFirstBox();
 
   // initiate search
-  window.once('resize', focusSearchInput); // hack to stimulate autofocus because it can't be used with tabIndex="-1"
-  SEARCH_INPUT.on('input', function() {
-    // to avoid searching when user is still typing
-    initTimeout('search', searchHandler, 200);
-  });
-  SEARCH_INPUT.placeholder = _getMsg('search');
+  initSearch();
 
-  // generate menu
+  // initiate menu
   genMenu();
   MENU_COVER.on('click', hideMenu);
 
@@ -613,6 +608,18 @@ chrome.storage.sync.get(null, function(STORAGE) {
     });
   }
 
+  function initSearch() {
+    SEARCH_INPUT
+      .prop('placeholder', _getMsg('search'))
+      .on('input', function() {
+        // to avoid searching when user is still typing
+        initTimeout('search', searchHandler, 200);
+      });
+
+    // hack to stimulate autofocus because it can't be used with tabIndex="-1"
+    window.once('resize', focusSearchInput);
+  }
+
   function initStyleOptions() {
     var font_size_px = FONT_SIZE + 'px';
     var separator_height_px = (FONT_SIZE > 16 ? FONT_SIZE : 18) / 2 + 'px';
@@ -634,7 +641,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     });
 
 
-    // set font size
+    // set font style
     css$.set('body', {
       'font': font_size_px + ' ' + font_family
     });
