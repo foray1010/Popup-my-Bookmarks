@@ -162,6 +162,9 @@ gulp.task 'md', ->
         'Q&A'
       ])
 
+      # enlarge first header
+      file_data = file_data.replace /^##/, '#'
+
     else
       throw "Unknown markdown file: #{file_name}"
 
