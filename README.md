@@ -19,9 +19,9 @@ Popup my Bookmarks is a Chrome extension aims at providing a more efficient way 
 ## Developer guide
 
 ##### Before you start
-1. Install [Node.js](//github.com/joyent/node) or [io.js](//github.com/iojs/io.js) via:
+1. Install [io.js](//github.com/iojs/io.js) (or [Node.js](//github.com/joyent/node) with no guarantee) via:
   - [nvm](//github.com/creationix/nvm) (Linux/Mac)
-  - [Node.js](//nodejs.org/download) or [io.js](//iojs.org) official website (Windows)
+  - [io.js official website](//iojs.org) (Windows)
 
 2. Install [gulp.js](//github.com/gulpjs/gulp)
 
