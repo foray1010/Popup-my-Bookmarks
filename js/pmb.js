@@ -66,7 +66,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
 
   // if first run
-  if (REMEMBER_POS === undefined) {
+  if (FONT_FAMILY === undefined) {
     openOptions();
   }
 
