@@ -76,7 +76,7 @@ Popup my Bookmarks is a Chrome extension aims at providing a more efficient way 
   Repo: https://github.com/foray1010/Popup-my-Bookmarks
 
 
-## Q&A
+## FAQ
 
 ##### Why does PmB need to 'Access your tabs and browsing activity' and 'Access your data on all websites'(optional)?
 

@@ -144,7 +144,7 @@ gulp.task 'md', ->
         'Popup my Bookmarks'
         'Plan to do'
         'What you can help'
-        'Q&A'
+        'FAQ'
       ])
 
       # remove first three lines
@@ -159,7 +159,7 @@ gulp.task 'md', ->
         'Developer guide'
         'Plan to do'
         'What you can help'
-        'Q&A'
+        'FAQ'
       ])
 
       # enlarge first header
