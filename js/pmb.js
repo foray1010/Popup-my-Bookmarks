@@ -534,7 +534,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function getRootFolderNum(box_num) {
-    return box_num > 0 ? 0 : getBoxList(box_num).class$('rootfolder').length;
+    return getBoxList(box_num).class$('rootfolder').length;
   }
 
   function greyMenuItem(grey_arr, is_grey) {
@@ -701,12 +701,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
     var menu_item_num = getMenuItemNum(_target);
     var tar_item_id = TARGET_ITEM.id;
 
-    if (event.button === 1 || menu_item_num < 0) {
-      return false;
-    }
-
     switch (menu_item_num) {
-      default: // For case 0, 1, 2: open bookmarks in tab/win
+      // open bookmarks in tab or win
+      case 0:
+      case 1:
+      case 2:
         openBkmarks(tar_item_id, isFolder(TARGET_ITEM), menu_item_num);
         break;
       case 3: // Edit... & Rename...
@@ -744,6 +743,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
         break;
       case 11: // Sort by name
         sortByName(BOX_PID[getBoxNum(tar_item_id)]);
+        break;
+      default:
+        return false;
     }
 
     hideMenu();
