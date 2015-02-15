@@ -759,11 +759,13 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function modMenuText(is_folder) {
     var p_tag = MENU.tag$('p');
-    (is_folder ? ['openAll', 'openAllInN', 'openAllInI', 'rename']
-      : ['openInB', 'openInN', 'openInI', 'edit'])
-      .ascEach(function(item_text, item_num) {
-        p_tag[item_num].innerText = _getMsg(item_text);
-      });
+    var menu_item_msg_name = is_folder ?
+      ['openAll', 'openAllInN', 'openAllInI', 'rename'] :
+      ['openInB', 'openInN', 'openInI', 'edit'];
+
+    menu_item_msg_name.ascEach(function(item_text, item_num) {
+      p_tag[item_num].innerText = _getMsg(item_text);
+    });
   }
 
   function noBkmarkHandler(box_num) {
@@ -874,7 +876,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
         parentId: BOX_PID[box_num],
         index: getItemIndex(TARGET_ITEM)
       }, function(moved_item) {
-        (id$(moved_item.id) || genItem(box_num, moved_item)).after(TARGET_ITEM);
+        var paste_item = id$(moved_item.id) || genItem(box_num, moved_item);
+        paste_item.after(TARGET_ITEM);
       });
     } else {
       _bookmark.getSubTree(node_id, function(node) {
