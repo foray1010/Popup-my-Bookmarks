@@ -1,7 +1,7 @@
 'use strict';
 chrome.storage.sync.get(null, function(STORAGE) {
   // shorter global
-  var _bookmark = chrome.bookmarks;
+  var _embookmark = chrome.bookmarks;
   var _getMsg = chrome.i18n.getMessage;
   var _localStorage = localStorage;
   var _tab = chrome.tabs;
@@ -421,20 +421,20 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function genFirstList() {
     _bookmark.getChildren('0', function(tree) {
-      tree.ascEach(function(stem, stem_num) {
-        if (stem_num !== DEF_EXPAND - 1) {
-          if (stem_num === 2 && HIDE_MOBILE) {
+      tree.ascEach(function(stem) {
+        if (stem.id != DEF_EXPAND) {
+          if (stem.id == 2 && HIDE_MOBILE) {
             return true;
           }
           genItem(0, stem).addClass('rootfolder').draggable = false;
         }
       });
-    });
 
-    _bookmark.getChildren(DEF_EXPAND + '', function(twig) {
-      genList(0, twig);
+      _bookmark.getChildren(DEF_EXPAND + '', function(twig) {
+        genList(0, twig);
 
-      loadLastPos();
+        loadLastPos();
+      });
     });
   }
 
