@@ -125,9 +125,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
         clearTimeout(HOVER_TIMEOUT); // clear the action of opening folder
 
         switch (_class) {
-          default:
-            focusSearchInput();
-            return false;
           case 'folder':
             if (isRootFolder(_target)) {
               hide_param = [false, true, true, true, true];
@@ -142,6 +139,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
             break;
           case 'no-bkmark':
             hide_param = [true, true, false, false, true];
+            break;
+          default:
+            focusSearchInput();
+            return false;
         }
         MENU.hide(hide_param);
 
@@ -151,8 +152,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
         greyMenuItem([0, 1], _class === 'no-bkmark');
         greyMenuItem([2], COPY_CUT_ITEM.id === null);
 
-        MENU_COVER.hide(false);
-        MENU.hide(false);
+        MENU_COVER.show();
+        MENU.show();
         SEARCH_INPUT.blur();
 
         setMenuPos(event);
@@ -277,7 +278,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
           }
         }
         break;
-      default: // case 2: case 3: case 4:
+      case 2:
+      case 3:
+      case 4:
         _tab.create({
           url: url,
           active: switcher === 2
@@ -415,7 +418,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
       BOX[0].rm();
     }
 
+    // remove headbox
     genBox(0).first().rm();
+
     genFirstList();
   }
 
@@ -635,18 +640,18 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
 
     // set panel(#main, #sub) width
-    css$.set('.panel-width', {
+    Css.set('.panel-width', {
       'width': SET_WIDTH + 'px'
     });
 
 
     // set font style
-    css$.set('body', {
+    Css.set('body', {
       'font': font_size_px + ' ' + font_family
     });
 
     if (FONT_SIZE > 16) {
-      css$.set({
+      Css.set({
         '.folderlist > p': {
           'height': font_size_px,
           'line-height': font_size_px
@@ -657,7 +662,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       });
     }
 
-    css$.set('.folderlist > .separator', {
+    Css.set('.folderlist > .separator', {
       'height': separator_height_px,
       'line-height': separator_height_px
     });
@@ -1071,7 +1076,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function setEditorPos() {
-    EDITOR.hide(false);
+    EDITOR.show();
     setBottomRight(
       EDITOR,
       getNowHeight() - EDITOR.offsetHeight - getRealTop(TARGET_ITEM),
@@ -1084,7 +1089,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     id$('edit-title').innerText = _getMsg(url ? 'edit' : 'rename').replace('...', '');
     input_field[0].val(title).selectText().focus();
-    input_field[1].val(url).hide(!url);
+    input_field[1].val(url).hidden = !url;
   }
 
   function setHeight(box_num) {
@@ -1093,7 +1098,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     var body_height;
     var footer_height = 4;
-    var header_height = box_num ? 32 : 0;
+    var header_height = box_num > 0 ? 32 : 0;
     var list_height;
     var search_height = box_num % 2 ? 0 : 24;
 
