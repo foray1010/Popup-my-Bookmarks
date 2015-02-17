@@ -309,24 +309,22 @@ var initTimeout;
         return this;
       },
     hide:
-      function(param) {
+      function() {
+        this.hidden = true;
+        return this;
+      },
+    show:
+      function() {
         var _this = this;
 
-        if (isArr(param)) {
-          param.ascEach(function(is_hide, child_num) {
-            _this.children[child_num].hide(is_hide);
-          });
-        } else {
-          _this.hidden = param !== false;
+        _this.hidden = false;
+        if (_this.style.display == 'none') {
+          _this.style.display = '';
         }
 
         return _this;
       },
-    opacity:
-      function(value) {
-        return this.css('opacity', value);
-      },
-    /* other */
+    /* Others */
     index:
       function() {
         for (var index_num = 0, indexer = this;
@@ -425,7 +423,7 @@ function tag$(friend, fb) {
 }
 
 // AJAX
-var ajax = (function() {
+var Ajax = (function() {
   var genQueryString = function(data) {
     var query = [];
     for (var key in data) {
@@ -493,10 +491,9 @@ var ajax = (function() {
     }
   };
 })();
-////
 
-// Element function
-var css$ = (function() {
+// set or unset CSS
+var Css = (function() {
   var getSheet = function() {
     var _jets_css = '_jets-css';
     var style_element = id$(_jets_css) || document.head.new$('style').prop('id', _jets_css);
@@ -531,6 +528,7 @@ var css$ = (function() {
   };
 })();
 
+// Element function
 function getRealTop(son) { // this code can be better
   for (var top = son.offsetTop;
        (son = son.parentNode).tagName !== 'BODY';
@@ -598,10 +596,11 @@ function opacityAnim(hollowman, end, timer) {
         hollowman.rm();
         return false;
       }
-      hollowman.hide().opacity('');
+      hollowman.hide();
+      hollowstyle.opacity = '';
     }
     hollowstyle.WebkitTransition = '';
   }, timer);
 
-  hollowman.opacity(end);
+  hollowstyle.opacity = end;
 }
