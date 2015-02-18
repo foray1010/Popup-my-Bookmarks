@@ -3,9 +3,9 @@
 var initTimeout;
 
 !function() {
-  var obj_proto = Object.prototype;
   var _doc = document;
   var _math = Math;
+  var obj_proto = Object.prototype;
 
   var TIMEOUT_HANDLER = {};
 
@@ -165,6 +165,10 @@ var initTimeout;
     new$:
       function(tag_name) {
         return new$(tag_name).appendTo(this);
+      },
+    query$:
+      function(query_str) {
+        return query$(query_str, this);
       },
     tag$:
       function(tag_name) {
@@ -406,6 +410,10 @@ function new$(tag_name) {
   return document.createElement(tag_name);
 }
 
+function query$(query_str, query_element) {
+  return (query_element || document).querySelectorAll(query_str);
+}
+
 function id$(id) {
   return document.getElementById(id);
 }
@@ -433,7 +441,7 @@ var Ajax = (function() {
     return query.join('&');
   };
 
-  var send = function(method, data, options) {
+  var sendAjax = function(method, data, options) {
     //// preassign value to options
     var empty_fn = function() {};
 
@@ -482,12 +490,12 @@ var Ajax = (function() {
         options.url += '?' + querystring;
       }
 
-      send('GET', null, options);
+      sendAjax('GET', null, options);
     },
     post: function(options) {
       var querystring = genQueryString(options.data);
 
-      send('POST', querystring, options);
+      sendAjax('POST', querystring, options);
     }
   };
 })();

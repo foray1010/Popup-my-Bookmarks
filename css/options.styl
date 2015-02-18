@@ -1,3 +1,8 @@
+$donate-desc-width = 400px
+$donate-img-width = 160px
+$donation-width = $donate-desc-width + $donate-img-width
+
+
 body
   font: 12px sans-serif
 
@@ -6,16 +11,24 @@ select
   box-sizing: content-box
   height: 20px
 
-input[type="number"]
-  text-align: right
-  width: 50px
+input
+  &[type="checkbox"]
+    vertical-align: middle
+
+  &[type="number"]
+    text-align: right
+    width: 50px
+
+select[multiple]
+  height: 100%
+
 
 .footer-hr
   background: #fa9115
   border: 0
   height: 1px
   margin: 0 auto
-  width: 700px
+  width: -webkit-calc(100% - 20px)
 
 .input-select-box
   border: 1px solid #0092fa
@@ -60,6 +73,13 @@ input[type="number"]
 .opt-input
   padding-left: 20px
 
+.select-multiple-box
+  border: 1px solid #0092fa
+  padding: 4px
+
+  & input
+    margin-right: 4px
+
 .selectbox
   background: #fff
   border: 1px solid currentcolor
@@ -91,9 +111,9 @@ input[type="number"]
   color: #fff
   cursor: default
 
+
 #container
   border: 1px solid #784c00
-  height: 790px
   width: 720px
 
   // vertical & horizontal center
@@ -106,27 +126,22 @@ input[type="number"]
 
 #donate-desc
   float: left
-  width: 400px
+  width: $donate-desc-width
 
 #donate-img
   float: left
-  height: 47px
-  width: 160px
+  height: 100%
+  width: $donate-img-width
 
 #donation
   height: 47px
   margin: auto
   padding: 10px 0 20px
-  width: 560px
-
-#footer
-  bottom: 0
-  position: absolute
-  width: 100%
+  width: $donation-width
 
 #logo-book
   background: #784c00
-  height: 80px
+  height: inherit
   left: 0
   position: absolute
   top: 0
@@ -155,11 +170,11 @@ input[type="number"]
   position: absolute
   right: 0
   top: 0
-  width: 658px
+  width: -webkit-calc(100% - 62px)
 
 #opt-button
-  float: right
-  margin: -10px 50px 10px 0
+  margin: 0 50px 5px 0;
+  text-align: right;
 
 #star-five
   margin: 32px 6px

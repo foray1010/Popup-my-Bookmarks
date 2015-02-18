@@ -8,6 +8,7 @@
   var OPTIONS;
 
   // elements
+  var CONTAINER = id$('container');
   var OPTIONS_BOX = id$('opt-box');
   var OPTIONS_BUTTON = id$('opt-button').tag$('button');
 
@@ -15,11 +16,10 @@
   // set HTML title
   document.title = _getMsg('options') + ' - ' + document.title;
 
-  // reset the container position if the height of window is too short
-  resetContainer();
-  window.on('resize', resetContainer);
-
   getOptionsAndGenTable();
+
+  // reset the container position if the height of window is too short
+  window.on('resize', resetContainer);
 
   // confirm button
   OPTIONS_BUTTON[0]
@@ -123,6 +123,9 @@
               value: option_value
             });
             break;
+          case 'select-multiple':
+            option_input = genSelectMultipleBox(option_field, option_choices, option_value);
+            break;
           case 'string':
             option_input = option_field.new$('select');
             option_choices.ascEach(function(choice, choice_num) {
@@ -138,6 +141,9 @@
 
         option_input.id = option_name;
       });
+
+      // set container height as all components' height is finalized
+      setContainerHeight();
     });
   }
 
@@ -184,6 +190,37 @@
     return hidden_input;
   }
 
+  function genSelectMultipleBox(option_field, option_choices, selected_values) {
+    var select_area = option_field.new$('div').addClass('select-multiple-box');
+    var hidden_input = select_area.new$('input').attr('type', 'hidden');
+
+    option_choices.ascEach(function(choice, choice_num) {
+      if (choice !== undefined) {
+        var is_checked = selected_values.hv(choice_num);
+        var row = select_area.new$('div');
+
+        row.new$('input')
+          .attr('type', 'checkbox')
+          .prop('checked', is_checked)
+          .val(choice_num);
+        row.new$('span').addText(choice);
+      }
+    });
+
+    select_area.on('change', function() {
+      var input_values = [];
+
+      select_area.query$('input[type="checkbox"]:checked')
+        .ascEach(function(input_element) {
+          input_values.push(input_element.value);
+        });
+
+      hidden_input.value = input_values.join();
+    });
+
+    return hidden_input;
+  }
+
   function getOptionsAndGenTable() {
     // options choices
     var boolean_choices = [true, false];
@@ -199,14 +236,15 @@
       },
       {
         name: 'defExpand',
-        choices: [], // set on the next step
+        // choices: set on the next step
         defaultValue: 1,
         type: 'string'
       },
       {
-        name: 'hideMobile',
-        choices: boolean_choices,
-        defaultValue: false
+        name: 'hideRootFolder',
+        // choices: set on the next step
+        defaultValue: [],
+        type: 'select-multiple'
       },
       {
         name: 'setWidth',
@@ -290,9 +328,15 @@
 
     // get the root folders' title and set as the choices of 'defExpand'
     chrome.bookmarks.getChildren('0', function(rootfolders) {
-      var def_expand_choices = OPTIONS.filter(function(x) { return x.name === 'defExpand'; })[0].choices;
+      var root_folder_choices = [];
       rootfolders.ascEach(function(this_folder) {
-        def_expand_choices[this_folder.id * 1] = this_folder.title;
+        root_folder_choices[this_folder.id * 1] = this_folder.title;
+      });
+
+      OPTIONS.ascEach(function(option) {
+        if (['defExpand', 'hideRootFolder'].hv(option.name)) {
+          option.choices = root_folder_choices;
+        }
       });
 
       // as it is an async function, generate table here
@@ -305,9 +349,9 @@
   }
 
   function resetContainer() {
-    var pos_val = window.innerHeight < container.offsetHeight ? 'auto' : '';
+    var pos_val = window.innerHeight < CONTAINER.offsetHeight ? 'auto' : '';
 
-    container.css({
+    CONTAINER.css({
       bottom: pos_val,
       top: pos_val
     });
@@ -338,9 +382,14 @@
             break;
           case 'number':
             option_value *= 1;
-            if (isNaN(option_value) || option_value < option_choices[0] || option_value > option_choices[1]) {
+            if (isNaN(option_value) ||
+                option_value < option_choices[0] ||
+                option_value > option_choices[1]) {
               throw _getMsg('opt_error', option_num + 1 + '');
             }
+            break;
+          case 'select-multiple':
+            option_value = option_value.split(',').map(function(x) { return x * 1; });
             break;
           case 'string':
             option_value *= 1;
@@ -353,6 +402,18 @@
     } catch(e) {
       genMsgBoxWhenConfirm(e);
     }
+  }
+
+  function setContainerHeight() {
+    var container_height = 0;
+
+    CONTAINER.children.ascEach(function(element) {
+      container_height += element.offsetHeight;
+    });
+
+    CONTAINER.style.height = container_height + 'px';
+
+    resetContainer();
   }
 
   function setPermission(option_permissions, option_name, option_value) {
