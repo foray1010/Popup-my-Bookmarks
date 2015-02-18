@@ -12,7 +12,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   var DEF_EXPAND = STORAGE.defExpand;
   var FONT_SIZE = STORAGE.fontSize;
   var FONT_FAMILY = STORAGE.fontFamily;
-  var HIDE_MOBILE = STORAGE.hideMobile;
+  var HIDE_ROOT_FOLDER = STORAGE.hideRootFolder;
   var MAX_RESULTS = STORAGE.maxResults;
   var OP_FOLDER_BY = STORAGE.opFolderBy;
   var LAST_PID = (_localStorage.getItem('lastPID') || '').split(',');
@@ -66,7 +66,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
 
   // if first run
-  if (FONT_FAMILY === undefined) {
+  if (HIDE_ROOT_FOLDER === undefined) {
     openOptions();
   }
 
@@ -428,7 +428,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     _bookmark.getChildren('0', function(tree) {
       tree.ascEach(function(stem) {
         if (stem.id == DEF_EXPAND ||
-            stem.id == 2 && HIDE_MOBILE) {
+            HIDE_ROOT_FOLDER.hv(stem.id * 1)) {
           return true;
         }
         genItem(0, stem).addClass('rootfolder').draggable = false;

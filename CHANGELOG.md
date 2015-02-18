@@ -1,6 +1,8 @@
 ## 3.1.0 (unreleased)
 Options:
   - Font family (suggested by Leebeaut Paul and David Bryant)
+  - Hide root folder (suggested by David Bryant)
+  - Remove 'Hide folder "Mobile bookmarks" if exists'
 
 Changes:
   - The options of 'Default expanded folder' are now depended on the root folders you have
