@@ -137,9 +137,13 @@
 		"message": "字型大小:<br>(12 - 30px)",
 		"description": "2013.07.26"
 	},
-	"opt_hideMobile": {
-		"message": "隱藏\"行動版書籤\":",
-		"description": "2013.03.27"
+	"opt_fontFamily": {
+		"message": "字型:",
+		"description": "2015.01.11"
+	},
+	"opt_hideRootFolder": {
+		"message": "隱藏根目錄:",
+		"description": "2015.02.18 | Root folder means the top level folder"
 	},
 	"opt_maxResults": {
 		"message": "搜尋結果的最大數量:<br>(10 - 200)",
