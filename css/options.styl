@@ -1,3 +1,6 @@
+$main-color1 = #0092fa
+$main-color2 = #fa9115
+
 $donate-desc-width = 400px
 $donate-img-width = 160px
 $donation-width = $donate-desc-width + $donate-img-width
@@ -24,14 +27,14 @@ select[multiple]
 
 
 .footer-hr
-  background: #fa9115
+  background: $main-color2
   border: 0
   height: 1px
   margin: 0 auto
   width: -webkit-calc(100% - 20px)
 
 .input-select-box
-  border: 1px solid #0092fa
+  border: 1px solid $main-color1
   display: inline-block
   position: relative
 
@@ -49,13 +52,13 @@ select[multiple]
     width: -webkit-calc(100% - 20px)
 
 .link
-  color: #0092fa
+  color: $main-color1
   cursor: pointer
   font-weight: bold
   text-decoration: none
 
   &:hover
-    color: #fa9115
+    color: $main-color2
 
 .logo-memo
   height: 18px
@@ -74,7 +77,7 @@ select[multiple]
   padding-left: 20px
 
 .select-multiple-box
-  border: 1px solid #0092fa
+  border: 1px solid $main-color1
   padding: 4px
 
   & input
@@ -83,7 +86,7 @@ select[multiple]
 .selectbox
   background: #fff
   border: 1px solid currentcolor
-  color: #0092fa
+  color: $main-color1
   display: table
   height: 20px
   position: relative
@@ -130,11 +133,10 @@ select[multiple]
 
 #donate-img
   float: left
-  height: 100%
   width: $donate-img-width
 
 #donation
-  height: 47px
+  height: 50px
   margin: auto
   padding: 10px 0 20px
   width: $donation-width
@@ -153,10 +155,10 @@ select[multiple]
   -webkit-user-select: none
 
 #logo-memo1
-  background: #0092fa
+  background: $main-color1
 
 #logo-memo2
-  background: #fa9115
+  background: $main-color2
 
 #logo-memo3
   background: #6cb
@@ -193,7 +195,7 @@ select[multiple]
     content: ""
     left: -26px
     position: absolute
-    top: 0px
+    top: 0
     -webkit-transform: rotate(-70deg)
 
   &
