@@ -24,12 +24,12 @@
   // confirm button
   OPTIONS_BUTTON[0]
     .addText(_getMsg('confirm'))
-    .on('click', saveOptions);
+    .clickByButton(0, saveOptions);
 
   // reset button
   OPTIONS_BUTTON[1]
     .addText(_getMsg('default'))
-    .on('click', resetOptions);
+    .clickByButton(0, resetOptions);
 
   // donation
   id$('donate-here').on('click', function() {
@@ -175,7 +175,7 @@
         .addClass('selectbox-item')
         .css('width', width_of_button + '%')
         .addText(button_text)
-        .on('click', function() {
+        .clickByButton(0, function() {
           if (!this.hvClass(selectbox_item_active)) {
             selectbox.class$(selectbox_item_active)[0].rmClass(selectbox_item_active);
             setActiveOption(this);

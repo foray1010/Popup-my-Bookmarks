@@ -492,7 +492,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       }
     });
 
-    MENU.on('click', menuEvent);
+    MENU.clickByButton(0, menuEvent);
   }
 
   function genNinja(box_num) {
@@ -570,7 +570,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     // confirm editing
     editor_button[0]
       .addText(_getMsg('confirm'))
-      .on('click', function() {
+      .clickByButton(0, function() {
         var editor_input = EDITOR.tag$('input');
         var next_box;
         var title = editor_input[0].value;
@@ -602,7 +602,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     // cancel editing
     editor_button[1]
       .addText(_getMsg('cancel'))
-      .on('click', hideMenu);
+      .clickByButton(0, hideMenu);
 
     // type 'Enter' on input tag
     EDITOR.on('keydown', function(event) {
