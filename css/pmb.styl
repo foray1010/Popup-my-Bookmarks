@@ -1,3 +1,7 @@
+$main-color1 = #0092fa
+$main-color2 = #fa9115
+
+
 @font-face
   font-family: ArchivoNarrow
   src: url(/font/ArchivoNarrow-Regular.otf)
@@ -17,13 +21,14 @@ input[type="text"]
   width: 100%
 
   &:focus
-    border-color: #0092fa
+    border-color: $main-color1
 
 p
   border: 1px solid transparent
   color: #222
   cursor: default
   margin: 0
+
 
 .box-template
   background: inherit
@@ -123,12 +128,13 @@ p
   height: 2px
   margin: 2px 0 0
 
+
 #drag-place
   border: 1px dashed #aaa
   height: 20px
 
 #edit-title
-  background: #fa9115
+  background: $main-color2
   color: #fff
   float: left
   padding: 1px 6px
@@ -149,7 +155,7 @@ p
   position: absolute
 
 #main
-  color: #fa9115
+  color: $main-color2
   right: 0
 
 #menu
@@ -188,8 +194,9 @@ p
   height: 21px
 
 #sub
-  color: #0092fa
+  color: $main-color1
   left: 0
+
 
 // no text overflow
 p
@@ -206,6 +213,7 @@ p
 #menu p:not(.grey-item):hover
   background: #eee
   border-color: #ddd
+
 
 ::-webkit-scrollbar
   background: transparent
