@@ -123,6 +123,7 @@
       } else {
         addEvent(events, event_fn, bubble);
       }
+
       return _this;
     },
     once: function(events, event_fn, bubble) {
@@ -135,14 +136,16 @@
       return _this.on(events, event_tmp_fn, bubble);
     },
     ready: function(fn) {
-      var document = this;
-      if (/^loaded|^c/.test(document.readyState)) {
+      var _this = this;
+      if (/^loaded|^c/.test(_this.readyState)) {
         fn();
       } else {
-        document.once('DOMContentLoaded', function() {
+        _this.once('DOMContentLoaded', function() {
           fn();
         });
       }
+
+      return _this;
     }
   });
 
