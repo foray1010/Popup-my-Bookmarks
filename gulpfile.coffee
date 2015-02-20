@@ -169,3 +169,10 @@ gulp.task 'md', ->
       throw "Unknown markdown file: #{file_name}"
 
   fs.writeFile file_name, file_data
+
+
+# jshint
+gulp.task 'test', ->
+  gulp.src path.join(lang.js.source, '*')
+    .pipe plugins.jshint()
+    .pipe plugins.jshint.reporter('jshint-stylish')

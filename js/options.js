@@ -435,4 +435,4 @@
       });
     }
   }
-}(this, document);
+}(window, document);

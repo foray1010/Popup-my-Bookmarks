@@ -1,0 +1,39 @@
+{
+  // Enforcing options
+  "curly": true,
+  "eqeqeq": true,
+  "expr": true, // avoid warning for bang function
+  "globals": {
+    "chrome": false
+  },
+  "predef": [
+    "class$",
+    "Css",
+    "id$",
+    "initTimeout",
+    "name$",
+    "new$",
+    "query$",
+    "tag$",
+    "update$"
+  ],
+  "globalstrict": true,
+  "indent": 2,
+  "newcap": true,
+  "noarg": true,
+  "nonbsp": true,
+  "nonew": true,
+  "quotmark": "single",
+  "shadow": true,
+  "singleGroups": true,
+  "undef": true,
+  "unused": true,
+
+  // Relaxing options
+  "boss": true,
+  "eqnull": true,
+
+  // Environments
+  "browser": true,
+  "devel": true
+}

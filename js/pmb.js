@@ -126,16 +126,18 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
         switch (_class) {
           case 'folder':
+          case 'bkmark':
             if (isRootFolder(_target)) {
               hide_param = [false, true, true, true, true];
               break;
             }
-          case 'bkmark':
+
             if (!IS_SEARCHING) {
               hide_param = [false, false, false, false, false];
             } else {
               hide_param = [false, false, false, true, true];
             }
+
             break;
           case 'no-bkmark':
             hide_param = [true, true, false, false, true];
@@ -325,7 +327,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function dragEndEvent(event) {
-    if (DRAG_PLACE.parentNode != PRELOAD) {
+    if (DRAG_PLACE.parentNode !== PRELOAD) {
       var _this = event.target;
       var box_num = getBoxNum(DRAG_PLACE);
       var no_bkmark = BOX[box_num].class$('no-bkmark')[0];
@@ -345,7 +347,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     focusSearchInput();
 
-    if (DRAG_ITEM.parentNode == PRELOAD) {
+    if (DRAG_ITEM.parentNode === PRELOAD) {
       DRAG_ITEM.rm();
     }
     DRAG_ITEM = null;
@@ -354,21 +356,21 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function dragOverEvent(event) {
     var _this = event.target;
 
-    if (_this.tagName == 'P' && DRAG_ITEM !== null) {
+    if (_this.tagName === 'P' && DRAG_ITEM !== null) {
       initTimeout('drag', function() {
         var _this_id = _this.id;
         var box_num = getBoxNum(_this);
         var is_place_before = event.offsetY < _this.offsetHeight / 2;
 
-        if (_this != DRAG_ITEM
-            && _this[is_place_before ? 'prev' : 'next']() != DRAG_ITEM
-            && !isRootFolder(_this)) {
+        if (_this !== DRAG_ITEM &&
+            _this[is_place_before ? 'prev' : 'next']() !== DRAG_ITEM &&
+            !isRootFolder(_this)) {
           DRAG_PLACE[is_place_before ? 'before' : 'after'](_this);
         } else {
           DRAG_PLACE.appendTo(PRELOAD);
         }
 
-        if (_this != DRAG_ITEM && isFolder(_this)) {
+        if (_this !== DRAG_ITEM && isFolder(_this)) {
           openFolder(_this_id);
           return false;
         }
@@ -427,8 +429,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function genFirstList() {
     _bookmark.getChildren('0', function(tree) {
       tree.ascEach(function(stem) {
-        if (stem.id == DEF_EXPAND ||
-            HIDE_ROOT_FOLDER.hv(stem.id * 1)) {
+        var stem_id = stem.id * 1;
+        if (stem_id === DEF_EXPAND ||
+            HIDE_ROOT_FOLDER.hv(stem_id)) {
           return true;
         }
         genItem(0, stem).addClass('rootfolder').draggable = false;
@@ -504,8 +507,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function getBoxNum(id) {
-    if (id != DEF_EXPAND) {
-      var id_parent = (isObj(id) ? id : id$(id)).parentNode;
+    if (id * 1 !== DEF_EXPAND) {
+      var id_parent = (typeof id === 'object' ? id : id$(id)).parentNode;
       if (id_parent) {
         return id_parent.data(DATATEXT_BOX_NUM) * 1;
       }
@@ -690,7 +693,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         };
 
         if (box_num === 0) {
-          if (DEF_EXPAND != folder_id) {
+          if (folder_id * 1 !== DEF_EXPAND) {
             return false;
           }
           fn_after_open();
@@ -1157,7 +1160,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
           node = node[0];
 
-          if (node.id !== item.id && node.id != 0) {
+          if (![item.id, '0'].hv(node.id)) {
             breadcrumb_arr.unshift(node.title);
           }
 

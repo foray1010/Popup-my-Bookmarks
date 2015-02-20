@@ -7,10 +7,13 @@
     "fs-extra": "*",
     "gulp": "*",
     "gulp-jade": "*",
+    "gulp-jshint": "*",
     "gulp-load-plugins": "*",
     "gulp-stylus": "*",
     "gulp-uglify": "*",
     "gulp-zip": "*",
+    "jshint": "*",
+    "jshint-stylish": "*",
     "yamljs": "*",
     "yargs": "*"
   },
@@ -18,9 +21,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "foray1010",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/foray1010/Popup-my-Bookmarks.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/foray1010/Popup-my-Bookmarks.git"
   },
   "license": "MIT"
 }
