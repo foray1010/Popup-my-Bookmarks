@@ -86,7 +86,7 @@
       .appendTo(opt_msg_box);
 
     setTimeout(function() {
-      opacityAnim(msg_box, -1);
+      msg_box.fadeOut(true);
     }, 3000);
   }
 
