@@ -862,7 +862,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
         genNinja(pre_box_num)
           .on('click', folder_cover_fn)
-          .hoverTimeout(folder_cover_fn, 300, 10);
+          .hoverTimeout(folder_cover_fn, 300, 20);
       }
 
       setTimeout(function() {

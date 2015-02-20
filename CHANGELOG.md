@@ -13,6 +13,7 @@ Bugfixes:
 
 Improvements:
   - Dragging is now much easier (a problem since the previous version)
+  - Reduce the sensitivity of closing folder when hovering its shadow
 
 Translations:
   - Support Russian locales (thanks Другие закладки)
@@ -203,7 +204,7 @@ Bugfixes:
   - When dragging bookmark on the original position, dragging indicator may be displayed
 
 Improvements:
-  - Reduce the sensitive of hovering folders (suggested by David Bryant)
+  - Reduce the sensitivity of hovering folders (suggested by David Bryant)
   - Reduce RAM usage
 
 Translations:

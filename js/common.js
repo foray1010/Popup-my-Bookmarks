@@ -1,26 +1,23 @@
 'use strict';
 /* Own Library */
-!function() {
-  var _doc = document;
-  var _math = Math;
-  var obj_proto = Object.prototype;
-
+!function(window, document, Math, undefined) {
+  var OBJECT_PROTO = Object.prototype;
   var TIMEOUT_HANDLER = {};
 
   /* Public Functions */
   window.initTimeout = function(timeout_name, fn, timeout) {
     clearTimeout(TIMEOUT_HANDLER[timeout_name]);
-    TIMEOUT_HANDLER[timeout_name] = setTimeout(fn, timeout);
+    return TIMEOUT_HANDLER[timeout_name] = setTimeout(fn, timeout);
   };
 
   /* Object.prototype */
-  obj_proto.propEach = function(fn) {
+  OBJECT_PROTO.propEach = function(fn) {
     for (var prop_arr = Object.keys(this), prop_name;
          prop_name = prop_arr.shift();
          fn(prop_name, this[prop_name])) {}
   };
 
-  obj_proto.prop = function(val1, val2) {
+  OBJECT_PROTO.prop = function(val1, val2) {
     var _this = this;
     if (val2 === undefined) {
       val1.propEach(function(dna, heredity) {
@@ -36,7 +33,7 @@
     return _this;
   };
 
-  obj_proto.prop({
+  OBJECT_PROTO.prop({
     ascEach:
       function(fn, max_length) {
         var _this = this, end = _this.length, i = 0;
@@ -81,10 +78,36 @@
       },
     hoverTimeout:
       function(fn, timeout, xy_range, is_inside_range) {
+        var _this = this;
         var event_timer;
         var mouse_xy;
-        var _this = this.on({
-              mousemove: function(event) {
+
+        var mousemove_fn = function(mouse_xy_org) {
+          var is_trigger_point = function(x_or_y) {
+            var displacement = Math.abs(mouse_xy[x_or_y] - mouse_xy_org[x_or_y]);
+            return displacement < xy_range === is_inside_range;
+          };
+
+          event_timer = setTimeout(function() {
+            if (document.contains(_this)) {
+              if (is_inside_range ?
+                    is_trigger_point(0) && is_trigger_point(1) :
+                    is_trigger_point(0) || is_trigger_point(1)) {
+                fn(event);
+                event_timer = null;
+              } else {
+                mousemove_fn(mouse_xy);
+              }
+            }
+          }, timeout);
+        };
+
+        if (is_inside_range === undefined) {
+          is_inside_range = true;
+        }
+
+        _this.on({
+          mousemove: function(event) {
             mouse_xy = [event.x, event.y];
             if (!event_timer) {
               mousemove_fn(mouse_xy);
@@ -95,24 +118,7 @@
             event_timer = null;
           }
         });
-        var mousemove_fn = function(mouse_xy_org) {
-          var is_xy_not_allow = function(x_or_y) {
-            return _math.abs(mouse_xy[x_or_y] - mouse_xy_org[x_or_y]) < xy_range === is_inside_range;
-          };
-          event_timer = setTimeout(function() {
-            if (_doc.contains(_this)) {
-              if (is_inside_range ? is_xy_not_allow(0) && is_xy_not_allow(1) : is_xy_not_allow(0) || is_xy_not_allow(1)) {
-                fn(event);
-                event_timer = null;
-              } else {
-                mousemove_fn(mouse_xy);
-              }
-            }
-          }, timeout);
-        };
-        if (is_inside_range === undefined) {
-          is_inside_range = false;
-        }
+
         return _this;
       },
     on:
@@ -141,11 +147,11 @@
       },
     ready:
       function(fn) {
-        var _doc = this;
-        if (/^loaded|^c/.test(_doc.readyState)) {
+        var document = this;
+        if (/^loaded|^c/.test(document.readyState)) {
           fn();
         } else {
-          _doc.once('DOMContentLoaded', function() {
+          document.once('DOMContentLoaded', function() {
             fn();
           });
         }
@@ -175,13 +181,15 @@
     ////
     addText:
       function(content) {
-        this.appendChild(_doc.createTextNode(content));
+        this.appendChild(document.createTextNode(content));
         return this;
       },
     after:
       function(after_element) {
         var _this = this, next_sibling = after_element.nextSibling;
-        return next_sibling ? _this.before(next_sibling) : _this.appendTo(after_element.parentNode);
+        return next_sibling ?
+          _this.before(next_sibling) :
+          _this.appendTo(after_element.parentNode);
       },
     attr:
       function(val1, val2) {
@@ -205,7 +213,9 @@
         var father, sons;
         if (typeof before_element === 'number') {
           sons = (father = this.parentNode).children;
-          before_element = sons[before_element < 0 ? sons.length - 1 + before_element : before_element];
+          before_element = sons[before_element < 0 ?
+            sons.length - 1 + before_element :
+            before_element];
         } else {
           father = before_element.parentNode;
         }
@@ -264,7 +274,7 @@
     rm:
       function() {
         var _this = this;
-        if (_doc.contains(_this)) {
+        if (document.contains(_this)) {
           _this.parentNode.removeChild(_this);
         }
       },
@@ -306,7 +316,12 @@
       },
     toggleClass:
       function(class_name, switcher) {
-        return classListFn(this, switcher === undefined ? 'toggle' : switcher ? 'add' : 'remove', class_name);
+        var class_fn_name = switcher === undefined ?
+          'toggle' :
+          switcher ?
+            'add' :
+            'remove';
+        return classListFn(this, class_fn_name, class_name);
       },
     /* Style Management */
     css:
@@ -340,7 +355,7 @@
       },
     hvFocus:
       function() {
-        return _doc.activeElement === this;
+        return document.activeElement === this;
       }
   });
 
@@ -348,11 +363,11 @@
   Array.prototype.prop({
     max:
       function() {
-        return _math.max.apply(_math, this);
+        return Math.max.apply(Math, this);
       },
     min:
       function() {
-        return _math.min.apply(_math, this);
+        return Math.min.apply(Math, this);
       },
     merge:
       function(arr) {
@@ -405,7 +420,7 @@
     _this.classList[fn_name](class_name);
     return _this;
   }
-}();
+}(window, document, Math);
 
 /* getElement */
 function new$(tag_name) {
