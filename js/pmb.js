@@ -553,15 +553,15 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function hideMenu(is_hide_cover) {
-    opacityAnim(MENU, 0);
+    MENU.fadeOut();
     //// to reset width and height because they may be changed when the width and height are not enough for displaying menu
     modBodyWidth(getNowWidth());
     modBodyHeight(getMaxHeight());
     ////
 
     if (is_hide_cover !== false) {
-      opacityAnim(EDITOR, 0);
-      opacityAnim(MENU_COVER, 0);
+      EDITOR.fadeOut();
+      MENU_COVER.fadeOut();
       TARGET_ITEM.rmClass('selected');
       SEARCH_INPUT.focus();
     }
@@ -954,11 +954,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
 
     NINJA_LIST.descEach(function() {
-      opacityAnim(NINJA_LIST.pop(), -1);
+      NINJA_LIST.pop().fadeOut(true);
     }, level - 1);
 
     BOX.descEach(function() {
-      opacityAnim(BOX.pop(), -1);
+      BOX.pop().fadeOut(true);
       BOX_PID.pop();
       NOW_SCROLL_TOP.pop();
       HEIGHT_LIST.pop();

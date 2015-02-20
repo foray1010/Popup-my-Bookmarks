@@ -1,5 +1,6 @@
 'use strict';
 !function(window, document, Math, undefined) {
+  var EMPTY_FUNC = function() {};
   var OBJECT_PROTO = Object.prototype;
   var TIMEOUT_HANDLER = {};
 
@@ -318,6 +319,46 @@
     },
     hvFocus: function() {
       return document.activeElement === this;
+    },
+
+    // Animation
+    anim: function(style_name, style_val) {
+      var _args = argumentsConstructor(
+        arguments, ['number', 'function'], [400, EMPTY_FUNC]
+      );
+      var duration = _args[0];
+      var complete_fn = _args[1];
+
+      var _this = this;
+      var _this_style = _this.style;
+
+      _this_style.WebkitTransition = style_name + ' ' + duration + 'ms';
+
+      setTimeout(function() {
+        _this_style.WebkitTransition = '';
+
+        complete_fn.call(_this);
+      }, duration);
+
+      _this_style[style_name] = style_val;
+    },
+    fadeOut: function() {
+      var _args = argumentsConstructor(
+        arguments, ['number', 'boolean'], [400, false]
+      );
+      var duration = _args[0];
+      var is_remove_when_done = _args[1];
+
+      var _this = this;
+
+      _this.anim('opacity', 0, duration, function() {
+        if (is_remove_when_done) {
+          _this.rm();
+        } else {
+          _this.hide();
+          _this.style.opacity = '';
+        }
+      });
     }
   });
 
@@ -372,6 +413,31 @@
   };
 
   // Private function
+  function argumentsConstructor(args, type_patterns, default_values) {
+    // remove the non-optional arguments
+    var args_slice_num = args.length - type_patterns.length;
+    if (args_slice_num > 0) {
+      args = [].slice.call(args, args_slice_num);
+    }
+
+    var arg_index = 0;
+    var return_list = [];
+
+    type_patterns.ascEach(function(expected_type, type_index) {
+      var this_arg = args[arg_index];
+      var this_type = typeof this_arg;
+
+      if (this_type === expected_type) {
+        return_list.push(this_arg);
+        arg_index++;
+      } else {
+        return_list.push(default_values[type_index]);
+      }
+    });
+
+    return return_list;
+  }
+
   function classListFn(_this, fn_name, class_name) {
     _this.classList[fn_name](class_name);
     return _this;
@@ -447,15 +513,13 @@
 
       var sendAjax = function(method, data, options) {
         //// preassign value to options
-        var empty_fn = function() {};
-
         var async = options.async !== undefined ? options.async : true;
         var response_type = options.type;
         var url = options.url;
 
-        var complete = options.complete || empty_fn;
-        var error = options.error || empty_fn;
-        var success = options.success || empty_fn;
+        var complete = options.complete || EMPTY_FUNC;
+        var error = options.error || EMPTY_FUNC;
+        var success = options.success || EMPTY_FUNC;
         ////
 
         var xmlhttp = new XMLHttpRequest();
@@ -549,34 +613,4 @@ function getRealTop(son) { // this code can be better
        // find firstChild's offset to identify if it is position: absolute
        top += (son.first().offsetTop === 0 ? son.offsetTop : 0) - son.scrollTop) {}
   return top;
-}
-
-// Animation
-function opacityAnim(hollowman, end, timer) {
-  var hollowstyle = hollowman.style;
-  var is_del;
-
-  if (end === -1) {
-    is_del = true;
-    end = 0;
-  }
-
-  if (!timer) {
-    timer = 300;
-  }
-
-  hollowstyle.WebkitTransition = 'opacity ' + timer + 'ms';
-  setTimeout(function() {
-    if (end === 0) {
-      if (is_del) {
-        hollowman.rm();
-        return false;
-      }
-      hollowman.hide();
-      hollowstyle.opacity = '';
-    }
-    hollowstyle.WebkitTransition = '';
-  }, timer);
-
-  hollowstyle.opacity = end;
 }
