@@ -86,169 +86,165 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   // event delegation
   BODY.on({
-    click:
-      function(event) {
-        var mouse_button = event.button;
-        var _target = getPTag(event.target);
-        var _id = _target.id;
+    click: function(event) {
+      var mouse_button = event.button;
+      var _target = getPTag(event.target);
+      var _id = _target.id;
 
-        switch (_target.classList[0]) {
-          case 'head-close':
-            resetBox(_target.parentNode.next().data(DATATEXT_BOX_NUM) - 1);
+      switch (_target.classList[0]) {
+        case 'head-close':
+          resetBox(_target.parentNode.next().data(DATATEXT_BOX_NUM) - 1);
+          break;
+        case 'folder':
+          if (mouse_button === 1) {
+            openBkmarks(_id, true, 0);
+          } else if (mouse_button === 0 && OP_FOLDER_BY) {
+            openFolder(_id);
+          }
+          break;
+        case 'bkmark':
+          _bookmark.get(_id, function(bkmark) {
+            clickSwitcher(mouse_button, bkmark[0].url);
+          });
+      }
+
+      focusSearchInput();
+    },
+    // Customize right click menu
+    contextmenu: function(event) {
+      var _target = getPTag(event.target);
+      var _class = _target.classList[0];
+      var hide_param;
+
+      if (_target.tagName === 'INPUT') {
+        return false;
+      }
+
+      event.preventDefault();
+      clearTimeout(HOVER_TIMEOUT); // clear the action of opening folder
+
+      switch (_class) {
+        case 'folder':
+        case 'bkmark':
+          if (isRootFolder(_target)) {
+            hide_param = [false, true, true, true, true];
             break;
-          case 'folder':
-            if (mouse_button === 1) {
-              openBkmarks(_id, true, 0);
-            } else if (mouse_button === 0 && OP_FOLDER_BY) {
-              openFolder(_id);
-            }
-            break;
-          case 'bkmark':
-            _bookmark.get(_id, function(bkmark) {
-              clickSwitcher(mouse_button, bkmark[0].url);
-            });
-        }
+          }
 
-        focusSearchInput();
-      },
-    contextmenu: // Customize right click menu
-      function(event) {
-        var _target = getPTag(event.target);
-        var _class = _target.classList[0];
-        var hide_param;
+          if (!IS_SEARCHING) {
+            hide_param = [false, false, false, false, false];
+          } else {
+            hide_param = [false, false, false, true, true];
+          }
 
-        if (_target.tagName === 'INPUT') {
+          break;
+        case 'no-bkmark':
+          hide_param = [true, true, false, false, true];
+          break;
+        default:
+          focusSearchInput();
           return false;
-        }
+      }
+      MENU.hide(hide_param);
 
-        event.preventDefault();
-        clearTimeout(HOVER_TIMEOUT); // clear the action of opening folder
+      TARGET_ITEM = _target;
+      modMenuText(isFolder(_target));
 
-        switch (_class) {
-          case 'folder':
-          case 'bkmark':
-            if (isRootFolder(_target)) {
-              hide_param = [false, true, true, true, true];
-              break;
-            }
+      greyMenuItem([0, 1], _class === 'no-bkmark');
+      greyMenuItem([2], COPY_CUT_ITEM.id === null);
 
-            if (!IS_SEARCHING) {
-              hide_param = [false, false, false, false, false];
-            } else {
-              hide_param = [false, false, false, true, true];
-            }
+      MENU_COVER.show();
+      MENU.show();
+      SEARCH_INPUT.blur();
 
-            break;
-          case 'no-bkmark':
-            hide_param = [true, true, false, false, true];
-            break;
-          default:
-            focusSearchInput();
-            return false;
-        }
-        MENU.hide(hide_param);
-
-        TARGET_ITEM = _target;
-        modMenuText(isFolder(_target));
-
-        greyMenuItem([0, 1], _class === 'no-bkmark');
-        greyMenuItem([2], COPY_CUT_ITEM.id === null);
-
-        MENU_COVER.show();
-        MENU.show();
-        SEARCH_INPUT.blur();
-
-        setMenuPos(event);
-      },
+      setMenuPos(event);
+    },
     dragend: dragEndEvent,
     dragover: dragOverEvent,
     dragstart: dragStartEvent,
-    keydown:
-      function(event) {
-        var key_code = event.keyCode;
-        switch (key_code) {
-          case 13:
-            // if (isHovering()) {
-            // } else if (IS_SEARCHING) {
-            if (IS_SEARCHING) {
-              getBoxList(0).firstChild.click(); // enter the first bkmark when press return key
-            }
-            break;
-          case 16: // shift
-          case 17: // ctrl
-            if (key_code !== ON_MOD_KEY) {
-              ON_MOD_KEY = key_code;
-            }
-            break;
-          // case 37: // left
-          // case 38: // up
-          // case 39: // right
-          // case 40: // down
-          //   break;
-        }
-      },
-    keyup:
-      function(event) {
-        if (event.keyCode === ON_MOD_KEY) {
-          ON_MOD_KEY = null;
-        }
-      },
-    mousedown: // disable the scrolling arrows after middle click
-      function(event) {
-        if (event.button === 1) {
-          event.preventDefault();
-        }
-      },
-    mouseout:
-      function(event) {
-        var _target = getPTag(event.target);
+    keydown: function(event) {
+      var key_code = event.keyCode;
+      switch (key_code) {
+        case 13:
+          // if (isHovering()) {
+          // } else if (IS_SEARCHING) {
+          if (IS_SEARCHING) {
+            // enter the first bkmark when press return key
+            getBoxList(0).firstChild.click();
+          }
+          break;
+        case 16: // shift
+        case 17: // ctrl
+          if (key_code !== ON_MOD_KEY) {
+            ON_MOD_KEY = key_code;
+          }
+          break;
+        // case 37: // left
+        // case 38: // up
+        // case 39: // right
+        // case 40: // down
+        //   break;
+      }
+    },
+    keyup: function(event) {
+      if (event.keyCode === ON_MOD_KEY) {
+        ON_MOD_KEY = null;
+      }
+    },
+    // disable the scrolling arrows after middle click
+    mousedown: function(event) {
+      if (event.button === 1) {
+        event.preventDefault();
+      }
+    },
+    mouseout: function(event) {
+      var _target = getPTag(event.target);
 
-        if (_target.tagName === 'P' && MENU_COVER.hidden) {
+      if (_target.tagName === 'P' && MENU_COVER.hidden) {
+        switch (_target.classList[0]) {
+          case 'folder':
+          case 'bkmark':
+          case 'no-bkmark':
+            clearTimeout(HOVER_TIMEOUT);
+        }
+        _target.rmClass('selected');
+      }
+    },
+    mouseover: function(event) {
+      var _target = getPTag(event.target);
+
+      if (_target.tagName === 'P' && MENU_COVER.hidden) {
+        if (!OP_FOLDER_BY) {
           switch (_target.classList[0]) {
             case 'folder':
+              HOVER_TIMEOUT = setTimeout(function() {
+                openFolder(_target.id);
+              }, 250);
+              break;
             case 'bkmark':
             case 'no-bkmark':
-              clearTimeout(HOVER_TIMEOUT);
+              HOVER_TIMEOUT = setTimeout(function() {
+                resetBox(getBoxNum(_target));
+              }, 250);
           }
-          _target.rmClass('selected');
         }
-      },
-    mouseover:
-      function(event) {
-        var _target = getPTag(event.target);
+        _target.addClass('selected');
+      }
+    },
+    // control scrolling speed
+    mousewheel: function(event) {
+      event.preventDefault();
 
-        if (_target.tagName === 'P' && MENU_COVER.hidden) {
-          if (!OP_FOLDER_BY) {
-            switch (_target.classList[0]) {
-              case 'folder':
-                HOVER_TIMEOUT = setTimeout(function() {
-                  openFolder(_target.id);
-                }, 250);
-                break;
-              case 'bkmark':
-              case 'no-bkmark':
-                HOVER_TIMEOUT = setTimeout(function() {
-                  resetBox(getBoxNum(_target));
-                }, 250);
-            }
-          }
-          _target.addClass('selected');
-        }
-      },
-    mousewheel: // control scrolling speed
-      function(event) {
-        event.preventDefault();
-
-        for (var target = event.target;
-             target !== BODY;
-             target = target.parentNode) {
-          if (target.hvClass('folderlist')) {
-            target.scrollTop -= ITEM_HEIGHT * event.wheelDelta / 120 >> 0;
-            savLastScroll(target);
-            break;
-          }
+      for (var target = event.target;
+           target !== BODY;
+           target = target.parentNode) {
+        if (target.hvClass('folderlist')) {
+          target.scrollTop -= ITEM_HEIGHT * event.wheelDelta / 120 >> 0;
+          savLastScroll(target);
+          break;
         }
       }
+    }
   });
 
 
