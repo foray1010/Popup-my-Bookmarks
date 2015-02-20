@@ -36,3 +36,8 @@
    To generate markdown file on the current directory
    - __store.md - Description for Chrome Web Store
    - README.md - Description for GitHub
+
+5. test
+   > gulp test
+
+   To test javascript code by jshint

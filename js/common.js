@@ -1,7 +1,5 @@
 'use strict';
 /* Own Library */
-var initTimeout;
-
 !function() {
   var _doc = document;
   var _math = Math;
@@ -10,7 +8,7 @@ var initTimeout;
   var TIMEOUT_HANDLER = {};
 
   /* Public Functions */
-  initTimeout = function(timeout_name, fn, timeout) {
+  window.initTimeout = function(timeout_name, fn, timeout) {
     clearTimeout(TIMEOUT_HANDLER[timeout_name]);
     TIMEOUT_HANDLER[timeout_name] = setTimeout(fn, timeout);
   };
@@ -26,7 +24,7 @@ var initTimeout;
     var _this = this;
     if (val2 === undefined) {
       val1.propEach(function(dna, heredity) {
-        if (!isObj(heredity) || heredity === null) {
+        if (typeof heredity !== 'object' || heredity === null) {
           _this[dna] = heredity;
         } else {
           _this[dna].prop(heredity);
@@ -50,7 +48,7 @@ var initTimeout;
     descEach:
       function(fn, end) {
         var _this = this, i = _this.length;
-        if (!(end > 0)) {
+        if (end === undefined || end < 0) {
           end = 0;
         }
         while (--i >= end && fn(_this[i], i) !== false) {}
@@ -99,7 +97,7 @@ var initTimeout;
         });
         var mousemove_fn = function(mouse_xy_org) {
           var is_xy_not_allow = function(x_or_y) {
-            return (_math.abs(mouse_xy[x_or_y] - mouse_xy_org[x_or_y]) < xy_range) === is_inside_range;
+            return _math.abs(mouse_xy[x_or_y] - mouse_xy_org[x_or_y]) < xy_range === is_inside_range;
           };
           event_timer = setTimeout(function() {
             if (_doc.contains(_this)) {
@@ -205,7 +203,7 @@ var initTimeout;
     before:
       function(before_element) {
         var father, sons;
-        if (typeof before_element == 'number') {
+        if (typeof before_element === 'number') {
           sons = (father = this.parentNode).children;
           before_element = sons[before_element < 0 ? sons.length - 1 + before_element : before_element];
         } else {
@@ -224,7 +222,7 @@ var initTimeout;
           _this.dataset[name] = val;
         };
 
-        if (isObj(name)) {
+        if (typeof name === 'object') {
           name.propEach(setDataset);
           return _this;
         }
@@ -242,7 +240,9 @@ var initTimeout;
       },
     empty:
       function() {
-        for (var father = this, sacrifice; sacrifice = father.firstChild; father.removeChild(sacrifice)) {}
+        for (var father = this, sacrifice;
+             sacrifice = father.firstChild;
+             father.removeChild(sacrifice)) {}
         return father;
       },
     first:
@@ -264,7 +264,9 @@ var initTimeout;
     rm:
       function() {
         var _this = this;
-        _doc.contains(_this) && _this.parentNode.removeChild(_this);
+        if (_doc.contains(_this)) {
+          _this.parentNode.removeChild(_this);
+        }
       },
     selectText:
       function() {
@@ -322,7 +324,7 @@ var initTimeout;
         var _this = this;
 
         _this.hidden = false;
-        if (_this.style.display == 'none') {
+        if (_this.style.display === 'none') {
           _this.style.display = '';
         }
 
@@ -462,7 +464,7 @@ var Ajax = (function() {
       xmlhttp.responseType = response_type;
     }
 
-    if (method == 'POST') {
+    if (method === 'POST') {
       xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     }
 
@@ -572,15 +574,6 @@ function update$(swelldom, vogue, catwalk, max_models) {
   updated_list.ascEach(function(jeans_id, season_num) {
     id$(jeans_id).before(season_num);
   });
-}
-
-/* Check function */
-function isArr(obj) {
-  return Array.isArray(obj);
-}
-
-function isObj(obj) {
-  return typeof obj == 'object';
 }
 
 /* Animation */

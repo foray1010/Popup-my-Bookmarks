@@ -59,6 +59,11 @@ Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG
    - __store.md - Description for Chrome Web Store
    - README.md - Description for GitHub
 
+5. test
+   > gulp test
+
+   To test javascript code by jshint
+
 
 ## Plan to do
 
