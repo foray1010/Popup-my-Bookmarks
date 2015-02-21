@@ -1078,7 +1078,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     EDITOR.show();
     setBottomRight(
       EDITOR,
-      getNowHeight() - EDITOR.offsetHeight - getRealTop(TARGET_ITEM),
+      getNowHeight() - EDITOR.offsetHeight - TARGET_ITEM.offset().top,
       getBoxNum(TARGET_ITEM) % 2 ? SET_WIDTH + 2 : 0
     );
   }
