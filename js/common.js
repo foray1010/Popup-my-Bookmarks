@@ -45,13 +45,6 @@
       }
       while (--i >= end && fn(_this[i], i) !== false) {}
     },
-    getEach: function(prop) {
-      var new_arr = [];
-      this.ascEach(function(item) {
-        new_arr.push(item[prop]);
-      });
-      return new_arr;
-    },
     hv: function(i) {
       var _this = this;
       return _this.indexOf ? _this.indexOf(i) >= 0 : _this[i] !== undefined;
