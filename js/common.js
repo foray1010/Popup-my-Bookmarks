@@ -294,14 +294,40 @@
       return classListFn(this, class_fn_name, class_name);
     },
 
-    // Style Management
-    css: function(param1, param2) {
-      this.style.prop(param1, param2);
-      return this;
+    // Style Handler
+    css: function(val1, val2) {
+      var _this = this;
+
+      if (typeof val1 !== 'object' && val2 === undefined) {
+        return getComputedStyle(_this)[val1];
+      }
+
+      _this.style.prop(val1, val2);
+      return _this;
     },
     hide: function() {
       this.hidden = true;
       return this;
+    },
+    offset: function() {
+      var check_element = this;
+      var offset_top = check_element.offsetTop;
+      var offset_left = check_element.offsetLeft;
+      while (check_element.tagName !== 'BODY') {
+        if (check_element.css('position') === 'absolute') {
+          offset_top += check_element.offsetTop;
+          offset_left += check_element.offsetLeft;
+        }
+        offset_top -= check_element.scrollTop;
+        offset_left -= check_element.scrollLeft;
+
+        check_element = check_element.parentNode;
+      }
+
+      return {
+        top: offset_top,
+        left: offset_left
+      };
     },
     show: function() {
       var _this = this;
@@ -313,7 +339,8 @@
 
       return _this;
     },
-    /* Others */
+
+    // Others
     index: function() {
       for (var index_num = 0, indexer = this;
         indexer = indexer.previousElementSibling;
@@ -608,12 +635,3 @@
     })()
   });
 }(window, document, Math);
-
-// Element function
-function getRealTop(son) { // this code can be better
-  for (var top = son.offsetTop;
-       (son = son.parentNode).tagName !== 'BODY';
-       // find firstChild's offset to identify if it is position: absolute
-       top += (son.first().offsetTop === 0 ? son.offsetTop : 0) - son.scrollTop) {}
-  return top;
-}
