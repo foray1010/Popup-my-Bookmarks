@@ -536,7 +536,7 @@
     },
 
     // AJAX
-    Ajax: (function() {
+    AJAX: (function() {
       var genQueryString = function(data) {
         var query = [];
         for (var key in data) {
@@ -548,7 +548,7 @@
         return query.join('&');
       };
 
-      var sendAjax = function(method, data, options) {
+      var sendAJAX = function(method, data, options) {
         //// preassign value to options
         var async = options.async !== undefined ? options.async : true;
         var response_type = options.type;
@@ -598,18 +598,18 @@
             options.url += '?' + querystring;
           }
 
-          sendAjax('GET', null, options);
+          sendAJAX('GET', null, options);
         },
         post: function(options) {
           var querystring = genQueryString(options.data);
 
-          sendAjax('POST', querystring, options);
+          sendAJAX('POST', querystring, options);
         }
       };
     })(),
 
     // set or unset CSS
-    Css: (function() {
+    CSS: (function() {
       var getSheet = function() {
         var _jets_css = '_jets-css';
         var style_element = id$(_jets_css);
