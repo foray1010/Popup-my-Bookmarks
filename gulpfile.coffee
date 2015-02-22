@@ -138,7 +138,7 @@ gulp.task 'dev', ->
 gulp.task 'md', ->
   file_name = argv.make
 
-  switch (file_name)
+  switch file_name
     when '__store.md'
       file_data = getMarkdownData([
         'Popup my Bookmarks'
