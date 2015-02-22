@@ -652,18 +652,18 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
 
     // set panel(#main, #sub) width
-    Css.set('.panel-width', {
+    CSS.set('.panel-width', {
       'width': SET_WIDTH + 'px'
     });
 
 
     // set font style
-    Css.set('body', {
+    CSS.set('body', {
       'font': font_size_px + ' ' + font_family
     });
 
     if (FONT_SIZE > 16) {
-      Css.set({
+      CSS.set({
         '.folderlist > p': {
           'height': font_size_px,
           'line-height': font_size_px
@@ -674,7 +674,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       });
     }
 
-    Css.set('.folderlist > .separator', {
+    CSS.set('.folderlist > .separator', {
       'height': separator_height_px,
       'line-height': separator_height_px
     });
