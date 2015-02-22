@@ -1,14 +1,18 @@
 'use strict';
-!function(window, document, Math, undefined) {
+!function(window, document, Math, Object, undefined) {
   var EMPTY_FUNC = function() {};
   var OBJECT_PROTO = Object.prototype;
   var TIMEOUT_HANDLER = {};
 
   // Object.prototype
   OBJECT_PROTO.propEach = function(fn) {
-    for (var prop_arr = Object.keys(this), prop_name;
-         prop_name = prop_arr.shift();
-         fn(prop_name, this[prop_name])) {}
+    var _this = this;
+
+    var prop_arr = Object.keys(_this);
+    var prop_name;
+    while (prop_name = prop_arr.shift()) {
+      fn(prop_name, _this[prop_name]);
+    }
   };
 
   OBJECT_PROTO.prop = function(val1, val2) {
@@ -223,9 +227,12 @@
       return _this.dataset[name];
     },
     empty: function() {
-      for (var father = this, sacrifice;
-           sacrifice = father.firstChild;
-           father.removeChild(sacrifice)) {}
+      var father = this;
+      var sacrifice;
+      while (sacrifice = father.firstChild) {
+        father.removeChild(sacrifice);
+      }
+
       return father;
     },
     first: function() {
@@ -335,9 +342,12 @@
 
     // Others
     index: function() {
-      for (var index_num = 0, indexer = this;
-        indexer = indexer.previousElementSibling;
-        ++index_num) {}
+      var index_num = 0;
+      var indexer = this;
+      while (indexer = indexer.prev()) {
+        index_num++;
+      }
+
       return index_num;
     },
     hvFocus: function() {
@@ -627,4 +637,4 @@
       };
     })()
   });
-}(window, document, Math);
+}(window, document, Math, Object);
