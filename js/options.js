@@ -43,10 +43,16 @@
     OPTIONS.ascEach(function(option) {
       var option_name = option.name;
       if (storage_obj[option_name] === undefined) {
-        storage_obj[option_name] = new_options[option_name] = option.defaultValue;
+        var option_default_val = option.defaultValue;
+        storage_obj[option_name] = option_default_val;
+        new_options[option_name] = option_default_val;
 
         // to remove unnecessary permissions
-        setPermission(option.permissions, option_name, new_options[option_name]);
+        setPermission(
+          option.permissions,
+          option_name,
+          new_options[option_name]
+        );
       }
     });
 
@@ -56,7 +62,8 @@
   }
 
   function genInputSelectBox(option_field, option_choices, selected_value) {
-    var input_select_box = option_field.new$('div').addClass('input-select-box');
+    var input_select_box = option_field.new$('div')
+      .addClass('input-select-box');
 
     var option_input = input_select_box.new$('input').attr({
       'type': 'text',
@@ -110,10 +117,18 @@
 
         switch (option.type || typeof option_choices[0]) {
           case 'boolean':
-            option_input = genSelectBox(option_field, option_choices, option_value);
+            option_input = genSelectBox(
+              option_field,
+              option_choices,
+              option_value
+            );
             break;
           case 'input-select':
-            option_input = genInputSelectBox(option_field, option_choices, option_value);
+            option_input = genInputSelectBox(
+              option_field,
+              option_choices,
+              option_value
+            );
             break;
           case 'number':
             option_input = option_field.new$('input').prop({
@@ -124,7 +139,11 @@
             });
             break;
           case 'select-multiple':
-            option_input = genSelectMultipleBox(option_field, option_choices, option_value);
+            option_input = genSelectMultipleBox(
+              option_field,
+              option_choices,
+              option_value
+            );
             break;
           case 'string':
             option_input = option_field.new$('select');
@@ -152,7 +171,8 @@
     var width_of_button = 100 / option_choices.length;
 
     var setActiveOption = function(option_button) {
-      var button_index = option_button.index() - 2; // -2 to ignore the input and background element
+      // -2 to ignore the input and background element
+      var button_index = option_button.index() - 2;
 
       option_button.addClass(selectbox_item_active);
       cover_box.style.left = button_index * width_of_button + '%';
@@ -169,7 +189,8 @@
     ////
 
     option_choices.ascEach(function(value) {
-      var button_text = typeof value !== 'boolean' ? value : _getMsg(value ? 'opt_yes' : 'opt_no');
+      var button_text = typeof value !== 'boolean' ?
+        value : _getMsg(value ? 'opt_yes' : 'opt_no');
 
       var option_button = selectbox.new$('div')
         .addClass('selectbox-item')
@@ -177,7 +198,8 @@
         .addText(button_text)
         .clickByButton(0, function() {
           if (!this.hvClass(selectbox_item_active)) {
-            selectbox.class$(selectbox_item_active)[0].rmClass(selectbox_item_active);
+            selectbox.class$(selectbox_item_active)[0]
+              .rmClass(selectbox_item_active);
             setActiveOption(this);
           }
         });
@@ -389,7 +411,10 @@
             }
             break;
           case 'select-multiple':
-            option_value = option_value.split(',').map(function(x) { return x * 1; });
+            option_value = option_value.split(',')
+              .map(function(x) {
+                return x * 1;
+              });
             break;
           case 'string':
             option_value *= 1;
@@ -418,18 +443,21 @@
 
   function setPermission(option_permissions, option_name, option_value) {
     if (option_permissions) {
-      var tmp_obj = {
+      var action_type = option_value ? 'request' : 'remove';
+      var permissions_obj = {
         permissions: [],
         origins: []
       };
 
       option_permissions.ascEach(function(permission) {
-        tmp_obj[permission.hv('://') ? 'origins' : 'permissions'].push(permission);
+        var prop_name = permission.hv('://') ? 'origins' : 'permissions';
+        permissions_obj[prop_name].push(permission);
       });
 
-      chrome.permissions[option_value ? 'request' : 'remove'](tmp_obj, function(is_success) {
+      chrome.permissions[action_type](permissions_obj, function(is_success) {
         if (!is_success) {
-          id$(option_name).parentNode.class$('selectbox-item')[option_value ? 1 : 0].click();
+          id$(option_name).parentNode
+            .class$('selectbox-item')[option_value ? 1 : 0].click();
           OPTIONS_BUTTON[0].click();
         }
       });

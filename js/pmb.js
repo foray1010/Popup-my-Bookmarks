@@ -3,11 +3,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
   // shorter global
   var _bookmark = chrome.bookmarks;
   var _getMsg = chrome.i18n.getMessage;
-  var _localStorage = localStorage;
   var _tab = chrome.tabs;
   var _win = chrome.windows;
 
-  // storage (e.g. options)
+  // options storage
   var BOOKMARKLET = STORAGE.bookmarklet;
   var DEF_EXPAND = STORAGE.defExpand;
   var FONT_SIZE = STORAGE.fontSize;
@@ -15,13 +14,19 @@ chrome.storage.sync.get(null, function(STORAGE) {
   var HIDE_ROOT_FOLDER = STORAGE.hideRootFolder;
   var MAX_RESULTS = STORAGE.maxResults;
   var OP_FOLDER_BY = STORAGE.opFolderBy;
-  var LAST_PID = (_localStorage.getItem('lastPID') || '').split(',');
-  var LAST_SCROLL = (_localStorage.getItem('lastScroll') || '').split(',');
   var REMEMBER_POS = STORAGE.rememberPos;
   var SEARCH_TARGET = STORAGE.searchTarget;
   var SET_WIDTH = STORAGE.setWidth;
   var TOOLTIP = STORAGE.tooltip;
   var WARN_OPEN_MANY = STORAGE.warnOpenMany;
+
+  // local storage
+  // name
+  var NAME_LAST_BOX_PID = 'lastBoxPID';
+  var NAME_LAST_SCROLL_TOP = 'lastScrollTop';
+  // value
+  var LAST_BOX_PID = jsonStorage('get', NAME_LAST_BOX_PID) || [];
+  var LAST_SCROLL_TOP = jsonStorage('get', NAME_LAST_SCROLL_TOP) || [];
 
   // pre-defined
   var BOX = [];
@@ -38,7 +43,13 @@ chrome.storage.sync.get(null, function(STORAGE) {
   var IS_SEARCHING = false;
   var ITEM_HEIGHT = (FONT_SIZE > 16 ? FONT_SIZE : 16) + 6;
   var MAX_HEIGHT = 596;
-  var MENU_PATTERN = ['', '', '', '|', '', 'del', '|', 'cut', 'copy', 'paste', '|', 'addPage', 'addFolder', 'addSeparator', '|', 'sortByName'];
+  var MENU_PATTERN = [
+    '', '', '', '|',
+    '', 'del', '|',
+    'cut', 'copy', 'paste', '|',
+    'addPage', 'addFolder', 'addSeparator', '|',
+    'sortByName'
+  ];
   var NINJA_LIST = [];
   var NOW_SCROLL_TOP = [];
   var ON_MOD_KEY;
@@ -170,7 +181,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
           // } else if (IS_SEARCHING) {
           if (IS_SEARCHING) {
             // enter the first bkmark when press return key
-            getBoxList(0).firstChild.click();
+            getBoxList(0).first().click();
           }
           break;
         case 16: // shift
@@ -513,8 +524,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function getItemIndex(item) {
-    // item.index() + 1 because when two items with same index, the new one will -1
-    return item.hvClass('no-bkmark') ? 0 : item.index() + 1 - getRootFolderNum(getBoxNum(item));
+    return item.hvClass('no-bkmark') ? 0 :
+      item.index() + 1 - getRootFolderNum(getBoxNum(item));
   }
 
   function getMaxHeight() {
@@ -550,10 +561,12 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function hideMenu(is_hide_cover) {
     MENU.fadeOut();
-    //// to reset width and height because they may be changed when the width and height are not enough for displaying menu
+
+    // reset window width and height
+    // because they may be changed when displaying menu
     modBodyWidth(getNowWidth());
     modBodyHeight(getMaxHeight());
-    ////
+
 
     if (is_hide_cover !== false) {
       EDITOR.fadeOut();
@@ -680,11 +693,13 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function loadLastPos() {
-    if (REMEMBER_POS && LAST_PID.length > 0) {
-      LAST_PID.ascEach(function(folder_id, box_num) {
+    if (REMEMBER_POS && LAST_BOX_PID.length > 0) {
+      LAST_BOX_PID.ascEach(function(folder_id, box_num) {
         var fn_after_open = function() {
-          if (LAST_SCROLL[box_num]) {
-            getBoxList(box_num).scrollTop = NOW_SCROLL_TOP[box_num] = LAST_SCROLL[box_num] * 1;
+          var last_scroll_top = LAST_SCROLL_TOP[box_num];
+          if (last_scroll_top) {
+            getBoxList(box_num).scrollTop = last_scroll_top;
+            NOW_SCROLL_TOP[box_num] = last_scroll_top;
           }
         };
 
@@ -697,6 +712,19 @@ chrome.storage.sync.get(null, function(STORAGE) {
           openFolder(folder_id, fn_after_open);
         }
       });
+    }
+  }
+
+  function jsonStorage(action, name, value) {
+    var _localStorage = localStorage;
+    var _json = JSON;
+
+    switch (action) {
+      case 'get':
+        return _json.parse(_localStorage.getItem(name));
+
+      case 'set':
+        _localStorage.setItem(name, _json.stringify(value));
     }
   }
 
@@ -797,7 +825,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
           }
         });
 
-        if (WARN_OPEN_MANY && url_list_len > 5 && !confirm(_getMsg('askOpenAll', url_list_len + ''))) {
+        if (WARN_OPEN_MANY &&
+            url_list_len > 5 &&
+            !confirm(_getMsg('askOpenAll', url_list_len + ''))) {
           return false;
         }
       } else {
@@ -967,18 +997,17 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function savLastPID() {
     if (REMEMBER_POS) {
-      _localStorage.setItem('lastPID', BOX_PID.join());
+      jsonStorage('set', NAME_LAST_BOX_PID, BOX_PID);
     }
   }
 
   function savLastScroll(target) {
     if (REMEMBER_POS) {
-      var last_scroll = 'lastScroll';
       var save_fn = function() {
-        _localStorage.setItem(last_scroll, NOW_SCROLL_TOP.join());
+        jsonStorage('set', NAME_LAST_SCROLL_TOP, NOW_SCROLL_TOP);
       };
       if (target) {
-        initTimeout(last_scroll, function() {
+        initTimeout(NAME_LAST_SCROLL_TOP, function() {
           NOW_SCROLL_TOP[target.data(DATATEXT_BOX_NUM) * 1] = target.scrollTop;
           save_fn();
         }, 200);
@@ -1001,7 +1030,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
 
     _bookmark.search(keyword, function(results) {
-      update$(getBoxList(0), sortByTitle(searchResultSelector(results)), function(item) {
+      var sorted_result = sortByTitle(searchResultSelector(results));
+      update$(getBoxList(0), sorted_result, function(item) {
         genItem(0, item).draggable = false;
       });
       noBkmarkHandler(0);
@@ -1058,8 +1088,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     if (is_start_search) {
       if (REMEMBER_POS) {
-        LAST_PID = BOX_PID.slice();
-        LAST_SCROLL = NOW_SCROLL_TOP.slice();
+        LAST_BOX_PID = BOX_PID.slice();
+        LAST_SCROLL_TOP = NOW_SCROLL_TOP.slice();
       }
       resetBox(0);
     } else {
@@ -1084,9 +1114,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function setEditorText(title, url) {
+    var editor_title = _getMsg(url ? 'edit' : 'rename').replace('...', '');
     var input_field = EDITOR.tag$('input');
 
-    id$('edit-title').innerText = _getMsg(url ? 'edit' : 'rename').replace('...', '');
+    id$('edit-title').innerText = editor_title;
     input_field[0].val(title).selectText().focus();
     input_field[1].val(url).hidden = !url;
   }
@@ -1103,8 +1134,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     var max_list_height = MAX_HEIGHT - search_height - header_height;
 
-    list_last_item = list_addr.lastChild;
-    list_height = list_last_item.offsetTop + list_last_item.offsetHeight - header_height;
+    list_last_item = list_addr.last();
+    list_height = list_last_item.offsetTop +
+                  list_last_item.offsetHeight -
+                  header_height;
     if (list_height > max_list_height) {
       list_height = max_list_height;
       list_addr.style.maxHeight = list_height + 'px';
@@ -1192,7 +1225,13 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function sortByName(parent_id) {
     _bookmark.getChildren(parent_id, function(child_list) {
       var gen_bkmark_list = function() {
-        return separated_child_list[separated_child_list.length] = [[/* Separators */], [/* Folders */], [/* Bookmarks */]];
+        var new_bkmark_list = [
+          [/* Separators */],
+          [/* Folders */],
+          [/* Bookmarks */]
+        ];
+        separated_child_list.push(new_bkmark_list);
+        return new_bkmark_list;
       };
 
       var new_child_list = [];
@@ -1201,8 +1240,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
       var selected_child_list = gen_bkmark_list();
 
       /**
-       * split all bookmarks into n main group, where n = the number of separators + 1
-       * Each main group contains 3 small groups (Separators, Folders, Bookmarks)
+       * Split all bookmarks into n main group,
+       * where n = the number of separators + 1
+       * Each main group contains 3 small groups
+       * (Separators, Folders, Bookmarks)
        */
       child_list.ascEach(function(bkmark) {
         var selected_bkmark_list_num;

@@ -59,11 +59,13 @@
 
     // Event Management
     clickByButton: function(allow_button, fn) {
-      return this.on('click', function(event) {
+      var _this = this;
+      _this.on('click', function(event) {
         if (allow_button === event.button) {
-          fn(event);
+          fn.call(_this, event);
         }
       });
+      return _this;
     },
     hoverTimeout: function(fn, timeout, xy_range, is_inside_range) {
       var _this = this;
@@ -538,7 +540,9 @@
       var genQueryString = function(data) {
         var query = [];
         for (var key in data) {
-          query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+          query.push(
+            encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
+          );
         }
 
         return query.join('&');
@@ -564,7 +568,10 @@
         }
 
         if (method === 'POST') {
-          xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          xmlhttp.setRequestHeader(
+            'Content-type',
+            'application/x-www-form-urlencoded'
+          );
         }
 
         xmlhttp.onreadystatechange = function() {
@@ -605,7 +612,10 @@
     Css: (function() {
       var getSheet = function() {
         var _jets_css = '_jets-css';
-        var style_element = id$(_jets_css) || document.head.new$('style').prop('id', _jets_css);
+        var style_element = id$(_jets_css);
+        if (!style_element) {
+          style_element = document.head.new$('style').prop('id', _jets_css);
+        }
         return style_element.sheet;
       };
 
