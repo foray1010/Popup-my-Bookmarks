@@ -1124,7 +1124,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function setHeight(box_num) {
     var list_addr = getBoxList(box_num);
-    var list_last_item;
+    var list_last_item = list_addr.last();
 
     var body_height;
     var footer_height = 4;
@@ -1134,7 +1134,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     var max_list_height = MAX_HEIGHT - search_height - header_height;
 
-    list_last_item = list_addr.last();
     list_height = list_last_item.offsetTop +
                   list_last_item.offsetHeight -
                   header_height;
@@ -1144,7 +1143,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
 
     body_height = list_height + search_height + header_height + footer_height;
-    HEIGHT_LIST[box_num] = body_height > MAX_HEIGHT ? MAX_HEIGHT : body_height;
+    HEIGHT_LIST[box_num] = [MAX_HEIGHT, body_height].min();
     modBodyHeight(getMaxHeight());
   }
 

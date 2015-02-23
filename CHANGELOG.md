@@ -1,4 +1,4 @@
-## 3.1.0 (unreleased)
+## 3.1.0.2302 (23/2/2015)
 Options:
   - Font family (suggested by Leebeaut Paul and David Bryant)
   - Hide root folder (suggested by David Bryant)
