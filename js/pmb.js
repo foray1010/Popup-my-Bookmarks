@@ -320,7 +320,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       genItem(box_num, new_obj).after(TARGET_ITEM);
 
       if (TARGET_ITEM.hvClass('no-bkmark')) {
-        TARGET_ITEM.rm(); // delete no-bkmark's element
+        TARGET_ITEM.remove(); // delete no-bkmark's element
       }
 
       setHeight(box_num);
@@ -340,7 +340,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       var no_bkmark = BOX[box_num].class$('no-bkmark')[0];
 
       if (no_bkmark) {
-        no_bkmark.rm();
+        no_bkmark.remove();
       }
 
       _bookmark.move(_this.id, {
@@ -355,7 +355,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     focusSearchInput();
 
     if (DRAG_ITEM.parentNode === PRELOAD) {
-      DRAG_ITEM.rm();
+      DRAG_ITEM.remove();
     }
     DRAG_ITEM = null;
   }
@@ -424,11 +424,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function genFirstBox() {
     if (BOX[0]) {
-      BOX[0].rm();
+      BOX[0].remove();
     }
 
     // remove headbox
-    genBox(0).first().rm();
+    genBox(0).first().remove();
 
     genFirstList();
   }
@@ -874,7 +874,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
       if (next_box) {
         tempDragItem(box_num);
-        next_box.rm();
+        next_box.remove();
       }
       next_box = genBox(next_box_num);
       next_box.class$('head-title')[0].innerText = id$(id).innerText;
@@ -960,7 +960,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
           resetBox(box_num);
         }
 
-        item.rm();
+        item.remove();
         noBkmarkHandler(box_num);
 
         setHeight(box_num);
