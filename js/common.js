@@ -170,11 +170,22 @@
       this.appendChild(document.createTextNode(content));
       return this;
     },
-    after: function(after_element) {
-      var _this = this, next_sibling = after_element.nextSibling;
-      return next_sibling ?
-        _this.before(next_sibling) :
-        _this.appendTo(after_element.parentNode);
+    after: function(param1) {
+      var _this = this;
+      var father;
+      var next_next_sibling;
+
+      if (typeof param1 === 'number') {
+        father = _this.parentNode;
+        next_next_sibling = _this.parentNode.children[param1 + 1];
+      } else {
+        father = param1.parentNode;
+        next_next_sibling = param1.next();
+      }
+
+      return next_next_sibling ?
+        _this.before(next_next_sibling) :
+        _this.appendTo(father);
     },
     attr: function(val1, val2) {
       var _this = this;
@@ -191,17 +202,19 @@
     appendTo: function(father) {
       return father.appendChild(this);
     },
-    before: function(before_element) {
+    before: function(param1) {
+      var _this = this;
       var father, sons;
-      if (typeof before_element === 'number') {
-        sons = (father = this.parentNode).children;
-        before_element = sons[before_element < 0 ?
-          sons.length - 1 + before_element :
-          before_element];
+      if (typeof param1 === 'number') {
+        father = _this.parentNode;
+        sons = father.children;
+        param1 = sons[param1 < 0 ?
+          sons.length - 1 + param1 :
+          param1];
       } else {
-        father = before_element.parentNode;
+        father = param1.parentNode;
       }
-      return father.insertBefore(this, before_element);
+      return father.insertBefore(_this, param1);
     },
     cloneTo: function(father, grandson) {
       return this.cloneNode(grandson !== false).appendTo(father);

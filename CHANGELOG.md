@@ -2,6 +2,9 @@
 Changes:
   - Increase minimum Chrome version from 20 to 26
 
+Bugfixes:
+  - Fix logic error in moving bookmarks when option 'Open folders by Left Click' is activated
+
 ## 3.1.0.2302 (23/2/2015)
 Options:
   - Font family (suggested by Leebeaut Paul and David Bryant)
