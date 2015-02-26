@@ -60,9 +60,6 @@ select[multiple]
   &:hover
     color: $main-color2
 
-.logo-memo
-  height: 18px
-
 .opt-desc
 .opt-input
   display: table-cell
@@ -154,17 +151,20 @@ select[multiple]
   height: 80px
   -webkit-user-select: none
 
-#logo-memo1
-  background: $main-color1
+#logo-memo *
+  height: 18px
 
-#logo-memo2
-  background: $main-color2
+  &:nth-of-type(1)
+    background: $main-color1
 
-#logo-memo3
-  background: #6cb
+  &:nth-of-type(2)
+    background: $main-color2
 
-#logo-memo4
-  background: #e77
+  &:nth-of-type(3)
+    background: #6cb
+
+  &:nth-of-type(4)
+    background: #e77
 
 #logo-title
   background: url(/img/opt_title.png) no-repeat center center

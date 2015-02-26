@@ -8,8 +8,9 @@ div#container
   div#logo-box
     div#logo-book
       div#star-five
-    - for (var x = 1; x <= 4; x++)
-      div.logo-memo(id="logo-memo#{x}")
+    div#logo-memo
+      - for (var x = 0; x < 4; x++)
+        div
     div#logo-title
 
   div#opt-box
