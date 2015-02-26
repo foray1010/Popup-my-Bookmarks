@@ -1,7 +1,7 @@
 name: 'Popup my Bookmarks'
 version: ''
 manifest_version: 2
-minimum_chrome_version: '26'
+minimum_chrome_version: '20'
 
 default_locale: 'en'
 description: '__MSG_extDesc__'

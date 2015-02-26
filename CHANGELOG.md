@@ -1,7 +1,3 @@
-## 3.2.0 (unreleased)
-Changes:
-  - Increase minimum Chrome version from 20 to 26
-
 ## 3.1.2.2602 (26/2/2015)
 Bugfixes:
   - Cannot save correct last position when dragging scrollbar (reported by KyosukeAce)

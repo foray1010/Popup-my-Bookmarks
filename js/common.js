@@ -245,6 +245,12 @@
     prev: function() {
       return this.previousElementSibling;
     },
+    rm: function() {
+      var _this = this;
+      if (document.contains(_this)) {
+        _this.parentNode.removeChild(_this);
+      }
+    },
     selectText: function() {
       var _this = this;
 
@@ -357,10 +363,10 @@
       var _this = this;
       var _this_style = _this.style;
 
-      _this_style.transition = style_name + ' ' + duration + 'ms';
+      _this_style.WebkitTransition = style_name + ' ' + duration + 'ms';
 
       setTimeout(function() {
-        _this_style.transition = '';
+        _this_style.WebkitTransition = '';
 
         complete_fn.call(_this);
       }, duration);
@@ -378,7 +384,7 @@
 
       _this.anim('opacity', 0, duration, function() {
         if (is_remove_when_done) {
-          _this.remove();
+          _this.rm();
         } else {
           _this.hide();
           _this.style.opacity = '';
@@ -546,7 +552,7 @@
 
       outdated_list.diff(updated_list)
         .ascEach(function(old_school) {
-          id$(old_school).remove();
+          id$(old_school).rm();
         });
 
       updated_list.diff(outdated_list)

@@ -331,7 +331,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     focusSearchInput();
 
     if (DRAG_ITEM.parentNode === PRELOAD) {
-      DRAG_ITEM.remove();
+      DRAG_ITEM.rm();
     }
     DRAG_ITEM = null;
   }
@@ -414,11 +414,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function genFirstBox() {
     if (BOX[0]) {
-      BOX[0].remove();
+      BOX[0].rm();
     }
 
     // remove headbox
-    genBox(0).first().remove();
+    genBox(0).first().rm();
 
     genFirstList();
   }
@@ -597,7 +597,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
           resetBox(box_num);
         }
 
-        removed_element.remove();
+        removed_element.rm();
         insertNoBkmark(box_num);
 
         setHeight(box_num);
@@ -918,7 +918,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
       if (next_box) {
         tempDragItem(box_num);
-        next_box.remove();
+        next_box.rm();
       }
       next_box = genBox(next_box_num);
       next_box.class$('head-title')[0].innerText = id$(id).innerText;
@@ -994,7 +994,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     var no_bkmark = box_list.class$(no_bkmark_class_name)[0];
 
     if (no_bkmark) {
-      no_bkmark.remove();
+      no_bkmark.rm();
     }
   }
 
