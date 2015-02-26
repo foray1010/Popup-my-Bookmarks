@@ -483,11 +483,11 @@
 
     var addEvent = is_once ?
       function(this_event_name, this_event_fn) {
-        var this_once_event_fn = function(e) {
-          event_fn(e);
-          _this.removeEventListener(this_event_name, this_once_event_fn);
+        var once_event_fn = function(e) {
+          this_event_fn(e);
+          _this.removeEventListener(this_event_name, once_event_fn);
         };
-        _this.addEventListener(this_event_name, this_once_event_fn, use_capture);
+        _this.addEventListener(this_event_name, once_event_fn, use_capture);
       } :
       function(this_event_name, this_event_fn) {
         _this.addEventListener(this_event_name, this_event_fn, use_capture);
