@@ -1,7 +1,3 @@
-## 3.2.0 (unreleased)
-Changes:
-  - Increase minimum Chrome version from 20 to 26
-
 ## 3.1.1.2602 (26/2/2015)
 Bugfixes:
   - Fix logic error in moving bookmarks when option 'Open folders by Left Click' is activated
