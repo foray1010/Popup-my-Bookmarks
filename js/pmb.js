@@ -250,20 +250,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
         }
         _target.addClass('selected');
       }
-    },
-    // control scrolling speed
-    mousewheel: function(event) {
-      event.preventDefault();
-
-      for (var target = event.target;
-           target !== BODY;
-           target = target.parentNode) {
-        if (target.hvClass('folderlist')) {
-          target.scrollTop -= ITEM_HEIGHT * event.wheelDelta / 120 >> 0;
-          savLastScroll(target);
-          break;
-        }
-      }
     }
   });
 
@@ -408,7 +394,21 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function genBox(box_num) {
     var box = BOX[box_num] = BOX_TEMPLATE.cloneTo(CONTAINER[box_num % 2]);
-    getBoxList(box_num).data(DATATEXT_BOX_NUM, box_num);
+
+    getBoxList(box_num)
+      .data(DATATEXT_BOX_NUM, box_num)
+      .on({
+        mousewheel: function(event) {
+          event.preventDefault();
+
+          // control scrolling speed
+          this.scrollTop -= ITEM_HEIGHT * event.wheelDelta / 120 >> 0;
+        },
+        scroll: function() {
+          savLastScroll(this);
+        }
+      });
+
     return box;
   }
 
