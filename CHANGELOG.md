@@ -2,6 +2,10 @@
 Changes:
   - Increase minimum Chrome version from 20 to 26
 
+## 3.1.2.2602 (26/2/2015)
+Bugfixes:
+  - Cannot save correct last position when dragging scrollbar (reported by KyosukeAce)
+
 ## 3.1.1.2602 (26/2/2015)
 Bugfixes:
   - Fix logic error in moving bookmarks when option 'Open folders by Left Click' is activated
