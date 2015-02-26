@@ -78,7 +78,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   // if first run
   if (HIDE_ROOT_FOLDER === undefined) {
-    openOptions();
+    openOptionsPage();
   }
 
   // render
@@ -159,7 +159,13 @@ chrome.storage.sync.get(null, function(STORAGE) {
           focusSearchInput();
           return false;
       }
-      MENU.hide(hide_param);
+
+      // set availability of menu items
+      if (hide_param) {
+        MENU.children.ascEach(function(menu_item, item_num) {
+          menu_item.hidden = hide_param[item_num];
+        });
+      }
 
       TARGET_ITEM = _target;
       modMenuText(isFolder(_target));
@@ -286,7 +292,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
           if (BOOKMARKLET) {
             _tab.executeScript(null, { code: url });
           } else if (confirm(_getMsg('alert_bookmarklet'))) {
-            openOptions();
+            openOptionsPage();
           }
         }
         break;
@@ -939,7 +945,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     });
   }
 
-  function openOptions() {
+  function openOptionsPage() {
     _tab.create({ url: 'options.html' });
   }
 
