@@ -72,9 +72,9 @@
       var event_timer;
       var mouse_xy;
 
-      var mousemove_fn = function(mouse_xy_org) {
+      var mousemove_fn = function(mouse_xy_orig) {
         var is_trigger_point = function(x_or_y) {
-          var displacement = Math.abs(mouse_xy[x_or_y] - mouse_xy_org[x_or_y]);
+          var displacement = Math.abs(mouse_xy[x_or_y] - mouse_xy_orig[x_or_y]);
           return displacement < xy_range === is_inside_range;
         };
 
@@ -111,28 +111,11 @@
 
       return _this;
     },
-    on: function(events, event_fn, bubble) {
-      var _this = this;
-      var addEvent = function(event_name, event_fn, bubble) {
-        _this.addEventListener(event_name, event_fn, bubble);
-      };
-
-      if (event_fn === undefined) {
-        events.propEach(addEvent);
-      } else {
-        addEvent(events, event_fn, bubble);
-      }
-
-      return _this;
+    on: function() {
+      return eventHandler(this, arguments, false);
     },
-    once: function(events, event_fn, bubble) {
-      var _this = this;
-      var event_tmp_fn = function(e) {
-        event_fn(e);
-        _this.removeEventListener(events, event_tmp_fn);
-      };
-
-      return _this.on(events, event_tmp_fn, bubble);
+    once: function() {
+      return eventHandler(this, arguments, true);
     },
     ready: function(fn) {
       var _this = this;
@@ -456,6 +439,10 @@
 
   // Private function
   function argumentsConstructor(args, type_patterns, default_values) {
+    if (default_values === undefined) {
+      default_values = [];
+    }
+
     // remove the non-optional arguments
     var args_slice_num = args.length - type_patterns.length;
     if (args_slice_num > 0) {
@@ -482,6 +469,36 @@
 
   function classListFn(_this, fn_name, class_name) {
     _this.classList[fn_name](class_name);
+    return _this;
+  }
+
+  function eventHandler(_this, orig_args, is_once) {
+    var _args = argumentsConstructor(
+      orig_args, ['object', 'string', 'function', 'boolean']
+    );
+    var events = _args[0];
+    var event_name = _args[1];
+    var event_fn = _args[2];
+    var use_capture = _args[3];
+
+    var addEvent = is_once ?
+      function(this_event_name, this_event_fn) {
+        var this_once_event_fn = function(e) {
+          event_fn(e);
+          _this.removeEventListener(this_event_name, this_once_event_fn);
+        };
+        _this.addEventListener(this_event_name, this_once_event_fn, use_capture);
+      } :
+      function(this_event_name, this_event_fn) {
+        _this.addEventListener(this_event_name, this_event_fn, use_capture);
+      };
+
+    if (events) {
+      events.propEach(addEvent);
+    } else {
+      addEvent(event_name, event_fn);
+    }
+
     return _this;
   }
 
