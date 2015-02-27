@@ -41,7 +41,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
   var HOVER_TIMEOUT;
   var IS_EXPANDED = false;
   var IS_SEARCHING = false;
-  var ITEM_HEIGHT = (FONT_SIZE > 16 ? FONT_SIZE : 16) + 6;
+  // +4 for padding, +2 for border width
+  var ITEM_HEIGHT = [FONT_SIZE, 16].max() + 6;
   var MAX_HEIGHT = 596;
   var MENU_PATTERN = [
     '', '', '', '|',
@@ -684,7 +685,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function initStyleOptions() {
     var font_size_px = FONT_SIZE + 'px';
-    var separator_height_px = (FONT_SIZE > 16 ? FONT_SIZE : 18) / 2 + 'px';
+    // -2 for border width
+    var separator_height_px = (ITEM_HEIGHT / 2) - 2 + 'px';
 
     // if the font family's name has whitespace, use quote to embed it
     var font_family = FONT_FAMILY.split(',').map(function(x) {
@@ -1136,8 +1138,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function setBottomRight(settler, set_bottom, set_right) {
     settler.css({
-      bottom: (set_bottom > 0 ? set_bottom : 0) + 'px',
-      right: (set_right > 0 ? set_right : 0) + 'px'
+      bottom: [set_bottom, 0].max() + 'px',
+      right: [set_right, 0].max() + 'px'
     });
   }
 
