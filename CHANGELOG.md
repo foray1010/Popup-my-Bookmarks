@@ -1,7 +1,3 @@
-## 3.2.0 (unreleased)
-Changes:
-  - Increase minimum Chrome version from 20 to 26
-
 ## 3.1.3.2702 (27/2/2015)
 Improvements:
   - Scroll back to the top when searching
