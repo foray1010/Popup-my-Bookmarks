@@ -1060,14 +1060,18 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
 
     _bookmark.search(keyword, function(results) {
+      var box_list = getBoxList(0);
       var sorted_result = sortByTitle(searchResultSelector(results));
 
       removeNoBkmark(0);
 
-      update$(getBoxList(0), sorted_result, function(item) {
+      update$(box_list, sorted_result, function(item) {
         genItem(0, item).draggable = false;
       });
       insertNoBkmark(0);
+
+      // scroll back to the top
+      box_list.scrollTop = 0;
 
       setHeight(0);
     });
