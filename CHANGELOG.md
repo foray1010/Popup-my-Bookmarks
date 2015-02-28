@@ -1,3 +1,7 @@
+## 3.1.4.2802 (28/2/2015)
+Bugfixes:
+  - Cannot restore last position in some special cases (reported by KyosukeAce)
+
 ## 3.1.3.2702 (27/2/2015)
 Improvements:
   - Scroll back to the top when searching
