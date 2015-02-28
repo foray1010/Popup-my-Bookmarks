@@ -1,7 +1,3 @@
-## 3.2.0 (unreleased)
-Changes:
-  - Increase minimum Chrome version from 20 to 26
-
 ## 3.1.4.2802 (28/2/2015)
 Bugfixes:
   - Cannot restore last position in some special cases (reported by KyosukeAce)
