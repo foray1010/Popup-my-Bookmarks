@@ -30,7 +30,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   // pre-defined
   var BOX = [];
-  var BOX_PID = [DEF_EXPAND + '']; //store the parentId of each box
+  var BOX_PID = []; //store the parentId of each box
   var COPY_CUT_ITEM = {
     id: null,
     isCut: false
@@ -393,8 +393,12 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
   }
 
-  function genBox(box_num) {
-    var box = BOX[box_num] = BOX_TEMPLATE.cloneTo(CONTAINER[box_num % 2]);
+  function genBox(box_num, box_pid) {
+    var box = BOX_TEMPLATE.cloneTo(CONTAINER[box_num % 2]);
+    BOX[box_num] = box;
+
+    BOX_PID[box_num] = box_pid;
+    savLastPID();
 
     getBoxList(box_num)
       .data(DATATEXT_BOX_NUM, box_num)
@@ -419,7 +423,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
 
     // remove headbox
-    genBox(0).first().remove();
+    genBox(0, DEF_EXPAND + '').first().remove();
 
     genFirstList();
   }
@@ -474,6 +478,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function genList(box_num, twig) {
+    NOW_SCROLL_TOP[box_num] = 0;
+
     twig.ascEach(function(leaf) {
       genItem(box_num, leaf);
     });
@@ -750,7 +756,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function loadLastPos() {
-    if (REMEMBER_POS && LAST_BOX_PID.length > 0) {
+    if (REMEMBER_POS) {
       LAST_BOX_PID.ascEach(function(folder_id, box_num) {
         var fn_after_open = function() {
           var last_scroll_top = LAST_SCROLL_TOP[box_num];
@@ -761,10 +767,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
         };
 
         if (box_num === 0) {
-          if (folder_id * 1 !== DEF_EXPAND) {
-            return false;
+          if (folder_id * 1 === DEF_EXPAND) {
+            fn_after_open();
           }
-          fn_after_open();
         } else {
           openFolder(folder_id, fn_after_open);
         }
@@ -914,15 +919,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
       var next_box = BOX[next_box_num];
       var folder_cover_fn;
 
-      NOW_SCROLL_TOP[next_box_num] = 0;
-      BOX_PID[next_box_num] = id;
-      savLastPID();
-
       if (next_box) {
         tempDragItem(box_num);
         next_box.remove();
       }
-      next_box = genBox(next_box_num);
+      next_box = genBox(next_box_num, id);
       next_box.class$('head-title')[0].innerText = id$(id).innerText;
 
       genList(next_box_num, twig);
