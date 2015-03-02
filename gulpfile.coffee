@@ -126,8 +126,8 @@ gulp.task 'dev', ->
   watchLang 'html', dev_path, pretty: true
 
   for file_name in ['font', '_locales', lang.js.source]
-    fs.symlink path.join('..', file_name), path.join(dev_path, file_name), 'dir'
-  fs.symlink path.join('..', resources_path, 'img-dev'), path.join(dev_path, 'img'), 'dir'
+    fs.symlinkSync path.join('..', file_name), path.join(dev_path, file_name), 'dir'
+  fs.symlinkSync path.join('..', resources_path, 'img-dev'), path.join(dev_path, 'img'), 'dir'
 
   compileManifest dev_path, (manifest_json) ->
     manifest_json.name += '(dev)'
