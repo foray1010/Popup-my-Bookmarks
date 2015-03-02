@@ -4,7 +4,7 @@ $main-color2 = #fa9115
 
 @font-face
   font-family: ArchivoNarrow
-  src: url(/font/ArchivoNarrow-Regular.otf)
+  src: url("/font/ArchivoNarrow-Regular.otf")
 
 body
   overflow: hidden
@@ -175,15 +175,10 @@ p
 #menu-cover
   background: rgba(255, 255, 255, .3)
 
-#search-img
-  float: left
-  margin: 4px 3px 5px 6px
-
 #search-input
   -webkit-appearance: none
   background: transparent
   border: 0
-  float: left
   height: 100%
   width: calc(100% - 21px)
 
@@ -191,6 +186,11 @@ p
   border: solid #ccc
   border-width: 0 0 1px 1px
   height: 21px
+
+  &:before
+    content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAsklEQVR42mNggIKGlq5UIL4CxP+B+B0QtwMxGwM2AJRYClUIws+R2LeAmAddcQJU8gIQq0LFeIB4GlR8K7qGJ1AJfiw2w5wojSwIEniCw6l1UHkfZMFfQPwFh4bNUA16yIIwt3aiKfaAih9HN0UAiN/AJIG4A4hXIIXUMSBmRdckC8T7kBTBgvQdlH0diIWxuVkL5EEgtoTyFZFsfwDEYgyEAFCRPJKm9wzEAKimh0D8DABuHq/4QpP4dwAAAABJRU5ErkJggg==")
+    float: left
+    margin: 4px 3px 5px 6px
 
 #sub
   color: $main-color1
@@ -232,6 +232,6 @@ p
 
 ::-webkit-search-cancel-button
   -webkit-appearance: none
-  content: url(/img/cancel.png)
+  content: url("/img/cancel.png")
   height: 10px
   width: 14px
