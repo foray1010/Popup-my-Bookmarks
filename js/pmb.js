@@ -106,13 +106,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
   // event delegation
   BODY.on({
     click: function(event) {
+      var item;
       var mouse_button = event.button;
       var target = event.target;
 
-      var item;
-      var item_id;
-
-      // reset the cursor to search-input
+      // reset the cursor to search-input after clicking
       focusSearchInput();
 
       if (target.hvClass('head-close')) {
@@ -123,20 +121,18 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
       item = getItem(target);
       if (item) {
-        item_id = item.id;
-
         switch (item.data(DATATEXT_BOOKMARK_TYPE)) {
           case 'folder':
             if (mouse_button === 1) {
-              openBkmarks(item_id, true, 0);
+              openBkmarks(item.id, true, 0);
             } else if (OP_FOLDER_BY) {
-              openFolder(item_id);
+              openFolder(item.id);
             }
 
             break;
 
           case 'bkmark':
-            _bookmark.get(item_id, function(bkmark) {
+            _bookmark.get(item.id, function(bkmark) {
               clickSwitcher(mouse_button, bkmark[0].url);
             });
         }
@@ -148,11 +144,12 @@ chrome.storage.sync.get(null, function(STORAGE) {
       var item;
       var target = event.target;
 
-      // allow contextmenu if it is an input element
+      // allow native contextmenu if it is an input element
       if (target.tagName === 'INPUT') {
         return true;
       }
 
+      // disable native contextmenu
       event.preventDefault();
       // clear the action of opening folder
       clearTimeout(HOVER_TIMEOUT);
@@ -341,40 +338,51 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function dragEndEvent(event) {
-    clearTimeout(DRAG_TIMEOUT);
+    if (DRAG_ITEM) {
+      clearTimeout(DRAG_TIMEOUT);
 
-    if (DRAG_PLACE.parentNode !== PRELOAD) {
-      var target = event.target;
-      var bkmark_index = getItemIndex(DRAG_PLACE) - 1;
-      var box_num = getParentBoxNum(DRAG_PLACE);
+      // remove DRAG_ITEM if it is not visible
+      if (DRAG_ITEM.parentNode === PRELOAD) {
+        DRAG_ITEM.remove();
+      }
+      // reset DRAG_ITEM to default value
+      DRAG_ITEM = null;
 
-      _bookmark.move(target.id, {
-        parentId: BOX_PID[box_num],
-        index: bkmark_index
-      });
+      // move the dragged item to the location of DRAG_PLACE
+      if (DRAG_PLACE.parentNode !== PRELOAD) {
+        var target = event.target;
+        var bkmark_index = getItemIndex(DRAG_PLACE) - 1;
+        var box_num = getParentBoxNum(DRAG_PLACE);
 
-      DRAG_PLACE.appendTo(PRELOAD);
+        _bookmark.move(target.id, {
+          parentId: BOX_PID[box_num],
+          index: bkmark_index
+        });
+
+        DRAG_PLACE.appendTo(PRELOAD);
+      }
+
+      // reset the cursor to search-input after dragging
+      focusSearchInput();
     }
-
-    if (DRAG_ITEM.parentNode === PRELOAD) {
-      DRAG_ITEM.remove();
-    }
-    DRAG_ITEM = null;
-
-    focusSearchInput();
   }
 
   function dragOverEvent(event) {
     var item = getItem(event.target);
 
-    if (item && DRAG_ITEM !== null) {
+    if (item && DRAG_ITEM) {
       DRAG_TIMEOUT = initTimeout('drag', function() {
-        var item_id = item.id;
         var box_num = getParentBoxNum(item);
         var is_place_before = event.offsetY < item.offsetHeight / 2;
+        var isnt_drag_item = item.id !== DRAG_ITEM.id;
 
-        if (item !== DRAG_ITEM &&
-            item[is_place_before ? 'prev' : 'next']() !== DRAG_ITEM &&
+        var item_sibling = item[is_place_before ? 'prev' : 'next']();
+
+        var isnt_drag_item_sibling = !item_sibling ||
+                                     item_sibling.id !== DRAG_ITEM.id;
+
+        if (isnt_drag_item &&
+            isnt_drag_item_sibling &&
             !isRootFolder(item)) {
           DRAG_PLACE[is_place_before ? 'before' : 'after'](item);
         } else {
@@ -382,8 +390,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
         }
 
         // item cannot be the parent folder of itself
-        if (item !== DRAG_ITEM && isFolder(item)) {
-          openFolder(item_id);
+        if (isnt_drag_item && isFolder(item)) {
+          openFolder(item.id);
           return false;
         }
 
@@ -1393,6 +1401,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     });
   }
 
+  // prevent dragend from stop working
   function tempDragItem(level) {
     if (DRAG_ITEM !== null && getParentBoxNum(DRAG_ITEM) > level) {
       DRAG_ITEM.appendTo(PRELOAD);
