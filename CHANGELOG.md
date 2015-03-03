@@ -2,6 +2,12 @@
 Changes:
   - Increase minimum Chrome version from 20 to 26
 
+Improvements:
+  - Smoother dragging
+
+Bugfixes:
+  - Dragging indicator may still appear when dragging end
+
 ## 3.1.4.2802 (28/2/2015)
 Bugfixes:
   - Cannot restore last position in some special cases (reported by KyosukeAce)

@@ -22,13 +22,17 @@ body.panel-width
   div#preload(hidden)
     div.box-template
       div.headbox
-        div.head-title
+        div.head-title.no-text-overflow
         div.head-close
       div.folderlist
 
-    p.bkmark(draggable="true")
+    p.item.bookmark-item.no-text-overflow(draggable="true")
       img.icon(src="", alt="", draggable="false")
       span
+
+    p.no-bkmark.item.bookmark-item.no-text-overflow
+
+    div.no-result.no-text-overflow
 
     div#drag-place
 
