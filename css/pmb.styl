@@ -10,9 +10,6 @@ body
   overflow: hidden
   -webkit-user-select: none
 
-div
-  cursor: default
-
 input[type="text"]
   border-color: #ccc
   box-sizing: border-box
@@ -23,12 +20,11 @@ input[type="text"]
   &:focus
     border-color: $main-color1
 
-p
-  border: 1px solid transparent
-  color: #222
-  cursor: default
-  margin: 0
 
+.bookmark-item
+  height: 16px
+  line-height: 16px
+  padding: 2px 0 2px 4px
 
 .box-template
   background: inherit
@@ -51,13 +47,8 @@ p
     height: 2px
     margin-top: 2px
 
-  & > p
-    height: 16px
-    line-height: 16px
-    padding: 2px 0 2px 4px
-
 .grey-item
-  color: #bbb
+  color: #bbb !important
 
 .head-close
   float: right
@@ -89,6 +80,7 @@ p
 
 .head-title
   color: #fff
+  cursor: default
   float: left
   font: 22px ArchivoNarrow, simhei
   line-height: 31px
@@ -98,12 +90,22 @@ p
 .headbox
   background: currentcolor
   height: 30px
+  margin-bottom: 2px
 
 .icon
   float: left
   height: 100%
   margin-right: 5px
   width: 16px
+
+.item
+  border: 1px solid transparent
+  color: #222
+  cursor: default
+  margin: 0
+
+.menu-item
+  padding: 2px 8px
 
 .ninja
   background: rgba(0, 0, 0, .16)
@@ -114,11 +116,21 @@ p
 
 .no-result
   color: #222
+  cursor: default
   padding: 3px 0
   text-align: center
 
+.no-text-overflow
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
 .rootfolder
   color: inherit !important
+
+.selected
+  background: #eee
+  border-color: #ddd
 
 .separator
   color: #bbb
@@ -142,6 +154,7 @@ p
 #edit-title
   background: $main-color2
   color: #fff
+  cursor: default
   float: left
   padding: 1px 6px
 
@@ -164,9 +177,6 @@ p
   padding: 4px
   position: absolute
 
-  & p
-    padding: 2px 8px
-
   & > div + div:not([hidden]) // separator between div
     border-top: 1px solid #e9e9e9
     margin-top: 3px
@@ -186,6 +196,7 @@ p
   border: solid #ccc
   border-width: 0 0 1px 1px
   height: 21px
+  margin-bottom: 2px
 
   &:before
     content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAsklEQVR42mNggIKGlq5UIL4CxP+B+B0QtwMxGwM2AJRYClUIws+R2LeAmAddcQJU8gIQq0LFeIB4GlR8K7qGJ1AJfiw2w5wojSwIEniCw6l1UHkfZMFfQPwFh4bNUA16yIIwt3aiKfaAih9HN0UAiN/AJIG4A4hXIIXUMSBmRdckC8T7kBTBgvQdlH0diIWxuVkL5EEgtoTyFZFsfwDEYgyEAFCRPJKm9wzEAKimh0D8DABuHq/4QpP4dwAAAABJRU5ErkJggg==")
@@ -195,23 +206,6 @@ p
 #sub
   color: $main-color1
   left: 0
-
-
-// no text overflow
-p
-.head-title
-  overflow: hidden
-  text-overflow: ellipsis
-  white-space: nowrap
-
-.headbox
-#searchbox
-  margin-bottom: 2px
-
-.selected
-#menu p:not(.grey-item):hover
-  background: #eee
-  border-color: #ddd
 
 
 ::-webkit-scrollbar

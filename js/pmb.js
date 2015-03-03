@@ -36,6 +36,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     isCut: false
   };
   var DRAG_ITEM = null;
+  var DRAG_TIMEOUT;
   var EDITOR_CREATE;
   var HEIGHT_LIST = [];
   var HOVER_TIMEOUT;
@@ -59,8 +60,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   // attr: data's text
   var DATATEXT_BOX_NUM = 'box_num';
+  var DATATEXT_BOOKMARK_TYPE = 'bookmark_type';
 
-  // id
+  // HTML element
   var BODY = document.body;
   var CONTAINER = [id$('main'), id$('sub')];
   var DRAG_PLACE = id$('drag-place');
@@ -72,9 +74,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   // preload
   var BOX_TEMPLATE = PRELOAD.class$('box-template')[0];
-  var ITEM = PRELOAD.class$('bkmark')[0];
-  var NOBKMARK = new$('p').addClass('no-bkmark').addText(_getMsg('noBkmark'));
-  var NORESULT = new$('div').addClass('no-result').addText(_getMsg('noResult'));
+  var ITEM = PRELOAD.class$('item')[0];
+  var NOBKMARK = PRELOAD.class$('no-bkmark')[0]
+    .data(DATATEXT_BOOKMARK_TYPE, 'no-bkmark')
+    .addText(_getMsg('noBkmark'));
+  var NORESULT = PRELOAD.class$('no-result')[0].addText(_getMsg('noResult'));
 
 
   // if first run
@@ -103,82 +107,94 @@ chrome.storage.sync.get(null, function(STORAGE) {
   BODY.on({
     click: function(event) {
       var mouse_button = event.button;
-      var _target = getPTag(event.target);
-      var _id = _target.id;
+      var target = event.target;
 
-      switch (_target.classList[0]) {
-        case 'head-close':
-          resetBox(_target.parentNode.next().data(DATATEXT_BOX_NUM) - 1);
-          break;
-        case 'folder':
-          if (mouse_button === 1) {
-            openBkmarks(_id, true, 0);
-          } else if (mouse_button === 0 && OP_FOLDER_BY) {
-            openFolder(_id);
-          }
-          break;
-        case 'bkmark':
-          _bookmark.get(_id, function(bkmark) {
-            clickSwitcher(mouse_button, bkmark[0].url);
-          });
+      var item;
+      var item_id;
+
+      // reset the cursor to search-input
+      focusSearchInput();
+
+      if (target.hvClass('head-close')) {
+        resetBox(target.parentNode.next().data(DATATEXT_BOX_NUM) - 1);
+
+        return true;
       }
 
-      focusSearchInput();
+      item = getItem(target);
+      if (item) {
+        item_id = item.id;
+
+        switch (item.data(DATATEXT_BOOKMARK_TYPE)) {
+          case 'folder':
+            if (mouse_button === 1) {
+              openBkmarks(item_id, true, 0);
+            } else if (OP_FOLDER_BY) {
+              openFolder(item_id);
+            }
+
+            break;
+
+          case 'bkmark':
+            _bookmark.get(item_id, function(bkmark) {
+              clickSwitcher(mouse_button, bkmark[0].url);
+            });
+        }
+      }
     },
     // Customize right click menu
     contextmenu: function(event) {
-      var _target = getPTag(event.target);
-      var _class = _target.classList[0];
       var hide_param;
+      var item;
+      var target = event.target;
 
-      if (_target.tagName === 'INPUT') {
-        return false;
+      // allow contextmenu if it is an input element
+      if (target.tagName === 'INPUT') {
+        return true;
       }
 
       event.preventDefault();
-      clearTimeout(HOVER_TIMEOUT); // clear the action of opening folder
+      // clear the action of opening folder
+      clearTimeout(HOVER_TIMEOUT);
 
-      switch (_class) {
+      item = getItem(target);
+      if (!item) {
+        focusSearchInput();
+        return true;
+      }
+
+      switch (item.data(DATATEXT_BOOKMARK_TYPE)) {
         case 'folder':
         case 'bkmark':
-          if (isRootFolder(_target)) {
+          if (isRootFolder(target)) {
             hide_param = [false, true, true, true, true];
-            break;
-          }
-
-          if (!IS_SEARCHING) {
+          } else if (!IS_SEARCHING) {
             hide_param = [false, false, false, false, false];
           } else {
             hide_param = [false, false, false, true, true];
           }
 
           break;
+
         case 'no-bkmark':
           hide_param = [true, true, false, false, true];
-          break;
-        default:
-          focusSearchInput();
-          return false;
       }
 
       // set availability of menu items
-      if (hide_param) {
-        MENU.children.ascEach(function(menu_item, item_num) {
-          menu_item.hidden = hide_param[item_num];
-        });
-      }
+      MENU.children.ascEach(function(menu_item, item_num) {
+        menu_item.hidden = hide_param[item_num];
+      });
 
-      TARGET_ITEM = _target;
-      modMenuText(isFolder(_target));
+      modMenuText(isFolder(target));
 
-      greyMenuItem([0, 1], _class === 'no-bkmark');
+      greyMenuItem([0, 1], item.id === '');
       greyMenuItem([2], COPY_CUT_ITEM.id === null);
 
       MENU_COVER.show();
       MENU.show();
-      SEARCH_INPUT.blur();
 
-      setMenuPos(event);
+      TARGET_ITEM = item;
+      setMenuPos(event.x, event.y);
     },
     dragend: dragEndEvent,
     dragover: dragOverEvent,
@@ -187,24 +203,25 @@ chrome.storage.sync.get(null, function(STORAGE) {
       var key_code = event.keyCode;
       switch (key_code) {
         case 13:
-          // if (isHovering()) {
-          // } else if (IS_SEARCHING) {
           if (IS_SEARCHING) {
             // enter the first bkmark when press return key
             getBoxList(0).first().click();
           }
+
           break;
+
         case 16: // shift
         case 17: // ctrl
           if (key_code !== ON_MOD_KEY) {
             ON_MOD_KEY = key_code;
           }
+
           break;
+
         // case 37: // left
         // case 38: // up
         // case 39: // right
         // case 40: // down
-        //   break;
       }
     },
     keyup: function(event) {
@@ -219,37 +236,40 @@ chrome.storage.sync.get(null, function(STORAGE) {
       }
     },
     mouseout: function(event) {
-      var _target = getPTag(event.target);
+      var item = getItem(event.target);
 
-      if (_target.tagName === 'P' && MENU_COVER.hidden) {
-        switch (_target.classList[0]) {
-          case 'folder':
-          case 'bkmark':
-          case 'no-bkmark':
-            clearTimeout(HOVER_TIMEOUT);
+      if (item) {
+        clearTimeout(HOVER_TIMEOUT);
+
+        // if menu is hidden, bookmark item should keep selected
+        // if item doesn't have id, it is menu item
+        if (MENU.hidden || item.hvClass('menu-item')) {
+          item.rmClass('selected');
         }
-        _target.rmClass('selected');
       }
     },
     mouseover: function(event) {
-      var _target = getPTag(event.target);
+      var item = getItem(event.target);
 
-      if (_target.tagName === 'P' && MENU_COVER.hidden) {
-        if (!OP_FOLDER_BY) {
-          switch (_target.classList[0]) {
-            case 'folder':
-              HOVER_TIMEOUT = setTimeout(function() {
-                openFolder(_target.id);
-              }, 250);
-              break;
-            case 'bkmark':
-            case 'no-bkmark':
-              HOVER_TIMEOUT = setTimeout(function() {
-                resetBox(getParentBoxNum(_target));
-              }, 250);
+      if (item) {
+        HOVER_TIMEOUT = setTimeout(function() {
+          if (!OP_FOLDER_BY) {
+            switch (item.data(DATATEXT_BOOKMARK_TYPE)) {
+              case 'folder':
+                openFolder(item.id);
+
+                break;
+
+              case 'bkmark':
+              case 'no-bkmark':
+                resetBox(getParentBoxNum(item));
+            }
           }
+        }, 250);
+
+        if (!item.hvClass('grey-item')) {
+          item.addClass('selected');
         }
-        _target.addClass('selected');
       }
     }
   });
@@ -260,6 +280,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     var switcher;
     if (mouse_button === 0) {
       switcher = 'Left';
+
       if (ON_MOD_KEY === 16) {
         switcher += 'Shift';
       } else if (ON_MOD_KEY === 17) {
@@ -282,7 +303,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
             openOptionsPage();
           }
         }
+
         break;
+
       case 2:
       case 3:
       case 4:
@@ -290,7 +313,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
           url: url,
           active: switcher === 2
         });
+
         break;
+
       case 5:
       case 6:
         _win.create({
@@ -316,46 +341,49 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function dragEndEvent(event) {
+    clearTimeout(DRAG_TIMEOUT);
+
     if (DRAG_PLACE.parentNode !== PRELOAD) {
-      var _this = event.target;
+      var target = event.target;
       var bkmark_index = getItemIndex(DRAG_PLACE) - 1;
       var box_num = getParentBoxNum(DRAG_PLACE);
 
-      DRAG_PLACE.appendTo(PRELOAD);
-
-      _bookmark.move(_this.id, {
+      _bookmark.move(target.id, {
         parentId: BOX_PID[box_num],
         index: bkmark_index
       });
-    }
 
-    focusSearchInput();
+      DRAG_PLACE.appendTo(PRELOAD);
+    }
 
     if (DRAG_ITEM.parentNode === PRELOAD) {
       DRAG_ITEM.remove();
     }
     DRAG_ITEM = null;
+
+    focusSearchInput();
   }
 
   function dragOverEvent(event) {
-    var _this = event.target;
+    var item = getItem(event.target);
 
-    if (_this.tagName === 'P' && DRAG_ITEM !== null) {
-      initTimeout('drag', function() {
-        var _this_id = _this.id;
-        var box_num = getParentBoxNum(_this);
-        var is_place_before = event.offsetY < _this.offsetHeight / 2;
+    if (item && DRAG_ITEM !== null) {
+      DRAG_TIMEOUT = initTimeout('drag', function() {
+        var item_id = item.id;
+        var box_num = getParentBoxNum(item);
+        var is_place_before = event.offsetY < item.offsetHeight / 2;
 
-        if (_this !== DRAG_ITEM &&
-            _this[is_place_before ? 'prev' : 'next']() !== DRAG_ITEM &&
-            !isRootFolder(_this)) {
-          DRAG_PLACE[is_place_before ? 'before' : 'after'](_this);
+        if (item !== DRAG_ITEM &&
+            item[is_place_before ? 'prev' : 'next']() !== DRAG_ITEM &&
+            !isRootFolder(item)) {
+          DRAG_PLACE[is_place_before ? 'before' : 'after'](item);
         } else {
           DRAG_PLACE.appendTo(PRELOAD);
         }
 
-        if (_this !== DRAG_ITEM && isFolder(_this)) {
-          openFolder(_this_id);
+        // item cannot be the parent folder of itself
+        if (item !== DRAG_ITEM && isFolder(item)) {
+          openFolder(item_id);
           return false;
         }
 
@@ -365,18 +393,18 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function dragStartEvent(event) {
-    var _target = event.target;
-    var box_num = getParentBoxNum(_target);
+    var target = event.target;
+    var box_num;
 
-    if (_target.tagName !== 'P') {
-      return false;
-    }
+    if (isItem(target)) {
+      DRAG_ITEM = target;
 
-    DRAG_ITEM = _target;
-
-    if (box_num === BOX.length) { // if there is next box
-      genNinja(box_num).hide();
-      genNinja(box_num + 1);
+      box_num = getParentBoxNum(target);
+      // if there is next box
+      if (box_num === BOX.length) {
+        genNinja(box_num).hide();
+        genNinja(box_num + 1);
+      }
     }
   }
 
@@ -459,6 +487,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
     setItemText(new_item, title, url);
 
     if (url) {
+      new_item.data(DATATEXT_BOOKMARK_TYPE, 'bkmark');
+
       if (url !== SEPARATE_THIS) {
         // for bookmarks
         icon.src = 'chrome://favicon/' + url;
@@ -470,7 +500,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       }
     } else {
       // for folders
-      new_item.className = 'folder';
+      new_item.data(DATATEXT_BOOKMARK_TYPE, 'folder');
       icon.src = 'img/folder.png';
     }
 
@@ -495,7 +525,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
       if (menu_item_text === '|') {
         area = MENU.new$('div');
       } else {
-        area.new$('p').innerText = menu_item_text && _getMsg(menu_item_text);
+        area.new$('p')
+          .addClass('item')
+          .addClass('menu-item')
+          .addText(menu_item_text && _getMsg(menu_item_text));
       }
     });
 
@@ -510,14 +543,17 @@ chrome.storage.sync.get(null, function(STORAGE) {
     return BOX[box_num].class$('folderlist')[0];
   }
 
-  function getParentBoxNum(id) {
-    if (id * 1 !== DEF_EXPAND) {
-      var id_parent = (typeof id === 'object' ? id : id$(id)).parentNode;
-      if (id_parent) {
-        return id_parent.data(DATATEXT_BOX_NUM) * 1;
-      }
+  function getItem(element) {
+    var item;
+    var item_parent = element.parentNode;
+
+    if (isItem(element)) {
+      item = element;
+    } else if (isItem(item_parent)) {
+      item = item_parent;
     }
-    return 0;
+
+    return item;
   }
 
   function getItemIndex(item) {
@@ -530,7 +566,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function getMenuItemNum(menu_item) {
-    return Array.prototype.indexOf.call(MENU.tag$('p'), menu_item);
+    return Array.prototype.indexOf.call(MENU.class$('menu-item'), menu_item);
   }
 
   function getNowHeight() {
@@ -541,8 +577,14 @@ chrome.storage.sync.get(null, function(STORAGE) {
     return IS_EXPANDED ? SET_WIDTH * 2 + 2 : SET_WIDTH;
   }
 
-  function getPTag(item) {
-    return ['SPAN', 'IMG'].hv(item.tagName) ? item.parentNode : item;
+  function getParentBoxNum(item) {
+    if (item.id !== DEF_EXPAND + '') {
+      var id_parent = item.parentNode;
+      if (id_parent) {
+        return id_parent.data(DATATEXT_BOX_NUM) * 1;
+      }
+    }
+    return 0;
   }
 
   function getRootFolderNum(box_num) {
@@ -718,7 +760,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     if (FONT_SIZE > 16) {
       CSS.set({
-        '.folderlist > p': {
+        '.bookmark-item': {
           'height': font_size_px,
           'line-height': font_size_px
         },
@@ -728,7 +770,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
       });
     }
 
-    CSS.set('.folderlist > .separator', {
+    // set separator height depend on item height
+    CSS.set('.separator', {
       'height': separator_height_px,
       'line-height': separator_height_px
     });
@@ -744,11 +787,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function isFolder(item) {
-    return item.hvClass('folder');
+    return item.data(DATATEXT_BOOKMARK_TYPE) === 'folder';
   }
 
-  function isHovering() {
-    return class$('selected').length > 0;
+  function isItem(element) {
+    return element.hvClass('item');
   }
 
   function isRootFolder(item) {
@@ -767,7 +810,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         };
 
         if (box_num === 0) {
-          if (folder_id * 1 === DEF_EXPAND) {
+          if (folder_id === DEF_EXPAND + '') {
             fn_after_open();
           }
         } else {
@@ -791,8 +834,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function menuEvent(event) {
-    var _target = event.target;
-    var menu_item_num = getMenuItemNum(_target);
+    var target = event.target;
+    var menu_item_num = getMenuItemNum(target);
     var tar_item_id = TARGET_ITEM.id;
 
     switch (menu_item_num) {
@@ -801,19 +844,24 @@ chrome.storage.sync.get(null, function(STORAGE) {
       case 1:
       case 2:
         openBkmarks(tar_item_id, isFolder(TARGET_ITEM), menu_item_num);
+
         break;
+
       case 3: // Edit... & Rename...
       case 9: // Add folder...
         EDITOR_CREATE = menu_item_num === 9;
         showEditor();
         return false;
+
       case 4: // Delete
         removeItem(tar_item_id);
+
         break;
+
       case 5: // Cut
       case 6: // Copy
       case 7: // Paste
-        if (_target.hvClass('grey-item')) {
+        if (target.hvClass('grey-item')) {
           return false;
         }
 
@@ -823,7 +871,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
           COPY_CUT_ITEM.isCut = menu_item_num === 5;
           COPY_CUT_ITEM.id = tar_item_id;
         }
+
         break;
+
       case 8: // Add current page
         _tab.query({
           currentWindow: true,
@@ -831,13 +881,19 @@ chrome.storage.sync.get(null, function(STORAGE) {
         }, function(tab) {
           createItem(tab[0].title, tab[0].url);
         });
+
         break;
+
       case 10: // Add separator
         createItem('- '.repeat(42), SEPARATE_THIS);
+
         break;
+
       case 11: // Sort by name
-        sortByName(BOX_PID[getParentBoxNum(tar_item_id)]);
+        sortByName(BOX_PID[getParentBoxNum(TARGET_ITEM)]);
+
         break;
+
       default:
         return false;
     }
@@ -854,13 +910,13 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function modMenuText(is_folder) {
-    var p_tag = MENU.tag$('p');
+    var menu_item = MENU.class$('menu-item');
     var menu_item_msg_name = is_folder ?
       ['openAll', 'openAllInN', 'openAllInI', 'rename'] :
       ['openInB', 'openInN', 'openInI', 'edit'];
 
     menu_item_msg_name.ascEach(function(item_text, item_num) {
-      p_tag[item_num].innerText = _getMsg(item_text);
+      menu_item[item_num].innerText = _getMsg(item_text);
     });
   }
 
@@ -913,18 +969,22 @@ chrome.storage.sync.get(null, function(STORAGE) {
         return false;
       }
 
-      var box_num = getParentBoxNum(id);
+      var folder_item = id$(id);
+
+      var box_num = getParentBoxNum(folder_item);
+      var folder_cover_fn;
+
       var next_box_num = box_num + 1;
       var pre_box_num = box_num - 1;
+
       var next_box = BOX[next_box_num];
-      var folder_cover_fn;
 
       if (next_box) {
         tempDragItem(box_num);
         next_box.remove();
       }
       next_box = genBox(next_box_num, id);
-      next_box.class$('head-title')[0].innerText = id$(id).innerText;
+      next_box.class$('head-title')[0].innerText = folder_item.innerText;
 
       genList(next_box_num, twig);
 
@@ -986,7 +1046,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function removeItem(item_id) {
-    var is_folder = id$(item_id).hvClass('folder');
+    var is_folder = isFolder(id$(item_id));
     _bookmark[is_folder ? 'removeTree' : 'remove'](item_id);
   }
 
@@ -1034,14 +1094,15 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
   }
 
-  function savLastScroll(target) {
+  function savLastScroll(box_list) {
     if (REMEMBER_POS) {
       var save_fn = function() {
         jsonStorage('set', NAME_LAST_SCROLL_TOP, NOW_SCROLL_TOP);
       };
-      if (target) {
+      if (box_list) {
         initTimeout(NAME_LAST_SCROLL_TOP, function() {
-          NOW_SCROLL_TOP[target.data(DATATEXT_BOX_NUM) * 1] = target.scrollTop;
+          var box_num = box_list.data(DATATEXT_BOX_NUM) * 1;
+          NOW_SCROLL_TOP[box_num] = box_list.scrollTop;
           save_fn();
         }, 200);
       } else {
@@ -1191,7 +1252,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     item.last().innerText = title || url || '';
   }
 
-  function setMenuPos(event) {
+  function setMenuPos(mouse_x, mouse_y) {
     var menu_height = MENU.offsetHeight;
     var menu_width = MENU.offsetWidth;
     var now_height = getNowHeight();
@@ -1206,8 +1267,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     setBottomRight(
       MENU,
-      now_height - menu_height - event.y,
-      getNowWidth() - menu_width - event.x
+      now_height - menu_height - mouse_y,
+      getNowWidth() - menu_width - mouse_x
     );
   }
 
