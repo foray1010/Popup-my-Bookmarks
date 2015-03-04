@@ -413,6 +413,17 @@ chrome.storage.sync.get(null, function(STORAGE) {
         genNinja(box_num).hide();
         genNinja(box_num + 1);
       }
+
+      // hack to prevent dragover and dragend event stop working
+      setTimeout(function() {
+        // create a cloned dragged item to replace the original one
+        target.cloneNode(true).after(target);
+
+        // move the original one to PRELOAD
+        // it can prevent dragged item from removing by resetBox,
+        // which lead to stop working of dragend event
+        DRAG_ITEM.appendTo(PRELOAD);
+      });
     }
   }
 
@@ -431,6 +442,12 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function genBox(box_num, box_pid) {
     var box = BOX_TEMPLATE.cloneTo(CONTAINER[box_num % 2]);
+
+    // remove the old box if exist
+    if (BOX[box_num]) {
+      BOX[box_num].remove();
+    }
+    // update reference to the new box
     BOX[box_num] = box;
 
     BOX_PID[box_num] = box_pid;
@@ -454,10 +471,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function genFirstBox() {
-    if (BOX[0]) {
-      BOX[0].remove();
-    }
-
     // remove headbox
     genBox(0, DEF_EXPAND + '').first().remove();
 
@@ -985,13 +998,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
       var next_box_num = box_num + 1;
       var pre_box_num = box_num - 1;
 
-      var next_box = BOX[next_box_num];
+      var next_box = genBox(next_box_num, id);
 
-      if (next_box) {
-        tempDragItem(box_num);
-        next_box.remove();
-      }
-      next_box = genBox(next_box_num, id);
+      // set head-title to its folder name
       next_box.class$('head-title')[0].innerText = folder_item.innerText;
 
       genList(next_box_num, twig);
@@ -1073,8 +1082,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
     if (!IS_SEARCHING && level === BOX.length - 1) { // if no next list
       return false;
     }
-
-    tempDragItem(level);
 
     if (level === 0) {
       expandWidth(false);
@@ -1399,12 +1406,5 @@ chrome.storage.sync.get(null, function(STORAGE) {
     return bkmark_list.sort(function(bkmark1, bkmark2) {
       return bkmark1.title.localeCompare(bkmark2.title);
     });
-  }
-
-  // prevent dragend from stop working
-  function tempDragItem(level) {
-    if (DRAG_ITEM !== null && getParentBoxNum(DRAG_ITEM) > level) {
-      DRAG_ITEM.appendTo(PRELOAD);
-    }
   }
 });
