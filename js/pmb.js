@@ -673,8 +673,19 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     _bookmark.onChanged.addListener(function(id, info) {
       var changed_item = id$(id);
+      var next_box_num;
+      var title = info.title;
+      var url = info.url;
+
       if (changed_item) {
-        setItemText(changed_item, info.title, info.url);
+        if (!url) {
+          next_box_num = getParentBoxNum(changed_item) + 1;
+          updateBoxHeadTitle(next_box_num, title);
+        } else if (url !== SEPARATE_THIS) {
+          setTooltip(changed_item, title, url);
+        }
+
+        setItemText(changed_item, title, url);
       }
     });
 
@@ -698,21 +709,14 @@ chrome.storage.sync.get(null, function(STORAGE) {
       .addText(_getMsg('confirm'))
       .clickByButton(0, function() {
         var editor_input = EDITOR.tag$('input');
-        var next_box;
         var title = editor_input[0].value;
         var url;
 
         if (EDITOR_CREATE) {
           createItem(title);
         } else {
-          if (isFolder(TARGET_ITEM)) {
-            next_box = BOX[getParentBoxNum(TARGET_ITEM) + 1];
-            if (next_box) {
-              next_box.class$('head-title')[0].innerText = title;
-            }
-          } else {
+          if (!isFolder(TARGET_ITEM)) {
             url = editor_input[1].value;
-            setTooltip(TARGET_ITEM, title, url);
           }
 
           _bookmark.update(TARGET_ITEM.id, {
@@ -997,8 +1001,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
       var next_box = genBox(next_box_num, id);
 
-      // set head-title to its folder name
-      next_box.class$('head-title')[0].innerText = folder_item.innerText;
+      updateBoxHeadTitle(next_box_num, folder_item.innerText);
 
       genList(next_box_num, twig);
 
@@ -1403,5 +1406,13 @@ chrome.storage.sync.get(null, function(STORAGE) {
     return bkmark_list.sort(function(bkmark1, bkmark2) {
       return bkmark1.title.localeCompare(bkmark2.title);
     });
+  }
+
+  function updateBoxHeadTitle(box_num, title) {
+    var box = BOX[box_num];
+
+    if (box) {
+      box.class$('head-title')[0].innerText = title;
+    }
   }
 });

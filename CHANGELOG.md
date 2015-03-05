@@ -8,6 +8,7 @@ Improvements:
 Bugfixes:
   - Dragging indicator may still appear after dragging is ended
   - Dragging indicator appears next to the dragged item in some special cases
+  - Tooltip displays after separator is edited
 
 ## 3.1.4.2802 (28/2/2015)
 Bugfixes:
