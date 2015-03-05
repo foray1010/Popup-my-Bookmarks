@@ -1,9 +1,13 @@
 $main-color1 = #0092fa
 $main-color2 = #fa9115
 
+$input-height = 20px
+
 $donate-desc-width = 400px
 $donate-img-width = 160px
 $donation-width = $donate-desc-width + $donate-img-width
+
+$logo-book-width = 62px
 
 
 body
@@ -12,7 +16,7 @@ body
 input[type="number"]
 select
   box-sizing: content-box
-  height: 20px
+  height: $input-height
 
 input
   &[type="checkbox"]
@@ -85,7 +89,7 @@ select[multiple]
   border: 1px solid currentcolor
   color: $main-color1
   display: table
-  height: 20px
+  height: $input-height
   position: relative
   text-align: center
   transition-duration: .4s
@@ -144,7 +148,7 @@ select[multiple]
   left: 0
   position: absolute
   top: 0
-  width: 62px
+  width: $logo-book-width
 
 #logo-box
   cursor: default
@@ -172,16 +176,26 @@ select[multiple]
   position: absolute
   right: 0
   top: 0
-  width: calc(100% - 62px)
+  width: "calc(100% - %s)" % $logo-book-width
 
 #opt-button
-  margin: 0 50px 5px 0;
-  text-align: right;
+  margin: 0 50px 5px 0
+  text-align: right
 
 #star-five
   margin: 32px 6px
   -webkit-transform: rotate(35deg)
   width: 0
+
+  &
+  &:before
+  &:after
+    border-color: #fc0 transparent
+    border-style: solid
+
+  &
+  &:after
+    border-width: 0 25px 18px 25px
 
   &:before
     border-width: 0 6px 20px 6px
@@ -197,13 +211,3 @@ select[multiple]
     position: absolute
     top: 0
     -webkit-transform: rotate(-70deg)
-
-  &
-  &:after
-    border-width: 0 25px 18px 25px
-
-  &
-  &:before
-  &:after
-    border-color: #fc0 transparent
-    border-style: solid
