@@ -341,11 +341,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
     if (DRAG_ITEM) {
       clearTimeout(DRAG_TIMEOUT);
 
-      // remove DRAG_ITEM if it is not visible
-      if (DRAG_ITEM.parentNode === PRELOAD) {
-        DRAG_ITEM.remove();
-      }
-      // reset DRAG_ITEM to default value
+      // remove DRAG_ITEM from PRELOAD
+      DRAG_ITEM.remove();
       DRAG_ITEM = null;
 
       // move the dragged item to the location of DRAG_PLACE
