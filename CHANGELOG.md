@@ -1,6 +1,7 @@
 ## 3.2.0 (unreleased)
 Changes:
   - Increase minimum Chrome version from 20 to 26
+  - More compact layout
 
 Improvements:
   - More precise dragging indicator
@@ -8,7 +9,8 @@ Improvements:
 Bugfixes:
   - Dragging indicator may still appear after dragging is ended
   - Dragging indicator appears next to the dragged item in some special cases
-  - Tooltip displays after separator is edited
+  - Tooltip displays after separator has been edited
+  - Weird display of separator when using Chrome(Linux)
 
 ## 3.1.4.2802 (28/2/2015)
 Bugfixes:
