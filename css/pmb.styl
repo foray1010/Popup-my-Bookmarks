@@ -1,6 +1,11 @@
 $main-color1 = #0092fa
 $main-color2 = #fa9115
 
+$golden-gap = 2px
+$golden-gap-2x = $golden-gap * 2
+
+$headbox-height = 30px
+
 
 @font-face
   font-family: ArchivoNarrow
@@ -14,7 +19,7 @@ input[type="text"]
   border-color: #ccc
   box-sizing: border-box
   margin: 3px 0 0
-  padding: 2px
+  padding: $golden-gap
   width: 100%
 
   &:focus
@@ -24,7 +29,7 @@ input[type="text"]
 .bookmark-item
   height: 16px
   line-height: 16px
-  padding: 2px 0 2px 4px
+  padding: $golden-gap 0 $golden-gap $golden-gap
 
 .box-template
   background: inherit
@@ -44,17 +49,17 @@ input[type="text"]
     background: currentcolor
     content: ""
     display: block
-    height: 2px
-    margin-top: 2px
+    height: $golden-gap
+    margin-top: $golden-gap
 
 .grey-item
   color: #bbb !important
 
 .head-close
   float: right
-  height: 30px
+  height: $headbox-height
   position: relative
-  width: 30px
+  width: $headbox-height
 
   &:hover
     background: #e44
@@ -79,23 +84,24 @@ input[type="text"]
     -webkit-transform: rotate(45deg)
 
 .head-title
+  box-sizing: border-box
   color: #fff
   cursor: default
   float: left
   font: 22px ArchivoNarrow, simhei
-  line-height: 31px
-  padding: 0 6px
-  width: calc(100% - 42px)
+  line-height: $headbox-height + 1px
+  padding: 0 $golden-gap-2x
+  width: 'calc(100% - %s)' % $headbox-height
 
 .headbox
   background: currentcolor
-  height: 30px
-  margin-bottom: 2px
+  height: $headbox-height
+  margin-bottom: $golden-gap
 
 .icon
   float: left
   height: 100%
-  margin-right: 5px
+  margin-right: $golden-gap-2x
   width: 16px
 
 .item
@@ -105,7 +111,7 @@ input[type="text"]
   margin: 0
 
 .menu-item
-  padding: 2px 8px
+  padding: $golden-gap 8px
 
 .ninja
   background: rgba(0, 0, 0, .16)
@@ -134,17 +140,12 @@ input[type="text"]
 
 .separator
   color: #bbb
-  padding: 0 1px !important
+  padding-bottom: 0
+  padding-top: 0
   text-overflow: clip
 
-  & > img
-    width: 0
-
-.the-end
-  background: currentcolor
-  border: 0
-  height: 2px
-  margin: 2px 0 0
+  & > .icon
+    display: none
 
 
 #drag-place
@@ -174,7 +175,7 @@ input[type="text"]
   background: #fff
   border: 1px solid #bababa
   box-shadow: 0 2px 4px rgba(0, 0, 0, .2)
-  padding: 4px
+  padding: $golden-gap-2x
   position: absolute
 
   & > div + div:not([hidden]) // separator between div
@@ -190,18 +191,18 @@ input[type="text"]
   background: transparent
   border: 0
   height: 100%
-  width: calc(100% - 21px)
+  width: calc(100% - 19px)
 
 #searchbox
   border: solid #ccc
   border-width: 0 0 1px 1px
   height: 21px
-  margin-bottom: 2px
+  margin-bottom: $golden-gap
 
   &:before
     content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAsklEQVR42mNggIKGlq5UIL4CxP+B+B0QtwMxGwM2AJRYClUIws+R2LeAmAddcQJU8gIQq0LFeIB4GlR8K7qGJ1AJfiw2w5wojSwIEniCw6l1UHkfZMFfQPwFh4bNUA16yIIwt3aiKfaAih9HN0UAiN/AJIG4A4hXIIXUMSBmRdckC8T7kBTBgvQdlH0diIWxuVkL5EEgtoTyFZFsfwDEYgyEAFCRPJKm9wzEAKimh0D8DABuHq/4QpP4dwAAAABJRU5ErkJggg==")
     float: left
-    margin: 4px 3px 5px 6px
+    padding: 4px 3px 5px 4px
 
 #sub
   color: $main-color1
@@ -210,12 +211,12 @@ input[type="text"]
 
 ::-webkit-scrollbar
   background: transparent
-  height: 5px
-  width: 7px
+  height: 5px + $golden-gap
+  width: 5px + $golden-gap
 
 ::-webkit-scrollbar-thumb
   background: #ccc
-  border-left: 2px solid #fff
+  border-left: $golden-gap solid #fff
 
   &:hover
     background: #bbb
