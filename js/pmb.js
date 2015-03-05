@@ -438,14 +438,12 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function genBox(box_num, box_pid) {
-    var box = BOX_TEMPLATE.cloneTo(CONTAINER[box_num % 2]);
-
     // remove the old box if exist
     if (BOX[box_num]) {
       BOX[box_num].remove();
     }
     // update reference to the new box
-    BOX[box_num] = box;
+    BOX[box_num] = BOX_TEMPLATE.cloneTo(CONTAINER[box_num % 2]);
 
     BOX_PID[box_num] = box_pid;
     savLastPID();
@@ -463,8 +461,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
           savLastScroll(this);
         }
       });
-
-    return box;
   }
 
   function genFirstBox() {
@@ -999,7 +995,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       var next_box_num = box_num + 1;
       var pre_box_num = box_num - 1;
 
-      var next_box = genBox(next_box_num, id);
+      genBox(next_box_num, id);
 
       updateBoxHeadTitle(next_box_num, folder_item.innerText);
 
