@@ -38,12 +38,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
   var DRAG_ITEM = null;
   var DRAG_TIMEOUT;
   var EDITOR_CREATE;
+  var GOLDEN_GAP = 2;
   var HEIGHT_LIST = [];
   var HOVER_TIMEOUT;
   var IS_EXPANDED = false;
   var IS_SEARCHING = false;
-  // +4 for padding, +2 for border width
-  var ITEM_HEIGHT = [FONT_SIZE, 16].max() + 6;
   var MAX_HEIGHT = 596;
   var MENU_PATTERN = [
     '', '', '', '|',
@@ -57,6 +56,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
   var ON_MOD_KEY;
   var SEPARATE_THIS = 'http://separatethis.com/';
   var TARGET_ITEM;
+
+  // +2 for border width, GOLDEN_GAP*2 for padding
+  var ITEM_HEIGHT = 2 + GOLDEN_GAP * 2 + [FONT_SIZE, 16].max();
 
   // attr: data's text
   var DATATEXT_BOX_NUM = 'box_num';
@@ -590,7 +592,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function getNowWidth() {
-    return IS_EXPANDED ? SET_WIDTH * 2 + 2 : SET_WIDTH;
+    return IS_EXPANDED ? SET_WIDTH * 2 + GOLDEN_GAP : SET_WIDTH;
   }
 
   function getParentBoxNum(item) {
@@ -1226,7 +1228,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     setBottomRight(
       EDITOR,
       getNowHeight() - EDITOR.offsetHeight - TARGET_ITEM.offset().top,
-      getParentBoxNum(TARGET_ITEM) % 2 ? SET_WIDTH + 2 : 0
+      getParentBoxNum(TARGET_ITEM) % 2 ? SET_WIDTH + GOLDEN_GAP : 0
     );
   }
 
@@ -1241,25 +1243,21 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function setHeight(box_num) {
     var box_list = getBoxList(box_num);
-    var list_last_item = box_list.last();
 
     var body_height;
-    var footer_height = 4;
-    var header_height = box_num > 0 ? 32 : 0;
+    var box_list_offset_top = box_list.offset().top;
+    var footer_height = GOLDEN_GAP * 2;
     var list_height;
-    var search_height = box_num % 2 ? 0 : 24;
 
-    var max_list_height = MAX_HEIGHT - search_height - header_height;
+    var max_list_height = MAX_HEIGHT - box_list_offset_top;
 
-    list_height = list_last_item.offsetTop +
-                  list_last_item.offsetHeight -
-                  header_height;
+    list_height = box_list.scrollHeight - footer_height;
     if (list_height > max_list_height) {
       list_height = max_list_height;
       box_list.style.maxHeight = list_height + 'px';
     }
 
-    body_height = list_height + search_height + header_height + footer_height;
+    body_height = list_height + box_list_offset_top + footer_height;
     HEIGHT_LIST[box_num] = [MAX_HEIGHT, body_height].min();
     modBodyHeight(getMaxHeight());
   }
