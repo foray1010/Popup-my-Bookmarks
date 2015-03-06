@@ -6,6 +6,7 @@
     "coffee-script": "*",
     "fs-extra": "*",
     "gulp": "*",
+    "gulp-coffeelint": "*",
     "gulp-jade": "*",
     "gulp-jshint": "*",
     "gulp-load-plugins": "*",

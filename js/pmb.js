@@ -288,10 +288,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
       case 0:
       case 1:
         if (url.indexOf('javascript') !== 0) {
-          _tab.update({ url: url });
+          _tab.update({url: url});
         } else {
           if (BOOKMARKLET) {
-            _tab.executeScript(null, { code: url });
+            _tab.executeScript(null, {code: url});
           } else if (confirm(_getMsg('alert_bookmarklet'))) {
             openOptionsPage();
           }
@@ -1020,7 +1020,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function openOptionsPage() {
-    _tab.create({ url: 'options.html' });
+    _tab.create({url: 'options.html'});
   }
 
   function pasteItem(node_id) {
