@@ -1326,12 +1326,12 @@ chrome.storage.sync.get(null, function(STORAGE) {
     hideMenu(false);
 
     if (EDITOR_CREATE) {
-      setEditorPos();
       setEditorText(_getMsg('newFolder'));
+      setEditorPos();
     } else {
       _bookmark.get(TARGET_ITEM.id, function(bkmark) {
-        setEditorPos();
         setEditorText(bkmark[0].title, bkmark[0].url);
+        setEditorPos();
       });
     }
   }

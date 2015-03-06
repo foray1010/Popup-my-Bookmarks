@@ -11,6 +11,7 @@ Bugfixes:
   - Dragging indicator appears next to the dragged item in some special cases
   - Tooltip displays after separator has been edited
   - Weird display of separator when using Chrome(Linux)
+  - Wrong editor position in some special cases
 
 ## 3.1.4.2802 (28/2/2015)
 Bugfixes:
