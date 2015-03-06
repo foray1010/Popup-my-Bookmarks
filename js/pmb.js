@@ -52,7 +52,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
     'sortByName'
   ];
   var NINJA_LIST = [];
-  var NOW_SCROLL_TOP = [];
   var ON_MOD_KEY;
   var SEPARATE_THIS = 'http://separatethis.com/';
   var TARGET_ITEM;
@@ -462,7 +461,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
           this.scrollTop -= ITEM_HEIGHT * event.wheelDelta / 120 >> 0;
         },
         scroll: function() {
-          savLastScroll(this);
+          savLastScroll(true);
         }
       });
 
@@ -526,8 +525,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function genList(box_num, twig) {
-    NOW_SCROLL_TOP[box_num] = 0;
-
     twig.ascEach(function(leaf) {
       genItem(box_num, leaf);
     });
@@ -577,6 +574,14 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function getItemIndex(item) {
     return item.hvClass('no-bkmark') ? 0 :
       item.index() + 1 - getRootFolderNum(getParentBoxNum(item));
+  }
+
+  function getLastScrollTop() {
+    var last_scroll_top = [];
+    BOX.ascEach(function(box, box_num) {
+      last_scroll_top[box_num] = getBoxList(box_num).scrollTop;
+    });
+    return last_scroll_top;
   }
 
   function getMaxHeight() {
@@ -828,7 +833,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
           var last_scroll_top = LAST_SCROLL_TOP[box_num];
           if (last_scroll_top) {
             getBoxList(box_num).scrollTop = last_scroll_top;
-            NOW_SCROLL_TOP[box_num] = last_scroll_top;
           }
         };
 
@@ -1097,7 +1101,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
     BOX.descEach(function() {
       BOX.pop().fadeOut(true);
       BOX_PID.pop();
-      NOW_SCROLL_TOP.pop();
       HEIGHT_LIST.pop();
     }, level + 1);
     savLastPID();
@@ -1112,17 +1115,13 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
   }
 
-  function savLastScroll(box_list) {
+  function savLastScroll(is_delay_save) {
     if (REMEMBER_POS) {
       var save_fn = function() {
-        jsonStorage('set', NAME_LAST_SCROLL_TOP, NOW_SCROLL_TOP);
+        jsonStorage('set', NAME_LAST_SCROLL_TOP, getLastScrollTop());
       };
-      if (box_list) {
-        initTimeout(NAME_LAST_SCROLL_TOP, function() {
-          var box_num = box_list.data(DATATEXT_BOX_NUM) * 1;
-          NOW_SCROLL_TOP[box_num] = box_list.scrollTop;
-          save_fn();
-        }, 200);
+      if (is_delay_save) {
+        initTimeout(NAME_LAST_SCROLL_TOP, save_fn, 200);
       } else {
         save_fn();
       }
@@ -1208,7 +1207,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     if (is_start_search) {
       if (REMEMBER_POS) {
         LAST_BOX_PID = BOX_PID.slice();
-        LAST_SCROLL_TOP = NOW_SCROLL_TOP.slice();
+        LAST_SCROLL_TOP = getLastScrollTop();
       }
       resetBox(0);
     } else {
