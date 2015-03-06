@@ -398,8 +398,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function dragStartEvent(event) {
-    var target = event.target;
     var box_num;
+    var target = event.target;
 
     if (isItem(target)) {
       DRAG_ITEM = target;
@@ -494,13 +494,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function genItem(box_num, node) {
-    var new_item = ITEM.cloneTo(getBoxList(box_num));
-    var icon = new_item.first();
+    var new_item = ITEM.cloneTo(getBoxList(box_num)).prop('id', node.id);
 
+    var icon = new_item.first();
     var title = node.title;
     var url = node.url;
-
-    new_item.id = node.id;
 
     setItemText(new_item, title, url);
 
@@ -709,8 +707,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
       .addText(_getMsg('confirm'))
       .clickByButton(0, function() {
         var editor_input = EDITOR.tag$('input');
-        var title = editor_input[0].value;
         var url;
+
+        var title = editor_input[0].value;
 
         if (EDITOR_CREATE) {
           createItem(title);
@@ -857,8 +856,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function menuEvent(event) {
     var target = event.target;
-    var menu_item_num = getMenuItemNum(target);
     var tar_item_id = TARGET_ITEM.id;
+
+    var menu_item_num = getMenuItemNum(target);
 
     switch (menu_item_num) {
       // open bookmarks in tab or win
@@ -944,7 +944,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function openBkmarks(target_id, is_folder, menu_item_num) {
     _bookmark[is_folder ? 'getSubTree' : 'get'](target_id, function(node) {
-      var url_list = [], url_list_len = 0;
+      var url_list = [];
+      var url_list_len = 0;
 
       if (is_folder) {
         node[0].children.ascEach(function(bkmark) {
@@ -991,10 +992,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
         return false;
       }
 
+      var folder_cover_fn;
       var folder_item = id$(id);
 
       var box_num = getParentBoxNum(folder_item);
-      var folder_cover_fn;
 
       var next_box_num = box_num + 1;
       var pre_box_num = box_num - 1;
