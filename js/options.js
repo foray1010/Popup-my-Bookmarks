@@ -123,6 +123,7 @@
               option_value
             );
             break;
+
           case 'input-select':
             option_input = genInputSelectBox(
               option_field,
@@ -130,6 +131,7 @@
               option_value
             );
             break;
+
           case 'number':
             option_input = option_field.new$('input').prop({
               type: 'number',
@@ -138,6 +140,7 @@
               value: option_value
             });
             break;
+
           case 'select-multiple':
             option_input = genSelectMultipleBox(
               option_field,
@@ -145,6 +148,7 @@
               option_value
             );
             break;
+
           case 'string':
             option_input = option_field.new$('select');
             option_choices.ascEach(function(choice, choice_num) {
@@ -399,9 +403,11 @@
             option_value = option_value === 'true';
             setPermission(option.permissions, option_name, option_value);
             break;
+
           case 'input-select':
             option_value = option_value.trim();
             break;
+
           case 'number':
             option_value *= 1;
             if (isNaN(option_value) ||
@@ -410,12 +416,14 @@
               throw _getMsg('opt_error', option_num + 1 + '');
             }
             break;
+
           case 'select-multiple':
             option_value = option_value.split(',')
               .map(function(x) {
                 return x * 1;
               });
             break;
+
           case 'string':
             option_value *= 1;
         }
