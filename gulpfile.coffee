@@ -48,7 +48,8 @@ compileManifest = (dest_dir, update_fn) ->
 
   dest_path = path.join dest_dir, 'manifest.json'
   fs.writeJSONSync dest_path, manifest_json
-getSourcePath = (this_lang) -> path.join this_lang.source, '*.' + this_lang.extName
+getSourcePath = (this_lang) ->
+  path.join this_lang.source, '*.' + this_lang.extName
 watchLang = (lang_name, dest_dir, options) ->
   this_lang = lang[lang_name]
 
@@ -89,10 +90,13 @@ gulp.task 'help', ->
 
 # compile and zip PmB
 gulp.task 'compile-init', ->
+  version_check = (x) -> x is "#{parseInt x}" and 0 <= x <= 65535
+
   if argv.version is undefined or
      argv.version.split('.').length isnt 4 or
-     not argv.version.split('.').every((x) -> x is "#{parseInt x}" and 0 <= x <= 65535)
-    throw 'You need to input a version number x.y.z.ddmm, each number between 0 - 65535'
+     not argv.version.split('.').every(version_check)
+    throw Error 'You need to input a version number x.y.z.ddmm,
+                 each number between 0 - 65535'
 
   initDir compile_path
 
@@ -126,8 +130,12 @@ gulp.task 'dev', ->
   watchLang 'html', dev_path, pretty: true
 
   for file_name in ['font', '_locales', lang.js.source]
-    fs.symlinkSync path.join('..', file_name), path.join(dev_path, file_name), 'dir'
-  fs.symlinkSync path.join('..', resources_path, 'img-dev'), path.join(dev_path, 'img'), 'dir'
+    source = path.join '..', file_name
+    dest = path.join dev_path, file_name
+    fs.symlinkSync source, dest, 'dir'
+  source = path.join '..', resources_path, 'img-dev'
+  dest = path.join dev_path, 'img'
+  fs.symlinkSync source, dest, 'dir'
 
   compileManifest dev_path, (manifest_json) ->
     manifest_json.name += '(dev)'
@@ -166,7 +174,7 @@ gulp.task 'md', ->
       file_data = file_data.replace /^##/, '#'
 
     else
-      throw "Unknown markdown file: #{file_name}"
+      throw Error "Unknown markdown file: #{file_name}"
 
   fs.writeFile file_name, file_data
 
@@ -176,3 +184,7 @@ gulp.task 'test', ->
   gulp.src path.join(lang.js.source, '*')
     .pipe plugins.jshint()
     .pipe plugins.jshint.reporter('jshint-stylish')
+
+  gulp.src '**.coffee'
+    .pipe plugins.coffeelint()
+    .pipe plugins.coffeelint.reporter()
