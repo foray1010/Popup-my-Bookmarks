@@ -129,7 +129,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
             } else if (OP_FOLDER_BY) {
               openFolder(item.id);
             }
-
             break;
 
           case 'bkmark':
@@ -171,7 +170,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
           } else {
             hide_param = [false, false, false, true, true];
           }
-
           break;
 
         case 'no-bkmark':
@@ -205,7 +203,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
             // enter the first bkmark when press return key
             getBoxList(0).first().click();
           }
-
           break;
 
         case 16: // shift
@@ -213,7 +210,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
           if (key_code !== ON_MOD_KEY) {
             ON_MOD_KEY = key_code;
           }
-
           break;
 
         // case 37: // left
@@ -255,7 +251,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
             switch (item.data(DATATEXT_BOOKMARK_TYPE)) {
               case 'folder':
                 openFolder(item.id);
-
                 break;
 
               case 'bkmark':
@@ -301,7 +296,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
             openOptionsPage();
           }
         }
-
         break;
 
       case 2:
@@ -311,7 +305,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
           url: url,
           active: switcher === 2
         });
-
         break;
 
       case 5:
@@ -872,7 +865,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
       case 1:
       case 2:
         openBkmarks(tar_item_id, isFolder(TARGET_ITEM), menu_item_num);
-
         break;
 
       case 3: // Edit... & Rename...
@@ -883,7 +875,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
       case 4: // Delete
         removeItem(tar_item_id);
-
         break;
 
       case 5: // Cut
@@ -899,7 +890,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
           COPY_CUT_ITEM.isCut = menu_item_num === 5;
           COPY_CUT_ITEM.id = tar_item_id;
         }
-
         break;
 
       case 8: // Add current page
@@ -909,17 +899,14 @@ chrome.storage.sync.get(null, function(STORAGE) {
         }, function(tab) {
           createItem(tab[0].title, tab[0].url);
         });
-
         break;
 
       case 10: // Add separator
         createItem('- '.repeat(42), SEPARATE_THIS);
-
         break;
 
       case 11: // Sort by name
         sortByName(BOX_PID[getParentBoxNum(TARGET_ITEM)]);
-
         break;
 
       default:
