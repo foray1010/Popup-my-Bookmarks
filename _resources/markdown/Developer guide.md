@@ -40,4 +40,4 @@
 5. test
    > gulp test
 
-   To test javascript code by jshint
+   To test javascript code by jshint and coffeescript code by coffeelint
