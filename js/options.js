@@ -413,7 +413,7 @@
             if (isNaN(option_value) ||
                 option_value < option_choices[0] ||
                 option_value > option_choices[1]) {
-              throw _getMsg('opt_error', option_num + 1 + '');
+              throw Error(_getMsg('opt_error', option_num + 1 + ''));
             }
             break;
 
@@ -433,7 +433,7 @@
       _storage.set(new_options);
       genMsgBoxWhenConfirm(_getMsg('opt_saved'));
     } catch(e) {
-      genMsgBoxWhenConfirm(e);
+      genMsgBoxWhenConfirm(e.toString());
     }
   }
 
