@@ -336,6 +336,9 @@
     },
 
     // Others
+    hvFocus: function() {
+      return document.activeElement === this;
+    },
     index: function() {
       var index_num = 0;
       var indexer = this;
@@ -345,8 +348,12 @@
 
       return index_num;
     },
-    hvFocus: function() {
-      return document.activeElement === this;
+    isInView: function() {
+      var rect = this.getBoundingClientRect();
+      return rect.bottom < 0 ||
+        rect.right < 0 ||
+        rect.left > window.innerWidth ||
+        rect.top > window.innerHeight;
     },
 
     // Animation

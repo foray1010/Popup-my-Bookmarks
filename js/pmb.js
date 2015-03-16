@@ -132,8 +132,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
             break;
 
           case 'bkmark':
-            _bookmark.get(item.id, function(bkmark) {
-              clickSwitcher(mouse_button, bkmark[0].url);
+            _bookmark.get(item.id, function(node) {
+              clickSwitcher(mouse_button, node[0].url);
             });
         }
       }
@@ -320,7 +320,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
   }
 
-  function createItem(title, url, after_fn) {
+  function createItemByMenu(title, url, after_fn) {
     var box_num = getParentBoxNum(TARGET_ITEM);
 
     _bookmark.create({
@@ -329,6 +329,15 @@ chrome.storage.sync.get(null, function(STORAGE) {
       url: url,
       index: getItemIndex(TARGET_ITEM)
     }, after_fn);
+  }
+
+  function createItemByMenuIntoView(title, url) {
+    createItemByMenu(title, url, function(item_info) {
+      var item = id$(item_info.id);
+      if (!item.isInView()) {
+        item.scrollIntoView(false);
+      }
+    });
   }
 
   function dragEndEvent(event) {
@@ -469,8 +478,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function genFirstList() {
-    _bookmark.getChildren('0', function(tree) {
-      tree.ascEach(function(stem) {
+    _bookmark.getChildren('0', function(root_tree_info) {
+      root_tree_info.ascEach(function(stem) {
         var stem_id = stem.id * 1;
         if (stem_id === DEF_EXPAND ||
             HIDE_ROOT_FOLDER.hv(stem_id)) {
@@ -479,8 +488,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
         genItem(0, stem).addClass('rootfolder').draggable = false;
       });
 
-      _bookmark.getChildren(DEF_EXPAND + '', function(twig) {
-        genList(0, twig);
+      _bookmark.getChildren(DEF_EXPAND + '', function(tree_info) {
+        genList(0, tree_info);
 
         loadLastPos();
       });
@@ -517,9 +526,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
     return new_item;
   }
 
-  function genList(box_num, twig) {
-    twig.ascEach(function(leaf) {
-      genItem(box_num, leaf);
+  function genList(box_num, tree_info) {
+    tree_info.ascEach(function(item_info) {
+      genItem(box_num, item_info);
     });
     insertNoBkmark(box_num);
 
@@ -690,9 +699,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
     _bookmark.onCreated.addListener(create_element_in_dom);
 
     _bookmark.onMoved.addListener(function(id) {
-      _bookmark.get(id, function(bkmark) {
+      _bookmark.get(id, function(node) {
         remove_element_from_dom(id);
-        create_element_in_dom(id, bkmark[0]);
+        create_element_in_dom(id, node[0]);
       });
     });
 
@@ -712,7 +721,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         var title = editor_input[0].value;
 
         if (EDITOR_CREATE) {
-          createItem(title);
+          createItemByMenuIntoView(title);
         } else {
           if (!isFolder(TARGET_ITEM)) {
             url = editor_input[1].value;
@@ -897,12 +906,12 @@ chrome.storage.sync.get(null, function(STORAGE) {
           currentWindow: true,
           active: true
         }, function(tab) {
-          createItem(tab[0].title, tab[0].url);
+          createItemByMenuIntoView(tab[0].title, tab[0].url);
         });
         break;
 
       case 10: // Add separator
-        createItem('- '.repeat(42), SEPARATE_THIS);
+        createItemByMenuIntoView('- '.repeat(42), SEPARATE_THIS);
         break;
 
       case 11: // Sort by name
@@ -980,8 +989,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
       return false;
     }
 
-    _bookmark.getChildren(id, function(twig) {
-      if (twig === undefined) {
+    _bookmark.getChildren(id, function(tree_info) {
+      if (tree_info === undefined) {
         return false;
       }
 
@@ -997,7 +1006,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
       updateBoxHeadTitle(next_box_num, folder_item.innerText);
 
-      genList(next_box_num, twig);
+      genList(next_box_num, tree_info);
 
       if (box_num > 0 && pre_box_num >= NINJA_LIST.length) {
         folder_cover_fn = function() {
@@ -1031,25 +1040,26 @@ chrome.storage.sync.get(null, function(STORAGE) {
         index: getItemIndex(TARGET_ITEM)
       });
     } else {
-      _bookmark.getSubTree(node_id, function(node) {
+      _bookmark.getSubTree(node_id, function(tree_info) {
         var copy_child_fn = function(folder_list, folder_id) {
           folder_list.children.ascEach(function(bkmark) {
             _bookmark.create({
               parentId: folder_id,
               title: bkmark.title,
               url: bkmark.url
-            }, function(new_item) {
+            }, function(item_info) {
               if (!bkmark.url) {
-                copy_child_fn(bkmark, new_item.id);
+                copy_child_fn(bkmark, item_info.id);
               }
             });
           });
         };
 
-        node = node[0];
-        createItem(node.title, node.url, function(folder) {
+        var node = tree_info[0];
+
+        createItemByMenu(node.title, node.url, function(item_info) {
           if (!node.url) {
-            copy_child_fn(node, folder.id);
+            copy_child_fn(node, item_info.id);
           }
         });
       });
@@ -1283,14 +1293,14 @@ chrome.storage.sync.get(null, function(STORAGE) {
             return false;
           }
 
-          node = node[0];
+          var item_info = node[0];
 
-          if (![item.id, '0'].hv(node.id)) {
-            breadcrumb_arr.unshift(node.title);
+          if (![item.id, '0'].hv(item_info.id)) {
+            breadcrumb_arr.unshift(item_info.title);
           }
 
-          if (node.parentId !== undefined) {
-            getBreadcrumb(node.parentId);
+          if (item_info.parentId !== undefined) {
+            getBreadcrumb(item_info.parentId);
           } else {
             tooltip_arr.unshift(breadcrumb_arr.join(' > '));
             item.title = tooltip_arr.join('\n');
@@ -1311,8 +1321,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
       setEditorText(_getMsg('newFolder'));
       setEditorPos();
     } else {
-      _bookmark.get(TARGET_ITEM.id, function(bkmark) {
-        setEditorText(bkmark[0].title, bkmark[0].url);
+      _bookmark.get(TARGET_ITEM.id, function(node) {
+        setEditorText(node[0].title, node[0].url);
         setEditorPos();
       });
     }
