@@ -1232,18 +1232,14 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     var body_height;
     var box_list_offset_top = box_list.offset().top;
-    var footer_height = GOLDEN_GAP * 2;
     var list_height;
 
     var max_list_height = MAX_HEIGHT - box_list_offset_top;
 
-    list_height = box_list.scrollHeight - footer_height;
-    if (list_height > max_list_height) {
-      list_height = max_list_height;
-      box_list.style.maxHeight = list_height + 'px';
-    }
+    list_height = [box_list.scrollHeight, max_list_height].min();
+    box_list.style.maxHeight = list_height + 'px';
 
-    body_height = list_height + box_list_offset_top + footer_height;
+    body_height = list_height + box_list_offset_top;
     HEIGHT_LIST[box_num] = [MAX_HEIGHT, body_height].min();
     modBodyHeight(getMaxHeight());
   }
