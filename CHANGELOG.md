@@ -5,6 +5,7 @@ Changes:
 
 Improvements:
   - More precise dragging indicator
+  - Scroll the created item into view
 
 Bugfixes:
   - Dragging indicator may still appear after dragging is ended
