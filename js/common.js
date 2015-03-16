@@ -302,18 +302,21 @@
       return this;
     },
     offset: function() {
-      var check_element = this;
-      var offset_top = check_element.offsetTop;
-      var offset_left = check_element.offsetLeft;
-      while (check_element.tagName !== 'BODY') {
-        if (check_element.css('position') === 'absolute') {
-          offset_top += check_element.offsetTop;
-          offset_left += check_element.offsetLeft;
-        }
-        offset_top -= check_element.scrollTop;
-        offset_left -= check_element.scrollLeft;
+      var _this = this;
+      var offset_top = _this.offsetTop;
+      var offset_left = _this.offsetLeft;
 
-        check_element = check_element.parentNode;
+      var parent_element = _this.parentNode;
+
+      while (parent_element !== document.body) {
+        if (parent_element.css('position') === 'absolute') {
+          offset_top += parent_element.offsetTop;
+          offset_left += parent_element.offsetLeft;
+        }
+        offset_top -= parent_element.scrollTop;
+        offset_left -= parent_element.scrollLeft;
+
+        parent_element = parent_element.parentNode;
       }
 
       return {
