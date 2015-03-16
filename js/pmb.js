@@ -396,6 +396,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         }
 
         resetBox(box_num);
+        setHeight(box_num);
       }, 70);
     }
   }
@@ -1250,7 +1251,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     box_list.style.maxHeight = list_height + 'px';
 
     body_height = list_height + box_list_offset_top;
-    HEIGHT_LIST[box_num] = [MAX_HEIGHT, body_height].min();
+    HEIGHT_LIST[box_num] = [body_height, MAX_HEIGHT].min();
     modBodyHeight(getMaxHeight());
   }
 
