@@ -6,6 +6,7 @@ Changes:
 Improvements:
   - More precise dragging indicator
   - Scroll the created item into view
+  - Resize the height of interface when displaying dragging indicator
 
 Bugfixes:
   - Dragging indicator may still appear after dragging is ended
