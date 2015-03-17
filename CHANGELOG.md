@@ -4,13 +4,13 @@ Changes:
   - More compact layout
 
 Improvements:
-  - More precise dragging indicator
+  - More precise drag indicator
   - Scroll the created item into view
-  - Resize the height of interface when displaying dragging indicator
+  - Resize the height of interface when displaying drag indicator
 
 Bugfixes:
-  - Dragging indicator may still appear after dragging is ended
-  - Dragging indicator appears next to the dragged item in some special cases
+  - drag indicator may still appear after dragging is ended
+  - drag indicator appears next to the dragged item in some special cases
   - Tooltip displays after separator has been edited
   - Weird display of separator when using Chrome(Linux)
   - Wrong editor position in some special cases
@@ -235,7 +235,7 @@ Bugfixes:
 
 ## 1.6.1.2306 (23/6/2013)
 Bugfixes:
-  - When dragging bookmark on the original position, dragging indicator may be displayed
+  - When dragging bookmark on the original position, drag indicator may be displayed
 
 Improvements:
   - Reduce the sensitivity of hovering folders (suggested by David Bryant)
