@@ -497,12 +497,12 @@ chrome.storage.sync.get(null, function(STORAGE) {
     });
   }
 
-  function genItem(box_num, node) {
-    var new_item = ITEM.cloneTo(getBoxList(box_num)).prop('id', node.id);
+  function genItem(box_num, item_info) {
+    var new_item = ITEM.cloneTo(getBoxList(box_num)).prop('id', item_info.id);
 
     var icon = new_item.first();
-    var title = node.title;
-    var url = node.url;
+    var title = item_info.title;
+    var url = item_info.url;
 
     setItemText(new_item, title, url);
 
@@ -1033,15 +1033,15 @@ chrome.storage.sync.get(null, function(STORAGE) {
     _tab.create({url: 'options.html'});
   }
 
-  function pasteItem(node_id) {
+  function pasteItem(item_id) {
     if (COPY_CUT_ITEM.isCut) {
       var box_num = getParentBoxNum(TARGET_ITEM);
-      _bookmark.move(node_id, {
+      _bookmark.move(item_id, {
         parentId: BOX_PID[box_num],
         index: getItemIndex(TARGET_ITEM)
       });
     } else {
-      _bookmark.getSubTree(node_id, function(tree_info) {
+      _bookmark.getSubTree(item_id, function(tree_info) {
         var copy_child_fn = function(folder_list, folder_id) {
           folder_list.children.ascEach(function(bkmark) {
             _bookmark.create({
@@ -1056,11 +1056,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
           });
         };
 
-        var node = tree_info[0];
+        var item_info = tree_info[0];
 
-        createItemByMenu(node.title, node.url, function(item_info) {
-          if (!node.url) {
-            copy_child_fn(node, item_info.id);
+        createItemByMenu(item_info.title, item_info.url, function(item_info) {
+          if (!item_info.url) {
+            copy_child_fn(item_info, item_info.id);
           }
         });
       });
