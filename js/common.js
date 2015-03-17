@@ -390,8 +390,7 @@
         if (is_remove_when_done) {
           _this.remove();
         } else {
-          _this.hide();
-          _this.style.opacity = '';
+          _this.hide().css('opacity', '');
         }
       });
     }
