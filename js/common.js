@@ -678,9 +678,10 @@
 
       var unsetAll = function() {
         var sheet = getSheet();
-        sheet.rules.descEach(function(rule_num) {
-          sheet.deleteRule(rule_num);
-        });
+
+        while (sheet.rules[0]) {
+          sheet.deleteRule(0);
+        }
       };
 
       return {
