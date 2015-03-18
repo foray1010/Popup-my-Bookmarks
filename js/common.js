@@ -655,18 +655,24 @@
         return style_element.sheet;
       };
 
-      var set = function(css_name, style_list) {
-        var _action = function(css_name, style_list) {
-          var sheet = getSheet();
+      var set = function(param1, param2) {
+        var _action = function(style_selector, style_list) {
+          var style_value = '';
           style_list.propEach(function(prop_name, prop_val) {
-            sheet.addRule(css_name, prop_name + ':' + prop_val);
+            style_value += prop_name + ':' + prop_val + ';';
           });
-        };
 
-        if (style_list === undefined) {
-          css_name.propEach(_action);
+          sheet.insertRule(
+            style_selector + '{' + style_value + '}',
+            sheet.cssRules.length
+          );
+        };
+        var sheet = getSheet();
+
+        if (param2 === undefined) {
+          param1.propEach(_action);
         } else {
-          _action(css_name, style_list);
+          _action(param1, param2);
         }
       };
 
