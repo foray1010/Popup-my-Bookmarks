@@ -628,10 +628,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     if (is_hide_cover !== false) {
       EDITOR.fadeOut();
-      MENU_COVER.fadeOut(function() {
-        TARGET_ITEM.rmClass('selected');
-        focusSearchInput();
-      });
+      MENU_COVER.fadeOut(focusSearchInput);
+      TARGET_ITEM.rmClass('selected');
     }
   }
 
