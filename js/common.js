@@ -679,7 +679,7 @@
       var unsetAll = function() {
         var sheet = getSheet();
 
-        while (sheet.rules[0]) {
+        while (sheet.cssRules[0]) {
           sheet.deleteRule(0);
         }
       };
