@@ -379,10 +379,11 @@
     },
     fadeOut: function() {
       var _args = argumentsConstructor(
-        arguments, ['number', 'boolean'], [400, false]
+        arguments, ['number', 'boolean', 'function'], [400, false, EMPTY_FUNC]
       );
       var duration = _args[0];
       var is_remove_when_done = _args[1];
+      var complete_fn = _args[2];
 
       var _this = this;
 
@@ -392,6 +393,8 @@
         } else {
           _this.hide().css('opacity', '');
         }
+
+        complete_fn.call(_this);
       });
     }
   });
