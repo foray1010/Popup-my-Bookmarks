@@ -576,7 +576,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function getItemIndex(item) {
     return item.hvClass('no-bkmark') ? 0 :
-      item.index() + 1 - getRootFolderNum(getParentBoxNum(item));
+      getRootFolderNum(getParentBoxNum(item)) + item.index() + 1;
   }
 
   function getLastScrollTop() {
@@ -604,13 +604,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function getParentBoxNum(item) {
-    if (item.id !== DEF_EXPAND + '') {
-      var id_parent = item.parentNode;
-      if (id_parent) {
-        return id_parent.data(DATATEXT_BOX_NUM) * 1;
-      }
-    }
-    return 0;
+    return item.parentNode.data(DATATEXT_BOX_NUM) * 1;
   }
 
   function getRootFolderNum(box_num) {
