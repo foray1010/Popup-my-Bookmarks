@@ -375,6 +375,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         var box_num = getParentBoxNum(item);
         var is_place_before = event.offsetY < item.offsetHeight / 2;
         var isnt_drag_item = item.id !== DRAG_ITEM.id;
+        var orig_box_num = getParentBoxNum(DRAG_PLACE);
 
         var item_sibling = item[is_place_before ? 'prev' : 'next']();
 
@@ -389,14 +390,22 @@ chrome.storage.sync.get(null, function(STORAGE) {
           DRAG_PLACE.appendTo(PRELOAD);
         }
 
+        // if the DRAG_PLACE is not on the same box,
+        // the height of where it come from and go to,
+        // need to be reseted
+        if (box_num !== orig_box_num) {
+          if (orig_box_num >= 0) {
+            setHeight(orig_box_num);
+          }
+          setHeight(box_num);
+        }
+
         // item cannot be the parent folder of itself
         if (isnt_drag_item && isFolder(item)) {
           openFolder(item.id);
-          return false;
+        } else {
+          resetBox(box_num);
         }
-
-        resetBox(box_num);
-        setHeight(box_num);
       }, 70);
     }
   }
