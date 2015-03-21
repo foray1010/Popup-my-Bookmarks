@@ -342,7 +342,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function createItemByMenuIntoView(title, url) {
     createItemByMenu(title, url, function(item_info) {
       var item = id$(item_info.id);
-      if (!item.isInView()) {
+      if (!isItemInView(item)) {
         item.scrollIntoView(false);
       }
     });
@@ -834,6 +834,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
     return element.hvClass('item');
   }
 
+  function isItemInView(item) {
+    var item_parent = item.parentNode;
+    item_parent.offsetHeight + item_parent.scrollTop >= item.offsetTop;
+  }
+
   function isRootFolder(item) {
     return item.hvClass('rootfolder');
   }
@@ -865,7 +870,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     if (selected_item_sibling) {
       selected_item_sibling.addClass('selected');
 
-      if (!selected_item_sibling.isInView()) {
+      if (!isItemInView(selected_item_sibling)) {
         selected_item_sibling.scrollIntoView(!is_down);
       }
     }
