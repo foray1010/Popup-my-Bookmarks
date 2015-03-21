@@ -2,6 +2,7 @@
 Changes:
   - Increase minimum Chrome version from 20 to 26
   - More compact layout
+  - 'Open all bookmarks' now ignore separators
 
 Improvements:
   - More precise drag indicator

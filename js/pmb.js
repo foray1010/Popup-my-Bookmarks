@@ -949,23 +949,22 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function openBkmarks(target_id, is_folder, menu_item_num) {
     _bookmark[is_folder ? 'getSubTree' : 'get'](target_id, function(node) {
       var url_list = [];
-      var url_list_len = 0;
 
       if (is_folder) {
-        node[0].children.ascEach(function(bkmark) {
-          if (bkmark.url) {
-            url_list[url_list_len] = bkmark.url;
-            ++url_list_len;
+        node[0].children.ascEach(function(item_info) {
+          var url = item_info.url;
+          if (url && url !== SEPARATE_THIS) {
+            url_list.push(url);
           }
         });
 
         if (WARN_OPEN_MANY &&
-            url_list_len > 5 &&
-            !confirm(_getMsg('askOpenAll', url_list_len + ''))) {
+            url_list.length > 5 &&
+            !confirm(_getMsg('askOpenAll', url_list.length + ''))) {
           return false;
         }
       } else {
-        url_list = [node[0].url];
+        url_list.push(node[0].url);
       }
 
       if (menu_item_num === 0) {
@@ -1284,7 +1283,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     var tooltip_arr = [];
 
     if (TOOLTIP) {
-      tooltip_arr = [title, url];
+      tooltip_arr.push(title, url);
     }
 
     if (IS_SEARCHING) {
