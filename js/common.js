@@ -301,29 +301,6 @@
       this.hidden = true;
       return this;
     },
-    offset: function() {
-      var _this = this;
-      var offset_top = _this.offsetTop;
-      var offset_left = _this.offsetLeft;
-
-      var parent_element = _this.parentNode;
-
-      while (parent_element !== document.body) {
-        if (parent_element.css('position') === 'absolute') {
-          offset_top += parent_element.offsetTop;
-          offset_left += parent_element.offsetLeft;
-        }
-        offset_top -= parent_element.scrollTop;
-        offset_left -= parent_element.scrollLeft;
-
-        parent_element = parent_element.parentNode;
-      }
-
-      return {
-        top: offset_top,
-        left: offset_left
-      };
-    },
     show: function() {
       var _this = this;
 

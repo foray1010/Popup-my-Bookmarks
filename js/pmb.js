@@ -1262,10 +1262,12 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function setEditorPos() {
+    var target_offset_top = TARGET_ITEM.getBoundingClientRect().top;
+
     EDITOR.show();
     setBottomRight(
       EDITOR,
-      getNowHeight() - EDITOR.offsetHeight - TARGET_ITEM.offset().top,
+      getNowHeight() - EDITOR.offsetHeight - target_offset_top,
       getParentBoxNum(TARGET_ITEM) % 2 ? SET_WIDTH + GOLDEN_GAP : 0
     );
   }
@@ -1283,7 +1285,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     var box_list = getBoxList(box_num);
 
     var body_height;
-    var box_list_offset_top = box_list.offset().top;
+    var box_list_offset_top = box_list.getBoundingClientRect().top;
     var list_height;
 
     var max_list_height = MAX_HEIGHT - box_list_offset_top;
