@@ -593,7 +593,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function getItemIndex(item) {
     return item.hvClass('no-bkmark') ? 0 :
-      getRootFolderNum(getParentBoxNum(item)) + item.index() + 1;
+      item.index() + 1 - getRootFolderNum(getParentBoxNum(item));
   }
 
   function getLastScrollTop() {
