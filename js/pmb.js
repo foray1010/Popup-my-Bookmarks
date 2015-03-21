@@ -212,10 +212,18 @@ chrome.storage.sync.get(null, function(STORAGE) {
           }
           break;
 
-        // case 37: // left
-        // case 38: // up
-        // case 39: // right
-        // case 40: // down
+        case 37: // left
+          break;
+
+        case 38: // up
+          keyUpDownHandler(false);
+          break;
+
+        case 39: // right
+          break;
+
+        case 40: // down
+          keyUpDownHandler(true);
       }
     },
     keyup: function(event) {
@@ -828,6 +836,39 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function isRootFolder(item) {
     return item.hvClass('rootfolder');
+  }
+
+  function keyUpDownHandler(is_down) {
+    var box_num;
+    var selected_item = query$('.bookmark-item.selected')[0];
+    var selected_item_sibling;
+
+    var first_or_last = is_down ? 'first' : 'last';
+    var prev_or_next = is_down ? 'next' : 'prev';
+
+    if (selected_item) {
+      selected_item_sibling = selected_item[prev_or_next]();
+
+      if (!selected_item_sibling) {
+        box_num = getParentBoxNum(selected_item);
+      }
+
+      selected_item.rmClass('selected');
+    } else {
+      box_num = 0;
+    }
+
+    if (box_num >= 0) {
+      selected_item_sibling = getBoxList(box_num)[first_or_last]();
+    }
+
+    if (selected_item_sibling) {
+      selected_item_sibling.addClass('selected');
+
+      if (!selected_item_sibling.isInView()) {
+        selected_item_sibling.scrollIntoView(!is_down);
+      }
+    }
   }
 
   function loadLastPos() {
