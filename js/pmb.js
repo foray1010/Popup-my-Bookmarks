@@ -254,6 +254,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     },
     mouseover: function(event) {
       var item = getItem(event.target);
+      var selected_item;
 
       if (item) {
         HOVER_TIMEOUT = setTimeout(function() {
@@ -270,6 +271,15 @@ chrome.storage.sync.get(null, function(STORAGE) {
           }
         }, 250);
 
+        // remove selected class applied by
+        // arrowUpDownHandler or arrowLeftRightHandler
+        if (MENU_COVER.hidden) {
+          selected_item = getSelectedItem();
+          if (selected_item) {
+            selected_item.rmClass('selected');
+          }
+        }
+
         if (!item.hvClass('grey-item')) {
           item.addClass('selected');
         }
@@ -284,7 +294,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       return false;
     }
 
-    var selected_item = query$('.bookmark-item.selected')[0];
+    var selected_item = getSelectedItem();
 
     var box_num = getParentBoxNum(selected_item);
     var prev_box_num;
@@ -317,7 +327,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
 
     var box_num;
-    var selected_item = query$('.bookmark-item.selected')[0];
+    var selected_item = getSelectedItem();
     var selected_item_sibling;
 
     var first_or_last = is_down ? 'first' : 'last';
@@ -342,6 +352,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     if (selected_item_sibling) {
       selected_item_sibling.addClass('selected');
 
+      console.log(isItemInView(selected_item_sibling))
       if (!isItemInView(selected_item_sibling)) {
         selected_item_sibling.scrollIntoView(!is_down);
       }
@@ -701,6 +712,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
     return getBoxList(box_num).class$('rootfolder').length;
   }
 
+  function getSelectedItem() {
+    return query$('.bookmark-item.selected')[0];
+  }
+
   function greyMenuItem(grey_arr, is_grey) {
     var menu = MENU.children[2];
     grey_arr.ascEach(function(item_num) {
@@ -908,8 +923,13 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function isItemInView(item) {
+    var item_bottom_offset_top = item.offsetTop + item.offsetHeight;
     var item_parent = item.parentNode;
-    item_parent.offsetHeight + item_parent.scrollTop >= item.offsetTop;
+
+    var parent_scroll_top = item_parent.scrollTop;
+
+    return item_bottom_offset_top > parent_scroll_top &&
+      item_parent.offsetHeight + parent_scroll_top >= item_bottom_offset_top;
   }
 
   function isRootFolder(item) {
