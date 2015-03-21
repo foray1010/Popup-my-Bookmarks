@@ -70,7 +70,7 @@
 	},
 	"no_implicit_parens": {
 		"strict": true,
-		"level": "ignore"
+		"level": "error"
 	},
 	"no_interpolation_in_single_quotes": {
 		"level": "error"

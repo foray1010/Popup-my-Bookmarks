@@ -1,10 +1,10 @@
-gulp = require 'gulp'
+gulp = require('gulp')
 
 argv = require('yargs').argv
-fs = require 'fs-extra'
-path = require 'path'
+fs = require('fs-extra')
+path = require('path')
 plugins = require('gulp-load-plugins')()
-yamljs = require 'yamljs'
+yamljs = require('yamljs')
 
 
 # language config
@@ -35,115 +35,125 @@ resources_path = '_resources'
 compileLang = (lang_name, dest_dir, options) ->
   this_lang = lang[lang_name]
 
-  fs.mkdirsSync path.join(dest_dir, this_lang.dest)
+  fs.mkdirsSync(path.join(dest_dir, this_lang.dest))
 
-  compileLangHandler this_lang, getSourcePath(this_lang), dest_dir, options
+  compileLangHandler(this_lang, getSourcePath(this_lang), dest_dir, options)
 compileLangHandler = (this_lang, source_path, dest_dir, options) ->
-  gulp.src source_path
-    .pipe plugins[this_lang.plugin](options)
-    .pipe gulp.dest(path.join(dest_dir, this_lang.dest))
+  gulp.src(source_path)
+    .pipe(plugins[this_lang.plugin](options))
+    .pipe(gulp.dest(path.join(dest_dir, this_lang.dest)))
 compileManifest = (dest_dir, update_fn) ->
-  manifest_json = yamljs.load path.join(resources_path, 'manifest.yml')
-  update_fn manifest_json
+  manifest_json = yamljs.load(path.join(resources_path, 'manifest.yml'))
+  update_fn(manifest_json)
 
-  dest_path = path.join dest_dir, 'manifest.json'
-  fs.writeJSONSync dest_path, manifest_json
+  dest_path = path.join(dest_dir, 'manifest.json')
+  fs.writeJSONSync(dest_path, manifest_json)
 getSourcePath = (this_lang) ->
-  path.join this_lang.source, '*.' + this_lang.extName
+  path.join(this_lang.source, '*.' + this_lang.extName)
 watchLang = (lang_name, dest_dir, options) ->
   this_lang = lang[lang_name]
 
-  compileLang lang_name, dest_dir, options
+  compileLang(lang_name, dest_dir, options)
 
-  gulp.watch getSourcePath(this_lang), (event) ->
-    compileLangHandler this_lang, event.path, dest_dir, options
+  gulp.watch(getSourcePath(this_lang), (event) ->
+    compileLangHandler(this_lang, event.path, dest_dir, options)
+  )
 
 # markdown handler
 getMarkdownData = (title_list) ->
-  md_source = path.join resources_path, 'markdown'
+  md_source = path.join(resources_path, 'markdown')
 
   data_list = []
   for title in title_list
-    file_data = fs.readFileSync path.join(md_source, "#{title}.md"), 'utf-8'
-    data_list.push """
+    file_data = fs.readFileSync(path.join(md_source, "#{title}.md"), 'utf-8')
+    data_list.push("""
 ## #{title}
 
 #{file_data}
-"""
+""")
 
-  return data_list.join '\n\n'
+  return data_list.join('\n\n')
 
 # initiate the output folder
 initDir = (dir_path) ->
-  fs.removeSync dir_path
-  fs.mkdirSync dir_path
+  fs.removeSync(dir_path)
+  fs.mkdirSync(dir_path)
 
 
 # default when no task
-gulp.task 'default', ['help']
+gulp.task('default', ['help'])
 
 
 # user guideline
-gulp.task 'help', ->
-  console.log '\n' + getMarkdownData(['Developer guide']) + '\n'
+gulp.task('help', ->
+  console.log('\n' + getMarkdownData(['Developer guide']) + '\n')
+)
 
 
 # compile and zip PmB
-gulp.task 'compile-init', ->
-  version_check = (x) -> x is "#{parseInt x}" and 0 <= x <= 65535
+gulp.task('compile-init', ->
+  version_check = (x) -> x is "#{parseInt(x)}" and 0 <= x <= 65535
 
   if argv.version is undefined or
      argv.version.split('.').length isnt 4 or
      not argv.version.split('.').every(version_check)
-    throw Error 'You need to input a version number x.y.z.ddmm,
-                 each number between 0 - 65535'
+    throw Error('You need to input a version number x.y.z.ddmm,
+                 each number between 0 - 65535')
 
-  initDir compile_path
+  initDir(compile_path)
+)
 
-gulp.task 'compile-main', ['compile-init'], ->
-  compileLang 'css', compile_path, compress: true
-  compileLang 'html', compile_path
-  compileLang 'js', compile_path
+gulp.task('compile-main', ['compile-init'], ->
+  compileLang('css', compile_path, compress: true)
+  compileLang('html', compile_path)
+  compileLang('js', compile_path)
+)
 
-gulp.task 'compile-others', ['compile-init'], ->
+gulp.task('compile-others', ['compile-init'], ->
   for file_name in ['font', '_locales', 'LICENSE']
-    fs.copySync file_name, path.join(compile_path, file_name)
-  fs.copySync path.join(resources_path, 'img'), path.join(compile_path, 'img')
+    fs.copySync(file_name, path.join(compile_path, file_name))
+  fs.copySync(path.join(resources_path, 'img'), path.join(compile_path, 'img'))
 
-  compileManifest compile_path, (manifest_json) ->
+  compileManifest(compile_path, (manifest_json) ->
     manifest_json.version = argv.version
+  )
+)
 
-gulp.task 'compile-zip', ['compile-main', 'compile-others'], ->
-  gulp.src path.join(compile_path, '**')
-    .pipe plugins.zip(argv.version + '.zip')
-    .pipe gulp.dest('.')
+gulp.task('compile-zip', ['compile-main', 'compile-others'], ->
+  gulp.src(path.join(compile_path, '**'))
+    .pipe(plugins.zip(argv.version + '.zip'))
+    .pipe(gulp.dest('.'))
+)
 
-gulp.task 'compile', ['compile-zip'], ->
-  fs.removeSync compile_path # useless after zipped
+gulp.task('compile', ['compile-zip'], ->
+  fs.removeSync(compile_path) # useless after zipped
+)
 
 
 # create a 'watched' folder for testing
-gulp.task 'dev', ->
-  initDir dev_path
+gulp.task('dev', ->
+  initDir(dev_path)
 
-  watchLang 'css', dev_path
-  watchLang 'html', dev_path, pretty: true
+  watchLang('css', dev_path)
+  watchLang('html', dev_path, pretty: true)
 
   for file_name in ['font', '_locales', lang.js.source]
-    source = path.join '..', file_name
-    dest = path.join dev_path, file_name
-    fs.symlinkSync source, dest, 'dir'
-  source = path.join '..', resources_path, 'img-dev'
-  dest = path.join dev_path, 'img'
-  fs.symlinkSync source, dest, 'dir'
+    source = path.join('..', file_name)
+    dest = path.join(dev_path, file_name)
+    fs.symlinkSync(source, dest, 'dir')
+  source = path.join('..', resources_path, 'img-dev')
+  dest = path.join(dev_path, 'img')
+  fs.symlinkSync(source, dest, 'dir')
 
-  compileManifest dev_path, (manifest_json) ->
+  compileManifest(dev_path, (manifest_json) ->
     manifest_json.name += '(dev)'
     manifest_json.version = '0.0.0.0'
+  )
+)
 
 
 # generate markdown file
-gulp.task 'md', ->
+gulp.task('md', ->
   file_name = argv.make
 
   switch file_name
@@ -156,10 +166,10 @@ gulp.task 'md', ->
       ])
 
       # remove first three lines
-      file_data = file_data.replace /.+\n\n.+\n/, ''
+      file_data = file_data.replace(/.+\n\n.+\n/, '')
 
       # remove style of subheader
-      file_data = file_data.replace /##### /g, ''
+      file_data = file_data.replace(/##### /g, '')
 
     when 'README.md'
       file_data = getMarkdownData([
@@ -171,20 +181,22 @@ gulp.task 'md', ->
       ])
 
       # enlarge first header
-      file_data = file_data.replace /^##/, '#'
+      file_data = file_data.replace(/^##/, '#')
 
     else
-      throw Error "Unknown markdown file: #{file_name}"
+      throw Error("Unknown markdown file: #{file_name}")
 
-  fs.writeFile file_name, file_data
+  fs.writeFile(file_name, file_data)
+)
 
 
 # jshint
-gulp.task 'test', ->
-  gulp.src path.join(lang.js.source, '*')
-    .pipe plugins.jshint()
-    .pipe plugins.jshint.reporter('jshint-stylish')
+gulp.task('test', ->
+  gulp.src(path.join(lang.js.source, '*'))
+    .pipe(plugins.jshint())
+    .pipe(plugins.jshint.reporter('jshint-stylish'))
 
-  gulp.src '**.coffee'
-    .pipe plugins.coffeelint()
-    .pipe plugins.coffeelint.reporter()
+  gulp.src('**.coffee')
+    .pipe(plugins.coffeelint())
+    .pipe(plugins.coffeelint.reporter())
+)
