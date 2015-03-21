@@ -213,17 +213,19 @@ chrome.storage.sync.get(null, function(STORAGE) {
           break;
 
         case 37: // left
+          arrowLeftRightHandler(true);
           break;
 
         case 38: // up
-          keyUpDownHandler(false);
+          arrowUpDownHandler(false);
           break;
 
         case 39: // right
+          arrowLeftRightHandler(false);
           break;
 
         case 40: // down
-          keyUpDownHandler(true);
+          arrowUpDownHandler(true);
       }
     },
     keyup: function(event) {
@@ -245,7 +247,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
         // if menu is hidden, bookmark item should keep selected
         // if item doesn't have id, it is menu item
-        if (MENU.hidden || item.hvClass('menu-item')) {
+        if (MENU_COVER.hidden || item.hvClass('menu-item')) {
           item.rmClass('selected');
         }
       }
@@ -277,6 +279,77 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
 
   // functions
+  function arrowLeftRightHandler(is_left) {
+    if (!MENU_COVER.hidden) {
+      return false;
+    }
+
+    var selected_item = query$('.bookmark-item.selected')[0];
+
+    var box_num = getParentBoxNum(selected_item);
+    var prev_box_num;
+
+    var move_selected_to_box = function(this_box_num) {
+      selected_item.rmClass('selected');
+      getBoxList(this_box_num).first().addClass('selected');
+    };
+
+    if (selected_item) {
+      if (is_left) {
+        prev_box_num = box_num - 1;
+        if (prev_box_num >= 0) {
+          resetBox(prev_box_num);
+          move_selected_to_box(prev_box_num);
+        }
+      } else {
+        if (selected_item.data(DATATEXT_BOOKMARK_TYPE) === 'folder') {
+          openFolder(selected_item.id, function() {
+            move_selected_to_box(box_num + 1);
+          });
+        }
+      }
+    }
+  }
+
+  function arrowUpDownHandler(is_down) {
+    if (!MENU_COVER.hidden) {
+      return false;
+    }
+
+    var box_num;
+    var selected_item = query$('.bookmark-item.selected')[0];
+    var selected_item_sibling;
+
+    var first_or_last = is_down ? 'first' : 'last';
+    var prev_or_next = is_down ? 'next' : 'prev';
+
+    if (selected_item) {
+      selected_item_sibling = selected_item[prev_or_next]();
+
+      if (!selected_item_sibling) {
+        box_num = getParentBoxNum(selected_item);
+      }
+
+      selected_item.rmClass('selected');
+    } else {
+      box_num = 0;
+    }
+
+    if (box_num >= 0) {
+      selected_item_sibling = getBoxList(box_num)[first_or_last]();
+    }
+
+    if (selected_item_sibling) {
+      selected_item_sibling.addClass('selected');
+
+      if (!isItemInView(selected_item_sibling)) {
+        selected_item_sibling.scrollIntoView(!is_down);
+      }
+    }
+
+    SEARCH_INPUT.blur();
+  }
+
   function clickSwitcher(mouse_button, url) {
     var switcher;
     if (mouse_button === 0) {
@@ -841,39 +914,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function isRootFolder(item) {
     return item.hvClass('rootfolder');
-  }
-
-  function keyUpDownHandler(is_down) {
-    var box_num;
-    var selected_item = query$('.bookmark-item.selected')[0];
-    var selected_item_sibling;
-
-    var first_or_last = is_down ? 'first' : 'last';
-    var prev_or_next = is_down ? 'next' : 'prev';
-
-    if (selected_item) {
-      selected_item_sibling = selected_item[prev_or_next]();
-
-      if (!selected_item_sibling) {
-        box_num = getParentBoxNum(selected_item);
-      }
-
-      selected_item.rmClass('selected');
-    } else {
-      box_num = 0;
-    }
-
-    if (box_num >= 0) {
-      selected_item_sibling = getBoxList(box_num)[first_or_last]();
-    }
-
-    if (selected_item_sibling) {
-      selected_item_sibling.addClass('selected');
-
-      if (!isItemInView(selected_item_sibling)) {
-        selected_item_sibling.scrollIntoView(!is_down);
-      }
-    }
   }
 
   function loadLastPos() {
