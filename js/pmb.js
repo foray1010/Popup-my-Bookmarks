@@ -340,7 +340,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     } else if (selected_item) {
       item_parent = selected_item.parentNode;
     } else {
-      item_parent = getBoxList(0);
+      item_parent = getBoxList(BOX.length - 1);
     }
 
     item_list = item_parent.class$('item');
