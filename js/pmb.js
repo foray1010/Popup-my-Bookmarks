@@ -165,7 +165,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       switch (item.data(DATATEXT_BOOKMARK_TYPE)) {
         case 'folder':
         case 'bkmark':
-          if (isRootFolder(target)) {
+          if (isRootFolder(item)) {
             hide_param = [false, true, true, true, true];
           } else if (!IS_SEARCHING) {
             hide_param = [false, false, false, false, false];
@@ -183,7 +183,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         menu_item.hidden = hide_param[item_num];
       });
 
-      modMenuText(isFolder(target));
+      modMenuText(isFolder(item));
 
       greyMenuItem([0, 1], item.id === '');
       greyMenuItem([2], COPY_CUT_ITEM.id === null);
