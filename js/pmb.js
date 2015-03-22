@@ -297,6 +297,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       return false;
     }
 
+    var select_index = 0;
     var selected_item = getSelectedItem();
 
     var box_num = getParentBoxNum(selected_item);
@@ -304,13 +305,16 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     var move_selected_to_box = function(this_box_num) {
       selected_item.rmClass('selected');
-      getBoxList(this_box_num).first().addClass('selected');
+      getBoxList(this_box_num).children[select_index].addClass('selected');
     };
 
     if (selected_item) {
       if (is_left) {
         prev_box_num = box_num - 1;
         if (prev_box_num >= 0) {
+          // select the parent folder item
+          select_index = id$(BOX_PID[box_num]).index();
+
           resetBox(prev_box_num);
           move_selected_to_box(prev_box_num);
         }
