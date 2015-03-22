@@ -6,6 +6,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
   var _tab = chrome.tabs;
   var _win = chrome.windows;
 
+  var _indexOf = Array.prototype.indexOf;
+
   // options storage
   var BOOKMARKLET = STORAGE.bookmarklet;
   var DEF_EXPAND = STORAGE.defExpand;
@@ -197,12 +199,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
     dragstart: dragStartEvent,
     keydown: function(event) {
       var key_code = event.keyCode;
+
       switch (key_code) {
         case 13:
-          if (IS_SEARCHING) {
-            // enter the first bkmark when press return key
-            getBoxList(0).first().click();
-          }
+          enterHandler();
           break;
 
         case 16: // shift
@@ -217,6 +217,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
           break;
 
         case 38: // up
+          event.preventDefault();
           arrowUpDownHandler(false);
           break;
 
@@ -225,7 +226,12 @@ chrome.storage.sync.get(null, function(STORAGE) {
           break;
 
         case 40: // down
+          event.preventDefault();
           arrowUpDownHandler(true);
+          break;
+
+        default:
+          focusSearchInput();
       }
     },
     keyup: function(event) {
@@ -245,9 +251,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
       if (item) {
         clearTimeout(HOVER_TIMEOUT);
 
-        // if menu is hidden, bookmark item should keep selected
-        // if item doesn't have id, it is menu item
-        if (MENU_COVER.hidden || item.hvClass('menu-item')) {
+        // if menu is displayed, bookmark item should keep selected
+        if (!isMenuCovered() || item.hvClass('menu-item')) {
           item.rmClass('selected');
         }
       }
@@ -273,11 +278,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
         // remove selected class applied by
         // arrowUpDownHandler or arrowLeftRightHandler
-        if (MENU_COVER.hidden) {
-          selected_item = getSelectedItem();
-          if (selected_item) {
-            selected_item.rmClass('selected');
-          }
+        selected_item = getSelectedItem();
+        if (selected_item) {
+          selected_item.rmClass('selected');
         }
 
         if (!item.hvClass('grey-item')) {
@@ -290,7 +293,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   // functions
   function arrowLeftRightHandler(is_left) {
-    if (!MENU_COVER.hidden) {
+    if (isMenuCovered()) {
       return false;
     }
 
@@ -322,42 +325,60 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function arrowUpDownHandler(is_down) {
-    if (!MENU_COVER.hidden) {
-      return false;
-    }
-
-    var box_num;
+    var is_menu_covered = isMenuCovered();
+    var item_list;
+    var item_parent;
     var selected_item = getSelectedItem();
-    var selected_item_sibling;
 
-    var first_or_last = is_down ? 'first' : 'last';
-    var prev_or_next = is_down ? 'next' : 'prev';
+    var last_item_index;
+    var next_selected_index;
+    var next_selected_item;
+    var orig_selected_index;
 
-    if (selected_item) {
-      selected_item_sibling = selected_item[prev_or_next]();
-
-      if (!selected_item_sibling) {
-        box_num = getParentBoxNum(selected_item);
-      }
-
-      selected_item.rmClass('selected');
+    if (is_menu_covered) {
+      item_parent = MENU;
+    } else if (selected_item) {
+      item_parent = selected_item.parentNode;
     } else {
-      box_num = 0;
+      item_parent = getBoxList(0);
     }
 
-    if (box_num >= 0) {
-      selected_item_sibling = getBoxList(box_num)[first_or_last]();
+    item_list = item_parent.class$('item');
+    last_item_index = item_list.length - 1;
+    if (selected_item) {
+      orig_selected_index = _indexOf.call(item_list, selected_item);
+
+      if (is_down) {
+        next_selected_index = orig_selected_index + 1;
+        if (next_selected_index > last_item_index) {
+          next_selected_index = 0;
+        }
+      } else {
+        next_selected_index = orig_selected_index - 1;
+        if (next_selected_index < 0) {
+          next_selected_index = last_item_index;
+        }
+      }
+    } else {
+      next_selected_index = is_down ? 0 : last_item_index;
     }
 
-    if (selected_item_sibling) {
-      selected_item_sibling.addClass('selected');
+    // remove old selected
+    if (selected_item) {
+      selected_item.rmClass('selected');
+    }
 
-      console.log(isItemInView(selected_item_sibling))
-      if (!isItemInView(selected_item_sibling)) {
-        selected_item_sibling.scrollIntoView(!is_down);
+    // add new selected
+    next_selected_item = item_list[next_selected_index];
+    if (next_selected_item) {
+      next_selected_item.addClass('selected');
+
+      if (!is_menu_covered && !isItemInView(next_selected_item)) {
+        next_selected_item.scrollIntoView(!is_down);
       }
     }
 
+    // avoid changing cursor position in SEARCH_INPUT
     SEARCH_INPUT.blur();
   }
 
@@ -529,6 +550,17 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
   }
 
+  function enterHandler() {
+    var selected_item = getSelectedItem();
+
+    if (selected_item) {
+      selected_item.click();
+    } else if (IS_SEARCHING) {
+      // enter the first bkmark when press return key
+      getBoxList(0).first().click();
+    }
+  }
+
   function expandWidth(expand) {
     if (IS_EXPANDED !== expand) {
       IS_EXPANDED = expand;
@@ -537,7 +569,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function focusSearchInput() {
-    if (MENU_COVER.hidden) {
+    if (!isMenuCovered() && !SEARCH_INPUT.hvFocus()) {
       SEARCH_INPUT.focus();
     }
   }
@@ -692,8 +724,12 @@ chrome.storage.sync.get(null, function(STORAGE) {
     return HEIGHT_LIST.max();
   }
 
+  function getMenuItem() {
+    return MENU.class$('menu-item');
+  }
+
   function getMenuItemNum(menu_item) {
-    return Array.prototype.indexOf.call(MENU.class$('menu-item'), menu_item);
+    return _indexOf.call(getMenuItem(), menu_item);
   }
 
   function getNowHeight() {
@@ -713,7 +749,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function getSelectedItem() {
-    return query$('.bookmark-item.selected')[0];
+    var item_type = !isMenuCovered() ? '.bookmark-item' : '.menu-item';
+
+    return query$(item_type + '.selected')[0];
   }
 
   function greyMenuItem(grey_arr, is_grey) {
@@ -932,6 +970,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
       item_parent.offsetHeight + parent_scroll_top >= item_bottom_offset_top;
   }
 
+  function isMenuCovered() {
+    return !MENU_COVER.hidden;
+  }
+
   function isRootFolder(item) {
     return item.hvClass('rootfolder');
   }
@@ -1042,7 +1084,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function modMenuText(is_folder) {
-    var menu_item = MENU.class$('menu-item');
+    var menu_item = getMenuItem();
     var menu_item_msg_name = is_folder ?
       ['openAll', 'openAllInN', 'openAllInI', 'rename'] :
       ['openInB', 'openInN', 'openInI', 'edit'];
@@ -1093,6 +1135,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function openFolder(id, fn_after_open) {
     if (BOX_PID.hv(id)) {
+      if (fn_after_open) {
+        fn_after_open();
+      }
       return false;
     }
 

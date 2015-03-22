@@ -67,9 +67,7 @@ Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG
 
 ## Plan to do
 
-1. Keyboard Navigation
-
-2. Bookmarks selector (allow drag and manage a group of bookmarks)
+1. Bookmarks selector (allow drag and manage a group of bookmarks)
 
 
 ## What you can help
