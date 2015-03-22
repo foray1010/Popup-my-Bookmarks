@@ -1,4 +1,7 @@
-## 3.2.0 (unreleased)
+## 4.0.0 (unreleased)
+Features:
+  - Keyboard Navigation
+
 Changes:
   - Increase minimum Chrome version from 20 to 26
   - More compact layout
