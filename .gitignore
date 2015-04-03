@@ -1,17 +1,20 @@
 # temporarily files
 ## for Mac
-**/.DS_Store
-**/._*
+.DS_Store
+._*
 
 ## for Windows
-**/Desktop.ini
-**/Thumbs.db
+Desktop.ini
+Thumbs.db
+
 
 # temporarily folder
 __*
 
+
 # Dependency directory
 node_modules
+
 
 # zip for release
 *.zip
