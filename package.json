@@ -13,7 +13,6 @@
     "gulp-stylus": "*",
     "gulp-uglify": "*",
     "gulp-zip": "*",
-    "jshint": "*",
     "jshint-stylish": "*",
     "yamljs": "*",
     "yargs": "*"
