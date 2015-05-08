@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "A more efficient way to view and manage your bookmarks menu.",
   "devDependencies": {
+    "cli-color": "*",
     "coffee-script": "*",
     "fs-extra": "*",
     "gulp": "*",
