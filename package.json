@@ -17,9 +17,6 @@
     "yamljs": "*",
     "yargs": "*"
   },
-  "scripts": {
-    "test": "gulp test"
-  },
   "author": "foray1010",
   "repository": {
     "type": "git",
