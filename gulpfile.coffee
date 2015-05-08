@@ -39,6 +39,9 @@ compileLang = (lang_name, dest_dir, options) ->
 
   compileLangHandler(this_lang, getSourcePath(this_lang), dest_dir, options)
 compileLangHandler = (this_lang, source_path, dest_dir, options) ->
+  now_time = new Date().toLocaleTimeString()
+  console.log("[#{now_time}] #{source_path} is compiled")
+
   gulp.src(source_path)
     .pipe(plugins[this_lang.plugin](options))
     .pipe(gulp.dest(path.join(dest_dir, this_lang.dest)))
