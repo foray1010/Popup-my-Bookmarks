@@ -1,6 +1,7 @@
 gulp = require('gulp')
 
 argv = require('yargs').argv
+clc = require('cli-color')
 fs = require('fs-extra')
 path = require('path')
 plugins = require('gulp-load-plugins')()
@@ -40,7 +41,8 @@ compileLang = (lang_name, dest_dir, options) ->
   compileLangHandler(this_lang, getSourcePath(this_lang), dest_dir, options)
 compileLangHandler = (this_lang, source_path, dest_dir, options) ->
   now_time = new Date().toLocaleTimeString()
-  console.log("[#{now_time}] #{source_path} is compiled")
+  console.log('[' + clc.blackBright(now_time) + '] ' +
+              clc.magenta(source_path) + ' is compiled')
 
   gulp.src(source_path)
     .pipe(plugins[this_lang.plugin](options))
