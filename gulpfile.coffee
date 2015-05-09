@@ -197,6 +197,9 @@ gulp.task('md', ->
 
 # jshint
 gulp.task('test', ->
+  gulp.src(path.join(lang.css.source, '*'))
+    .pipe(plugins.stylint())
+
   gulp.src(path.join(lang.js.source, '*'))
     .pipe(plugins.jshint())
     .pipe(plugins.jshint.reporter('jshint-stylish'))
