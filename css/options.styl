@@ -13,7 +13,7 @@ $logo-book-width = 62px
 body
   font: 12px sans-serif
 
-input[type="number"]
+input[type="number"],
 select
   box-sizing: content-box
   height: $input-height
@@ -42,7 +42,7 @@ select[multiple]
   display: inline-block
   position: relative
 
-  & > input
+  & > input,
   & > select
     border: 0 !important
 
@@ -65,7 +65,7 @@ select[multiple]
   &:hover
     color: $main-color2
 
-.opt-desc
+.opt-desc,
 .opt-input
   display: table-cell
   height: 38px
@@ -188,13 +188,13 @@ select[multiple]
   -webkit-transform: rotate(35deg)
   width: 0
 
-  &
-  &:before
+  &,
+  &:before,
   &:after
     border-color: #fc0 transparent
     border-style: solid
 
-  &
+  &,
   &:after
     border-width: 0 25px 18px 25px
 
