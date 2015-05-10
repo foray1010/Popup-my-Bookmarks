@@ -30,14 +30,17 @@
 
    Display developer guide on terminal
 
+5. lint
+   > gulp lint
+
+   To lint
+   - JavaScript code by [JSHint](//github.com/jshint/jshint)
+   - CoffeeScript code by [CoffeeLint](//github.com/clutchski/coffeelint)
+   - Stylus code by [Stylint](//github.com/rossPatton/stylint)
+
 4. md
    > gulp md --make file_name
 
    To generate markdown file on the current directory
    - __store.md - Description for Chrome Web Store
    - README.md - Description for GitHub
-
-5. test
-   > gulp test
-
-   To test javascript code by jshint and coffeescript code by coffeelint
