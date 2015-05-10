@@ -157,6 +157,21 @@ gulp.task('dev', ->
 )
 
 
+# Lints
+gulp.task('lint', ->
+  gulp.src(path.join(lang.css.source, '*'))
+    .pipe(plugins.stylint())
+
+  gulp.src(path.join(lang.js.source, '*'))
+    .pipe(plugins.jshint())
+    .pipe(plugins.jshint.reporter('jshint-stylish'))
+
+  gulp.src('**.coffee')
+    .pipe(plugins.coffeelint())
+    .pipe(plugins.coffeelint.reporter())
+)
+
+
 # generate markdown file
 gulp.task('md', ->
   file_name = argv.make
@@ -192,19 +207,4 @@ gulp.task('md', ->
       throw Error("Unknown markdown file: #{file_name}")
 
   fs.writeFile(file_name, file_data)
-)
-
-
-# jshint
-gulp.task('test', ->
-  gulp.src(path.join(lang.css.source, '*'))
-    .pipe(plugins.stylint())
-
-  gulp.src(path.join(lang.js.source, '*'))
-    .pipe(plugins.jshint())
-    .pipe(plugins.jshint.reporter('jshint-stylish'))
-
-  gulp.src('**.coffee')
-    .pipe(plugins.coffeelint())
-    .pipe(plugins.coffeelint.reporter())
 )
