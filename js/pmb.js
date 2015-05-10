@@ -129,7 +129,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
             if (mouse_button === 1) {
               openBkmarks(item.id, true, 0);
             } else if (OP_FOLDER_BY) {
-              openFolder(item.id);
+              if (!BOX_PID.hv(item.id)) {
+                openFolder(item.id);
+              } else {
+                resetBox(getParentBoxNum(item));
+              }
             }
             break;
 
@@ -1150,6 +1154,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         return false;
       }
 
+      var folder_cover;
       var folder_cover_fn;
       var folder_item = id$(id);
 
@@ -1169,9 +1174,12 @@ chrome.storage.sync.get(null, function(STORAGE) {
           resetBox(pre_box_num);
         };
 
-        genNinja(pre_box_num)
-          .on('click', folder_cover_fn)
-          .hoverTimeout(folder_cover_fn, 300, 20);
+        folder_cover = genNinja(pre_box_num)
+          .on('click', folder_cover_fn);
+
+        if (!OP_FOLDER_BY) {
+          folder_cover.hoverTimeout(folder_cover_fn, 300, 20);
+        }
       }
 
       setTimeout(function() {
