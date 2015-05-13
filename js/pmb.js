@@ -62,7 +62,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   var ITEM_HEIGHT = 2 + GOLDEN_GAP * 2 + [FONT_SIZE, 16].max();
 
   // attr: data's text
-  var DATATEXT_BOX_NUM = 'box_num';
+  var DATATEXT_BOX_NUM = 'boxNum';
   var DATATEXT_BOOKMARK_TYPE = 'bookmark_type';
 
   // HTML element
@@ -82,7 +82,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
     .data(DATATEXT_BOOKMARK_TYPE, 'no-bkmark')
     .addText(_getMsg('noBkmark'));
   var NORESULT = PRELOAD.class$('no-result')[0].addText(_getMsg('noResult'));
-
 
   // if first run
   if (HIDE_ROOT_FOLDER === undefined) {
@@ -110,7 +109,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   BODY.on({
     click: function(event) {
       var item;
-      var mouse_button = event.button;
+      var mouseButton = event.button;
       var target = event.target;
 
       // reset the cursor to search-input after clicking
@@ -126,7 +125,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       if (item) {
         switch (item.data(DATATEXT_BOOKMARK_TYPE)) {
           case 'folder':
-            if (mouse_button === 1) {
+            if (mouseButton === 1) {
               openBkmarks(item.id, true, 0);
             } else if (OP_FOLDER_BY) {
               if (!BOX_PID.hv(item.id)) {
@@ -139,14 +138,14 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
           case 'bkmark':
             _bookmark.get(item.id, function(node) {
-              clickSwitcher(mouse_button, node[0].url);
+              clickSwitcher(mouseButton, node[0].url);
             });
         }
       }
     },
     // Customize right click menu
     contextmenu: function(event) {
-      var hide_param;
+      var hideParam;
       var item;
       var target = event.target;
 
@@ -170,21 +169,21 @@ chrome.storage.sync.get(null, function(STORAGE) {
         case 'folder':
         case 'bkmark':
           if (isRootFolder(item)) {
-            hide_param = [false, true, true, true, true];
+            hideParam = [false, true, true, true, true];
           } else if (!IS_SEARCHING) {
-            hide_param = [false, false, false, false, false];
+            hideParam = [false, false, false, false, false];
           } else {
-            hide_param = [false, false, false, true, true];
+            hideParam = [false, false, false, true, true];
           }
           break;
 
         case 'no-bkmark':
-          hide_param = [true, true, false, false, true];
+          hideParam = [true, true, false, false, true];
       }
 
       // set availability of menu items
-      MENU.children.ascEach(function(menu_item, item_num) {
-        menu_item.hidden = hide_param[item_num];
+      MENU.children.ascEach(function(menuItem, itemNum) {
+        menuItem.hidden = hideParam[itemNum];
       });
 
       modMenuText(isFolder(item));
@@ -202,17 +201,17 @@ chrome.storage.sync.get(null, function(STORAGE) {
     dragover: dragOverEvent,
     dragstart: dragStartEvent,
     keydown: function(event) {
-      var key_code = event.keyCode;
+      var keyCode = event.keyCode;
 
-      switch (key_code) {
+      switch (keyCode) {
         case 13:
           enterHandler();
           break;
 
         case 16: // shift
         case 17: // ctrl
-          if (key_code !== ON_MOD_KEY) {
-            ON_MOD_KEY = key_code;
+          if (keyCode !== ON_MOD_KEY) {
+            ON_MOD_KEY = keyCode;
           }
           break;
 
@@ -263,7 +262,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     },
     mouseover: function(event) {
       var item = getItem(event.target);
-      var selected_item;
+      var selectedItem;
 
       if (item) {
         HOVER_TIMEOUT = setTimeout(function() {
@@ -282,9 +281,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
         // remove selected class applied by
         // arrowUpDownHandler or arrowLeftRightHandler
-        selected_item = getSelectedItem();
-        if (selected_item) {
-          selected_item.rmClass('selected');
+        selectedItem = getSelectedItem();
+        if (selectedItem) {
+          selectedItem.rmClass('selected');
         }
 
         if (!item.hvClass('grey-item')) {
@@ -294,95 +293,94 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
   });
 
-
   // functions
-  function arrowLeftRightHandler(is_left) {
+  function arrowLeftRightHandler(isLeft) {
     if (isMenuCovered()) {
       return false;
     }
 
-    var select_index = 0;
-    var selected_item = getSelectedItem();
+    var selectIndex = 0;
+    var selectedItem = getSelectedItem();
 
-    var box_num = getParentBoxNum(selected_item);
-    var prev_box_num;
+    var boxNum = getParentBoxNum(selectedItem);
+    var prevBoxNum;
 
-    var move_selected_to_box = function(this_box_num) {
-      selected_item.rmClass('selected');
-      getBoxList(this_box_num).children[select_index].addClass('selected');
+    var moveSelectedToBox = function(thisBoxNum) {
+      selectedItem.rmClass('selected');
+      getBoxList(thisBoxNum).children[selectIndex].addClass('selected');
     };
 
-    if (selected_item) {
-      if (is_left) {
-        prev_box_num = box_num - 1;
-        if (prev_box_num >= 0) {
+    if (selectedItem) {
+      if (isLeft) {
+        prevBoxNum = boxNum - 1;
+        if (prevBoxNum >= 0) {
           // select the parent folder item
-          select_index = id$(BOX_PID[box_num]).index();
+          selectIndex = id$(BOX_PID[boxNum]).index();
 
-          resetBox(prev_box_num);
-          move_selected_to_box(prev_box_num);
+          resetBox(prevBoxNum);
+          moveSelectedToBox(prevBoxNum);
         }
       } else {
-        if (selected_item.data(DATATEXT_BOOKMARK_TYPE) === 'folder') {
-          openFolder(selected_item.id, function() {
-            move_selected_to_box(box_num + 1);
+        if (selectedItem.data(DATATEXT_BOOKMARK_TYPE) === 'folder') {
+          openFolder(selectedItem.id, function() {
+            moveSelectedToBox(boxNum + 1);
           });
         }
       }
     }
   }
 
-  function arrowUpDownHandler(is_down) {
-    var is_menu_covered = isMenuCovered();
-    var item_list;
-    var item_parent;
-    var selected_item = getSelectedItem();
+  function arrowUpDownHandler(isDown) {
+    var isMenuCovered = isMenuCovered();
+    var itemList;
+    var itemParent;
+    var selectedItem = getSelectedItem();
 
-    var last_item_index;
-    var next_selected_index;
-    var next_selected_item;
-    var orig_selected_index;
+    var lastItemIndex;
+    var nextSelectedIndex;
+    var nextSelectedItem;
+    var origSelectedIndex;
 
-    if (is_menu_covered) {
-      item_parent = MENU;
-    } else if (selected_item) {
-      item_parent = selected_item.parentNode;
+    if (isMenuCovered) {
+      itemParent = MENU;
+    } else if (selectedItem) {
+      itemParent = selectedItem.parentNode;
     } else {
-      item_parent = getBoxList(BOX.length - 1);
+      itemParent = getBoxList(BOX.length - 1);
     }
 
-    item_list = item_parent.class$('item');
-    last_item_index = item_list.length - 1;
-    if (selected_item) {
-      orig_selected_index = _indexOf.call(item_list, selected_item);
+    itemList = itemParent.class$('item');
+    lastItemIndex = itemList.length - 1;
+    if (selectedItem) {
+      origSelectedIndex = _indexOf.call(itemList, selectedItem);
 
-      if (is_down) {
-        next_selected_index = orig_selected_index + 1;
-        if (next_selected_index > last_item_index) {
-          next_selected_index = 0;
+      if (isDown) {
+        nextSelectedIndex = origSelectedIndex + 1;
+        if (nextSelectedIndex > lastItemIndex) {
+          nextSelectedIndex = 0;
         }
       } else {
-        next_selected_index = orig_selected_index - 1;
-        if (next_selected_index < 0) {
-          next_selected_index = last_item_index;
+        nextSelectedIndex = origSelectedIndex - 1;
+        if (nextSelectedIndex < 0) {
+          nextSelectedIndex = lastItemIndex;
         }
       }
     } else {
-      next_selected_index = is_down ? 0 : last_item_index;
+      nextSelectedIndex = isDown ? 0 : lastItemIndex;
     }
 
     // remove old selected
-    if (selected_item) {
-      selected_item.rmClass('selected');
+    if (selectedItem) {
+      selectedItem.rmClass('selected');
     }
 
     // add new selected
-    next_selected_item = item_list[next_selected_index];
-    if (next_selected_item) {
-      next_selected_item.addClass('selected');
+    nextSelectedItem = itemList[nextSelectedIndex];
+    if (nextSelectedItem) {
+      nextSelectedItem.addClass('selected');
 
-      if (!is_menu_covered && !isItemInView(next_selected_item)) {
-        next_selected_item.scrollIntoView(!is_down);
+      if (!isMenuCovered && !isItemInView(nextSelectedItem)) {
+        nextSelectedItem.scrollIntoView(!isDown);
       }
     }
 
@@ -390,9 +388,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
     SEARCH_INPUT.blur();
   }
 
-  function clickSwitcher(mouse_button, url) {
+  function clickSwitcher(mouseButton, url) {
     var switcher;
-    if (mouse_button === 0) {
+    if (mouseButton === 0) {
       switcher = 'Left';
 
       if (ON_MOD_KEY === 16) {
@@ -441,20 +439,20 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
   }
 
-  function createItemByMenu(title, url, after_fn) {
-    var box_num = getParentBoxNum(TARGET_ITEM);
+  function createItemByMenu(title, url, afterFn) {
+    var boxNum = getParentBoxNum(TARGET_ITEM);
 
     _bookmark.create({
-      parentId: BOX_PID[box_num],
+      parentId: BOX_PID[boxNum],
       title: title,
       url: url,
       index: getItemIndex(TARGET_ITEM)
-    }, after_fn);
+    }, afterFn);
   }
 
   function createItemByMenuIntoView(title, url) {
-    createItemByMenu(title, url, function(item_info) {
-      var item = id$(item_info.id);
+    createItemByMenu(title, url, function(itemInfo) {
+      var item = id$(itemInfo.id);
       if (!isItemInView(item)) {
         item.scrollIntoView(false);
       }
@@ -472,12 +470,12 @@ chrome.storage.sync.get(null, function(STORAGE) {
       // move the dragged item to the location of DRAG_PLACE
       if (DRAG_PLACE.parentNode !== PRELOAD) {
         var target = event.target;
-        var bkmark_index = getItemIndex(DRAG_PLACE) - 1;
-        var box_num = getParentBoxNum(DRAG_PLACE);
+        var bkmarkIndex = getItemIndex(DRAG_PLACE) - 1;
+        var boxNum = getParentBoxNum(DRAG_PLACE);
 
         _bookmark.move(target.id, {
-          parentId: BOX_PID[box_num],
-          index: bkmark_index
+          parentId: BOX_PID[boxNum],
+          index: bkmarkIndex
         });
 
         DRAG_PLACE.appendTo(PRELOAD);
@@ -493,20 +491,20 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     if (item && DRAG_ITEM) {
       DRAG_TIMEOUT = initTimeout('drag', function() {
-        var box_num = getParentBoxNum(item);
-        var is_place_before = event.offsetY < item.offsetHeight / 2;
-        var isnt_drag_item = item.id !== DRAG_ITEM.id;
-        var orig_box_num = getParentBoxNum(DRAG_PLACE);
+        var boxNum = getParentBoxNum(item);
+        var isPlaceBefore = event.offsetY < item.offsetHeight / 2;
+        var isntDragItem = item.id !== DRAG_ITEM.id;
+        var origBoxNum = getParentBoxNum(DRAG_PLACE);
 
-        var item_sibling = item[is_place_before ? 'prev' : 'next']();
+        var itemSibling = item[isPlaceBefore ? 'prev' : 'next']();
 
-        var isnt_drag_item_sibling = !item_sibling ||
-                                     item_sibling.id !== DRAG_ITEM.id;
+        var isntDragItemSibling = !itemSibling ||
+                                  itemSibling.id !== DRAG_ITEM.id;
 
-        if (isnt_drag_item &&
-            isnt_drag_item_sibling &&
+        if (isntDragItem &&
+            isntDragItemSibling &&
             !isRootFolder(item)) {
-          DRAG_PLACE[is_place_before ? 'before' : 'after'](item);
+          DRAG_PLACE[isPlaceBefore ? 'before' : 'after'](item);
         } else {
           DRAG_PLACE.appendTo(PRELOAD);
         }
@@ -514,35 +512,35 @@ chrome.storage.sync.get(null, function(STORAGE) {
         // if the DRAG_PLACE is not on the same box,
         // the height of where it come from and go to,
         // need to be reseted
-        if (box_num !== orig_box_num) {
-          if (orig_box_num >= 0) {
-            setHeight(orig_box_num);
+        if (boxNum !== origBoxNum) {
+          if (origBoxNum >= 0) {
+            setHeight(origBoxNum);
           }
-          setHeight(box_num);
+          setHeight(boxNum);
         }
 
         // item cannot be the parent folder of itself
-        if (isnt_drag_item && isFolder(item)) {
+        if (isntDragItem && isFolder(item)) {
           openFolder(item.id);
         } else {
-          resetBox(box_num);
+          resetBox(boxNum);
         }
       }, 70);
     }
   }
 
   function dragStartEvent(event) {
-    var box_num;
+    var boxNum;
     var target = event.target;
 
     if (isItem(target)) {
       DRAG_ITEM = target;
 
-      box_num = getParentBoxNum(target);
+      boxNum = getParentBoxNum(target);
       // if there is next box
-      if (box_num === BOX.length) {
-        genNinja(box_num).hide();
-        genNinja(box_num + 1);
+      if (boxNum === BOX.length) {
+        genNinja(boxNum).hide();
+        genNinja(boxNum + 1);
       }
 
       // hack to prevent dragover and dragend event stop working
@@ -559,10 +557,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function enterHandler() {
-    var selected_item = getSelectedItem();
+    var selectedItem = getSelectedItem();
 
-    if (selected_item) {
-      selected_item.click();
+    if (selectedItem) {
+      selectedItem.click();
     } else if (IS_SEARCHING) {
       // enter the first bkmark when press return key
       getBoxList(0).first().click();
@@ -582,21 +580,21 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
   }
 
-  function genBox(box_num, box_pid) {
-    var box = BOX_TEMPLATE.cloneTo(CONTAINER[box_num % 2]);
+  function genBox(boxNum, boxPid) {
+    var box = BOX_TEMPLATE.cloneTo(CONTAINER[boxNum % 2]);
 
     // remove the old box if exist
-    if (BOX[box_num]) {
-      BOX[box_num].remove();
+    if (BOX[boxNum]) {
+      BOX[boxNum].remove();
     }
     // update reference to the new box
-    BOX[box_num] = box;
+    BOX[boxNum] = box;
 
-    BOX_PID[box_num] = box_pid;
+    BOX_PID[boxNum] = boxPid;
     savLastPID();
 
-    getBoxList(box_num)
-      .data(DATATEXT_BOX_NUM, box_num)
+    getBoxList(boxNum)
+      .data(DATATEXT_BOX_NUM, boxNum)
       .on({
         mousewheel: function(event) {
           event.preventDefault();
@@ -620,96 +618,96 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function genFirstList() {
-    _bookmark.getChildren('0', function(root_tree_info) {
-      root_tree_info.ascEach(function(stem) {
-        var stem_id = stem.id * 1;
-        if (stem_id === DEF_EXPAND ||
-            HIDE_ROOT_FOLDER.hv(stem_id)) {
+    _bookmark.getChildren('0', function(rootTreeInfo) {
+      rootTreeInfo.ascEach(function(stem) {
+        var stemId = stem.id * 1;
+        if (stemId === DEF_EXPAND ||
+            HIDE_ROOT_FOLDER.hv(stemId)) {
           return true;
         }
         genItem(0, stem).addClass('rootfolder').draggable = false;
       });
 
-      _bookmark.getChildren(DEF_EXPAND + '', function(tree_info) {
-        genList(0, tree_info);
+      _bookmark.getChildren(DEF_EXPAND + '', function(treeInfo) {
+        genList(0, treeInfo);
 
         loadLastPos();
       });
     });
   }
 
-  function genItem(box_num, item_info) {
-    var new_item = ITEM.cloneTo(getBoxList(box_num)).prop('id', item_info.id);
+  function genItem(boxNum, itemInfo) {
+    var newItem = ITEM.cloneTo(getBoxList(boxNum)).prop('id', itemInfo.id);
 
-    var icon = new_item.first();
-    var title = item_info.title;
-    var url = item_info.url;
+    var icon = newItem.first();
+    var title = itemInfo.title;
+    var url = itemInfo.url;
 
-    setItemText(new_item, title, url);
+    setItemText(newItem, title, url);
 
     if (url) {
-      new_item.data(DATATEXT_BOOKMARK_TYPE, 'bkmark');
+      newItem.data(DATATEXT_BOOKMARK_TYPE, 'bkmark');
 
       if (url !== SEPARATE_THIS) {
         // for bookmarks
         icon.src = 'chrome://favicon/' + url;
 
-        setTooltip(new_item, title, url);
+        setTooltip(newItem, title, url);
       } else {
         // for separators
-        new_item.addClass('separator');
+        newItem.addClass('separator');
       }
     } else {
       // for folders
-      new_item.data(DATATEXT_BOOKMARK_TYPE, 'folder');
+      newItem.data(DATATEXT_BOOKMARK_TYPE, 'folder');
       icon.src = 'img/folder.png';
     }
 
-    return new_item;
+    return newItem;
   }
 
-  function genList(box_num, tree_info) {
-    tree_info.ascEach(function(item_info) {
-      genItem(box_num, item_info);
+  function genList(boxNum, treeInfo) {
+    treeInfo.ascEach(function(itemInfo) {
+      genItem(boxNum, itemInfo);
     });
-    insertNoBkmark(box_num);
+    insertNoBkmark(boxNum);
 
-    setHeight(box_num);
+    setHeight(boxNum);
   }
 
   function genMenu() {
     var area = MENU.new$('div');
 
-    MENU_PATTERN.ascEach(function(menu_item_text) {
-      if (menu_item_text === '|') {
+    MENU_PATTERN.ascEach(function(menuItemText) {
+      if (menuItemText === '|') {
         area = MENU.new$('div');
       } else {
         area.new$('p')
           .addClass('item')
           .addClass('menu-item')
-          .addText(menu_item_text && _getMsg(menu_item_text));
+          .addText(menuItemText && _getMsg(menuItemText));
       }
     });
 
     MENU.clickByButton(0, menuEvent);
   }
 
-  function genNinja(box_num) {
-    return NINJA_LIST[box_num] = BOX[box_num].new$('div').addClass('ninja');
+  function genNinja(boxNum) {
+    return NINJA_LIST[boxNum] = BOX[boxNum].new$('div').addClass('ninja');
   }
 
-  function getBoxList(box_num) {
-    return BOX[box_num].class$('folderlist')[0];
+  function getBoxList(boxNum) {
+    return BOX[boxNum].class$('folderlist')[0];
   }
 
   function getItem(element) {
     var item;
-    var item_parent = element.parentNode;
+    var itemParent = element.parentNode;
 
     if (isItem(element)) {
       item = element;
-    } else if (isItem(item_parent)) {
-      item = item_parent;
+    } else if (isItem(itemParent)) {
+      item = itemParent;
     }
 
     return item;
@@ -721,11 +719,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function getLastScrollTop() {
-    var last_scroll_top = [];
-    BOX.ascEach(function(box, box_num) {
-      last_scroll_top[box_num] = getBoxList(box_num).scrollTop;
+    var lastScrollTop = [];
+    BOX.ascEach(function(box, boxNum) {
+      lastScrollTop[boxNum] = getBoxList(boxNum).scrollTop;
     });
-    return last_scroll_top;
+    return lastScrollTop;
   }
 
   function getMaxHeight() {
@@ -736,8 +734,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
     return MENU.class$('menu-item');
   }
 
-  function getMenuItemNum(menu_item) {
-    return _indexOf.call(getMenuItem(), menu_item);
+  function getMenuItemNum(menuItem) {
+    return _indexOf.call(getMenuItem(), menuItem);
   }
 
   function getNowHeight() {
@@ -752,24 +750,24 @@ chrome.storage.sync.get(null, function(STORAGE) {
     return item.parentNode.data(DATATEXT_BOX_NUM) * 1;
   }
 
-  function getRootFolderNum(box_num) {
-    return getBoxList(box_num).class$('rootfolder').length;
+  function getRootFolderNum(boxNum) {
+    return getBoxList(boxNum).class$('rootfolder').length;
   }
 
   function getSelectedItem() {
-    var item_type = !isMenuCovered() ? '.bookmark-item' : '.menu-item';
+    var itemType = !isMenuCovered() ? '.bookmark-item' : '.menu-item';
 
-    return query$(item_type + '.selected')[0];
+    return query$(itemType + '.selected')[0];
   }
 
-  function greyMenuItem(grey_arr, is_grey) {
+  function greyMenuItem(greyArr, isGrey) {
     var menu = MENU.children[2];
-    grey_arr.ascEach(function(item_num) {
-      menu.children[item_num].toggleClass('grey-item', is_grey);
+    greyArr.ascEach(function(itemNum) {
+      menu.children[itemNum].toggleClass('grey-item', isGrey);
     });
   }
 
-  function hideMenu(is_hide_cover) {
+  function hideMenu(isHideCover) {
     MENU.fadeOut();
 
     // reset window width and height
@@ -777,7 +775,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     modBodyWidth(getNowWidth());
     modBodyHeight(getMaxHeight());
 
-    if (is_hide_cover !== false) {
+    if (isHideCover !== false) {
       EDITOR.fadeOut();
       MENU_COVER.fadeOut(focusSearchInput);
       TARGET_ITEM.rmClass('selected');
@@ -785,90 +783,90 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function initBookmarkEvent() {
-    var create_element_in_dom = function(id, info) {
-      var box_num = BOX_PID.indexOf(info.parentId);
+    var createElementInDom = function(id, info) {
+      var boxNum = BOX_PID.indexOf(info.parentId);
 
       // if parent box exists
-      if (box_num >= 0) {
-        removeNoBkmark(box_num);
+      if (boxNum >= 0) {
+        removeNoBkmark(boxNum);
 
-        genItem(box_num, info)
-          .after(getRootFolderNum(box_num) + info.index - 1);
+        genItem(boxNum, info)
+          .after(getRootFolderNum(boxNum) + info.index - 1);
 
-        setHeight(box_num);
+        setHeight(boxNum);
       }
     };
 
-    var remove_element_from_dom = function(id) {
-      var box_num;
-      var removed_element = id$(id);
+    var removeElementFromDom = function(id) {
+      var boxNum;
+      var removedElement = id$(id);
 
       if (COPY_CUT_ITEM.id === id) {
         COPY_CUT_ITEM.id = null;
       }
 
-      if (removed_element) {
-        box_num = getParentBoxNum(removed_element);
+      if (removedElement) {
+        boxNum = getParentBoxNum(removedElement);
 
         // if this bookmark is folder, remove its sub tree from DOM
         if (BOX_PID.hv(id)) {
-          resetBox(box_num);
+          resetBox(boxNum);
         }
 
-        removed_element.remove();
-        insertNoBkmark(box_num);
+        removedElement.remove();
+        insertNoBkmark(boxNum);
 
-        setHeight(box_num);
+        setHeight(boxNum);
       }
     };
 
     _bookmark.onChanged.addListener(function(id, info) {
-      var changed_item = id$(id);
-      var next_box_num;
+      var changedItem = id$(id);
+      var nextBoxNum;
       var title = info.title;
       var url = info.url;
 
-      if (changed_item) {
+      if (changedItem) {
         if (!url) {
-          next_box_num = getParentBoxNum(changed_item) + 1;
-          updateBoxHeadTitle(next_box_num, title);
+          nextBoxNum = getParentBoxNum(changedItem) + 1;
+          updateBoxHeadTitle(nextBoxNum, title);
         } else if (url !== SEPARATE_THIS) {
-          setTooltip(changed_item, title, url);
+          setTooltip(changedItem, title, url);
         }
 
-        setItemText(changed_item, title, url);
+        setItemText(changedItem, title, url);
       }
     });
 
-    _bookmark.onCreated.addListener(create_element_in_dom);
+    _bookmark.onCreated.addListener(createElementInDom);
 
     _bookmark.onMoved.addListener(function(id) {
       _bookmark.get(id, function(node) {
-        remove_element_from_dom(id);
-        create_element_in_dom(id, node[0]);
+        removeElementFromDom(id);
+        createElementInDom(id, node[0]);
       });
     });
 
-    _bookmark.onRemoved.addListener(remove_element_from_dom);
+    _bookmark.onRemoved.addListener(removeElementFromDom);
   }
 
   function initEditor() {
-    var editor_button = EDITOR.tag$('button');
+    var editorButton = EDITOR.tag$('button');
 
     // confirm editing
-    editor_button[0]
+    editorButton[0]
       .addText(_getMsg('confirm'))
       .clickByButton(0, function() {
-        var editor_input = EDITOR.tag$('input');
+        var editorInput = EDITOR.tag$('input');
         var url;
 
-        var title = editor_input[0].value;
+        var title = editorInput[0].value;
 
         if (EDITOR_CREATE) {
           createItemByMenuIntoView(title);
         } else {
           if (!isFolder(TARGET_ITEM)) {
-            url = editor_input[1].value;
+            url = editorInput[1].value;
           }
 
           _bookmark.update(TARGET_ITEM.id, {
@@ -881,14 +879,14 @@ chrome.storage.sync.get(null, function(STORAGE) {
       });
 
     // cancel editing
-    editor_button[1]
+    editorButton[1]
       .addText(_getMsg('cancel'))
       .clickByButton(0, hideMenu);
 
     // type 'Enter' on input tag
     EDITOR.on('keydown', function(event) {
       if (event.keyCode === 13) {
-        editor_button[0].click();
+        editorButton[0].click();
       }
     });
   }
@@ -906,12 +904,13 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function initStyleOptions() {
-    var font_size_px = FONT_SIZE + 'px';
+    var fontSizePx = FONT_SIZE + 'px';
     // -2 for border width
-    var separator_height_px = (ITEM_HEIGHT / 2) - 2 + 'px';
+    var separatorHeightPx = (ITEM_HEIGHT / 2) - 2 + 'px';
 
     // if the font family's name has whitespace, use quote to embed it
-    var font_family = FONT_FAMILY.split(',').map(function(x) {
+    var fontFamily = FONT_FAMILY.split(',')
+      .map(function(x) {
         x = x.trim();
         if (x.hv(' ')) {
           x = '"' + x + '"';
@@ -920,43 +919,41 @@ chrome.storage.sync.get(null, function(STORAGE) {
       })
       .join(',');
 
-
     // set panel(#main, #sub) width
     CSS.set('.panel-width', {
       'width': SET_WIDTH + 'px'
     });
 
-
     // set font style
     CSS.set('body', {
-      'font': font_size_px + ' ' + font_family
+      'font': fontSizePx + ' ' + fontFamily
     });
 
     if (FONT_SIZE > 16) {
       CSS.set({
         '.bookmark-item': {
-          'height': font_size_px,
-          'line-height': font_size_px
+          'height': fontSizePx,
+          'line-height': fontSizePx
         },
         '.icon': {
-          'width': font_size_px
+          'width': fontSizePx
         }
       });
     }
 
     // set separator height depend on item height
     CSS.set('.separator', {
-      'height': separator_height_px,
-      'line-height': separator_height_px
+      'height': separatorHeightPx,
+      'line-height': separatorHeightPx
     });
   }
 
-  function insertNoBkmark(box_num) {
-    var box_list = getBoxList(box_num);
-    var no_bkmark = !IS_SEARCHING ? NOBKMARK : NORESULT;
+  function insertNoBkmark(boxNum) {
+    var boxList = getBoxList(boxNum);
+    var noBkmark = !IS_SEARCHING ? NOBKMARK : NORESULT;
 
-    if (box_list.children.length === getRootFolderNum(box_num)) {
-      no_bkmark.cloneTo(box_list);
+    if (boxList.children.length === getRootFolderNum(boxNum)) {
+      noBkmark.cloneTo(boxList);
     }
   }
 
@@ -969,13 +966,13 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function isItemInView(item) {
-    var item_bottom_offset_top = item.offsetTop + item.offsetHeight;
-    var item_parent = item.parentNode;
+    var itemBottomOffsetTop = item.offsetTop + item.offsetHeight;
+    var itemParent = item.parentNode;
 
-    var parent_scroll_top = item_parent.scrollTop;
+    var parentScrollTop = itemParent.scrollTop;
 
-    return item_bottom_offset_top > parent_scroll_top &&
-      item_parent.offsetHeight + parent_scroll_top >= item_bottom_offset_top;
+    return itemBottomOffsetTop > parentScrollTop &&
+      itemParent.offsetHeight + parentScrollTop >= itemBottomOffsetTop;
   }
 
   function isMenuCovered() {
@@ -988,20 +985,20 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function loadLastPos() {
     if (REMEMBER_POS) {
-      LAST_BOX_PID.ascEach(function(folder_id, box_num) {
-        var fn_after_open = function() {
-          var last_scroll_top = LAST_SCROLL_TOP[box_num];
-          if (last_scroll_top) {
-            getBoxList(box_num).scrollTop = last_scroll_top;
+      LAST_BOX_PID.ascEach(function(folderId, boxNum) {
+        var fnAfterOpen = function() {
+          var lastScrollTop = LAST_SCROLL_TOP[boxNum];
+          if (lastScrollTop) {
+            getBoxList(boxNum).scrollTop = lastScrollTop;
           }
         };
 
-        if (box_num === 0) {
-          if (folder_id === DEF_EXPAND + '') {
-            fn_after_open();
+        if (boxNum === 0) {
+          if (folderId === DEF_EXPAND + '') {
+            fnAfterOpen();
           }
         } else {
-          openFolder(folder_id, fn_after_open);
+          openFolder(folderId, fnAfterOpen);
         }
       });
     }
@@ -1022,26 +1019,26 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function menuEvent(event) {
     var target = event.target;
-    var tar_item_id = TARGET_ITEM.id;
+    var targetItemId = TARGET_ITEM.id;
 
-    var menu_item_num = getMenuItemNum(target);
+    var menuItemNum = getMenuItemNum(target);
 
-    switch (menu_item_num) {
+    switch (menuItemNum) {
       // open bookmarks in tab or win
       case 0:
       case 1:
       case 2:
-        openBkmarks(tar_item_id, isFolder(TARGET_ITEM), menu_item_num);
+        openBkmarks(targetItemId, isFolder(TARGET_ITEM), menuItemNum);
         break;
 
       case 3: // Edit... & Rename...
       case 9: // Add folder...
-        EDITOR_CREATE = menu_item_num === 9;
+        EDITOR_CREATE = menuItemNum === 9;
         showEditor();
         return false;
 
       case 4: // Delete
-        removeItem(tar_item_id);
+        removeItem(targetItemId);
         break;
 
       case 5: // Cut
@@ -1051,11 +1048,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
           return false;
         }
 
-        if (menu_item_num === 7) {
+        if (menuItemNum === 7) {
           pasteItem(COPY_CUT_ITEM.id);
         } else {
-          COPY_CUT_ITEM.isCut = menu_item_num === 5;
-          COPY_CUT_ITEM.id = tar_item_id;
+          COPY_CUT_ITEM.isCut = menuItemNum === 5;
+          COPY_CUT_ITEM.id = targetItemId;
         }
         break;
 
@@ -1083,48 +1080,48 @@ chrome.storage.sync.get(null, function(STORAGE) {
     hideMenu();
   }
 
-  function modBodyHeight(new_height) {
-    BODY.style.height = new_height + 'px';
+  function modBodyHeight(newHeight) {
+    BODY.style.height = newHeight + 'px';
   }
 
-  function modBodyWidth(new_width) {
-    BODY.style.width = new_width + 'px';
+  function modBodyWidth(newWidth) {
+    BODY.style.width = newWidth + 'px';
   }
 
-  function modMenuText(is_folder) {
-    var menu_item = getMenuItem();
-    var menu_item_msg_name = is_folder ?
+  function modMenuText(isFolder) {
+    var menuItem = getMenuItem();
+    var menuItemMsgName = isFolder ?
       ['openAll', 'openAllInN', 'openAllInI', 'rename'] :
       ['openInB', 'openInN', 'openInI', 'edit'];
 
-    menu_item_msg_name.ascEach(function(item_text, item_num) {
-      menu_item[item_num].innerText = _getMsg(item_text);
+    menuItemMsgName.ascEach(function(itemText, itemNum) {
+      menuItem[itemNum].innerText = _getMsg(itemText);
     });
   }
 
-  function openBkmarks(target_id, is_folder, menu_item_num) {
-    _bookmark[is_folder ? 'getSubTree' : 'get'](target_id, function(node) {
-      var url_list = [];
+  function openBkmarks(targetId, isFolder, menuItemNum) {
+    _bookmark[isFolder ? 'getSubTree' : 'get'](targetId, function(node) {
+      var urlList = [];
 
-      if (is_folder) {
-        node[0].children.ascEach(function(item_info) {
-          var url = item_info.url;
+      if (isFolder) {
+        node[0].children.ascEach(function(itemInfo) {
+          var url = itemInfo.url;
           if (url && url !== SEPARATE_THIS) {
-            url_list.push(url);
+            urlList.push(url);
           }
         });
 
         if (WARN_OPEN_MANY &&
-            url_list.length > 5 &&
-            !confirm(_getMsg('askOpenAll', url_list.length + ''))) {
+            urlList.length > 5 &&
+            !confirm(_getMsg('askOpenAll', urlList.length + ''))) {
           return false;
         }
       } else {
-        url_list.push(node[0].url);
+        urlList.push(node[0].url);
       }
 
-      if (menu_item_num === 0) {
-        url_list.ascEach(function(url) {
+      if (menuItemNum === 0) {
+        urlList.ascEach(function(url) {
           _tab.create({
             url: url,
             active: false
@@ -1132,8 +1129,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
         });
       } else {
         _win.create({
-          url: url_list,
-          incognito: menu_item_num !== 1
+          url: urlList,
+          incognito: menuItemNum !== 1
         });
       }
 
@@ -1141,44 +1138,44 @@ chrome.storage.sync.get(null, function(STORAGE) {
     });
   }
 
-  function openFolder(id, fn_after_open) {
+  function openFolder(id, fnAfterOpen) {
     if (BOX_PID.hv(id)) {
-      if (fn_after_open) {
-        fn_after_open();
+      if (fnAfterOpen) {
+        fnAfterOpen();
       }
       return false;
     }
 
-    _bookmark.getChildren(id, function(tree_info) {
-      if (tree_info === undefined) {
+    _bookmark.getChildren(id, function(treeInfo) {
+      if (treeInfo === undefined) {
         return false;
       }
 
-      var folder_cover;
-      var folder_cover_fn;
-      var folder_item = id$(id);
+      var folderCover;
+      var folderCoverFn;
+      var folderItem = id$(id);
 
-      var box_num = getParentBoxNum(folder_item);
+      var boxNum = getParentBoxNum(folderItem);
 
-      var next_box_num = box_num + 1;
-      var pre_box_num = box_num - 1;
+      var nextBoxNum = boxNum + 1;
+      var prevBoxNum = boxNum - 1;
 
-      genBox(next_box_num, id);
+      genBox(nextBoxNum, id);
 
-      updateBoxHeadTitle(next_box_num, folder_item.innerText);
+      updateBoxHeadTitle(nextBoxNum, folderItem.innerText);
 
-      genList(next_box_num, tree_info);
+      genList(nextBoxNum, treeInfo);
 
-      if (box_num > 0 && pre_box_num >= NINJA_LIST.length) {
-        folder_cover_fn = function() {
-          resetBox(pre_box_num);
+      if (boxNum > 0 && prevBoxNum >= NINJA_LIST.length) {
+        folderCoverFn = function() {
+          resetBox(prevBoxNum);
         };
 
-        folder_cover = genNinja(pre_box_num)
-          .on('click', folder_cover_fn);
+        folderCover = genNinja(prevBoxNum)
+          .on('click', folderCoverFn);
 
         if (!OP_FOLDER_BY) {
-          folder_cover.hoverTimeout(folder_cover_fn, 300, 20);
+          folderCover.hoverTimeout(folderCoverFn, 300, 20);
         }
       }
 
@@ -1186,8 +1183,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
         expandWidth(true);
       }, 50);
 
-      if (fn_after_open) {
-        fn_after_open();
+      if (fnAfterOpen) {
+        fnAfterOpen();
       }
     });
   }
@@ -1196,53 +1193,53 @@ chrome.storage.sync.get(null, function(STORAGE) {
     _tab.create({url: 'options.html'});
   }
 
-  function pasteItem(item_id) {
+  function pasteItem(itemId) {
     if (COPY_CUT_ITEM.isCut) {
-      var box_num = getParentBoxNum(TARGET_ITEM);
-      _bookmark.move(item_id, {
-        parentId: BOX_PID[box_num],
+      var boxNum = getParentBoxNum(TARGET_ITEM);
+      _bookmark.move(itemId, {
+        parentId: BOX_PID[boxNum],
         index: getItemIndex(TARGET_ITEM)
       });
     } else {
-      _bookmark.getSubTree(item_id, function(tree_info) {
-        var copy_child_fn = function(folder_list, folder_id) {
-          folder_list.children.ascEach(function(bkmark) {
+      _bookmark.getSubTree(itemId, function(treeInfo) {
+        var copyChildFn = function(folderList, folderId) {
+          folderList.children.ascEach(function(bkmark) {
             _bookmark.create({
-              parentId: folder_id,
+              parentId: folderId,
               title: bkmark.title,
               url: bkmark.url
-            }, function(item_info) {
+            }, function(itemInfo) {
               if (!bkmark.url) {
-                copy_child_fn(bkmark, item_info.id);
+                copyChildFn(bkmark, itemInfo.id);
               }
             });
           });
         };
 
-        var item_info = tree_info[0];
+        var itemInfo = treeInfo[0];
 
-        createItemByMenu(item_info.title, item_info.url, function(item_info) {
-          if (!item_info.url) {
-            copy_child_fn(item_info, item_info.id);
+        createItemByMenu(itemInfo.title, itemInfo.url, function(itemInfo) {
+          if (!itemInfo.url) {
+            copyChildFn(itemInfo, itemInfo.id);
           }
         });
       });
     }
   }
 
-  function removeItem(item_id) {
-    var is_folder = isFolder(id$(item_id));
-    _bookmark[is_folder ? 'removeTree' : 'remove'](item_id);
+  function removeItem(itemId) {
+    var isFolder = isFolder(id$(itemId));
+    _bookmark[isFolder ? 'removeTree' : 'remove'](itemId);
   }
 
-  function removeNoBkmark(box_num) {
-    var box_list = getBoxList(box_num);
-    var no_bkmark_class_name = !IS_SEARCHING ? 'no-bkmark' : 'no-result';
+  function removeNoBkmark(boxNum) {
+    var boxList = getBoxList(boxNum);
+    var noBkmarkClassName = !IS_SEARCHING ? 'no-bkmark' : 'no-result';
 
-    var no_bkmark = box_list.class$(no_bkmark_class_name)[0];
+    var noBkmark = boxList.class$(noBkmarkClassName)[0];
 
-    if (no_bkmark) {
-      no_bkmark.remove();
+    if (noBkmark) {
+      noBkmark.remove();
     }
   }
 
@@ -1276,15 +1273,16 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
   }
 
-  function savLastScroll(is_delay_save) {
+  function savLastScroll(isDelaySave) {
     if (REMEMBER_POS) {
-      var save_fn = function() {
+      var saveFn = function() {
         jsonStorage('set', NAME_LAST_SCROLL_TOP, getLastScrollTop());
       };
-      if (is_delay_save) {
-        initTimeout(NAME_LAST_SCROLL_TOP, save_fn, 200);
+
+      if (isDelaySave) {
+        initTimeout(NAME_LAST_SCROLL_TOP, saveFn, 200);
       } else {
-        save_fn();
+        saveFn();
       }
     }
   }
@@ -1302,70 +1300,70 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
 
     _bookmark.search(keyword, function(results) {
-      var box_list = getBoxList(0);
-      var sorted_result = sortByTitle(searchResultSelector(results));
+      var boxList = getBoxList(0);
+      var sortedResult = sortByTitle(searchResultSelector(results));
 
       removeNoBkmark(0);
 
-      update$(box_list, sorted_result, function(item) {
+      update$(boxList, sortedResult, function(item) {
         genItem(0, item).draggable = false;
       });
       insertNoBkmark(0);
 
       // scroll back to the top
-      box_list.scrollTop = 0;
+      boxList.scrollTop = 0;
 
       setHeight(0);
     });
   }
 
   function searchResultSelector(results) {
-    var is_only_search_title = SEARCH_TARGET === 1;
-    var new_results = [];
-    var splitted_key_arr = [];
+    var isOnlySearchTitle = SEARCH_TARGET === 1;
+    var newResults = [];
+    var splittedKeyArr = [];
 
-    if (is_only_search_title) {
-      SEARCH_INPUT.value.split(' ').ascEach(function(splitted_key) {
-        if (splitted_key !== '') {
-          splitted_key_arr.push(splitted_key.toLowerCase());
+    if (isOnlySearchTitle) {
+      SEARCH_INPUT.value.split(' ').ascEach(function(splittedKey) {
+        if (splittedKey !== '') {
+          splittedKeyArr.push(splittedKey.toLowerCase());
         }
       });
     }
 
     results.ascEach(function(bkmark) {
-      var bkmark_title;
-      var bkmark_url = bkmark.url;
-      var is_not_title_matched;
+      var bkmarkTitle;
+      var bkmarkUrl = bkmark.url;
+      var isntTitleMatched;
 
-      if (bkmark_url && bkmark_url !== SEPARATE_THIS) {
-        if (is_only_search_title) {
-          bkmark_title = bkmark.title.toLowerCase();
-          splitted_key_arr.ascEach(function(splitted_key) {
-            if (!bkmark_title.hv(splitted_key)) {
-              is_not_title_matched = true;
+      if (bkmarkUrl && bkmarkUrl !== SEPARATE_THIS) {
+        if (isOnlySearchTitle) {
+          bkmarkTitle = bkmark.title.toLowerCase();
+          splittedKeyArr.ascEach(function(splittedKey) {
+            if (!bkmarkTitle.hv(splittedKey)) {
+              isntTitleMatched = true;
               return false;
             }
           });
 
-          if (is_not_title_matched) {
+          if (isntTitleMatched) {
             return true;
           }
         }
 
-        new_results.push(bkmark);
-        if (new_results.length === MAX_RESULTS) {
+        newResults.push(bkmark);
+        if (newResults.length === MAX_RESULTS) {
           return false;
         }
       }
     });
 
-    return new_results;
+    return newResults;
   }
 
-  function searchSwitch(is_start_search) {
-    IS_SEARCHING = is_start_search;
+  function searchSwitch(isStartSearch) {
+    IS_SEARCHING = isStartSearch;
 
-    if (is_start_search) {
+    if (isStartSearch) {
       if (REMEMBER_POS) {
         LAST_BOX_PID = BOX_PID.slice();
         LAST_SCROLL_TOP = getLastScrollTop();
@@ -1376,47 +1374,47 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
   }
 
-  function setBottomRight(settler, set_bottom, set_right) {
+  function setBottomRight(settler, bottomValue, rightValue) {
     settler.css({
-      bottom: [set_bottom, 0].max() + 'px',
-      right: [set_right, 0].max() + 'px'
+      bottom: [bottomValue, 0].max() + 'px',
+      right: [rightValue, 0].max() + 'px'
     });
   }
 
   function setEditorPos() {
-    var target_offset_top = TARGET_ITEM.getBoundingClientRect().top;
+    var targetOffsetTop = TARGET_ITEM.getBoundingClientRect().top;
 
     EDITOR.show();
     setBottomRight(
       EDITOR,
-      getNowHeight() - EDITOR.offsetHeight - target_offset_top,
+      getNowHeight() - EDITOR.offsetHeight - targetOffsetTop,
       getParentBoxNum(TARGET_ITEM) % 2 ? SET_WIDTH + GOLDEN_GAP : 0
     );
   }
 
   function setEditorText(title, url) {
-    var editor_title = _getMsg(url ? 'edit' : 'rename').replace('...', '');
-    var input_field = EDITOR.tag$('input');
+    var editorTitle = _getMsg(url ? 'edit' : 'rename').replace('...', '');
+    var inputField = EDITOR.tag$('input');
 
-    id$('edit-title').innerText = editor_title;
-    input_field[0].val(title).selectText().focus();
-    input_field[1].val(url).hidden = !url;
+    id$('edit-title').innerText = editorTitle;
+    inputField[0].val(title).selectText().focus();
+    inputField[1].val(url).hidden = !url;
   }
 
-  function setHeight(box_num) {
-    var box_list = getBoxList(box_num);
+  function setHeight(boxNum) {
+    var boxList = getBoxList(boxNum);
 
-    var body_height;
-    var box_list_offset_top = box_list.getBoundingClientRect().top;
-    var list_height;
+    var bodyHeight;
+    var boxListOffsetTop = boxList.getBoundingClientRect().top;
+    var listHeight;
 
-    var max_list_height = MAX_HEIGHT - box_list_offset_top;
+    var maxListHeight = MAX_HEIGHT - boxListOffsetTop;
 
-    list_height = [box_list.scrollHeight, max_list_height].min();
-    box_list.style.maxHeight = list_height + 'px';
+    listHeight = [boxList.scrollHeight, maxListHeight].min();
+    boxList.style.maxHeight = listHeight + 'px';
 
-    body_height = list_height + box_list_offset_top;
-    HEIGHT_LIST[box_num] = [body_height, MAX_HEIGHT].min();
+    bodyHeight = listHeight + boxListOffsetTop;
+    HEIGHT_LIST[boxNum] = [bodyHeight, MAX_HEIGHT].min();
     modBodyHeight(getMaxHeight());
   }
 
@@ -1424,59 +1422,59 @@ chrome.storage.sync.get(null, function(STORAGE) {
     item.last().innerText = title || url || '';
   }
 
-  function setMenuPos(mouse_x, mouse_y) {
-    var menu_height = MENU.offsetHeight;
-    var menu_width = MENU.offsetWidth;
-    var now_height = getNowHeight();
+  function setMenuPos(mouseX, mouseY) {
+    var menuHeight = MENU.offsetHeight;
+    var menuWidth = MENU.offsetWidth;
+    var nowHeight = getNowHeight();
 
-    if (menu_height > now_height) {
-      modBodyHeight(menu_height);
+    if (menuHeight > nowHeight) {
+      modBodyHeight(menuHeight);
     }
 
-    if (menu_width > BODY.offsetWidth) {
-      modBodyWidth(menu_width);
+    if (menuWidth > BODY.offsetWidth) {
+      modBodyWidth(menuWidth);
     }
 
     setBottomRight(
       MENU,
-      now_height - menu_height - mouse_y,
-      getNowWidth() - menu_width - mouse_x
+      nowHeight - menuHeight - mouseY,
+      getNowWidth() - menuWidth - mouseX
     );
   }
 
   function setTooltip(item, title, url) {
-    var tooltip_arr = [];
+    var tooltipArr = [];
 
     if (TOOLTIP) {
-      tooltip_arr.push(title, url);
+      tooltipArr.push(title, url);
     }
 
     if (IS_SEARCHING) {
-      var breadcrumb_arr = [];
-      var getBreadcrumb = function(bread_id) {
-        _bookmark.get(bread_id, function(node) {
+      var breadcrumbArr = [];
+      var getBreadcrumb = function(breadId) {
+        _bookmark.get(breadId, function(node) {
           if (node === undefined) {
             return false;
           }
 
-          var item_info = node[0];
+          var itemInfo = node[0];
 
-          if (![item.id, '0'].hv(item_info.id)) {
-            breadcrumb_arr.unshift(item_info.title);
+          if (![item.id, '0'].hv(itemInfo.id)) {
+            breadcrumbArr.unshift(itemInfo.title);
           }
 
-          if (item_info.parentId !== undefined) {
-            getBreadcrumb(item_info.parentId);
+          if (itemInfo.parentId !== undefined) {
+            getBreadcrumb(itemInfo.parentId);
           } else {
-            tooltip_arr.unshift(breadcrumb_arr.join(' > '));
-            item.title = tooltip_arr.join('\n');
+            tooltipArr.unshift(breadcrumbArr.join(' > '));
+            item.title = tooltipArr.join('\n');
           }
         });
       };
 
       getBreadcrumb(item.id);
-    } else if (tooltip_arr.length > 0) {
-      item.title = tooltip_arr.join('\n');
+    } else if (tooltipArr.length > 0) {
+      item.title = tooltipArr.join('\n');
     }
   }
 
@@ -1494,21 +1492,21 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
   }
 
-  function sortByName(parent_id) {
-    _bookmark.getChildren(parent_id, function(child_list) {
-      var gen_bkmark_list = function() {
-        var new_bkmark_list = [
+  function sortByName(parentId) {
+    _bookmark.getChildren(parentId, function(childList) {
+      var genBkmarkList = function() {
+        var newBkmarkList = [
           [/* Separators */],
           [/* Folders */],
           [/* Bookmarks */]
         ];
-        separated_child_list.push(new_bkmark_list);
-        return new_bkmark_list;
+        separatedChildList.push(newBkmarkList);
+        return newBkmarkList;
       };
 
-      var new_child_list = [];
-      var separated_child_list = [];
-      var selected_child_list = gen_bkmark_list();
+      var newChildList = [];
+      var separatedChildList = [];
+      var selectedChildList = genBkmarkList();
 
       /**
        * Split all bookmarks into n main group,
@@ -1516,57 +1514,57 @@ chrome.storage.sync.get(null, function(STORAGE) {
        * Each main group contains 3 small groups
        * (Separators, Folders, Bookmarks)
        */
-      child_list.ascEach(function(bkmark) {
-        var selected_bkmark_list_num;
+      childList.ascEach(function(bkmark) {
+        var selectedBkmarkListNum;
         var url = bkmark.url;
 
         if (url) {
           if (url !== SEPARATE_THIS) {
             // Bookmarks
-            selected_bkmark_list_num = 2;
+            selectedBkmarkListNum = 2;
           } else {
             //  Separators
-            selected_bkmark_list_num = 0;
-            selected_child_list = gen_bkmark_list();
+            selectedBkmarkListNum = 0;
+            selectedChildList = genBkmarkList();
           }
         } else {
           // Folders
-          selected_bkmark_list_num = 1;
+          selectedBkmarkListNum = 1;
         }
 
-        selected_child_list[selected_bkmark_list_num].push(bkmark);
+        selectedChildList[selectedBkmarkListNum].push(bkmark);
       });
 
       // Concatenate all lists into single list
-      separated_child_list.ascEach(function(selected_child_list) {
-        selected_child_list.ascEach(function(bkmark_list) {
-          new_child_list = new_child_list.concat(sortByTitle(bkmark_list));
+      separatedChildList.ascEach(function(selectedChildList) {
+        selectedChildList.ascEach(function(bkmarkList) {
+          newChildList = newChildList.concat(sortByTitle(bkmarkList));
         });
       });
 
       // Sort bookmarks by Selection sort
-      new_child_list.ascEach(function(bkmark, index) {
-        var old_index = child_list.indexOf(bkmark);
+      newChildList.ascEach(function(bkmark, index) {
+        var oldIndex = childList.indexOf(bkmark);
 
-        if (old_index !== index) {
-          child_list.move(old_index, index);
+        if (oldIndex !== index) {
+          childList.move(oldIndex, index);
 
           _bookmark.move(bkmark.id, {
-            index: index + (index > old_index ? 1 : 0)
+            index: index + (index > oldIndex ? 1 : 0)
           });
         }
       });
     });
   }
 
-  function sortByTitle(bkmark_list) {
-    return bkmark_list.sort(function(bkmark1, bkmark2) {
+  function sortByTitle(bkmarkList) {
+    return bkmarkList.sort(function(bkmark1, bkmark2) {
       return bkmark1.title.localeCompare(bkmark2.title);
     });
   }
 
-  function updateBoxHeadTitle(box_num, title) {
-    var box = BOX[box_num];
+  function updateBoxHeadTitle(boxNum, title) {
+    var box = BOX[boxNum];
 
     if (box) {
       box.class$('head-title')[0].innerText = title;
