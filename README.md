@@ -52,7 +52,7 @@ Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG
 
    Display developer guide on terminal
 
-5. lint
+4. lint
    > gulp lint
 
    To lint
@@ -60,7 +60,7 @@ Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG
    - CoffeeScript code by [CoffeeLint](//github.com/clutchski/coffeelint)
    - Stylus code by [Stylint](//github.com/rossPatton/stylint)
 
-4. md
+5. md
    > gulp md --make file_name
 
    To generate markdown file on the current directory

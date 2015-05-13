@@ -7,10 +7,6 @@ $golden-gap-2x = $golden-gap * 2
 $headbox-height = 30px
 
 
-@font-face
-  font-family: ArchivoNarrow
-  src: url("/font/ArchivoNarrow-Regular.woff")
-
 body
   overflow: hidden
   -webkit-user-select: none
@@ -64,6 +60,13 @@ input[type="text"]
   &:hover
     background: #e44
 
+  &:before,
+  &:after
+    background: #fff
+    content: ""
+    position: absolute
+    -webkit-transform: rotate(45deg)
+
   &:before
     height: 12px
     left: 14px
@@ -75,13 +78,6 @@ input[type="text"]
     left: 9px
     top: 14px
     width: 12px
-
-  &:before,
-  &:after
-    background: #fff
-    content: ""
-    position: absolute
-    -webkit-transform: rotate(45deg)
 
 .head-title
   box-sizing: border-box

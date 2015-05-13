@@ -7,7 +7,6 @@ path = require('path')
 plugins = require('gulp-load-plugins')()
 yamljs = require('yamljs')
 
-
 # language config
 lang =
   css:
@@ -27,135 +26,133 @@ lang =
     dest: 'js'
 
 # predefined path
-compile_path = '__compile'
-dev_path = '__dev'
-resources_path = '_resources'
-
+compilePath = '__compile'
+devPath = '__dev'
+resourcesPath = '_resources'
 
 # language handlers
-compileLang = (lang_name, dest_dir, options) ->
-  this_lang = lang[lang_name]
+compileLang = (langName, destDir, options) ->
+  thisLang = lang[langName]
 
-  fs.mkdirsSync(path.join(dest_dir, this_lang.dest))
+  fs.mkdirsSync(path.join(destDir, thisLang.dest))
 
-  compileLangHandler(this_lang, getSourcePath(this_lang), dest_dir, options)
-compileLangHandler = (this_lang, source_path, dest_dir, options) ->
-  now_time = new Date().toLocaleTimeString()
-  console.log('[' + clc.blackBright(now_time) + '] ' +
-              clc.magenta(source_path) + ' is compiled')
+  compileLangHandler(thisLang, getSourcePath(thisLang), destDir, options)
 
-  gulp.src(source_path)
-    .pipe(plugins[this_lang.plugin](options))
-    .pipe(gulp.dest(path.join(dest_dir, this_lang.dest)))
-compileManifest = (dest_dir, update_fn) ->
-  manifest_json = yamljs.load(path.join(resources_path, 'manifest.yml'))
-  update_fn(manifest_json)
+compileLangHandler = (thisLang, sourcePath, destDir, options) ->
+  nowTime = new Date().toLocaleTimeString()
+  console.log('[' + clc.blackBright(nowTime) + '] ' +
+              clc.magenta(sourcePath) + ' is compiled')
 
-  dest_path = path.join(dest_dir, 'manifest.json')
-  fs.writeJSONSync(dest_path, manifest_json)
-getSourcePath = (this_lang) ->
-  path.join(this_lang.source, '*.' + this_lang.extName)
-watchLang = (lang_name, dest_dir, options) ->
-  this_lang = lang[lang_name]
+  gulp.src(sourcePath)
+    .pipe(plugins[thisLang.plugin](options))
+    .pipe(gulp.dest(path.join(destDir, thisLang.dest)))
 
-  compileLang(lang_name, dest_dir, options)
+compileManifest = (destDir, updateFn) ->
+  manifestJSON = yamljs.load(path.join(resourcesPath, 'manifest.yml'))
+  updateFn(manifestJSON)
 
-  gulp.watch(getSourcePath(this_lang), (event) ->
-    compileLangHandler(this_lang, event.path, dest_dir, options)
+  destPath = path.join(destDir, 'manifest.json')
+  fs.writeJSONSync(destPath, manifestJSON)
+
+getSourcePath = (thisLang) ->
+  path.join(thisLang.source, '*.' + thisLang.extName)
+
+watchLang = (langName, destDir, options) ->
+  thisLang = lang[langName]
+
+  compileLang(langName, destDir, options)
+
+  gulp.watch(getSourcePath(thisLang), (event) ->
+    compileLangHandler(thisLang, event.path, destDir, options)
   )
 
 # markdown handler
-getMarkdownData = (title_list) ->
-  md_source = path.join(resources_path, 'markdown')
+getMarkdownData = (titleList) ->
+  mdSource = path.join(resourcesPath, 'markdown')
 
-  data_list = []
-  for title in title_list
-    file_data = fs.readFileSync(path.join(md_source, "#{title}.md"), 'utf-8')
-    data_list.push("""
+  dataList = []
+  for title in titleList
+    fileData = fs.readFileSync(path.join(mdSource, "#{title}.md"), 'utf-8')
+    dataList.push("""
 ## #{title}
 
-#{file_data}
+#{fileData}
 """)
 
-  return data_list.join('\n\n')
+  return dataList.join('\n\n')
 
 # initiate the output folder
-initDir = (dir_path) ->
-  fs.removeSync(dir_path)
-  fs.mkdirSync(dir_path)
-
+initDir = (dirPath) ->
+  fs.removeSync(dirPath)
+  fs.mkdirSync(dirPath)
 
 # default when no task
 gulp.task('default', ['help'])
-
 
 # user guideline
 gulp.task('help', ->
   console.log('\n' + getMarkdownData(['Developer guide']) + '\n')
 )
 
-
 # compile and zip PmB
 gulp.task('compile-init', ->
-  version_check = (x) -> x is "#{parseInt(x)}" and 0 <= x <= 65535
+  versionCheck = (x) -> x is "#{parseInt(x)}" and 0 <= x <= 65535
 
   if argv.version is undefined or
      argv.version.split('.').length isnt 4 or
-     not argv.version.split('.').every(version_check)
+     not argv.version.split('.').every(versionCheck)
     throw Error('You need to input a version number x.y.z.ddmm,
                  each number between 0 - 65535')
 
-  initDir(compile_path)
+  initDir(compilePath)
 )
 
 gulp.task('compile-main', ['compile-init'], ->
-  compileLang('css', compile_path, compress: true)
-  compileLang('html', compile_path)
-  compileLang('js', compile_path)
+  compileLang('css', compilePath, compress: true)
+  compileLang('html', compilePath)
+  compileLang('js', compilePath)
 )
 
 gulp.task('compile-others', ['compile-init'], ->
-  for file_name in ['font', '_locales', 'LICENSE']
-    fs.copySync(file_name, path.join(compile_path, file_name))
-  fs.copySync(path.join(resources_path, 'img'), path.join(compile_path, 'img'))
+  for fileName in ['font', '_locales', 'LICENSE']
+    fs.copySync(fileName, path.join(compilePath, fileName))
+  fs.copySync(path.join(resourcesPath, 'img'), path.join(compilePath, 'img'))
 
-  compileManifest(compile_path, (manifest_json) ->
-    manifest_json.version = argv.version
+  compileManifest(compilePath, (manifestJSON) ->
+    manifestJSON.version = argv.version
   )
 )
 
 gulp.task('compile-zip', ['compile-main', 'compile-others'], ->
-  gulp.src(path.join(compile_path, '**'))
+  gulp.src(path.join(compilePath, '**'))
     .pipe(plugins.zip(argv.version + '.zip'))
     .pipe(gulp.dest('.'))
 )
 
 gulp.task('compile', ['compile-zip'], ->
-  fs.removeSync(compile_path) # useless after zipped
+  fs.removeSync(compilePath) # useless after zipped
 )
-
 
 # create a 'watched' folder for testing
 gulp.task('dev', ->
-  initDir(dev_path)
+  initDir(devPath)
 
-  watchLang('css', dev_path)
-  watchLang('html', dev_path, pretty: true)
+  watchLang('css', devPath)
+  watchLang('html', devPath, pretty: true)
 
-  for file_name in ['font', '_locales', lang.js.source]
-    source = path.join('..', file_name)
-    dest = path.join(dev_path, file_name)
+  for fileName in ['font', '_locales', lang.js.source]
+    source = path.join('..', fileName)
+    dest = path.join(devPath, fileName)
     fs.symlinkSync(source, dest, 'dir')
-  source = path.join('..', resources_path, 'img-dev')
-  dest = path.join(dev_path, 'img')
+  source = path.join('..', resourcesPath, 'img-dev')
+  dest = path.join(devPath, 'img')
   fs.symlinkSync(source, dest, 'dir')
 
-  compileManifest(dev_path, (manifest_json) ->
-    manifest_json.name += '(dev)'
-    manifest_json.version = '0.0.0.0'
+  compileManifest(devPath, (manifestJSON) ->
+    manifestJSON.name += '(dev)'
+    manifestJSON.version = '0.0.0.0'
   )
 )
-
 
 # Lints
 gulp.task('lint', ->
@@ -163,6 +160,7 @@ gulp.task('lint', ->
     .pipe(plugins.stylint())
 
   gulp.src(path.join(lang.js.source, '*'))
+    .pipe(plugins.jscs())
     .pipe(plugins.jshint())
     .pipe(plugins.jshint.reporter('jshint-stylish'))
 
@@ -171,14 +169,13 @@ gulp.task('lint', ->
     .pipe(plugins.coffeelint.reporter())
 )
 
-
 # generate markdown file
 gulp.task('md', ->
-  file_name = argv.make
+  fileName = argv.make
 
-  switch file_name
+  switch fileName
     when '__store.md'
-      file_data = getMarkdownData([
+      fileData = getMarkdownData([
         'Popup my Bookmarks'
         'Plan to do'
         'What you can help'
@@ -186,13 +183,13 @@ gulp.task('md', ->
       ])
 
       # remove first three lines
-      file_data = file_data.replace(/.+\n\n.+\n/, '')
+      fileData = fileData.replace(/.+\n\n.+\n/, '')
 
       # remove style of subheader
-      file_data = file_data.replace(/##### /g, '')
+      fileData = fileData.replace(/##### /g, '')
 
     when 'README.md'
-      file_data = getMarkdownData([
+      fileData = getMarkdownData([
         'Popup my Bookmarks'
         'Developer guide'
         'Plan to do'
@@ -201,10 +198,10 @@ gulp.task('md', ->
       ])
 
       # enlarge first header
-      file_data = file_data.replace(/^##/, '#')
+      fileData = fileData.replace(/^##/, '#')
 
     else
-      throw Error("Unknown markdown file: #{file_name}")
+      throw Error("Unknown markdown file: #{fileName}")
 
-  fs.writeFile(file_name, file_data)
+  fs.writeFile(fileName, fileData)
 )
