@@ -164,7 +164,7 @@ gulp.task('lint', ->
     .pipe(plugins.jshint())
     .pipe(plugins.jshint.reporter('jshint-stylish'))
 
-  gulp.src('**.coffee')
+  gulp.src('*.coffee')
     .pipe(plugins.coffeelint())
     .pipe(plugins.coffeelint.reporter())
 )
