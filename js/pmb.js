@@ -303,7 +303,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     var selectedItem = getSelectedItem();
 
     var boxNum = getParentBoxNum(selectedItem);
-    var prevBoxNum;
+    var prevBoxNum = boxNum - 1;
 
     var moveSelectedToBox = function(thisBoxNum) {
       selectedItem.rmClass('selected');
@@ -312,7 +312,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     if (selectedItem) {
       if (isLeft) {
-        prevBoxNum = boxNum - 1;
         if (prevBoxNum >= 0) {
           // select the parent folder item
           selectIndex = id$(BOX_PID[boxNum]).index();
