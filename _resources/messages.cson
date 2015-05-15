@@ -1,0 +1,324 @@
+addFolder:
+  locales:
+    en: "Add folder..."
+    zh_CN: "添加文件夹..."
+    zh_TW: "新增資料夾..."
+  description: "2013.01.23 | Refer to Chrome Bookmark manager"
+addPage:
+  locales:
+    en: "Add current page"
+    zh_CN: "添加当前网页"
+    zh_TW: "新增當前網頁"
+  description: "2013.01.23"
+addSeparator:
+  locales:
+    en: "Add separator"
+    zh_CN: "添加分割条"
+    zh_TW: "新增分隔線"
+  description: "2013.07.26 | Refer to Firefox Bookmark menu"
+alert_bookmarklet:
+  locales:
+    en: '''
+      You haven't enabled bookmarklet yet.
+      Do you want to enable it in options page?
+    '''
+    zh_CN: '''
+      你还没有启用书签小程序。
+      你要在设定页面启用它吗？
+    '''
+    zh_TW: '''
+      你還沒有啟用書籤小程式。
+      你要在設定頁面啟用它嗎？
+    '''
+  description: "2013.08.12"
+askOpenAll:
+  locales:
+    en: '''
+      You are about to open $bkmarkCount$ bookmarks.
+      Are you sure you want to continue?
+    '''
+    zh_CN: '''
+      你正尝试打开 $bkmarkCount$ 个书签。
+      你确定要继续吗？
+    '''
+    zh_TW: '''
+      你正嘗試開啟 $bkmarkCount$ 個書籤。
+      你確定要繼續嗎？
+    '''
+  description: "2013.01.29 | Refer to Firefox Bookmark menu"
+  placeholders:
+    bkmarkCount:
+      content: "$1"
+cancel:
+  locales:
+    en: "Cancel"
+    zh_CN: "取消"
+    zh_TW: "取消"
+  description: "2013.01.30"
+confirm:
+  locales:
+    en: "Confirm"
+    zh_CN: "确定"
+    zh_TW: "確定"
+  description: "2013.01.30"
+copy:
+  locales:
+    en: "Copy"
+    zh_CN: "复制"
+    zh_TW: "複製"
+  description: "2013.07.07 | Refer to Chrome Bookmark manager"
+cut:
+  locales:
+    en: "Cut"
+    zh_CN: "剪切"
+    zh_TW: "剪下"
+  description: "2013.07.07 | Refer to Chrome Bookmark manager"
+default:
+  locales:
+    en: "Default"
+    zh_CN: "默认"
+    zh_TW: "預設"
+  description: "2013.03.26"
+del:
+  locales:
+    en: "Delete"
+    zh_CN: "删除"
+    zh_TW: "刪除"
+  description: "2013.01.23 | Refer to Chrome Bookmark manager"
+edit:
+  locales:
+    en: "Edit..."
+    zh_CN: "修改..."
+    zh_TW: "編輯..."
+  description: "2013.01.23 | Refer to Chrome Bookmark manager"
+extDesc:
+  locales:
+    en: "A more efficient way to view and manage your bookmarks menu."
+    zh_CN: "更有效率地查看及管理你的书签选单。"
+    zh_TW: "更有效率地查看及管理你的書籤選單。"
+  description: "2013.01.21"
+newFolder:
+  locales:
+    en: "New folder"
+    zh_CN: "添加资料夹"
+    zh_TW: "新增資料夾"
+  description: "2013.01.28 | Refer to Chrome Bookmark manager"
+noBkmark:
+  locales:
+    en: "Right click here to add bookmarks :-)"
+    zh_CN: "在此按右键添加书签吧 :-)"
+    zh_TW: "在此按右鍵新增書籤吧 :-)"
+  description: "2013.01.22"
+noResult:
+  locales:
+    en: "No bookmarks are matched"
+    zh_CN: "没有对应的书签"
+    zh_TW: "沒有對應的書籤"
+  description: "2013.01.27"
+openAll:
+  locales:
+    en: "Open all bookmarks"
+    zh_CN: "打开所有书签"
+    zh_TW: "開啟所有書籤"
+  description: "2013.01.23 | Refer to Chrome Bookmark manager"
+openAllInI:
+  locales:
+    en: "Open all bookmarks in incognito window"
+    zh_CN: "在隐身窗口中打开所有书签"
+    zh_TW: "在無痕式視窗中開啟所有書籤"
+  description: "2013.01.23 | Refer to Chrome Bookmark manager"
+openAllInN:
+  locales:
+    en: "Open all bookmarks in new window"
+    zh_CN: "在新窗口中打开所有书签"
+    zh_TW: "在新視窗中開啟所有書籤"
+  description: "2013.01.23 | Refer to Chrome Bookmark manager"
+openInB:
+  locales:
+    en: "Open in background tab"
+    zh_CN: "在背景分页中打开"
+    zh_TW: "在背景分頁中開啟"
+  description: "2013.01.23"
+openInI:
+  locales:
+    en: "Open in incognito window"
+    zh_CN: "在隐身窗口中打开"
+    zh_TW: "在無痕式視窗中開啟"
+  description: "2013.01.23 | Refer to Chrome Bookmark manager"
+openInN:
+  locales:
+    en: "Open in new window"
+    zh_CN: "在新窗口中打开"
+    zh_TW: "在新視窗中開啟"
+  description: "2013.01.23 | Refer to Chrome Bookmark manager"
+opt_bookmarklet:
+  locales:
+    en: "Bookmarklet supported:<br>(Javascript Bookmark Script)"
+    zh_CN: "支持书签小程序:<br>(Javascript 书签脚本)"
+    zh_TW: "支援書籤小程式:<br>(Javascript 書籤腳本)"
+  description: "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
+opt_clickByLeft:
+  locales:
+    en: "Left Click to open bookmarks in:"
+    zh_CN: "左键打开书签於:"
+    zh_TW: "左鍵開啟書籤於:"
+  description: "2013.06.01"
+opt_clickByLeftCtrl:
+  locales:
+    en: "Ctrl + Left Click to open bookmarks in:"
+    zh_CN: "Ctrl + 左键打开书签於:"
+    zh_TW: "Ctrl + 左鍵開啟書籤於:"
+  description: "2013.06.01"
+opt_clickByLeftShift:
+  locales:
+    en: "Shift + Left Click to open bookmarks in:"
+    zh_CN: "Shift + 左键打开书签於:"
+    zh_TW: "Shift + 左鍵開啟書籤於:"
+  description: "2013.06.01"
+opt_clickByMiddle:
+  locales:
+    en: "Middle Click to open bookmarks in:"
+    zh_CN: "中键打开书签於:"
+    zh_TW: "中鍵開啟書籤於:"
+  description: "2013.06.01"
+opt_clickOption:
+  locales:
+    en: "current tab|current tab (w/o closing PmB)|new tab|background tab|background tab (w/o closing PmB)|new window|incognito window"
+    zh_CN: "当前分页|当前分页 (不关闭PmB)|新分页|背景分页|背景分页 (不关闭PmB)|新窗口|隐身窗口"
+    zh_TW: "當前分頁|當前分頁 (不關閉PmB)|新分頁|背景分頁|背景分頁 (不關閉PmB)|新視窗|無痕式視窗"
+  description: "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+opt_defExpand:
+  locales:
+    en: "Default expanded folder:"
+    zh_CN: "默认展开资料夹:"
+    zh_TW: "預設展開資料夾:"
+  description: "2013.07.30"
+opt_error:
+  locales:
+    en: "Wrong input on option $fieldNum$"
+    zh_CN: "错误输入: 设置$fieldNum$"
+    zh_TW: "錯誤輸入: 設定$fieldNum$"
+  description: "2013.03.27"
+  placeholders:
+    fieldNum:
+      content: "$1"
+opt_fontFamily:
+  locales:
+    en: "Font family:"
+    zh_CN: "字体:"
+    zh_TW: "字型:"
+  description: "2015.01.11"
+opt_fontSize:
+  locales:
+    en: "Font size:<br>(12 - 30px)"
+    zh_CN: "字体大小:<br>(12 - 30px)"
+    zh_TW: "字型大小:<br>(12 - 30px)"
+  description: "2013.07.26"
+opt_hideRootFolder:
+  locales:
+    en: "Hide root folder:"
+    zh_CN: "隐藏根目录:"
+    zh_TW: "隱藏根目錄:"
+  description: "2015.02.18 | Root folder means the top level folder"
+opt_maxResults:
+  locales:
+    en: "The maximum number of search results:<br>(10 - 200)"
+    zh_CN: "搜索结果的最大数量:<br>(10 - 200)"
+    zh_TW: "搜尋結果的最大數量:<br>(10 - 200)"
+  description: "2013.03.24"
+opt_no:
+  locales:
+    en: "No"
+    zh_CN: "否"
+    zh_TW: "否"
+  description: "2013.03.27"
+opt_opFolderBy:
+  locales:
+    en: "Open folders by Left Click:"
+    zh_CN: "通过点击左键打开资料夹:"
+    zh_TW: "通過點擊左鍵開啟資料夾:"
+  description: "2013.06.29"
+opt_rememberPos:
+  locales:
+    en: "Remember last position:"
+    zh_CN: "记住最后的位置:"
+    zh_TW: "記住最後的位置:"
+  description: "2014.02.24"
+opt_saved:
+  locales:
+    en: "Saved"
+    zh_CN: "已储存"
+    zh_TW: "已儲存"
+  description: "2013.03.27"
+opt_searchTarget:
+  locales:
+    en: "Search queries allowed:"
+    zh_CN: "搜索范围:"
+    zh_TW: "搜尋範圍:"
+  description: "2013.09.11"
+opt_searchTargetOpt:
+  locales:
+    en: "both title and URL|title only"
+    zh_CN: "标题及网址|标题"
+    zh_TW: "標題及網址|標題"
+  description: "2013.09.11"
+opt_setWidth:
+  locales:
+    en: "Panel width:<br>(100 - 399px)"
+    zh_CN: "面板宽度:<br>(100 - 399px)"
+    zh_TW: "面板寬度:<br>(100 - 399px)"
+  description: "2013.03.24"
+opt_tooltip:
+  locales:
+    en: "Show tooltip with detailed information of bookmarks:"
+    zh_CN: "提示书签的详细内容:"
+    zh_TW: "提示書籤的詳細內容:"
+  description: "2013.03.24"
+opt_warnOpenMany:
+  locales:
+    en: "Warn me when opening multiple tabs might slow down Chrome:"
+    zh_CN: "当打开多个分页可能使 Chrome 变慢时警告我:"
+    zh_TW: "當開啟多個分頁可能使 Chrome 變慢時警告我:"
+  description: "2013.04.26 | Refer to Firefox -> Options -> Tabs"
+opt_yes:
+  locales:
+    en: "Yes"
+    zh_CN: "是"
+    zh_TW: "是"
+  description: "2013.03.27"
+options:
+  locales:
+    en: "Options"
+    zh_CN: "设置"
+    zh_TW: "設定"
+  description: "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
+paste:
+  locales:
+    en: "Paste"
+    zh_CN: "粘贴"
+    zh_TW: "貼上"
+  description: "2013.07.7 | Refer to Chrome Bookmark manager"
+rename:
+  locales:
+    en: "Rename..."
+    zh_CN: "重命名..."
+    zh_TW: "重新命名..."
+  description: "2013.01.23 | Refer to Chrome Bookmark manager"
+search:
+  locales:
+    en: "Search"
+    zh_CN: "搜索"
+    zh_TW: "搜尋"
+  description: "2013.01.10"
+showInFolder:
+  locales:
+    en: "Show in folder"
+    zh_CN: "在文件夹中显示"
+    zh_TW: "在資料夾中顯示"
+  description: "2014.03.21 | Refer to Chrome Bookmark manager"
+sortByName:
+  locales:
+    en: "Sort by name"
+    zh_CN: "按名称排序"
+    zh_TW: "依名稱排序"
+  description: "2013.09.17 | Refer to Firefox Bookmark menu"

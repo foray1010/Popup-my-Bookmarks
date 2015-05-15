@@ -92,10 +92,6 @@
 		"message": "Open in new window",
 		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
 	},
-	"options": {
-		"message": "Options",
-		"description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
-	},
 	"opt_bookmarklet": {
 		"message": "Bookmarklet supported:<br>(Javascript Bookmark Script)",
 		"description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
@@ -133,13 +129,13 @@
 			}
 		}
 	},
-	"opt_fontSize": {
-		"message": "Font size:<br>(12 - 30px)",
-		"description": "2013.07.26"
-	},
 	"opt_fontFamily": {
 		"message": "Font family:",
 		"description": "2015.01.11"
+	},
+	"opt_fontSize": {
+		"message": "Font size:<br>(12 - 30px)",
+		"description": "2013.07.26"
 	},
 	"opt_hideRootFolder": {
 		"message": "Hide root folder:",
@@ -181,13 +177,17 @@
 		"message": "Show tooltip with detailed information of bookmarks:",
 		"description": "2013.03.24"
 	},
+	"opt_warnOpenMany": {
+		"message": "Warn me when opening multiple tabs might slow down Chrome:",
+		"description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
+	},
 	"opt_yes": {
 		"message": "Yes",
 		"description": "2013.03.27"
 	},
-	"opt_warnOpenMany": {
-		"message": "Warn me when opening multiple tabs might slow down Chrome:",
-		"description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
+	"options": {
+		"message": "Options",
+		"description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
 	},
 	"paste": {
 		"message": "Paste",
