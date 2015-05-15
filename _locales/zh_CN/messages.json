@@ -1,15 +1,15 @@
 {
 	"addFolder": {
 		"message": "添加文件夹...",
-		"description": "2013.03.28"
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
 	},
 	"addPage": {
 		"message": "添加当前网页",
-		"description": "2013.03.28"
+		"description": "2013.01.23"
 	},
 	"addSeparator": {
 		"message": "添加分割条",
-		"description": "2013.07.26"
+		"description": "2013.07.26 | Refer to Firefox Bookmark menu"
 	},
 	"alert_bookmarklet": {
 		"message": "你还没有启用书签小程序。\n你要在设定页面启用它吗？",
@@ -17,7 +17,7 @@
 	},
 	"askOpenAll": {
 		"message": "你正尝试打开 $bkmarkCount$ 个书签。\n你确定要继续吗？",
-		"description": "2013.03.28",
+		"description": "2013.01.29 | Refer to Firefox Bookmark menu",
 		"placeholders": {
 			"bkmarkCount": {
 				"content": "$1"
@@ -26,79 +26,75 @@
 	},
 	"cancel": {
 		"message": "取消",
-		"description": "2013.03.28"
+		"description": "2013.01.30"
 	},
 	"confirm": {
 		"message": "确定",
-		"description": "2013.03.28"
+		"description": "2013.01.30"
 	},
 	"copy": {
 		"message": "复制",
-		"description": "2013.07.7"
+		"description": "2013.07.07 | Refer to Chrome Bookmark manager"
 	},
 	"cut": {
 		"message": "剪切",
-		"description": "2013.07.7"
+		"description": "2013.07.07 | Refer to Chrome Bookmark manager"
 	},
 	"default": {
 		"message": "默认",
-		"description": "2013.03.28"
+		"description": "2013.03.26"
 	},
 	"del": {
 		"message": "删除",
-		"description": "2013.03.28"
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
 	},
 	"edit": {
 		"message": "修改...",
-		"description": "2013.03.28"
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
 	},
 	"extDesc": {
 		"message": "更有效率地查看及管理你的书签选单。",
-		"description": "2013.03.28"
+		"description": "2013.01.21"
 	},
 	"newFolder": {
 		"message": "添加资料夹",
-		"description": "2013.03.28"
+		"description": "2013.01.28 | Refer to Chrome Bookmark manager"
 	},
 	"noBkmark": {
 		"message": "在此按右键添加书签吧 :-)",
-		"description": "2013.03.28"
+		"description": "2013.01.22"
 	},
 	"noResult": {
 		"message": "没有对应的书签",
-		"description": "2013.03.28"
+		"description": "2013.01.27"
 	},
 	"openAll": {
 		"message": "打开所有书签",
-		"description": "2013.03.28"
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
 	},
 	"openAllInI": {
 		"message": "在隐身窗口中打开所有书签",
-		"description": "2013.03.28"
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
 	},
 	"openAllInN": {
 		"message": "在新窗口中打开所有书签",
-		"description": "2013.03.28"
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
 	},
 	"openInB": {
 		"message": "在背景分页中打开",
-		"description": "2013.03.28"
+		"description": "2013.01.23"
 	},
 	"openInI": {
 		"message": "在隐身窗口中打开",
-		"description": "2013.03.28"
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
 	},
 	"openInN": {
 		"message": "在新窗口中打开",
-		"description": "2013.03.28"
-	},
-	"options": {
-		"message": "设置",
-		"description": "2013.03.28"
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
 	},
 	"opt_bookmarklet": {
 		"message": "支持书签小程序:<br>(Javascript 书签脚本)",
-		"description": "2013.08.12"
+		"description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
 	},
 	"opt_clickByLeft": {
 		"message": "左键打开书签於:",
@@ -118,7 +114,7 @@
 	},
 	"opt_clickOption": {
 		"message": "当前分页|当前分页 (不关闭PmB)|新分页|背景分页|背景分页 (不关闭PmB)|新窗口|隐身窗口",
-		"description": "2013.06.01"
+		"description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
 	},
 	"opt_defExpand": {
 		"message": "默认展开资料夹:",
@@ -126,20 +122,20 @@
 	},
 	"opt_error": {
 		"message": "错误输入: 设置$fieldNum$",
-		"description": "2013.03.28",
+		"description": "2013.03.27",
 		"placeholders": {
 			"fieldNum": {
 				"content": "$1"
 			}
 		}
 	},
-	"opt_fontSize": {
-		"message": "字体大小:<br>(12 - 30px)",
-		"description": "2013.07.26"
-	},
 	"opt_fontFamily": {
 		"message": "字体:",
 		"description": "2015.01.11"
+	},
+	"opt_fontSize": {
+		"message": "字体大小:<br>(12 - 30px)",
+		"description": "2013.07.26"
 	},
 	"opt_hideRootFolder": {
 		"message": "隐藏根目录:",
@@ -147,11 +143,11 @@
 	},
 	"opt_maxResults": {
 		"message": "搜索结果的最大数量:<br>(10 - 200)",
-		"description": "2013.03.28"
+		"description": "2013.03.24"
 	},
 	"opt_no": {
 		"message": "否",
-		"description": "2013.03.28"
+		"description": "2013.03.27"
 	},
 	"opt_opFolderBy": {
 		"message": "通过点击左键打开资料夹:",
@@ -163,7 +159,7 @@
 	},
 	"opt_saved": {
 		"message": "已储存",
-		"description": "2013.03.28"
+		"description": "2013.03.27"
 	},
 	"opt_searchTarget": {
 		"message": "搜索范围:",
@@ -175,31 +171,35 @@
 	},
 	"opt_setWidth": {
 		"message": "面板宽度:<br>(100 - 399px)",
-		"description": "2013.03.28"
+		"description": "2013.03.24"
 	},
 	"opt_tooltip": {
 		"message": "提示书签的详细内容:",
-		"description": "2013.03.28"
-	},
-	"opt_yes": {
-		"message": "是",
-		"description": "2013.03.28"
+		"description": "2013.03.24"
 	},
 	"opt_warnOpenMany": {
 		"message": "当打开多个分页可能使 Chrome 变慢时警告我:",
-		"description": "2013.04.26"
+		"description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
+	},
+	"opt_yes": {
+		"message": "是",
+		"description": "2013.03.27"
+	},
+	"options": {
+		"message": "设置",
+		"description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
 	},
 	"paste": {
 		"message": "粘贴",
-		"description": "2013.07.7"
+		"description": "2013.07.7 | Refer to Chrome Bookmark manager"
 	},
 	"rename": {
 		"message": "重命名...",
-		"description": "2013.03.28"
+		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
 	},
 	"search": {
 		"message": "搜索",
-		"description": "2013.03.28"
+		"description": "2013.01.10"
 	},
 	"showInFolder": {
 		"message": "在文件夹中显示",
