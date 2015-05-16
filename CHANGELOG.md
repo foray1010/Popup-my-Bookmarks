@@ -6,6 +6,8 @@ Changes:
   - Increase minimum Chrome version from 20 to 26
   - More compact layout
   - 'Open all bookmarks' now ignore separators
+  - Close folder by clicking its folder item when using Left Click mode (suggested by Bram Jacob)
+  - Close folder by clicking its box shadow when using Left Click mode
 
 Improvements:
   - More precise drag indicator
