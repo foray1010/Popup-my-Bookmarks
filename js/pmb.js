@@ -186,7 +186,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         menuItem.hidden = hideParam[itemNum];
       });
 
-      modMenuText(isFolder(item));
+      modMenuText(isFolderItem(item));
 
       greyMenuItem([0, 1], item.id === '');
       greyMenuItem([2], COPY_CUT_ITEM.id === null);
@@ -519,7 +519,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         }
 
         // item cannot be the parent folder of itself
-        if (isntDragItem && isFolder(item)) {
+        if (isntDragItem && isFolderItem(item)) {
           openFolder(item.id);
         } else {
           resetBox(boxNum);
@@ -864,7 +864,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         if (EDITOR_CREATE) {
           createItemByMenuIntoView(title);
         } else {
-          if (!isFolder(TARGET_ITEM)) {
+          if (!isFolderItem(TARGET_ITEM)) {
             url = editorInput[1].value;
           }
 
@@ -956,7 +956,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
   }
 
-  function isFolder(item) {
+  function isFolderItem(item) {
     return item.data(DATATEXT_BOOKMARK_TYPE) === 'folder';
   }
 
@@ -1027,7 +1027,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       case 0:
       case 1:
       case 2:
-        openBkmarks(targetItemId, isFolder(TARGET_ITEM), menuItemNum);
+        openBkmarks(targetItemId, isFolderItem(TARGET_ITEM), menuItemNum);
         break;
 
       case 3: // Edit... & Rename...
@@ -1227,7 +1227,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function removeItem(itemId) {
-    var isFolder = isFolder(id$(itemId));
+    var isFolder = isFolderItem(id$(itemId));
     _bookmark[isFolder ? 'removeTree' : 'remove'](itemId);
   }
 
