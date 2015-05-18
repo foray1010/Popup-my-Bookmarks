@@ -330,7 +330,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function arrowUpDownHandler(isDown) {
-    var isMenuCovered = isMenuCovered();
     var itemList;
     var itemParent;
     var selectedItem = getSelectedItem();
@@ -340,7 +339,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     var nextSelectedItem;
     var origSelectedIndex;
 
-    if (isMenuCovered) {
+    if (isMenuCovered()) {
       itemParent = MENU;
     } else if (selectedItem) {
       itemParent = selectedItem.parentNode;
@@ -378,7 +377,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     if (nextSelectedItem) {
       nextSelectedItem.addClass('selected');
 
-      if (!isMenuCovered && !isItemInView(nextSelectedItem)) {
+      if (!isMenuCovered() && !isItemInView(nextSelectedItem)) {
         nextSelectedItem.scrollIntoView(!isDown);
       }
     }
