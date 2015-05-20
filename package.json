@@ -5,6 +5,7 @@
   "devDependencies": {
     "cli-color": "*",
     "coffee-script": "*",
+    "cson": "*",
     "fs-extra": "*",
     "gulp": "*",
     "gulp-coffeelint": "*",
@@ -17,7 +18,6 @@
     "gulp-uglify": "*",
     "gulp-zip": "*",
     "jshint-stylish": "*",
-    "yamljs": "*",
     "yargs": "*"
   },
   "author": "foray1010",

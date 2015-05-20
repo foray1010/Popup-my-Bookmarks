@@ -2,10 +2,10 @@ gulp = require('gulp')
 
 argv = require('yargs').argv
 clc = require('cli-color')
+cson = require('cson')
 fs = require('fs-extra')
 path = require('path')
 plugins = require('gulp-load-plugins')()
-yamljs = require('yamljs')
 
 # language config
 lang =
@@ -48,7 +48,7 @@ compileLangHandler = (thisLang, sourcePath, destDir, options) ->
     .pipe(gulp.dest(path.join(destDir, thisLang.dest)))
 
 compileManifest = (destDir, updateFn) ->
-  manifestJSON = yamljs.load(path.join(resourcesPath, 'manifest.yml'))
+  manifestJSON = cson.load(path.join(resourcesPath, 'manifest.cson'))
   updateFn(manifestJSON)
 
   destPath = path.join(destDir, 'manifest.json')
