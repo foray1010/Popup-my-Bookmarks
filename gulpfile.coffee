@@ -1,3 +1,5 @@
+'use strict'
+
 gulp = require('gulp')
 
 argv = require('yargs').argv
