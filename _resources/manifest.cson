@@ -16,12 +16,14 @@ browser_action:
   default_popup: 'popup.html'
 options_page: 'options.html'
 
-permissions:
-  - 'chrome://favicon/'
-  - 'bookmarks'
-  - 'storage'
-  - 'tabs'
+permissions: [
+  'chrome://favicon/'
+  'bookmarks'
+  'storage'
+  'tabs'
+]
 
-optional_permissions:
-  - 'http://*/'
-  - 'https://*/'
+optional_permissions: [
+  'http://*/'
+  'https://*/'
+]
