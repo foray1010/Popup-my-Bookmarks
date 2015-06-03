@@ -32,7 +32,7 @@
 
   // donation
   id$('donate-here').on('click', function() {
-    id$('donate-img').tag$('input')[2].click();
+    id$('donate-img').name$('submit')[0].click();
   });
 
   function checkOptions(storageObj) {
@@ -65,8 +65,8 @@
       .addClass('input-select-box');
 
     var optionInput = inputSelectBox.new$('input').attr({
-      'type': 'text',
-      'value': selectedValue
+      type: 'text',
+      value: selectedValue
     });
     var optionSelect = inputSelectBox.new$('select');
 

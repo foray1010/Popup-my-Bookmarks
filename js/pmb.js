@@ -919,29 +919,29 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     // set panel(#main, #sub) width
     CSS.set('.panel-width', {
-      'width': SET_WIDTH + 'px'
+      width: SET_WIDTH + 'px'
     });
 
     // set font style
     CSS.set('body', {
-      'font': fontSizePx + ' ' + fontFamily
+      font: fontSizePx + ' ' + fontFamily
     });
 
     if (FONT_SIZE > 16) {
       CSS.set({
         '.bookmark-item': {
-          'height': fontSizePx,
+          height: fontSizePx,
           'line-height': fontSizePx
         },
         '.icon': {
-          'width': fontSizePx
+          width: fontSizePx
         }
       });
     }
 
     // set separator height depend on item height
     CSS.set('.separator', {
-      'height': separatorHeightPx,
+      height: separatorHeightPx,
       'line-height': separatorHeightPx
     });
   }
