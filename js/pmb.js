@@ -63,7 +63,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   // attr: data's text
   var DATATEXT_BOX_NUM = 'boxNum';
-  var DATATEXT_BOOKMARK_TYPE = 'bookmark_type';
+  var DATATEXT_BOOKMARK_TYPE = 'bookmarkType';
 
   // HTML element
   var BODY = document.body;
