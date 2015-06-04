@@ -171,6 +171,13 @@
     const selectboxItemActive = 'selectbox-item-active';
     const widthOfButton = 100 / optionChoices.length;
 
+    // generate element needed
+    const selectbox = optionField.new$('div').addClass('selectbox');
+    const hiddenInput = selectbox.new$('input').attr('type', 'hidden');
+    const coverBox = selectbox.new$('div')
+      .addClass('selectbox-cover')
+      .css('width', widthOfButton + '%');
+
     const setActiveOption = function(optionButton) {
       // -2 to ignore the input and background element
       const buttonIndex = optionButton.index() - 2;
@@ -180,13 +187,6 @@
 
       hiddenInput.value = optionChoices[buttonIndex];
     };
-
-    // generate element needed
-    const selectbox = optionField.new$('div').addClass('selectbox');
-    const hiddenInput = selectbox.new$('input').attr('type', 'hidden');
-    const coverBox = selectbox.new$('div')
-      .addClass('selectbox-cover')
-      .css('width', widthOfButton + '%');
 
     optionChoices.ascEach(function(value) {
       const buttonText = typeof value !== 'boolean' ?
@@ -457,6 +457,7 @@
 
       optionPermissions.ascEach(function(permission) {
         const propName = permission.hv('://') ? 'origins' : 'permissions';
+
         permissionsObj[propName].push(permission);
       });
 

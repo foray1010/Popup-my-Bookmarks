@@ -516,6 +516,7 @@
           thisEventFn(e);
           _this.removeEventListener(thisEventName, onceEventFn);
         };
+
         _this.addEventListener(thisEventName, onceEventFn, useCapture);
       } :
       function(thisEventName, thisEventFn) {

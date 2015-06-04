@@ -283,7 +283,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
   });
 
-  // functions
   function arrowLeftRightHandler(isLeft) {
     if (isMenuCovered()) {
       return false;
@@ -292,6 +291,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     const selectedItem = getSelectedItem();
 
     const boxNum = getParentBoxNum(selectedItem);
+
     const prevBoxNum = boxNum - 1;
 
     const moveSelectedToBox = function(thisBoxNum) {
@@ -443,6 +443,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function createItemByMenuIntoView(title, url) {
     createItemByMenu(title, url, function(itemInfo) {
       const item = id$(itemInfo.id);
+
       if (!isItemInView(item)) {
         item.scrollIntoView(false);
       }
@@ -459,9 +460,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
       // move the dragged item to the location of DRAG_PLACE
       if (DRAG_PLACE.parentNode !== PRELOAD) {
-        const target = event.target;
         const bkmarkIndex = getItemIndex(DRAG_PLACE) - 1;
         const boxNum = getParentBoxNum(DRAG_PLACE);
+        const target = event.target;
 
         _bookmark.move(target.id, {
           parentId: BOX_PID[boxNum],
@@ -553,7 +554,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     if (selectedItem) {
       selectedItem.click();
     } else if (IS_SEARCHING) {
-      // enter the first bkmark when press return key
+      // enter the first bookmark when press return key
       getBoxList(0).first().click();
     }
   }
@@ -611,7 +612,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function genFirstList() {
     _bookmark.getChildren('0', function(rootTreeInfo) {
       rootTreeInfo.ascEach(function(stem) {
-        const stemId = stem.id * 1;
+        const stemId = 1 * stem.id;
+
         if (stemId === STORAGE.defExpand ||
             STORAGE.hideRootFolder.hv(stemId)) {
           return true;
@@ -629,10 +631,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function genItem(boxNum, itemInfo) {
     const newItem = ITEM.cloneTo(getBoxList(boxNum)).prop('id', itemInfo.id);
-
-    const icon = newItem.first();
     const title = itemInfo.title;
     const url = itemInfo.url;
+
+    const icon = newItem.first();
 
     setItemText(newItem, title, url);
 
@@ -714,9 +716,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function getLastScrollTop() {
     const lastScrollTop = [];
+
     BOX.ascEach(function(box, boxNum) {
       lastScrollTop[boxNum] = getBoxList(boxNum).scrollTop;
     });
+
     return lastScrollTop;
   }
 
@@ -756,6 +760,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function greyMenuItem(greyArr, isGrey) {
     const menu = MENU.children[2];
+
     greyArr.ascEach(function(itemNum) {
       menu.children[itemNum].toggleClass('grey-item', isGrey);
     });
@@ -901,10 +906,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function initStyleOptions() {
-    const fontSizePx = STORAGE.fontSize + 'px';
-    // -2 for border width
-    const separatorHeightPx = (ITEM_HEIGHT / 2) - 2 + 'px';
-
     // if the font family's name has whitespace, use quote to embed it
     const fontFamily = STORAGE.fontFamily.split(',')
       .map(function(x) {
@@ -915,6 +916,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
         return x;
       })
       .join(',');
+
+    const fontSizePx = STORAGE.fontSize + 'px';
+
+    // -2 for border width
+    const separatorHeightPx = (ITEM_HEIGHT / 2) - 2 + 'px';
 
     // set panel(#main, #sub) width
     CSS.set('.panel-width', {
@@ -985,6 +991,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       LAST_BOX_PID.ascEach(function(folderId, boxNum) {
         const fnAfterOpen = function() {
           const lastScrollTop = LAST_SCROLL_TOP[boxNum];
+
           if (lastScrollTop) {
             getBoxList(boxNum).scrollTop = lastScrollTop;
           }
@@ -1103,6 +1110,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       if (isFolder) {
         node[0].children.ascEach(function(itemInfo) {
           const url = itemInfo.url;
+
           if (url && url !== SEPARATE_THIS) {
             urlList.push(url);
           }
@@ -1194,6 +1202,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function pasteItem(itemId) {
     if (COPY_CUT_ITEM.isCut) {
       const boxNum = getParentBoxNum(TARGET_ITEM);
+
       _bookmark.move(itemId, {
         parentId: BOX_PID[boxNum],
         index: getItemIndex(TARGET_ITEM)
@@ -1227,6 +1236,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function removeItem(itemId) {
     const isFolder = isFolderItem(id$(itemId));
+
     _bookmark[isFolder ? 'removeTree' : 'remove'](itemId);
   }
 
@@ -1451,6 +1461,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     if (IS_SEARCHING) {
       const breadcrumbArr = [];
+
       const getBreadcrumb = function(breadId) {
         _bookmark.get(breadId, function(node) {
           if (node === undefined) {
