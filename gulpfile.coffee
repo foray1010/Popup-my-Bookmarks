@@ -13,17 +13,18 @@ plugins = require('gulp-load-plugins')()
 lang =
   css:
     extName: 'styl'
-    plugin: 'stylus'
+    compiler: 'stylus'
     source: 'css'
     dest: 'css'
   html:
     extName: 'jade'
-    plugin: 'jade'
+    compiler: 'jade'
     source: 'html'
     dest: '.'
   js:
     extName: 'js'
-    plugin: 'uglify'
+    compiler: 'babel'
+    minifier: 'uglify'
     source: 'js'
     dest: 'js'
 
@@ -41,12 +42,24 @@ compileLang = (langName, destDir, options) ->
   compileLangHandler(thisLang, getSourcePath(thisLang), destDir, options)
 
 compileLangHandler = (thisLang, sourcePath, destDir, options) ->
+  compilerPipe = plugins[thisLang.compiler](options)
+  hvMinifier = !!plugins[thisLang.minifier]
   nowTime = new Date().toLocaleTimeString()
+
+  minifierPipe =
+    if hvMinifier
+      plugins[thisLang.minifier]()
+    else
+      # as gulp-if require child action,
+      # this action will never been triggered
+      compilerPipe
+
   console.log('[' + clc.blackBright(nowTime) + '] ' +
               clc.magenta(sourcePath) + ' is compiled')
 
   gulp.src(sourcePath)
-    .pipe(plugins[thisLang.plugin](options))
+    .pipe(compilerPipe)
+    .pipe(plugins.if(hvMinifier, minifierPipe))
     .pipe(gulp.dest(path.join(destDir, thisLang.dest)))
 
 compileManifest = (destDir, updateFn) ->
@@ -141,8 +154,9 @@ gulp.task('dev', ->
 
   watchLang('css', devPath)
   watchLang('html', devPath, pretty: true)
+  watchLang('js', devPath)
 
-  for fileName in ['font', '_locales', lang.js.source]
+  for fileName in ['font', '_locales']
     source = path.join('..', fileName)
     dest = path.join(devPath, fileName)
     fs.symlinkSync(source, dest, 'dir')
@@ -162,9 +176,9 @@ gulp.task('lint', ->
     .pipe(plugins.stylint())
 
   gulp.src(path.join(lang.js.source, '*'))
-    .pipe(plugins.jscs())
-    .pipe(plugins.jshint())
-    .pipe(plugins.jshint.reporter('jshint-stylish'))
+    .pipe(plugins.eslint())
+    .pipe(plugins.eslint.format())
+    .pipe(plugins.eslint.failAfterError())
 
   gulp.src('*.coffee')
     .pipe(plugins.coffeelint())

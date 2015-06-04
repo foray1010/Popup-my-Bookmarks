@@ -1,24 +1,27 @@
-'use strict';
-!function(window, document, Math, Object, undefined) {
-  var EMPTY_FUNC = function() {};
-  var OBJECT_PROTO = Object.prototype;
-  var TIMEOUT_HANDLER = {};
+(function(window, document, Math, Object) {
+  const EMPTY_FUNC = function() {};
+  const OBJECT_PROTO = Object.prototype;
+  const TIMEOUT_HANDLER = {};
 
   // Object.prototype
   OBJECT_PROTO.propEach = function(fn) {
-    var _this = this;
+    const _this = this;
 
-    var propArr = Object.keys(_this);
-    var propName;
+    const propArr = Object.keys(_this);
+
+    let propName;
+
     while (propName = propArr.shift()) {
       fn(propName, _this[propName]);
     }
   };
 
   OBJECT_PROTO.prop = function(val1, val2) {
-    var _this = this;
+    const _this = this;
+
     if (typeof val1 === 'object') {
-      var isntDeepScan = val2 !== true;
+      const isntDeepScan = val2 !== true;
+
       val1.propEach(function(dna, heredity) {
         if (isntDeepScan ||
             typeof heredity !== 'object' ||
@@ -31,14 +34,16 @@
     } else {
       _this[val1] = val2;
     }
+
     return _this;
   };
 
   OBJECT_PROTO.prop({
     ascEach: function(fn, maxLength) {
-      var _this = this;
-      var end = _this.length;
-      var i = 0;
+      const _this = this;
+
+      let end = _this.length;
+      let i = 0;
 
       if (end > maxLength) {
         end = maxLength;
@@ -47,8 +52,9 @@
       while (i < end && fn(_this[i], i++) !== false) {}
     },
     descEach: function(fn, end) {
-      var _this = this;
-      var i = _this.length;
+      const _this = this;
+
+      let i = _this.length;
 
       if (end === undefined || end < 0) {
         end = 0;
@@ -57,7 +63,8 @@
       while (--i >= end && fn(_this[i], i) !== false) {}
     },
     hv: function(i) {
-      var _this = this;
+      const _this = this;
+
       return _this.indexOf ? _this.indexOf(i) >= 0 : _this[i] !== undefined;
     },
     isEmpty: function() {
@@ -66,22 +73,22 @@
 
     // Event Management
     clickByButton: function(allowButton, fn) {
-      var _this = this;
+      const _this = this;
+
       _this.on('click', function(event) {
         if (allowButton === event.button) {
           fn.call(_this, event);
         }
       });
+
       return _this;
     },
     hoverTimeout: function(fn, timeout, xyRange, isInsideRange) {
-      var _this = this;
-      var eventTimer;
-      var mouseXY;
+      const _this = this;
 
-      var mousemoveFn = function(mouseXYOrig) {
-        var isTriggerPoint = function(axis) {
-          var displacement = Math.abs(mouseXY[axis] - mouseXYOrig[axis]);
+      const mousemoveFn = function(mouseXYOrig) {
+        const isTriggerPoint = function(axis) {
+          const displacement = Math.abs(mouseXY[axis] - mouseXYOrig[axis]);
           return displacement < xyRange === isInsideRange;
         };
 
@@ -98,6 +105,9 @@
           }
         }, timeout);
       };
+
+      let eventTimer;
+      let mouseXY;
 
       if (isInsideRange === undefined) {
         isInsideRange = true;
@@ -125,7 +135,8 @@
       return eventHandler(this, arguments, true);
     },
     ready: function(fn) {
-      var _this = this;
+      const _this = this;
+
       if (/^loaded|^c/.test(_this.readyState)) {
         fn();
       } else {
@@ -161,9 +172,10 @@
       return this;
     },
     after: function(param1) {
-      var _this = this;
-      var father;
-      var nextNextSibling;
+      const _this = this;
+
+      let father;
+      let nextNextSibling;
 
       if (typeof param1 === 'number') {
         father = _this.parentNode;
@@ -178,24 +190,29 @@
         _this.appendTo(father);
     },
     attr: function(val1, val2) {
-      var _this = this;
-      var _action = function(name, val) {
+      const _this = this;
+
+      const _action = function(name, val) {
         _this.setAttribute(name, val);
       };
+
       if (val2 === undefined) {
         val1.propEach(_action);
       } else {
         _action(val1, val2);
       }
+
       return _this;
     },
     appendTo: function(father) {
       return father.appendChild(this);
     },
     before: function(param1) {
-      var _this = this;
-      var father;
-      var sons;
+      const _this = this;
+
+      let father;
+      let sons;
+
       if (typeof param1 === 'number') {
         father = _this.parentNode;
         sons = father.children;
@@ -205,41 +222,46 @@
       } else {
         father = param1.parentNode;
       }
+
       return father.insertBefore(_this, param1);
     },
     cloneTo: function(father, grandson) {
       return this.cloneNode(grandson !== false).appendTo(father);
     },
-    data: function(name, val) {
-      var _this = this;
-      var setDataset = function(name, val) {
+    data: function(param1, param2) {
+      const _this = this;
+
+      const setDataset = function(name, val) {
         _this.dataset[name] = val;
       };
 
-      if (typeof name === 'object') {
-        name.propEach(setDataset);
+      if (typeof param1 === 'object') {
+        param1.propEach(setDataset);
         return _this;
       }
 
-      if (val !== undefined) {
-        if (val === null) {
-          delete _this.dataset[name];
+      if (param2 !== undefined) {
+        if (param2 === null) {
+          delete _this.dataset[param1];
         } else {
-          setDataset(name, val);
+          setDataset(param1, param2);
         }
+
         return _this;
       }
 
-      return _this.dataset[name];
+      return _this.dataset[param1];
     },
     empty: function() {
-      var father = this;
-      var sacrifice;
-      while (sacrifice = father.firstChild) {
-        father.removeChild(sacrifice);
+      const _this = this;
+
+      let sacrifice;
+
+      while (sacrifice = _this.firstChild) {
+        _this.removeChild(sacrifice);
       }
 
-      return father;
+      return _this;
     },
     first: function() {
       return this.firstElementChild;
@@ -254,13 +276,13 @@
       return this.previousElementSibling;
     },
     selectText: function() {
-      var _this = this;
+      const _this = this;
 
       if (_this.tagName === 'INPUT') {
         _this.setSelectionRange(0, _this.value.length);
       } else {
-        var range = document.createRange();
-        var selection = window.getSelection();
+        const range = document.createRange();
+        const selection = window.getSelection();
 
         range.selectNodeContents(_this);
 
@@ -286,23 +308,29 @@
       return classListFn(this, 'remove', className);
     },
     toggleClass: function(className, switcher) {
-      var classFnName = switcher === undefined ?
-        'toggle' :
-        switcher ?
-          'add' :
-          'remove';
+      let classFnName;
+
+      if (switcher === undefined) {
+        classFnName = 'toggle';
+      } else if (switcher) {
+        classFnName = 'add';
+      } else {
+        classFnName = 'remove';
+      }
+
       return classListFn(this, classFnName, className);
     },
 
     // Style Handler
     css: function(val1, val2) {
-      var _this = this;
+      const _this = this;
 
       if (typeof val1 !== 'object' && val2 === undefined) {
         return window.getComputedStyle(_this)[val1];
       }
 
       _this.style.prop(val1, val2);
+
       return _this;
     },
     hide: function() {
@@ -310,7 +338,7 @@
       return this;
     },
     show: function() {
-      var _this = this;
+      const _this = this;
 
       _this.hidden = false;
       if (_this.style.display === 'none') {
@@ -325,8 +353,9 @@
       return document.activeElement === this;
     },
     index: function() {
-      var indexNum = 0;
-      var indexer = this;
+      let indexer = this;
+      let indexNum = 0;
+
       while (indexer = indexer.prev()) {
         indexNum++;
       }
@@ -336,13 +365,13 @@
 
     // Animation
     anim: function(styleName, styleValue) {
-      var _args = argumentsConstructor(
+      const _this = this;
+
+      const _args = argumentsConstructor(
         arguments, ['number', 'function'], [400, EMPTY_FUNC]
       );
-      var duration = _args[0];
-      var completeFn = _args[1];
-
-      var _this = this;
+      const duration = _args[0];
+      const completeFn = _args[1];
 
       _this.style.transition = styleName + ' ' + duration + 'ms';
 
@@ -355,14 +384,14 @@
       _this.style[styleName] = styleValue;
     },
     fadeOut: function() {
-      var _args = argumentsConstructor(
+      const _this = this;
+
+      const _args = argumentsConstructor(
         arguments, ['number', 'boolean', 'function'], [400, false, EMPTY_FUNC]
       );
-      var duration = _args[0];
-      var isRemoveWhenDone = _args[1];
-      var completeFn = _args[2];
-
-      var _this = this;
+      const duration = _args[0];
+      const isRemoveWhenDone = _args[1];
+      const completeFn = _args[2];
 
       _this.anim('opacity', 0, duration, function() {
         if (isRemoveWhenDone) {
@@ -385,45 +414,54 @@
       return Math.min.apply(Math, this);
     },
     merge: function(arr) {
-      var arr2 = [];
+      const arr2 = [];
+
       this.ascEach(function(i) {
         if (arr.hv(i)) {
           arr2.push(i);
         }
       });
+
       return arr2;
     },
     diff: function(arr) {
-      var arr2 = [];
+      const arr2 = [];
+
       this.ascEach(function(i) {
         if (!arr.hv(i)) {
           arr2.push(i);
         }
       });
+
       return arr2;
     },
     move: function(oldIndex, newIndex) {
       this.splice(newIndex, 0, this.splice(oldIndex, 1)[0]);
     },
     rm: function(removedItem) {
-      var _this = this;
+      const _this = this;
+
       _this.splice(_this.indexOf(removedItem), 1);
+
       return _this;
     }
   });
 
   // String.prototype
   String.prototype.repeat = function(times) {
-    var result = '';
-    var string = this;
+    let result = '';
+    let string = this;
+
     while (times) {
       if (times & 1) {
         result += string;
       }
+
       if (times >>= 1) {
         string += string;
       }
     }
+
     return result;
   };
 
@@ -434,17 +472,18 @@
     }
 
     // remove the non-optional arguments
-    var argsSliceNum = args.length - typePatterns.length;
+    const argsSliceNum = args.length - typePatterns.length;
+    const returnList = [];
+
+    let argIndex = 0;
+
     if (argsSliceNum > 0) {
       args = [].slice.call(args, argsSliceNum);
     }
 
-    var argIndex = 0;
-    var returnList = [];
-
     typePatterns.ascEach(function(expectedType, typeIndex) {
-      var thisArg = args[argIndex];
-      var thisType = typeof thisArg;
+      const thisArg = args[argIndex];
+      const thisType = typeof thisArg;
 
       if (thisType === expectedType) {
         returnList.push(thisArg);
@@ -463,17 +502,17 @@
   }
 
   function eventHandler(_this, origArgs, isOnce) {
-    var _args = argumentsConstructor(
+    const _args = argumentsConstructor(
       origArgs, ['object', 'string', 'function', 'boolean']
     );
-    var events = _args[0];
-    var eventName = _args[1];
-    var eventFn = _args[2];
-    var useCapture = _args[3];
+    const events = _args[0];
+    const eventName = _args[1];
+    const eventFn = _args[2];
+    const useCapture = _args[3];
 
-    var addEvent = isOnce ?
+    const addEvent = isOnce ?
       function(thisEventName, thisEventFn) {
-        var onceEventFn = function(e) {
+        const onceEventFn = function(e) {
           thisEventFn(e);
           _this.removeEventListener(thisEventName, onceEventFn);
         };
@@ -496,7 +535,8 @@
   window.prop({
     initTimeout: function(timeoutName, fn, timeout) {
       clearTimeout(TIMEOUT_HANDLER[timeoutName]);
-      return TIMEOUT_HANDLER[timeoutName] = setTimeout(fn, timeout);
+      TIMEOUT_HANDLER[timeoutName] = setTimeout(fn, timeout);
+      return TIMEOUT_HANDLER[timeoutName];
     },
 
     // get element
@@ -521,8 +561,8 @@
 
     // set element
     update$: function(swelldom, vogue, catwalk, maxModels) {
-      var outdatedList = [];
-      var updatedList = [];
+      const outdatedList = [];
+      const updatedList = [];
 
       swelldom.children.ascEach(function(jeans) {
         if (jeans.id !== '') {
@@ -549,93 +589,26 @@
       });
     },
 
-    // AJAX
-    AJAX: (function() {
-      var genQueryString = function(data) {
-        var query = [];
-        for (var key in data) {
-          query.push(
-            encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
-          );
-        }
-
-        return query.join('&');
-      };
-
-      var sendAJAX = function(method, data, options) {
-        //// preassign value to options
-        var async = options.async !== undefined ? options.async : true;
-        var responseType = options.type;
-        var url = options.url;
-
-        var complete = options.complete || EMPTY_FUNC;
-        var error = options.error || EMPTY_FUNC;
-        var success = options.success || EMPTY_FUNC;
-        ////
-
-        var xmlhttp = new XMLHttpRequest();
-
-        xmlhttp.open(method, url, async);
-
-        if (responseType) {
-          xmlhttp.responseType = responseType;
-        }
-
-        if (method === 'POST') {
-          xmlhttp.setRequestHeader(
-            'Content-type',
-            'application/x-www-form-urlencoded'
-          );
-        }
-
-        xmlhttp.onreadystatechange = function() {
-          if (xmlhttp.readyState === 4) {
-            var response = xmlhttp.response;
-
-            if (xmlhttp.status === 200) {
-              success(response);
-            } else {
-              error(response);
-            }
-
-            complete();
-          }
-        };
-
-        xmlhttp.send(data);
-      };
-
-      return {
-        get: function(options) {
-          var querystring = genQueryString(options.data);
-          if (querystring) {
-            options.url += '?' + querystring;
-          }
-
-          sendAJAX('GET', null, options);
-        },
-        post: function(options) {
-          var querystring = genQueryString(options.data);
-
-          sendAJAX('POST', querystring, options);
-        }
-      };
-    })(),
-
     // set or unset CSS
     CSS: (function() {
-      var getSheet = function() {
-        var _jetsCss = '_jets-css';
-        var styleElement = id$(_jetsCss);
+      const getSheet = function() {
+        const _jetsCss = '_jets-css';
+
+        let styleElement = id$(_jetsCss);
+
         if (!styleElement) {
           styleElement = document.head.new$('style').prop('id', _jetsCss);
         }
+
         return styleElement.sheet;
       };
 
-      var set = function(param1, param2) {
-        var _action = function(styleSelector, styleList) {
-          var styleValue = '';
+      const set = function(param1, param2) {
+        const sheet = getSheet();
+
+        const _action = function(styleSelector, styleList) {
+          let styleValue = '';
+
           styleList.propEach(function(propName, propValue) {
             styleValue += propName + ':' + propValue + ';';
           });
@@ -645,7 +618,6 @@
             sheet.cssRules.length
           );
         };
-        var sheet = getSheet();
 
         if (param2 === undefined) {
           param1.propEach(_action);
@@ -654,8 +626,8 @@
         }
       };
 
-      var unsetAll = function() {
-        var sheet = getSheet();
+      const unsetAll = function() {
+        const sheet = getSheet();
 
         while (sheet.cssRules[0]) {
           sheet.deleteRule(0);
@@ -668,4 +640,4 @@
       };
     })()
   });
-}(window, document, Math, Object);
+})(window, document, Math, Object);

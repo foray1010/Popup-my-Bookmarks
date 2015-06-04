@@ -1,16 +1,15 @@
-'use strict';
-!function(window, document, undefined) {
+(function(window, document) {
   // shorter function
-  var _getMsg = chrome.i18n.getMessage;
-  var _storage = chrome.storage.sync;
-
-  // global variables
-  var OPTIONS;
+  const _getMsg = chrome.i18n.getMessage;
+  const _storage = chrome.storage.sync;
 
   // elements
-  var CONTAINER = id$('container');
-  var OPTIONS_BOX = id$('opt-box');
-  var OPTIONS_BUTTON = id$('opt-button').tag$('button');
+  const CONTAINER = id$('container');
+  const OPTIONS_BOX = id$('opt-box');
+  const OPTIONS_BUTTON = id$('opt-button').tag$('button');
+
+  // global variables
+  let OPTIONS;
 
   // set HTML title
   document.title = _getMsg('options') + ' - ' + document.title;
@@ -36,11 +35,11 @@
   });
 
   function checkOptions(storageObj) {
-    var newOptions = {};
+    const newOptions = {};
 
     OPTIONS.ascEach(function(option) {
-      var optionDefaultValue = option.defaultValue;
-      var optionName = option.name;
+      const optionDefaultValue = option.defaultValue;
+      const optionName = option.name;
 
       if (storageObj[optionName] === undefined) {
         storageObj[optionName] = optionDefaultValue;
@@ -61,14 +60,14 @@
   }
 
   function genInputSelectBox(optionField, optionChoices, selectedValue) {
-    var inputSelectBox = optionField.new$('div')
+    const inputSelectBox = optionField.new$('div')
       .addClass('input-select-box');
 
-    var optionInput = inputSelectBox.new$('input').attr({
+    const optionInput = inputSelectBox.new$('input').attr({
       type: 'text',
       value: selectedValue
     });
-    var optionSelect = inputSelectBox.new$('select');
+    const optionSelect = inputSelectBox.new$('select');
 
     optionChoices.ascEach(function(choice) {
       optionSelect.new$('option').prop({
@@ -86,8 +85,8 @@
   }
 
   function genMsgBoxWhenConfirm(msgText) {
-    var optMsgBox = id$('opt-msg-box').empty();
-    var msgBox = new$('span')
+    const optMsgBox = id$('opt-msg-box').empty();
+    const msgBox = new$('span')
       .addText(msgText)
       .appendTo(optMsgBox);
 
@@ -101,16 +100,15 @@
       checkOptions(storageObj);
 
       OPTIONS.ascEach(function(option) {
-        var optionName = option.name;
-        var optionChoices = option.choices;
+        const optionBox = OPTIONS_BOX.new$('div');
+        const optionName = option.name;
+        const optionChoices = option.choices;
 
-        var optionValue = storageObj[optionName];
+        const optionDesc = optionBox.new$('div').addClass('opt-desc');
+        const optionField = optionBox.new$('div').addClass('opt-input');
+        const optionValue = storageObj[optionName];
 
-        var optionBox = OPTIONS_BOX.new$('div');
-
-        var optionDesc = optionBox.new$('div').addClass('opt-desc');
-        var optionField = optionBox.new$('div').addClass('opt-input');
-        var optionInput;
+        let optionInput;
 
         optionDesc.innerHTML = _getMsg('opt_' + optionName);
 
@@ -170,12 +168,12 @@
   }
 
   function genSelectBox(optionField, optionChoices, selectedValue) {
-    var selectboxItemActive = 'selectbox-item-active';
-    var widthOfButton = 100 / optionChoices.length;
+    const selectboxItemActive = 'selectbox-item-active';
+    const widthOfButton = 100 / optionChoices.length;
 
-    var setActiveOption = function(optionButton) {
+    const setActiveOption = function(optionButton) {
       // -2 to ignore the input and background element
-      var buttonIndex = optionButton.index() - 2;
+      const buttonIndex = optionButton.index() - 2;
 
       optionButton.addClass(selectboxItemActive);
       coverBox.style.left = buttonIndex * widthOfButton + '%';
@@ -183,19 +181,18 @@
       hiddenInput.value = optionChoices[buttonIndex];
     };
 
-    //// generate element needed
-    var selectbox = optionField.new$('div').addClass('selectbox');
-    var hiddenInput = selectbox.new$('input').attr('type', 'hidden');
-    var coverBox = selectbox.new$('div')
+    // generate element needed
+    const selectbox = optionField.new$('div').addClass('selectbox');
+    const hiddenInput = selectbox.new$('input').attr('type', 'hidden');
+    const coverBox = selectbox.new$('div')
       .addClass('selectbox-cover')
       .css('width', widthOfButton + '%');
-    ////
 
     optionChoices.ascEach(function(value) {
-      var buttonText = typeof value !== 'boolean' ?
+      const buttonText = typeof value !== 'boolean' ?
         value : _getMsg(value ? 'opt_yes' : 'opt_no');
 
-      var optionButton = selectbox.new$('div')
+      const optionButton = selectbox.new$('div')
         .addClass('selectbox-item')
         .css('width', widthOfButton + '%')
         .addText(buttonText)
@@ -216,13 +213,13 @@
   }
 
   function genSelectMultipleBox(optionField, optionChoices, selectedValues) {
-    var selectArea = optionField.new$('div').addClass('select-multiple-box');
-    var hiddenInput = selectArea.new$('input').attr('type', 'hidden');
+    const selectArea = optionField.new$('div').addClass('select-multiple-box');
+    const hiddenInput = selectArea.new$('input').attr('type', 'hidden');
 
     optionChoices.ascEach(function(choice, choiceNum) {
       if (choice !== undefined) {
-        var isChecked = selectedValues.hv(choiceNum);
-        var row = selectArea.new$('div');
+        const isChecked = selectedValues.hv(choiceNum);
+        const row = selectArea.new$('div');
 
         row.new$('input')
           .attr('type', 'checkbox')
@@ -233,7 +230,7 @@
     });
 
     selectArea.on('change', function() {
-      var inputValues = [];
+      const inputValues = [];
 
       selectArea.query$('input[type="checkbox"]:checked')
         .ascEach(function(inputElement) {
@@ -248,8 +245,8 @@
 
   function getOptionsAndGenTable() {
     // options choices
-    var booleanChoices = [true, false];
-    var openBookmarkChoices = getSelectQueue('clickOption');
+    const booleanChoices = [true, false];
+    const openBookmarkChoices = getSelectQueue('clickOption');
 
     // set global variable: OPTIONS
     OPTIONS = [
@@ -353,7 +350,8 @@
 
     // get the root folders' title and set as the choices of 'defExpand'
     chrome.bookmarks.getChildren('0', function(rootFolders) {
-      var rootFolderChoices = [];
+      const rootFolderChoices = [];
+
       rootFolders.ascEach(function(thisFolder) {
         rootFolderChoices[thisFolder.id * 1] = thisFolder.title;
       });
@@ -374,7 +372,7 @@
   }
 
   function resetContainer() {
-    var posValue = window.innerHeight < CONTAINER.offsetHeight ? 'auto' : '';
+    const posValue = window.innerHeight < CONTAINER.offsetHeight ? 'auto' : '';
 
     CONTAINER.css({
       bottom: posValue,
@@ -389,13 +387,14 @@
   }
 
   function saveOptions() {
-    var newOptions = {};
+    const newOptions = {};
 
     try {
       OPTIONS.ascEach(function(option, optionNum) {
-        var optionName = option.name;
-        var optionChoices = option.choices;
-        var optionValue = id$(optionName).value;
+        const optionName = option.name;
+        const optionChoices = option.choices;
+
+        let optionValue = id$(optionName).value;
 
         switch (option.type || typeof optionChoices[0]) {
           case 'boolean':
@@ -437,7 +436,7 @@
   }
 
   function setContainerHeight() {
-    var containerHeight = 0;
+    let containerHeight = 0;
 
     CONTAINER.children.ascEach(function(element) {
       containerHeight += element.offsetHeight;
@@ -450,14 +449,14 @@
 
   function setPermission(optionPermissions, optionName, optionValue) {
     if (optionPermissions) {
-      var actionType = optionValue ? 'request' : 'remove';
-      var permissionsObj = {
+      const actionType = optionValue ? 'request' : 'remove';
+      const permissionsObj = {
         permissions: [],
         origins: []
       };
 
       optionPermissions.ascEach(function(permission) {
-        var propName = permission.hv('://') ? 'origins' : 'permissions';
+        const propName = permission.hv('://') ? 'origins' : 'permissions';
         permissionsObj[propName].push(permission);
       });
 
@@ -470,4 +469,4 @@
       });
     }
   }
-}(window, document);
+})(window, document);
