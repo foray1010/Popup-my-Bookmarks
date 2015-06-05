@@ -40,27 +40,23 @@
 
   OBJECT_PROTO.prop({
     ascEach(fn, maxLength) {
-      const _this = this;
-
-      let end = _this.length;
+      let end = this.length;
       let i = 0;
 
       if (end > maxLength) {
         end = maxLength;
       }
 
-      while (i < end && fn(_this[i], i++) !== false) {}
+      while (i < end && fn(this[i], i++) !== false) {}
     },
     descEach(fn, end) {
-      const _this = this;
-
-      let i = _this.length;
-
       if (end === undefined || end < 0) {
         end = 0;
       }
 
-      while (--i >= end && fn(_this[i], i) !== false) {}
+      let i = this.length;
+
+      while (--i >= end && fn(this[i], i) !== false) {}
     },
     hv(i) {
       const _this = this;
@@ -186,10 +182,8 @@
         _this.appendTo(father);
     },
     attr(val1, val2) {
-      const _this = this;
-
-      const _action = function(name, val) {
-        _this.setAttribute(name, val);
+      const _action = (name, val) => {
+        this.setAttribute(name, val);
       };
 
       if (val2 === undefined) {
@@ -198,19 +192,17 @@
         _action(val1, val2);
       }
 
-      return _this;
+      return this;
     },
     appendTo(father) {
       return father.appendChild(this);
     },
     before(param1) {
-      const _this = this;
-
       let father;
       let sons;
 
       if (typeof param1 === 'number') {
-        father = _this.parentNode;
+        father = this.parentNode;
         sons = father.children;
         param1 = sons[param1 < 0 ?
           sons.length - 1 + param1 :
@@ -219,7 +211,7 @@
         father = param1.parentNode;
       }
 
-      return father.insertBefore(_this, param1);
+      return father.insertBefore(this, param1);
     },
     cloneTo(father, grandson) {
       return this.cloneNode(grandson !== false).appendTo(father);
