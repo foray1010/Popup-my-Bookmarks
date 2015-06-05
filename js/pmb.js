@@ -94,7 +94,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   // event delegation
   BODY.on({
-    click: function(event) {
+    click(event) {
       const mouseButton = event.button;
       const target = event.target;
 
@@ -132,7 +132,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       }
     },
     // Customize right click menu
-    contextmenu: function(event) {
+    contextmenu(event) {
       const target = event.target;
 
       let hideParam;
@@ -189,7 +189,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     dragend: dragEndEvent,
     dragover: dragOverEvent,
     dragstart: dragStartEvent,
-    keydown: function(event) {
+    keydown(event) {
       const keyCode = event.keyCode;
 
       switch (keyCode) {
@@ -226,18 +226,18 @@ chrome.storage.sync.get(null, function(STORAGE) {
           focusSearchInput();
       }
     },
-    keyup: function(event) {
+    keyup(event) {
       if (event.keyCode === ON_MOD_KEY) {
         ON_MOD_KEY = null;
       }
     },
     // disable the scrolling arrows after middle click
-    mousedown: function(event) {
+    mousedown(event) {
       if (event.button === 1) {
         event.preventDefault();
       }
     },
-    mouseout: function(event) {
+    mouseout(event) {
       const item = getItem(event.target);
 
       if (item) {
@@ -249,7 +249,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         }
       }
     },
-    mouseover: function(event) {
+    mouseover(event) {
       const item = getItem(event.target);
 
       let selectedItem;
@@ -588,13 +588,13 @@ chrome.storage.sync.get(null, function(STORAGE) {
     getBoxList(boxNum)
       .data(DATATEXT_BOX_NUM, boxNum)
       .on({
-        mousewheel: function(event) {
+        mousewheel(event) {
           event.preventDefault();
 
           // control scrolling speed
           this.scrollTop -= ITEM_HEIGHT * event.wheelDelta / 120 >> 0;
         },
-        scroll: function() {
+        scroll() {
           savLastScroll(true);
         }
       });
@@ -910,9 +910,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
     const fontFamily = STORAGE.fontFamily.split(',')
       .map(function(x) {
         x = x.trim();
+
         if (x.hv(' ')) {
           x = `"${x}"`;
         }
+
         return x;
       })
       .join(',');
@@ -1269,6 +1271,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       BOX_PID.pop();
       HEIGHT_LIST.pop();
     }, level + 1);
+
     savLastPID();
     savLastScroll();
 
