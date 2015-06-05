@@ -417,9 +417,7 @@
 
           case 'select-multiple':
             optionValue = optionValue.split(',')
-              .map(function(x) {
-                return x * 1;
-              });
+              .map(x => x * 1);
             break;
 
           case 'string':

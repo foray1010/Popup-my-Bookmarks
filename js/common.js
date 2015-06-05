@@ -39,7 +39,7 @@
   };
 
   OBJECT_PROTO.prop({
-    ascEach: function(fn, maxLength) {
+    ascEach(fn, maxLength) {
       const _this = this;
 
       let end = _this.length;
@@ -51,7 +51,7 @@
 
       while (i < end && fn(_this[i], i++) !== false) {}
     },
-    descEach: function(fn, end) {
+    descEach(fn, end) {
       const _this = this;
 
       let i = _this.length;
@@ -62,17 +62,17 @@
 
       while (--i >= end && fn(_this[i], i) !== false) {}
     },
-    hv: function(i) {
+    hv(i) {
       const _this = this;
 
       return _this.indexOf ? _this.indexOf(i) >= 0 : _this[i] !== undefined;
     },
-    isEmpty: function() {
+    isEmpty() {
       return Object.keys(this).length === 0;
     },
 
     // Event Management
-    clickByButton: function(allowButton, fn) {
+    clickByButton(allowButton, fn) {
       const _this = this;
 
       _this.on('click', function(event) {
@@ -83,7 +83,7 @@
 
       return _this;
     },
-    hoverTimeout: function(fn, timeout, xyRange, isInsideRange) {
+    hoverTimeout(fn, timeout, xyRange, isInsideRange=true) {
       const _this = this;
 
       const mousemoveFn = function(mouseXYOrig) {
@@ -109,18 +109,14 @@
       let eventTimer;
       let mouseXY;
 
-      if (isInsideRange === undefined) {
-        isInsideRange = true;
-      }
-
       _this.on({
-        mousemove: function(event) {
+        mousemove(event) {
           mouseXY = [event.x, event.y];
           if (!eventTimer) {
             mousemoveFn(mouseXY);
           }
         },
-        mouseout: function() {
+        mouseout() {
           clearTimeout(eventTimer);
           eventTimer = null;
         }
@@ -128,13 +124,13 @@
 
       return _this;
     },
-    on: function() {
+    on() {
       return eventHandler(this, arguments, false);
     },
-    once: function() {
+    once() {
       return eventHandler(this, arguments, true);
     },
-    ready: function(fn) {
+    ready(fn) {
       const _this = this;
 
       if (/^loaded|^c/.test(_this.readyState)) {
@@ -153,25 +149,25 @@
   HTMLElement.prototype.prop({
     // Element Management
     // Element Selectors
-    class$: function(className) {
+    class$(className) {
       return class$(className, this);
     },
-    new$: function(tagName) {
+    new$(tagName) {
       return new$(tagName).appendTo(this);
     },
-    query$: function(queryStr) {
+    query$(queryStr) {
       return query$(queryStr, this);
     },
-    tag$: function(tagName) {
+    tag$(tagName) {
       return tag$(tagName, this);
     },
 
     // Element Modifier
-    addText: function(content) {
+    addText(content) {
       this.appendChild(document.createTextNode(content));
       return this;
     },
-    after: function(param1) {
+    after(param1) {
       const _this = this;
 
       let father;
@@ -189,7 +185,7 @@
         _this.before(nextNextSibling) :
         _this.appendTo(father);
     },
-    attr: function(val1, val2) {
+    attr(val1, val2) {
       const _this = this;
 
       const _action = function(name, val) {
@@ -204,10 +200,10 @@
 
       return _this;
     },
-    appendTo: function(father) {
+    appendTo(father) {
       return father.appendChild(this);
     },
-    before: function(param1) {
+    before(param1) {
       const _this = this;
 
       let father;
@@ -225,10 +221,10 @@
 
       return father.insertBefore(_this, param1);
     },
-    cloneTo: function(father, grandson) {
+    cloneTo(father, grandson) {
       return this.cloneNode(grandson !== false).appendTo(father);
     },
-    data: function(param1, param2) {
+    data(param1, param2) {
       const _this = this;
 
       const setDataset = function(name, val) {
@@ -252,7 +248,7 @@
 
       return _this.dataset[param1];
     },
-    empty: function() {
+    empty() {
       const _this = this;
 
       let sacrifice;
@@ -263,19 +259,19 @@
 
       return _this;
     },
-    first: function() {
+    first() {
       return this.firstElementChild;
     },
-    last: function() {
+    last() {
       return this.lastElementChild;
     },
-    next: function() {
+    next() {
       return this.nextElementSibling;
     },
-    prev: function() {
+    prev() {
       return this.previousElementSibling;
     },
-    selectText: function() {
+    selectText() {
       const _this = this;
 
       if (_this.tagName === 'INPUT') {
@@ -292,22 +288,22 @@
 
       return _this;
     },
-    val: function(newValue) {
+    val(newValue) {
       this.value = newValue;
       return this;
     },
 
     // Class Management
-    addClass: function(className) {
+    addClass(className) {
       return classListFn(this, 'add', className);
     },
-    hvClass: function(className) {
+    hvClass(className) {
       return this.classList.contains(className);
     },
-    rmClass: function(className) {
+    rmClass(className) {
       return classListFn(this, 'remove', className);
     },
-    toggleClass: function(className, switcher) {
+    toggleClass(className, switcher) {
       let classFnName;
 
       if (switcher === undefined) {
@@ -322,7 +318,7 @@
     },
 
     // Style Handler
-    css: function(val1, val2) {
+    css(val1, val2) {
       const _this = this;
 
       if (typeof val1 !== 'object' && val2 === undefined) {
@@ -333,11 +329,11 @@
 
       return _this;
     },
-    hide: function() {
+    hide() {
       this.hidden = true;
       return this;
     },
-    show: function() {
+    show() {
       const _this = this;
 
       _this.hidden = false;
@@ -349,10 +345,10 @@
     },
 
     // Others
-    hvFocus: function() {
+    hvFocus() {
       return document.activeElement === this;
     },
-    index: function() {
+    index() {
       let indexer = this;
       let indexNum = 0;
 
@@ -364,7 +360,7 @@
     },
 
     // Animation
-    anim: function(styleName, styleValue) {
+    anim(styleName, styleValue) {
       const _this = this;
 
       const _args = argumentsConstructor(
@@ -383,7 +379,7 @@
 
       _this.style[styleName] = styleValue;
     },
-    fadeOut: function() {
+    fadeOut() {
       const _this = this;
 
       const _args = argumentsConstructor(
@@ -407,13 +403,13 @@
 
   // Array.prototype
   Array.prototype.prop({
-    max: function() {
+    max() {
       return Math.max.apply(Math, this);
     },
-    min: function() {
+    min() {
       return Math.min.apply(Math, this);
     },
-    merge: function(arr) {
+    merge(arr) {
       const arr2 = [];
 
       this.ascEach(function(i) {
@@ -424,7 +420,7 @@
 
       return arr2;
     },
-    diff: function(arr) {
+    diff(arr) {
       const arr2 = [];
 
       this.ascEach(function(i) {
@@ -435,10 +431,10 @@
 
       return arr2;
     },
-    move: function(oldIndex, newIndex) {
+    move(oldIndex, newIndex) {
       this.splice(newIndex, 0, this.splice(oldIndex, 1)[0]);
     },
-    rm: function(removedItem) {
+    rm(removedItem) {
       const _this = this;
 
       _this.splice(_this.indexOf(removedItem), 1);
@@ -466,11 +462,7 @@
   };
 
   // Private function
-  function argumentsConstructor(args, typePatterns, defaultValues) {
-    if (defaultValues === undefined) {
-      defaultValues = [];
-    }
-
+  function argumentsConstructor(args, typePatterns, defaultValues=[]) {
     // remove the non-optional arguments
     const argsSliceNum = args.length - typePatterns.length;
     const returnList = [];
@@ -534,34 +526,34 @@
 
   // Public Functions
   window.prop({
-    initTimeout: function(timeoutName, fn, timeout) {
+    initTimeout(timeoutName, fn, timeout) {
       clearTimeout(TIMEOUT_HANDLER[timeoutName]);
       TIMEOUT_HANDLER[timeoutName] = setTimeout(fn, timeout);
       return TIMEOUT_HANDLER[timeoutName];
     },
 
     // get element
-    class$: function(className, classroom) {
+    class$(className, classroom) {
       return (classroom || document).getElementsByClassName(className);
     },
-    id$: function(id) {
+    id$(id) {
       return document.getElementById(id);
     },
-    name$: function(name) {
+    name$(name) {
       return document.getElementsByName(name);
     },
-    new$: function(tagName) {
+    new$(tagName) {
       return document.createElement(tagName);
     },
-    query$: function(queryStr, queryElement) {
+    query$(queryStr, queryElement) {
       return (queryElement || document).querySelectorAll(queryStr);
     },
-    tag$: function(friend, fb) {
+    tag$(friend, fb) {
       return (fb || document).getElementsByTagName(friend);
     },
 
     // set element
-    update$: function(swelldom, vogue, catwalk, maxModels) {
+    update$(swelldom, vogue, catwalk, maxModels) {
       const outdatedList = [];
       const updatedList = [];
 
