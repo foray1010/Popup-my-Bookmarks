@@ -43,8 +43,10 @@ compileLang = (langName, destDir, options) ->
 
 compileLangHandler = (thisLang, sourcePath, destDir, options) ->
   compilerPipe = plugins[thisLang.compiler](options)
-  hvMinifier = !!plugins[thisLang.minifier]
   nowTime = new Date().toLocaleTimeString()
+
+  # if have minifier and it is now for production
+  hvMinifier = !!plugins[thisLang.minifier] and destDir.startsWith(compilePath)
 
   minifierPipe =
     if hvMinifier
