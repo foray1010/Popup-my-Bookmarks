@@ -1,4 +1,4 @@
-(function(window, document) {
+{
   // shorter function
   const _getMsg = chrome.i18n.getMessage;
   const _storage = chrome.storage.sync;
@@ -54,16 +54,14 @@
       }
     });
 
-    if (!newOptions.isEmpty()) {
-      _storage.set(newOptions);
-    }
+    _storage.set(newOptions);
   }
 
   function genInputSelectBox(optionField, optionChoices, selectedValue) {
     const inputSelectBox = optionField.new$('div')
       .addClass('input-select-box');
 
-    const optionInput = inputSelectBox.new$('input').attr({
+    const optionInput = inputSelectBox.new$('input').prop({
       type: 'text',
       value: selectedValue
     });
@@ -85,13 +83,15 @@
   }
 
   function genMsgBoxWhenConfirm(msgText) {
-    const optMsgBox = id$('opt-msg-box').empty();
-    const msgBox = new$('span')
-      .addText(msgText)
-      .appendTo(optMsgBox);
+    const optMsgBox = id$('opt-msg-box');
 
-    setTimeout(function() {
-      msgBox.fadeOut(true);
+    optMsgBox.innerText = msgText;
+
+    initTimeout('fadeOutMsgBox', function() {
+      optMsgBox.fadeOut(function() {
+        optMsgBox.innerText = '';
+        optMsgBox.hidden = false;
+      });
     }, 3000);
   }
 
@@ -173,7 +173,7 @@
 
     // generate element needed
     const selectbox = optionField.new$('div').addClass('selectbox');
-    const hiddenInput = selectbox.new$('input').attr('type', 'hidden');
+    const hiddenInput = selectbox.new$('input').prop('type', 'hidden');
     const coverBox = selectbox.new$('div')
       .addClass('selectbox-cover')
       .css('width', widthOfButton + '%');
@@ -214,17 +214,19 @@
 
   function genSelectMultipleBox(optionField, optionChoices, selectedValues) {
     const selectArea = optionField.new$('div').addClass('select-multiple-box');
-    const hiddenInput = selectArea.new$('input').attr('type', 'hidden');
+    const hiddenInput = selectArea.new$('input').prop('type', 'hidden');
 
     optionChoices.ascEach(function(choice, choiceNum) {
       if (choice !== undefined) {
-        const isChecked = selectedValues.hv(choiceNum);
+        const isChecked = selectedValues.includes(choiceNum);
         const row = selectArea.new$('div');
 
         row.new$('input')
-          .attr('type', 'checkbox')
-          .prop('checked', isChecked)
-          .val(choiceNum);
+          .prop({
+            type: 'checkbox',
+            value: choiceNum,
+            checked: isChecked
+          });
         row.new$('span').addText(choice);
       }
     });
@@ -353,11 +355,11 @@
       const rootFolderChoices = [];
 
       rootFolders.ascEach(function(thisFolder) {
-        rootFolderChoices[thisFolder.id * 1] = thisFolder.title;
+        rootFolderChoices[1 * thisFolder.id] = thisFolder.title;
       });
 
       OPTIONS.ascEach(function(option) {
-        if (['defExpand', 'hideRootFolder'].hv(option.name)) {
+        if (['defExpand', 'hideRootFolder'].includes(option.name)) {
           option.choices = rootFolderChoices;
         }
       });
@@ -417,16 +419,18 @@
 
           case 'select-multiple':
             optionValue = optionValue.split(',')
-              .map(x => x * 1);
+              .map((x) => 1 * x);
             break;
 
           case 'string':
             optionValue *= 1;
         }
+
         newOptions[optionName] = optionValue;
       });
 
       _storage.set(newOptions);
+
       genMsgBoxWhenConfirm(_getMsg('opt_saved'));
     } catch (e) {
       genMsgBoxWhenConfirm(e.toString());
@@ -454,7 +458,7 @@
       };
 
       optionPermissions.ascEach(function(permission) {
-        const propName = permission.hv('://') ? 'origins' : 'permissions';
+        const propName = permission.includes('://') ? 'origins' : 'permissions';
 
         permissionsObj[propName].push(permission);
       });
@@ -468,4 +472,4 @@
       });
     }
   }
-})(window, document);
+}

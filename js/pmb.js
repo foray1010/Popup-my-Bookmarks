@@ -28,7 +28,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   const SEPARATE_THIS = 'http://separatethis.com/';
 
   // +2 for border width, GOLDEN_GAP*2 for padding
-  const ITEM_HEIGHT = 2 + GOLDEN_GAP * 2 + [STORAGE.fontSize, 16].max();
+  const ITEM_HEIGHT = 2 + GOLDEN_GAP * 2 + Math.max(STORAGE.fontSize, 16);
 
   // attr: data's text
   const DATATEXT_BOX_NUM = 'boxNum';
@@ -116,7 +116,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
             if (mouseButton === 1) {
               openBkmarks(item.id, true, 0);
             } else if (STORAGE.opFolderBy) {
-              if (!BOX_PID.hv(item.id)) {
+              if (!BOX_PID.includes(item.id)) {
                 openFolder(item.id);
               } else {
                 resetBox(getParentBoxNum(item));
@@ -180,8 +180,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
       greyMenuItem([0, 1], item.id === '');
       greyMenuItem([2], COPY_CUT_ITEM.id === null);
 
-      MENU_COVER.show();
-      MENU.show();
+      MENU_COVER.hidden = false;
+      MENU.hidden = false;
 
       TARGET_ITEM = item;
       setMenuPos(event.x, event.y);
@@ -531,7 +531,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       boxNum = getParentBoxNum(target);
       // if there is next box
       if (boxNum === BOX.length) {
-        genNinja(boxNum).hide();
+        genNinja(boxNum).hidden = true;
         genNinja(boxNum + 1);
       }
 
@@ -567,7 +567,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function focusSearchInput() {
-    if (!isMenuCovered() && !SEARCH_INPUT.hvFocus()) {
+    if (!isMenuCovered() && document.activeElement !== SEARCH_INPUT) {
       SEARCH_INPUT.focus();
     }
   }
@@ -615,7 +615,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         const stemId = 1 * stem.id;
 
         if (stemId === STORAGE.defExpand ||
-            STORAGE.hideRootFolder.hv(stemId)) {
+            STORAGE.hideRootFolder.includes(stemId)) {
           return true;
         }
         genItem(0, stem).addClass('rootfolder').draggable = false;
@@ -725,7 +725,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function getMaxHeight() {
-    return HEIGHT_LIST.max();
+    return Math.max.apply(Math, HEIGHT_LIST);
   }
 
   function getMenuItem() {
@@ -745,7 +745,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function getParentBoxNum(item) {
-    return item.parentNode.data(DATATEXT_BOX_NUM) * 1;
+    return 1 * item.parentNode.data(DATATEXT_BOX_NUM);
   }
 
   function getRootFolderNum(boxNum) {
@@ -809,7 +809,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         boxNum = getParentBoxNum(removedElement);
 
         // if this bookmark is folder, remove its sub tree from DOM
-        if (BOX_PID.hv(id)) {
+        if (BOX_PID.includes(id)) {
           resetBox(boxNum);
         }
 
@@ -911,7 +911,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       .map(function(x) {
         x = x.trim();
 
-        if (x.hv(' ')) {
+        if (x.includes(' ')) {
           x = `"${x}"`;
         }
 
@@ -1146,7 +1146,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function openFolder(id, fnAfterOpen) {
-    if (BOX_PID.hv(id)) {
+    if (BOX_PID.includes(id)) {
       if (fnAfterOpen) {
         fnAfterOpen();
       }
@@ -1351,7 +1351,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         if (isOnlySearchTitle) {
           bkmarkTitle = bkmark.title.toLowerCase();
           splittedKeyArr.ascEach(function(splittedKey) {
-            if (!bkmarkTitle.hv(splittedKey)) {
+            if (!bkmarkTitle.includes(splittedKey)) {
               isntTitleMatched = true;
               return false;
             }
@@ -1388,15 +1388,15 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function setBottomRight(settler, bottomValue, rightValue) {
     settler.css({
-      bottom: [bottomValue, 0].max() + 'px',
-      right: [rightValue, 0].max() + 'px'
+      bottom: Math.max(bottomValue, 0) + 'px',
+      right: Math.max(rightValue, 0) + 'px'
     });
   }
 
   function setEditorPos() {
     const targetOffsetTop = TARGET_ITEM.getBoundingClientRect().top;
 
-    EDITOR.show();
+    EDITOR.hidden = false;
     setBottomRight(
       EDITOR,
       getNowHeight() - EDITOR.offsetHeight - targetOffsetTop,
@@ -1408,9 +1408,16 @@ chrome.storage.sync.get(null, function(STORAGE) {
     const editorTitle = _getMsg(url ? 'edit' : 'rename').replace('...', '');
     const inputField = EDITOR.tag$('input');
 
+    const titleField = inputField[0];
+    const urlField = inputField[1];
+
     id$('edit-title').innerText = editorTitle;
-    inputField[0].val(title).selectText().focus();
-    inputField[1].val(url).hidden = !url;
+
+    titleField.value = title;
+    urlField.value = url;
+
+    titleField.selectText().focus();
+    urlField.hidden = !url;
   }
 
   function setHeight(boxNum) {
@@ -1423,11 +1430,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
     let bodyHeight;
     let listHeight;
 
-    listHeight = [boxList.scrollHeight, maxListHeight].min();
+    listHeight = Math.min(boxList.scrollHeight, maxListHeight);
     boxList.style.maxHeight = listHeight + 'px';
 
     bodyHeight = listHeight + boxListOffsetTop;
-    HEIGHT_LIST[boxNum] = [bodyHeight, MAX_HEIGHT].min();
+    HEIGHT_LIST[boxNum] = Math.min(bodyHeight, MAX_HEIGHT);
     modBodyHeight(getMaxHeight());
   }
 
@@ -1473,7 +1480,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
           const itemInfo = node[0];
 
-          if (![item.id, '0'].hv(itemInfo.id)) {
+          if (![item.id, '0'].includes(itemInfo.id)) {
             breadcrumbArr.unshift(itemInfo.title);
           }
 
