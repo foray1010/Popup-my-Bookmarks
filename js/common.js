@@ -1,4 +1,4 @@
-(function(window, document, Math, Object) {
+{
   const EMPTY_FUNC = function() {};
   const OBJECT_PROTO = Object.prototype;
   const TIMEOUT_HANDLER = {};
@@ -7,7 +7,7 @@
   OBJECT_PROTO.propEach = function(fn) {
     const _this = this;
 
-    const propArr = Object.keys(_this);
+    const propArr = Object.getOwnPropertyNames(_this);
 
     let propName;
 
@@ -20,11 +20,8 @@
     const _this = this;
 
     if (typeof val1 === 'object') {
-      const isntDeepScan = val2 !== true;
-
       val1.propEach(function(dna, heredity) {
-        if (isntDeepScan ||
-            typeof heredity !== 'object' ||
+        if (typeof heredity !== 'object' ||
             heredity === null) {
           _this[dna] = heredity;
         } else {
@@ -58,13 +55,10 @@
 
       while (--i >= end && fn(this[i], i) !== false) {}
     },
-    hv(i) {
+    includes(i) {
       const _this = this;
 
       return _this.indexOf ? _this.indexOf(i) >= 0 : _this[i] !== undefined;
-    },
-    isEmpty() {
-      return Object.keys(this).length === 0;
     },
 
     // Event Management
@@ -125,19 +119,6 @@
     },
     once() {
       return eventHandler(this, arguments, true);
-    },
-    ready(fn) {
-      const _this = this;
-
-      if (/^loaded|^c/.test(_this.readyState)) {
-        fn();
-      } else {
-        _this.once('DOMContentLoaded', function() {
-          fn();
-        });
-      }
-
-      return _this;
     }
   });
 
@@ -181,6 +162,9 @@
         _this.before(nextNextSibling) :
         _this.appendTo(father);
     },
+    appendTo(father) {
+      return father.appendChild(this);
+    },
     attr(val1, val2) {
       const _action = (name, val) => {
         this.setAttribute(name, val);
@@ -193,9 +177,6 @@
       }
 
       return this;
-    },
-    appendTo(father) {
-      return father.appendChild(this);
     },
     before(param1) {
       let father;
@@ -240,17 +221,6 @@
 
       return _this.dataset[param1];
     },
-    empty() {
-      const _this = this;
-
-      let sacrifice;
-
-      while (sacrifice = _this.firstChild) {
-        _this.removeChild(sacrifice);
-      }
-
-      return _this;
-    },
     first() {
       return this.firstElementChild;
     },
@@ -279,10 +249,6 @@
       }
 
       return _this;
-    },
-    val(newValue) {
-      this.value = newValue;
-      return this;
     },
 
     // Class Management
@@ -321,25 +287,8 @@
 
       return _this;
     },
-    hide() {
-      this.hidden = true;
-      return this;
-    },
-    show() {
-      const _this = this;
-
-      _this.hidden = false;
-      if (_this.style.display === 'none') {
-        _this.style.display = '';
-      }
-
-      return _this;
-    },
 
     // Others
-    hvFocus() {
-      return document.activeElement === this;
-    },
     index() {
       let indexer = this;
       let indexNum = 0;
@@ -355,13 +304,11 @@
     anim(styleName, styleValue) {
       const _this = this;
 
-      const _args = argumentsConstructor(
+      const [duration, completeFn] = argumentsConstructor(
         arguments, ['number', 'function'], [400, EMPTY_FUNC]
       );
-      const duration = _args[0];
-      const completeFn = _args[1];
 
-      _this.style.transition = styleName + ' ' + duration + 'ms';
+      _this.style.transition = `${styleName} ${duration}ms`;
 
       setTimeout(function() {
         _this.style.transition = '';
@@ -374,18 +321,16 @@
     fadeOut() {
       const _this = this;
 
-      const _args = argumentsConstructor(
+      const [duration, isRemoveWhenDone, completeFn] = argumentsConstructor(
         arguments, ['number', 'boolean', 'function'], [400, false, EMPTY_FUNC]
       );
-      const duration = _args[0];
-      const isRemoveWhenDone = _args[1];
-      const completeFn = _args[2];
 
       _this.anim('opacity', 0, duration, function() {
         if (isRemoveWhenDone) {
           _this.remove();
         } else {
-          _this.hide().css('opacity', '');
+          _this.hidden = true;
+          _this.css('opacity', '');
         }
 
         completeFn.call(_this);
@@ -395,17 +340,11 @@
 
   // Array.prototype
   Array.prototype.prop({
-    max() {
-      return Math.max.apply(Math, this);
-    },
-    min() {
-      return Math.min.apply(Math, this);
-    },
     merge(arr) {
       const arr2 = [];
 
       this.ascEach(function(i) {
-        if (arr.hv(i)) {
+        if (arr.includes(i)) {
           arr2.push(i);
         }
       });
@@ -416,7 +355,7 @@
       const arr2 = [];
 
       this.ascEach(function(i) {
-        if (!arr.hv(i)) {
+        if (!arr.includes(i)) {
           arr2.push(i);
         }
       });
@@ -425,13 +364,6 @@
     },
     move(oldIndex, newIndex) {
       this.splice(newIndex, 0, this.splice(oldIndex, 1)[0]);
-    },
-    rm(removedItem) {
-      const _this = this;
-
-      _this.splice(_this.indexOf(removedItem), 1);
-
-      return _this;
     }
   });
 
@@ -486,13 +418,9 @@
   }
 
   function eventHandler(_this, origArgs, isOnce) {
-    const _args = argumentsConstructor(
+    const [events, eventName, eventFn, useCapture] = argumentsConstructor(
       origArgs, ['object', 'string', 'function', 'boolean']
     );
-    const events = _args[0];
-    const eventName = _args[1];
-    const eventFn = _args[2];
-    const useCapture = _args[3];
 
     const addEvent = isOnce ?
       function(thisEventName, thisEventFn) {
@@ -625,4 +553,4 @@
       };
     })()
   });
-})(window, document, Math, Object);
+}
