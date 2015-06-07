@@ -54,7 +54,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   // global variables
   let DRAG_ITEM = null;
-  let DRAG_TIMEOUT;
   let EDITOR_CREATE;
   let HOVER_TIMEOUT;
   let IS_EXPANDED = false;
@@ -452,8 +451,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function dragEndEvent(event) {
     if (DRAG_ITEM) {
-      clearTimeout(DRAG_TIMEOUT);
-
       // remove DRAG_ITEM from PRELOAD
       DRAG_ITEM.remove();
       DRAG_ITEM = null;
@@ -481,42 +478,40 @@ chrome.storage.sync.get(null, function(STORAGE) {
     const item = getItem(event.target);
 
     if (item && DRAG_ITEM) {
-      DRAG_TIMEOUT = initTimeout('drag', function() {
-        const boxNum = getParentBoxNum(item);
-        const isPlaceBefore = event.offsetY < item.offsetHeight / 2;
-        const isntDragItem = item.id !== DRAG_ITEM.id;
-        const origBoxNum = getParentBoxNum(DRAG_PLACE);
+      const boxNum = getParentBoxNum(item);
+      const isPlaceBefore = event.offsetY < item.offsetHeight / 2;
+      const isntDragItem = item.id !== DRAG_ITEM.id;
+      const origBoxNum = getParentBoxNum(DRAG_PLACE);
 
-        const itemSibling = item[isPlaceBefore ? 'prev' : 'next']();
+      const itemSibling = item[isPlaceBefore ? 'prev' : 'next']();
 
-        const isntDragItemSibling = !itemSibling ||
-                                  itemSibling.id !== DRAG_ITEM.id;
+      const isntDragItemSibling = !itemSibling ||
+                                itemSibling.id !== DRAG_ITEM.id;
 
-        if (isntDragItem &&
-            isntDragItemSibling &&
-            !isRootFolder(item)) {
-          DRAG_PLACE[isPlaceBefore ? 'before' : 'after'](item);
-        } else {
-          DRAG_PLACE.appendTo(PRELOAD);
+      if (isntDragItem &&
+          isntDragItemSibling &&
+          !isRootFolder(item)) {
+        DRAG_PLACE[isPlaceBefore ? 'before' : 'after'](item);
+      } else {
+        DRAG_PLACE.appendTo(PRELOAD);
+      }
+
+      // if the DRAG_PLACE is not on the same box,
+      // the height of where it come from and go to,
+      // need to be reseted
+      if (boxNum !== origBoxNum) {
+        if (origBoxNum >= 0) {
+          setHeight(origBoxNum);
         }
+        setHeight(boxNum);
+      }
 
-        // if the DRAG_PLACE is not on the same box,
-        // the height of where it come from and go to,
-        // need to be reseted
-        if (boxNum !== origBoxNum) {
-          if (origBoxNum >= 0) {
-            setHeight(origBoxNum);
-          }
-          setHeight(boxNum);
-        }
-
-        // item cannot be the parent folder of itself
-        if (isntDragItem && isFolderItem(item)) {
-          openFolder(item.id);
-        } else {
-          resetBox(boxNum);
-        }
-      }, 70);
+      // item cannot be the parent folder of itself
+      if (isntDragItem && isFolderItem(item)) {
+        openFolder(item.id);
+      } else {
+        resetBox(boxNum);
+      }
     }
   }
 
