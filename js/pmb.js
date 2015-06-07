@@ -66,8 +66,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
   const NAME_LAST_BOX_PID = 'lastBoxPID';
   const NAME_LAST_SCROLL_TOP = 'lastScrollTop';
   // value
-  let LAST_BOX_PID = jsonStorage('get', NAME_LAST_BOX_PID) || [];
-  let LAST_SCROLL_TOP = jsonStorage('get', NAME_LAST_SCROLL_TOP) || [];
+  let LAST_BOX_PID = JSONStorage.get(NAME_LAST_BOX_PID) || [];
+  let LAST_SCROLL_TOP = JSONStorage.get(NAME_LAST_SCROLL_TOP) || [];
 
   // if first run
   if (STORAGE.hideRootFolder === undefined) {
@@ -483,7 +483,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       const isntDragItem = item.id !== DRAG_ITEM.id;
       const origBoxNum = getParentBoxNum(DRAG_PLACE);
 
-      const itemSibling = item[isPlaceBefore ? 'prev' : 'next']();
+      const itemSibling = isPlaceBefore ? item.prev() : item.next();
 
       const isntDragItemSibling = !itemSibling ||
                                 itemSibling.id !== DRAG_ITEM.id;
@@ -491,7 +491,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
       if (isntDragItem &&
           isntDragItemSibling &&
           !isRootFolder(item)) {
-        DRAG_PLACE[isPlaceBefore ? 'before' : 'after'](item);
+        if (isPlaceBefore) {
+          DRAG_PLACE.before(item);
+        } else {
+          DRAG_PLACE.after(item);
+        }
       } else {
         DRAG_PLACE.appendTo(PRELOAD);
       }
@@ -1005,19 +1009,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
   }
 
-  function jsonStorage(action, name, value) {
-    const _localStorage = localStorage;
-    const _json = JSON;
-
-    switch (action) {
-      case 'get':
-        return _json.parse(_localStorage.getItem(name));
-
-      case 'set':
-        _localStorage.setItem(name, _json.stringify(value));
-    }
-  }
-
   function menuEvent(event) {
     const target = event.target;
     const targetItemId = TARGET_ITEM.id;
@@ -1140,7 +1131,9 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function openBkmarks(targetId, isFolder, menuItemNum) {
-    _bookmark[isFolder ? 'getSubTree' : 'get'](targetId, function(node) {
+    const getBookmark = isFolder ? _bookmark.getSubTree : _bookmark.get;
+
+    getBookmark(targetId, function(node) {
       const urlList = [];
 
       if (isFolder) {
@@ -1270,7 +1263,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function removeItem(itemId) {
     const isFolder = isFolderItem(id$(itemId));
 
-    _bookmark[isFolder ? 'removeTree' : 'remove'](itemId);
+    if (isFolder) {
+      _bookmark.removeTree(itemId);
+    } else {
+      _bookmark.remove(itemId);
+    }
   }
 
   function removeNoBkmark(boxNum) {
@@ -1311,14 +1308,14 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function savLastPID() {
     if (STORAGE.rememberPos) {
-      jsonStorage('set', NAME_LAST_BOX_PID, BOX_PID);
+      JSONStorage.set(NAME_LAST_BOX_PID, BOX_PID);
     }
   }
 
   function savLastScroll(isDelaySave) {
     if (STORAGE.rememberPos) {
       const saveFn = function() {
-        jsonStorage('set', NAME_LAST_SCROLL_TOP, getLastScrollTop());
+        JSONStorage.set(NAME_LAST_SCROLL_TOP, getLastScrollTop());
       };
 
       if (isDelaySave) {
@@ -1373,14 +1370,13 @@ chrome.storage.sync.get(null, function(STORAGE) {
     }
 
     results.ascEach(function(bkmark) {
+      const bkmarkTitle = bkmark.title.toLowerCase();
       const bkmarkUrl = bkmark.url;
 
-      let bkmarkTitle;
       let isntTitleMatched;
 
       if (bkmarkUrl && bkmarkUrl !== SEPARATE_THIS) {
         if (isOnlySearchTitle) {
-          bkmarkTitle = bkmark.title.toLowerCase();
           splittedKeyArr.ascEach(function(splittedKey) {
             if (!bkmarkTitle.includes(splittedKey)) {
               isntTitleMatched = true;
@@ -1458,13 +1454,12 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     const maxListHeight = MAX_HEIGHT - boxListOffsetTop;
 
-    let bodyHeight;
-    let listHeight;
+    const listHeight = Math.min(boxList.scrollHeight, maxListHeight);
 
-    listHeight = Math.min(boxList.scrollHeight, maxListHeight);
+    const bodyHeight = listHeight + boxListOffsetTop;
+
     boxList.style.maxHeight = listHeight + 'px';
 
-    bodyHeight = listHeight + boxListOffsetTop;
     HEIGHT_LIST[boxNum] = Math.min(bodyHeight, MAX_HEIGHT);
     modBodyHeight(getMaxHeight());
   }

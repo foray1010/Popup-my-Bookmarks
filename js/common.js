@@ -21,11 +21,12 @@
 
     if (typeof val1 === 'object') {
       val1.propEach(function(dna, heredity) {
-        if (typeof heredity !== 'object' ||
-            heredity === null) {
-          _this[dna] = heredity;
-        } else {
+        if (typeof _this[dna] === 'object' &&
+            typeof heredity === 'object' &&
+            heredity !== null) {
           _this[dna].prop(heredity);
+        } else {
+          _this[dna] = heredity;
         }
       });
     } else {
@@ -459,6 +460,12 @@
       updatedList.ascEach(function(jeansId, seasonNum) {
         id$(jeansId).before(seasonNum);
       });
+    },
+
+    // use JSON for localStorage
+    JSONStorage: {
+      get: (name) => JSON.parse(localStorage.getItem(name)),
+      set: (name, value) => localStorage.setItem(name, JSON.stringify(value))
     }
   });
 
