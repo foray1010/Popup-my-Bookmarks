@@ -1,3 +1,10 @@
+## 4.0.1.706 (7/6/2015)
+Improvements:
+  - Dragging is now much more sensitive
+
+Bugfixes:
+  - Drag fail easily on Windows
+
 ## 4.0.0.706 (7/6/2015)
 Features:
   - Keyboard Navigation
@@ -15,8 +22,8 @@ Improvements:
   - Resize the height of interface when displaying drag indicator
 
 Bugfixes:
-  - drag indicator may still appear after dragging is ended
-  - drag indicator appears next to the dragged item in some special cases
+  - Drag indicator may still appear after dragging is ended
+  - Drag indicator appears next to the dragged item in some special cases
   - Tooltip displays after separator has been edited
   - Weird display of separator when using Chrome(Linux)
   - Wrong editor position in some special cases
