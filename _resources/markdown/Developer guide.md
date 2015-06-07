@@ -4,7 +4,6 @@
   - [io.js official website](//iojs.org) (Windows)
 
 2. Install [gulp.js](//github.com/gulpjs/gulp)
-
    > npm install -g gulp
 
 3. **cd** to your workspace and install all dependencies
