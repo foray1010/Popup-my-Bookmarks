@@ -103,7 +103,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       // reset the cursor to search-input after clicking
       focusSearchInput();
 
-      if (target.hvClass('head-close')) {
+      if (target.hasClass('head-close')) {
         resetBox(target.parentNode.next().data(DATATEXT_BOX_NUM) - 1);
 
         return true;
@@ -244,8 +244,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
         clearTimeout(HOVER_TIMEOUT);
 
         // if menu is displayed, bookmark item should keep selected
-        if (!isMenuCovered() || item.hvClass('menu-item')) {
-          item.rmClass('selected');
+        if (!isMenuCovered() || item.hasClass('menu-item')) {
+          item.removeClass('selected');
         }
       }
     },
@@ -273,10 +273,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
         // arrowUpDownHandler or arrowLeftRightHandler
         selectedItem = getSelectedItem();
         if (selectedItem) {
-          selectedItem.rmClass('selected');
+          selectedItem.removeClass('selected');
         }
 
-        if (!item.hvClass('grey-item')) {
+        if (!item.hasClass('grey-item')) {
           item.addClass('selected');
         }
       }
@@ -295,7 +295,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     const prevBoxNum = boxNum - 1;
 
     const moveSelectedToBox = function(thisBoxNum) {
-      selectedItem.rmClass('selected');
+      selectedItem.removeClass('selected');
       getBoxList(thisBoxNum).children[selectIndex].addClass('selected');
     };
 
@@ -360,7 +360,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     // remove old selected
     if (selectedItem) {
-      selectedItem.rmClass('selected');
+      selectedItem.removeClass('selected');
     }
 
     // add new selected
@@ -710,7 +710,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function getItemIndex(item) {
-    return item.hvClass('no-bkmark') ? 0 :
+    return item.hasClass('no-bkmark') ? 0 :
       item.index() + 1 - getRootFolderNum(getParentBoxNum(item));
   }
 
@@ -777,7 +777,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     if (isHideCover !== false) {
       EDITOR.fadeOut();
       MENU_COVER.fadeOut(focusSearchInput);
-      TARGET_ITEM.rmClass('selected');
+      TARGET_ITEM.removeClass('selected');
     }
   }
 
@@ -967,7 +967,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function isItem(element) {
-    return element.hvClass('item');
+    return element.hasClass('item');
   }
 
   function isItemInView(item) {
@@ -985,7 +985,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function isRootFolder(item) {
-    return item.hvClass('rootfolder');
+    return item.hasClass('rootfolder');
   }
 
   function loadLastPos() {
@@ -1050,7 +1050,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       case 5: // Cut
       case 6: // Copy
       case 7: // Paste
-        if (target.hvClass('grey-item')) {
+        if (target.hasClass('grey-item')) {
           return false;
         }
 
