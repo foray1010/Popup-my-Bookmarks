@@ -500,57 +500,43 @@
       updatedList.ascEach(function(jeansId, seasonNum) {
         id$(jeansId).before(seasonNum);
       });
-    },
-
-    // set or unset CSS
-    CSS: (function() {
-      const getSheet = function() {
-        const _jetsCss = '_jets-css';
-
-        let styleElement = id$(_jetsCss);
-
-        if (!styleElement) {
-          styleElement = document.head.new$('style').prop('id', _jetsCss);
-        }
-
-        return styleElement.sheet;
-      };
-
-      const set = function(param1, param2) {
-        const sheet = getSheet();
-
-        const _action = function(styleSelector, styleList) {
-          let styleValue = '';
-
-          styleList.propEach(function(propName, propValue) {
-            styleValue += propName + ':' + propValue + ';';
-          });
-
-          sheet.insertRule(
-            styleSelector + '{' + styleValue + '}',
-            sheet.cssRules.length
-          );
-        };
-
-        if (param2 === undefined) {
-          param1.propEach(_action);
-        } else {
-          _action(param1, param2);
-        }
-      };
-
-      const unsetAll = function() {
-        const sheet = getSheet();
-
-        while (sheet.cssRules[0]) {
-          sheet.deleteRule(0);
-        }
-      };
-
-      return {
-        set: set,
-        unsetAll: unsetAll
-      };
-    })()
+    }
   });
+
+  // set or unset CSS
+  window.CSS = (function() {
+    const sheet = document.head.new$('style').sheet;
+
+    const set = function(param1, param2) {
+      const _action = function(styleSelector, styleList) {
+        let styleValue = '';
+
+        styleList.propEach(function(propName, propValue) {
+          styleValue += `${propName}:${propValue};`;
+        });
+
+        sheet.insertRule(
+          styleSelector + '{' + styleValue + '}',
+          sheet.cssRules.length
+        );
+      };
+
+      if (param2 === undefined) {
+        param1.propEach(_action);
+      } else {
+        _action(param1, param2);
+      }
+    };
+
+    const unsetAll = function() {
+      while (sheet.cssRules[0]) {
+        sheet.deleteRule(0);
+      }
+    };
+
+    return {
+      set: set,
+      unsetAll: unsetAll
+    };
+  })();
 }
