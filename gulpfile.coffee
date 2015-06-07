@@ -23,7 +23,7 @@ lang =
     dest: '.'
   js:
     extName: 'js'
-    compiler: 'babel'
+    compiler: 'browserify'
     minifier: 'uglify'
     source: 'js'
     dest: 'js'
@@ -127,7 +127,7 @@ gulp.task('compile-init', ->
 gulp.task('compile-main', ['compile-init'], ->
   compileLang('css', compilePath, compress: true)
   compileLang('html', compilePath)
-  compileLang('js', compilePath)
+  compileLang('js', compilePath, transform: ['babelify'])
 )
 
 gulp.task('compile-others', ['compile-init'], ->
@@ -156,7 +156,7 @@ gulp.task('dev', ->
 
   watchLang('css', devPath)
   watchLang('html', devPath, pretty: true)
-  watchLang('js', devPath)
+  watchLang('js', devPath, transform: ['babelify'])
 
   for fileName in ['font', '_locales']
     source = path.join('..', fileName)
