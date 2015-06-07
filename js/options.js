@@ -30,14 +30,14 @@
     .clickByButton(0, resetOptions);
 
   // donation
-  id$('donate-here').on('click', function() {
+  id$('donate-here').on('click', () => {
     id$('donate-img').name$('submit')[0].click();
   });
 
   function checkOptions(storageObj) {
     const newOptions = {};
 
-    OPTIONS.ascEach(function(option) {
+    OPTIONS.ascEach((option) => {
       const optionDefaultValue = option.defaultValue;
       const optionName = option.name;
 
@@ -67,14 +67,14 @@
     });
     const optionSelect = inputSelectBox.new$('select');
 
-    optionChoices.ascEach(function(choice) {
+    optionChoices.ascEach((choice) => {
       optionSelect.new$('option').prop({
         selected: choice === selectedValue,
         innerText: choice
       });
     });
 
-    optionSelect.on('change', function() {
+    optionSelect.on('change', () => {
       optionInput.value = optionSelect.value;
       optionInput.focus();
     });
@@ -87,8 +87,8 @@
 
     optMsgBox.innerText = msgText;
 
-    initTimeout('fadeOutMsgBox', function() {
-      optMsgBox.fadeOut(function() {
+    initTimeout('fadeOutMsgBox', () => {
+      optMsgBox.fadeOut(() => {
         optMsgBox.innerText = '';
         optMsgBox.hidden = false;
       });
@@ -96,10 +96,10 @@
   }
 
   function genOptionsTable() {
-    _storage.get(null, function(storageObj) {
+    _storage.get(null, (storageObj) => {
       checkOptions(storageObj);
 
-      OPTIONS.ascEach(function(option) {
+      OPTIONS.ascEach((option) => {
         const optionBox = OPTIONS_BOX.new$('div');
         const optionName = option.name;
         const optionChoices = option.choices;
@@ -148,7 +148,7 @@
 
           case 'string':
             optionInput = optionField.new$('select');
-            optionChoices.ascEach(function(choice, choiceNum) {
+            optionChoices.ascEach((choice, choiceNum) => {
               if (choice !== undefined) {
                 optionInput.new$('option').prop({
                   value: choiceNum,
@@ -178,7 +178,7 @@
       .addClass('selectbox-cover')
       .css('width', widthOfButton + '%');
 
-    const setActiveOption = function(optionButton) {
+    const setActiveOption = (optionButton) => {
       // -2 to ignore the input and background element
       const buttonIndex = optionButton.index() - 2;
 
@@ -188,7 +188,7 @@
       hiddenInput.value = optionChoices[buttonIndex];
     };
 
-    optionChoices.ascEach(function(value) {
+    optionChoices.ascEach((value) => {
       const buttonText = typeof value !== 'boolean' ?
         value : _getMsg(value ? 'opt_yes' : 'opt_no');
 
@@ -196,11 +196,11 @@
         .addClass('selectbox-item')
         .css('width', widthOfButton + '%')
         .addText(buttonText)
-        .clickByButton(0, function() {
-          if (!this.hasClass(selectboxItemActive)) {
+        .clickByButton(0, () => {
+          if (!optionButton.hasClass(selectboxItemActive)) {
             selectbox.class$(selectboxItemActive)[0]
               .removeClass(selectboxItemActive);
-            setActiveOption(this);
+            setActiveOption(optionButton);
           }
         });
 
@@ -216,7 +216,7 @@
     const selectArea = optionField.new$('div').addClass('select-multiple-box');
     const hiddenInput = selectArea.new$('input').prop('type', 'hidden');
 
-    optionChoices.ascEach(function(choice, choiceNum) {
+    optionChoices.ascEach((choice, choiceNum) => {
       if (choice !== undefined) {
         const isChecked = selectedValues.includes(choiceNum);
         const row = selectArea.new$('div');
@@ -231,11 +231,11 @@
       }
     });
 
-    selectArea.on('change', function() {
+    selectArea.on('change', () => {
       const inputValues = [];
 
       selectArea.query$('input[type="checkbox"]:checked')
-        .ascEach(function(inputElement) {
+        .ascEach((inputElement) => {
           inputValues.push(inputElement.value);
         });
 
@@ -351,14 +351,14 @@
     ];
 
     // get the root folders' title and set as the choices of 'defExpand'
-    chrome.bookmarks.getChildren('0', function(rootFolders) {
+    chrome.bookmarks.getChildren('0', (rootFolders) => {
       const rootFolderChoices = [];
 
-      rootFolders.ascEach(function(thisFolder) {
+      rootFolders.ascEach((thisFolder) => {
         rootFolderChoices[1 * thisFolder.id] = thisFolder.title;
       });
 
-      OPTIONS.ascEach(function(option) {
+      OPTIONS.ascEach((option) => {
         if (['defExpand', 'hideRootFolder'].includes(option.name)) {
           option.choices = rootFolderChoices;
         }
@@ -383,7 +383,7 @@
   }
 
   function resetOptions() {
-    _storage.clear(function() {
+    _storage.clear(() => {
       window.location.reload();
     });
   }
@@ -392,7 +392,7 @@
     const newOptions = {};
 
     try {
-      OPTIONS.ascEach(function(option, optionNum) {
+      OPTIONS.ascEach((option, optionNum) => {
         const optionName = option.name;
         const optionChoices = option.choices;
 
@@ -440,7 +440,7 @@
   function setContainerHeight() {
     let containerHeight = 0;
 
-    CONTAINER.children.ascEach(function(element) {
+    CONTAINER.children.ascEach((element) => {
       containerHeight += element.offsetHeight;
     });
 
@@ -457,13 +457,13 @@
         origins: []
       };
 
-      optionPermissions.ascEach(function(permission) {
+      optionPermissions.ascEach((permission) => {
         const propName = permission.includes('://') ? 'origins' : 'permissions';
 
         permissionsObj[propName].push(permission);
       });
 
-      chrome.permissions[actionType](permissionsObj, function(isSuccess) {
+      chrome.permissions[actionType](permissionsObj, (isSuccess) => {
         if (!isSuccess) {
           id$(optionName).parentNode
             .class$('selectbox-item')[optionValue ? 1 : 0].click();

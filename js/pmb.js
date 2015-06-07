@@ -1,4 +1,4 @@
-chrome.storage.sync.get(null, function(STORAGE) {
+chrome.storage.sync.get(null, (STORAGE) => {
   // shorter global
   const _bookmark = chrome.bookmarks;
   const _getMsg = chrome.i18n.getMessage;
@@ -124,7 +124,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
             break;
 
           case 'bkmark':
-            _bookmark.get(item.id, function(node) {
+            _bookmark.get(item.id, (node) => {
               clickSwitcher(mouseButton, node[0].url);
             });
         }
@@ -170,7 +170,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       }
 
       // set availability of menu items
-      MENU.children.ascEach(function(menuItem, itemNum) {
+      MENU.children.ascEach((menuItem, itemNum) => {
         menuItem.hidden = hideParam[itemNum];
       });
 
@@ -254,7 +254,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       let selectedItem;
 
       if (item) {
-        HOVER_TIMEOUT = setTimeout(function() {
+        HOVER_TIMEOUT = setTimeout(() => {
           if (!STORAGE.opFolderBy) {
             switch (item.data(DATATEXT_BOOKMARK_TYPE)) {
               case 'folder':
@@ -293,7 +293,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     const prevBoxNum = boxNum - 1;
 
-    const moveSelectedToBox = function(thisBoxNum) {
+    const moveSelectedToBox = (thisBoxNum) => {
       selectedItem.removeClass('selected');
       getBoxList(thisBoxNum).children[selectIndex].addClass('selected');
     };
@@ -311,7 +311,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         }
       } else {
         if (selectedItem.data(DATATEXT_BOOKMARK_TYPE) === 'folder') {
-          openFolder(selectedItem.id, function() {
+          openFolder(selectedItem.id, () => {
             moveSelectedToBox(boxNum + 1);
           });
         }
@@ -440,7 +440,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function createItemByMenuIntoView(title, url) {
-    createItemByMenu(title, url, function(itemInfo) {
+    createItemByMenu(title, url, (itemInfo) => {
       const item = id$(itemInfo.id);
 
       if (!isItemInView(item)) {
@@ -535,7 +535,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       }
 
       // hack to prevent dragover and dragend event stop working
-      setTimeout(function() {
+      setTimeout(() => {
         // create a cloned dragged item to replace the original one
         target.cloneNode(true).after(target);
 
@@ -609,8 +609,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function genFirstList() {
-    _bookmark.getChildren('0', function(rootTreeInfo) {
-      rootTreeInfo.ascEach(function(stem) {
+    _bookmark.getChildren('0', (rootTreeInfo) => {
+      rootTreeInfo.ascEach((stem) => {
         const stemId = 1 * stem.id;
 
         if (stemId === STORAGE.defExpand ||
@@ -620,7 +620,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         genItem(0, stem).addClass('rootfolder').draggable = false;
       });
 
-      _bookmark.getChildren('' + STORAGE.defExpand, function(treeInfo) {
+      _bookmark.getChildren('' + STORAGE.defExpand, (treeInfo) => {
         genList(0, treeInfo);
 
         loadLastPos();
@@ -659,7 +659,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function genList(boxNum, treeInfo) {
-    treeInfo.ascEach(function(itemInfo) {
+    treeInfo.ascEach((itemInfo) => {
       genItem(boxNum, itemInfo);
     });
     insertNoBkmark(boxNum);
@@ -670,7 +670,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function genMenu() {
     let area = MENU.new$('div');
 
-    MENU_PATTERN.ascEach(function(menuItemText) {
+    MENU_PATTERN.ascEach((menuItemText) => {
       if (menuItemText === '|') {
         area = MENU.new$('div');
       } else {
@@ -716,7 +716,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function getLastScrollTop() {
     const lastScrollTop = [];
 
-    BOX.ascEach(function(box, boxNum) {
+    BOX.ascEach((box, boxNum) => {
       lastScrollTop[boxNum] = getBoxList(boxNum).scrollTop;
     });
 
@@ -760,7 +760,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function greyMenuItem(greyArr, isGrey) {
     const menu = MENU.children[2];
 
-    greyArr.ascEach(function(itemNum) {
+    greyArr.ascEach((itemNum) => {
       menu.children[itemNum].toggleClass('grey-item', isGrey);
     });
   }
@@ -781,7 +781,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function initBookmarkEvent() {
-    const createElementInDom = function(id, info) {
+    const createElementInDom = (id, info) => {
       const boxNum = BOX_PID.indexOf(info.parentId);
 
       // if parent box exists
@@ -795,7 +795,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       }
     };
 
-    const removeElementFromDom = function(id) {
+    const removeElementFromDom = (id) => {
       const removedElement = id$(id);
 
       let boxNum;
@@ -819,7 +819,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       }
     };
 
-    _bookmark.onChanged.addListener(function(id, info) {
+    _bookmark.onChanged.addListener((id, info) => {
       const changedItem = id$(id);
       const title = info.title;
       const url = info.url;
@@ -840,8 +840,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
     _bookmark.onCreated.addListener(createElementInDom);
 
-    _bookmark.onMoved.addListener(function(id) {
-      _bookmark.get(id, function(node) {
+    _bookmark.onMoved.addListener((id) => {
+      _bookmark.get(id, (node) => {
         removeElementFromDom(id);
         createElementInDom(id, node[0]);
       });
@@ -856,7 +856,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
     // confirm editing
     editorButton[0]
       .addText(_getMsg('confirm'))
-      .clickByButton(0, function() {
+      .clickByButton(0, () => {
         const editorInput = EDITOR.tag$('input');
 
         const title = editorInput[0].value;
@@ -885,7 +885,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       .clickByButton(0, hideMenu);
 
     // type 'Enter' on input tag
-    EDITOR.on('keydown', function(event) {
+    EDITOR.on('keydown', (event) => {
       if (event.keyCode === 13) {
         editorButton[0].click();
       }
@@ -895,7 +895,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function initSearch() {
     SEARCH_INPUT
       .prop('placeholder', _getMsg('search'))
-      .on('input', function() {
+      .on('input', () => {
         // to avoid searching when user is still typing
         initTimeout('search', searchHandler, 200);
       });
@@ -907,7 +907,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function initStyleOptions() {
     // if the font family's name has whitespace, use quote to embed it
     const fontFamily = STORAGE.fontFamily.split(',')
-      .map(function(x) {
+      .map((x) => {
         x = x.trim();
 
         if (x.includes(' ')) {
@@ -989,8 +989,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function loadLastPos() {
     if (STORAGE.rememberPos) {
-      LAST_BOX_PID.ascEach(function(folderId, boxNum) {
-        const fnAfterOpen = function() {
+      LAST_BOX_PID.ascEach((folderId, boxNum) => {
+        const fnAfterOpen = () => {
           const lastScrollTop = LAST_SCROLL_TOP[boxNum];
 
           if (lastScrollTop) {
@@ -1052,7 +1052,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         _tab.query({
           currentWindow: true,
           active: true
-        }, function(tab) {
+        }, (tab) => {
           createItemByMenuIntoView(tab[0].title, tab[0].url);
         });
         break;
@@ -1086,20 +1086,20 @@ chrome.storage.sync.get(null, function(STORAGE) {
       ['openAll', 'openAllInN', 'openAllInI', 'rename'] :
       ['openInB', 'openInN', 'openInI', 'edit'];
 
-    menuItemMsgName.ascEach(function(itemText, itemNum) {
+    menuItemMsgName.ascEach((itemText, itemNum) => {
       menuItem[itemNum].innerText = _getMsg(itemText);
     });
   }
 
   function onHoverTimeout(element, fn, delay, xyRange=20, isInsideRange=true) {
-    const mousemoveFn = function(mouseXYOrig) {
-      const isTriggerPoint = function(axis) {
+    const mousemoveFn = (mouseXYOrig) => {
+      const isTriggerPoint = (axis) => {
         const displacement = Math.abs(mouseXY[axis] - mouseXYOrig[axis]);
 
         return displacement < xyRange === isInsideRange;
       };
 
-      eventTimer = setTimeout(function() {
+      eventTimer = setTimeout(() => {
         if (document.contains(element)) {
           if (isInsideRange ?
                 isTriggerPoint(0) && isTriggerPoint(1) :
@@ -1133,11 +1133,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
   function openBkmarks(targetId, isFolder, menuItemNum) {
     const getBookmark = isFolder ? _bookmark.getSubTree : _bookmark.get;
 
-    getBookmark(targetId, function(node) {
+    getBookmark(targetId, (node) => {
       const urlList = [];
 
       if (isFolder) {
-        node[0].children.ascEach(function(itemInfo) {
+        node[0].children.ascEach((itemInfo) => {
           const url = itemInfo.url;
 
           if (url && url !== SEPARATE_THIS) {
@@ -1155,7 +1155,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       }
 
       if (menuItemNum === 0) {
-        urlList.ascEach(function(url) {
+        urlList.ascEach((url) => {
           _tab.create({
             url: url,
             active: false
@@ -1180,7 +1180,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       return false;
     }
 
-    _bookmark.getChildren(id, function(treeInfo) {
+    _bookmark.getChildren(id, (treeInfo) => {
       if (treeInfo === undefined) {
         return false;
       }
@@ -1199,7 +1199,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       genList(nextBoxNum, treeInfo);
 
       if (boxNum > 0 && prevBoxNum >= NINJA_LIST.length) {
-        const folderCoverFn = function() {
+        const folderCoverFn = () => {
           resetBox(prevBoxNum);
         };
 
@@ -1211,7 +1211,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
         }
       }
 
-      setTimeout(function() {
+      setTimeout(() => {
         expandWidth(true);
       }, 50);
 
@@ -1234,16 +1234,16 @@ chrome.storage.sync.get(null, function(STORAGE) {
         index: getItemIndex(TARGET_ITEM)
       });
     } else {
-      _bookmark.getSubTree(itemId, function(treeInfo) {
+      _bookmark.getSubTree(itemId, (treeInfo) => {
         const branchInfo = treeInfo[0];
 
-        const copyChildFn = function(folderList, folderId) {
-          folderList.children.ascEach(function(bkmark) {
+        const copyChildFn = (folderList, folderId) => {
+          folderList.children.ascEach((bkmark) => {
             _bookmark.create({
               parentId: folderId,
               title: bkmark.title,
               url: bkmark.url
-            }, function(itemInfo) {
+            }, (itemInfo) => {
               if (!bkmark.url) {
                 copyChildFn(bkmark, itemInfo.id);
               }
@@ -1251,7 +1251,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
           });
         };
 
-        createItemByMenu(branchInfo.title, branchInfo.url, function(itemInfo) {
+        createItemByMenu(branchInfo.title, branchInfo.url, (itemInfo) => {
           if (!itemInfo.url) {
             copyChildFn(itemInfo, itemInfo.id);
           }
@@ -1290,11 +1290,11 @@ chrome.storage.sync.get(null, function(STORAGE) {
       expandWidth(false);
     }
 
-    NINJA_LIST.descEach(function() {
+    NINJA_LIST.descEach(() => {
       NINJA_LIST.pop().fadeOut(true);
     }, level - 1);
 
-    BOX.descEach(function() {
+    BOX.descEach(() => {
       BOX.pop().fadeOut(true);
       BOX_PID.pop();
       HEIGHT_LIST.pop();
@@ -1314,7 +1314,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
   function savLastScroll(isDelaySave) {
     if (STORAGE.rememberPos) {
-      const saveFn = function() {
+      const saveFn = () => {
         JSONStorage.set(NAME_LAST_SCROLL_TOP, getLastScrollTop());
       };
 
@@ -1338,13 +1338,13 @@ chrome.storage.sync.get(null, function(STORAGE) {
       searchSwitch(true);
     }
 
-    _bookmark.search(keyword, function(results) {
+    _bookmark.search(keyword, (results) => {
       const boxList = getBoxList(0);
       const sortedResult = sortByTitle(searchResultSelector(results));
 
       removeNoBkmark(0);
 
-      update$(boxList, sortedResult, function(item) {
+      update$(boxList, sortedResult, (item) => {
         genItem(0, item).draggable = false;
       });
       insertNoBkmark(0);
@@ -1362,14 +1362,14 @@ chrome.storage.sync.get(null, function(STORAGE) {
     const splittedKeyArr = [];
 
     if (isOnlySearchTitle) {
-      SEARCH_INPUT.value.split(' ').ascEach(function(splittedKey) {
+      SEARCH_INPUT.value.split(' ').ascEach((splittedKey) => {
         if (splittedKey !== '') {
           splittedKeyArr.push(splittedKey.toLowerCase());
         }
       });
     }
 
-    results.ascEach(function(bkmark) {
+    results.ascEach((bkmark) => {
       const bkmarkTitle = bkmark.title.toLowerCase();
       const bkmarkUrl = bkmark.url;
 
@@ -1377,7 +1377,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
 
       if (bkmarkUrl && bkmarkUrl !== SEPARATE_THIS) {
         if (isOnlySearchTitle) {
-          splittedKeyArr.ascEach(function(splittedKey) {
+          splittedKeyArr.ascEach((splittedKey) => {
             if (!bkmarkTitle.includes(splittedKey)) {
               isntTitleMatched = true;
               return false;
@@ -1498,8 +1498,8 @@ chrome.storage.sync.get(null, function(STORAGE) {
     if (IS_SEARCHING) {
       const breadcrumbArr = [];
 
-      const getBreadcrumb = function(breadId) {
-        _bookmark.get(breadId, function(node) {
+      const getBreadcrumb = (breadId) => {
+        _bookmark.get(breadId, (node) => {
           if (node === undefined) {
             return false;
           }
@@ -1532,7 +1532,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
       setEditorText(_getMsg('newFolder'));
       setEditorPos();
     } else {
-      _bookmark.get(TARGET_ITEM.id, function(node) {
+      _bookmark.get(TARGET_ITEM.id, (node) => {
         setEditorText(node[0].title, node[0].url);
         setEditorPos();
       });
@@ -1540,10 +1540,10 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function sortByName(parentId) {
-    _bookmark.getChildren(parentId, function(childList) {
+    _bookmark.getChildren(parentId, (childList) => {
       const separatedChildList = [];
 
-      const genBkmarkList = function() {
+      const genBkmarkList = () => {
         const newBkmarkList = [
           [/* Separators */],
           [/* Folders */],
@@ -1564,7 +1564,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
        * Each main group contains 3 small groups
        * (Separators, Folders, Bookmarks)
        */
-      childList.ascEach(function(bkmark) {
+      childList.ascEach((bkmark) => {
         const url = bkmark.url;
 
         let selectedBkmarkListNum;
@@ -1587,14 +1587,14 @@ chrome.storage.sync.get(null, function(STORAGE) {
       });
 
       // Concatenate all lists into single list
-      separatedChildList.ascEach(function(thisSelectedChildList) {
-        thisSelectedChildList.ascEach(function(bkmarkList) {
+      separatedChildList.ascEach((thisSelectedChildList) => {
+        thisSelectedChildList.ascEach((bkmarkList) => {
           newChildList = newChildList.concat(sortByTitle(bkmarkList));
         });
       });
 
       // Sort bookmarks by Selection sort
-      newChildList.ascEach(function(bkmark, index) {
+      newChildList.ascEach((bkmark, index) => {
         const oldIndex = childList.indexOf(bkmark);
 
         if (oldIndex !== index) {
@@ -1609,7 +1609,7 @@ chrome.storage.sync.get(null, function(STORAGE) {
   }
 
   function sortByTitle(bkmarkList) {
-    return bkmarkList.sort(function(bkmark1, bkmark2) {
+    return bkmarkList.sort((bkmark1, bkmark2) => {
       return bkmark1.title.localeCompare(bkmark2.title);
     });
   }

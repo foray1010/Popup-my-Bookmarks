@@ -1,5 +1,5 @@
 {
-  const EMPTY_FUNC = function() {};
+  const EMPTY_FUNC = () => {};
   const OBJECT_PROTO = Object.prototype;
   const TIMEOUT_HANDLER = {};
 
@@ -20,7 +20,7 @@
     const _this = this;
 
     if (typeof val1 === 'object') {
-      val1.propEach(function(dna, heredity) {
+      val1.propEach((dna, heredity) => {
         if (typeof _this[dna] === 'object' &&
             typeof heredity === 'object' &&
             heredity !== null) {
@@ -66,7 +66,7 @@
     clickByButton(allowButton, fn) {
       const _this = this;
 
-      _this.on('click', function(event) {
+      _this.on('click', (event) => {
         if (allowButton === event.button) {
           fn.call(_this, event);
         }
@@ -160,7 +160,7 @@
     data(param1, param2) {
       const _this = this;
 
-      const setDataset = function(name, val) {
+      const setDataset = (name, val) => {
         _this.dataset[name] = val;
       };
 
@@ -270,7 +270,7 @@
 
       _this.style.transition = `${styleName} ${duration}ms`;
 
-      setTimeout(function() {
+      setTimeout(() => {
         _this.style.transition = '';
 
         completeFn.call(_this);
@@ -285,7 +285,7 @@
         arguments, ['number', 'boolean', 'function'], [400, false, EMPTY_FUNC]
       );
 
-      _this.anim('opacity', 0, duration, function() {
+      _this.anim('opacity', 0, duration, () => {
         if (isRemoveWhenDone) {
           _this.remove();
         } else {
@@ -303,7 +303,7 @@
     merge(arr) {
       const arr2 = [];
 
-      this.ascEach(function(i) {
+      this.ascEach((i) => {
         if (arr.includes(i)) {
           arr2.push(i);
         }
@@ -314,7 +314,7 @@
     diff(arr) {
       const arr2 = [];
 
-      this.ascEach(function(i) {
+      this.ascEach((i) => {
         if (!arr.includes(i)) {
           arr2.push(i);
         }
@@ -357,7 +357,7 @@
       args = [].slice.call(args, argsSliceNum);
     }
 
-    typePatterns.ascEach(function(expectedType, typeIndex) {
+    typePatterns.ascEach((expectedType, typeIndex) => {
       const thisArg = args[argIndex];
       const thisType = typeof thisArg;
 
@@ -383,15 +383,15 @@
     );
 
     const addEvent = isOnce ?
-      function(thisEventName, thisEventFn) {
-        const onceEventFn = function(e) {
+      (thisEventName, thisEventFn) => {
+        const onceEventFn = (e) => {
           thisEventFn(e);
           _this.removeEventListener(thisEventName, onceEventFn);
         };
 
         _this.addEventListener(thisEventName, onceEventFn, useCapture);
       } :
-      function(thisEventName, thisEventFn) {
+      (thisEventName, thisEventFn) => {
         _this.addEventListener(thisEventName, thisEventFn, useCapture);
       };
 
@@ -437,27 +437,27 @@
       const outdatedList = [];
       const updatedList = [];
 
-      swelldom.children.ascEach(function(jeans) {
+      swelldom.children.ascEach((jeans) => {
         if (jeans.id !== '') {
           outdatedList.push(jeans.id);
         }
       });
 
-      vogue.ascEach(function(jeans) {
+      vogue.ascEach((jeans) => {
         updatedList.push(jeans.id);
       }, maxModels);
 
       outdatedList.diff(updatedList)
-        .ascEach(function(oldSchool) {
+        .ascEach((oldSchool) => {
           id$(oldSchool).remove();
         });
 
       updatedList.diff(outdatedList)
-        .ascEach(function(season) {
+        .ascEach((season) => {
           catwalk(vogue[updatedList.indexOf(season)]);
         });
 
-      updatedList.ascEach(function(jeansId, seasonNum) {
+      updatedList.ascEach((jeansId, seasonNum) => {
         id$(jeansId).before(seasonNum);
       });
     },
@@ -470,14 +470,14 @@
   });
 
   // set or unset CSS
-  window.CSS = (function() {
+  window.CSS = (() => {
     const sheet = document.head.new$('style').sheet;
 
-    const set = function(param1, param2) {
-      const _action = function(styleSelector, styleList) {
+    const set = (param1, param2) => {
+      const _action = (styleSelector, styleList) => {
         let styleValue = '';
 
-        styleList.propEach(function(propName, propValue) {
+        styleList.propEach((propName, propValue) => {
           styleValue += `${propName}:${propValue};`;
         });
 
@@ -494,7 +494,7 @@
       }
     };
 
-    const unsetAll = function() {
+    const unsetAll = () => {
       while (sheet.cssRules[0]) {
         sheet.deleteRule(0);
       }
