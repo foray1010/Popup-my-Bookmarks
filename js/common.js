@@ -73,47 +73,6 @@
 
       return _this;
     },
-    hoverTimeout(fn, timeout, xyRange, isInsideRange=true) {
-      const _this = this;
-
-      const mousemoveFn = function(mouseXYOrig) {
-        const isTriggerPoint = function(axis) {
-          const displacement = Math.abs(mouseXY[axis] - mouseXYOrig[axis]);
-          return displacement < xyRange === isInsideRange;
-        };
-
-        eventTimer = setTimeout(function() {
-          if (document.contains(_this)) {
-            if (isInsideRange ?
-                  isTriggerPoint(0) && isTriggerPoint(1) :
-                  isTriggerPoint(0) || isTriggerPoint(1)) {
-              fn(event);
-              eventTimer = null;
-            } else {
-              mousemoveFn(mouseXY);
-            }
-          }
-        }, timeout);
-      };
-
-      let eventTimer;
-      let mouseXY;
-
-      _this.on({
-        mousemove(event) {
-          mouseXY = [event.x, event.y];
-          if (!eventTimer) {
-            mousemoveFn(mouseXY);
-          }
-        },
-        mouseout() {
-          clearTimeout(eventTimer);
-          eventTimer = null;
-        }
-      });
-
-      return _this;
-    },
     on() {
       return eventHandler(this, arguments, false);
     },

@@ -1100,6 +1100,45 @@ chrome.storage.sync.get(null, function(STORAGE) {
     });
   }
 
+  function onHoverTimeout(element, fn, delay, xyRange=20, isInsideRange=true) {
+    const mousemoveFn = function(mouseXYOrig) {
+      const isTriggerPoint = function(axis) {
+        const displacement = Math.abs(mouseXY[axis] - mouseXYOrig[axis]);
+
+        return displacement < xyRange === isInsideRange;
+      };
+
+      eventTimer = setTimeout(function() {
+        if (document.contains(element)) {
+          if (isInsideRange ?
+                isTriggerPoint(0) && isTriggerPoint(1) :
+                isTriggerPoint(0) || isTriggerPoint(1)) {
+            fn(event);
+            eventTimer = null;
+          } else {
+            mousemoveFn(mouseXY);
+          }
+        }
+      }, delay);
+    };
+
+    let eventTimer;
+    let mouseXY;
+
+    element.on({
+      mousemove(event) {
+        mouseXY = [event.x, event.y];
+        if (!eventTimer) {
+          mousemoveFn(mouseXY);
+        }
+      },
+      mouseout() {
+        clearTimeout(eventTimer);
+        eventTimer = null;
+      }
+    });
+  }
+
   function openBkmarks(targetId, isFolder, menuItemNum) {
     _bookmark[isFolder ? 'getSubTree' : 'get'](targetId, function(node) {
       const urlList = [];
@@ -1160,9 +1199,6 @@ chrome.storage.sync.get(null, function(STORAGE) {
       const nextBoxNum = boxNum + 1;
       const prevBoxNum = boxNum - 1;
 
-      let folderCover;
-      let folderCoverFn;
-
       genBox(nextBoxNum, id);
 
       updateBoxHeadTitle(nextBoxNum, folderItem.innerText);
@@ -1170,15 +1206,15 @@ chrome.storage.sync.get(null, function(STORAGE) {
       genList(nextBoxNum, treeInfo);
 
       if (boxNum > 0 && prevBoxNum >= NINJA_LIST.length) {
-        folderCoverFn = function() {
+        const folderCoverFn = function() {
           resetBox(prevBoxNum);
         };
 
-        folderCover = genNinja(prevBoxNum)
+        const folderCover = genNinja(prevBoxNum)
           .on('click', folderCoverFn);
 
         if (!STORAGE.opFolderBy) {
-          folderCover.hoverTimeout(folderCoverFn, 300, 20);
+          onHoverTimeout(folderCover, folderCoverFn, 300);
         }
       }
 
