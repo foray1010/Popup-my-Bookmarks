@@ -197,9 +197,9 @@
         .css('width', widthOfButton + '%')
         .addText(buttonText)
         .clickByButton(0, function() {
-          if (!this.hvClass(selectboxItemActive)) {
+          if (!this.hasClass(selectboxItemActive)) {
             selectbox.class$(selectboxItemActive)[0]
-              .rmClass(selectboxItemActive);
+              .removeClass(selectboxItemActive);
             setActiveOption(this);
           }
         });

@@ -255,10 +255,10 @@
     addClass(className) {
       return classListFn(this, 'add', className);
     },
-    hvClass(className) {
+    hasClass(className) {
       return this.classList.contains(className);
     },
-    rmClass(className) {
+    removeClass(className) {
       return classListFn(this, 'remove', className);
     },
     toggleClass(className, switcher) {
