@@ -22,8 +22,9 @@
    > gulp dev
 
    To make a temporary folder "__dev" for you to load unpacked extension
-   - *.styl and *.jade will be watched and compiled to *.css or *.html once you edit
-   - "__dev/js" will be soft-linked to "./js"
+   - ES6 JavaScript to ES5 JavaScript by [Babel](//github.com/babel/babel)
+   - *.styl to *.css by [Stylus](//github.com/stylus/stylus)
+   - *.jade to *.html by [Jade](//github.com/jadejs/jade)
 
 3. help
    > gulp help
@@ -34,7 +35,7 @@
    > gulp lint
 
    To lint
-   - JavaScript code by [JSHint](//github.com/jshint/jshint)
+   - ES6 JavaScript code by [ESLint](//github.com/eslint/eslint)
    - CoffeeScript code by [CoffeeLint](//github.com/clutchski/coffeelint)
    - Stylus code by [Stylint](//github.com/rossPatton/stylint)
 
