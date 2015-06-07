@@ -59,9 +59,6 @@ Translations:
   - Support Russian locales (thanks Другие закладки)
   - Locales update: Korean(Jinhyeok Lee)
 
-Others:
-  - We are now officially launched on Opera add-ons (suggested by Ruarí Ødegaard)
-
 ## 3.0.0.506 (5/6/2014)
 Features:
   - Add Breadcrumb to tooltips during search (inspired by Ashish Bogawat)
