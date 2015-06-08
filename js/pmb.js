@@ -30,17 +30,17 @@ chrome.storage.sync.get(null, (STORAGE) => {
   // +2 for border width, GOLDEN_GAP*2 for padding
   const ITEM_HEIGHT = 2 + GOLDEN_GAP * 2 + Math.max(STORAGE.fontSize, 16);
 
-  // attr: data's text
+  // attr: data: key
   const DATATEXT_BOX_NUM = 'boxNum';
   const DATATEXT_BOOKMARK_TYPE = 'bookmarkType';
 
   // HTML element
   const BODY = document.body;
-  const CONTAINER = [id$('main'), id$('sub')];
   const DRAG_PLACE = id$('drag-place');
   const EDITOR = id$('editor');
   const MENU = id$('menu');
   const MENU_COVER = id$('menu-cover');
+  const PANEL = [id$('main'), id$('sub')];
   const PRELOAD = id$('preload');
   const SEARCH_INPUT = id$('search-input');
 
@@ -572,7 +572,7 @@ chrome.storage.sync.get(null, (STORAGE) => {
   }
 
   function genBox(boxNum, boxPid) {
-    const box = BOX_TEMPLATE.cloneTo(CONTAINER[boxNum % 2]);
+    const box = BOX_TEMPLATE.cloneTo(PANEL[boxNum % 2]);
 
     // remove the old box if exist
     if (BOX[boxNum]) {
