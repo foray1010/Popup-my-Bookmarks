@@ -12,7 +12,7 @@ function clickCancelHandler(event, {props, state}) {
 
 function render({props, state}) {
   return (
-    <div id='editor' class='panel-width'>
+    <div id='editor' class='panel-width' hidden={props.isHidden}>
       <span id='edit-title'>{''}</span>
       <input type='text' value={''} />
       <input type='text' value={''} />

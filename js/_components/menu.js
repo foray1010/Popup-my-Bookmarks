@@ -31,7 +31,7 @@ function render({props, state}) {
     return <div>{menuAreaItems}</div>;
   });
 
-  return <div id='menu'>{menuItems}</div>;
+  return <div id='menu' hidden={props.isHidden}>{menuItems}</div>;
 }
 
 export default {render};

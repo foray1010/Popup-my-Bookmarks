@@ -1,5 +1,7 @@
 import {element} from 'deku';
 
+import Headbox from './headbox';
+
 let ITEM_HEIGHT = 22; // test
 
 function mouseWheelHandler(event, {props, state}) {
@@ -12,10 +14,7 @@ function mouseWheelHandler(event, {props, state}) {
 function render({props, state}) {
   return (
     <div class='box-template'>
-      <div class='headbox'>
-        <div class='head-title no-text-overflow'>{''}</div>
-        <div class='head-close' />
-      </div>
+      <Headbox />
       <div
         class='folderlist'
         onMouseWheel={mouseWheelHandler}

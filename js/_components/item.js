@@ -17,15 +17,35 @@ function dragStartHandler(event, {props, state}) {
 }
 
 function render({props, state}) {
+  const itemClasses = ['item', 'bookmark-item', 'no-text-overflow'];
   const itemInfo = props.itemInfo;
 
-  const iconSrc = `chrome://favicon/${itemInfo.url}`;
   const itemTitle = itemInfo.title || itemInfo.url;
+
+  let iconSrc;
+  let isDraggable = true;
+
+  if (itemInfo.url) {
+    if (itemInfo.url === globals.separateThisUrl) {
+      itemClasses.push('separator');
+    } else {
+      iconSrc = `chrome://favicon/${itemInfo.url}`;
+    }
+  } else {
+    iconSrc = 'img/folder.png';
+
+    // when it is a root folder
+    if (itemInfo.parentId === '0') {
+      itemClasses.push('rootfolder');
+
+      isDraggable = false;
+    }
+  }
 
   return (
     <p
-      class='item bookmark-item no-text-overflow'
-      draggable='true'
+      class={itemClasses}
+      draggable={isDraggable}
       onClick={clickHandler}
       onDragEnd={dragEndHandler}
       onDragOver={dragOverHandler}
