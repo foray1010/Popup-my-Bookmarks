@@ -15,6 +15,13 @@ function initialState(props) {
   };
 }
 
+// disable the scrolling arrows after middle click
+function mouseDownHandler(event) {
+  if (event.button === 1) {
+    event.preventDefault();
+  }
+}
+
 function render({props, state}, setState) {
   console.log({props, state});
 
@@ -23,7 +30,7 @@ function render({props, state}, setState) {
   };
 
   return (
-    <div>
+    <div onMouseDown={mouseDownHandler}>
       <Panel
         trees={state.trees}
         updateTrees={updateTrees} />
