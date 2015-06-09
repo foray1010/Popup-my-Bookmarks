@@ -1,4 +1,6 @@
 parser: "babel-eslint"
+plugins:
+  - "react"
 env:
   browser: true
 globals:
@@ -21,6 +23,7 @@ ecmaFeatures:
   destructuring: true
   forOf: true
   generators: false
+  jsx: true
   modules: true
   objectLiteralComputedProperties: true
   objectLiteralDuplicateProperties: false
@@ -28,7 +31,7 @@ ecmaFeatures:
   objectLiteralShorthandProperties: true
   spread: true
   superInFunctions: true
-  templateStrings: true
+  templateStrings: true,
 rules:
 /**
 * Strict mode
@@ -207,3 +210,31 @@ rules:
   space-infix-ops: 2
   space-return-throw-case: 2
   spaced-line-comment: 2
+
+/**
+ * JSX style
+ */
+  react/display-name: 0
+  react/jsx-boolean-value:
+    - 2
+    - "never"
+  react/jsx-no-undef: 2
+  react/jsx-quotes:
+    - 2
+    - "single"
+  react/jsx-sort-prop-types: 0
+  react/jsx-sort-props: 0
+  react/jsx-uses-react:
+    - 2
+    -
+      pragma: "element"
+  react/jsx-uses-vars: 2
+  react/no-did-mount-set-state: 0
+  react/no-did-update-set-state: 0
+  react/no-multi-comp: 0
+  react/no-unknown-property: 0
+  react/prop-types: 0
+  react/react-in-jsx-scope: 0
+  react/self-closing-comp: 2
+  react/sort-comp: 0
+  react/wrap-multilines: 2
