@@ -4,12 +4,14 @@ import Editor from './editor';
 import Menu from './menu';
 import Panel from './panel';
 
+function initialState(props) {
+  return {
+    trees: props.globals.trees
+  };
+}
+
 function render({props, state}, setState) {
   console.log({props, state});
-
-  if (!state.trees) {
-    state.trees = props.globals.trees;
-  }
 
   const updateTrees = (newTrees) => {
     setState({trees: newTrees});
@@ -27,4 +29,4 @@ function render({props, state}, setState) {
   );
 }
 
-export default {render};
+export default {initialState, render};
