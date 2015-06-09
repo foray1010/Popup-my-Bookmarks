@@ -1,6 +1,6 @@
 import {element, render, tree} from 'deku';
 
-import PMB from './_components/pmb';
+import App from './_components/popup/app';
 
 window.globals = {
   separateThisUrl: 'http://separatethis.com/'
@@ -45,7 +45,7 @@ new Promise((resolve) => {
     });
   })
   .then(() => {
-    const app = tree(<PMB trees={trees} />);
+    const app = tree(<App trees={trees} />);
 
     render(app, document.getElementById('container'));
   });
