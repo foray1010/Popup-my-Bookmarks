@@ -25,7 +25,7 @@ function render({props, state}) {
       onDragEnd={dragEndHandler}
       onDragOver={dragOverHandler}
       onDragStart={dragStartHandler}>
-      <img class='icon' src={''} alt='' draggable='false'>
+      <img class='icon' src={''} alt='' draggable='false' />
       <span>{''}</span>
     </p>
   );

@@ -9,6 +9,7 @@
     "coffee-script": "*",
     "cson": "*",
     "deku": "*",
+    "eslint-plugin-react": "*",
     "fs-extra": "*",
     "gulp": "*",
     "gulp-browserify": "*",
