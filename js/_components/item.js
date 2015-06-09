@@ -17,6 +17,11 @@ function dragStartHandler(event, {props, state}) {
 }
 
 function render({props, state}) {
+  const itemInfo = props.itemInfo;
+
+  const iconSrc = `chrome://favicon/${itemInfo.url}`;
+  const itemTitle = itemInfo.title || itemInfo.url;
+
   return (
     <p
       class='item bookmark-item no-text-overflow'
@@ -25,8 +30,8 @@ function render({props, state}) {
       onDragEnd={dragEndHandler}
       onDragOver={dragOverHandler}
       onDragStart={dragStartHandler}>
-      <img class='icon' src={''} alt='' draggable='false' />
-      <span>{''}</span>
+      <img class='icon' src={iconSrc} alt='' draggable='false' />
+      <span>{itemTitle}</span>
     </p>
   );
 }

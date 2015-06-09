@@ -1,18 +1,49 @@
 import {element, render, tree} from 'deku';
 
-import Editor from './_components/editor';
-import Menu from './_components/menu';
-import Panel from './_components/panel';
+import PMB from './_components/pmb';
 
-chrome.storage.sync.get(null, (STORAGE) => {
-  const app = tree(
-    <div>
-      <Panel />
-      <div id='menu-cover' class='ninja' hidden />
-      <Menu />
-      <Editor />
-    </div>
-  );
+const globals = {
+  trees: []
+};
 
-  render(app, document.getElementById('container'));
-});
+new Promise((resolve) => {
+  chrome.storage.sync.get(null, (storage) => {
+    globals.storage = storage;
+
+    resolve();
+  });
+})
+  .then(() => {
+    return new Promise((resolve) => {
+      chrome.bookmarks.getChildren('0', (rootTreeInfo) => {
+        const minRootTreeInfo = rootTreeInfo.filter((itemInfo) => {
+          const itemIdNum = 1 * itemInfo.id;
+
+          const isFilterThisItem = itemIdNum === globals.storage.defExpand ||
+            globals.storage.hideRootFolder.includes(itemIdNum);
+
+          return isFilterThisItem;
+        });
+
+        globals.trees.push(minRootTreeInfo);
+
+        resolve();
+      });
+    });
+  })
+  .then(() => {
+    return new Promise((resolve) => {
+      const defExpandStr = '' + globals.storage.defExpand;
+
+      chrome.bookmarks.getChildren(defExpandStr, (treeInfo) => {
+        globals.trees.push(treeInfo);
+
+        resolve();
+      });
+    });
+  })
+  .then(() => {
+    const app = tree(<PMB globals={globals} />);
+
+    render(app, document.getElementById('container'));
+  });
