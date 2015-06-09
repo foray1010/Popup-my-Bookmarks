@@ -2,9 +2,11 @@ import {element, render, tree} from 'deku';
 
 import PMB from './_components/pmb';
 
-const globals = {
-  trees: []
+window.globals = {
+  separateThisUrl: 'http://separatethis.com/'
 };
+
+const trees = [];
 
 new Promise((resolve) => {
   chrome.storage.sync.get(null, (storage) => {
@@ -25,7 +27,7 @@ new Promise((resolve) => {
           return isFilterThisItem;
         });
 
-        globals.trees.push(minRootTreeInfo);
+        trees.push(minRootTreeInfo);
 
         resolve();
       });
@@ -36,14 +38,14 @@ new Promise((resolve) => {
       const defExpandStr = '' + globals.storage.defExpand;
 
       chrome.bookmarks.getChildren(defExpandStr, (treeInfo) => {
-        globals.trees.push(treeInfo);
+        trees.push(treeInfo);
 
         resolve();
       });
     });
   })
   .then(() => {
-    const app = tree(<PMB globals={globals} />);
+    const app = tree(<PMB trees={trees} />);
 
     render(app, document.getElementById('container'));
   });
