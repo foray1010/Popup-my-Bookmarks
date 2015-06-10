@@ -62,7 +62,32 @@ function clickSwitcher(mouseButton, itemUrl) {
   }
 }
 
+function contextMenuHandler(event, {props, state}, updateState) {
+  // disable native context menu
+  event.preventDefault();
 
+  const itemInfo = props.itemInfo;
+
+  let hideParam;
+
+  switch (getBookmarkType(itemInfo)) {
+    case 'folder':
+    case 'bkmark':
+      if (isRootFolder(itemInfo)) {
+        hideParam = [false, true, true, true, true];
+      // } else if (!IS_SEARCHING) {
+      //   hideParam = [false, false, false, false, false];
+      } else {
+        hideParam = [false, false, false, true, true];
+      }
+      break;
+
+    case 'no-bkmark':
+      hideParam = [true, true, false, false, true];
+  }
+
+  console.log(hideParam);
+}
 
 function dragEndHandler(event, {props, state}) {
 
@@ -74,6 +99,22 @@ function dragOverHandler(event, {props, state}) {
 
 function dragStartHandler(event, {props, state}) {
 
+}
+
+function getBookmarkType(itemInfo) {
+  let bookmarkType;
+
+  if (itemInfo.url) {
+    bookmarkType = 'bkmark';
+  } else {
+    bookmarkType = 'folder';
+  }
+
+  return bookmarkType;
+}
+
+function isRootFolder(itemInfo) {
+  return itemInfo.parentId === '0';
 }
 
 function mouseOutHandler(event, {props, state}, updateState) {
@@ -110,8 +151,7 @@ function render({props, state}) {
   } else {
     iconSrc = 'img/folder.png';
 
-    // when it is a root folder
-    if (itemInfo.parentId === '0') {
+    if (isRootFolder(itemInfo)) {
       itemClasses.push('rootfolder');
 
       isDraggable = false;
@@ -127,6 +167,7 @@ function render({props, state}) {
       class={itemClasses}
       draggable={isDraggable}
       onClick={clickHandler}
+      onContextMenu={contextmenuHandler}
       onDragEnd={dragEndHandler}
       onDragOver={dragOverHandler}
       onDragStart={dragStartHandler}
