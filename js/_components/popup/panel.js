@@ -5,6 +5,7 @@ import Item from './item';
 import Search from './search';
 
 function render({props, state}) {
+  const boxClasses = ['panel', 'panel-width'];
   const mainBoxes = [];
   const subBoxes = [];
   const treeItemsList = [];
@@ -31,10 +32,10 @@ function render({props, state}) {
 
   return (
     <div>
-      <div id='sub' class='panel panel-width'>
+      <div id='sub' class={boxClasses}>
         {subBoxes}
       </div>
-      <div id='main' class='panel panel-width'>
+      <div id='main' class={boxClasses}>
         <Search />
         {mainBoxes}
       </div>
