@@ -167,7 +167,7 @@ function render({props, state}) {
       class={itemClasses}
       draggable={isDraggable}
       onClick={clickHandler}
-      onContextMenu={contextmenuHandler}
+      onContextMenu={contextMenuHandler}
       onDragEnd={dragEndHandler}
       onDragOver={dragOverHandler}
       onDragStart={dragStartHandler}

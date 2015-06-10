@@ -4,6 +4,18 @@ import Editor from './editor';
 import Menu from './menu';
 import Panel from './panel';
 
+function contextMenuHandler(event) {
+  const target = event.event;
+
+  // allow native context menu if it is an input element
+  if (target.tagName === 'INPUT') {
+    return true;
+  }
+
+  // disable native context menu
+  event.preventDefault();
+}
+
 function initialState(props) {
   return {
     hidden: {
@@ -30,7 +42,9 @@ function render({props, state}, setState) {
   };
 
   return (
-    <div onMouseDown={mouseDownHandler}>
+    <div
+      onContextMenu={contextMenuHandler}
+      onMouseDown={mouseDownHandler}>
       <Panel
         trees={state.trees}
         updateTrees={updateTrees} />
