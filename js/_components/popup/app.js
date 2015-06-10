@@ -18,11 +18,10 @@ function contextMenuHandler(event) {
 
 function initialState(props) {
   return {
-    hidden: {
-      editor: true,
-      menu: true,
-      menuCover: true
-    },
+    hiddenEditor: true,
+    hiddenMenu: true,
+    hiddenMenuCover: true,
+    menuParam: [],
     trees: props.trees
   };
 }
@@ -37,20 +36,19 @@ function mouseDownHandler(event) {
 function render({props, state}, setState) {
   console.log({props, state});
 
-  const updateTrees = (newTrees) => {
-    setState({trees: newTrees});
-  };
+  window.globals.setRootState = setState;
 
   return (
     <div
       onContextMenu={contextMenuHandler}
       onMouseDown={mouseDownHandler}>
       <Panel
-        trees={state.trees}
-        updateTrees={updateTrees} />
-      <div id='menu-cover' class='ninja' hidden={state.hidden.menuCover} />
-      <Menu isHidden={state.hidden.menu} />
-      <Editor isHidden={state.hidden.editor} />
+        trees={state.trees} />
+      <div id='menu-cover' class='ninja' hidden={state.hiddenMenuCover} />
+      <Menu
+        isHidden={state.hiddenMenu}
+        menuParam={state.menuParam} />
+      <Editor isHidden={state.hiddenEditor} />
     </div>
   );
 }
