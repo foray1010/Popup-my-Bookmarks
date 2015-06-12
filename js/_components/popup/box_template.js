@@ -4,7 +4,7 @@ import Headbox from './headbox';
 
 let ITEM_HEIGHT = 22; // test
 
-function mouseWheelHandler(event, {props, state}) {
+function wheelHandler(event, {props, state}) {
   event.preventDefault();
 
   // control scrolling speed
@@ -17,7 +17,7 @@ function render({props, state}) {
       <Headbox />
       <div
         class='folderlist'
-        onMouseWheel={mouseWheelHandler}
+        onWheel={wheelHandler}
         onScroll={scrollHandler}>
         {props.treeItems}
       </div>
