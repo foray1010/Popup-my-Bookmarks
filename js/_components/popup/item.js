@@ -129,12 +129,20 @@ function isRootFolder(itemInfo) {
 }
 
 function mouseEnterHandler(event, {props, state}, updateState) {
+  if (event.target !== event.delegateTarget) {
+    return true;
+  }
+
   if (!state.isSelected) {
     updateState({isSelected: true});
   }
 }
 
 function mouseLeaveHandler(event, {props, state}, updateState) {
+  if (event.target !== event.delegateTarget) {
+    return true;
+  }
+
   updateState({isSelected: false});
 }
 
