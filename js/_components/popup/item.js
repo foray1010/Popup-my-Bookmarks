@@ -128,14 +128,14 @@ function isRootFolder(itemInfo) {
   return itemInfo.parentId === '0';
 }
 
-function mouseOutHandler(event, {props, state}, updateState) {
-  updateState({isSelected: false});
-}
-
-function mouseOverHandler(event, {props, state}, updateState) {
+function mouseEnterHandler(event, {props, state}, updateState) {
   if (!state.isSelected) {
     updateState({isSelected: true});
   }
+}
+
+function mouseLeaveHandler(event, {props, state}, updateState) {
+  updateState({isSelected: false});
 }
 
 function render({props, state}) {
@@ -180,8 +180,8 @@ function render({props, state}) {
       onDragEnd={dragEndHandler}
       onDragOver={dragOverHandler}
       onDragStart={dragStartHandler}
-      onMouseOut={mouseOutHandler}
-      onMouseOver={mouseOverHandler}>
+      onMouseEnter={mouseEnterHandler}
+      onMouseLeave={mouseLeaveHandler}>
       <img class='icon' src={iconSrc} alt='' draggable='false' />
       <span>{itemTitle}</span>
     </p>
