@@ -118,14 +118,18 @@ function getBookmarkType(itemInfo) {
   return bookmarkType;
 }
 
+function initialState() {
+  return {
+    isSelected: false
+  };
+}
+
 function isRootFolder(itemInfo) {
   return itemInfo.parentId === '0';
 }
 
 function mouseOutHandler(event, {props, state}, updateState) {
-  if (state.isSelected) {
-    updateState({isSelected: false});
-  }
+  updateState({isSelected: false});
 }
 
 function mouseOverHandler(event, {props, state}, updateState) {
@@ -184,4 +188,4 @@ function render({props, state}) {
   );
 }
 
-export default {render};
+export default {initialState, render};
