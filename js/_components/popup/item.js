@@ -4,9 +4,7 @@ function clickHandler(event, {props, state}) {
   const itemInfo = props.itemInfo;
   const mouseButton = event.button;
 
-  chrome.bookmarks.get(itemInfo.id, (node) => {
-    clickSwitcher(mouseButton, node[0].url);
-  });
+  clickSwitcher(mouseButton, itemInfo.url);
 }
 
 function clickSwitcher(mouseButton, itemUrl) {
