@@ -4,60 +4,7 @@ function clickHandler(event, {props, state}) {
   const itemInfo = props.itemInfo;
   const mouseButton = event.button;
 
-  clickSwitcher(mouseButton, itemInfo.url);
-}
-
-function clickSwitcher(mouseButton, itemUrl) {
-  let switcher;
-
-  if (mouseButton === 0) {
-    switcher = 'Left';
-
-    // if (ON_MOD_KEY === 16) {
-    //   switcher += 'Shift';
-    // } else if (ON_MOD_KEY === 17) {
-    //   switcher += 'Ctrl';
-    // }
-  } else {
-    switcher = 'Middle';
-  }
-
-  const handlerId = globals.storage['clickBy' + switcher];
-
-  switch (handlerId) {
-    case 0:
-    case 1:
-      if (itemUrl.indexOf('javascript') !== 0) {
-        chrome.tabs.update({url: itemUrl});
-      } else {
-        if (globals.storage.bookmarklet) {
-          chrome.tabs.executeScript(null, {code: itemUrl});
-        } else if (confirm(_getMsg('alert_bookmarklet'))) {
-          openOptionsPage();
-        }
-      }
-      break;
-
-    case 2:
-    case 3:
-    case 4:
-      chrome.tabs.create({
-        url: itemUrl,
-        active: handlerId === 2
-      });
-      break;
-
-    case 5:
-    case 6:
-      chrome.windows.create({
-        url: itemUrl,
-        incognito: handlerId === 6
-      });
-  }
-
-  if (handlerId !== 1 && handlerId !== 4) {
-    setTimeout(window.close, 200);
-  }
+  openBookmark(mouseButton, itemInfo.url);
 }
 
 function contextMenuHandler(event, {props, state}, updateState) {
@@ -131,8 +78,14 @@ function mouseEnterHandler(event, {props, state}, updateState) {
     return true;
   }
 
+  const itemInfo = props.itemInfo;
+
   if (!state.isSelected) {
     updateState({isSelected: true});
+  }
+
+  if (!itemInfo.url) {
+    openFolder(itemInfo);
   }
 }
 
@@ -142,6 +95,72 @@ function mouseLeaveHandler(event, {props, state}, updateState) {
   }
 
   updateState({isSelected: false});
+}
+
+function openBookmark(mouseButton, itemUrl) {
+  let switcher;
+
+  if (mouseButton === 0) {
+    switcher = 'Left';
+
+    // if (ON_MOD_KEY === 16) {
+    //   switcher += 'Shift';
+    // } else if (ON_MOD_KEY === 17) {
+    //   switcher += 'Ctrl';
+    // }
+  } else {
+    switcher = 'Middle';
+  }
+
+  const handlerId = globals.storage['clickBy' + switcher];
+
+  switch (handlerId) {
+    case 0:
+    case 1:
+      if (itemUrl.indexOf('javascript') !== 0) {
+        chrome.tabs.update({url: itemUrl});
+      } else {
+        if (globals.storage.bookmarklet) {
+          chrome.tabs.executeScript(null, {code: itemUrl});
+        } else if (confirm(_getMsg('alert_bookmarklet'))) {
+          openOptionsPage();
+        }
+      }
+      break;
+
+    case 2:
+    case 3:
+    case 4:
+      chrome.tabs.create({
+        url: itemUrl,
+        active: handlerId === 2
+      });
+      break;
+
+    case 5:
+    case 6:
+      chrome.windows.create({
+        url: itemUrl,
+        incognito: handlerId === 6
+      });
+  }
+
+  if (handlerId !== 1 && handlerId !== 4) {
+    setTimeout(window.close, 200);
+  }
+}
+
+function openFolder(itemInfo) {
+  return new Promise((resolve, reject) => {
+    chrome.bookmarks.getChildren(itemInfo.id, (treeInfo) => {
+      if (treeInfo === undefined) {
+        reject();
+        return false;
+      }
+
+      resolve();
+    });
+  });
 }
 
 function render({props, state}) {
