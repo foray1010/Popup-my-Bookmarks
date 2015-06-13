@@ -2,23 +2,14 @@ import {element} from 'deku';
 
 import Headbox from './headbox';
 
-let ITEM_HEIGHT = 22; // test
-
-function wheelHandler(event, {props, state}) {
-  event.preventDefault();
-
-  // control scrolling speed
-  this.scrollTop -= ITEM_HEIGHT * event.wheelDelta / 120 >> 0;
-}
-
 function render({props, state}) {
   return (
     <div class='box-template'>
       <Headbox />
       <div
         class='folderlist'
-        onWheel={wheelHandler}
-        onScroll={scrollHandler}>
+        onScroll={scrollHandler}
+        onWheel={wheelHandler}>
         {props.treeItems}
       </div>
     </div>
@@ -26,7 +17,10 @@ function render({props, state}) {
 }
 
 function scrollHandler(event, {props, state}) {
-  console.log(event);
+}
+
+function wheelHandler(event, {props, state}) {
+  event.preventDefault();
 }
 
 export default {render};
