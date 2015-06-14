@@ -1,40 +1,11 @@
 doctype html
 meta(charset="utf-8")
 title Popup my Bookmarks
-each x in ["common", "pmb"]
+each x in ["common", "popup"]
   link(rel="stylesheet", href="css/#{x}.css")
 
 body.panel-width
-  div#sub.panel.panel-width
-  div#main.panel.panel-width
-    div#searchbox
-      input#search-input(type="search", tabindex="-1")
+  div#container
 
-  div#menu-cover.ninja(hidden)
-  div#menu(hidden)
-  div#editor.panel-width(hidden)
-    span#edit-title &nbsp;
-    input(type="text")
-    input(type="text")
-    button
-    button
-
-  div#preload(hidden)
-    div.box-template
-      div.headbox
-        div.head-title.no-text-overflow
-        div.head-close
-      div.folderlist
-
-    p.item.bookmark-item.no-text-overflow(draggable="true")
-      img.icon(src="", alt="", draggable="false")
-      span
-
-    p.no-bkmark.item.bookmark-item.no-text-overflow
-
-    div.no-result.no-text-overflow
-
-    div#drag-place
-
-  each x in ["common", "pmb"]
+  each x in ["common", "popup"]
     script(src="js/#{x}.js")
