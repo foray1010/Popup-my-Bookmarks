@@ -1,11 +1,11 @@
 import {element} from 'deku';
 
-import Headbox from './headbox';
+import HeadBox from './head_box';
 
 function render({props, state}) {
   return (
     <div class='box-template'>
-      <Headbox />
+      <HeadBox />
       <div
         class='folderlist'
         onScroll={scrollHandler}
