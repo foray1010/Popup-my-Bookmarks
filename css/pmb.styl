@@ -45,6 +45,11 @@ input[type="text"]
 .grey-item
   color: #bbb !important
 
+.head-box
+  background: currentcolor
+  height: $head-box-height
+  margin-bottom: $golden-gap
+
 .head-close
   float: right
   height: $head-box-height
@@ -82,11 +87,6 @@ input[type="text"]
   line-height: $head-box-height + 1px
   padding: 0 $golden-gap-2x
   width: "calc(100% - %s)" % $head-box-height
-
-.head-box
-  background: currentcolor
-  height: $head-box-height
-  margin-bottom: $golden-gap
 
 .icon
   float: left
@@ -127,7 +127,7 @@ input[type="text"]
   overflow: hidden
   position: absolute
 
-.rootfolder
+.root-folder
   color: inherit !important
 
 .selected
@@ -182,14 +182,7 @@ input[type="text"]
 #menu-cover
   background: rgba(255, 255, 255, .3)
 
-#search-input
-  -webkit-appearance: none
-  background: transparent
-  border: 0
-  height: 100%
-  width: calc(100% - 19px)
-
-#searchbox
+#search-box
   border: solid #ccc
   border-width: 0 0 1px 1px
   height: 21px
@@ -199,6 +192,13 @@ input[type="text"]
     content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAsklEQVR42mNggIKGlq5UIL4CxP+B+B0QtwMxGwM2AJRYClUIws+R2LeAmAddcQJU8gIQq0LFeIB4GlR8K7qGJ1AJfiw2w5wojSwIEniCw6l1UHkfZMFfQPwFh4bNUA16yIIwt3aiKfaAih9HN0UAiN/AJIG4A4hXIIXUMSBmRdckC8T7kBTBgvQdlH0diIWxuVkL5EEgtoTyFZFsfwDEYgyEAFCRPJKm9wzEAKimh0D8DABuHq/4QpP4dwAAAABJRU5ErkJggg==")
     float: left
     padding: 4px 3px 5px 4px
+
+#search-input
+  -webkit-appearance: none
+  background: transparent
+  border: 0
+  height: 100%
+  width: calc(100% - 19px)
 
 #sub
   color: $main-color1

@@ -7,7 +7,7 @@ function inputHandler(event, {props, state}) {
 
 function render({props, state}) {
   return (
-    <div id='searchbox'>
+    <div id='search-box'>
       <input
         id='search-input'
         type='search'
