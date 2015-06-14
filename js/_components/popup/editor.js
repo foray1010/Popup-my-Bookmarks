@@ -3,11 +3,18 @@ import {element} from 'deku';
 const _getMsg = chrome.i18n.getMessage;
 
 function clickConfirmHandler(event, {props, state}) {
-
+  closeEditor();
 }
 
 function clickCancelHandler(event, {props, state}) {
+  closeEditor();
+}
 
+function closeEditor() {
+  globals.setRootState({
+    hiddenEditor: true,
+    hiddenMenuCover: true
+  });
 }
 
 function render({props, state}) {
