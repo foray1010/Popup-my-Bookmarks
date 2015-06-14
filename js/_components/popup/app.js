@@ -5,7 +5,7 @@ import Menu from './menu';
 import Panel from './panel';
 
 function contextMenuHandler(event) {
-  const target = event.event;
+  const target = event.target;
 
   // allow native context menu if it is an input element
   if (target.tagName === 'INPUT') {
