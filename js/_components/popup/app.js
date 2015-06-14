@@ -18,6 +18,7 @@ function contextMenuHandler(event) {
 
 function initialState(props) {
   return {
+    editItem: null,
     hiddenEditor: true,
     hiddenMenu: true,
     hiddenMenuCover: true,
@@ -48,7 +49,9 @@ function render({props, state}, setState) {
       <Menu
         isHidden={state.hiddenMenu}
         menuParam={state.menuParam} />
-      <Editor isHidden={state.hiddenEditor} />
+      <Editor
+        editItem={state.editItem}
+        isHidden={state.hiddenEditor} />
     </div>
   );
 }
