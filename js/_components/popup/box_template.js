@@ -7,7 +7,7 @@ function render({props, state}) {
     <div class='box-template'>
       <HeadBox />
       <div
-        class='folderlist'
+        class='folder-list'
         onScroll={scrollHandler}
         onWheel={wheelHandler}>
         {props.treeItems}
