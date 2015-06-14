@@ -186,7 +186,7 @@ function render({props, state}) {
     iconSrc = 'img/folder.png';
 
     if (isRootFolder(itemInfo)) {
-      itemClasses.push('rootfolder');
+      itemClasses.push('root-folder');
 
       isDraggable = false;
     }
