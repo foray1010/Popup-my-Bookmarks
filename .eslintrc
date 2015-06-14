@@ -87,7 +87,7 @@ rules:
   no-sparse-arrays: 2
   no-unreachable: 2
   use-isnan: 2
-  block-scoped-var: 2
+  block-scoped-var: 0
 
 /**
 * Best practices
