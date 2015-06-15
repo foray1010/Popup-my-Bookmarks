@@ -16,7 +16,7 @@ function render({props, state}) {
         <div class='head-close' onClick={closeHandler} />
       </div>
       <div
-        class='folder-list'
+        class='bookmark-list'
         onScroll={scrollHandler}
         onWheel={wheelHandler}>
         {props.treeItems}
