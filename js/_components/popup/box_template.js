@@ -7,7 +7,7 @@ function closeHandler(event, {props, state}) {
 function render({props, state}) {
   const treeInfo = props.treeInfo;
 
-  const isRootBox = treeInfo.parentId === '0';
+  const isRootBox = globals.isRootFolder(treeInfo);
 
   return (
     <div class='box-template'>

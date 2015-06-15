@@ -6,6 +6,11 @@ window.globals = {
   isFolder(itemInfo) {
     return !itemInfo.url;
   },
+
+  isRootFolder(itemInfo) {
+    return itemInfo.parentId === '0';
+  },
+
   getBookmarkType(itemInfo) {
     let bookmarkType;
 
@@ -17,6 +22,7 @@ window.globals = {
 
     return bookmarkType;
   },
+
   getSingleTree(id) {
     return new Promise((resolve) => {
       chrome.bookmarks.get(id, (itemInfo) => {
@@ -29,9 +35,11 @@ window.globals = {
       });
     });
   },
+
   openOptionsPage() {
     chrome.tabs.create({url: 'options.html'});
   },
+
   separateThisUrl: 'http://separatethis.com/'
 };
 

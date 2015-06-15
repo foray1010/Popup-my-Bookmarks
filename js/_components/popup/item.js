@@ -20,7 +20,7 @@ function contextMenuHandler(event, {props, state}, updateState) {
   switch (globals.getBookmarkType(itemInfo)) {
     case 'folder':
     case 'bkmark':
-      if (isRootFolder(itemInfo)) {
+      if (globals.isRootFolder(itemInfo)) {
         menuHideChild = [false, true, true, true, true];
       // } else if (!IS_SEARCHING) {
       //   menuHideChild = [false, false, false, false, false];
@@ -58,10 +58,6 @@ function initialState() {
   return {
     isSelected: false
   };
-}
-
-function isRootFolder(itemInfo) {
-  return itemInfo.parentId === '0';
 }
 
 function mouseEnterHandler(event, {props, state}, updateState) {
@@ -170,7 +166,7 @@ function render({props, state}) {
   if (globals.isFolder(itemInfo)) {
     iconSrc = 'img/folder.png';
 
-    if (isRootFolder(itemInfo)) {
+    if (globals.isRootFolder(itemInfo)) {
       itemClasses.push('root-folder');
 
       isDraggable = false;
