@@ -15,16 +15,26 @@ window.globals = {
       });
     });
   },
+  openOptionsPage() {
+    chrome.tabs.create({url: 'options.html'});
+  },
   separateThisUrl: 'http://separatethis.com/'
 };
 
 const trees = [];
 
-new Promise((resolve) => {
+new Promise((resolve, reject) => {
   chrome.storage.sync.get(null, (storage) => {
     globals.storage = storage;
 
-    resolve();
+    // if first run
+    if (globals.storage.hideRootFolder === undefined) {
+      globals.openOptionsPage();
+
+      reject();
+    } else {
+      resolve();
+    }
   });
 })
   .then(() => {
