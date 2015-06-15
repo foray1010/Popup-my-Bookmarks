@@ -163,6 +163,7 @@ function render({props, state}) {
 
   let iconSrc;
   let isDraggable = true;
+  let tooltip;
 
   if (globals.isFolder(itemInfo)) {
     iconSrc = 'img/folder.png';
@@ -177,6 +178,10 @@ function render({props, state}) {
       itemClasses.push('separator');
     } else {
       iconSrc = `chrome://favicon/${itemInfo.url}`;
+
+      if (globals.storage.tooltip) {
+        tooltip = itemInfo.title + '\n' + itemInfo.url;
+      }
     }
   }
 
@@ -187,6 +192,7 @@ function render({props, state}) {
   return (
     <p
       class={itemClasses}
+      title={tooltip}
       draggable={isDraggable}
       onClick={clickHandler}
       onContextMenu={contextMenuHandler}
