@@ -15,29 +15,29 @@ function contextMenuHandler(event, {props, state}, updateState) {
 
   const itemInfo = props.itemInfo;
 
-  let menuParam;
+  let menuHideChild;
 
   switch (getBookmarkType(itemInfo)) {
     case 'folder':
     case 'bkmark':
       if (isRootFolder(itemInfo)) {
-        menuParam = [false, true, true, true, true];
+        menuHideChild = [false, true, true, true, true];
       // } else if (!IS_SEARCHING) {
-      //   menuParam = [false, false, false, false, false];
+      //   menuHideChild = [false, false, false, false, false];
       } else {
-        menuParam = [false, false, false, true, true];
+        menuHideChild = [false, false, false, true, true];
       }
       break;
 
     case 'no-bkmark':
-      menuParam = [true, true, false, false, true];
+      menuHideChild = [true, true, false, false, true];
   }
 
-  console.log(menuParam);
+  console.log(menuHideChild);
 
   globals.setRootState({
     hiddenMenu: false,
-    menuParam: menuParam
+    menuHideChild: menuHideChild
   });
 }
 

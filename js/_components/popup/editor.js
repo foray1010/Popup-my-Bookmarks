@@ -12,14 +12,14 @@ function clickCancelHandler(event, {props, state}) {
 
 function closeEditor() {
   globals.setRootState({
-    editItem: null,
+    editTarget: null,
     hiddenEditor: true,
     hiddenMenuCover: true
   });
 }
 
 function render({props, state}) {
-  const itemInfo = props.editItem;
+  const itemInfo = props.editTarget;
 
   let editorTitle;
   let isItemFolder;
