@@ -18,11 +18,12 @@ function contextMenuHandler(event) {
 
 function initialState(props) {
   return {
-    editItem: null,
+    editTarget: null,
     hiddenEditor: true,
     hiddenMenu: true,
     hiddenMenuCover: true,
-    menuParam: [],
+    menuHideChild: [],
+    menuTarget: null,
     trees: props.trees
   };
 }
@@ -48,9 +49,10 @@ function render({props, state}, setState) {
       <div id='menu-cover' class='ninja' hidden={state.hiddenMenuCover} />
       <Menu
         isHidden={state.hiddenMenu}
-        menuParam={state.menuParam} />
+        menuHideChild={state.menuHideChild}
+        menuTarget={state.menuTarget} />
       <Editor
-        editItem={state.editItem}
+        editTarget={state.editTarget}
         isHidden={state.hiddenEditor} />
     </div>
   );

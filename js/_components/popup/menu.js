@@ -20,7 +20,7 @@ function render({props, state}) {
   }
 
   const menuItems = menuPattern.map((menuAreaKeys, menuAreaIndex) => {
-    const isMenuAreaHidden = props.menuParam[menuAreaIndex];
+    const isMenuAreaHidden = props.menuHideChild[menuAreaIndex];
     const menuAreaItems = menuAreaKeys.map((menuItemKey) => {
       return (
         <p class='item menu-item'>
