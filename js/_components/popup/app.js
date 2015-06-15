@@ -2,6 +2,7 @@ import {element} from 'deku';
 
 import Editor from './editor';
 import Menu from './menu';
+import MenuCover from './menu_cover';
 import Panel from './panel';
 
 function contextMenuHandler(event) {
@@ -44,9 +45,8 @@ function render({props, state}, setState) {
     <div
       onContextMenu={contextMenuHandler}
       onMouseDown={mouseDownHandler}>
-      <Panel
-        trees={state.trees} />
-      <div id='menu-cover' class='ninja' hidden={state.hiddenMenuCover} />
+      <Panel trees={state.trees} />
+      <MenuCover isHidden={state.hiddenMenuCover} />
       <Menu
         isHidden={state.hiddenMenu}
         menuHideChild={state.menuHideChild}
