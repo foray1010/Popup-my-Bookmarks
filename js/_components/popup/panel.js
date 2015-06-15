@@ -11,11 +11,13 @@ function render({props, state}) {
   const treeItemsList = [];
 
   props.trees.forEach((treeInfo, treeIndex) => {
+    const childrenInfo = treeInfo.children;
+
     const isRootTree = treeIndex === 0;
 
     const treeItemsIndex = isRootTree ? 0 : treeIndex - 1;
 
-    treeInfo.forEach((itemInfo) => {
+    childrenInfo.forEach((itemInfo) => {
       if (!treeItemsList[treeItemsIndex]) {
         treeItemsList[treeItemsIndex] = [];
       }
