@@ -3,6 +3,8 @@ import {element, render, tree} from 'deku';
 import App from './_components/popup/app';
 
 window.globals = {
+  goldenGap: 2,
+
   isFolder(itemInfo) {
     return !itemInfo.url;
   },
