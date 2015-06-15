@@ -29,7 +29,14 @@ function render({props, state}) {
   treeItemsList.forEach((treeItems, treeItemsIndex) => {
     const targetBox = treeItemsIndex % 2 === 0 ? mainBoxes : subBoxes;
 
-    targetBox.push(<BoxTemplate treeItems={treeItems} />);
+    const treeIndex = treeItemsIndex + 1;
+    const treeInfo = props.trees[treeIndex];
+
+    targetBox.push(
+      <BoxTemplate
+        treeInfo={treeInfo}
+        treeItems={treeItems} />
+    );
   });
 
   return (

@@ -1,11 +1,20 @@
 import {element} from 'deku';
 
-import HeadBox from './head_box';
+function closeHandler(event, {props, state}) {
+
+}
 
 function render({props, state}) {
+  const treeInfo = props.treeInfo;
+
+  const isRootBox = treeInfo.parentId === '0';
+
   return (
     <div class='box-template'>
-      <HeadBox />
+      <div class='head-box' hidden={isRootBox}>
+        <div class='head-title no-text-overflow'>{treeInfo.title}</div>
+        <div class='head-close' onClick={closeHandler} />
+      </div>
       <div
         class='folder-list'
         onScroll={scrollHandler}
