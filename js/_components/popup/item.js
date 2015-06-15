@@ -1,5 +1,7 @@
 import {element} from 'deku';
 
+const _getMsg = chrome.i18n.getMessage;
+
 function clickHandler(event, {props, state}) {
   const itemInfo = props.itemInfo;
   const mouseButton = event.button;
