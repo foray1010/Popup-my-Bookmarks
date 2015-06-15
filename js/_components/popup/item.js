@@ -123,7 +123,7 @@ function openBookmark(mouseButton, itemUrl) {
         if (globals.storage.bookmarklet) {
           chrome.tabs.executeScript(null, {code: itemUrl});
         } else if (confirm(_getMsg('alert_bookmarklet'))) {
-          openOptionsPage();
+          globals.openOptionsPage();
         }
       }
       break;
