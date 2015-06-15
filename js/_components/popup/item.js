@@ -17,7 +17,7 @@ function contextMenuHandler(event, {props, state}, updateState) {
 
   let menuHideChild;
 
-  switch (getBookmarkType(itemInfo)) {
+  switch (globals.getBookmarkType(itemInfo)) {
     case 'folder':
     case 'bkmark':
       if (isRootFolder(itemInfo)) {
@@ -53,18 +53,6 @@ function dragStartHandler(event, {props, state}) {
 
 }
 
-function getBookmarkType(itemInfo) {
-  let bookmarkType;
-
-  if (itemInfo.url) {
-    bookmarkType = 'bkmark';
-  } else {
-    bookmarkType = 'folder';
-  }
-
-  return bookmarkType;
-}
-
 function initialState() {
   return {
     isSelected: false
@@ -86,7 +74,7 @@ function mouseEnterHandler(event, {props, state}, updateState) {
     updateState({isSelected: true});
   }
 
-  if (!itemInfo.url) {
+  if (globals.isFolder(itemInfo)) {
     openFolder(itemInfo);
   }
 }
@@ -178,19 +166,19 @@ function render({props, state}) {
   let iconSrc;
   let isDraggable = true;
 
-  if (itemInfo.url) {
-    if (itemInfo.url === globals.separateThisUrl) {
-      itemClasses.push('separator');
-    } else {
-      iconSrc = `chrome://favicon/${itemInfo.url}`;
-    }
-  } else {
+  if (globals.isFolder(itemInfo)) {
     iconSrc = 'img/folder.png';
 
     if (isRootFolder(itemInfo)) {
       itemClasses.push('root-folder');
 
       isDraggable = false;
+    }
+  } else {
+    if (itemInfo.url === globals.separateThisUrl) {
+      itemClasses.push('separator');
+    } else {
+      iconSrc = `chrome://favicon/${itemInfo.url}`;
     }
   }
 
