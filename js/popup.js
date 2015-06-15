@@ -3,6 +3,20 @@ import {element, render, tree} from 'deku';
 import App from './_components/popup/app';
 
 window.globals = {
+  isFolder(itemInfo) {
+    return !itemInfo.url;
+  },
+  getBookmarkType(itemInfo) {
+    let bookmarkType;
+
+    if (globals.isFolder(itemInfo)) {
+      bookmarkType = 'folder';
+    } else {
+      bookmarkType = 'bkmark';
+    }
+
+    return bookmarkType;
+  },
   getSingleTree(id) {
     return new Promise((resolve) => {
       chrome.bookmarks.get(id, (itemInfo) => {
