@@ -38,6 +38,8 @@ window.globals = {
     });
   },
 
+  maxHeight: 596,
+
   openOptionsPage() {
     chrome.tabs.create({url: 'options.html'});
   },
