@@ -46,7 +46,7 @@ new Promise((resolve, reject) => {
           const isFilterThisItem = itemIdNum === globals.storage.defExpand ||
             globals.storage.hideRootFolder.includes(itemIdNum);
 
-          return isFilterThisItem;
+          return !isFilterThisItem;
         });
 
         trees.push(treeInfo);
