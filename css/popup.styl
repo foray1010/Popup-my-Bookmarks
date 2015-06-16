@@ -6,6 +6,9 @@ $golden-gap-2x = $golden-gap * 2
 
 $head-box-height = 30px
 
+highlight-item()
+  background: #eee
+  border-color: #ddd
 
 body
   overflow: hidden
@@ -103,6 +106,9 @@ input[type="text"]
 .menu-item
   padding: $golden-gap 8px
 
+  &:hover
+    highlight-item()
+
 .ninja
   background: rgba(0, 0, 0, .16)
   bottom: 0
@@ -130,9 +136,8 @@ input[type="text"]
 .root-folder
   color: inherit !important
 
-.selected
-  background: #eee
-  border-color: #ddd
+.highlight-item
+  highlight-item()
 
 .separator
   color: #bbb
@@ -142,7 +147,6 @@ input[type="text"]
 
   & > .icon
     display: none
-
 
 #drag-place
   border: 1px dashed #aaa
@@ -203,7 +207,6 @@ input[type="text"]
 #sub
   color: $main-color1
   left: 0
-
 
 ::-webkit-scrollbar
   background: transparent
