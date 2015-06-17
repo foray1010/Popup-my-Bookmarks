@@ -1,7 +1,7 @@
 import {element} from 'deku';
 
-import BoxTemplate from './box_template';
 import BookmarkItem from './bookmark_item';
+import BoxTemplate from './box_template';
 import Search from './search';
 
 function render({props, state}) {
