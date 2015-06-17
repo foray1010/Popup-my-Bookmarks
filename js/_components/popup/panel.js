@@ -1,7 +1,7 @@
 import {element} from 'deku';
 
 import BoxTemplate from './box_template';
-import Item from './item';
+import BookmarkItem from './bookmark_item';
 import Search from './search';
 
 function render({props, state}) {
@@ -22,7 +22,7 @@ function render({props, state}) {
         treeItemsList[treeItemsIndex] = [];
       }
 
-      treeItemsList[treeItemsIndex].push(<Item itemInfo={itemInfo} />);
+      treeItemsList[treeItemsIndex].push(<BookmarkItem itemInfo={itemInfo} />);
     });
   });
 
