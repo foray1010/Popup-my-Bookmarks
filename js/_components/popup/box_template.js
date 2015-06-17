@@ -19,7 +19,7 @@ function render({props, state}) {
         class='bookmark-list'
         onScroll={scrollHandler}
         onWheel={wheelHandler}>
-        {props.treeItems}
+        {props.children}
       </div>
     </div>
   );
