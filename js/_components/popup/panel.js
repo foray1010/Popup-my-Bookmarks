@@ -33,9 +33,9 @@ function render({props, state}) {
     const treeInfo = props.trees[treeIndex];
 
     targetBox.push(
-      <BoxTemplate
-        treeInfo={treeInfo}
-        treeItems={treeItems} />
+      <BoxTemplate treeInfo={treeInfo}>
+        {treeItems}
+      </BoxTemplate>
     );
   });
 
