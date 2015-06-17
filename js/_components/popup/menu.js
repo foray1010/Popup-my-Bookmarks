@@ -2,6 +2,12 @@ import {element} from 'deku';
 
 const _getMsg = chrome.i18n.getMessage;
 
+function afterRender({props}, el) {
+  if (!props.isHidden) {
+    setMenuPos(el, props.mousePos);
+  }
+}
+
 function closeMenu() {
   globals.setRootState({
     hiddenMenu: true,
@@ -114,4 +120,27 @@ function render({props, state}) {
   return <div id='menu' hidden={props.isHidden}>{menuItems}</div>;
 }
 
-export default {render};
+function setMenuPos(el, mousePos) {
+  const body = document.body;
+  const menuHeight = el.offsetHeight;
+  const menuWidth = el.offsetWidth;
+
+  const bodyHeight = body.offsetHeight;
+  const bodyWidth = body.offsetWidth;
+
+  if (menuHeight > bodyHeight) {
+    body.style.height = menuHeight + 'px';
+  }
+
+  if (menuWidth > bodyWidth) {
+    body.style.width = menuWidth + 'px';
+  }
+
+  const bottomPos = bodyHeight - menuHeight - mousePos.y;
+  const rightPos = bodyWidth - menuWidth - mousePos.x;
+
+  el.style.bottom = Math.max(bottomPos, 0) + 'px';
+  el.style.right = Math.max(rightPos, 0) + 'px';
+}
+
+export default {afterRender, render};

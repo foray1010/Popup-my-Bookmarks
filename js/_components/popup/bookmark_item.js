@@ -18,7 +18,8 @@ function contextMenuHandler(event, {props, state}, updateState) {
   globals.setRootState({
     hiddenMenu: false,
     hiddenMenuCover: false,
-    menuTarget: itemInfo
+    menuTarget: itemInfo,
+    mousePos: {x: event.x, y: event.y}
   });
 }
 
