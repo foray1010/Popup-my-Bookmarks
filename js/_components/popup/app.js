@@ -28,6 +28,7 @@ function initialState(props) {
     hiddenMenu: true,
     hiddenMenuCover: true,
     menuTarget: null,
+    mousePos: {x: 0, y: 0},
     trees: props.trees
   };
 }
@@ -104,7 +105,8 @@ function render({props, state}, setState) {
       <MenuCover isHidden={state.hiddenMenuCover} />
       <Menu
         isHidden={state.hiddenMenu}
-        menuTarget={state.menuTarget} />
+        menuTarget={state.menuTarget}
+        mousePos={state.mousePos} />
       <Editor
         editTarget={state.editTarget}
         isHidden={state.hiddenEditor} />
