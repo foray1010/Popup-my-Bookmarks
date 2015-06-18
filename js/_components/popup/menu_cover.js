@@ -2,9 +2,8 @@ import {element} from 'deku';
 
 function clickHandler(event, {props, state}) {
   globals.setRootState({
-    hiddenEditor: true,
-    hiddenMenu: true,
-    hiddenMenuCover: true
+    editTarget: null,
+    menuTarget: null
   });
 }
 
