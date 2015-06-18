@@ -24,9 +24,6 @@ function contextMenuHandler(event) {
 function initialState(props) {
   return {
     editTarget: null,
-    hiddenEditor: true,
-    hiddenMenu: true,
-    hiddenMenuCover: true,
     menuTarget: null,
     mousePos: {x: 0, y: 0},
     trees: props.trees
@@ -97,19 +94,19 @@ function render({props, state}, setState) {
 
   window.globals.setRootState = setState;
 
+  // if menu or editor has target, show menu-cover
+  const isHiddenMenuCover = !(state.menuTarget || state.editTarget);
+
   return (
     <div
       onContextMenu={contextMenuHandler}
       onMouseDown={mouseDownHandler}>
       <Panel trees={state.trees} />
-      <MenuCover isHidden={state.hiddenMenuCover} />
+      <MenuCover isHidden={isHiddenMenuCover} />
       <Menu
-        isHidden={state.hiddenMenu}
         menuTarget={state.menuTarget}
         mousePos={state.mousePos} />
-      <Editor
-        editTarget={state.editTarget}
-        isHidden={state.hiddenEditor} />
+      <Editor editTarget={state.editTarget} />
     </div>
   );
 }

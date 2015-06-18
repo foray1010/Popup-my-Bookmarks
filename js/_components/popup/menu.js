@@ -10,8 +10,7 @@ function afterRender({props}, el) {
 
 function closeMenu() {
   globals.setRootState({
-    hiddenMenu: true,
-    hiddenMenuCover: true
+    menuTarget: null
   });
 }
 
@@ -81,6 +80,8 @@ function menuClickEvent(event) {
 function render({props, state}) {
   const itemInfo = props.menuTarget;
 
+  const isHidden = !itemInfo;
+
   let menuItems;
 
   if (itemInfo) {
@@ -117,7 +118,7 @@ function render({props, state}) {
     });
   }
 
-  return <div id='menu' hidden={props.isHidden}>{menuItems}</div>;
+  return <div id='menu' hidden={isHidden}>{menuItems}</div>;
 }
 
 function setMenuPos(el, mousePos) {

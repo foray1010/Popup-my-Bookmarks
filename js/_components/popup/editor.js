@@ -12,14 +12,14 @@ function clickCancelHandler(event, {props, state}) {
 
 function closeEditor() {
   globals.setRootState({
-    editTarget: null,
-    hiddenEditor: true,
-    hiddenMenuCover: true
+    editTarget: null
   });
 }
 
 function render({props, state}) {
   const itemInfo = props.editTarget;
+
+  const isHidden = !itemInfo;
 
   let editorTitle;
   let isItemFolder;
@@ -36,7 +36,7 @@ function render({props, state}) {
   }
 
   return (
-    <div id='editor' class='panel-width' hidden={props.isHidden}>
+    <div id='editor' class='panel-width' hidden={isHidden}>
       <span id='edit-title'>{editorTitle}</span>
       <input type='text' value={itemTitle} />
       <input type='text' value={itemUrl} hidden={isItemFolder} />
