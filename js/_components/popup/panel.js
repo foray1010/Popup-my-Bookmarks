@@ -12,9 +12,9 @@ function render({props, state}) {
 
   props.trees.forEach((treeInfo, treeIndex) => {
     const childrenInfo = treeInfo.children;
-
     const isRootTree = treeIndex === 0;
 
+    // put the first tree into the default expanded one
     const treeItemsIndex = isRootTree ? 0 : treeIndex - 1;
 
     childrenInfo.forEach((itemInfo) => {
@@ -22,14 +22,16 @@ function render({props, state}) {
         treeItemsList[treeItemsIndex] = [];
       }
 
-      treeItemsList[treeItemsIndex].push(<BookmarkItem itemInfo={itemInfo} />);
+      treeItemsList[treeItemsIndex].push(
+        <BookmarkItem itemInfo={itemInfo} />
+      );
     });
   });
 
   treeItemsList.forEach((treeItems, treeItemsIndex) => {
     const targetBox = treeItemsIndex % 2 === 0 ? mainBoxes : subBoxes;
-
     const treeIndex = treeItemsIndex + 1;
+
     const treeInfo = props.trees[treeIndex];
 
     targetBox.push(
