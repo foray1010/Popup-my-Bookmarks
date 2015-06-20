@@ -81,8 +81,8 @@ function openBookmark(mouseButton, itemUrl) {
   const handlerId = globals.storage['clickBy' + switcher];
 
   switch (handlerId) {
-    case 0:
-    case 1:
+    case 0: // current tab
+    case 1: // current tab (w/o closing PmB)
       if (itemUrl.indexOf('javascript') !== 0) {
         chrome.tabs.update({url: itemUrl});
       } else {
@@ -94,17 +94,17 @@ function openBookmark(mouseButton, itemUrl) {
       }
       break;
 
-    case 2:
-    case 3:
-    case 4:
+    case 2: // new tab
+    case 3: // background tab
+    case 4: // background tab (w/o closing PmB)
       chrome.tabs.create({
         url: itemUrl,
         active: handlerId === 2
       });
       break;
 
-    case 5:
-    case 6:
+    case 5: // new window
+    case 6: // incognito window
       chrome.windows.create({
         url: itemUrl,
         incognito: handlerId === 6
