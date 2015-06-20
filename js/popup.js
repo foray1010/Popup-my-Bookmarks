@@ -19,7 +19,7 @@ window.globals = {
     if (globals.isFolder(itemInfo)) {
       bookmarkType = 'folder';
     } else {
-      bookmarkType = 'bkmark';
+      bookmarkType = 'bookmark';
     }
 
     return bookmarkType;

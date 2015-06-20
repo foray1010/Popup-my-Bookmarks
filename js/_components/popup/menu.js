@@ -19,7 +19,7 @@ function getChildrenHiddenStatus(itemInfo) {
 
   switch (globals.getBookmarkType(itemInfo)) {
     case 'folder':
-    case 'bkmark':
+    case 'bookmark':
       if (globals.isRootFolder(itemInfo)) {
         childrenHiddenStatus = [false, true, true, true, true];
       // } else if (!IS_SEARCHING) {
@@ -29,7 +29,7 @@ function getChildrenHiddenStatus(itemInfo) {
       }
       break;
 
-    case 'no-bkmark':
+    case 'no-bookmark':
       childrenHiddenStatus = [true, true, false, false, true];
   }
 
