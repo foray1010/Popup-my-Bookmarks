@@ -1,13 +1,30 @@
 import {element} from 'deku';
 
+import BookmarkItem from './bookmark_item';
+
 function closeHandler(event, {props, state}) {
 
 }
 
 function render({props, state}) {
   const treeInfo = props.treeInfo;
+  const treeItems = [];
 
   const isRootBox = globals.isRootFolder(treeInfo);
+
+  const pushTreeItem = (thisTreeInfo) => {
+    thisTreeInfo.children.forEach((itemInfo) => {
+      treeItems.push(
+        <BookmarkItem itemInfo={itemInfo} />
+      );
+    });
+  };
+
+  if (isRootBox) {
+    pushTreeItem(globals.rootTree);
+  }
+
+  pushTreeItem(treeInfo);
 
   return (
     <div class='box-template'>
@@ -19,7 +36,7 @@ function render({props, state}) {
         class='bookmark-list'
         onScroll={scrollHandler}
         onWheel={wheelHandler}>
-        {props.children}
+        {treeItems}
       </div>
     </div>
   );
