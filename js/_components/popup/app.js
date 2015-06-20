@@ -26,7 +26,7 @@ function initialState(props) {
     editTarget: null,
     menuTarget: null,
     mousePos: {x: 0, y: 0},
-    trees: props.trees
+    trees: [props.defExpandTree]
   };
 }
 

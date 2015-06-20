@@ -52,7 +52,7 @@ window.globals = {
   separateThisUrl: 'http://separatethis.com/'
 };
 
-const trees = [];
+let defExpandTree;
 
 new Promise((resolve, reject) => {
   chrome.storage.sync.get(null, (storage) => {
@@ -80,17 +80,19 @@ new Promise((resolve, reject) => {
           return !isFilterThisItem;
         });
 
-        trees.push(treeInfo);
+        globals.rootTree = treeInfo;
       });
   })
   .then(() => {
     return globals.getSingleTree('' + globals.storage.defExpand)
       .then((treeInfo) => {
-        trees.push(treeInfo);
+        defExpandTree = treeInfo;
       });
   })
   .then(() => {
-    const app = tree(<App trees={trees} />);
+    const app = tree(
+      <App defExpandTree={defExpandTree} />
+    );
 
     render(app, document.getElementById('container'));
   });
