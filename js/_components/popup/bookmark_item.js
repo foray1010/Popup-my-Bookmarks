@@ -117,16 +117,10 @@ function openBookmark(mouseButton, itemUrl) {
 }
 
 function openFolder(itemInfo) {
-  return new Promise((resolve, reject) => {
-    chrome.bookmarks.getChildren(itemInfo.id, (treeInfo) => {
-      if (treeInfo === undefined) {
-        reject();
-        return false;
-      }
+  return globals.getSingleTree(itemInfo.id)
+    .then((treeInfo) => {
 
-      resolve();
     });
-  });
 }
 
 function render({props, state}) {
