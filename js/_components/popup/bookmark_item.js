@@ -6,7 +6,13 @@ function clickHandler(event, {props, state}) {
   const itemInfo = props.itemInfo;
   const mouseButton = event.button;
 
-  openBookmark(mouseButton, itemInfo.url);
+  switch (globals.getBookmarkType(itemInfo)) {
+    case 'folder':
+      break;
+
+    case 'bookmark':
+      openBookmark(mouseButton, itemInfo.url);
+  }
 }
 
 function contextMenuHandler(event, {props, state}, updateState) {
