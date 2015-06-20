@@ -52,17 +52,13 @@ window.globals = {
   separateThisUrl: 'http://separatethis.com/'
 };
 
-let defExpandTree;
-
-new Promise((resolve, reject) => {
+new Promise((resolve) => {
   chrome.storage.sync.get(null, (storage) => {
     globals.storage = storage;
 
     // if first run
     if (globals.storage.hideRootFolder === undefined) {
       globals.openOptionsPage();
-
-      reject();
     } else {
       resolve();
     }
@@ -84,15 +80,12 @@ new Promise((resolve, reject) => {
       });
   })
   .then(() => {
-    return globals.getSingleTree('' + globals.storage.defExpand)
-      .then((treeInfo) => {
-        defExpandTree = treeInfo;
-      });
-  })
-  .then(() => {
-    const app = tree(
-      <App defExpandTree={defExpandTree} />
-    );
+    globals.getSingleTree('' + globals.storage.defExpand)
+      .then((defExpandTree) => {
+        const app = tree(
+          <App defExpandTree={defExpandTree} />
+        );
 
-    render(app, document.getElementById('container'));
+        render(app, document.getElementById('container'));
+      });
   });
