@@ -92,7 +92,7 @@ function mouseDownHandler(event) {
 function render({props, state}, setState) {
   console.log({props, state});
 
-  window.globals.setRootState = setState;
+  globals.setRootState = setState;
 
   // if menu or editor has target, show menu-cover
   const isHiddenMenuCover = !(state.menuTarget || state.editTarget);
