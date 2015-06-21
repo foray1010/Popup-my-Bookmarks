@@ -237,7 +237,7 @@ gulp.task('compile-zip', [
 
 gulp.task('compile', ['compile-zip'], function() {
   // useless after zipped
-  fs.removeSync(compilePath);
+  fs.remove(compilePath);
 });
 
 // create a 'watched' folder for testing
