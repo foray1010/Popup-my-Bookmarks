@@ -25,6 +25,7 @@ function render({props, state}) {
       treeItems.push(
         <BookmarkItem
           itemInfo={itemInfo}
+          treeIndex={treeIndex}
           trees={trees} />
       );
     });
