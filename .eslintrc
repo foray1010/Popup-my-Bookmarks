@@ -3,6 +3,7 @@ plugins:
   - "react"
 env:
   browser: true
+  node: true
 globals:
   chrome: false
   class$: false
@@ -39,7 +40,7 @@ rules:
 */
   // babel inserts "use strict"; for us
   strict:
-    - 2
+    - 1
     - "never"
 
 /**
