@@ -118,7 +118,6 @@ function compileLangHandler(thisLang, sourcePath, destDir, options) {
     .on('end', function() {
       printWithTime(clc.magenta(sourcePath) + ' is compiled');
     });
-;
 }
 
 function compileManifest(destDir, updateFn) {
