@@ -40,6 +40,13 @@ const compilePath = '__compile';
 const devPath = '__dev';
 const resourcesPath = '_resources';
 
+// console print
+function printWithTime(msg) {
+  const nowTime = new Date().toLocaleTimeString();
+
+  console.log('[' + clc.blackBright(nowTime) + '] ' + msg);
+}
+
 // language handlers
 function compileLang(langName, destDir, options) {
   const thisLang = lang[langName];
@@ -78,7 +85,10 @@ function compileJS(destDir, options) {
       }
 
       return bundledStream
-        .pipe(gulp.dest(destDir));
+        .pipe(gulp.dest(destDir))
+        .on('end', function() {
+          printWithTime(clc.magenta(entry) + ' is browserified');
+        });
     };
 
     if (options.watch) {
@@ -94,14 +104,16 @@ function compileJS(destDir, options) {
 function compileLangHandler(thisLang, sourcePath, destDir, options) {
   const compilerPipe = plugins[thisLang.compiler](options);
   const dest = path.join(destDir, thisLang.dest);
-  const nowTime = new Date().toLocaleTimeString();
 
-  console.log('[' + clc.blackBright(nowTime) + '] ' +
-              clc.magenta(sourcePath) + ' is compiled');
+  // printWithTime(clc.magenta(sourcePath) + ' is compiled');
 
   return gulp.src(sourcePath)
     .pipe(compilerPipe)
-    .pipe(gulp.dest(dest));
+    .pipe(gulp.dest(dest))
+    .on('end', function() {
+      printWithTime(clc.magenta(sourcePath) + ' is compiled');
+    });
+;
 }
 
 function compileManifest(destDir, updateFn) {
