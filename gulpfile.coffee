@@ -3,11 +3,16 @@
 gulp = require('gulp')
 
 argv = require('yargs').argv
+browserify = require('browserify')
 clc = require('cli-color')
 cson = require('cson')
+es = require('event-stream')
 fs = require('fs-extra')
+globby = require('globby')
 path = require('path')
 plugins = require('gulp-load-plugins')()
+vinylSource = require('vinyl-source-stream')
+watchify = require('watchify')
 
 # language config
 lang =
@@ -23,8 +28,6 @@ lang =
     dest: '.'
   js:
     extName: 'js'
-    compiler: 'browserify'
-    minifier: 'uglify'
     source: 'js'
     dest: 'js'
 
@@ -41,28 +44,58 @@ compileLang = (langName, destDir, options) ->
 
   compileLangHandler(thisLang, getSourcePath(thisLang), destDir, options)
 
+compileJS = (destDir, options) ->
+  bundledStreamList = []
+  thisLang = lang.js
+
+  fs.mkdirsSync(path.join(destDir, thisLang.dest))
+
+  globby(getSourcePath(thisLang), (err, entries) ->
+    if err
+      console.log(err)
+      return false
+
+    bundledStreamList = entries.map((entry) ->
+      b = browserify(
+        entries: entry
+        debug: true
+        transform: ['babelify']
+      )
+
+      genBundle = () ->
+        bundledStream = b.bundle()
+          .pipe(vinylSource(entry))
+
+        if options.watch
+          return bundledStream
+            .pipe(gulp.dest(destDir))
+        else
+          uglifyStream = plugins.streamify(plugins.uglify())
+          return bundledStream
+            .pipe(uglifyStream)
+            .pipe(gulp.dest(destDir))
+
+      if options.watch
+        b = watchify(b)
+          .on('update', genBundle)
+
+      return genBundle()
+    )
+  )
+
+  return es.concat.apply(null, bundledStreamList)
+
 compileLangHandler = (thisLang, sourcePath, destDir, options) ->
   compilerPipe = plugins[thisLang.compiler](options)
+  dest = path.join(destDir, thisLang.dest)
   nowTime = new Date().toLocaleTimeString()
-
-  # if have minifier and it is now for production
-  hvMinifier = !!plugins[thisLang.minifier] and destDir.startsWith(compilePath)
-
-  minifierPipe =
-    if hvMinifier
-      plugins[thisLang.minifier]()
-    else
-      # as gulp-if require child action,
-      # this action will never been triggered
-      compilerPipe
 
   console.log('[' + clc.blackBright(nowTime) + '] ' +
               clc.magenta(sourcePath) + ' is compiled')
 
   gulp.src(sourcePath)
     .pipe(compilerPipe)
-    .pipe(plugins.if(hvMinifier, minifierPipe))
-    .pipe(gulp.dest(path.join(destDir, thisLang.dest)))
+    .pipe(gulp.dest(dest))
 
 compileManifest = (destDir, updateFn) ->
   manifestJSON = cson.load(path.join(resourcesPath, 'manifest.cson'))
@@ -156,7 +189,7 @@ gulp.task('dev', ->
 
   watchLang('css', devPath)
   watchLang('html', devPath, pretty: true)
-  watchLang('js', devPath, transform: ['babelify'])
+  compileJS(devPath, watch: true)
 
   for fileName in ['font', '_locales']
     source = path.join('..', fileName)
