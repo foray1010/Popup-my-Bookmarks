@@ -14,7 +14,7 @@ function render({props, state}) {
 
     targetBox.push(
       <BoxTemplate
-        treeInfo={treeInfo}
+        treeIndex={treeIndex}
         trees={trees} />
     );
   });
