@@ -19,7 +19,9 @@ function render({props, state}) {
   const pushTreeItem = (thisTreeInfo) => {
     thisTreeInfo.children.forEach((itemInfo) => {
       treeItems.push(
-        <BookmarkItem itemInfo={itemInfo} />
+        <BookmarkItem
+          itemInfo={itemInfo}
+          trees={props.trees} />
       );
     });
   };

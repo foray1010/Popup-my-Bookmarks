@@ -57,7 +57,7 @@ function mouseEnterHandler(event, {props, state}, updateState) {
   }
 
   if (globals.isFolder(itemInfo)) {
-    openFolder(itemInfo);
+    openFolder(itemInfo, props.trees);
   }
 }
 
@@ -122,10 +122,16 @@ function openBookmark(mouseButton, itemUrl) {
   }
 }
 
-function openFolder(itemInfo) {
+function openFolder(itemInfo, trees) {
   return globals.getSingleTree(itemInfo.id)
     .then((treeInfo) => {
+      const newTrees = trees.slice();
 
+      newTrees.push(treeInfo);
+
+      globals.setRootState({
+        trees: newTrees
+      });
     });
 }
 
