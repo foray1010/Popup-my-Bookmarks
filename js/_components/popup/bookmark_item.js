@@ -57,7 +57,7 @@ function mouseEnterHandler(event, {props, state}, updateState) {
   }
 
   if (globals.isFolder(itemInfo)) {
-    openFolder(itemInfo, props.trees);
+    openFolder(props);
   }
 }
 
@@ -122,13 +122,14 @@ function openBookmark(mouseButton, itemUrl) {
   }
 }
 
-function openFolder(itemInfo, trees) {
-  return globals.getSingleTree(itemInfo.id)
+function openFolder(props) {
+  return globals.getSingleTree(props.itemInfo.id)
     .then((treeInfo) => {
       // clone the array to avoid polluting the prevState value
-      const newTrees = trees.slice();
+      const newTrees = props.trees.slice();
+      const nextTreeIndex = props.treeIndex + 1;
 
-      newTrees.push(treeInfo);
+      newTrees[nextTreeIndex] = treeInfo;
 
       globals.setRootState({
         trees: newTrees
