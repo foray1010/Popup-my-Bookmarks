@@ -11,7 +11,7 @@ function render({props, state}) {
   return (
     <div
       id='menu-cover'
-      class='ninja'
+      class='cover'
       hidden={props.isHidden}
       onClick={clickHandler} />
   );
