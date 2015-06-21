@@ -45,42 +45,36 @@ compileLang = (langName, destDir, options) ->
   compileLangHandler(thisLang, getSourcePath(thisLang), destDir, options)
 
 compileJS = (destDir, options) ->
-  bundledStreamList = []
   thisLang = lang.js
 
   fs.mkdirsSync(path.join(destDir, thisLang.dest))
 
-  globby(getSourcePath(thisLang), (err, entries) ->
-    if err
-      console.log(err)
-      return false
+  entries = globby.sync(getSourcePath(thisLang))
 
-    bundledStreamList = entries.map((entry) ->
-      b = browserify(
-        entries: entry
-        debug: true
-        transform: ['babelify']
-      )
-
-      genBundle = () ->
-        bundledStream = b.bundle()
-          .pipe(vinylSource(entry))
-
-        if options.watch
-          return bundledStream
-            .pipe(gulp.dest(destDir))
-        else
-          uglifyStream = plugins.streamify(plugins.uglify())
-          return bundledStream
-            .pipe(uglifyStream)
-            .pipe(gulp.dest(destDir))
-
-      if options.watch
-        b = watchify(b)
-          .on('update', genBundle)
-
-      return genBundle()
+  bundledStreamList = entries.map((entry) ->
+    b = browserify(
+      entries: entry
+      debug: true
+      transform: ['babelify']
     )
+
+    genBundle = () ->
+      bundledStream = b.bundle()
+        .pipe(vinylSource(entry))
+
+      if !options.watch
+        uglifyStream = plugins.streamify(plugins.uglify())
+        bundledStream
+          .pipe(uglifyStream)
+
+      return bundledStream
+        .pipe(gulp.dest(destDir))
+
+    if options.watch
+      b = watchify(b)
+        .on('update', genBundle)
+
+    return genBundle()
   )
 
   return es.concat.apply(null, bundledStreamList)
@@ -157,10 +151,16 @@ gulp.task('compile-init', ->
   initDir(compilePath)
 )
 
-gulp.task('compile-main', ['compile-init'], ->
+gulp.task('compile-css', ['compile-init'], ->
   compileLang('css', compilePath, compress: true)
+)
+
+gulp.task('compile-html', ['compile-init'], ->
   compileLang('html', compilePath)
-  compileLang('js', compilePath, transform: ['babelify'])
+)
+
+gulp.task('compile-js', ['compile-init'], ->
+  compileJS(compilePath, watch: false)
 )
 
 gulp.task('compile-others', ['compile-init'], ->
@@ -173,7 +173,7 @@ gulp.task('compile-others', ['compile-init'], ->
   )
 )
 
-gulp.task('compile-zip', ['compile-main', 'compile-others'], ->
+gulp.task('compile-zip', ['compile-css', 'compile-html', 'compile-js', 'compile-others'], ->
   gulp.src(path.join(compilePath, '**'))
     .pipe(plugins.zip(argv.version + '.zip'))
     .pipe(gulp.dest('.'))
