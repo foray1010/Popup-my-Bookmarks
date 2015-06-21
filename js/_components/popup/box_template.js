@@ -2,6 +2,10 @@ import {element} from 'deku';
 
 import BookmarkItem from './bookmark_item';
 
+function afterRender(component, el) {
+  setHeight(el);
+}
+
 function closeHandler(event, {props, state}) {
 
 }
@@ -45,8 +49,25 @@ function render({props, state}) {
 function scrollHandler(event, {props, state}) {
 }
 
+function setHeight(el) {
+  const bookmarkList = el.getElementsByClassName('bookmark-list')[0];
+
+  // head-box and search-box height
+  const bookmarkListOffsetTop = bookmarkList.getBoundingClientRect().top;
+
+  const maxListHeight = globals.maxHeight - bookmarkListOffsetTop;
+
+  const listHeight = Math.min(bookmarkList.scrollHeight, maxListHeight);
+
+  const bodyHeight = listHeight + bookmarkListOffsetTop;
+
+  bookmarkList.style.maxHeight = listHeight + 'px';
+
+  document.body.style.height = Math.min(bodyHeight, globals.maxHeight) + 'px';
+}
+
 function wheelHandler(event, {props, state}) {
   event.preventDefault();
 }
 
-export default {render};
+export default {afterRender, render};
