@@ -125,6 +125,7 @@ function openBookmark(mouseButton, itemUrl) {
 function openFolder(itemInfo, trees) {
   return globals.getSingleTree(itemInfo.id)
     .then((treeInfo) => {
+      // clone the array to avoid polluting the prevState value
       const newTrees = trees.slice();
 
       newTrees.push(treeInfo);
