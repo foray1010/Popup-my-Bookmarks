@@ -101,6 +101,7 @@ function render({props, state}, setState) {
 
   return (
     <div
+      id='app'
       onContextMenu={contextMenuHandler}
       onMouseDown={mouseDownHandler}>
       <Panel trees={state.trees} />
