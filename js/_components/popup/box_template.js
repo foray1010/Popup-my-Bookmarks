@@ -13,15 +13,16 @@ function closeHandler(event, {props, state}) {
 function render({props, state}) {
   const treeInfo = props.treeInfo;
   const treeItems = [];
+  const trees = props.trees;
 
-  const isRootBox = globals.isRootFolder(treeInfo);
+  const isRootBox = trees.indexOf(treeInfo) === 0;
 
   const pushTreeItem = (thisTreeInfo) => {
     thisTreeInfo.children.forEach((itemInfo) => {
       treeItems.push(
         <BookmarkItem
           itemInfo={itemInfo}
-          trees={props.trees} />
+          trees={trees} />
       );
     });
   };
