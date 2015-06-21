@@ -20,7 +20,7 @@ function render({props, state}) {
   });
 
   return (
-    <div>
+    <div id='panel-box'>
       <div id='sub' class={boxClasses}>
         {subBoxes}
       </div>
