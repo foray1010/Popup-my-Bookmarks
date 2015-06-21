@@ -7,12 +7,15 @@ function render({props, state}) {
   const boxClasses = ['panel', 'panel-width'];
   const mainBoxes = [];
   const subBoxes = [];
+  const trees = props.trees;
 
-  props.trees.forEach((treeInfo, treeIndex) => {
+  trees.forEach((treeInfo, treeIndex) => {
     const targetBox = treeIndex % 2 === 0 ? mainBoxes : subBoxes;
 
     targetBox.push(
-      <BoxTemplate treeInfo={treeInfo} />
+      <BoxTemplate
+        treeInfo={treeInfo}
+        trees={trees} />
     );
   });
 
