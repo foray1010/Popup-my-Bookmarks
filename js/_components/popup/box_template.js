@@ -11,15 +11,14 @@ function closeHandler(event, {props, state}) {
 }
 
 function render({props, state}) {
-  const treeInfo = props.treeInfo;
   const treeItems = [];
+  const treeIndex = props.treeIndex;
   const trees = props.trees;
 
-  const treesIndex = trees.indexOf(treeInfo);
-
   // only hide the folder if it is not the top two folder
-  const isHiddenFolderCover = trees.length - treesIndex <= 2;
-  const isRootBox = treesIndex === 0;
+  const isHiddenFolderCover = trees.length - treeIndex <= 2;
+  const isRootBox = treeIndex === 0;
+  const treeInfo = trees[treeIndex];
 
   const pushTreeItem = (thisTreeInfo) => {
     thisTreeInfo.children.forEach((itemInfo) => {
