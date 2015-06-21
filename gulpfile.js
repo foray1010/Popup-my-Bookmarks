@@ -44,7 +44,7 @@ const resourcesPath = '_resources';
 function printWithTime(msg) {
   const nowTime = new Date().toLocaleTimeString();
 
-  console.log('[' + clc.blackBright(nowTime) + '] ' + msg);
+  console.log('[' + clc.blackBright(nowTime) + ']', msg);
 }
 
 // language handlers
@@ -64,7 +64,9 @@ function compileLang(langName, destDir, options) {
 function compileJS(destDir, options) {
   const thisLang = lang.js;
 
-  const entries = globby.sync(getSourcePath(thisLang));
+  const sourcePath = getSourcePath(thisLang);
+
+  const entries = globby.sync(sourcePath);
 
   fs.mkdirsSync(path.join(destDir, thisLang.dest));
 
@@ -98,7 +100,10 @@ function compileJS(destDir, options) {
     return genBundle();
   });
 
-  return es.concat.apply(null, bundledStreamList);
+  return es.concat.apply(null, bundledStreamList)
+    .on('end', function() {
+      printWithTime(clc.magenta(sourcePath) + ' is compiled');
+    });
 }
 
 function compileLangHandler(thisLang, sourcePath, destDir, options) {
