@@ -6,8 +6,23 @@ function afterRender(component, el) {
   setHeight(el);
 }
 
-function closeHandler(event, {props, state}) {
+function closeHandlerByFolderCover(event, {props}) {
+  removeTreeInfoFromIndex(props.trees, props.treeIndex + 1);
+}
 
+function closeHandlerbyHeadClose(event, {props}) {
+  removeTreeInfoFromIndex(props.trees, props.treeIndex);
+}
+
+function removeTreeInfoFromIndex(trees, removeFromIndex) {
+  // clone the array to avoid polluting the prevState value
+  const newTrees = trees.slice();
+
+  newTrees.splice(removeFromIndex);
+
+  globals.setRootState({
+    trees: newTrees
+  });
 }
 
 function render({props, state}) {
@@ -41,7 +56,7 @@ function render({props, state}) {
     <div class='box-template'>
       <div class='head-box' hidden={isRootBox}>
         <div class='head-title no-text-overflow'>{treeInfo.title}</div>
-        <div class='head-close' onClick={closeHandler} />
+        <div class='head-close' onClick={closeHandlerbyHeadClose} />
       </div>
       <div
         class='bookmark-list'
@@ -52,7 +67,7 @@ function render({props, state}) {
       <div
         class='cover'
         hidden={isHiddenFolderCover}
-        onClick={closeHandler} />
+        onClick={closeHandlerByFolderCover} />
     </div>
   );
 }
