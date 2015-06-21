@@ -15,7 +15,11 @@ function render({props, state}) {
   const treeItems = [];
   const trees = props.trees;
 
-  const isRootBox = trees.indexOf(treeInfo) === 0;
+  const treesIndex = trees.indexOf(treeInfo);
+
+  // only hide the folder if it is not the top two folder
+  const isHiddenFolderCover = trees.length - treesIndex <= 2;
+  const isRootBox = treesIndex === 0;
 
   const pushTreeItem = (thisTreeInfo) => {
     thisTreeInfo.children.forEach((itemInfo) => {
@@ -45,6 +49,10 @@ function render({props, state}) {
         onWheel={wheelHandler}>
         {treeItems}
       </div>
+      <div
+        class='cover'
+        hidden={isHiddenFolderCover}
+        onClick={closeHandler} />
     </div>
   );
 }
