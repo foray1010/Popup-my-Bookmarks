@@ -39,6 +39,7 @@ function render({props, state}) {
     thisTreeInfo.children.forEach((itemInfo) => {
       treeItems.push(
         <BookmarkItem
+          key={itemInfo.id}
           itemInfo={itemInfo}
           treeIndex={treeIndex}
           trees={trees} />
