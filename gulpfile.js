@@ -170,7 +170,7 @@ gulp.task('default', ['help']);
 
 // user guideline
 gulp.task('help', function() {
-  console.log('\n' + getMarkdownData(['Developer guide']) + '\n');
+  printWithTime('\n' + getMarkdownData(['Developer guide']));
 });
 
 // compile and zip PmB
