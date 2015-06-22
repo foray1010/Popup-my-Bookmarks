@@ -100,24 +100,16 @@ function compileJS(destDir, options) {
     return genBundle();
   });
 
-  return es.concat.apply(null, bundledStreamList)
-    .on('end', function() {
-      printWithTime(clc.magenta(sourcePath) + ' is compiled');
-    });
+  return es.concat.apply(null, bundledStreamList);
 }
 
 function compileLangHandler(thisLang, sourcePath, destDir, options) {
   const compilerPipe = plugins[thisLang.compiler](options);
   const dest = path.join(destDir, thisLang.dest);
 
-  // printWithTime(clc.magenta(sourcePath) + ' is compiled');
-
   return gulp.src(sourcePath)
     .pipe(compilerPipe)
-    .pipe(gulp.dest(dest))
-    .on('end', function() {
-      printWithTime(clc.magenta(sourcePath) + ' is compiled');
-    });
+    .pipe(gulp.dest(dest));
 }
 
 function compileManifest(destDir, updateFn) {
@@ -136,7 +128,12 @@ function watchLang(langName, destDir, options) {
   const thisLang = lang[langName];
 
   gulp.watch(getSourcePath(thisLang), function(event) {
-    compileLangHandler(thisLang, event.path, destDir, options);
+    const sourcePath = path.relative(__dirname, event.path);
+
+    compileLangHandler(thisLang, sourcePath, destDir, options)
+      .on('end', function() {
+        printWithTime(clc.magenta(sourcePath) + ' is compiled');
+      });
   });
 
   return compileLang(langName, destDir, options);
@@ -241,13 +238,27 @@ gulp.task('compile', ['compile-zip'], function() {
 });
 
 // create a 'watched' folder for testing
-gulp.task('dev', function() {
+gulp.task('dev-init', function() {
   initDir(devPath);
+});
 
-  watchLang('css', devPath);
-  watchLang('html', devPath, {pretty: true});
-  compileJS(devPath, {watch: true});
+gulp.task('dev-css', ['dev-init'], function() {
+  return watchLang('css', devPath);
+});
 
+gulp.task('dev-html', ['dev-init'], function() {
+  return watchLang('html', devPath, {pretty: true});
+});
+
+gulp.task('dev-js', ['dev-init'], function() {
+  return compileJS(devPath, {watch: true});
+});
+
+gulp.task('dev', [
+            'dev-css',
+            'dev-html',
+            'dev-js'
+          ], function() {
   const fileList = ['font', '_locales'];
 
   fileList.forEach(function(fileName) {
