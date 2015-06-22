@@ -185,8 +185,7 @@ gulp.task('compile-init', function() {
     );
   };
 
-  if (version === undefined ||
-      typeof version !== 'string' ||
+  if (typeof version !== 'string' ||
       version.split('.').length !== 4 ||
       !version.split('.').every(versionCheck)) {
     throw Error('You need to input a version number x.y.z.ddmm, ' +
