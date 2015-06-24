@@ -4,6 +4,7 @@ import BookmarkTree from './bookmark_tree';
 import Search from './search';
 
 function render({props, state}) {
+  const expandTableCell = <div class='panel-width' />;
   const mainPanelItems = [];
   const subPanelClass = ['panel'];
   const subPanelItems = [];
@@ -28,11 +29,11 @@ function render({props, state}) {
     <div id='panel-box'>
       <div class='panel-row'>
         <div id='sub' class={subPanelClass}>
-          <div class='panel-width' />
+          {expandTableCell}
           {subPanelItems}
         </div>
         <div id='main' class='panel'>
-          <div class='panel-width' />
+          {expandTableCell}
           <Search />
           {mainPanelItems}
         </div>
