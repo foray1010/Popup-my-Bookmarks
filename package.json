@@ -22,6 +22,7 @@
     "gulp-stylus": "*",
     "gulp-uglify": "*",
     "gulp-zip": "*",
+    "normalize.css": "*",
     "vinyl-source-stream": "*",
     "watchify": "*",
     "yargs": "*"

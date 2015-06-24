@@ -1,5 +1,6 @@
 $main-color1 = #0092fa
 $main-color2 = #fa9115
+$main-font-color = #222
 
 $golden-gap = 2px
 $golden-gap-2x = $golden-gap * 2
@@ -11,7 +12,6 @@ highlight-item()
   border-color: #ddd
 
 body
-  overflow: hidden
   -webkit-user-select: none
 
 input[type="text"]
@@ -108,7 +108,7 @@ input[type="text"]
 
 .item
   border: 1px solid transparent
-  color: #222
+  color: $main-font-color
   cursor: default
   margin: 0
 
@@ -119,7 +119,7 @@ input[type="text"]
     highlight-item()
 
 .no-result
-  color: #222
+  color: $main-font-color
   cursor: default
   padding: $golden-gap 0
   text-align: center
@@ -213,9 +213,9 @@ input[type="text"]
     padding: 4px 3px 5px 4px
 
 #search-input
-  -webkit-appearance: none
   background: transparent
   border: 0
+  color: $main-font-color
   height: 100%
   width: calc(100% - 19px)
 
@@ -240,7 +240,6 @@ input[type="text"]
     background: #aaa
 
 ::-webkit-search-cancel-button
-  -webkit-appearance: none
   content: url("/img/cancel.png")
   height: 10px
   width: 14px
