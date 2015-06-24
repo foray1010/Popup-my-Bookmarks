@@ -1,6 +1,6 @@
 import {element} from 'deku';
 
-import BoxTemplate from './box_template';
+import BookmarkTree from './bookmark_tree';
 import Search from './search';
 
 function render({props, state}) {
@@ -14,7 +14,7 @@ function render({props, state}) {
       mainPanelItems : subPanelItems;
 
     targetPanelItems.push(
-      <BoxTemplate
+      <BookmarkTree
         treeIndex={treeIndex}
         trees={trees} />
     );
