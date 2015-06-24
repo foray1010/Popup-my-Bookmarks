@@ -7,22 +7,11 @@ function afterRender(component, el) {
 }
 
 function closeHandlerByFolderCover(event, {props}) {
-  removeTreeInfoFromIndex(props.trees, props.treeIndex + 1);
+  globals.removeTreeInfoFromIndex(props.trees, props.treeIndex + 1);
 }
 
 function closeHandlerbyHeadClose(event, {props}) {
-  removeTreeInfoFromIndex(props.trees, props.treeIndex);
-}
-
-function removeTreeInfoFromIndex(trees, removeFromIndex) {
-  // clone the array to avoid polluting the prevState value
-  const newTrees = trees.slice();
-
-  newTrees.splice(removeFromIndex);
-
-  globals.setRootState({
-    trees: newTrees
-  });
+  globals.removeTreeInfoFromIndex(props.trees, props.treeIndex);
 }
 
 function render({props, state}) {
