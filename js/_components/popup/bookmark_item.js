@@ -58,6 +58,8 @@ function mouseEnterHandler(event, {props, state}, updateState) {
 
   if (globals.isFolder(itemInfo)) {
     openFolder(props);
+  } else {
+    globals.removeTreeInfoFromIndex(props.trees, props.treeIndex + 1);
   }
 }
 

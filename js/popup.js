@@ -49,6 +49,17 @@ window.globals = {
     chrome.tabs.create({url: 'options.html'});
   },
 
+  removeTreeInfoFromIndex(trees, removeFromIndex) {
+    // clone the array to avoid polluting the prevState value
+    const newTrees = trees.slice();
+
+    newTrees.splice(removeFromIndex);
+
+    globals.setRootState({
+      trees: newTrees
+    });
+  },
+
   separateThisUrl: 'http://separatethis.com/'
 };
 
