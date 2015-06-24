@@ -52,6 +52,9 @@ input[type="text"]
   top: 0
   width: 100%
 
+.display-none
+  display: none !important
+
 .grey-item
   color: #bbb !important
 
@@ -129,9 +132,12 @@ input[type="text"]
 
 .panel
   background: inherit
-  height: 100%
-  overflow: hidden
-  position: absolute
+  display: table-cell
+  position: relative
+
+.panel-row
+  background: inherit
+  display: table-row
 
 .root-folder
   color: inherit !important
@@ -175,7 +181,6 @@ input[type="text"]
 
 #main
   color: $main-color2
-  right: 0
 
 #menu
   background: #fff
@@ -194,6 +199,8 @@ input[type="text"]
 
 #panel-box
   background: inherit
+  border-collapse: collapse
+  display: table
 
 #search-box
   border: solid #ccc
@@ -214,8 +221,8 @@ input[type="text"]
   width: calc(100% - 19px)
 
 #sub
+  border-right: $golden-gap transparent solid
   color: $main-color1
-  left: 0
 
 ::-webkit-scrollbar
   background: transparent

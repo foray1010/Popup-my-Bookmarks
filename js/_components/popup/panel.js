@@ -4,29 +4,38 @@ import BoxTemplate from './box_template';
 import Search from './search';
 
 function render({props, state}) {
-  const boxClasses = ['panel', 'panel-width'];
-  const mainBoxes = [];
-  const subBoxes = [];
+  const mainPanelItems = [];
+  const subPanelClass = ['panel'];
+  const subPanelItems = [];
   const trees = props.trees;
 
   trees.forEach((treeInfo, treeIndex) => {
-    const targetBox = treeIndex % 2 === 0 ? mainBoxes : subBoxes;
+    const targetPanelItems = treeIndex % 2 === 0 ?
+      mainPanelItems : subPanelItems;
 
-    targetBox.push(
+    targetPanelItems.push(
       <BoxTemplate
         treeIndex={treeIndex}
         trees={trees} />
     );
   });
 
+  if (!subPanelItems.length) {
+    subPanelClass.push('display-none');
+  }
+
   return (
     <div id='panel-box'>
-      <div id='sub' class={boxClasses}>
-        {subBoxes}
-      </div>
-      <div id='main' class={boxClasses}>
-        <Search />
-        {mainBoxes}
+      <div class='panel-row'>
+        <div id='sub' class={subPanelClass}>
+          <div class='panel-width' />
+          {subPanelItems}
+        </div>
+        <div id='main' class='panel'>
+          <div class='panel-width' />
+          <Search />
+          {mainPanelItems}
+        </div>
       </div>
     </div>
   );

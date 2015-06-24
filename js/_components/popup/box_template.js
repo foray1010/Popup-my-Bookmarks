@@ -86,11 +86,7 @@ function setHeight(el) {
 
   const listHeight = Math.min(bookmarkList.scrollHeight, maxListHeight);
 
-  const bodyHeight = listHeight + bookmarkListOffsetTop;
-
   bookmarkList.style.maxHeight = listHeight + 'px';
-
-  document.body.style.height = Math.min(bodyHeight, globals.maxHeight) + 'px';
 }
 
 function wheelHandler(event, {props, state}) {
