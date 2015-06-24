@@ -3,7 +3,11 @@ import {element} from 'deku';
 const _getMsg = chrome.i18n.getMessage;
 
 function afterRender({props}, el) {
-  if (!props.isHidden) {
+  const itemInfo = props.menuTarget;
+
+  const isHidden = !itemInfo;
+
+  if (!isHidden) {
     setMenuPos(el, props.mousePos);
   }
 }
