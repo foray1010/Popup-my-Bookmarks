@@ -43,7 +43,7 @@ function render({props, state}) {
   pushTreeItem(treeInfo);
 
   return (
-    <div class='box-template'>
+    <div class='bookmark-tree'>
       <div class='head-box' hidden={isRootBox}>
         <div class='head-title no-text-overflow'>{treeInfo.title}</div>
         <div class='head-close' onClick={closeHandlerbyHeadClose} />
