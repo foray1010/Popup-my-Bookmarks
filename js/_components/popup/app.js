@@ -5,10 +5,6 @@ import Menu from './menu';
 import MenuCover from './menu_cover';
 import Panel from './panel';
 
-function afterUpdate({state}, prevProps, prevState) {
-  setBodyWidth(prevState.trees.length, state.trees.length);
-}
-
 function beforeMount() {
   initStyleOptions();
 }
@@ -114,14 +110,4 @@ function render({props, state}, setState) {
   );
 }
 
-function setBodyWidth(prevTreesLen, treesLen) {
-  const bodyStyle = document.body.style;
-
-  if (treesLen > 1 && prevTreesLen <= 1) {
-    bodyStyle.width = globals.storage.setWidth * 2 + globals.goldenGap + 'px';
-  } else if (treesLen <= 1 && prevTreesLen > 1) {
-    bodyStyle.width = null;
-  }
-}
-
-export default {afterUpdate, beforeMount, initialState, render};
+export default {beforeMount, initialState, render};
