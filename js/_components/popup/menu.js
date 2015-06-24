@@ -130,7 +130,7 @@ function setMenuPos(el, mousePos) {
   const menuHeight = el.offsetHeight;
   const menuWidth = el.offsetWidth;
 
-  const bodyHeight = body.offsetHeight;
+  const bodyHeight = body.scrollHeight;
   const bodyWidth = body.offsetWidth;
 
   if (menuHeight > bodyHeight) {
