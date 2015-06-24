@@ -4,14 +4,13 @@ const _getMsg = chrome.i18n.getMessage;
 
 function clickHandler(event, {props, state}) {
   const itemInfo = props.itemInfo;
-  const mouseButton = event.button;
 
   switch (globals.getBookmarkType(itemInfo)) {
     case 'folder':
       break;
 
     case 'bookmark':
-      openBookmark(mouseButton, itemInfo.url);
+      openBookmark(getOpenBookmarkHandlerId(event), itemInfo.url);
   }
 }
 
@@ -37,6 +36,26 @@ function dragOverHandler(event, {props, state}) {
 
 function dragStartHandler(event, {props, state}) {
 
+}
+
+function getOpenBookmarkHandlerId(event) {
+  const mouseButton = event.button;
+
+  let switcher;
+
+  if (mouseButton === 0) {
+    switcher = 'Left';
+
+    if (event.shiftKey) {
+      switcher += 'Shift';
+    } else if (event.ctrlKey) {
+      switcher += 'Ctrl';
+    }
+  } else {
+    switcher = 'Middle';
+  }
+
+  return globals.storage['clickBy' + switcher];
 }
 
 function initialState() {
@@ -71,23 +90,7 @@ function mouseLeaveHandler(event, {props, state}, updateState) {
   updateState({isSelected: false});
 }
 
-function openBookmark(mouseButton, itemUrl) {
-  let switcher;
-
-  if (mouseButton === 0) {
-    switcher = 'Left';
-
-    // if (ON_MOD_KEY === 16) {
-    //   switcher += 'Shift';
-    // } else if (ON_MOD_KEY === 17) {
-    //   switcher += 'Ctrl';
-    // }
-  } else {
-    switcher = 'Middle';
-  }
-
-  const handlerId = globals.storage['clickBy' + switcher];
-
+function openBookmark(handlerId, itemUrl) {
   switch (handlerId) {
     case 0: // current tab
     case 1: // current tab (w/o closing PmB)
