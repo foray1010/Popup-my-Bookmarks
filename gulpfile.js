@@ -196,7 +196,10 @@ gulp.task('compile-init', function() {
 });
 
 gulp.task('compile-css', ['compile-init'], function() {
-  return compileLang('css', compilePath, {compress: true});
+  return compileLang('css', compilePath, {
+    compress: true,
+    'include css': true
+  });
 });
 
 gulp.task('compile-html', ['compile-init'], function() {
@@ -242,7 +245,7 @@ gulp.task('dev-init', function() {
 });
 
 gulp.task('dev-css', ['dev-init'], function() {
-  return watchLang('css', devPath);
+  return watchLang('css', devPath, {'include css': true});
 });
 
 gulp.task('dev-html', ['dev-init'], function() {
