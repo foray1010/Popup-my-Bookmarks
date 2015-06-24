@@ -14,6 +14,7 @@ function render({props, state}) {
         type='search'
         placeholder={_getMsg('search')}
         tabindex='-1'
+        autofocus
         onInput={inputHandler} />
     </div>
   );
