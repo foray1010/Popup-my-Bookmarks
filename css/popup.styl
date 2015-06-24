@@ -7,6 +7,8 @@ $golden-gap-2x = $golden-gap * 2
 
 $head-box-height = 30px
 
+$search-box-height = 21px
+
 highlight-item()
   background: #eee
   border-color: #ddd
@@ -204,20 +206,21 @@ input[type="text"]
 #search-box
   border: solid #ccc
   border-width: 0 0 1px 1px
-  height: 21px
+  height: $search-box-height
   margin-bottom: $golden-gap
 
-  &:before
-    content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAsklEQVR42mNggIKGlq5UIL4CxP+B+B0QtwMxGwM2AJRYClUIws+R2LeAmAddcQJU8gIQq0LFeIB4GlR8K7qGJ1AJfiw2w5wojSwIEniCw6l1UHkfZMFfQPwFh4bNUA16yIIwt3aiKfaAih9HN0UAiN/AJIG4A4hXIIXUMSBmRdckC8T7kBTBgvQdlH0diIWxuVkL5EEgtoTyFZFsfwDEYgyEAFCRPJKm9wzEAKimh0D8DABuHq/4QpP4dwAAAABJRU5ErkJggg==")
-    float: left
-    padding: 4px 3px 5px 4px
+#search-img
+  float: left
+  padding: 5px 4px 4px 5px
 
 #search-input
   background: transparent
   border: 0
   color: $main-font-color
+  float: right
+  font-size: 12px
   height: 100%
-  width: calc(100% - 19px)
+  width: "calc(100% - %s)" % $search-box-height
 
 #sub
   border-right: $golden-gap transparent solid

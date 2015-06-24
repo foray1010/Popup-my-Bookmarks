@@ -154,7 +154,7 @@ function render({props, state}) {
   let tooltip;
 
   if (globals.isFolder(itemInfo)) {
-    iconSrc = 'img/folder.png';
+    iconSrc = '/img/folder.png';
 
     if (globals.isRootFolder(itemInfo)) {
       itemClasses.push('root-folder');
