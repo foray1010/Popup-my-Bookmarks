@@ -4,9 +4,8 @@ import BookmarkTree from './bookmark_tree';
 import Search from './search';
 
 function render({props, state}) {
-  const expandTableCell = <div class='panel-width' />;
   const mainPanelItems = [];
-  const subPanelClass = ['panel'];
+  const panelClasses = ['panel', 'panel-width'];
   const subPanelItems = [];
   const trees = props.trees;
 
@@ -16,11 +15,13 @@ function render({props, state}) {
 
     targetPanelItems.push(
       <BookmarkTree
+        key={treeInfo.id}
         treeIndex={treeIndex}
         trees={trees} />
     );
   });
 
+  const subPanelClass = panelClasses.slice();
   if (!subPanelItems.length) {
     subPanelClass.push('display-none');
   }
@@ -29,12 +30,10 @@ function render({props, state}) {
     <div id='panel-box'>
       <div class='panel-row'>
         <div id='sub' class={subPanelClass}>
-          {expandTableCell}
           {subPanelItems}
         </div>
-        <div id='main' class='panel'>
-          {expandTableCell}
-          <Search />
+        <div id='main' class={panelClasses}>
+          <Search key='search' />
           {mainPanelItems}
         </div>
       </div>
