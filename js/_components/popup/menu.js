@@ -46,7 +46,7 @@ function getMenuItemNum(menuItem) {
   return Array.prototype.indexOf.call(menuItemList, menuItem);
 }
 
-function menuClickEvent(event) {
+function menuClickEvent(event, {props}) {
   const target = event.target;
 
   const menuItemNum = getMenuItemNum(target);
@@ -59,6 +59,10 @@ function menuClickEvent(event) {
 
     case 3: // Edit... or Rename...
     case 9: // Add folder...
+      globals.setRootState({
+        editTarget: props.menuTarget,
+        menuTarget: null
+      });
       return true;
 
     case 4: // Delete
