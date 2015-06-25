@@ -37,7 +37,7 @@ input[type="text"]
 .bookmark-list
   overflow-y: auto
 
-  &:after
+  &::after
     background: currentcolor
     content: ""
     display: block
@@ -76,20 +76,20 @@ input[type="text"]
   &:hover
     background: #e44
 
-  &:before,
-  &:after
+  &::before,
+  &::after
     background: #fff
     content: ""
     position: absolute
     -webkit-transform: rotate(45deg)
 
-  &:before
+  &::before
     height: 12px
     left: 14px
     top: 9px
     width: 2px
 
-  &:after
+  &::after
     height: 2px
     left: 9px
     top: 14px
@@ -139,7 +139,7 @@ input[type="text"]
   display: table-cell
   position: relative
 
-  &:before
+  &::before
     content: ""
     display: block
     width: inherit
