@@ -186,16 +186,16 @@ select[multiple]
   width: 0
 
   &,
-  &:before,
-  &:after
+  &::before,
+  &::after
     border-color: #fc0 transparent
     border-style: solid
 
   &,
-  &:after
+  &::after
     border-width: 0 25px 18px 25px
 
-  &:before
+  &::before
     border-width: 0 6px 20px 6px
     content: ""
     left: -16px
@@ -203,7 +203,7 @@ select[multiple]
     top: -14px
     -webkit-transform: rotate(-35deg)
 
-  &:after
+  &::after
     content: ""
     left: -26px
     position: absolute
