@@ -58,7 +58,6 @@ function menuClickEvent(event, {props}) {
       break;
 
     case 3: // Edit... or Rename...
-    case 9: // Add folder...
       globals.setRootState({
         editTarget: props.menuTarget,
         menuTarget: null
@@ -72,6 +71,9 @@ function menuClickEvent(event, {props}) {
     case 6: // Copy
     case 7: // Paste
       break;
+
+    case 9: // Add folder...
+      return true;
 
     case 8: // Add current page
       break;
