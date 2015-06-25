@@ -58,22 +58,12 @@ function getOpenBookmarkHandlerId(event) {
   return globals.storage['clickBy' + switcher];
 }
 
-function initialState() {
-  return {
-    isSelected: false
-  };
-}
-
 function mouseEnterHandler(event, {props, state}, updateState) {
   if (event.target !== event.delegateTarget) {
     return true;
   }
 
   const itemInfo = props.itemInfo;
-
-  if (!state.isSelected) {
-    updateState({isSelected: true});
-  }
 
   if (globals.isFolder(itemInfo)) {
     openFolder(props);
@@ -86,8 +76,6 @@ function mouseLeaveHandler(event, {props, state}, updateState) {
   if (event.target !== event.delegateTarget) {
     return true;
   }
-
-  updateState({isSelected: false});
 }
 
 function openBookmark(handlerId, itemUrl) {
@@ -176,10 +164,6 @@ function render({props, state}) {
     }
   }
 
-  if (state.isSelected) {
-    itemClasses.push('selected');
-  }
-
   return (
     <p
       class={itemClasses}
@@ -198,4 +182,4 @@ function render({props, state}) {
   );
 }
 
-export default {initialState, render};
+export default {render};
