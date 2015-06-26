@@ -30,9 +30,9 @@ function render({props, state}) {
         <BookmarkItem
           key={itemInfo.id}
           itemInfo={itemInfo}
+          searchResult={searchResult}
           treeIndex={treeIndex}
-          trees={trees}
-          searchResult={searchResult} />
+          trees={trees} />
       );
     });
   };
@@ -79,7 +79,7 @@ function scrollHandler(event, {props, state}) {
 function setHeight(el) {
   const bookmarkList = el.getElementsByClassName('bookmark-list')[0];
 
-  // head-box and search-box height
+  // search-box and tree-head-box height
   const bookmarkListOffsetTop = bookmarkList.getBoundingClientRect().top;
 
   const maxListHeight = globals.maxHeight - bookmarkListOffsetTop;
