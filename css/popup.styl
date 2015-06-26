@@ -5,9 +5,9 @@ $main-font-color = #222
 $golden-gap = 2px
 $golden-gap-2x = $golden-gap * 2
 
-$head-box-height = 30px
-
 $search-box-height = 21px
+
+$tree-head-box-height = 30px
 
 highlight-item()
   background: #eee
@@ -61,49 +61,6 @@ input[type="text"]
 
 .grey-item
   color: #bbb !important
-
-.head-box
-  background: currentcolor
-  height: $head-box-height
-  margin-bottom: $golden-gap
-
-.head-close
-  float: right
-  height: $head-box-height
-  position: relative
-  width: $head-box-height
-
-  &:hover
-    background: #e44
-
-  &::before,
-  &::after
-    background: #fff
-    content: ""
-    position: absolute
-    -webkit-transform: rotate(45deg)
-
-  &::before
-    height: 12px
-    left: 14px
-    top: 9px
-    width: 2px
-
-  &::after
-    height: 2px
-    left: 9px
-    top: 14px
-    width: 12px
-
-.head-title
-  box-sizing: border-box
-  color: #fff
-  cursor: default
-  float: left
-  font: 22px ArchivoNarrow, simhei
-  line-height: $head-box-height + 1px
-  padding: 0 $golden-gap-2x
-  width: "calc(100% - %s)" % $head-box-height
 
 .icon
   float: left
@@ -162,6 +119,49 @@ input[type="text"]
 
   & > .icon
     display: none
+
+.tree-head-box
+  background: currentcolor
+  height: $tree-head-box-height
+  margin-bottom: $golden-gap
+
+.tree-head-close
+  float: right
+  height: $tree-head-box-height
+  position: relative
+  width: $tree-head-box-height
+
+  &:hover
+    background: #e44
+
+  &::before,
+  &::after
+    background: #fff
+    content: ""
+    position: absolute
+    -webkit-transform: rotate(45deg)
+
+  &::before
+    height: 12px
+    left: 14px
+    top: 9px
+    width: 2px
+
+  &::after
+    height: 2px
+    left: 9px
+    top: 14px
+    width: 12px
+
+.tree-head-title
+  box-sizing: border-box
+  color: #fff
+  cursor: default
+  float: left
+  font: 22px ArchivoNarrow, simhei
+  line-height: $tree-head-box-height + 1px
+  padding: 0 $golden-gap-2x
+  width: "calc(100% - %s)" % $tree-head-box-height
 
 #app
   background: inherit

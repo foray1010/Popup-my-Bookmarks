@@ -26,6 +26,7 @@ function initialState(props) {
     editTarget: null,
     menuTarget: null,
     mousePos: {x: 0, y: 0},
+    searchResult: null,
     trees: [props.defExpandTree]
   };
 }
@@ -100,11 +101,14 @@ function render({props, state}, setState) {
       id='app'
       onContextMenu={contextMenuHandler}
       onMouseDown={mouseDownHandler}>
-      <Panel trees={state.trees} />
+      <Panel
+        searchResult={state.searchResult}
+        trees={state.trees} />
       <MenuCover isHidden={isHiddenMenuCover} />
       <Menu
         menuTarget={state.menuTarget}
-        mousePos={state.mousePos} />
+        mousePos={state.mousePos}
+        searchResult={state.searchResult} />
       <Editor editTarget={state.editTarget} />
     </div>
   );

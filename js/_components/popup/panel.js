@@ -6,20 +6,30 @@ import Search from './search';
 function render({props, state}) {
   const mainPanelItems = [];
   const panelClasses = ['panel', 'panel-width'];
+  const searchResult = props.searchResult;
   const subPanelItems = [];
   const trees = props.trees;
 
-  trees.forEach((treeInfo, treeIndex) => {
-    const targetPanelItems = treeIndex % 2 === 0 ?
-      mainPanelItems : subPanelItems;
-
-    targetPanelItems.push(
+  const genBookmarkTree = (id, thisTreeIndex) => {
+    return (
       <BookmarkTree
-        key={treeInfo.id}
-        treeIndex={treeIndex}
+        key={id}
+        searchResult={searchResult}
+        treeIndex={thisTreeIndex}
         trees={trees} />
     );
-  });
+  };
+
+  if (searchResult) {
+    mainPanelItems.push(genBookmarkTree('search-result', null));
+  } else {
+    trees.forEach((treeInfo, treeIndex) => {
+      const targetPanelItems = treeIndex % 2 === 0 ?
+        mainPanelItems : subPanelItems;
+
+      targetPanelItems.push(genBookmarkTree(treeInfo.id, treeIndex));
+    });
+  }
 
   const subPanelClass = panelClasses.slice();
   if (!subPanelItems.length) {
