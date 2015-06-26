@@ -1,53 +1,64 @@
 import {element} from 'deku';
 
 import BookmarkItem from './bookmark_item';
+import TreeHead from './tree_head';
 
 function afterRender(component, el) {
   setHeight(el);
 }
 
-function closeHandlerByFolderCover(event, {props}) {
+function closeHandler(event, {props}) {
   globals.removeTreeInfoFromIndex(props.trees, props.treeIndex + 1);
 }
 
-function closeHandlerbyHeadClose(event, {props}) {
-  globals.removeTreeInfoFromIndex(props.trees, props.treeIndex);
-}
-
 function render({props, state}) {
+  const searchResult = props.searchResult;
   const treeItems = [];
   const treeIndex = props.treeIndex;
   const trees = props.trees;
 
-  // only hide the folder if it is not the top two folder
-  const isHiddenFolderCover = trees.length - treeIndex <= 2;
+  const isSearching = !!searchResult;
   const isRootBox = treeIndex === 0;
   const treeInfo = trees[treeIndex];
 
-  const pushTreeItem = (thisTreeInfo) => {
-    thisTreeInfo.children.forEach((itemInfo) => {
+  // hide the folder if it is not the top two folder
+  const isHiddenFolderCover = isSearching || trees.length - treeIndex <= 2;
+
+  const pushTreeItem = (childrenInfo) => {
+    childrenInfo.forEach((itemInfo) => {
       treeItems.push(
         <BookmarkItem
           key={itemInfo.id}
           itemInfo={itemInfo}
           treeIndex={treeIndex}
-          trees={trees} />
+          trees={trees}
+          searchResult={searchResult} />
       );
     });
   };
 
-  if (isRootBox) {
-    pushTreeItem(globals.rootTree);
+  let treeHead;
+  if (!isSearching && !isRootBox) {
+    treeHead = (
+      <TreeHead
+        treeIndex={treeIndex}
+        trees={trees} />
+    );
   }
 
-  pushTreeItem(treeInfo);
+  if (searchResult) {
+    pushTreeItem(searchResult);
+  } else {
+    if (isRootBox) {
+      pushTreeItem(globals.rootTree.children);
+    }
+
+    pushTreeItem(treeInfo.children);
+  }
 
   return (
     <div class='bookmark-tree'>
-      <div class='head-box' hidden={isRootBox}>
-        <div class='head-title no-text-overflow'>{treeInfo.title}</div>
-        <div class='head-close' onClick={closeHandlerbyHeadClose} />
-      </div>
+      {treeHead}
       <div
         class='bookmark-list'
         onScroll={scrollHandler}
@@ -57,7 +68,7 @@ function render({props, state}) {
       <div
         class='cover'
         hidden={isHiddenFolderCover}
-        onClick={closeHandlerByFolderCover} />
+        onClick={closeHandler} />
     </div>
   );
 }

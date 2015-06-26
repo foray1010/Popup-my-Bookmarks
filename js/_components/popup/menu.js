@@ -18,7 +18,9 @@ function closeMenu() {
   });
 }
 
-function getChildrenHiddenStatus(itemInfo) {
+function getChildrenHiddenStatus(props) {
+  const itemInfo = props.menuTarget;
+
   let childrenHiddenStatus = [];
 
   switch (globals.getBookmarkType(itemInfo)) {
@@ -26,10 +28,10 @@ function getChildrenHiddenStatus(itemInfo) {
     case 'bookmark':
       if (globals.isRootFolder(itemInfo)) {
         childrenHiddenStatus = [false, true, true, true, true];
-      // } else if (!IS_SEARCHING) {
-      //   childrenHiddenStatus = [false, false, false, false, false];
-      } else {
+      } else if (props.searchResult) {
         childrenHiddenStatus = [false, false, false, true, true];
+      } else {
+        childrenHiddenStatus = [false, false, false, false, false];
       }
       break;
 
@@ -95,7 +97,7 @@ function render({props, state}) {
   let menuItems;
 
   if (itemInfo) {
-    const childrenHiddenStatus = getChildrenHiddenStatus(itemInfo);
+    const childrenHiddenStatus = getChildrenHiddenStatus(props);
     const menuPattern = [
       [],
       [],
