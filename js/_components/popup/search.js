@@ -33,9 +33,9 @@ function render({props, state}) {
   );
 }
 
-function searchResultFilter(keyword, result) {
+function searchResultFilter(keyword, results) {
   const isOnlySearchTitle = globals.storage.searchTarget === 1;
-  const newResult = [];
+  const newResults = [];
   const splittedKeyArr = [];
 
   if (isOnlySearchTitle) {
@@ -46,7 +46,7 @@ function searchResultFilter(keyword, result) {
     }
   }
 
-  result.forEach((bookmark) => {
+  results.forEach((bookmark) => {
     const bookmarkTitle = bookmark.title.toLowerCase();
     const bookmarkUrl = bookmark.url;
 
@@ -59,15 +59,15 @@ function searchResultFilter(keyword, result) {
         }
       }
 
-      newResult.push(bookmark);
+      newResults.push(bookmark);
 
-      if (newResult.length === globals.storage.maxresult) {
+      if (newResults.length === globals.storage.maxresult) {
         return false;
       }
     }
   });
 
-  return newResult;
+  return newResults;
 }
 
 function sortByTitle(bookmarkList) {
