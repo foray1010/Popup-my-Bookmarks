@@ -2,6 +2,15 @@ import {element} from 'deku';
 
 const _getMsg = chrome.i18n.getMessage;
 
+function afterMount({props}, el) {
+  const itemInfo = props.itemInfo;
+
+  if (!globals.isFolder(itemInfo) &&
+      itemInfo.url !== globals.separateThisUrl) {
+    setTooltip(el, props);
+  }
+}
+
 function clickHandler(event, {props, state}) {
   const itemInfo = props.itemInfo;
 
@@ -142,7 +151,6 @@ function render({props, state}) {
 
   let iconSrc;
   let isDraggable = true;
-  let tooltip;
 
   if (globals.isFolder(itemInfo)) {
     iconSrc = '/img/folder.png';
@@ -157,17 +165,12 @@ function render({props, state}) {
       itemClasses.push('separator');
     } else {
       iconSrc = `chrome://favicon/${itemInfo.url}`;
-
-      if (globals.storage.tooltip) {
-        tooltip = itemInfo.title + '\n' + itemInfo.url;
-      }
     }
   }
 
   return (
     <p
       class={itemClasses}
-      title={tooltip}
       draggable={isDraggable}
       onClick={clickHandler}
       onContextMenu={contextMenuHandler}
@@ -177,9 +180,55 @@ function render({props, state}) {
       onMouseEnter={mouseEnterHandler}
       onMouseLeave={mouseLeaveHandler}>
       <img class='icon' src={iconSrc} alt='' draggable='false' />
-      <span>{itemTitle}</span>
+      {itemTitle}
     </p>
   );
 }
 
-export default {render};
+function setTooltip(el, props) {
+  const isSearching = !!props.searchResult;
+  const itemInfo = props.itemInfo;
+  const tooltipArr = [];
+
+  const setTitle = () => {
+    if (tooltipArr.length) {
+      el.title = tooltipArr.join('\n');
+    }
+  };
+
+  if (globals.storage.tooltip) {
+    tooltipArr.push(itemInfo.title, itemInfo.url);
+  }
+
+  if (isSearching) {
+    const breadcrumbArr = [];
+
+    const getBreadcrumb = (breadId) => {
+      chrome.bookmarks.get(breadId, (node) => {
+        if (node === undefined) {
+          return false;
+        }
+
+        const thisItemInfo = node[0];
+
+        if (![itemInfo.id, '0'].includes(thisItemInfo.id)) {
+          breadcrumbArr.unshift(thisItemInfo.title);
+        }
+
+        if (thisItemInfo.parentId !== undefined) {
+          getBreadcrumb(thisItemInfo.parentId);
+        } else {
+          tooltipArr.unshift(breadcrumbArr.join(' > '));
+
+          setTitle();
+        }
+      });
+    };
+
+    getBreadcrumb(itemInfo.id);
+  } else {
+    setTitle();
+  }
+}
+
+export default {afterMount, render};
