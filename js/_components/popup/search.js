@@ -46,26 +46,33 @@ function searchResultFilter(keyword, results) {
     }
   }
 
-  results.forEach((bookmark) => {
+  for (let bookmark of results) {
     const bookmarkTitle = bookmark.title.toLowerCase();
     const bookmarkUrl = bookmark.url;
+
+    let isntTitleMatched = false;
 
     if (bookmarkUrl && bookmarkUrl !== globals.separateThisUrl) {
       if (isOnlySearchTitle) {
         for (let splittedKey of splittedKeyArr) {
           if (!bookmarkTitle.includes(splittedKey)) {
-            return true;
+            isntTitleMatched = true;
+            break;
           }
+        }
+
+        if (isntTitleMatched) {
+          continue;
         }
       }
 
       newResults.push(bookmark);
 
-      if (newResults.length === globals.storage.maxresult) {
-        return false;
+      if (newResults.length === globals.storage.maxResults) {
+        break;
       }
     }
-  });
+  }
 
   return newResults;
 }
