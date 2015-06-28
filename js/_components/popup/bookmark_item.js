@@ -140,6 +140,7 @@ function openFolder(props) {
 }
 
 function render({props, state}) {
+  const isSearching = !!props.searchResult;
   const itemClasses = [
     'item',
     'bookmark-item',
@@ -166,6 +167,10 @@ function render({props, state}) {
     } else {
       iconSrc = `chrome://favicon/${itemInfo.url}`;
     }
+  }
+
+  if (isSearching) {
+    isDraggable = false;
   }
 
   return (
