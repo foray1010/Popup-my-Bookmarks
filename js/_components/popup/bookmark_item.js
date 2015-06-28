@@ -72,12 +72,15 @@ function mouseEnterHandler(event, {props, state}, updateState) {
     return true;
   }
 
+  const isSearching = !!props.searchResult;
   const itemInfo = props.itemInfo;
 
-  if (globals.isFolder(itemInfo)) {
-    openFolder(props);
-  } else {
-    globals.removeTreeInfoFromIndex(props.trees, props.treeIndex + 1);
+  if (!isSearching) {
+    if (globals.isFolder(itemInfo)) {
+      openFolder(props);
+    } else {
+      globals.removeTreeInfoFromIndex(props.trees, props.treeIndex + 1);
+    }
   }
 }
 
