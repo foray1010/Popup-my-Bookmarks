@@ -2,6 +2,17 @@ import {element} from 'deku';
 
 const _getMsg = chrome.i18n.getMessage;
 
+function addCurrentPage(menuTarget) {
+  chrome.tabs.query({
+    currentWindow: true,
+    active: true
+  }, (results) => {
+    const currentTab = results[0];
+
+    createBookmarkItem(menuTarget, currentTab.title, currentTab.url);
+  });
+}
+
 function afterRender({props}, el) {
   const itemInfo = props.menuTarget;
 
@@ -15,6 +26,15 @@ function afterRender({props}, el) {
 function closeMenu() {
   globals.setRootState({
     menuTarget: null
+  });
+}
+
+function createBookmarkItem(menuTarget, title, url) {
+  chrome.bookmarks.create({
+    parentId: menuTarget.parentId,
+    title: title,
+    url: url,
+    index: menuTarget.index + 1
   });
 }
 
@@ -81,6 +101,7 @@ function menuClickEvent(event, {props}) {
       return true;
 
     case 8: // Add current page
+      addCurrentPage(itemInfo);
       break;
 
     case 10: // Add separator

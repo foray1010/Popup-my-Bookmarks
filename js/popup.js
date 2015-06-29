@@ -11,6 +11,18 @@ window.globals = {
     return !itemInfo.url;
   },
 
+  isItemInView(item) {
+    const itemBottomOffsetTop = item.offsetTop + item.offsetHeight;
+    const itemParent = item.parentNode;
+
+    const parentScrollTop = itemParent.scrollTop;
+
+    return (
+      itemBottomOffsetTop > parentScrollTop &&
+      itemParent.offsetHeight + parentScrollTop >= itemBottomOffsetTop
+    );
+  },
+
   isRootFolder(itemInfo) {
     return itemInfo.parentId === '0';
   },
