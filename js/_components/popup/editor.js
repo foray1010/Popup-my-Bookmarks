@@ -3,9 +3,9 @@ import {element} from 'deku';
 const _getMsg = chrome.i18n.getMessage;
 
 function afterRender({props}, el) {
-  const itemInfo = props.editTarget;
+  const editTarget = props.editTarget;
 
-  const isHidden = !itemInfo;
+  const isHidden = !editTarget;
 
   if (!isHidden) {
     setEditorPos(el);
@@ -27,18 +27,18 @@ function closeEditor() {
 }
 
 function render({props, state}) {
-  const itemInfo = props.editTarget;
+  const editTarget = props.editTarget;
 
-  const isHidden = !itemInfo;
+  const isHidden = !editTarget;
 
   let editorTitle;
   let isItemFolder;
   let itemTitle;
   let itemUrl;
 
-  if (itemInfo) {
-    itemTitle = itemInfo.title;
-    itemUrl = itemInfo.url;
+  if (editTarget) {
+    itemTitle = editTarget.title;
+    itemUrl = editTarget.url;
 
     isItemFolder = !itemUrl;
 
