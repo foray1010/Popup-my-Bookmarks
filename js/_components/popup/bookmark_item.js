@@ -178,6 +178,7 @@ function render({props, state}) {
 
   return (
     <p
+      id={itemInfo.id}
       class={itemClasses}
       draggable={isDraggable}
       onClick={clickHandler}
