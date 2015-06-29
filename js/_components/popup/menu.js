@@ -49,6 +49,7 @@ function getMenuItemNum(menuItem) {
 }
 
 function menuClickEvent(event, {props}) {
+  const itemInfo = props.menuTarget;
   const target = event.target;
 
   const menuItemNum = getMenuItemNum(target);
@@ -57,6 +58,7 @@ function menuClickEvent(event, {props}) {
     case 0: // Open bookmark(s) in background tab or this window
     case 1: // in new window
     case 2: // in incognito window
+      globals.openMultipleBookmarks(itemInfo, menuItemNum);
       break;
 
     case 3: // Edit... or Rename...
