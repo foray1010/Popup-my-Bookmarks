@@ -4,6 +4,8 @@ import App from './_components/popup/app';
 
 window.globals = {
   goldenGap: 2,
+  maxHeight: 596,
+  separateThisUrl: 'http://separatethis.com/',
 
   isFolder(itemInfo) {
     return !itemInfo.url;
@@ -42,8 +44,6 @@ window.globals = {
       });
     });
   },
-
-  maxHeight: 596,
 
   openMultipleBookmarks(itemInfo, menuItemNum) {
     const urlList = [];
@@ -116,9 +116,7 @@ window.globals = {
     globals.setRootState({
       trees: newTrees
     });
-  },
-
-  separateThisUrl: 'http://separatethis.com/'
+  }
 };
 
 new Promise((resolve) => {
