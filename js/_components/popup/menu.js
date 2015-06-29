@@ -14,9 +14,9 @@ function addCurrentPage(menuTarget) {
 }
 
 function afterRender({props}, el) {
-  const itemInfo = props.menuTarget;
+  const menuTarget = props.menuTarget;
 
-  const isHidden = !itemInfo;
+  const isHidden = !menuTarget;
 
   if (!isHidden) {
     setMenuPos(el, props.mousePos);
@@ -39,14 +39,14 @@ function createBookmarkItem(menuTarget, title, url) {
 }
 
 function getChildrenHiddenStatus(props) {
-  const itemInfo = props.menuTarget;
+  const menuTarget = props.menuTarget;
 
   let childrenHiddenStatus = [];
 
-  switch (globals.getBookmarkType(itemInfo)) {
+  switch (globals.getBookmarkType(menuTarget)) {
     case 'folder':
     case 'bookmark':
-      if (globals.isRootFolder(itemInfo)) {
+      if (globals.isRootFolder(menuTarget)) {
         childrenHiddenStatus = [false, true, true, true, true];
       } else if (props.searchResult) {
         childrenHiddenStatus = [false, false, false, true, true];
@@ -69,7 +69,7 @@ function getMenuItemNum(menuItem) {
 }
 
 function menuClickEvent(event, {props}) {
-  const itemInfo = props.menuTarget;
+  const menuTarget = props.menuTarget;
   const target = event.target;
 
   const menuItemNum = getMenuItemNum(target);
@@ -78,7 +78,7 @@ function menuClickEvent(event, {props}) {
     case 0: // Open bookmark(s) in background tab or this window
     case 1: // in new window
     case 2: // in incognito window
-      globals.openMultipleBookmarks(itemInfo, menuItemNum);
+      globals.openMultipleBookmarks(menuTarget, menuItemNum);
       break;
 
     case 3: // Edit... or Rename...
@@ -89,7 +89,7 @@ function menuClickEvent(event, {props}) {
       return true;
 
     case 4: // Delete
-      removeBookmarkItem(itemInfo);
+      removeBookmarkItem(menuTarget);
       break;
 
     case 5: // Cut
@@ -101,7 +101,7 @@ function menuClickEvent(event, {props}) {
       return true;
 
     case 8: // Add current page
-      addCurrentPage(itemInfo);
+      addCurrentPage(menuTarget);
       break;
 
     case 10: // Add separator
@@ -113,22 +113,22 @@ function menuClickEvent(event, {props}) {
   closeMenu();
 }
 
-function removeBookmarkItem(itemInfo) {
-  if (globals.isFolder(itemInfo)) {
-    chrome.bookmarks.removeTree(itemInfo.id);
+function removeBookmarkItem(menuTarget) {
+  if (globals.isFolder(menuTarget)) {
+    chrome.bookmarks.removeTree(menuTarget.id);
   } else {
-    chrome.bookmarks.remove(itemInfo.id);
+    chrome.bookmarks.remove(menuTarget.id);
   }
 }
 
 function render({props, state}) {
-  const itemInfo = props.menuTarget;
+  const menuTarget = props.menuTarget;
 
-  const isHidden = !itemInfo;
+  const isHidden = !menuTarget;
 
   let menuItems;
 
-  if (itemInfo) {
+  if (menuTarget) {
     const childrenHiddenStatus = getChildrenHiddenStatus(props);
     const menuPattern = [
       [],
@@ -138,7 +138,7 @@ function render({props, state}) {
       ['sortByName']
     ];
 
-    if (globals.isFolder(itemInfo)) {
+    if (globals.isFolder(menuTarget)) {
       menuPattern[0] = ['openAll', 'openAllInN', 'openAllInI'];
       menuPattern[1] = ['rename', 'del'];
     } else {
