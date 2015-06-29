@@ -69,6 +69,7 @@ function menuClickEvent(event, {props}) {
       return true;
 
     case 4: // Delete
+      removeBookmarkItem(itemInfo);
       break;
 
     case 5: // Cut
@@ -89,6 +90,14 @@ function menuClickEvent(event, {props}) {
   }
 
   closeMenu();
+}
+
+function removeBookmarkItem(itemInfo) {
+  if (globals.isFolder(itemInfo)) {
+    chrome.bookmarks.removeTree(itemInfo.id);
+  } else {
+    chrome.bookmarks.remove(itemInfo.id);
+  }
 }
 
 function render({props, state}) {
