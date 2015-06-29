@@ -45,6 +45,64 @@ window.globals = {
 
   maxHeight: 596,
 
+  openMultipleBookmarks(itemInfo, menuItemNum) {
+    const urlList = [];
+
+    return new Promise((resolve, reject) => {
+      if (globals.isFolder(itemInfo)) {
+        chrome.bookmarks.getSubTree(itemInfo.id, (results) => {
+          const childrenInfo = results[0].children;
+
+          for (let thisItemInfo of childrenInfo) {
+            const url = thisItemInfo.url;
+
+            if (!globals.isFolder(thisItemInfo) &&
+                url !== globals.separateThisUrl) {
+              urlList.push(url);
+            }
+          }
+
+          const msgAskOpenAll = chrome.i18n.getMessage(
+            'askOpenAll', '' + urlList.length
+          );
+
+          if (globals.storage.warnOpenMany &&
+              urlList.length > 5 &&
+              !confirm(msgAskOpenAll)) {
+            reject();
+          } else {
+            resolve();
+          }
+        });
+      } else {
+        chrome.bookmarks.get(itemInfo.id, (results) => {
+          const thisItemInfo = results[0];
+
+          urlList.push(thisItemInfo.url);
+
+          resolve();
+        });
+      }
+    })
+      .then(() => {
+        if (menuItemNum === 0) {
+          for (let url of urlList) {
+            chrome.tabs.create({
+              url: url,
+              active: false
+            });
+          }
+        } else {
+          chrome.windows.create({
+            url: urlList,
+            incognito: menuItemNum !== 1
+          });
+        }
+
+        window.close();
+      });
+  },
+
   openOptionsPage() {
     chrome.tabs.create({url: 'options.html'});
   },
