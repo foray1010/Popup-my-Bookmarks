@@ -128,6 +128,12 @@ window.globals = {
     globals.setRootState({
       trees: newTrees
     });
+  },
+
+  sortByTitle(bookmarkList) {
+    return bookmarkList.sort((bookmark1, bookmark2) => {
+      return bookmark1.title.localeCompare(bookmark2.title);
+    });
   }
 };
 

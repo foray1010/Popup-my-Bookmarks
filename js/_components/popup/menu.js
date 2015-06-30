@@ -105,9 +105,15 @@ function menuClickEvent(event, {props}) {
       break;
 
     case 10: // Add separator
+      createBookmarkItem(
+        menuTarget,
+        '- '.repeat(42),
+        globals.separateThisUrl
+      );
       break;
 
     case 11: // Sort by name
+      sortByName(menuTarget.parentId);
   }
 
   closeMenu();
@@ -186,6 +192,73 @@ function setMenuPos(el, mousePos) {
 
   el.style.bottom = Math.max(bottomPos, 0) + 'px';
   el.style.right = Math.max(rightPos, 0) + 'px';
+}
+
+function sortByName(parentId) {
+  chrome.bookmarks.getChildren(parentId, (childrenInfo) => {
+    const classifiedItemsList = [];
+
+    const genClassifiedItems = () => {
+      const newClassifiedItems = [
+        [/* Separators */],
+        [/* Folders */],
+        [/* Bookmarks */]
+      ];
+
+      classifiedItemsList.push(newClassifiedItems);
+
+      return newClassifiedItems;
+    };
+
+    let newChildrenInfo = [];
+    let selectedClassifiedItems = genClassifiedItems();
+
+    /**
+     * Split all bookmarks into n main group,
+     * where n = the number of separators + 1
+     * Each main group contains 3 small groups
+     * (Separators, Folders, Bookmarks)
+     */
+    for (let itemInfo of childrenInfo) {
+      let classifiedItemsIndex;
+
+      if (globals.isFolder(itemInfo)) {
+        classifiedItemsIndex = 1;
+      } else {
+        if (itemInfo.url !== globals.separateThisUrl) {
+          classifiedItemsIndex = 2;
+        } else {
+          classifiedItemsIndex = 0;
+
+          selectedClassifiedItems = genClassifiedItems();
+        }
+      }
+
+      selectedClassifiedItems[classifiedItemsIndex].push(itemInfo);
+    }
+
+    // Concatenate all lists into single list
+    for (let thisChildrenInfo of classifiedItemsList) {
+      for (let classifiedItems of thisChildrenInfo) {
+        newChildrenInfo = newChildrenInfo.concat(
+          globals.sortByTitle(classifiedItems)
+        );
+      }
+    }
+
+    // Sort bookmarks by Selection sort
+    newChildrenInfo.forEach((itemInfo, index) => {
+      const oldIndex = childrenInfo.indexOf(itemInfo);
+
+      if (oldIndex !== index) {
+        childrenInfo.move(oldIndex, index);
+
+        chrome.bookmarks.move(itemInfo.id, {
+          index: index + (index > oldIndex ? 1 : 0)
+        });
+      }
+    });
+  });
 }
 
 export default {afterRender, render};
