@@ -11,7 +11,9 @@ function inputHandler(event, {props, state}) {
     globals.setRootState({searchResult: null});
   } else {
     chrome.bookmarks.search(keyword, (result) => {
-      const searchResult = sortByTitle(searchResultFilter(keyword, result));
+      const searchResult = globals.sortByTitle(
+        searchResultFilter(keyword, result)
+      );
 
       globals.setRootState({searchResult});
     });
@@ -79,12 +81,6 @@ function searchResultFilter(keyword, results) {
   }
 
   return newResults;
-}
-
-function sortByTitle(bookmarkList) {
-  return bookmarkList.sort((bookmark1, bookmark2) => {
-    return bookmark1.title.localeCompare(bookmark2.title);
-  });
 }
 
 export default {render};
