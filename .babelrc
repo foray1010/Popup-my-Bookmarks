@@ -1,3 +1,4 @@
 {
-  "jsxPragma": "element"
+  "jsxPragma": "element",
+  "loose": "all"
 }
