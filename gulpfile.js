@@ -82,7 +82,14 @@ function compileJS(destDir, options) {
         .pipe(vinylSource(entry));
 
       if (!options.watch) {
-        const uglifyStream = plugins.streamify(plugins.uglify());
+        const uglifyStream = plugins.streamify(plugins.uglify({
+          compress: {
+            drop_console: true,
+            pure_getters: true,
+            unsafe: true
+          },
+          output: {screw_ie8: true}
+        }));
         bundledStream.pipe(uglifyStream);
       }
 
