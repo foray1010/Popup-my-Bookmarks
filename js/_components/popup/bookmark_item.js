@@ -1,7 +1,5 @@
 import {element} from 'deku';
 
-const _getMsg = chrome.i18n.getMessage;
-
 function afterMount({props}, el) {
   const itemInfo = props.itemInfo;
 
@@ -97,9 +95,11 @@ function openBookmark(handlerId, itemUrl) {
       if (itemUrl.indexOf('javascript') !== 0) {
         chrome.tabs.update({url: itemUrl});
       } else {
+        const msgAlertBookmarklet = chrome.i18n.getMessage('alert_bookmarklet');
+
         if (globals.storage.bookmarklet) {
           chrome.tabs.executeScript(null, {code: itemUrl});
-        } else if (confirm(_getMsg('alert_bookmarklet'))) {
+        } else if (confirm(msgAlertBookmarklet)) {
           globals.openOptionsPage();
         }
       }
