@@ -1,7 +1,5 @@
 import {element} from 'deku';
 
-const _getMsg = chrome.i18n.getMessage;
-
 function inputHandler(event, {props, state}) {
   const searchInput = event.target;
 
@@ -31,7 +29,7 @@ function render({props, state}) {
       <input
         id='search-input'
         type='search'
-        placeholder={_getMsg('search')}
+        placeholder={chrome.i18n.getMessage('search')}
         tabindex='-1'
         autofocus
         onInput={inputHandler} />

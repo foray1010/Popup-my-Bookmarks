@@ -1,7 +1,5 @@
 import {element} from 'deku';
 
-const _getMsg = chrome.i18n.getMessage;
-
 function afterRender({props}, el) {
   const editTarget = props.editTarget;
 
@@ -28,11 +26,13 @@ function closeEditor() {
 
 function render({props, state}) {
   const editTarget = props.editTarget;
+  const msgCancel = chrome.i18n.getMessage('cancel');
+  const msgConfirm = chrome.i18n.getMessage('confirm');
 
   const isHidden = !editTarget;
 
   let editorTitle;
-  let isItemFolder;
+  let isFolderItem;
   let itemTitle;
   let itemUrl;
 
@@ -40,18 +40,18 @@ function render({props, state}) {
     itemTitle = editTarget.title;
     itemUrl = editTarget.url;
 
-    isItemFolder = !itemUrl;
+    isFolderItem = globals.isFolder(editTarget);
 
-    editorTitle = _getMsg(isItemFolder ? 'rename' : 'edit');
+    editorTitle = chrome.i18n.getMessage(isFolderItem ? 'rename' : 'edit');
   }
 
   return (
     <div id='editor' class='panel-width' hidden={isHidden}>
       <span id='editor-title'>{editorTitle}</span>
       <input type='text' value={itemTitle} />
-      <input type='text' value={itemUrl} hidden={isItemFolder} />
-      <button onClick={clickConfirmHandler}>{_getMsg('confirm')}</button>
-      <button onClick={clickCancelHandler}>{_getMsg('cancel')}</button>
+      <input type='text' value={itemUrl} hidden={isFolderItem} />
+      <button onClick={clickConfirmHandler}>{msgConfirm}</button>
+      <button onClick={clickCancelHandler}>{msgCancel}</button>
     </div>
   );
 }

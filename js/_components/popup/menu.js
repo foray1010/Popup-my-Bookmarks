@@ -1,7 +1,5 @@
 import {element} from 'deku';
 
-const _getMsg = chrome.i18n.getMessage;
-
 function addCurrentPage(menuTarget) {
   chrome.tabs.query({
     currentWindow: true,
@@ -159,7 +157,7 @@ function render({props, state}) {
           <p
             class='item menu-item'
             onClick={menuClickEvent}>
-            {_getMsg(menuItemKey)}
+            {chrome.i18n.getMessage(menuItemKey)}
           </p>
         );
       });
