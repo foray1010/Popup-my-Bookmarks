@@ -217,7 +217,7 @@ function sortByName(parentId) {
      * Each main group contains 3 small groups
      * (Separators, Folders, Bookmarks)
      */
-    for (let itemInfo of childrenInfo) {
+    childrenInfo.forEach((itemInfo) => {
       let classifiedItemsIndex;
 
       if (globals.isFolder(itemInfo)) {
@@ -233,16 +233,16 @@ function sortByName(parentId) {
       }
 
       selectedClassifiedItems[classifiedItemsIndex].push(itemInfo);
-    }
+    });
 
     // Concatenate all lists into single list
-    for (let thisChildrenInfo of classifiedItemsList) {
-      for (let classifiedItems of thisChildrenInfo) {
+    classifiedItemsList.forEach((thisChildrenInfo) => {
+      thisChildrenInfo.forEach((classifiedItems) => {
         newChildrenInfo = newChildrenInfo.concat(
           globals.sortByTitle(classifiedItems)
         );
-      }
-    }
+      });
+    });
 
     // Sort bookmarks by Selection sort
     newChildrenInfo.forEach((itemInfo, index) => {

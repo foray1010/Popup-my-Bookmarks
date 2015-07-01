@@ -25,7 +25,7 @@ function render({props, state}) {
   const isHiddenFolderCover = isSearching || trees.length - treeIndex <= 2;
 
   const pushTreeItem = (childrenInfo) => {
-    for (let itemInfo of childrenInfo) {
+    childrenInfo.forEach((itemInfo) => {
       treeItems.push(
         <BookmarkItem
           key={itemInfo.id}
@@ -34,7 +34,7 @@ function render({props, state}) {
           treeIndex={treeIndex}
           trees={trees} />
       );
-    }
+    });
   };
 
   let treeHead;
