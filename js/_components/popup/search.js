@@ -43,40 +43,45 @@ function searchResultFilter(keyword, results) {
   const splittedKeyArr = [];
 
   if (isOnlySearchTitle) {
-    for (let splittedKey of keyword.split(' ')) {
+    keyword.split(' ').forEach((splittedKey) => {
       if (splittedKey !== '') {
         splittedKeyArr.push(splittedKey.toLowerCase());
       }
-    }
+    });
   }
 
-  for (let bookmark of results) {
-    const bookmarkTitle = bookmark.title.toLowerCase();
-    const bookmarkUrl = bookmark.url;
+  results.every((itemInfo) => {
+    const itemTitle = itemInfo.title.toLowerCase();
 
     let isntTitleMatched = false;
 
-    if (bookmarkUrl && bookmarkUrl !== globals.separateThisUrl) {
+    if (!globals.isFolder(itemInfo) &&
+        itemInfo.url !== globals.separateThisUrl) {
       if (isOnlySearchTitle) {
-        for (let splittedKey of splittedKeyArr) {
-          if (!bookmarkTitle.includes(splittedKey)) {
+        splittedKeyArr.every((splittedKey) => {
+          if (!itemTitle.includes(splittedKey)) {
             isntTitleMatched = true;
-            break;
+
+            return false;
           }
-        }
+
+          return true;
+        });
 
         if (isntTitleMatched) {
-          continue;
+          return true;
         }
       }
 
-      newResults.push(bookmark);
+      newResults.push(itemInfo);
 
       if (newResults.length === globals.storage.maxResults) {
-        break;
+        return false;
       }
     }
-  }
+
+    return true;
+  });
 
   return newResults;
 }
