@@ -8,7 +8,7 @@ const clc = require('cli-color');
 const cson = require('cson');
 const es = require('event-stream');
 const fs = require('fs-extra');
-const globby = require('globby');
+const glob = require('glob');
 const path = require('path');
 const plugins = require('gulp-load-plugins')();
 const vinylSource = require('vinyl-source-stream');
@@ -66,7 +66,7 @@ function compileJS(destDir, options) {
 
   const sourcePath = getSourcePath(thisLang);
 
-  const entries = globby.sync(sourcePath);
+  const entries = glob.sync(sourcePath);
 
   fs.mkdirsSync(path.join(destDir, thisLang.dest));
 
