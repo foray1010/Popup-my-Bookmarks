@@ -55,8 +55,7 @@ function searchResultFilter(keyword, results) {
 
     let isntTitleMatched = false;
 
-    if (!globals.isFolder(itemInfo) &&
-        itemInfo.url !== globals.separateThisUrl) {
+    if (globals.getBookmarkType(itemInfo) === 'bookmark') {
       if (isOnlySearchTitle) {
         splittedKeyArr.every((splittedKey) => {
           if (!itemTitle.includes(splittedKey)) {

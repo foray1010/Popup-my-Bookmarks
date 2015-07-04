@@ -23,20 +23,20 @@ window.globals = {
     );
   },
 
-  isRootFolder(itemInfo) {
-    return itemInfo.parentId === '0';
-  },
-
   getBookmarkType(itemInfo) {
-    let bookmarkType;
-
-    if (globals.isFolder(itemInfo)) {
-      bookmarkType = 'folder';
-    } else {
-      bookmarkType = 'bookmark';
+    if (itemInfo.parentId === '0') {
+      return 'root-folder';
     }
 
-    return bookmarkType;
+    if (globals.isFolder(itemInfo)) {
+      return 'folder';
+    }
+
+    if (itemInfo.url === globals.separateThisUrl) {
+      return 'separator';
+    }
+
+    return 'bookmark';
   },
 
   getSingleTree(id) {
@@ -68,8 +68,7 @@ window.globals = {
           for (let thisItemInfo of childrenInfo) {
             const url = thisItemInfo.url;
 
-            if (!globals.isFolder(thisItemInfo) &&
-                url !== globals.separateThisUrl) {
+            if (globals.getBookmarkType(thisItemInfo) === 'bookmark') {
               urlList.push(url);
             }
           }

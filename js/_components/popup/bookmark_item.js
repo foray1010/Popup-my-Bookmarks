@@ -3,8 +3,7 @@ import {element} from 'deku';
 function afterMount({props}, el) {
   const itemInfo = props.itemInfo;
 
-  if (!globals.isFolder(itemInfo) &&
-      itemInfo.url !== globals.separateThisUrl) {
+  if (globals.getBookmarkType(itemInfo) === 'bookmark') {
     setTooltip(el, props);
   }
 }
@@ -12,12 +11,10 @@ function afterMount({props}, el) {
 function clickHandler(event, {props, state}) {
   const itemInfo = props.itemInfo;
 
-  switch (globals.getBookmarkType(itemInfo)) {
-    case 'folder':
-      break;
+  if (globals.isFolder(itemInfo)) {
 
-    case 'bookmark':
-      openBookmark(getOpenBookmarkHandlerId(event), itemInfo.url);
+  } else {
+    openBookmark(getOpenBookmarkHandlerId(event), itemInfo.url);
   }
 }
 
@@ -158,18 +155,20 @@ function render({props, state}) {
 
   if (globals.isFolder(itemInfo)) {
     iconSrc = '/img/folder.png';
+  }
 
-    if (globals.isRootFolder(itemInfo)) {
+  switch (globals.getBookmarkType(itemInfo)) {
+    case 'root-folder':
       itemClasses.push('root-folder');
-
       isDraggable = false;
-    }
-  } else {
-    if (itemInfo.url === globals.separateThisUrl) {
+      break;
+
+    case 'separator':
       itemClasses.push('separator');
-    } else {
+      break;
+
+    case 'bookmark':
       iconSrc = `chrome://favicon/${itemInfo.url}`;
-    }
   }
 
   if (isSearching) {
