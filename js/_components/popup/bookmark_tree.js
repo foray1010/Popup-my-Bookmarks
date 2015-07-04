@@ -1,14 +1,11 @@
 import {element} from 'deku';
 
 import BookmarkItem from './bookmark_item';
+import FolderCover from './folder_cover';
 import TreeHead from './tree_head';
 
 function afterRender(component, el) {
   setHeight(el);
-}
-
-function closeHandler(event, {props}) {
-  globals.removeTreeInfoFromIndex(props.trees, props.treeIndex + 1);
 }
 
 function render({props, state}) {
@@ -23,6 +20,10 @@ function render({props, state}) {
 
   // hide the folder if it is not the top two folder
   const isHiddenFolderCover = isSearching || trees.length - treeIndex <= 2;
+
+  const folderCoverClickHandler = () => {
+    globals.removeTreeInfoFromIndex(trees, treeIndex + 1);
+  };
 
   const pushTreeItem = (childrenInfo) => {
     childrenInfo.forEach((itemInfo) => {
@@ -65,10 +66,9 @@ function render({props, state}) {
         onWheel={wheelHandler}>
         {treeItems}
       </div>
-      <div
-        class='cover'
-        hidden={isHiddenFolderCover}
-        onClick={closeHandler} />
+      <FolderCover
+        isHidden={isHiddenFolderCover}
+        clickHandler={folderCoverClickHandler} />
     </div>
   );
 }
