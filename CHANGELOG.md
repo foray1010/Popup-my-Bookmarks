@@ -1,3 +1,7 @@
+## 5.0.0 (unreleased)
+Translations:
+  - Support Norwegian Bokmål locales (thanks Bjorn Tore Asheim)
+
 ## 4.0.1.706 (7/6/2015)
 Improvements:
   - Dragging is now much more sensitive
