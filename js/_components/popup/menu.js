@@ -39,17 +39,16 @@ function createBookmarkItem(menuTarget, title, url) {
 function getChildrenHiddenStatus(props) {
   const menuTarget = props.menuTarget;
 
-  let childrenHiddenStatus = [];
+  let childrenHiddenStatus = [false, false, false, false, false];
 
   switch (globals.getBookmarkType(menuTarget)) {
-    case 'folder':
+    case 'root-folder':
+      childrenHiddenStatus = [false, true, true, true, true];
+      break;
+
     case 'bookmark':
-      if (globals.isRootFolder(menuTarget)) {
-        childrenHiddenStatus = [false, true, true, true, true];
-      } else if (props.searchResult) {
+      if (props.searchResult) {
         childrenHiddenStatus = [false, false, false, true, true];
-      } else {
-        childrenHiddenStatus = [false, false, false, false, false];
       }
       break;
 
@@ -220,16 +219,18 @@ function sortByName(parentId) {
     childrenInfo.forEach((itemInfo) => {
       let classifiedItemsIndex;
 
-      if (globals.isFolder(itemInfo)) {
-        classifiedItemsIndex = 1;
-      } else {
-        if (itemInfo.url !== globals.separateThisUrl) {
-          classifiedItemsIndex = 2;
-        } else {
-          classifiedItemsIndex = 0;
+      switch (globals.getBookmarkType(itemInfo)) {
+        case 'folder':
+          classifiedItemsIndex = 1;
+          break;
 
+        case 'separator':
+          classifiedItemsIndex = 0;
           selectedClassifiedItems = genClassifiedItems();
-        }
+          break;
+
+        case 'bookmark':
+          classifiedItemsIndex = 2;
       }
 
       selectedClassifiedItems[classifiedItemsIndex].push(itemInfo);
