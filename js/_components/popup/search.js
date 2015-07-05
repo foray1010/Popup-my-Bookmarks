@@ -53,10 +53,10 @@ function searchResultFilter(keyword, results) {
   results.every((itemInfo) => {
     const itemTitle = itemInfo.title.toLowerCase();
 
-    let isntTitleMatched = false;
-
     if (globals.getBookmarkType(itemInfo) === 'bookmark') {
       if (isOnlySearchTitle) {
+        let isntTitleMatched = false;
+
         splittedKeyArr.every((splittedKey) => {
           if (!itemTitle.includes(splittedKey)) {
             isntTitleMatched = true;
