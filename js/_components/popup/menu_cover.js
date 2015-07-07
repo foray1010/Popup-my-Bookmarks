@@ -2,7 +2,7 @@ import {element} from 'deku';
 
 function clickHandler(event, {props, state}) {
   globals.setRootState({
-    editTarget: null,
+    editorTarget: null,
     menuTarget: null
   });
 }

@@ -1,9 +1,9 @@
 import {element} from 'deku';
 
 function afterRender({props}, el) {
-  const editTarget = props.editTarget;
+  const editorTarget = props.editorTarget;
 
-  const isHidden = !editTarget;
+  const isHidden = !editorTarget;
 
   if (!isHidden) {
     setEditorPos(el);
@@ -11,6 +11,22 @@ function afterRender({props}, el) {
 }
 
 function clickConfirmHandler(event, {props, state}) {
+  const editorInput = document.getElementById('editor')
+    .getElementsByTagName('input');
+  const editorTarget = props.editorTarget;
+
+  let updatedTitle = editorInput[0].value;
+  let updatedUrl;
+
+  if (!globals.isFolder(editorTarget)) {
+    updatedUrl = editorInput[1].value;
+  }
+
+  chrome.bookmarks.update(editorTarget.id, {
+    title: updatedTitle,
+    url: updatedUrl
+  });
+
   closeEditor();
 }
 
@@ -20,27 +36,27 @@ function clickCancelHandler(event, {props, state}) {
 
 function closeEditor() {
   globals.setRootState({
-    editTarget: null
+    editorTarget: null
   });
 }
 
 function render({props, state}) {
-  const editTarget = props.editTarget;
+  const editorTarget = props.editorTarget;
   const msgCancel = chrome.i18n.getMessage('cancel');
   const msgConfirm = chrome.i18n.getMessage('confirm');
 
-  const isHidden = !editTarget;
+  const isHidden = !editorTarget;
 
   let editorTitle;
   let isFolderItem;
   let itemTitle;
   let itemUrl;
 
-  if (editTarget) {
-    itemTitle = editTarget.title;
-    itemUrl = editTarget.url;
+  if (editorTarget) {
+    itemTitle = editorTarget.title;
+    itemUrl = editorTarget.url;
 
-    isFolderItem = globals.isFolder(editTarget);
+    isFolderItem = globals.isFolder(editorTarget);
 
     editorTitle = chrome.i18n.getMessage(isFolderItem ? 'rename' : 'edit');
   }
