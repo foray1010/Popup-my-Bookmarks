@@ -11,6 +11,10 @@ window.globals = {
     return !itemInfo.url;
   },
 
+  isFolderOpened(trees, itemInfo) {
+    return trees.some((treeInfo) => treeInfo.id === itemInfo.id);
+  },
+
   isItemInView(item) {
     const itemBottomOffsetTop = item.offsetTop + item.offsetHeight;
     const itemParent = item.parentNode;

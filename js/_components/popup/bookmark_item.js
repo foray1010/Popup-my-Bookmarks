@@ -12,7 +12,20 @@ function clickHandler(event, {props, state}) {
   const itemInfo = props.itemInfo;
 
   if (globals.isFolder(itemInfo)) {
+    switch (event.button) {
+      case 0:
+        if (globals.storage.opFolderBy) {
+          if (!globals.isFolderOpened(props.trees, itemInfo)) {
+            openFolder(props);
+          } else {
+            globals.removeTreeInfoFromIndex(props.trees, props.treeIndex + 1);
+          }
+        }
+        break;
 
+      case 1:
+        globals.openMultipleBookmarks(itemInfo, 0);
+    }
   } else {
     openBookmark(getOpenBookmarkHandlerId(event), itemInfo.url);
   }
@@ -70,9 +83,11 @@ function mouseEnterHandler(event, {props, state}, updateState) {
   const isSearching = !!props.searchResult;
   const itemInfo = props.itemInfo;
 
-  if (!isSearching) {
+  if (!isSearching && !globals.storage.opFolderBy) {
     if (globals.isFolder(itemInfo)) {
-      openFolder(props);
+      if (!globals.isFolderOpened(props.trees, itemInfo)) {
+        openFolder(props);
+      }
     } else {
       globals.removeTreeInfoFromIndex(props.trees, props.treeIndex + 1);
     }
