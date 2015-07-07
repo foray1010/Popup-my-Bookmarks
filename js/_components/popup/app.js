@@ -23,7 +23,7 @@ function contextMenuHandler(event) {
 
 function initialState(props) {
   return {
-    editTarget: null,
+    editorTarget: null,
     menuTarget: null,
     mousePos: {x: 0, y: 0},
     searchResult: null,
@@ -90,7 +90,7 @@ function render({props, state}, setState) {
   globals.setRootState = setState;
 
   // if menu or editor has target, show menu-cover
-  const isHiddenMenuCover = !(state.menuTarget || state.editTarget);
+  const isHiddenMenuCover = !(state.menuTarget || state.editorTarget);
 
   return (
     <div
@@ -105,7 +105,7 @@ function render({props, state}, setState) {
         menuTarget={state.menuTarget}
         mousePos={state.mousePos}
         searchResult={state.searchResult} />
-      <Editor editTarget={state.editTarget} />
+      <Editor editorTarget={state.editorTarget} />
     </div>
   );
 }
