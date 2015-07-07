@@ -69,13 +69,11 @@ window.globals = {
         chrome.bookmarks.getSubTree(itemInfo.id, (results) => {
           const childrenInfo = results[0].children;
 
-          for (let thisItemInfo of childrenInfo) {
-            const url = thisItemInfo.url;
-
+          childrenInfo.forEach((thisItemInfo) => {
             if (globals.getBookmarkType(thisItemInfo) === 'bookmark') {
-              urlList.push(url);
+              urlList.push(thisItemInfo.url);
             }
-          }
+          });
 
           const msgAskOpenAll = chrome.i18n.getMessage(
             'askOpenAll', '' + urlList.length
@@ -101,12 +99,12 @@ window.globals = {
     })
       .then(() => {
         if (menuItemNum === 0) {
-          for (let url of urlList) {
+          urlList.forEach((url) => {
             chrome.tabs.create({
               url: url,
               active: false
             });
-          }
+          });
         } else {
           chrome.windows.create({
             url: urlList,
