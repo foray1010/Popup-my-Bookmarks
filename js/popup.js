@@ -48,6 +48,7 @@ window.globals = {
       chrome.bookmarks.get(id, (itemInfo) => {
         chrome.bookmarks.getChildren(id, (childrenInfo) => {
           const treeInfo = itemInfo[0];
+
           treeInfo.children = childrenInfo;
 
           resolve(treeInfo);
