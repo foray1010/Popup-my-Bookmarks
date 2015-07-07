@@ -32,10 +32,6 @@ function initialState(props) {
 }
 
 function initStyleOptions() {
-  // +2 for border width, goldenGap*2 for padding
-  const itemHeight = 2 + globals.goldenGap * 2 +
-    Math.max(globals.storage.fontSize, 16);
-
   // if the font family's name has whitespace, use quote to embed it
   const fontFamily = globals.storage.fontFamily.split(',')
     .map((x) => {
@@ -52,7 +48,7 @@ function initStyleOptions() {
   const fontSizePx = globals.storage.fontSize + 'px';
 
   // -2 for border width
-  const separatorHeightPx = (itemHeight / 2) - 2 + 'px';
+  const separatorHeightPx = (globals.itemHeight / 2) - 2 + 'px';
 
   // set panel (#main, #sub) width
   CSS.set('.panel-width', {

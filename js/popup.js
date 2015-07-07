@@ -142,6 +142,10 @@ new Promise((resolve) => {
   chrome.storage.sync.get(null, (storage) => {
     globals.storage = storage;
 
+    // +2 for border width, goldenGap*2 for padding
+    globals.itemHeight = 2 + globals.goldenGap * 2 +
+      Math.max(globals.storage.fontSize, 16);
+
     // if first run
     if (globals.storage.hideRootFolder === undefined) {
       globals.openOptionsPage();
