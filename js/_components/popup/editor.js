@@ -7,6 +7,9 @@ function afterRender({props}, el) {
 
   if (!isHidden) {
     setEditorPos(el);
+
+    // auto focus to title field
+    el.getElementsByTagName('input')[0].focus();
   }
 }
 
