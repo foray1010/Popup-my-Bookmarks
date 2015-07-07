@@ -47,11 +47,6 @@ window.globals = {
     return new Promise((resolve, reject) => {
       chrome.bookmarks.get(id, (itemInfo) => {
         chrome.bookmarks.getChildren(id, (childrenInfo) => {
-          if (childrenInfo === undefined) {
-            reject();
-            return false;
-          }
-
           const treeInfo = itemInfo[0];
           treeInfo.children = childrenInfo;
 
