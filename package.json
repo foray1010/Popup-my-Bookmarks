@@ -2,13 +2,16 @@
   "name": "Popup-my-Bookmarks",
   "version": "0.0.0",
   "description": "A more efficient way to view and manage your bookmarks menu.",
+  "dependencies": {
+    "deku": "*",
+    "normalize.css": "*"
+  },
   "devDependencies": {
     "babel-eslint": "*",
     "babelify": "*",
     "browserify": "*",
     "cli-color": "*",
     "cson": "*",
-    "deku": "*",
     "eslint-plugin-react": "*",
     "event-stream": "*",
     "fs-extra": "*",
@@ -22,7 +25,6 @@
     "gulp-stylus": "*",
     "gulp-uglify": "*",
     "gulp-zip": "*",
-    "normalize.css": "*",
     "vinyl-source-stream": "*",
     "watchify": "*",
     "yargs": "*"

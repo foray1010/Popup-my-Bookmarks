@@ -80,7 +80,7 @@ function menuClickEvent(event, {props}) {
 
     case 3: // Edit... or Rename...
       globals.setRootState({
-        editorTarget: props.menuTarget,
+        editorTarget: menuTarget,
         menuTarget: null
       });
       return true;
