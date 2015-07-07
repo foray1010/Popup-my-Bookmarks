@@ -228,10 +228,6 @@ function setTooltip(el, props) {
 
     const getBreadcrumb = (breadId) => {
       chrome.bookmarks.get(breadId, (node) => {
-        if (node === undefined) {
-          return false;
-        }
-
         const thisItemInfo = node[0];
 
         if (![itemInfo.id, '0'].includes(thisItemInfo.id)) {
