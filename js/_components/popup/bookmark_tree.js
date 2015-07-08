@@ -49,33 +49,35 @@ function render({props, state}) {
   }
 
   if (searchResult) {
-    pushTreeItem(searchResult);
+    if (searchResult.length) {
+      pushTreeItem(searchResult);
+    } else {
+      treeItems.push(<NoResult key='no-result' />);
+    }
   } else {
     if (isRootBox) {
       pushTreeItem(globals.rootTree.children);
     }
 
-    pushTreeItem(treeInfo.children);
-  }
+    if (treeInfo.children.length) {
+      pushTreeItem(treeInfo.children);
+    } else {
+      const noBookmarkInfo = {
+        id: ['no-bookmark', treeInfo.id].join('-'),
+        index: -1, // as it is not appeared in the childrenInfo
+        parentId: treeInfo.id,
+        title: chrome.i18n.getMessage('noBkmark')
+      };
 
-  if (searchResult && !searchResult.length) {
-    treeItems.push(<NoResult key='no-result' />);
-  } else if (!treeInfo.children.length) {
-    const noBookmarkInfo = {
-      id: ['no-bookmark', treeInfo.id].join('-'),
-      index: -1, // as it is not appeared in the childrenInfo
-      parentId: treeInfo.id,
-      title: chrome.i18n.getMessage('noBkmark')
-    };
-
-    treeItems.push(
-      <BookmarkItem
-        key='no-bookmark'
-        itemInfo={noBookmarkInfo}
-        searchResult={searchResult}
-        treeIndex={treeIndex}
-        trees={trees} />
-    );
+      treeItems.push(
+        <BookmarkItem
+          key='no-bookmark'
+          itemInfo={noBookmarkInfo}
+          searchResult={searchResult}
+          treeIndex={treeIndex}
+          trees={trees} />
+      );
+    }
   }
 
   return (
