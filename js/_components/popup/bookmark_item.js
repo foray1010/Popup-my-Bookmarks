@@ -63,10 +63,10 @@ function getOpenBookmarkHandlerId(event) {
   if (mouseButton === 0) {
     switcher = 'Left';
 
-    if (event.shiftKey) {
-      switcher += 'Shift';
-    } else if (event.ctrlKey) {
+    if (event.ctrlKey || event.metaKey) {
       switcher += 'Ctrl';
+    } else if (event.shiftKey) {
+      switcher += 'Shift';
     }
   } else {
     switcher = 'Middle';
