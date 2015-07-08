@@ -11,9 +11,12 @@ function afterMount({props}, el) {
 function clickHandler(event, {props, state}) {
   const itemInfo = props.itemInfo;
 
-  if (globals.isFolder(itemInfo)) {
-    switch (event.button) {
-      case 0:
+  const bookmarkType = globals.getBookmarkType(itemInfo);
+
+  switch (bookmarkType) {
+    case 'root-folder':
+    case 'folder':
+      if (event.button === 0) {
         if (globals.storage.opFolderBy) {
           if (!globals.isFolderOpened(props.trees, itemInfo)) {
             openFolder(props);
@@ -21,13 +24,14 @@ function clickHandler(event, {props, state}) {
             globals.removeTreeInfoFromIndex(props.trees, props.treeIndex + 1);
           }
         }
-        break;
-
-      case 1:
+      } else {
         globals.openMultipleBookmarks(itemInfo, 0);
-    }
-  } else {
-    openBookmark(getOpenBookmarkHandlerId(event), itemInfo.url);
+      }
+      break;
+
+    case 'separator':
+    case 'bookmark':
+      openBookmark(getOpenBookmarkHandlerId(event), itemInfo.url);
   }
 }
 
@@ -163,6 +167,7 @@ function render({props, state}) {
   ];
   const itemInfo = props.itemInfo;
 
+  const bookmarkType = globals.getBookmarkType(itemInfo);
   const itemTitle = itemInfo.title || itemInfo.url;
 
   let iconSrc;
@@ -172,14 +177,15 @@ function render({props, state}) {
     iconSrc = '/img/folder.png';
   }
 
-  switch (globals.getBookmarkType(itemInfo)) {
+  switch (bookmarkType) {
+    case 'no-bookmark':
     case 'root-folder':
-      itemClasses.push('root-folder');
       isDraggable = false;
+      itemClasses.push(bookmarkType);
       break;
 
     case 'separator':
-      itemClasses.push('separator');
+      itemClasses.push(bookmarkType);
       break;
 
     case 'bookmark':

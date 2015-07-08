@@ -8,7 +8,9 @@ window.globals = {
   separateThisUrl: 'http://separatethis.com/',
 
   isFolder(itemInfo) {
-    return !itemInfo.url;
+    const bookmarkType = globals.getBookmarkType(itemInfo);
+
+    return /folder$/.test(bookmarkType);
   },
 
   isFolderOpened(trees, itemInfo) {
@@ -28,11 +30,15 @@ window.globals = {
   },
 
   getBookmarkType(itemInfo) {
+    if (/^no-bookmark/.test(itemInfo.id)) {
+      return 'no-bookmark';
+    }
+
     if (itemInfo.parentId === '0') {
       return 'root-folder';
     }
 
-    if (globals.isFolder(itemInfo)) {
+    if (!itemInfo.url) {
       return 'folder';
     }
 
