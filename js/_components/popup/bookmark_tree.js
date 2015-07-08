@@ -2,6 +2,7 @@ import {element} from 'deku';
 
 import BookmarkItem from './bookmark_item';
 import FolderCover from './folder_cover';
+import NoResult from './no_result';
 import TreeHead from './tree_head';
 
 function afterRender(component, el) {
@@ -55,6 +56,26 @@ function render({props, state}) {
     }
 
     pushTreeItem(treeInfo.children);
+  }
+
+  if (searchResult && !searchResult.length) {
+    treeItems.push(<NoResult key='no-result' />);
+  } else if (!treeInfo.children.length) {
+    const noBookmarkInfo = {
+      id: ['no-bookmark', treeInfo.id].join('-'),
+      index: 0,
+      parentId: treeInfo.id,
+      title: chrome.i18n.getMessage('noBkmark')
+    };
+
+    treeItems.push(
+      <BookmarkItem
+        key='no-bookmark'
+        itemInfo={noBookmarkInfo}
+        searchResult={searchResult}
+        treeIndex={treeIndex}
+        trees={trees} />
+    );
   }
 
   return (
