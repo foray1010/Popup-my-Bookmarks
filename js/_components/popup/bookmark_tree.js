@@ -26,16 +26,20 @@ function render({props, state}) {
     globals.removeTreeInfoFromIndex(trees, treeIndex + 1);
   };
 
+  const genBookmarkItem = (itemInfo) => {
+    return (
+      <BookmarkItem
+        key={itemInfo.id}
+        itemInfo={itemInfo}
+        searchResult={searchResult}
+        treeIndex={treeIndex}
+        trees={trees} />
+    );
+  };
+
   const pushTreeItem = (childrenInfo) => {
     childrenInfo.forEach((itemInfo) => {
-      treeItems.push(
-        <BookmarkItem
-          key={itemInfo.id}
-          itemInfo={itemInfo}
-          searchResult={searchResult}
-          treeIndex={treeIndex}
-          trees={trees} />
-      );
+      treeItems.push(genBookmarkItem(itemInfo));
     });
   };
 
@@ -69,14 +73,7 @@ function render({props, state}) {
         title: chrome.i18n.getMessage('noBkmark')
       };
 
-      treeItems.push(
-        <BookmarkItem
-          key='no-bookmark'
-          itemInfo={noBookmarkInfo}
-          searchResult={searchResult}
-          treeIndex={treeIndex}
-          trees={trees} />
-      );
+      treeItems.push(genBookmarkItem(noBookmarkInfo));
     }
   }
 
