@@ -63,7 +63,7 @@ function render({props, state}) {
   } else if (!treeInfo.children.length) {
     const noBookmarkInfo = {
       id: ['no-bookmark', treeInfo.id].join('-'),
-      index: 0,
+      index: -1, // as it is not appeared in the childrenInfo
       parentId: treeInfo.id,
       title: chrome.i18n.getMessage('noBkmark')
     };
