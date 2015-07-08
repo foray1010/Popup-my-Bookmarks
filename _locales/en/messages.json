@@ -101,8 +101,8 @@
 		"description": "2013.06.01"
 	},
 	"opt_clickByLeftCtrl": {
-		"message": "Ctrl + Left Click to open bookmarks in:",
-		"description": "2013.06.01"
+		"message": "Ctrl / CMD + Left Click to open bookmarks in:",
+		"description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
 	},
 	"opt_clickByLeftShift": {
 		"message": "Shift + Left Click to open bookmarks in:",

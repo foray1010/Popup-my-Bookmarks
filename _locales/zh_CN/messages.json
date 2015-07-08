@@ -101,8 +101,8 @@
 		"description": "2013.06.01"
 	},
 	"opt_clickByLeftCtrl": {
-		"message": "Ctrl + 左键打开书签於:",
-		"description": "2013.06.01"
+		"message": "Ctrl / CMD + 左键打开书签於:",
+		"description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
 	},
 	"opt_clickByLeftShift": {
 		"message": "Shift + 左键打开书签於:",
