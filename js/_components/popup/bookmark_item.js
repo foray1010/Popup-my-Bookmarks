@@ -81,7 +81,7 @@ function getOpenBookmarkHandlerId(event) {
 
 function mouseEnterHandler(event, {props, state}, updateState) {
   if (event.target !== event.delegateTarget) {
-    return true;
+    return false;
   }
 
   const isSearching = !!props.searchResult;
@@ -100,7 +100,7 @@ function mouseEnterHandler(event, {props, state}, updateState) {
 
 function mouseLeaveHandler(event, {props, state}, updateState) {
   if (event.target !== event.delegateTarget) {
-    return true;
+    return false;
   }
 }
 
