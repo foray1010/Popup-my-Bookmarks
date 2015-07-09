@@ -14,7 +14,7 @@ function contextMenuHandler(event) {
 
   // allow native context menu if it is an input element
   if (target.tagName === 'INPUT') {
-    return true;
+    return false;
   }
 
   // disable native context menu
