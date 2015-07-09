@@ -21,6 +21,21 @@ function afterRender({props}, el) {
   }
 }
 
+function afterUpdate({props}, prevProps) {
+  const menuTarget = props.menuTarget;
+  const prevMenuTarget = prevProps.menuTarget;
+
+  if (prevMenuTarget !== menuTarget) {
+    if (menuTarget) {
+      toggleSelected(menuTarget, 'add');
+    }
+
+    if (prevMenuTarget) {
+      toggleSelected(prevMenuTarget, 'remove');
+    }
+  }
+}
+
 function closeMenu() {
   globals.setRootState({
     menuTarget: null
@@ -39,24 +54,21 @@ function createBookmarkItem(menuTarget, title, url) {
 function getChildrenHiddenStatus(props) {
   const menuTarget = props.menuTarget;
 
-  let childrenHiddenStatus = [false, false, false, false, false];
-
   switch (globals.getBookmarkType(menuTarget)) {
     case 'root-folder':
-      childrenHiddenStatus = [false, true, true, true, true];
-      break;
+      return [false, true, true, true, true];
 
     case 'bookmark':
       if (props.searchResult) {
-        childrenHiddenStatus = [false, false, false, true, true];
+        return [false, false, false, true, true];
       }
       break;
 
     case 'no-bookmark':
-      childrenHiddenStatus = [true, true, false, false, true];
+      return [true, true, false, false, true];
   }
 
-  return childrenHiddenStatus;
+  return [false, false, false, false, false];
 }
 
 function getMenuItemNum(menuItem) {
@@ -260,4 +272,12 @@ function sortByName(parentId) {
   });
 }
 
-export default {afterRender, render};
+function toggleSelected(menuTarget, toggleParam) {
+  let menuTargetElem = document.getElementById(menuTarget.id);
+
+  if (menuTargetElem) {
+    menuTargetElem.classList[toggleParam]('selected');
+  }
+}
+
+export default {afterRender, afterUpdate, render};
