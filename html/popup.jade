@@ -1,11 +1,7 @@
-doctype html
-meta(charset="utf-8")
-title Popup my Bookmarks
-each x in ["common", "popup"]
-  link(rel="stylesheet", href="css/#{x}.css")
+extends ./_components/layout
 
-body
-  div#container
+block css
+  link(rel="stylesheet", href="/css/popup.css")
 
-  each x in ["common", "popup"]
-    script(src="js/#{x}.js")
+block js
+  script(src="/js/popup.js")
