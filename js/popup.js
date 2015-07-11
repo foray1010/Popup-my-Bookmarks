@@ -119,7 +119,11 @@ window.globals = {
   },
 
   openOptionsPage() {
-    chrome.tabs.create({url: 'options.html'});
+    if (chrome.runtime.openOptionsPage) {
+      chrome.runtime.openOptionsPage();
+    } else {
+      chrome.tabs.create({url: 'options.html'});
+    }
   },
 
   removeTreeInfoFromIndex(trees, removeFromIndex) {
