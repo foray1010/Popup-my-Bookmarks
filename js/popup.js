@@ -166,8 +166,10 @@ new Promise((resolve) => {
         treeInfo.children = treeInfo.children.filter((itemInfo) => {
           const itemIdNum = 1 * itemInfo.id;
 
-          const isFilterThisItem = itemIdNum === globals.storage.defExpand ||
-            globals.storage.hideRootFolder.includes(itemIdNum);
+          const isFilterThisItem = (
+            itemIdNum === globals.storage.defExpand ||
+            globals.storage.hideRootFolder.indexOf(itemIdNum) >= 0
+          );
 
           return !isFilterThisItem;
         });
