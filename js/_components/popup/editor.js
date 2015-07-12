@@ -1,67 +1,67 @@
-import {element} from 'deku';
+import {element} from 'deku'
 
 function afterRender({props}, el) {
-  const editorTarget = props.editorTarget;
+  const editorTarget = props.editorTarget
 
-  const isHidden = !editorTarget;
+  const isHidden = !editorTarget
 
   if (!isHidden) {
-    setEditorPos(el);
+    setEditorPos(el)
 
     // auto focus to title field
-    el.getElementsByTagName('input')[0].focus();
+    el.getElementsByTagName('input')[0].focus()
   }
 }
 
 function clickConfirmHandler(event, {props, state}) {
   const editorInput = document.getElementById('editor')
-    .getElementsByTagName('input');
-  const editorTarget = props.editorTarget;
+    .getElementsByTagName('input')
+  const editorTarget = props.editorTarget
 
-  let updatedTitle = editorInput[0].value;
-  let updatedUrl;
+  let updatedTitle = editorInput[0].value
+  let updatedUrl
 
   if (!globals.isFolder(editorTarget)) {
-    updatedUrl = editorInput[1].value;
+    updatedUrl = editorInput[1].value
   }
 
   chrome.bookmarks.update(editorTarget.id, {
     title: updatedTitle,
     url: updatedUrl
-  });
+  })
 
-  closeEditor();
+  closeEditor()
 }
 
 function clickCancelHandler(event, {props, state}) {
-  closeEditor();
+  closeEditor()
 }
 
 function closeEditor() {
   globals.setRootState({
     editorTarget: null
-  });
+  })
 }
 
 function render({props, state}) {
-  const editorTarget = props.editorTarget;
-  const msgCancel = chrome.i18n.getMessage('cancel');
-  const msgConfirm = chrome.i18n.getMessage('confirm');
+  const editorTarget = props.editorTarget
+  const msgCancel = chrome.i18n.getMessage('cancel')
+  const msgConfirm = chrome.i18n.getMessage('confirm')
 
-  const isHidden = !editorTarget;
+  const isHidden = !editorTarget
 
-  let editorTitle;
-  let isFolderItem;
-  let itemTitle;
-  let itemUrl;
+  let editorTitle
+  let isFolderItem
+  let itemTitle
+  let itemUrl
 
   if (editorTarget) {
-    itemTitle = editorTarget.title;
-    itemUrl = editorTarget.url;
+    itemTitle = editorTarget.title
+    itemUrl = editorTarget.url
 
-    isFolderItem = globals.isFolder(editorTarget);
+    isFolderItem = globals.isFolder(editorTarget)
 
-    editorTitle = chrome.i18n.getMessage(isFolderItem ? 'rename' : 'edit');
+    editorTitle = chrome.i18n.getMessage(isFolderItem ? 'rename' : 'edit')
   }
 
   return (
@@ -72,22 +72,22 @@ function render({props, state}) {
       <button onClick={clickConfirmHandler}>{msgConfirm}</button>
       <button onClick={clickCancelHandler}>{msgCancel}</button>
     </div>
-  );
+  )
 }
 
 function setEditorPos(el) {
-  const body = document.body;
-  const editorHeight = el.offsetHeight;
-  const editorWidth = el.offsetWidth;
+  const body = document.body
+  const editorHeight = el.offsetHeight
+  const editorWidth = el.offsetWidth
 
-  const bodyHeight = body.scrollHeight;
-  const bodyWidth = body.offsetWidth;
+  const bodyHeight = body.scrollHeight
+  const bodyWidth = body.offsetWidth
 
-  const bottomPos = bodyHeight - editorHeight;
-  const rightPos = bodyWidth - editorWidth;
+  const bottomPos = bodyHeight - editorHeight
+  const rightPos = bodyWidth - editorWidth
 
-  el.style.bottom = Math.max(bottomPos, 0) + 'px';
-  el.style.right = Math.max(rightPos, 0) + 'px';
+  el.style.bottom = Math.max(bottomPos, 0) + 'px'
+  el.style.right = Math.max(rightPos, 0) + 'px'
 }
 
-export default {afterRender, render};
+export default {afterRender, render}

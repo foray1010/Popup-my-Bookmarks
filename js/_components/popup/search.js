@@ -1,20 +1,20 @@
-import {element} from 'deku';
+import {element} from 'deku'
 
 function inputHandler(event, {props, state}) {
-  const searchInput = event.target;
+  const searchInput = event.target
 
-  const keyword = searchInput.value;
+  const keyword = searchInput.value
 
   if (keyword === '') {
-    globals.setRootState({searchResult: null});
+    globals.setRootState({searchResult: null})
   } else {
     chrome.bookmarks.search(keyword, (result) => {
       const searchResult = globals.sortByTitle(
         searchResultFilter(keyword, result)
-      );
+      )
 
-      globals.setRootState({searchResult});
-    });
+      globals.setRootState({searchResult})
+    })
   }
 }
 
@@ -34,55 +34,55 @@ function render({props, state}) {
         autofocus
         onInput={inputHandler} />
     </div>
-  );
+  )
 }
 
 function searchResultFilter(keyword, results) {
-  const isOnlySearchTitle = globals.storage.searchTarget === 1;
-  const newResults = [];
-  const splittedKeyArr = [];
+  const isOnlySearchTitle = globals.storage.searchTarget === 1
+  const newResults = []
+  const splittedKeyArr = []
 
   if (isOnlySearchTitle) {
     keyword.split(' ').forEach((splittedKey) => {
       if (splittedKey !== '') {
-        splittedKeyArr.push(splittedKey.toLowerCase());
+        splittedKeyArr.push(splittedKey.toLowerCase())
       }
-    });
+    })
   }
 
   results.every((itemInfo) => {
-    const itemTitle = itemInfo.title.toLowerCase();
+    const itemTitle = itemInfo.title.toLowerCase()
 
     if (globals.getBookmarkType(itemInfo) === 'bookmark') {
       if (isOnlySearchTitle) {
-        let isntTitleMatched = false;
+        let isntTitleMatched = false
 
         splittedKeyArr.every((splittedKey) => {
           if (itemTitle.indexOf(splittedKey) < 0) {
-            isntTitleMatched = true;
+            isntTitleMatched = true
 
-            return false;
+            return false
           }
 
-          return true;
-        });
+          return true
+        })
 
         if (isntTitleMatched) {
-          return true;
+          return true
         }
       }
 
-      newResults.push(itemInfo);
+      newResults.push(itemInfo)
 
       if (newResults.length === globals.storage.maxResults) {
-        return false;
+        return false
       }
     }
 
-    return true;
-  });
+    return true
+  })
 
-  return newResults;
+  return newResults
 }
 
-export default {render};
+export default {render}

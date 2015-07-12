@@ -1,24 +1,24 @@
-import {element} from 'deku';
+import {element} from 'deku'
 
-import Editor from './editor';
-import Menu from './menu';
-import MenuCover from './menu_cover';
-import Panel from './panel';
+import Editor from './editor'
+import Menu from './menu'
+import MenuCover from './menu_cover'
+import Panel from './panel'
 
 function beforeMount() {
-  initStyleOptions();
+  initStyleOptions()
 }
 
 function contextMenuHandler(event) {
-  const target = event.target;
+  const target = event.target
 
   // allow native context menu if it is an input element
   if (target.tagName === 'INPUT') {
-    return false;
+    return false
   }
 
   // disable native context menu
-  event.preventDefault();
+  event.preventDefault()
 }
 
 function initialState(props) {
@@ -28,37 +28,37 @@ function initialState(props) {
     mousePos: {x: 0, y: 0},
     searchResult: null,
     trees: [props.defExpandTree]
-  };
+  }
 }
 
 function initStyleOptions() {
   // if the font family's name has whitespace, use quote to embed it
   const fontFamily = globals.storage.fontFamily.split(',')
     .map((x) => {
-      x = x.trim();
+      x = x.trim()
 
       if (x.indexOf(' ') >= 0) {
-        x = `"${x}"`;
+        x = `"${x}"`
       }
 
-      return x;
+      return x
     })
-    .join(',');
+    .join(',')
 
-  const fontSizePx = globals.storage.fontSize + 'px';
+  const fontSizePx = globals.storage.fontSize + 'px'
 
   // -2 for border width
-  const separatorHeightPx = (globals.itemHeight / 2) - 2 + 'px';
+  const separatorHeightPx = (globals.itemHeight / 2) - 2 + 'px'
 
   // set panel (#main, #sub) width
   CSS.set('.panel-width', {
     width: globals.storage.setWidth + 'px'
-  });
+  })
 
   // set font style
   CSS.set('body', {
     font: fontSizePx + ' ' + fontFamily
-  });
+  })
 
   if (globals.storage.fontSize > 16) {
     CSS.set({
@@ -69,28 +69,28 @@ function initStyleOptions() {
       '.icon': {
         width: fontSizePx
       }
-    });
+    })
   }
 
   // set separator height depend on item height
   CSS.set('.separator', {
     height: separatorHeightPx,
     'line-height': separatorHeightPx
-  });
+  })
 }
 
 // disable the scrolling arrows after middle click
 function mouseDownHandler(event) {
   if (event.button === 1) {
-    event.preventDefault();
+    event.preventDefault()
   }
 }
 
 function render({props, state}, setState) {
-  globals.setRootState = setState;
+  globals.setRootState = setState
 
   // if menu or editor has target, show menu-cover
-  const isHiddenMenuCover = !(state.menuTarget || state.editorTarget);
+  const isHiddenMenuCover = !(state.menuTarget || state.editorTarget)
 
   return (
     <div
@@ -107,7 +107,7 @@ function render({props, state}, setState) {
         searchResult={state.searchResult} />
       <Editor editorTarget={state.editorTarget} />
     </div>
-  );
+  )
 }
 
-export default {beforeMount, initialState, render};
+export default {beforeMount, initialState, render}

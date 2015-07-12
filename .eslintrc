@@ -198,7 +198,7 @@ rules:
     - "never"
   semi:
     - 2
-    - "always"
+    - "never"
   semi-spacing:
     - 2
     -

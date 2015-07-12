@@ -1,37 +1,37 @@
-import {element} from 'deku';
+import {element} from 'deku'
 
 function addCurrentPage(menuTarget) {
   chrome.tabs.query({
     currentWindow: true,
     active: true
   }, (results) => {
-    const currentTab = results[0];
+    const currentTab = results[0]
 
-    createBookmarkItem(menuTarget, currentTab.title, currentTab.url);
-  });
+    createBookmarkItem(menuTarget, currentTab.title, currentTab.url)
+  })
 }
 
 function afterRender({props}, el) {
-  const menuTarget = props.menuTarget;
+  const menuTarget = props.menuTarget
 
-  const isHidden = !menuTarget;
+  const isHidden = !menuTarget
 
   if (!isHidden) {
-    setMenuPos(el, props.mousePos);
+    setMenuPos(el, props.mousePos)
   }
 }
 
 function afterUpdate({props}, prevProps) {
-  const menuTarget = props.menuTarget;
-  const prevMenuTarget = prevProps.menuTarget;
+  const menuTarget = props.menuTarget
+  const prevMenuTarget = prevProps.menuTarget
 
   if (prevMenuTarget !== menuTarget) {
     if (menuTarget) {
-      toggleSelected(menuTarget, 'add');
+      toggleSelected(menuTarget, 'add')
     }
 
     if (prevMenuTarget) {
-      toggleSelected(prevMenuTarget, 'remove');
+      toggleSelected(prevMenuTarget, 'remove')
     }
   }
 }
@@ -39,7 +39,7 @@ function afterUpdate({props}, prevProps) {
 function closeMenu() {
   globals.setRootState({
     menuTarget: null
-  });
+  })
 }
 
 function createBookmarkItem(menuTarget, title, url) {
@@ -48,121 +48,121 @@ function createBookmarkItem(menuTarget, title, url) {
     title: title,
     url: url,
     index: menuTarget.index + 1
-  });
+  })
 }
 
 function getChildrenHiddenStatus(props) {
-  const menuTarget = props.menuTarget;
+  const menuTarget = props.menuTarget
 
   switch (globals.getBookmarkType(menuTarget)) {
     case 'root-folder':
-      return [false, true, true, true, true];
+      return [false, true, true, true, true]
 
     case 'bookmark':
       if (props.searchResult) {
-        return [false, false, false, true, true];
+        return [false, false, false, true, true]
       }
-      break;
+      break
 
     case 'no-bookmark':
-      return [true, true, false, false, true];
+      return [true, true, false, false, true]
   }
 
-  return [false, false, false, false, false];
+  return [false, false, false, false, false]
 }
 
 function getMenuItemNum(menuItem) {
-  const menuItemList = document.getElementsByClassName('menu-item');
+  const menuItemList = document.getElementsByClassName('menu-item')
 
-  return Array.prototype.indexOf.call(menuItemList, menuItem);
+  return Array.prototype.indexOf.call(menuItemList, menuItem)
 }
 
 function menuClickEvent(event, {props}) {
-  const menuTarget = props.menuTarget;
-  const target = event.target;
+  const menuTarget = props.menuTarget
+  const target = event.target
 
-  const menuItemNum = getMenuItemNum(target);
+  const menuItemNum = getMenuItemNum(target)
 
   switch (menuItemNum) {
     case 0: // Open bookmark(s) in background tab or this window
     case 1: // in new window
     case 2: // in incognito window
-      globals.openMultipleBookmarks(menuTarget, menuItemNum);
-      break;
+      globals.openMultipleBookmarks(menuTarget, menuItemNum)
+      break
 
     case 3: // Edit... or Rename...
       globals.setRootState({
         editorTarget: menuTarget,
         menuTarget: null
-      });
-      return false;
+      })
+      return false
 
     case 4: // Delete
-      removeBookmarkItem(menuTarget);
-      break;
+      removeBookmarkItem(menuTarget)
+      break
 
     case 5: // Cut
     case 6: // Copy
     case 7: // Paste
-      break;
+      break
 
     case 9: // Add folder...
-      return false;
+      return false
 
     case 8: // Add current page
-      addCurrentPage(menuTarget);
-      break;
+      addCurrentPage(menuTarget)
+      break
 
     case 10: // Add separator
       createBookmarkItem(
         menuTarget,
         '- '.repeat(42),
         globals.separateThisUrl
-      );
-      break;
+      )
+      break
 
     case 11: // Sort by name
-      sortByName(menuTarget.parentId);
+      sortByName(menuTarget.parentId)
   }
 
-  closeMenu();
+  closeMenu()
 }
 
 function removeBookmarkItem(menuTarget) {
   if (globals.isFolder(menuTarget)) {
-    chrome.bookmarks.removeTree(menuTarget.id);
+    chrome.bookmarks.removeTree(menuTarget.id)
   } else {
-    chrome.bookmarks.remove(menuTarget.id);
+    chrome.bookmarks.remove(menuTarget.id)
   }
 }
 
 function render({props, state}) {
-  const menuTarget = props.menuTarget;
+  const menuTarget = props.menuTarget
 
-  const isHidden = !menuTarget;
+  const isHidden = !menuTarget
 
-  let menuItems;
+  let menuItems
 
   if (menuTarget) {
-    const childrenHiddenStatus = getChildrenHiddenStatus(props);
+    const childrenHiddenStatus = getChildrenHiddenStatus(props)
     const menuPattern = [
       [],
       [],
       ['cut', 'copy', 'paste'],
       ['addPage', 'addFolder', 'addSeparator'],
       ['sortByName']
-    ];
+    ]
 
     if (globals.isFolder(menuTarget)) {
-      menuPattern[0] = ['openAll', 'openAllInN', 'openAllInI'];
-      menuPattern[1] = ['rename', 'del'];
+      menuPattern[0] = ['openAll', 'openAllInN', 'openAllInI']
+      menuPattern[1] = ['rename', 'del']
     } else {
-      menuPattern[0] = ['openInB', 'openInN', 'openInI'];
-      menuPattern[1] = ['edit', 'del'];
+      menuPattern[0] = ['openInB', 'openInN', 'openInI']
+      menuPattern[1] = ['edit', 'del']
     }
 
     menuItems = menuPattern.map((menuAreaKeys, menuAreaIndex) => {
-      const isMenuAreaHidden = childrenHiddenStatus[menuAreaIndex];
+      const isMenuAreaHidden = childrenHiddenStatus[menuAreaIndex]
       const menuAreaItems = menuAreaKeys.map((menuItemKey) => {
         return (
           <p
@@ -170,57 +170,57 @@ function render({props, state}) {
             onClick={menuClickEvent}>
             {chrome.i18n.getMessage(menuItemKey)}
           </p>
-        );
-      });
+        )
+      })
 
-      return <div hidden={isMenuAreaHidden}>{menuAreaItems}</div>;
-    });
+      return <div hidden={isMenuAreaHidden}>{menuAreaItems}</div>
+    })
   }
 
-  return <div id='menu' hidden={isHidden}>{menuItems}</div>;
+  return <div id='menu' hidden={isHidden}>{menuItems}</div>
 }
 
 function setMenuPos(el, mousePos) {
-  const body = document.body;
-  const menuHeight = el.offsetHeight;
-  const menuWidth = el.offsetWidth;
+  const body = document.body
+  const menuHeight = el.offsetHeight
+  const menuWidth = el.offsetWidth
 
-  const bodyHeight = body.scrollHeight;
-  const bodyWidth = body.offsetWidth;
+  const bodyHeight = body.scrollHeight
+  const bodyWidth = body.offsetWidth
 
   if (menuHeight > bodyHeight) {
-    body.style.height = menuHeight + 'px';
+    body.style.height = menuHeight + 'px'
   }
 
   if (menuWidth > bodyWidth) {
-    body.style.width = menuWidth + 'px';
+    body.style.width = menuWidth + 'px'
   }
 
-  const bottomPos = bodyHeight - menuHeight - mousePos.y;
-  const rightPos = bodyWidth - menuWidth - mousePos.x;
+  const bottomPos = bodyHeight - menuHeight - mousePos.y
+  const rightPos = bodyWidth - menuWidth - mousePos.x
 
-  el.style.bottom = Math.max(bottomPos, 0) + 'px';
-  el.style.right = Math.max(rightPos, 0) + 'px';
+  el.style.bottom = Math.max(bottomPos, 0) + 'px'
+  el.style.right = Math.max(rightPos, 0) + 'px'
 }
 
 function sortByName(parentId) {
   chrome.bookmarks.getChildren(parentId, (childrenInfo) => {
-    const classifiedItemsList = [];
+    const classifiedItemsList = []
 
     const genClassifiedItems = () => {
       const newClassifiedItems = [
         [/* Separators */],
         [/* Folders */],
         [/* Bookmarks */]
-      ];
+      ]
 
-      classifiedItemsList.push(newClassifiedItems);
+      classifiedItemsList.push(newClassifiedItems)
 
-      return newClassifiedItems;
-    };
+      return newClassifiedItems
+    }
 
-    let newChildrenInfo = [];
-    let selectedClassifiedItems = genClassifiedItems();
+    let newChildrenInfo = []
+    let selectedClassifiedItems = genClassifiedItems()
 
     /**
      * Split all bookmarks into n main group,
@@ -229,55 +229,55 @@ function sortByName(parentId) {
      * (Separators, Folders, Bookmarks)
      */
     childrenInfo.forEach((itemInfo) => {
-      let classifiedItemsIndex;
+      let classifiedItemsIndex
 
       switch (globals.getBookmarkType(itemInfo)) {
         case 'folder':
-          classifiedItemsIndex = 1;
-          break;
+          classifiedItemsIndex = 1
+          break
 
         case 'separator':
-          classifiedItemsIndex = 0;
-          selectedClassifiedItems = genClassifiedItems();
-          break;
+          classifiedItemsIndex = 0
+          selectedClassifiedItems = genClassifiedItems()
+          break
 
         case 'bookmark':
-          classifiedItemsIndex = 2;
+          classifiedItemsIndex = 2
       }
 
-      selectedClassifiedItems[classifiedItemsIndex].push(itemInfo);
-    });
+      selectedClassifiedItems[classifiedItemsIndex].push(itemInfo)
+    })
 
     // Concatenate all lists into single list
     classifiedItemsList.forEach((thisChildrenInfo) => {
       thisChildrenInfo.forEach((classifiedItems) => {
         newChildrenInfo = newChildrenInfo.concat(
           globals.sortByTitle(classifiedItems)
-        );
-      });
-    });
+        )
+      })
+    })
 
     // Sort bookmarks by Selection sort
     newChildrenInfo.forEach((itemInfo, index) => {
-      const oldIndex = childrenInfo.indexOf(itemInfo);
+      const oldIndex = childrenInfo.indexOf(itemInfo)
 
       if (oldIndex !== index) {
-        childrenInfo.move(oldIndex, index);
+        childrenInfo.move(oldIndex, index)
 
         chrome.bookmarks.move(itemInfo.id, {
           index: index + (index > oldIndex ? 1 : 0)
-        });
+        })
       }
-    });
-  });
+    })
+  })
 }
 
 function toggleSelected(menuTarget, toggleParam) {
-  let menuTargetElem = document.getElementById(menuTarget.id);
+  let menuTargetElem = document.getElementById(menuTarget.id)
 
   if (menuTargetElem) {
-    menuTargetElem.classList[toggleParam]('selected');
+    menuTargetElem.classList[toggleParam]('selected')
   }
 }
 
-export default {afterRender, afterUpdate, render};
+export default {afterRender, afterUpdate, render}
