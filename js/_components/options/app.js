@@ -1,5 +1,7 @@
 import {element} from 'deku'
 
+import Donate from './donate'
+
 function initialState(props) {
   return {
     storage: props.storage
@@ -11,6 +13,7 @@ function render({props, state}, setState) {
 
   return (
     <div id='app'>
+      <Donate />
     </div>
   )
 }
