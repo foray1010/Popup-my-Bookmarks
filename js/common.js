@@ -1,8 +1,8 @@
-{
-  import 'string.prototype.includes';
-  import 'string.prototype.repeat';
-  import 'string.prototype.startswith';
+import 'string.prototype.includes';
+import 'string.prototype.repeat';
+import 'string.prototype.startswith';
 
+{
   // ES6 Polyfill
   if (!Array.prototype.includes) {
     Array.prototype.includes = function(i) {
