@@ -49,11 +49,11 @@ window.globals = {
     return 'bookmark'
   },
 
-  getSingleTree(id) {
+  getFlatTree(id) {
     return new Promise((resolve) => {
-      chrome.bookmarks.get(id, (itemInfo) => {
+      chrome.bookmarks.get(id, (results) => {
         chrome.bookmarks.getChildren(id, (childrenInfo) => {
-          const treeInfo = itemInfo[0]
+          const treeInfo = results[0]
 
           treeInfo.children = childrenInfo
 
@@ -127,13 +127,12 @@ window.globals = {
   },
 
   removeTreeInfoFromIndex(trees, removeFromIndex) {
-    // clone the array to avoid polluting the prevState value
-    const newTrees = trees.slice()
+    const newTrees = trees.asMutable()
 
     newTrees.splice(removeFromIndex)
 
     globals.setRootState({
-      trees: newTrees
+      trees: Immutable(newTrees)
     })
   },
 
@@ -146,7 +145,7 @@ window.globals = {
 
 new Promise((resolve) => {
   chrome.storage.sync.get(null, (storage) => {
-    globals.storage = storage
+    globals.storage = Immutable(storage)
 
     // +2 for border width, goldenGap*2 for padding
     globals.itemHeight = 2 + globals.goldenGap * 2 +
@@ -161,7 +160,7 @@ new Promise((resolve) => {
   })
 })
   .then(() => {
-    return globals.getSingleTree('0')
+    return globals.getFlatTree('0')
       .then((treeInfo) => {
         treeInfo.children = treeInfo.children.filter((itemInfo) => {
           const itemIdNum = 1 * itemInfo.id
@@ -174,11 +173,11 @@ new Promise((resolve) => {
           return !isFilterThisItem
         })
 
-        globals.rootTree = treeInfo
+        globals.rootTree = Immutable(treeInfo)
       })
   })
   .then(() => {
-    globals.getSingleTree('' + globals.storage.defExpand)
+    globals.getFlatTree('' + globals.storage.defExpand)
       .then((defExpandTree) => {
         const app = tree(
           <App defExpandTree={defExpandTree} />

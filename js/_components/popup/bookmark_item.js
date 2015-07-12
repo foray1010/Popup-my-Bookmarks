@@ -43,7 +43,7 @@ function contextMenuHandler(event, {props, state}, updateState) {
 
   globals.setRootState({
     menuTarget: itemInfo,
-    mousePos: {x: event.x, y: event.y}
+    mousePos: Immutable({x: event.x, y: event.y})
   })
 }
 
@@ -144,16 +144,15 @@ function openBookmark(handlerId, itemUrl) {
 }
 
 function openFolder(props) {
-  return globals.getSingleTree(props.itemInfo.id)
+  return globals.getFlatTree(props.itemInfo.id)
     .then((treeInfo) => {
-      // clone the array to avoid polluting the prevState value
-      const newTrees = props.trees.slice()
+      const newTrees = props.trees.asMutable()
       const nextTreeIndex = props.treeIndex + 1
 
       newTrees[nextTreeIndex] = treeInfo
 
       globals.setRootState({
-        trees: newTrees
+        trees: Immutable(newTrees)
       })
     })
 }

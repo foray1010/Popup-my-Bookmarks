@@ -6,14 +6,18 @@ function inputHandler(event, {props, state}) {
   const keyword = searchInput.value
 
   if (keyword === '') {
-    globals.setRootState({searchResult: null})
+    globals.setRootState({
+      searchResult: null
+    })
   } else {
     chrome.bookmarks.search(keyword, (result) => {
       const searchResult = globals.sortByTitle(
         searchResultFilter(keyword, result)
       )
 
-      globals.setRootState({searchResult})
+      globals.setRootState({
+        searchResult: Immutable(searchResult)
+      })
     })
   }
 }
