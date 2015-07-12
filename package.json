@@ -4,7 +4,10 @@
   "description": "A more efficient way to view and manage your bookmarks menu.",
   "dependencies": {
     "deku": "*",
-    "normalize.css": "*"
+    "normalize.css": "*",
+    "string.prototype.includes": "*",
+    "string.prototype.repeat": "*",
+    "string.prototype.startswith": "*"
   },
   "devDependencies": {
     "babel-eslint": "*",

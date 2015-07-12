@@ -108,9 +108,7 @@ function openBookmark(handlerId, itemUrl) {
   switch (handlerId) {
     case 0: // current tab
     case 1: // current tab (w/o closing PmB)
-      if (itemUrl.indexOf('javascript') !== 0) {
-        chrome.tabs.update({url: itemUrl});
-      } else {
+      if (itemUrl.startsWith('javascript:')) {
         const msgAlertBookmarklet = chrome.i18n.getMessage('alert_bookmarklet');
 
         if (globals.storage.bookmarklet) {
@@ -118,6 +116,8 @@ function openBookmark(handlerId, itemUrl) {
         } else if (confirm(msgAlertBookmarklet)) {
           globals.openOptionsPage();
         }
+      } else {
+        chrome.tabs.update({url: itemUrl});
       }
       break;
 
