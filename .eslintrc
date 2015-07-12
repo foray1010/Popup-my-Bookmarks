@@ -6,17 +6,10 @@ env:
   node: true
 globals:
   chrome: false
-  class$: false
   CSS: false
   globals: false
-  id$: false
-  initTimeout: false
+  Immutable: false
   JSONStorage: false
-  name$: false
-  new$: false
-  query$: false
-  tag$: false
-  update$: false
 ecmaFeatures:
   arrowFunctions: true
   blockBindings: true
@@ -179,7 +172,7 @@ rules:
   new-cap:
     - 2
     -
-      newIsCap: true
+      capIsNew: false
   no-multiple-empty-lines:
     - 2
     -

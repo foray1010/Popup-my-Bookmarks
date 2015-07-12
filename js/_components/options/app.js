@@ -4,7 +4,7 @@ import Donate from './donate'
 
 function initialState(props) {
   return {
-    storage: props.storage
+    storage: Immutable(props.storage)
   }
 }
 

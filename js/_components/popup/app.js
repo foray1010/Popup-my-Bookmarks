@@ -25,9 +25,9 @@ function initialState(props) {
   return {
     editorTarget: null,
     menuTarget: null,
-    mousePos: {x: 0, y: 0},
+    mousePos: Immutable({x: 0, y: 0}),
     searchResult: null,
-    trees: [props.defExpandTree]
+    trees: Immutable([props.defExpandTree])
   }
 }
 

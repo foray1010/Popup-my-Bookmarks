@@ -2,7 +2,9 @@
 
 const gulp = require('gulp')
 
+const aliasify = require('aliasify')
 const argv = require('yargs').argv
+const babelify = require('babelify')
 const browserify = require('browserify')
 const clc = require('cli-color')
 const cson = require('cson')
@@ -62,6 +64,7 @@ function compileLang(langName, destDir, options) {
 }
 
 function compileJS(destDir, options) {
+  const isDebug = destDir === devPath
   const thisLang = lang.js
 
   const sourcePath = getSourcePath(thisLang)
@@ -73,9 +76,20 @@ function compileJS(destDir, options) {
   const bundledStreamList = entries.map(function(entry) {
     let b = browserify({
       entries: entry,
-      debug: true,
-      transform: ['babelify']
+      debug: isDebug
     })
+      .transform(babelify)
+
+    if (!isDebug) {
+      b.transform(aliasify, {
+        aliases: {
+          // production build does not freeze the object,
+          // which significantly improves performance
+          'seamless-immutable': 'seamless-immutable/' +
+            'seamless-immutable.production.min'
+        }
+      })
+    }
 
     const genBundle = function() {
       const bundledStream = b.bundle()

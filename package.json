@@ -5,11 +5,13 @@
   "dependencies": {
     "deku": "*",
     "normalize.css": "*",
+    "seamless-immutable": "*",
     "string.prototype.includes": "*",
     "string.prototype.repeat": "*",
     "string.prototype.startswith": "*"
   },
   "devDependencies": {
+    "aliasify": "*",
     "babel-eslint": "*",
     "babelify": "*",
     "browserify": "*",

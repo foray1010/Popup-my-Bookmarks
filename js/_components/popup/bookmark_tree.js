@@ -66,12 +66,12 @@ function render({props, state}) {
     if (treeInfo.children.length) {
       pushTreeItem(treeInfo.children)
     } else {
-      const noBookmarkInfo = {
+      const noBookmarkInfo = Immutable({
         id: ['no-bookmark', treeInfo.id].join('-'),
         index: -1, // as it is not appeared in the childrenInfo
         parentId: treeInfo.id,
         title: chrome.i18n.getMessage('noBkmark')
-      }
+      })
 
       treeItems.push(genBookmarkItem(noBookmarkInfo))
     }
