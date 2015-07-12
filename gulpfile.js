@@ -21,6 +21,7 @@ const lang = {
   css: {
     extName: 'styl',
     compiler: 'stylus',
+    minifer: 'purifycss',
     source: 'css',
     dest: 'css'
   },
@@ -125,12 +126,25 @@ function compileJS(destDir, options) {
 }
 
 function compileLangHandler(thisLang, sourcePath, destDir, options) {
-  const compilerPipe = plugins[thisLang.compiler](options)
+  if (!options) {
+    options = {}
+  }
+
+  const compilerPipe = plugins[thisLang.compiler]
+    .apply(null, options.compilerConfig)
   const dest = path.join(destDir, thisLang.dest)
 
-  return gulp.src(sourcePath)
+  const compileStream = gulp.src(sourcePath)
     .pipe(compilerPipe)
-    .pipe(gulp.dest(dest))
+
+  if (destDir === compilePath && thisLang.minifer) {
+    const miniferPipe = plugins[thisLang.minifer]
+      .apply(null, options.miniferConfig)
+
+    compileStream.pipe(miniferPipe)
+  }
+
+  return compileStream.pipe(gulp.dest(dest))
 }
 
 function compileManifest(destDir, updateFn) {
@@ -218,8 +232,8 @@ gulp.task('compile-init', function() {
 
 gulp.task('compile-css', ['compile-init'], function() {
   return compileLang('css', compilePath, {
-    compress: true,
-    'include css': true
+    compilerConfig: [{'include css': true}],
+    miniferConfig: [[getSourcePath(lang.js)], {minify: true}]
   })
 })
 
@@ -266,11 +280,15 @@ gulp.task('dev-init', function() {
 })
 
 gulp.task('dev-css', ['dev-init'], function() {
-  return watchLang('css', devPath, {'include css': true})
+  return watchLang('css', devPath, {
+    compilerConfig: [{'include css': true}]
+  })
 })
 
 gulp.task('dev-html', ['dev-init'], function() {
-  return watchLang('html', devPath, {pretty: true})
+  return watchLang('html', devPath, {
+    compilerConfig: [{pretty: true}]
+  })
 })
 
 gulp.task('dev-js', ['dev-init'], function() {
