@@ -1,48 +1,48 @@
-import {element} from 'deku';
+import {element} from 'deku'
 
 function render({props, state}) {
-  const delay = 300;
-  const xyRange = 20;
+  const delay = 300
+  const xyRange = 20
 
   const mouseLeaveHandler = (event) => {
-    clearTimeout(triggerOnClickTimer);
-    triggerOnClickTimer = null;
-  };
+    clearTimeout(triggerOnClickTimer)
+    triggerOnClickTimer = null
+  }
 
   const mouseMoveHandler = (event) => {
     mousePosition = {
       x: event.x,
       y: event.y
-    };
+    }
 
     if (!triggerOnClickTimer) {
-      triggerOnClickByXYRange(mousePosition);
+      triggerOnClickByXYRange(mousePosition)
     }
-  };
+  }
 
   const triggerOnClickByXYRange = (mousePositionOrig) => {
     const isInTriggerPoint = (axis) => {
       const displacement = Math.abs(
         mousePosition[axis] - mousePositionOrig[axis]
-      );
+      )
 
-      return displacement < xyRange;
-    };
+      return displacement < xyRange
+    }
 
     triggerOnClickTimer = setTimeout(() => {
-      const isTrigger = isInTriggerPoint('x') && isInTriggerPoint('y');
+      const isTrigger = isInTriggerPoint('x') && isInTriggerPoint('y')
 
       if (isTrigger) {
-        props.clickHandler();
-        triggerOnClickTimer = null;
+        props.clickHandler()
+        triggerOnClickTimer = null
       } else {
-        triggerOnClickByXYRange(mousePosition);
+        triggerOnClickByXYRange(mousePosition)
       }
-    }, delay);
-  };
+    }, delay)
+  }
 
-  let mousePosition;
-  let triggerOnClickTimer = null;
+  let mousePosition
+  let triggerOnClickTimer = null
 
   return (
     <div
@@ -51,7 +51,7 @@ function render({props, state}) {
       onClick={props.clickHandler}
       onMouseLeave={mouseLeaveHandler}
       onMouseMove={mouseMoveHandler} />
-  );
+  )
 }
 
-export default {render};
+export default {render}

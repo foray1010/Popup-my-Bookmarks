@@ -1,14 +1,14 @@
-import {element} from 'deku';
+import {element} from 'deku'
 
-import BookmarkTree from './bookmark_tree';
-import Search from './search';
+import BookmarkTree from './bookmark_tree'
+import Search from './search'
 
 function render({props, state}) {
-  const mainPanelItems = [];
-  const panelClasses = ['panel', 'panel-width'];
-  const searchResult = props.searchResult;
-  const subPanelItems = [];
-  const trees = props.trees;
+  const mainPanelItems = []
+  const panelClasses = ['panel', 'panel-width']
+  const searchResult = props.searchResult
+  const subPanelItems = []
+  const trees = props.trees
 
   const genBookmarkTree = (id, thisTreeIndex) => {
     return (
@@ -17,23 +17,23 @@ function render({props, state}) {
         searchResult={searchResult}
         treeIndex={thisTreeIndex}
         trees={trees} />
-    );
-  };
+    )
+  }
 
   if (searchResult) {
-    mainPanelItems.push(genBookmarkTree('search-result', null));
+    mainPanelItems.push(genBookmarkTree('search-result', null))
   } else {
     trees.forEach((treeInfo, treeIndex) => {
       const targetPanelItems = treeIndex % 2 === 0 ?
-        mainPanelItems : subPanelItems;
+        mainPanelItems : subPanelItems
 
-      targetPanelItems.push(genBookmarkTree(treeInfo.id, treeIndex));
-    });
+      targetPanelItems.push(genBookmarkTree(treeInfo.id, treeIndex))
+    })
   }
 
-  const subPanelClass = panelClasses.slice();
+  const subPanelClass = panelClasses.slice()
   if (!subPanelItems.length) {
-    subPanelClass.push('display-none');
+    subPanelClass.push('display-none')
   }
 
   return (
@@ -48,7 +48,7 @@ function render({props, state}) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default {render};
+export default {render}

@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
-const gulp = require('gulp');
+const gulp = require('gulp')
 
-const argv = require('yargs').argv;
-const browserify = require('browserify');
-const clc = require('cli-color');
-const cson = require('cson');
-const es = require('event-stream');
-const fs = require('fs-extra');
-const glob = require('glob');
-const path = require('path');
-const plugins = require('gulp-load-plugins')();
-const vinylSource = require('vinyl-source-stream');
-const watchify = require('watchify');
+const argv = require('yargs').argv
+const browserify = require('browserify')
+const clc = require('cli-color')
+const cson = require('cson')
+const es = require('event-stream')
+const fs = require('fs-extra')
+const glob = require('glob')
+const path = require('path')
+const plugins = require('gulp-load-plugins')()
+const vinylSource = require('vinyl-source-stream')
+const watchify = require('watchify')
 
 // language config
 const lang = {
@@ -33,53 +33,53 @@ const lang = {
     source: 'js',
     dest: 'js'
   }
-};
+}
 
 // predefined path
-const compilePath = '__compile';
-const devPath = '__dev';
-const resourcesPath = '_resources';
+const compilePath = '__compile'
+const devPath = '__dev'
+const resourcesPath = '_resources'
 
 // console print
 function printWithTime(msg) {
-  const nowTime = new Date().toLocaleTimeString();
+  const nowTime = new Date().toLocaleTimeString()
 
-  console.log('[' + clc.blackBright(nowTime) + ']', msg);
+  console.log('[' + clc.blackBright(nowTime) + ']', msg)
 }
 
 // language handlers
 function compileLang(langName, destDir, options) {
-  const thisLang = lang[langName];
+  const thisLang = lang[langName]
 
-  fs.mkdirsSync(path.join(destDir, thisLang.dest));
+  fs.mkdirsSync(path.join(destDir, thisLang.dest))
 
   return compileLangHandler(
     thisLang,
     getSourcePath(thisLang),
     destDir,
     options
-  );
+  )
 }
 
 function compileJS(destDir, options) {
-  const thisLang = lang.js;
+  const thisLang = lang.js
 
-  const sourcePath = getSourcePath(thisLang);
+  const sourcePath = getSourcePath(thisLang)
 
-  const entries = glob.sync(sourcePath);
+  const entries = glob.sync(sourcePath)
 
-  fs.mkdirsSync(path.join(destDir, thisLang.dest));
+  fs.mkdirsSync(path.join(destDir, thisLang.dest))
 
   const bundledStreamList = entries.map(function(entry) {
     let b = browserify({
       entries: entry,
       debug: true,
       transform: ['babelify']
-    });
+    })
 
     const genBundle = function() {
       const bundledStream = b.bundle()
-        .pipe(vinylSource(entry));
+        .pipe(vinylSource(entry))
 
       if (!options.watch) {
         const uglifyStream = plugins.streamify(plugins.uglify({
@@ -89,146 +89,146 @@ function compileJS(destDir, options) {
             unsafe: true
           },
           output: {screw_ie8: true}
-        }));
-        bundledStream.pipe(uglifyStream);
+        }))
+        bundledStream.pipe(uglifyStream)
       }
 
       return bundledStream
         .pipe(gulp.dest(destDir))
         .on('end', function() {
-          printWithTime(clc.magenta(entry) + ' is browserified');
-        });
-    };
-
-    if (options.watch) {
-      b = watchify(b).on('update', genBundle);
+          printWithTime(clc.magenta(entry) + ' is browserified')
+        })
     }
 
-    return genBundle();
-  });
+    if (options.watch) {
+      b = watchify(b).on('update', genBundle)
+    }
 
-  return es.concat.apply(null, bundledStreamList);
+    return genBundle()
+  })
+
+  return es.concat.apply(null, bundledStreamList)
 }
 
 function compileLangHandler(thisLang, sourcePath, destDir, options) {
-  const compilerPipe = plugins[thisLang.compiler](options);
-  const dest = path.join(destDir, thisLang.dest);
+  const compilerPipe = plugins[thisLang.compiler](options)
+  const dest = path.join(destDir, thisLang.dest)
 
   return gulp.src(sourcePath)
     .pipe(compilerPipe)
-    .pipe(gulp.dest(dest));
+    .pipe(gulp.dest(dest))
 }
 
 function compileManifest(destDir, updateFn) {
-  const manifestJSON = cson.load(path.join(resourcesPath, 'manifest.cson'));
-  updateFn(manifestJSON);
+  const manifestJSON = cson.load(path.join(resourcesPath, 'manifest.cson'))
+  updateFn(manifestJSON)
 
-  const destPath = path.join(destDir, 'manifest.json');
-  fs.writeJSONSync(destPath, manifestJSON);
+  const destPath = path.join(destDir, 'manifest.json')
+  fs.writeJSONSync(destPath, manifestJSON)
 }
 
 function getSourcePath(thisLang) {
-  return path.join(thisLang.source, '*.' + thisLang.extName);
+  return path.join(thisLang.source, '*.' + thisLang.extName)
 }
 
 function watchLang(langName, destDir, options) {
-  const thisLang = lang[langName];
+  const thisLang = lang[langName]
 
   gulp.watch(getSourcePath(thisLang), function(event) {
-    const sourcePath = path.relative(__dirname, event.path);
+    const sourcePath = path.relative(__dirname, event.path)
 
     compileLangHandler(thisLang, sourcePath, destDir, options)
       .on('end', function() {
-        printWithTime(clc.magenta(sourcePath) + ' is compiled');
-      });
-  });
+        printWithTime(clc.magenta(sourcePath) + ' is compiled')
+      })
+  })
 
-  return compileLang(langName, destDir, options);
+  return compileLang(langName, destDir, options)
 }
 
 // markdown handler
 function getMarkdownData(titleList) {
-  const mdSource = path.join(resourcesPath, 'markdown');
+  const mdSource = path.join(resourcesPath, 'markdown')
 
-  const dataList = [];
+  const dataList = []
   titleList.forEach(function(title) {
     const fileData = fs.readFileSync(
       path.join(mdSource, `${title}.md`), 'utf-8'
-    );
+    )
 
     dataList.push(
       `## ${title}` +
       '\n\n' +
       fileData
-    );
-  });
+    )
+  })
 
-  return dataList.join('\n\n');
+  return dataList.join('\n\n')
 }
 
 // initiate the output folder
 function initDir(dirPath) {
-  fs.removeSync(dirPath);
-  fs.mkdirSync(dirPath);
+  fs.removeSync(dirPath)
+  fs.mkdirSync(dirPath)
 }
 
 // default when no task
-gulp.task('default', ['help']);
+gulp.task('default', ['help'])
 
 // user guideline
 gulp.task('help', function() {
-  printWithTime('\n' + getMarkdownData(['Developer guide']));
-});
+  printWithTime('\n' + getMarkdownData(['Developer guide']))
+})
 
 // compile and zip PmB
 gulp.task('compile-init', function() {
-  const version = argv.version;
+  const version = argv.version
 
   const versionCheck = function(x) {
     return (
       x === `${parseInt(x, 10)}` &&
       x >= 0 &&
       x <= 65535
-    );
-  };
+    )
+  }
 
   if (typeof version !== 'string' ||
       version.split('.').length !== 4 ||
       !version.split('.').every(versionCheck)) {
     throw Error('You need to input a version number x.y.z.ddmm, ' +
-      'each number between 0 - 65535');
+      'each number between 0 - 65535')
   }
 
-  initDir(compilePath);
-});
+  initDir(compilePath)
+})
 
 gulp.task('compile-css', ['compile-init'], function() {
   return compileLang('css', compilePath, {
     compress: true,
     'include css': true
-  });
-});
+  })
+})
 
 gulp.task('compile-html', ['compile-init'], function() {
-  return compileLang('html', compilePath);
-});
+  return compileLang('html', compilePath)
+})
 
 gulp.task('compile-js', ['compile-init'], function() {
-  return compileJS(compilePath, {watch: false});
-});
+  return compileJS(compilePath, {watch: false})
+})
 
 gulp.task('compile-others', ['compile-init'], function() {
-  const fileList = ['font', '_locales', 'LICENSE'];
+  const fileList = ['font', '_locales', 'LICENSE']
 
   fileList.forEach(function(fileName) {
-    fs.copySync(fileName, path.join(compilePath, fileName));
-  });
-  fs.copySync(path.join(resourcesPath, 'img'), path.join(compilePath, 'img'));
+    fs.copySync(fileName, path.join(compilePath, fileName))
+  })
+  fs.copySync(path.join(resourcesPath, 'img'), path.join(compilePath, 'img'))
 
   compileManifest(compilePath, function(manifestJSON) {
-    manifestJSON.version = argv.version;
-  });
-});
+    manifestJSON.version = argv.version
+  })
+})
 
 gulp.task('compile-zip', [
             'compile-css',
@@ -238,62 +238,62 @@ gulp.task('compile-zip', [
           ], function() {
   return gulp.src(path.join(compilePath, '**'))
     .pipe(plugins.zip(argv.version + '.zip'))
-    .pipe(gulp.dest('.'));
-});
+    .pipe(gulp.dest('.'))
+})
 
 gulp.task('compile', ['compile-zip'], function() {
   // useless after zipped
-  fs.remove(compilePath);
-});
+  fs.remove(compilePath)
+})
 
 // create a 'watched' folder for testing
 gulp.task('dev-init', function() {
-  initDir(devPath);
-});
+  initDir(devPath)
+})
 
 gulp.task('dev-css', ['dev-init'], function() {
-  return watchLang('css', devPath, {'include css': true});
-});
+  return watchLang('css', devPath, {'include css': true})
+})
 
 gulp.task('dev-html', ['dev-init'], function() {
-  return watchLang('html', devPath, {pretty: true});
-});
+  return watchLang('html', devPath, {pretty: true})
+})
 
 gulp.task('dev-js', ['dev-init'], function() {
-  return compileJS(devPath, {watch: true});
-});
+  return compileJS(devPath, {watch: true})
+})
 
 gulp.task('dev', [
             'dev-css',
             'dev-html',
             'dev-js'
           ], function() {
-  const fileList = ['font', '_locales'];
+  const fileList = ['font', '_locales']
 
   fileList.forEach(function(fileName) {
     fs.symlinkSync(
       path.join('..', fileName),
       path.join(devPath, fileName),
       'dir'
-    );
-  });
+    )
+  })
   fs.symlinkSync(
     path.join('..', resourcesPath, 'img-dev'),
     path.join(devPath, 'img'),
     'dir'
-  );
+  )
 
   compileManifest(devPath, function(manifestJSON) {
-    manifestJSON.name += '(dev)';
-    manifestJSON.version = '0.0.0.0';
-  });
-});
+    manifestJSON.name += '(dev)'
+    manifestJSON.version = '0.0.0.0'
+  })
+})
 
 // Lints
 gulp.task('lint-css', function() {
   return gulp.src(path.join(lang.css.source, '*'))
-    .pipe(plugins.stylint());
-});
+    .pipe(plugins.stylint())
+})
 
 gulp.task('lint-js', function() {
   return gulp.src([
@@ -302,16 +302,16 @@ gulp.task('lint-js', function() {
   ])
     .pipe(plugins.eslint())
     .pipe(plugins.eslint.format())
-    .pipe(plugins.eslint.failAfterError());
-});
+    .pipe(plugins.eslint.failAfterError())
+})
 
-gulp.task('lint', ['lint-css', 'lint-js']);
+gulp.task('lint', ['lint-css', 'lint-js'])
 
 // generate markdown file
 gulp.task('md', function() {
-  const fileName = argv.make;
+  const fileName = argv.make
 
-  let fileData;
+  let fileData
 
   switch (fileName) {
     case '__store.md':
@@ -320,15 +320,15 @@ gulp.task('md', function() {
         'Plan to do',
         'What you can help',
         'FAQ'
-      ]);
+      ])
 
       // remove first three lines
-      fileData = fileData.replace(/.+\n\n.+\n/, '');
+      fileData = fileData.replace(/.+\n\n.+\n/, '')
 
       // remove style of subheader
-      fileData = fileData.replace(/##### /g, '');
+      fileData = fileData.replace(/##### /g, '')
 
-      break;
+      break
 
     case 'README.md':
       fileData = getMarkdownData([
@@ -337,16 +337,16 @@ gulp.task('md', function() {
         'Plan to do',
         'What you can help',
         'FAQ'
-      ]);
+      ])
 
       // enlarge first header
-      fileData = fileData.replace(/^##/, '#');
+      fileData = fileData.replace(/^##/, '#')
 
-      break;
+      break
 
     default:
-      throw Error(`Unknown markdown file: ${fileName}`);
+      throw Error(`Unknown markdown file: ${fileName}`)
   }
 
-  fs.writeFile(fileName, fileData);
-});
+  fs.writeFile(fileName, fileData)
+})

@@ -1,10 +1,10 @@
-import {element} from 'deku';
+import {element} from 'deku'
 
 function clickHandler(event, {props, state}) {
   globals.setRootState({
     editorTarget: null,
     menuTarget: null
-  });
+  })
 }
 
 function render({props, state}) {
@@ -14,7 +14,7 @@ function render({props, state}) {
       class='cover'
       hidden={props.isHidden}
       onClick={clickHandler} />
-  );
+  )
 }
 
-export default {render};
+export default {render}
