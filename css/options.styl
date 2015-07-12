@@ -28,13 +28,6 @@ input
 select[multiple]
   height: 100%
 
-.footer-hr
-  background: $main-color2
-  border: 0
-  height: 1px
-  margin: 0 auto
-  width: calc(100% - 20px)
-
 .input-select-box
   border: 1px solid $main-color1
   display: inline-block
@@ -114,18 +107,6 @@ select[multiple]
   color: #fff
   cursor: default
 
-#container
-  border: 1px solid #784c00
-  width: 720px
-
-  // vertical & horizontal center
-  position: absolute
-  top: 0
-  right: 0
-  bottom: 0
-  left: 0
-  margin: auto
-
 #donate-desc
   float: left
   width: $donate-desc-width
@@ -140,72 +121,6 @@ select[multiple]
   padding: 10px 0 20px
   width: $donation-width
 
-#logo-book
-  background: #784c00
-  height: inherit
-  left: 0
-  position: absolute
-  top: 0
-  width: $logo-book-width
-
-#logo-box
-  cursor: default
-  height: 80px
-  -webkit-user-select: none
-
-#logo-memo div
-  height: 18px
-
-  &:nth-of-type(1)
-    background: $main-color1
-
-  &:nth-of-type(2)
-    background: $main-color2
-
-  &:nth-of-type(3)
-    background: #6cb
-
-  &:nth-of-type(4)
-    background: #e77
-
-#logo-title
-  background: url("/img/opt_title.png") no-repeat center center
-  height: 69px
-  position: absolute
-  right: 0
-  top: 0
-  width: "calc(100% - %s)" % $logo-book-width
-
 #opt-button
   margin: 0 50px 5px 0
   text-align: right
-
-#star-five
-  margin: 32px 6px
-  -webkit-transform: rotate(35deg)
-  width: 0
-
-  &,
-  &::before,
-  &::after
-    border-color: #fc0 transparent
-    border-style: solid
-
-  &,
-  &::after
-    border-width: 0 25px 18px 25px
-
-  &::before
-    border-width: 0 6px 20px 6px
-    content: ""
-    left: -16px
-    position: absolute
-    top: -14px
-    -webkit-transform: rotate(-35deg)
-
-  &::after
-    content: ""
-    left: -26px
-    position: absolute
-    top: 0
-    -webkit-transform: rotate(-70deg)

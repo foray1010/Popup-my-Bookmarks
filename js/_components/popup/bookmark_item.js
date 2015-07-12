@@ -233,8 +233,8 @@ function setTooltip(el, props) {
     const breadcrumbArr = []
 
     const getBreadcrumb = (breadId) => {
-      chrome.bookmarks.get(breadId, (node) => {
-        const thisItemInfo = node[0]
+      chrome.bookmarks.get(breadId, (results) => {
+        const thisItemInfo = results[0]
 
         breadcrumbArr.unshift(thisItemInfo.title)
 
