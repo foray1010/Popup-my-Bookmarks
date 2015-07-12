@@ -95,7 +95,7 @@ function menuClickEvent(event, {props}) {
         editorTarget: menuTarget,
         menuTarget: null
       })
-      return false
+      return
 
     case 4: // Delete
       removeBookmarkItem(menuTarget)
@@ -107,7 +107,7 @@ function menuClickEvent(event, {props}) {
       break
 
     case 9: // Add folder...
-      return false
+      return
 
     case 8: // Add current page
       addCurrentPage(menuTarget)
