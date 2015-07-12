@@ -3,13 +3,6 @@ import 'string.prototype.repeat';
 import 'string.prototype.startswith';
 
 {
-  // ES6 Polyfill
-  if (!Array.prototype.includes) {
-    Array.prototype.includes = function(i) {
-      return this.indexOf(i) >= 0;
-    };
-  }
-
   // set or unset CSS
   window.CSS = (() => {
     const styleElem = document.createElement('style');

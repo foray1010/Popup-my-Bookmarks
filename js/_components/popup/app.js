@@ -37,7 +37,7 @@ function initStyleOptions() {
     .map((x) => {
       x = x.trim();
 
-      if (x.includes(' ')) {
+      if (x.indexOf(' ') >= 0) {
         x = `"${x}"`;
       }
 

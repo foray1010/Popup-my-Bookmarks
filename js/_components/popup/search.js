@@ -58,7 +58,7 @@ function searchResultFilter(keyword, results) {
         let isntTitleMatched = false;
 
         splittedKeyArr.every((splittedKey) => {
-          if (!itemTitle.includes(splittedKey)) {
+          if (itemTitle.indexOf(splittedKey) < 0) {
             isntTitleMatched = true;
 
             return false;

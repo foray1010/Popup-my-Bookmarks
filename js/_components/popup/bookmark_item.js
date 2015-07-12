@@ -236,11 +236,9 @@ function setTooltip(el, props) {
       chrome.bookmarks.get(breadId, (node) => {
         const thisItemInfo = node[0];
 
-        if (![itemInfo.id, '0'].includes(thisItemInfo.id)) {
-          breadcrumbArr.unshift(thisItemInfo.title);
-        }
+        breadcrumbArr.unshift(thisItemInfo.title);
 
-        if (thisItemInfo.parentId !== undefined) {
+        if (thisItemInfo.parentId !== '0') {
           getBreadcrumb(thisItemInfo.parentId);
         } else {
           tooltipArr.unshift(breadcrumbArr.join(' > '));
@@ -250,7 +248,7 @@ function setTooltip(el, props) {
       });
     };
 
-    getBreadcrumb(itemInfo.id);
+    getBreadcrumb(itemInfo.parentId);
   } else {
     setTitle();
   }
