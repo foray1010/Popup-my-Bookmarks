@@ -6,7 +6,7 @@ window.globals = {}
 
 new Promise((resolve) => {
   chrome.storage.sync.get(null, (storage) => {
-    resolve(storage)
+    resolve(Immutable(storage))
   })
 })
   .then((storage) => {
