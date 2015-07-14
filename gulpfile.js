@@ -2,13 +2,10 @@
 
 const gulp = require('gulp')
 
-const aliasify = require('aliasify')
 const argv = require('yargs').argv
-const babelify = require('babelify')
 const browserify = require('browserify')
 const clc = require('cli-color')
 const cson = require('cson')
-const es = require('event-stream')
 const fs = require('fs-extra')
 const glob = require('glob')
 const path = require('path')
@@ -64,7 +61,7 @@ function compileLang(langName, destDir, options) {
   )
 }
 
-function compileJS(destDir, options) {
+function compileJS(destDir) {
   const isDebug = destDir === devPath
   const thisLang = lang.js
 
@@ -72,17 +69,36 @@ function compileJS(destDir, options) {
 
   const entries = glob.sync(sourcePath)
 
-  fs.mkdirsSync(path.join(destDir, thisLang.dest))
+  const genBundle = function(ids) {
+    return b.bundle()
+      .pipe(vinylSource('common.js'))
+      .pipe(gulp.dest(path.join(destDir, thisLang.dest)))
+      .on('end', function() {
+        if (ids) {
+          ids.forEach(function(id) {
+            const entryPath = path.relative('.', id)
 
-  const bundledStreamList = entries.map(function(entry) {
-    let b = browserify({
-      entries: entry,
-      debug: isDebug
+            printWithTime(clc.magenta(entryPath) + ' is browserified')
+          })
+        }
+      })
+  }
+
+  let b = browserify(entries, {
+    debug: isDebug
+  })
+    .plugin('factor-bundle', {
+      outputs: entries.map(function(entry) {
+        return path.join(destDir, entry)
+      })
     })
-      .transform(babelify)
+    .transform('babelify')
 
-    if (!isDebug) {
-      b.transform(aliasify, {
+  if (isDebug) {
+    b = watchify(b).on('update', genBundle)
+  } else {
+    b
+      .transform('aliasify', {
         aliases: {
           // production build does not freeze the object,
           // which significantly improves performance
@@ -90,39 +106,20 @@ function compileJS(destDir, options) {
             'seamless-immutable.production.min'
         }
       })
-    }
+      .transform('uglifyify', {
+        compress: {
+          drop_console: true,
+          pure_getters: true,
+          unsafe: true
+        },
+        global: true,
+        output: {screw_ie8: true}
+      })
+  }
 
-    const genBundle = function() {
-      const bundledStream = b.bundle()
-        .pipe(vinylSource(entry))
+  fs.mkdirsSync(path.join(destDir, thisLang.dest))
 
-      if (!options.watch) {
-        const uglifyStream = plugins.streamify(plugins.uglify({
-          compress: {
-            drop_console: true,
-            pure_getters: true,
-            unsafe: true
-          },
-          output: {screw_ie8: true}
-        }))
-        bundledStream.pipe(uglifyStream)
-      }
-
-      return bundledStream
-        .pipe(gulp.dest(destDir))
-        .on('end', function() {
-          printWithTime(clc.magenta(entry) + ' is browserified')
-        })
-    }
-
-    if (options.watch) {
-      b = watchify(b).on('update', genBundle)
-    }
-
-    return genBundle()
-  })
-
-  return es.concat.apply(null, bundledStreamList)
+  return genBundle()
 }
 
 function compileLangHandler(thisLang, sourcePath, destDir, options) {
@@ -242,7 +239,7 @@ gulp.task('compile-html', ['compile-init'], function() {
 })
 
 gulp.task('compile-js', ['compile-init'], function() {
-  return compileJS(compilePath, {watch: false})
+  return compileJS(compilePath)
 })
 
 gulp.task('compile-others', ['compile-init'], function() {
@@ -292,7 +289,7 @@ gulp.task('dev-html', ['dev-init'], function() {
 })
 
 gulp.task('dev-js', ['dev-init'], function() {
-  return compileJS(devPath, {watch: true})
+  return compileJS(devPath)
 })
 
 gulp.task('dev', [

@@ -1,3 +1,4 @@
+import './_components/common'
 import {element, render, tree} from 'deku'
 
 import App from './_components/popup/app'
