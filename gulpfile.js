@@ -21,7 +21,7 @@ const lang = {
   css: {
     extName: 'styl',
     compiler: 'stylus',
-    minifer: 'purifycss',
+    minifer: 'minifyCss',
     source: 'css',
     dest: 'css'
   },
@@ -233,7 +233,7 @@ gulp.task('compile-init', function() {
 gulp.task('compile-css', ['compile-init'], function() {
   return compileLang('css', compilePath, {
     compilerConfig: [{'include css': true}],
-    miniferConfig: [[getSourcePath(lang.js)], {minify: true}]
+    miniferConfig: [{keepSpecialComments: 0}]
   })
 })
 

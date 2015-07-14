@@ -25,7 +25,7 @@
     "gulp-eslint": "*",
     "gulp-jade": "*",
     "gulp-load-plugins": "*",
-    "gulp-purifycss": "*",
+    "gulp-minify-css": "*",
     "gulp-streamify": "*",
     "gulp-stylint": "*",
     "gulp-stylus": "*",
