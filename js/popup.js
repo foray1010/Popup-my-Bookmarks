@@ -1,6 +1,6 @@
-import './_components/common'
 import {element, render, tree} from 'deku'
 
+import './_components/common'
 import App from './_components/popup/app'
 
 window.globals = {
