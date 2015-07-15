@@ -1,11 +1,10 @@
-$main-color1 = #0092fa
-$main-color2 = #fa9115
-
-$input-height = 20px
+@import "./_components/variables"
 
 $donate-desc-width = 400px
 $donate-img-width = 160px
-$donation-width = $donate-desc-width + $donate-img-width
+$donate-width = $donate-desc-width + $donate-img-width
+
+$input-height = 20px
 
 body
   font: 12px sans-serif
@@ -75,7 +74,7 @@ select[multiple]
     margin-right: 4px
 
 .selectbox
-  background: #fff
+  background: $blank-color
   border: 1px solid currentcolor
   color: $main-color1
   display: table
@@ -102,13 +101,13 @@ select[multiple]
   vertical-align: middle
 
 .selectbox-item-active
-  color: #fff
+  color: $blank-color
   cursor: default
 
 #donate
   height: 50px
   margin: auto
-  width: $donation-width
+  width: $donate-width
 
 #donate-desc
   float: left
