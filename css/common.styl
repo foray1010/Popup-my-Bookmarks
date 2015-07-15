@@ -1,7 +1,4 @@
-$main-color1 = #0092fa
-$main-color2 = #fa9115
-$main-font-color = #222
-
+@import "./_components/variables"
 @import "../node_modules/normalize.css/normalize.css"
 
 @font-face
@@ -9,13 +6,12 @@ $main-font-color = #222
   src: url("/font/ArchivoNarrow-Regular.woff")
 
 body
-  background: #fff
+  background: $blank-color
   color: $main-font-color
 
 button
-  background: #eee
+  background: $highlight-level1
   border: 0
-  color: #555
   margin: 3px 0 0 3px
   outline: 0
   padding: 4px 8px
@@ -32,5 +28,5 @@ select
 input[type="number"],
 input[type="text"],
 select
-  background: #fff
+  background: $blank-color
   border: 1px solid $main-color1
