@@ -62,7 +62,7 @@ rules:
   no-cond-assign:
     - 2
     - "always"
-  no-console: 1
+  no-console: 2
   no-debugger: 1
   no-alert: 0
   no-constant-condition: 1
