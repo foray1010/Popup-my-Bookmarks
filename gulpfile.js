@@ -85,7 +85,8 @@ function compileJS(destDir) {
   }
 
   let b = browserify(entries, {
-    debug: isDebug
+    debug: isDebug,
+    detectGlobals: false
   })
     .plugin('factor-bundle', {
       outputs: entries.map(function(entry) {
