@@ -4,14 +4,19 @@ const gulp = require('gulp')
 
 const argv = require('yargs').argv
 const browserify = require('browserify')
-const clc = require('cli-color')
 const cson = require('cson')
 const fs = require('fs-extra')
 const glob = require('glob')
+const gutil = require('gulp-util')
 const path = require('path')
 const plugins = require('gulp-load-plugins')()
 const vinylSource = require('vinyl-source-stream')
 const watchify = require('watchify')
+
+// predefined path
+const compilePath = '__compile'
+const devPath = '__dev'
+const resourcesPath = '_resources'
 
 // language config
 const lang = {
@@ -33,18 +38,6 @@ const lang = {
     source: 'js',
     dest: 'js'
   }
-}
-
-// predefined path
-const compilePath = '__compile'
-const devPath = '__dev'
-const resourcesPath = '_resources'
-
-// console print
-function printWithTime(msg) {
-  const nowTime = new Date().toLocaleTimeString()
-
-  console.log('[' + clc.blackBright(nowTime) + ']', msg)
 }
 
 // language handlers
@@ -78,7 +71,7 @@ function compileJS(destDir) {
           ids.forEach(function(id) {
             const entryPath = path.relative('.', id)
 
-            printWithTime(clc.magenta(entryPath) + ' is browserified')
+            gutil.log(gutil.colors.magenta(entryPath), 'is browserified')
           })
         }
       })
@@ -165,7 +158,7 @@ function watchLang(langName, destDir, options) {
 
     compileLangHandler(thisLang, sourcePath, destDir, options)
       .on('end', function() {
-        printWithTime(clc.magenta(sourcePath) + ' is compiled')
+        gutil.log(gutil.colors.magenta(sourcePath), 'is compiled')
       })
   })
 
@@ -203,7 +196,7 @@ gulp.task('default', ['help'])
 
 // user guideline
 gulp.task('help', function() {
-  printWithTime('\n' + getMarkdownData(['Developer guide']))
+  gutil.log('\n' + getMarkdownData(['Developer guide']))
 })
 
 // compile and zip PmB
