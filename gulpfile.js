@@ -79,7 +79,7 @@ function compileJS(destDir) {
 
   let b = browserify(entries, {
     debug: isDebug,
-    detectGlobals: false
+    insertGlobals: true
   })
     .plugin('factor-bundle', {
       outputs: entries.map(function(entry) {
