@@ -4,6 +4,8 @@
   "description": "A more efficient way to view and manage your bookmarks menu.",
   "dependencies": {
     "deku": "*",
+    "lodash.debounce": "*",
+    "lodash.throttle": "*",
     "normalize.css": "*",
     "seamless-immutable": "*",
     "string.prototype.includes": "*",
