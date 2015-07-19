@@ -1,4 +1,10 @@
 ## 5.0.0 (unreleased)
+Features:
+  - Open popup by Ctrl / CMD + B (suggested by Sebastian B)
+
+Changes:
+  - Increase minimum Chrome version from 26 to 32
+
 Translations:
   - Support Norwegian Bokmål locales (thanks Bjorn Tore Asheim)
 
