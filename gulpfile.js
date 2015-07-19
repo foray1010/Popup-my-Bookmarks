@@ -169,13 +169,12 @@ function watchLang(langName, destDir, options) {
 function getMarkdownData(titleList) {
   const mdSource = path.join(resourcesPath, 'markdown')
 
-  const dataList = []
-  titleList.forEach(function(title) {
+  const dataList = titleList.map(function(title) {
     const fileData = fs.readFileSync(
       path.join(mdSource, `${title}.md`), 'utf-8'
     )
 
-    dataList.push(
+    return (
       `## ${title}` +
       '\n\n' +
       fileData
