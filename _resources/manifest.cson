@@ -1,7 +1,9 @@
 name: 'Popup my Bookmarks'
+short_name: 'PmB'
 version: ''
 manifest_version: 2
 minimum_chrome_version: '32'
+offline_enabled: true
 
 default_locale: 'en'
 description: '__MSG_extDesc__'
@@ -18,6 +20,11 @@ options_page: 'options.html'
 options_ui:
   page: 'options.html'
   chrome_style: true
+
+commands:
+  _execute_browser_action:
+    suggested_key:
+      default: 'Ctrl+B'
 
 permissions: [
   'chrome://favicon/'
