@@ -12,20 +12,15 @@ globals:
 ecmaFeatures:
   arrowFunctions: true
   blockBindings: true
-  classes: true
   defaultParams: true
   destructuring: true
-  forOf: true
-  generators: false
   jsx: true
   modules: true
   objectLiteralComputedProperties: true
-  objectLiteralDuplicateProperties: false
   objectLiteralShorthandMethods: true
   objectLiteralShorthandProperties: true
   spread: true
-  superInFunctions: true
-  templateStrings: true,
+  templateStrings: true
 rules:
 /**
 * Strict mode
