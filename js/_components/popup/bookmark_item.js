@@ -27,6 +27,7 @@ function clickHandler(event, {props, state}) {
       } else {
         globals.openMultipleBookmarks(itemInfo, 0)
       }
+
       break
 
     case 'separator':
@@ -119,6 +120,7 @@ function openBookmark(handlerId, itemUrl) {
       } else {
         chrome.tabs.update({url: itemUrl})
       }
+
       break
 
     case 2: // new tab

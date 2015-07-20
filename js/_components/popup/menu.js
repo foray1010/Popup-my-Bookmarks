@@ -62,6 +62,7 @@ function getChildrenHiddenStatus(props) {
       if (props.searchResult) {
         return [false, false, false, true, true]
       }
+
       break
 
     case 'no-bookmark':
