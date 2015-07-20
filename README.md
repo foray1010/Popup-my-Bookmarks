@@ -73,7 +73,6 @@ Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG
 
   To lint
   - ES6 JavaScript code by [ESLint](//github.com/eslint/eslint)
-  - CoffeeScript code by [CoffeeLint](//github.com/clutchski/coffeelint)
   - Stylus code by [Stylint](//github.com/rossPatton/stylint)
 
 5. md
