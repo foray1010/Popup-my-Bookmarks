@@ -18,7 +18,8 @@ function clickConfirmHandler(event, {props, state}) {
     .getElementsByTagName('input')
   const editorTarget = props.editorTarget
 
-  let updatedTitle = editorInput[0].value
+  const updatedTitle = editorInput[0].value
+
   let updatedUrl
 
   if (!globals.isFolder(editorTarget)) {
