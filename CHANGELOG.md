@@ -5,6 +5,9 @@ Features:
 Changes:
   - Increase minimum Chrome version from 26 to 32
 
+Bugfixes:
+  - Cannot display the whole popup in OSX
+
 Translations:
   - Support Norwegian Bokmål locales (thanks Bjorn Tore Asheim)
 
