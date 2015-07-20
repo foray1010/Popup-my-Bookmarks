@@ -168,6 +168,9 @@ rules:
     - 2
     -
       capIsNew: false
+  no-extra-parens:
+    - 2
+    - "functions"
   no-multiple-empty-lines:
     - 2
     -
@@ -176,7 +179,6 @@ rules:
   no-new-object: 2
   no-spaced-func: 2
   no-trailing-spaces: 2
-  no-wrap-func: 2
   no-underscore-dangle: 0
   one-var:
     - 2
@@ -199,7 +201,9 @@ rules:
     - "never"
   space-infix-ops: 2
   space-return-throw-case: 2
-  spaced-line-comment: 2
+  spaced-comment:
+    - 2
+    - "always"
 
 /**
  * JSX style
