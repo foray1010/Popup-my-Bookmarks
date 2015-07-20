@@ -25,7 +25,7 @@ rules:
 /**
 * Strict mode
 */
-  // babel inserts "use strict"; for us
+  // babel inserts "use strict" for us
   strict:
     - 1
     - "never"
