@@ -339,8 +339,8 @@ gulp.task('md', function() {
     case '__store.md':
       fileData = getMarkdownData([
         'Popup my Bookmarks',
-        'Plan to do',
-        'What you can help',
+        'Todo',
+        'Contributing',
         'FAQ'
       ])
 
@@ -356,8 +356,8 @@ gulp.task('md', function() {
       fileData = getMarkdownData([
         'Popup my Bookmarks',
         'Developer guide',
-        'Plan to do',
-        'What you can help',
+        'Todo',
+        'Contributing',
         'FAQ'
       ])
 

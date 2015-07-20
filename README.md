@@ -87,12 +87,12 @@ Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG
   - `README.md` - Description for GitHub
 
 
-## Plan to do
+## Todo
 
 1. Bookmarks selector (allow drag and manage a group of bookmarks)
 
 
-## What you can help
+## Contributing
 
 - Translate to other languages, It's all depended on volunteers as I am not a linguist. ;-)
 
