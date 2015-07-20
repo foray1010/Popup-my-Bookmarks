@@ -273,7 +273,7 @@ function sortByName(parentId) {
 }
 
 function toggleSelected(menuTarget, toggleParam) {
-  let menuTargetElem = document.getElementById(menuTarget.id)
+  const menuTargetElem = document.getElementById(menuTarget.id)
 
   if (menuTargetElem) {
     menuTargetElem.classList[toggleParam]('selected')
