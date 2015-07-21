@@ -1,4 +1,32 @@
+import debounce from 'lodash.debounce'
 import {element} from 'deku'
+
+const debouncedMouseHandler = debounce((event, {props}) => {
+  if (event.target !== event.delegateTarget) {
+    return
+  }
+
+  const isSearching = !!props.searchResult
+  const itemInfo = props.itemInfo
+
+  switch (event.type) {
+    case 'mouseenter':
+      if (!isSearching && !globals.storage.opFolderBy) {
+        if (globals.isFolder(itemInfo)) {
+          if (!globals.isFolderOpened(props.trees, itemInfo)) {
+            openFolder(props)
+          }
+        } else {
+          globals.removeTreeInfoFromIndex(props.trees, props.treeIndex + 1)
+        }
+      }
+
+      break
+
+    case 'mouseleave':
+      break
+  }
+}, 200)
 
 function afterMount({props}, el) {
   const itemInfo = props.itemInfo
@@ -33,6 +61,7 @@ function clickHandler(event, {props, state}) {
     case 'separator':
     case 'bookmark':
       openBookmark(getOpenBookmarkHandlerId(event), itemInfo.url)
+      break
   }
 }
 
@@ -80,31 +109,6 @@ function getOpenBookmarkHandlerId(event) {
   return globals.storage['clickBy' + switcher]
 }
 
-function mouseEnterHandler(event, {props, state}, updateState) {
-  if (event.target !== event.delegateTarget) {
-    return
-  }
-
-  const isSearching = !!props.searchResult
-  const itemInfo = props.itemInfo
-
-  if (!isSearching && !globals.storage.opFolderBy) {
-    if (globals.isFolder(itemInfo)) {
-      if (!globals.isFolderOpened(props.trees, itemInfo)) {
-        openFolder(props)
-      }
-    } else {
-      globals.removeTreeInfoFromIndex(props.trees, props.treeIndex + 1)
-    }
-  }
-}
-
-function mouseLeaveHandler(event, {props, state}, updateState) {
-  if (event.target !== event.delegateTarget) {
-    return
-  }
-}
-
 function openBookmark(handlerId, itemUrl) {
   switch (handlerId) {
     case 0: // current tab
@@ -138,6 +142,7 @@ function openBookmark(handlerId, itemUrl) {
         url: itemUrl,
         incognito: handlerId === 6
       })
+      break
   }
 
   if (handlerId !== 1 && handlerId !== 4) {
@@ -191,6 +196,7 @@ function render({props, state}) {
 
     case 'bookmark':
       iconSrc = `chrome://favicon/${itemInfo.url}`
+      break
   }
 
   if (isSearching) {
@@ -207,8 +213,8 @@ function render({props, state}) {
       onDragEnd={dragEndHandler}
       onDragOver={dragOverHandler}
       onDragStart={dragStartHandler}
-      onMouseEnter={mouseEnterHandler}
-      onMouseLeave={mouseLeaveHandler}>
+      onMouseEnter={debouncedMouseHandler}
+      onMouseLeave={debouncedMouseHandler}>
       <img class='icon' src={iconSrc} alt='' draggable='false' />
       {itemTitle}
     </p>

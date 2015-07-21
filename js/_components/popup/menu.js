@@ -54,22 +54,26 @@ function createBookmarkItem(menuTarget, title, url) {
 function getChildrenHiddenStatus(props) {
   const menuTarget = props.menuTarget
 
+  let childrenHiddenStatus = [false, false, false, false, false]
+
   switch (globals.getBookmarkType(menuTarget)) {
     case 'root-folder':
-      return [false, true, true, true, true]
+      childrenHiddenStatus = [false, true, true, true, true]
+      break
 
     case 'bookmark':
       if (props.searchResult) {
-        return [false, false, false, true, true]
+        childrenHiddenStatus = [false, false, false, true, true]
       }
 
       break
 
     case 'no-bookmark':
-      return [true, true, false, false, true]
+      childrenHiddenStatus = [true, true, false, false, true]
+      break
   }
 
-  return [false, false, false, false, false]
+  return childrenHiddenStatus
 }
 
 function getMenuItemNum(menuItem) {
@@ -124,6 +128,7 @@ function menuClickEvent(event, {props}) {
 
     case 11: // Sort by name
       sortByName(menuTarget.parentId)
+      break
   }
 
   closeMenu()
@@ -244,6 +249,7 @@ function sortByName(parentId) {
 
         case 'bookmark':
           classifiedItemsIndex = 2
+          break
       }
 
       selectedClassifiedItems[classifiedItemsIndex].push(itemInfo)
