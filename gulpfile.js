@@ -349,7 +349,6 @@ gulp.task('md', function() {
 
       // remove style of subheader
       fileData = fileData.replace(/##### /g, '')
-
       break
 
     case 'README.md':
@@ -363,7 +362,6 @@ gulp.task('md', function() {
 
       // enlarge first header
       fileData = fileData.replace(/^##/, '#')
-
       break
 
     default:
