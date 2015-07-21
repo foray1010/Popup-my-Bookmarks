@@ -1,4 +1,7 @@
+import debounce from 'lodash.debounce'
 import {element} from 'deku'
+
+const debouncedInputHandler = debounce(inputHandler, 200)
 
 function inputHandler(event, {props, state}) {
   const searchInput = event.target
@@ -36,7 +39,7 @@ function render({props, state}) {
         placeholder={chrome.i18n.getMessage('search')}
         tabindex='-1'
         autofocus
-        onInput={inputHandler} />
+        onInput={debouncedInputHandler} />
     </div>
   )
 }
