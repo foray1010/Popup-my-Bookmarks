@@ -2,6 +2,12 @@
   "name": "Popup-my-Bookmarks",
   "version": "0.0.0",
   "description": "A more efficient way to view and manage your bookmarks menu.",
+  "author": "foray1010",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/foray1010/Popup-my-Bookmarks.git"
+  },
+  "license": "MIT",
   "dependencies": {
     "deku": "0.4.9",
     "lodash.debounce": "*",
@@ -34,11 +40,5 @@
     "vinyl-source-stream": "*",
     "watchify": "*",
     "yargs": "*"
-  },
-  "author": "foray1010",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/foray1010/Popup-my-Bookmarks.git"
-  },
-  "license": "MIT"
+  }
 }
