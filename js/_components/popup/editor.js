@@ -6,7 +6,7 @@ function afterRender({props}, el) {
   const isHidden = !editorTarget
 
   if (!isHidden) {
-    setEditorPos(el)
+    setEditorPos(el, document.getElementById(editorTarget.id))
 
     // auto focus to title field
     el.getElementsByTagName('input')[0].focus()
@@ -76,7 +76,7 @@ function render({props, state}) {
   )
 }
 
-function setEditorPos(el) {
+function setEditorPos(el, editorTargetEl) {
   const body = document.body
   const editorHeight = el.offsetHeight
   const editorWidth = el.offsetWidth
@@ -84,7 +84,9 @@ function setEditorPos(el) {
   const bodyHeight = body.scrollHeight
   const bodyWidth = body.offsetWidth
 
-  const bottomPos = bodyHeight - editorHeight
+  const bottomPos = (
+    bodyHeight - editorHeight - editorTargetEl.getBoundingClientRect().top
+  )
   const rightPos = bodyWidth - editorWidth
 
   el.style.bottom = Math.max(bottomPos, 0) + 'px'
