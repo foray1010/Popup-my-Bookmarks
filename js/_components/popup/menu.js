@@ -269,7 +269,8 @@ function sortByName(parentId) {
       const oldIndex = childrenInfo.indexOf(itemInfo)
 
       if (oldIndex !== index) {
-        childrenInfo.move(oldIndex, index)
+        // move the item from old index to new index
+        childrenInfo.splice(index, 0, childrenInfo.splice(oldIndex, 1)[0])
 
         chrome.bookmarks.move(itemInfo.id, {
           index: index + (index > oldIndex ? 1 : 0)
