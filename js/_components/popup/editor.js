@@ -13,6 +13,10 @@ function afterRender({props}, el) {
   }
 }
 
+function clickCancelHandler(event, {props, state}) {
+  closeEditor()
+}
+
 function clickConfirmHandler(event, {props, state}) {
   const editorInput = document.getElementById('editor')
     .getElementsByTagName('input')
@@ -31,10 +35,6 @@ function clickConfirmHandler(event, {props, state}) {
     url: updatedUrl
   })
 
-  closeEditor()
-}
-
-function clickCancelHandler(event, {props, state}) {
   closeEditor()
 }
 
@@ -80,13 +80,12 @@ function setEditorPos(el, editorTargetEl) {
   const body = document.body
   const editorHeight = el.offsetHeight
   const editorWidth = el.offsetWidth
+  const targetOffsetTop = editorTargetEl.getBoundingClientRect().top
 
   const bodyHeight = body.scrollHeight
   const bodyWidth = body.offsetWidth
 
-  const bottomPos = (
-    bodyHeight - editorHeight - editorTargetEl.getBoundingClientRect().top
-  )
+  const bottomPos = bodyHeight - editorHeight - targetOffsetTop
   const rightPos = bodyWidth - editorWidth
 
   el.style.bottom = Math.max(bottomPos, 0) + 'px'
