@@ -3,15 +3,14 @@
 const gulp = require('gulp')
 
 const argv = require('yargs').argv
-const browserify = require('browserify')
 const cson = require('cson')
 const fs = require('fs-extra')
-const glob = require('glob')
 const gutil = require('gulp-util')
+const named = require('vinyl-named')
 const path = require('path')
 const plugins = require('gulp-load-plugins')()
-const vinylSource = require('vinyl-source-stream')
-const watchify = require('watchify')
+const webpack = require('webpack')
+const webpackStream = require('webpack-stream')
 
 // predefined path
 const compilePath = '__compile'
@@ -55,65 +54,67 @@ function compileLang(langName, destDir, options) {
 }
 
 function compileJS(destDir) {
-  const isDebug = destDir === devPath
+  const isDev = destDir === devPath
+  const resolveAlias = {}
   const thisLang = lang.js
+  const webpackPlugins = [
+    new webpack.optimize.CommonsChunkPlugin('common.js'),
+    new webpack.optimize.DedupePlugin()
+  ]
 
+  const destPath = path.join(destDir, thisLang.dest)
   const sourcePath = getSourcePath(thisLang)
 
-  const entries = glob.sync(sourcePath)
+  fs.mkdirsSync(destPath)
 
-  const genBundle = function(ids) {
-    return b.bundle()
-      .pipe(vinylSource('common.js'))
-      .pipe(gulp.dest(path.join(destDir, thisLang.dest)))
-      .on('end', function() {
-        if (ids) {
-          ids.forEach(function(id) {
-            const entryPath = path.relative('.', id)
+  if (!isDev) {
+    // production build does not freeze the object,
+    // which significantly improves performance
+    resolveAlias['seamless-immutable'] = 'seamless-immutable/' +
+      'seamless-immutable.production.min'
 
-            gutil.log(gutil.colors.magenta(entryPath), 'is browserified')
-          })
-        }
-      })
+    webpackPlugins.push(new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        drop_console: true,
+        pure_getters: true,
+        unsafe: true,
+        warnings: false
+      },
+      output: {
+        comments: false,
+        screw_ie8: true
+      }
+    }))
   }
 
-  let b = browserify(entries, {
-    debug: isDebug,
-    insertGlobals: true
-  })
-    .plugin('factor-bundle', {
-      outputs: entries.map(function(entry) {
-        return path.join(destDir, entry)
-      })
-    })
-    .transform('babelify')
+  const stream = gulp.src(sourcePath)
+    .pipe(named())
+    .pipe(webpackStream({
+      devtool: isDev ? 'source-map' : undefined,
+      module: {
+        loaders: [
+          {
+            test: /\.js$/,
+            loader: 'babel-loader'
+          }
+        ]
+      },
+      plugins: webpackPlugins,
+      resolve : {
+        alias: resolveAlias
+      },
+      stats: {
+        timings: true,
+        version: false
+      },
+      watch: isDev
+    }, webpack))
+    .pipe(gulp.dest(destPath))
 
-  if (isDebug) {
-    b = watchify(b).on('update', genBundle)
-  } else {
-    b
-      .transform('aliasify', {
-        aliases: {
-          // production build does not freeze the object,
-          // which significantly improves performance
-          'seamless-immutable': 'seamless-immutable/' +
-            'seamless-immutable.production.min'
-        }
-      })
-      .transform('uglifyify', {
-        compress: {
-          drop_console: true,
-          pure_getters: true,
-          unsafe: true
-        },
-        global: true,
-        output: {screw_ie8: true}
-      })
+  // if webpack is watching, it blocks other gulp tasks
+  if (!isDev) {
+    return stream
   }
-
-  fs.mkdirsSync(path.join(destDir, thisLang.dest))
-
-  return genBundle()
 }
 
 function compileLangHandler(thisLang, sourcePath, destDir, options) {

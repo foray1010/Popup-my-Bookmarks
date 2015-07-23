@@ -19,14 +19,11 @@
     "string.prototype.startswith": "*"
   },
   "devDependencies": {
-    "aliasify": "*",
-    "babelify": "*",
-    "browserify": "*",
+    "babel-core": "*",
+    "babel-loader": "*",
     "cson": "*",
     "eslint-plugin-react": "*",
-    "factor-bundle": "2.3.3",
     "fs-extra": "*",
-    "glob": "*",
     "gulp": "*",
     "gulp-eslint": "*",
     "gulp-jade": "*",
@@ -36,9 +33,10 @@
     "gulp-stylus": "*",
     "gulp-util": "*",
     "gulp-zip": "*",
-    "uglifyify": "*",
-    "vinyl-source-stream": "*",
-    "watchify": "*",
+    "node-libs-browser": "*",
+    "vinyl-named": "*",
+    "webpack": "*",
+    "webpack-stream": "*",
     "yargs": "*"
   }
 }
