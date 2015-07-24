@@ -5,8 +5,21 @@ import Menu from './menu'
 import MenuCover from './menu_cover'
 import Panel from './panel'
 
+let currentStateTrees
+
+function afterMount({}, el, setState) {
+  globals.setRootState = setState
+
+  initBookmarkEvent()
+}
+
 function beforeMount() {
   initStyleOptions()
+}
+
+function beforeRender({state}) {
+  // assume this module will always update
+  currentStateTrees = state.trees
 }
 
 function contextMenuHandler(event) {
@@ -19,6 +32,118 @@ function contextMenuHandler(event) {
 
   // disable native context menu
   event.preventDefault()
+}
+
+function initBookmarkEvent() {
+  const createElementInTree = (newTrees, id, itemInfo) => {
+    let hit = false
+
+    newTrees.every((treeInfo) => {
+      if (treeInfo.id === itemInfo.parentId) {
+        hit = true
+
+        treeInfo.children.splice(itemInfo.index, 0, itemInfo)
+
+        return false
+      }
+
+      return true
+    })
+
+    return hit
+  }
+
+  const removeElementFromTree = (newTrees, id, removeInfo) => {
+    let hit = false
+
+    newTrees.forEach((treeInfo, treeIndex) => {
+      if (treeInfo.id === removeInfo.parentId) {
+        hit = true
+
+        treeInfo.children.splice(removeInfo.index, 1)
+      }
+
+      if (treeInfo.id === id) {
+        hit = true
+
+        newTrees.splice(treeIndex, 1)
+      }
+    })
+
+    return hit
+  }
+
+  chrome.bookmarks.onChanged.addListener((id) => {
+    const newTrees = currentStateTrees.asMutable({deep: true})
+
+    chrome.bookmarks.get(id, (results) => {
+      const itemInfo = results[0]
+
+      let hit = false
+
+      newTrees.forEach((treeInfo) => {
+        if (treeInfo.id === itemInfo.parentId) {
+          hit = true
+
+          treeInfo.children[itemInfo.index] = itemInfo
+        }
+
+        if (treeInfo.id === id) {
+          hit = true
+
+          treeInfo.title = itemInfo.title
+        }
+      })
+
+      if (hit) {
+        globals.setRootState({
+          trees: Immutable(newTrees)
+        })
+      }
+    })
+  })
+
+  chrome.bookmarks.onCreated.addListener((id, itemInfo) => {
+    const newTrees = currentStateTrees.asMutable({deep: true})
+
+    const hit = createElementInTree(newTrees, id, itemInfo)
+
+    if (hit) {
+      globals.setRootState({
+        trees: Immutable(newTrees)
+      })
+    }
+  })
+
+  chrome.bookmarks.onMoved.addListener((id) => {
+    const newTrees = currentStateTrees.asMutable({deep: true})
+
+    chrome.bookmarks.get(id, (results) => {
+      const itemInfo = results[0]
+
+      const removeHit = removeElementFromTree(newTrees, id, itemInfo)
+
+      const createHit = createElementInTree(newTrees, id, itemInfo)
+
+      if (removeHit || createHit) {
+        globals.setRootState({
+          trees: Immutable(newTrees)
+        })
+      }
+    })
+  })
+
+  chrome.bookmarks.onRemoved.addListener((id, removeInfo) => {
+    const newTrees = currentStateTrees.asMutable({deep: true})
+
+    const hit = removeElementFromTree(newTrees, id, removeInfo)
+
+    if (hit) {
+      globals.setRootState({
+        trees: Immutable(newTrees)
+      })
+    }
+  })
 }
 
 function initialState(props) {
@@ -86,9 +211,7 @@ function mouseDownHandler(event) {
   }
 }
 
-function render({props, state}, setState) {
-  globals.setRootState = setState
-
+function render({state}) {
   // if menu or editor has target, show menu-cover
   const isHiddenMenuCover = !(state.menuTarget || state.editorTarget)
 
@@ -110,4 +233,4 @@ function render({props, state}, setState) {
   )
 }
 
-export default {beforeMount, initialState, render}
+export default {afterMount, beforeMount, beforeRender, initialState, render}

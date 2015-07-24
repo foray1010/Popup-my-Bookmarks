@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "deku": "0.4.9",
+    "deku": "*",
     "lodash.debounce": "*",
     "lodash.throttle": "*",
     "normalize.css": "*",

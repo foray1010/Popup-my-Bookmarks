@@ -11,12 +11,12 @@ function afterRender(component, el) {
 
 function render({props, state}) {
   const searchResult = props.searchResult
-  const treeItems = []
   const treeIndex = props.treeIndex
+  const treeItems = []
   const trees = props.trees
 
-  const isSearching = !!searchResult
   const isRootBox = treeIndex === 0
+  const isSearching = !!searchResult
   const treeInfo = trees[treeIndex]
 
   // hide the folder if it is not the top two folder
@@ -67,7 +67,7 @@ function render({props, state}) {
       pushTreeItem(treeInfo.children)
     } else {
       const noBookmarkInfo = Immutable({
-        id: ['no-bookmark', treeInfo.id].join('-'),
+        id: `no-bookmark-${treeInfo.id}`,
         index: -1, // as it is not appeared in the childrenInfo
         parentId: treeInfo.id,
         title: chrome.i18n.getMessage('noBkmark')

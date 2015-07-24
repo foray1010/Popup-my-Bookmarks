@@ -4,7 +4,9 @@ import BookmarkTree from './bookmark_tree'
 import Search from './search'
 
 function render({props, state}) {
-  const mainPanelItems = []
+  const mainPanelItems = [
+    <Search key='search' />
+  ]
   const panelClasses = ['panel', 'panel-width']
   const searchResult = props.searchResult
   const subPanelItems = []
@@ -43,7 +45,6 @@ function render({props, state}) {
           {subPanelItems}
         </div>
         <div id='main' class={panelClasses}>
-          <Search key='search' />
           {mainPanelItems}
         </div>
       </div>
