@@ -100,7 +100,7 @@ function compileJS(destDir) {
         ]
       },
       plugins: webpackPlugins,
-      resolve : {
+      resolve: {
         alias: resolveAlias
       },
       stats: {
