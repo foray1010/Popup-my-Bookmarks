@@ -128,13 +128,15 @@ window.globals = {
   },
 
   removeTreeInfoFromIndex(trees, removeFromIndex) {
-    const newTrees = trees.asMutable()
+    if (trees.length > removeFromIndex) {
+      const newTrees = trees.asMutable()
 
-    newTrees.splice(removeFromIndex)
+      newTrees.splice(removeFromIndex)
 
-    globals.setRootState({
-      trees: Immutable(newTrees)
-    })
+      globals.setRootState({
+        trees: Immutable(newTrees)
+      })
+    }
   },
 
   sortByTitle(bookmarkList) {
