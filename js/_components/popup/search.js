@@ -1,4 +1,5 @@
 import debounce from 'lodash.debounce'
+import forEach from 'lodash.foreach'
 import {element} from 'deku'
 
 const debouncedInputHandler = debounce(inputHandler, 200)
@@ -50,28 +51,26 @@ function searchResultFilter(keyword, results) {
   const splittedKeyArr = []
 
   if (isOnlySearchTitle) {
-    keyword.split(' ').forEach((splittedKey) => {
+    forEach(keyword.split(' '), (splittedKey) => {
       if (splittedKey !== '') {
         splittedKeyArr.push(splittedKey.toLowerCase())
       }
     })
   }
 
-  results.every((itemInfo) => {
+  forEach(results, (itemInfo) => {
     const itemTitle = itemInfo.title.toLowerCase()
 
     if (globals.getBookmarkType(itemInfo) === 'bookmark') {
       if (isOnlySearchTitle) {
         let isntTitleMatched = false
 
-        splittedKeyArr.every((splittedKey) => {
+        forEach(splittedKeyArr, (splittedKey) => {
           if (itemTitle.indexOf(splittedKey) < 0) {
             isntTitleMatched = true
 
             return false
           }
-
-          return true
         })
 
         if (isntTitleMatched) {
@@ -85,8 +84,6 @@ function searchResultFilter(keyword, results) {
         return false
       }
     }
-
-    return true
   })
 
   return newResults

@@ -11,6 +11,7 @@
   "dependencies": {
     "deku": "*",
     "lodash.debounce": "*",
+    "lodash.foreach": "*",
     "lodash.throttle": "*",
     "normalize.css": "*",
     "seamless-immutable": "*",

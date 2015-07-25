@@ -1,3 +1,4 @@
+import forEach from 'lodash.foreach'
 import {element} from 'deku'
 
 import BookmarkItem from './bookmark_item'
@@ -38,7 +39,7 @@ function render({props, state}) {
   }
 
   const pushTreeItem = (childrenInfo) => {
-    childrenInfo.forEach((itemInfo) => {
+    forEach(childrenInfo, (itemInfo) => {
       treeItems.push(genBookmarkItem(itemInfo))
     })
   }

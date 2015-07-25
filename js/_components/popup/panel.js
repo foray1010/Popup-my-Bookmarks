@@ -1,3 +1,4 @@
+import forEach from 'lodash.foreach'
 import {element} from 'deku'
 
 import BookmarkTree from './bookmark_tree'
@@ -25,7 +26,7 @@ function render({props, state}) {
   if (searchResult) {
     mainPanelItems.push(genBookmarkTree('search-result', null))
   } else {
-    trees.forEach((treeInfo, treeIndex) => {
+    forEach(trees, (treeInfo, treeIndex) => {
       const targetPanelItems = treeIndex % 2 === 0 ?
         mainPanelItems : subPanelItems
 
