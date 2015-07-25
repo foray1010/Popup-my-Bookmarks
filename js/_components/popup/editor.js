@@ -13,11 +13,11 @@ function afterRender({props}, el) {
   }
 }
 
-function clickCancelHandler(event, {props, state}) {
+function clickCancelHandler() {
   closeEditor()
 }
 
-function clickConfirmHandler(event, {props, state}) {
+function clickConfirmHandler(event, {props}) {
   const editorInput = document.getElementById('editor')
     .getElementsByTagName('input')
   const editorTarget = props.editorTarget
@@ -44,7 +44,7 @@ function closeEditor() {
   })
 }
 
-function render({props, state}) {
+function render({props}) {
   const editorTarget = props.editorTarget
   const msgCancel = chrome.i18n.getMessage('cancel')
   const msgConfirm = chrome.i18n.getMessage('confirm')

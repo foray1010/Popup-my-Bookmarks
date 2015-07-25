@@ -4,7 +4,7 @@ function closeHandler(event, {props}) {
   globals.removeTreeInfoFromIndex(props.trees, props.treeIndex)
 }
 
-function render({props, state}) {
+function render({props}) {
   const treeIndex = props.treeIndex
   const trees = props.trees
 

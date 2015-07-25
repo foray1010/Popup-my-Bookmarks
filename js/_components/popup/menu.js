@@ -1,5 +1,5 @@
-import forEach from 'lodash.foreach'
 import {element} from 'deku'
+import forEach from 'lodash.foreach'
 
 function addCurrentPage(menuTarget) {
   chrome.tabs.query({
@@ -143,7 +143,7 @@ function removeBookmarkItem(menuTarget) {
   }
 }
 
-function render({props, state}) {
+function render({props}) {
   const menuTarget = props.menuTarget
 
   const isHidden = !menuTarget

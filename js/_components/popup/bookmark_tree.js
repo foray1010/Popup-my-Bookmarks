@@ -1,5 +1,5 @@
-import forEach from 'lodash.foreach'
 import {element} from 'deku'
+import forEach from 'lodash.foreach'
 
 import BookmarkItem from './bookmark_item'
 import FolderCover from './folder_cover'
@@ -10,7 +10,7 @@ function afterRender(component, el) {
   setHeight(el)
 }
 
-function render({props, state}) {
+function render({props}) {
   const searchResult = props.searchResult
   const treeIndex = props.treeIndex
   const treeItems = []
@@ -94,7 +94,7 @@ function render({props, state}) {
   )
 }
 
-function scrollHandler(event, {props, state}) {
+function scrollHandler(event, {props}) {
 }
 
 function setHeight(el) {
@@ -110,7 +110,7 @@ function setHeight(el) {
   bookmarkList.style.maxHeight = listHeight + 'px'
 }
 
-function wheelHandler(event, {props, state}) {
+function wheelHandler(event) {
   event.preventDefault()
 
   const _this = event.delegateTarget
