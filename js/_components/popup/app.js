@@ -1,3 +1,4 @@
+import forEach from 'lodash.foreach'
 import {element} from 'deku'
 
 import Editor from './editor'
@@ -38,7 +39,7 @@ function initBookmarkEvent() {
   const createElementInTree = (newTrees, id, itemInfo) => {
     let hit = false
 
-    newTrees.every((treeInfo) => {
+    forEach(newTrees, (treeInfo) => {
       if (treeInfo.id === itemInfo.parentId) {
         hit = true
 
@@ -46,8 +47,6 @@ function initBookmarkEvent() {
 
         return false
       }
-
-      return true
     })
 
     return hit
@@ -56,7 +55,7 @@ function initBookmarkEvent() {
   const removeElementFromTree = (newTrees, id, removeInfo) => {
     let hit = false
 
-    newTrees.forEach((treeInfo, treeIndex) => {
+    forEach(newTrees, (treeInfo, treeIndex) => {
       if (treeInfo.id === removeInfo.parentId) {
         hit = true
 
@@ -81,7 +80,7 @@ function initBookmarkEvent() {
 
       let hit = false
 
-      newTrees.forEach((treeInfo) => {
+      forEach(newTrees, (treeInfo) => {
         if (treeInfo.id === itemInfo.parentId) {
           hit = true
 

@@ -1,3 +1,4 @@
+import forEach from 'lodash.foreach'
 import {element, render, tree} from 'deku'
 
 import './_components/common'
@@ -72,7 +73,7 @@ window.globals = {
         chrome.bookmarks.getSubTree(itemInfo.id, (results) => {
           const childrenInfo = results[0].children
 
-          childrenInfo.forEach((thisItemInfo) => {
+          forEach(childrenInfo, (thisItemInfo) => {
             if (globals.getBookmarkType(thisItemInfo) === 'bookmark') {
               urlList.push(thisItemInfo.url)
             }
@@ -102,7 +103,7 @@ window.globals = {
     })
       .then(() => {
         if (menuItemNum === 0) {
-          urlList.forEach((url) => {
+          forEach(urlList, (url) => {
             chrome.tabs.create({
               url: url,
               active: false

@@ -1,3 +1,4 @@
+import forEach from 'lodash.foreach'
 import {element} from 'deku'
 
 function addCurrentPage(menuTarget) {
@@ -234,7 +235,7 @@ function sortByName(parentId) {
      * Each main group contains 3 small groups
      * (Separators, Folders, Bookmarks)
      */
-    childrenInfo.forEach((itemInfo) => {
+    forEach(childrenInfo, (itemInfo) => {
       let classifiedItemsIndex
 
       switch (globals.getBookmarkType(itemInfo)) {
@@ -256,8 +257,8 @@ function sortByName(parentId) {
     })
 
     // Concatenate all lists into single list
-    classifiedItemsList.forEach((thisChildrenInfo) => {
-      thisChildrenInfo.forEach((classifiedItems) => {
+    forEach(classifiedItemsList, (thisChildrenInfo) => {
+      forEach(thisChildrenInfo, (classifiedItems) => {
         newChildrenInfo = newChildrenInfo.concat(
           globals.sortByTitle(classifiedItems)
         )
@@ -265,7 +266,7 @@ function sortByName(parentId) {
     })
 
     // Sort bookmarks by Selection sort
-    newChildrenInfo.forEach((itemInfo, index) => {
+    forEach(newChildrenInfo, (itemInfo, index) => {
       const oldIndex = childrenInfo.indexOf(itemInfo)
 
       if (oldIndex !== index) {
