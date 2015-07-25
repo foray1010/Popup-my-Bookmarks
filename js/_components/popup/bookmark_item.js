@@ -36,7 +36,7 @@ function afterMount({props}, el) {
   }
 }
 
-function clickHandler(event, {props, state}) {
+function clickHandler(event, {props}) {
   const itemInfo = props.itemInfo
 
   const bookmarkType = globals.getBookmarkType(itemInfo)
@@ -65,7 +65,7 @@ function clickHandler(event, {props, state}) {
   }
 }
 
-function contextMenuHandler(event, {props, state}, updateState) {
+function contextMenuHandler(event, {props}) {
   // disable native context menu
   event.preventDefault()
 
@@ -77,15 +77,15 @@ function contextMenuHandler(event, {props, state}, updateState) {
   })
 }
 
-function dragEndHandler(event, {props, state}) {
+function dragEndHandler(event, {props}) {
 
 }
 
-function dragOverHandler(event, {props, state}) {
+function dragOverHandler(event, {props}) {
 
 }
 
-function dragStartHandler(event, {props, state}) {
+function dragStartHandler(event, {props}) {
 
 }
 
@@ -164,7 +164,7 @@ function openFolder(props) {
     })
 }
 
-function render({props, state}) {
+function render({props}) {
   const isSearching = !!props.searchResult
   const itemClasses = [
     'item',

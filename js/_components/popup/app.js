@@ -1,5 +1,5 @@
-import forEach from 'lodash.foreach'
 import {element} from 'deku'
+import forEach from 'lodash.foreach'
 
 import Editor from './editor'
 import Menu from './menu'

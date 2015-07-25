@@ -1,6 +1,6 @@
 import {element} from 'deku'
 
-function render({props, state}) {
+function render() {
   return (
     <div class='no-result no-text-overflow'>
       {chrome.i18n.getMessage('noResult')}

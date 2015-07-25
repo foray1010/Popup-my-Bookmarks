@@ -1,6 +1,6 @@
 import {element} from 'deku'
 
-function render({props, state}, setState) {
+function render({props}) {
   return (
     <div id='nav-bar'>
     </div>

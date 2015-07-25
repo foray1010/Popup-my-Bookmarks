@@ -1,13 +1,13 @@
 import {element} from 'deku'
 
-function clickHandler(event, {props, state}) {
+function clickHandler() {
   globals.setRootState({
     editorTarget: null,
     menuTarget: null
   })
 }
 
-function render({props, state}) {
+function render({props}) {
   return (
     <div
       id='menu-cover'

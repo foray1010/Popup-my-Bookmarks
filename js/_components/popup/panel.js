@@ -1,10 +1,10 @@
-import forEach from 'lodash.foreach'
 import {element} from 'deku'
+import forEach from 'lodash.foreach'
 
 import BookmarkTree from './bookmark_tree'
 import Search from './search'
 
-function render({props, state}) {
+function render({props}) {
   const mainPanelItems = [
     <Search key='search' />
   ]

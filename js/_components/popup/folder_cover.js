@@ -1,10 +1,10 @@
 import {element} from 'deku'
 
-function render({props, state}) {
+function render({props}) {
   const delay = 300
   const xyRange = 20
 
-  const mouseLeaveHandler = (event) => {
+  const mouseLeaveHandler = () => {
     clearTimeout(triggerOnClickTimer)
     triggerOnClickTimer = null
   }

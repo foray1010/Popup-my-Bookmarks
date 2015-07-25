@@ -1,10 +1,10 @@
 import debounce from 'lodash.debounce'
-import forEach from 'lodash.foreach'
 import {element} from 'deku'
+import forEach from 'lodash.foreach'
 
 const debouncedInputHandler = debounce(inputHandler, 200)
 
-function inputHandler(event, {props, state}) {
+function inputHandler(event) {
   const searchInput = event.target
 
   const keyword = searchInput.value
@@ -26,7 +26,7 @@ function inputHandler(event, {props, state}) {
   }
 }
 
-function render({props, state}) {
+function render() {
   return (
     <div id='search-box'>
       <img
