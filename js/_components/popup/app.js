@@ -1,5 +1,5 @@
+import debounce from 'lodash.debounce'
 import {element} from 'deku'
-import forEach from 'lodash.foreach'
 
 import Editor from './editor'
 import Menu from './menu'
@@ -36,113 +36,41 @@ function contextMenuHandler(event) {
 }
 
 function initBookmarkEvent() {
-  const createElementInTree = (newTrees, id, itemInfo) => {
+  const renewTrees = debounce((oldTrees) => {
+    const treesIdList = oldTrees.asMutable()
+      .map((treeInfo) => treeInfo.id)
+
+    Promise.all(treesIdList.map((treeId) => {
+      return globals.getFlatTree(treeId)
+    }))
+      .then((newTrees) => {
+        globals.setRootState({
+          // to make sure the menu is not activated when bookmark is updating
+          editorTarget: null,
+          menuTarget: null,
+
+          trees: Immutable(newTrees)
+        })
+      })
+  }, 100)
+
+  const renewSplicedTreesById = (id) => {
     let hit = false
 
-    forEach(newTrees, (treeInfo) => {
-      if (treeInfo.id === itemInfo.parentId) {
-        hit = true
-
-        treeInfo.children.splice(itemInfo.index, 0, itemInfo)
-
-        return false
-      }
-    })
-
-    return hit
-  }
-
-  const removeElementFromTree = (newTrees, id, removeInfo) => {
-    let hit = false
-
-    forEach(newTrees, (treeInfo, treeIndex) => {
-      if (treeInfo.id === removeInfo.parentId) {
-        hit = true
-
-        treeInfo.children.splice(removeInfo.index, 1)
-      }
-
+    renewTrees(currentStateTrees.filter((treeInfo) => {
       if (treeInfo.id === id) {
         hit = true
-
-        newTrees.splice(treeIndex, 1)
       }
-    })
 
-    return hit
+      // remove all the following treeInfo after hit
+      return !hit
+    }))
   }
 
-  chrome.bookmarks.onChanged.addListener((id) => {
-    const newTrees = currentStateTrees.asMutable({deep: true})
-
-    chrome.bookmarks.get(id, (results) => {
-      const itemInfo = results[0]
-
-      let hit = false
-
-      forEach(newTrees, (treeInfo) => {
-        if (treeInfo.id === itemInfo.parentId) {
-          hit = true
-
-          treeInfo.children[itemInfo.index] = itemInfo
-        }
-
-        if (treeInfo.id === id) {
-          hit = true
-
-          treeInfo.title = itemInfo.title
-        }
-      })
-
-      if (hit) {
-        globals.setRootState({
-          trees: Immutable(newTrees)
-        })
-      }
-    })
-  })
-
-  chrome.bookmarks.onCreated.addListener((id, itemInfo) => {
-    const newTrees = currentStateTrees.asMutable({deep: true})
-
-    const hit = createElementInTree(newTrees, id, itemInfo)
-
-    if (hit) {
-      globals.setRootState({
-        trees: Immutable(newTrees)
-      })
-    }
-  })
-
-  chrome.bookmarks.onMoved.addListener((id) => {
-    const newTrees = currentStateTrees.asMutable({deep: true})
-
-    chrome.bookmarks.get(id, (results) => {
-      const itemInfo = results[0]
-
-      const removeHit = removeElementFromTree(newTrees, id, itemInfo)
-
-      const createHit = createElementInTree(newTrees, id, itemInfo)
-
-      if (removeHit || createHit) {
-        globals.setRootState({
-          trees: Immutable(newTrees)
-        })
-      }
-    })
-  })
-
-  chrome.bookmarks.onRemoved.addListener((id, removeInfo) => {
-    const newTrees = currentStateTrees.asMutable({deep: true})
-
-    const hit = removeElementFromTree(newTrees, id, removeInfo)
-
-    if (hit) {
-      globals.setRootState({
-        trees: Immutable(newTrees)
-      })
-    }
-  })
+  chrome.bookmarks.onChanged.addListener(() => renewTrees(currentStateTrees))
+  chrome.bookmarks.onCreated.addListener(() => renewTrees(currentStateTrees))
+  chrome.bookmarks.onMoved.addListener(renewSplicedTreesById)
+  chrome.bookmarks.onRemoved.addListener(renewSplicedTreesById)
 }
 
 function initialState(props) {
