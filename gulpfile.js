@@ -250,11 +250,11 @@ gulp.task('compile-others', ['compile-init'], function() {
 })
 
 gulp.task('compile-zip', [
-            'compile-css',
-            'compile-html',
-            'compile-js',
-            'compile-others'
-          ], function() {
+  'compile-css',
+  'compile-html',
+  'compile-js',
+  'compile-others'
+], function() {
   return gulp.src(path.join(compilePath, '**'))
     .pipe(plugins.zip(argv.version + '.zip'))
     .pipe(gulp.dest('.'))
@@ -287,10 +287,10 @@ gulp.task('dev-js', ['dev-init'], function() {
 })
 
 gulp.task('dev', [
-            'dev-css',
-            'dev-html',
-            'dev-js'
-          ], function() {
+  'dev-css',
+  'dev-html',
+  'dev-js'
+], function() {
   const fileList = ['font', '_locales']
 
   fileList.forEach(function(fileName) {

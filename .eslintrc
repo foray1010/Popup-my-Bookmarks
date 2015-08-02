@@ -72,7 +72,6 @@ rules:
   no-invalid-regexp: 2
   no-irregular-whitespace: 2
   no-obj-calls: 2
-  no-reserved-keys: 2
   no-sparse-arrays: 2
   no-unreachable: 2
   use-isnan: 2
@@ -133,7 +132,7 @@ rules:
     - 2
     - 2
     -
-      indentSwitchCase: true
+      SwitchCase: 1
   brace-style:
     - 2
     - "1tbs"
@@ -188,6 +187,9 @@ rules:
   padded-blocks:
     - 2
     - "never"
+  quote-props:
+    - 2
+    - "as-needed"
   semi:
     - 2
     - "never"
