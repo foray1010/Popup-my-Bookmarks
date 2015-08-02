@@ -36,6 +36,11 @@ function afterMount({props}, el) {
   }
 }
 
+function beforeUpdate() {
+  // prevent using outdated props.trees
+  debouncedMouseHandler.cancel()
+}
+
 function clickHandler(event, {props}) {
   const itemInfo = props.itemInfo
 
@@ -261,4 +266,4 @@ function setTooltip(el, props) {
   }
 }
 
-export default {afterMount, render}
+export default {afterMount, beforeUpdate, render}
