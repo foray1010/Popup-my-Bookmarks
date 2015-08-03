@@ -40,19 +40,6 @@ const lang = {
 }
 
 // language handlers
-function compileLang(langName, destDir, options) {
-  const thisLang = lang[langName]
-
-  fs.mkdirsSync(path.join(destDir, thisLang.dest))
-
-  return compileLangHandler(
-    thisLang,
-    getSourcePath(thisLang),
-    destDir,
-    options
-  )
-}
-
 function compileJS(destDir) {
   const isDev = destDir === devPath
   const resolveAlias = {}
@@ -115,6 +102,19 @@ function compileJS(destDir) {
   if (!isDev) {
     return stream
   }
+}
+
+function compileLang(langName, destDir, options) {
+  const thisLang = lang[langName]
+
+  fs.mkdirsSync(path.join(destDir, thisLang.dest))
+
+  return compileLangHandler(
+    thisLang,
+    getSourcePath(thisLang),
+    destDir,
+    options
+  )
 }
 
 function compileLangHandler(thisLang, sourcePath, destDir, options) {
