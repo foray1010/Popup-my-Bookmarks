@@ -1,9 +1,8 @@
 import {element, render, tree} from 'deku'
 
 import './_components/common'
+import './_components/options/globals'
 import App from './_components/options/app'
-
-window.globals = {}
 
 new Promise((resolve) => {
   chrome.storage.sync.get(null, (storage) => {
