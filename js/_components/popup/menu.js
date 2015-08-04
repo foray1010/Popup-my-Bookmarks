@@ -1,4 +1,4 @@
-import {element} from 'deku'
+import element from 'virtual-element'
 import forEach from 'lodash.foreach'
 
 function addCurrentPage(menuTarget) {

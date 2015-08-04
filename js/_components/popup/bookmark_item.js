@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce'
-import {element} from 'deku'
+import element from 'virtual-element'
 
 const debouncedMouseHandler = debounce((event, {props}) => {
   if (event.target !== event.delegateTarget) {
@@ -211,7 +211,7 @@ function render({props}) {
   return (
     <p
       id={itemInfo.id}
-      class={itemClasses}
+      class={itemClasses.join(' ')}
       draggable={isDraggable}
       onClick={clickHandler}
       onContextMenu={contextMenuHandler}

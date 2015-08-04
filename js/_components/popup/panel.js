@@ -1,4 +1,4 @@
-import {element} from 'deku'
+import element from 'virtual-element'
 import forEach from 'lodash.foreach'
 
 import BookmarkTree from './bookmark_tree'
@@ -42,10 +42,10 @@ function render({props}) {
   return (
     <div id='panel-box'>
       <div class='panel-row'>
-        <div id='sub' class={subPanelClass}>
+        <div id='sub' class={subPanelClass.join(' ')}>
           {subPanelItems}
         </div>
-        <div id='main' class={panelClasses}>
+        <div id='main' class={panelClasses.join(' ')}>
           {mainPanelItems}
         </div>
       </div>

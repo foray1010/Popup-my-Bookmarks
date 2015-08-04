@@ -1,4 +1,5 @@
-import {element, render, tree} from 'deku'
+import element from 'virtual-element'
+import {render, tree} from 'deku'
 
 import './_components/common'
 import './_components/popup/globals'

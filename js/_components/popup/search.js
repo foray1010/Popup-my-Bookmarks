@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce'
-import {element} from 'deku'
+import element from 'virtual-element'
 import forEach from 'lodash.foreach'
 
 const debouncedInputHandler = debounce(inputHandler, 200)

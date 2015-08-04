@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce'
-import {element} from 'deku'
+import element from 'virtual-element'
 
 import Editor from './editor'
 import Menu from './menu'
