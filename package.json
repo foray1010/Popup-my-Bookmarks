@@ -17,7 +17,8 @@
     "seamless-immutable": "*",
     "string.prototype.includes": "*",
     "string.prototype.repeat": "*",
-    "string.prototype.startswith": "*"
+    "string.prototype.startswith": "*",
+    "virtual-element": "*"
   },
   "devDependencies": {
     "babel-core": "*",

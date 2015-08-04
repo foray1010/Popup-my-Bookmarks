@@ -1,4 +1,4 @@
-import {element} from 'deku'
+import element from 'virtual-element'
 
 function render() {
   return (

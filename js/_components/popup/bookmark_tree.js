@@ -1,4 +1,4 @@
-import {element} from 'deku'
+import element from 'virtual-element'
 import forEach from 'lodash.foreach'
 
 import BookmarkItem from './bookmark_item'
@@ -44,7 +44,7 @@ function render({props}) {
     })
   }
 
-  let treeHead
+  let treeHead = ''
   if (!isSearching && !isRootBox) {
     treeHead = (
       <TreeHead
