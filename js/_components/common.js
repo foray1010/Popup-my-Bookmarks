@@ -1,7 +1,10 @@
-import Immutable from 'seamless-immutable'
 import 'string.prototype.includes'
 import 'string.prototype.repeat'
 import 'string.prototype.startswith'
+import ChromePromise from 'chrome-promise'
+import Immutable from 'seamless-immutable'
+
+window.chromep = new ChromePromise()
 
 // set or unset CSS
 window.CSS = (() => {

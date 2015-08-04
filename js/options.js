@@ -5,14 +5,10 @@ import './_components/common'
 import './_components/options/globals'
 import App from './_components/options/app'
 
-new Promise((resolve) => {
-  chrome.storage.sync.get(null, (storage) => {
-    resolve(Immutable(storage))
-  })
-})
+chromep.storage.sync.get(null)
   .then((storage) => {
     const app = tree(
-      <App storage={storage} />
+      <App storage={Immutable(storage)} />
     )
 
     render(app, document.getElementById('container'))

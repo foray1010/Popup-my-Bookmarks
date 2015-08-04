@@ -5,8 +5,8 @@ import './_components/common'
 import './_components/popup/globals'
 import App from './_components/popup/app'
 
-new Promise((resolve) => {
-  chrome.storage.sync.get(null, (storage) => {
+chromep.storage.sync.get(null)
+  .then((storage) => {
     globals.storage = Immutable(storage)
 
     // +2 for border width, goldenGap*2 for padding
@@ -16,11 +16,8 @@ new Promise((resolve) => {
     // if first run
     if (globals.storage.hideRootFolder === undefined) {
       globals.openOptionsPage()
-    } else {
-      resolve()
     }
   })
-})
   .then(() => {
     return globals.getFlatTree('0')
       .then((treeInfo) => {
