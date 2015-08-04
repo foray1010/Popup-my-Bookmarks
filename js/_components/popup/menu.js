@@ -211,7 +211,7 @@ function setMenuPos(el, mousePos) {
 }
 
 function sortByName(parentId) {
-  chrome.bookmarks.getChildren(parentId, (childrenInfo) => {
+  return chromep.bookmarks.getChildren(parentId).then((childrenInfo) => {
     const classifiedItemsList = []
 
     const genClassifiedItems = () => {

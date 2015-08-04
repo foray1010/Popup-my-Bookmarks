@@ -46,17 +46,19 @@ window.globals = {
   },
 
   getFlatTree(id) {
-    return new Promise((resolve) => {
-      chrome.bookmarks.get(id, (results) => {
-        chrome.bookmarks.getChildren(id, (childrenInfo) => {
-          const treeInfo = results[0]
+    let treeInfo
 
-          treeInfo.children = childrenInfo
+    return chromep.bookmarks.get(id)
+      .then((results) => {
+        treeInfo = results[0]
 
-          resolve(treeInfo)
-        })
+        return chromep.bookmarks.getChildren(id)
       })
-    })
+      .then((childrenInfo) => {
+        treeInfo.children = childrenInfo
+
+        return treeInfo
+      })
   },
 
   openMultipleBookmarks(itemInfo, menuItemNum) {
@@ -64,7 +66,7 @@ window.globals = {
 
     return new Promise((resolve, reject) => {
       if (globals.isFolder(itemInfo)) {
-        chrome.bookmarks.getSubTree(itemInfo.id, (results) => {
+        chromep.bookmarks.getSubTree(itemInfo.id).then((results) => {
           const childrenInfo = results[0].children
 
           forEach(childrenInfo, (thisItemInfo) => {
@@ -86,7 +88,7 @@ window.globals = {
           }
         })
       } else {
-        chrome.bookmarks.get(itemInfo.id, (results) => {
+        chromep.bookmarks.get(itemInfo.id).then((results) => {
           const thisItemInfo = results[0]
 
           urlList.push(thisItemInfo.url)

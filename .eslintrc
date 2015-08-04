@@ -3,12 +3,6 @@ plugins:
 env:
   browser: true
   node: true
-globals:
-  chrome: false
-  CSS: false
-  globals: false
-  Immutable: false
-  JSONStorage: false
 ecmaFeatures:
   arrowFunctions: true
   blockBindings: true

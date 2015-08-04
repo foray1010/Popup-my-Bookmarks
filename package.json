@@ -9,6 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "chrome-promise": "*",
     "deku": "*",
     "lodash.debounce": "*",
     "lodash.foreach": "*",

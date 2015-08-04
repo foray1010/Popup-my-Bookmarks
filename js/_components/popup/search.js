@@ -14,7 +14,7 @@ function inputHandler(event) {
       searchResult: null
     })
   } else {
-    chrome.bookmarks.search(keyword, (result) => {
+    chromep.bookmarks.search(keyword).then((result) => {
       const searchResult = globals.sortByTitle(
         searchResultFilter(keyword, result)
       )
