@@ -38,7 +38,7 @@ window.globals = {
       return 'folder'
     }
 
-    if (itemInfo.url === globals.separateThisUrl) {
+    if (itemInfo.url.startsWith(globals.separateThisUrl)) {
       return 'separator'
     }
 

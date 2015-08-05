@@ -4,6 +4,7 @@ Features:
 
 Changes:
   - Increase minimum Chrome version from 26 to 32
+  - Support all kind of separators in separatethis.com
 
 Bugfixes:
   - Cannot display the whole popup in OSX
