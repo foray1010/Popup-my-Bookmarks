@@ -22,16 +22,18 @@ const navBarItems = Immutable([
   }
 ])
 
+function afterMount({}, el, setState) {
+  globals.setRootState = setState
+}
+
 function initialState(props) {
   return {
     currentModule: navBarItems[0].module,
-    storage: props.storage
+    storage: Immutable(props.initialStorage)
   }
 }
 
-function render({props, state}, setState) {
-  globals.setRootState = setState
-
+function render({state}, setState) {
   return (
     <div id='app'>
       <NavBar navBarItems={navBarItems} />
@@ -40,4 +42,4 @@ function render({props, state}, setState) {
   )
 }
 
-export default {initialState, render}
+export default {afterMount, initialState, render}

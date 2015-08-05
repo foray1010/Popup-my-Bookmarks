@@ -8,7 +8,7 @@ import App from './_components/options/app'
 chromep.storage.sync.get(null)
   .then((storage) => {
     const app = tree(
-      <App storage={Immutable(storage)} />
+      <App initialStorage={storage} />
     )
 
     render(app, document.getElementById('container'))
