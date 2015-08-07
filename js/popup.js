@@ -22,7 +22,7 @@ chromep.storage.sync.get(null)
     return globals.getFlatTree('0')
       .then((treeInfo) => {
         treeInfo.children = treeInfo.children.filter((itemInfo) => {
-          const itemIdNum = 1 * itemInfo.id
+          const itemIdNum = parseInt(itemInfo.id, 10)
 
           const isFilterThisItem = (
             itemIdNum === globals.storage.defExpand ||
@@ -36,7 +36,7 @@ chromep.storage.sync.get(null)
       })
   })
   .then(() => {
-    globals.getFlatTree('' + globals.storage.defExpand)
+    globals.getFlatTree(String(globals.storage.defExpand))
       .then((defExpandTree) => {
         const app = tree(
           <App defExpandTree={defExpandTree} />

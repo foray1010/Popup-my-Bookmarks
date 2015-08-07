@@ -33,7 +33,7 @@ function initialState(props) {
   }
 }
 
-function render({state}, setState) {
+function render({state}) {
   return (
     <div id='app'>
       <NavBar navBarItems={navBarItems} />
