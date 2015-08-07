@@ -77,19 +77,14 @@ function render({props}) {
 }
 
 function setEditorPos(el, editorTargetEl) {
-  const body = document.body
-  const editorHeight = el.offsetHeight
-  const editorWidth = el.offsetWidth
-  const targetOffsetTop = editorTargetEl.getBoundingClientRect().top
+  const editorTargetOffset = editorTargetEl.getBoundingClientRect()
 
-  const bodyHeight = body.scrollHeight
-  const bodyWidth = body.offsetWidth
-
-  const bottomPos = bodyHeight - editorHeight - targetOffsetTop
-  const rightPos = bodyWidth - editorWidth
+  const bottomPos = (
+    document.body.scrollHeight - el.offsetHeight - editorTargetOffset.top
+  )
 
   el.style.bottom = Math.max(bottomPos, 0) + 'px'
-  el.style.right = Math.max(rightPos, 0) + 'px'
+  el.style.left = editorTargetOffset.left + 'px'
 }
 
 export default {afterRender, render}
