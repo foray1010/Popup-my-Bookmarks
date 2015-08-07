@@ -76,7 +76,7 @@ window.globals = {
           })
 
           const msgAskOpenAll = chrome.i18n.getMessage(
-            'askOpenAll', '' + urlList.length
+            'askOpenAll', String(urlList.length)
           )
 
           if (globals.storage.warnOpenMany &&
