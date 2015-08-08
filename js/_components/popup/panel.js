@@ -41,13 +41,11 @@ function render({props}) {
 
   return (
     <div id='panel-box'>
-      <div class='panel-row'>
-        <div id='sub' class={subPanelClass.join(' ')}>
-          {subPanelItems}
-        </div>
-        <div id='main' class={panelClasses.join(' ')}>
-          {mainPanelItems}
-        </div>
+      <div id='main' class={panelClasses.join(' ')}>
+        {mainPanelItems}
+      </div>
+      <div id='sub' class={subPanelClass.join(' ')}>
+        {subPanelItems}
       </div>
     </div>
   )

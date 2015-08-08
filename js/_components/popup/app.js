@@ -96,38 +96,32 @@ function initStyleOptions() {
       return x
     })
     .join(',')
+  const fontSize = globals.storage.fontSize
 
-  const fontSizePx = globals.storage.fontSize + 'px'
+  const itemHeight = globals.goldenGap * 2 + fontSize
 
-  // -2 for border width
-  const separatorHeightPx = (globals.itemHeight / 2) - 2 + 'px'
+  // +1 for border width, globals.goldenGap for padding
+  globals.itemOffsetHeight = (1 + globals.goldenGap) * 2 + itemHeight
 
-  // set panel (#main, #sub) width
-  CSS.set('.panel-width', {
-    width: globals.storage.setWidth + 'px'
-  })
-
-  // set font style
-  CSS.set('body', {
-    font: fontSizePx + ' ' + fontFamily
-  })
-
-  if (globals.storage.fontSize > 16) {
-    CSS.set({
-      '.bookmark-item': {
-        height: fontSizePx,
-        'line-height': fontSizePx
-      },
-      '.icon': {
-        width: fontSizePx
-      }
-    })
-  }
-
-  // set separator height depend on item height
-  CSS.set('.separator', {
-    height: separatorHeightPx,
-    'line-height': separatorHeightPx
+  CSS.set({
+    body: {
+      font: `${fontSize}px ${fontFamily}`
+    },
+    '.bookmark-item': {
+      height: itemHeight + 'px'
+    },
+    '.icon': {
+      // set the width same as item height, as it is a square
+      width: itemHeight + 'px'
+    },
+    '.panel-width': {
+      // set panel (#main, #sub) width
+      width: globals.storage.setWidth + 'px'
+    },
+    '.separator': {
+      // set separator height depend on item height
+      height: (globals.itemOffsetHeight / 2) + 'px'
+    }
   })
 }
 

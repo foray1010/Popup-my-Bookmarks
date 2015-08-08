@@ -22,8 +22,8 @@ input[type="text"]
     border-color: $main-color1
 
 .bookmark-item
-  height: 16px
-  line-height: 16px
+  align-items: center
+  display: flex
   padding: $golden-gap 0 $golden-gap $golden-gap
 
   &:hover
@@ -58,16 +58,12 @@ input[type="text"]
   color: $highlight-level4 !important
 
 .icon
-  float: left
-  height: 100%
   margin-right: $golden-gap-2x
-  width: 16px
 
 .item
   border: 1px solid transparent
   color: $main-font-color
   cursor: default
-  margin: 0
 
 .menu-item
   padding: $golden-gap 8px
@@ -91,17 +87,7 @@ input[type="text"]
 
 .panel
   background: inherit
-  display: table-cell
   position: relative
-
-  &::before
-    content: ""
-    display: block
-    width: inherit
-
-.panel-row
-  background: inherit
-  display: table-row
 
 .root-folder
   color: inherit !important
@@ -110,21 +96,23 @@ input[type="text"]
   highlight-item()
 
 .separator
+  box-sizing: border-box
   color: $highlight-level4
-  padding-bottom: 0
-  padding-top: 0
-  text-overflow: clip
 
   & > .icon
     display: none
 
+  & > .no-text-overflow
+    text-overflow: clip
+
 .tree-head-box
   background: currentcolor
+  display: flex
   height: $tree-head-box-height
   margin-bottom: $golden-gap
 
 .tree-head-close
-  float: right
+  flex-shrink: 0 // don't push me out of view when title is too long
   height: $tree-head-box-height
   position: relative
   width: $tree-head-box-height
@@ -152,14 +140,12 @@ input[type="text"]
     width: 12px
 
 .tree-head-title
-  box-sizing: border-box
   color: $blank-color
   cursor: default
-  float: left
   font: 22px ArchivoNarrow, simhei
   line-height: $tree-head-box-height + 1px
+  margin-right: auto
   padding: 0 $golden-gap-2x
-  width: "calc(100% - %s)" % $tree-head-box-height
 
 #app
   background: inherit
@@ -206,32 +192,29 @@ input[type="text"]
 
 #panel-box
   background: inherit
-  border-collapse: collapse
-  display: table
-  table-layout: fixed
+  display: flex
+  flex-direction: row-reverse
 
 #search-box
   border: solid $highlight-level3
-  border-width: 0 0 1px 1px
+  border-width: 0 0 1px 0
+  display: flex
   height: $search-box-height
   margin-bottom: $golden-gap
 
 #search-img
-  float: left
   padding: 5px 4px 4px 5px
 
 #search-input
   background: transparent
   border: 0
   color: $main-font-color
-  float: right
   font-size: 12px
-  height: 100%
-  width: "calc(100% - %s)" % $search-box-height
+  width: 100%
 
 #sub
-  border-right: $golden-gap transparent solid
   color: $main-color1
+  margin-right: $golden-gap
 
 ::-webkit-scrollbar
   background: transparent

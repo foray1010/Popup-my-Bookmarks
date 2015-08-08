@@ -116,7 +116,7 @@ function wheelHandler(event) {
   const _this = event.delegateTarget
 
   // control scrolling speed
-  _this.scrollTop -= globals.itemHeight * event.wheelDelta / 120 >> 0
+  _this.scrollTop -= globals.itemOffsetHeight * event.wheelDelta / 120 >> 0
 }
 
 export default {afterRender, render}

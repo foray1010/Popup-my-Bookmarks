@@ -172,11 +172,11 @@ function render({props}) {
       const isMenuAreaHidden = childrenHiddenStatus[menuAreaIndex]
       const menuAreaItems = menuAreaKeys.map((menuItemKey) => {
         return (
-          <p
+          <div
             class='item menu-item'
             onClick={menuClickEvent}>
             {chrome.i18n.getMessage(menuItemKey)}
-          </p>
+          </div>
         )
       })
 
