@@ -2,10 +2,6 @@ import debounce from 'lodash.debounce'
 import element from 'virtual-element'
 
 const debouncedMouseHandler = debounce((event, {props}) => {
-  if (event.target !== event.delegateTarget) {
-    return
-  }
-
   const isSearching = !!props.searchResult
   const itemInfo = props.itemInfo
 
@@ -173,8 +169,7 @@ function render({props}) {
   const isSearching = !!props.searchResult
   const itemClasses = [
     'item',
-    'bookmark-item',
-    'no-text-overflow'
+    'bookmark-item'
   ]
   const itemInfo = props.itemInfo
 
@@ -209,7 +204,7 @@ function render({props}) {
   }
 
   return (
-    <p
+    <div
       id={itemInfo.id}
       class={itemClasses.join(' ')}
       draggable={isDraggable}
@@ -221,8 +216,8 @@ function render({props}) {
       onMouseEnter={debouncedMouseHandler}
       onMouseLeave={debouncedMouseHandler}>
       <img class='icon' src={iconSrc} alt='' draggable='false' />
-      {itemTitle}
-    </p>
+      <div class='no-text-overflow'>{itemTitle}</div>
+    </div>
   )
 }
 
