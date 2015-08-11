@@ -45,9 +45,9 @@ function closeMenu() {
 
 function createBookmarkItem(menuTarget, title, url) {
   chrome.bookmarks.create({
+    title,
+    url,
     parentId: menuTarget.parentId,
-    title: title,
-    url: url,
     index: menuTarget.index + 1
   })
 }

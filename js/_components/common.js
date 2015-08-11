@@ -9,6 +9,7 @@ window.chromep = new ChromePromise()
 // set or unset CSS
 window.CSS = (() => {
   const styleElem = document.createElement('style')
+
   document.head.appendChild(styleElem)
 
   const sheet = styleElem.sheet
@@ -51,11 +52,7 @@ window.JSONStorage = {
 }
 
 function propEach(obj, fn) {
-  const propArr = Object.getOwnPropertyNames(obj)
-
-  let propName
-
-  while (propName = propArr.shift()) {
+  Object.getOwnPropertyNames(obj).forEach((propName) => {
     fn(propName, obj[propName])
-  }
+  })
 }

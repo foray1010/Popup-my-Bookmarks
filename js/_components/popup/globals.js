@@ -1,3 +1,5 @@
+import forEach from 'lodash.foreach'
+
 window.globals = {
   goldenGap: 2,
   maxHeight: 596,
@@ -101,7 +103,7 @@ window.globals = {
         if (menuItemNum === 0) {
           forEach(urlList, (url) => {
             chrome.tabs.create({
-              url: url,
+              url,
               active: false
             })
           })

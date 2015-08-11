@@ -13,7 +13,6 @@
     "deku": "*",
     "lodash.debounce": "*",
     "lodash.foreach": "*",
-    "lodash.throttle": "*",
     "normalize.css": "*",
     "seamless-immutable": "*",
     "string.prototype.includes": "*",
@@ -23,8 +22,10 @@
   },
   "devDependencies": {
     "babel-core": "*",
+    "babel-eslint": "*",
     "babel-loader": "*",
     "cson": "*",
+    "eslint-config-airbnb": "0.0.7",
     "eslint-plugin-react": "*",
     "fs-extra": "*",
     "gulp": "*",

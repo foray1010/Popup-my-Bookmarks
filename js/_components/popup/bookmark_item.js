@@ -2,7 +2,7 @@ import debounce from 'lodash.debounce'
 import element from 'virtual-element'
 
 const debouncedMouseHandler = debounce((event, {props}) => {
-  const isSearching = !!props.searchResult
+  const isSearching = Boolean(props.searchResult)
   const itemInfo = props.itemInfo
 
   switch (event.type) {
@@ -166,7 +166,7 @@ function openFolder(props) {
 }
 
 function render({props}) {
-  const isSearching = !!props.searchResult
+  const isSearching = Boolean(props.searchResult)
   const itemClasses = [
     'item',
     'bookmark-item'
@@ -222,7 +222,7 @@ function render({props}) {
 }
 
 function setTooltip(el, props) {
-  const isSearching = !!props.searchResult
+  const isSearching = Boolean(props.searchResult)
   const itemInfo = props.itemInfo
   const tooltipArr = []
 
