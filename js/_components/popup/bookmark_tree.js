@@ -17,7 +17,7 @@ function render({props}) {
   const trees = props.trees
 
   const isRootBox = treeIndex === 0
-  const isSearching = !!searchResult
+  const isSearching = Boolean(searchResult)
   const treeInfo = trees[treeIndex]
 
   // hide the folder if it is not the top two folder
@@ -116,7 +116,7 @@ function wheelHandler(event) {
   const _this = event.delegateTarget
 
   // control scrolling speed
-  _this.scrollTop -= globals.itemOffsetHeight * event.wheelDelta / 120 >> 0
+  _this.scrollTop -= parseInt(globals.itemOffsetHeight * event.wheelDelta / 120, 10)
 }
 
 export default {afterRender, render}

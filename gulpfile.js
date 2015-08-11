@@ -140,10 +140,11 @@ function compileLangHandler(thisLang, sourcePath, destDir, options) {
 }
 
 function compileManifest(destDir, updateFn) {
+  const destPath = path.join(destDir, 'manifest.json')
   const manifestJSON = cson.load(path.join(resourcesPath, 'manifest.cson'))
+
   updateFn(manifestJSON)
 
-  const destPath = path.join(destDir, 'manifest.json')
   fs.writeJSONSync(destPath, manifestJSON)
 }
 
