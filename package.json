@@ -31,7 +31,6 @@
     "gulp": "*",
     "gulp-eslint": "*",
     "gulp-jade": "*",
-    "gulp-load-plugins": "*",
     "gulp-minify-css": "*",
     "gulp-stylint": "*",
     "gulp-stylus": "*",
