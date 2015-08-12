@@ -1,47 +1,48 @@
 'use strict'
 
-const gulp = require('gulp')
-
 const argv = require('yargs').argv
 const cson = require('cson')
+const eslint = require('gulp-eslint')
 const fs = require('fs-extra')
+const gulp = require('gulp')
 const gutil = require('gulp-util')
+const jade = require('gulp-jade')
+const minifyCss = require('gulp-minify-css')
 const named = require('vinyl-named')
 const path = require('path')
-const plugins = require('gulp-load-plugins')()
+const stylint = require('gulp-stylint')
+const stylus = require('gulp-stylus')
 const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
+const zip = require('gulp-zip')
 
-// predefined path
-const compilePath = '__compile'
-const devPath = '__dev'
-const resourcesPath = '_resources'
+// predefined dir path
+const compileDir = '__compile'
+const devDir = '__dev'
+const resourcesDir = '_resources'
 
 // language config
 const lang = {
   css: {
-    extName: 'styl',
-    compiler: 'stylus',
-    minifer: 'minifyCss',
-    source: 'css',
-    dest: 'css'
+    destDir: 'css',
+    srcPath: path.join('css', '*') + '.styl',
+    compiler: stylus,
+    minifer: minifyCss
   },
   html: {
-    extName: 'jade',
-    compiler: 'jade',
-    source: 'html',
-    dest: '.'
+    destDir: '.',
+    srcPath: path.join('html', '*') + '.jade',
+    compiler: jade
   },
   js: {
-    extName: 'js',
-    source: 'js',
-    dest: 'js'
+    destDir: 'js',
+    srcPath: path.join('js', '*') + '.js'
   }
 }
 
 // language handlers
-function compileJS(destDir) {
-  const isDev = destDir === devPath
+function compileJS(workingDir) {
+  const isDev = workingDir === devDir
   const resolveAlias = {}
   const thisLang = lang.js
   const webpackPlugins = [
@@ -49,10 +50,8 @@ function compileJS(destDir) {
     new webpack.optimize.DedupePlugin()
   ]
 
-  const destPath = path.join(destDir, thisLang.dest)
-  const sourcePath = getSourcePath(thisLang)
-
-  fs.mkdirsSync(destPath)
+  const destDir = path.join(workingDir, thisLang.destDir)
+  const srcPath = thisLang.srcPath
 
   if (!isDev) {
     // production build does not freeze the object,
@@ -74,7 +73,7 @@ function compileJS(destDir) {
     }))
   }
 
-  const stream = gulp.src(sourcePath)
+  return gulp.src(srcPath)
     .pipe(named())
     .pipe(webpackStream({
       devtool: isDev ? 'source-map' : undefined,
@@ -96,91 +95,65 @@ function compileJS(destDir) {
       },
       watch: isDev
     }, webpack))
-    .pipe(gulp.dest(destPath))
-
-  // if webpack is watching, it blocks other gulp tasks
-  if (!isDev) {
-    return stream
-  }
+    .pipe(gulp.dest(destDir))
 }
 
-function compileLang(langName, destDir, options) {
-  const thisLang = lang[langName]
-
-  fs.mkdirsSync(path.join(destDir, thisLang.dest))
-
-  return compileLangHandler(
-    thisLang,
-    getSourcePath(thisLang),
-    destDir,
-    options
-  )
-}
-
-function compileLangHandler(thisLang, sourcePath, destDir, options) {
+function compileLang(langName, workingDir, options) {
   if (!options) {
     options = {}
   }
 
-  const compilerPipe = plugins[thisLang.compiler]
-    .apply(null, options.compilerConfig)
-  const dest = path.join(destDir, thisLang.dest)
+  const isDev = workingDir === devDir
+  const thisLang = lang[langName]
 
-  const compileStream = gulp.src(sourcePath)
-    .pipe(compilerPipe)
+  const compileHandler = function(srcPath) {
+    const compilerPipe = thisLang.compiler.apply(null, options.compilerConfig)
+    const destDir = path.join(workingDir, thisLang.destDir)
 
-  if (destDir === compilePath && thisLang.minifer) {
-    const miniferPipe = plugins[thisLang.minifer]
-      .apply(null, options.miniferConfig)
+    const compileStream = gulp.src(srcPath).pipe(compilerPipe)
 
-    compileStream.pipe(miniferPipe)
+    if (!isDev && thisLang.minifer) {
+      const miniferPipe = thisLang.minifer.apply(null, options.miniferConfig)
+
+      compileStream.pipe(miniferPipe)
+    }
+
+    return compileStream.pipe(gulp.dest(destDir))
   }
 
-  return compileStream.pipe(gulp.dest(dest))
+  fs.mkdirsSync(path.join(workingDir, thisLang.destDir))
+
+  if (isDev) {
+    gulp.watch(thisLang.srcPath, function(event) {
+      const srcPath = path.relative(__dirname, event.path)
+
+      compileHandler(srcPath)
+        .on('end', function() {
+          gutil.log(gutil.colors.magenta(srcPath), 'is compiled')
+        })
+    })
+  }
+
+  return compileHandler(thisLang.srcPath)
 }
 
-function compileManifest(destDir, updateFn) {
-  const destPath = path.join(destDir, 'manifest.json')
-  const manifestJSON = cson.load(path.join(resourcesPath, 'manifest.cson'))
+function compileManifest(workingDir, updateFn) {
+  const destPath = path.join(workingDir, 'manifest.json')
+  const manifestJSON = cson.load(path.join(resourcesDir, 'manifest.cson'))
 
   updateFn(manifestJSON)
 
   fs.writeJSONSync(destPath, manifestJSON)
 }
 
-function getSourcePath(thisLang) {
-  return path.join(thisLang.source, '*.' + thisLang.extName)
-}
-
-function watchLang(langName, destDir, options) {
-  const thisLang = lang[langName]
-
-  gulp.watch(getSourcePath(thisLang), function(event) {
-    const sourcePath = path.relative(__dirname, event.path)
-
-    compileLangHandler(thisLang, sourcePath, destDir, options)
-      .on('end', function() {
-        gutil.log(gutil.colors.magenta(sourcePath), 'is compiled')
-      })
-  })
-
-  return compileLang(langName, destDir, options)
-}
-
 // markdown handler
 function getMarkdownData(titleList) {
-  const mdSource = path.join(resourcesPath, 'markdown')
+  const mdSource = path.join(resourcesDir, 'markdown')
 
   const dataList = titleList.map(function(title) {
-    const fileData = fs.readFileSync(
-      path.join(mdSource, `${title}.md`), 'utf-8'
-    )
+    const fileData = fs.readFileSync(path.join(mdSource, `${title}.md`), 'utf-8')
 
-    return (
-      `## ${title}` +
-      '\n\n' +
-      fileData
-    )
+    return `## ${title}\n\n${fileData}`
   })
 
   return dataList.join('\n\n')
@@ -194,11 +167,6 @@ function initDir(dirPath) {
 
 // default when no task
 gulp.task('default', ['help'])
-
-// user guideline
-gulp.task('help', function() {
-  gutil.log('\n' + getMarkdownData(['Developer guide']))
-})
 
 // compile and zip PmB
 gulp.task('compile-init', function() {
@@ -219,33 +187,33 @@ gulp.task('compile-init', function() {
       'each number between 0 - 65535')
   }
 
-  initDir(compilePath)
+  initDir(compileDir)
 })
 
 gulp.task('compile-css', ['compile-init'], function() {
-  return compileLang('css', compilePath, {
+  return compileLang('css', compileDir, {
     compilerConfig: [{'include css': true}],
     miniferConfig: [{keepSpecialComments: 0}]
   })
 })
 
 gulp.task('compile-html', ['compile-init'], function() {
-  return compileLang('html', compilePath)
+  return compileLang('html', compileDir)
 })
 
 gulp.task('compile-js', ['compile-init'], function() {
-  return compileJS(compilePath)
+  return compileJS(compileDir)
 })
 
 gulp.task('compile-others', ['compile-init'], function() {
   const fileList = ['font', '_locales', 'LICENSE']
 
   fileList.forEach(function(fileName) {
-    fs.copySync(fileName, path.join(compilePath, fileName))
+    fs.copySync(fileName, path.join(compileDir, fileName))
   })
-  fs.copySync(path.join(resourcesPath, 'img'), path.join(compilePath, 'img'))
+  fs.copySync(path.join(resourcesDir, 'img'), path.join(compileDir, 'img'))
 
-  compileManifest(compilePath, function(manifestJSON) {
+  compileManifest(compileDir, function(manifestJSON) {
     manifestJSON.version = argv.version
   })
 })
@@ -256,35 +224,35 @@ gulp.task('compile-zip', [
   'compile-js',
   'compile-others'
 ], function() {
-  return gulp.src(path.join(compilePath, '**'))
-    .pipe(plugins.zip(argv.version + '.zip'))
+  return gulp.src(path.join(compileDir, '**'))
+    .pipe(zip(argv.version + '.zip'))
     .pipe(gulp.dest('.'))
 })
 
 gulp.task('compile', ['compile-zip'], function() {
   // useless after zipped
-  fs.remove(compilePath)
+  fs.remove(compileDir)
 })
 
-// create a 'watched' folder for testing
+// create a watched folder for testing
 gulp.task('dev-init', function() {
-  initDir(devPath)
+  initDir(devDir)
 })
 
 gulp.task('dev-css', ['dev-init'], function() {
-  return watchLang('css', devPath, {
+  return compileLang('css', devDir, {
     compilerConfig: [{'include css': true}]
   })
 })
 
 gulp.task('dev-html', ['dev-init'], function() {
-  return watchLang('html', devPath, {
+  return compileLang('html', devDir, {
     compilerConfig: [{pretty: true}]
   })
 })
 
 gulp.task('dev-js', ['dev-init'], function() {
-  return compileJS(devPath)
+  compileJS(devDir)
 })
 
 gulp.task('dev', [
@@ -297,36 +265,42 @@ gulp.task('dev', [
   fileList.forEach(function(fileName) {
     fs.symlinkSync(
       path.join('..', fileName),
-      path.join(devPath, fileName),
+      path.join(devDir, fileName),
       'dir'
     )
   })
   fs.symlinkSync(
-    path.join('..', resourcesPath, 'img-dev'),
-    path.join(devPath, 'img'),
+    path.join('..', resourcesDir, 'img-dev'),
+    path.join(devDir, 'img'),
     'dir'
   )
 
-  compileManifest(devPath, function(manifestJSON) {
+  compileManifest(devDir, function(manifestJSON) {
     manifestJSON.name += '(dev)'
     manifestJSON.version = '0.0.0.0'
   })
 })
 
-// Lints
+// user guideline
+gulp.task('help', function() {
+  gutil.log('\n' + getMarkdownData(['Developer guide']))
+})
+
+// lints
 gulp.task('lint-css', function() {
-  return gulp.src(path.join(lang.css.source, '*'))
-    .pipe(plugins.stylint())
+  return gulp.src(lang.css.srcPath)
+    .pipe(stylint())
 })
 
 gulp.task('lint-js', function() {
   return gulp.src([
     'gulpfile.js',
-    path.join(lang.js.source, '**')
+    // check the inner directories too
+    lang.js.srcPath.replace('*', path.join('**', '*'))
   ])
-    .pipe(plugins.eslint())
-    .pipe(plugins.eslint.format())
-    .pipe(plugins.eslint.failAfterError())
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
 })
 
 gulp.task('lint', ['lint-css', 'lint-js'])
