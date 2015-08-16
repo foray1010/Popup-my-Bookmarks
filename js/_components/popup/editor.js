@@ -1,25 +1,18 @@
 import element from 'virtual-element'
 
 function afterRender({props}, el) {
-  const editorTarget = props.editorTarget
+  const isHidden = !props.editorTarget
 
-  const isHidden = !editorTarget
+  setEditorPos(props, el)
 
   if (!isHidden) {
-    setEditorPos(el, document.getElementById(editorTarget.id))
-
     // auto focus to title field
     el.getElementsByTagName('input')[0].focus()
   }
 }
 
-function clickCancelHandler() {
-  closeEditor()
-}
-
 function clickConfirmHandler(event, {props}) {
-  const editorInput = document.getElementById('editor')
-    .getElementsByTagName('input')
+  const editorInput = document.getElementById('editor').getElementsByTagName('input')
   const editorTarget = props.editorTarget
 
   const updatedTitle = editorInput[0].value
@@ -39,6 +32,8 @@ function clickConfirmHandler(event, {props}) {
 }
 
 function closeEditor() {
+  globals.resetBodySize()
+
   globals.setRootState({
     editorTarget: null
   })
@@ -71,20 +66,40 @@ function render({props}) {
       <input type='text' value={itemTitle} />
       <input type='text' value={itemUrl} hidden={isFolderItem} />
       <button onClick={clickConfirmHandler}>{msgConfirm}</button>
-      <button onClick={clickCancelHandler}>{msgCancel}</button>
+      <button onClick={closeEditor}>{msgCancel}</button>
     </div>
   )
 }
 
-function setEditorPos(el, editorTargetEl) {
-  const editorTargetOffset = editorTargetEl.getBoundingClientRect()
+function setEditorPos(props, el) {
+  const editorTarget = props.editorTarget
 
-  const bottomPos = (
-    document.body.scrollHeight - el.offsetHeight - editorTargetOffset.top
-  )
+  const isHidden = !editorTarget
 
-  el.style.bottom = Math.max(bottomPos, 0) + 'px'
-  el.style.left = editorTargetOffset.left + 'px'
+  let bottomPosPx = ''
+  let leftPosPx = ''
+
+  if (!isHidden) {
+    const body = document.body
+    const editorHeight = el.offsetHeight
+    const editorTargetEl = document.getElementById(editorTarget.id)
+    const html = document.getElementsByTagName('html')[0]
+
+    const editorTargetOffset = editorTargetEl.getBoundingClientRect()
+    const htmlHeight = html.clientHeight
+
+    const bottomPos = htmlHeight - editorHeight - editorTargetOffset.top
+
+    if (editorHeight > htmlHeight) {
+      body.style.height = editorHeight + 'px'
+    }
+
+    bottomPosPx = Math.max(bottomPos, 0) + 'px'
+    leftPosPx = editorTargetOffset.left + 'px'
+  }
+
+  el.style.bottom = bottomPosPx
+  el.style.left = leftPosPx
 }
 
 export default {afterRender, render}

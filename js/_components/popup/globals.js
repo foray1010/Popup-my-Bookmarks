@@ -138,6 +138,14 @@ window.globals = {
     }
   },
 
+  resetBodySize() {
+    const bodyStyle = document.body.style
+
+    // reset to original size
+    bodyStyle.height = ''
+    bodyStyle.width = ''
+  },
+
   sortByTitle(bookmarkList) {
     return bookmarkList.sort((bookmark1, bookmark2) => {
       return bookmark1.title.localeCompare(bookmark2.title)
