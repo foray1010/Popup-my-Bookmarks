@@ -8,6 +8,7 @@ Changes:
 
 Bugfixes:
   - Cannot display the whole popup in OSX
+  - Wrong menu/editor position in some situations
 
 Translations:
   - Support Norwegian Bokmål locales (thanks Bjorn Tore Asheim)

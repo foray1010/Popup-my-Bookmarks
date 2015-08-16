@@ -1,6 +1,8 @@
 import element from 'virtual-element'
 
 function clickHandler() {
+  globals.resetBodySize()
+
   globals.setRootState({
     editorTarget: null,
     menuTarget: null

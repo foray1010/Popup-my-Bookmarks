@@ -13,13 +13,7 @@ function addCurrentPage(menuTarget) {
 }
 
 function afterRender({props}, el) {
-  const menuTarget = props.menuTarget
-
-  const isHidden = !menuTarget
-
-  if (!isHidden) {
-    setMenuPos(el, props.mousePos)
-  }
+  setMenuPos(props, el)
 }
 
 function afterUpdate({props}, prevProps) {
@@ -38,6 +32,8 @@ function afterUpdate({props}, prevProps) {
 }
 
 function closeMenu() {
+  globals.resetBodySize()
+
   globals.setRootState({
     menuTarget: null
   })
@@ -98,10 +94,9 @@ function menuClickEvent(event, {props}) {
 
     case 3: // Edit... or Rename...
       globals.setRootState({
-        editorTarget: menuTarget,
-        menuTarget: null
+        editorTarget: menuTarget
       })
-      return
+      break
 
     case 4: // Delete
       removeBookmarkItem(menuTarget)
@@ -187,27 +182,41 @@ function render({props}) {
   return <div id='menu' hidden={isHidden}>{menuItems}</div>
 }
 
-function setMenuPos(el, mousePos) {
-  const body = document.body
-  const menuHeight = el.offsetHeight
-  const menuWidth = el.offsetWidth
+function setMenuPos(props, el) {
+  const mousePos = props.mousePos
+  const menuTarget = props.menuTarget
 
-  const bodyHeight = body.scrollHeight
-  const bodyWidth = body.offsetWidth
+  const isHidden = !menuTarget
 
-  if (menuHeight > bodyHeight) {
-    body.style.height = menuHeight + 'px'
+  let bottomPosPx = ''
+  let rightPosPx = ''
+
+  if (!isHidden) {
+    const body = document.body
+    const html = document.getElementsByTagName('html')[0]
+    const menuHeight = el.offsetHeight
+    const menuWidth = el.offsetWidth
+
+    const bodyWidth = body.offsetWidth
+    const htmlHeight = html.clientHeight
+
+    const bottomPos = htmlHeight - menuHeight - mousePos.y
+    const rightPos = bodyWidth - menuWidth - mousePos.x
+
+    if (menuHeight > htmlHeight) {
+      body.style.height = menuHeight + 'px'
+    }
+
+    if (menuWidth > bodyWidth) {
+      body.style.width = menuWidth + 'px'
+    }
+
+    bottomPosPx = Math.max(bottomPos, 0) + 'px'
+    rightPosPx = Math.max(rightPos, 0) + 'px'
   }
 
-  if (menuWidth > bodyWidth) {
-    body.style.width = menuWidth + 'px'
-  }
-
-  const bottomPos = bodyHeight - menuHeight - mousePos.y
-  const rightPos = bodyWidth - menuWidth - mousePos.x
-
-  el.style.bottom = Math.max(bottomPos, 0) + 'px'
-  el.style.right = Math.max(rightPos, 0) + 'px'
+  el.style.bottom = bottomPosPx
+  el.style.right = rightPosPx
 }
 
 function sortByName(parentId) {
