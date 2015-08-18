@@ -5,13 +5,18 @@ function closeHandler(event, {props}) {
 }
 
 function render({props}) {
+  const treeHeadBoxClasses = ['tree-head-box']
   const treeIndex = props.treeIndex
   const trees = props.trees
 
-  const treeInfo = trees[treeIndex]
+  const treeInfo = trees[treeIndex] || {}
+
+  if (props.isHidden) {
+    treeHeadBoxClasses.push('display-none')
+  }
 
   return (
-    <div class='tree-head-box'>
+    <div class={treeHeadBoxClasses.join(' ')}>
       <div class='tree-head-title no-text-overflow'>{treeInfo.title}</div>
       <div class='tree-head-close' onClick={closeHandler} />
     </div>
