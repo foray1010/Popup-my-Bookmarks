@@ -44,15 +44,6 @@ function render({props}) {
     })
   }
 
-  let treeHead = ''
-  if (!isSearching && !isRootBox) {
-    treeHead = (
-      <TreeHead
-        treeIndex={treeIndex}
-        trees={trees} />
-    )
-  }
-
   if (searchResult) {
     if (searchResult.length) {
       pushTreeItem(searchResult)
@@ -80,7 +71,10 @@ function render({props}) {
 
   return (
     <div class='bookmark-tree'>
-      {treeHead}
+      <TreeHead
+        isHidden={isSearching || isRootBox}
+        treeIndex={treeIndex}
+        trees={trees} />
       <div
         class='bookmark-list'
         onScroll={scrollHandler}
