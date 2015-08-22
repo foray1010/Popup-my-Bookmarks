@@ -1,3 +1,4 @@
+import 'array.prototype.findindex'
 import 'string.prototype.includes'
 import 'string.prototype.repeat'
 import 'string.prototype.startswith'
@@ -8,11 +9,11 @@ window.chromep = new ChromePromise()
 
 // set or unset CSS
 window.CSS = (() => {
-  const styleElem = document.createElement('style')
+  const styleEl = document.createElement('style')
 
-  document.head.appendChild(styleElem)
+  document.head.appendChild(styleEl)
 
-  const sheet = styleElem.sheet
+  const sheet = styleEl.sheet
 
   const set = (param1, param2) => {
     const _action = (styleSelector, styleList) => {

@@ -2,16 +2,25 @@ import debounce from 'lodash.debounce'
 import element from 'virtual-element'
 
 import Editor from './editor'
+import {getSearchResult} from './search'
 import Menu from './menu'
 import MenuCover from './menu_cover'
 import Panel from './panel'
 
-let currentStateTrees
+let currentState
 
 function afterMount({}, el, setState) {
   globals.setRootState = setState
 
   initBookmarkEvent()
+}
+
+function afterUpdate({props, state}, prevProps, prevState, setState) {
+  if (prevState.isSearching && !state.isSearching) {
+    setState({
+      trees: getDefaultTrees(props)
+    })
+  }
 }
 
 function beforeMount() {
@@ -20,7 +29,7 @@ function beforeMount() {
 
 function beforeRender({state}) {
   // assume this module will always update
-  currentStateTrees = state.trees
+  currentState = state
 }
 
 function contextMenuHandler(event) {
@@ -35,13 +44,21 @@ function contextMenuHandler(event) {
   event.preventDefault()
 }
 
-function initBookmarkEvent() {
-  const renewTrees = debounce((oldTrees) => {
-    const treesIdList = oldTrees.asMutable()
-      .map((treeInfo) => treeInfo.id)
+function getDefaultTrees(props) {
+  return Immutable([props.defExpandTree])
+}
 
-    Promise.all(treesIdList.map((treeId) => {
-      return globals.getFlatTree(treeId)
+function initBookmarkEvent() {
+  const renewCurrentTrees = () => renewTrees(currentState.trees)
+
+  const renewTrees = debounce((oldTrees) => {
+    // Promise.all cannot recognize immutable array
+    Promise.all(oldTrees.asMutable().map((treeInfo) => {
+      if (treeInfo.id === 'search-result') {
+        return getSearchResult()
+      }
+
+      return globals.getFlatTree(treeInfo.id)
     }))
       .then((newTrees) => {
         globals.setRootState({
@@ -54,32 +71,29 @@ function initBookmarkEvent() {
       })
   }, 100)
 
-  const renewSplicedTreesById = (id) => {
-    let hit = false
+  const renewSlicedTreesById = (itemId) => {
+    const removeFromIndex = currentState.trees.findIndex((treeInfo) => {
+      return treeInfo.id === itemId
+    })
 
-    renewTrees(currentStateTrees.filter((treeInfo) => {
-      if (treeInfo.id === id) {
-        hit = true
-      }
+    const slicedTrees = globals.getSlicedTrees(currentState.trees, removeFromIndex)
 
-      // remove all the following treeInfo after hit
-      return !hit
-    }))
+    renewTrees(slicedTrees)
   }
 
-  chrome.bookmarks.onChanged.addListener(() => renewTrees(currentStateTrees))
-  chrome.bookmarks.onCreated.addListener(() => renewTrees(currentStateTrees))
-  chrome.bookmarks.onMoved.addListener(renewSplicedTreesById)
-  chrome.bookmarks.onRemoved.addListener(renewSplicedTreesById)
+  chrome.bookmarks.onChanged.addListener(renewCurrentTrees)
+  chrome.bookmarks.onCreated.addListener(renewCurrentTrees)
+  chrome.bookmarks.onMoved.addListener(renewSlicedTreesById)
+  chrome.bookmarks.onRemoved.addListener(renewSlicedTreesById)
 }
 
 function initialState(props) {
   return {
     editorTarget: null,
+    isSearching: false,
     menuTarget: null,
     mousePos: Immutable({x: 0, y: 0}),
-    searchResult: null,
-    trees: Immutable([props.defExpandTree])
+    trees: getDefaultTrees(props)
   }
 }
 
@@ -142,16 +156,16 @@ function render({state}) {
       onContextMenu={contextMenuHandler}
       onMouseDown={mouseDownHandler}>
       <Panel
-        searchResult={state.searchResult}
+        isSearching={state.isSearching}
         trees={state.trees} />
       <MenuCover isHidden={isHiddenMenuCover} />
       <Menu
+        isSearching={state.isSearching}
         menuTarget={state.menuTarget}
-        mousePos={state.mousePos}
-        searchResult={state.searchResult} />
+        mousePos={state.mousePos} />
       <Editor editorTarget={state.editorTarget} />
     </div>
   )
 }
 
-export default {afterMount, beforeMount, beforeRender, initialState, render}
+export default {afterMount, afterUpdate, beforeMount, beforeRender, initialState, render}

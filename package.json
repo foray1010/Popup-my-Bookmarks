@@ -9,6 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "array.prototype.findindex": "*",
     "chrome-promise": "*",
     "deku": "*",
     "lodash.debounce": "*",
@@ -25,7 +26,7 @@
     "babel-eslint": "*",
     "babel-loader": "*",
     "cson": "*",
-    "eslint-config-airbnb": "0.0.7",
+    "eslint-config-airbnb": "0.0.8",
     "eslint-plugin-react": "*",
     "fs-extra": "*",
     "gulp": "*",

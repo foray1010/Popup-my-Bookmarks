@@ -59,7 +59,7 @@ function getChildrenHiddenStatus(props) {
       break
 
     case 'bookmark':
-      if (props.searchResult) {
+      if (props.isSearching) {
         childrenHiddenStatus = [false, false, false, true, true]
       }
 
@@ -291,10 +291,10 @@ function sortByName(parentId) {
 }
 
 function toggleSelected(menuTarget, toggleParam) {
-  const menuTargetElem = document.getElementById(menuTarget.id)
+  const menuTargetEl = document.getElementById(menuTarget.id)
 
-  if (menuTargetElem) {
-    menuTargetElem.classList[toggleParam]('selected')
+  if (menuTargetEl) {
+    menuTargetEl.classList[toggleParam]('selected')
   }
 }
 

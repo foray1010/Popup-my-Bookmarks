@@ -11,28 +11,20 @@ function afterRender(component, el) {
 }
 
 function render({props}) {
-  const searchResult = props.searchResult
+  const isSearching = props.isSearching
   const treeIndex = props.treeIndex
   const treeItems = []
   const trees = props.trees
 
   const isRootBox = treeIndex === 0
-  const isSearching = Boolean(searchResult)
   const treeInfo = trees[treeIndex]
-
-  // hide the folder if it is not the top two folder
-  const isHiddenFolderCover = isSearching || trees.length - treeIndex <= 2
-
-  const folderCoverClickHandler = () => {
-    globals.removeTreeInfoFromIndex(trees, treeIndex + 1)
-  }
 
   const genBookmarkItem = (itemInfo) => {
     return (
       <BookmarkItem
         key={itemInfo.id}
+        isSearching={isSearching}
         itemInfo={itemInfo}
-        searchResult={searchResult}
         treeIndex={treeIndex}
         trees={trees} />
     )
@@ -44,19 +36,15 @@ function render({props}) {
     })
   }
 
-  if (searchResult) {
-    if (searchResult.length) {
-      pushTreeItem(searchResult)
-    } else {
-      treeItems.push(<NoResult key='no-result' />)
-    }
-  } else {
-    if (isRootBox) {
-      pushTreeItem(globals.rootTree.children)
-    }
+  if (isRootBox && !isSearching) {
+    pushTreeItem(globals.rootTree.children)
+  }
 
-    if (treeInfo.children.length) {
-      pushTreeItem(treeInfo.children)
+  if (treeInfo.children.length) {
+    pushTreeItem(treeInfo.children)
+  } else {
+    if (isSearching) {
+      treeItems.push(<NoResult key='no-result' />)
     } else {
       const noBookmarkInfo = Immutable({
         id: `no-bookmark-${treeInfo.id}`,
@@ -82,8 +70,8 @@ function render({props}) {
         {treeItems}
       </div>
       <FolderCover
-        isHidden={isHiddenFolderCover}
-        clickHandler={folderCoverClickHandler} />
+        treeIndex={treeIndex}
+        trees={trees} />
     </div>
   )
 }
