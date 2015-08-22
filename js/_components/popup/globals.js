@@ -63,6 +63,14 @@ window.globals = {
       })
   },
 
+  getSlicedTrees(trees, removeFromIndex) {
+    if (trees.length > removeFromIndex) {
+      return trees.slice(0, removeFromIndex)
+    }
+
+    return trees
+  },
+
   openMultipleBookmarks(itemInfo, menuItemNum) {
     const urlList = []
 
@@ -127,13 +135,11 @@ window.globals = {
   },
 
   removeTreeInfoFromIndex(trees, removeFromIndex) {
-    if (trees.length > removeFromIndex) {
-      const newTrees = trees.asMutable()
+    const slicedTrees = globals.getSlicedTrees(trees, removeFromIndex)
 
-      newTrees.splice(removeFromIndex)
-
+    if (trees !== slicedTrees) {
       globals.setRootState({
-        trees: Immutable(newTrees)
+        trees: slicedTrees
       })
     }
   },

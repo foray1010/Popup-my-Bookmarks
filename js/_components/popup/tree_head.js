@@ -9,7 +9,7 @@ function render({props}) {
   const treeIndex = props.treeIndex
   const trees = props.trees
 
-  const treeInfo = trees[treeIndex] || {}
+  const treeInfo = trees[treeIndex]
 
   if (props.isHidden) {
     treeHeadBoxClasses.push('display-none')

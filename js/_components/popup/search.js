@@ -4,23 +4,35 @@ import forEach from 'lodash.foreach'
 
 const debouncedInputHandler = debounce(inputHandler, 200)
 
+let keyword = ''
+
+function getSearchResult() {
+  return chromep.bookmarks.search(keyword).then((result) => {
+    const filteredResult = searchResultFilter(result)
+
+    const searchResult = globals.sortByTitle(filteredResult)
+
+    return {
+      children: searchResult,
+      id: 'search-result'
+    }
+  })
+}
+
 function inputHandler(event) {
   const searchInput = event.target
 
-  const keyword = searchInput.value
+  keyword = searchInput.value.trim().replace('\s+', ' ')
 
   if (keyword === '') {
     globals.setRootState({
-      searchResult: null
+      isSearching: false
     })
   } else {
-    chromep.bookmarks.search(keyword).then((result) => {
-      const searchResult = globals.sortByTitle(
-        searchResultFilter(keyword, result)
-      )
-
+    getSearchResult().then((searchResult) => {
       globals.setRootState({
-        searchResult: Immutable(searchResult)
+        isSearching: true,
+        trees: Immutable([searchResult])
       })
     })
   }
@@ -45,16 +57,14 @@ function render() {
   )
 }
 
-function searchResultFilter(keyword, results) {
+function searchResultFilter(results) {
   const isOnlySearchTitle = globals.storage.searchTarget === 1
   const newResults = []
   const splittedKeyArr = []
 
   if (isOnlySearchTitle) {
     forEach(keyword.split(' '), (splittedKey) => {
-      if (splittedKey !== '') {
-        splittedKeyArr.push(splittedKey.toLowerCase())
-      }
+      splittedKeyArr.push(splittedKey.toLowerCase())
     })
   }
 
@@ -89,4 +99,4 @@ function searchResultFilter(keyword, results) {
   return newResults
 }
 
-export default {render}
+export default {getSearchResult, render}

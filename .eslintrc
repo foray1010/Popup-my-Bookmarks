@@ -82,7 +82,6 @@ rules:
     -
       capIsNew: false
   new-parens: 2
-  no-lonely-if: 2
   no-unneeded-ternary: 2
   operator-assignment:
     - 2
