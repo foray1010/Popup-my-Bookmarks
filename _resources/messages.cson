@@ -153,9 +153,18 @@ openInN:
   description: "2013.01.23 | Refer to Chrome Bookmark manager"
 opt_bookmarklet:
   locales:
-    en: "Bookmarklet supported:<br>(Javascript Bookmark Script)"
-    zh_CN: "支持书签小程序:<br>(Javascript 书签脚本)"
-    zh_TW: "支援書籤小程式:<br>(Javascript 書籤腳本)"
+    en: '''
+      Bookmarklet supported:
+      (Javascript Bookmark Script)
+    '''
+    zh_CN: '''
+      支持书签小程序:
+      (Javascript 书签脚本)
+    '''
+    zh_TW: '''
+      支援書籤小程式:
+      (Javascript 書籤腳本)
+    '''
   description: "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
 opt_clickByLeft:
   locales:
@@ -187,21 +196,24 @@ opt_clickOption:
     zh_CN: "当前分页|当前分页 (不关闭PmB)|新分页|背景分页|背景分页 (不关闭PmB)|新窗口|隐身窗口"
     zh_TW: "當前分頁|當前分頁 (不關閉PmB)|新分頁|背景分頁|背景分頁 (不關閉PmB)|新視窗|無痕式視窗"
   description: "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+opt_contributors:
+  locales:
+    en: "Contributors"
+    zh_CN: "贡献者"
+    zh_TW: "貢獻者"
+  description: "2015.08.22"
+opt_control:
+  locales:
+    en: "Control"
+    zh_CN: "控制"
+    zh_TW: "控制"
+  description: "2015.08.22"
 opt_defExpand:
   locales:
     en: "Default expanded folder:"
     zh_CN: "默认展开资料夹:"
     zh_TW: "預設展開資料夾:"
   description: "2013.07.30"
-opt_error:
-  locales:
-    en: "Wrong input on option $fieldNum$"
-    zh_CN: "错误输入: 设置$fieldNum$"
-    zh_TW: "錯誤輸入: 設定$fieldNum$"
-  description: "2013.03.27"
-  placeholders:
-    fieldNum:
-      content: "$1"
 opt_fontFamily:
   locales:
     en: "Font family:"
@@ -210,10 +222,25 @@ opt_fontFamily:
   description: "2015.01.11"
 opt_fontSize:
   locales:
-    en: "Font size:<br>(12 - 30px)"
-    zh_CN: "字体大小:<br>(12 - 30px)"
-    zh_TW: "字型大小:<br>(12 - 30px)"
+    en: '''
+      Font size:
+      (12 - 30px)
+    '''
+    zh_CN: '''
+      字体大小:
+      (12 - 30px)
+    '''
+    zh_TW: '''
+      字型大小:
+      (12 - 30px)
+    '''
   description: "2013.07.26"
+opt_general:
+  locales:
+    en: "General"
+    zh_CN: "一般"
+    zh_TW: "一般"
+  description: "2015.08.22"
 opt_hideRootFolder:
   locales:
     en: "Hide root folder:"
@@ -222,9 +249,18 @@ opt_hideRootFolder:
   description: "2015.02.18 | Root folder means the top level folder"
 opt_maxResults:
   locales:
-    en: "The maximum number of search results:<br>(10 - 200)"
-    zh_CN: "搜索结果的最大数量:<br>(10 - 200)"
-    zh_TW: "搜尋結果的最大數量:<br>(10 - 200)"
+    en: '''
+      Maximum number of search results:
+      (10 - 200)
+    '''
+    zh_CN: '''
+      搜索结果的最大数量:
+      (10 - 200)
+    '''
+    zh_TW: '''
+      搜尋結果的最大數量:
+      (10 - 200)
+    '''
   description: "2013.03.24"
 opt_no:
   locales:
@@ -264,9 +300,18 @@ opt_searchTargetOpt:
   description: "2013.09.11"
 opt_setWidth:
   locales:
-    en: "Panel width:<br>(100 - 399px)"
-    zh_CN: "面板宽度:<br>(100 - 399px)"
-    zh_TW: "面板寬度:<br>(100 - 399px)"
+    en: '''
+      Panel width:
+      (100 - 399px)
+    '''
+    zh_CN: '''
+      面板宽度:
+      (100 - 399px)
+    '''
+    zh_TW: '''
+      面板寬度:
+      (100 - 399px)
+    '''
   description: "2013.03.24"
 opt_tooltip:
   locales:
@@ -274,6 +319,12 @@ opt_tooltip:
     zh_CN: "提示书签的详细内容:"
     zh_TW: "提示書籤的詳細內容:"
   description: "2013.03.24"
+opt_userInterface:
+  locales:
+    en: "UI"
+    zh_CN: "界面"
+    zh_TW: "介面"
+  description: "2015.08.22"
 opt_warnOpenMany:
   locales:
     en: "Warn me when opening multiple tabs might slow down Chrome:"

@@ -6,11 +6,11 @@ import './_components/popup/globals'
 import App from './_components/popup/app'
 
 chromep.storage.sync.get(null)
-  .then((storage) => {
-    globals.storage = Immutable(storage)
+  .then((options) => {
+    globals.options = Immutable(options)
 
     // if first run
-    if (globals.storage.hideRootFolder === undefined) {
+    if (globals.options.hideRootFolder === undefined) {
       globals.openOptionsPage()
     }
   })
@@ -21,8 +21,8 @@ chromep.storage.sync.get(null)
           const itemIdNum = parseInt(itemInfo.id, 10)
 
           const isFilterThisItem = (
-            itemIdNum === globals.storage.defExpand ||
-            globals.storage.hideRootFolder.indexOf(itemIdNum) >= 0
+            itemIdNum === globals.options.defExpand ||
+            globals.options.hideRootFolder.indexOf(itemIdNum) >= 0
           )
 
           return !isFilterThisItem
@@ -32,7 +32,7 @@ chromep.storage.sync.get(null)
       })
   })
   .then(() => {
-    globals.getFlatTree(String(globals.storage.defExpand))
+    globals.getFlatTree(String(globals.options.defExpand))
       .then((defExpandTree) => {
         const app = tree(
           <App defExpandTree={defExpandTree} />

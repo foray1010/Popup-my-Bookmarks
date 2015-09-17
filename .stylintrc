@@ -6,7 +6,7 @@
   "commaSpace": "always",
   "commentSpace": "always",
   "cssLiteral": "never",
-  "depthLimit": 2,
+  "depthLimit": 3,
   "duplicates": true,
   "efficient": "always",
   "extendPref": "@extend",

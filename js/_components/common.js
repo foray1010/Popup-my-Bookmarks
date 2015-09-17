@@ -1,3 +1,4 @@
+import 'array.prototype.find'
 import 'array.prototype.findindex'
 import 'string.prototype.includes'
 import 'string.prototype.repeat'

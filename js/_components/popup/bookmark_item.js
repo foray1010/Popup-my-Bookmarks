@@ -7,7 +7,7 @@ const debouncedMouseHandler = debounce((event, {props}) => {
 
   switch (event.type) {
     case 'mouseenter':
-      if (!isSearching && !globals.storage.opFolderBy) {
+      if (!isSearching && !globals.options.opFolderBy) {
         if (globals.isFolder(itemInfo)) {
           if (!globals.isFolderOpened(props.trees, itemInfo)) {
             openFolder(props)
@@ -46,7 +46,7 @@ function clickHandler(event, {props}) {
     case 'root-folder':
     case 'folder':
       if (event.button === 0) {
-        if (globals.storage.opFolderBy) {
+        if (globals.options.opFolderBy) {
           if (!globals.isFolderOpened(props.trees, itemInfo)) {
             openFolder(props)
           } else {
@@ -107,7 +107,7 @@ function getOpenBookmarkHandlerId(event) {
     switcher = 'Middle'
   }
 
-  return globals.storage['clickBy' + switcher]
+  return globals.options['clickBy' + switcher]
 }
 
 function openBookmark(handlerId, itemUrl) {
@@ -117,7 +117,7 @@ function openBookmark(handlerId, itemUrl) {
       if (itemUrl.startsWith('javascript:')) {
         const msgAlertBookmarklet = chrome.i18n.getMessage('alert_bookmarklet')
 
-        if (globals.storage.bookmarklet) {
+        if (globals.options.bookmarklet) {
           chrome.tabs.executeScript(null, {code: itemUrl})
         } else if (confirm(msgAlertBookmarklet)) {
           globals.openOptionsPage()
@@ -232,7 +232,7 @@ function setTooltip(el, props) {
     }
   }
 
-  if (globals.storage.tooltip) {
+  if (globals.options.tooltip) {
     tooltipArr.push(itemInfo.title, itemInfo.url)
   }
 

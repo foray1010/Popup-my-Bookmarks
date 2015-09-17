@@ -89,7 +89,7 @@ window.globals = {
             'askOpenAll', String(urlList.length)
           )
 
-          if (globals.storage.warnOpenMany &&
+          if (globals.options.warnOpenMany &&
               urlList.length > 5 &&
               !confirm(msgAskOpenAll)) {
             reject()

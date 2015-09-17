@@ -2,24 +2,14 @@
 
 $search-box-height = 21px
 
-$tree-head-box-height = 30px
+$tree-header-box-height = 30px
 
 highlight-item()
-  background: $highlight-level1
+  background-color: $highlight-level1
   border-color: $highlight-level2
 
 body
   -webkit-user-select: none
-
-input[type="text"]
-  border-color: $highlight-level3
-  box-sizing: border-box
-  margin: 3px 0 0
-  padding: $golden-gap
-  width: 100%
-
-  &:focus
-    border-color: $main-color1
 
 .bookmark-item
   align-items: center
@@ -33,19 +23,19 @@ input[type="text"]
   overflow-y: auto
 
   &::after
-    background: currentcolor
+    background-color: currentcolor
     content: ""
     display: block
     height: $golden-gap
     margin-top: $golden-gap
 
 .bookmark-tree
-  background: inherit
+  background-color: inherit
   position: absolute
   width: 100%
 
 .cover
-  background: rgba(0, 0, 0, .16)
+  background-color: rgba(0, 0, 0, .16)
   bottom: 0
   position: absolute
   top: 0
@@ -86,7 +76,7 @@ input[type="text"]
   white-space: nowrap
 
 .panel
-  background: inherit
+  background-color: inherit
   position: relative
 
 .root-folder
@@ -105,24 +95,24 @@ input[type="text"]
   & > .no-text-overflow
     text-overflow: clip
 
-.tree-head-box
-  background: currentcolor
+.tree-header-box
+  background-color: currentcolor
   display: flex
-  height: $tree-head-box-height
+  height: $tree-header-box-height
   margin-bottom: $golden-gap
 
-.tree-head-close
+.tree-header-close
   flex-shrink: 0 // don't push me out of view when title is too long
-  height: $tree-head-box-height
+  height: $tree-header-box-height
   position: relative
-  width: $tree-head-box-height
+  width: $tree-header-box-height
 
   &:hover
-    background: $main-color3
+    background-color: $main-color4
 
   &::before,
   &::after
-    background: $blank-color
+    background-color: $blank-color
     content: ""
     position: absolute
     -webkit-transform: rotate(45deg)
@@ -139,34 +129,48 @@ input[type="text"]
     top: 14px
     width: 12px
 
-.tree-head-title
+.tree-header-title
   color: $blank-color
   cursor: default
   font: 22px ArchivoNarrow, simhei
-  line-height: $tree-head-box-height + 1px
+  line-height: $tree-header-box-height + 1px
   margin-right: auto
   padding: 0 $golden-gap-2x
 
 #app
-  background: inherit
+  background-color: inherit
 
 #container
-  background: inherit
+  background-color: inherit
 
 #drag-place
   border: 1px dashed $highlight-level5
   height: 20px
 
 #editor
-  background: $blank-color
+  background-color: $blank-color
   border: solid $highlight-level4
   border-width: 1px 0
-  padding: 3px 0
+  box-sizing: border-box
+  padding: $golden-gap-2x $golden-gap
   position: absolute
   text-align: right
 
+  & > button
+    margin: $golden-gap-2x 0 0 $golden-gap-2x
+
+  & > input[type="text"]
+    border-color: $highlight-level3
+    box-sizing: border-box
+    margin: $golden-gap-2x 0 0
+    padding: $golden-gap
+    width: 100%
+
+    &:focus
+      border-color: $main-color1
+
 #editor-title
-  background: $main-color2
+  background-color: $main-color2
   color: $blank-color
   cursor: default
   float: left
@@ -176,7 +180,7 @@ input[type="text"]
   color: $main-color2
 
 #menu
-  background: $blank-color
+  background-color: $blank-color
   border: 1px solid $highlight-level4
   box-shadow: 0 2px 4px rgba(0, 0, 0, .2)
   padding: $golden-gap-2x
@@ -188,10 +192,10 @@ input[type="text"]
     padding-top: $golden-gap
 
 #menu-cover
-  background: rgba(255, 255, 255, .3)
+  background-color: rgba(255, 255, 255, .3)
 
 #panel-box
-  background: inherit
+  background-color: inherit
   display: flex
   flex-direction: row-reverse
 
@@ -206,7 +210,7 @@ input[type="text"]
   padding: 5px 4px 4px 5px
 
 #search-input
-  background: transparent
+  background-color: transparent
   border: 0
   color: $main-font-color
   font-size: 12px
@@ -217,20 +221,20 @@ input[type="text"]
   margin-right: $golden-gap
 
 ::-webkit-scrollbar
-  background: transparent
+  background-color: transparent
   height: 5px
   width: 5px + $golden-gap
 
 ::-webkit-scrollbar-thumb
-  background: $highlight-level3
+  background-color: $highlight-level3
   border-left: $golden-gap solid $blank-color
 
   &:hover
-    background: $highlight-level4
+    background-color: $highlight-level4
     border: 0
 
   &:active
-    background: $highlight-level5
+    background-color: $highlight-level5
 
 ::-webkit-search-cancel-button
   content: url("/img/cancel.png")

@@ -93,7 +93,7 @@
 		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
 	},
 	"opt_bookmarklet": {
-		"message": "支持书签小程序:<br>(Javascript 书签脚本)",
+		"message": "支持书签小程序:\n(Javascript 书签脚本)",
 		"description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
 	},
 	"opt_clickByLeft": {
@@ -116,6 +116,14 @@
 		"message": "当前分页|当前分页 (不关闭PmB)|新分页|背景分页|背景分页 (不关闭PmB)|新窗口|隐身窗口",
 		"description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
 	},
+	"opt_contributors": {
+		"message": "贡献者",
+		"description": "2015.08.22"
+	},
+	"opt_control": {
+		"message": "控制",
+		"description": "2015.08.22"
+	},
 	"opt_defExpand": {
 		"message": "默认展开资料夹:",
 		"description": "2013.07.30"
@@ -134,15 +142,19 @@
 		"description": "2015.01.11"
 	},
 	"opt_fontSize": {
-		"message": "字体大小:<br>(12 - 30px)",
+		"message": "字体大小:\n(12 - 30px)",
 		"description": "2013.07.26"
+	},
+	"opt_general": {
+		"message": "一般",
+		"description": "2015.08.22"
 	},
 	"opt_hideRootFolder": {
 		"message": "隐藏根目录:",
 		"description": "2015.02.18 | Root folder means the top level folder"
 	},
 	"opt_maxResults": {
-		"message": "搜索结果的最大数量:<br>(10 - 200)",
+		"message": "搜索结果的最大数量:\n(10 - 200)",
 		"description": "2013.03.24"
 	},
 	"opt_no": {
@@ -170,12 +182,16 @@
 		"description": "2013.09.11"
 	},
 	"opt_setWidth": {
-		"message": "面板宽度:<br>(100 - 399px)",
+		"message": "面板宽度:\n(100 - 399px)",
 		"description": "2013.03.24"
 	},
 	"opt_tooltip": {
 		"message": "提示书签的详细内容:",
 		"description": "2013.03.24"
+	},
+	"opt_userInterface": {
+		"message": "界面",
+		"description": "2015.08.22"
 	},
 	"opt_warnOpenMany": {
 		"message": "当打开多个分页可能使 Chrome 变慢时警告我:",

@@ -4,7 +4,7 @@ import forEach from 'lodash.foreach'
 import BookmarkItem from './bookmark_item'
 import FolderCover from './folder_cover'
 import NoResult from './no_result'
-import TreeHead from './tree_head'
+import TreeHeader from './tree_header'
 
 function afterRender(component, el) {
   setHeight(el)
@@ -59,7 +59,7 @@ function render({props}) {
 
   return (
     <div class='bookmark-tree'>
-      <TreeHead
+      <TreeHeader
         isHidden={isSearching || isRootBox}
         treeIndex={treeIndex}
         trees={trees} />
@@ -82,7 +82,7 @@ function scrollHandler(event, {props}) {
 function setHeight(el) {
   const bookmarkList = el.getElementsByClassName('bookmark-list')[0]
 
-  // search-box and tree-head-box height
+  // search-box and tree-header-box height
   const bookmarkListOffsetTop = bookmarkList.getBoundingClientRect().top
 
   const maxListHeight = globals.maxHeight - bookmarkListOffsetTop
@@ -95,10 +95,10 @@ function setHeight(el) {
 function wheelHandler(event) {
   event.preventDefault()
 
-  const _this = event.delegateTarget
+  const el = event.delegateTarget
 
   // control scrolling speed
-  _this.scrollTop -= parseInt(globals.itemOffsetHeight * event.wheelDelta / 120, 10)
+  el.scrollTop -= parseInt(globals.itemOffsetHeight * event.wheelDelta / 120, 10)
 }
 
 export default {afterRender, render}
