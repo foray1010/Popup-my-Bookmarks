@@ -5,7 +5,7 @@ const paypalUrl = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick' +
 
 function render() {
   return (
-    <div id='donate'>
+    <footer id='donate'>
       <a id='donate-img' href={paypalUrl} target='_blank'>
         <img src='/img/btn_donateCC_LG.png' alt='' />
       </a>
@@ -20,7 +20,7 @@ function render() {
         </a>
         {'!'}
       </div>
-    </div>
+    </footer>
   )
 }
 

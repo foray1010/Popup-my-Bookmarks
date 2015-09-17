@@ -99,7 +99,7 @@ function initialState(props) {
 
 function initStyleOptions() {
   // if the font family's name has whitespace, use quote to embed it
-  const fontFamily = globals.storage.fontFamily.split(',')
+  const fontFamily = globals.options.fontFamily.split(',')
     .map((x) => {
       x = x.trim()
 
@@ -110,7 +110,7 @@ function initStyleOptions() {
       return x
     })
     .join(',')
-  const fontSize = globals.storage.fontSize
+  const fontSize = globals.options.fontSize
 
   const itemHeight = globals.goldenGap * 2 + fontSize
 
@@ -130,7 +130,7 @@ function initStyleOptions() {
     },
     '.panel-width': {
       // set panel (#main, #sub) width
-      width: globals.storage.setWidth + 'px'
+      width: globals.options.setWidth + 'px'
     },
     '.separator': {
       // set separator height depend on item height

@@ -9,6 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "array.prototype.find": "*",
     "array.prototype.findindex": "*",
     "chrome-promise": "*",
     "deku": "*",

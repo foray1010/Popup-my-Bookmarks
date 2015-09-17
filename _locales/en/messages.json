@@ -93,7 +93,7 @@
 		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
 	},
 	"opt_bookmarklet": {
-		"message": "Bookmarklet supported:<br>(Javascript Bookmark Script)",
+		"message": "Bookmarklet supported:\n(Javascript Bookmark Script)",
 		"description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
 	},
 	"opt_clickByLeft": {
@@ -116,6 +116,14 @@
 		"message": "current tab|current tab (w/o closing PmB)|new tab|background tab|background tab (w/o closing PmB)|new window|incognito window",
 		"description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
 	},
+	"opt_contributors": {
+		"message": "Contributors",
+		"description": "2015.08.22"
+	},
+	"opt_control": {
+		"message": "Control",
+		"description": "2015.08.22"
+	},
 	"opt_defExpand": {
 		"message": "Default expanded folder:",
 		"description": "2013.07.30"
@@ -134,15 +142,19 @@
 		"description": "2015.01.11"
 	},
 	"opt_fontSize": {
-		"message": "Font size:<br>(12 - 30px)",
+		"message": "Font size:\n(12 - 30px)",
 		"description": "2013.07.26"
+	},
+	"opt_general": {
+		"message": "General",
+		"description": "2015.08.22"
 	},
 	"opt_hideRootFolder": {
 		"message": "Hide root folder:",
 		"description": "2015.02.18 | Root folder means the top level folder"
 	},
 	"opt_maxResults": {
-		"message": "The maximum number of search results:<br>(10 - 200)",
+		"message": "Maximum number of search results:\n(10 - 200)",
 		"description": "2013.03.24"
 	},
 	"opt_no": {
@@ -170,12 +182,16 @@
 		"description": "2013.09.11"
 	},
 	"opt_setWidth": {
-		"message": "Panel width:<br>(100 - 399px)",
+		"message": "Panel width:\n(100 - 399px)",
 		"description": "2013.03.24"
 	},
 	"opt_tooltip": {
 		"message": "Show tooltip with detailed information of bookmarks:",
 		"description": "2013.03.24"
+	},
+	"opt_userInterface": {
+		"message": "UI",
+		"description": "2015.08.22"
 	},
 	"opt_warnOpenMany": {
 		"message": "Warn me when opening multiple tabs might slow down Chrome:",

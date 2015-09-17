@@ -2,6 +2,7 @@ import element from 'virtual-element'
 
 import Donate from './donate'
 import NavBar from './nav_bar'
+import ModuleMapper from './module_mapper'
 
 const navBarItems = Immutable([
   {
@@ -9,8 +10,8 @@ const navBarItems = Immutable([
     msg: 'opt_general'
   },
   {
-    module: 'layout',
-    msg: 'opt_layout'
+    module: 'userInterface',
+    msg: 'opt_userInterface'
   },
   {
     module: 'control',
@@ -28,15 +29,20 @@ function afterMount({}, el, setState) {
 
 function initialState(props) {
   return {
-    currentModule: navBarItems[0].module,
-    storage: Immutable(props.initialStorage)
+    currentModule: props.initialCurrentModule,
+    options: Immutable(props.initialOptions)
   }
 }
 
 function render({state}) {
   return (
     <div id='app'>
-      <NavBar navBarItems={navBarItems} />
+      <NavBar
+        currentModule={state.currentModule}
+        navBarItems={navBarItems} />
+      <ModuleMapper
+        currentModule={state.currentModule}
+        options={state.options} />
       <Donate />
     </div>
   )

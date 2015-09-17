@@ -86,7 +86,9 @@ rules:
   operator-assignment:
     - 2
     - "always"
-  operator-linebreak: 2
+  operator-linebreak:
+    - 2
+    - "after"
   semi:
     - 2
     - "never"

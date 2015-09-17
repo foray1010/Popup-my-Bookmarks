@@ -6,13 +6,12 @@
   src: url("/font/ArchivoNarrow-Regular.woff")
 
 body
-  background: $blank-color
+  background-color: $blank-color
   color: $main-font-color
 
 button
-  background: $highlight-level1
+  background-color: $highlight-level1
   border: 0
-  margin: 3px 0 0 3px
   outline: 0
   padding: 4px 8px
 
@@ -20,13 +19,11 @@ button
   &:hover
     color: $main-color1
 
-input,
-select
-  outline: 0
-  padding: 0
-
 input[type="number"],
+input[type="search"],
 input[type="text"],
 select
-  background: $blank-color
+  background-color: $blank-color
   border: 1px solid $main-color1
+  outline: 0
+  padding: 0 $golden-gap-2x

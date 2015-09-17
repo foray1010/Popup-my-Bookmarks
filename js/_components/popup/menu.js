@@ -2,10 +2,10 @@ import element from 'virtual-element'
 import forEach from 'lodash.foreach'
 
 function addCurrentPage(menuTarget) {
-  chrome.tabs.query({
+  chromep.tabs.query({
     currentWindow: true,
     active: true
-  }, (results) => {
+  }).then((results) => {
     const currentTab = results[0]
 
     createBookmarkItem(menuTarget, currentTab.title, currentTab.url)

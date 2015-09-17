@@ -58,7 +58,7 @@ function render() {
 }
 
 function searchResultFilter(results) {
-  const isOnlySearchTitle = globals.storage.searchTarget === 1
+  const isOnlySearchTitle = globals.options.searchTarget === 1
   const newResults = []
   const splittedKeyArr = []
 
@@ -90,7 +90,7 @@ function searchResultFilter(results) {
 
       newResults.push(itemInfo)
 
-      if (newResults.length === globals.storage.maxResults) {
+      if (newResults.length === globals.options.maxResults) {
         return false
       }
     }

@@ -1,29 +1,46 @@
 @import "./_components/variables"
 
-$donate-desc-width = 400px
+$donate-desc-width = 380px
 $donate-img-width = 160px
 $donate-width = $donate-desc-width + $donate-img-width
 
-$input-height = 20px
+$input-height = 22px
+
+nav-bar-item-colorizing()
+  &:nth-of-type(1)
+    border-bottom-color: $main-color1
+
+  &:nth-of-type(2)
+    border-bottom-color: $main-color2
+
+  &:nth-of-type(3)
+    border-bottom-color: $main-color3
+
+  &:nth-of-type(4)
+    border-bottom-color: $main-color4
 
 body
   font: 12px sans-serif
+  width: 750px
 
 input[type="number"],
+input[type="text"],
 select
-  box-sizing: content-box
+  box-sizing: border-box
   height: $input-height
 
-input
-  &[type="checkbox"]
-    vertical-align: middle
+  // fix a weird layout forced in option V2
+  min-height: 0 !important
 
-  &[type="number"]
-    text-align: right
-    width: 50px
+input[type="number"]
+  text-align: right
+  width: 50px
 
-select[multiple]
-  height: 100%
+select,
+select:hover
+  // fix a weird layout forced in option V2
+  -webkit-appearance: menulist
+  background-image: none !important
 
 .input-select-box
   border: 1px solid $main-color1
@@ -38,7 +55,7 @@ select[multiple]
     box-sizing: border-box
     height: 100%
     left: 0
-    padding: 4px
+    padding: 0 $golden-gap-2x
     position: absolute
     text-align: left
     top: 0
@@ -53,31 +70,53 @@ select[multiple]
   &:hover
     color: $main-color2
 
-.opt-desc,
-.opt-input
-  display: table-cell
-  height: 38px
-  vertical-align: middle
+.nav-bar-item
+  border-bottom: $golden-gap-2x solid transparent
+  color: $blank-color
+  flex: 1 0 0
+  font: 16px ArchivoNarrow
+  padding-top: $golden-gap-2x
+  text-align: center
 
-.opt-desc
+  &:hover
+    nav-bar-item-colorizing()
+
+.nav-bar-item-active
+  nav-bar-item-colorizing()
+
+.option-desc
+  flex: 1 0 0
   text-align: right
-  width: 390px
+  white-space: pre
 
-.opt-input
+.option-input
+  flex: 1 0 0
   padding-left: 20px
+
+.option-item
+  align-items: center
+  display: flex
+  height: 42px
 
 .select-multiple-box
   border: 1px solid $main-color1
-  padding: 4px
+  display: inline-block
+  padding: $golden-gap-2x
 
-  & input
-    margin-right: 4px
+  & > label
+    align-items: center
+    display: flex
 
-.selectbox
-  background: $blank-color
+    & > input
+      margin-right: $golden-gap-2x
+
+.select-button-box
+  align-items: center
+  background-color: $blank-color
   border: 1px solid currentcolor
+  box-sizing: border-box
   color: $main-color1
-  display: table
+  display: flex
   height: $input-height
   position: relative
   text-align: center
@@ -85,39 +124,56 @@ select[multiple]
   -webkit-user-select: none
   width: 80px
 
-.selectbox-cover
-  background: currentcolor
+.select-button-cover
+  background-color: currentcolor
   height: 100%
   position: absolute
   transition-duration: inherit
   transition-property: left
 
-.selectbox-item
+.select-button-item
   cursor: pointer
-  display: table-cell
+  flex: 1 0 0
   position: relative
   transition-duration: inherit
   transition-property: color
-  vertical-align: middle
 
-.selectbox-item-active
+.select-button-item-active
   color: $blank-color
   cursor: default
 
 #donate
+  align-items: center
   display: flex
   height: 50px
   margin: auto
+  padding: 8px
   width: $donate-width
 
 #donate-desc
-  margin: auto
   width: $donate-desc-width
 
 #donate-img
-  margin: auto
   width: $donate-img-width
 
-#opt-button
-  margin: 0 50px 5px 0
+#nav-bar
+  background-color: $main-color5
+  display: flex
+  margin-bottom: $golden-gap-2x
+
+#option-button-box
+  margin-right: 150px
   text-align: right
+
+  & > button
+    // fix a weird layout forced in option V2
+    background-image: none
+    border: 0
+    padding: 4px 8px
+
+    margin: $golden-gap-2x 0 0 $golden-gap-2x
+
+    // fix a weird layout forced in option V2
+    &:focus,
+    &:hover
+      color: $main-color1
