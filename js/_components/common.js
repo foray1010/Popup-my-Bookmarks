@@ -1,8 +1,3 @@
-import 'array.prototype.find'
-import 'array.prototype.findindex'
-import 'string.prototype.includes'
-import 'string.prototype.repeat'
-import 'string.prototype.startswith'
 import ChromePromise from 'chrome-promise'
 import Immutable from 'seamless-immutable'
 

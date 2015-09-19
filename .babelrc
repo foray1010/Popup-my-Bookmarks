@@ -1,4 +1,5 @@
 {
   "jsxPragma": "element",
-  "loose": "all"
+  "loose": "all",
+  "optional": ["runtime"]
 }
