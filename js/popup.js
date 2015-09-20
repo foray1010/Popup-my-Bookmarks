@@ -5,39 +5,36 @@ import './_components/common'
 import './_components/popup/globals'
 import App from './_components/popup/app'
 
-chromep.storage.sync.get(null)
-  .then((options) => {
-    globals.options = Immutable(options)
+!async function() {
+  globals.options = Immutable(await chromep.storage.sync.get(null))
 
-    // if first run
-    if (globals.options.hideRootFolder === undefined) {
-      globals.openOptionsPage()
-    }
+  // if first run
+  if (globals.options.hideRootFolder === undefined) {
+    globals.openOptionsPage()
+  }
+
+  /* get globals.rootTree */
+  const treeInfo = await globals.getFlatTree('0')
+
+  treeInfo.children = treeInfo.children.filter((itemInfo) => {
+    const itemIdNum = parseInt(itemInfo.id, 10)
+
+    const isFilterThisItem = (
+      itemIdNum === globals.options.defExpand ||
+      globals.options.hideRootFolder.indexOf(itemIdNum) >= 0
+    )
+
+    return !isFilterThisItem
   })
-  .then(() => {
-    return globals.getFlatTree('0')
-      .then((treeInfo) => {
-        treeInfo.children = treeInfo.children.filter((itemInfo) => {
-          const itemIdNum = parseInt(itemInfo.id, 10)
 
-          const isFilterThisItem = (
-            itemIdNum === globals.options.defExpand ||
-            globals.options.hideRootFolder.indexOf(itemIdNum) >= 0
-          )
+  globals.rootTree = Immutable(treeInfo)
 
-          return !isFilterThisItem
-        })
+  /* render the app */
+  const defExpandTree = await globals.getFlatTree(String(globals.options.defExpand))
 
-        globals.rootTree = Immutable(treeInfo)
-      })
-  })
-  .then(() => {
-    globals.getFlatTree(String(globals.options.defExpand))
-      .then((defExpandTree) => {
-        const app = tree(
-          <App defExpandTree={defExpandTree} />
-        )
+  const app = tree(
+    <App defExpandTree={defExpandTree} />
+  )
 
-        render(app, document.getElementById('container'))
-      })
-  })
+  render(app, document.getElementById('container'))
+}()

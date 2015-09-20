@@ -1,5 +1,4 @@
 import element from 'virtual-element'
-import forEach from 'lodash.foreach'
 
 import BookmarkTree from './bookmark_tree'
 import Search from './search'
@@ -13,7 +12,7 @@ function render({props}) {
   const subPanelItems = []
   const trees = props.trees
 
-  forEach(trees, (treeInfo, treeIndex) => {
+  trees.forEach((treeInfo, treeIndex) => {
     const targetPanelItems = treeIndex % 2 === 0 ? mainPanelItems : subPanelItems
 
     targetPanelItems.push(

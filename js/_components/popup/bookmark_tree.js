@@ -1,5 +1,4 @@
 import element from 'virtual-element'
-import forEach from 'lodash.foreach'
 
 import BookmarkItem from './bookmark_item'
 import FolderCover from './folder_cover'
@@ -31,9 +30,9 @@ function render({props}) {
   }
 
   const pushTreeItem = (childrenInfo) => {
-    forEach(childrenInfo, (itemInfo) => {
+    for (const itemInfo of childrenInfo) {
       treeItems.push(genBookmarkItem(itemInfo))
-    })
+    }
   }
 
   if (isRootBox && !isSearching) {

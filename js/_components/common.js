@@ -49,7 +49,7 @@ window.JSONStorage = {
 }
 
 function propEach(obj, fn) {
-  Object.getOwnPropertyNames(obj).forEach((propName) => {
+  for (const propName of Object.getOwnPropertyNames(obj)) {
     fn(propName, obj[propName])
-  })
+  }
 }

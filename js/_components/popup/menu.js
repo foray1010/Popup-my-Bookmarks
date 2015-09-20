@@ -1,15 +1,14 @@
 import element from 'virtual-element'
-import forEach from 'lodash.foreach'
 
-function addCurrentPage(menuTarget) {
-  chromep.tabs.query({
+async function addCurrentPage(menuTarget) {
+  const results = await chromep.tabs.query({
     currentWindow: true,
     active: true
-  }).then((results) => {
-    const currentTab = results[0]
-
-    createBookmarkItem(menuTarget, currentTab.title, currentTab.url)
   })
+
+  const currentTab = results[0]
+
+  createBookmarkItem(menuTarget, currentTab.title, currentTab.url)
 }
 
 function afterRender({props}, el) {
@@ -219,74 +218,74 @@ function setMenuPos(props, el) {
   el.style.right = rightPosPx
 }
 
-function sortByName(parentId) {
-  return chromep.bookmarks.getChildren(parentId).then((childrenInfo) => {
-    const classifiedItemsList = []
+async function sortByName(parentId) {
+  const childrenInfo = await chromep.bookmarks.getChildren(parentId)
 
-    const genClassifiedItems = () => {
-      const newClassifiedItems = [
-        [/* Separators */],
-        [/* Folders */],
-        [/* Bookmarks */]
-      ]
+  const classifiedItemsList = []
 
-      classifiedItemsList.push(newClassifiedItems)
+  const genClassifiedItems = () => {
+    const newClassifiedItems = [
+      [/* Separators */],
+      [/* Folders */],
+      [/* Bookmarks */]
+    ]
 
-      return newClassifiedItems
+    classifiedItemsList.push(newClassifiedItems)
+
+    return newClassifiedItems
+  }
+
+  let newChildrenInfo = []
+  let selectedClassifiedItems = genClassifiedItems()
+
+  /**
+   * Split all bookmarks into n main group,
+   * where n = the number of separators + 1
+   * Each main group contains 3 small groups
+   * (Separators, Folders, Bookmarks)
+   */
+  for (const itemInfo of childrenInfo) {
+    let classifiedItemsIndex
+
+    switch (globals.getBookmarkType(itemInfo)) {
+      case 'folder':
+        classifiedItemsIndex = 1
+        break
+
+      case 'separator':
+        classifiedItemsIndex = 0
+        selectedClassifiedItems = genClassifiedItems()
+        break
+
+      case 'bookmark':
+        classifiedItemsIndex = 2
+        break
     }
 
-    let newChildrenInfo = []
-    let selectedClassifiedItems = genClassifiedItems()
+    selectedClassifiedItems[classifiedItemsIndex].push(itemInfo)
+  }
 
-    /**
-     * Split all bookmarks into n main group,
-     * where n = the number of separators + 1
-     * Each main group contains 3 small groups
-     * (Separators, Folders, Bookmarks)
-     */
-    forEach(childrenInfo, (itemInfo) => {
-      let classifiedItemsIndex
+  // Concatenate all lists into single list
+  for (const thisChildrenInfo of classifiedItemsList) {
+    for (const classifiedItems of thisChildrenInfo) {
+      newChildrenInfo = newChildrenInfo.concat(
+        globals.sortByTitle(classifiedItems)
+      )
+    }
+  }
 
-      switch (globals.getBookmarkType(itemInfo)) {
-        case 'folder':
-          classifiedItemsIndex = 1
-          break
+  // Sort bookmarks by Selection sort
+  newChildrenInfo.forEach((itemInfo, index) => {
+    const oldIndex = childrenInfo.indexOf(itemInfo)
 
-        case 'separator':
-          classifiedItemsIndex = 0
-          selectedClassifiedItems = genClassifiedItems()
-          break
+    if (oldIndex !== index) {
+      // move the item from old index to new index
+      childrenInfo.splice(index, 0, childrenInfo.splice(oldIndex, 1)[0])
 
-        case 'bookmark':
-          classifiedItemsIndex = 2
-          break
-      }
-
-      selectedClassifiedItems[classifiedItemsIndex].push(itemInfo)
-    })
-
-    // Concatenate all lists into single list
-    forEach(classifiedItemsList, (thisChildrenInfo) => {
-      forEach(thisChildrenInfo, (classifiedItems) => {
-        newChildrenInfo = newChildrenInfo.concat(
-          globals.sortByTitle(classifiedItems)
-        )
+      chrome.bookmarks.move(itemInfo.id, {
+        index: index + (index > oldIndex ? 1 : 0)
       })
-    })
-
-    // Sort bookmarks by Selection sort
-    forEach(newChildrenInfo, (itemInfo, index) => {
-      const oldIndex = childrenInfo.indexOf(itemInfo)
-
-      if (oldIndex !== index) {
-        // move the item from old index to new index
-        childrenInfo.splice(index, 0, childrenInfo.splice(oldIndex, 1)[0])
-
-        chrome.bookmarks.move(itemInfo.id, {
-          index: index + (index > oldIndex ? 1 : 0)
-        })
-      }
-    })
+    }
   })
 }
 

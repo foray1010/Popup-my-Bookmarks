@@ -12,7 +12,6 @@
     "chrome-promise": "*",
     "deku": "*",
     "lodash.debounce": "*",
-    "lodash.foreach": "*",
     "normalize.css": "*",
     "seamless-immutable": "*",
     "virtual-element": "*"

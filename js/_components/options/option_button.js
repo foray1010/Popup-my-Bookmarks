@@ -1,83 +1,40 @@
 import element from 'virtual-element'
-import forEach from 'lodash.foreach'
 
-// will be called by globals.setPermission, so no parameters
-function confirmButtonHandler() {
-  const newOptions = {}
-  const optionTableEl = document.getElementById('option-table')
+async function confirmButtonHandler(event, {props}) {
+  const currentModule = props.currentModule
+  const newOptions = props.options.asMutable()
 
-  const namedElList = optionTableEl.querySelectorAll('[name]')
-
-  forEach(namedElList, (namedEl) => {
-    const optionName = namedEl.name
-
+  for (const optionName of globals.optionTableMap[currentModule]) {
     const optionInfo = globals.optionsSchema.find((option) => option.name === optionName)
 
-    const optionType = optionInfo.type || typeof optionInfo.choices[0]
+    if (optionInfo.permissions) {
+      const isSuccess = await globals.setPermission(optionInfo, newOptions[optionName])
 
-    let optionValue = namedEl.value.trim().replace('\s+', ' ')
-
-    // option in array form
-    switch (optionType) {
-      case 'select-multiple':
-        if (!newOptions[optionName]) {
-          newOptions[optionName] = []
-        }
-    }
-
-    if (namedEl.tagName === 'INPUT') {
-      switch (namedEl.type) {
-        case 'checkbox':
-        case 'radio':
-          if (!namedEl.checked) {
-            return true
-          }
+      if (!isSuccess) {
+        newOptions[optionName] = optionInfo.defaultValue
       }
     }
+  }
 
-    // change to non-string type
-    switch (optionType) {
-      case 'boolean':
-        optionValue = optionValue === 'true'
-        break
+  await chromep.storage.sync.set(newOptions)
 
-      case 'number':
-      case 'select-multiple':
-      case 'string':
-        optionValue = parseInt(optionValue, 10)
-    }
+  const options = await globals.getCurrentModuleOptions(currentModule)
 
-    if (optionInfo.permissions) {
-      // to remove unnecessary permissions
-      globals.setPermission(optionInfo, optionValue)
-    }
-
-    if (Array.isArray(newOptions[optionName])) {
-      newOptions[optionName].push(optionValue)
-    } else {
-      newOptions[optionName] = optionValue
-    }
-  })
-
-  chromep.storage.sync.set(newOptions).then(() => {
-    chromep.storage.sync.get(null).then((options) => {
-      globals.setRootState({
-        options: Immutable(options)
-      })
-    })
+  globals.setRootState({
+    options: Immutable(options)
   })
 }
 
-function defaultButtonHandler(event, {props}) {
-  chromep.storage.sync.clear()
-    .then(globals.initOptionsValue)
-    .then(() => {
-      globals.getCurrentModuleOptions(props.currentModule).then((options) => {
-        globals.setRootState({
-          options: Immutable(options)
-        })
-      })
-    })
+async function defaultButtonHandler(event, {props}) {
+  await chromep.storage.sync.clear()
+
+  await globals.initOptionsValue()
+
+  const options = await globals.getCurrentModuleOptions(props.currentModule)
+
+  globals.setRootState({
+    options: Immutable(options)
+  })
 }
 
 function render() {
@@ -89,4 +46,4 @@ function render() {
   )
 }
 
-export default {confirmButtonHandler, render}
+export default {render}

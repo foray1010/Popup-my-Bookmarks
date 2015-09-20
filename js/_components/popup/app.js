@@ -51,24 +51,23 @@ function getDefaultTrees(props) {
 function initBookmarkEvent() {
   const renewCurrentTrees = () => renewTrees(currentState.trees)
 
-  const renewTrees = debounce((oldTrees) => {
+  const renewTrees = debounce(async function(oldTrees) {
     // Promise.all cannot recognize immutable array
-    Promise.all(oldTrees.asMutable().map((treeInfo) => {
+    const newTrees = await Promise.all(oldTrees.asMutable().map((treeInfo) => {
       if (treeInfo.id === 'search-result') {
         return getSearchResult()
       }
 
       return globals.getFlatTree(treeInfo.id)
     }))
-      .then((newTrees) => {
-        globals.setRootState({
-          // to make sure the menu is not activated when bookmark is updating
-          editorTarget: null,
-          menuTarget: null,
 
-          trees: Immutable(newTrees)
-        })
-      })
+    globals.setRootState({
+      // to make sure the menu is not activated when bookmark is updating
+      editorTarget: null,
+      menuTarget: null,
+
+      trees: Immutable(newTrees)
+    })
   }, 100)
 
   const renewSlicedTreesById = (itemId) => {

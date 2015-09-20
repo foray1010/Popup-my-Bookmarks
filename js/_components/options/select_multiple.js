@@ -1,5 +1,4 @@
 import element from 'virtual-element'
-import forEach from 'lodash.foreach'
 
 function changeHandler(event, {props}) {
   const optionName = props.optionName
@@ -27,7 +26,7 @@ function render({props}) {
 
   const optionValue = props.options[optionName]
 
-  forEach(props.optionChoices, (optionChoice, optionChoiceIndex) => {
+  props.optionChoices.forEach((optionChoice, optionChoiceIndex) => {
     if (optionChoice !== undefined) {
       const isChecked = optionValue.indexOf(optionChoiceIndex) >= 0
 

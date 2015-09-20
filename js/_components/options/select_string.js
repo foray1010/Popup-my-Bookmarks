@@ -1,5 +1,4 @@
 import element from 'virtual-element'
-import forEach from 'lodash.foreach'
 
 function changeHandler(event, {props}) {
   const newOptionValue = parseInt(event.delegateTarget.value, 10)
@@ -13,7 +12,7 @@ function render({props}) {
 
   const optionValue = props.options[optionName]
 
-  forEach(props.optionChoices, (optionChoice, optionChoiceIndex) => {
+  props.optionChoices.forEach((optionChoice, optionChoiceIndex) => {
     if (optionChoice !== undefined) {
       optionItems.push(
         <option

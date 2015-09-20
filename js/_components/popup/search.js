@@ -1,25 +1,24 @@
 import debounce from 'lodash.debounce'
 import element from 'virtual-element'
-import forEach from 'lodash.foreach'
 
 const debouncedInputHandler = debounce(inputHandler, 200)
 
 let keyword = ''
 
-function getSearchResult() {
-  return chromep.bookmarks.search(keyword).then((result) => {
-    const filteredResult = searchResultFilter(result)
+async function getSearchResult() {
+  const result = await chromep.bookmarks.search(keyword)
 
-    const searchResult = globals.sortByTitle(filteredResult)
+  const filteredResult = searchResultFilter(result)
 
-    return {
-      children: searchResult,
-      id: 'search-result'
-    }
-  })
+  const searchResult = globals.sortByTitle(filteredResult)
+
+  return {
+    children: searchResult,
+    id: 'search-result'
+  }
 }
 
-function inputHandler(event) {
+async function inputHandler(event) {
   const searchInput = event.target
 
   keyword = searchInput.value.trim().replace('\s+', ' ')
@@ -29,11 +28,11 @@ function inputHandler(event) {
       isSearching: false
     })
   } else {
-    getSearchResult().then((searchResult) => {
-      globals.setRootState({
-        isSearching: true,
-        trees: Immutable([searchResult])
-      })
+    const searchResult = await getSearchResult()
+
+    globals.setRootState({
+      isSearching: true,
+      trees: Immutable([searchResult])
     })
   }
 }
@@ -63,38 +62,37 @@ function searchResultFilter(results) {
   const splittedKeyArr = []
 
   if (isOnlySearchTitle) {
-    forEach(keyword.split(' '), (splittedKey) => {
+    for (const splittedKey of keyword.split(' ')) {
       splittedKeyArr.push(splittedKey.toLowerCase())
-    })
+    }
   }
 
-  forEach(results, (itemInfo) => {
+  for (const itemInfo of results) {
     const itemTitle = itemInfo.title.toLowerCase()
 
     if (globals.getBookmarkType(itemInfo) === 'bookmark') {
       if (isOnlySearchTitle) {
         let isntTitleMatched = false
 
-        forEach(splittedKeyArr, (splittedKey) => {
+        for (const splittedKey of splittedKeyArr) {
           if (itemTitle.indexOf(splittedKey) < 0) {
             isntTitleMatched = true
-
-            return false
+            break
           }
-        })
+        }
 
         if (isntTitleMatched) {
-          return true
+          continue
         }
       }
 
       newResults.push(itemInfo)
 
       if (newResults.length === globals.options.maxResults) {
-        return false
+        break
       }
     }
-  })
+  }
 
   return newResults
 }
