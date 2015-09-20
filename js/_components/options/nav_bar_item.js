@@ -1,15 +1,14 @@
 import element from 'virtual-element'
 
-function updateCurrentModule(event, {props}) {
+async function updateCurrentModule(event, {props}) {
   const navBarItemInfo = props.navBarItemInfo
 
   if (navBarItemInfo.module !== props.currentModule) {
-    globals.getCurrentModuleOptions(navBarItemInfo.module).then((options) => {
-      console.log(options)
-      globals.setRootState({
-        currentModule: navBarItemInfo.module,
-        options: Immutable(options)
-      })
+    const options = await globals.getCurrentModuleOptions(navBarItemInfo.module)
+
+    globals.setRootState({
+      currentModule: navBarItemInfo.module,
+      options: Immutable(options)
     })
   }
 }

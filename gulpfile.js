@@ -208,9 +208,9 @@ gulp.task('compile-js', ['compile-init'], function() {
 gulp.task('compile-others', ['compile-init'], function() {
   const fileList = ['font', '_locales', 'LICENSE']
 
-  fileList.forEach(function(fileName) {
+  for (const fileName of fileList) {
     fs.copySync(fileName, path.join(compileDir, fileName))
-  })
+  }
   fs.copySync(path.join(resourcesDir, 'img'), path.join(compileDir, 'img'))
 
   compileManifest(compileDir, function(manifestJSON) {
@@ -262,13 +262,13 @@ gulp.task('dev', [
 ], function() {
   const fileList = ['font', '_locales']
 
-  fileList.forEach(function(fileName) {
+  for (const fileName of fileList) {
     fs.symlinkSync(
       path.join('..', fileName),
       path.join(devDir, fileName),
       'dir'
     )
-  })
+  }
   fs.symlinkSync(
     path.join('..', resourcesDir, 'img-dev'),
     path.join(devDir, 'img'),

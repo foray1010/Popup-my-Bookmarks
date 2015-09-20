@@ -1,5 +1,3 @@
-import forEach from 'lodash.foreach'
-
 window.globals = {
   goldenGap: 2,
   maxHeight: 596,
@@ -47,20 +45,12 @@ window.globals = {
     return 'bookmark'
   },
 
-  getFlatTree(id) {
-    let treeInfo
+  async getFlatTree(id) {
+    const treeInfo = (await chromep.bookmarks.get(id))[0]
 
-    return chromep.bookmarks.get(id)
-      .then((results) => {
-        treeInfo = results[0]
+    treeInfo.children = await chromep.bookmarks.getChildren(id)
 
-        return chromep.bookmarks.getChildren(id)
-      })
-      .then((childrenInfo) => {
-        treeInfo.children = childrenInfo
-
-        return treeInfo
-      })
+    return treeInfo
   },
 
   getSlicedTrees(trees, removeFromIndex) {
@@ -71,59 +61,52 @@ window.globals = {
     return trees
   },
 
-  openMultipleBookmarks(itemInfo, menuItemNum) {
+  async openMultipleBookmarks(itemInfo, menuItemNum) {
     const urlList = []
 
-    return new Promise((resolve, reject) => {
-      if (globals.isFolder(itemInfo)) {
-        chromep.bookmarks.getSubTree(itemInfo.id).then((results) => {
-          const childrenInfo = results[0].children
+    if (globals.isFolder(itemInfo)) {
+      const results = await chromep.bookmarks.getSubTree(itemInfo.id)
 
-          forEach(childrenInfo, (thisItemInfo) => {
-            if (globals.getBookmarkType(thisItemInfo) === 'bookmark') {
-              urlList.push(thisItemInfo.url)
-            }
-          })
+      const childrenInfo = results[0].children
 
-          const msgAskOpenAll = chrome.i18n.getMessage(
-            'askOpenAll', String(urlList.length)
-          )
-
-          if (globals.options.warnOpenMany &&
-              urlList.length > 5 &&
-              !confirm(msgAskOpenAll)) {
-            reject()
-          } else {
-            resolve()
-          }
-        })
-      } else {
-        chromep.bookmarks.get(itemInfo.id).then((results) => {
-          const thisItemInfo = results[0]
-
+      for (const thisItemInfo of childrenInfo) {
+        if (globals.getBookmarkType(thisItemInfo) === 'bookmark') {
           urlList.push(thisItemInfo.url)
+        }
+      }
 
-          resolve()
+      const msgAskOpenAll = chrome.i18n.getMessage(
+        'askOpenAll', String(urlList.length)
+      )
+
+      if (globals.options.warnOpenMany &&
+          urlList.length > 5 &&
+          !confirm(msgAskOpenAll)) {
+        return
+      }
+    } else {
+      const results = await chromep.bookmarks.get(itemInfo.id)
+
+      const thisItemInfo = results[0]
+
+      urlList.push(thisItemInfo.url)
+    }
+
+    if (menuItemNum === 0) {
+      for (const url of urlList) {
+        chrome.tabs.create({
+          url,
+          active: false
         })
       }
-    })
-      .then(() => {
-        if (menuItemNum === 0) {
-          forEach(urlList, (url) => {
-            chrome.tabs.create({
-              url,
-              active: false
-            })
-          })
-        } else {
-          chrome.windows.create({
-            url: urlList,
-            incognito: menuItemNum !== 1
-          })
-        }
-
-        window.close()
+    } else {
+      chrome.windows.create({
+        url: urlList,
+        incognito: menuItemNum !== 1
       })
+    }
+
+    window.close()
   },
 
   openOptionsPage() {

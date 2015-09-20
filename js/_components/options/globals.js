@@ -1,7 +1,3 @@
-import forEach from 'lodash.foreach'
-
-import {confirmButtonHandler} from './option_button'
-
 window.globals = {
   optionTableMap: {
     general: [
@@ -30,29 +26,29 @@ window.globals = {
   getCurrentModuleOptions(currentModule) {
     return chromep.storage.sync.get(globals.optionTableMap[currentModule] || [])
   },
-  initOptionsValue() {
-    return chromep.storage.sync.get(null).then((options) => {
-      const newOptions = {}
+  async initOptionsValue() {
+    const options = await chromep.storage.sync.get(null)
 
-      forEach(globals.optionsSchema, (optionInfo) => {
-        const optionDefaultValue = optionInfo.defaultValue
-        const optionName = optionInfo.name
+    const newOptions = {}
 
-        if (options[optionName] === undefined) {
-          options[optionName] = optionDefaultValue
-          newOptions[optionName] = optionDefaultValue
+    for (const optionInfo of globals.optionsSchema) {
+      const optionDefaultValue = optionInfo.defaultValue
+      const optionName = optionInfo.name
 
-          if (optionInfo.permissions) {
-            // to remove unnecessary permissions
-            globals.setPermission(optionInfo, optionDefaultValue)
-          }
+      if (options[optionName] === undefined) {
+        options[optionName] = optionDefaultValue
+        newOptions[optionName] = optionDefaultValue
+
+        if (optionInfo.permissions) {
+          // to remove unnecessary permissions
+          await globals.setPermission(optionInfo, optionDefaultValue)
         }
-      })
+      }
+    }
 
-      return chromep.storage.sync.set(newOptions)
-    })
+    await chromep.storage.sync.set(newOptions)
   },
-  setPermission(optionInfo, newOptionValue) {
+  async setPermission(optionInfo, newOptionValue) {
     const permissionFunc = newOptionValue ?
       chromep.permissions.request :
       chromep.permissions.remove
@@ -61,25 +57,23 @@ window.globals = {
       origins: []
     }
 
-    forEach(optionInfo.permissions, (permission) => {
+    for (const permission of optionInfo.permissions) {
       const propName = permission.includes('://') ? 'origins' : 'permissions'
 
       permissionsObj[propName].push(permission)
-    })
+    }
 
-    return permissionFunc(permissionsObj).then((isSuccess) => {
-      if (!isSuccess) {
-        const optionTableEl = document.getElementById('option-table')
+    const isSuccess = await permissionFunc(permissionsObj)
 
-        const optionNameEl = optionTableEl.querySelectorAll(`[name="${optionInfo.name}"]`)
+    if (!isSuccess) {
+      const optionTableEl = document.getElementById('option-table')
 
-        optionNameEl[newOptionValue ? 1 : 0].click()
+      const optionNameEl = optionTableEl.querySelectorAll(`[name="${optionInfo.name}"]`)
 
-        confirmButtonHandler()
-      }
+      optionNameEl[newOptionValue ? 1 : 0].click()
+    }
 
-      return isSuccess
-    })
+    return isSuccess
   },
   updateOptionsState(options, optionName, newOptionValue) {
     const mutableOptions = options.asMutable()

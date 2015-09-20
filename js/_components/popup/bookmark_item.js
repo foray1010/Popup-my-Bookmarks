@@ -151,18 +151,16 @@ function openBookmark(handlerId, itemUrl) {
   }
 }
 
-function openFolder(props) {
-  return globals.getFlatTree(props.itemInfo.id)
-    .then((treeInfo) => {
-      const newTrees = props.trees.asMutable()
-      const nextTreeIndex = props.treeIndex + 1
+async function openFolder(props) {
+  const newTrees = props.trees.asMutable()
+  const nextTreeIndex = props.treeIndex + 1
+  const treeInfo = await globals.getFlatTree(props.itemInfo.id)
 
-      newTrees[nextTreeIndex] = treeInfo
+  newTrees[nextTreeIndex] = treeInfo
 
-      globals.setRootState({
-        trees: Immutable(newTrees)
-      })
-    })
+  globals.setRootState({
+    trees: Immutable(newTrees)
+  })
 }
 
 function render({props}) {
@@ -239,20 +237,20 @@ function setTooltip(el, props) {
   if (isSearching) {
     const breadcrumbArr = []
 
-    const getBreadcrumb = (breadId) => {
-      chromep.bookmarks.get(breadId).then((results) => {
-        const thisItemInfo = results[0]
+    const getBreadcrumb = async function(breadId) {
+      const results = await chromep.bookmarks.get(breadId)
 
-        breadcrumbArr.unshift(thisItemInfo.title)
+      const thisItemInfo = results[0]
 
-        if (thisItemInfo.parentId !== '0') {
-          getBreadcrumb(thisItemInfo.parentId)
-        } else {
-          tooltipArr.unshift(breadcrumbArr.join(' > '))
+      breadcrumbArr.unshift(thisItemInfo.title)
 
-          setTitle()
-        }
-      })
+      if (thisItemInfo.parentId !== '0') {
+        getBreadcrumb(thisItemInfo.parentId)
+      } else {
+        tooltipArr.unshift(breadcrumbArr.join(' > '))
+
+        setTitle()
+      }
     }
 
     getBreadcrumb(itemInfo.parentId)

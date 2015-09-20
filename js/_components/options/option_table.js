@@ -18,7 +18,9 @@ function render({props}) {
       <div id='option-table'>
         {optionTableItems}
       </div>
-      <OptionButton currentModule={props.currentModule} />
+      <OptionButton
+        currentModule={props.currentModule}
+        options={props.options} />
     </div>
   )
 }
