@@ -9,17 +9,17 @@ import Panel from './panel'
 
 let currentState
 
-function afterMount({}, el, setState) {
+async function afterMount({}, el, setState) {
   globals.setRootState = setState
+
+  await initTrees()
 
   initBookmarkEvent()
 }
 
-function afterUpdate({props, state}, prevProps, prevState, setState) {
+async function afterUpdate({props, state}, prevProps, prevState) {
   if (prevState.isSearching && !state.isSearching) {
-    setState({
-      trees: getDefaultTrees(props)
-    })
+    await initTrees()
   }
 }
 
@@ -42,10 +42,6 @@ function contextMenuHandler(event) {
 
   // disable native context menu
   event.preventDefault()
-}
-
-function getDefaultTrees(props) {
-  return Immutable([props.defExpandTree])
 }
 
 function initBookmarkEvent() {
@@ -88,13 +84,13 @@ function initBookmarkEvent() {
   chrome.bookmarks.onRemoved.addListener(renewSlicedTreesById)
 }
 
-function initialState(props) {
+function initialState() {
   return {
     editorTarget: null,
     isSearching: false,
     menuTarget: null,
     mousePos: Immutable({x: 0, y: 0}),
-    trees: getDefaultTrees(props)
+    trees: Immutable([])
   }
 }
 
@@ -137,6 +133,14 @@ function initStyleOptions() {
       // set separator height depend on item height
       height: (globals.itemOffsetHeight / 2) + 'px'
     }
+  })
+}
+
+async function initTrees() {
+  const defExpandTree = await globals.getFlatTree(String(globals.options.defExpand))
+
+  globals.setRootState({
+    trees: Immutable([defExpandTree])
   })
 }
 

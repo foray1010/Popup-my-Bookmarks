@@ -11,15 +11,7 @@ import getOptionsConfig from './_components/options/get_options_config'
 
   await globals.initOptionsValue()
 
-  const currentModule = Object.keys(globals.optionTableMap)[0]
-
-  const options = await globals.getCurrentModuleOptions(currentModule)
-
-  const app = tree(
-    <App
-      initialCurrentModule={currentModule}
-      initialOptions={options} />
-  )
+  const app = tree(<App />)
 
   render(app, document.getElementById('container'))
 }().catch((e) => console.error(e.stack))
