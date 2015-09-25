@@ -71,13 +71,15 @@ function initBookmarkEvent() {
   }, 100)
 
   const renewSlicedTreesById = (itemId) => {
-    const removeFromIndex = currentState.trees.findIndex((treeInfo) => {
-      return treeInfo.id === itemId
-    })
+    const removeFromIndex = currentState.trees.findIndex((treeInfo) => treeInfo.id === itemId)
 
-    const slicedTrees = globals.getSlicedTrees(currentState.trees, removeFromIndex)
+    if (removeFromIndex >= 0) {
+      const slicedTrees = globals.getSlicedTrees(currentState.trees, removeFromIndex)
 
-    renewTrees(slicedTrees)
+      renewTrees(slicedTrees)
+    } else {
+      renewCurrentTrees()
+    }
   }
 
   chrome.bookmarks.onChanged.addListener(renewCurrentTrees)
