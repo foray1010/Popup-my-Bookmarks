@@ -5,13 +5,17 @@ async function confirmButtonHandler(event, {props}) {
   const newOptions = props.options.asMutable()
 
   for (const optionName of globals.optionTableMap[currentModule]) {
-    const optionInfo = globals.optionsSchema.find((option) => option.name === optionName)
+    const optionConfig = globals.optionsConfig[optionName]
 
-    if (optionInfo.permissions) {
-      const isSuccess = await globals.setPermission(optionInfo, newOptions[optionName])
+    if (optionConfig.permissions) {
+      const isSuccess = await globals.setPermission(
+        optionName,
+        optionConfig,
+        newOptions[optionName]
+      )
 
       if (!isSuccess) {
-        newOptions[optionName] = optionInfo.defaultValue
+        newOptions[optionName] = optionConfig.default
       }
     }
   }
