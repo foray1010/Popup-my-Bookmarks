@@ -26,7 +26,7 @@ function render({props}) {
 
   const optionValue = props.options[optionName]
 
-  props.optionChoices.forEach((optionChoice, optionChoiceIndex) => {
+  props.optionConfig.choices.forEach((optionChoice, optionChoiceIndex) => {
     if (optionChoice !== undefined) {
       const isChecked = optionValue.indexOf(optionChoiceIndex) >= 0
 
@@ -35,7 +35,7 @@ function render({props}) {
           <input
             name={props.optionName}
             type='checkbox'
-            value={optionChoiceIndex}
+            value={String(optionChoiceIndex)}
             checked={isChecked}
             onChange={changeHandler} />
           {optionChoice}

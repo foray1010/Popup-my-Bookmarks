@@ -4,13 +4,18 @@ import {render, tree} from 'deku'
 import './_components/common'
 import './_components/popup/globals'
 import App from './_components/popup/app'
+import getOptionsConfig from './_components/options/get_options_config'
 
 !async function() {
   globals.options = Immutable(await chromep.storage.sync.get(null))
 
-  // if first run
-  if (globals.options.hideRootFolder === undefined) {
-    globals.openOptionsPage()
+  /* if first run */
+  const optionsConfig = await getOptionsConfig()
+
+  for (const optionName of Object.keys(optionsConfig)) {
+    if (globals.options[optionName] === undefined) {
+      globals.openOptionsPage()
+    }
   }
 
   /* get globals.rootTree */
@@ -37,4 +42,4 @@ import App from './_components/popup/app'
   )
 
   render(app, document.getElementById('container'))
-}()
+}().catch((e) => console.error(e.stack))

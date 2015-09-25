@@ -31,24 +31,25 @@ window.globals = {
 
     const newOptions = {}
 
-    for (const optionInfo of globals.optionsSchema) {
-      const optionDefaultValue = optionInfo.defaultValue
-      const optionName = optionInfo.name
+    for (const optionName of Object.keys(globals.optionsConfig)) {
+      const optionConfig = globals.optionsConfig[optionName]
+
+      const optionDefaultValue = optionConfig.default
 
       if (options[optionName] === undefined) {
         options[optionName] = optionDefaultValue
         newOptions[optionName] = optionDefaultValue
 
-        if (optionInfo.permissions) {
+        if (optionConfig.permissions) {
           // to remove unnecessary permissions
-          await globals.setPermission(optionInfo, optionDefaultValue)
+          await globals.setPermission(optionName, optionConfig, optionDefaultValue)
         }
       }
     }
 
     await chromep.storage.sync.set(newOptions)
   },
-  async setPermission(optionInfo, newOptionValue) {
+  async setPermission(optionName, optionConfig, newOptionValue) {
     const permissionFunc = newOptionValue ?
       chromep.permissions.request :
       chromep.permissions.remove
@@ -57,7 +58,7 @@ window.globals = {
       origins: []
     }
 
-    for (const permission of optionInfo.permissions) {
+    for (const permission of optionConfig.permissions) {
       const propName = permission.includes('://') ? 'origins' : 'permissions'
 
       permissionsObj[propName].push(permission)
@@ -66,21 +67,15 @@ window.globals = {
     const isSuccess = await permissionFunc(permissionsObj)
 
     if (!isSuccess) {
-      const optionTableEl = document.getElementById('option-table')
+      const optionNameEls = document.getElementsByName(optionName)
 
-      const optionNameEl = optionTableEl.querySelectorAll(`[name="${optionInfo.name}"]`)
-
-      optionNameEl[newOptionValue ? 1 : 0].click()
+      optionNameEls[newOptionValue ? 1 : 0].click()
     }
 
     return isSuccess
   },
   updateOptionsState(options, optionName, newOptionValue) {
     const mutableOptions = options.asMutable()
-
-    if (typeof newOptionValue === 'string') {
-      newOptionValue = newOptionValue.trim().replace('\s+', ' ')
-    }
 
     mutableOptions[optionName] = newOptionValue
 

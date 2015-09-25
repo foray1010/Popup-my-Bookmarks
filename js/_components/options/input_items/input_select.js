@@ -7,7 +7,7 @@ function afterUpdate({props}) {
 }
 
 function changeHandler(event, {props}) {
-  const newOptionValue = event.delegateTarget.value
+  const newOptionValue = event.delegateTarget.value.trim().replace('\s+', ' ')
 
   globals.updateOptionsState(props.options, props.optionName, newOptionValue)
 }
@@ -17,7 +17,7 @@ function render({props}) {
 
   const optionValue = props.options[optionName]
 
-  const optionItems = props.optionChoices.map((optionChoice) => {
+  const optionItems = props.optionConfig.choices.map((optionChoice) => {
     return (
       <option selected={optionValue === optionChoice}>
         {optionChoice}

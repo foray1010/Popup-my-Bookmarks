@@ -1,15 +1,12 @@
 import element from 'virtual-element'
 
 function afterRender({props}, el) {
-  const optionChoices = props.optionChoices
   const optionValue = props.options[props.optionName]
   const selectButtonCoverEl = el.getElementsByClassName('select-button-cover')[0]
 
-  const buttonIndex = optionChoices.indexOf(optionValue)
-  const itemWidthPct = 100 / optionChoices.length
+  const buttonIndex = optionValue ? 0 : 1
 
-  selectButtonCoverEl.style.width = itemWidthPct + '%'
-  selectButtonCoverEl.style.left = buttonIndex * itemWidthPct + '%'
+  selectButtonCoverEl.style.left = buttonIndex * 50 + '%'
 }
 
 function changeHandler(event, {props}) {
@@ -23,9 +20,8 @@ function render({props}) {
 
   const optionValue = props.options[optionName]
 
-  const optionItems = props.optionChoices.map((optionChoice) => {
-    const buttonText = typeof optionChoice !== 'boolean' ?
-      optionChoice : chrome.i18n.getMessage(optionChoice ? 'opt_yes' : 'opt_no')
+  const optionItems = [true, false].map((optionChoice) => {
+    const buttonText = chrome.i18n.getMessage(optionChoice ? 'opt_yes' : 'opt_no')
     const isChecked = optionValue === optionChoice
     const selectButtonClasses = ['select-button-item']
 
