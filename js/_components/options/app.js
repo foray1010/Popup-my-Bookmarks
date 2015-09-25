@@ -23,15 +23,17 @@ const navBarItems = Immutable([
   }
 ])
 
-function afterMount({}, el, setState) {
+async function afterMount({}, el, setState) {
   globals.setRootState = setState
-}
 
-function initialState(props) {
-  return {
-    currentModule: props.initialCurrentModule,
-    options: Immutable(props.initialOptions)
-  }
+  const currentModule = Object.keys(globals.optionTableMap)[0]
+
+  const options = await globals.getCurrentModuleOptions(currentModule)
+
+  setState({
+    currentModule: currentModule,
+    options: Immutable(options)
+  })
 }
 
 function render({state}) {
@@ -48,4 +50,4 @@ function render({state}) {
   )
 }
 
-export default {afterMount, initialState, render}
+export default {afterMount, render}

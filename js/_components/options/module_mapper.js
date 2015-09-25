@@ -8,12 +8,17 @@ function render({props}) {
     case 'contributors':
       return <Contributors />
 
-    default:
+    case 'control':
+    case 'general':
+    case 'userInterface':
       return (
         <OptionTable
           currentModule={props.currentModule}
           options={props.options} />
       )
+
+    default:
+      return <div />
   }
 }
 

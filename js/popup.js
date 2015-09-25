@@ -35,11 +35,7 @@ import getOptionsConfig from './_components/options/get_options_config'
   globals.rootTree = Immutable(treeInfo)
 
   /* render the app */
-  const defExpandTree = await globals.getFlatTree(String(globals.options.defExpand))
-
-  const app = tree(
-    <App defExpandTree={defExpandTree} />
-  )
+  const app = tree(<App />)
 
   render(app, document.getElementById('container'))
 }().catch((e) => console.error(e.stack))
