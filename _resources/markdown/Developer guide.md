@@ -1,7 +1,7 @@
 ##### Before you start
-1. Install [io.js](//github.com/iojs/io.js) (or [Node.js](//github.com/joyent/node) with no guarantee) via:
+1. Install [Node.js](//github.com/nodejs/node) (version >= 4.0) via:
   - [nvm](//github.com/creationix/nvm) (Linux/Mac)
-  - [io.js official website](//iojs.org) (Windows)
+  - [Node.js official website](//nodejs.org/en/download/) (Windows)
 
 2. Install [gulp.js](//github.com/gulpjs/gulp)
 

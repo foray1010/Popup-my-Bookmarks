@@ -106,7 +106,7 @@ function compileLang(langName, workingDir, options) {
   const isDev = workingDir === devDir
   const thisLang = lang[langName]
 
-  const compileHandler = function(srcPath) {
+  const compileHandler = (srcPath) => {
     const compilerPipe = thisLang.compiler.apply(null, options.compilerConfig)
     const destDir = path.join(workingDir, thisLang.destDir)
 
@@ -124,11 +124,11 @@ function compileLang(langName, workingDir, options) {
   fs.mkdirsSync(path.join(workingDir, thisLang.destDir))
 
   if (isDev) {
-    gulp.watch(thisLang.srcPath, function(event) {
+    gulp.watch(thisLang.srcPath, (event) => {
       const srcPath = path.relative(__dirname, event.path)
 
       compileHandler(srcPath)
-        .on('end', function() {
+        .on('end', () => {
           gutil.log(gutil.colors.magenta(srcPath), 'is compiled')
         })
     })
@@ -150,7 +150,7 @@ function compileManifest(workingDir, updateFn) {
 function getMarkdownData(titleList) {
   const mdSource = path.join(resourcesDir, 'markdown')
 
-  const dataList = titleList.map(function(title) {
+  const dataList = titleList.map((title) => {
     const fileData = fs.readFileSync(path.join(mdSource, `${title}.md`), 'utf-8')
 
     return `## ${title}\n\n${fileData}`
@@ -169,10 +169,10 @@ function initDir(dirPath) {
 gulp.task('default', ['help'])
 
 // compile and zip PmB
-gulp.task('compile-init', function() {
+gulp.task('compile-init', () => {
   const version = argv.version
 
-  const versionCheck = function(x) {
+  const versionCheck = (x) => {
     return (
       x === `${parseInt(x, 10)}` &&
       x >= 0 &&
@@ -190,22 +190,22 @@ gulp.task('compile-init', function() {
   initDir(compileDir)
 })
 
-gulp.task('compile-css', ['compile-init'], function() {
+gulp.task('compile-css', ['compile-init'], () => {
   return compileLang('css', compileDir, {
     compilerConfig: [{'include css': true}],
     miniferConfig: [{keepSpecialComments: 0}]
   })
 })
 
-gulp.task('compile-html', ['compile-init'], function() {
+gulp.task('compile-html', ['compile-init'], () => {
   return compileLang('html', compileDir)
 })
 
-gulp.task('compile-js', ['compile-init'], function() {
+gulp.task('compile-js', ['compile-init'], () => {
   return compileJS(compileDir)
 })
 
-gulp.task('compile-others', ['compile-init'], function() {
+gulp.task('compile-others', ['compile-init'], () => {
   const fileList = ['font', '_locales', 'LICENSE']
 
   for (const fileName of fileList) {
@@ -213,7 +213,7 @@ gulp.task('compile-others', ['compile-init'], function() {
   }
   fs.copySync(path.join(resourcesDir, 'img'), path.join(compileDir, 'img'))
 
-  compileManifest(compileDir, function(manifestJSON) {
+  compileManifest(compileDir, (manifestJSON) => {
     manifestJSON.version = argv.version
   })
 })
@@ -223,35 +223,35 @@ gulp.task('compile-zip', [
   'compile-html',
   'compile-js',
   'compile-others'
-], function() {
+], () => {
   return gulp.src(path.join(compileDir, '**'))
     .pipe(zip(argv.version + '.zip'))
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('compile', ['compile-zip'], function() {
+gulp.task('compile', ['compile-zip'], () => {
   // useless after zipped
   fs.remove(compileDir)
 })
 
 // create a watched folder for testing
-gulp.task('dev-init', function() {
+gulp.task('dev-init', () => {
   initDir(devDir)
 })
 
-gulp.task('dev-css', ['dev-init'], function() {
+gulp.task('dev-css', ['dev-init'], () => {
   return compileLang('css', devDir, {
     compilerConfig: [{'include css': true}]
   })
 })
 
-gulp.task('dev-html', ['dev-init'], function() {
+gulp.task('dev-html', ['dev-init'], () => {
   return compileLang('html', devDir, {
     compilerConfig: [{pretty: true}]
   })
 })
 
-gulp.task('dev-js', ['dev-init'], function() {
+gulp.task('dev-js', ['dev-init'], () => {
   compileJS(devDir)
 })
 
@@ -259,7 +259,7 @@ gulp.task('dev', [
   'dev-css',
   'dev-html',
   'dev-js'
-], function() {
+], () => {
   const fileList = ['font', '_locales']
 
   for (const fileName of fileList) {
@@ -275,24 +275,24 @@ gulp.task('dev', [
     'dir'
   )
 
-  compileManifest(devDir, function(manifestJSON) {
+  compileManifest(devDir, (manifestJSON) => {
     manifestJSON.name += '(dev)'
     manifestJSON.version = '0.0.0.0'
   })
 })
 
 // user guideline
-gulp.task('help', function() {
+gulp.task('help', () => {
   gutil.log('\n' + getMarkdownData(['Developer guide']))
 })
 
 // lints
-gulp.task('lint-css', function() {
+gulp.task('lint-css', () => {
   return gulp.src(lang.css.srcPath)
     .pipe(stylint())
 })
 
-gulp.task('lint-js', function() {
+gulp.task('lint-js', () => {
   return gulp.src([
     'gulpfile.js',
     // check the inner directories too
@@ -306,7 +306,7 @@ gulp.task('lint-js', function() {
 gulp.task('lint', ['lint-css', 'lint-js'])
 
 // generate markdown file
-gulp.task('md', function() {
+gulp.task('md', () => {
   const fileName = argv.make
 
   let fileData
