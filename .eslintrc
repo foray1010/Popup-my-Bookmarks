@@ -33,6 +33,7 @@ rules:
   no-multi-spaces: 2
   no-param-reassign: 0
   no-script-url: 0
+  no-unused-expressions: 0
   no-useless-call: 2
   no-void: 2
   wrap-iife: 0
@@ -72,11 +73,15 @@ rules:
   array-bracket-spacing: 2
   computed-property-spacing: 2
   func-names: 0
+  id-length: 0
   indent:
     - 2
     - 2
     -
       SwitchCase: 1
+  jsx-quotes:
+    - 2
+    - "prefer-single"
   new-cap:
     - 2
     -
@@ -111,9 +116,6 @@ rules:
   react/jsx-boolean-value:
     - 2
     - "never"
-  react/jsx-quotes:
-    - 2
-    - "single"
   react/jsx-uses-react:
     - 2
     -
