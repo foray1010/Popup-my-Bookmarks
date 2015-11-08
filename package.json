@@ -20,10 +20,11 @@
     "virtual-element": "*"
   },
   "devDependencies": {
-    "babel-core": "*",
+    "babel-core": "^5.0.0",
     "babel-eslint": "*",
-    "babel-loader": "*",
-    "babel-runtime": "*",
+    "babel-loader": "^5.0.0",
+    "babel-runtime": "^5.0.0",
+    "buffer": "3.4.3",
     "cson": "*",
     "eslint-config-airbnb": "0.1.0",
     "eslint-plugin-react": "*",
