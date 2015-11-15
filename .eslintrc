@@ -14,12 +14,8 @@ rules:
   comma-dangle:
     - 2
     - "never"
-  no-debugger: 1
-  no-empty-character-class: 2
   no-extra-boolean-cast: 2
-  no-regex-spaces: 2
   no-unexpected-multiline: 2
-  valid-typeof: 2
 
   ##################
   # Best Practices #
@@ -30,8 +26,6 @@ rules:
     - "property"
   no-alert: 0
   no-implicit-coercion: 2
-  no-labels: 2
-  no-multi-spaces: 2
   no-param-reassign: 0
   no-script-url: 0
   no-unused-expressions: 0
@@ -50,7 +44,6 @@ rules:
   #############
   # Variables #
   #############
-  no-undef: 2
   no-unused-vars:
   - 1
   -
@@ -74,7 +67,6 @@ rules:
   array-bracket-spacing: 2
   computed-property-spacing: 2
   func-names: 0
-  id-length: 0
   indent:
     - 2
     - 2
