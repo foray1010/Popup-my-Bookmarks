@@ -25,7 +25,9 @@ rules:
     - 2
     - "property"
   no-alert: 0
+  no-else-return: 0
   no-implicit-coercion: 2
+  no-loop-func: 0
   no-param-reassign: 0
   no-script-url: 0
   no-unused-expressions: 0
