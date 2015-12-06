@@ -237,7 +237,7 @@ function setTooltip(el, props) {
   if (isSearching) {
     const breadcrumbArr = []
 
-    const getBreadcrumb = async function(breadId) {
+    const getBreadcrumb = async function (breadId) {
       const results = await chromep.bookmarks.get(breadId)
 
       const thisItemInfo = results[0]

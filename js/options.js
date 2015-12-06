@@ -6,7 +6,7 @@ import './_components/options/globals'
 import App from './_components/options/app'
 import getOptionsConfig from './_components/options/get_options_config'
 
-!async function() {
+!async function () {
   globals.optionsConfig = await getOptionsConfig()
 
   await globals.initOptionsValue()
