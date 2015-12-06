@@ -6,7 +6,7 @@ import './_components/popup/globals'
 import App from './_components/popup/app'
 import getOptionsConfig from './_components/options/get_options_config'
 
-!async function() {
+!async function () {
   globals.options = Immutable(await chromep.storage.sync.get(null))
 
   /* if first run */

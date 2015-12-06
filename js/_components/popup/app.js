@@ -47,7 +47,7 @@ function contextMenuHandler(event) {
 function initBookmarkEvent() {
   const renewCurrentTrees = () => renewTrees(currentState.trees)
 
-  const renewTrees = debounce(async function(oldTrees) {
+  const renewTrees = debounce(async function (oldTrees) {
     // Promise.all cannot recognize immutable array
     const newTrees = await Promise.all(oldTrees.asMutable().map((treeInfo) => {
       if (treeInfo.id === 'search-result') {
