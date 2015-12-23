@@ -20,7 +20,6 @@ rules:
   ##################
   # Best Practices #
   ##################
-  default-case: 0
   dot-location:
     - 2
     - "property"
@@ -35,22 +34,14 @@ rules:
   no-void: 2
   wrap-iife: 0
 
-  ###############
-  # Strict mode #
-  ###############
-  # babel inserts "use strict" for us
-  strict:
-    - 1
-    - "never"
-
   #############
   # Variables #
   #############
   no-unused-vars:
   - 1
   -
-    vars: "local"
     args: "after-used"
+    vars: "local"
   no-use-before-define: 0
 
   ###########
@@ -94,6 +85,15 @@ rules:
     - 2
     - "never"
 
+  ################
+  # ECMAScript 6 #
+  ################
+  constructor-super: 2
+  generator-star-spacing:
+    - 2
+    - "after"
+  object-shorthand: 0
+
   ##########
   # Legacy #
   ##########
@@ -107,10 +107,6 @@ rules:
   #############
   # JSX style #
   #############
-  react/display-name: 0
-  react/jsx-boolean-value:
-    - 2
-    - "never"
   react/jsx-uses-react:
     - 2
     -

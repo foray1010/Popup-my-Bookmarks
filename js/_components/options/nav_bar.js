@@ -8,7 +8,8 @@ function render({props}) {
       <NavBarItem
         key={navBarItemInfo.module}
         currentModule={props.currentModule}
-        navBarItemInfo={navBarItemInfo} />
+        navBarItemInfo={navBarItemInfo}
+      />
     )
   })
 

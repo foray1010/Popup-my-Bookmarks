@@ -41,10 +41,12 @@ function render({state}) {
     <div id='app'>
       <NavBar
         currentModule={state.currentModule}
-        navBarItems={navBarItems} />
+        navBarItems={navBarItems}
+      />
       <ModuleMapper
         currentModule={state.currentModule}
-        options={state.options} />
+        options={state.options}
+      />
       <Donate />
     </div>
   )

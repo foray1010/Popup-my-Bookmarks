@@ -67,6 +67,8 @@ function getChildrenHiddenStatus(props) {
     case 'no-bookmark':
       childrenHiddenStatus = [true, true, false, false, true]
       break
+
+    default:
   }
 
   return childrenHiddenStatus
@@ -124,6 +126,8 @@ function menuClickEvent(event, {props}) {
     case 11: // Sort by name
       sortByName(menuTarget.parentId)
       break
+
+    default:
   }
 
   closeMenu()
@@ -168,7 +172,8 @@ function render({props}) {
         return (
           <div
             class='item menu-item'
-            onClick={menuClickEvent}>
+            onClick={menuClickEvent}
+          >
             {chrome.i18n.getMessage(menuItemKey)}
           </div>
         )
@@ -260,6 +265,8 @@ async function sortByName(parentId) {
       case 'bookmark':
         classifiedItemsIndex = 2
         break
+
+      default:
     }
 
     selectedClassifiedItems[classifiedItemsIndex].push(itemInfo)

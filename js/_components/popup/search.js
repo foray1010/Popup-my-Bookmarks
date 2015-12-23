@@ -44,14 +44,16 @@ function render() {
         id='search-img'
         src='/img/search.png'
         alt=''
-        draggable='false' />
+        draggable='false'
+      />
       <input
         id='search-input'
         type='search'
         placeholder={chrome.i18n.getMessage('search')}
         tabindex='-1'
         autofocus
-        onInput={debouncedInputHandler} />
+        onInput={debouncedInputHandler}
+      />
     </div>
   )
 }

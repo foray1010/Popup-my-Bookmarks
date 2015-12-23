@@ -159,15 +159,18 @@ function render({state}) {
     <div
       id='app'
       onContextMenu={contextMenuHandler}
-      onMouseDown={mouseDownHandler}>
+      onMouseDown={mouseDownHandler}
+    >
       <Panel
         isSearching={state.isSearching}
-        trees={state.trees} />
+        trees={state.trees}
+      />
       <MenuCover isHidden={isHiddenMenuCover} />
       <Menu
         isSearching={state.isSearching}
         menuTarget={state.menuTarget}
-        mousePos={state.mousePos} />
+        mousePos={state.mousePos}
+      />
       <Editor editorTarget={state.editorTarget} />
     </div>
   )

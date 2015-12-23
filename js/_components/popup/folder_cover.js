@@ -58,7 +58,8 @@ function render({props}) {
       hidden={isHidden}
       onClick={clickCoverHandler}
       onMouseLeave={mouseLeaveHandler}
-      onMouseMove={mouseMoveHandler} />
+      onMouseMove={mouseMoveHandler}
+    />
   )
 }
 

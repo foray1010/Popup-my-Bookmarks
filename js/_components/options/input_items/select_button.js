@@ -37,7 +37,8 @@ function render({props}) {
           value={String(optionChoice)}
           checked={isChecked}
           hidden
-          onChange={changeHandler} />
+          onChange={changeHandler}
+        />
         {buttonText}
       </label>
     )

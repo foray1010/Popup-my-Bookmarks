@@ -17,7 +17,8 @@ function render({props}) {
       optionItems.push(
         <option
           value={String(optionChoiceIndex)}
-          selected={optionChoiceIndex === optionValue}>
+          selected={optionChoiceIndex === optionValue}
+        >
           {optionChoice}
         </option>
       )

@@ -21,6 +21,8 @@ const debouncedMouseHandler = debounce((event, {props}) => {
 
     case 'mouseleave':
       break
+
+    default:
   }
 }, 200)
 
@@ -63,6 +65,8 @@ function clickHandler(event, {props}) {
     case 'bookmark':
       openBookmark(getOpenBookmarkHandlerId(event), itemInfo.url)
       break
+
+    default:
   }
 }
 
@@ -144,6 +148,8 @@ function openBookmark(handlerId, itemUrl) {
         incognito: handlerId === 6
       })
       break
+
+    default:
   }
 
   if (handlerId !== 1 && handlerId !== 4) {
@@ -195,6 +201,8 @@ function render({props}) {
     case 'bookmark':
       iconSrc = `chrome://favicon/${itemInfo.url}`
       break
+
+    default:
   }
 
   if (isSearching) {
@@ -212,7 +220,8 @@ function render({props}) {
       onDragOver={dragOverHandler}
       onDragStart={dragStartHandler}
       onMouseEnter={debouncedMouseHandler}
-      onMouseLeave={debouncedMouseHandler}>
+      onMouseLeave={debouncedMouseHandler}
+    >
       <img class='icon' src={iconSrc} alt='' draggable='false' />
       <div class='no-text-overflow'>{itemTitle}</div>
     </div>

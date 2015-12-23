@@ -25,7 +25,8 @@ function render({props}) {
         isSearching={isSearching}
         itemInfo={itemInfo}
         treeIndex={treeIndex}
-        trees={trees} />
+        trees={trees}
+      />
     )
   }
 
@@ -61,16 +62,19 @@ function render({props}) {
       <TreeHeader
         isHidden={isSearching || isRootBox}
         treeIndex={treeIndex}
-        trees={trees} />
+        trees={trees}
+      />
       <div
         class='bookmark-list'
         onScroll={scrollHandler}
-        onWheel={wheelHandler}>
+        onWheel={wheelHandler}
+      >
         {treeItems}
       </div>
       <FolderCover
         treeIndex={treeIndex}
-        trees={trees} />
+        trees={trees}
+      />
     </div>
   )
 }

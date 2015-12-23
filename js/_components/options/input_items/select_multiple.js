@@ -37,7 +37,8 @@ function render({props}) {
             type='checkbox'
             value={String(optionChoiceIndex)}
             checked={isChecked}
-            onChange={changeHandler} />
+            onChange={changeHandler}
+          />
           {optionChoice}
         </label>
       )
