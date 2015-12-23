@@ -28,6 +28,8 @@ function render({props}) {
 
       case 'string':
         return InputSelect
+
+      default:
     }
   })()
 
@@ -38,7 +40,8 @@ function render({props}) {
         <InputItem
           optionConfig={optionConfig}
           optionName={optionName}
-          options={props.options} />
+          options={props.options}
+        />
       </div>
     </div>
   )

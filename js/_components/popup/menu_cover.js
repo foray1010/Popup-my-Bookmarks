@@ -15,7 +15,8 @@ function render({props}) {
       id='menu-cover'
       class='cover'
       hidden={props.isHidden}
-      onClick={clickHandler} />
+      onClick={clickHandler}
+    />
   )
 }
 

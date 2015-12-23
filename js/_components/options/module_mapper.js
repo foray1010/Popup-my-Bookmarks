@@ -14,7 +14,8 @@ function render({props}) {
       return (
         <OptionTable
           currentModule={props.currentModule}
-          options={props.options} />
+          options={props.options}
+        />
       )
 
     default:

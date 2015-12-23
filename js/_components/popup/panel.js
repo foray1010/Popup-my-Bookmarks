@@ -20,7 +20,8 @@ function render({props}) {
         key={treeInfo.id}
         isSearching={isSearching}
         treeIndex={treeIndex}
-        trees={trees} />
+        trees={trees}
+      />
     )
   })
 

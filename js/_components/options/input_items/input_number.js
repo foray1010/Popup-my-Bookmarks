@@ -29,7 +29,8 @@ function render({props}) {
       min={optionConfig.minimum}
       max={optionConfig.maximum}
       value={String(optionValue)}
-      onChange={changeHandler} />
+      onChange={changeHandler}
+    />
   )
 }
 

@@ -9,7 +9,8 @@ function render({props}) {
       <OptionItem
         key={optionName}
         optionName={optionName}
-        options={props.options} />
+        options={props.options}
+      />
     )
   })
 
@@ -20,7 +21,8 @@ function render({props}) {
       </div>
       <OptionButton
         currentModule={props.currentModule}
-        options={props.options} />
+        options={props.options}
+      />
     </div>
   )
 }
