@@ -41,7 +41,7 @@ Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG
 1. compile
 
   ```
-  gulp compile --version x.y.z.ddmm
+  gulp compile --ver x.y.z.ddmm
   ```
 
   To compile the whole extension and output a zip file for uploading to Chrome Web Store
