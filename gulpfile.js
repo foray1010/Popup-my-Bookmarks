@@ -8,8 +8,8 @@ const fs = require('fs-extra')
 const gulp = require('gulp')
 const gutil = require('gulp-util')
 const jade = require('gulp-jade')
-const minifyCss = require('gulp-minify-css')
 const named = require('vinyl-named')
+const nano = require('gulp-cssnano')
 const path = require('path')
 const stylint = require('gulp-stylint')
 const stylus = require('gulp-stylus')
@@ -28,7 +28,7 @@ const lang = {
     destDir: 'css',
     srcPath: path.join('css', '*') + '.styl',
     compiler: stylus,
-    minifer: minifyCss
+    minifer: nano
   },
   html: {
     destDir: '.',
@@ -171,7 +171,7 @@ gulp.task('default', ['help'])
 
 // compile and zip PmB
 gulp.task('compile-init', () => {
-  const version = argv.version
+  const version = argv.ver
 
   const versionCheck = (x) => {
     return (
@@ -194,7 +194,10 @@ gulp.task('compile-init', () => {
 gulp.task('compile-css', ['compile-init'], () => {
   return compileLang('css', compileDir, {
     compilerConfig: [{'include css': true}],
-    miniferConfig: [{keepSpecialComments: 0}]
+    miniferConfig: [{
+      autoprefixer: false,
+      discardComments: {removeAll: true}
+    }]
   })
 })
 
@@ -215,7 +218,7 @@ gulp.task('compile-others', ['compile-init'], () => {
   fs.copySync(path.join(resourcesDir, 'img'), path.join(compileDir, 'img'))
 
   compileManifest(compileDir, (manifestJSON) => {
-    manifestJSON.version = argv.version
+    manifestJSON.version = argv.ver
   })
 })
 
@@ -226,7 +229,7 @@ gulp.task('compile-zip', [
   'compile-others'
 ], () => {
   return gulp.src(path.join(compileDir, '**'))
-    .pipe(zip(argv.version + '.zip'))
+    .pipe(zip(argv.ver + '.zip'))
     .pipe(gulp.dest('.'))
 })
 
