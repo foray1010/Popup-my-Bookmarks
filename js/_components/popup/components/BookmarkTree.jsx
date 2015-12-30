@@ -1,9 +1,9 @@
 import element from 'virtual-element'
 
-import BookmarkItem from './bookmark_item'
-import FolderCover from './folder_cover'
-import NoResult from './no_result'
-import TreeHeader from './tree_header'
+import BookmarkItem from './BookmarkItem'
+import FolderCover from './FolderCover'
+import NoResult from './NoResult'
+import TreeHeader from './TreeHeader'
 
 function afterRender(component, el) {
   setHeight(el)

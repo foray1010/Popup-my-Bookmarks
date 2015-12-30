@@ -1,11 +1,11 @@
 import debounce from 'lodash.debounce'
 import element from 'virtual-element'
 
-import Editor from './editor'
-import {getSearchResult} from './search'
-import Menu from './menu'
-import MenuCover from './menu_cover'
-import Panel from './panel'
+import Editor from '../components/Editor'
+import {getSearchResult} from '../components/Search'
+import Menu from '../components/Menu'
+import MenuCover from '../components/MenuCover'
+import Panel from '../components/Panel'
 
 let currentState
 

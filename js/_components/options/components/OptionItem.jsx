@@ -1,10 +1,10 @@
 import element from 'virtual-element'
 
-import InputNumber from './input_items/input_number'
-import InputSelect from './input_items/input_select'
-import SelectButton from './input_items/select_button'
-import SelectMultiple from './input_items/select_multiple'
-import SelectString from './input_items/select_string'
+import InputNumber from './input_items/InputNumber'
+import InputSelect from './input_items/InputSelect'
+import SelectButton from './input_items/SelectButton'
+import SelectMultiple from './input_items/SelectMultiple'
+import SelectString from './input_items/SelectString'
 
 function render({props}) {
   const optionName = props.optionName
