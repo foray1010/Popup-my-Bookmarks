@@ -1,7 +1,7 @@
 import element from 'virtual-element'
 
-import Contributors from './contributors'
-import OptionTable from './option_table'
+import Contributors from './Contributors'
+import OptionTable from './OptionTable'
 
 function render({props}) {
   switch (props.currentModule) {

@@ -1,7 +1,7 @@
 import element from 'virtual-element'
 
-import BookmarkTree from './bookmark_tree'
-import Search from './search'
+import BookmarkTree from './BookmarkTree'
+import Search from './Search'
 
 function render({props}) {
   const isSearching = props.isSearching

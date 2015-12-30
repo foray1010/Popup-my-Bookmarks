@@ -1,6 +1,6 @@
 import element from 'virtual-element'
 
-import NavBarItem from './nav_bar_item'
+import NavBarItem from './NavBarItem'
 
 function render({props}) {
   const navItems = props.navBarItems.asMutable().map((navBarItemInfo) => {

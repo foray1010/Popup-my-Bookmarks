@@ -37,7 +37,7 @@ const lang = {
   },
   js: {
     destDir: 'js',
-    srcPath: path.join('js', '*') + '.js'
+    srcPath: path.join('js', '*') + '.jsx'
   }
 }
 
@@ -81,14 +81,15 @@ function compileJS(workingDir) {
       module: {
         loaders: [
           {
-            test: /\.js$/,
+            test: /\.js(x)?$/,
             loader: 'babel-loader'
           }
         ]
       },
       plugins: webpackPlugins,
       resolve: {
-        alias: resolveAlias
+        alias: resolveAlias,
+        extensions: ['', '.js', '.jsx', '.json']
       },
       stats: {
         timings: true,

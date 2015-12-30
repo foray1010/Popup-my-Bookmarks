@@ -1,8 +1,8 @@
 import element from 'virtual-element'
 
-import Donate from './donate'
-import NavBar from './nav_bar'
-import ModuleMapper from './module_mapper'
+import Donate from '../components/Donate'
+import NavBar from '../components/NavBar'
+import ModuleMapper from '../components/ModuleMapper'
 
 const navBarItems = Immutable([
   {

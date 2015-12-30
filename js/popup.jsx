@@ -3,8 +3,8 @@ import {render, tree} from 'deku'
 
 import './_components/common'
 import './_components/popup/globals'
-import App from './_components/popup/app'
-import getOptionsConfig from './_components/options/get_options_config'
+import App from './_components/popup/containers/App'
+import getOptionsConfig from './_components/options/getOptionsConfig'
 
 !async function () {
   globals.options = Immutable(await chromep.storage.sync.get(null))

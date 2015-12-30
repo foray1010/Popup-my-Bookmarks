@@ -1,7 +1,7 @@
 import element from 'virtual-element'
 
-import OptionButton from './option_button'
-import OptionItem from './option_item'
+import OptionButton from './OptionButton'
+import OptionItem from './OptionItem'
 
 function render({props}) {
   const optionTableItems = globals.optionTableMap[props.currentModule].map((optionName) => {
