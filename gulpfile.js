@@ -44,7 +44,6 @@ const lang = {
 // language handlers
 function compileJS(workingDir) {
   const isDev = workingDir === devDir
-  const resolveAlias = {}
   const thisLang = lang.js
   const webpackPlugins = [
     new webpack.optimize.CommonsChunkPlugin('common.js'),
@@ -54,12 +53,11 @@ function compileJS(workingDir) {
   const destDir = path.join(workingDir, thisLang.destDir)
   const srcPath = thisLang.srcPath
 
-  if (!isDev) {
-    // production build does not freeze the object,
-    // which significantly improves performance
-    resolveAlias['seamless-immutable'] = 'seamless-immutable/' +
-      'seamless-immutable.production.min'
+  webpackPlugins.push(new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(isDev ? 'development' : 'production')
+  }))
 
+  if (!isDev) {
     webpackPlugins.push(new webpack.optimize.UglifyJsPlugin({
       compress: {
         drop_console: true,
@@ -88,7 +86,6 @@ function compileJS(workingDir) {
       },
       plugins: webpackPlugins,
       resolve: {
-        alias: resolveAlias,
         extensions: ['', '.js', '.jsx', '.json']
       },
       stats: {
