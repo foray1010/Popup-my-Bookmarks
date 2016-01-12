@@ -1,36 +1,77 @@
-import element from 'virtual-element'
+import {element} from 'deku'
 
-function afterUpdate({props}) {
-  const optionInput = document.getElementsByName(props.optionName)[0]
+import {updateSingleOption} from '../../actions'
 
-  optionInput.focus()
+const changeHandler = (model) => (evt) => {
+  const {dispatch, props} = model
+
+  const {optionName} = props
+
+  const newOptionValue = evt.target.value.trim().replace(/\s+/g, ' ')
+
+  dispatch(updateSingleOption(optionName, newOptionValue))
 }
 
-function changeHandler(event, {props}) {
-  const newOptionValue = event.delegateTarget.value.trim().replace('\s+', ' ')
+const InputSelect = {
+  onUpdate(model) {
+    const {props} = model
 
-  globals.updateOptionsState(props.options, props.optionName, newOptionValue)
-}
+    const {optionName} = props
 
-function render({props}) {
-  const optionName = props.optionName
+    const optionInput = document.getElementsByName(optionName)[0]
 
-  const optionValue = props.options[optionName]
+    optionInput.focus()
+  },
 
-  const optionItems = props.optionConfig.choices.map((optionChoice) => {
+  render(model) {
+    const {context, props} = model
+
+    const {optionConfig, optionName} = props
+    const {options} = context
+
+    const compiledChangeHandler = changeHandler(model)
+    const optionValue = options[optionName]
+
+    const optionItems = optionConfig.choices.map((optionChoice, optionChoiceIndex) => {
+      return (
+        <OptionInput
+          key={String(optionChoiceIndex)}
+          optionChoice={optionChoice}
+          optionName={optionName}
+        />
+      )
+    })
+
     return (
-      <option selected={optionValue === optionChoice}>
+      <div class='input-select-box'>
+        <input
+          name={optionName}
+          type='text'
+          value={optionValue}
+          onChange={compiledChangeHandler}
+        />
+        <select onChange={compiledChangeHandler}>{optionItems}</select>
+      </div>
+    )
+  }
+}
+
+const OptionInput = {
+  render(model) {
+    const {context, props} = model
+
+    const {optionChoice, optionName} = props
+    const {options} = context
+
+    const optionValue = options[optionName]
+
+    return (
+      // <option selected={optionValue === optionChoice}> // test
+      <option>
         {optionChoice}
       </option>
     )
-  })
-
-  return (
-    <div class='input-select-box'>
-      <input name={optionName} type='text' value={optionValue} onChange={changeHandler} />
-      <select onChange={changeHandler}>{optionItems}</select>
-    </div>
-  )
+  }
 }
 
-export default {afterUpdate, render}
+export default InputSelect

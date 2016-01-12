@@ -43,57 +43,17 @@ const lang = {
 
 // language handlers
 function compileJS(workingDir) {
-  const isDev = workingDir === devDir
+  // define in here because it depends on process.env.NODE_ENV
+  const webpackConfig = require('./webpack.config')
+
   const thisLang = lang.js
-  const webpackPlugins = [
-    new webpack.optimize.CommonsChunkPlugin('common.js'),
-    new webpack.optimize.DedupePlugin()
-  ]
 
   const destDir = path.join(workingDir, thisLang.destDir)
   const srcPath = thisLang.srcPath
 
-  webpackPlugins.push(new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(isDev ? 'development' : 'production')
-  }))
-
-  if (!isDev) {
-    webpackPlugins.push(new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        drop_console: true,
-        pure_getters: true,
-        unsafe: true,
-        warnings: false
-      },
-      output: {
-        comments: false,
-        screw_ie8: true
-      }
-    }))
-  }
-
   return gulp.src(srcPath)
     .pipe(named())
-    .pipe(webpackStream({
-      devtool: isDev ? 'source-map' : undefined,
-      module: {
-        loaders: [
-          {
-            test: /\.js(x)?$/,
-            loader: 'babel-loader'
-          }
-        ]
-      },
-      plugins: webpackPlugins,
-      resolve: {
-        extensions: ['', '.js', '.jsx', '.json']
-      },
-      stats: {
-        timings: true,
-        version: false
-      },
-      watch: isDev
-    }, webpack))
+    .pipe(webpackStream(webpackConfig, webpack))
     .pipe(gulp.dest(destDir))
 }
 
@@ -102,7 +62,7 @@ function compileLang(langName, workingDir, options) {
     options = {}
   }
 
-  const isDev = workingDir === devDir
+  const isDev = process.env.NODE_ENV === 'development'
   const thisLang = lang[langName]
 
   const compileHandler = (srcPath) => {
@@ -123,8 +83,8 @@ function compileLang(langName, workingDir, options) {
   fs.mkdirsSync(path.join(workingDir, thisLang.destDir))
 
   if (isDev) {
-    gulp.watch(thisLang.srcPath, (event) => {
-      const srcPath = path.relative(__dirname, event.path)
+    gulp.watch(thisLang.srcPath, (evt) => {
+      const srcPath = path.relative(__dirname, evt.path)
 
       compileHandler(srcPath)
         .on('end', () => {
@@ -168,7 +128,9 @@ function initDir(dirPath) {
 gulp.task('default', ['help'])
 
 // compile and zip PmB
-gulp.task('compile-init', () => {
+gulp.task('compile:init', () => {
+  process.env.NODE_ENV = 'production'
+
   const version = argv.ver
 
   const versionCheck = (x) => {
@@ -189,7 +151,7 @@ gulp.task('compile-init', () => {
   initDir(compileDir)
 })
 
-gulp.task('compile-css', ['compile-init'], () => {
+gulp.task('compile:css', ['compile:init'], () => {
   return compileLang('css', compileDir, {
     compilerConfig: [{'include css': true}],
     miniferConfig: [{
@@ -199,15 +161,15 @@ gulp.task('compile-css', ['compile-init'], () => {
   })
 })
 
-gulp.task('compile-html', ['compile-init'], () => {
+gulp.task('compile:html', ['compile:init'], () => {
   return compileLang('html', compileDir)
 })
 
-gulp.task('compile-js', ['compile-init'], () => {
+gulp.task('compile:js', ['compile:init'], () => {
   return compileJS(compileDir)
 })
 
-gulp.task('compile-others', ['compile-init'], () => {
+gulp.task('compile:others', ['compile:init'], () => {
   const fileList = ['font', '_locales', 'LICENSE']
 
   for (const fileName of fileList) {
@@ -220,47 +182,49 @@ gulp.task('compile-others', ['compile-init'], () => {
   })
 })
 
-gulp.task('compile-zip', [
-  'compile-css',
-  'compile-html',
-  'compile-js',
-  'compile-others'
+gulp.task('compile:zip', [
+  'compile:css',
+  'compile:html',
+  'compile:js',
+  'compile:others'
 ], () => {
   return gulp.src(path.join(compileDir, '**'))
     .pipe(zip(argv.ver + '.zip'))
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('compile', ['compile-zip'], () => {
+gulp.task('compile', ['compile:zip'], () => {
   // useless after zipped
   fs.remove(compileDir)
 })
 
 // create a watched folder for testing
-gulp.task('dev-init', () => {
+gulp.task('dev:init', () => {
+  process.env.NODE_ENV = 'development'
+
   initDir(devDir)
 })
 
-gulp.task('dev-css', ['dev-init'], () => {
+gulp.task('dev:css', ['dev:init'], () => {
   return compileLang('css', devDir, {
     compilerConfig: [{'include css': true}]
   })
 })
 
-gulp.task('dev-html', ['dev-init'], () => {
+gulp.task('dev:html', ['dev:init'], () => {
   return compileLang('html', devDir, {
     compilerConfig: [{pretty: true}]
   })
 })
 
-gulp.task('dev-js', ['dev-init'], () => {
+gulp.task('dev:js', ['dev:init'], () => {
   compileJS(devDir)
 })
 
 gulp.task('dev', [
-  'dev-css',
-  'dev-html',
-  'dev-js'
+  'dev:css',
+  'dev:html',
+  'dev:js'
 ], () => {
   const fileList = ['font', '_locales']
 

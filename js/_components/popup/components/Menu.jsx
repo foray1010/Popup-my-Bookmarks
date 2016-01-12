@@ -1,102 +1,28 @@
-import element from 'virtual-element'
+import {element} from 'deku'
 
-async function addCurrentPage(menuTarget) {
-  const results = await chromep.tabs.query({
-    currentWindow: true,
-    active: true
-  })
+import {
+  updateEditorTarget,
+  updateMenuTarget
+} from '../actions'
 
-  const currentTab = results[0]
+const menuId = 'menu'
 
-  createBookmarkItem(menuTarget, currentTab.title, currentTab.url)
-}
+const menuItemClickHandler = (model) => (evt) => {
+  const {context, dispatch} = model
 
-function afterRender({props}, el) {
-  setMenuPos(props, el)
-}
+  const {menuTarget} = context
 
-function afterUpdate({props}, prevProps) {
-  const menuTarget = props.menuTarget
-  const prevMenuTarget = prevProps.menuTarget
-
-  if (prevMenuTarget !== menuTarget) {
-    if (menuTarget) {
-      toggleSelected(menuTarget, 'add')
-    }
-
-    if (prevMenuTarget) {
-      toggleSelected(prevMenuTarget, 'remove')
-    }
-  }
-}
-
-function closeMenu() {
-  globals.resetBodySize()
-
-  globals.setRootState({
-    menuTarget: null
-  })
-}
-
-function createBookmarkItem(menuTarget, title, url) {
-  chrome.bookmarks.create({
-    title,
-    url,
-    parentId: menuTarget.parentId,
-    index: menuTarget.index + 1
-  })
-}
-
-function getChildrenHiddenStatus(props) {
-  const menuTarget = props.menuTarget
-
-  let childrenHiddenStatus = [false, false, false, false, false]
-
-  switch (globals.getBookmarkType(menuTarget)) {
-    case 'root-folder':
-      childrenHiddenStatus = [false, true, true, true, true]
-      break
-
-    case 'bookmark':
-      if (props.isSearching) {
-        childrenHiddenStatus = [false, false, false, true, true]
-      }
-
-      break
-
-    case 'no-bookmark':
-      childrenHiddenStatus = [true, true, false, false, true]
-      break
-
-    default:
-  }
-
-  return childrenHiddenStatus
-}
-
-function getMenuItemNum(menuItem) {
-  const menuItemList = document.getElementsByClassName('menu-item')
-
-  return Array.prototype.indexOf.call(menuItemList, menuItem)
-}
-
-function menuClickEvent(event, {props}) {
-  const menuTarget = props.menuTarget
-  const target = event.target
-
-  const menuItemNum = getMenuItemNum(target)
+  const menuItemNum = getMenuItemNum(evt.target)
 
   switch (menuItemNum) {
     case 0: // Open bookmark(s) in background tab or this window
     case 1: // in new window
     case 2: // in incognito window
-      globals.openMultipleBookmarks(menuTarget, menuItemNum)
+      globals.openMultipleBookmarks(model, menuTarget, menuItemNum)
       break
 
     case 3: // Edit... or Rename...
-      globals.setRootState({
-        editorTarget: menuTarget
-      })
+      dispatch(updateEditorTarget(menuTarget))
       break
 
     case 4: // Delete
@@ -130,7 +56,68 @@ function menuClickEvent(event, {props}) {
     default:
   }
 
-  closeMenu()
+  closeMenu(model)
+}
+
+async function addCurrentPage(menuTarget) {
+  const results = await chromep.tabs.query({
+    currentWindow: true,
+    active: true
+  })
+
+  const currentTab = results[0]
+
+  createBookmarkItem(menuTarget, currentTab.title, currentTab.url)
+}
+
+function closeMenu(model) {
+  const {dispatch} = model
+
+  globals.resetBodySize()
+
+  dispatch(updateMenuTarget(null))
+}
+
+function createBookmarkItem(menuTarget, title, url) {
+  chrome.bookmarks.create({
+    index: menuTarget.index + 1,
+    parentId: menuTarget.parentId,
+    title: title,
+    url: url
+  })
+}
+
+function getChildrenHiddenStatus(context) {
+  const {menuTarget, searchKeyword} = context
+
+  let childrenHiddenStatus = [false, false, false, false, false]
+
+  switch (globals.getBookmarkType(menuTarget)) {
+    case 'root-folder':
+      childrenHiddenStatus = [false, true, true, true, true]
+      break
+
+    case 'bookmark':
+      if (searchKeyword) {
+        childrenHiddenStatus = [false, false, false, true, true]
+      }
+
+      break
+
+    case 'no-bookmark':
+      childrenHiddenStatus = [true, true, false, false, true]
+      break
+
+    default:
+  }
+
+  return childrenHiddenStatus
+}
+
+function getMenuItemNum(menuItem) {
+  const menuItemList = document.getElementsByClassName('menu-item')
+
+  return Array.prototype.indexOf.call(menuItemList, menuItem)
 }
 
 function removeBookmarkItem(menuTarget) {
@@ -141,54 +128,12 @@ function removeBookmarkItem(menuTarget) {
   }
 }
 
-function render({props}) {
-  const menuTarget = props.menuTarget
+function setMenuPosition(model) {
+  const {context} = model
 
-  const isHidden = !menuTarget
+  const {menuTarget, mousePosition} = context
 
-  let menuItems
-
-  if (menuTarget) {
-    const childrenHiddenStatus = getChildrenHiddenStatus(props)
-    const menuPattern = [
-      [],
-      [],
-      ['cut', 'copy', 'paste'],
-      ['addPage', 'addFolder', 'addSeparator'],
-      ['sortByName']
-    ]
-
-    if (globals.isFolder(menuTarget)) {
-      menuPattern[0] = ['openAll', 'openAllInN', 'openAllInI']
-      menuPattern[1] = ['rename', 'del']
-    } else {
-      menuPattern[0] = ['openInB', 'openInN', 'openInI']
-      menuPattern[1] = ['edit', 'del']
-    }
-
-    menuItems = menuPattern.map((menuAreaKeys, menuAreaIndex) => {
-      const isMenuAreaHidden = childrenHiddenStatus[menuAreaIndex]
-      const menuAreaItems = menuAreaKeys.map((menuItemKey) => {
-        return (
-          <div
-            class='item menu-item'
-            onClick={menuClickEvent}
-          >
-            {chrome.i18n.getMessage(menuItemKey)}
-          </div>
-        )
-      })
-
-      return <div hidden={isMenuAreaHidden}>{menuAreaItems}</div>
-    })
-  }
-
-  return <div id='menu' hidden={isHidden}>{menuItems}</div>
-}
-
-function setMenuPos(props, el) {
-  const mousePos = props.mousePos
-  const menuTarget = props.menuTarget
+  const el = document.getElementById(menuId)
 
   const isHidden = !menuTarget
 
@@ -204,8 +149,8 @@ function setMenuPos(props, el) {
     const bodyWidth = body.offsetWidth
     const htmlHeight = html.clientHeight
 
-    const bottomPos = htmlHeight - menuHeight - mousePos.y
-    const rightPos = bodyWidth - menuWidth - mousePos.x
+    const bottomPos = htmlHeight - menuHeight - mousePosition.y
+    const rightPos = bodyWidth - menuWidth - mousePosition.x
 
     if (menuHeight > htmlHeight) {
       body.style.height = menuHeight + 'px'
@@ -296,12 +241,57 @@ async function sortByName(parentId) {
   })
 }
 
-function toggleSelected(menuTarget, toggleParam) {
-  const menuTargetEl = document.getElementById(menuTarget.id)
+const Menu = {
+  onUpdate(model) {
+    setMenuPosition(model)
+  },
 
-  if (menuTargetEl) {
-    menuTargetEl.classList[toggleParam]('selected')
+  render(model) {
+    const {context} = model
+
+    const {menuTarget} = context
+
+    const isHidden = !menuTarget
+
+    let menuItems
+
+    if (menuTarget) {
+      const childrenHiddenStatus = getChildrenHiddenStatus(context)
+      const menuPattern = [
+        [],
+        [],
+        ['cut', 'copy', 'paste'],
+        ['addPage', 'addFolder', 'addSeparator'],
+        ['sortByName']
+      ]
+
+      if (globals.isFolder(menuTarget)) {
+        menuPattern[0] = ['openAll', 'openAllInN', 'openAllInI']
+        menuPattern[1] = ['rename', 'del']
+      } else {
+        menuPattern[0] = ['openInB', 'openInN', 'openInI']
+        menuPattern[1] = ['edit', 'del']
+      }
+
+      menuItems = menuPattern.map((menuAreaKeys, menuAreaIndex) => {
+        const isMenuAreaHidden = childrenHiddenStatus[menuAreaIndex]
+        const menuAreaItems = menuAreaKeys.map((menuItemKey) => {
+          return (
+            <div
+              class='item menu-item'
+              onClick={menuItemClickHandler(model)}
+            >
+              {chrome.i18n.getMessage(menuItemKey)}
+            </div>
+          )
+        })
+
+        return <div hidden={isMenuAreaHidden}>{menuAreaItems}</div>
+      })
+    }
+
+    return <div id={menuId} hidden={isHidden}>{menuItems}</div>
   }
 }
 
-export default {afterRender, afterUpdate, render}
+export default Menu

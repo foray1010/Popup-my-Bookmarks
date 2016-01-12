@@ -1,19 +1,25 @@
-import element from 'virtual-element'
+import {element} from 'deku'
 
-function afterRender({props}, el) {
-  const isHidden = !props.editorTarget
+import {updateEditorTarget} from '../actions'
 
-  setEditorPos(props, el)
+const editorId = 'editor'
+const msgCancel = chrome.i18n.getMessage('cancel')
+const msgConfirm = chrome.i18n.getMessage('confirm')
+const msgEdit = chrome.i18n.getMessage('edit')
+const msgRename = chrome.i18n.getMessage('rename')
 
-  if (!isHidden) {
-    // auto focus to title field
-    el.getElementsByTagName('input')[0].focus()
-  }
+const clickCancelHandler = (model) => () => {
+  const {dispatch} = model
+
+  closeEditor(dispatch)
 }
 
-function clickConfirmHandler(event, {props}) {
-  const editorInput = document.getElementById('editor').getElementsByTagName('input')
-  const editorTarget = props.editorTarget
+const clickConfirmHandler = (model) => () => {
+  const {context, dispatch} = model
+
+  const {editorTarget} = context
+
+  const editorInput = document.getElementById(editorId).getElementsByTagName('input')
 
   const updatedTitle = editorInput[0].value
 
@@ -28,56 +34,22 @@ function clickConfirmHandler(event, {props}) {
     url: updatedUrl
   })
 
-  closeEditor()
+  closeEditor(dispatch)
 }
 
-function closeEditor() {
+function closeEditor(dispatch) {
   globals.resetBodySize()
 
-  globals.setRootState({
-    editorTarget: null
-  })
+  dispatch(updateEditorTarget(null))
 }
 
-function render({props}) {
-  const editorTarget = props.editorTarget
-  const msgCancel = chrome.i18n.getMessage('cancel')
-  const msgConfirm = chrome.i18n.getMessage('confirm')
+function setEditorPosition(context, el) {
+  const {editorTarget} = context
 
   const isHidden = !editorTarget
 
-  let editorTitle
-  let isFolderItem
-  let itemTitle
-  let itemUrl
-
-  if (editorTarget) {
-    itemTitle = editorTarget.title
-    itemUrl = editorTarget.url
-
-    isFolderItem = globals.isFolder(editorTarget)
-
-    editorTitle = chrome.i18n.getMessage(isFolderItem ? 'rename' : 'edit')
-  }
-
-  return (
-    <div id='editor' class='panel-width' hidden={isHidden}>
-      <span id='editor-title'>{editorTitle}</span>
-      <input type='text' value={itemTitle} />
-      <input type='text' value={itemUrl} hidden={isFolderItem} />
-      <button onClick={clickConfirmHandler}>{msgConfirm}</button>
-      <button onClick={closeEditor}>{msgCancel}</button>
-    </div>
-  )
-}
-
-function setEditorPos(props, el) {
-  const editorTarget = props.editorTarget
-
-  const isHidden = !editorTarget
-
-  let bottomPosPx = ''
-  let leftPosPx = ''
+  let bottomPositionPx = ''
+  let leftPositionPx = ''
 
   if (!isHidden) {
     const body = document.body
@@ -88,18 +60,66 @@ function setEditorPos(props, el) {
     const editorTargetOffset = editorTargetEl.getBoundingClientRect()
     const htmlHeight = html.clientHeight
 
-    const bottomPos = htmlHeight - editorHeight - editorTargetOffset.top
+    const bottomPosition = htmlHeight - editorHeight - editorTargetOffset.top
 
     if (editorHeight > htmlHeight) {
       body.style.height = editorHeight + 'px'
     }
 
-    bottomPosPx = Math.max(bottomPos, 0) + 'px'
-    leftPosPx = editorTargetOffset.left + 'px'
+    bottomPositionPx = Math.max(bottomPosition, 0) + 'px'
+    leftPositionPx = editorTargetOffset.left + 'px'
   }
 
-  el.style.bottom = bottomPosPx
-  el.style.left = leftPosPx
+  el.style.bottom = bottomPositionPx
+  el.style.left = leftPositionPx
 }
 
-export default {afterRender, render}
+const Editor = {
+  onUpdate(model) {
+    const {context} = model
+
+    const el = document.getElementById(editorId)
+    const isHidden = !context.editorTarget
+
+    setEditorPosition(context, el)
+
+    if (!isHidden) {
+      // auto focus to title field
+      el.getElementsByTagName('input')[0].focus()
+    }
+  },
+
+  render(model) {
+    const {context} = model
+
+    const {editorTarget} = context
+
+    const isHidden = !editorTarget
+
+    let editorTitle
+    let isFolderItem = false
+    let itemTitle
+    let itemUrl
+
+    if (editorTarget) {
+      itemTitle = editorTarget.title
+      itemUrl = editorTarget.url
+
+      isFolderItem = globals.isFolder(editorTarget)
+
+      editorTitle = isFolderItem ? msgRename : msgEdit
+    }
+
+    return (
+      <div id={editorId} class='panel-width' hidden={isHidden}>
+        <span id='editor-title'>{editorTitle}</span>
+        <input type='text' value={itemTitle} />
+        <input type='text' value={itemUrl} hidden={isFolderItem} />
+        <button onClick={clickConfirmHandler(model)}>{msgConfirm}</button>
+        <button onClick={clickCancelHandler(model)}>{msgCancel}</button>
+      </div>
+    )
+  }
+}
+
+export default Editor

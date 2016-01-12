@@ -53,6 +53,12 @@ window.globals = {
     return treeInfo
   },
 
+  async getFirstTree(options) {
+    const firstTree = await globals.getFlatTree(String(options.defExpand))
+
+    return firstTree
+  },
+
   getSlicedTrees(trees, removeFromIndex) {
     if (trees.length > removeFromIndex) {
       return trees.slice(0, removeFromIndex)
@@ -61,7 +67,9 @@ window.globals = {
     return trees
   },
 
-  async openMultipleBookmarks(itemInfo, menuItemNum) {
+  async openMultipleBookmarks(model, itemInfo, menuItemNum) {
+    const {context} = model
+
     const urlList = []
 
     if (globals.isFolder(itemInfo)) {
@@ -79,7 +87,7 @@ window.globals = {
         'askOpenAll', String(urlList.length)
       )
 
-      if (globals.options.warnOpenMany &&
+      if (context.options.warnOpenMany &&
           urlList.length > 5 &&
           !confirm(msgAskOpenAll)) {
         return
@@ -114,16 +122,6 @@ window.globals = {
       chrome.runtime.openOptionsPage()
     } else {
       chrome.tabs.create({url: 'options.html'})
-    }
-  },
-
-  removeTreeInfoFromIndex(trees, removeFromIndex) {
-    const slicedTrees = globals.getSlicedTrees(trees, removeFromIndex)
-
-    if (trees !== slicedTrees) {
-      globals.setRootState({
-        trees: slicedTrees
-      })
     }
   },
 

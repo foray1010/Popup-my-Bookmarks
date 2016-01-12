@@ -1,14 +1,41 @@
+import {element} from 'deku'
 import debounce from 'lodash.debounce'
-import element from 'virtual-element'
 
-const debouncedInputHandler = debounce(inputHandler, 200)
+import {
+  updateSearchKeyword,
+  updateTrees
+} from '../actions'
 
-let keyword = ''
+const msgSearch = chrome.i18n.getMessage('search')
 
-async function getSearchResult() {
-  const result = await chromep.bookmarks.search(keyword)
+const debouncedInputHandler = (model) => debounce(async (evt) => {
+  const {context, dispatch} = model
 
-  const filteredResult = searchResultFilter(result)
+  const {options} = context
+
+  const newSearchKeyword = evt.target.value.trim().replace(/\s+/g, ' ')
+  const newTrees = []
+
+  if (newSearchKeyword === '') {
+    const defExpandTree = await globals.getFirstTree(options)
+
+    newTrees.push(defExpandTree)
+  } else {
+    const searchResult = await getSearchResult(context, newSearchKeyword)
+
+    newTrees.push(searchResult)
+  }
+
+  dispatch([
+    updateSearchKeyword(newSearchKeyword),
+    updateTrees(newTrees)
+  ])
+}, 200)
+
+async function getSearchResult(context, newSearchKeyword) {
+  const result = await chromep.bookmarks.search(newSearchKeyword)
+
+  const filteredResult = searchResultFilter(context, newSearchKeyword, result)
 
   const searchResult = globals.sortByTitle(filteredResult)
 
@@ -18,53 +45,15 @@ async function getSearchResult() {
   }
 }
 
-async function inputHandler(event) {
-  const searchInput = event.target
+function searchResultFilter(context, newSearchKeyword, results) {
+  const {options} = context
 
-  keyword = searchInput.value.trim().replace('\s+', ' ')
-
-  if (keyword === '') {
-    globals.setRootState({
-      isSearching: false
-    })
-  } else {
-    const searchResult = await getSearchResult()
-
-    globals.setRootState({
-      isSearching: true,
-      trees: Immutable([searchResult])
-    })
-  }
-}
-
-function render() {
-  return (
-    <div id='search-box'>
-      <img
-        id='search-img'
-        src='/img/search.png'
-        alt=''
-        draggable='false'
-      />
-      <input
-        id='search-input'
-        type='search'
-        placeholder={chrome.i18n.getMessage('search')}
-        tabindex='-1'
-        autofocus
-        onInput={debouncedInputHandler}
-      />
-    </div>
-  )
-}
-
-function searchResultFilter(results) {
-  const isOnlySearchTitle = globals.options.searchTarget === 1
+  const isOnlySearchTitle = options.searchTarget === 1
   const newResults = []
   const splittedKeyArr = []
 
   if (isOnlySearchTitle) {
-    for (const splittedKey of keyword.split(' ')) {
+    for (const splittedKey of newSearchKeyword.split(' ')) {
       splittedKeyArr.push(splittedKey.toLowerCase())
     }
   }
@@ -90,7 +79,7 @@ function searchResultFilter(results) {
 
       newResults.push(itemInfo)
 
-      if (newResults.length === globals.options.maxResults) {
+      if (newResults.length === options.maxResults) {
         break
       }
     }
@@ -99,4 +88,30 @@ function searchResultFilter(results) {
   return newResults
 }
 
-export default {getSearchResult, render}
+const Search = {
+  render(model) {
+    return (
+      <div id='search-box'>
+        <img
+          id='search-img'
+          src='/img/search.png'
+          alt=''
+          draggable='false'
+        />
+        <input
+          id='search-input'
+          type='search'
+          placeholder={msgSearch}
+          tabindex='-1'
+          autofocus
+          onInput={debouncedInputHandler(model)}
+        />
+      </div>
+    )
+  }
+}
+
+export default {
+  getSearchResult,
+  ...Search
+}

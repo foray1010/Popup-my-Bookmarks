@@ -1,85 +1,21 @@
-import element from 'virtual-element'
+import {element} from 'deku'
+import Immutable from 'seamless-immutable'
 
 import BookmarkItem from './BookmarkItem'
 import FolderCover from './FolderCover'
 import NoResult from './NoResult'
 import TreeHeader from './TreeHeader'
 
-function afterRender(component, el) {
-  setHeight(el)
+const msgNoBookmark = chrome.i18n.getMessage('noBkmark')
+
+const scrollHandler = (model) => (evt) => {
 }
 
-function render({props}) {
-  const isSearching = props.isSearching
-  const treeIndex = props.treeIndex
-  const treeItems = []
-  const trees = props.trees
+const wheelHandler = () => (evt) => {
+  evt.preventDefault()
 
-  const isRootBox = treeIndex === 0
-  const treeInfo = trees[treeIndex]
-
-  const genBookmarkItem = (itemInfo) => {
-    return (
-      <BookmarkItem
-        key={itemInfo.id}
-        isSearching={isSearching}
-        itemInfo={itemInfo}
-        treeIndex={treeIndex}
-        trees={trees}
-      />
-    )
-  }
-
-  const pushTreeItem = (childrenInfo) => {
-    for (const itemInfo of childrenInfo) {
-      treeItems.push(genBookmarkItem(itemInfo))
-    }
-  }
-
-  if (isRootBox && !isSearching) {
-    pushTreeItem(globals.rootTree.children)
-  }
-
-  if (treeInfo.children.length) {
-    pushTreeItem(treeInfo.children)
-  } else {
-    if (isSearching) {
-      treeItems.push(<NoResult key='no-result' />)
-    } else {
-      const noBookmarkInfo = Immutable({
-        id: `no-bookmark-${treeInfo.id}`,
-        index: -1, // as it is not appeared in the childrenInfo
-        parentId: treeInfo.id,
-        title: chrome.i18n.getMessage('noBkmark')
-      })
-
-      treeItems.push(genBookmarkItem(noBookmarkInfo))
-    }
-  }
-
-  return (
-    <div class='bookmark-tree'>
-      <TreeHeader
-        isHidden={isSearching || isRootBox}
-        treeIndex={treeIndex}
-        trees={trees}
-      />
-      <div
-        class='bookmark-list'
-        onScroll={scrollHandler}
-        onWheel={wheelHandler}
-      >
-        {treeItems}
-      </div>
-      <FolderCover
-        treeIndex={treeIndex}
-        trees={trees}
-      />
-    </div>
-  )
-}
-
-function scrollHandler(event, {props}) {
+  // control scrolling speed
+  evt.target.scrollTop -= Math.floor(globals.itemOffsetHeight * evt.wheelDelta / 120)
 }
 
 function setHeight(el) {
@@ -95,13 +31,76 @@ function setHeight(el) {
   bookmarkList.style.maxHeight = listHeight + 'px'
 }
 
-function wheelHandler(event) {
-  event.preventDefault()
+const BookmarkTree = {
+  // afterRender(model) {
+  //   setHeight(el)
+  // },
 
-  const el = event.delegateTarget
+  render(model) {
+    const {context, props} = model
 
-  // control scrolling speed
-  el.scrollTop -= parseInt(globals.itemOffsetHeight * event.wheelDelta / 120, 10)
+    const {rootTree, searchKeyword, trees} = context
+    const {treeIndex} = props
+
+    const treeItems = []
+
+    const isRootBox = treeIndex === 0
+    const treeInfo = trees[treeIndex]
+
+    const genBookmarkItem = (itemInfo) => {
+      return (
+        <BookmarkItem
+          key={itemInfo.id}
+          itemInfo={itemInfo}
+          treeIndex={treeIndex}
+        />
+      )
+    }
+
+    const pushTreeItems = (thisTreeInfo) => {
+      for (const itemInfo of thisTreeInfo.children) {
+        treeItems.push(genBookmarkItem(itemInfo))
+      }
+    }
+
+    if (isRootBox && !searchKeyword) {
+      pushTreeItems(rootTree)
+    }
+
+    if (treeInfo.children.length) {
+      pushTreeItems(treeInfo)
+    } else {
+      if (searchKeyword) {
+        treeItems.push(<NoResult key='no-result' />)
+      } else {
+        const noBookmarkInfo = Immutable({
+          id: `no-bookmark-${treeInfo.id}`,
+          index: -1, // as it is not appeared in the childrenInfo
+          parentId: treeInfo.id,
+          title: msgNoBookmark
+        })
+
+        treeItems.push(genBookmarkItem(noBookmarkInfo))
+      }
+    }
+
+    return (
+      <div class='bookmark-tree'>
+        <TreeHeader
+          isHidden={searchKeyword || isRootBox}
+          treeIndex={treeIndex}
+        />
+        <div
+          class='bookmark-list'
+          onScroll={scrollHandler(model)}
+          onWheel={wheelHandler()}
+        >
+          {treeItems}
+        </div>
+        <FolderCover treeIndex={treeIndex} />
+      </div>
+    )
+  }
 }
 
-export default {afterRender, render}
+export default BookmarkTree

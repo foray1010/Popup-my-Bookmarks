@@ -1,27 +1,30 @@
-import element from 'virtual-element'
+import {element} from 'deku'
 
-function afterRender({props}, el) {
-  const optionValue = props.options[props.optionName]
-  const selectButtonCoverEl = el.getElementsByClassName('select-button-cover')[0]
+import {updateSingleOption} from '../../actions'
 
-  const buttonIndex = optionValue ? 0 : 1
+const msgNo = chrome.i18n.getMessage('opt_no')
+const msgYes = chrome.i18n.getMessage('opt_yes')
 
-  selectButtonCoverEl.style.left = buttonIndex * 50 + '%'
+const changeHandler = (model) => (evt) => {
+  const {dispatch, props} = model
+
+  const {optionName} = props
+
+  const newOptionValue = evt.target.value === 'true'
+
+  dispatch(updateSingleOption(optionName, newOptionValue))
 }
 
-function changeHandler(event, {props}) {
-  const newOptionValue = event.delegateTarget.value === 'true'
+const OptionInput = {
+  render(model) {
+    const {context, props} = model
 
-  globals.updateOptionsState(props.options, props.optionName, newOptionValue)
-}
+    const {optionChoice, optionName} = props
+    const {options} = context
 
-function render({props}) {
-  const optionName = props.optionName
+    const optionValue = options[optionName]
 
-  const optionValue = props.options[optionName]
-
-  const optionItems = [true, false].map((optionChoice) => {
-    const buttonText = chrome.i18n.getMessage(optionChoice ? 'opt_yes' : 'opt_no')
+    const buttonText = optionChoice ? msgYes : msgNo
     const isChecked = optionValue === optionChoice
     const selectButtonClasses = ['select-button-item']
 
@@ -37,19 +40,43 @@ function render({props}) {
           value={String(optionChoice)}
           checked={isChecked}
           hidden
-          onChange={changeHandler}
+          onChange={changeHandler(model)}
         />
         {buttonText}
       </label>
     )
-  })
-
-  return (
-    <div class='select-button-box'>
-      <div class='select-button-cover' />
-      {optionItems}
-    </div>
-  )
+  }
 }
 
-export default {afterRender, render}
+const SelectButton = {
+  render(model) {
+    const {context, props} = model
+
+    const {optionName} = props
+    const {options} = context
+
+    const optionValue = options[optionName]
+
+    const optionItems = [true, false].map((optionChoice) => {
+      return (
+        <OptionInput
+          key={String(optionChoice)}
+          optionChoice={optionChoice}
+          optionName={optionName}
+        />
+      )
+    })
+    const selectdButtonIndex = optionValue ? 0 : 1
+
+    const selectButtonCoverStyle = `left: ${selectdButtonIndex * 50}%`
+
+    return (
+      <div class='select-button-box'>
+        <div class='select-button-cover' style={selectButtonCoverStyle} />
+        {optionItems}
+      </div>
+    )
+  }
+}
+
+export default SelectButton

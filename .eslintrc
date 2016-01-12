@@ -5,7 +5,6 @@ globals:
   chromep: false
   CSS: false
   globals: false
-  Immutable: false
   JSONStorage: false
 rules:
   ###################
@@ -37,11 +36,15 @@ rules:
   #############
   # Variables #
   #############
+  no-shadow:
+    - 2
+    -
+      builtinGlobals: true
   no-unused-vars:
-  - 1
-  -
-    args: "after-used"
-    vars: "local"
+    - 1
+    -
+      args: "after-used"
+      vars: "local"
   no-use-before-define: 0
 
   ###########
@@ -101,6 +104,9 @@ rules:
     - 2
     - 100
     - 2
+    -
+      ignoreUrls: true
+      ignoreComments: true
   no-bitwise: 2
   no-plusplus: 2
 

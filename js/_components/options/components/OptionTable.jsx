@@ -1,30 +1,38 @@
-import element from 'virtual-element'
+import {element} from 'deku'
 
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 
-function render({props}) {
-  const optionTableItems = globals.optionTableMap[props.currentModule].map((optionName) => {
-    return (
-      <OptionItem
-        key={optionName}
-        optionName={optionName}
-        options={props.options}
-      />
-    )
-  })
+const OptionTable = {
+  render(model) {
+    const {context} = model
 
-  return (
-    <div>
-      <div id='option-table'>
-        {optionTableItems}
-      </div>
-      <OptionButton
-        currentModule={props.currentModule}
-        options={props.options}
-      />
-    </div>
-  )
+    const {options, selectedNavModule} = context
+
+    const selectedOptionTableMap = globals.optionTableMap[selectedNavModule]
+
+    const optionTableItems = []
+
+    for (const optionName of selectedOptionTableMap) {
+      if (options[optionName] !== undefined) {
+        optionTableItems.push(
+          <OptionItem
+            key={optionName}
+            optionName={optionName}
+          />
+        )
+      }
+    }
+
+    return (
+      <main>
+        <div id='option-table'>
+          {optionTableItems}
+        </div>
+        <OptionButton />
+      </main>
+    )
+  }
 }
 
-export default {render}
+export default OptionTable

@@ -1,10 +1,18 @@
-import element from 'virtual-element'
+import {element} from 'deku'
 
-async function confirmButtonHandler(event, {props}) {
-  const currentModule = props.currentModule
-  const newOptions = props.options.asMutable()
+import {reloadOptions} from '../actions'
 
-  for (const optionName of globals.optionTableMap[currentModule]) {
+const msgConfirm = chrome.i18n.getMessage('confirm')
+const msgDefault = chrome.i18n.getMessage('default')
+
+const confirmButtonHandler = (model) => async () => {
+  const {context, dispatch} = model
+
+  const {options, selectedNavModule} = context
+
+  const newOptions = options.asMutable()
+
+  for (const optionName of globals.optionTableMap[selectedNavModule]) {
     const optionConfig = globals.optionsConfig[optionName]
 
     if (optionConfig.permissions) {
@@ -22,32 +30,28 @@ async function confirmButtonHandler(event, {props}) {
 
   await chromep.storage.sync.set(newOptions)
 
-  const options = await globals.getCurrentModuleOptions(currentModule)
-
-  globals.setRootState({
-    options: Immutable(options)
-  })
+  dispatch(await reloadOptions())
 }
 
-async function defaultButtonHandler(event, {props}) {
+const defaultButtonHandler = (model) => async () => {
+  const {dispatch} = model
+
   await chromep.storage.sync.clear()
 
   await globals.initOptionsValue()
 
-  const options = await globals.getCurrentModuleOptions(props.currentModule)
-
-  globals.setRootState({
-    options: Immutable(options)
-  })
+  dispatch(await reloadOptions())
 }
 
-function render() {
-  return (
-    <div id='option-button-box'>
-      <button onClick={confirmButtonHandler}>{chrome.i18n.getMessage('confirm')}</button>
-      <button onClick={defaultButtonHandler}>{chrome.i18n.getMessage('default')}</button>
-    </div>
-  )
+const OptionButton = {
+  render(model) {
+    return (
+      <div id='option-button-box'>
+        <button onClick={confirmButtonHandler(model)}>{msgConfirm}</button>
+        <button onClick={defaultButtonHandler(model)}>{msgDefault}</button>
+      </div>
+    )
+  }
 }
 
-export default {render}
+export default OptionButton

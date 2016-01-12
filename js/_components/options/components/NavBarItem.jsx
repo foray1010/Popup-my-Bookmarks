@@ -1,31 +1,48 @@
-import element from 'virtual-element'
+import {element} from 'deku'
 
-async function updateCurrentModule(event, {props}) {
-  const navBarItemInfo = props.navBarItemInfo
+import {
+  reloadOptions,
+  selectNavModule
+} from '../actions'
 
-  if (navBarItemInfo.module !== props.currentModule) {
-    const options = await globals.getCurrentModuleOptions(navBarItemInfo.module)
+const clickHandler = (model) => async () => {
+  const {context, dispatch, props} = model
 
-    globals.setRootState({
-      currentModule: navBarItemInfo.module,
-      options: Immutable(options)
-    })
+  const {navBarItemInfo} = props
+  const {selectedNavModule} = context
+
+  const newSelectedNavModule = navBarItemInfo.navModule
+
+  if (newSelectedNavModule !== selectedNavModule) {
+    dispatch([
+      await reloadOptions(), // reset the options
+      selectNavModule(newSelectedNavModule)
+    ])
   }
 }
 
-function render({props}) {
-  const navBarItemClasses = ['nav-bar-item']
-  const navBarItemInfo = props.navBarItemInfo
+const NavBarItem = {
+  render(model) {
+    const {context, props} = model
 
-  if (navBarItemInfo.module === props.currentModule) {
-    navBarItemClasses.push('nav-bar-item-active')
+    const {navBarItemInfo} = props
+    const {selectedNavModule} = context
+
+    const navBarItemClasses = ['nav-bar-item']
+
+    if (navBarItemInfo.navModule === selectedNavModule) {
+      navBarItemClasses.push('nav-bar-item-active')
+    }
+
+    return (
+      <div
+        class={navBarItemClasses.join(' ')}
+        onClick={clickHandler(model)}
+      >
+        {navBarItemInfo.title}
+      </div>
+    )
   }
-
-  return (
-    <div class={navBarItemClasses.join(' ')} onClick={updateCurrentModule}>
-      {chrome.i18n.getMessage(navBarItemInfo.msg)}
-    </div>
-  )
 }
 
-export default {render}
+export default NavBarItem
