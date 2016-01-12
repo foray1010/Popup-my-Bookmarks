@@ -23,9 +23,7 @@ window.globals = {
       'opFolderBy'
     ]
   },
-  getCurrentModuleOptions(currentModule) {
-    return chromep.storage.sync.get(globals.optionTableMap[currentModule] || [])
-  },
+
   async initOptionsValue() {
     const options = await chromep.storage.sync.get(null)
 
@@ -49,6 +47,7 @@ window.globals = {
 
     await chromep.storage.sync.set(newOptions)
   },
+
   async setPermission(optionName, optionConfig, newOptionValue) {
     const permissionFunc = newOptionValue ?
       chromep.permissions.request :
@@ -73,14 +72,5 @@ window.globals = {
     }
 
     return isSuccess
-  },
-  updateOptionsState(options, optionName, newOptionValue) {
-    const mutableOptions = options.asMutable()
-
-    mutableOptions[optionName] = newOptionValue
-
-    globals.setRootState({
-      options: Immutable(mutableOptions)
-    })
   }
 }

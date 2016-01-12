@@ -1,26 +1,36 @@
-import element from 'virtual-element'
+import {element} from 'deku'
 
-function closeHandler(event, {props}) {
-  globals.removeTreeInfoFromIndex(props.trees, props.treeIndex)
+import {removeTreeInfosFromIndex} from '../actions'
+
+const closeHandler = (model) => () => {
+  const {dispatch, props} = model
+
+  const {treeIndex} = props
+
+  dispatch(removeTreeInfosFromIndex(treeIndex))
 }
 
-function render({props}) {
-  const treeHeaderBoxClasses = ['tree-header-box']
-  const treeIndex = props.treeIndex
-  const trees = props.trees
+const TreeHeader = {
+  render(model) {
+    const {context, props} = model
 
-  const treeInfo = trees[treeIndex]
+    const {isHidden, treeIndex} = props
+    const {trees} = context
 
-  if (props.isHidden) {
-    treeHeaderBoxClasses.push('display-none')
+    const treeHeaderBoxClasses = ['tree-header-box']
+    const treeInfo = trees[treeIndex]
+
+    if (isHidden) {
+      treeHeaderBoxClasses.push('display-none')
+    }
+
+    return (
+      <header class={treeHeaderBoxClasses.join(' ')}>
+        <div class='tree-header-title no-text-overflow'>{treeInfo.title}</div>
+        <div class='tree-header-close' onClick={closeHandler(model)} />
+      </header>
+    )
   }
-
-  return (
-    <header class={treeHeaderBoxClasses.join(' ')}>
-      <div class='tree-header-title no-text-overflow'>{treeInfo.title}</div>
-      <div class='tree-header-close' onClick={closeHandler} />
-    </header>
-  )
 }
 
-export default {render}
+export default TreeHeader

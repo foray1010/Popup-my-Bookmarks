@@ -21,7 +21,7 @@ Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG
 ## Developer guide
 
 ##### Before you start
-1. Install [Node.js](//github.com/nodejs/node) (version >= 4.0) via:
+1. Install [Node.js](//github.com/nodejs/node) (version >= 4.2) via:
   - [nvm](//github.com/creationix/nvm) (Linux/Mac)
   - [Node.js official website](//nodejs.org/en/download/) (Windows)
 

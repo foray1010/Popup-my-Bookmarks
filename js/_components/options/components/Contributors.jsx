@@ -1,14 +1,11 @@
-import element from 'virtual-element'
+import {element} from 'deku'
 
-function render() {
-  return (
-    <div />
-  )
+const Contributors = {
+  render() {
+    return (
+      <main />
+    )
+  }
 }
 
-function shouldUpdate() {
-  // static HTML, never update
-  return false
-}
-
-export default {render, shouldUpdate}
+export default Contributors

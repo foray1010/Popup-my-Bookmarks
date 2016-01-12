@@ -1,41 +1,53 @@
-import element from 'virtual-element'
-import {render, tree} from 'deku'
+import {dom, element} from 'deku'
 
 import './_components/common'
 import './_components/popup/globals'
 import App from './_components/popup/containers/App'
-import getOptionsConfig from './_components/options/getOptionsConfig'
+import configureStore from './_components/store/configureStore'
+import getOptionsConfig from './_components/getOptionsConfig'
+import Immutable from 'seamless-immutable'
+import reducers from './_components/popup/reducers'
 
 !async function () {
-  globals.options = Immutable(await chromep.storage.sync.get(null))
+  const options = await chromep.storage.sync.get(null)
 
   /* if first run */
   const optionsConfig = await getOptionsConfig()
 
   for (const optionName of Object.keys(optionsConfig)) {
-    if (globals.options[optionName] === undefined) {
-      globals.openOptionsPage()
+    if (options[optionName] === undefined) {
+      return globals.openOptionsPage()
     }
   }
 
   /* get globals.rootTree */
-  const treeInfo = await globals.getFlatTree('0')
+  const rootTree = await globals.getFlatTree('0')
 
-  treeInfo.children = treeInfo.children.filter((itemInfo) => {
-    const itemIdNum = parseInt(itemInfo.id, 10)
+  rootTree.children = rootTree.children.filter((itemInfo) => {
+    const itemIdNum = Number(itemInfo.id)
 
     const isFilterThisItem = (
-      itemIdNum === globals.options.defExpand ||
-      globals.options.hideRootFolder.indexOf(itemIdNum) >= 0
+      itemIdNum === options.defExpand ||
+      options.hideRootFolder.indexOf(itemIdNum) >= 0
     )
 
     return !isFilterThisItem
   })
 
-  globals.rootTree = Immutable(treeInfo)
+  /* Create a Redux store to handle all UI actions and side-effects */
+  const firstTree = await globals.getFirstTree(options)
+
+  const store = configureStore(reducers, Immutable({
+    options: options,
+    rootTree: rootTree,
+    trees: [firstTree]
+  }))
 
   /* render the app */
-  const app = tree(<App />)
+  const render = dom.createRenderer(document.getElementById('container'), store.dispatch)
 
-  render(app, document.getElementById('container'))
-}().catch((e) => console.error(e.stack))
+  const renderer = () => render(<App />, store.getState())
+
+  renderer()
+  store.subscribe(renderer)
+}().catch((err) => console.error(err.stack))

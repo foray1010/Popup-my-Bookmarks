@@ -1,17 +1,31 @@
-import element from 'virtual-element'
-import {render, tree} from 'deku'
+import {dom, element} from 'deku'
 
 import './_components/common'
 import './_components/options/globals'
 import App from './_components/options/containers/App'
-import getOptionsConfig from './_components/options/getOptionsConfig'
+import configureStore from './_components/store/configureStore'
+import getOptionsConfig from './_components/getOptionsConfig'
+import Immutable from 'seamless-immutable'
+import reducers from './_components/options/reducers'
 
-!async function () {
+!async () => {
   globals.optionsConfig = await getOptionsConfig()
 
   await globals.initOptionsValue()
 
-  const app = tree(<App />)
+  /* Create a Redux store to handle all UI actions and side-effects */
+  const options = await chromep.storage.sync.get(null)
 
-  render(app, document.getElementById('container'))
-}().catch((e) => console.error(e.stack))
+  const store = configureStore(reducers, Immutable({
+    options: options,
+    selectedNavModule: 'general'
+  }))
+
+  /* render the app */
+  const render = dom.createRenderer(document.getElementById('container'), store.dispatch)
+
+  const renderer = () => render(<App />, store.getState())
+
+  renderer()
+  store.subscribe(renderer)
+}().catch((err) => console.error(err.stack))

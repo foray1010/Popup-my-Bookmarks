@@ -1,5 +1,4 @@
 import ChromePromise from 'chrome-promise'
-import Immutable from 'seamless-immutable'
 
 window.chromep = new ChromePromise()
 
@@ -41,11 +40,9 @@ window.CSS = (() => {
   return {set, unsetAll}
 })()
 
-window.Immutable = Immutable
-
 window.JSONStorage = {
-  get: (name) => JSON.parse(localStorage.getItem(name)),
-  set: (name, value) => localStorage.setItem(name, JSON.stringify(value))
+  get: (key) => JSON.parse(localStorage.getItem(key)),
+  set: (key, value) => localStorage.setItem(key, JSON.stringify(value))
 }
 
 function propEach(obj, fn) {

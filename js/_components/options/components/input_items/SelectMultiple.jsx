@@ -1,10 +1,15 @@
-import element from 'virtual-element'
+import {element} from 'deku'
 
-function changeHandler(event, {props}) {
-  const optionName = props.optionName
-  const targetValue = parseInt(event.delegateTarget.value, 10)
+import {updateSingleOption} from '../../actions'
 
-  const newOptionValue = props.options[optionName].asMutable()
+const changeHandler = (model) => (evt) => {
+  const {context, dispatch, props} = model
+
+  const {optionName} = props
+  const {options} = context
+
+  const newOptionValue = options[optionName].asMutable()
+  const targetValue = parseInt(evt.target.value, 10)
 
   const targetValueIndex = newOptionValue.indexOf(targetValue)
 
@@ -17,39 +22,62 @@ function changeHandler(event, {props}) {
     newOptionValue.sort()
   }
 
-  globals.updateOptionsState(props.options, optionName, newOptionValue)
+  dispatch(updateSingleOption(optionName, newOptionValue))
 }
 
-function render({props}) {
-  const checkboxItems = []
-  const optionName = props.optionName
+const OptionInput = {
+  render(model) {
+    const {context, props} = model
 
-  const optionValue = props.options[optionName]
+    const {optionChoice, optionChoiceIndex, optionName} = props
+    const {options} = context
 
-  props.optionConfig.choices.forEach((optionChoice, optionChoiceIndex) => {
-    if (optionChoice !== undefined) {
-      const isChecked = optionValue.indexOf(optionChoiceIndex) >= 0
+    const optionValue = options[optionName]
 
-      checkboxItems.push(
-        <label>
-          <input
-            name={props.optionName}
-            type='checkbox'
-            value={String(optionChoiceIndex)}
-            checked={isChecked}
-            onChange={changeHandler}
+    const isChecked = optionValue.indexOf(optionChoiceIndex) >= 0
+
+    return (
+      <label>
+        <input
+          name={optionName}
+          type='checkbox'
+          value={String(optionChoiceIndex)}
+          checked={isChecked}
+          onChange={changeHandler(model)}
+        />
+        {optionChoice}
+      </label>
+    )
+  }
+}
+
+const SelectMultiple = {
+  render(model) {
+    const {props} = model
+
+    const {optionConfig, optionName} = props
+
+    const checkboxItems = []
+
+    optionConfig.choices.forEach((optionChoice, optionChoiceIndex) => {
+      if (optionChoice !== undefined) {
+        checkboxItems.push(
+          <OptionInput
+            key={String(optionChoiceIndex)}
+            optionChoice={optionChoice}
+            optionChoiceIndex={optionChoiceIndex}
+            optionName={optionName}
           />
-          {optionChoice}
-        </label>
-      )
-    }
-  })
+        )
+      }
+    })
 
-  return (
-    <div class='select-multiple-box'>
-      {checkboxItems}
-    </div>
-  )
+    return (
+      <div class='select-multiple-box'>
+        {checkboxItems}
+      </div>
+    )
+  }
 }
 
-export default {render}
+export default SelectMultiple

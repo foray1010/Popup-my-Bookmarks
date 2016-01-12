@@ -1,76 +1,67 @@
+import {element} from 'deku'
 import debounce from 'lodash.debounce'
-import element from 'virtual-element'
 
-import Editor from '../components/Editor'
 import {getSearchResult} from '../components/Search'
+import {
+  updateEditorTarget,
+  updateMenuTarget,
+  updateTrees
+} from '../actions'
+import Editor from '../components/Editor'
 import Menu from '../components/Menu'
 import MenuCover from '../components/MenuCover'
 import Panel from '../components/Panel'
 
-let currentState
+let currentContext = null
 
-async function afterMount({}, el, setState) {
-  globals.setRootState = setState
-
-  await initTrees()
-
-  initBookmarkEvent()
-}
-
-async function afterUpdate({props, state}, prevProps, prevState) {
-  if (prevState.isSearching && !state.isSearching) {
-    await initTrees()
-  }
-}
-
-function beforeMount() {
-  initStyleOptions()
-}
-
-function beforeRender({state}) {
-  // assume this module will always update
-  currentState = state
-}
-
-function contextMenuHandler(event) {
-  const target = event.target
-
+const contextMenuHandler = () => (evt) => {
   // allow native context menu if it is an input element
-  if (target.tagName === 'INPUT') {
+  if (evt.target.tagName === 'INPUT') {
     return
   }
 
   // disable native context menu
-  event.preventDefault()
+  evt.preventDefault()
 }
 
-function initBookmarkEvent() {
-  const renewCurrentTrees = () => renewTrees(currentState.trees)
+const mouseDownHandler = () => (evt) => {
+  // disable the scrolling arrows after middle click
+  if (evt.button === 1) {
+    evt.preventDefault()
+  }
+}
 
-  const renewTrees = debounce(async function (oldTrees) {
+function initBookmarkEvent(dispatch) {
+  const renewCurrentTrees = () => renewTrees(currentContext.trees)
+
+  const renewTrees = debounce(async (oldTrees) => {
+    const {searchKeyword} = currentContext
+
     // Promise.all cannot recognize immutable array
-    const newTrees = await Promise.all(oldTrees.asMutable().map((treeInfo) => {
+    const newTrees = await* oldTrees.asMutable().map((treeInfo) => {
       if (treeInfo.id === 'search-result') {
-        return getSearchResult()
+        return getSearchResult(currentContext, searchKeyword)
       }
 
       return globals.getFlatTree(treeInfo.id)
-    }))
-
-    globals.setRootState({
-      // to make sure the menu is not activated when bookmark is updating
-      editorTarget: null,
-      menuTarget: null,
-
-      trees: Immutable(newTrees)
     })
+
+    dispatch([
+      // to make sure the menu is not activated when bookmark is updating
+      updateEditorTarget(null),
+      updateMenuTarget(null),
+
+      updateTrees(newTrees)
+    ])
   }, 100)
 
   const renewSlicedTreesById = (itemId) => {
-    const removeFromIndex = currentState.trees.findIndex((treeInfo) => treeInfo.id === itemId)
+    const {trees} = currentContext
+
+    const removeFromIndex = trees.findIndex((treeInfo) => treeInfo.id === itemId)
 
     if (removeFromIndex >= 0) {
-      const slicedTrees = globals.getSlicedTrees(currentState.trees, removeFromIndex)
+      const slicedTrees = globals.getSlicedTrees(trees, removeFromIndex)
 
       renewTrees(slicedTrees)
     } else {
@@ -84,30 +75,20 @@ function initBookmarkEvent() {
   chrome.bookmarks.onRemoved.addListener(renewSlicedTreesById)
 }
 
-function initialState() {
-  return {
-    editorTarget: null,
-    isSearching: false,
-    menuTarget: null,
-    mousePos: Immutable({x: 0, y: 0}),
-    trees: Immutable([])
-  }
-}
-
-function initStyleOptions() {
+function initStyleOptions(options) {
   // if the font family's name has whitespace, use quote to embed it
-  const fontFamily = globals.options.fontFamily.split(',')
+  const fontFamily = options.fontFamily.split(',')
     .map((x) => {
       x = x.trim()
 
       if (x.indexOf(' ') >= 0) {
-        x = `"${x}"`
+        x = JSON.stringify(x)
       }
 
       return x
     })
     .join(',')
-  const fontSize = globals.options.fontSize
+  const fontSize = options.fontSize
 
   const itemHeight = globals.goldenGap * 2 + fontSize
 
@@ -127,7 +108,7 @@ function initStyleOptions() {
     },
     '.panel-width': {
       // set panel (#main, #sub) width
-      width: globals.options.setWidth + 'px'
+      width: options.setWidth + 'px'
     },
     '.separator': {
       // set separator height depend on item height
@@ -136,44 +117,41 @@ function initStyleOptions() {
   })
 }
 
-async function initTrees() {
-  const defExpandTree = await globals.getFlatTree(String(globals.options.defExpand))
+const App = {
+  onCreate(model) {
+    const {context, dispatch} = model
 
-  globals.setRootState({
-    trees: Immutable([defExpandTree])
-  })
-}
+    const {options} = context
 
-// disable the scrolling arrows after middle click
-function mouseDownHandler(event) {
-  if (event.button === 1) {
-    event.preventDefault()
+    currentContext = context
+
+    initStyleOptions(options)
+
+    initBookmarkEvent(dispatch)
+  },
+
+  onUpdate(model) {
+    const {context} = model
+
+    currentContext = context
+  },
+
+  render() {
+    console.log('render')
+
+    return (
+      <div
+        id='app'
+        onContextMenu={contextMenuHandler()}
+        onMouseDown={mouseDownHandler()}
+      >
+        <Panel />
+        <MenuCover />
+        <Menu />
+        <Editor />
+      </div>
+    )
   }
 }
 
-function render({state}) {
-  // if menu or editor has target, show menu-cover
-  const isHiddenMenuCover = !(state.menuTarget || state.editorTarget)
-
-  return (
-    <div
-      id='app'
-      onContextMenu={contextMenuHandler}
-      onMouseDown={mouseDownHandler}
-    >
-      <Panel
-        isSearching={state.isSearching}
-        trees={state.trees}
-      />
-      <MenuCover isHidden={isHiddenMenuCover} />
-      <Menu
-        isSearching={state.isSearching}
-        menuTarget={state.menuTarget}
-        mousePos={state.mousePos}
-      />
-      <Editor editorTarget={state.editorTarget} />
-    </div>
-  )
-}
-
-export default {afterMount, afterUpdate, beforeMount, beforeRender, initialState, render}
+export default App

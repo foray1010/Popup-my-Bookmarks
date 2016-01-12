@@ -1,11 +1,15 @@
-import element from 'virtual-element'
+import {element} from 'deku'
 
-function render() {
-  return (
-    <div class='no-result no-text-overflow'>
-      {chrome.i18n.getMessage('noResult')}
-    </div>
-  )
+const msgNoResult = chrome.i18n.getMessage('noResult')
+
+const NoResult = {
+  render() {
+    return (
+      <div class='no-result no-text-overflow'>
+        {msgNoResult}
+      </div>
+    )
+  }
 }
 
-export default {render}
+export default NoResult

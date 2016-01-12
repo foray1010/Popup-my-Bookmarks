@@ -1,23 +1,43 @@
-import element from 'virtual-element'
+import {element} from 'deku'
 
 import NavBarItem from './NavBarItem'
 
-function render({props}) {
-  const navItems = props.navBarItems.asMutable().map((navBarItemInfo) => {
-    return (
-      <NavBarItem
-        key={navBarItemInfo.module}
-        currentModule={props.currentModule}
-        navBarItemInfo={navBarItemInfo}
-      />
-    )
-  })
+const navBarItemInfos = [
+  {
+    navModule: 'general',
+    title: chrome.i18n.getMessage('opt_general')
+  },
+  {
+    navModule: 'userInterface',
+    title: chrome.i18n.getMessage('opt_userInterface')
+  },
+  {
+    navModule: 'control',
+    title: chrome.i18n.getMessage('opt_control')
+  },
+  {
+    navModule: 'contributors',
+    title: chrome.i18n.getMessage('opt_contributors')
+  }
+]
 
-  return (
-    <nav id='nav-bar'>
-      {navItems}
-    </nav>
-  )
+const NavBar = {
+  render() {
+    const navItems = navBarItemInfos.map((navBarItemInfo) => {
+      return (
+        <NavBarItem
+          key={navBarItemInfo.navModule}
+          navBarItemInfo={navBarItemInfo}
+        />
+      )
+    })
+
+    return (
+      <nav id='nav-bar'>
+        {navItems}
+      </nav>
+    )
+  }
 }
 
-export default {render}
+export default NavBar

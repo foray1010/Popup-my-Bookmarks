@@ -1,4 +1,4 @@
-import element from 'virtual-element'
+import {element} from 'deku'
 
 import InputNumber from './input_items/InputNumber'
 import InputSelect from './input_items/InputSelect'
@@ -6,45 +6,48 @@ import SelectButton from './input_items/SelectButton'
 import SelectMultiple from './input_items/SelectMultiple'
 import SelectString from './input_items/SelectString'
 
-function render({props}) {
-  const optionName = props.optionName
+const OptionItem = {
+  render(model) {
+    const {props} = model
 
-  const optionConfig = globals.optionsConfig[optionName]
+    const {optionName} = props
 
-  const InputItem = (() => {
-    switch (optionConfig.type) {
-      case 'array':
-        return SelectMultiple
+    const optionConfig = globals.optionsConfig[optionName]
 
-      case 'boolean':
-        return SelectButton
+    const InputItem = (() => {
+      switch (optionConfig.type) {
+        case 'array':
+          return SelectMultiple
 
-      case 'integer':
-        if (optionConfig.choices) {
-          return SelectString
-        }
+        case 'boolean':
+          return SelectButton
 
-        return InputNumber
+        case 'integer':
+          if (optionConfig.choices) {
+            return SelectString
+          }
 
-      case 'string':
-        return InputSelect
+          return InputNumber
 
-      default:
-    }
-  })()
+        case 'string':
+          return InputSelect
 
-  return (
-    <div class='option-item'>
-      <div class='option-desc'>{chrome.i18n.getMessage('opt_' + optionName)}</div>
-      <div class='option-input'>
-        <InputItem
-          optionConfig={optionConfig}
-          optionName={optionName}
-          options={props.options}
-        />
+        default:
+      }
+    })()
+
+    return (
+      <div class='option-item'>
+        <div class='option-desc'>{chrome.i18n.getMessage('opt_' + optionName)}</div>
+        <div class='option-input'>
+          <InputItem
+            optionConfig={optionConfig}
+            optionName={optionName}
+          />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
-export default {render}
+export default OptionItem

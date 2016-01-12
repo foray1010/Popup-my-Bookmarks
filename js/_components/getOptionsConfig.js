@@ -6,7 +6,7 @@ async function getOptionsConfig() {
   const rootFolders = await chromep.bookmarks.getChildren('0')
 
   for (const rootFolder of rootFolders) {
-    const rootFolderIdNum = parseInt(rootFolder.id, 10)
+    const rootFolderIdNum = Number(rootFolder.id)
 
     rootFolderChoices[rootFolderIdNum] = rootFolder.title
   }

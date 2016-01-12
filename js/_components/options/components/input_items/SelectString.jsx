@@ -1,31 +1,63 @@
-import element from 'virtual-element'
+import {element} from 'deku'
 
-function changeHandler(event, {props}) {
-  const newOptionValue = parseInt(event.delegateTarget.value, 10)
+import {updateSingleOption} from '../../actions'
 
-  globals.updateOptionsState(props.options, props.optionName, newOptionValue)
+const changeHandler = (model) => (evt) => {
+  const {dispatch, props} = model
+
+  const {optionName} = props
+  const newOptionValue = parseInt(evt.target.value, 10)
+
+  dispatch(updateSingleOption(optionName, newOptionValue))
 }
 
-function render({props}) {
-  const optionItems = []
-  const optionName = props.optionName
+const OptionInput = {
+  render(model) {
+    const {context, props} = model
 
-  const optionValue = props.options[optionName]
+    const {optionChoice, optionChoiceIndex, optionName} = props
+    const {options} = context
 
-  props.optionConfig.choices.forEach((optionChoice, optionChoiceIndex) => {
-    if (optionChoice !== undefined) {
-      optionItems.push(
-        <option
-          value={String(optionChoiceIndex)}
-          selected={optionChoiceIndex === optionValue}
-        >
-          {optionChoice}
-        </option>
-      )
-    }
-  })
+    const optionValue = options[optionName]
 
-  return <select name={optionName} onChange={changeHandler}>{optionItems}</select>
+    return (
+      <option
+        value={String(optionChoiceIndex)}
+        // selected={optionChoiceIndex === optionValue} // test
+      >
+        {optionChoice}
+      </option>
+    )
+  }
 }
 
-export default {render}
+const SelectString = {
+  render(model) {
+    const {props} = model
+
+    const {optionConfig, optionName} = props
+
+    const optionItems = []
+
+    optionConfig.choices.forEach((optionChoice, optionChoiceIndex) => {
+      if (optionChoice !== undefined) {
+        optionItems.push(
+          <OptionInput
+            key={String(optionChoiceIndex)}
+            optionChoice={optionChoice}
+            optionChoiceIndex={optionChoiceIndex}
+            optionName={optionName}
+          />
+        )
+      }
+    })
+
+    return (
+      <select name={optionName} onChange={changeHandler(model)}>
+        {optionItems}
+      </select>
+    )
+  }
+}
+
+export default SelectString

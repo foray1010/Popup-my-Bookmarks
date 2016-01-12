@@ -1,66 +1,79 @@
-import element from 'virtual-element'
+import {element} from 'deku'
 
-function clickCoverHandler(event, {props}) {
-  closeFolder(props)
+import {removeTreeInfosFromIndex} from '../actions'
+
+const clickCoverHandler = (model) => () => {
+  closeFolder(model)
 }
 
-function closeFolder(props) {
-  globals.removeTreeInfoFromIndex(props.trees, props.treeIndex + 1)
+function closeFolder(model) {
+  const {dispatch, props} = model
+
+  const {treeIndex} = props
+
+  dispatch(removeTreeInfosFromIndex(treeIndex))
 }
 
-function render({props}) {
-  const delay = 300
-  // hide the folder if it is not the top two folder
-  const isHidden = props.trees.length - props.treeIndex <= 2
-  const xyRange = 20
+const FolderCover = {
+  render(model) {
+    const {context, props} = model
 
-  const mouseLeaveHandler = () => {
-    clearTimeout(triggerOnClickTimer)
-    triggerOnClickTimer = null
-  }
+    const {treeIndex} = props
+    const {trees} = context
 
-  const mouseMoveHandler = (event) => {
-    mousePosition = {
-      x: event.x,
-      y: event.y
+    const delay = 300
+    // hide the folder if it is not the top two folder
+    const isHidden = trees.length - treeIndex <= 2
+    const xyRange = 20
+
+    const mouseLeaveHandler = () => () => {
+      clearTimeout(triggerOnClickTimer)
+      triggerOnClickTimer = null
     }
 
-    if (!triggerOnClickTimer) {
-      triggerOnClickByXYRange(mousePosition)
-    }
-  }
+    const mouseMoveHandler = () => (evt) => {
+      mousePosition = {
+        x: evt.x,
+        y: evt.y
+      }
 
-  const triggerOnClickByXYRange = (mousePositionOrig) => {
-    const isInTriggerPoint = (axis) => {
-      const displacement = Math.abs(mousePosition[axis] - mousePositionOrig[axis])
-
-      return displacement < xyRange
-    }
-
-    triggerOnClickTimer = setTimeout(() => {
-      const isTrigger = isInTriggerPoint('x') && isInTriggerPoint('y')
-
-      if (isTrigger) {
-        closeFolder(props)
-        triggerOnClickTimer = null
-      } else {
+      if (!triggerOnClickTimer) {
         triggerOnClickByXYRange(mousePosition)
       }
-    }, delay)
+    }
+
+    const triggerOnClickByXYRange = (mousePositionOrig) => {
+      const isInTriggerPoint = (axis) => {
+        const displacement = Math.abs(mousePosition[axis] - mousePositionOrig[axis])
+
+        return displacement < xyRange
+      }
+
+      triggerOnClickTimer = setTimeout(() => {
+        const isTrigger = isInTriggerPoint('x') && isInTriggerPoint('y')
+
+        if (isTrigger) {
+          closeFolder(model)
+          triggerOnClickTimer = null
+        } else {
+          triggerOnClickByXYRange(mousePosition)
+        }
+      }, delay)
+    }
+
+    let mousePosition
+    let triggerOnClickTimer = null
+
+    return (
+      <div
+        class='cover'
+        hidden={isHidden}
+        onClick={clickCoverHandler(model)}
+        onMouseLeave={mouseLeaveHandler(model)}
+        onMouseMove={mouseMoveHandler(model)}
+      />
+    )
   }
-
-  let mousePosition
-  let triggerOnClickTimer = null
-
-  return (
-    <div
-      class='cover'
-      hidden={isHidden}
-      onClick={clickCoverHandler}
-      onMouseLeave={mouseLeaveHandler}
-      onMouseMove={mouseMoveHandler}
-    />
-  )
 }
 
-export default {render}
+export default FolderCover

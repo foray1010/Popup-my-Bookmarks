@@ -1,19 +1,83 @@
+import {element} from 'deku'
 import debounce from 'lodash.debounce'
-import element from 'virtual-element'
 
-const debouncedMouseHandler = debounce((event, {props}) => {
-  const isSearching = props.isSearching
-  const itemInfo = props.itemInfo
+import {
+  replaceTreeInfoByIndex,
+  removeTreeInfosFromIndex,
+  updateMenuTarget,
+  updateMousePosition
+} from '../actions'
 
-  switch (event.type) {
+const msgAlertBookmarklet = chrome.i18n.getMessage('alert_bookmarklet')
+
+const clickHandler = (model) => (evt) => {
+  evt.preventDefault()
+
+  const {context, dispatch, props} = model
+
+  const {itemInfo, treeIndex} = props
+  const {trees} = context
+
+  const bookmarkType = globals.getBookmarkType(itemInfo)
+
+  switch (bookmarkType) {
+    case 'root-folder':
+    case 'folder':
+      if (evt.button === 0) {
+        if (context.options.opFolderBy) {
+          if (!globals.isFolderOpened(trees, itemInfo)) {
+            openFolder(model)
+          } else {
+            dispatch(removeTreeInfosFromIndex(treeIndex + 1))
+          }
+        }
+      } else {
+        globals.openMultipleBookmarks(model, itemInfo, 0)
+      }
+
+      break
+
+    case 'separator':
+    case 'bookmark':
+      openBookmark(model, evt)
+      break
+
+    default:
+  }
+}
+
+const contextMenuHandler = (model) => (evt) => {
+  // disable native context menu
+  evt.preventDefault()
+
+  const {dispatch, props} = model
+
+  const {itemInfo} = props
+
+  dispatch([
+    updateMousePosition({
+      x: evt.x,
+      y: evt.y
+    }),
+    updateMenuTarget(itemInfo)
+  ])
+}
+
+const debouncedMouseHandler = (model) => debounce((evt) => {
+  const {context, dispatch, props} = model
+
+  const {itemInfo, treeIndex} = props
+  const {searchKeyword, trees} = context
+
+  switch (evt.type) {
     case 'mouseenter':
-      if (!isSearching && !globals.options.opFolderBy) {
+      if (!searchKeyword && !context.options.opFolderBy) {
         if (globals.isFolder(itemInfo)) {
-          if (!globals.isFolderOpened(props.trees, itemInfo)) {
-            openFolder(props)
+          if (!globals.isFolderOpened(trees, itemInfo)) {
+            openFolder(model)
           }
         } else {
-          globals.removeTreeInfoFromIndex(props.trees, props.treeIndex + 1)
+          dispatch(removeTreeInfosFromIndex(treeIndex + 1))
         }
       }
 
@@ -26,102 +90,93 @@ const debouncedMouseHandler = debounce((event, {props}) => {
   }
 }, 200)
 
-function afterMount({props}, el) {
-  const itemInfo = props.itemInfo
-
-  if (globals.getBookmarkType(itemInfo) === 'bookmark') {
-    setTooltip(el, props)
-  }
-}
-
-function beforeUpdate() {
-  // prevent using outdated props.trees
-  debouncedMouseHandler.cancel()
-}
-
-function clickHandler(event, {props}) {
-  const itemInfo = props.itemInfo
-
-  const bookmarkType = globals.getBookmarkType(itemInfo)
-
-  switch (bookmarkType) {
-    case 'root-folder':
-    case 'folder':
-      if (event.button === 0) {
-        if (globals.options.opFolderBy) {
-          if (!globals.isFolderOpened(props.trees, itemInfo)) {
-            openFolder(props)
-          } else {
-            globals.removeTreeInfoFromIndex(props.trees, props.treeIndex + 1)
-          }
-        }
-      } else {
-        globals.openMultipleBookmarks(itemInfo, 0)
-      }
-
-      break
-
-    case 'separator':
-    case 'bookmark':
-      openBookmark(getOpenBookmarkHandlerId(event), itemInfo.url)
-      break
-
-    default:
-  }
-}
-
-function contextMenuHandler(event, {props}) {
-  // disable native context menu
-  event.preventDefault()
-
-  const itemInfo = props.itemInfo
-
-  globals.setRootState({
-    menuTarget: itemInfo,
-    mousePos: Immutable({x: event.x, y: event.y})
-  })
-}
-
-function dragEndHandler(event, {props}) {
+const dragEndHandler = (model) => (evt) => {
 
 }
 
-function dragOverHandler(event, {props}) {
+const dragOverHandler = (model) => (evt) => {
 
 }
 
-function dragStartHandler(event, {props}) {
+const dragStartHandler = (model) => (evt) => {
 
 }
 
-function getOpenBookmarkHandlerId(event) {
-  const mouseButton = event.button
+function getOpenBookmarkHandlerId(model, evt) {
+  const {context} = model
+
+  const {options} = context
+
+  const mouseButton = evt.button
 
   let switcher
 
   if (mouseButton === 0) {
     switcher = 'Left'
 
-    if (event.ctrlKey || event.metaKey) {
+    if (evt.ctrlKey || evt.metaKey) {
       switcher += 'Ctrl'
-    } else if (event.shiftKey) {
+    } else if (evt.shiftKey) {
       switcher += 'Shift'
     }
   } else {
     switcher = 'Middle'
   }
 
-  return globals.options['clickBy' + switcher]
+  return options['clickBy' + switcher]
 }
 
-function openBookmark(handlerId, itemUrl) {
+async function getTooltip(model) {
+  const {context, props} = model
+
+  const {itemInfo} = props
+  const {options, searchKeyword} = context
+
+  const tooltipArr = []
+
+  if (options.tooltip) {
+    tooltipArr.push(itemInfo.title, itemInfo.url)
+  }
+
+  if (searchKeyword) {
+    const breadcrumbArr = []
+
+    const getBreadcrumb = async (breadId) => {
+      const results = await chromep.bookmarks.get(breadId)
+
+      const thisItemInfo = results[0]
+
+      breadcrumbArr.unshift(thisItemInfo.title)
+
+      if (thisItemInfo.parentId === '0') {
+        tooltipArr.unshift(breadcrumbArr.join(' > '))
+      } else {
+        await getBreadcrumb(thisItemInfo.parentId)
+      }
+    }
+
+    await getBreadcrumb(itemInfo.parentId)
+  }
+
+  if (tooltipArr.length) {
+    return tooltipArr.join('\n')
+  }
+}
+
+function openBookmark(model, evt) {
+  const {context, props} = model
+
+  const {itemInfo} = props
+  const {options} = context
+
+  const handlerId = getOpenBookmarkHandlerId(model, evt)
+  const itemUrl = itemInfo.url
+
   switch (handlerId) {
     case 0: // current tab
     case 1: // current tab (w/o closing PmB)
       if (itemUrl.startsWith('javascript:')) {
-        const msgAlertBookmarklet = chrome.i18n.getMessage('alert_bookmarklet')
-
-        if (globals.options.bookmarklet) {
+        if (options.bookmarklet) {
           chrome.tabs.executeScript(null, {code: itemUrl})
         } else if (confirm(msgAlertBookmarklet)) {
           globals.openOptionsPage()
@@ -157,115 +212,96 @@ function openBookmark(handlerId, itemUrl) {
   }
 }
 
-async function openFolder(props) {
-  const newTrees = props.trees.asMutable()
-  const nextTreeIndex = props.treeIndex + 1
-  const treeInfo = await globals.getFlatTree(props.itemInfo.id)
+async function openFolder(model) {
+  const {dispatch, props} = model
 
-  newTrees[nextTreeIndex] = treeInfo
+  const {itemInfo, treeIndex} = props
 
-  globals.setRootState({
-    trees: Immutable(newTrees)
-  })
+  const nextTreeIndex = treeIndex + 1
+  const treeInfo = await globals.getFlatTree(itemInfo.id)
+
+  dispatch(replaceTreeInfoByIndex(nextTreeIndex, treeInfo))
 }
 
-function render({props}) {
-  const isSearching = props.isSearching
-  const itemClasses = [
-    'item',
-    'bookmark-item'
-  ]
-  const itemInfo = props.itemInfo
+const BookmarkItem = {
+  // async afterRender(model) {
+  //   const {props} = model
 
-  const bookmarkType = globals.getBookmarkType(itemInfo)
-  const itemTitle = itemInfo.title || itemInfo.url
+  //   const {itemInfo} = props
 
-  let iconSrc
-  let isDraggable = true
+  //   const el = document.getElementById(itemInfo.id)
 
-  if (globals.isFolder(itemInfo)) {
-    iconSrc = '/img/folder.png'
-  }
+  //   if (el) {
+  //     el.title = await getTooltip(model)
+  //   }
+  // },
 
-  switch (bookmarkType) {
-    case 'no-bookmark':
-    case 'root-folder':
+  render(model) {
+    const {context, props} = model
+
+    const {itemInfo} = props
+    const {menuTarget, searchKeyword} = context
+
+    const bookmarkType = globals.getBookmarkType(itemInfo)
+    const compiledMouseHandler = debouncedMouseHandler(model)
+    const itemClasses = [
+      'item',
+      'bookmark-item'
+    ]
+    const itemTitle = itemInfo.title || itemInfo.url
+
+    let iconSrc
+    let isDraggable = true
+
+    if (globals.isFolder(itemInfo)) {
+      iconSrc = '/img/folder.png'
+    }
+
+    switch (bookmarkType) {
+      case 'no-bookmark':
+      case 'root-folder':
+        isDraggable = false
+        itemClasses.push(bookmarkType)
+        break
+
+      case 'separator':
+        itemClasses.push(bookmarkType)
+        break
+
+      case 'bookmark':
+        iconSrc = `chrome://favicon/${itemInfo.url}`
+        break
+
+      default:
+    }
+
+    if (searchKeyword) {
       isDraggable = false
-      itemClasses.push(bookmarkType)
-      break
-
-    case 'separator':
-      itemClasses.push(bookmarkType)
-      break
-
-    case 'bookmark':
-      iconSrc = `chrome://favicon/${itemInfo.url}`
-      break
-
-    default:
-  }
-
-  if (isSearching) {
-    isDraggable = false
-  }
-
-  return (
-    <div
-      id={itemInfo.id}
-      class={itemClasses.join(' ')}
-      draggable={isDraggable}
-      onClick={clickHandler}
-      onContextMenu={contextMenuHandler}
-      onDragEnd={dragEndHandler}
-      onDragOver={dragOverHandler}
-      onDragStart={dragStartHandler}
-      onMouseEnter={debouncedMouseHandler}
-      onMouseLeave={debouncedMouseHandler}
-    >
-      <img class='icon' src={iconSrc} alt='' draggable='false' />
-      <div class='no-text-overflow'>{itemTitle}</div>
-    </div>
-  )
-}
-
-function setTooltip(el, props) {
-  const isSearching = props.isSearching
-  const itemInfo = props.itemInfo
-  const tooltipArr = []
-
-  const setTitle = () => {
-    if (tooltipArr.length) {
-      el.title = tooltipArr.join('\n')
-    }
-  }
-
-  if (globals.options.tooltip) {
-    tooltipArr.push(itemInfo.title, itemInfo.url)
-  }
-
-  if (isSearching) {
-    const breadcrumbArr = []
-
-    const getBreadcrumb = async function (breadId) {
-      const results = await chromep.bookmarks.get(breadId)
-
-      const thisItemInfo = results[0]
-
-      breadcrumbArr.unshift(thisItemInfo.title)
-
-      if (thisItemInfo.parentId !== '0') {
-        getBreadcrumb(thisItemInfo.parentId)
-      } else {
-        tooltipArr.unshift(breadcrumbArr.join(' > '))
-
-        setTitle()
-      }
     }
 
-    getBreadcrumb(itemInfo.parentId)
-  } else {
-    setTitle()
+    if (menuTarget && menuTarget.id === itemInfo.id) {
+      itemClasses.push('selected')
+    }
+
+    return (
+      <a
+        id={itemInfo.id}
+        class={itemClasses.join(' ')}
+        href
+        draggable={isDraggable}
+        onClick={clickHandler(model)}
+        onContextMenu={contextMenuHandler(model)}
+        onDragEnd={dragEndHandler(model)}
+        onDragOver={dragOverHandler(model)}
+        onDragStart={dragStartHandler(model)}
+        onMouseEnter={compiledMouseHandler}
+        onMouseLeave={compiledMouseHandler}
+      >
+        <img class='icon' src={iconSrc} alt='' draggable='false' />
+        <span class='no-text-overflow'>{itemTitle}</span>
+      </a>
+    )
   }
 }
 
-export default {afterMount, beforeUpdate, render}
+export default BookmarkItem
