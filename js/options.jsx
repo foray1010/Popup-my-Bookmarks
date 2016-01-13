@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import {dom, element} from 'deku'
 
 import './_components/common'
@@ -8,7 +9,7 @@ import getOptionsConfig from './_components/getOptionsConfig'
 import Immutable from 'seamless-immutable'
 import reducers from './_components/options/reducers'
 
-!async () => {
+!async function () {
   globals.optionsConfig = await getOptionsConfig()
 
   await globals.initOptionsValue()

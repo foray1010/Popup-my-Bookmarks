@@ -1,5 +1,9 @@
+
 {
-  "jsxPragma": "element",
-  "loose": "all",
-  "optional": ["runtime"]
+  "presets": ["es2015", "stage-2"],
+  "plugins": [
+    ["transform-react-jsx", {
+      "pragma": "element"
+    }]
+  ]
 }

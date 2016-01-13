@@ -38,13 +38,13 @@ function initBookmarkEvent(dispatch) {
     const {searchKeyword} = currentContext
 
     // Promise.all cannot recognize immutable array
-    const newTrees = await* oldTrees.asMutable().map((treeInfo) => {
+    const newTrees = await Promise.all(oldTrees.asMutable().map((treeInfo) => {
       if (treeInfo.id === 'search-result') {
         return getSearchResult(currentContext, searchKeyword)
       }
 
       return globals.getFlatTree(treeInfo.id)
-    })
+    }))
 
     dispatch([
       // to make sure the menu is not activated when bookmark is updating

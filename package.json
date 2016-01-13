@@ -12,6 +12,7 @@
     "node": ">= 4.2"
   },
   "dependencies": {
+    "babel-polyfill": "*",
     "chrome-promise": "*",
     "deku": "2.0.0-rc12",
     "lodash.debounce": "*",
@@ -23,10 +24,12 @@
     "seamless-immutable": "*"
   },
   "devDependencies": {
-    "babel-core": "^5.0.0",
+    "babel-core": "*",
     "babel-eslint": "*",
-    "babel-loader": "^5.0.0",
-    "babel-runtime": "^5.0.0",
+    "babel-loader": "*",
+    "babel-plugin-transform-react-jsx": "*",
+    "babel-preset-es2015": "*",
+    "babel-preset-stage-2": "*",
     "cson": "*",
     "eslint-config-airbnb": "3.1.0",
     "eslint-plugin-react": "*",
