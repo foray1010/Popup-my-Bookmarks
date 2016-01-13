@@ -42,7 +42,6 @@
     "gulp-stylus": "*",
     "gulp-util": "*",
     "gulp-zip": "*",
-    "node-libs-browser": "*",
     "vinyl-named": "*",
     "webpack": "*",
     "webpack-stream": "*",
