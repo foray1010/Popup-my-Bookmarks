@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import {dom, element} from 'deku'
 
 import './_components/common'
