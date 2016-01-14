@@ -66,8 +66,7 @@ const OptionInput = {
     const optionValue = options[optionName]
 
     return (
-      // <option selected={optionValue === optionChoice}> // test
-      <option>
+      <option selected={optionValue === optionChoice}>
         {optionChoice}
       </option>
     )
