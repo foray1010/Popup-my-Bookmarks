@@ -8,6 +8,8 @@ import {
 const menuId = 'menu'
 
 const menuItemClickHandler = (model) => (evt) => {
+  evt.preventDefault()
+
   const {context, dispatch} = model
 
   const {menuTarget} = context
@@ -117,7 +119,7 @@ function getChildrenHiddenStatus(context) {
 function getMenuItemNum(menuItem) {
   const menuItemList = document.getElementsByClassName('menu-item')
 
-  return Array.prototype.indexOf.call(menuItemList, menuItem)
+  return Array.from(menuItemList).indexOf(menuItem)
 }
 
 function removeBookmarkItem(menuTarget) {
@@ -257,6 +259,7 @@ const Menu = {
 
     if (menuTarget) {
       const childrenHiddenStatus = getChildrenHiddenStatus(context)
+      const compiledMenuItemClickHandler = menuItemClickHandler(model)
       const menuPattern = [
         [],
         [],
@@ -277,16 +280,26 @@ const Menu = {
         const isMenuAreaHidden = childrenHiddenStatus[menuAreaIndex]
         const menuAreaItems = menuAreaKeys.map((menuItemKey) => {
           return (
-            <div
-              class='item menu-item'
-              onClick={menuItemClickHandler(model)}
-            >
-              {chrome.i18n.getMessage(menuItemKey)}
-            </div>
+            <li>
+              <a
+                class='item menu-item'
+                href=''
+                onClick={compiledMenuItemClickHandler}
+              >
+                {chrome.i18n.getMessage(menuItemKey)}
+              </a>
+            </li>
           )
         })
 
-        return <div hidden={isMenuAreaHidden}>{menuAreaItems}</div>
+        return (
+          <ul
+            class='menu-area'
+            hidden={isMenuAreaHidden}
+          >
+            {menuAreaItems}
+          </ul>
+        )
       })
     }
 

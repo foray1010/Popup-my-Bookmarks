@@ -8,6 +8,11 @@ highlight-item()
   background-color: $highlight-level1
   border-color: $highlight-level2
 
+plain-list()
+  list-style: none
+  margin: 0
+  padding: 0
+
 body
   -webkit-user-select: none
 
@@ -21,6 +26,7 @@ body
     highlight-item()
 
 .bookmark-list
+  plain-list()
   overflow-y: auto
 
   &::after
@@ -56,8 +62,13 @@ body
   color: $main-font-color
   cursor: default
 
+.menu-area
+  plain-list()
+
 .menu-item
+  display: block
   padding: $golden-gap 8px
+  text-decoration: none
 
   &:hover
     highlight-item()
@@ -188,7 +199,7 @@ body
   padding: $golden-gap-2x
   position: absolute
 
-  & > div + div:not([hidden]) // separator between div
+  & > ul + ul:not([hidden]) // separator between div
     border-top: 1px solid $highlight-level2
     margin-top: $golden-gap
     padding-top: $golden-gap

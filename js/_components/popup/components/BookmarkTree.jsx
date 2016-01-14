@@ -90,13 +90,13 @@ const BookmarkTree = {
           isHidden={searchKeyword || isRootBox}
           treeIndex={treeIndex}
         />
-        <div
+        <ul
           class='bookmark-list'
           onScroll={scrollHandler(model)}
           onWheel={wheelHandler()}
         >
           {treeItems}
-        </div>
+        </ul>
         <FolderCover treeIndex={treeIndex} />
       </div>
     )
