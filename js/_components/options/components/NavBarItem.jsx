@@ -5,7 +5,9 @@ import {
   selectNavModule
 } from '../actions'
 
-const clickHandler = (model) => async () => {
+const clickHandler = (model) => async (evt) => {
+  evt.preventDefault()
+
   const {context, dispatch, props} = model
 
   const {navBarItemInfo} = props
@@ -35,12 +37,13 @@ const NavBarItem = {
     }
 
     return (
-      <div
+      <a
         class={navBarItemClasses.join(' ')}
+        href=''
         onClick={clickHandler(model)}
       >
         {navBarItemInfo.title}
-      </div>
+      </a>
     )
   }
 }

@@ -284,22 +284,23 @@ const BookmarkItem = {
     }
 
     return (
-      <a
-        id={itemInfo.id}
-        class={itemClasses.join(' ')}
-        href=''
-        draggable={isDraggable}
-        onClick={clickHandler(model)}
-        onContextMenu={contextMenuHandler(model)}
-        onDragEnd={dragEndHandler(model)}
-        onDragOver={dragOverHandler(model)}
-        onDragStart={dragStartHandler(model)}
-        onMouseEnter={compiledMouseHandler}
-        onMouseLeave={compiledMouseHandler}
-      >
-        <img class='icon' src={iconSrc} alt='' draggable='false' />
-        <span class='no-text-overflow'>{itemTitle}</span>
-      </a>
+      <li id={itemInfo.id}>
+        <a
+          class={itemClasses.join(' ')}
+          href=''
+          draggable={isDraggable}
+          onClick={clickHandler(model)}
+          onContextMenu={contextMenuHandler(model)}
+          onDragEnd={dragEndHandler(model)}
+          onDragOver={dragOverHandler(model)}
+          onDragStart={dragStartHandler(model)}
+          onMouseEnter={compiledMouseHandler}
+          onMouseLeave={compiledMouseHandler}
+        >
+          <img class='icon' src={iconSrc} alt='' draggable='false' />
+          <span class='no-text-overflow'>{itemTitle}</span>
+        </a>
+      </li>
     )
   }
 }
