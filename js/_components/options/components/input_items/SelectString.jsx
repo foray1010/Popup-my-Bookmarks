@@ -23,7 +23,7 @@ const OptionInput = {
     return (
       <option
         value={String(optionChoiceIndex)}
-        // selected={optionChoiceIndex === optionValue} // test
+        selected={optionChoiceIndex === optionValue}
       >
         {optionChoice}
       </option>
