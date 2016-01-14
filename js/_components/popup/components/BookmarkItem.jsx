@@ -287,7 +287,7 @@ const BookmarkItem = {
       <a
         id={itemInfo.id}
         class={itemClasses.join(' ')}
-        href
+        href=''
         draggable={isDraggable}
         onClick={clickHandler(model)}
         onContextMenu={contextMenuHandler(model)}
