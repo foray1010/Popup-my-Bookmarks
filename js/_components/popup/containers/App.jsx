@@ -34,6 +34,20 @@ const mouseDownHandler = () => (evt) => {
 function initBookmarkEvent(dispatch) {
   const renewCurrentTrees = () => renewTrees(currentContext.trees)
 
+  const renewSlicedTreesById = (itemId) => {
+    const {trees} = currentContext
+
+    const removeFromIndex = trees.findIndex((treeInfo) => treeInfo.id === itemId)
+
+    if (removeFromIndex >= 0) {
+      const slicedTrees = globals.getSlicedTrees(trees, removeFromIndex)
+
+      renewTrees(slicedTrees)
+    } else {
+      renewCurrentTrees()
+    }
+  }
+
   const renewTrees = debounce(async (oldTrees) => {
     const {searchKeyword} = currentContext
 
@@ -54,20 +68,6 @@ function initBookmarkEvent(dispatch) {
       updateTrees(newTrees)
     ])
   }, 100)
-
-  const renewSlicedTreesById = (itemId) => {
-    const {trees} = currentContext
-
-    const removeFromIndex = trees.findIndex((treeInfo) => treeInfo.id === itemId)
-
-    if (removeFromIndex >= 0) {
-      const slicedTrees = globals.getSlicedTrees(trees, removeFromIndex)
-
-      renewTrees(slicedTrees)
-    } else {
-      renewCurrentTrees()
-    }
-  }
 
   chrome.bookmarks.onChanged.addListener(renewCurrentTrees)
   chrome.bookmarks.onCreated.addListener(renewCurrentTrees)
