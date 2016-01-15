@@ -92,12 +92,6 @@ const Search = {
   render(model) {
     return (
       <div id='search-box'>
-        <img
-          id='search-img'
-          src='/img/search.png'
-          alt=''
-          draggable='false'
-        />
         <input
           id='search-input'
           type='search'

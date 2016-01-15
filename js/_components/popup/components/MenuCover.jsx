@@ -1,6 +1,9 @@
 import {element} from 'deku'
 
-import {updateEditorTarget, updateMenuTarget} from '../actions'
+import {
+  updateEditorTarget,
+  updateMenuTarget
+} from '../actions'
 
 const clickHandler = (model) => () => {
   const {dispatch} = model
