@@ -134,8 +134,10 @@ window.globals = {
   },
 
   sortByTitle(bookmarkList) {
-    return bookmarkList.sort((bookmark1, bookmark2) => {
-      return bookmark1.title.localeCompare(bookmark2.title)
-    })
+    const collator = new Intl.Collator()
+
+    const {compare} = collator
+
+    return bookmarkList.sort((a, b) => compare(a.title, b.title))
   }
 }
