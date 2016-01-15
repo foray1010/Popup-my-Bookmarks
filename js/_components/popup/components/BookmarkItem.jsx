@@ -178,7 +178,7 @@ function openBookmark(model, evt) {
       if (itemUrl.startsWith('javascript:')) {
         if (options.bookmarklet) {
           chrome.tabs.executeScript(null, {code: itemUrl})
-        } else if (confirm(msgAlertBookmarklet)) {
+        } else if (window.confirm(msgAlertBookmarklet)) {
           globals.openOptionsPage()
         }
       } else {
