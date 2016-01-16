@@ -5,8 +5,6 @@ import {
   updateMenuTarget
 } from '../actions'
 
-const menuId = 'menu'
-
 const menuItemClickHandler = (model) => (evt) => {
   evt.preventDefault()
 
@@ -131,11 +129,11 @@ function removeBookmarkItem(menuTarget) {
 }
 
 function setMenuPosition(model) {
-  const {context} = model
+  const {context, path} = model
 
   const {menuTarget, mousePosition} = context
 
-  const el = document.getElementById(menuId)
+  const el = document.getElementById(path)
 
   const isHidden = !menuTarget
 
@@ -249,7 +247,7 @@ const Menu = {
   },
 
   render(model) {
-    const {context} = model
+    const {context, path} = model
 
     const {menuTarget} = context
 
@@ -303,7 +301,7 @@ const Menu = {
       })
     }
 
-    return <div id={menuId} hidden={isHidden}>{menuItems}</div>
+    return <div id={path} class='menu' hidden={isHidden}>{menuItems}</div>
   }
 }
 
