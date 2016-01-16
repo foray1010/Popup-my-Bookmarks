@@ -2,7 +2,6 @@ import {element} from 'deku'
 
 import {updateEditorTarget} from '../actions'
 
-const editorId = 'editor'
 const msgCancel = chrome.i18n.getMessage('cancel')
 const msgConfirm = chrome.i18n.getMessage('confirm')
 const msgEdit = chrome.i18n.getMessage('edit')
@@ -15,11 +14,11 @@ const clickCancelHandler = (model) => () => {
 }
 
 const clickConfirmHandler = (model) => () => {
-  const {context, dispatch} = model
+  const {context, dispatch, path} = model
 
   const {editorTarget} = context
 
-  const editorInput = document.getElementById(editorId).getElementsByTagName('input')
+  const editorInput = document.getElementById(path).getElementsByTagName('input')
 
   const updatedTitle = editorInput[0].value
 
@@ -76,9 +75,9 @@ function setEditorPosition(context, el) {
 
 const Editor = {
   onUpdate(model) {
-    const {context} = model
+    const {context, path} = model
 
-    const el = document.getElementById(editorId)
+    const el = document.getElementById(path)
     const isHidden = !context.editorTarget
 
     setEditorPosition(context, el)
@@ -90,7 +89,7 @@ const Editor = {
   },
 
   render(model) {
-    const {context} = model
+    const {context, path} = model
 
     const {editorTarget} = context
 
@@ -111,8 +110,8 @@ const Editor = {
     }
 
     return (
-      <div id={editorId} class='panel-width' hidden={isHidden}>
-        <span id='editor-title'>{editorTitle}</span>
+      <div id={path} class='editor panel-width' hidden={isHidden}>
+        <span class='editor-title'>{editorTitle}</span>
         <input type='text' value={itemTitle} />
         <input type='text' value={itemUrl} hidden={isFolderItem} />
         <button onClick={clickConfirmHandler(model)}>{msgConfirm}</button>
