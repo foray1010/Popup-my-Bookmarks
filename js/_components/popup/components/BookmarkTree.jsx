@@ -8,6 +8,16 @@ import TreeHeader from './TreeHeader'
 
 const msgNoBookmark = chrome.i18n.getMessage('noBkmark')
 
+const afterRender = (model) => window.requestAnimationFrame(() => {
+  const {path} = model
+
+  const el = document.getElementById(path)
+
+  if (el) {
+    setHeight(el)
+  }
+})
+
 const scrollHandler = (model) => (evt) => {
 }
 
@@ -32,12 +42,16 @@ function setHeight(el) {
 }
 
 const BookmarkTree = {
-  // afterRender(model) {
-  //   setHeight(el)
-  // },
+  onCreate(model) {
+    afterRender(model)
+  },
+
+  onUpdate(model) {
+    afterRender(model)
+  },
 
   render(model) {
-    const {context, props} = model
+    const {context, path, props} = model
 
     const {rootTree, searchKeyword, trees} = context
     const {treeIndex} = props
@@ -85,7 +99,7 @@ const BookmarkTree = {
     }
 
     return (
-      <div class='bookmark-tree'>
+      <div id={path} class='bookmark-tree'>
         <TreeHeader
           isHidden={searchKeyword || isRootBox}
           treeIndex={treeIndex}

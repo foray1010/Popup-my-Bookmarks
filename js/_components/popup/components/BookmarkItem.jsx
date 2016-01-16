@@ -10,6 +10,22 @@ import {
 
 const msgAlertBookmarklet = chrome.i18n.getMessage('alert_bookmarklet')
 
+const afterRender = (model) => window.requestAnimationFrame(async () => {
+  const {props} = model
+
+  const {itemInfo} = props
+
+  const bookmarkType = globals.getBookmarkType(itemInfo)
+
+  if (bookmarkType === 'bookmark') {
+    const el = document.getElementById(itemInfo.id)
+
+    if (el) {
+      el.title = await getTooltip(model)
+    }
+  }
+})
+
 const clickHandler = (model) => (evt) => {
   evt.preventDefault()
 
@@ -224,17 +240,13 @@ async function openFolder(model) {
 }
 
 const BookmarkItem = {
-  // async afterRender(model) {
-  //   const {props} = model
+  onCreate(model) {
+    afterRender(model)
+  },
 
-  //   const {itemInfo} = props
-
-  //   const el = document.getElementById(itemInfo.id)
-
-  //   if (el) {
-  //     el.title = await getTooltip(model)
-  //   }
-  // },
+  onUpdate(model) {
+    afterRender(model)
+  },
 
   render(model) {
     const {context, props} = model
