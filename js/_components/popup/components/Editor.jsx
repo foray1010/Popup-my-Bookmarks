@@ -95,10 +95,10 @@ const Editor = {
 
     const isHidden = !editorTarget
 
-    let editorTitle
+    let editorTitle = null
     let isFolderItem = false
-    let itemTitle
-    let itemUrl
+    let itemTitle = null
+    let itemUrl = null
 
     if (editorTarget) {
       itemTitle = editorTarget.title

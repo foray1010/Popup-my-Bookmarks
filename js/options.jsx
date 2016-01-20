@@ -1,5 +1,5 @@
 import 'babel-polyfill'
-import {dom, element} from 'deku'
+import {createApp, element} from 'deku'
 
 import './_components/common'
 import './_components/options/globals'
@@ -23,7 +23,7 @@ import reducers from './_components/options/reducers'
   }))
 
   /* render the app */
-  const render = dom.createRenderer(document.getElementById('container'), store.dispatch)
+  const render = createApp(document.getElementById('container'), store.dispatch)
 
   const renderer = () => render(<App />, store.getState())
 
