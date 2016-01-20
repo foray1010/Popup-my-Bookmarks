@@ -14,7 +14,7 @@
   "dependencies": {
     "babel-polyfill": "*",
     "chrome-promise": "*",
-    "deku": "2.0.0-rc13",
+    "deku": "2.0.0-rc15",
     "lodash.debounce": "*",
     "normalize.css": "*",
     "redux": "*",

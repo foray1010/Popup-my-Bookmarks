@@ -253,7 +253,7 @@ const Menu = {
 
     const isHidden = !menuTarget
 
-    let menuItems
+    let menuItems = null
 
     if (menuTarget) {
       const childrenHiddenStatus = getChildrenHiddenStatus(context)

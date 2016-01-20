@@ -260,9 +260,9 @@ const BookmarkItem = {
       'item',
       'bookmark-item'
     ]
-    const itemTitle = itemInfo.title || itemInfo.url
+    const itemTitle = itemInfo.title || itemInfo.url || null
 
-    let iconSrc
+    let iconSrc = null
     let isDraggable = true
 
     if (globals.isFolder(itemInfo)) {

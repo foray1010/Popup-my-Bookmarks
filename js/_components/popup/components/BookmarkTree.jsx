@@ -101,7 +101,7 @@ const BookmarkTree = {
     return (
       <div id={path} class='bookmark-tree'>
         <TreeHeader
-          isHidden={searchKeyword || isRootBox}
+          isHidden={Boolean(searchKeyword || isRootBox)}
           treeIndex={treeIndex}
         />
         <ul

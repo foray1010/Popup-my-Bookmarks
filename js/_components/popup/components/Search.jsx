@@ -41,7 +41,8 @@ async function getSearchResult(context, newSearchKeyword) {
 
   return {
     children: searchResult,
-    id: 'search-result'
+    id: 'search-result',
+    title: null
   }
 }
 
