@@ -41,8 +41,8 @@ window.CSS = (() => {
 })()
 
 window.JSONStorage = {
-  get: (key) => JSON.parse(localStorage.getItem(key)),
-  set: (key, value) => localStorage.setItem(key, JSON.stringify(value))
+  get: (key) => JSON.parse(window.localStorage.getItem(key)),
+  set: (key, value) => window.localStorage.setItem(key, JSON.stringify(value))
 }
 
 function propEach(obj, fn) {
