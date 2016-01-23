@@ -1,26 +1,50 @@
 import Immutable from 'seamless-immutable'
 
+import {
+  OPTIONS_BOOKMARKLET,
+  OPTIONS_CLICK_BY_LEFT,
+  OPTIONS_CLICK_BY_LEFT_CTRL,
+  OPTIONS_CLICK_BY_LEFT_SHIFT,
+  OPTIONS_CLICK_BY_MIDDLE,
+  OPTIONS_DEF_EXPAND,
+  OPTIONS_FONT_FAMILY,
+  OPTIONS_FONT_SIZE,
+  OPTIONS_HIDE_ROOT_FOLDER,
+  OPTIONS_MAX_RESULTS,
+  OPTIONS_OP_FOLDER_BY,
+  OPTIONS_REMEMBER_POS,
+  OPTIONS_SEARCH_TARGET,
+  OPTIONS_SET_WIDTH,
+  OPTIONS_TOOLTIP,
+  OPTIONS_WARN_OPEN_MANY
+} from '../../constants'
+
+export const NAV_MODULE_CONTRIBUTORS = 'contributors'
+export const NAV_MODULE_CONTROL = 'control'
+export const NAV_MODULE_GENERAL = 'general'
+export const NAV_MODULE_USER_INTERFACE = 'userInterface'
+
 export const OPTION_TABLE_MAP = Immutable({
-  general: [
-    'bookmarklet',
-    'defExpand',
-    'hideRootFolder',
-    'searchTarget',
-    'maxResults',
-    'tooltip',
-    'warnOpenMany',
-    'rememberPos'
+  [NAV_MODULE_GENERAL]: [
+    OPTIONS_BOOKMARKLET,
+    OPTIONS_DEF_EXPAND,
+    OPTIONS_HIDE_ROOT_FOLDER,
+    OPTIONS_SEARCH_TARGET,
+    OPTIONS_MAX_RESULTS,
+    OPTIONS_TOOLTIP,
+    OPTIONS_WARN_OPEN_MANY,
+    OPTIONS_REMEMBER_POS
   ],
-  userInterface: [
-    'setWidth',
-    'fontSize',
-    'fontFamily'
+  [NAV_MODULE_USER_INTERFACE]: [
+    OPTIONS_SET_WIDTH,
+    OPTIONS_FONT_SIZE,
+    OPTIONS_FONT_FAMILY
   ],
-  control: [
-    'clickByLeft',
-    'clickByLeftCtrl',
-    'clickByLeftShift',
-    'clickByMiddle',
-    'opFolderBy'
+  [NAV_MODULE_CONTROL]: [
+    OPTIONS_CLICK_BY_LEFT,
+    OPTIONS_CLICK_BY_LEFT_CTRL,
+    OPTIONS_CLICK_BY_LEFT_SHIFT,
+    OPTIONS_CLICK_BY_MIDDLE,
+    OPTIONS_OP_FOLDER_BY
   ]
 })

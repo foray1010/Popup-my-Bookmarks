@@ -1,22 +1,28 @@
 import {element} from 'deku'
 
+import {
+  NAV_MODULE_CONTRIBUTORS,
+  NAV_MODULE_CONTROL,
+  NAV_MODULE_GENERAL,
+  NAV_MODULE_USER_INTERFACE
+} from '../constants'
 import NavBarItem from './NavBarItem'
 
 const navBarItemInfos = [
   {
-    navModule: 'general',
+    navModule: NAV_MODULE_GENERAL,
     title: chrome.i18n.getMessage('opt_general')
   },
   {
-    navModule: 'userInterface',
+    navModule: NAV_MODULE_USER_INTERFACE,
     title: chrome.i18n.getMessage('opt_userInterface')
   },
   {
-    navModule: 'control',
+    navModule: NAV_MODULE_CONTROL,
     title: chrome.i18n.getMessage('opt_control')
   },
   {
-    navModule: 'contributors',
+    navModule: NAV_MODULE_CONTRIBUTORS,
     title: chrome.i18n.getMessage('opt_contributors')
   }
 ]
