@@ -1,10 +1,10 @@
 import chromep from '../lib/chromePromise'
 
-window.globals = {
-  goldenGap: 2,
-  maxHeight: 596,
-  separateThisUrl: 'http://separatethis.com/',
+import {
+  SEPARATE_THIS_URL
+} from './constants'
 
+window.globals = {
   isFolder(itemInfo) {
     const bookmarkType = globals.getBookmarkType(itemInfo)
 
@@ -40,7 +40,7 @@ window.globals = {
       return 'folder'
     }
 
-    if (itemInfo.url.startsWith(globals.separateThisUrl)) {
+    if (itemInfo.url.startsWith(SEPARATE_THIS_URL)) {
       return 'separator'
     }
 

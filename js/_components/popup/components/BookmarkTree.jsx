@@ -1,6 +1,9 @@
 import {element} from 'deku'
 import Immutable from 'seamless-immutable'
 
+import {
+  MAX_HEIGHT
+} from '../constants'
 import BookmarkItem from './BookmarkItem'
 import FolderCover from './FolderCover'
 import NoResult from './NoResult'
@@ -34,7 +37,7 @@ function setHeight(el) {
   // search-box and tree-header-box height
   const bookmarkListOffsetTop = bookmarkList.getBoundingClientRect().top
 
-  const maxListHeight = globals.maxHeight - bookmarkListOffsetTop
+  const maxListHeight = MAX_HEIGHT - bookmarkListOffsetTop
 
   const listHeight = Math.min(bookmarkList.scrollHeight, maxListHeight)
 

@@ -1,31 +1,6 @@
 import chromep from '../lib/chromePromise'
 
 window.globals = {
-  optionTableMap: {
-    general: [
-      'bookmarklet',
-      'defExpand',
-      'hideRootFolder',
-      'searchTarget',
-      'maxResults',
-      'tooltip',
-      'warnOpenMany',
-      'rememberPos'
-    ],
-    userInterface: [
-      'setWidth',
-      'fontSize',
-      'fontFamily'
-    ],
-    control: [
-      'clickByLeft',
-      'clickByLeftCtrl',
-      'clickByLeftShift',
-      'clickByMiddle',
-      'opFolderBy'
-    ]
-  },
-
   async initOptionsValue(optionsConfig) {
     const options = await chromep.storage.sync.get(null)
 

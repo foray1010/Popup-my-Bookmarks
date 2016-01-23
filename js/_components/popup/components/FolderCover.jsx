@@ -1,6 +1,8 @@
 import {element} from 'deku'
 
-import {removeTreeInfosFromIndex} from '../actions'
+import {
+  removeTreeInfosFromIndex
+} from '../actions'
 
 const clickCoverHandler = (model) => () => {
   closeFolder(model)

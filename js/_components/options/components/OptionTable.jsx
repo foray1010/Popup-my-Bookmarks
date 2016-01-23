@@ -1,5 +1,8 @@
 import {element} from 'deku'
 
+import {
+  OPTION_TABLE_MAP
+} from '../constants'
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 
@@ -9,7 +12,7 @@ const OptionTable = {
 
     const {options, selectedNavModule} = context
 
-    const selectedOptionTableMap = globals.optionTableMap[selectedNavModule]
+    const selectedOptionTableMap = OPTION_TABLE_MAP[selectedNavModule]
 
     const optionTableItems = []
 
