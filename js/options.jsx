@@ -12,11 +12,9 @@ import reducers from './_components/options/reducers'
 !async function () {
   const optionsConfig = await getOptionsConfig()
 
-  await globals.initOptionsValue(optionsConfig)
+  const options = await globals.initOptionsValue(optionsConfig)
 
   /* Create a Redux store to handle all UI actions and side-effects */
-  const options = await chromep.storage.sync.get(null)
-
   const store = configureStore(reducers, Immutable({
     options: options,
     optionsConfig: optionsConfig,

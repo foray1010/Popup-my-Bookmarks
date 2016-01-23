@@ -4,7 +4,7 @@ import {
   OPTION_TABLE_MAP
 } from '../constants'
 import {
-  reloadOptions
+  updateOptions
 } from '../actions'
 import chromep from '../../lib/chromePromise'
 
@@ -36,7 +36,7 @@ const confirmButtonHandler = (model) => async () => {
 
   await chromep.storage.sync.set(newOptions)
 
-  dispatch(await reloadOptions())
+  dispatch(updateOptions(newOptions))
 }
 
 const defaultButtonHandler = (model) => async () => {
@@ -46,9 +46,9 @@ const defaultButtonHandler = (model) => async () => {
 
   await chromep.storage.sync.clear()
 
-  await globals.initOptionsValue(optionsConfig)
+  const newOptions = await globals.initOptionsValue(optionsConfig)
 
-  dispatch(await reloadOptions())
+  dispatch(updateOptions(newOptions))
 }
 
 const OptionButton = {
