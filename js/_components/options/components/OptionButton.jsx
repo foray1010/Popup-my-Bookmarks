@@ -9,12 +9,12 @@ const msgDefault = chrome.i18n.getMessage('default')
 const confirmButtonHandler = (model) => async () => {
   const {context, dispatch} = model
 
-  const {options, selectedNavModule} = context
+  const {options, optionsConfig, selectedNavModule} = context
 
   const newOptions = options.asMutable()
 
   for (const optionName of globals.optionTableMap[selectedNavModule]) {
-    const optionConfig = globals.optionsConfig[optionName]
+    const optionConfig = optionsConfig[optionName]
 
     if (optionConfig.permissions) {
       const isSuccess = await globals.setPermission(
@@ -35,11 +35,13 @@ const confirmButtonHandler = (model) => async () => {
 }
 
 const defaultButtonHandler = (model) => async () => {
-  const {dispatch} = model
+  const {context, dispatch} = model
+
+  const {optionsConfig} = context
 
   await chromep.storage.sync.clear()
 
-  await globals.initOptionsValue()
+  await globals.initOptionsValue(optionsConfig)
 
   dispatch(await reloadOptions())
 }

@@ -8,11 +8,12 @@ import SelectString from './input_items/SelectString'
 
 const OptionItem = {
   render(model) {
-    const {props} = model
+    const {context, props} = model
 
     const {optionName} = props
+    const {optionsConfig} = context
 
-    const optionConfig = globals.optionsConfig[optionName]
+    const optionConfig = optionsConfig[optionName]
 
     const InputItem = (() => {
       switch (optionConfig.type) {

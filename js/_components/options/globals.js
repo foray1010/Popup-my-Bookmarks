@@ -26,13 +26,13 @@ window.globals = {
     ]
   },
 
-  async initOptionsValue() {
+  async initOptionsValue(optionsConfig) {
     const options = await chromep.storage.sync.get(null)
 
     const newOptions = {}
 
-    for (const optionName of Object.keys(globals.optionsConfig)) {
-      const optionConfig = globals.optionsConfig[optionName]
+    for (const optionName of Object.keys(optionsConfig)) {
+      const optionConfig = optionsConfig[optionName]
 
       const optionDefaultValue = optionConfig.default
 
