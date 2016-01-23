@@ -1,3 +1,4 @@
+import chromep from '../../lib/chromePromise'
 import Immutable from 'seamless-immutable'
 
 /* action type */

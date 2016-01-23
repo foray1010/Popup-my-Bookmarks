@@ -5,6 +5,7 @@ import {
   updateSearchKeyword,
   updateTrees
 } from '../actions'
+import chromep from '../../lib/chromePromise'
 
 const msgSearch = chrome.i18n.getMessage('search')
 

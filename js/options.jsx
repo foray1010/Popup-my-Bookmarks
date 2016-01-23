@@ -1,9 +1,9 @@
 import 'babel-polyfill'
 import {createApp, element} from 'deku'
 
-import './_components/common'
 import './_components/options/globals'
 import App from './_components/options/containers/App'
+import chromep from './_components/lib/chromePromise'
 import configureStore from './_components/store/configureStore'
 import getOptionsConfig from './_components/getOptionsConfig'
 import Immutable from 'seamless-immutable'

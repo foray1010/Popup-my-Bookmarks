@@ -7,6 +7,7 @@ import {
   updateMenuTarget,
   updateMousePosition
 } from '../actions'
+import chromep from '../../lib/chromePromise'
 
 const msgAlertBookmarklet = chrome.i18n.getMessage('alert_bookmarklet')
 
