@@ -31,7 +31,7 @@
     "babel-preset-es2015": "*",
     "babel-preset-stage-2": "*",
     "cson": "*",
-    "eslint-config-airbnb": "3.1.0",
+    "eslint-config-airbnb": "4.0.0",
     "eslint-plugin-react": "*",
     "fs-extra": "*",
     "gulp": "*",

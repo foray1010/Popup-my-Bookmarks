@@ -93,11 +93,13 @@ rules:
   ################
   # ECMAScript 6 #
   ################
+  arrow-body-style: 0
   constructor-super: 2
   generator-star-spacing:
     - 2
     - "after"
   object-shorthand: 0
+  prefer-template: 0
 
   ##########
   # Legacy #
