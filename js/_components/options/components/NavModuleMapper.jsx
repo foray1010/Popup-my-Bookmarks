@@ -1,5 +1,11 @@
 import {element} from 'deku'
 
+import {
+  NAV_MODULE_CONTRIBUTORS,
+  NAV_MODULE_CONTROL,
+  NAV_MODULE_GENERAL,
+  NAV_MODULE_USER_INTERFACE
+} from '../constants'
 import Contributors from './Contributors'
 import OptionTable from './OptionTable'
 
@@ -10,12 +16,12 @@ const NavModuleMapper = {
     const {selectedNavModule} = context
 
     switch (selectedNavModule) {
-      case 'contributors':
+      case NAV_MODULE_CONTRIBUTORS:
         return <Contributors />
 
-      case 'control':
-      case 'general':
-      case 'userInterface':
+      case NAV_MODULE_CONTROL:
+      case NAV_MODULE_GENERAL:
+      case NAV_MODULE_USER_INTERFACE:
         return (
           <OptionTable />
         )

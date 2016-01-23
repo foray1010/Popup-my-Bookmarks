@@ -4,6 +4,9 @@ import {createApp, element} from 'deku'
 import {
   initOptionsValue
 } from './_components/options/functions'
+import {
+  NAV_MODULE_GENERAL
+} from './_components/options/constants'
 import App from './_components/options/containers/App'
 import configureStore from './_components/store/configureStore'
 import getOptionsConfig from './_components/getOptionsConfig'
@@ -19,7 +22,7 @@ import reducers from './_components/options/reducers'
   const store = configureStore(reducers, Immutable({
     options: options,
     optionsConfig: optionsConfig,
-    selectedNavModule: 'general'
+    selectedNavModule: NAV_MODULE_GENERAL
   }))
 
   /* render the app */
