@@ -3,6 +3,9 @@ import debounce from 'lodash.debounce'
 
 import {getSearchResult} from '../components/Search'
 import {
+  GOLDEN_GAP
+} from '../constants'
+import {
   updateEditorTarget,
   updateMenuTarget,
   updateTrees
@@ -84,10 +87,10 @@ function initStyleOptions(options) {
     .map((x) => JSON.stringify(x.trim()))
     .join(',')
 
-  const itemHeight = globals.goldenGap * 2 + fontSize
+  const itemHeight = GOLDEN_GAP * 2 + fontSize
 
-  // +1 for border width, globals.goldenGap for padding
-  globals.itemOffsetHeight = (1 + globals.goldenGap) * 2 + itemHeight
+  // +1 for border width, GOLDEN_GAP for padding
+  globals.itemOffsetHeight = (1 + GOLDEN_GAP) * 2 + itemHeight
 
   css.set({
     body: {

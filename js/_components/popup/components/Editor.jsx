@@ -1,6 +1,8 @@
 import {element} from 'deku'
 
-import {updateEditorTarget} from '../actions'
+import {
+  updateEditorTarget
+} from '../actions'
 
 const msgCancel = chrome.i18n.getMessage('cancel')
 const msgConfirm = chrome.i18n.getMessage('confirm')

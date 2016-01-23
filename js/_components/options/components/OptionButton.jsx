@@ -1,6 +1,11 @@
 import {element} from 'deku'
 
-import {reloadOptions} from '../actions'
+import {
+  OPTION_TABLE_MAP
+} from '../constants'
+import {
+  reloadOptions
+} from '../actions'
 import chromep from '../../lib/chromePromise'
 
 const msgConfirm = chrome.i18n.getMessage('confirm')
@@ -13,7 +18,7 @@ const confirmButtonHandler = (model) => async () => {
 
   const newOptions = options.asMutable()
 
-  for (const optionName of globals.optionTableMap[selectedNavModule]) {
+  for (const optionName of OPTION_TABLE_MAP[selectedNavModule]) {
     const optionConfig = optionsConfig[optionName]
 
     if (optionConfig.permissions) {

@@ -1,6 +1,9 @@
 import {element} from 'deku'
 
 import {
+  SEPARATE_THIS_URL
+} from '../constants'
+import {
   updateEditorTarget,
   updateMenuTarget
 } from '../actions'
@@ -46,7 +49,7 @@ const menuItemClickHandler = (model) => (evt) => {
       createBookmarkItem(
         menuTarget,
         '- '.repeat(42),
-        globals.separateThisUrl
+        SEPARATE_THIS_URL
       )
       break
 
