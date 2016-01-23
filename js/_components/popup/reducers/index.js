@@ -22,6 +22,10 @@ const rootReducer = combineReducers({
     }
   },
 
+  itemOffsetHeight(state = 0) {
+    return state
+  },
+
   menuTarget(state = null, action) {
     switch (action.type) {
       case UPDATE_MENU_TARGET:

@@ -1,6 +1,10 @@
 import {element} from 'deku'
 
 import {
+  isFolder,
+  resetBodySize
+} from '../functions'
+import {
   updateEditorTarget
 } from '../actions'
 
@@ -26,7 +30,7 @@ const clickConfirmHandler = (model) => () => {
 
   let updatedUrl
 
-  if (!globals.isFolder(editorTarget)) {
+  if (!isFolder(editorTarget)) {
     updatedUrl = editorInput[1].value
   }
 
@@ -39,7 +43,7 @@ const clickConfirmHandler = (model) => () => {
 }
 
 function closeEditor(dispatch) {
-  globals.resetBodySize()
+  resetBodySize()
 
   dispatch(updateEditorTarget(null))
 }
@@ -106,7 +110,7 @@ const Editor = {
       itemTitle = editorTarget.title
       itemUrl = editorTarget.url
 
-      isFolderItem = globals.isFolder(editorTarget)
+      isFolderItem = isFolder(editorTarget)
 
       editorTitle = isFolderItem ? msgRename : msgEdit
     }

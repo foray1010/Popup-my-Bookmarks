@@ -2,6 +2,14 @@ import {element} from 'deku'
 import debounce from 'lodash.debounce'
 
 import {
+  getBookmarkType,
+  getFlatTree,
+  isFolder,
+  isFolderOpened,
+  openMultipleBookmarks,
+  openOptionsPage
+} from '../functions'
+import {
   replaceTreeInfoByIndex,
   removeTreeInfosFromIndex,
   updateMenuTarget,
@@ -16,7 +24,7 @@ const afterRender = (model) => window.requestAnimationFrame(async () => {
 
   const {itemInfo} = props
 
-  const bookmarkType = globals.getBookmarkType(itemInfo)
+  const bookmarkType = getBookmarkType(itemInfo)
 
   if (bookmarkType === 'bookmark') {
     const el = document.getElementById(itemInfo.id)
@@ -35,21 +43,21 @@ const clickHandler = (model) => (evt) => {
   const {itemInfo, treeIndex} = props
   const {trees} = context
 
-  const bookmarkType = globals.getBookmarkType(itemInfo)
+  const bookmarkType = getBookmarkType(itemInfo)
 
   switch (bookmarkType) {
     case 'root-folder':
     case 'folder':
       if (evt.button === 0) {
         if (context.options.opFolderBy) {
-          if (!globals.isFolderOpened(trees, itemInfo)) {
+          if (!isFolderOpened(trees, itemInfo)) {
             openFolder(model)
           } else {
             dispatch(removeTreeInfosFromIndex(treeIndex + 1))
           }
         }
       } else {
-        globals.openMultipleBookmarks(model, itemInfo, 0)
+        openMultipleBookmarks(model, itemInfo, 0)
       }
 
       break
@@ -89,8 +97,8 @@ const debouncedMouseHandler = (model) => debounce((evt) => {
   switch (evt.type) {
     case 'mouseenter':
       if (!searchKeyword && !context.options.opFolderBy) {
-        if (globals.isFolder(itemInfo)) {
-          if (!globals.isFolderOpened(trees, itemInfo)) {
+        if (isFolder(itemInfo)) {
+          if (!isFolderOpened(trees, itemInfo)) {
             openFolder(model)
           }
         } else {
@@ -196,7 +204,7 @@ function openBookmark(model, evt) {
         if (options.bookmarklet) {
           chrome.tabs.executeScript(null, {code: itemUrl})
         } else if (window.confirm(msgAlertBookmarklet)) {
-          globals.openOptionsPage()
+          openOptionsPage()
         }
       } else {
         chrome.tabs.update({url: itemUrl})
@@ -235,7 +243,7 @@ async function openFolder(model) {
   const {itemInfo, treeIndex} = props
 
   const nextTreeIndex = treeIndex + 1
-  const treeInfo = await globals.getFlatTree(itemInfo.id)
+  const treeInfo = await getFlatTree(itemInfo.id)
 
   dispatch(replaceTreeInfoByIndex(nextTreeIndex, treeInfo))
 }
@@ -255,7 +263,7 @@ const BookmarkItem = {
     const {itemInfo} = props
     const {menuTarget, searchKeyword} = context
 
-    const bookmarkType = globals.getBookmarkType(itemInfo)
+    const bookmarkType = getBookmarkType(itemInfo)
     const compiledMouseHandler = debouncedMouseHandler(model)
     const itemClasses = [
       'item',
@@ -266,7 +274,7 @@ const BookmarkItem = {
     let iconSrc = null
     let isDraggable = true
 
-    if (globals.isFolder(itemInfo)) {
+    if (isFolder(itemInfo)) {
       iconSrc = '/img/folder.png'
     }
 
