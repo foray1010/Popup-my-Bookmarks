@@ -6,7 +6,7 @@ import {
   UPDATE_OPTIONS,
   UPDATE_OPTIONS_CONFIG,
   UPDATE_SINGLE_OPTION
-} from '../actions'
+} from '../constants/actionTypes'
 
 const rootReducer = combineReducers({
   selectedNavModule(state = null, action) {

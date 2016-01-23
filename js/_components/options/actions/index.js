@@ -1,12 +1,12 @@
-import chromep from '../../lib/chromePromise'
 import Immutable from 'seamless-immutable'
 
-/* action type */
-export const SELECT_NAV_MODULE = 'SELECT_NAV_MODULE'
-export const UPDATE_OPTIONS = 'UPDATE_OPTIONS'
-export const UPDATE_OPTIONS_CONFIG = 'UPDATE_OPTIONS_CONFIG'
-export const UPDATE_SINGLE_OPTION = 'UPDATE_SINGLE_OPTION'
-
+import {
+  SELECT_NAV_MODULE,
+  UPDATE_OPTIONS,
+  UPDATE_OPTIONS_CONFIG,
+  UPDATE_SINGLE_OPTION
+} from '../constants/actionTypes'
+import chromep from '../../lib/chromePromise'
 
 /* basic action */
 export function selectNavModule(navModule) {

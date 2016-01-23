@@ -1,14 +1,14 @@
 import Immutable from 'seamless-immutable'
 
-/* action type */
-export const REMOVE_TREE_INFOS_FROM_INDEX = 'REMOVE_TREE_INFOS_FROM_INDEX'
-export const REPLACE_TREE_INFO_BY_INDEX = 'REPLACE_TREE_INFO_BY_INDEX'
-export const UPDATE_EDITOR_TARGET = 'UPDATE_EDITOR_TARGET'
-export const UPDATE_MENU_TARGET = 'UPDATE_MENU_TARGET'
-export const UPDATE_MOUSE_POSITION = 'UPDATE_MOUSE_POSITION'
-export const UPDATE_SEARCH_KEYWORD = 'UPDATE_SEARCH_KEYWORD'
-export const UPDATE_TREES = 'UPDATE_TREES'
-
+import {
+  REMOVE_TREE_INFOS_FROM_INDEX,
+  REPLACE_TREE_INFO_BY_INDEX,
+  UPDATE_EDITOR_TARGET,
+  UPDATE_MENU_TARGET,
+  UPDATE_MOUSE_POSITION,
+  UPDATE_SEARCH_KEYWORD,
+  UPDATE_TREES
+} from '../constants/actionTypes'
 
 /* basic action */
 export function removeTreeInfosFromIndex(removeFromIndex) {
