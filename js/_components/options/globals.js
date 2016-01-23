@@ -3,8 +3,7 @@ import chromep from '../lib/chromePromise'
 window.globals = {
   async initOptionsValue(optionsConfig) {
     const options = await chromep.storage.sync.get(null)
-
-    const newOptions = {}
+    const updatedOptions = {}
 
     for (const optionName of Object.keys(optionsConfig)) {
       const optionConfig = optionsConfig[optionName]
@@ -13,7 +12,7 @@ window.globals = {
 
       if (options[optionName] === undefined) {
         options[optionName] = optionDefaultValue
-        newOptions[optionName] = optionDefaultValue
+        updatedOptions[optionName] = optionDefaultValue
 
         if (optionConfig.permissions) {
           // to remove unnecessary permissions
@@ -22,7 +21,9 @@ window.globals = {
       }
     }
 
-    await chromep.storage.sync.set(newOptions)
+    await chromep.storage.sync.set(updatedOptions)
+
+    return options
   },
 
   async setPermission(optionName, optionConfig, newOptionValue) {
