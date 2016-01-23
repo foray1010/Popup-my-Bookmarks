@@ -24,7 +24,7 @@ const afterRender = (model) => window.requestAnimationFrame(() => {
 const scrollHandler = (model) => (evt) => {
 }
 
-const wheelHandler = (model) => (evt) => {
+const wheelHandler = (model) => function (evt) {
   evt.preventDefault()
 
   const {context} = model
@@ -32,7 +32,7 @@ const wheelHandler = (model) => (evt) => {
   const {itemOffsetHeight} = context
 
   // control scrolling speed
-  evt.target.scrollTop -= Math.floor(itemOffsetHeight * evt.wheelDelta / 120)
+  this.scrollTop -= Math.floor(itemOffsetHeight * evt.wheelDelta / 120)
 }
 
 function setHeight(el) {
@@ -114,7 +114,7 @@ const BookmarkTree = {
         <ul
           class='bookmark-list'
           onScroll={scrollHandler(model)}
-          onWheel={wheelHandler()}
+          onWheel={wheelHandler(model)}
         >
           {treeItems}
         </ul>
