@@ -77,19 +77,12 @@ function initBookmarkEvent(dispatch) {
 }
 
 function initStyleOptions(options) {
+  let {fontFamily, fontSize, setWidth} = options
+
   // if the font family's name has whitespace, use quote to embed it
-  const fontFamily = options.fontFamily.split(',')
-    .map((x) => {
-      x = x.trim()
-
-      if (x.indexOf(' ') >= 0) {
-        x = JSON.stringify(x)
-      }
-
-      return x
-    })
+  fontFamily = fontFamily.split(',')
+    .map((x) => JSON.stringify(x.trim()))
     .join(',')
-  const fontSize = options.fontSize
 
   const itemHeight = globals.goldenGap * 2 + fontSize
 
@@ -109,7 +102,7 @@ function initStyleOptions(options) {
     },
     '.panel-width': {
       // set panel (#main, #sub) width
-      width: options.setWidth + 'px'
+      width: setWidth + 'px'
     },
     '.separator': {
       // set separator height depend on item height
