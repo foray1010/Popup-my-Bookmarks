@@ -1,16 +1,16 @@
 import {element} from 'deku'
 import debounce from 'lodash.debounce'
 
-import {getSearchResult} from '../components/Search'
 import {
-  GOLDEN_GAP
-} from '../constants'
+  getFlatTree,
+  getSlicedTrees
+} from '../functions'
+import {getSearchResult} from '../components/Search'
 import {
   updateEditorTarget,
   updateMenuTarget,
   updateTrees
 } from '../actions'
-import css from '../../lib/css'
 import Editor from '../components/Editor'
 import Menu from '../components/Menu'
 import MenuCover from '../components/MenuCover'
@@ -44,7 +44,7 @@ function initBookmarkEvent(dispatch) {
     const removeFromIndex = trees.findIndex((treeInfo) => treeInfo.id === itemId)
 
     if (removeFromIndex >= 0) {
-      const slicedTrees = globals.getSlicedTrees(trees, removeFromIndex)
+      const slicedTrees = getSlicedTrees(trees, removeFromIndex)
 
       renewTrees(slicedTrees)
     } else {
@@ -61,7 +61,7 @@ function initBookmarkEvent(dispatch) {
         return getSearchResult(currentContext, searchKeyword)
       }
 
-      return globals.getFlatTree(treeInfo.id)
+      return getFlatTree(treeInfo.id)
     }))
 
     dispatch([
@@ -79,50 +79,11 @@ function initBookmarkEvent(dispatch) {
   chrome.bookmarks.onRemoved.addListener(renewSlicedTreesById)
 }
 
-function initStyleOptions(options) {
-  let {fontFamily, fontSize, setWidth} = options
-
-  // if the font family's name has whitespace, use quote to embed it
-  fontFamily = fontFamily.split(',')
-    .map((x) => JSON.stringify(x.trim()))
-    .join(',')
-
-  const itemHeight = GOLDEN_GAP * 2 + fontSize
-
-  // +1 for border width, GOLDEN_GAP for padding
-  globals.itemOffsetHeight = (1 + GOLDEN_GAP) * 2 + itemHeight
-
-  css.set({
-    body: {
-      font: `${fontSize}px ${fontFamily}`
-    },
-    '.bookmark-item': {
-      height: itemHeight + 'px'
-    },
-    '.icon': {
-      // set the width same as item height, as it is a square
-      width: itemHeight + 'px'
-    },
-    '.panel-width': {
-      // set panel (#main, #sub) width
-      width: setWidth + 'px'
-    },
-    '.separator': {
-      // set separator height depend on item height
-      height: (globals.itemOffsetHeight / 2) + 'px'
-    }
-  })
-}
-
 const App = {
   onCreate(model) {
     const {context, dispatch} = model
 
-    const {options} = context
-
     currentContext = context
-
-    initStyleOptions(options)
 
     initBookmarkEvent(dispatch)
   },

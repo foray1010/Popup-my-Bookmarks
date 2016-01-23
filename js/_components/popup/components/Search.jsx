@@ -2,6 +2,11 @@ import {element} from 'deku'
 import debounce from 'lodash.debounce'
 
 import {
+  getBookmarkType,
+  getFirstTree,
+  sortByTitle
+} from '../functions'
+import {
   updateSearchKeyword,
   updateTrees
 } from '../actions'
@@ -18,7 +23,7 @@ const debouncedInputHandler = (model) => debounce(async (evt) => {
   const newTrees = []
 
   if (newSearchKeyword === '') {
-    const defExpandTree = await globals.getFirstTree(options)
+    const defExpandTree = await getFirstTree(options)
 
     newTrees.push(defExpandTree)
   } else {
@@ -38,7 +43,7 @@ async function getSearchResult(context, newSearchKeyword) {
 
   const filteredResult = searchResultFilter(context, newSearchKeyword, result)
 
-  const searchResult = globals.sortByTitle(filteredResult)
+  const searchResult = sortByTitle(filteredResult)
 
   return {
     children: searchResult,
@@ -63,7 +68,7 @@ function searchResultFilter(context, newSearchKeyword, results) {
   for (const itemInfo of results) {
     const itemTitle = itemInfo.title.toLowerCase()
 
-    if (globals.getBookmarkType(itemInfo) === 'bookmark') {
+    if (getBookmarkType(itemInfo) === 'bookmark') {
       if (isOnlySearchTitle) {
         let isntTitleMatched = false
 

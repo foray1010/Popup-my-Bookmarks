@@ -1,9 +1,10 @@
 import 'babel-polyfill'
 import {createApp, element} from 'deku'
 
-import './_components/options/globals'
+import {
+  initOptionsValue
+} from './_components/options/functions'
 import App from './_components/options/containers/App'
-import chromep from './_components/lib/chromePromise'
 import configureStore from './_components/store/configureStore'
 import getOptionsConfig from './_components/getOptionsConfig'
 import Immutable from 'seamless-immutable'
@@ -12,7 +13,7 @@ import reducers from './_components/options/reducers'
 !async function () {
   const optionsConfig = await getOptionsConfig()
 
-  const options = await globals.initOptionsValue(optionsConfig)
+  const options = await initOptionsValue(optionsConfig)
 
   /* Create a Redux store to handle all UI actions and side-effects */
   const store = configureStore(reducers, Immutable({

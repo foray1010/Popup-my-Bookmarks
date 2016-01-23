@@ -1,7 +1,13 @@
 import 'babel-polyfill'
 import {createApp, element} from 'deku'
 
-import './_components/popup/globals'
+import {
+  getFirstTree,
+  getFlatTree,
+  getStyleOptions,
+  openOptionsPage,
+  setPredefinedStyleSheet
+} from './_components/popup/functions'
 import App from './_components/popup/containers/App'
 import chromep from './_components/lib/chromePromise'
 import configureStore from './_components/store/configureStore'
@@ -17,12 +23,17 @@ import reducers from './_components/popup/reducers'
 
   for (const optionName of Object.keys(optionsConfig)) {
     if (options[optionName] === undefined) {
-      return globals.openOptionsPage()
+      return openOptionsPage()
     }
   }
 
-  /* get globals.rootTree */
-  const rootTree = await globals.getFlatTree('0')
+  /* Init predefined stylesheet */
+  const styleOptions = getStyleOptions(options)
+
+  setPredefinedStyleSheet(styleOptions)
+
+  /* get rootTree */
+  const rootTree = await getFlatTree('0')
 
   rootTree.children = rootTree.children.filter((itemInfo) => {
     const itemIdNum = Number(itemInfo.id)
@@ -36,9 +47,10 @@ import reducers from './_components/popup/reducers'
   })
 
   /* Create a Redux store to handle all UI actions and side-effects */
-  const firstTree = await globals.getFirstTree(options)
+  const firstTree = await getFirstTree(options)
 
   const store = configureStore(reducers, Immutable({
+    itemOffsetHeight: styleOptions.itemOffsetHeight,
     options: options,
     rootTree: rootTree,
     trees: [firstTree]

@@ -1,6 +1,10 @@
 import {element} from 'deku'
 
 import {
+  initOptionsValue,
+  setPermission
+} from '../functions'
+import {
   OPTION_TABLE_MAP
 } from '../constants'
 import {
@@ -22,7 +26,7 @@ const confirmButtonHandler = (model) => async () => {
     const optionConfig = optionsConfig[optionName]
 
     if (optionConfig.permissions) {
-      const isSuccess = await globals.setPermission(
+      const isSuccess = await setPermission(
         optionName,
         optionConfig,
         newOptions[optionName]
@@ -46,7 +50,7 @@ const defaultButtonHandler = (model) => async () => {
 
   await chromep.storage.sync.clear()
 
-  const newOptions = await globals.initOptionsValue(optionsConfig)
+  const newOptions = await initOptionsValue(optionsConfig)
 
   dispatch(updateOptions(newOptions))
 }

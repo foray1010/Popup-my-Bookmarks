@@ -1,6 +1,13 @@
 import {element} from 'deku'
 
 import {
+  getBookmarkType,
+  isFolder,
+  openMultipleBookmarks,
+  resetBodySize,
+  sortByTitle
+} from '../functions'
+import {
   SEPARATE_THIS_URL
 } from '../constants'
 import {
@@ -22,7 +29,7 @@ const menuItemClickHandler = (model) => (evt) => {
     case 0: // Open bookmark(s) in background tab or this window
     case 1: // in new window
     case 2: // in incognito window
-      globals.openMultipleBookmarks(model, menuTarget, menuItemNum)
+      openMultipleBookmarks(model, menuTarget, menuItemNum)
       break
 
     case 3: // Edit... or Rename...
@@ -77,7 +84,7 @@ async function addCurrentPage(menuTarget) {
 function closeMenu(model) {
   const {dispatch} = model
 
-  globals.resetBodySize()
+  resetBodySize()
 
   dispatch(updateMenuTarget(null))
 }
@@ -96,7 +103,7 @@ function getChildrenHiddenStatus(context) {
 
   let childrenHiddenStatus = [false, false, false, false, false]
 
-  switch (globals.getBookmarkType(menuTarget)) {
+  switch (getBookmarkType(menuTarget)) {
     case 'root-folder':
       childrenHiddenStatus = [false, true, true, true, true]
       break
@@ -125,7 +132,7 @@ function getMenuItemNum(menuItem) {
 }
 
 function removeBookmarkItem(menuTarget) {
-  if (globals.isFolder(menuTarget)) {
+  if (isFolder(menuTarget)) {
     chrome.bookmarks.removeTree(menuTarget.id)
   } else {
     chrome.bookmarks.remove(menuTarget.id)
@@ -201,7 +208,7 @@ async function sortByName(parentId) {
   for (const itemInfo of childrenInfo) {
     let classifiedItemsIndex
 
-    switch (globals.getBookmarkType(itemInfo)) {
+    switch (getBookmarkType(itemInfo)) {
       case 'folder':
         classifiedItemsIndex = 1
         break
@@ -225,7 +232,7 @@ async function sortByName(parentId) {
   for (const thisChildrenInfo of classifiedItemsList) {
     for (const classifiedItems of thisChildrenInfo) {
       newChildrenInfo = newChildrenInfo.concat(
-        globals.sortByTitle(classifiedItems)
+        sortByTitle(classifiedItems)
       )
     }
   }
@@ -270,7 +277,7 @@ const Menu = {
         ['sortByName']
       ]
 
-      if (globals.isFolder(menuTarget)) {
+      if (isFolder(menuTarget)) {
         menuPattern[0] = ['openAll', 'openAllInN', 'openAllInI']
         menuPattern[1] = ['rename', 'del']
       } else {

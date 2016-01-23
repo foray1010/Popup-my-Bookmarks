@@ -2,7 +2,6 @@ extends: "airbnb"
 parser: "babel-eslint"
 globals:
   chrome: false
-  globals: false
 rules:
   ###################
   # Possible Errors #

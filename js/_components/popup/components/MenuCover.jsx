@@ -1,6 +1,9 @@
 import {element} from 'deku'
 
 import {
+  resetBodySize
+} from '../functions'
+import {
   updateEditorTarget,
   updateMenuTarget
 } from '../actions'
@@ -8,7 +11,7 @@ import {
 const clickHandler = (model) => () => {
   const {dispatch} = model
 
-  globals.resetBodySize()
+  resetBodySize()
 
   dispatch([
     updateEditorTarget(null),

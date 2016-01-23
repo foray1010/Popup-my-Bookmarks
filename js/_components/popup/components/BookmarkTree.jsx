@@ -24,11 +24,15 @@ const afterRender = (model) => window.requestAnimationFrame(() => {
 const scrollHandler = (model) => (evt) => {
 }
 
-const wheelHandler = () => (evt) => {
+const wheelHandler = (model) => (evt) => {
   evt.preventDefault()
 
+  const {context} = model
+
+  const {itemOffsetHeight} = context
+
   // control scrolling speed
-  evt.target.scrollTop -= Math.floor(globals.itemOffsetHeight * evt.wheelDelta / 120)
+  evt.target.scrollTop -= Math.floor(itemOffsetHeight * evt.wheelDelta / 120)
 }
 
 function setHeight(el) {
