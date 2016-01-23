@@ -1,3 +1,5 @@
+import chromep from '../lib/chromePromise'
+
 window.globals = {
   goldenGap: 2,
   maxHeight: 596,

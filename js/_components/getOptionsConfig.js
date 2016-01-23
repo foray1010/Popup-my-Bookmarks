@@ -1,3 +1,5 @@
+import chromep from './lib/chromePromise'
+
 async function getOptionsConfig() {
   const openBookmarkChoices = getSelectChoices('opt_clickOption')
   const rootFolderChoices = []

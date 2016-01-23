@@ -7,6 +7,7 @@ import {
   updateMenuTarget,
   updateTrees
 } from '../actions'
+import css from '../../lib/css'
 import Editor from '../components/Editor'
 import Menu from '../components/Menu'
 import MenuCover from '../components/MenuCover'
@@ -95,7 +96,7 @@ function initStyleOptions(options) {
   // +1 for border width, globals.goldenGap for padding
   globals.itemOffsetHeight = (1 + globals.goldenGap) * 2 + itemHeight
 
-  CSS.set({
+  css.set({
     body: {
       font: `${fontSize}px ${fontFamily}`
     },

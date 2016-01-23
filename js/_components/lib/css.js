@@ -1,9 +1,10 @@
-import ChromePromise from 'chrome-promise'
+function propEach(obj, fn) {
+  for (const propName of Object.keys(obj)) {
+    fn(propName, obj[propName])
+  }
+}
 
-window.chromep = new ChromePromise()
-
-// set or unset CSS
-window.CSS = (() => {
+const css = (() => {
   const styleEl = document.createElement('style')
 
   document.head.appendChild(styleEl)
@@ -40,13 +41,4 @@ window.CSS = (() => {
   return {set, unsetAll}
 })()
 
-window.JSONStorage = {
-  get: (key) => JSON.parse(window.localStorage.getItem(key)),
-  set: (key, value) => window.localStorage.setItem(key, JSON.stringify(value))
-}
-
-function propEach(obj, fn) {
-  for (const propName of Object.keys(obj)) {
-    fn(propName, obj[propName])
-  }
-}
+export default css

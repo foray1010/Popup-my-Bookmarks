@@ -1,6 +1,7 @@
 import {element} from 'deku'
 
 import {reloadOptions} from '../actions'
+import chromep from '../../lib/chromePromise'
 
 const msgConfirm = chrome.i18n.getMessage('confirm')
 const msgDefault = chrome.i18n.getMessage('default')

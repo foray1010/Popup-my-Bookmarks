@@ -1,3 +1,5 @@
+import chromep from '../lib/chromePromise'
+
 window.globals = {
   optionTableMap: {
     general: [
