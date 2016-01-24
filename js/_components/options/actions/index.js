@@ -3,7 +3,6 @@ import Immutable from 'seamless-immutable'
 import {
   SELECT_NAV_MODULE,
   UPDATE_OPTIONS,
-  UPDATE_OPTIONS_CONFIG,
   UPDATE_SINGLE_OPTION
 } from '../constants/actionTypes'
 import chromep from '../../lib/chromePromise'
@@ -20,13 +19,6 @@ export function updateOptions(options) {
   return Immutable({
     type: UPDATE_OPTIONS,
     options: options
-  })
-}
-
-export function updateOptionsConfig(optionsConfig) {
-  return Immutable({
-    type: UPDATE_OPTIONS_CONFIG,
-    optionsConfig: optionsConfig
   })
 }
 

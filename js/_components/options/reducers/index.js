@@ -4,21 +4,10 @@ import Immutable from 'seamless-immutable'
 import {
   SELECT_NAV_MODULE,
   UPDATE_OPTIONS,
-  UPDATE_OPTIONS_CONFIG,
   UPDATE_SINGLE_OPTION
 } from '../constants/actionTypes'
 
 const rootReducer = combineReducers({
-  selectedNavModule(state = null, action) {
-    switch (action.type) {
-      case SELECT_NAV_MODULE:
-        return action.navModule
-
-      default:
-        return state
-    }
-  },
-
   options(state = Immutable({}), action) {
     switch (action.type) {
       case UPDATE_OPTIONS:
@@ -36,10 +25,14 @@ const rootReducer = combineReducers({
     }
   },
 
-  optionsConfig(state = Immutable({}), action) {
+  optionsConfig(state = Immutable({})) {
+    return state
+  },
+
+  selectedNavModule(state = null, action) {
     switch (action.type) {
-      case UPDATE_OPTIONS_CONFIG:
-        return action.optionsConfig
+      case SELECT_NAV_MODULE:
+        return action.navModule
 
       default:
         return state

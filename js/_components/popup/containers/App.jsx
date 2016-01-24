@@ -55,7 +55,6 @@ function initBookmarkEvent(dispatch) {
   const renewTrees = debounce(async (oldTrees) => {
     const {searchKeyword} = currentContext
 
-    // Promise.all cannot recognize immutable array
     const newTrees = await Promise.all(oldTrees.asMutable().map((treeInfo) => {
       if (treeInfo.id === 'search-result') {
         return getSearchResult(currentContext, searchKeyword)

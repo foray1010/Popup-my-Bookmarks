@@ -32,7 +32,7 @@ const InputSelect = {
     const compiledChangeHandler = changeHandler(model)
     const optionValue = options[optionName]
 
-    const optionItems = optionConfig.choices.map((optionChoice, optionChoiceIndex) => {
+    const optionItems = optionConfig.choices.asMutable().map((optionChoice, optionChoiceIndex) => {
       return (
         <OptionInput
           key={String(optionChoiceIndex)}
