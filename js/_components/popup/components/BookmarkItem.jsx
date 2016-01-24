@@ -30,7 +30,11 @@ const afterRender = (model) => window.requestAnimationFrame(async () => {
     const el = document.getElementById(itemInfo.id)
 
     if (el) {
-      el.title = await getTooltip(model)
+      const tooltip = await getTooltip(model)
+
+      if (tooltip) {
+        el.title = tooltip
+      }
     }
   }
 })
@@ -183,9 +187,7 @@ async function getTooltip(model) {
     await getBreadcrumb(itemInfo.parentId)
   }
 
-  if (tooltipArr.length) {
-    return tooltipArr.join('\n')
-  }
+  return tooltipArr.join('\n')
 }
 
 function openBookmark(model, evt) {
