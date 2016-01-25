@@ -2,6 +2,7 @@ import {element} from 'deku'
 import debounce from 'lodash.debounce'
 
 import {
+  genDummyItemInfo,
   getBookmarkType,
   getFirstTree,
   sortByTitle
@@ -46,9 +47,9 @@ async function getSearchResult(context, newSearchKeyword) {
   const searchResult = sortByTitle(filteredResult)
 
   return {
+    ...genDummyItemInfo(),
     children: searchResult,
-    id: 'search-result',
-    title: null
+    id: 'search-result'
   }
 }
 
