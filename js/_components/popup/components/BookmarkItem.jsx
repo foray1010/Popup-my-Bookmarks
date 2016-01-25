@@ -261,7 +261,7 @@ const BookmarkItem = {
     const {context, props} = model
 
     const {itemInfo} = props
-    const {menuTarget, searchKeyword} = context
+    const {cutTarget, menuTarget, searchKeyword} = context
 
     const bookmarkType = getBookmarkType(itemInfo)
     const compiledMouseHandler = debouncedMouseHandler(model)
@@ -296,12 +296,16 @@ const BookmarkItem = {
       default:
     }
 
-    if (searchKeyword) {
-      isDraggable = false
+    if (cutTarget && cutTarget.id === itemInfo.id) {
+      itemClasses.push('grey-item')
     }
 
     if (menuTarget && menuTarget.id === itemInfo.id) {
       itemClasses.push('selected')
+    }
+
+    if (searchKeyword) {
+      isDraggable = false
     }
 
     return (
