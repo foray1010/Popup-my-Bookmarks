@@ -8,6 +8,7 @@ Changes:
   - Support all kind of separators in separatethis.com
 
 Bugfixes:
+  - Cannot `Copy` a folder
   - Cannot display the whole popup in OSX
   - Wrong menu/editor position in some situations
   - Setting of `Hide root folder` will be lost on second save
