@@ -54,6 +54,8 @@ const menuItemClickHandler = (model) => async function (evt) {
       break
 
     case 7: // Paste
+      await pasteItem(context)
+
       if (cutTarget) {
         actionList.push(updateCutTarget(null))
       }
@@ -67,7 +69,7 @@ const menuItemClickHandler = (model) => async function (evt) {
       break
 
     case 10: // Add separator
-      await createBookmarkItem(
+      await createBookmarkBelowMenuTarget(
         menuTarget,
         '- '.repeat(42),
         SEPARATE_THIS_URL
@@ -95,15 +97,15 @@ async function addCurrentPage(menuTarget) {
 
   const currentTab = results[0]
 
-  await createBookmarkItem(menuTarget, currentTab.title, currentTab.url)
+  await createBookmarkBelowMenuTarget(menuTarget, currentTab.title, currentTab.url)
 }
 
-async function createBookmarkItem(menuTarget, title, url) {
-  await chromep.bookmarks.create({
+async function createBookmarkBelowMenuTarget(menuTarget, title, url) {
+  return await chromep.bookmarks.create({
     index: menuTarget.index + 1,
     parentId: menuTarget.parentId,
     title: title.trim(),
-    url: url.trim()
+    url: url && url.trim()
   })
 }
 
@@ -138,6 +140,47 @@ function getMenuItemNum(menuItem) {
   const menuItemList = document.getElementsByClassName('menu-item')
 
   return Array.from(menuItemList).indexOf(menuItem)
+}
+
+async function pasteItem(context) {
+  const {copyTarget, cutTarget, menuTarget} = context
+
+  if (copyTarget) {
+    const copyChildFn = async (thisTreeInfo, parentId) => {
+      for (const thisItemInfo of thisTreeInfo.children) {
+        const thisCreatedItemInfo = await chromep.bookmarks.create({
+          parentId: parentId,
+          title: thisItemInfo.title,
+          url: thisItemInfo.url
+        })
+
+        if (getBookmarkType(thisItemInfo) === 'folder') {
+          await copyChildFn(thisItemInfo, thisCreatedItemInfo.id)
+        }
+      }
+    }
+
+    const treeInfo = await chromep.bookmarks.getSubTree(copyTarget.id)
+
+    const itemInfo = treeInfo[0]
+
+    const createdItemInfo = await createBookmarkBelowMenuTarget(
+      menuTarget,
+      itemInfo.title,
+      itemInfo.url
+    )
+
+    if (getBookmarkType(itemInfo) === 'folder') {
+      await copyChildFn(itemInfo, createdItemInfo.id)
+    }
+  }
+
+  if (cutTarget) {
+    await chromep.bookmarks.move(cutTarget.id, {
+      parentId: menuTarget.parentId,
+      index: menuTarget.index + 1
+    })
+  }
 }
 
 async function removeBookmarkItem(menuTarget) {
