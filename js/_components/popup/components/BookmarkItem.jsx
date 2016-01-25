@@ -39,7 +39,7 @@ const afterRender = (model) => window.requestAnimationFrame(async () => {
   }
 })
 
-const clickHandler = (model) => (evt) => {
+const clickHandler = (model) => async (evt) => {
   evt.preventDefault()
 
   const {context, dispatch, props} = model
@@ -55,7 +55,7 @@ const clickHandler = (model) => (evt) => {
       if (evt.button === 0) {
         if (context.options.opFolderBy) {
           if (!isFolderOpened(trees, itemInfo)) {
-            openFolder(model)
+            await openFolder(model)
           } else {
             dispatch(removeTreeInfosFromIndex(treeIndex + 1))
           }
@@ -63,7 +63,6 @@ const clickHandler = (model) => (evt) => {
       } else {
         openMultipleBookmarks(model, itemInfo, 0)
       }
-
       break
 
     case 'separator':
@@ -92,7 +91,7 @@ const contextMenuHandler = (model) => (evt) => {
   ])
 }
 
-const debouncedMouseHandler = (model) => debounce((evt) => {
+const debouncedMouseHandler = (model) => debounce(async (evt) => {
   const {context, dispatch, props} = model
 
   const {itemInfo, treeIndex} = props
@@ -103,13 +102,12 @@ const debouncedMouseHandler = (model) => debounce((evt) => {
       if (!searchKeyword && !context.options.opFolderBy) {
         if (isFolder(itemInfo)) {
           if (!isFolderOpened(trees, itemInfo)) {
-            openFolder(model)
+            await openFolder(model)
           }
         } else {
           dispatch(removeTreeInfosFromIndex(treeIndex + 1))
         }
       }
-
       break
 
     case 'mouseleave':
