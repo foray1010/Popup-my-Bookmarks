@@ -2,6 +2,9 @@ import {element} from 'deku'
 import Immutable from 'seamless-immutable'
 
 import {
+  genDummyItemInfo
+} from '../functions'
+import {
   MAX_HEIGHT
 } from '../constants'
 import BookmarkItem from './BookmarkItem'
@@ -95,6 +98,7 @@ const BookmarkTree = {
         treeItems.push(<NoResult key='no-result' />)
       } else {
         const noBookmarkInfo = Immutable({
+          ...genDummyItemInfo(),
           id: `no-bookmark-${treeInfo.id}`,
           index: -1, // as it is not appeared in the childrenInfo
           parentId: treeInfo.id,

@@ -6,6 +6,24 @@ import {
 } from '../constants'
 import css from '../../lib/css'
 
+export function genDummyItemInfo() {
+  const dummyItemInfo = {}
+  const itemInfoFieldNames = [
+    'dateAdded',
+    'dateGroupModified',
+    'id',
+    'index',
+    'parentId',
+    'title'
+  ]
+
+  for (const itemInfoFieldName of itemInfoFieldNames) {
+    dummyItemInfo[itemInfoFieldName] = null
+  }
+
+  return dummyItemInfo
+}
+
 export function getBookmarkType(itemInfo) {
   if (/^no-bookmark/.test(itemInfo.id)) {
     return 'no-bookmark'
