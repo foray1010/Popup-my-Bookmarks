@@ -4,6 +4,8 @@ import Immutable from 'seamless-immutable'
 import {
   REMOVE_TREE_INFOS_FROM_INDEX,
   REPLACE_TREE_INFO_BY_INDEX,
+  UPDATE_COPY_TARGET,
+  UPDATE_CUT_TARGET,
   UPDATE_EDITOR_TARGET,
   UPDATE_MENU_TARGET,
   UPDATE_MOUSE_POSITION,
@@ -12,6 +14,32 @@ import {
 } from '../constants/actionTypes'
 
 const rootReducer = combineReducers({
+  copyTarget(state = null, action) {
+    switch (action.type) {
+      case UPDATE_COPY_TARGET:
+        return action.copyTarget
+
+      case UPDATE_CUT_TARGET:
+        return null
+
+      default:
+        return state
+    }
+  },
+
+  cutTarget(state = null, action) {
+    switch (action.type) {
+      case UPDATE_COPY_TARGET:
+        return null
+
+      case UPDATE_CUT_TARGET:
+        return action.cutTarget
+
+      default:
+        return state
+    }
+  },
+
   editorTarget(state = null, action) {
     switch (action.type) {
       case UPDATE_EDITOR_TARGET:

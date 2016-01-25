@@ -11,49 +11,63 @@ import {
   SEPARATE_THIS_URL
 } from '../constants'
 import {
+  updateCopyTarget,
+  updateCutTarget,
   updateEditorTarget,
   updateMenuTarget
 } from '../actions'
 import chromep from '../../lib/chromePromise'
 
-const menuItemClickHandler = (model) => (evt) => {
+const menuItemClickHandler = (model) => async function (evt) {
   evt.preventDefault()
+
+  if (Array.from(this.classList).indexOf('grey-item') >= 0) return
 
   const {context, dispatch} = model
 
-  const {menuTarget} = context
+  const {cutTarget, menuTarget} = context
 
-  const menuItemNum = getMenuItemNum(evt.target)
+  const actionList = []
+  const menuItemNum = getMenuItemNum(this)
 
   switch (menuItemNum) {
     case 0: // Open bookmark(s) in background tab or this window
     case 1: // in new window
     case 2: // in incognito window
-      openMultipleBookmarks(model, menuTarget, menuItemNum)
+      await openMultipleBookmarks(model, menuTarget, menuItemNum)
       break
 
     case 3: // Edit... or Rename...
-      dispatch(updateEditorTarget(menuTarget))
+      actionList.push(updateEditorTarget(menuTarget))
       break
 
     case 4: // Delete
-      removeBookmarkItem(menuTarget)
+      await removeBookmarkItem(menuTarget)
       break
 
     case 5: // Cut
+      actionList.push(updateCutTarget(menuTarget))
+      break
+
     case 6: // Copy
+      actionList.push(updateCopyTarget(menuTarget))
+      break
+
     case 7: // Paste
+      if (cutTarget) {
+        actionList.push(updateCutTarget(null))
+      }
       break
 
     case 9: // Add folder...
       return
 
     case 8: // Add current page
-      addCurrentPage(menuTarget)
+      await addCurrentPage(menuTarget)
       break
 
     case 10: // Add separator
-      createBookmarkItem(
+      await createBookmarkItem(
         menuTarget,
         '- '.repeat(42),
         SEPARATE_THIS_URL
@@ -61,13 +75,16 @@ const menuItemClickHandler = (model) => (evt) => {
       break
 
     case 11: // Sort by name
-      sortByName(menuTarget.parentId)
+      await sortByName(menuTarget.parentId)
       break
 
     default:
   }
 
-  closeMenu(model)
+  resetBodySize()
+
+  actionList.push(updateMenuTarget(null))
+  dispatch(actionList)
 }
 
 async function addCurrentPage(menuTarget) {
@@ -78,23 +95,15 @@ async function addCurrentPage(menuTarget) {
 
   const currentTab = results[0]
 
-  createBookmarkItem(menuTarget, currentTab.title, currentTab.url)
+  await createBookmarkItem(menuTarget, currentTab.title, currentTab.url)
 }
 
-function closeMenu(model) {
-  const {dispatch} = model
-
-  resetBodySize()
-
-  dispatch(updateMenuTarget(null))
-}
-
-function createBookmarkItem(menuTarget, title, url) {
-  chrome.bookmarks.create({
+async function createBookmarkItem(menuTarget, title, url) {
+  await chromep.bookmarks.create({
     index: menuTarget.index + 1,
     parentId: menuTarget.parentId,
-    title: title,
-    url: url
+    title: title.trim(),
+    url: url.trim()
   })
 }
 
@@ -131,12 +140,12 @@ function getMenuItemNum(menuItem) {
   return Array.from(menuItemList).indexOf(menuItem)
 }
 
-function removeBookmarkItem(menuTarget) {
-  if (isFolder(menuTarget)) {
-    chrome.bookmarks.removeTree(menuTarget.id)
-  } else {
-    chrome.bookmarks.remove(menuTarget.id)
-  }
+async function removeBookmarkItem(menuTarget) {
+  const removeFunc = isFolder(menuTarget) ?
+    chromep.bookmarks.removeTree :
+    chromep.bookmarks.remove
+
+  await removeFunc(menuTarget.id)
 }
 
 function setMenuPosition(model) {
@@ -268,7 +277,6 @@ const Menu = {
 
     if (menuTarget) {
       const childrenHiddenStatus = getChildrenHiddenStatus(context)
-      const compiledMenuItemClickHandler = menuItemClickHandler(model)
       const menuPattern = [
         [],
         [],
@@ -287,32 +295,82 @@ const Menu = {
 
       menuItems = menuPattern.map((menuAreaKeys, menuAreaIndex) => {
         const isMenuAreaHidden = childrenHiddenStatus[menuAreaIndex]
-        const menuAreaItems = menuAreaKeys.map((menuItemKey) => {
-          return (
-            <li>
-              <a
-                class='item menu-item'
-                href=''
-                onClick={compiledMenuItemClickHandler}
-              >
-                {chrome.i18n.getMessage(menuItemKey)}
-              </a>
-            </li>
-          )
-        })
 
         return (
-          <ul
-            class='menu-area'
-            hidden={isMenuAreaHidden}
-          >
-            {menuAreaItems}
-          </ul>
+          <MenuArea
+            key={menuAreaKeys.join()}
+            isHidden={isMenuAreaHidden}
+            menuAreaKeys={menuAreaKeys}
+          />
         )
       })
     }
 
-    return <div id={path} class='menu' hidden={isHidden}>{menuItems}</div>
+    return (
+      <div
+        id={path}
+        class='menu'
+        hidden={isHidden}
+      >
+        {menuItems}
+      </div>
+    )
+  }
+}
+
+const MenuArea = {
+  render(model) {
+    const {props} = model
+
+    const {isHidden, menuAreaKeys} = props
+
+    const menuAreaItems = menuAreaKeys.map((menuItemKey) => {
+      return (
+        <MenuItem
+          key={menuItemKey}
+          menuItemKey={menuItemKey}
+        />
+      )
+    })
+
+    return (
+      <ul
+        class='menu-area'
+        hidden={isHidden}
+      >
+        {menuAreaItems}
+      </ul>
+    )
+  }
+}
+
+const MenuItem = {
+  render(model) {
+    const {context, props} = model
+
+    const {copyTarget, cutTarget} = context
+    const {menuItemKey} = props
+
+    const menuItemClasses = [
+      'item',
+      'menu-item'
+    ]
+
+    if (menuItemKey === 'paste' && !copyTarget && !cutTarget) {
+      menuItemClasses.push('grey-item')
+    }
+
+    return (
+      <li>
+        <a
+          class={menuItemClasses.join(' ')}
+          href=''
+          onClick={menuItemClickHandler(model)}
+        >
+          {chrome.i18n.getMessage(menuItemKey)}
+        </a>
+      </li>
+    )
   }
 }
 

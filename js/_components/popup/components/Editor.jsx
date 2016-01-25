@@ -26,12 +26,12 @@ const clickConfirmHandler = (model) => () => {
 
   const editorInput = document.getElementById(path).getElementsByTagName('input')
 
-  const updatedTitle = editorInput[0].value
+  const updatedTitle = editorInput[0].value.trim()
 
   let updatedUrl
 
   if (!isFolder(editorTarget)) {
-    updatedUrl = editorInput[1].value
+    updatedUrl = editorInput[1].value.trim()
   }
 
   chrome.bookmarks.update(editorTarget.id, {
