@@ -3,6 +3,8 @@ import Immutable from 'seamless-immutable'
 import {
   REMOVE_TREE_INFOS_FROM_INDEX,
   REPLACE_TREE_INFO_BY_INDEX,
+  UPDATE_COPY_TARGET,
+  UPDATE_CUT_TARGET,
   UPDATE_EDITOR_TARGET,
   UPDATE_MENU_TARGET,
   UPDATE_MOUSE_POSITION,
@@ -23,6 +25,20 @@ export function replaceTreeInfoByIndex(treeIndex, treeInfo) {
     type: REPLACE_TREE_INFO_BY_INDEX,
     treeIndex: treeIndex,
     treeInfo: treeInfo
+  })
+}
+
+export function updateCopyTarget(copyTarget) {
+  return Immutable({
+    type: UPDATE_COPY_TARGET,
+    copyTarget: copyTarget
+  })
+}
+
+export function updateCutTarget(cutTarget) {
+  return Immutable({
+    type: UPDATE_CUT_TARGET,
+    cutTarget: cutTarget
   })
 }
 

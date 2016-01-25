@@ -95,6 +95,8 @@ export function isItemInView(item) {
 export async function openMultipleBookmarks(model, itemInfo, menuItemNum) {
   const {context} = model
 
+  const {options} = context
+
   const urlList = []
 
   if (isFolder(itemInfo)) {
@@ -112,7 +114,7 @@ export async function openMultipleBookmarks(model, itemInfo, menuItemNum) {
       'askOpenAll', String(urlList.length)
     )
 
-    if (context.options.warnOpenMany &&
+    if (options.warnOpenMany &&
         urlList.length > 5 &&
         !confirm(msgAskOpenAll)) {
       return
