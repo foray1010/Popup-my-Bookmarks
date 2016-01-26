@@ -12,6 +12,7 @@ import {
 import {
   replaceTreeInfoByIndex,
   removeTreeInfosFromIndex,
+  updateDragTarget,
   updateMenuTarget,
   updateMousePosition
 } from '../actions'
@@ -117,16 +118,31 @@ const debouncedMouseHandler = (model) => debounce(async (evt) => {
   }
 }, 200)
 
-const dragEndHandler = (model) => (evt) => {
+const dragEndHandler = (model) => () => {
+  const {context, dispatch} = model
 
+  dispatch([
+    updateDragTarget(null)
+  ])
 }
 
 const dragOverHandler = (model) => (evt) => {
+  const {context, dispatch, props} = model
 
+  const {itemInfo} = props
+
+  dispatch([
+  ])
 }
 
-const dragStartHandler = (model) => (evt) => {
+const dragStartHandler = (model) => () => {
+  const {context, dispatch, props} = model
 
+  const {itemInfo} = props
+
+  dispatch([
+    updateDragTarget(itemInfo)
+  ])
 }
 
 function getOpenBookmarkHandlerId(model, evt) {
@@ -261,7 +277,7 @@ const BookmarkItem = {
     const {context, props} = model
 
     const {itemInfo} = props
-    const {cutTarget, menuTarget, searchKeyword} = context
+    const {cutTarget, dragTarget, menuTarget, searchKeyword} = context
 
     const bookmarkType = getBookmarkType(itemInfo)
     const compiledMouseHandler = debouncedMouseHandler(model)
@@ -296,11 +312,14 @@ const BookmarkItem = {
       default:
     }
 
-    if (cutTarget && cutTarget.id === itemInfo.id) {
+    const isCutTarget = cutTarget && cutTarget.id === itemInfo.id
+    const isDragTarget = dragTarget && dragTarget.id === itemInfo.id
+    if (isCutTarget || isDragTarget) {
       itemClasses.push('grey-item')
     }
 
-    if (menuTarget && menuTarget.id === itemInfo.id) {
+    const isMenuTarget = menuTarget && menuTarget.id === itemInfo.id
+    if (isMenuTarget) {
       itemClasses.push('selected')
     }
 
@@ -309,16 +328,19 @@ const BookmarkItem = {
     }
 
     return (
-      <li id={itemInfo.id}>
+      <li
+        id={itemInfo.id}
+        draggable={String(isDraggable)}
+        onDragEnd={dragEndHandler(model)}
+        onDragOver={dragOverHandler(model)}
+        onDragStart={dragStartHandler(model)}
+      >
         <a
           class={itemClasses.join(' ')}
-          href=''
-          draggable={isDraggable}
+          href={itemInfo.url || ''}
+          draggable='false'
           onClick={clickHandler(model)}
           onContextMenu={contextMenuHandler(model)}
-          onDragEnd={dragEndHandler(model)}
-          onDragOver={dragOverHandler(model)}
-          onDragStart={dragStartHandler(model)}
           onMouseEnter={compiledMouseHandler}
           onMouseLeave={compiledMouseHandler}
         >
