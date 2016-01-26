@@ -71,7 +71,15 @@ export function getStyleOptions(options) {
 
   // if the font family's name has whitespace, use quote to embed it
   const parsedFontFamily = fontFamily.split(',')
-    .map((x) => JSON.stringify(x.trim()))
+    .map((x) => {
+      x = x.trim()
+
+      if (/\s/.test(x)) {
+        x = JSON.stringify(x)
+      }
+
+      return x
+    })
     .join(',')
 
   const itemHeight = GOLDEN_GAP * 2 + fontSize
