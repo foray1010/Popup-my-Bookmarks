@@ -5,6 +5,7 @@ import {
   REPLACE_TREE_INFO_BY_INDEX,
   UPDATE_COPY_TARGET,
   UPDATE_CUT_TARGET,
+  UPDATE_DRAG_TARGET,
   UPDATE_EDITOR_TARGET,
   UPDATE_MENU_TARGET,
   UPDATE_MOUSE_POSITION,
@@ -39,6 +40,13 @@ export function updateCutTarget(cutTarget) {
   return Immutable({
     type: UPDATE_CUT_TARGET,
     cutTarget: cutTarget
+  })
+}
+
+export function updateDragTarget(dragTarget) {
+  return Immutable({
+    type: UPDATE_DRAG_TARGET,
+    dragTarget: dragTarget
   })
 }
 

@@ -6,6 +6,7 @@ import {
   REPLACE_TREE_INFO_BY_INDEX,
   UPDATE_COPY_TARGET,
   UPDATE_CUT_TARGET,
+  UPDATE_DRAG_TARGET,
   UPDATE_EDITOR_TARGET,
   UPDATE_MENU_TARGET,
   UPDATE_MOUSE_POSITION,
@@ -34,6 +35,16 @@ const rootReducer = combineReducers({
 
       case UPDATE_CUT_TARGET:
         return action.cutTarget
+
+      default:
+        return state
+    }
+  },
+
+  dragTarget(state = null, action) {
+    switch (action.type) {
+      case UPDATE_DRAG_TARGET:
+        return action.dragTarget
 
       default:
         return state
