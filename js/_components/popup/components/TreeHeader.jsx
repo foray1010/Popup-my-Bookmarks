@@ -1,7 +1,7 @@
 import {element} from 'deku'
 
 import {
-  removeTreeInfosAfterIndex
+  removeTreeInfosFromIndex
 } from '../actions'
 
 const closeHandler = (model) => () => {
@@ -9,7 +9,7 @@ const closeHandler = (model) => () => {
 
   const {treeIndex} = props
 
-  dispatch(removeTreeInfosAfterIndex(treeIndex))
+  dispatch(removeTreeInfosFromIndex(treeIndex))
 }
 
 const TreeHeader = {

@@ -13,7 +13,7 @@ import {
   putDragIndicator,
   removeDragIndicator,
   replaceTreeInfoByIndex,
-  removeTreeInfosAfterIndex,
+  removeTreeInfosFromIndex,
   updateDragTarget,
   updateMenuTarget,
   updateMousePosition
@@ -65,9 +65,9 @@ const clickHandler = (model) => async (evt) => {
       if (evt.button === 0) {
         if (options.opFolderBy) {
           if (!isFolderOpened(trees, itemInfo)) {
-            await openFolder(model)
+            dispatch(await openFolder(model))
           } else {
-            dispatch(removeTreeInfosAfterIndex(treeIndex + 1))
+            dispatch(removeTreeInfosFromIndex(treeIndex + 1))
           }
         }
       } else {
@@ -101,12 +101,14 @@ const contextMenuHandler = (model) => (evt) => {
   ])
 }
 
-const debouncedDragEnterHandler = debounce((model, evt) => {
+const debouncedDragEnterHandler = debounce(async (model, evt) => {
   const {context, dispatch, props} = model
 
   const {dragTarget, itemOffsetHeight} = context
-  const {itemInfo} = props
+  const {itemInfo, treeIndex} = props
 
+  const actionList = []
+  const isDragTarget = dragTarget.id === itemInfo.id
   const isPlaceAfter = evt.offsetY > itemOffsetHeight / 2
 
   const shouldRemoveDragIndicator = (() => {
@@ -126,16 +128,25 @@ const debouncedDragEnterHandler = debounce((model, evt) => {
     }
 
     return (
-      dragTarget.id === itemInfo.id ||
+      isDragTarget ||
       getBookmarkType(itemInfo) === TYPE_ROOT_FOLDER
     )
   })()
 
-  if (shouldRemoveDragIndicator) {
-    dispatch(removeDragIndicator())
+  // item cannot be the parent folder of itself
+  if (!isDragTarget && isFolder(itemInfo)) {
+    actionList.push(await openFolder(model))
   } else {
-    dispatch(putDragIndicator(itemInfo, isPlaceAfter))
+    actionList.push(removeTreeInfosFromIndex(treeIndex + 1))
   }
+
+  if (shouldRemoveDragIndicator) {
+    actionList.push(removeDragIndicator())
+  } else {
+    actionList.push(putDragIndicator(itemInfo, isPlaceAfter))
+  }
+
+  dispatch(actionList)
 }, 50)
 
 const debouncedMouseHandler = debounce(async (model, evt) => {
@@ -149,10 +160,10 @@ const debouncedMouseHandler = debounce(async (model, evt) => {
       if (!searchKeyword && !options.opFolderBy) {
         if (isFolder(itemInfo)) {
           if (!isFolderOpened(trees, itemInfo)) {
-            await openFolder(model)
+            dispatch(await openFolder(model))
           }
         } else {
-          dispatch(removeTreeInfosAfterIndex(treeIndex + 1))
+          dispatch(removeTreeInfosFromIndex(treeIndex + 1))
         }
       }
       break
@@ -176,9 +187,12 @@ const dragEndHandler = (model) => () => {
 const dragStartHandler = (model) => () => {
   const {dispatch, props} = model
 
-  const {itemInfo} = props
+  const {itemInfo, treeIndex} = props
 
-  dispatch(updateDragTarget(itemInfo))
+  dispatch([
+    // removeTreeInfosFromIndex(treeIndex + 1),
+    updateDragTarget(itemInfo)
+  ])
 }
 
 function getOpenBookmarkHandlerId(model, evt) {
@@ -290,14 +304,14 @@ function openBookmark(model, evt) {
 }
 
 async function openFolder(model) {
-  const {dispatch, props} = model
+  const {props} = model
 
   const {itemInfo, treeIndex} = props
 
   const nextTreeIndex = treeIndex + 1
   const treeInfo = await getFlatTree(itemInfo.id)
 
-  dispatch(replaceTreeInfoByIndex(nextTreeIndex, treeInfo))
+  return replaceTreeInfoByIndex(nextTreeIndex, treeInfo)
 }
 
 const BookmarkItem = {

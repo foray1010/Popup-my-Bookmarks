@@ -30,10 +30,10 @@ export function removeDragIndicator() {
   })
 }
 
-export function removeTreeInfosAfterIndex(removeAfterIndex) {
+export function removeTreeInfosFromIndex(removeFromIndex) {
   return Immutable({
     type: REMOVE_TREE_INFOS_FROM_INDEX,
-    removeAfterIndex: removeAfterIndex
+    removeFromIndex: removeFromIndex
   })
 }
 
