@@ -63,9 +63,9 @@ export async function getFirstTree(options) {
   return firstTree
 }
 
-export function getSlicedTrees(trees, removeAfterIndex) {
-  if (trees.length > removeAfterIndex) {
-    return trees.slice(0, removeAfterIndex)
+export function getSlicedTrees(trees, removeFromIndex) {
+  if (trees.length > removeFromIndex) {
+    return trees.slice(0, removeFromIndex)
   }
 
   return trees

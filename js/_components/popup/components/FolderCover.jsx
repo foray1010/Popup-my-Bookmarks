@@ -1,7 +1,7 @@
 import {element} from 'deku'
 
 import {
-  removeTreeInfosAfterIndex
+  removeTreeInfosFromIndex
 } from '../actions'
 
 const clickCoverHandler = (model) => () => {
@@ -13,7 +13,7 @@ function closeFolder(model) {
 
   const {treeIndex} = props
 
-  dispatch(removeTreeInfosAfterIndex(treeIndex))
+  dispatch(removeTreeInfosFromIndex(treeIndex))
 }
 
 const FolderCover = {

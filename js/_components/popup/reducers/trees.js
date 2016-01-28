@@ -4,7 +4,8 @@ import {
   DRAG_INDICATOR
 } from '../constants'
 import {
-  genDummyItemInfo
+  genDummyItemInfo,
+  getSlicedTrees
 } from '../functions'
 import {
   PUT_DRAG_INDICATOR,
@@ -81,11 +82,7 @@ export default function trees(state = Immutable([]), action) {
       return removeDragIndicatorFromTrees(state)
 
     case REMOVE_TREE_INFOS_FROM_INDEX:
-      if (state.length > action.removeAfterIndex) {
-        return state.slice(0, action.removeAfterIndex)
-      }
-
-      return state
+      return getSlicedTrees(state, action.removeFromIndex)
 
     case REPLACE_TREE_INFO_BY_INDEX:
       const mutableTrees = state.asMutable()
