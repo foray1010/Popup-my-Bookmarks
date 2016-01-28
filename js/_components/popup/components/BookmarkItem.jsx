@@ -55,7 +55,7 @@ const clickHandler = (model) => async (evt) => {
   const {context, dispatch, props} = model
 
   const {itemInfo, treeIndex} = props
-  const {trees} = context
+  const {options, trees} = context
 
   const bookmarkType = getBookmarkType(itemInfo)
 
@@ -63,7 +63,7 @@ const clickHandler = (model) => async (evt) => {
     case TYPE_ROOT_FOLDER:
     case TYPE_FOLDER:
       if (evt.button === 0) {
-        if (context.options.opFolderBy) {
+        if (options.opFolderBy) {
           if (!isFolderOpened(trees, itemInfo)) {
             await openFolder(model)
           } else {
@@ -142,11 +142,11 @@ const debouncedMouseHandler = debounce(async (model, evt) => {
   const {context, dispatch, props} = model
 
   const {itemInfo, treeIndex} = props
-  const {searchKeyword, trees} = context
+  const {options, searchKeyword, trees} = context
 
   switch (evt.type) {
     case 'mouseenter':
-      if (!searchKeyword && !context.options.opFolderBy) {
+      if (!searchKeyword && !options.opFolderBy) {
         if (isFolder(itemInfo)) {
           if (!isFolderOpened(trees, itemInfo)) {
             await openFolder(model)

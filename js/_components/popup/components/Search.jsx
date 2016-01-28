@@ -18,7 +18,7 @@ import chromep from '../../lib/chromePromise'
 
 const msgSearch = chrome.i18n.getMessage('search')
 
-const debouncedInputHandler = (model) => debounce(async (evt) => {
+const debouncedInputHandler = debounce(async (model, evt) => {
   const {context, dispatch} = model
 
   const {options} = context
@@ -42,7 +42,7 @@ const debouncedInputHandler = (model) => debounce(async (evt) => {
   ])
 }, 200)
 
-async function getSearchResult(context, newSearchKeyword) {
+export async function getSearchResult(context, newSearchKeyword) {
   const result = await chromep.bookmarks.search(newSearchKeyword)
 
   const filteredResult = searchResultFilter(context, newSearchKeyword, result)
@@ -101,6 +101,8 @@ function searchResultFilter(context, newSearchKeyword, results) {
 
 const Search = {
   render(model) {
+    const compiledInputHandler = (evt) => debouncedInputHandler(model, evt)
+
     return (
       <div id='search-box'>
         <input
@@ -109,14 +111,11 @@ const Search = {
           placeholder={msgSearch}
           tabindex='-1'
           autofocus
-          onInput={debouncedInputHandler(model)}
+          onInput={compiledInputHandler}
         />
       </div>
     )
   }
 }
 
-export default {
-  getSearchResult,
-  ...Search
-}
+export default Search
