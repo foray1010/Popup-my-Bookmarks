@@ -1,6 +1,8 @@
 import Immutable from 'seamless-immutable'
 
 import {
+  PUT_DRAG_INDICATOR,
+  REMOVE_DRAG_INDICATOR,
   REMOVE_TREE_INFOS_FROM_INDEX,
   REPLACE_TREE_INFO_BY_INDEX,
   UPDATE_COPY_TARGET,
@@ -14,10 +16,24 @@ import {
 } from '../constants/actionTypes'
 
 /* basic action */
-export function removeTreeInfosFromIndex(removeFromIndex) {
+export function putDragIndicator(itemInfo, isPlaceAfter) {
+  return Immutable({
+    type: PUT_DRAG_INDICATOR,
+    itemInfo: itemInfo,
+    isPlaceAfter: isPlaceAfter
+  })
+}
+
+export function removeDragIndicator() {
+  return Immutable({
+    type: REMOVE_DRAG_INDICATOR
+  })
+}
+
+export function removeTreeInfosAfterIndex(removeAfterIndex) {
   return Immutable({
     type: REMOVE_TREE_INFOS_FROM_INDEX,
-    removeFromIndex: removeFromIndex
+    removeAfterIndex: removeAfterIndex
   })
 }
 

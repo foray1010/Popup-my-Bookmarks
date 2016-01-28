@@ -2,17 +2,15 @@ import {combineReducers} from 'redux'
 import Immutable from 'seamless-immutable'
 
 import {
-  REMOVE_TREE_INFOS_FROM_INDEX,
-  REPLACE_TREE_INFO_BY_INDEX,
   UPDATE_COPY_TARGET,
   UPDATE_CUT_TARGET,
   UPDATE_DRAG_TARGET,
   UPDATE_EDITOR_TARGET,
   UPDATE_MENU_TARGET,
   UPDATE_MOUSE_POSITION,
-  UPDATE_SEARCH_KEYWORD,
-  UPDATE_TREES
+  UPDATE_SEARCH_KEYWORD
 } from '../constants/actionTypes'
+import trees from './trees'
 
 const rootReducer = combineReducers({
   copyTarget(state = null, action) {
@@ -103,29 +101,7 @@ const rootReducer = combineReducers({
     }
   },
 
-  trees(state = Immutable([]), action) {
-    switch (action.type) {
-      case REMOVE_TREE_INFOS_FROM_INDEX:
-        if (state.length > action.removeFromIndex) {
-          return state.slice(0, action.removeFromIndex)
-        }
-
-        return state
-
-      case REPLACE_TREE_INFO_BY_INDEX:
-        const mutableTrees = state.asMutable()
-
-        mutableTrees[action.treeIndex] = action.treeInfo
-
-        return Immutable(mutableTrees)
-
-      case UPDATE_TREES:
-        return action.trees
-
-      default:
-        return state
-    }
-  }
+  trees
 })
 
 export default rootReducer

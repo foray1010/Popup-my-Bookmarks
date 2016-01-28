@@ -1,6 +1,8 @@
 import mapArrayToEnums from '../../lib/mapArrayToEnums'
 
 module.exports = mapArrayToEnums([
+  'PUT_DRAG_INDICATOR',
+  'REMOVE_DRAG_INDICATOR',
   'REMOVE_TREE_INFOS_FROM_INDEX',
   'REPLACE_TREE_INFO_BY_INDEX',
   'UPDATE_COPY_TARGET',

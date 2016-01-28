@@ -8,6 +8,9 @@ import {
   sortByTitle
 } from '../functions'
 import {
+  TYPE_BOOKMARK
+} from '../constants'
+import {
   updateSearchKeyword,
   updateTrees
 } from '../actions'
@@ -69,7 +72,7 @@ function searchResultFilter(context, newSearchKeyword, results) {
   for (const itemInfo of results) {
     const itemTitle = itemInfo.title.toLowerCase()
 
-    if (getBookmarkType(itemInfo) === 'bookmark') {
+    if (getBookmarkType(itemInfo) === TYPE_BOOKMARK) {
       if (isOnlySearchTitle) {
         let isntTitleMatched = false
 

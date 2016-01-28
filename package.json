@@ -14,13 +14,13 @@
   "dependencies": {
     "babel-polyfill": "*",
     "chrome-promise": "*",
-    "deku": "2.0.0-rc15",
+    "deku": "2.0.0-rc16",
     "lodash.debounce": "*",
     "normalize.css": "*",
     "redux": "*",
     "redux-batched-subscribe": "*",
     "redux-logger": "*",
-    "redux-multi": "*",
+    "redux-multi": "0.1.12",
     "seamless-immutable": "*"
   },
   "devDependencies": {
