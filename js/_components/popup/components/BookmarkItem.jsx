@@ -10,12 +10,21 @@ import {
   openOptionsPage
 } from '../functions'
 import {
+  putDragIndicator,
+  removeDragIndicator,
   replaceTreeInfoByIndex,
-  removeTreeInfosFromIndex,
+  removeTreeInfosAfterIndex,
   updateDragTarget,
   updateMenuTarget,
   updateMousePosition
 } from '../actions'
+import {
+  TYPE_BOOKMARK,
+  TYPE_FOLDER,
+  TYPE_NO_BOOKMARK,
+  TYPE_ROOT_FOLDER,
+  TYPE_SEPARATOR
+} from '../constants'
 import chromep from '../../lib/chromePromise'
 
 const msgAlertBookmarklet = chrome.i18n.getMessage('alert_bookmarklet')
@@ -27,7 +36,7 @@ const afterRender = (model) => window.requestAnimationFrame(async () => {
 
   const bookmarkType = getBookmarkType(itemInfo)
 
-  if (bookmarkType === 'bookmark') {
+  if (bookmarkType === TYPE_BOOKMARK) {
     const el = document.getElementById(itemInfo.id)
 
     if (el) {
@@ -51,14 +60,14 @@ const clickHandler = (model) => async (evt) => {
   const bookmarkType = getBookmarkType(itemInfo)
 
   switch (bookmarkType) {
-    case 'root-folder':
-    case 'folder':
+    case TYPE_ROOT_FOLDER:
+    case TYPE_FOLDER:
       if (evt.button === 0) {
         if (context.options.opFolderBy) {
           if (!isFolderOpened(trees, itemInfo)) {
             await openFolder(model)
           } else {
-            dispatch(removeTreeInfosFromIndex(treeIndex + 1))
+            dispatch(removeTreeInfosAfterIndex(treeIndex + 1))
           }
         }
       } else {
@@ -66,8 +75,8 @@ const clickHandler = (model) => async (evt) => {
       }
       break
 
-    case 'separator':
-    case 'bookmark':
+    case TYPE_SEPARATOR:
+    case TYPE_BOOKMARK:
       openBookmark(model, evt)
       break
 
@@ -92,7 +101,44 @@ const contextMenuHandler = (model) => (evt) => {
   ])
 }
 
-const debouncedMouseHandler = (model) => debounce(async (evt) => {
+const debouncedDragEnterHandler = debounce((model, evt) => {
+  const {context, dispatch, props} = model
+
+  const {dragTarget, itemOffsetHeight} = context
+  const {itemInfo} = props
+
+  const isPlaceAfter = evt.offsetY > itemOffsetHeight / 2
+
+  const shouldRemoveDragIndicator = (() => {
+    const isSiblingOfDragTarget = (
+      dragTarget.parentId === itemInfo.parentId &&
+      Math.abs(dragTarget.index - itemInfo.index) === 1
+    )
+
+    if (isSiblingOfDragTarget) {
+      const isDragTargetAfterItemInfo = dragTarget.index - itemInfo.index > 0
+
+      if (isPlaceAfter) {
+        return isDragTargetAfterItemInfo
+      } else {
+        return !isDragTargetAfterItemInfo
+      }
+    }
+
+    return (
+      dragTarget.id === itemInfo.id ||
+      getBookmarkType(itemInfo) === TYPE_ROOT_FOLDER
+    )
+  })()
+
+  if (shouldRemoveDragIndicator) {
+    dispatch(removeDragIndicator())
+  } else {
+    dispatch(putDragIndicator(itemInfo, isPlaceAfter))
+  }
+}, 50)
+
+const debouncedMouseHandler = debounce(async (model, evt) => {
   const {context, dispatch, props} = model
 
   const {itemInfo, treeIndex} = props
@@ -106,7 +152,7 @@ const debouncedMouseHandler = (model) => debounce(async (evt) => {
             await openFolder(model)
           }
         } else {
-          dispatch(removeTreeInfosFromIndex(treeIndex + 1))
+          dispatch(removeTreeInfosAfterIndex(treeIndex + 1))
         }
       }
       break
@@ -119,30 +165,20 @@ const debouncedMouseHandler = (model) => debounce(async (evt) => {
 }, 200)
 
 const dragEndHandler = (model) => () => {
-  const {context, dispatch} = model
+  const {dispatch} = model
 
   dispatch([
+    removeDragIndicator(),
     updateDragTarget(null)
   ])
 }
 
-const dragOverHandler = (model) => (evt) => {
-  const {context, dispatch, props} = model
-
-  const {itemInfo} = props
-
-  dispatch([
-  ])
-}
-
 const dragStartHandler = (model) => () => {
-  const {context, dispatch, props} = model
+  const {dispatch, props} = model
 
   const {itemInfo} = props
 
-  dispatch([
-    updateDragTarget(itemInfo)
-  ])
+  dispatch(updateDragTarget(itemInfo))
 }
 
 function getOpenBookmarkHandlerId(model, evt) {
@@ -280,7 +316,8 @@ const BookmarkItem = {
     const {cutTarget, dragTarget, menuTarget, searchKeyword} = context
 
     const bookmarkType = getBookmarkType(itemInfo)
-    const compiledMouseHandler = debouncedMouseHandler(model)
+    const compiledDragEnterHandler = (evt) => debouncedDragEnterHandler(model, evt)
+    const compiledMouseHandler = (evt) => debouncedMouseHandler(model, evt)
     const itemClasses = [
       'item',
       'bookmark-item'
@@ -295,17 +332,17 @@ const BookmarkItem = {
     }
 
     switch (bookmarkType) {
-      case 'no-bookmark':
-      case 'root-folder':
+      case TYPE_NO_BOOKMARK:
+      case TYPE_ROOT_FOLDER:
         isDraggable = false
         itemClasses.push(bookmarkType)
         break
 
-      case 'separator':
+      case TYPE_SEPARATOR:
         itemClasses.push(bookmarkType)
         break
 
-      case 'bookmark':
+      case TYPE_BOOKMARK:
         iconSrc = `chrome://favicon/${itemInfo.url}`
         break
 
@@ -332,7 +369,7 @@ const BookmarkItem = {
         id={itemInfo.id}
         draggable={String(isDraggable)}
         onDragEnd={dragEndHandler(model)}
-        onDragOver={dragOverHandler(model)}
+        onDragEnter={compiledDragEnterHandler}
         onDragStart={dragStartHandler(model)}
       >
         <a

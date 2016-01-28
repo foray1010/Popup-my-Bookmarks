@@ -2,7 +2,12 @@ import chromep from '../../lib/chromePromise'
 
 import {
   GOLDEN_GAP,
-  SEPARATE_THIS_URL
+  SEPARATE_THIS_URL,
+  TYPE_BOOKMARK,
+  TYPE_FOLDER,
+  TYPE_NO_BOOKMARK,
+  TYPE_ROOT_FOLDER,
+  TYPE_SEPARATOR
 } from '../constants'
 import css from '../../lib/css'
 
@@ -26,22 +31,22 @@ export function genDummyItemInfo() {
 
 export function getBookmarkType(itemInfo) {
   if (/^no-bookmark/.test(itemInfo.id)) {
-    return 'no-bookmark'
+    return TYPE_NO_BOOKMARK
   }
 
   if (itemInfo.parentId === '0') {
-    return 'root-folder'
+    return TYPE_ROOT_FOLDER
   }
 
   if (!itemInfo.url) {
-    return 'folder'
+    return TYPE_FOLDER
   }
 
   if (itemInfo.url.startsWith(SEPARATE_THIS_URL)) {
-    return 'separator'
+    return TYPE_SEPARATOR
   }
 
-  return 'bookmark'
+  return TYPE_BOOKMARK
 }
 
 export async function getFlatTree(id) {
@@ -58,9 +63,9 @@ export async function getFirstTree(options) {
   return firstTree
 }
 
-export function getSlicedTrees(trees, removeFromIndex) {
-  if (trees.length > removeFromIndex) {
-    return trees.slice(0, removeFromIndex)
+export function getSlicedTrees(trees, removeAfterIndex) {
+  if (trees.length > removeAfterIndex) {
+    return trees.slice(0, removeAfterIndex)
   }
 
   return trees
@@ -131,7 +136,7 @@ export async function openMultipleBookmarks(model, itemInfo, menuItemNum) {
     const childrenInfo = results[0].children
 
     for (const thisItemInfo of childrenInfo) {
-      if (getBookmarkType(thisItemInfo) === 'bookmark') {
+      if (getBookmarkType(thisItemInfo) === TYPE_BOOKMARK) {
         urlList.push(thisItemInfo.url)
       }
     }

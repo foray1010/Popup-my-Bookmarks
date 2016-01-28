@@ -41,10 +41,10 @@ function initBookmarkEvent(dispatch) {
   const renewSlicedTreesById = (itemId) => {
     const {trees} = currentContext
 
-    const removeFromIndex = trees.findIndex((treeInfo) => treeInfo.id === itemId)
+    const removeAfterIndex = trees.findIndex((treeInfo) => treeInfo.id === itemId)
 
-    if (removeFromIndex >= 0) {
-      const slicedTrees = getSlicedTrees(trees, removeFromIndex)
+    if (removeAfterIndex >= 0) {
+      const slicedTrees = getSlicedTrees(trees, removeAfterIndex)
 
       renewTrees(slicedTrees)
     } else {

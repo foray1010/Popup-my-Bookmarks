@@ -8,7 +8,12 @@ import {
   sortByTitle
 } from '../functions'
 import {
-  SEPARATE_THIS_URL
+  SEPARATE_THIS_URL,
+  TYPE_BOOKMARK,
+  TYPE_FOLDER,
+  TYPE_NO_BOOKMARK,
+  TYPE_ROOT_FOLDER,
+  TYPE_SEPARATOR
 } from '../constants'
 import {
   updateCopyTarget,
@@ -115,18 +120,18 @@ function getChildrenHiddenStatus(context) {
   let childrenHiddenStatus = [false, false, false, false, false]
 
   switch (getBookmarkType(menuTarget)) {
-    case 'root-folder':
+    case TYPE_ROOT_FOLDER:
       childrenHiddenStatus = [false, true, true, true, true]
       break
 
-    case 'bookmark':
+    case TYPE_BOOKMARK:
       if (searchKeyword) {
         childrenHiddenStatus = [false, false, false, true, true]
       }
 
       break
 
-    case 'no-bookmark':
+    case TYPE_NO_BOOKMARK:
       childrenHiddenStatus = [true, true, false, false, true]
       break
 
@@ -154,7 +159,7 @@ async function pasteItem(context) {
           url: thisItemInfo.url
         })
 
-        if (getBookmarkType(thisItemInfo) === 'folder') {
+        if (getBookmarkType(thisItemInfo) === TYPE_FOLDER) {
           await copyChildFn(thisItemInfo, thisCreatedItemInfo.id)
         }
       }
@@ -170,7 +175,7 @@ async function pasteItem(context) {
       itemInfo.url
     )
 
-    if (getBookmarkType(itemInfo) === 'folder') {
+    if (getBookmarkType(itemInfo) === TYPE_FOLDER) {
       await copyChildFn(itemInfo, createdItemInfo.id)
     }
   }
@@ -261,16 +266,16 @@ async function sortByName(parentId) {
     let classifiedItemsIndex
 
     switch (getBookmarkType(itemInfo)) {
-      case 'folder':
+      case TYPE_FOLDER:
         classifiedItemsIndex = 1
         break
 
-      case 'separator':
+      case TYPE_SEPARATOR:
         classifiedItemsIndex = 0
         selectedClassifiedItems = genClassifiedItems()
         break
 
-      case 'bookmark':
+      case TYPE_BOOKMARK:
         classifiedItemsIndex = 2
         break
 

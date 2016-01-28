@@ -2,12 +2,14 @@ import {element} from 'deku'
 import Immutable from 'seamless-immutable'
 
 import {
-  genDummyItemInfo
-} from '../functions'
-import {
+  DRAG_INDICATOR,
   MAX_HEIGHT
 } from '../constants'
+import {
+  genDummyItemInfo
+} from '../functions'
 import BookmarkItem from './BookmarkItem'
+import DragIndicator from './DragIndicator'
 import FolderCover from './FolderCover'
 import NoResult from './NoResult'
 import TreeHeader from './TreeHeader'
@@ -83,7 +85,11 @@ const BookmarkTree = {
 
     const pushTreeItems = (thisTreeInfo) => {
       for (const itemInfo of thisTreeInfo.children) {
-        treeItems.push(genBookmarkItem(itemInfo))
+        if (itemInfo.id === DRAG_INDICATOR) {
+          treeItems.push(<DragIndicator />)
+        } else {
+          treeItems.push(genBookmarkItem(itemInfo))
+        }
       }
     }
 
