@@ -65,7 +65,7 @@ const BookmarkTree = {
   render(model) {
     const {context, path, props} = model
 
-    const {rootTree, searchKeyword, trees} = context
+    const {dragIndicator, rootTree, searchKeyword, trees} = context
     const {treeIndex} = props
 
     const treeItems = []
@@ -83,22 +83,10 @@ const BookmarkTree = {
       )
     }
 
-    const pushTreeItems = (thisTreeInfo) => {
-      for (const itemInfo of thisTreeInfo.children) {
-        if (itemInfo.id === DRAG_INDICATOR) {
-          treeItems.push(<DragIndicator />)
-        } else {
-          treeItems.push(genBookmarkItem(itemInfo))
-        }
-      }
-    }
-
-    if (isRootBox && !searchKeyword) {
-      pushTreeItems(rootTree)
-    }
-
     if (treeInfo.children.length) {
-      pushTreeItems(treeInfo)
+      for (const itemInfo of treeInfo.children) {
+        treeItems.push(genBookmarkItem(itemInfo))
+      }
     } else {
       if (searchKeyword) {
         treeItems.push(<NoResult key='no-result' />)
@@ -112,6 +100,16 @@ const BookmarkTree = {
         })
 
         treeItems.push(genBookmarkItem(noBookmarkInfo))
+      }
+    }
+
+    if (dragIndicator && dragIndicator.parentId === treeInfo.id) {
+      treeItems.splice(dragIndicator.index, 0, <DragIndicator />)
+    }
+
+    if (isRootBox && !searchKeyword) {
+      for (const itemInfo of rootTree.children) {
+        treeItems.unshift(genBookmarkItem(itemInfo))
       }
     }
 

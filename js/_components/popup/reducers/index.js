@@ -2,6 +2,14 @@ import {combineReducers} from 'redux'
 import Immutable from 'seamless-immutable'
 
 import {
+  DRAG_INDICATOR
+} from '../constants'
+import {
+  genDummyItemInfo
+} from '../functions'
+import {
+  PUT_DRAG_INDICATOR,
+  REMOVE_DRAG_INDICATOR,
   UPDATE_COPY_TARGET,
   UPDATE_CUT_TARGET,
   UPDATE_DRAG_TARGET,
@@ -33,6 +41,26 @@ const rootReducer = combineReducers({
 
       case UPDATE_CUT_TARGET:
         return action.cutTarget
+
+      default:
+        return state
+    }
+  },
+
+  dragIndicator(state = null, action) {
+    switch (action.type) {
+      case PUT_DRAG_INDICATOR:
+        const {isPlaceAfter, itemInfo} = action
+
+        return {
+          ...genDummyItemInfo(),
+          id: DRAG_INDICATOR,
+          index: Math.max(itemInfo.index, 0) + (isPlaceAfter ? 1 : 0),
+          parentId: itemInfo.parentId
+        }
+
+      case REMOVE_DRAG_INDICATOR:
+        return null
 
       default:
         return state
