@@ -176,11 +176,20 @@ const debouncedMouseHandler = debounce(async (model, evt) => {
   }
 }, 200)
 
-const dragEndHandler = (model) => () => {
-  const {dispatch} = model
+const dragEndHandler = (model) => async () => {
+  const {context, dispatch} = model
+
+  const {dragIndicator, dragTarget} = context
 
   // remove cached dragTargetEl
   dragHackEl.innerHTML = ''
+
+  if (dragIndicator) {
+    await chromep.bookmarks.move(dragTarget.id, {
+      parentId: dragIndicator.parentId,
+      index: dragIndicator.index
+    })
+  }
 
   dispatch([
     removeDragIndicator(),
