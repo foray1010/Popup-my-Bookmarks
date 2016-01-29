@@ -5,20 +5,23 @@ import {
   DRAG_INDICATOR
 } from '../constants'
 import {
-  genDummyItemInfo
+  genDummyItemInfo,
+  getSlicedTrees
 } from '../functions'
 import {
   PUT_DRAG_INDICATOR,
   REMOVE_DRAG_INDICATOR,
+  REMOVE_TREE_INFOS_FROM_INDEX,
+  REPLACE_TREE_INFO_BY_INDEX,
   UPDATE_COPY_TARGET,
   UPDATE_CUT_TARGET,
   UPDATE_DRAG_TARGET,
   UPDATE_EDITOR_TARGET,
   UPDATE_MENU_TARGET,
   UPDATE_MOUSE_POSITION,
-  UPDATE_SEARCH_KEYWORD
+  UPDATE_SEARCH_KEYWORD,
+  UPDATE_TREES
 } from '../constants/actionTypes'
-import trees from './trees'
 
 const rootReducer = combineReducers({
   copyTarget(state = null, action) {
@@ -129,7 +132,25 @@ const rootReducer = combineReducers({
     }
   },
 
-  trees
+  trees(state = Immutable([]), action) {
+    switch (action.type) {
+      case REMOVE_TREE_INFOS_FROM_INDEX:
+        return getSlicedTrees(state, action.removeFromIndex)
+
+      case REPLACE_TREE_INFO_BY_INDEX:
+        const mutableTrees = state.asMutable()
+
+        mutableTrees[action.treeIndex] = action.treeInfo
+
+        return Immutable(mutableTrees)
+
+      case UPDATE_TREES:
+        return action.trees
+
+      default:
+        return state
+    }
+  }
 })
 
 export default rootReducer
