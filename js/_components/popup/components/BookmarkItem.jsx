@@ -27,6 +27,7 @@ import {
 } from '../constants'
 import chromep from '../../lib/chromePromise'
 
+const dragHackEl = document.getElementById('drag-hack')
 const msgAlertBookmarklet = chrome.i18n.getMessage('alert_bookmarklet')
 
 const afterRender = (model) => window.requestAnimationFrame(async () => {
@@ -178,6 +179,9 @@ const debouncedMouseHandler = debounce(async (model, evt) => {
 const dragEndHandler = (model) => () => {
   const {dispatch} = model
 
+  // remove cached dragTargetEl
+  dragHackEl.innerHTML = ''
+
   dispatch([
     removeDragIndicator(),
     updateDragTarget(null)
@@ -189,10 +193,24 @@ const dragStartHandler = (model) => () => {
 
   const {itemInfo, treeIndex} = props
 
-  dispatch([
-    // removeTreeInfosFromIndex(treeIndex + 1),
-    updateDragTarget(itemInfo)
-  ])
+  // hack to prevent dragover and dragend event stop working when dragTargetEl is removed
+  setTimeout(() => {
+    const dragTargetEl = document.getElementById(itemInfo.id)
+
+    // create a cloned dragged item to replace the original one
+    const clonedDragTargetEl = dragTargetEl.cloneNode(true)
+    dragTargetEl.parentNode.insertBefore(clonedDragTargetEl, dragTargetEl)
+
+    // move the original one to #drag-hack
+    // it can prevent dragged item from removing by removeTreeInfosFromIndex,
+    // which stop dragend event from firing
+    dragHackEl.appendChild(dragTargetEl)
+
+    dispatch([
+      removeTreeInfosFromIndex(treeIndex + 1),
+      updateDragTarget(itemInfo)
+    ])
+  })
 }
 
 function getOpenBookmarkHandlerId(model, evt) {
