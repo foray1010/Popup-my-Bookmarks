@@ -26,7 +26,7 @@ import chromep from '../../lib/chromePromise'
 const menuItemClickHandler = (model) => async function (evt) {
   evt.preventDefault()
 
-  if (Array.from(this.classList).indexOf('grey-item') >= 0) return
+  if (this.classList.contains('grey-item')) return
 
   const {context, dispatch} = model
 

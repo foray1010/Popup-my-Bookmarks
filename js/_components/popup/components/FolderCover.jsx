@@ -13,7 +13,7 @@ function closeFolder(model) {
 
   const {treeIndex} = props
 
-  dispatch(removeTreeInfosFromIndex(treeIndex))
+  dispatch(removeTreeInfosFromIndex(treeIndex + 1))
 }
 
 const FolderCover = {
