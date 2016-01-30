@@ -28,12 +28,15 @@ const FolderCover = {
     const isHidden = trees.length - treeIndex <= 2
     const xyRange = 20
 
-    const mouseLeaveHandler = () => () => {
+    let mousePosition = null
+    let triggerOnClickTimer = null
+
+    const mouseLeaveHandler = () => {
       clearTimeout(triggerOnClickTimer)
       triggerOnClickTimer = null
     }
 
-    const mouseMoveHandler = () => (evt) => {
+    const mouseMoveHandler = (evt) => {
       mousePosition = {
         x: evt.x,
         y: evt.y
@@ -63,16 +66,13 @@ const FolderCover = {
       }, delay)
     }
 
-    let mousePosition
-    let triggerOnClickTimer = null
-
     return (
       <div
         class='cover'
         hidden={isHidden}
         onClick={clickCoverHandler(model)}
-        onMouseLeave={mouseLeaveHandler(model)}
-        onMouseMove={mouseMoveHandler(model)}
+        onMouseLeave={mouseLeaveHandler}
+        onMouseMove={mouseMoveHandler}
       />
     )
   }
