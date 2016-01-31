@@ -37,7 +37,7 @@ const lang = {
   },
   js: {
     destDir: 'js',
-    srcPath: path.join('js', '*') + '.jsx'
+    srcPath: path.join('js', '*') + '.js'
   }
 }
 
