@@ -30,6 +30,8 @@ import chromep from '../../lib/chromePromise'
 const dragHackEl = document.getElementById('drag-hack')
 const msgAlertBookmarklet = chrome.i18n.getMessage('alert_bookmarklet')
 
+let currentContext = null
+
 const afterRender = (model) => window.requestAnimationFrame(async () => {
   const {props} = model
 
@@ -177,9 +179,12 @@ const debouncedMouseHandler = debounce(async (model, evt) => {
 }, 200)
 
 const dragEndHandler = (model) => async () => {
-  const {context, dispatch} = model
+  const {dispatch} = model
 
-  const {dragIndicator, dragTarget} = context
+  // because we move the original dragTargetEl to #drag-hack
+  // the original dragTargetEl cannot be updated by deku, so the model will not be updated
+  // that's why we need to store the updated context in currentContext
+  const {dragIndicator, dragTarget} = currentContext
 
   // remove cached dragTargetEl
   dragHackEl.innerHTML = ''
@@ -343,10 +348,18 @@ async function openFolder(model) {
 
 const BookmarkItem = {
   onCreate(model) {
+    const {context} = model
+
+    currentContext = context
+
     afterRender(model)
   },
 
   onUpdate(model) {
+    const {context} = model
+
+    currentContext = context
+
     afterRender(model)
   },
 
