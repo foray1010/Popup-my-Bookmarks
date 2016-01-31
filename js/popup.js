@@ -1,5 +1,4 @@
 import 'babel-polyfill'
-import {createApp, element} from 'deku'
 
 import {
   getFirstTree,
@@ -14,6 +13,7 @@ import configureStore from './_components/store/configureStore'
 import getOptionsConfig from './_components/getOptionsConfig'
 import Immutable from 'seamless-immutable'
 import reducers from './_components/popup/reducers'
+import render from './_components/lib/render'
 
 !async function () {
   const options = await chromep.storage.sync.get(null)
@@ -57,10 +57,5 @@ import reducers from './_components/popup/reducers'
   }))
 
   /* render the app */
-  const render = createApp(document.getElementById('container'), store.dispatch)
-
-  const renderer = () => render(<App />, store.getState())
-
-  renderer()
-  store.subscribe(renderer)
+  render(App, store)
 }().catch((err) => console.error(err.stack))
