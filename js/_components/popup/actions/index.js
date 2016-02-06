@@ -9,6 +9,7 @@ import {
   UPDATE_CUT_TARGET,
   UPDATE_DRAG_TARGET,
   UPDATE_EDITOR_TARGET,
+  UPDATE_KEYBOARD_TARGET,
   UPDATE_MENU_TARGET,
   UPDATE_MOUSE_POSITION,
   UPDATE_SEARCH_KEYWORD,
@@ -70,6 +71,13 @@ export function updateEditorTarget(editorTarget) {
   return Immutable({
     type: UPDATE_EDITOR_TARGET,
     editorTarget: editorTarget
+  })
+}
+
+export function updateKeyboardTarget(keyboardTarget) {
+  return Immutable({
+    type: UPDATE_KEYBOARD_TARGET,
+    keyboardTarget: keyboardTarget
   })
 }
 

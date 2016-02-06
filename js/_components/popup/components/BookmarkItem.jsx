@@ -366,8 +366,14 @@ const BookmarkItem = {
   render(model) {
     const {context, props} = model
 
+    const {
+      cutTarget,
+      dragTarget,
+      keyboardTarget,
+      menuTarget,
+      searchKeyword
+    } = context
     const {itemInfo} = props
-    const {cutTarget, dragTarget, menuTarget, searchKeyword} = context
 
     const bookmarkType = getBookmarkType(itemInfo)
     const compiledDragEnterHandler = (evt) => debouncedDragEnterHandler(model, evt)
@@ -405,12 +411,14 @@ const BookmarkItem = {
 
     const isCutTarget = cutTarget && cutTarget.id === itemInfo.id
     const isDragTarget = dragTarget && dragTarget.id === itemInfo.id
+    const isKeyboardTarget = keyboardTarget && keyboardTarget.id === itemInfo.id
+    const isMenuTarget = menuTarget && menuTarget.id === itemInfo.id
+
     if (isCutTarget || isDragTarget) {
       itemClasses.push('grey-item')
     }
 
-    const isMenuTarget = menuTarget && menuTarget.id === itemInfo.id
-    if (isMenuTarget) {
+    if (isDragTarget || isKeyboardTarget || isMenuTarget) {
       itemClasses.push('selected')
     }
 

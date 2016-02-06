@@ -1,4 +1,4 @@
-import chromep from '../../lib/chromePromise'
+import Immutable from 'seamless-immutable'
 
 import {
   GOLDEN_GAP,
@@ -9,24 +9,50 @@ import {
   TYPE_ROOT_FOLDER,
   TYPE_SEPARATOR
 } from '../constants'
+import chromep from '../../lib/chromePromise'
 import css from '../../lib/css'
 
-export function genDummyItemInfo() {
-  const dummyItemInfo = {}
-  const itemInfoFieldNames = [
-    'dateAdded',
-    'dateGroupModified',
-    'id',
-    'index',
-    'parentId',
-    'title'
-  ]
+const msgNoBookmark = chrome.i18n.getMessage('noBkmark')
 
-  for (const itemInfoFieldName of itemInfoFieldNames) {
-    dummyItemInfo[itemInfoFieldName] = null
+export function genBookmarkList(context, treeInfo, treeIndex) {
+  const {rootTree, searchKeyword} = context
+
+  let childrenInfo = treeInfo.children
+
+  if (!searchKeyword) {
+    if (childrenInfo.length === 0) {
+      childrenInfo = childrenInfo.concat([
+        genNoBookmarkInfo(treeInfo.id)
+      ])
+    }
+
+    if (treeIndex === 0) {
+      return rootTree.children.concat(childrenInfo)
+    }
   }
 
-  return dummyItemInfo
+  return childrenInfo
+}
+
+export function genDummyItemInfo() {
+  return {
+    dateAdded: null,
+    dateGroupModified: null,
+    id: null,
+    index: null,
+    parentId: null,
+    title: null
+  }
+}
+
+export function genNoBookmarkInfo(parentId) {
+  return Immutable({
+    ...genDummyItemInfo(),
+    id: `no-bookmark-${parentId}`,
+    index: -1, // as it is not appeared in the childrenInfo
+    parentId: parentId,
+    title: msgNoBookmark
+  })
 }
 
 export function getBookmarkType(itemInfo) {
