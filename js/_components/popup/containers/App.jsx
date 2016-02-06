@@ -143,7 +143,9 @@ async function keyboardArrowLeftRightHandler(model, isLeft) {
 
       dispatch([
         removeTreeInfosFromIndex(targetTreeIndex),
-        updateKeyboardTarget(prevBookmarkList[0])
+        updateKeyboardTarget(
+          prevBookmarkList.find((itemInfo) => itemInfo.id === keyboardTarget.parentId)
+        )
       ])
     }
   } else {
