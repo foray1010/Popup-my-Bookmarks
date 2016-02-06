@@ -10,8 +10,8 @@ import {
 } from '../functions'
 import {getSearchResult} from '../components/Search'
 import {
-  replaceTreeInfoByIndex,
   removeTreeInfosFromIndex,
+  replaceTreeInfoByIndex,
   updateEditorTarget,
   updateMenuTarget,
   updateKeyboardTarget,
