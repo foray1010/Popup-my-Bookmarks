@@ -1,20 +1,16 @@
 import {element} from 'deku'
-import Immutable from 'seamless-immutable'
 
 import {
-  DRAG_INDICATOR,
   MAX_HEIGHT
 } from '../constants'
 import {
-  genDummyItemInfo
+  genBookmarkList
 } from '../functions'
 import BookmarkItem from './BookmarkItem'
 import DragIndicator from './DragIndicator'
 import FolderCover from './FolderCover'
 import NoResult from './NoResult'
 import TreeHeader from './TreeHeader'
-
-const msgNoBookmark = chrome.i18n.getMessage('noBkmark')
 
 const afterRender = (model) => window.requestAnimationFrame(() => {
   const {path} = model
@@ -41,16 +37,16 @@ const wheelHandler = (model) => function (evt) {
 }
 
 function setHeight(el) {
-  const bookmarkList = el.getElementsByClassName('bookmark-list')[0]
+  const bookmarkListEl = el.getElementsByClassName('bookmark-list')[0]
 
   // search-box and tree-header-box height
-  const bookmarkListOffsetTop = bookmarkList.getBoundingClientRect().top
+  const bookmarkListElOffsetTop = bookmarkListEl.getBoundingClientRect().top
 
-  const maxListHeight = MAX_HEIGHT - bookmarkListOffsetTop
+  const maxListHeight = MAX_HEIGHT - bookmarkListElOffsetTop
 
-  const listHeight = Math.min(bookmarkList.scrollHeight, maxListHeight)
+  const listHeight = Math.min(bookmarkListEl.scrollHeight, maxListHeight)
 
-  bookmarkList.style.maxHeight = listHeight + 'px'
+  bookmarkListEl.style.maxHeight = listHeight + 'px'
 }
 
 const BookmarkTree = {
@@ -68,13 +64,14 @@ const BookmarkTree = {
     const {dragIndicator, rootTree, searchKeyword, trees} = context
     const {treeIndex} = props
 
+    const isFirstTree = treeIndex === 0
+    const treeInfo = trees[treeIndex]
     const treeItems = []
 
-    const isRootBox = treeIndex === 0
-    const treeInfo = trees[treeIndex]
+    const bookmarkList = genBookmarkList(context, treeInfo, treeIndex)
 
-    const genBookmarkItem = (itemInfo) => {
-      return (
+    for (const itemInfo of bookmarkList) {
+      treeItems.push(
         <BookmarkItem
           key={itemInfo.id}
           itemInfo={itemInfo}
@@ -83,40 +80,26 @@ const BookmarkTree = {
       )
     }
 
-    if (treeInfo.children.length) {
-      for (const itemInfo of treeInfo.children) {
-        treeItems.push(genBookmarkItem(itemInfo))
-      }
-    } else {
-      if (searchKeyword) {
-        treeItems.push(<NoResult key='no-result' />)
-      } else {
-        const noBookmarkInfo = Immutable({
-          ...genDummyItemInfo(),
-          id: `no-bookmark-${treeInfo.id}`,
-          index: -1, // as it is not appeared in the childrenInfo
-          parentId: treeInfo.id,
-          title: msgNoBookmark
-        })
-
-        treeItems.push(genBookmarkItem(noBookmarkInfo))
-      }
-    }
-
     if (dragIndicator && dragIndicator.parentId === treeInfo.id) {
+      let dragIndicatorIndex = dragIndicator.index
+
+      if (isFirstTree && !searchKeyword) {
+        dragIndicatorIndex += rootTree.children.length
+      }
+
       treeItems.splice(dragIndicator.index, 0, <DragIndicator />)
     }
 
-    if (isRootBox && !searchKeyword) {
-      for (const itemInfo of rootTree.children) {
-        treeItems.unshift(genBookmarkItem(itemInfo))
-      }
+    if (searchKeyword && bookmarkList.length === 0) {
+      treeItems.push(
+        <NoResult key='no-result' />
+      )
     }
 
     return (
       <div id={path} class='bookmark-tree'>
         <TreeHeader
-          isHidden={Boolean(searchKeyword || isRootBox)}
+          isHidden={Boolean(isFirstTree || searchKeyword)}
           treeIndex={treeIndex}
         />
         <ul
