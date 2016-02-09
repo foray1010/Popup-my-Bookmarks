@@ -173,7 +173,7 @@ export async function openMultipleBookmarks(model, itemInfo, menuItemNum) {
 
     if (options.warnOpenMany &&
         urlList.length > 5 &&
-        !confirm(msgAskOpenAll)) {
+        !window.confirm(msgAskOpenAll)) {
       return
     }
   } else {
@@ -249,7 +249,7 @@ export function setPredefinedStyleSheet(styleOptions) {
 }
 
 export function sortByTitle(bookmarkList) {
-  const collator = new Intl.Collator()
+  const collator = new window.Intl.Collator()
 
   const {compare} = collator
 
