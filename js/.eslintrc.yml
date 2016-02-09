@@ -1,0 +1,2 @@
+extends: "foray1010/deku"
+parser: "babel-eslint"

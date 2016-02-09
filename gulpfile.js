@@ -1,4 +1,3 @@
-/* eslint strict: 0 */
 'use strict'
 
 const argv = require('yargs').argv

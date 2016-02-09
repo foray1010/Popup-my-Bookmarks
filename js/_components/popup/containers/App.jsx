@@ -38,7 +38,7 @@ const contextMenuHandler = (evt) => {
 }
 
 const keyDownHandler = (model) => async (evt) => {
-  const keyCode = event.keyCode
+  const keyCode = evt.keyCode
 
   switch (keyCode) {
     case 37: // left
