@@ -23,7 +23,8 @@ import render from './_components/lib/render'
 
   for (const optionName of Object.keys(optionsConfig)) {
     if (options[optionName] === undefined) {
-      return openOptionsPage()
+      await openOptionsPage()
+      return
     }
   }
 

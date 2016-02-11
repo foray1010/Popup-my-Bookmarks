@@ -7,6 +7,7 @@ import {
 import {
   updateEditorTarget
 } from '../actions'
+import chromep from '../../lib/chromePromise'
 
 const msgCancel = chrome.i18n.getMessage('cancel')
 const msgConfirm = chrome.i18n.getMessage('confirm')
@@ -19,7 +20,7 @@ const clickCancelHandler = (model) => () => {
   closeEditor(dispatch)
 }
 
-const clickConfirmHandler = (model) => () => {
+const clickConfirmHandler = (model) => async () => {
   const {context, dispatch, path} = model
 
   const {editorTarget} = context
@@ -34,7 +35,7 @@ const clickConfirmHandler = (model) => () => {
     updatedUrl = editorInput[1].value.trim()
   }
 
-  chrome.bookmarks.update(editorTarget.id, {
+  await chromep.bookmarks.update(editorTarget.id, {
     title: updatedTitle,
     url: updatedUrl
   })

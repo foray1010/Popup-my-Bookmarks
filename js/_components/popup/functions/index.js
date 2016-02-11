@@ -186,13 +186,13 @@ export async function openMultipleBookmarks(model, itemInfo, menuItemNum) {
 
   if (menuItemNum === 0) {
     for (const url of urlList) {
-      chrome.tabs.create({
+      await chromep.tabs.create({
         url,
         active: false
       })
     }
   } else {
-    chrome.windows.create({
+    await chromep.windows.create({
       url: urlList,
       incognito: menuItemNum !== 1
     })
@@ -201,11 +201,15 @@ export async function openMultipleBookmarks(model, itemInfo, menuItemNum) {
   window.close()
 }
 
-export function openOptionsPage() {
-  if (chrome.runtime.openOptionsPage) {
-    chrome.runtime.openOptionsPage()
+export async function openOptionsPage() {
+  if (chromep.runtime.openOptionsPage) {
+    await chromep.runtime.openOptionsPage()
   } else {
-    chrome.tabs.create({url: 'options.html'})
+    const manifest = chrome.runtime.getManifest()
+
+    await chromep.tabs.create({
+      url: manifest.options_page
+    })
   }
 }
 

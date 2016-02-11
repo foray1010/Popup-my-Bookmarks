@@ -80,7 +80,7 @@ const clickHandler = (model) => async (evt) => {
 
     case TYPE_SEPARATOR:
     case TYPE_BOOKMARK:
-      openBookmark(model, evt)
+      await openBookmark(model, evt)
       break
 
     default:
@@ -286,7 +286,7 @@ async function getTooltip(model) {
   return tooltipArr.join('\n')
 }
 
-function openBookmark(model, evt) {
+async function openBookmark(model, evt) {
   const {context, props} = model
 
   const {itemInfo} = props
@@ -300,12 +300,12 @@ function openBookmark(model, evt) {
     case 1: // current tab (w/o closing PmB)
       if (itemUrl.startsWith('javascript:')) {
         if (options.bookmarklet) {
-          chrome.tabs.executeScript(null, {code: itemUrl})
+          await chromep.tabs.executeScript(null, {code: itemUrl})
         } else if (window.confirm(msgAlertBookmarklet)) {
-          openOptionsPage()
+          await openOptionsPage()
         }
       } else {
-        chrome.tabs.update({url: itemUrl})
+        await chromep.tabs.update({url: itemUrl})
       }
 
       break
@@ -313,7 +313,7 @@ function openBookmark(model, evt) {
     case 2: // new tab
     case 3: // background tab
     case 4: // background tab (w/o closing PmB)
-      chrome.tabs.create({
+      await chromep.tabs.create({
         url: itemUrl,
         active: handlerId === 2
       })
@@ -321,7 +321,7 @@ function openBookmark(model, evt) {
 
     case 5: // new window
     case 6: // incognito window
-      chrome.windows.create({
+      await chromep.windows.create({
         url: itemUrl,
         incognito: handlerId === 6
       })
@@ -330,8 +330,9 @@ function openBookmark(model, evt) {
     default:
   }
 
+  // if not (w/o closing PmB)
   if (handlerId !== 1 && handlerId !== 4) {
-    setTimeout(window.close, 200)
+    window.close()
   }
 }
 
