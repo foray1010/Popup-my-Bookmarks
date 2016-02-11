@@ -29,18 +29,9 @@ select
   box-sizing: border-box
   height: $input-height
 
-  // fix a weird layout forced in option V2
-  min-height: 0 !important
-
 input[type="number"]
   text-align: right
   width: 50px
-
-select,
-select:hover
-  // fix a weird layout forced in option V2
-  -webkit-appearance: menulist
-  background-image: none !important
 
 .input-select-box
   border: 1px solid $main-color1
@@ -49,7 +40,7 @@ select:hover
 
   & > input,
   & > select
-    border: 0 !important
+    border: 0
 
   & > input
     box-sizing: border-box
@@ -169,14 +160,4 @@ select:hover
   text-align: right
 
   & > button
-    // fix a weird layout forced in option V2
-    background-image: none
-    border: 0
-    padding: 4px 8px
-
     margin: $golden-gap-2x 0 0 $golden-gap-2x
-
-    // fix a weird layout forced in option V2
-    &:focus,
-    &:hover
-      color: $main-color1
