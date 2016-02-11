@@ -295,18 +295,21 @@ async function sortByName(parentId) {
   }
 
   // Sort bookmarks by Selection sort
-  newChildrenInfo.forEach((itemInfo, index) => {
+  const newChildrenInfoLen = newChildrenInfo.length
+  for (let index = 0; index < newChildrenInfoLen; index += 1) {
+    const itemInfo = newChildrenInfo[index]
+
     const oldIndex = childrenInfo.indexOf(itemInfo)
 
     if (oldIndex !== index) {
       // move the item from old index to new index
       childrenInfo.splice(index, 0, childrenInfo.splice(oldIndex, 1)[0])
 
-      chrome.bookmarks.move(itemInfo.id, {
+      await chromep.bookmarks.move(itemInfo.id, {
         index: index + (index > oldIndex ? 1 : 0)
       })
     }
-  })
+  }
 }
 
 const Menu = {
