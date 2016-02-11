@@ -19,7 +19,7 @@ browser_action:
 options_page: 'options.html'
 options_ui:
   page: 'options.html'
-  chrome_style: true
+  chrome_style: false
 
 commands:
   _execute_browser_action:
