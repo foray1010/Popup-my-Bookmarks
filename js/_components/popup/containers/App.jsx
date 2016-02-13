@@ -71,10 +71,13 @@ const mouseDownHandler = () => (evt) => {
 }
 
 function getKeyboardTargetTreeIndex(context) {
-  const {keyboardTarget, searchKeyword, trees} = context
+  const {keyboardTarget, trees} = context
 
-  if (!keyboardTarget || searchKeyword ||
-    getBookmarkType(keyboardTarget) === TYPE_ROOT_FOLDER) {
+  if (!keyboardTarget) {
+    return trees.length - 1
+  }
+
+  if (getBookmarkType(keyboardTarget) === TYPE_ROOT_FOLDER) {
     return 0
   }
 
