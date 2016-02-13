@@ -63,7 +63,7 @@ const keyDownHandler = (model) => async (evt) => {
   }
 }
 
-const mouseDownHandler = () => (evt) => {
+const mouseDownHandler = (evt) => {
   // disable the scrolling arrows after middle click
   if (evt.button === 1) {
     evt.preventDefault()
@@ -181,9 +181,8 @@ async function keyboardArrowUpDownHandler(model, isUp) {
 
   let nextSelectedIndex
   if (keyboardTarget) {
-    const origSelectedIndex = targetBookmarkList.findIndex((itemInfo) => {
-      return itemInfo.id === keyboardTarget.id
-    })
+    const origSelectedIndex = targetBookmarkList
+      .findIndex((itemInfo) => itemInfo.id === keyboardTarget.id)
 
     if (isUp) {
       nextSelectedIndex = origSelectedIndex - 1
@@ -226,7 +225,7 @@ const App = {
         id='app'
         onContextMenu={contextMenuHandler}
         onKeyDown={keyDownHandler(model)}
-        onMouseDown={mouseDownHandler()}
+        onMouseDown={mouseDownHandler}
       >
         <Panel />
         <MenuCover />

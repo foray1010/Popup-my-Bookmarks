@@ -34,7 +34,7 @@ const OptionInput = {
 
     const optionValue = options[optionName]
 
-    const isChecked = optionValue.indexOf(optionChoiceIndex) >= 0
+    const isChecked = optionValue.includes(optionChoiceIndex)
 
     return (
       <label>

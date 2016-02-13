@@ -106,12 +106,14 @@ async function addCurrentPage(menuTarget) {
 }
 
 async function createBookmarkBelowMenuTarget(menuTarget, title, url) {
-  return await chromep.bookmarks.create({
+  const createdItemInfo = await chromep.bookmarks.create({
     index: menuTarget.index + 1,
     parentId: menuTarget.parentId,
     title: title.trim(),
     url: url && url.trim()
   })
+
+  return createdItemInfo
 }
 
 function getChildrenHiddenStatus(context) {
