@@ -11,6 +11,9 @@
   "engines": {
     "node": ">= 4.2"
   },
+  "scripts": {
+    "lint": "gulp lint"
+  },
   "dependencies": {
     "babel-polyfill": "*",
     "chrome-promise": "*",
@@ -44,10 +47,14 @@
     "gulp-stylus": "*",
     "gulp-util": "*",
     "gulp-zip": "*",
+    "pre-commit": "^1.1.2",
     "vinyl-named": "*",
     "webpack": "*",
     "webpack-stream": "*",
     "yargs": "*"
   },
-  "private": true
+  "private": true,
+  "pre-commit": [
+    "lint"
+  ]
 }
