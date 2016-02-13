@@ -105,7 +105,7 @@ export function getStyleOptions(options) {
     .map((x) => {
       x = x.trim()
 
-      if (/\s/.test(x)) {
+      if (x.includes(' ')) {
         x = JSON.stringify(x)
       }
 
@@ -130,7 +130,7 @@ export function getStyleOptions(options) {
 export function isFolder(itemInfo) {
   const bookmarkType = getBookmarkType(itemInfo)
 
-  return /folder$/.test(bookmarkType)
+  return bookmarkType.includes(TYPE_FOLDER)
 }
 
 export function isFolderOpened(trees, itemInfo) {
@@ -253,9 +253,7 @@ export function setPredefinedStyleSheet(styleOptions) {
 }
 
 export function sortByTitle(bookmarkList) {
-  const collator = new window.Intl.Collator()
-
-  const {compare} = collator
+  const {compare} = new window.Intl.Collator()
 
   return bookmarkList.sort((a, b) => compare(a.title, b.title))
 }

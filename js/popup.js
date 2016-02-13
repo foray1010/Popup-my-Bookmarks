@@ -41,7 +41,7 @@ import render from './_components/lib/render'
 
     const isFilterThisItem = (
       itemIdNum === options.defExpand ||
-      options.hideRootFolder.indexOf(itemIdNum) >= 0
+      options.hideRootFolder.includes(itemIdNum)
     )
 
     return !isFilterThisItem

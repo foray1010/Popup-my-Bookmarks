@@ -64,26 +64,19 @@ function searchResultFilter(context, newSearchKeyword, results) {
   const splittedKeyArr = []
 
   if (isOnlySearchTitle) {
-    for (const splittedKey of newSearchKeyword.split(' ')) {
-      splittedKeyArr.push(splittedKey.toLowerCase())
-    }
+    splittedKeyArr.push(
+      ...newSearchKeyword.split(' ').map((x) => x.toLowerCase())
+    )
   }
 
   for (const itemInfo of results) {
-    const itemTitle = itemInfo.title.toLowerCase()
-
     if (getBookmarkType(itemInfo) === TYPE_BOOKMARK) {
       if (isOnlySearchTitle) {
-        let isntTitleMatched = false
+        const itemTitle = itemInfo.title.toLowerCase()
 
-        for (const splittedKey of splittedKeyArr) {
-          if (itemTitle.indexOf(splittedKey) < 0) {
-            isntTitleMatched = true
-            break
-          }
-        }
+        const isTitleMatched = splittedKeyArr.every((x) => itemTitle.includes(x))
 
-        if (isntTitleMatched) {
+        if (!isTitleMatched) {
           continue
         }
       }

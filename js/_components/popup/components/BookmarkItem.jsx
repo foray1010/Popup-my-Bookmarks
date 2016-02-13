@@ -237,18 +237,18 @@ function getOpenBookmarkHandlerId(model, evt) {
   let switcher
 
   if (mouseButton === 0) {
-    switcher = 'Left'
-
     if (evt.ctrlKey || evt.metaKey) {
-      switcher += 'Ctrl'
+      switcher = 'clickByLeftCtrl'
     } else if (evt.shiftKey) {
-      switcher += 'Shift'
+      switcher = 'clickByLeftShift'
+    } else {
+      switcher = 'clickByLeft'
     }
   } else {
-    switcher = 'Middle'
+    switcher = 'clickByMiddle'
   }
 
-  return options['clickBy' + switcher]
+  return options[switcher]
 }
 
 async function getTooltip(model) {
