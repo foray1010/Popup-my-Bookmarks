@@ -136,13 +136,7 @@ gulp.task('compile:init', () => {
 
   const version = argv.ver
 
-  const versionCheck = (x) => {
-    return (
-      x === `${parseInt(x, 10)}` &&
-      x >= 0 &&
-      x <= 65535
-    )
-  }
+  const versionCheck = (x) => /^\d{1,5}$/.test(x) && Number(x) <= 65535
 
   if (typeof version !== 'string' ||
       version.split('.').length !== 4 ||
