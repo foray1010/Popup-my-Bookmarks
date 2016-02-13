@@ -10,6 +10,7 @@ const jade = require('gulp-jade')
 const named = require('vinyl-named')
 const nano = require('gulp-cssnano')
 const path = require('path')
+const plumber = require('gulp-plumber')
 const stylint = require('gulp-stylint')
 const stylus = require('gulp-stylus')
 const webpack = require('webpack')
@@ -51,6 +52,7 @@ function compileJS(workingDir) {
   const srcPath = thisLang.srcPath
 
   return gulp.src(srcPath)
+    .pipe(plumber())
     .pipe(named())
     .pipe(webpackStream(webpackConfig, webpack))
     .pipe(gulp.dest(destDir))
@@ -68,7 +70,9 @@ function compileLang(langName, workingDir, options) {
     const compilerPipe = thisLang.compiler.apply(null, options.compilerConfig)
     const destDir = path.join(workingDir, thisLang.destDir)
 
-    const compileStream = gulp.src(srcPath).pipe(compilerPipe)
+    const compileStream = gulp.src(srcPath)
+      .pipe(plumber())
+      .pipe(compilerPipe)
 
     if (!isDev && thisLang.minifer) {
       const miniferPipe = thisLang.minifer.apply(null, options.miniferConfig)

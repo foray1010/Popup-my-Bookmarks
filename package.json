@@ -39,6 +39,7 @@
     "gulp-cssnano": "*",
     "gulp-eslint": "^1.1.1",
     "gulp-jade": "*",
+    "gulp-plumber": "*",
     "gulp-stylint": "*",
     "gulp-stylus": "*",
     "gulp-util": "*",
