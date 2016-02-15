@@ -1,21 +1,15 @@
-import {element} from 'deku'
+import {h} from 'preact'
 
 import Donate from '../components/Donate'
 import NavBar from '../components/NavBar'
 import NavModuleMapper from '../components/NavModuleMapper'
 
-const App = {
-  render() {
-    console.log('render')
-
-    return (
-      <div id='app'>
-        <NavBar />
-        <NavModuleMapper />
-        <Donate />
-      </div>
-    )
-  }
-}
+const App = () => (
+  <div id='app'>
+    <NavBar />
+    <NavModuleMapper />
+    <Donate />
+  </div>
+)
 
 export default App

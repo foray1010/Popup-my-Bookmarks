@@ -1,4 +1,5 @@
-import {element} from 'deku'
+import {connect} from 'react-redux'
+import {h} from 'preact'
 
 import {
   NAV_MODULE_CONTRIBUTORS,
@@ -9,27 +10,27 @@ import {
 import Contributors from './Contributors'
 import OptionTable from './OptionTable'
 
-const NavModuleMapper = {
-  render(model) {
-    const {context} = model
+const mapStateToProps = (state) => ({
+  selectedNavModule: state.selectedNavModule
+})
 
-    const {selectedNavModule} = context
+const NavModuleMapper = (props) => {
+  const {selectedNavModule} = props
 
-    switch (selectedNavModule) {
-      case NAV_MODULE_CONTRIBUTORS:
-        return <Contributors />
+  switch (selectedNavModule) {
+    case NAV_MODULE_CONTRIBUTORS:
+      return <Contributors />
 
-      case NAV_MODULE_CONTROL:
-      case NAV_MODULE_GENERAL:
-      case NAV_MODULE_USER_INTERFACE:
-        return (
-          <OptionTable />
-        )
+    case NAV_MODULE_CONTROL:
+    case NAV_MODULE_GENERAL:
+    case NAV_MODULE_USER_INTERFACE:
+      return (
+        <OptionTable />
+      )
 
-      default:
-        return <main />
-    }
+    default:
+      return <main />
   }
 }
 
-export default NavModuleMapper
+export default connect(mapStateToProps)(NavModuleMapper)

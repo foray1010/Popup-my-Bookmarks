@@ -1,4 +1,6 @@
-import {element} from 'deku'
+import {bind} from 'decko'
+import {connect} from 'react-redux'
+import {Component, h} from 'preact'
 
 import {
   resetBodySize
@@ -8,32 +10,34 @@ import {
   updateMenuTarget
 } from '../actions'
 
-const clickHandler = (model) => () => {
-  const {dispatch} = model
+const mapStateToProps = (state) => ({
+  // if editor or menu has target, show menu-cover
+  isHidden: !(state.editorTarget || state.menuTarget)
+})
 
-  resetBodySize()
+@connect(mapStateToProps)
+class MenuCover extends Component {
+  @bind
+  clickHandler() {
+    const {dispatch} = this.props
 
-  dispatch([
-    updateEditorTarget(null),
-    updateMenuTarget(null)
-  ])
-}
+    resetBodySize()
 
-const MenuCover = {
-  render(model) {
-    const {context} = model
+    dispatch([
+      updateEditorTarget(null),
+      updateMenuTarget(null)
+    ])
+  }
 
-    const {editorTarget, menuTarget} = context
-
-    // if editor or menu has target, show menu-cover
-    const isHidden = !(editorTarget || menuTarget)
+  render(props) {
+    const {isHidden} = props
 
     return (
       <div
         id='menu-cover'
-        class='cover'
+        className='cover'
         hidden={isHidden}
-        onClick={clickHandler(model)}
+        onClick={this.clickHandler}
       />
     )
   }

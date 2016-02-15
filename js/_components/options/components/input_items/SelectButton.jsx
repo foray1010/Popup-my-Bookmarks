@@ -1,26 +1,36 @@
-import {element} from 'deku'
+import {bind} from 'decko'
+import {connect} from 'react-redux'
+import {Component, h} from 'preact'
 
 import {updateSingleOption} from '../../actions'
 
 const msgNo = chrome.i18n.getMessage('opt_no')
 const msgYes = chrome.i18n.getMessage('opt_yes')
 
-const changeHandler = (model) => (evt) => {
-  const {dispatch, props} = model
+const mapStateToProps = (state) => ({
+  options: state.options
+})
 
-  const {optionName} = props
+@connect(mapStateToProps)
+class OptionInput extends Component {
+  @bind
+  changeHandler(evt) {
+    const {
+      dispatch,
+      optionName
+    } = this.props
 
-  const newOptionValue = evt.target.value === 'true'
+    const newOptionValue = evt.target.value === 'true'
 
-  dispatch(updateSingleOption(optionName, newOptionValue))
-}
+    dispatch(updateSingleOption(optionName, newOptionValue))
+  }
 
-const OptionInput = {
-  render(model) {
-    const {context, props} = model
-
-    const {optionChoice, optionName} = props
-    const {options} = context
+  render(props) {
+    const {
+      optionChoice,
+      optionName,
+      options
+    } = props
 
     const optionValue = options[optionName]
 
@@ -33,14 +43,14 @@ const OptionInput = {
     }
 
     return (
-      <label class={selectButtonClasses.join(' ')}>
+      <label className={selectButtonClasses.join(' ')}>
         <input
           name={optionName}
           type='radio'
           value={String(optionChoice)}
           checked={isChecked}
           hidden
-          onChange={changeHandler(model)}
+          onChange={this.changeHandler}
         />
         {buttonText}
       </label>
@@ -48,31 +58,31 @@ const OptionInput = {
   }
 }
 
-const SelectButton = {
-  render(model) {
-    const {context, props} = model
-
-    const {optionName} = props
-    const {options} = context
+@connect(mapStateToProps)
+class SelectButton extends Component {
+  render(props) {
+    const {
+      optionName,
+      options
+    } = props
 
     const optionValue = options[optionName]
 
-    const optionItems = [true, false].map((optionChoice) => {
-      return (
-        <OptionInput
-          key={String(optionChoice)}
-          optionChoice={optionChoice}
-          optionName={optionName}
-        />
-      )
-    })
+    const optionItems = [true, false].map((optionChoice) => (
+      <OptionInput
+        key={String(optionChoice)}
+        optionChoice={optionChoice}
+        optionName={optionName}
+      />
+    ))
+
     const selectdButtonIndex = optionValue ? 0 : 1
 
     const selectButtonCoverStyle = `left: ${selectdButtonIndex * 50}%`
 
     return (
-      <div class='select-button-box'>
-        <div class='select-button-cover' style={selectButtonCoverStyle} />
+      <div className='select-button-box'>
+        <div className='select-button-cover' style={selectButtonCoverStyle} />
         {optionItems}
       </div>
     )

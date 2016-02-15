@@ -1,14 +1,16 @@
-import {element} from 'deku'
-import debounce from 'lodash.debounce'
+import {bind, debounce} from 'decko'
+import {connect} from 'react-redux'
+import {Component, h} from 'preact'
+import _debounce from 'lodash.debounce'
 
 import {
   genBookmarkList,
   getBookmarkType,
   getFlatTree,
+  getSearchResult,
   getSlicedTrees,
   isFolder
 } from '../functions'
-import {getSearchResult} from '../components/Search'
 import {
   removeTreeInfosFromIndex,
   replaceTreeInfoByIndex,
@@ -25,207 +27,229 @@ import Menu from '../components/Menu'
 import MenuCover from '../components/MenuCover'
 import Panel from '../components/Panel'
 
-let currentContext = null
+const mapStateToProps = (state) => ({
+  editorTarget: state.editorTarget,
+  keyboardTarget: state.keyboardTarget,
+  menuTarget: state.menuTarget,
+  options: state.options,
+  rootTree: state.rootTree,
+  searchKeyword: state.searchKeyword,
+  trees: state.trees
+})
 
-const contextMenuHandler = (evt) => {
-  // allow native context menu if it is an input element
-  if (evt.target.tagName === 'INPUT') {
-    return
+@connect(mapStateToProps)
+class App extends Component {
+  constructor() {
+    super()
+
+    this.genBookmarkList = genBookmarkList.bind(this)
+    this.getSearchResult = getSearchResult.bind(this)
   }
 
-  // disable native context menu
-  evt.preventDefault()
-}
-
-const keyDownHandler = (model) => async (evt) => {
-  const keyCode = evt.keyCode
-
-  switch (keyCode) {
-    case 37: // left
-      await keyboardArrowLeftRightHandler(model, true)
-      break
-
-    case 38: // up
-      evt.preventDefault()
-      await keyboardArrowUpDownHandler(model, true)
-      break
-
-    case 39: // right
-      await keyboardArrowLeftRightHandler(model, false)
-      break
-
-    case 40: // down
-      evt.preventDefault()
-      await keyboardArrowUpDownHandler(model, false)
-      break
-
-    default:
+  componentDidMount() {
+    this.initBookmarkEvent()
   }
-}
 
-const mouseDownHandler = (evt) => {
-  // disable the scrolling arrows after middle click
-  if (evt.button === 1) {
+  getKeyboardTargetTreeIndex() {
+    const {
+      keyboardTarget,
+      trees
+    } = this.props
+
+    if (!keyboardTarget) {
+      return trees.length - 1
+    }
+
+    if (getBookmarkType(keyboardTarget) === TYPE_ROOT_FOLDER) {
+      return 0
+    }
+
+    return trees.findIndex((treeInfo) => treeInfo.id === keyboardTarget.parentId)
+  }
+
+  contextMenuHandler(evt) {
+    // allow native context menu if it is an input element
+    if (evt.target.tagName === 'INPUT') {
+      return
+    }
+
+    // disable native context menu
     evt.preventDefault()
   }
-}
 
-function getKeyboardTargetTreeIndex(context) {
-  const {keyboardTarget, trees} = context
+  initBookmarkEvent() {
+    const renewCurrentTrees = () => renewTrees(this.props.trees)
 
-  if (!keyboardTarget) {
-    return trees.length - 1
-  }
+    const renewSlicedTreesById = (itemId) => {
+      const {trees} = this.props
 
-  if (getBookmarkType(keyboardTarget) === TYPE_ROOT_FOLDER) {
-    return 0
-  }
+      const removeFromIndex = trees.findIndex((treeInfo) => treeInfo.id === itemId)
 
-  return trees.findIndex((treeInfo) => treeInfo.id === keyboardTarget.parentId)
-}
+      if (removeFromIndex >= 0) {
+        const slicedTrees = getSlicedTrees(trees, removeFromIndex)
 
-function initBookmarkEvent(dispatch) {
-  const renewCurrentTrees = () => renewTrees(currentContext.trees)
-
-  const renewSlicedTreesById = (itemId) => {
-    const {trees} = currentContext
-
-    const removeFromIndex = trees.findIndex((treeInfo) => treeInfo.id === itemId)
-
-    if (removeFromIndex >= 0) {
-      const slicedTrees = getSlicedTrees(trees, removeFromIndex)
-
-      renewTrees(slicedTrees)
-    } else {
-      renewCurrentTrees()
-    }
-  }
-
-  const renewTrees = debounce(async (oldTrees) => {
-    const {searchKeyword} = currentContext
-
-    const newTrees = await Promise.all(oldTrees.asMutable().map((treeInfo) => {
-      if (treeInfo.id === 'search-result') {
-        return getSearchResult(currentContext, searchKeyword)
+        renewTrees(slicedTrees)
+      } else {
+        renewCurrentTrees()
       }
+    }
 
-      return getFlatTree(treeInfo.id)
-    }))
+    const renewTrees = _debounce(async (oldTrees) => {
+      const {
+        dispatch,
+        searchKeyword
+      } = this.props
 
-    dispatch([
-      // to make sure the menu is not activated when bookmark is updating
-      updateEditorTarget(null),
-      updateMenuTarget(null),
+      const newTrees = await Promise.all(oldTrees.asMutable().map((treeInfo) => {
+        if (treeInfo.id === 'search-result') {
+          return this.getSearchResult(searchKeyword)
+        }
 
-      updateTrees(newTrees)
-    ])
-  }, 100)
-
-  chrome.bookmarks.onChanged.addListener(renewCurrentTrees)
-  chrome.bookmarks.onCreated.addListener(renewCurrentTrees)
-  chrome.bookmarks.onMoved.addListener(renewSlicedTreesById)
-  chrome.bookmarks.onRemoved.addListener(renewSlicedTreesById)
-}
-
-async function keyboardArrowLeftRightHandler(model, isLeft) {
-  const {context, dispatch} = model
-
-  const {editorTarget, keyboardTarget, menuTarget, trees} = context
-
-  if (editorTarget || menuTarget) return
-  if (!keyboardTarget) return
-
-  const targetTreeIndex = getKeyboardTargetTreeIndex(context)
-
-  if (isLeft) {
-    if (trees.length > 0) {
-      const prevTreeIndex = targetTreeIndex - 1
-      const prevTreeInfo = trees[prevTreeIndex]
-
-      const prevBookmarkList = genBookmarkList(context, prevTreeInfo, prevTreeIndex)
+        return getFlatTree(treeInfo.id)
+      }))
 
       dispatch([
-        removeTreeInfosFromIndex(targetTreeIndex),
-        updateKeyboardTarget(
-          prevBookmarkList.find((itemInfo) => itemInfo.id === keyboardTarget.parentId)
-        )
-      ])
-    }
-  } else {
-    if (isFolder(keyboardTarget)) {
-      const nextTreeIndex = targetTreeIndex + 1
-      const nextTreeInfo = await getFlatTree(keyboardTarget.id)
+        // to make sure the menu is not activated when bookmark is updating
+        updateEditorTarget(null),
+        updateMenuTarget(null),
 
-      const nextBookmarkList = genBookmarkList(context, nextTreeInfo, nextTreeIndex)
-
-      dispatch([
-        await replaceTreeInfoByIndex(nextTreeIndex, nextTreeInfo),
-        updateKeyboardTarget(nextBookmarkList[0])
+        updateTrees(newTrees)
       ])
-    }
+    }, 100)
+
+    chrome.bookmarks.onChanged.addListener(renewCurrentTrees)
+    chrome.bookmarks.onCreated.addListener(renewCurrentTrees)
+    chrome.bookmarks.onMoved.addListener(renewSlicedTreesById)
+    chrome.bookmarks.onRemoved.addListener(renewSlicedTreesById)
   }
-}
 
-async function keyboardArrowUpDownHandler(model, isUp) {
-  const {context, dispatch} = model
+  async keyboardArrowLeftRightHandler(isLeft) {
+    const {
+      dispatch,
+      editorTarget,
+      keyboardTarget,
+      menuTarget,
+      trees
+    } = this.props
 
-  const {editorTarget, keyboardTarget, menuTarget, trees} = context
+    if (editorTarget || menuTarget) return
+    if (!keyboardTarget) return
 
-  if (editorTarget || menuTarget) return
+    const targetTreeIndex = this.getKeyboardTargetTreeIndex()
 
-  const targetTreeIndex = getKeyboardTargetTreeIndex(context)
+    if (isLeft) {
+      if (trees.length > 0) {
+        const prevTreeIndex = targetTreeIndex - 1
+        const prevTreeInfo = trees[prevTreeIndex]
 
-  const targetBookmarkList = genBookmarkList(context, trees[targetTreeIndex], targetTreeIndex)
+        const prevBookmarkList = this.genBookmarkList(prevTreeInfo, prevTreeIndex)
 
-  const lastItemIndex = targetBookmarkList.length - 1
-
-  let nextSelectedIndex
-  if (keyboardTarget) {
-    const origSelectedIndex = targetBookmarkList
-      .findIndex((itemInfo) => itemInfo.id === keyboardTarget.id)
-
-    if (isUp) {
-      nextSelectedIndex = origSelectedIndex - 1
-      if (nextSelectedIndex < 0) {
-        nextSelectedIndex = lastItemIndex
+        dispatch([
+          removeTreeInfosFromIndex(targetTreeIndex),
+          updateKeyboardTarget(
+            prevBookmarkList.find((itemInfo) => itemInfo.id === keyboardTarget.parentId)
+          )
+        ])
       }
     } else {
-      nextSelectedIndex = origSelectedIndex + 1
-      if (nextSelectedIndex > lastItemIndex) {
-        nextSelectedIndex = 0
+      if (isFolder(keyboardTarget)) {
+        const nextTreeIndex = targetTreeIndex + 1
+        const nextTreeInfo = await getFlatTree(keyboardTarget.id)
+
+        const nextBookmarkList = this.genBookmarkList(nextTreeInfo, nextTreeIndex)
+
+        dispatch([
+          await replaceTreeInfoByIndex(nextTreeIndex, nextTreeInfo),
+          updateKeyboardTarget(nextBookmarkList[0])
+        ])
       }
     }
-  } else {
-    nextSelectedIndex = isUp ? lastItemIndex : 0
   }
 
-  dispatch(updateKeyboardTarget(targetBookmarkList[nextSelectedIndex]))
-}
+  async keyboardArrowUpDownHandler(isUp) {
+    const {
+      dispatch,
+      editorTarget,
+      keyboardTarget,
+      menuTarget,
+      trees
+    } = this.props
 
-const App = {
-  onCreate(model) {
-    const {context, dispatch} = model
+    if (editorTarget || menuTarget) return
 
-    currentContext = context
+    const targetTreeIndex = this.getKeyboardTargetTreeIndex()
 
-    initBookmarkEvent(dispatch)
-  },
+    const targetBookmarkList = this.genBookmarkList(trees[targetTreeIndex], targetTreeIndex)
 
-  onUpdate(model) {
-    const {context} = model
+    const lastItemIndex = targetBookmarkList.length - 1
 
-    currentContext = context
-  },
+    let nextSelectedIndex
+    if (keyboardTarget) {
+      const origSelectedIndex = targetBookmarkList
+        .findIndex((itemInfo) => itemInfo.id === keyboardTarget.id)
 
-  render(model) {
+      if (isUp) {
+        nextSelectedIndex = origSelectedIndex - 1
+        if (nextSelectedIndex < 0) {
+          nextSelectedIndex = lastItemIndex
+        }
+      } else {
+        nextSelectedIndex = origSelectedIndex + 1
+        if (nextSelectedIndex > lastItemIndex) {
+          nextSelectedIndex = 0
+        }
+      }
+    } else {
+      nextSelectedIndex = isUp ? lastItemIndex : 0
+    }
+
+    dispatch(updateKeyboardTarget(targetBookmarkList[nextSelectedIndex]))
+  }
+
+  @bind
+  @debounce(30)
+  async keyDownHandler(evt) {
+    const keyCode = evt.keyCode
+
+    switch (keyCode) {
+      case 37: // left
+        await this.keyboardArrowLeftRightHandler(true)
+        break
+
+      case 38: // up
+        evt.preventDefault()
+        await this.keyboardArrowUpDownHandler(true)
+        break
+
+      case 39: // right
+        await this.keyboardArrowLeftRightHandler(false)
+        break
+
+      case 40: // down
+        evt.preventDefault()
+        await this.keyboardArrowUpDownHandler(false)
+        break
+
+      default:
+    }
+  }
+
+  mouseDownHandler(evt) {
+    // disable the scrolling arrows after middle click
+    if (evt.button === 1) {
+      evt.preventDefault()
+    }
+  }
+
+  render() {
     console.log('render')
 
     return (
       <div
         id='app'
-        onContextMenu={contextMenuHandler}
-        onKeyDown={keyDownHandler(model)}
-        onMouseDown={mouseDownHandler}
+        onContextMenu={this.contextMenuHandler}
+        onKeyDown={this.keyDownHandler}
+        onMouseDown={this.mouseDownHandler}
       >
         <Panel />
         <MenuCover />

@@ -40,6 +40,10 @@ module.exports = {
   },
   plugins: webpackPlugins,
   resolve: {
+    alias: {
+      react: 'preact-compat',
+      'react-dom': 'preact-compat'
+    },
     extensions: ['', '.js', '.jsx']
   },
   stats: {

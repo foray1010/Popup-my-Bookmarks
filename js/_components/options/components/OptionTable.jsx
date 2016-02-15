@@ -1,4 +1,5 @@
-import {element} from 'deku'
+import {connect} from 'react-redux'
+import {h} from 'preact'
 
 import {
   OPTION_TABLE_MAP
@@ -6,36 +7,39 @@ import {
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 
-const OptionTable = {
-  render(model) {
-    const {context} = model
+const mapStateToProps = (state) => ({
+  options: state.options,
+  selectedNavModule: state.selectedNavModule
+})
 
-    const {options, selectedNavModule} = context
+const OptionTable = (props) => {
+  const {
+    options,
+    selectedNavModule
+  } = props
 
-    const selectedOptionTableMap = OPTION_TABLE_MAP[selectedNavModule]
+  const optionTableItems = []
+  const selectedOptionTableMap = OPTION_TABLE_MAP[selectedNavModule]
 
-    const optionTableItems = []
-
-    for (const optionName of selectedOptionTableMap) {
-      if (options[optionName] !== undefined) {
-        optionTableItems.push(
-          <OptionItem
-            key={optionName}
-            optionName={optionName}
-          />
-        )
-      }
+  for (const optionName of selectedOptionTableMap) {
+    if (options[optionName] !== undefined) {
+      optionTableItems.push(
+        <OptionItem
+          key={optionName}
+          optionName={optionName}
+        />
+      )
     }
-
-    return (
-      <main>
-        <div id='option-table'>
-          {optionTableItems}
-        </div>
-        <OptionButton />
-      </main>
-    )
   }
+
+  return (
+    <main>
+      <div id='option-table'>
+        {optionTableItems}
+      </div>
+      <OptionButton />
+    </main>
+  )
 }
 
-export default OptionTable
+export default connect(mapStateToProps)(OptionTable)

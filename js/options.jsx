@@ -1,4 +1,6 @@
 import 'babel-polyfill'
+import {h, render} from 'preact'
+import {Provider} from 'react-redux'
 
 import {
   initOptionsValue
@@ -11,7 +13,6 @@ import configureStore from './_components/store/configureStore'
 import getOptionsConfig from './_components/getOptionsConfig'
 import Immutable from 'seamless-immutable'
 import reducers from './_components/options/reducers'
-import render from './_components/lib/render'
 
 !async function () {
   const optionsConfig = await getOptionsConfig()
@@ -26,5 +27,9 @@ import render from './_components/lib/render'
   }))
 
   /* render the app */
-  render(App, store)
+  render((
+    <Provider store={store}>
+      <App />
+    </Provider>
+  ), document.getElementById('container'))
 }().catch((err) => console.error(err.stack))

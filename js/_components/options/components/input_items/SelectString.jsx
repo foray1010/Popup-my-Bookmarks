@@ -1,22 +1,22 @@
-import {element} from 'deku'
+import {bind} from 'decko'
+import {connect} from 'react-redux'
+import {Component, h} from 'preact'
 
 import {updateSingleOption} from '../../actions'
 
-const changeHandler = (model) => (evt) => {
-  const {dispatch, props} = model
+const mapStateToProps = (state) => ({
+  options: state.options
+})
 
-  const {optionName} = props
-  const newOptionValue = parseInt(evt.target.value, 10)
-
-  dispatch(updateSingleOption(optionName, newOptionValue))
-}
-
-const OptionInput = {
-  render(model) {
-    const {context, props} = model
-
-    const {optionChoice, optionChoiceIndex, optionName} = props
-    const {options} = context
+@connect(mapStateToProps)
+class OptionInput extends Component {
+  render(props) {
+    const {
+      optionChoice,
+      optionChoiceIndex,
+      optionName,
+      options
+    } = props
 
     const optionValue = options[optionName]
 
@@ -31,11 +31,25 @@ const OptionInput = {
   }
 }
 
-const SelectString = {
-  render(model) {
-    const {props} = model
+@connect(mapStateToProps)
+class SelectString extends Component {
+  @bind
+  changeHandler(evt) {
+    const {
+      dispatch,
+      optionName
+    } = this.props
 
-    const {optionConfig, optionName} = props
+    const newOptionValue = parseInt(evt.target.value, 10)
+
+    dispatch(updateSingleOption(optionName, newOptionValue))
+  }
+
+  render(props) {
+    const {
+      optionConfig,
+      optionName
+    } = props
 
     const optionItems = []
 
@@ -53,7 +67,7 @@ const SelectString = {
     })
 
     return (
-      <select name={optionName} onChange={changeHandler(model)}>
+      <select name={optionName} onChange={this.changeHandler}>
         {optionItems}
       </select>
     )

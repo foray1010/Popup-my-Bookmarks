@@ -1,23 +1,34 @@
-import {element} from 'deku'
+import {bind} from 'decko'
+import {connect} from 'react-redux'
+import {Component, h} from 'preact'
 
 import {
   removeTreeInfosFromIndex
 } from '../actions'
 
-const closeHandler = (model) => () => {
-  const {dispatch, props} = model
+const mapStateToProps = (state, ownProps) => ({
+  isHidden: ownProps.treeIndex === 0 || Boolean(state.searchKeyword),
+  trees: state.trees
+})
 
-  const {treeIndex} = props
+@connect(mapStateToProps)
+class TreeHeader extends Component {
+  @bind
+  closeHandler() {
+    const {
+      dispatch,
+      treeIndex
+    } = this.props
 
-  dispatch(removeTreeInfosFromIndex(treeIndex))
-}
+    dispatch(removeTreeInfosFromIndex(treeIndex))
+  }
 
-const TreeHeader = {
-  render(model) {
-    const {context, props} = model
-
-    const {isHidden, treeIndex} = props
-    const {trees} = context
+  render(props) {
+    const {
+      isHidden,
+      treeIndex,
+      trees
+    } = props
 
     const treeHeaderBoxClasses = ['tree-header-box']
     const treeInfo = trees[treeIndex]
@@ -27,9 +38,9 @@ const TreeHeader = {
     }
 
     return (
-      <header class={treeHeaderBoxClasses.join(' ')}>
-        <div class='tree-header-title no-text-overflow'>{treeInfo.title}</div>
-        <div class='tree-header-close' onClick={closeHandler(model)} />
+      <header className={treeHeaderBoxClasses.join(' ')}>
+        <div className='tree-header-title no-text-overflow'>{treeInfo.title}</div>
+        <div className='tree-header-close' onClick={this.closeHandler} />
       </header>
     )
   }

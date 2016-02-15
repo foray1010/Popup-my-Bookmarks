@@ -1,11 +1,7 @@
-import {element} from 'deku'
+import {h} from 'preact'
 
-const Contributors = {
-  render() {
-    return (
-      <main />
-    )
-  }
-}
+const Contributors = () => (
+  <main />
+)
 
 export default Contributors

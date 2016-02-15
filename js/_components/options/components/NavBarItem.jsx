@@ -1,34 +1,41 @@
-import {element} from 'deku'
+import {bind} from 'decko'
+import {connect} from 'react-redux'
+import {Component, h} from 'preact'
 
 import {
   reloadOptions,
   selectNavModule
 } from '../actions'
 
-const clickHandler = (model) => async (evt) => {
-  evt.preventDefault()
+const mapStateToProps = (state) => ({
+  selectedNavModule: state.selectedNavModule
+})
 
-  const {context, dispatch, props} = model
+@connect(mapStateToProps)
+class NavBarItem extends Component {
+  @bind
+  async clickHandler(evt) {
+    evt.preventDefault()
 
-  const {navBarItemInfo} = props
-  const {selectedNavModule} = context
+    const {
+      dispatch,
+      navBarItemInfo,
+      selectedNavModule
+    } = this.props
 
-  const newSelectedNavModule = navBarItemInfo.navModule
-
-  if (newSelectedNavModule !== selectedNavModule) {
-    dispatch([
-      await reloadOptions(), // reset the options
-      selectNavModule(newSelectedNavModule)
-    ])
+    if (navBarItemInfo.navModule !== selectedNavModule) {
+      dispatch([
+        await reloadOptions(), // reset the options
+        selectNavModule(navBarItemInfo.navModule)
+      ])
+    }
   }
-}
 
-const NavBarItem = {
-  render(model) {
-    const {context, props} = model
-
-    const {navBarItemInfo} = props
-    const {selectedNavModule} = context
+  render(props) {
+    const {
+      navBarItemInfo,
+      selectedNavModule
+    } = props
 
     const navBarItemClasses = ['nav-bar-item']
 
@@ -38,9 +45,9 @@ const NavBarItem = {
 
     return (
       <a
-        class={navBarItemClasses.join(' ')}
+        className={navBarItemClasses.join(' ')}
         href=''
-        onClick={clickHandler(model)}
+        onClick={this.clickHandler}
       >
         {navBarItemInfo.title}
       </a>
