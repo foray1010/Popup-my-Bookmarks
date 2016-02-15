@@ -14,8 +14,11 @@ import css from '../../lib/css'
 
 const msgNoBookmark = chrome.i18n.getMessage('noBkmark')
 
-export function genBookmarkList(context, treeInfo, treeIndex) {
-  const {rootTree, searchKeyword} = context
+export function genBookmarkList(treeInfo, treeIndex) {
+  const {
+    rootTree,
+    searchKeyword
+  } = this.props
 
   let childrenInfo = treeInfo.children
 
@@ -89,6 +92,47 @@ export async function getFirstTree(options) {
   return firstTree
 }
 
+export async function getSearchResult(newSearchKeyword) {
+  const {options} = this.props
+
+  const filteredResult = []
+  const isOnlySearchTitle = options.searchTarget === 1
+  const results = await chromep.bookmarks.search(newSearchKeyword)
+  const splittedKeyArr = []
+
+  if (isOnlySearchTitle) {
+    splittedKeyArr.push(
+      ...newSearchKeyword.split(' ').map((x) => x.toLowerCase())
+    )
+  }
+
+  for (const itemInfo of results) {
+    if (getBookmarkType(itemInfo) === TYPE_BOOKMARK) {
+      if (isOnlySearchTitle) {
+        const itemTitle = itemInfo.title.toLowerCase()
+
+        const isTitleMatched = splittedKeyArr.every((x) => itemTitle.includes(x))
+
+        if (!isTitleMatched) {
+          continue
+        }
+      }
+
+      filteredResult.push(itemInfo)
+
+      if (filteredResult.length === options.maxResults) {
+        break
+      }
+    }
+  }
+
+  return {
+    ...genDummyItemInfo(),
+    children: sortByTitle(filteredResult),
+    id: 'search-result'
+  }
+}
+
 export function getSlicedTrees(trees, removeFromIndex) {
   if (trees.length > removeFromIndex) {
     return trees.slice(0, removeFromIndex)
@@ -149,10 +193,8 @@ export function isItemInView(item) {
   )
 }
 
-export async function openMultipleBookmarks(model, itemInfo, menuItemNum) {
-  const {context} = model
-
-  const {options} = context
+export async function openMultipleBookmarks(itemInfo, menuItemNum) {
+  const {options} = this.props
 
   const urlList = []
 

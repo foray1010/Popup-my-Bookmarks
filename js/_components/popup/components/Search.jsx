@@ -1,110 +1,67 @@
-import {element} from 'deku'
-import debounce from 'lodash.debounce'
+import {bind, debounce} from 'decko'
+import {connect} from 'react-redux'
+import {Component, h} from 'preact'
 
 import {
-  genDummyItemInfo,
-  getBookmarkType,
   getFirstTree,
-  sortByTitle
+  getSearchResult
 } from '../functions'
-import {
-  TYPE_BOOKMARK
-} from '../constants'
 import {
   updateSearchKeyword,
   updateTrees
 } from '../actions'
-import chromep from '../../lib/chromePromise'
 
 const msgSearch = chrome.i18n.getMessage('search')
 
-const debouncedInputHandler = debounce(async (model, evt) => {
-  const {context, dispatch} = model
+const mapStateToProps = (state) => ({
+  options: state.options
+})
 
-  const {options} = context
+@connect(mapStateToProps)
+class Search extends Component {
+  constructor() {
+    super()
 
-  const newSearchKeyword = evt.target.value.trim().replace(/\s+/g, ' ')
-  const newTrees = []
-
-  if (newSearchKeyword === '') {
-    const defExpandTree = await getFirstTree(options)
-
-    newTrees.push(defExpandTree)
-  } else {
-    const searchResult = await getSearchResult(context, newSearchKeyword)
-
-    newTrees.push(searchResult)
+    this.getSearchResult = getSearchResult.bind(this)
   }
 
-  dispatch([
-    updateSearchKeyword(newSearchKeyword),
-    updateTrees(newTrees)
-  ])
-}, 200)
+  @bind
+  @debounce(200)
+  async inputHandler(evt) {
+    const {
+      dispatch,
+      options
+    } = this.props
 
-export async function getSearchResult(context, newSearchKeyword) {
-  const result = await chromep.bookmarks.search(newSearchKeyword)
+    const newSearchKeyword = evt.target.value.trim().replace(/\s+/g, ' ')
+    const newTrees = []
 
-  const filteredResult = searchResultFilter(context, newSearchKeyword, result)
+    if (newSearchKeyword === '') {
+      const defExpandTree = await getFirstTree(options)
 
-  const searchResult = sortByTitle(filteredResult)
+      newTrees.push(defExpandTree)
+    } else {
+      const searchResult = await this.getSearchResult(newSearchKeyword)
 
-  return {
-    ...genDummyItemInfo(),
-    children: searchResult,
-    id: 'search-result'
-  }
-}
-
-function searchResultFilter(context, newSearchKeyword, results) {
-  const {options} = context
-
-  const isOnlySearchTitle = options.searchTarget === 1
-  const newResults = []
-  const splittedKeyArr = []
-
-  if (isOnlySearchTitle) {
-    splittedKeyArr.push(
-      ...newSearchKeyword.split(' ').map((x) => x.toLowerCase())
-    )
-  }
-
-  for (const itemInfo of results) {
-    if (getBookmarkType(itemInfo) === TYPE_BOOKMARK) {
-      if (isOnlySearchTitle) {
-        const itemTitle = itemInfo.title.toLowerCase()
-
-        const isTitleMatched = splittedKeyArr.every((x) => itemTitle.includes(x))
-
-        if (!isTitleMatched) {
-          continue
-        }
-      }
-
-      newResults.push(itemInfo)
-
-      if (newResults.length === options.maxResults) {
-        break
-      }
+      newTrees.push(searchResult)
     }
+
+    dispatch([
+      updateSearchKeyword(newSearchKeyword),
+      updateTrees(newTrees)
+    ])
   }
 
-  return newResults
-}
-
-const Search = {
-  render(model) {
-    const compiledInputHandler = (evt) => debouncedInputHandler(model, evt)
-
+  render() {
     return (
       <div id='search-box'>
         <input
           id='search-input'
           type='search'
           placeholder={msgSearch}
-          tabindex='-1'
-          autofocus
-          onInput={compiledInputHandler}
+          tabIndex='-1'
+          autoFocus
+          onInput={this.inputHandler}
         />
       </div>
     )

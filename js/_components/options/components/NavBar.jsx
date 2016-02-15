@@ -1,4 +1,4 @@
-import {element} from 'deku'
+import {h} from 'preact'
 
 import {
   NAV_MODULE_CONTRIBUTORS,
@@ -27,23 +27,19 @@ const navBarItemInfos = [
   }
 ]
 
-const NavBar = {
-  render() {
-    const navItems = navBarItemInfos.map((navBarItemInfo) => {
-      return (
-        <NavBarItem
-          key={navBarItemInfo.navModule}
-          navBarItemInfo={navBarItemInfo}
-        />
-      )
-    })
+const NavBar = () => {
+  const navItems = navBarItemInfos.map((navBarItemInfo) => (
+    <NavBarItem
+      key={navBarItemInfo.navModule}
+      navBarItemInfo={navBarItemInfo}
+    />
+  ))
 
-    return (
-      <nav id='nav-bar'>
-        {navItems}
-      </nav>
-    )
-  }
+  return (
+    <nav id='nav-bar'>
+      {navItems}
+    </nav>
+  )
 }
 
 export default NavBar

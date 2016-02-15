@@ -1,4 +1,6 @@
-import {element} from 'deku'
+import {bind} from 'decko'
+import {connect} from 'react-redux'
+import {Component, h} from 'preact'
 
 import {
   initOptionsValue,
@@ -15,52 +17,65 @@ import chromep from '../../lib/chromePromise'
 const msgConfirm = chrome.i18n.getMessage('confirm')
 const msgDefault = chrome.i18n.getMessage('default')
 
-const confirmButtonHandler = (model) => async () => {
-  const {context, dispatch} = model
+const mapStateToProps = (state) => ({
+  options: state.options,
+  optionsConfig: state.optionsConfig,
+  selectedNavModule: state.selectedNavModule
+})
 
-  const {options, optionsConfig, selectedNavModule} = context
+@connect(mapStateToProps)
+class OptionButton extends Component {
+  @bind
+  async confirmButtonHandler() {
+    const {
+      dispatch,
+      options,
+      optionsConfig,
+      selectedNavModule
+    } = this.props
 
-  const newOptions = options.asMutable()
+    const newOptions = options.asMutable()
 
-  for (const optionName of OPTION_TABLE_MAP[selectedNavModule]) {
-    const optionConfig = optionsConfig[optionName]
+    for (const optionName of OPTION_TABLE_MAP[selectedNavModule]) {
+      const optionConfig = optionsConfig[optionName]
 
-    if (optionConfig.permissions) {
-      const isSuccess = await setPermission(
-        optionName,
-        optionConfig,
-        newOptions[optionName]
-      )
+      if (optionConfig.permissions) {
+        const isSuccess = await setPermission(
+          optionName,
+          optionConfig,
+          newOptions[optionName]
+        )
 
-      if (!isSuccess) {
-        newOptions[optionName] = optionConfig.default
+        if (!isSuccess) {
+          newOptions[optionName] = optionConfig.default
+        }
       }
     }
+
+    await chromep.storage.sync.set(newOptions)
+
+    dispatch(updateOptions(newOptions))
   }
 
-  await chromep.storage.sync.set(newOptions)
+  @bind
+  async defaultButtonHandler() {
+    const {
+      dispatch,
+      optionsConfig
+    } = this.props
 
-  dispatch(updateOptions(newOptions))
-}
+    await chromep.storage.sync.clear()
 
-const defaultButtonHandler = (model) => async () => {
-  const {context, dispatch} = model
+    const newOptions = await initOptionsValue(optionsConfig)
 
-  const {optionsConfig} = context
+    dispatch(updateOptions(newOptions))
+  }
 
-  await chromep.storage.sync.clear()
-
-  const newOptions = await initOptionsValue(optionsConfig)
-
-  dispatch(updateOptions(newOptions))
-}
-
-const OptionButton = {
-  render(model) {
+  render() {
     return (
       <div id='option-button-box'>
-        <button onClick={confirmButtonHandler(model)}>{msgConfirm}</button>
-        <button onClick={defaultButtonHandler(model)}>{msgDefault}</button>
+        <button onClick={this.confirmButtonHandler}>{msgConfirm}</button>
+        <button onClick={this.defaultButtonHandler}>{msgDefault}</button>
       </div>
     )
   }

@@ -1,31 +1,32 @@
-import {element} from 'deku'
+import {bind} from 'decko'
+import {connect} from 'react-redux'
+import {Component, h} from 'preact'
 
 import {
   removeTreeInfosFromIndex
 } from '../actions'
 
-const clickCoverHandler = (model) => () => {
-  closeFolder(model)
-}
+const mapStateToProps = (state, ownProps) => ({
+  // hide the folder if it is not the top two folder
+  isHidden: state.trees.length - ownProps.treeIndex <= 2
+})
 
-function closeFolder(model) {
-  const {dispatch, props} = model
+@connect(mapStateToProps)
+class FolderCover extends Component {
+  @bind
+  closeHandler() {
+    const {
+      dispatch,
+      treeIndex
+    } = this.props
 
-  const {treeIndex} = props
+    dispatch(removeTreeInfosFromIndex(treeIndex + 1))
+  }
 
-  dispatch(removeTreeInfosFromIndex(treeIndex + 1))
-}
-
-const FolderCover = {
-  render(model) {
-    const {context, props} = model
-
-    const {treeIndex} = props
-    const {trees} = context
+  render(props) {
+    const {isHidden} = props
 
     const delay = 300
-    // hide the folder if it is not the top two folder
-    const isHidden = trees.length - treeIndex <= 2
     const xyRange = 20
 
     let mousePosition = null
@@ -58,7 +59,7 @@ const FolderCover = {
         const isTrigger = isInTriggerPoint('x') && isInTriggerPoint('y')
 
         if (isTrigger) {
-          closeFolder(model)
+          this.closeHandler()
           triggerOnClickTimer = null
         } else {
           triggerOnClickByXYRange(mousePosition)
@@ -68,9 +69,9 @@ const FolderCover = {
 
     return (
       <div
-        class='cover'
+        className='cover'
         hidden={isHidden}
-        onClick={clickCoverHandler(model)}
+        onClick={this.closeHandler}
         onMouseLeave={mouseLeaveHandler}
         onMouseMove={mouseMoveHandler}
       />

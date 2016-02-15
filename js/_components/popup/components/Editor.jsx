@@ -1,4 +1,6 @@
-import {element} from 'deku'
+import {bind} from 'decko'
+import {connect} from 'react-redux'
+import {Component, h} from 'preact'
 
 import {
   isFolder,
@@ -14,91 +16,94 @@ const msgConfirm = chrome.i18n.getMessage('confirm')
 const msgEdit = chrome.i18n.getMessage('edit')
 const msgRename = chrome.i18n.getMessage('rename')
 
-const clickCancelHandler = (model) => () => {
-  const {dispatch} = model
+const mapStateToProps = (state) => ({
+  editorTarget: state.editorTarget
+})
 
-  closeEditor(dispatch)
-}
+@connect(mapStateToProps)
+class Editor extends Component {
+  componentDidUpdate() {
+    const {editorTarget} = this.props
 
-const clickConfirmHandler = (model) => async () => {
-  const {context, dispatch, path} = model
+    const el = this.base
+    const isHidden = !editorTarget
 
-  const {editorTarget} = context
-
-  const editorInput = document.getElementById(path).getElementsByTagName('input')
-
-  const updatedTitle = editorInput[0].value.trim()
-
-  let updatedUrl
-
-  if (!isFolder(editorTarget)) {
-    updatedUrl = editorInput[1].value.trim()
-  }
-
-  await chromep.bookmarks.update(editorTarget.id, {
-    title: updatedTitle,
-    url: updatedUrl
-  })
-
-  closeEditor(dispatch)
-}
-
-function closeEditor(dispatch) {
-  resetBodySize()
-
-  dispatch(updateEditorTarget(null))
-}
-
-function setEditorPosition(context, el) {
-  const {editorTarget} = context
-
-  const isHidden = !editorTarget
-
-  let bottomPositionPx = ''
-  let leftPositionPx = ''
-
-  if (!isHidden) {
-    const body = document.body
-    const editorHeight = el.offsetHeight
-    const editorTargetEl = document.getElementById(editorTarget.id)
-    const html = document.getElementsByTagName('html')[0]
-
-    const editorTargetOffset = editorTargetEl.getBoundingClientRect()
-    const htmlHeight = html.clientHeight
-
-    const bottomPosition = htmlHeight - editorHeight - editorTargetOffset.top
-
-    if (editorHeight > htmlHeight) {
-      body.style.height = editorHeight + 'px'
-    }
-
-    bottomPositionPx = Math.max(bottomPosition, 0) + 'px'
-    leftPositionPx = editorTargetOffset.left + 'px'
-  }
-
-  el.style.bottom = bottomPositionPx
-  el.style.left = leftPositionPx
-}
-
-const Editor = {
-  onUpdate(model) {
-    const {context, path} = model
-
-    const el = document.getElementById(path)
-    const isHidden = !context.editorTarget
-
-    setEditorPosition(context, el)
+    this.setEditorPosition(el)
 
     if (!isHidden) {
       // auto focus to title field
       el.getElementsByTagName('input')[0].focus()
     }
-  },
+  }
 
-  render(model) {
-    const {context, path} = model
+  setEditorPosition(el) {
+    const {editorTarget} = this.props
 
-    const {editorTarget} = context
+    const isHidden = !editorTarget
+
+    let bottomPositionPx = ''
+    let leftPositionPx = ''
+
+    if (!isHidden) {
+      const body = document.body
+      const editorHeight = el.offsetHeight
+      const editorTargetEl = document.getElementById(editorTarget.id)
+      const html = document.getElementsByTagName('html')[0]
+
+      const editorTargetOffset = editorTargetEl.getBoundingClientRect()
+      const htmlHeight = html.clientHeight
+
+      const bottomPosition = htmlHeight - editorHeight - editorTargetOffset.top
+
+      if (editorHeight > htmlHeight) {
+        body.style.height = editorHeight + 'px'
+      }
+
+      bottomPositionPx = Math.max(bottomPosition, 0) + 'px'
+      leftPositionPx = editorTargetOffset.left + 'px'
+    }
+
+    el.style.bottom = bottomPositionPx
+    el.style.left = leftPositionPx
+  }
+
+  @bind
+  clickCancelHandler() {
+    this.closeEditor()
+  }
+
+  @bind
+  async clickConfirmHandler() {
+    const {editorTarget} = this.props
+
+    const editorInput = this.base.getElementsByTagName('input')
+
+    const updatedTitle = editorInput[0].value.trim()
+
+    let updatedUrl
+
+    if (!isFolder(editorTarget)) {
+      updatedUrl = editorInput[1].value.trim()
+    }
+
+    await chromep.bookmarks.update(editorTarget.id, {
+      title: updatedTitle,
+      url: updatedUrl
+    })
+
+    this.closeEditor()
+  }
+
+  closeEditor() {
+    const {dispatch} = this.props
+
+    resetBodySize()
+
+    dispatch(updateEditorTarget(null))
+  }
+
+  render(props) {
+    const {editorTarget} = props
 
     const isHidden = !editorTarget
 
@@ -117,12 +122,12 @@ const Editor = {
     }
 
     return (
-      <div id={path} class='editor panel-width' hidden={isHidden}>
-        <span class='editor-title'>{editorTitle}</span>
+      <div className='editor panel-width' hidden={isHidden}>
+        <span className='editor-title'>{editorTitle}</span>
         <input type='text' value={itemTitle} />
         <input type='text' value={itemUrl} hidden={isFolderItem} />
-        <button onClick={clickConfirmHandler(model)}>{msgConfirm}</button>
-        <button onClick={clickCancelHandler(model)}>{msgCancel}</button>
+        <button onClick={this.clickConfirmHandler}>{msgConfirm}</button>
+        <button onClick={this.clickCancelHandler}>{msgCancel}</button>
       </div>
     )
   }

@@ -1,36 +1,47 @@
-import {element} from 'deku'
+import {bind} from 'decko'
+import {connect} from 'react-redux'
+import {Component, h} from 'preact'
 
 import {updateSingleOption} from '../../actions'
 
-const changeHandler = (model) => (evt) => {
-  const {context, dispatch, props} = model
+const mapStateToProps = (state) => ({
+  options: state.options
+})
 
-  const {optionName} = props
-  const {options} = context
+@connect(mapStateToProps)
+class OptionInput extends Component {
+  @bind
+  changeHandler(evt) {
+    const {
+      dispatch,
+      optionName,
+      options
+    } = this.props
 
-  const newOptionValue = options[optionName].asMutable()
-  const targetValue = parseInt(evt.target.value, 10)
+    const newOptionValue = options[optionName].asMutable()
+    const targetValue = parseInt(evt.target.value, 10)
 
-  const targetValueIndex = newOptionValue.indexOf(targetValue)
+    const targetValueIndex = newOptionValue.indexOf(targetValue)
 
-  const wasChecked = targetValueIndex >= 0
+    const wasChecked = targetValueIndex >= 0
 
-  if (wasChecked) {
-    newOptionValue.splice(targetValueIndex, 1)
-  } else {
-    newOptionValue.push(targetValue)
-    newOptionValue.sort()
+    if (wasChecked) {
+      newOptionValue.splice(targetValueIndex, 1)
+    } else {
+      newOptionValue.push(targetValue)
+      newOptionValue.sort()
+    }
+
+    dispatch(updateSingleOption(optionName, newOptionValue))
   }
 
-  dispatch(updateSingleOption(optionName, newOptionValue))
-}
-
-const OptionInput = {
-  render(model) {
-    const {context, props} = model
-
-    const {optionChoice, optionChoiceIndex, optionName} = props
-    const {options} = context
+  render(props) {
+    const {
+      optionChoice,
+      optionChoiceIndex,
+      optionName,
+      options
+    } = props
 
     const optionValue = options[optionName]
 
@@ -43,7 +54,7 @@ const OptionInput = {
           type='checkbox'
           value={String(optionChoiceIndex)}
           checked={isChecked}
-          onChange={changeHandler(model)}
+          onChange={this.changeHandler}
         />
         {optionChoice}
       </label>
@@ -51,11 +62,13 @@ const OptionInput = {
   }
 }
 
-const SelectMultiple = {
-  render(model) {
-    const {props} = model
-
-    const {optionConfig, optionName} = props
+@connect(mapStateToProps)
+class SelectMultiple extends Component {
+  render(props) {
+    const {
+      optionConfig,
+      optionName
+    } = props
 
     const checkboxItems = []
 
@@ -73,7 +86,7 @@ const SelectMultiple = {
     })
 
     return (
-      <div class='select-multiple-box'>
+      <div className='select-multiple-box'>
         {checkboxItems}
       </div>
     )
