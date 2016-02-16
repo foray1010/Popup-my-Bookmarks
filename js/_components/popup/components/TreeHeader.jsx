@@ -30,17 +30,14 @@ class TreeHeader extends Component {
       trees
     } = props
 
-    const treeHeaderBoxClasses = ['tree-header-box']
     const treeInfo = trees[treeIndex]
 
-    if (isHidden) {
-      treeHeaderBoxClasses.push('display-none')
-    }
-
     return (
-      <header className={treeHeaderBoxClasses.join(' ')}>
-        <div className='tree-header-title no-text-overflow'>{treeInfo.title}</div>
-        <div className='tree-header-close' onClick={this.closeHandler} />
+      <header hidden={isHidden}>
+        <div className='tree-header-box'>
+          <div className='tree-header-title no-text-overflow'>{treeInfo.title}</div>
+          <div className='tree-header-close' onClick={this.closeHandler} />
+        </div>
       </header>
     )
   }

@@ -1,4 +1,3 @@
-import {bind} from 'decko'
 import {connect} from 'react-redux'
 import {Component, h} from 'preact'
 

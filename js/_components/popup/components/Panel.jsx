@@ -28,17 +28,12 @@ const Panel = (props) => {
     )
   })
 
-  const subPanelClass = panelClasses.slice()
-  if (!subPanelItems.length) {
-    subPanelClass.push('display-none')
-  }
-
   return (
     <main id='panel-box'>
       <div id='main' className={panelClasses.join(' ')}>
         {mainPanelItems}
       </div>
-      <div id='sub' className={subPanelClass.join(' ')}>
+      <div id='sub' className={panelClasses.join(' ')} hidden={!subPanelItems.length}>
         {subPanelItems}
       </div>
     </main>
