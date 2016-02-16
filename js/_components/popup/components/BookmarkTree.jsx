@@ -61,6 +61,7 @@ class BookmarkTree extends Component {
     })
   }
 
+  @bind
   scrollHandler() {
   }
 
@@ -70,8 +71,10 @@ class BookmarkTree extends Component {
 
     const {itemOffsetHeight} = this.props
 
+    const el = this.base.getElementsByClassName('bookmark-list')[0]
+
     // control scrolling speed
-    // this.scrollTop -= Math.floor(itemOffsetHeight * evt.wheelDelta / 120)
+    el.scrollTop -= Math.floor(itemOffsetHeight * evt.wheelDelta / 120)
   }
 
   render(props) {
