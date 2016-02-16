@@ -7,7 +7,7 @@ import {
 } from '../actions'
 
 const mapStateToProps = (state, ownProps) => ({
-  isHidden: ownProps.treeIndex === 0 || Boolean(state.searchKeyword),
+  isHidden: Boolean(ownProps.treeIndex === 0 || state.searchKeyword),
   trees: state.trees
 })
 
