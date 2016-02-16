@@ -31,16 +31,30 @@ import chromep from '../../lib/chromePromise'
 const dragHackEl = document.getElementById('drag-hack')
 const msgAlertBookmarklet = chrome.i18n.getMessage('alert_bookmarklet')
 
-const mapStateToProps = (state) => ({
-  cutTarget: state.cutTarget,
-  dragTarget: state.dragTarget,
-  itemOffsetHeight: state.itemOffsetHeight,
-  keyboardTarget: state.keyboardTarget,
-  menuTarget: state.menuTarget,
-  options: state.options,
-  searchKeyword: state.searchKeyword,
-  trees: state.trees
-})
+const mapStateToProps = (state, ownProps) => {
+  const {
+    cutTarget,
+    dragTarget,
+    keyboardTarget,
+    menuTarget
+  } = state
+  const {itemInfo} = ownProps
+
+  const isCutTarget = Boolean(cutTarget && cutTarget.id === itemInfo.id)
+  const isDragTarget = Boolean(dragTarget && dragTarget.id === itemInfo.id)
+  const isKeyboardTarget = Boolean(keyboardTarget && keyboardTarget.id === itemInfo.id)
+  const isMenuTarget = Boolean(menuTarget && menuTarget.id === itemInfo.id)
+
+  return {
+    dragTarget: dragTarget,
+    isGreyItem: isCutTarget || isDragTarget,
+    isSelected: isDragTarget || isKeyboardTarget || isMenuTarget,
+    itemOffsetHeight: state.itemOffsetHeight,
+    options: state.options,
+    searchKeyword: state.searchKeyword,
+    trees: state.trees
+  }
+}
 
 @connect(mapStateToProps)
 class BookmarkItem extends Component {
@@ -52,6 +66,21 @@ class BookmarkItem extends Component {
 
   componentDidMount() {
     this.afterRender()
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const propNames = [
+      'isGreyItem',
+      'isSelected',
+      'itemInfo',
+      'searchKeyword'
+    ]
+
+    for (const propName of propNames) {
+      if (this.props[propName] !== nextProps[propName]) return true
+    }
+
+    return false
   }
 
   componentDidUpdate() {
@@ -401,11 +430,9 @@ class BookmarkItem extends Component {
 
   render(props) {
     const {
-      cutTarget,
-      dragTarget,
+      isGreyItem,
+      isSelected,
       itemInfo,
-      keyboardTarget,
-      menuTarget,
       searchKeyword
     } = props
 
@@ -441,16 +468,11 @@ class BookmarkItem extends Component {
       default:
     }
 
-    const isCutTarget = cutTarget && cutTarget.id === itemInfo.id
-    const isDragTarget = dragTarget && dragTarget.id === itemInfo.id
-    const isKeyboardTarget = keyboardTarget && keyboardTarget.id === itemInfo.id
-    const isMenuTarget = menuTarget && menuTarget.id === itemInfo.id
-
-    if (isCutTarget || isDragTarget) {
+    if (isGreyItem) {
       itemClasses.push('grey-item')
     }
 
-    if (isDragTarget || isKeyboardTarget || isMenuTarget) {
+    if (isSelected) {
       itemClasses.push('selected')
     }
 
