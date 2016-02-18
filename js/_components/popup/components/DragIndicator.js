@@ -1,8 +1,10 @@
 import {h} from 'preact'
 
+import {DRAG_INDICATOR} from '../constants'
+
 const DragIndicator = () => (
   <li>
-    <div className='drag-indicator' />
+    <div className={DRAG_INDICATOR} />
   </li>
 )
 

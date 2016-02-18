@@ -3,11 +3,11 @@ import {connect} from 'react-redux'
 import {Component, h} from 'preact'
 
 import {
-  MAX_HEIGHT
-} from '../constants'
-import {
   genBookmarkList
 } from '../functions'
+import {
+  MAX_HEIGHT
+} from '../constants'
 import BookmarkItem from './BookmarkItem'
 import DragIndicator from './DragIndicator'
 import FolderCover from './FolderCover'

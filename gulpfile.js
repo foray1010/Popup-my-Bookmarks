@@ -25,19 +25,19 @@ const resourcesDir = '_resources'
 // language config
 const lang = {
   css: {
+    extname: '.styl',
     destDir: 'css',
-    srcPath: path.join('css', '*') + '.styl',
-    compiler: stylus,
-    minifer: nano
+    srcDir: 'css'
   },
   html: {
+    extname: '.jade',
     destDir: '.',
-    srcPath: path.join('html', '*') + '.jade',
-    compiler: jade
+    srcDir: 'html'
   },
   js: {
+    extname: '.js?(x)',
     destDir: 'js',
-    srcPath: path.join('js', '*') + '.js?(x)'
+    srcDir: 'js'
   }
 }
 
@@ -49,7 +49,7 @@ function compileJS(workingDir) {
   const thisLang = lang.js
 
   const destDir = path.join(workingDir, thisLang.destDir)
-  const srcPath = thisLang.srcPath
+  const srcPath = path.join(thisLang.srcDir, '*' + thisLang.extname)
 
   return gulp.src(srcPath)
     .pipe(plumber())
@@ -66,18 +66,19 @@ function compileLang(langName, workingDir, options) {
   const isDev = process.env.NODE_ENV === 'development'
   const thisLang = lang[langName]
 
-  const compileHandler = (srcPath) => {
-    const compilerPipe = thisLang.compiler.apply(null, options.compilerConfig)
+  const srcPath = path.join(thisLang.srcDir, '*' + thisLang.extname)
+
+  const compileHandler = (thisSrcPath) => {
     const destDir = path.join(workingDir, thisLang.destDir)
 
-    const compileStream = gulp.src(srcPath)
-      .pipe(plumber())
-      .pipe(compilerPipe)
+    const compileStream = gulp.src(thisSrcPath).pipe(plumber())
 
-    if (!isDev && thisLang.minifer) {
-      const miniferPipe = thisLang.minifer.apply(null, options.miniferConfig)
+    if (options.compilerPipe) {
+      compileStream.pipe(options.compilerPipe)
+    }
 
-      compileStream.pipe(miniferPipe)
+    if (options.miniferPipe) {
+      compileStream.pipe(options.miniferPipe)
     }
 
     return compileStream.pipe(gulp.dest(destDir))
@@ -86,17 +87,17 @@ function compileLang(langName, workingDir, options) {
   fs.mkdirsSync(path.join(workingDir, thisLang.destDir))
 
   if (isDev) {
-    gulp.watch(thisLang.srcPath, (evt) => {
-      const srcPath = path.relative(__dirname, evt.path)
+    gulp.watch(srcPath, (evt) => {
+      const thisSrcPath = path.relative(__dirname, evt.path)
 
-      compileHandler(srcPath)
+      compileHandler(thisSrcPath)
         .on('end', () => {
-          gutil.log(gutil.colors.magenta(srcPath), 'is compiled')
+          gutil.log(gutil.colors.magenta(thisSrcPath), 'is compiled')
         })
     })
   }
 
-  return compileHandler(thisLang.srcPath)
+  return compileHandler(srcPath)
 }
 
 function compileManifest(workingDir, updateFn) {
@@ -150,16 +151,18 @@ gulp.task('compile:init', () => {
 
 gulp.task('compile:css', ['compile:init'], () => {
   return compileLang('css', compileDir, {
-    compilerConfig: [{'include css': true}],
-    miniferConfig: [{
+    compilerPipe: stylus({'include css': true}),
+    miniferPipe: nano({
       autoprefixer: false,
       discardComments: {removeAll: true}
-    }]
+    })
   })
 })
 
 gulp.task('compile:html', ['compile:init'], () => {
-  return compileLang('html', compileDir)
+  return compileLang('html', compileDir, {
+    compilerPipe: jade()
+  })
 })
 
 gulp.task('compile:js', ['compile:init'], () => {
@@ -204,13 +207,13 @@ gulp.task('dev:init', () => {
 
 gulp.task('dev:css', ['dev:init'], () => {
   return compileLang('css', devDir, {
-    compilerConfig: [{'include css': true}]
+    compilerPipe: stylus({'include css': true})
   })
 })
 
 gulp.task('dev:html', ['dev:init'], () => {
   return compileLang('html', devDir, {
-    compilerConfig: [{pretty: true}]
+    compilerPipe: jade({pretty: true})
   })
 })
 
