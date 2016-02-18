@@ -41,10 +41,10 @@ Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG
 1. compile
 
   ```
-  gulp compile --ver x.y.z.ddmm
+  gulp compile
   ```
 
-  To compile the whole extension and output a zip file for uploading to Chrome Web Store
+  To compile the whole extension and output a zip file ([version in package.json].zip) for uploading to Chrome Web Store
 
 2. dev
 
@@ -78,7 +78,7 @@ Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG
 5. md
 
   ```
-  gulp md --make <file_name>
+  gulp md
   ```
 
   To generate markdown file on the current directory

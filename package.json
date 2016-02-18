@@ -1,6 +1,6 @@
 {
   "name": "Popup-my-Bookmarks",
-  "version": "0.0.0",
+  "version": "5.0.0",
   "description": "A more efficient way to view and manage your bookmarks menu.",
   "author": "foray1010",
   "repository": {
@@ -55,8 +55,7 @@
     "pre-commit": "^1.1.2",
     "vinyl-named": "*",
     "webpack": "*",
-    "webpack-stream": "*",
-    "yargs": "*"
+    "webpack-stream": "*"
   },
   "private": true,
   "pre-commit": [
