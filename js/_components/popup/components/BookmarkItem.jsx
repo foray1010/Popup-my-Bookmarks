@@ -483,7 +483,7 @@ class BookmarkItem extends Component {
     return (
       <li
         id={itemInfo.id}
-        draggable={String(isDraggable)}
+        draggable={isDraggable}
         onDragEnd={this.dragEndHandler}
         onDragEnter={this.dragEnterHandler}
         onDragStart={this.dragStartHandler}
@@ -491,13 +491,13 @@ class BookmarkItem extends Component {
         <a
           className={itemClasses.join(' ')}
           href={itemInfo.url || ''}
-          draggable='false'
+          draggable={false}
           onClick={this.clickHandler}
           onContextMenu={this.contextMenuHandler}
           onMouseEnter={this.mouseHandler}
           onMouseLeave={this.mouseHandler}
         >
-          <img className='icon' src={iconSrc} alt='' draggable='false' />
+          <img className='icon' src={iconSrc} alt='' draggable={false} />
           <span className='no-text-overflow'>{itemTitle}</span>
         </a>
       </li>
