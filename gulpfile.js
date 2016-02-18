@@ -1,6 +1,5 @@
 'use strict'
 
-const argv = require('yargs').argv
 const cson = require('cson')
 const eslint = require('gulp-eslint')
 const fs = require('fs-extra')
@@ -16,6 +15,8 @@ const stylus = require('gulp-stylus')
 const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
 const zip = require('gulp-zip')
+
+const packageJSON = require('./package')
 
 // predefined dir path
 const compileDir = '__compile'
@@ -104,9 +105,19 @@ function compileManifest(workingDir, updateFn) {
   const destPath = path.join(workingDir, 'manifest.json')
   const manifestJSON = cson.load(path.join(resourcesDir, 'manifest.cson'))
 
-  updateFn(manifestJSON)
+  manifestJSON.version = packageJSON.version
+  if (updateFn) {
+    updateFn(manifestJSON)
+  }
 
   fs.writeJSONSync(destPath, manifestJSON)
+}
+
+function validatePackageVersion() {
+  const version = packageJSON.version
+  if (typeof version !== 'string' || !/^([1-9]?\d\.){2}[1-9]?\d$/.test(version)) {
+    throw Error('You need to input a version number x.y.z, each number between 0 - 99')
+  }
 }
 
 // markdown handler
@@ -135,16 +146,7 @@ gulp.task('default', ['help'])
 gulp.task('compile:init', () => {
   process.env.NODE_ENV = 'production'
 
-  const version = argv.ver
-
-  const versionCheck = (x) => /^\d{1,5}$/.test(x) && Number(x) <= 65535
-
-  if (typeof version !== 'string' ||
-      version.split('.').length !== 4 ||
-      !version.split('.').every(versionCheck)) {
-    throw Error('You need to input a version number x.y.z.ddmm, ' +
-      'each number between 0 - 65535')
-  }
+  validatePackageVersion()
 
   initDir(compileDir)
 })
@@ -177,9 +179,7 @@ gulp.task('compile:others', ['compile:init'], () => {
   }
   fs.copySync(path.join(resourcesDir, 'img'), path.join(compileDir, 'img'))
 
-  compileManifest(compileDir, (manifestJSON) => {
-    manifestJSON.version = argv.ver
-  })
+  compileManifest(compileDir)
 })
 
 gulp.task('compile:zip', [
@@ -189,7 +189,7 @@ gulp.task('compile:zip', [
   'compile:others'
 ], () => {
   return gulp.src(path.join(compileDir, '**'))
-    .pipe(zip(argv.ver + '.zip'))
+    .pipe(zip(packageJSON.version + '.zip'))
     .pipe(gulp.dest('.'))
 })
 
@@ -201,6 +201,8 @@ gulp.task('compile', ['compile:zip'], () => {
 // create a watched folder for testing
 gulp.task('dev:init', () => {
   process.env.NODE_ENV = 'development'
+
+  validatePackageVersion()
 
   initDir(devDir)
 })
@@ -242,8 +244,7 @@ gulp.task('dev', [
   )
 
   compileManifest(devDir, (manifestJSON) => {
-    manifestJSON.name += '(dev)'
-    manifestJSON.version = '0.0.0.0'
+    manifestJSON.name += ' (dev)'
   })
 })
 
@@ -273,43 +274,40 @@ gulp.task('lint:js', () => {
 gulp.task('lint', ['lint:css', 'lint:js'])
 
 // generate markdown file
-gulp.task('md', () => {
-  const fileName = argv.make
+gulp.task('md:readme', () => {
+  const fileName = 'README.md'
 
-  let fileData
+  let fileData = getMarkdownData([
+    'Popup my Bookmarks',
+    'Developer guide',
+    'Todo',
+    'Contributing',
+    'FAQ'
+  ])
 
-  switch (fileName) {
-    case '__store.md':
-      fileData = getMarkdownData([
-        'Popup my Bookmarks',
-        'Todo',
-        'Contributing',
-        'FAQ'
-      ])
-
-      // remove first three lines
-      fileData = fileData.replace(/.+\n\n.+\n/, '')
-
-      // remove style of subheader
-      fileData = fileData.replace(/##### /g, '')
-      break
-
-    case 'README.md':
-      fileData = getMarkdownData([
-        'Popup my Bookmarks',
-        'Developer guide',
-        'Todo',
-        'Contributing',
-        'FAQ'
-      ])
-
-      // enlarge first header
-      fileData = fileData.replace(/^##/, '#')
-      break
-
-    default:
-      throw Error(`Unknown markdown file: ${fileName}`)
-  }
+  // enlarge first header
+  fileData = fileData.replace(/^##/, '#')
 
   fs.writeFile(fileName, fileData)
 })
+
+gulp.task('md:store', () => {
+  const fileName = '__store.md'
+
+  let fileData = getMarkdownData([
+    'Popup my Bookmarks',
+    'Todo',
+    'Contributing',
+    'FAQ'
+  ])
+
+  // remove first three lines
+  fileData = fileData.replace(/.+\n\n.+\n/, '')
+
+  // remove style of subheader
+  fileData = fileData.replace(/##### /g, '')
+
+  fs.writeFile(fileName, fileData)
+})
+
+gulp.task('md', ['md:readme', 'md:store'])
