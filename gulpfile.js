@@ -253,23 +253,24 @@ gulp.task('help', () => {
 })
 
 // lints
-gulp.task('lint-css', () => {
-  return gulp.src(lang.css.srcPath)
+gulp.task('lint:css', () => {
+  const srcPath = path.join(lang.css.srcDir, '**', '*' + lang.css.extname)
+
+  return gulp.src(srcPath)
     .pipe(stylint())
 })
 
-gulp.task('lint-js', () => {
+gulp.task('lint:js', () => {
   return gulp.src([
-    'gulpfile.js',
-    // check the inner directories too
-    lang.js.srcPath.replace('*', path.join('**', '*'))
+    path.join(lang.js.srcDir, '**', '*' + lang.js.extname),
+    '*' + lang.js.extname
   ])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
 })
 
-gulp.task('lint', ['lint-css', 'lint-js'])
+gulp.task('lint', ['lint:css', 'lint:js'])
 
 // generate markdown file
 gulp.task('md', () => {
