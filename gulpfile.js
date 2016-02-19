@@ -72,17 +72,11 @@ function compileLang(langName, workingDir, options) {
   const compileHandler = (thisSrcPath) => {
     const destDir = path.join(workingDir, thisLang.destDir)
 
-    const compileStream = gulp.src(thisSrcPath).pipe(plumber())
-
-    if (options.compilerPipe) {
-      compileStream.pipe(options.compilerPipe)
-    }
-
-    if (options.miniferPipe) {
-      compileStream.pipe(options.miniferPipe)
-    }
-
-    return compileStream.pipe(gulp.dest(destDir))
+    return gulp.src(thisSrcPath)
+      .pipe(plumber())
+      .pipe(options.compilerPipe || gutil.noop())
+      .pipe(options.miniferPipe || gutil.noop())
+      .pipe(gulp.dest(destDir))
   }
 
   fs.mkdirsSync(path.join(workingDir, thisLang.destDir))
