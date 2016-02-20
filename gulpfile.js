@@ -1,5 +1,7 @@
 'use strict'
 
+const bluebird = require('bluebird')
+const co = require('co')
 const cson = require('cson')
 const eslint = require('gulp-eslint')
 const fs = require('fs-extra')
@@ -17,6 +19,9 @@ const webpackStream = require('webpack-stream')
 const zip = require('gulp-zip')
 
 const packageJSON = require('./package')
+
+// promisify
+bluebird.promisifyAll(fs)
 
 // predefined dir path
 const compileDir = '__compile'
@@ -79,8 +84,6 @@ function compileLang(langName, workingDir, options) {
       .pipe(gulp.dest(destDir))
   }
 
-  fs.mkdirsSync(path.join(workingDir, thisLang.destDir))
-
   if (isDev) {
     gulp.watch(srcPath, (evt) => {
       const thisSrcPath = path.relative(__dirname, evt.path)
@@ -95,7 +98,7 @@ function compileLang(langName, workingDir, options) {
   return compileHandler(srcPath)
 }
 
-function compileManifest(workingDir, updateFn) {
+function* compileManifest(workingDir, updateFn) {
   const destPath = path.join(workingDir, 'manifest.json')
   const manifestJSON = cson.load(path.join(resourcesDir, 'manifest.cson'))
 
@@ -104,7 +107,7 @@ function compileManifest(workingDir, updateFn) {
     updateFn(manifestJSON)
   }
 
-  fs.writeJSONSync(destPath, manifestJSON)
+  yield fs.writeJSONAsync(destPath, manifestJSON)
 }
 
 function validatePackageVersion() {
@@ -115,11 +118,11 @@ function validatePackageVersion() {
 }
 
 // markdown handler
-function getMarkdownData(titleList) {
+function* getMarkdownData(titleList) {
   const mdSource = path.join(resourcesDir, 'markdown')
 
-  const dataList = titleList.map((title) => {
-    const fileData = fs.readFileSync(path.join(mdSource, `${title}.md`), 'utf-8')
+  const dataList = yield titleList.map(function* (title) {
+    const fileData = yield fs.readFileAsync(path.join(mdSource, `${title}.md`), 'utf-8')
 
     return `## ${title}\n\n${fileData}`
   })
@@ -128,9 +131,15 @@ function getMarkdownData(titleList) {
 }
 
 // initiate the output folder
-function initDir(dirPath) {
-  fs.removeSync(dirPath)
-  fs.mkdirSync(dirPath)
+function* initDir(workingDir) {
+  yield fs.removeAsync(workingDir)
+  yield fs.mkdirAsync(workingDir)
+
+  for (const langName of Object.keys(lang)) {
+    const thisLang = lang[langName]
+
+    yield fs.mkdirsAsync(path.join(workingDir, thisLang.destDir))
+  }
 }
 
 // default when no task
@@ -138,11 +147,13 @@ gulp.task('default', ['help'])
 
 // compile and zip PmB
 gulp.task('compile:init', () => {
-  process.env.NODE_ENV = 'production'
+  return co(function* () {
+    process.env.NODE_ENV = 'production'
 
-  validatePackageVersion()
+    validatePackageVersion()
 
-  initDir(compileDir)
+    yield initDir(compileDir)
+  })
 })
 
 gulp.task('compile:css', ['compile:init'], () => {
@@ -166,14 +177,16 @@ gulp.task('compile:js', ['compile:init'], () => {
 })
 
 gulp.task('compile:others', ['compile:init'], () => {
-  const fileList = ['font', '_locales', 'LICENSE']
+  return co(function* () {
+    const fileList = ['font', '_locales', 'LICENSE']
 
-  for (const fileName of fileList) {
-    fs.copySync(fileName, path.join(compileDir, fileName))
-  }
-  fs.copySync(path.join(resourcesDir, 'img'), path.join(compileDir, 'img'))
+    for (const fileName of fileList) {
+      yield fs.copyAsync(fileName, path.join(compileDir, fileName))
+    }
+    yield fs.copyAsync(path.join(resourcesDir, 'img'), path.join(compileDir, 'img'))
 
-  compileManifest(compileDir)
+    yield compileManifest(compileDir)
+  })
 })
 
 gulp.task('compile:zip', [
@@ -188,17 +201,21 @@ gulp.task('compile:zip', [
 })
 
 gulp.task('compile', ['compile:zip'], () => {
-  // useless after zipped
-  fs.remove(compileDir)
+  return co(function* () {
+    // useless after zipped
+    yield fs.removeAsync(compileDir)
+  })
 })
 
 // create a watched folder for testing
 gulp.task('dev:init', () => {
-  process.env.NODE_ENV = 'development'
+  return co(function* () {
+    process.env.NODE_ENV = 'development'
 
-  validatePackageVersion()
+    validatePackageVersion()
 
-  initDir(devDir)
+    yield initDir(devDir)
+  })
 })
 
 gulp.task('dev:css', ['dev:init'], () => {
@@ -214,37 +231,47 @@ gulp.task('dev:html', ['dev:init'], () => {
 })
 
 gulp.task('dev:js', ['dev:init'], () => {
+  // don't return because webpack `watch` will hold the pipe
   compileJS(devDir)
+})
+
+gulp.task('dev:others', ['dev:init'], () => {
+  return co(function* () {
+    const fileList = ['font', '_locales']
+
+    for (const fileName of fileList) {
+      yield fs.symlinkAsync(
+        path.join('..', fileName),
+        path.join(devDir, fileName),
+        'dir'
+      )
+    }
+    yield fs.symlinkAsync(
+      path.join('..', resourcesDir, 'img-dev'),
+      path.join(devDir, 'img'),
+      'dir'
+    )
+
+    yield compileManifest(devDir, (manifestJSON) => {
+      manifestJSON.name += ' (dev)'
+    })
+  })
 })
 
 gulp.task('dev', [
   'dev:css',
   'dev:html',
-  'dev:js'
-], () => {
-  const fileList = ['font', '_locales']
-
-  for (const fileName of fileList) {
-    fs.symlinkSync(
-      path.join('..', fileName),
-      path.join(devDir, fileName),
-      'dir'
-    )
-  }
-  fs.symlinkSync(
-    path.join('..', resourcesDir, 'img-dev'),
-    path.join(devDir, 'img'),
-    'dir'
-  )
-
-  compileManifest(devDir, (manifestJSON) => {
-    manifestJSON.name += ' (dev)'
-  })
-})
+  'dev:js',
+  'dev:others'
+])
 
 // user guideline
 gulp.task('help', () => {
-  gutil.log('\n' + getMarkdownData(['Developer guide']))
+  return co(function* () {
+    const developerGuideMD = yield getMarkdownData(['Developer guide'])
+
+    gutil.log('\n' + developerGuideMD)
+  })
 })
 
 // lints
@@ -269,39 +296,43 @@ gulp.task('lint', ['lint:css', 'lint:js'])
 
 // generate markdown file
 gulp.task('md:readme', () => {
-  const fileName = 'README.md'
+  return co(function* () {
+    const fileName = 'README.md'
 
-  let fileData = getMarkdownData([
-    'Popup my Bookmarks',
-    'Developer guide',
-    'Todo',
-    'Contributing',
-    'FAQ'
-  ])
+    let fileData = yield getMarkdownData([
+      'Popup my Bookmarks',
+      'Developer guide',
+      'Todo',
+      'Contributing',
+      'FAQ'
+    ])
 
-  // enlarge first header
-  fileData = fileData.replace(/^##/, '#')
+    // enlarge first header
+    fileData = fileData.replace(/^##/, '#')
 
-  fs.writeFile(fileName, fileData)
+    yield fs.writeFileAsync(fileName, fileData)
+  })
 })
 
 gulp.task('md:store', () => {
-  const fileName = '__store.md'
+  return co(function* () {
+    const fileName = '__store.md'
 
-  let fileData = getMarkdownData([
-    'Popup my Bookmarks',
-    'Todo',
-    'Contributing',
-    'FAQ'
-  ])
+    let fileData = yield getMarkdownData([
+      'Popup my Bookmarks',
+      'Todo',
+      'Contributing',
+      'FAQ'
+    ])
 
-  // remove first three lines
-  fileData = fileData.replace(/.+\n\n.+\n/, '')
+    // remove first three lines
+    fileData = fileData.replace(/.+\n\n.+\n/, '')
 
-  // remove style of subheader
-  fileData = fileData.replace(/##### /g, '')
+    // remove style of subheader
+    fileData = fileData.replace(/##### /g, '')
 
-  fs.writeFile(fileName, fileData)
+    yield fs.writeFileAsync(fileName, fileData)
+  })
 })
 
 gulp.task('md', ['md:readme', 'md:store'])
