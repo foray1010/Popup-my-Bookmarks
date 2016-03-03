@@ -2,26 +2,45 @@
 
 const webpack = require('webpack')
 
-const webpackPlugins = [
-  new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-  }),
-  new webpack.optimize.CommonsChunkPlugin('common.js'),
-  new webpack.optimize.DedupePlugin(),
-  new webpack.optimize.OccurenceOrderPlugin()
-]
-
-let devtool = undefined
-let isWatch = false
+const webpackConfig = {
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /\/node_modules\//,
+        loader: 'babel-loader'
+      }
+    ]
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    }),
+    new webpack.optimize.CommonsChunkPlugin('common.js'),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin()
+  ],
+  resolve: {
+    alias: {
+      react: 'preact-compat',
+      'react-dom': 'preact-compat'
+    },
+    extensions: ['', '.js', '.jsx']
+  },
+  stats: {
+    timings: true,
+    version: false
+  }
+}
 
 switch (process.env.NODE_ENV) {
   case 'development':
-    devtool = 'source-map'
-    isWatch = true
+    webpackConfig.devtool = 'source-map'
+    webpackConfig.watch = true
     break
 
   case 'production':
-    webpackPlugins.push(
+    webpackConfig.plugins.push(
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           drop_console: true,
@@ -40,28 +59,4 @@ switch (process.env.NODE_ENV) {
   default:
 }
 
-module.exports = {
-  devtool: devtool,
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /\/node_modules\//,
-        loader: 'babel-loader'
-      }
-    ]
-  },
-  plugins: webpackPlugins,
-  resolve: {
-    alias: {
-      react: 'preact-compat',
-      'react-dom': 'preact-compat'
-    },
-    extensions: ['', '.js', '.jsx']
-  },
-  stats: {
-    timings: true,
-    version: false
-  },
-  watch: isWatch
-}
+module.exports = webpackConfig
