@@ -1,6 +1,7 @@
 import {bind} from 'decko'
 import {connect} from 'react-redux'
 import {Component, h} from 'preact'
+import classNames from 'classnames'
 
 import {updateSingleOption} from '../../actions'
 
@@ -36,14 +37,16 @@ class OptionInput extends Component {
 
     const buttonText = optionChoice ? msgYes : msgNo
     const isChecked = optionValue === optionChoice
-    const selectButtonClasses = ['select-button-item']
 
-    if (isChecked) {
-      selectButtonClasses.push('select-button-item-active')
-    }
+    const selectButtonClassName = classNames(
+      'select-button-item',
+      {
+        'select-button-item-active': isChecked
+      }
+    )
 
     return (
-      <label className={selectButtonClasses.join(' ')}>
+      <label className={selectButtonClassName}>
         <input
           name={optionName}
           type='radio'

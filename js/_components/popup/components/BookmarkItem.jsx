@@ -1,6 +1,7 @@
 import {bind, debounce} from 'decko'
 import {connect} from 'react-redux'
 import {Component, h} from 'preact'
+import classNames from 'classnames'
 
 import {
   getBookmarkType,
@@ -437,28 +438,22 @@ class BookmarkItem extends Component {
     } = props
 
     const bookmarkType = getBookmarkType(itemInfo)
-    const itemClasses = [
+    const itemClassName = classNames(
       'item',
-      'bookmark-item'
-    ]
+      'bookmark-item',
+      bookmarkType,
+      {
+        'grey-item': isGreyItem,
+        selected: isSelected
+      }
+    )
     const itemTitle = itemInfo.title || itemInfo.url || null
 
     let iconSrc = null
-    let isDraggable = true
-
-    if (isFolder(itemInfo)) {
-      iconSrc = '/img/folder.png'
-    }
-
     switch (bookmarkType) {
-      case TYPE_NO_BOOKMARK:
       case TYPE_ROOT_FOLDER:
-        isDraggable = false
-        itemClasses.push(bookmarkType)
-        break
-
-      case TYPE_SEPARATOR:
-        itemClasses.push(bookmarkType)
+      case TYPE_FOLDER:
+        iconSrc = '/img/folder.png'
         break
 
       case TYPE_BOOKMARK:
@@ -468,16 +463,17 @@ class BookmarkItem extends Component {
       default:
     }
 
-    if (isGreyItem) {
-      itemClasses.push('grey-item')
-    }
+    let isDraggable = true
+    switch (bookmarkType) {
+      case TYPE_NO_BOOKMARK:
+      case TYPE_ROOT_FOLDER:
+        isDraggable = false
+        break
 
-    if (isSelected) {
-      itemClasses.push('selected')
-    }
-
-    if (searchKeyword) {
-      isDraggable = false
+      default:
+        if (searchKeyword) {
+          isDraggable = false
+        }
     }
 
     return (
@@ -489,8 +485,8 @@ class BookmarkItem extends Component {
         onDragStart={this.dragStartHandler}
       >
         <a
-          className={itemClasses.join(' ')}
-          href={itemInfo.url || ''}
+          className={itemClassName}
+          href={itemInfo.url}
           draggable={false}
           onClick={this.clickHandler}
           onContextMenu={this.contextMenuHandler}

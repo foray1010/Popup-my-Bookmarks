@@ -1,5 +1,6 @@
 import {connect} from 'react-redux'
 import {h} from 'preact'
+import classNames from 'classnames'
 
 import BookmarkTree from './BookmarkTree'
 import Search from './Search'
@@ -14,7 +15,7 @@ const Panel = (props) => {
   const mainPanelItems = [
     <Search key='search-box' />
   ]
-  const panelClasses = ['panel', 'panel-width']
+  const panelClassName = classNames('panel', 'panel-width')
   const subPanelItems = []
 
   trees.forEach((treeInfo, treeIndex) => {
@@ -30,10 +31,10 @@ const Panel = (props) => {
 
   return (
     <main id='panel-box'>
-      <div id='main' className={panelClasses.join(' ')}>
+      <div id='main' className={panelClassName}>
         {mainPanelItems}
       </div>
-      <div id='sub' className={panelClasses.join(' ')} hidden={!subPanelItems.length}>
+      <div id='sub' className={panelClassName} hidden={!subPanelItems.length}>
         {subPanelItems}
       </div>
     </main>
