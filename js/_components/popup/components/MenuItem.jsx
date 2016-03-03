@@ -1,6 +1,7 @@
 import {bind} from 'decko'
 import {connect} from 'react-redux'
 import {Component, h} from 'preact'
+import classNames from 'classnames'
 
 import {
   getBookmarkType,
@@ -276,19 +277,18 @@ class MenuItem extends Component {
       menuItemKey
     } = props
 
-    const menuItemClasses = [
+    const menuItemClassName = classNames(
       'item',
-      'menu-item'
-    ]
-
-    if (menuItemKey === 'paste' && !copyTarget && !cutTarget) {
-      menuItemClasses.push('grey-item')
-    }
+      'menu-item',
+      {
+        'grey-item': menuItemKey === 'paste' && !copyTarget && !cutTarget
+      }
+    )
 
     return (
       <li>
         <a
-          className={menuItemClasses.join(' ')}
+          className={menuItemClassName}
           href=''
           onClick={this.clickHandler}
         >

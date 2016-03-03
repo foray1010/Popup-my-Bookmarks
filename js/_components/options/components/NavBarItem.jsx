@@ -1,6 +1,7 @@
 import {bind} from 'decko'
 import {connect} from 'react-redux'
 import {Component, h} from 'preact'
+import classNames from 'classnames'
 
 import {
   reloadOptions,
@@ -37,15 +38,16 @@ class NavBarItem extends Component {
       selectedNavModule
     } = props
 
-    const navBarItemClasses = ['nav-bar-item']
-
-    if (navBarItemInfo.navModule === selectedNavModule) {
-      navBarItemClasses.push('nav-bar-item-active')
-    }
+    const navBarItemClassName = classNames(
+      'nav-bar-item',
+      {
+        'nav-bar-item-active': navBarItemInfo.navModule === selectedNavModule
+      }
+    )
 
     return (
       <a
-        className={navBarItemClasses.join(' ')}
+        className={navBarItemClassName}
         href=''
         onClick={this.clickHandler}
       >
