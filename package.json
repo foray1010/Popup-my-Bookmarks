@@ -22,7 +22,7 @@
     "lodash.debounce": "^4.0.3",
     "normalize.css": "^3.0.3",
     "preact": "^4.0.0",
-    "preact-compat": "^0.7.1",
+    "preact-compat": "^1.6.0",
     "proptypes": "^0.14.3",
     "react-redux": "^4.4.0",
     "redux": "^3.3.1",
