@@ -6,7 +6,9 @@ const cson = require('cson')
 const eslint = require('gulp-eslint')
 const fs = require('fs-extra')
 const gulp = require('gulp')
+const gulpFilter = require('gulp-filter')
 const gutil = require('gulp-util')
+const imageGrayScale = require('gulp-image-grayscale')
 const jade = require('gulp-jade')
 const named = require('vinyl-named')
 const nano = require('gulp-cssnano')
@@ -178,12 +180,17 @@ gulp.task('compile:js', ['compile:init'], () => {
 
 gulp.task('compile:others', ['compile:init'], () => {
   return co(function* () {
-    const fileList = ['font', '_locales', 'LICENSE']
+    const fileList = [
+      '_locales',
+      'font',
+      'img',
+      'LICENSE'
+    ]
 
-    for (const fileName of fileList) {
-      yield fs.copyAsync(fileName, path.join(compileDir, fileName))
-    }
-    yield fs.copyAsync(path.join(resourcesDir, 'img'), path.join(compileDir, 'img'))
+    yield fileList.map((fileName) => fs.copyAsync(
+      fileName,
+      path.join(compileDir, fileName))
+    )
 
     yield compileManifest(compileDir)
   })
@@ -230,6 +237,20 @@ gulp.task('dev:html', ['dev:init'], () => {
   })
 })
 
+gulp.task('dev:img', ['dev:init'], () => {
+  const iconFilter = gulpFilter(path.join('img', 'icon*.png'), {
+    restore: true
+  })
+
+  return gulp.src(path.join('img', '*'))
+    .pipe(iconFilter)
+      .pipe(imageGrayScale({
+        logProgress: false
+      }))
+    .pipe(iconFilter.restore)
+    .pipe(gulp.dest(path.join(devDir, 'img')))
+})
+
 gulp.task('dev:js', ['dev:init'], () => {
   // don't return because webpack `watch` will hold the pipe
   compileJS(devDir)
@@ -239,18 +260,11 @@ gulp.task('dev:others', ['dev:init'], () => {
   return co(function* () {
     const fileList = ['font', '_locales']
 
-    for (const fileName of fileList) {
-      yield fs.symlinkAsync(
-        path.join('..', fileName),
-        path.join(devDir, fileName),
-        'dir'
-      )
-    }
-    yield fs.symlinkAsync(
-      path.join('..', resourcesDir, 'img-dev'),
-      path.join(devDir, 'img'),
+    yield fileList.map((fileName) => fs.symlinkAsync(
+      path.join('..', fileName),
+      path.join(devDir, fileName),
       'dir'
-    )
+    ))
 
     yield compileManifest(devDir, (manifestJSON) => {
       manifestJSON.name += ' (dev)'
@@ -261,6 +275,7 @@ gulp.task('dev:others', ['dev:init'], () => {
 gulp.task('dev', [
   'dev:css',
   'dev:html',
+  'dev:img',
   'dev:js',
   'dev:others'
 ])
