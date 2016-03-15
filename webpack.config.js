@@ -17,8 +17,7 @@ const webpackConfig = {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
     new webpack.optimize.CommonsChunkPlugin('common.js'),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin()
+    new webpack.optimize.OccurenceOrderPlugin(true)
   ],
   resolve: {
     alias: {
@@ -41,6 +40,7 @@ switch (process.env.NODE_ENV) {
 
   case 'production':
     webpackConfig.plugins.push(
+      new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           drop_console: true,
