@@ -1,6 +1,6 @@
-import {bind} from 'decko'
+import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {Component, h} from 'preact'
+import {createElement, Component} from 'react'
 
 import {
   initOptionsValue,
@@ -25,8 +25,8 @@ const mapStateToProps = (state) => ({
 
 @connect(mapStateToProps)
 class OptionButton extends Component {
-  @bind
-  async confirmButtonHandler() {
+  @autobind
+  async handleConfirm() {
     const {
       dispatch,
       options,
@@ -57,8 +57,8 @@ class OptionButton extends Component {
     dispatch(updateOptions(newOptions))
   }
 
-  @bind
-  async defaultButtonHandler() {
+  @autobind
+  async handleDefault() {
     const {
       dispatch,
       optionsConfig
@@ -74,8 +74,8 @@ class OptionButton extends Component {
   render() {
     return (
       <div id='option-button-box'>
-        <button onClick={this.confirmButtonHandler}>{msgConfirm}</button>
-        <button onClick={this.defaultButtonHandler}>{msgDefault}</button>
+        <button onClick={this.handleConfirm}>{msgConfirm}</button>
+        <button onClick={this.handleDefault}>{msgDefault}</button>
       </div>
     )
   }

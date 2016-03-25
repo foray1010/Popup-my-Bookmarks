@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {Component, h} from 'preact'
+import {createElement, Component} from 'react'
 
 import {
   getBookmarkType,
@@ -94,8 +94,8 @@ class Menu extends Component {
     el.style.right = rightPosPx
   }
 
-  render(props) {
-    const {menuTarget} = props
+  render() {
+    const {menuTarget} = this.props
 
     const isHidden = !menuTarget
 
@@ -130,6 +130,9 @@ class Menu extends Component {
 
     return (
       <div
+        ref={(ref) => {
+          this.base = ref
+        }}
         className='menu'
         hidden={isHidden}
       >

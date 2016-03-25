@@ -1,2 +1,2 @@
-extends: "foray1010/preact"
+extends: "foray1010/react"
 parser: "babel-eslint"

@@ -1,6 +1,6 @@
-import {bind} from 'decko'
+import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {Component, h} from 'preact'
+import {createElement, Component} from 'react'
 import classNames from 'classnames'
 
 import {
@@ -14,9 +14,10 @@ const mapStateToProps = (state) => ({
 
 @connect(mapStateToProps)
 class NavBarItem extends Component {
-  @bind
-  async clickHandler(evt) {
+  @autobind
+  async handleClick(evt) {
     evt.preventDefault()
+    evt.persist()
 
     const {
       dispatch,
@@ -32,11 +33,11 @@ class NavBarItem extends Component {
     }
   }
 
-  render(props) {
+  render() {
     const {
       navBarItemInfo,
       selectedNavModule
-    } = props
+    } = this.props
 
     const navBarItemClassName = classNames(
       'nav-bar-item',
@@ -49,7 +50,7 @@ class NavBarItem extends Component {
       <a
         className={navBarItemClassName}
         href=''
-        onClick={this.clickHandler}
+        onClick={this.handleClick}
       >
         {navBarItemInfo.title}
       </a>

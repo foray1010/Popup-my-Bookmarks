@@ -1,6 +1,6 @@
-import {bind} from 'decko'
+import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {Component, h} from 'preact'
+import {createElement, Component} from 'react'
 
 import {updateSingleOption} from '../../actions'
 
@@ -10,8 +10,8 @@ const mapStateToProps = (state) => ({
 
 @connect(mapStateToProps)
 class InputNumber extends Component {
-  @bind
-  changeHandler(evt) {
+  @autobind
+  handleChange(evt) {
     const {
       dispatch,
       optionConfig,
@@ -32,12 +32,12 @@ class InputNumber extends Component {
     }
   }
 
-  render(props) {
+  render() {
     const {
       optionConfig,
       optionName,
       options
-    } = props
+    } = this.props
 
     const optionValue = options[optionName]
 
@@ -48,7 +48,7 @@ class InputNumber extends Component {
         min={optionConfig.minimum}
         max={optionConfig.maximum}
         value={String(optionValue)}
-        onChange={this.changeHandler}
+        onChange={this.handleChange}
       />
     )
   }

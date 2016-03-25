@@ -1,6 +1,6 @@
-import {bind} from 'decko'
+import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {Component, h} from 'preact'
+import {createElement, Component} from 'react'
 
 import {
   genBookmarkList
@@ -13,19 +13,6 @@ import DragIndicator from './DragIndicator'
 import FolderCover from './FolderCover'
 import NoResult from './NoResult'
 import TreeHeader from './TreeHeader'
-
-function setHeight(el) {
-  const bookmarkListEl = el.getElementsByClassName('bookmark-list')[0]
-
-  // search-box and tree-header-box height
-  const bookmarkListElOffsetTop = bookmarkListEl.getBoundingClientRect().top
-
-  const maxListHeight = MAX_HEIGHT - bookmarkListElOffsetTop
-
-  const listHeight = Math.min(bookmarkListEl.scrollHeight, maxListHeight)
-
-  bookmarkListEl.style.maxHeight = listHeight + 'px'
-}
 
 const mapStateToProps = (state) => ({
   dragIndicator: state.dragIndicator,
@@ -51,40 +38,46 @@ class BookmarkTree extends Component {
     this.afterRender()
   }
 
+  @autobind
+  setHeight() {
+    const bookmarkListEl = this.bookmarkList
+
+    // search-box and tree-header-box height
+    const bookmarkListElOffsetTop = bookmarkListEl.getBoundingClientRect().top
+
+    const maxListHeight = MAX_HEIGHT - bookmarkListElOffsetTop
+
+    const listHeight = Math.min(bookmarkListEl.scrollHeight, maxListHeight)
+
+    bookmarkListEl.style.maxHeight = listHeight + 'px'
+  }
+
   afterRender() {
-    window.requestAnimationFrame(() => {
-      const el = this.base
-
-      if (el) {
-        setHeight(el)
-      }
-    })
+    window.requestAnimationFrame(this.setHeight)
   }
 
-  @bind
-  scrollHandler() {
+  @autobind
+  handleScroll() {
   }
 
-  @bind
-  wheelHandler(evt) {
+  @autobind
+  handleWheel(evt) {
     evt.preventDefault()
 
     const {itemOffsetHeight} = this.props
 
-    const el = this.base.getElementsByClassName('bookmark-list')[0]
-
     // control scrolling speed
-    el.scrollTop -= Math.floor(itemOffsetHeight * evt.wheelDelta / 120)
+    this.bookmarkList.scrollTop -= Math.floor(itemOffsetHeight * evt.deltaY / 120)
   }
 
-  render(props) {
+  render() {
     const {
       dragIndicator,
       rootTree,
       searchKeyword,
       treeIndex,
       trees
-    } = props
+    } = this.props
 
     const isFirstTree = treeIndex === 0
     const treeInfo = trees[treeIndex]
@@ -119,9 +112,12 @@ class BookmarkTree extends Component {
       <div className='bookmark-tree'>
         <TreeHeader treeIndex={treeIndex} />
         <ul
+          ref={(ref) => {
+            this.bookmarkList = ref
+          }}
           className='bookmark-list'
-          onScroll={this.scrollHandler}
-          onWheel={this.wheelHandler}
+          onScroll={this.handleScroll}
+          onWheel={this.handleWheel}
         >
           {treeItems}
         </ul>

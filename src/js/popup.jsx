@@ -1,6 +1,7 @@
 import 'babel-polyfill'
-import {h, render} from 'preact'
+import {createElement} from 'react'
 import {Provider} from 'react-redux'
+import {render} from 'react-dom'
 
 import {
   getFirstTree,

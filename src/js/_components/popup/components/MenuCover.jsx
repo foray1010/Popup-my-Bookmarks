@@ -1,6 +1,6 @@
-import {bind} from 'decko'
+import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {Component, h} from 'preact'
+import {createElement, Component} from 'react'
 
 import {
   resetBodySize
@@ -17,8 +17,8 @@ const mapStateToProps = (state) => ({
 
 @connect(mapStateToProps)
 class MenuCover extends Component {
-  @bind
-  clickHandler() {
+  @autobind
+  handleClick() {
     const {dispatch} = this.props
 
     resetBodySize()
@@ -29,15 +29,15 @@ class MenuCover extends Component {
     ])
   }
 
-  render(props) {
-    const {isHidden} = props
+  render() {
+    const {isHidden} = this.props
 
     return (
       <div
         id='menu-cover'
         className='cover'
         hidden={isHidden}
-        onClick={this.clickHandler}
+        onClick={this.handleClick}
       />
     )
   }

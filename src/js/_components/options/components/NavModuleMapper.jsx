@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {h} from 'preact'
+import {createElement} from 'react'
 
 import {
   NAV_MODULE_CONTRIBUTORS,

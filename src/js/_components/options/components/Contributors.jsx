@@ -1,4 +1,4 @@
-import {h} from 'preact'
+import {createElement} from 'react'
 
 const Contributors = () => (
   <main />

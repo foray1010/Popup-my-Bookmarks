@@ -1,6 +1,6 @@
-import {bind, debounce} from 'decko'
+import {autobind, debounce} from 'core-decorators'
 import {connect} from 'react-redux'
-import {Component, h} from 'preact'
+import {createElement, Component} from 'react'
 
 import {
   getFirstTree,
@@ -25,9 +25,15 @@ class Search extends Component {
     this.getSearchResult = getSearchResult.bind(this)
   }
 
-  @bind
+  @autobind
+  handleInput(evt) {
+    evt.persist()
+
+    this._handleInput(evt)
+  }
+
   @debounce(200)
-  async inputHandler(evt) {
+  async _handleInput(evt) {
     const {
       dispatch,
       options
@@ -61,7 +67,7 @@ class Search extends Component {
           placeholder={msgSearch}
           tabIndex='-1'
           autoFocus
-          onInput={this.inputHandler}
+          onInput={this.handleInput}
         />
       </div>
     )

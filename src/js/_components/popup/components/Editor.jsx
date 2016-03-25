@@ -1,6 +1,6 @@
-import {bind} from 'decko'
+import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {Component, h} from 'preact'
+import {createElement, Component} from 'react'
 
 import {
   isFolder,
@@ -25,20 +25,20 @@ class Editor extends Component {
   componentDidUpdate() {
     const {editorTarget} = this.props
 
-    const el = this.base
     const isHidden = !editorTarget
 
-    this.setEditorPosition(el)
+    this.setEditorPosition()
 
     if (!isHidden) {
       // auto focus to title field
-      el.getElementsByTagName('input')[0].focus()
+      this.titleInput.focus()
     }
   }
 
-  setEditorPosition(el) {
+  setEditorPosition() {
     const {editorTarget} = this.props
 
+    const el = this.base
     const isHidden = !editorTarget
 
     let bottomPositionPx = ''
@@ -67,23 +67,29 @@ class Editor extends Component {
     el.style.left = leftPositionPx
   }
 
-  @bind
-  clickCancelHandler() {
+  closeEditor() {
+    const {dispatch} = this.props
+
+    resetBodySize()
+
+    dispatch(updateEditorTarget(null))
+  }
+
+  @autobind
+  handleCancel() {
     this.closeEditor()
   }
 
-  @bind
-  async clickConfirmHandler() {
+  @autobind
+  async handleConfirm() {
     const {editorTarget} = this.props
 
-    const editorInput = this.base.getElementsByTagName('input')
-
-    const updatedTitle = editorInput[0].value.trim()
+    const updatedTitle = this.titleInput.value.trim()
 
     let updatedUrl
 
     if (!isFolder(editorTarget)) {
-      updatedUrl = editorInput[1].value.trim()
+      updatedUrl = this.urlInput.value.trim()
     }
 
     await chromep.bookmarks.update(editorTarget.id, {
@@ -94,16 +100,8 @@ class Editor extends Component {
     this.closeEditor()
   }
 
-  closeEditor() {
-    const {dispatch} = this.props
-
-    resetBodySize()
-
-    dispatch(updateEditorTarget(null))
-  }
-
-  render(props) {
-    const {editorTarget} = props
+  render() {
+    const {editorTarget} = this.props
 
     const isHidden = !editorTarget
 
@@ -122,12 +120,31 @@ class Editor extends Component {
     }
 
     return (
-      <div className='editor panel-width' hidden={isHidden}>
+      <div
+        ref={(ref) => {
+          this.base = ref
+        }}
+        className='editor panel-width'
+        hidden={isHidden}
+      >
         <span className='editor-title'>{editorTitle}</span>
-        <input type='text' value={itemTitle} />
-        <input type='text' value={itemUrl} hidden={isFolderItem} />
-        <button onClick={this.clickConfirmHandler}>{msgConfirm}</button>
-        <button onClick={this.clickCancelHandler}>{msgCancel}</button>
+        <input
+          ref={(ref) => {
+            this.titleInput = ref
+          }}
+          type='text'
+          value={itemTitle}
+        />
+        <input
+          ref={(ref) => {
+            this.urlInput = ref
+          }}
+          type='text'
+          value={itemUrl}
+          hidden={isFolderItem}
+        />
+        <button onClick={this.handleConfirm}>{msgConfirm}</button>
+        <button onClick={this.handleCancel}>{msgCancel}</button>
       </div>
     )
   }

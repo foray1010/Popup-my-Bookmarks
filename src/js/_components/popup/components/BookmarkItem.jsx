@@ -1,6 +1,6 @@
-import {bind, debounce} from 'decko'
+import {autobind, debounce} from 'core-decorators'
 import {connect} from 'react-redux'
-import {Component, h} from 'preact'
+import {createElement, Component} from 'react'
 import classNames from 'classnames'
 
 import {
@@ -153,22 +153,19 @@ class BookmarkItem extends Component {
       const bookmarkType = getBookmarkType(itemInfo)
 
       if (bookmarkType === TYPE_BOOKMARK) {
-        const el = document.getElementById(itemInfo.id)
+        const tooltip = await this.getTooltip()
 
-        if (el) {
-          const tooltip = await this.getTooltip()
-
-          if (tooltip) {
-            el.title = tooltip
-          }
+        if (tooltip) {
+          this.base.title = tooltip
         }
       }
     })
   }
 
-  @bind
-  async clickHandler(evt) {
+  @autobind
+  async handleClick(evt) {
     evt.preventDefault()
+    evt.persist()
 
     const {
       dispatch,
@@ -207,8 +204,8 @@ class BookmarkItem extends Component {
     }
   }
 
-  @bind
-  contextMenuHandler(evt) {
+  @autobind
+  handleContextMenu(evt) {
     // disable native context menu
     evt.preventDefault()
 
@@ -219,15 +216,15 @@ class BookmarkItem extends Component {
 
     dispatch([
       updateMousePosition({
-        x: evt.x,
-        y: evt.y
+        x: evt.clientX,
+        y: evt.clientY
       }),
       updateMenuTarget(itemInfo)
     ])
   }
 
-  @bind
-  async dragEndHandler() {
+  @autobind
+  async handleDragEnd() {
     const {
       dispatch,
       dragIndicator,
@@ -235,7 +232,7 @@ class BookmarkItem extends Component {
     } = this.props
 
     // because we move the original dragTargetEl to #drag-hack
-    // the original dragTargetEl cannot be updated by preact, so the model will not be updated
+    // the original dragTargetEl cannot be updated by react, so the model will not be updated
     // that's why we need to store the updated context in currentContext
     // const {dragIndicator, dragTarget} = currentContext
 
@@ -255,9 +252,15 @@ class BookmarkItem extends Component {
     ])
   }
 
-  @bind
+  @autobind
+  handleDragEnter(evt) {
+    evt.persist()
+
+    this._handleDragEnter(evt)
+  }
+
   @debounce(50)
-  async dragEnterHandler(evt) {
+  async _handleDragEnter(evt) {
     const {
       dispatch,
       dragTarget,
@@ -308,8 +311,8 @@ class BookmarkItem extends Component {
     dispatch(actionList)
   }
 
-  @bind
-  dragStartHandler() {
+  @autobind
+  handleDragStart() {
     const {
       dispatch,
       itemInfo,
@@ -318,7 +321,7 @@ class BookmarkItem extends Component {
 
     // hack to prevent dragover and dragend event stop working when dragTargetEl is removed
     setTimeout(() => {
-      const dragTargetEl = document.getElementById(itemInfo.id)
+      const dragTargetEl = this.base
 
       // create a cloned dragged item to replace the original one
       const clonedDragTargetEl = dragTargetEl.cloneNode(true)
@@ -336,9 +339,15 @@ class BookmarkItem extends Component {
     })
   }
 
-  @bind
+  @autobind
+  handleMouse(evt) {
+    evt.persist()
+
+    this._handleMouse(evt)
+  }
+
   @debounce(200)
-  async mouseHandler(evt) {
+  async _handleMouse(evt) {
     const {
       dispatch,
       itemInfo,
@@ -429,13 +438,13 @@ class BookmarkItem extends Component {
     return replaceTreeInfoByIndex(nextTreeIndex, treeInfo)
   }
 
-  render(props) {
+  render() {
     const {
       isGreyItem,
       isSelected,
       itemInfo,
       searchKeyword
-    } = props
+    } = this.props
 
     const bookmarkType = getBookmarkType(itemInfo)
     const itemClassName = classNames(
@@ -478,20 +487,23 @@ class BookmarkItem extends Component {
 
     return (
       <li
+        ref={(ref) => {
+          this.base = ref
+        }}
         id={itemInfo.id}
         draggable={isDraggable}
-        onDragEnd={this.dragEndHandler}
-        onDragEnter={this.dragEnterHandler}
-        onDragStart={this.dragStartHandler}
+        onDragEnd={this.handleDragEnd}
+        onDragEnter={this.handleDragEnter}
+        onDragStart={this.handleDragStart}
       >
         <a
           className={itemClassName}
           href={itemInfo.url}
           draggable={false}
-          onClick={this.clickHandler}
-          onContextMenu={this.contextMenuHandler}
-          onMouseEnter={this.mouseHandler}
-          onMouseLeave={this.mouseHandler}
+          onClick={this.handleClick}
+          onContextMenu={this.handleContextMenu}
+          onMouseEnter={this.handleMouse}
+          onMouseLeave={this.handleMouse}
         >
           <img className='icon' src={iconSrc} alt='' draggable={false} />
           <span className='no-text-overflow'>{itemTitle}</span>

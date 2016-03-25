@@ -1,6 +1,6 @@
-import {bind} from 'decko'
+import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {Component, h} from 'preact'
+import {createElement, Component} from 'react'
 
 import {updateSingleOption} from '../../actions'
 
@@ -18,8 +18,8 @@ class InputSelect extends Component {
     optionInput.focus()
   }
 
-  @bind
-  changeHandler(evt) {
+  @autobind
+  handleChange(evt) {
     const {
       dispatch,
       optionName
@@ -30,12 +30,12 @@ class InputSelect extends Component {
     dispatch(updateSingleOption(optionName, newOptionValue))
   }
 
-  render(props) {
+  render() {
     const {
       optionConfig,
       optionName,
       options
-    } = props
+    } = this.props
 
     const optionValue = options[optionName]
 
@@ -53,9 +53,9 @@ class InputSelect extends Component {
           name={optionName}
           type='text'
           value={optionValue}
-          onChange={this.changeHandler}
+          onChange={this.handleChange}
         />
-        <select onChange={this.changeHandler}>{optionItems}</select>
+        <select onChange={this.handleChange}>{optionItems}</select>
       </div>
     )
   }
@@ -63,12 +63,12 @@ class InputSelect extends Component {
 
 @connect(mapStateToProps)
 class OptionInput extends Component {
-  render(props) {
+  render() {
     const {
       optionChoice,
       optionName,
       options
-    } = props
+    } = this.props
 
     const optionValue = options[optionName]
 
