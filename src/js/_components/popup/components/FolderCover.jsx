@@ -1,6 +1,6 @@
-import {bind} from 'decko'
+import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {Component, h} from 'preact'
+import {createElement, Component} from 'react'
 
 import {
   removeTreeInfosFromIndex
@@ -13,8 +13,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 @connect(mapStateToProps)
 class FolderCover extends Component {
-  @bind
-  closeHandler() {
+  @autobind
+  handleClose() {
     const {
       dispatch,
       treeIndex
@@ -23,8 +23,8 @@ class FolderCover extends Component {
     dispatch(removeTreeInfosFromIndex(treeIndex + 1))
   }
 
-  render(props) {
-    const {isHidden} = props
+  render() {
+    const {isHidden} = this.props
 
     const delay = 300
     const xyRange = 20
@@ -32,12 +32,12 @@ class FolderCover extends Component {
     let mousePosition = null
     let triggerOnClickTimer = null
 
-    const mouseLeaveHandler = () => {
+    const handleMouseLeave = () => {
       clearTimeout(triggerOnClickTimer)
       triggerOnClickTimer = null
     }
 
-    const mouseMoveHandler = (evt) => {
+    const handleMouseMove = (evt) => {
       mousePosition = {
         x: evt.x,
         y: evt.y
@@ -59,7 +59,7 @@ class FolderCover extends Component {
         const isTrigger = isInTriggerPoint('x') && isInTriggerPoint('y')
 
         if (isTrigger) {
-          this.closeHandler()
+          this.handleClose()
           triggerOnClickTimer = null
         } else {
           triggerOnClickByXYRange(mousePosition)
@@ -71,9 +71,9 @@ class FolderCover extends Component {
       <div
         className='cover'
         hidden={isHidden}
-        onClick={this.closeHandler}
-        onMouseLeave={mouseLeaveHandler}
-        onMouseMove={mouseMoveHandler}
+        onClick={this.handleClose}
+        onMouseLeave={handleMouseLeave}
+        onMouseMove={handleMouseMove}
       />
     )
   }

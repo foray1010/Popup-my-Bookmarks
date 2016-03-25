@@ -1,6 +1,6 @@
-import {bind} from 'decko'
+import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {Component, h} from 'preact'
+import {createElement, Component} from 'react'
 
 import {
   removeTreeInfosFromIndex
@@ -13,8 +13,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 @connect(mapStateToProps)
 class TreeHeader extends Component {
-  @bind
-  closeHandler() {
+  @autobind
+  handleClose() {
     const {
       dispatch,
       treeIndex
@@ -23,12 +23,12 @@ class TreeHeader extends Component {
     dispatch(removeTreeInfosFromIndex(treeIndex))
   }
 
-  render(props) {
+  render() {
     const {
       isHidden,
       treeIndex,
       trees
-    } = props
+    } = this.props
 
     const treeInfo = trees[treeIndex]
 
@@ -36,7 +36,7 @@ class TreeHeader extends Component {
       <header hidden={isHidden}>
         <div className='tree-header-box'>
           <div className='tree-header-title no-text-overflow'>{treeInfo.title}</div>
-          <div className='tree-header-close' onClick={this.closeHandler} />
+          <div className='tree-header-close' onClick={this.handleClose} />
         </div>
       </header>
     )

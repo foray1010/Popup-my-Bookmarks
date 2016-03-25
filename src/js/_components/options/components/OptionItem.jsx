@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {h} from 'preact'
+import {createElement} from 'react'
 
 import InputNumber from './input_items/InputNumber'
 import InputSelect from './input_items/InputSelect'

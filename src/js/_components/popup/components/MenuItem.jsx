@@ -1,6 +1,6 @@
-import {bind} from 'decko'
+import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {Component, h} from 'preact'
+import {createElement, Component} from 'react'
 import classNames from 'classnames'
 
 import {
@@ -150,9 +150,10 @@ class MenuItem extends Component {
     this.openMultipleBookmarks = openMultipleBookmarks.bind(this)
   }
 
-  @bind
-  async clickHandler(evt) {
+  @autobind
+  async handleClick(evt) {
     evt.preventDefault()
+    evt.persist()
 
     const {target} = evt
     if (target.classList.contains('grey-item')) return
@@ -270,12 +271,12 @@ class MenuItem extends Component {
     }
   }
 
-  render(props) {
+  render() {
     const {
       copyTarget,
       cutTarget,
       menuItemKey
-    } = props
+    } = this.props
 
     const menuItemClassName = classNames(
       'item',
@@ -290,7 +291,7 @@ class MenuItem extends Component {
         <a
           className={menuItemClassName}
           href=''
-          onClick={this.clickHandler}
+          onClick={this.handleClick}
         >
           {chrome.i18n.getMessage(menuItemKey)}
         </a>

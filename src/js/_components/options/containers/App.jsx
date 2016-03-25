@@ -1,4 +1,4 @@
-import {h} from 'preact'
+import {createElement} from 'react'
 
 import Donate from '../components/Donate'
 import NavBar from '../components/NavBar'

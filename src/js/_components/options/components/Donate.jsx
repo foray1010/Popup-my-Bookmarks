@@ -1,4 +1,4 @@
-import {h} from 'preact'
+import {createElement} from 'react'
 
 const paypalUrl = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick' +
   '&hosted_button_id=TP67BBZ7VK934'

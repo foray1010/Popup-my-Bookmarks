@@ -1,6 +1,6 @@
-import {bind} from 'decko'
+import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {Component, h} from 'preact'
+import {createElement, Component} from 'react'
 
 import {updateSingleOption} from '../../actions'
 
@@ -10,8 +10,8 @@ const mapStateToProps = (state) => ({
 
 @connect(mapStateToProps)
 class OptionInput extends Component {
-  @bind
-  changeHandler(evt) {
+  @autobind
+  handleChange(evt) {
     const {
       dispatch,
       optionName,
@@ -35,13 +35,13 @@ class OptionInput extends Component {
     dispatch(updateSingleOption(optionName, newOptionValue))
   }
 
-  render(props) {
+  render() {
     const {
       optionChoice,
       optionChoiceIndex,
       optionName,
       options
-    } = props
+    } = this.props
 
     const optionValue = options[optionName]
 
@@ -54,7 +54,7 @@ class OptionInput extends Component {
           type='checkbox'
           value={String(optionChoiceIndex)}
           checked={isChecked}
-          onChange={this.changeHandler}
+          onChange={this.handleChange}
         />
         {optionChoice}
       </label>
@@ -64,11 +64,11 @@ class OptionInput extends Component {
 
 @connect(mapStateToProps)
 class SelectMultiple extends Component {
-  render(props) {
+  render() {
     const {
       optionConfig,
       optionName
-    } = props
+    } = this.props
 
     const checkboxItems = []
 

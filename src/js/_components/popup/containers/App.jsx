@@ -1,6 +1,6 @@
-import {bind, debounce} from 'decko'
+import {autobind, debounce} from 'core-decorators'
 import {connect} from 'react-redux'
-import {Component, h} from 'preact'
+import {createElement, Component} from 'react'
 import _debounce from 'lodash.debounce'
 
 import {
@@ -67,7 +67,7 @@ class App extends Component {
     return trees.findIndex((treeInfo) => treeInfo.id === keyboardTarget.parentId)
   }
 
-  contextMenuHandler(evt) {
+  handleContextMenu(evt) {
     // allow native context menu if it is an input element
     if (evt.target.tagName === 'INPUT') {
       return
@@ -75,6 +75,47 @@ class App extends Component {
 
     // disable native context menu
     evt.preventDefault()
+  }
+
+  @autobind
+  handleKeyDown(evt) {
+    evt.persist()
+
+    this._handleKeyDown(evt)
+  }
+
+  @debounce(30)
+  async _handleKeyDown(evt) {
+    const keyCode = evt.keyCode
+
+    switch (keyCode) {
+      case 37: // left
+        await this.keyboardArrowLeftRightHandler(true)
+        break
+
+      case 38: // up
+        evt.preventDefault()
+        await this.keyboardArrowUpDownHandler(true)
+        break
+
+      case 39: // right
+        await this.keyboardArrowLeftRightHandler(false)
+        break
+
+      case 40: // down
+        evt.preventDefault()
+        await this.keyboardArrowUpDownHandler(false)
+        break
+
+      default:
+    }
+  }
+
+  handleMouseDown(evt) {
+    // disable the scrolling arrows after middle click
+    if (evt.button === 1) {
+      evt.preventDefault()
+    }
   }
 
   initBookmarkEvent() {
@@ -206,50 +247,15 @@ class App extends Component {
     dispatch(updateKeyboardTarget(targetBookmarkList[nextSelectedIndex]))
   }
 
-  @bind
-  @debounce(30)
-  async keyDownHandler(evt) {
-    const keyCode = evt.keyCode
-
-    switch (keyCode) {
-      case 37: // left
-        await this.keyboardArrowLeftRightHandler(true)
-        break
-
-      case 38: // up
-        evt.preventDefault()
-        await this.keyboardArrowUpDownHandler(true)
-        break
-
-      case 39: // right
-        await this.keyboardArrowLeftRightHandler(false)
-        break
-
-      case 40: // down
-        evt.preventDefault()
-        await this.keyboardArrowUpDownHandler(false)
-        break
-
-      default:
-    }
-  }
-
-  mouseDownHandler(evt) {
-    // disable the scrolling arrows after middle click
-    if (evt.button === 1) {
-      evt.preventDefault()
-    }
-  }
-
   render() {
     console.log('render')
 
     return (
       <div
         id='app'
-        onContextMenu={this.contextMenuHandler}
-        onKeyDown={this.keyDownHandler}
-        onMouseDown={this.mouseDownHandler}
+        onContextMenu={this.handleContextMenu}
+        onKeyDown={this.handleKeyDown}
+        onMouseDown={this.handleMouseDown}
       >
         <Panel />
         <MenuCover />
