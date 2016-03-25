@@ -20,10 +20,6 @@ const webpackConfig = {
     new webpack.optimize.OccurenceOrderPlugin(true)
   ],
   resolve: {
-    alias: {
-      react: 'preact-compat',
-      'react-dom': 'preact-compat'
-    },
     extensions: ['', '.js', '.jsx']
   },
   stats: {
