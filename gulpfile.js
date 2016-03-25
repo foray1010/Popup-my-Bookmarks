@@ -240,11 +240,11 @@ gulp.task('dev:html', ['dev:init'], () => {
 })
 
 gulp.task('dev:img', ['dev:init'], () => {
-  const iconFilter = gulpFilter(path.join('img', 'icon*.png'), {
+  const iconFilter = gulpFilter(path.join(sourceDir, 'img', 'icon*.png'), {
     restore: true
   })
 
-  return gulp.src(path.join('img', '*'))
+  return gulp.src(path.join(sourceDir, 'img', '*'))
     .pipe(iconFilter)
       .pipe(imageGrayScale({
         logProgress: false
