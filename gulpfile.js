@@ -2,7 +2,6 @@
 
 const bluebird = require('bluebird')
 const co = require('co')
-const cson = require('cson')
 const eslint = require('gulp-eslint')
 const fs = require('fs-extra')
 const gulp = require('gulp')
@@ -18,6 +17,7 @@ const stylint = require('gulp-stylint')
 const stylus = require('gulp-stylus')
 const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
+const YAML = require('yamljs')
 const zip = require('gulp-zip')
 
 const packageJSON = require('./package')
@@ -28,24 +28,24 @@ bluebird.promisifyAll(fs)
 // predefined dir path
 const compileDir = '__compile'
 const devDir = '__dev'
-const resourcesDir = '_resources'
+const sourceDir = 'src'
 
 // language config
 const lang = {
   css: {
     extname: '.styl',
     destDir: 'css',
-    srcDir: 'css'
+    srcDir: path.join(sourceDir, 'css')
   },
   html: {
     extname: '.jade',
     destDir: '.',
-    srcDir: 'html'
+    srcDir: path.join(sourceDir, 'html')
   },
   js: {
     extname: '.js?(x)',
     destDir: 'js',
-    srcDir: 'js'
+    srcDir: path.join(sourceDir, 'js')
   }
 }
 
@@ -102,7 +102,7 @@ function compileLang(langName, workingDir, options) {
 
 function* compileManifest(workingDir, updateFn) {
   const destPath = path.join(workingDir, 'manifest.json')
-  const manifestJSON = cson.load(path.join(resourcesDir, 'manifest.cson'))
+  const manifestJSON = YAML.load(path.join(sourceDir, 'manifest.yml'))
 
   manifestJSON.version = packageJSON.version
   if (updateFn) {
@@ -121,10 +121,8 @@ function validatePackageVersion() {
 
 // markdown handler
 function* getMarkdownData(titleList) {
-  const mdSource = path.join(resourcesDir, 'markdown')
-
   const dataList = yield titleList.map(function* (title) {
-    const fileData = yield fs.readFileAsync(path.join(mdSource, `${title}.md`), 'utf-8')
+    const fileData = yield fs.readFileAsync(path.join('markdown', `${title}.md`), 'utf-8')
 
     return `## ${title}\n\n${fileData}`
   })
@@ -183,13 +181,17 @@ gulp.task('compile:others', ['compile:init'], () => {
     const fileList = [
       '_locales',
       'font',
-      'img',
-      'LICENSE'
+      'img'
     ]
-
     yield fileList.map((fileName) => fs.copyAsync(
-      fileName,
-      path.join(compileDir, fileName))
+      path.join(sourceDir, fileName),
+      path.join(compileDir, fileName)
+    ))
+
+    const licenseFile = 'LICENSE'
+    yield fs.copyAsync(
+      licenseFile,
+      path.join(compileDir, licenseFile)
     )
 
     yield compileManifest(compileDir)
@@ -258,10 +260,12 @@ gulp.task('dev:js', ['dev:init'], () => {
 
 gulp.task('dev:others', ['dev:init'], () => {
   return co(function* () {
-    const fileList = ['font', '_locales']
-
+    const fileList = [
+      'font',
+      '_locales'
+    ]
     yield fileList.map((fileName) => fs.symlinkAsync(
-      path.join('..', fileName),
+      path.join('..', path.join(sourceDir, fileName)),
       path.join(devDir, fileName),
       'dir'
     ))
