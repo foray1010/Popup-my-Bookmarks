@@ -227,12 +227,12 @@ export async function openMultipleBookmarks(itemInfo, menuItemNum) {
   }
 
   if (menuItemNum === 0) {
-    for (const url of urlList) {
-      await chromep.tabs.create({
+    await Promise.all(urlList.map((url) => {
+      return chromep.tabs.create({
         url,
         active: false
       })
-    }
+    }))
   } else {
     await chromep.windows.create({
       url: urlList,

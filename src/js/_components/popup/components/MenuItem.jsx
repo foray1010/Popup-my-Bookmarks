@@ -139,7 +139,8 @@ async function sortByName(parentId) {
 const mapStateToProps = (state) => ({
   copyTarget: state.copyTarget,
   cutTarget: state.cutTarget,
-  menuTarget: state.menuTarget
+  menuTarget: state.menuTarget,
+  options: state.options
 })
 
 @connect(mapStateToProps)
