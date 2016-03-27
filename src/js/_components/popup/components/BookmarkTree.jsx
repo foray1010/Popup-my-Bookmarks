@@ -33,14 +33,16 @@ class BookmarkTree extends Component {
   setHeight() {
     const bookmarkListEl = this.bookmarkList
 
-    // search-box and tree-header-box height
-    const bookmarkListElOffsetTop = bookmarkListEl.getBoundingClientRect().top
+    if (bookmarkListEl) {
+      // search-box and tree-header-box height
+      const bookmarkListElOffsetTop = bookmarkListEl.getBoundingClientRect().top
 
-    const maxListHeight = MAX_HEIGHT - bookmarkListElOffsetTop
+      const maxListHeight = MAX_HEIGHT - bookmarkListElOffsetTop
 
-    const listHeight = Math.min(bookmarkListEl.scrollHeight, maxListHeight)
+      const listHeight = Math.min(bookmarkListEl.scrollHeight, maxListHeight)
 
-    bookmarkListEl.style.maxHeight = listHeight + 'px'
+      bookmarkListEl.style.maxHeight = listHeight + 'px'
+    }
   }
 
   afterRender() {
