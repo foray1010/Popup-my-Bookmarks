@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 
 import {updateSingleOption} from '../../actions'
 
@@ -8,30 +8,6 @@ const mapStateToProps = (state) => ({
   options: state.options
 })
 
-@connect(mapStateToProps)
-class OptionInput extends Component {
-  render() {
-    const {
-      optionChoice,
-      optionChoiceIndex,
-      optionName,
-      options
-    } = this.props
-
-    const optionValue = options[optionName]
-
-    return (
-      <option
-        value={String(optionChoiceIndex)}
-        selected={optionChoiceIndex === optionValue}
-      >
-        {optionChoice}
-      </option>
-    )
-  }
-}
-
-@connect(mapStateToProps)
 class SelectString extends Component {
   @autobind
   handleChange(evt) {
@@ -48,30 +24,45 @@ class SelectString extends Component {
   render() {
     const {
       optionConfig,
-      optionName
+      optionName,
+      options
     } = this.props
 
     const optionItems = []
+    const optionValue = options[optionName]
 
     optionConfig.choices.forEach((optionChoice, optionChoiceIndex) => {
       if (optionChoice !== undefined) {
         optionItems.push(
-          <OptionInput
+          <option
             key={String(optionChoiceIndex)}
-            optionChoice={optionChoice}
-            optionChoiceIndex={optionChoiceIndex}
-            optionName={optionName}
-          />
+            value={String(optionChoiceIndex)}
+          >
+            {optionChoice}
+          </option>
         )
       }
     })
 
     return (
-      <select name={optionName} onChange={this.handleChange}>
+      <select
+        name={optionName}
+        defaultValue={optionValue}
+        onChange={this.handleChange}
+      >
         {optionItems}
       </select>
     )
   }
 }
 
-export default SelectString
+if (process.env.NODE_ENV !== 'production') {
+  SelectString.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    optionConfig: PropTypes.object.isRequired,
+    optionName: PropTypes.string.isRequired,
+    options: PropTypes.object.isRequired
+  }
+}
+
+export default connect(mapStateToProps)(SelectString)

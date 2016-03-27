@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {createElement} from 'react'
+import {createElement, PropTypes} from 'react'
 
 import InputNumber from './input_items/InputNumber'
 import InputSelect from './input_items/InputSelect'
@@ -53,6 +53,13 @@ const OptionItem = (props) => {
       </div>
     </div>
   )
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  OptionItem.propTypes = {
+    optionName: PropTypes.string.isRequired,
+    optionsConfig: PropTypes.object.isRequired
+  }
 }
 
 export default connect(mapStateToProps)(OptionItem)

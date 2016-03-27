@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 
 import {
   isFolder,
@@ -20,7 +20,6 @@ const mapStateToProps = (state) => ({
   editorTarget: state.editorTarget
 })
 
-@connect(mapStateToProps)
 class Editor extends Component {
   componentDidUpdate() {
     const {editorTarget} = this.props
@@ -45,7 +44,6 @@ class Editor extends Component {
     let leftPositionPx = ''
 
     if (!isHidden) {
-      const body = document.body
       const editorHeight = el.offsetHeight
       const editorTargetEl = document.getElementById(editorTarget.id)
       const html = document.getElementsByTagName('html')[0]
@@ -56,7 +54,7 @@ class Editor extends Component {
       const bottomPosition = htmlHeight - editorHeight - editorTargetOffset.top
 
       if (editorHeight > htmlHeight) {
-        body.style.height = editorHeight + 'px'
+        document.body.style.height = editorHeight + 'px'
       }
 
       bottomPositionPx = Math.max(bottomPosition, 0) + 'px'
@@ -150,4 +148,11 @@ class Editor extends Component {
   }
 }
 
-export default Editor
+if (process.env.NODE_ENV !== 'production') {
+  Editor.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    editorTarget: PropTypes.object
+  }
+}
+
+export default connect(mapStateToProps)(Editor)

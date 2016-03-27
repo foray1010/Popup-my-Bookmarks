@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 import classNames from 'classnames'
 
 import {updateSingleOption} from '../../actions'
@@ -61,35 +61,40 @@ class OptionInput extends Component {
   }
 }
 
-@connect(mapStateToProps)
-class SelectButton extends Component {
-  render() {
-    const {
-      optionName,
-      options
-    } = this.props
+const SelectButton = (props) => {
+  const {
+    optionName,
+    options
+  } = props
 
-    const optionValue = options[optionName]
+  const optionItems = [true, false].map((optionChoice) => (
+    <OptionInput
+      key={String(optionChoice)}
+      optionChoice={optionChoice}
+      optionName={optionName}
+    />
+  ))
+  const optionValue = options[optionName]
 
-    const optionItems = [true, false].map((optionChoice) => (
-      <OptionInput
-        key={String(optionChoice)}
-        optionChoice={optionChoice}
-        optionName={optionName}
-      />
-    ))
+  const selectdButtonIndex = optionValue ? 0 : 1
 
-    const selectdButtonIndex = optionValue ? 0 : 1
+  const selectButtonCoverStyle = {
+    left: `${selectdButtonIndex * 50}%`
+  }
 
-    const selectButtonCoverStyle = `left: ${selectdButtonIndex * 50}%`
+  return (
+    <div className='select-button-box'>
+      <div className='select-button-cover' style={selectButtonCoverStyle} />
+      {optionItems}
+    </div>
+  )
+}
 
-    return (
-      <div className='select-button-box'>
-        <div className='select-button-cover' style={selectButtonCoverStyle} />
-        {optionItems}
-      </div>
-    )
+if (process.env.NODE_ENV !== 'production') {
+  SelectButton.propTypes = {
+    optionName: PropTypes.string.isRequired,
+    options: PropTypes.object.isRequired
   }
 }
 
-export default SelectButton
+export default connect(mapStateToProps)(SelectButton)

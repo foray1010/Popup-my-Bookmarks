@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 import classNames from 'classnames'
 
 import {
@@ -12,7 +12,6 @@ const mapStateToProps = (state) => ({
   selectedNavModule: state.selectedNavModule
 })
 
-@connect(mapStateToProps)
 class NavBarItem extends Component {
   @autobind
   async handleClick(evt) {
@@ -58,4 +57,12 @@ class NavBarItem extends Component {
   }
 }
 
-export default NavBarItem
+if (process.env.NODE_ENV !== 'production') {
+  NavBarItem.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    navBarItemInfo: PropTypes.object.isRequired,
+    selectedNavModule: PropTypes.string.isRequired
+  }
+}
+
+export default connect(mapStateToProps)(NavBarItem)

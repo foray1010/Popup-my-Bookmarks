@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 
 import {updateSingleOption} from '../../actions'
 
@@ -62,35 +62,39 @@ class OptionInput extends Component {
   }
 }
 
-@connect(mapStateToProps)
-class SelectMultiple extends Component {
-  render() {
-    const {
-      optionConfig,
-      optionName
-    } = this.props
+const SelectMultiple = (props) => {
+  const {
+    optionConfig,
+    optionName
+  } = props
 
-    const checkboxItems = []
+  const checkboxItems = []
 
-    optionConfig.choices.forEach((optionChoice, optionChoiceIndex) => {
-      if (optionChoice !== undefined) {
-        checkboxItems.push(
-          <OptionInput
-            key={String(optionChoiceIndex)}
-            optionChoice={optionChoice}
-            optionChoiceIndex={optionChoiceIndex}
-            optionName={optionName}
-          />
-        )
-      }
-    })
+  optionConfig.choices.forEach((optionChoice, optionChoiceIndex) => {
+    if (optionChoice !== undefined) {
+      checkboxItems.push(
+        <OptionInput
+          key={String(optionChoiceIndex)}
+          optionChoice={optionChoice}
+          optionChoiceIndex={optionChoiceIndex}
+          optionName={optionName}
+        />
+      )
+    }
+  })
 
-    return (
-      <div className='select-multiple-box'>
-        {checkboxItems}
-      </div>
-    )
+  return (
+    <div className='select-multiple-box'>
+      {checkboxItems}
+    </div>
+  )
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  SelectMultiple.propTypes = {
+    optionConfig: PropTypes.object.isRequired,
+    optionName: PropTypes.string.isRequired
   }
 }
 
-export default SelectMultiple
+export default connect(mapStateToProps)(SelectMultiple)

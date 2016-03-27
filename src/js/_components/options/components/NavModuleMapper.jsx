@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {createElement} from 'react'
+import {createElement, PropTypes} from 'react'
 
 import {
   NAV_MODULE_CONTRIBUTORS,
@@ -30,6 +30,12 @@ const NavModuleMapper = (props) => {
 
     default:
       return <main />
+  }
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  NavModuleMapper.propTypes = {
+    selectedNavModule: PropTypes.string.isRequired
   }
 }
 

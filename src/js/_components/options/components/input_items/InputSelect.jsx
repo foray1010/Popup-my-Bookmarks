@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 
 import {updateSingleOption} from '../../actions'
 
@@ -8,7 +8,6 @@ const mapStateToProps = (state) => ({
   options: state.options
 })
 
-@connect(mapStateToProps)
 class InputSelect extends Component {
   componentDidUpdate() {
     const {optionName} = this.props
@@ -40,11 +39,9 @@ class InputSelect extends Component {
     const optionValue = options[optionName]
 
     const optionItems = optionConfig.choices.asMutable().map((optionChoice, optionChoiceIndex) => (
-      <OptionInput
-        key={String(optionChoiceIndex)}
-        optionChoice={optionChoice}
-        optionName={optionName}
-      />
+      <option key={String(optionChoiceIndex)}>
+        {optionChoice}
+      </option>
     ))
 
     return (
@@ -55,29 +52,24 @@ class InputSelect extends Component {
           value={optionValue}
           onChange={this.handleChange}
         />
-        <select onChange={this.handleChange}>{optionItems}</select>
+        <select
+          defaultValue={optionValue}
+          onChange={this.handleChange}
+        >
+          {optionItems}
+        </select>
       </div>
     )
   }
 }
 
-@connect(mapStateToProps)
-class OptionInput extends Component {
-  render() {
-    const {
-      optionChoice,
-      optionName,
-      options
-    } = this.props
-
-    const optionValue = options[optionName]
-
-    return (
-      <option selected={optionValue === optionChoice}>
-        {optionChoice}
-      </option>
-    )
+if (process.env.NODE_ENV !== 'production') {
+  InputSelect.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    optionConfig: PropTypes.object.isRequired,
+    optionName: PropTypes.string.isRequired,
+    options: PropTypes.object.isRequired
   }
 }
 
-export default InputSelect
+export default connect(mapStateToProps)(InputSelect)
