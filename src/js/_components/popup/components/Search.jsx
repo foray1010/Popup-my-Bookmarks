@@ -55,7 +55,7 @@ class Search extends Component {
 
   render() {
     return (
-      <div id='search-box'>
+      <header id='search-box'>
         <input
           id='search-input'
           type='search'
@@ -64,7 +64,7 @@ class Search extends Component {
           autoFocus
           onInput={this.handleInput}
         />
-      </div>
+      </header>
     )
   }
 }

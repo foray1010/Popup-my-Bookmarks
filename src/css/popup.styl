@@ -71,9 +71,6 @@ body
     padding: $golden-gap
     width: 100%
 
-    &:focus
-      border-color: $main-color1
-
 .editor-title
   background-color: $main-color2
   color: $blank-color
@@ -160,6 +157,7 @@ body
   margin-bottom: $golden-gap
 
 .tree-header-close
+  background-color: transparent
   flex-shrink: 0 // don't push me out of view when title is too long
   height: $tree-header-box-height
   position: relative
@@ -192,6 +190,7 @@ body
   cursor: default
   font: 22px ArchivoNarrow, simhei
   line-height: $tree-header-box-height + 1px
+  margin: 0
   margin-right: auto
   padding: 0 $golden-gap-2x
 
@@ -231,6 +230,7 @@ body
   border: 0
   color: $main-font-color
   font-size: 12px
+  outline: 0
   padding: 0 1px
   width: 100%
 

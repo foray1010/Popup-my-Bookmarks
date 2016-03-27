@@ -67,8 +67,8 @@ class OptionButton extends Component {
   render() {
     return (
       <div id='option-button-box'>
-        <button onClick={this.handleConfirm}>{msgConfirm}</button>
-        <button onClick={this.handleDefault}>{msgDefault}</button>
+        <button type='button' onClick={this.handleConfirm}>{msgConfirm}</button>
+        <button type='button' onClick={this.handleDefault}>{msgDefault}</button>
       </div>
     )
   }
