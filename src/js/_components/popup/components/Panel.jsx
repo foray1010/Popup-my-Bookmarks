@@ -19,7 +19,7 @@ const Panel = (props) => {
 
     targetPanelItems.push(
       <BookmarkTree
-        key={treeInfo.id}
+        key={String(treeIndex)}
         treeIndex={treeIndex}
       />
     )
