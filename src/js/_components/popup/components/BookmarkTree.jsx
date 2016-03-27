@@ -3,11 +3,12 @@ import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
 
 import {
-  genBookmarkList
-} from '../functions'
-import {
+  DRAG_INDICATOR,
   MAX_HEIGHT
 } from '../constants'
+import {
+  genBookmarkList
+} from '../functions'
 import BookmarkItem from './BookmarkItem'
 import DragIndicator from './DragIndicator'
 import FolderCover from './FolderCover'
@@ -92,7 +93,7 @@ class BookmarkTree extends Component {
         dragIndicatorIndex += rootTree.children.length
       }
 
-      treeItems.splice(dragIndicator.index, 0, <DragIndicator />)
+      treeItems.splice(dragIndicator.index, 0, <DragIndicator key={DRAG_INDICATOR} />)
     }
 
     if (searchKeyword && treeItems.length === 0) {
