@@ -5,14 +5,6 @@ import {createElement, Component, PropTypes} from 'react'
 import {updateSingleOption} from '../../actions'
 
 class InputSelect extends Component {
-  componentDidUpdate() {
-    const {optionName} = this.props
-
-    const optionInput = document.getElementsByName(optionName)[0]
-
-    optionInput.focus()
-  }
-
   @autobind
   handleChange(evt) {
     const {
@@ -23,6 +15,10 @@ class InputSelect extends Component {
     const newOptionValue = evt.target.value.trim().replace(/\s+/g, ' ')
 
     dispatch(updateSingleOption(optionName, newOptionValue))
+
+    if (evt.target.tagName === 'SELECT') {
+      this.inputEl.focus()
+    }
   }
 
   render() {
@@ -43,6 +39,9 @@ class InputSelect extends Component {
     return (
       <div className='input-select-box'>
         <input
+          ref={(ref) => {
+            this.inputEl = ref
+          }}
           name={optionName}
           type='text'
           value={optionValue}
