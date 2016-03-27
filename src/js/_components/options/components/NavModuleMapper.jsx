@@ -24,9 +24,7 @@ const NavModuleMapper = (props) => {
     case NAV_MODULE_CONTROL:
     case NAV_MODULE_GENERAL:
     case NAV_MODULE_USER_INTERFACE:
-      return (
-        <OptionTable />
-      )
+      return <OptionTable />
 
     default:
       return <main />
