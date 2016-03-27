@@ -81,8 +81,8 @@ function compileLang(langName, workingDir, options) {
 
     return gulp.src(thisSrcPath)
       .pipe(plumber())
-      .pipe(options.compilerPipe || gutil.noop())
-      .pipe(options.miniferPipe || gutil.noop())
+      .pipe(options.compilerPipe ? options.compilerPipe() : gutil.noop())
+      .pipe(options.miniferPipe ? options.miniferPipe() : gutil.noop())
       .pipe(gulp.dest(destDir))
   }
 
@@ -158,8 +158,8 @@ gulp.task('compile:init', () => {
 
 gulp.task('compile:css', ['compile:init'], () => {
   return compileLang('css', compileDir, {
-    compilerPipe: stylus({'include css': true}),
-    miniferPipe: nano({
+    compilerPipe: () => stylus({'include css': true}),
+    miniferPipe: () => nano({
       autoprefixer: false,
       discardComments: {removeAll: true}
     })
@@ -168,7 +168,7 @@ gulp.task('compile:css', ['compile:init'], () => {
 
 gulp.task('compile:html', ['compile:init'], () => {
   return compileLang('html', compileDir, {
-    compilerPipe: jade()
+    compilerPipe: () => jade()
   })
 })
 
@@ -229,13 +229,13 @@ gulp.task('dev:init', () => {
 
 gulp.task('dev:css', ['dev:init'], () => {
   return compileLang('css', devDir, {
-    compilerPipe: stylus({'include css': true})
+    compilerPipe: () => stylus({'include css': true})
   })
 })
 
 gulp.task('dev:html', ['dev:init'], () => {
   return compileLang('html', devDir, {
-    compilerPipe: jade({pretty: true})
+    compilerPipe: () => jade({pretty: true})
   })
 })
 
