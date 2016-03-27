@@ -25,6 +25,9 @@ class Editor extends Component {
     this.setEditorPosition()
 
     if (!isHidden) {
+      this.titleInput.value = editorTarget.title
+      this.urlInput.value = editorTarget.url
+
       // auto focus to title field
       this.titleInput.focus()
     }
@@ -101,13 +104,8 @@ class Editor extends Component {
 
     let editorTitle = null
     let isFolderItem = false
-    let itemTitle = null
-    let itemUrl = null
 
     if (editorTarget) {
-      itemTitle = editorTarget.title
-      itemUrl = editorTarget.url
-
       isFolderItem = isFolder(editorTarget)
 
       editorTitle = isFolderItem ? msgRename : msgEdit
@@ -127,14 +125,12 @@ class Editor extends Component {
             this.titleInput = ref
           }}
           type='text'
-          value={itemTitle}
         />
         <input
           ref={(ref) => {
             this.urlInput = ref
           }}
           type='text'
-          value={itemUrl}
           hidden={isFolderItem}
         />
         <button onClick={this.handleConfirm}>{msgConfirm}</button>
