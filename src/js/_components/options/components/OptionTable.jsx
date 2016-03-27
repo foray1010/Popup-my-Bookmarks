@@ -7,11 +7,6 @@ import {
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 
-const mapStateToProps = (state) => ({
-  options: state.options,
-  selectedNavModule: state.selectedNavModule
-})
-
 const OptionTable = (props) => {
   const {
     options,
@@ -48,5 +43,10 @@ if (process.env.NODE_ENV !== 'production') {
     selectedNavModule: PropTypes.string.isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  options: state.options,
+  selectedNavModule: state.selectedNavModule
+})
 
 export default connect(mapStateToProps)(OptionTable)

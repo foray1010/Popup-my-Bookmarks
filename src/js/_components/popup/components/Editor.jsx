@@ -16,10 +16,6 @@ const msgConfirm = chrome.i18n.getMessage('confirm')
 const msgEdit = chrome.i18n.getMessage('edit')
 const msgRename = chrome.i18n.getMessage('rename')
 
-const mapStateToProps = (state) => ({
-  editorTarget: state.editorTarget
-})
-
 class Editor extends Component {
   componentDidUpdate() {
     const {editorTarget} = this.props
@@ -154,5 +150,9 @@ if (process.env.NODE_ENV !== 'production') {
     editorTarget: PropTypes.object
   }
 }
+
+const mapStateToProps = (state) => ({
+  editorTarget: state.editorTarget
+})
 
 export default connect(mapStateToProps)(Editor)

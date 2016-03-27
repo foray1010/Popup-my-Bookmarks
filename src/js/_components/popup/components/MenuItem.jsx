@@ -136,13 +136,6 @@ async function sortByName(parentId) {
   }
 }
 
-const mapStateToProps = (state) => ({
-  copyTarget: state.copyTarget,
-  cutTarget: state.cutTarget,
-  menuTarget: state.menuTarget,
-  options: state.options
-})
-
 class MenuItem extends Component {
   constructor() {
     super()
@@ -302,13 +295,20 @@ class MenuItem extends Component {
 
 if (process.env.NODE_ENV !== 'production') {
   MenuItem.propTypes = {
-    copyTarget: PropTypes.object.isRequired,
-    cutTarget: PropTypes.object.isRequired,
+    copyTarget: PropTypes.object,
+    cutTarget: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
-    isHidden: PropTypes.bool.isRequired,
     menuItemKey: PropTypes.string.isRequired,
-    menuTarget: PropTypes.object.isRequired
+    menuTarget: PropTypes.object.isRequired,
+    options: PropTypes.object.isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  copyTarget: state.copyTarget,
+  cutTarget: state.cutTarget,
+  menuTarget: state.menuTarget,
+  options: state.options
+})
 
 export default connect(mapStateToProps)(MenuItem)

@@ -17,12 +17,6 @@ import chromep from '../../lib/chromePromise'
 const msgConfirm = chrome.i18n.getMessage('confirm')
 const msgDefault = chrome.i18n.getMessage('default')
 
-const mapStateToProps = (state) => ({
-  options: state.options,
-  optionsConfig: state.optionsConfig,
-  selectedNavModule: state.selectedNavModule
-})
-
 class OptionButton extends Component {
   @autobind
   async handleConfirm() {
@@ -88,5 +82,11 @@ if (process.env.NODE_ENV !== 'production') {
     selectedNavModule: PropTypes.string.isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  options: state.options,
+  optionsConfig: state.optionsConfig,
+  selectedNavModule: state.selectedNavModule
+})
 
 export default connect(mapStateToProps)(OptionButton)

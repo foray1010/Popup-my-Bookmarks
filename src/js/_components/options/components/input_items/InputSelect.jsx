@@ -4,10 +4,6 @@ import {createElement, Component, PropTypes} from 'react'
 
 import {updateSingleOption} from '../../actions'
 
-const mapStateToProps = (state) => ({
-  options: state.options
-})
-
 class InputSelect extends Component {
   componentDidUpdate() {
     const {optionName} = this.props
@@ -71,5 +67,9 @@ if (process.env.NODE_ENV !== 'production') {
     options: PropTypes.object.isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  options: state.options
+})
 
 export default connect(mapStateToProps)(InputSelect)

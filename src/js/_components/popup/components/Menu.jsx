@@ -12,12 +12,6 @@ import {
 } from '../constants'
 import MenuArea from './MenuArea'
 
-const mapStateToProps = (state) => ({
-  menuTarget: state.menuTarget,
-  mousePosition: state.mousePosition,
-  searchKeyword: state.searchKeyword
-})
-
 class Menu extends Component {
   componentDidUpdate() {
     this.setMenuPosition()
@@ -148,5 +142,11 @@ if (process.env.NODE_ENV !== 'production') {
     searchKeyword: PropTypes.string.isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  menuTarget: state.menuTarget,
+  mousePosition: state.mousePosition,
+  searchKeyword: state.searchKeyword
+})
 
 export default connect(mapStateToProps)(Menu)

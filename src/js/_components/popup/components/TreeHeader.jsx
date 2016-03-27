@@ -6,11 +6,6 @@ import {
   removeTreeInfosFromIndex
 } from '../actions'
 
-const mapStateToProps = (state, ownProps) => ({
-  isHidden: Boolean(ownProps.treeIndex === 0 || state.searchKeyword),
-  trees: state.trees
-})
-
 class TreeHeader extends Component {
   @autobind
   handleClose() {
@@ -50,5 +45,10 @@ if (process.env.NODE_ENV !== 'production') {
     trees: PropTypes.arrayOf(PropTypes.object).isRequired
   }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  isHidden: Boolean(ownProps.treeIndex === 0 || state.searchKeyword),
+  trees: state.trees
+})
 
 export default connect(mapStateToProps)(TreeHeader)

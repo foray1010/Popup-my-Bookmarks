@@ -10,10 +10,6 @@ import {
 import Contributors from './Contributors'
 import OptionTable from './OptionTable'
 
-const mapStateToProps = (state) => ({
-  selectedNavModule: state.selectedNavModule
-})
-
 const NavModuleMapper = (props) => {
   const {selectedNavModule} = props
 
@@ -27,7 +23,7 @@ const NavModuleMapper = (props) => {
       return <OptionTable />
 
     default:
-      return <main />
+      return null
   }
 }
 
@@ -36,5 +32,9 @@ if (process.env.NODE_ENV !== 'production') {
     selectedNavModule: PropTypes.string.isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  selectedNavModule: state.selectedNavModule
+})
 
 export default connect(mapStateToProps)(NavModuleMapper)

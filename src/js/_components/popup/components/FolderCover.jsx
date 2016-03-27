@@ -6,11 +6,6 @@ import {
   removeTreeInfosFromIndex
 } from '../actions'
 
-const mapStateToProps = (state, ownProps) => ({
-  // hide the folder if it is not the top two folder
-  isHidden: state.trees.length - ownProps.treeIndex <= 2
-})
-
 class FolderCover extends Component {
   @autobind
   handleClose() {
@@ -85,5 +80,10 @@ if (process.env.NODE_ENV !== 'production') {
     treeIndex: PropTypes.number.isRequired
   }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  // hide the folder if it is not the top two folder
+  isHidden: state.trees.length - ownProps.treeIndex <= 2
+})
 
 export default connect(mapStateToProps)(FolderCover)

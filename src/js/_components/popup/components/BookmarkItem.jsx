@@ -32,31 +32,6 @@ import chromep from '../../lib/chromePromise'
 const dragHackEl = document.getElementById('drag-hack')
 const msgAlertBookmarklet = chrome.i18n.getMessage('alert_bookmarklet')
 
-const mapStateToProps = (state, ownProps) => {
-  const {
-    cutTarget,
-    dragTarget,
-    keyboardTarget,
-    menuTarget
-  } = state
-  const {itemInfo} = ownProps
-
-  const isCutTarget = Boolean(cutTarget && cutTarget.id === itemInfo.id)
-  const isDragTarget = Boolean(dragTarget && dragTarget.id === itemInfo.id)
-  const isKeyboardTarget = Boolean(keyboardTarget && keyboardTarget.id === itemInfo.id)
-  const isMenuTarget = Boolean(menuTarget && menuTarget.id === itemInfo.id)
-
-  return {
-    dragTarget: dragTarget,
-    isGreyItem: isCutTarget || isDragTarget,
-    isSelected: isDragTarget || isKeyboardTarget || isMenuTarget,
-    itemOffsetHeight: state.itemOffsetHeight,
-    options: state.options,
-    searchKeyword: state.searchKeyword,
-    trees: state.trees
-  }
-}
-
 class BookmarkItem extends Component {
   constructor() {
     super()
@@ -521,6 +496,32 @@ if (process.env.NODE_ENV !== 'production') {
     searchKeyword: PropTypes.string.isRequired,
     treeIndex: PropTypes.number.isRequired,
     trees: PropTypes.arrayOf(PropTypes.object).isRequired
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  const {
+    cutTarget,
+    dragTarget,
+    keyboardTarget,
+    menuTarget
+  } = state
+  const {itemInfo} = ownProps
+
+  const isCutTarget = Boolean(cutTarget && cutTarget.id === itemInfo.id)
+  const isDragTarget = Boolean(dragTarget && dragTarget.id === itemInfo.id)
+  const isKeyboardTarget = Boolean(keyboardTarget && keyboardTarget.id === itemInfo.id)
+  const isMenuTarget = Boolean(menuTarget && menuTarget.id === itemInfo.id)
+
+  return {
+    dragIndicator: state.dragIndicator,
+    dragTarget: dragTarget,
+    isGreyItem: isCutTarget || isDragTarget,
+    isSelected: isDragTarget || isKeyboardTarget || isMenuTarget,
+    itemOffsetHeight: state.itemOffsetHeight,
+    options: state.options,
+    searchKeyword: state.searchKeyword,
+    trees: state.trees
   }
 }
 

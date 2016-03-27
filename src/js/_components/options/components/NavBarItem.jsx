@@ -8,10 +8,6 @@ import {
   selectNavModule
 } from '../actions'
 
-const mapStateToProps = (state) => ({
-  selectedNavModule: state.selectedNavModule
-})
-
 class NavBarItem extends Component {
   @autobind
   async handleClick(evt) {
@@ -64,5 +60,9 @@ if (process.env.NODE_ENV !== 'production') {
     selectedNavModule: PropTypes.string.isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  selectedNavModule: state.selectedNavModule
+})
 
 export default connect(mapStateToProps)(NavBarItem)

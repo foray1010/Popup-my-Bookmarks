@@ -7,10 +7,6 @@ import SelectButton from './input_items/SelectButton'
 import SelectMultiple from './input_items/SelectMultiple'
 import SelectString from './input_items/SelectString'
 
-const mapStateToProps = (state) => ({
-  optionsConfig: state.optionsConfig
-})
-
 const OptionItem = (props) => {
   const {
     optionName,
@@ -61,5 +57,9 @@ if (process.env.NODE_ENV !== 'production') {
     optionsConfig: PropTypes.object.isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  optionsConfig: state.optionsConfig
+})
 
 export default connect(mapStateToProps)(OptionItem)
