@@ -25,25 +25,25 @@ class Editor extends Component {
     this.setEditorPosition()
 
     if (!isHidden) {
-      this.titleInput.value = editorTarget.title
-      this.urlInput.value = editorTarget.url
+      this.titleInputEl.value = editorTarget.title
+      this.urlInputEl.value = editorTarget.url
 
       // auto focus to title field
-      this.titleInput.focus()
+      this.titleInputEl.focus()
     }
   }
 
   setEditorPosition() {
     const {editorTarget} = this.props
 
-    const el = this.base
+    const {baseEl} = this
     const isHidden = !editorTarget
 
     let bottomPositionPx = ''
     let leftPositionPx = ''
 
     if (!isHidden) {
-      const editorHeight = el.offsetHeight
+      const editorHeight = baseEl.offsetHeight
       const editorTargetEl = document.getElementById(editorTarget.id)
       const html = document.getElementsByTagName('html')[0]
 
@@ -60,8 +60,8 @@ class Editor extends Component {
       leftPositionPx = editorTargetOffset.left + 'px'
     }
 
-    el.style.bottom = bottomPositionPx
-    el.style.left = leftPositionPx
+    baseEl.style.bottom = bottomPositionPx
+    baseEl.style.left = leftPositionPx
   }
 
   closeEditor() {
@@ -81,12 +81,12 @@ class Editor extends Component {
   async handleConfirm() {
     const {editorTarget} = this.props
 
-    const updatedTitle = this.titleInput.value.trim()
+    const updatedTitle = this.titleInputEl.value.trim()
 
     let updatedUrl
 
     if (!isFolder(editorTarget)) {
-      updatedUrl = this.urlInput.value.trim()
+      updatedUrl = this.urlInputEl.value.trim()
     }
 
     await chromep.bookmarks.update(editorTarget.id, {
@@ -114,7 +114,7 @@ class Editor extends Component {
     return (
       <div
         ref={(ref) => {
-          this.base = ref
+          this.baseEl = ref
         }}
         className='editor panel-width'
         hidden={isHidden}
@@ -122,13 +122,13 @@ class Editor extends Component {
         <span className='editor-title'>{editorTitle}</span>
         <input
           ref={(ref) => {
-            this.titleInput = ref
+            this.titleInputEl = ref
           }}
           type='text'
         />
         <input
           ref={(ref) => {
-            this.urlInput = ref
+            this.urlInputEl = ref
           }}
           type='text'
           hidden={isFolderItem}

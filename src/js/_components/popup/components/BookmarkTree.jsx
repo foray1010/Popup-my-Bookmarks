@@ -31,7 +31,7 @@ class BookmarkTree extends Component {
 
   @autobind
   setHeight() {
-    const bookmarkListEl = this.bookmarkList
+    const {bookmarkListEl} = this
 
     if (bookmarkListEl) {
       // search-box and tree-header-box height
@@ -60,7 +60,7 @@ class BookmarkTree extends Component {
     const {itemOffsetHeight} = this.props
 
     // control scrolling speed
-    this.bookmarkList.scrollTop -= Math.floor(itemOffsetHeight * evt.deltaY / 120)
+    this.bookmarkListEl.scrollTop -= Math.floor(itemOffsetHeight * evt.deltaY / 120)
   }
 
   render() {
@@ -106,7 +106,7 @@ class BookmarkTree extends Component {
         <TreeHeader treeIndex={treeIndex} />
         <ul
           ref={(ref) => {
-            this.bookmarkList = ref
+            this.bookmarkListEl = ref
           }}
           className='bookmark-list'
           onScroll={this.handleScroll}

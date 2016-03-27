@@ -123,7 +123,7 @@ class BookmarkItem extends Component {
       const bookmarkType = getBookmarkType(itemInfo)
 
       if (bookmarkType === TYPE_BOOKMARK) {
-        const baseEl = this.base
+        const {baseEl} = this
         const tooltip = await this.getTooltip()
 
         if (baseEl && tooltip) {
@@ -292,7 +292,7 @@ class BookmarkItem extends Component {
 
     // hack to prevent dragover and dragend event stop working when dragTargetEl is removed
     setTimeout(() => {
-      const dragTargetEl = this.base
+      const dragTargetEl = this.baseEl
 
       // create a cloned dragged item to replace the original one
       const clonedDragTargetEl = dragTargetEl.cloneNode(true)
@@ -459,7 +459,7 @@ class BookmarkItem extends Component {
     return (
       <li
         ref={(ref) => {
-          this.base = ref
+          this.baseEl = ref
         }}
         id={itemInfo.id}
         draggable={isDraggable}
