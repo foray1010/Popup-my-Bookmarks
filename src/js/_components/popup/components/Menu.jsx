@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 
 import {
   getBookmarkType,
@@ -10,7 +10,7 @@ import {
   TYPE_NO_BOOKMARK,
   TYPE_ROOT_FOLDER
 } from '../constants'
-import MenuItem from './MenuItem'
+import MenuArea from './MenuArea'
 
 const mapStateToProps = (state) => ({
   menuTarget: state.menuTarget,
@@ -18,7 +18,6 @@ const mapStateToProps = (state) => ({
   searchKeyword: state.searchKeyword
 })
 
-@connect(mapStateToProps)
 class Menu extends Component {
   componentDidUpdate() {
     this.setMenuPosition()
@@ -142,27 +141,12 @@ class Menu extends Component {
   }
 }
 
-const MenuArea = (props) => {
-  const {
-    isHidden,
-    menuAreaKeys
-  } = props
-
-  const menuAreaItems = menuAreaKeys.map((menuItemKey) => (
-    <MenuItem
-      key={menuItemKey}
-      menuItemKey={menuItemKey}
-    />
-  ))
-
-  return (
-    <ul
-      className='menu-area'
-      hidden={isHidden}
-    >
-      {menuAreaItems}
-    </ul>
-  )
+if (process.env.NODE_ENV !== 'production') {
+  Menu.propTypes = {
+    menuTarget: PropTypes.object,
+    mousePosition: PropTypes.objectOf(PropTypes.number).isRequired,
+    searchKeyword: PropTypes.string.isRequired
+  }
 }
 
-export default Menu
+export default connect(mapStateToProps)(Menu)

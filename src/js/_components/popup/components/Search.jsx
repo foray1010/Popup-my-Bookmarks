@@ -1,6 +1,6 @@
 import {autobind, debounce} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 
 import {
   getFirstTree,
@@ -17,7 +17,6 @@ const mapStateToProps = (state) => ({
   options: state.options
 })
 
-@connect(mapStateToProps)
 class Search extends Component {
   constructor() {
     super()
@@ -74,4 +73,11 @@ class Search extends Component {
   }
 }
 
-export default Search
+if (process.env.NODE_ENV !== 'production') {
+  Search.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    options: PropTypes.object.isRequired
+  }
+}
+
+export default connect(mapStateToProps)(Search)

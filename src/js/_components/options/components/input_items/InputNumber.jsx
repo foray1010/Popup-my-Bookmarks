@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 
 import {updateSingleOption} from '../../actions'
 
@@ -8,7 +8,6 @@ const mapStateToProps = (state) => ({
   options: state.options
 })
 
-@connect(mapStateToProps)
 class InputNumber extends Component {
   @autobind
   handleChange(evt) {
@@ -54,4 +53,13 @@ class InputNumber extends Component {
   }
 }
 
-export default InputNumber
+if (process.env.NODE_ENV !== 'production') {
+  InputNumber.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    optionConfig: PropTypes.object.isRequired,
+    optionName: PropTypes.string.isRequired,
+    options: PropTypes.object.isRequired
+  }
+}
+
+export default connect(mapStateToProps)(InputNumber)

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {createElement} from 'react'
+import {createElement, PropTypes} from 'react'
 
 import {
   OPTION_TABLE_MAP
@@ -40,6 +40,13 @@ const OptionTable = (props) => {
       <OptionButton />
     </main>
   )
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  OptionTable.propTypes = {
+    options: PropTypes.object.isRequired,
+    selectedNavModule: PropTypes.string.isRequired
+  }
 }
 
 export default connect(mapStateToProps)(OptionTable)

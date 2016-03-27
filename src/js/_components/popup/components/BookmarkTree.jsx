@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 
 import {
   genBookmarkList
@@ -22,7 +22,6 @@ const mapStateToProps = (state) => ({
   trees: state.trees
 })
 
-@connect(mapStateToProps)
 class BookmarkTree extends Component {
   constructor() {
     super()
@@ -127,4 +126,15 @@ class BookmarkTree extends Component {
   }
 }
 
-export default BookmarkTree
+if (process.env.NODE_ENV !== 'production') {
+  BookmarkTree.propTypes = {
+    dragIndicator: PropTypes.object,
+    itemOffsetHeight: PropTypes.number.isRequired,
+    rootTree: PropTypes.object.isRequired,
+    searchKeyword: PropTypes.string.isRequired,
+    treeIndex: PropTypes.number.isRequired,
+    trees: PropTypes.arrayOf(PropTypes.object).isRequired
+  }
+}
+
+export default connect(mapStateToProps)(BookmarkTree)

@@ -1,6 +1,6 @@
 import {autobind, debounce} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 import _debounce from 'lodash.debounce'
 
 import {
@@ -37,7 +37,6 @@ const mapStateToProps = (state) => ({
   trees: state.trees
 })
 
-@connect(mapStateToProps)
 class App extends Component {
   constructor() {
     super()
@@ -266,4 +265,15 @@ class App extends Component {
   }
 }
 
-export default App
+if (process.env.NODE_ENV !== 'production') {
+  App.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    editorTarget: PropTypes.object,
+    keyboardTarget: PropTypes.object,
+    menuTarget: PropTypes.object,
+    searchKeyword: PropTypes.string.isRequired,
+    trees: PropTypes.arrayOf(PropTypes.object).isRequired
+  }
+}
+
+export default connect(mapStateToProps)(App)

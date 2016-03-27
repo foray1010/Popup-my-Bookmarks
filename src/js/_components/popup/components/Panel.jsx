@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {createElement} from 'react'
+import {createElement, PropTypes} from 'react'
 import classNames from 'classnames'
 
 import BookmarkTree from './BookmarkTree'
@@ -39,6 +39,12 @@ const Panel = (props) => {
       </div>
     </main>
   )
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  Panel.propTypes = {
+    trees: PropTypes.arrayOf(PropTypes.object).isRequired
+  }
 }
 
 export default connect(mapStateToProps)(Panel)

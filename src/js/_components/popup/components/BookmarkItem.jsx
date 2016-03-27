@@ -1,6 +1,6 @@
 import {autobind, debounce} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 import classNames from 'classnames'
 
 import {
@@ -57,7 +57,6 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-@connect(mapStateToProps)
 class BookmarkItem extends Component {
   constructor() {
     super()
@@ -77,11 +76,7 @@ class BookmarkItem extends Component {
       'searchKeyword'
     ]
 
-    for (const propName of propNames) {
-      if (this.props[propName] !== nextProps[propName]) return true
-    }
-
-    return false
+    return propNames.some((propName) => this.props[propName] !== nextProps[propName])
   }
 
   componentDidUpdate() {
@@ -513,4 +508,20 @@ class BookmarkItem extends Component {
   }
 }
 
-export default BookmarkItem
+if (process.env.NODE_ENV !== 'production') {
+  BookmarkItem.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    dragIndicator: PropTypes.object,
+    dragTarget: PropTypes.object,
+    isGreyItem: PropTypes.bool.isRequired,
+    isSelected: PropTypes.bool.isRequired,
+    itemInfo: PropTypes.object.isRequired,
+    itemOffsetHeight: PropTypes.number.isRequired,
+    options: PropTypes.object.isRequired,
+    searchKeyword: PropTypes.string.isRequired,
+    treeIndex: PropTypes.number.isRequired,
+    trees: PropTypes.arrayOf(PropTypes.object).isRequired
+  }
+}
+
+export default connect(mapStateToProps)(BookmarkItem)

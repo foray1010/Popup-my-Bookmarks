@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 
 import {
   removeTreeInfosFromIndex
@@ -11,7 +11,6 @@ const mapStateToProps = (state, ownProps) => ({
   trees: state.trees
 })
 
-@connect(mapStateToProps)
 class TreeHeader extends Component {
   @autobind
   handleClose() {
@@ -43,4 +42,13 @@ class TreeHeader extends Component {
   }
 }
 
-export default TreeHeader
+if (process.env.NODE_ENV !== 'production') {
+  TreeHeader.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    isHidden: PropTypes.bool.isRequired,
+    treeIndex: PropTypes.number.isRequired,
+    trees: PropTypes.arrayOf(PropTypes.object).isRequired
+  }
+}
+
+export default connect(mapStateToProps)(TreeHeader)

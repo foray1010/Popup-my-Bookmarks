@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 import classNames from 'classnames'
 
 import {
@@ -143,7 +143,6 @@ const mapStateToProps = (state) => ({
   options: state.options
 })
 
-@connect(mapStateToProps)
 class MenuItem extends Component {
   constructor() {
     super()
@@ -301,4 +300,15 @@ class MenuItem extends Component {
   }
 }
 
-export default MenuItem
+if (process.env.NODE_ENV !== 'production') {
+  MenuItem.propTypes = {
+    copyTarget: PropTypes.object.isRequired,
+    cutTarget: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    isHidden: PropTypes.bool.isRequired,
+    menuItemKey: PropTypes.string.isRequired,
+    menuTarget: PropTypes.object.isRequired
+  }
+}
+
+export default connect(mapStateToProps)(MenuItem)

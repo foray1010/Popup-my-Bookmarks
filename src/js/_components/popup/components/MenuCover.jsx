@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 
 import {
   resetBodySize
@@ -15,7 +15,6 @@ const mapStateToProps = (state) => ({
   isHidden: !(state.editorTarget || state.menuTarget)
 })
 
-@connect(mapStateToProps)
 class MenuCover extends Component {
   @autobind
   handleClick() {
@@ -43,4 +42,11 @@ class MenuCover extends Component {
   }
 }
 
-export default MenuCover
+if (process.env.NODE_ENV !== 'production') {
+  MenuCover.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    isHidden: PropTypes.bool.isRequired
+  }
+}
+
+export default connect(mapStateToProps)(MenuCover)

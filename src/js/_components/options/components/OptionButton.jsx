@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component} from 'react'
+import {createElement, Component, PropTypes} from 'react'
 
 import {
   initOptionsValue,
@@ -23,7 +23,6 @@ const mapStateToProps = (state) => ({
   selectedNavModule: state.selectedNavModule
 })
 
-@connect(mapStateToProps)
 class OptionButton extends Component {
   @autobind
   async handleConfirm() {
@@ -81,4 +80,13 @@ class OptionButton extends Component {
   }
 }
 
-export default OptionButton
+if (process.env.NODE_ENV !== 'production') {
+  OptionButton.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    options: PropTypes.object.isRequired,
+    optionsConfig: PropTypes.object.isRequired,
+    selectedNavModule: PropTypes.string.isRequired
+  }
+}
+
+export default connect(mapStateToProps)(OptionButton)
