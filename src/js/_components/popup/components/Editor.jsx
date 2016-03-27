@@ -112,7 +112,7 @@ class Editor extends Component {
     }
 
     return (
-      <div
+      <form
         ref={(ref) => {
           this.baseEl = ref
         }}
@@ -133,9 +133,9 @@ class Editor extends Component {
           type='text'
           hidden={isFolderItem}
         />
-        <button onClick={this.handleConfirm}>{msgConfirm}</button>
-        <button onClick={this.handleCancel}>{msgCancel}</button>
-      </div>
+        <button type='button' onClick={this.handleConfirm}>{msgConfirm}</button>
+        <button type='button' onClick={this.handleCancel}>{msgCancel}</button>
+      </form>
     )
   }
 }

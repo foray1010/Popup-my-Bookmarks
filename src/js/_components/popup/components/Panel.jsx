@@ -27,12 +27,12 @@ const Panel = (props) => {
 
   return (
     <main id='panel-box'>
-      <div id='main' className={panelClassName}>
+      <section id='main' className={panelClassName}>
         {mainPanelItems}
-      </div>
-      <div id='sub' className={panelClassName} hidden={!subPanelItems.length}>
+      </section>
+      <section id='sub' className={panelClassName} hidden={!subPanelItems.length}>
         {subPanelItems}
-      </div>
+      </section>
     </main>
   )
 }

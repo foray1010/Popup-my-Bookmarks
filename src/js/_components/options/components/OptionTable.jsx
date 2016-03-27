@@ -28,12 +28,12 @@ const OptionTable = (props) => {
   }
 
   return (
-    <main>
+    <form>
       <div id='option-table'>
         {optionTableItems}
       </div>
       <OptionButton />
-    </main>
+    </form>
   )
 }
 

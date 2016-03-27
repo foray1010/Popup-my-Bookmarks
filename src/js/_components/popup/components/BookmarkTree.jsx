@@ -103,7 +103,7 @@ class BookmarkTree extends Component {
     }
 
     return (
-      <div className='bookmark-tree'>
+      <section className='bookmark-tree'>
         <TreeHeader treeIndex={treeIndex} />
         <ul
           ref={(ref) => {
@@ -116,7 +116,7 @@ class BookmarkTree extends Component {
           {treeItems}
         </ul>
         <FolderCover treeIndex={treeIndex} />
-      </div>
+      </section>
     )
   }
 }

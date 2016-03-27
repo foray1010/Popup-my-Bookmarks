@@ -14,9 +14,21 @@ button
   border: 0
   padding: 4px 8px
 
-  &:focus,
   &:hover
     color: $main-color1
+
+a,
+button,
+input[type="checkbox"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+select
+  outline-color: $highlight-level5
+  outline-width: 1px
+
+  &:focus
+    outline-style: solid
 
 input[type="number"],
 input[type="search"],
