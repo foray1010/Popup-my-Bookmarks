@@ -53,7 +53,7 @@ class Menu extends Component {
       mousePosition
     } = this.props
 
-    const el = this.base
+    const {baseEl} = this
     const isHidden = !menuTarget
 
     let bottomPosPx = ''
@@ -62,8 +62,8 @@ class Menu extends Component {
     if (!isHidden) {
       const body = document.body
       const html = document.getElementsByTagName('html')[0]
-      const menuHeight = el.offsetHeight
-      const menuWidth = el.offsetWidth
+      const menuHeight = baseEl.offsetHeight
+      const menuWidth = baseEl.offsetWidth
 
       const bodyWidth = body.offsetWidth
       const htmlHeight = html.clientHeight
@@ -83,8 +83,8 @@ class Menu extends Component {
       rightPosPx = Math.max(rightPos, 0) + 'px'
     }
 
-    el.style.bottom = bottomPosPx
-    el.style.right = rightPosPx
+    baseEl.style.bottom = bottomPosPx
+    baseEl.style.right = rightPosPx
   }
 
   render() {
@@ -124,7 +124,7 @@ class Menu extends Component {
     return (
       <div
         ref={(ref) => {
-          this.base = ref
+          this.baseEl = ref
         }}
         className='menu'
         hidden={isHidden}
