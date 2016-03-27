@@ -123,10 +123,11 @@ class BookmarkItem extends Component {
       const bookmarkType = getBookmarkType(itemInfo)
 
       if (bookmarkType === TYPE_BOOKMARK) {
+        const baseEl = this.base
         const tooltip = await this.getTooltip()
 
-        if (tooltip) {
-          this.base.title = tooltip
+        if (baseEl && tooltip) {
+          baseEl.title = tooltip
         }
       }
     })
