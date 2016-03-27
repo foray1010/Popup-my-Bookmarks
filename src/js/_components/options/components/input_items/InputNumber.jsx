@@ -14,14 +14,14 @@ class InputNumber extends Component {
       options
     } = this.props
 
-    const el = evt.target
+    const inputEl = evt.target
 
-    const newOptionValue = parseInt(el.value, 10)
+    const newOptionValue = parseInt(inputEl.value, 10)
 
     if (isNaN(newOptionValue) ||
         newOptionValue < optionConfig.minimum ||
         newOptionValue > optionConfig.maximum) {
-      el.value = options[optionName]
+      inputEl.value = options[optionName]
     } else {
       dispatch(updateSingleOption(optionName, newOptionValue))
     }
