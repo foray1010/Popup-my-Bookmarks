@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
 import classNames from 'classnames'
 
-import {updateSingleOption} from '../../actions'
+import {updateSingleOption} from '../../../actions'
 
 const msgNo = chrome.i18n.getMessage('opt_no')
 const msgYes = chrome.i18n.getMessage('opt_yes')
