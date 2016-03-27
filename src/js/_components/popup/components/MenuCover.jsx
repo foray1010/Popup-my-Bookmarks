@@ -10,11 +10,6 @@ import {
   updateMenuTarget
 } from '../actions'
 
-const mapStateToProps = (state) => ({
-  // if editor or menu has target, show menu-cover
-  isHidden: !(state.editorTarget || state.menuTarget)
-})
-
 class MenuCover extends Component {
   @autobind
   handleClick() {
@@ -48,5 +43,10 @@ if (process.env.NODE_ENV !== 'production') {
     isHidden: PropTypes.bool.isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  // if editor or menu has target, show menu-cover
+  isHidden: !(state.editorTarget || state.menuTarget)
+})
 
 export default connect(mapStateToProps)(MenuCover)

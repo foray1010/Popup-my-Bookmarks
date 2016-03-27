@@ -8,10 +8,6 @@ import {updateSingleOption} from '../../../actions'
 const msgNo = chrome.i18n.getMessage('opt_no')
 const msgYes = chrome.i18n.getMessage('opt_yes')
 
-const mapStateToProps = (state) => ({
-  options: state.options
-})
-
 class Option extends Component {
   @autobind
   handleChange(evt) {
@@ -68,5 +64,9 @@ if (process.env.NODE_ENV !== 'production') {
     options: PropTypes.object.isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  options: state.options
+})
 
 export default connect(mapStateToProps)(Option)

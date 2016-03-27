@@ -27,16 +27,6 @@ import Menu from '../components/Menu'
 import MenuCover from '../components/MenuCover'
 import Panel from '../components/Panel'
 
-const mapStateToProps = (state) => ({
-  editorTarget: state.editorTarget,
-  keyboardTarget: state.keyboardTarget,
-  menuTarget: state.menuTarget,
-  options: state.options,
-  rootTree: state.rootTree,
-  searchKeyword: state.searchKeyword,
-  trees: state.trees
-})
-
 class App extends Component {
   constructor() {
     super()
@@ -271,9 +261,21 @@ if (process.env.NODE_ENV !== 'production') {
     editorTarget: PropTypes.object,
     keyboardTarget: PropTypes.object,
     menuTarget: PropTypes.object,
+    options: PropTypes.object.isRequired,
+    rootTree: PropTypes.object.isRequired,
     searchKeyword: PropTypes.string.isRequired,
     trees: PropTypes.arrayOf(PropTypes.object).isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  editorTarget: state.editorTarget,
+  keyboardTarget: state.keyboardTarget,
+  menuTarget: state.menuTarget,
+  options: state.options,
+  rootTree: state.rootTree,
+  searchKeyword: state.searchKeyword,
+  trees: state.trees
+})
 
 export default connect(mapStateToProps)(App)

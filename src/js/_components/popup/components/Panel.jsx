@@ -5,10 +5,6 @@ import classNames from 'classnames'
 import BookmarkTree from './BookmarkTree'
 import Search from './Search'
 
-const mapStateToProps = (state) => ({
-  trees: state.trees
-})
-
 const Panel = (props) => {
   const {trees} = props
 
@@ -46,5 +42,9 @@ if (process.env.NODE_ENV !== 'production') {
     trees: PropTypes.arrayOf(PropTypes.object).isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  trees: state.trees
+})
 
 export default connect(mapStateToProps)(Panel)

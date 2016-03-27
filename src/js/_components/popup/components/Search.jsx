@@ -13,10 +13,6 @@ import {
 
 const msgSearch = chrome.i18n.getMessage('search')
 
-const mapStateToProps = (state) => ({
-  options: state.options
-})
-
 class Search extends Component {
   constructor() {
     super()
@@ -79,5 +75,9 @@ if (process.env.NODE_ENV !== 'production') {
     options: PropTypes.object.isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  options: state.options
+})
 
 export default connect(mapStateToProps)(Search)

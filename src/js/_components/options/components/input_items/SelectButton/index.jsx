@@ -3,10 +3,6 @@ import {createElement, PropTypes} from 'react'
 
 import Option from './Option'
 
-const mapStateToProps = (state) => ({
-  options: state.options
-})
-
 const SelectButton = (props) => {
   const {
     optionName,
@@ -42,5 +38,9 @@ if (process.env.NODE_ENV !== 'production') {
     options: PropTypes.object.isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  options: state.options
+})
 
 export default connect(mapStateToProps)(SelectButton)

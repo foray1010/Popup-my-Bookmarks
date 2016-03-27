@@ -4,10 +4,6 @@ import {createElement, Component, PropTypes} from 'react'
 
 import {updateSingleOption} from '../../actions'
 
-const mapStateToProps = (state) => ({
-  options: state.options
-})
-
 class InputNumber extends Component {
   @autobind
   handleChange(evt) {
@@ -61,5 +57,9 @@ if (process.env.NODE_ENV !== 'production') {
     options: PropTypes.object.isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  options: state.options
+})
 
 export default connect(mapStateToProps)(InputNumber)

@@ -14,14 +14,6 @@ import FolderCover from './FolderCover'
 import NoResult from './NoResult'
 import TreeHeader from './TreeHeader'
 
-const mapStateToProps = (state) => ({
-  dragIndicator: state.dragIndicator,
-  itemOffsetHeight: state.itemOffsetHeight,
-  rootTree: state.rootTree,
-  searchKeyword: state.searchKeyword,
-  trees: state.trees
-})
-
 class BookmarkTree extends Component {
   constructor() {
     super()
@@ -136,5 +128,13 @@ if (process.env.NODE_ENV !== 'production') {
     trees: PropTypes.arrayOf(PropTypes.object).isRequired
   }
 }
+
+const mapStateToProps = (state) => ({
+  dragIndicator: state.dragIndicator,
+  itemOffsetHeight: state.itemOffsetHeight,
+  rootTree: state.rootTree,
+  searchKeyword: state.searchKeyword,
+  trees: state.trees
+})
 
 export default connect(mapStateToProps)(BookmarkTree)
