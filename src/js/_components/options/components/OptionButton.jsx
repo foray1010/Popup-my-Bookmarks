@@ -19,7 +19,10 @@ const msgDefault = chrome.i18n.getMessage('default')
 
 class OptionButton extends Component {
   @autobind
-  async handleConfirm() {
+  async handleConfirm(evt) {
+    evt.preventDefault()
+    evt.persist()
+
     const {
       dispatch,
       options,
@@ -51,7 +54,10 @@ class OptionButton extends Component {
   }
 
   @autobind
-  async handleDefault() {
+  async handleDefault(evt) {
+    evt.preventDefault()
+    evt.persist()
+
     const {
       dispatch,
       optionsConfig
@@ -67,8 +73,8 @@ class OptionButton extends Component {
   render() {
     return (
       <div id='option-button-box'>
-        <button type='button' onClick={this.handleConfirm}>{msgConfirm}</button>
-        <button type='button' onClick={this.handleDefault}>{msgDefault}</button>
+        <button type='submit' onClick={this.handleConfirm}>{msgConfirm}</button>
+        <button type='reset' onClick={this.handleDefault}>{msgDefault}</button>
       </div>
     )
   }
