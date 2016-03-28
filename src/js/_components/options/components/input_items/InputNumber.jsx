@@ -6,24 +6,47 @@ import {updateSingleOption} from '../../actions'
 
 class InputNumber extends Component {
   @autobind
-  handleChange(evt) {
+  handleBlur(evt) {
     const {
       dispatch,
       optionConfig,
-      optionName,
-      options
+      optionName
     } = this.props
 
     const inputEl = evt.target
 
     const newOptionValue = parseInt(inputEl.value, 10)
 
-    if (isNaN(newOptionValue) ||
-        newOptionValue < optionConfig.minimum ||
-        newOptionValue > optionConfig.maximum) {
-      inputEl.value = options[optionName]
+    if (newOptionValue < optionConfig.minimum) {
+      dispatch(updateSingleOption(optionName, optionConfig.minimum))
+    } else if (newOptionValue > optionConfig.maximum) {
+      dispatch(updateSingleOption(optionName, optionConfig.maximum))
+    }
+  }
+
+  @autobind
+  handleChange(evt) {
+    const {
+      dispatch,
+      optionName
+    } = this.props
+
+    const inputEl = evt.target
+
+    const newOptionValue = parseInt(inputEl.value, 10)
+
+    if (isNaN(newOptionValue)) {
+      return
     } else {
       dispatch(updateSingleOption(optionName, newOptionValue))
+    }
+  }
+
+  @autobind
+  handleKeyDown(evt) {
+    // when click Enter, it will submit the form
+    if (evt.keyCode === 13) {
+      this.handleBlur(evt)
     }
   }
 
@@ -43,7 +66,9 @@ class InputNumber extends Component {
         min={optionConfig.minimum}
         max={optionConfig.maximum}
         value={String(optionValue)}
+        onBlur={this.handleBlur}
         onChange={this.handleChange}
+        onKeyDown={this.handleKeyDown}
       />
     )
   }
