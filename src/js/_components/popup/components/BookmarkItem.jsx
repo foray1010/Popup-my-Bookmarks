@@ -469,7 +469,7 @@ class BookmarkItem extends Component {
       >
         <a
           className={itemClassName}
-          href={itemInfo.url}
+          href={itemInfo.url || '#'}
           draggable={false}
           onClick={this.handleClick}
           onContextMenu={this.handleContextMenu}
