@@ -43,7 +43,7 @@ class SelectString extends Component {
     return (
       <select
         name={optionName}
-        defaultValue={optionValue}
+        value={optionValue}
         onChange={this.handleChange}
       >
         {optionItems}

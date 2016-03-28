@@ -78,7 +78,10 @@ class Editor extends Component {
   }
 
   @autobind
-  async handleConfirm() {
+  async handleConfirm(evt) {
+    evt.preventDefault()
+    evt.persist()
+
     const {editorTarget} = this.props
 
     const updatedTitle = this.titleInputEl.value.trim()
@@ -133,7 +136,7 @@ class Editor extends Component {
           type='text'
           hidden={isFolderItem}
         />
-        <button type='button' onClick={this.handleConfirm}>{msgConfirm}</button>
+        <button type='submit' onClick={this.handleConfirm}>{msgConfirm}</button>
         <button type='button' onClick={this.handleCancel}>{msgCancel}</button>
       </form>
     )
