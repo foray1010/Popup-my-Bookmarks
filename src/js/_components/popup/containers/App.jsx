@@ -75,9 +75,7 @@ class App extends Component {
 
   @debounce(30)
   async _handleKeyDown(evt) {
-    const keyCode = evt.keyCode
-
-    switch (keyCode) {
+    switch (evt.keyCode) {
       case 37: // left
         await this.keyboardArrowLeftRightHandler(true)
         break
