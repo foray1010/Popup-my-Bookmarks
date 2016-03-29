@@ -8,6 +8,7 @@ import {
   getFlatTree,
   isFolder,
   isFolderOpened,
+  isItemInView,
   openMultipleBookmarks,
   openOptionsPage
 } from '../functions'
@@ -46,6 +47,7 @@ class BookmarkItem extends Component {
   shouldComponentUpdate(nextProps) {
     const propNames = [
       'isGreyItem',
+      'isKeepInView',
       'isSelected',
       'itemInfo',
       'searchKeyword'
@@ -55,7 +57,16 @@ class BookmarkItem extends Component {
   }
 
   componentDidUpdate() {
+    const {
+      isKeepInView
+    } = this.props
+
     this.afterRender()
+
+    const {baseEl} = this
+    if (isKeepInView && !isItemInView(baseEl)) {
+      baseEl.scrollIntoView(false)
+    }
   }
 
   getOpenBookmarkHandlerId(evt) {
@@ -490,6 +501,7 @@ if (process.env.NODE_ENV !== 'production') {
     dragIndicator: PropTypes.object,
     dragTarget: PropTypes.object,
     isGreyItem: PropTypes.bool.isRequired,
+    isKeepInView: PropTypes.bool.isRequired,
     isSelected: PropTypes.bool.isRequired,
     itemInfo: PropTypes.object.isRequired,
     itemOffsetHeight: PropTypes.number.isRequired,
@@ -518,6 +530,7 @@ const mapStateToProps = (state, ownProps) => {
     dragIndicator: state.dragIndicator,
     dragTarget: dragTarget,
     isGreyItem: isCutTarget || isDragTarget,
+    isKeepInView: isKeyboardTarget || isMenuTarget,
     isSelected: isDragTarget || isKeyboardTarget || isMenuTarget,
     itemOffsetHeight: state.itemOffsetHeight,
     options: state.options,
