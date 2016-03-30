@@ -6,18 +6,44 @@ import {updateSingleOption} from '../../actions'
 
 class InputSelect extends Component {
   @autobind
+  handleBlur(evt) {
+    const {
+      dispatch,
+      optionName
+    } = this.props
+
+    const newOptionValue = evt.target.value
+      .trim()
+      .replace(/,\s/g, ',')
+      .replace(/,$/, '')
+
+    dispatch(updateSingleOption(optionName, newOptionValue))
+  }
+
+  @autobind
   handleChange(evt) {
     const {
       dispatch,
       optionName
     } = this.props
 
-    const newOptionValue = evt.target.value.trim().replace(/\s+/g, ' ')
+    const newOptionValue = evt.target.value
+      .trimLeft()
+      .replace(/\s+/g, ' ')
+      .replace(/^,/, '')
 
     dispatch(updateSingleOption(optionName, newOptionValue))
 
     if (evt.target.tagName === 'SELECT') {
       this.inputEl.focus()
+    }
+  }
+
+  @autobind
+  handleKeyDown(evt) {
+    // when click Enter, it will submit the form
+    if (evt.keyCode === 13) {
+      this.handleBlur(evt)
     }
   }
 
@@ -45,7 +71,9 @@ class InputSelect extends Component {
           name={optionName}
           type='text'
           value={optionValue}
+          onBlur={this.handleBlur}
           onChange={this.handleChange}
+          onKeyDown={this.handleKeyDown}
         />
         <select
           defaultValue={optionValue}

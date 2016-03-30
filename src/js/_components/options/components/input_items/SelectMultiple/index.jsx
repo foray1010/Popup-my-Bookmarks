@@ -24,9 +24,9 @@ const SelectMultiple = (props) => {
   })
 
   return (
-    <div className='select-multiple-box'>
+    <span className='select-multiple-box'>
       {checkboxItems}
-    </div>
+    </span>
   )
 }
 
