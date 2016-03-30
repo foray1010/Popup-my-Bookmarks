@@ -1,9 +1,10 @@
 import {applyMiddleware, compose, createStore} from 'redux'
 import {batchedSubscribe} from 'redux-batched-subscribe'
-import _debounce from 'lodash.debounce'
 import multi from 'redux-multi'
+import ReactDOM from 'react-dom'
 
-const batchDebounce = _debounce((notify) => notify())
+import debounceByAnimationFrame from '../lib/debounceByAnimationFrame'
+
 const middlewares = [
   multi
 ]
@@ -15,5 +16,5 @@ if (process.env.NODE_ENV === 'development') {
 
 export default compose(
   applyMiddleware(...middlewares),
-  batchedSubscribe(batchDebounce)
+  batchedSubscribe(debounceByAnimationFrame(ReactDOM.unstable_batchedUpdates))
 )(createStore)
