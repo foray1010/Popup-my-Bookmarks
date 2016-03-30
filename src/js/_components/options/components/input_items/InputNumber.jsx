@@ -13,9 +13,7 @@ class InputNumber extends Component {
       optionName
     } = this.props
 
-    const inputEl = evt.target
-
-    const newOptionValue = parseInt(inputEl.value, 10)
+    const newOptionValue = parseInt(evt.target.value, 10)
 
     if (newOptionValue < optionConfig.minimum) {
       dispatch(updateSingleOption(optionName, optionConfig.minimum))
@@ -31,9 +29,7 @@ class InputNumber extends Component {
       optionName
     } = this.props
 
-    const inputEl = evt.target
-
-    const newOptionValue = parseInt(inputEl.value, 10)
+    const newOptionValue = parseInt(evt.target.value, 10)
 
     if (isNaN(newOptionValue)) {
       return
