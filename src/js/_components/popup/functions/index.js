@@ -181,18 +181,6 @@ export function isFolderOpened(trees, itemInfo) {
   return trees.some((treeInfo) => treeInfo.id === itemInfo.id)
 }
 
-export function isItemInView(item) {
-  const itemBottomOffsetTop = item.offsetTop + item.offsetHeight
-  const itemParent = item.parentNode
-
-  const parentScrollTop = itemParent.scrollTop
-
-  return (
-    itemBottomOffsetTop > parentScrollTop &&
-    itemParent.offsetHeight + parentScrollTop >= itemBottomOffsetTop
-  )
-}
-
 export async function openMultipleBookmarks(itemInfo, menuItemNum) {
   const {options} = this.props
 
@@ -261,6 +249,25 @@ export function resetBodySize() {
   // reset to original size
   bodyStyle.height = ''
   bodyStyle.width = ''
+}
+
+export function scrollIntoViewIfNeeded(el) {
+  const {
+    bottom,
+    top
+  } = el.getBoundingClientRect()
+
+  const {
+    height: parentHeight,
+    top: parentTop
+  } = el.parentNode.getBoundingClientRect()
+
+  const isScrolledOutOfBottomView = bottom > parentTop + parentHeight
+  const isScrolledOutOfTopView = top < parentTop
+
+  if (isScrolledOutOfBottomView || isScrolledOutOfTopView) {
+    el.scrollIntoView(isScrolledOutOfTopView)
+  }
 }
 
 export function setPredefinedStyleSheet(styleOptions) {
