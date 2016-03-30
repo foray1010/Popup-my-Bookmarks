@@ -8,9 +8,9 @@ import {
   getFlatTree,
   isFolder,
   isFolderOpened,
-  isItemInView,
   openMultipleBookmarks,
-  openOptionsPage
+  openOptionsPage,
+  scrollIntoViewIfNeeded
 } from '../functions'
 import {
   putDragIndicator,
@@ -47,10 +47,10 @@ class BookmarkItem extends Component {
   shouldComponentUpdate(nextProps) {
     const propNames = [
       'isGreyItem',
-      'isKeepInView',
       'isSelected',
       'itemInfo',
-      'searchKeyword'
+      'searchKeyword',
+      'shouldKeepInView'
     ]
 
     return propNames.some((propName) => this.props[propName] !== nextProps[propName])
@@ -58,25 +58,22 @@ class BookmarkItem extends Component {
 
   componentDidUpdate() {
     const {
-      isKeepInView
+      shouldKeepInView
     } = this.props
 
     this.afterRender()
 
-    const {baseEl} = this
-    if (isKeepInView && !isItemInView(baseEl)) {
-      baseEl.scrollIntoView(false)
+    if (shouldKeepInView) {
+      scrollIntoViewIfNeeded(this.baseEl)
     }
   }
 
   getOpenBookmarkHandlerId(evt) {
     const {options} = this.props
 
-    const mouseButton = evt.button
-
     let switcher
 
-    if (mouseButton === 0) {
+    if (evt.button === 0) {
       if (evt.ctrlKey || evt.metaKey) {
         switcher = 'clickByLeftCtrl'
       } else if (evt.shiftKey) {
@@ -501,12 +498,12 @@ if (process.env.NODE_ENV !== 'production') {
     dragIndicator: PropTypes.object,
     dragTarget: PropTypes.object,
     isGreyItem: PropTypes.bool.isRequired,
-    isKeepInView: PropTypes.bool.isRequired,
     isSelected: PropTypes.bool.isRequired,
     itemInfo: PropTypes.object.isRequired,
     itemOffsetHeight: PropTypes.number.isRequired,
     options: PropTypes.object.isRequired,
     searchKeyword: PropTypes.string.isRequired,
+    shouldKeepInView: PropTypes.bool.isRequired,
     treeIndex: PropTypes.number.isRequired,
     trees: PropTypes.arrayOf(PropTypes.object).isRequired
   }
@@ -530,11 +527,11 @@ const mapStateToProps = (state, ownProps) => {
     dragIndicator: state.dragIndicator,
     dragTarget: dragTarget,
     isGreyItem: isCutTarget || isDragTarget,
-    isKeepInView: isKeyboardTarget || isMenuTarget,
     isSelected: isDragTarget || isKeyboardTarget || isMenuTarget,
     itemOffsetHeight: state.itemOffsetHeight,
     options: state.options,
     searchKeyword: state.searchKeyword,
+    shouldKeepInView: isKeyboardTarget || isMenuTarget,
     trees: state.trees
   }
 }
