@@ -9,7 +9,8 @@ import {
   isFolder,
   isFolderOpened,
   openMultipleBookmarks,
-  openOptionsPage
+  openOptionsPage,
+  scrollIntoViewIfNeeded
 } from '../functions'
 import {
   putDragIndicator,
@@ -48,24 +49,31 @@ class BookmarkItem extends Component {
       'isGreyItem',
       'isSelected',
       'itemInfo',
-      'searchKeyword'
+      'searchKeyword',
+      'shouldKeepInView'
     ]
 
     return propNames.some((propName) => this.props[propName] !== nextProps[propName])
   }
 
   componentDidUpdate() {
+    const {
+      shouldKeepInView
+    } = this.props
+
     this.afterRender()
+
+    if (shouldKeepInView) {
+      scrollIntoViewIfNeeded(this.baseEl)
+    }
   }
 
   getOpenBookmarkHandlerId(evt) {
     const {options} = this.props
 
-    const mouseButton = evt.button
-
     let switcher
 
-    if (mouseButton === 0) {
+    if (evt.button === 0) {
       if (evt.ctrlKey || evt.metaKey) {
         switcher = 'clickByLeftCtrl'
       } else if (evt.shiftKey) {
@@ -495,6 +503,7 @@ if (process.env.NODE_ENV !== 'production') {
     itemOffsetHeight: PropTypes.number.isRequired,
     options: PropTypes.object.isRequired,
     searchKeyword: PropTypes.string.isRequired,
+    shouldKeepInView: PropTypes.bool.isRequired,
     treeIndex: PropTypes.number.isRequired,
     trees: PropTypes.arrayOf(PropTypes.object).isRequired
   }
@@ -522,6 +531,7 @@ const mapStateToProps = (state, ownProps) => {
     itemOffsetHeight: state.itemOffsetHeight,
     options: state.options,
     searchKeyword: state.searchKeyword,
+    shouldKeepInView: isKeyboardTarget || isMenuTarget,
     trees: state.trees
   }
 }

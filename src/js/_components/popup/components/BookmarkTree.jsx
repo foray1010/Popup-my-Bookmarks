@@ -51,6 +51,20 @@ class BookmarkTree extends Component {
   }
 
   @autobind
+  handleKeyDown(evt) {
+    switch (evt.keyCode) {
+      case 37: // left
+      case 38: // up
+      case 39: // right
+      case 40: // down
+        evt.preventDefault()
+        break
+
+      default:
+    }
+  }
+
+  @autobind
   handleScroll() {
   }
 
@@ -61,7 +75,7 @@ class BookmarkTree extends Component {
     const {itemOffsetHeight} = this.props
 
     // control scrolling speed
-    this.bookmarkListEl.scrollTop -= Math.floor(itemOffsetHeight * evt.deltaY / 120)
+    this.bookmarkListEl.scrollTop += Math.floor(itemOffsetHeight * evt.deltaY / 30)
   }
 
   render() {
@@ -110,6 +124,7 @@ class BookmarkTree extends Component {
             this.bookmarkListEl = ref
           }}
           className='bookmark-list'
+          onKeyDown={this.handleKeyDown}
           onScroll={this.handleScroll}
           onWheel={this.handleWheel}
         >
