@@ -1,7 +1,9 @@
+import {applyMiddleware, compose, createStore} from 'redux'
 import {batchedSubscribe} from 'redux-batched-subscribe'
-import {createStore, applyMiddleware} from 'redux'
+import _debounce from 'lodash.debounce'
 import multi from 'redux-multi'
 
+const batchDebounce = _debounce((notify) => notify())
 const middlewares = [
   multi
 ]
@@ -11,8 +13,7 @@ if (process.env.NODE_ENV === 'development') {
   middlewares.push(createLogger()) // must be the last item
 }
 
-const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore)
-
-const createStoreWithBatching = batchedSubscribe((fn) => fn())(createStoreWithMiddleware)
-
-export default createStoreWithBatching
+export default compose(
+  applyMiddleware(...middlewares),
+  batchedSubscribe(batchDebounce)
+)(createStore)
