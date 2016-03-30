@@ -75,7 +75,7 @@ class BookmarkTree extends Component {
     const {itemOffsetHeight} = this.props
 
     // control scrolling speed
-    this.bookmarkListEl.scrollTop += Math.floor(itemOffsetHeight * evt.deltaY / 30)
+    this.bookmarkListEl.scrollTop += Math.floor(itemOffsetHeight * evt.deltaY / 40)
   }
 
   render() {
