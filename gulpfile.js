@@ -265,7 +265,7 @@ gulp.task('dev:others', ['dev:init'], () => {
       '_locales'
     ]
     yield fileList.map((fileName) => fs.symlinkAsync(
-      path.join('..', path.join(sourceDir, fileName)),
+      path.join('..', sourceDir, fileName),
       path.join(devDir, fileName),
       'dir'
     ))
