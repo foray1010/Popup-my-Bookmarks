@@ -119,10 +119,7 @@ async function sortByName(parentId) {
   }
 
   // Sort bookmarks by Selection sort
-  const newChildrenInfoLen = newChildrenInfo.length
-  for (let index = 0; index < newChildrenInfoLen; index += 1) {
-    const itemInfo = newChildrenInfo[index]
-
+  for (const [index, itemInfo] of newChildrenInfo.entries()) {
     const oldIndex = childrenInfo.indexOf(itemInfo)
 
     if (oldIndex !== index) {
