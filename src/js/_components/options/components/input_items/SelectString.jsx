@@ -27,7 +27,7 @@ class SelectString extends Component {
     const optionItems = []
     const optionValue = options[optionName]
 
-    optionConfig.choices.forEach((optionChoice, optionChoiceIndex) => {
+    for (const [optionChoiceIndex, optionChoice] of optionConfig.choices.entries()) {
       if (optionChoice !== undefined) {
         optionItems.push(
           <option
@@ -38,7 +38,7 @@ class SelectString extends Component {
           </option>
         )
       }
-    })
+    }
 
     return (
       <select

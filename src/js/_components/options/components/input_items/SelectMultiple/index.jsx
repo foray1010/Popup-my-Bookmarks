@@ -10,7 +10,7 @@ const SelectMultiple = (props) => {
 
   const checkboxItems = []
 
-  optionConfig.choices.forEach((optionChoice, optionChoiceIndex) => {
+  for (const [optionChoiceIndex, optionChoice] of optionConfig.choices.entries()) {
     if (optionChoice !== undefined) {
       checkboxItems.push(
         <Option
@@ -21,7 +21,7 @@ const SelectMultiple = (props) => {
         />
       )
     }
-  })
+  }
 
   return (
     <span className='select-multiple-box'>

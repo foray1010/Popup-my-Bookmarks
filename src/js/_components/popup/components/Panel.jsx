@@ -14,7 +14,7 @@ const Panel = (props) => {
   const panelClassName = classNames('panel', 'panel-width')
   const subPanelItems = []
 
-  trees.forEach((treeInfo, treeIndex) => {
+  for (const [treeIndex] of trees.entries()) {
     const targetPanelItems = treeIndex % 2 === 0 ? mainPanelItems : subPanelItems
 
     targetPanelItems.push(
@@ -23,7 +23,7 @@ const Panel = (props) => {
         treeIndex={treeIndex}
       />
     )
-  })
+  }
 
   return (
     <main id='panel-box'>
