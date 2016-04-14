@@ -1,30 +1,69 @@
 {
   "name": "Popup-my-Bookmarks",
-  "version": "0.0.0",
+  "version": "5.0.0",
   "description": "A more efficient way to view and manage your bookmarks menu.",
-  "devDependencies": {
-    "babel-eslint": "*",
-    "cli-color": "*",
-    "coffee-script": "*",
-    "cson": "*",
-    "fs-extra": "*",
-    "gulp": "*",
-    "gulp-babel": "*",
-    "gulp-coffeelint": "*",
-    "gulp-eslint": "*",
-    "gulp-if": "*",
-    "gulp-jade": "*",
-    "gulp-load-plugins": "*",
-    "gulp-stylint": "*",
-    "gulp-stylus": "*",
-    "gulp-uglify": "*",
-    "gulp-zip": "*",
-    "yargs": "*"
-  },
   "author": "foray1010",
   "repository": {
     "type": "git",
     "url": "https://github.com/foray1010/Popup-my-Bookmarks.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">= 4.2"
+  },
+  "scripts": {
+    "lint": "gulp lint"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.5.0",
+    "chrome-promise": "^1.0.6",
+    "classnames": "^2.2.3",
+    "core-decorators": "^0.12.0",
+    "lodash.debounce": "^4.0.3",
+    "normalize.css": "^4.0.0",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-redux": "^4.4.0",
+    "redux": "^3.3.1",
+    "redux-batched-subscribe": "^0.1.4",
+    "redux-logger": "^2.5.2",
+    "redux-multi": "0.1.12",
+    "seamless-immutable": "^5.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.5.2",
+    "babel-eslint": "^6.0.0",
+    "babel-loader": "^6.2.3",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-react-jsx": "^6.5.2",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-stage-2": "^6.5.0",
+    "bluebird": "^3.3.1",
+    "co": "^4.6.0",
+    "eslint": "^2.5.1",
+    "eslint-config-foray1010": "^1.6.0",
+    "eslint-plugin-jsx-a11y": "^0.6.2",
+    "eslint-plugin-react": "^4.3.0",
+    "fs-extra": "^0.26.5",
+    "gulp": "^3.9.1",
+    "gulp-cssnano": "^2.1.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-filter": "^4.0.0",
+    "gulp-image-grayscale": "^1.0.3",
+    "gulp-jade": "^1.1.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-stylint": "^3.0.0",
+    "gulp-stylus": "^2.3.0",
+    "gulp-util": "^3.0.7",
+    "gulp-zip": "^3.2.0",
+    "pre-commit": "^1.1.2",
+    "vinyl-named": "^1.1.0",
+    "webpack": "^1.12.13",
+    "webpack-stream": "^3.1.0",
+    "yamljs": "^0.2.6"
+  },
+  "private": true,
+  "pre-commit": [
+    "lint"
+  ]
 }
