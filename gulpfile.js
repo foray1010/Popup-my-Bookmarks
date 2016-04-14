@@ -320,6 +320,7 @@ gulp.task('md:readme', () => {
 
     let fileData = yield getMarkdownData([
       'Popup my Bookmarks',
+      'Stable version',
       'Developer guide',
       'Todo',
       'Contributing',
