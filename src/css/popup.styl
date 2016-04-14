@@ -1,0 +1,262 @@
+@import "./_components/variables"
+
+$search-box-height = 21px
+
+$tree-header-box-height = 30px
+
+highlight-item()
+  background-color: $highlight-level1
+  border-color: $highlight-level2
+
+plain-list()
+  list-style: none
+  margin: 0
+  padding: 0
+
+body
+  -webkit-user-select: none
+
+.bookmark-item
+  align-items: center
+  display: flex
+  outline: 0
+  padding: $golden-gap 0 $golden-gap $golden-gap
+  text-decoration: none
+
+  &:focus,
+  &:hover
+    highlight-item()
+
+.bookmark-list
+  plain-list()
+  overflow-y: auto
+
+  &::after
+    background-color: currentcolor
+    content: ""
+    display: block
+    height: $golden-gap
+    margin-top: $golden-gap
+
+.bookmark-tree
+  background-color: inherit
+  position: absolute
+  width: 100%
+
+.cover
+  background-color: rgba(0, 0, 0, .16)
+  bottom: 0
+  position: absolute
+  top: 0
+  width: 100%
+
+.drag-indicator
+  border: 1px dashed $highlight-level5
+  height: 20px
+
+.editor
+  background-color: $blank-color
+  border: solid $highlight-level4
+  border-width: 1px 0
+  box-sizing: border-box
+  padding: $golden-gap-2x $golden-gap
+  position: absolute
+  text-align: right
+
+  & > button
+    margin: $golden-gap-2x 0 0 $golden-gap-2x
+
+  & > input[type="text"]
+    border-color: $highlight-level3
+    box-sizing: border-box
+    margin: $golden-gap-2x 0 0
+    padding: $golden-gap
+    width: 100%
+
+.editor-title
+  background-color: $main-color2
+  color: $blank-color
+  cursor: default
+  float: left
+  padding: 1px 6px
+
+.grey-item
+  color: $highlight-level4 !important
+
+  & > img
+    opacity: .4
+
+.icon
+  margin-right: $golden-gap-2x
+
+.item
+  border: 1px solid transparent
+  color: $main-font-color
+  cursor: default
+
+.menu
+  background-color: $blank-color
+  border: 1px solid $highlight-level4
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .2)
+  padding: $golden-gap-2x
+  position: absolute
+
+  & > ul + ul:not([hidden]) // separator between div
+    border-top: 1px solid $highlight-level2
+    margin-top: $golden-gap
+    padding-top: $golden-gap
+
+.menu-area
+  plain-list()
+
+.menu-item
+  display: block
+  padding: $golden-gap 8px
+  text-decoration: none
+
+  &:not(.grey-item):hover
+    highlight-item()
+
+.no-bookmark > .icon
+  display: none
+
+.no-result
+  color: $main-font-color
+  cursor: default
+  margin: $golden-gap-2x
+  padding: $golden-gap 0
+  text-align: center
+
+.no-text-overflow
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.panel
+  background-color: inherit
+  position: relative
+
+.root-folder
+  color: inherit !important
+
+.selected
+  highlight-item()
+
+.separator
+  box-sizing: border-box
+  color: $highlight-level4
+
+  & > .icon
+    display: none
+
+  & > .no-text-overflow
+    text-overflow: clip
+
+.tree-header-box
+  background-color: currentcolor
+  display: flex
+  height: $tree-header-box-height
+  margin-bottom: $golden-gap
+
+.tree-header-close
+  background-color: transparent
+  flex-shrink: 0 // don't push me out of view when title is too long
+  height: $tree-header-box-height
+  position: relative
+  width: $tree-header-box-height
+
+  &:hover
+    background-color: $main-color4
+
+  &::before,
+  &::after
+    background-color: $blank-color
+    content: ""
+    position: absolute
+    -webkit-transform: rotate(45deg)
+
+  &::before
+    height: 12px
+    left: 14px
+    top: 9px
+    width: 2px
+
+  &::after
+    height: 2px
+    left: 9px
+    top: 14px
+    width: 12px
+
+.tree-header-title
+  color: $blank-color
+  cursor: default
+  font: 22px ArchivoNarrow, simhei
+  line-height: $tree-header-box-height + 1px
+  margin: 0
+  margin-right: auto
+  padding: 0 $golden-gap-2x
+
+#app
+  background-color: inherit
+
+#container
+  background-color: inherit
+
+#main
+  color: $main-color2
+
+#menu-cover
+  background-color: rgba(255, 255, 255, .3)
+
+#panel-box
+  background-color: inherit
+  display: flex
+  flex-direction: row-reverse
+
+#search-box
+  border: solid $highlight-level3
+  border-width: 0 0 1px 0
+  display: flex
+  height: $search-box-height
+  margin-bottom: $golden-gap
+
+  &::before
+    content: url("/img/search.png")
+    padding: 5px 4px 4px 5px
+
+#search-img
+  padding: 5px 4px 4px 5px
+
+#search-input
+  background-color: transparent
+  border: 0
+  color: $main-font-color
+  font-size: 12px
+  outline: 0
+  padding: 0 1px
+  width: 100%
+
+#sub
+  color: $main-color1
+  margin-right: $golden-gap
+
+::-webkit-scrollbar
+  background-color: transparent
+  height: 5px
+  width: 5px + $golden-gap
+
+::-webkit-scrollbar-thumb
+  background-color: $highlight-level3
+  border-left: $golden-gap solid $blank-color
+
+  &:hover
+    background-color: $highlight-level4
+    border: 0
+
+  &:active
+    background-color: $highlight-level5
+
+::-webkit-search-cancel-button
+  content: url("/img/cancel.png")
+  height: 10px
+  width: 14px

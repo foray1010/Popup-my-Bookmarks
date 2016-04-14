@@ -18,62 +18,85 @@
 Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG.md
 
 
+## Stable version
+
+Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum_chrome_version_26) for the stable version that is currently using in Chrome Extension Store
+
+
 ## Developer guide
 
 ##### Before you start
-1. Install [io.js](//github.com/iojs/io.js) (or [Node.js](//github.com/joyent/node) with no guarantee) via:
+1. Install [Node.js](//github.com/nodejs/node) (version >= 4.2) via:
   - [nvm](//github.com/creationix/nvm) (Linux/Mac)
-  - [io.js official website](//iojs.org) (Windows)
+  - [Node.js official website](//nodejs.org/en/download/) (Windows)
 
 2. Install [gulp.js](//github.com/gulpjs/gulp)
-   > npm install -g gulp
+
+  ```
+  npm install -g gulp
+  ```
 
 3. **cd** to your workspace and install all dependencies
-   > cd ~/Popup-my-Bookmarks
-   >
-   > npm install
+
+  ```
+  npm install
+  ```
 
 ##### Commands
 1. compile
-   > gulp compile --version x.y.z.ddmm
 
-   To compile the whole extension and output a zip file for uploading to Chrome Web Store
+  ```
+  gulp compile
+  ```
+
+  To compile the whole extension and output a zip file ([version in package.json].zip) for uploading to Chrome Web Store
 
 2. dev
-   > gulp dev
 
-   To make a temporary folder "__dev" for you to load unpacked extension
-   - ES6 JavaScript to ES5 JavaScript by [Babel](//github.com/babel/babel)
-   - *.styl to *.css by [Stylus](//github.com/stylus/stylus)
-   - *.jade to *.html by [Jade](//github.com/jadejs/jade)
+  ```
+  gulp dev
+  ```
+
+  To make a temporary folder `__dev` for you to load unpacked extension
+  - ES6 JavaScript to ES5 JavaScript by [Babel](//github.com/babel/babel)
+  - *.styl to *.css by [Stylus](//github.com/stylus/stylus)
+  - *.jade to *.html by [Jade](//github.com/jadejs/jade)
 
 3. help
-   > gulp help
 
-   Display developer guide on terminal
+  ```
+  gulp help
+  ```
+
+  Display developer guide on terminal
 
 4. lint
-   > gulp lint
 
-   To lint
-   - ES6 JavaScript code by [ESLint](//github.com/eslint/eslint)
-   - CoffeeScript code by [CoffeeLint](//github.com/clutchski/coffeelint)
-   - Stylus code by [Stylint](//github.com/rossPatton/stylint)
+  ```
+  gulp lint
+  ```
+
+  To lint
+  - ES6 JavaScript code by [ESLint](//github.com/eslint/eslint)
+  - Stylus code by [Stylint](//github.com/rossPatton/stylint)
 
 5. md
-   > gulp md --make file_name
 
-   To generate markdown file on the current directory
-   - __store.md - Description for Chrome Web Store
-   - README.md - Description for GitHub
+  ```
+  gulp md
+  ```
+
+  To generate markdown file on the current directory
+  - `__store.md` - Description for Chrome Web Store
+  - `README.md` - Description for GitHub
 
 
-## Plan to do
+## Todo
 
 1. Bookmarks selector (allow drag and manage a group of bookmarks)
 
 
-## What you can help
+## Contributing
 
 - Translate to other languages, It's all depended on volunteers as I am not a linguist. ;-)
 
@@ -86,8 +109,8 @@ Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG
 
 ## FAQ
 
-##### Why does PmB need to 'Access your tabs and browsing activity' and 'Access your data on all websites'(optional)?
+##### Why does PmB need to `Access your tabs and browsing activity` and `Access your data on all websites`(optional)?
 
-- 'Add current page' and 'Open bookmark in tab' require permission - 'Access your tabs and browsing activity'
+- `Add current page` and `Open bookmark in tab` require permission - `Access your tabs and browsing activity`
 
-- 'Bookmarklet support'(optional) requires permission - 'Access your data on all websites'(optional)
+- `Bookmarklet support`(optional) requires permission - `Access your data on all websites`(optional)

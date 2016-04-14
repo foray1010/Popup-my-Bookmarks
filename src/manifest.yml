@@ -1,0 +1,37 @@
+name: "Popup my Bookmarks"
+short_name: "PmB"
+version: ""
+manifest_version: 2
+minimum_chrome_version: "31"
+offline_enabled: true
+
+default_locale: "en"
+description: "__MSG_extDesc__"
+
+icons:
+  16: "img/icon16.png"
+  48: "img/icon48.png"
+  128: "img/icon128.png"
+
+browser_action:
+  default_icon: "img/icon38.png"
+  default_popup: "popup.html"
+options_page: "options.html"
+options_ui:
+  page: "options.html"
+  chrome_style: false
+
+commands:
+  _execute_browser_action:
+    suggested_key:
+      default: "Ctrl+B"
+
+permissions:
+  - "chrome://favicon/"
+  - "bookmarks"
+  - "storage"
+  - "tabs"
+
+optional_permissions:
+  - "http://*/"
+  - "https://*/"

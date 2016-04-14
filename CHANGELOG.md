@@ -1,3 +1,21 @@
+## 5.0.0 (unreleased)
+Features:
+  - Open popup by Ctrl / CMD + B (suggested by Sebastian B)
+
+Changes:
+  - Increase minimum Chrome version from 26 to 32
+  - New option page using options V2 standard
+  - Support all kind of separators in separatethis.com
+
+Bugfixes:
+  - Cannot `Copy` a folder
+  - Cannot display the whole popup in OSX
+  - Wrong menu/editor position in some situations
+  - Setting of `Hide root folder` will be lost on second save
+
+Translations:
+  - Support Norwegian Bokmål locales (thanks Bjorn Tore Asheim)
+
 ## 4.0.1.706 (7/6/2015)
 Improvements:
   - Dragging is now much more sensitive

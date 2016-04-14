@@ -7,14 +7,14 @@
 Desktop.ini
 Thumbs.db
 
-
-# temporarily folder
-__*
-
+# npm temporarily files
+npm-debug.log
 
 # Dependency directory
 node_modules
 
+# temporarily folder
+__*
 
 # zip for release
 *.zip
