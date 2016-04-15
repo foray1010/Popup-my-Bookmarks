@@ -28,7 +28,7 @@
     "redux-batched-subscribe": "^0.1.4",
     "redux-logger": "^2.5.2",
     "redux-multi": "0.1.12",
-    "seamless-immutable": "^5.0.1"
+    "seamless-immutable": "^6.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.5.2",
@@ -46,7 +46,7 @@
     "eslint-config-foray1010": "^1.6.0",
     "eslint-plugin-jsx-a11y": "^0.6.2",
     "eslint-plugin-react": "^4.3.0",
-    "fs-extra": "^0.26.5",
+    "fs-extra": "^0.27.0",
     "gulp": "^3.9.1",
     "gulp-cssnano": "^2.1.1",
     "gulp-eslint": "^2.0.0",
