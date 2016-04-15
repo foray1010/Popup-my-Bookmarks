@@ -121,10 +121,8 @@ function validatePackageVersion() {
 
 // markdown handler
 function* getMarkdownData(titleList) {
-  const dataList = yield titleList.map(function* (title) {
-    const fileData = yield fs.readFileAsync(path.join('markdown', `${title}.md`), 'utf-8')
-
-    return `## ${title}\n\n${fileData}`
+  const dataList = yield titleList.map((title) => {
+    return fs.readFileAsync(path.join('markdown', `${title}.md`), 'utf-8')
   })
 
   return dataList.join('\n\n')
@@ -319,12 +317,13 @@ gulp.task('md:readme', () => {
     const fileName = 'README.md'
 
     let fileData = yield getMarkdownData([
-      'Popup my Bookmarks',
-      'Stable version',
-      'Developer guide',
-      'Todo',
-      'Contributing',
-      'FAQ'
+      'title',
+      'description',
+      'stable_version',
+      'developer_guide',
+      'todo',
+      'contributing',
+      'faq'
     ])
 
     // enlarge first header
@@ -339,17 +338,16 @@ gulp.task('md:store', () => {
     const fileName = '__store.md'
 
     let fileData = yield getMarkdownData([
-      'Popup my Bookmarks',
-      'Todo',
-      'Contributing',
-      'FAQ'
+      'description',
+      'todo',
+      'contributing',
+      'faq'
     ])
 
-    // remove first three lines
-    fileData = fileData.replace(/.+\n\n.+\n/, '')
-
-    // remove style of subheader
-    fileData = fileData.replace(/##### /g, '')
+    fileData = fileData
+      // remove style of subheader
+      .replace(/##### /g, '')
+      .trim()
 
     yield fs.writeFileAsync(fileName, fileData)
   })

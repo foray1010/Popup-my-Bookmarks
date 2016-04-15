@@ -1,3 +1,5 @@
+## Contributing
+
 - Translate to other languages, It's all depended on volunteers as I am not a linguist. ;-)
 
   Please join our translation team on http://goo.gl/ZET77
