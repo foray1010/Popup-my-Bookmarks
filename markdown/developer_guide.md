@@ -1,3 +1,5 @@
+## Developer guide
+
 ##### Before you start
 1. Install [Node.js](//github.com/nodejs/node) (version >= 4.2) via:
   - [nvm](//github.com/creationix/nvm) (Linux/Mac)
