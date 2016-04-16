@@ -114,7 +114,6 @@ input[type="number"]
   position: relative
   text-align: center
   transition-duration: .4s
-  -webkit-user-select: none
   width: 80px
 
 .select-button-cover
@@ -126,15 +125,30 @@ input[type="number"]
   width: 50%
 
 .select-button-item
+  background-color: transparent
+  border: 0
+  color: inherit
   cursor: pointer
-  flex: 1 0 0
-  position: relative
+  height: 100%
   transition-duration: inherit
   transition-property: color
+  width: 100%
+
+  &:hover
+    color: inherit
 
 .select-button-item-active
   color: $blank-color
   cursor: default
+
+  &:hover
+    color: $blank-color
+
+.select-button-label
+  flex: 1 0 0
+  height: 100%
+  position: relative
+  transition-duration: inherit
 
 #donate
   align-items: center
