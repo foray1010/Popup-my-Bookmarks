@@ -20,8 +20,8 @@ const msgDefault = chrome.i18n.getMessage('default')
 class OptionButton extends Component {
   @autobind
   async handleConfirm(evt) {
-    evt.preventDefault()
     evt.persist()
+    evt.preventDefault()
 
     const {
       dispatch,
@@ -55,8 +55,8 @@ class OptionButton extends Component {
 
   @autobind
   async handleDefault(evt) {
-    evt.preventDefault()
     evt.persist()
+    evt.preventDefault()
 
     const {
       dispatch,

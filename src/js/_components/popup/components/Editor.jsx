@@ -79,8 +79,8 @@ class Editor extends Component {
 
   @autobind
   async handleConfirm(evt) {
-    evt.preventDefault()
     evt.persist()
+    evt.preventDefault()
 
     const {editorTarget} = this.props
 

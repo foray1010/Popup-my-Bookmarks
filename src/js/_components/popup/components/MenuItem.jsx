@@ -142,8 +142,8 @@ class MenuItem extends Component {
 
   @autobind
   async handleClick(evt) {
-    evt.preventDefault()
     evt.persist()
+    evt.preventDefault()
 
     const {target} = evt
     if (target.classList.contains('grey-item')) return
