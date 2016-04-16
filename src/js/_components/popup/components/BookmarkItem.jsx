@@ -479,6 +479,7 @@ class BookmarkItem extends Component {
           className={itemClassName}
           href={itemInfo.url || '#'}
           draggable={false}
+          tabIndex='-1'
           onClick={this.handleClick}
           onContextMenu={this.handleContextMenu}
           onMouseEnter={this.handleMouse}

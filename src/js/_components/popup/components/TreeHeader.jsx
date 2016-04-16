@@ -29,8 +29,15 @@ class TreeHeader extends Component {
     return (
       <header hidden={isHidden}>
         <div className='tree-header-box'>
-          <h1 className='tree-header-title no-text-overflow'>{treeInfo.title}</h1>
-          <button className='tree-header-close' onClick={this.handleClose} />
+          <h1 className='tree-header-title no-text-overflow'>
+            {treeInfo.title}
+          </h1>
+          <button
+            className='tree-header-close'
+            type='button'
+            tabIndex='-1'
+            onClick={this.handleClose}
+          />
         </div>
       </header>
     )
