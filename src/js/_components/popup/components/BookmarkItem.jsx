@@ -143,8 +143,8 @@ class BookmarkItem extends Component {
 
   @autobind
   async handleClick(evt) {
-    evt.preventDefault()
     evt.persist()
+    evt.preventDefault()
 
     const {
       dispatch,

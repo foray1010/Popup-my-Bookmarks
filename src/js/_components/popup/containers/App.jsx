@@ -70,18 +70,39 @@ class App extends Component {
   handleKeyDown(evt) {
     evt.persist()
 
-    this._handleKeyDown(evt)
+    const {
+      editorTarget,
+      menuTarget
+    } = this.props
+
+    if (!editorTarget && !menuTarget) {
+      // preventDefault here because default operation may run before debounced/async function
+      switch (evt.keyCode) {
+        case 9: // tab
+        case 38: // up
+        case 40: // down
+          evt.preventDefault()
+          break
+
+        default:
+      }
+
+      this._handleKeyDown(evt)
+    }
   }
 
   @debounce(30)
   async _handleKeyDown(evt) {
     switch (evt.keyCode) {
+      case 9: // tab
+        await this.keyboardArrowUpDownHandler(evt.shiftKey)
+        break
+
       case 37: // left
         await this.keyboardArrowLeftRightHandler(true)
         break
 
       case 38: // up
-        evt.preventDefault()
         await this.keyboardArrowUpDownHandler(true)
         break
 
@@ -90,7 +111,6 @@ class App extends Component {
         break
 
       case 40: // down
-        evt.preventDefault()
         await this.keyboardArrowUpDownHandler(false)
         break
 

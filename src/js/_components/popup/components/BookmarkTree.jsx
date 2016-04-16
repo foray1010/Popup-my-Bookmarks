@@ -51,20 +51,6 @@ class BookmarkTree extends Component {
   }
 
   @autobind
-  handleKeyDown(evt) {
-    switch (evt.keyCode) {
-      case 37: // left
-      case 38: // up
-      case 39: // right
-      case 40: // down
-        evt.preventDefault()
-        break
-
-      default:
-    }
-  }
-
-  @autobind
   handleScroll() {
   }
 
