@@ -92,6 +92,19 @@ export async function getFirstTree(options) {
   return firstTree
 }
 
+export function getItemHeight(options) {
+  const {fontSize} = options
+
+  return GOLDEN_GAP * 2 + fontSize
+}
+
+export function getItemOffsetHeight(options) {
+  const itemHeight = getItemHeight(options)
+
+  // +1 for border width, GOLDEN_GAP for padding
+  return (1 + GOLDEN_GAP) * 2 + itemHeight
+}
+
 export async function getSearchResult(newSearchKeyword) {
   const {options} = this.props
 
@@ -257,14 +270,15 @@ export function scrollIntoViewIfNeeded(el) {
   }
 }
 
-export function setPredefinedStyleSheet(styleOptions) {
+export function setPredefinedStyleSheet(options) {
   const {
     fontFamily,
     fontSize,
-    itemHeight,
-    itemOffsetHeight,
-    panelWidth
-  } = styleOptions
+    setWidth
+  } = options
+
+  const itemHeight = getItemHeight(options)
+  const itemOffsetHeight = getItemOffsetHeight(options)
 
   css.set({
     body: {
@@ -272,19 +286,19 @@ export function setPredefinedStyleSheet(styleOptions) {
       'font-size': `${fontSize}px`
     },
     '.bookmark-item': {
-      height: itemHeight + 'px'
+      height: `${itemHeight}px`
     },
     '.icon': {
       // set the width same as item height, as it is a square
-      width: itemHeight + 'px'
+      width: `${itemHeight}px`
     },
     '.panel-width': {
       // set panel (#main, #sub) width
-      width: panelWidth + 'px'
+      width: `${setWidth}px`
     },
     '.separator': {
       // set separator height depend on item height
-      height: (itemOffsetHeight / 2) + 'px'
+      height: `${itemOffsetHeight / 2}px`
     }
   })
 }
