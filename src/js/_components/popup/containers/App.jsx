@@ -9,7 +9,8 @@ import {
   getFlatTree,
   getSearchResult,
   getSlicedTrees,
-  isFolder
+  isFolder,
+  setPredefinedStyleSheet
 } from '../functions'
 import {
   removeTreeInfosFromIndex,
@@ -33,6 +34,12 @@ class App extends Component {
 
     this.genBookmarkList = genBookmarkList.bind(this)
     this.getSearchResult = getSearchResult.bind(this)
+  }
+
+  componentWillMount() {
+    const {options} = this.props
+
+    setPredefinedStyleSheet(options)
   }
 
   componentDidMount() {

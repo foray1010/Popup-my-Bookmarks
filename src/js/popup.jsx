@@ -6,9 +6,8 @@ import {render} from 'react-dom'
 import {
   getFirstTree,
   getFlatTree,
-  getStyleOptions,
-  openOptionsPage,
-  setPredefinedStyleSheet
+  getItemOffsetHeight,
+  openOptionsPage
 } from './_components/popup/functions'
 import App from './_components/popup/containers/App'
 import chromep from './_components/lib/chromePromise'
@@ -30,11 +29,6 @@ import reducers from './_components/popup/reducers'
     }
   }
 
-  /* Init predefined stylesheet */
-  const styleOptions = getStyleOptions(options)
-
-  setPredefinedStyleSheet(styleOptions)
-
   /* get rootTree */
   const rootTree = await getFlatTree('0')
 
@@ -53,7 +47,7 @@ import reducers from './_components/popup/reducers'
   const firstTree = await getFirstTree(options)
 
   const store = configureStore(reducers, Immutable({
-    itemOffsetHeight: styleOptions.itemOffsetHeight,
+    itemOffsetHeight: getItemOffsetHeight(options),
     options: options,
     rootTree: rootTree,
     trees: [firstTree]
