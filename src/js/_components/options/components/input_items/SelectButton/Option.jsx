@@ -21,6 +21,11 @@ class Option extends Component {
     dispatch(updateSingleOption(optionName, newOptionValue))
   }
 
+  @autobind
+  handleClick() {
+    this.inputEl.click()
+  }
+
   render() {
     const {
       optionChoice,
@@ -41,8 +46,11 @@ class Option extends Component {
     )
 
     return (
-      <label className={selectButtonClassName}>
+      <label className='select-button-label'>
         <input
+          ref={(ref) => {
+            this.inputEl = ref
+          }}
           name={optionName}
           type='radio'
           value={String(optionChoice)}
@@ -50,7 +58,13 @@ class Option extends Component {
           hidden
           onChange={this.handleChange}
         />
-        {buttonText}
+        <button
+          className={selectButtonClassName}
+          type='button'
+          onClick={this.handleClick}
+        >
+          {buttonText}
+        </button>
       </label>
     )
   }
