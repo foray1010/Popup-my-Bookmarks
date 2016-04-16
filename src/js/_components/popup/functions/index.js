@@ -144,26 +144,13 @@ export function getSlicedTrees(trees, removeFromIndex) {
 export function getStyleOptions(options) {
   const {fontFamily, fontSize, setWidth} = options
 
-  // if the font family's name has whitespace, use quote to embed it
-  const parsedFontFamily = fontFamily.split(',')
-    .map((x) => {
-      x = x.trim()
-
-      if (x.includes(' ')) {
-        x = JSON.stringify(x)
-      }
-
-      return x
-    })
-    .join(',')
-
   const itemHeight = GOLDEN_GAP * 2 + fontSize
 
   // +1 for border width, GOLDEN_GAP for padding
   const itemOffsetHeight = (1 + GOLDEN_GAP) * 2 + itemHeight
 
   return {
-    fontFamily: parsedFontFamily,
+    fontFamily: fontFamily,
     fontSize: fontSize,
     itemHeight: itemHeight,
     itemOffsetHeight: itemOffsetHeight,
@@ -281,7 +268,8 @@ export function setPredefinedStyleSheet(styleOptions) {
 
   css.set({
     body: {
-      font: `${fontSize}px ${fontFamily}`
+      'font-family': fontFamily,
+      'font-size': `${fontSize}px`
     },
     '.bookmark-item': {
       height: itemHeight + 'px'
