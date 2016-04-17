@@ -60,7 +60,13 @@ class App extends Component {
       return 0
     }
 
-    return trees.findIndex((treeInfo) => treeInfo.id === keyboardTarget.parentId)
+    const matchedIndex = trees.findIndex((treeInfo) => treeInfo.id === keyboardTarget.parentId)
+
+    if (matchedIndex < 0) {
+      return trees.length - 1
+    }
+
+    return matchedIndex
   }
 
   handleContextMenu(evt) {
