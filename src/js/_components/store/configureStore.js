@@ -1,3 +1,4 @@
+/* eslint global-require: 0 */ // webpack cannot drop unused dependencies
 import {applyMiddleware, compose, createStore} from 'redux'
 import {batchedSubscribe} from 'redux-batched-subscribe'
 import multi from 'redux-multi'
