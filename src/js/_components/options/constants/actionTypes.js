@@ -1,7 +1,3 @@
-import mapArrayToEnums from '../../lib/mapArrayToEnums'
-
-module.exports = mapArrayToEnums([
-  'SELECT_NAV_MODULE',
-  'UPDATE_OPTIONS',
-  'UPDATE_SINGLE_OPTION'
-])
+export const SELECT_NAV_MODULE = 'SELECT_NAV_MODULE'
+export const UPDATE_OPTIONS = 'UPDATE_OPTIONS'
+export const UPDATE_SINGLE_OPTION = 'UPDATE_SINGLE_OPTION'
