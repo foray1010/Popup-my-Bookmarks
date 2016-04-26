@@ -114,7 +114,7 @@ function* compileManifest(workingDir, updateFn) {
 
 function validatePackageVersion() {
   const version = packageJSON.version
-  if (typeof version !== 'string' || !/^([1-9]?\d\.){2}[1-9]?\d$/.test(version)) {
+  if (!/^([1-9]?\d\.){2}[1-9]?\d$/.test(version)) {
     throw Error('You need to input a version number x.y.z, each number between 0 - 99')
   }
 }
