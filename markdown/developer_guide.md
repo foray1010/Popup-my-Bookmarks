@@ -48,7 +48,7 @@
 4. lint
 
   ```
-  gulp lint
+  npm run lint
   ```
 
   To lint

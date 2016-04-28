@@ -77,7 +77,7 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
 4. lint
 
   ```
-  gulp lint
+  npm run lint
   ```
 
   To lint
