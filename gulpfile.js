@@ -2,7 +2,6 @@
 
 const bluebird = require('bluebird')
 const co = require('co')
-const eslint = require('gulp-eslint')
 const fs = require('fs-extra')
 const gulp = require('gulp')
 const gulpFilter = require('gulp-filter')
@@ -13,7 +12,6 @@ const named = require('vinyl-named')
 const nano = require('gulp-cssnano')
 const path = require('path')
 const plumber = require('gulp-plumber')
-const stylint = require('gulp-stylint')
 const stylus = require('gulp-stylus')
 const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
@@ -285,31 +283,11 @@ gulp.task('dev', [
 // user guideline
 gulp.task('help', () => {
   return co(function* () {
-    const developerGuideMD = yield getMarkdownData(['Developer guide'])
+    const developerGuideMD = yield getMarkdownData(['developer_guide'])
 
     gutil.log('\n' + developerGuideMD)
   })
 })
-
-// lints
-gulp.task('lint:css', () => {
-  const srcPath = path.join(lang.css.srcDir, '**', '*' + lang.css.extname)
-
-  return gulp.src(srcPath)
-    .pipe(stylint())
-})
-
-gulp.task('lint:js', () => {
-  return gulp.src([
-    path.join(lang.js.srcDir, '**', '*' + lang.js.extname),
-    '*' + lang.js.extname
-  ])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-})
-
-gulp.task('lint', ['lint:css', 'lint:js'])
 
 // generate markdown file
 gulp.task('md:readme', () => {
