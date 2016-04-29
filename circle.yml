@@ -1,0 +1,12 @@
+machine:
+  node:
+    version: "4.4.3"
+
+general:
+  branches:
+    only:
+      - "master"
+
+test:
+  pre:
+    - "npm run lint"
