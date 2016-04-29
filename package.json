@@ -12,7 +12,8 @@
     "node": ">= 4.2"
   },
   "scripts": {
-    "lint": "eslint --ext .js,.jsx . && stylint src"
+    "lint": "eslint --ext .js,.jsx . && stylint src",
+    "test": "exit 0"
   },
   "dependencies": {
     "babel-polyfill": "^6.5.0",
