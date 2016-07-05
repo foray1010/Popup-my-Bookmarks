@@ -19,6 +19,7 @@ const YAML = require('yamljs')
 const zip = require('gulp-zip')
 
 const packageJSON = require('./package')
+const webpackConfig = require('./webpack.config')
 
 // promisify
 bluebird.promisifyAll(fs)
@@ -49,9 +50,6 @@ const lang = {
 
 // language handlers
 function buildJS(workingDir) {
-  // define in here because it depends on process.env.NODE_ENV
-  const webpackConfig = require('./webpack.config')
-
   const thisLang = lang.js
 
   const destDir = path.join(workingDir, thisLang.destDir)
@@ -69,7 +67,7 @@ function buildLang(langName, workingDir, options) {
     options = {}
   }
 
-  const isDev = process.env.NODE_ENV === 'development'
+  const isDev = process.argv[2] === 'dev'
   const thisLang = lang[langName]
 
   const srcPath = path.join(thisLang.srcDir, '*' + thisLang.extname)
