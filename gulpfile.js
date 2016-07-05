@@ -24,7 +24,7 @@ const packageJSON = require('./package')
 bluebird.promisifyAll(fs)
 
 // predefined dir path
-const compileDir = '__compile'
+const buildDir = '__build'
 const devDir = '__dev'
 const sourceDir = 'src'
 
@@ -48,7 +48,7 @@ const lang = {
 }
 
 // language handlers
-function compileJS(workingDir) {
+function buildJS(workingDir) {
   // define in here because it depends on process.env.NODE_ENV
   const webpackConfig = require('./webpack.config')
 
@@ -64,7 +64,7 @@ function compileJS(workingDir) {
     .pipe(gulp.dest(destDir))
 }
 
-function compileLang(langName, workingDir, options) {
+function buildLang(langName, workingDir, options) {
   if (!options) {
     options = {}
   }
@@ -74,12 +74,12 @@ function compileLang(langName, workingDir, options) {
 
   const srcPath = path.join(thisLang.srcDir, '*' + thisLang.extname)
 
-  const compileHandler = (thisSrcPath) => {
+  const buildHandler = (thisSrcPath) => {
     const destDir = path.join(workingDir, thisLang.destDir)
 
     return gulp.src(thisSrcPath)
       .pipe(plumber())
-      .pipe(options.compilerPipe ? options.compilerPipe() : gutil.noop())
+      .pipe(options.builderPipe ? options.builderPipe() : gutil.noop())
       .pipe(options.miniferPipe ? options.miniferPipe() : gutil.noop())
       .pipe(gulp.dest(destDir))
   }
@@ -88,17 +88,17 @@ function compileLang(langName, workingDir, options) {
     gulp.watch(srcPath, (evt) => {
       const thisSrcPath = path.relative(__dirname, evt.path)
 
-      compileHandler(thisSrcPath)
+      buildHandler(thisSrcPath)
         .on('end', () => {
-          gutil.log(gutil.colors.magenta(thisSrcPath), 'is compiled')
+          gutil.log(gutil.colors.magenta(thisSrcPath), 'is built')
         })
     })
   }
 
-  return compileHandler(srcPath)
+  return buildHandler(srcPath)
 }
 
-function* compileManifest(workingDir, updateFn) {
+function* buildManifest(workingDir, updateFn) {
   const destPath = path.join(workingDir, 'manifest.json')
   const manifestJSON = YAML.load(path.join(sourceDir, 'manifest.yml'))
 
@@ -141,20 +141,20 @@ function* initDir(workingDir) {
 // default when no task
 gulp.task('default', ['help'])
 
-// compile and zip PmB
-gulp.task('compile:init', () => {
+// build and zip PmB
+gulp.task('build:init', () => {
   return co(function* () {
     process.env.NODE_ENV = 'production'
 
     validatePackageVersion()
 
-    yield initDir(compileDir)
+    yield initDir(buildDir)
   })
 })
 
-gulp.task('compile:css', ['compile:init'], () => {
-  return compileLang('css', compileDir, {
-    compilerPipe: () => stylus({'include css': true}),
+gulp.task('build:css', ['build:init'], () => {
+  return buildLang('css', buildDir, {
+    builderPipe: () => stylus({'include css': true}),
     miniferPipe: () => nano({
       autoprefixer: false,
       discardComments: {removeAll: true}
@@ -162,17 +162,17 @@ gulp.task('compile:css', ['compile:init'], () => {
   })
 })
 
-gulp.task('compile:html', ['compile:init'], () => {
-  return compileLang('html', compileDir, {
-    compilerPipe: () => jade()
+gulp.task('build:html', ['build:init'], () => {
+  return buildLang('html', buildDir, {
+    builderPipe: () => jade()
   })
 })
 
-gulp.task('compile:js', ['compile:init'], () => {
-  return compileJS(compileDir)
+gulp.task('build:js', ['build:init'], () => {
+  return buildJS(buildDir)
 })
 
-gulp.task('compile:others', ['compile:init'], () => {
+gulp.task('build:others', ['build:init'], () => {
   return co(function* () {
     const fileList = [
       '_locales',
@@ -181,34 +181,34 @@ gulp.task('compile:others', ['compile:init'], () => {
     ]
     yield fileList.map((fileName) => fs.copyAsync(
       path.join(sourceDir, fileName),
-      path.join(compileDir, fileName)
+      path.join(buildDir, fileName)
     ))
 
     const licenseFile = 'LICENSE'
     yield fs.copyAsync(
       licenseFile,
-      path.join(compileDir, licenseFile)
+      path.join(buildDir, licenseFile)
     )
 
-    yield compileManifest(compileDir)
+    yield buildManifest(buildDir)
   })
 })
 
-gulp.task('compile:zip', [
-  'compile:css',
-  'compile:html',
-  'compile:js',
-  'compile:others'
+gulp.task('build:zip', [
+  'build:css',
+  'build:html',
+  'build:js',
+  'build:others'
 ], () => {
-  return gulp.src(path.join(compileDir, '**'))
+  return gulp.src(path.join(buildDir, '**'))
     .pipe(zip(packageJSON.version + '.zip'))
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('compile', ['compile:zip'], () => {
+gulp.task('build', ['build:zip'], () => {
   return co(function* () {
     // useless after zipped
-    yield fs.removeAsync(compileDir)
+    yield fs.removeAsync(buildDir)
   })
 })
 
@@ -224,14 +224,14 @@ gulp.task('dev:init', () => {
 })
 
 gulp.task('dev:css', ['dev:init'], () => {
-  return compileLang('css', devDir, {
-    compilerPipe: () => stylus({'include css': true})
+  return buildLang('css', devDir, {
+    builderPipe: () => stylus({'include css': true})
   })
 })
 
 gulp.task('dev:html', ['dev:init'], () => {
-  return compileLang('html', devDir, {
-    compilerPipe: () => jade({pretty: true})
+  return buildLang('html', devDir, {
+    builderPipe: () => jade({pretty: true})
   })
 })
 
@@ -251,7 +251,7 @@ gulp.task('dev:img', ['dev:init'], () => {
 
 gulp.task('dev:js', ['dev:init'], () => {
   // don't return because webpack `watch` will hold the pipe
-  compileJS(devDir)
+  buildJS(devDir)
 })
 
 gulp.task('dev:others', ['dev:init'], () => {
@@ -266,7 +266,7 @@ gulp.task('dev:others', ['dev:init'], () => {
       'dir'
     ))
 
-    yield compileManifest(devDir, (manifestJSON) => {
+    yield buildManifest(devDir, (manifestJSON) => {
       manifestJSON.name += ' (dev)'
     })
   })
