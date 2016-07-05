@@ -12,8 +12,8 @@
     "node": ">= 4.2"
   },
   "scripts": {
-    "build": "gulp build",
-    "dev": "gulp dev",
+    "build": "NODE_ENV=production gulp build",
+    "dev": "NODE_ENV=development gulp dev",
     "help": "gulp help",
     "lint": "eslint --ext .js,.jsx . && stylint src",
     "md": "gulp md",
