@@ -12,7 +12,11 @@
     "node": ">= 4.2"
   },
   "scripts": {
+    "build": "gulp build",
+    "dev": "gulp dev",
+    "help": "gulp help",
     "lint": "eslint --ext .js,.jsx . && stylint src",
+    "md": "gulp md",
     "test": "exit 0"
   },
   "dependencies": {

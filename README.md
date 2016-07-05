@@ -35,31 +35,25 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
   - [nvm](//github.com/creationix/nvm) (Linux/Mac)
   - [Node.js official website](//nodejs.org/en/download/) (Windows)
 
-2. Install [gulp.js](//github.com/gulpjs/gulp)
-
-  ```
-  npm install -g gulp
-  ```
-
-3. **cd** to your workspace and install all dependencies
+2. **cd** to your workspace and install all dependencies
 
   ```
   npm install
   ```
 
 ##### Commands
-1. compile
+1. build
 
   ```
-  gulp compile
+  npm run build
   ```
 
-  To compile the whole extension and output a zip file ([version in package.json].zip) for uploading to Chrome Web Store
+  To build the whole extension and output a zip file ([version in package.json].zip) for uploading to Chrome Web Store
 
 2. dev
 
   ```
-  gulp dev
+  npm run dev
   ```
 
   To make a temporary folder `__dev` for you to load unpacked extension
@@ -70,7 +64,7 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
 3. help
 
   ```
-  gulp help
+  npm run help
   ```
 
   Display developer guide on terminal
@@ -88,7 +82,7 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
 5. md
 
   ```
-  gulp md
+  npm run md
   ```
 
   To generate markdown file on the current directory
