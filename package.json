@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.5.0",
-    "chrome-promise": "^1.0.6",
+    "chrome-promise": "^2.0.0",
     "classnames": "^2.2.3",
     "core-decorators": "^0.12.0",
     "lodash.debounce": "^4.0.3",
