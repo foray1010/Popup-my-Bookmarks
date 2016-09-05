@@ -5,16 +5,31 @@ const paypalUrl = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick' +
 
 const Donate = () => (
   <footer id='donate'>
-    <a id='donate-img' href={paypalUrl} target='_blank'>
+    <a
+      id='donate-img'
+      href={paypalUrl}
+      target='_blank'
+      rel='noopener noreferrer'
+    >
       <img src='/img/btn_donateCC_LG.png' alt='' />
     </a>
     <p id='donate-desc'>
       {'If you like Popup my Bookmarks, please rate this extension on '}
-      <a className='link' href='http://goo.gl/x9Wlq' target='_blank'>
+      <a
+        className='link'
+        href='http://goo.gl/x9Wlq'
+        target='_blank'
+        rel='noopener noreferrer'
+      >
         Chrome Web Store
       </a>
       {' and consider to buy me a drink via '}
-      <a className='link' href={paypalUrl} target='_blank'>
+      <a
+        className='link'
+        href={paypalUrl}
+        target='_blank'
+        rel='noopener noreferrer'
+      >
         PayPal
       </a>
       {'!'}

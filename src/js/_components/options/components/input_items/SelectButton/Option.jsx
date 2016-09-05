@@ -21,11 +21,6 @@ class Option extends Component {
     dispatch(updateSingleOption(optionName, newOptionValue))
   }
 
-  @autobind
-  handleClick() {
-    this.inputEl.click()
-  }
-
   render() {
     const {
       optionChoice,
@@ -33,9 +28,10 @@ class Option extends Component {
       options
     } = this.props
 
+    const buttonText = optionChoice ? msgYes : msgNo
+    const id = `_${optionName}-${optionChoice}`.toLowerCase().replace(/\s/g, '')
     const optionValue = options[optionName]
 
-    const buttonText = optionChoice ? msgYes : msgNo
     const isChecked = optionValue === optionChoice
 
     const selectButtonClassName = classNames(
@@ -46,11 +42,9 @@ class Option extends Component {
     )
 
     return (
-      <label className='select-button-label'>
+      <label className='select-button-label' htmlFor={id}>
         <input
-          ref={(ref) => {
-            this.inputEl = ref
-          }}
+          id={id}
           name={optionName}
           type='radio'
           value={String(optionChoice)}
@@ -58,13 +52,9 @@ class Option extends Component {
           hidden
           onChange={this.handleChange}
         />
-        <button
-          className={selectButtonClassName}
-          type='button'
-          onClick={this.handleClick}
-        >
+        <div className={selectButtonClassName}>
           {buttonText}
-        </button>
+        </div>
       </label>
     )
   }

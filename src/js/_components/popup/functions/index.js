@@ -95,14 +95,14 @@ export async function getFirstTree(options) {
 export function getItemHeight(options) {
   const {fontSize} = options
 
-  return GOLDEN_GAP * 2 + fontSize
+  return (GOLDEN_GAP * 2) + fontSize
 }
 
 export function getItemOffsetHeight(options) {
   const itemHeight = getItemHeight(options)
 
   // +1 for border width, GOLDEN_GAP for padding
-  return (1 + GOLDEN_GAP) * 2 + itemHeight
+  return ((1 + GOLDEN_GAP) * 2) + itemHeight
 }
 
 export async function getSearchResult(newSearchKeyword) {
@@ -157,10 +157,10 @@ export function getSlicedTrees(trees, removeFromIndex) {
 export function getStyleOptions(options) {
   const {fontFamily, fontSize, setWidth} = options
 
-  const itemHeight = GOLDEN_GAP * 2 + fontSize
+  const itemHeight = (GOLDEN_GAP * 2) + fontSize
 
   // +1 for border width, GOLDEN_GAP for padding
-  const itemOffsetHeight = (1 + GOLDEN_GAP) * 2 + itemHeight
+  const itemOffsetHeight = ((1 + GOLDEN_GAP) * 2) + itemHeight
 
   return {
     fontFamily: fontFamily,

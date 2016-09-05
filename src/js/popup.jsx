@@ -2,6 +2,7 @@ import 'babel-polyfill'
 import {createElement} from 'react'
 import {Provider} from 'react-redux'
 import {render} from 'react-dom'
+import Immutable from 'seamless-immutable'
 
 import {
   getFirstTree,
@@ -13,7 +14,6 @@ import App from './_components/popup/containers/App'
 import chromep from './_components/lib/chromePromise'
 import configureStore from './_components/store/configureStore'
 import getOptionsConfig from './_components/getOptionsConfig'
-import Immutable from 'seamless-immutable'
 import reducers from './_components/popup/reducers'
 
 !async function () {

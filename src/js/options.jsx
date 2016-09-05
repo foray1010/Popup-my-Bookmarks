@@ -2,6 +2,7 @@ import 'babel-polyfill'
 import {createElement} from 'react'
 import {Provider} from 'react-redux'
 import {render} from 'react-dom'
+import Immutable from 'seamless-immutable'
 
 import {
   initOptionsValue
@@ -12,7 +13,6 @@ import {
 import App from './_components/options/containers/App'
 import configureStore from './_components/store/configureStore'
 import getOptionsConfig from './_components/getOptionsConfig'
-import Immutable from 'seamless-immutable'
 import reducers from './_components/options/reducers'
 
 !async function () {

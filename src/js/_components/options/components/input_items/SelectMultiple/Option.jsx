@@ -38,13 +38,15 @@ class Option extends Component {
       options
     } = this.props
 
+    const id = `_${optionName}-${optionChoice}`.toLowerCase().replace(/\s/g, '')
     const optionValue = options[optionName]
 
     const isChecked = optionValue.includes(optionChoiceIndex)
 
     return (
-      <label>
+      <label htmlFor={id}>
         <input
+          id={id}
           name={optionName}
           type='checkbox'
           value={String(optionChoiceIndex)}

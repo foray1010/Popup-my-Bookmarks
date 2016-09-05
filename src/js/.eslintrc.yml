@@ -1,2 +1,3 @@
-extends: "foray1010/react"
-parser: "babel-eslint"
+extends:
+  - "foray1010/react"
+  - "foray1010/rules/babel"
