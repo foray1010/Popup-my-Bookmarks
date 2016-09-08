@@ -296,16 +296,14 @@ if (process.env.NODE_ENV !== 'production') {
     cutTarget: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
     menuItemKey: PropTypes.string.isRequired,
-    menuTarget: PropTypes.object.isRequired,
-    options: PropTypes.object.isRequired
+    menuTarget: PropTypes.object.isRequired
   }
 }
 
 const mapStateToProps = (state) => ({
   copyTarget: state.copyTarget,
   cutTarget: state.cutTarget,
-  menuTarget: state.menuTarget,
-  options: state.options
+  menuTarget: state.menuTarget
 })
 
 export default connect(mapStateToProps)(MenuItem)

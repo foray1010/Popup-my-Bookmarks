@@ -293,7 +293,6 @@ if (process.env.NODE_ENV !== 'production') {
     keyboardTarget: PropTypes.object,
     menuTarget: PropTypes.object,
     options: PropTypes.object.isRequired,
-    rootTree: PropTypes.object.isRequired,
     searchKeyword: PropTypes.string.isRequired,
     trees: PropTypes.arrayOf(PropTypes.object).isRequired
   }
@@ -304,7 +303,6 @@ const mapStateToProps = (state) => ({
   keyboardTarget: state.keyboardTarget,
   menuTarget: state.menuTarget,
   options: state.options,
-  rootTree: state.rootTree,
   searchKeyword: state.searchKeyword,
   trees: state.trees
 })
