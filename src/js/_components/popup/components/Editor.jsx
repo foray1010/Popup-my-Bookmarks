@@ -45,7 +45,7 @@ class Editor extends Component {
     if (!isHidden) {
       const editorHeight = baseEl.offsetHeight
       const editorTargetEl = document.getElementById(editorTarget.id)
-      const html = document.getElementsByTagName('html')[0]
+      const html = document.documentElement
 
       const editorTargetOffset = editorTargetEl.getBoundingClientRect()
       const htmlHeight = html.clientHeight

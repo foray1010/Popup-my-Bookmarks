@@ -61,7 +61,7 @@ class Menu extends Component {
 
     if (!isHidden) {
       const body = document.body
-      const html = document.getElementsByTagName('html')[0]
+      const html = document.documentElement
       const menuHeight = baseEl.offsetHeight
       const menuWidth = baseEl.offsetWidth
 
