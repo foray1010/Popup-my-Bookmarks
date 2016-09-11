@@ -29,7 +29,7 @@
   To make a temporary folder `__dev` for you to load unpacked extension
   - ES6 JavaScript to ES5 JavaScript by [Babel](//github.com/babel/babel)
   - *.styl to *.css by [Stylus](//github.com/stylus/stylus)
-  - *.jade to *.html by [Jade](//github.com/jadejs/jade)
+  - *.pug to *.html by [Pug](//github.com/pugjs/pug)
 
 3. help
 

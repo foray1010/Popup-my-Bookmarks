@@ -1,16 +1,18 @@
 {
   "name": "Popup-my-Bookmarks",
   "version": "5.0.0",
-  "description": "A more efficient way to view and manage your bookmarks menu.",
-  "author": "foray1010",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/foray1010/Popup-my-Bookmarks.git"
-  },
-  "license": "MIT",
   "engines": {
     "node": ">= 4.2"
   },
+  "description": "A more efficient way to view and manage your bookmarks menu.",
+  "private": true,
+
+  "license": "MIT",
+  "author": "foray1010",
+  "homepage": "https://github.com/foray1010/Popup-my-Bookmarks",
+  "repository": "foray1010/Popup-my-Bookmarks",
+  "bugs": "https://github.com/foray1010/Popup-my-Bookmarks/issues",
+
   "scripts": {
     "build": "NODE_ENV=production gulp build",
     "dev": "NODE_ENV=development gulp dev",
@@ -19,6 +21,10 @@
     "md": "gulp md",
     "test": "exit 0"
   },
+  "pre-commit": [
+    "lint"
+  ],
+
   "dependencies": {
     "babel-polyfill": "^6.5.0",
     "chrome-promise": "^1.0.6",
@@ -52,8 +58,8 @@
     "gulp-cssnano": "^2.1.1",
     "gulp-filter": "^4.0.0",
     "gulp-image-grayscale": "^2.0.1",
-    "gulp-jade": "^1.1.0",
     "gulp-plumber": "^1.1.0",
+    "gulp-pug": "^3.0.4",
     "gulp-stylus": "^2.3.0",
     "gulp-util": "^3.0.7",
     "gulp-zip": "^3.2.0",
@@ -63,9 +69,5 @@
     "webpack": "^1.12.13",
     "webpack-stream": "^3.1.0",
     "yamljs": "^0.2.6"
-  },
-  "private": true,
-  "pre-commit": [
-    "lint"
-  ]
+  }
 }

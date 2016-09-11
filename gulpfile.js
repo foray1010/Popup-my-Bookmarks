@@ -7,11 +7,11 @@ const gulp = require('gulp')
 const gulpFilter = require('gulp-filter')
 const gutil = require('gulp-util')
 const imageGrayScale = require('gulp-image-grayscale')
-const jade = require('gulp-jade')
 const named = require('vinyl-named')
 const nano = require('gulp-cssnano')
 const path = require('path')
 const plumber = require('gulp-plumber')
+const pug = require('gulp-pug')
 const stylus = require('gulp-stylus')
 const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
@@ -37,7 +37,7 @@ const lang = {
     srcDir: path.join(sourceDir, 'css')
   },
   html: {
-    extname: '.jade',
+    extname: '.pug',
     destDir: '.',
     srcDir: path.join(sourceDir, 'html')
   },
@@ -162,7 +162,7 @@ gulp.task('build:css', ['build:init'], () => {
 
 gulp.task('build:html', ['build:init'], () => {
   return buildLang('html', buildDir, {
-    builderPipe: () => jade()
+    builderPipe: () => pug()
   })
 })
 
@@ -229,7 +229,7 @@ gulp.task('dev:css', ['dev:init'], () => {
 
 gulp.task('dev:html', ['dev:init'], () => {
   return buildLang('html', devDir, {
-    builderPipe: () => jade({pretty: true})
+    builderPipe: () => pug({pretty: true})
   })
 })
 
