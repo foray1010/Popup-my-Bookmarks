@@ -1,4 +1,4 @@
-import chromep from '../../lib/chromePromise'
+import chromep from '../../common/lib/chromePromise'
 
 export async function initOptionsValue(optionsConfig) {
   const options = await chromep.storage.sync.get(null)

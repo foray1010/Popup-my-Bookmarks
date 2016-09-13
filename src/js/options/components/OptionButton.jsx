@@ -12,7 +12,7 @@ import {
 import {
   updateOptions
 } from '../actions'
-import chromep from '../../lib/chromePromise'
+import chromep from '../../common/lib/chromePromise'
 
 const msgConfirm = chrome.i18n.getMessage('confirm')
 const msgDefault = chrome.i18n.getMessage('default')

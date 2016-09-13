@@ -5,7 +5,7 @@ import {
   UPDATE_OPTIONS,
   UPDATE_SINGLE_OPTION
 } from '../constants/actionTypes'
-import chromep from '../../lib/chromePromise'
+import chromep from '../../common/lib/chromePromise'
 
 /* basic action */
 export function selectNavModule(navModule) {

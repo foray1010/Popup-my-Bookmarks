@@ -7,7 +7,6 @@ const gulp = require('gulp')
 const gulpFilter = require('gulp-filter')
 const gutil = require('gulp-util')
 const imageGrayScale = require('gulp-image-grayscale')
-const named = require('vinyl-named')
 const nano = require('gulp-cssnano')
 const path = require('path')
 const plumber = require('gulp-plumber')
@@ -42,9 +41,7 @@ const lang = {
     srcDir: path.join(sourceDir, 'html')
   },
   js: {
-    extname: '.js?(x)',
-    destDir: 'js',
-    srcDir: path.join(sourceDir, 'js')
+    destDir: 'js'
   }
 }
 
@@ -53,11 +50,8 @@ function buildJS(workingDir) {
   const thisLang = lang.js
 
   const destDir = path.join(workingDir, thisLang.destDir)
-  const srcPath = path.join(thisLang.srcDir, '*' + thisLang.extname)
 
-  return gulp.src(srcPath)
-    .pipe(plumber())
-    .pipe(named())
+  return plumber()
     .pipe(webpackStream(webpackConfig, webpack))
     .pipe(gulp.dest(destDir))
 }

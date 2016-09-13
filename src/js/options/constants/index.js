@@ -17,7 +17,7 @@ import {
   OPTIONS_SET_WIDTH,
   OPTIONS_TOOLTIP,
   OPTIONS_WARN_OPEN_MANY
-} from '../../constants'
+} from '../../common/constants'
 
 export const NAV_MODULE_CONTRIBUTORS = 'contributors'
 export const NAV_MODULE_CONTROL = 'control'

@@ -15,8 +15,8 @@ import {
   OPTIONS_SET_WIDTH,
   OPTIONS_TOOLTIP,
   OPTIONS_WARN_OPEN_MANY
-} from './constants'
-import chromep from './lib/chromePromise'
+} from '../constants'
+import chromep from './chromePromise'
 
 async function getOptionsConfig() {
   const openBookmarkChoices = getSelectChoices('opt_clickOption')

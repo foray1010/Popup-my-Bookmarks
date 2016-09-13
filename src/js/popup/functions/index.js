@@ -9,8 +9,8 @@ import {
   TYPE_ROOT_FOLDER,
   TYPE_SEPARATOR
 } from '../constants'
-import chromep from '../../lib/chromePromise'
-import css from '../../lib/css'
+import chromep from '../../common/lib/chromePromise'
+import css from '../../common/lib/css'
 
 const msgNoBookmark = chrome.i18n.getMessage('noBkmark')
 

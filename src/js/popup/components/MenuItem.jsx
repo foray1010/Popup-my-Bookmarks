@@ -22,7 +22,7 @@ import {
   updateEditorTarget,
   updateMenuTarget
 } from '../actions'
-import chromep from '../../lib/chromePromise'
+import chromep from '../../common/lib/chromePromise'
 
 async function addCurrentPage(menuTarget) {
   const results = await chromep.tabs.query({

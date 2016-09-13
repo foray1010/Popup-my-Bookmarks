@@ -6,14 +6,14 @@ import Immutable from 'seamless-immutable'
 
 import {
   initOptionsValue
-} from './_components/options/functions'
+} from './functions'
 import {
   NAV_MODULE_GENERAL
-} from './_components/options/constants'
-import App from './_components/options/containers/App'
-import configureStore from './_components/store/configureStore'
-import getOptionsConfig from './_components/getOptionsConfig'
-import reducers from './_components/options/reducers'
+} from './constants'
+import App from './containers/App'
+import configureStore from '../common/store/configureStore'
+import getOptionsConfig from '../common/lib/getOptionsConfig'
+import reducers from './reducers'
 
 !async function () {
   const optionsConfig = await getOptionsConfig()

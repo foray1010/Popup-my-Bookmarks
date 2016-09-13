@@ -9,7 +9,7 @@ import {
 import {
   updateEditorTarget
 } from '../actions'
-import chromep from '../../lib/chromePromise'
+import chromep from '../../common/lib/chromePromise'
 
 const msgCancel = chrome.i18n.getMessage('cancel')
 const msgConfirm = chrome.i18n.getMessage('confirm')

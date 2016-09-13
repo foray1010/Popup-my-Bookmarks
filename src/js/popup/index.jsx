@@ -9,12 +9,12 @@ import {
   getFlatTree,
   getItemOffsetHeight,
   openOptionsPage
-} from './_components/popup/functions'
-import App from './_components/popup/containers/App'
-import chromep from './_components/lib/chromePromise'
-import configureStore from './_components/store/configureStore'
-import getOptionsConfig from './_components/getOptionsConfig'
-import reducers from './_components/popup/reducers'
+} from './functions'
+import App from './containers/App'
+import chromep from '../common/lib/chromePromise'
+import configureStore from '../common/store/configureStore'
+import getOptionsConfig from '../common/lib/getOptionsConfig'
+import reducers from './reducers'
 
 !async function () {
   const options = await chromep.storage.sync.get(null)

@@ -3,6 +3,10 @@
 const webpack = require('webpack')
 
 const webpackConfig = {
+  entry: {
+    options: './src/js/options/index.jsx',
+    popup: './src/js/popup/index.jsx'
+  },
   module: {
     loaders: [
       {
@@ -11,6 +15,9 @@ const webpackConfig = {
         loader: 'babel-loader'
       }
     ]
+  },
+  output: {
+    filename: '[name].js'
   },
   plugins: [
     new webpack.DefinePlugin({
