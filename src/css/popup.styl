@@ -26,22 +26,6 @@ body
   &:hover
     highlight-item()
 
-.bookmark-list
-  plain-list()
-  overflow-y: auto
-
-  &::after
-    background-color: currentcolor
-    content: ""
-    display: block
-    height: $golden-gap
-    margin-top: $golden-gap
-
-.bookmark-tree
-  background-color: inherit
-  position: absolute
-  width: 100%
-
 .cover
   background-color: rgba(0, 0, 0, .16)
   bottom: 0
@@ -194,9 +178,6 @@ body
   margin: 0
   margin-right: auto
   padding: 0 $golden-gap-2x
-
-#app
-  background-color: inherit
 
 #container
   background-color: inherit

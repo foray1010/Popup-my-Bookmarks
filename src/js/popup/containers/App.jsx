@@ -2,6 +2,7 @@ import {autobind, debounce} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
 import _debounce from 'lodash.debounce'
+import CSSModules from 'react-css-modules'
 
 import {
   genBookmarkList,
@@ -27,6 +28,7 @@ import Editor from '../components/Editor'
 import Menu from '../components/Menu'
 import MenuCover from '../components/MenuCover'
 import Panel from '../components/Panel'
+import styles from '../../../css/popup/app.scss'
 
 class App extends Component {
   constructor() {
@@ -272,7 +274,7 @@ class App extends Component {
 
     return (
       <div
-        id='app'
+        styleName='main'
         onContextMenu={this.handleContextMenu}
         onKeyDown={this.handleKeyDown}
         onMouseDown={this.handleMouseDown}
@@ -307,4 +309,6 @@ const mapStateToProps = (state) => ({
   trees: state.trees
 })
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(
+  CSSModules(App, styles)
+)

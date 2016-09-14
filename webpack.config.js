@@ -1,5 +1,7 @@
 'use strict'
 
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const querystring = require('querystring')
 const webpack = require('webpack')
 
 const webpackConfig = {
@@ -38,11 +40,44 @@ const webpackConfig = {
 switch (process.env.NODE_ENV) {
   case 'development':
     webpackConfig.devtool = 'source-map'
+    webpackConfig.module.loaders.push({
+      test: /\.scss$/,
+      loaders: [
+        'style-loader?' + querystring.stringify({
+          sourceMap: true
+        }),
+        'css-loader?' + querystring.stringify({
+          modules: true,
+          importLoaders: 1,
+          localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
+        }),
+        'sass-loader'
+      ]
+    })
     webpackConfig.watch = true
     break
 
   case 'production':
+    webpackConfig.module.loaders.push({
+      test: /\.scss$/,
+      loader: ExtractTextPlugin.extract({
+        notExtractLoader: 'style-loader',
+        loaders: [
+          'css-loader?' + querystring.stringify({
+            modules: true,
+            importLoaders: 1,
+            localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
+          }),
+          'sass-loader',
+          'resolve-url-loader',
+          'postcss-loader'
+        ]
+      })
+    })
     webpackConfig.plugins.push(
+      new ExtractTextPlugin('app.css', {
+        allChunks: true
+      }),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
