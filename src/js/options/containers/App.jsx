@@ -5,7 +5,7 @@ import NavBar from '../components/NavBar'
 import NavModuleMapper from '../components/NavModuleMapper'
 
 const App = () => (
-  <div id='app'>
+  <div>
     <NavBar />
     <NavModuleMapper />
     <Donate />

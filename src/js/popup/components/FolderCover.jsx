@@ -1,10 +1,12 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
+import CSSModules from 'react-css-modules'
 
 import {
   removeTreeInfosFromIndex
 } from '../actions'
+import styles from '../../../css/popup/folder-cover.scss'
 
 class FolderCover extends Component {
   @autobind
@@ -63,7 +65,7 @@ class FolderCover extends Component {
 
     return (
       <div
-        className='cover'
+        styleName='main'
         hidden={isHidden}
         onClick={this.handleClose}
         onMouseLeave={handleMouseLeave}
@@ -86,4 +88,6 @@ const mapStateToProps = (state, ownProps) => ({
   isHidden: state.trees.length - ownProps.treeIndex <= 2
 })
 
-export default connect(mapStateToProps)(FolderCover)
+export default connect(mapStateToProps)(
+  CSSModules(FolderCover, styles)
+)

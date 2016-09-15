@@ -1,8 +1,7 @@
-@import "../common/composes.scss";
 @import "../common/variables.scss";
 
 .list {
-  composes: plain-list;
+  composes: plain-list from "../common/composes.scss";
   overflow-y: auto;
 
   &::after {

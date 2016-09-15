@@ -1,3 +1,17 @@
+.cover {
+  background-color: rgba(0, 0, 0, .16);
+  bottom: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.no-text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .plain-list {
   list-style: none;
   margin: 0;

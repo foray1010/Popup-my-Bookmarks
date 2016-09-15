@@ -1,9 +1,5 @@
 @import "./components/variables"
 
-$donate-desc-width = 380px
-$donate-img-width = 160px
-$donate-width = $donate-desc-width + $donate-img-width
-
 $input-height = 22px
 
 nav-bar-item-colorizing()
@@ -51,15 +47,6 @@ input[type="number"]
     text-align: left
     top: 0
     width: calc(100% - 20px)
-
-.link
-  color: $main-color1
-  cursor: pointer
-  font-weight: bold
-  text-decoration: none
-
-  &:hover
-    color: $main-color2
 
 .nav-bar-item
   border-bottom: $golden-gap-2x solid transparent
@@ -144,20 +131,6 @@ input[type="number"]
   height: 100%
   position: relative
   transition-duration: inherit
-
-#donate
-  align-items: center
-  display: flex
-  height: 50px
-  margin: auto
-  padding: 8px
-  width: $donate-width
-
-#donate-desc
-  width: $donate-desc-width
-
-#donate-img
-  width: $donate-img-width
 
 #nav-bar
   background-color: $main-color5

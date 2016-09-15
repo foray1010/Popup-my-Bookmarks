@@ -1,6 +1,8 @@
 import {createElement, PropTypes} from 'react'
+import CSSModules from 'react-css-modules'
 
 import MenuItem from './MenuItem'
+import styles from '../../../css/popup/menu-area.scss'
 
 const MenuArea = (props) => {
   const {
@@ -17,7 +19,7 @@ const MenuArea = (props) => {
 
   return (
     <ul
-      className='menu-area'
+      styleName='main'
       hidden={isHidden}
     >
       {menuAreaItems}
@@ -32,4 +34,4 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
-export default MenuArea
+export default CSSModules(MenuArea, styles)

@@ -1,6 +1,9 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
+import CSSModules from 'react-css-modules'
+
+import styles from '../../../css/popup/menu-cover.scss'
 
 import {
   resetBodySize
@@ -28,8 +31,7 @@ class MenuCover extends Component {
 
     return (
       <div
-        id='menu-cover'
-        className='cover'
+        styleName='main'
         hidden={isHidden}
         onClick={this.handleClick}
       />
@@ -49,4 +51,6 @@ const mapStateToProps = (state) => ({
   isHidden: !(state.editorTarget || state.menuTarget)
 })
 
-export default connect(mapStateToProps)(MenuCover)
+export default connect(mapStateToProps)(
+  CSSModules(MenuCover, styles)
+)

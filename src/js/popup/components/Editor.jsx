@@ -1,6 +1,7 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
+import CSSModules from 'react-css-modules'
 
 import {
   isFolder,
@@ -10,6 +11,7 @@ import {
   updateEditorTarget
 } from '../actions'
 import chromep from '../../common/lib/chromePromise'
+import styles from '../../../css/popup/editor.scss'
 
 const msgCancel = chrome.i18n.getMessage('cancel')
 const msgConfirm = chrome.i18n.getMessage('confirm')
@@ -119,10 +121,11 @@ class Editor extends Component {
         ref={(ref) => {
           this.baseEl = ref
         }}
-        className='editor panel-width'
+        className='panel-width'
+        styleName='main'
         hidden={isHidden}
       >
-        <span className='editor-title'>{editorTitle}</span>
+        <span styleName='title'>{editorTitle}</span>
         <input
           ref={(ref) => {
             this.titleInputEl = ref
@@ -154,4 +157,6 @@ const mapStateToProps = (state) => ({
   editorTarget: state.editorTarget
 })
 
-export default connect(mapStateToProps)(Editor)
+export default connect(mapStateToProps)(
+  CSSModules(Editor, styles)
+)
