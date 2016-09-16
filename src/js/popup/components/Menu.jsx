@@ -12,6 +12,7 @@ import {
   TYPE_ROOT_FOLDER
 } from '../constants'
 import MenuArea from './MenuArea'
+
 import styles from '../../../css/popup/menu.scss'
 
 class Menu extends Component {

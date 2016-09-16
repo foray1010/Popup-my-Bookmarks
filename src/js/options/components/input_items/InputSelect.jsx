@@ -4,6 +4,7 @@ import {createElement, Component, PropTypes} from 'react'
 import CSSModules from 'react-css-modules'
 
 import {updateSingleOption} from '../../actions'
+
 import styles from '../../../../css/options/input-select.scss'
 
 class InputSelect extends Component {

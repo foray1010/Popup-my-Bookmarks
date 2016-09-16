@@ -15,6 +15,7 @@ import DragIndicator from './DragIndicator'
 import FolderCover from './FolderCover'
 import NoResult from './NoResult'
 import TreeHeader from './TreeHeader'
+
 import styles from '../../../css/popup/bookmark-tree.scss'
 
 class BookmarkTree extends Component {

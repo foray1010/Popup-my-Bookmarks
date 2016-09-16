@@ -11,6 +11,7 @@ import {
   updateSearchKeyword,
   updateTrees
 } from '../actions'
+
 import styles from '../../../css/popup/search.scss'
 
 const msgSearch = chrome.i18n.getMessage('search')

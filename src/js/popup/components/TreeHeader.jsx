@@ -6,6 +6,7 @@ import CSSModules from 'react-css-modules'
 import {
   removeTreeInfosFromIndex
 } from '../actions'
+
 import styles from '../../../css/popup/tree-header.scss'
 
 class TreeHeader extends Component {

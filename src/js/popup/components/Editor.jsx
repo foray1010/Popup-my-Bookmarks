@@ -11,6 +11,7 @@ import {
   updateEditorTarget
 } from '../actions'
 import chromep from '../../common/lib/chromePromise'
+
 import styles from '../../../css/popup/editor.scss'
 
 const msgCancel = chrome.i18n.getMessage('cancel')

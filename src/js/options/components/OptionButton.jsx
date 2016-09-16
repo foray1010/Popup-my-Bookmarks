@@ -14,6 +14,7 @@ import {
   updateOptions
 } from '../actions'
 import chromep from '../../common/lib/chromePromise'
+
 import styles from '../../../css/options/option-button.scss'
 
 const msgConfirm = chrome.i18n.getMessage('confirm')

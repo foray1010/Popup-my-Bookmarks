@@ -2,6 +2,7 @@ import {createElement, PropTypes} from 'react'
 import CSSModules from 'react-css-modules'
 
 import Option from './Option'
+
 import styles from '../../../../../css/options/select-multiple.scss'
 
 const SelectMultiple = (props) => {

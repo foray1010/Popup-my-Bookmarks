@@ -28,6 +28,7 @@ import Editor from '../components/Editor'
 import Menu from '../components/Menu'
 import MenuCover from '../components/MenuCover'
 import Panel from '../components/Panel'
+
 import styles from '../../../css/popup/app.scss'
 
 class App extends Component {

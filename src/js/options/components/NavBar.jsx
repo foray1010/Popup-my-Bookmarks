@@ -8,6 +8,7 @@ import {
   NAV_MODULE_USER_INTERFACE
 } from '../constants'
 import NavBarItem from './NavBarItem'
+
 import styles from '../../../css/options/nav-bar.scss'
 
 const navBarItemInfos = [

@@ -7,6 +7,7 @@ import InputSelect from './input_items/InputSelect'
 import SelectButton from './input_items/SelectButton'
 import SelectMultiple from './input_items/SelectMultiple'
 import SelectString from './input_items/SelectString'
+
 import styles from '../../../css/options/option-item.scss'
 
 const OptionItem = (props) => {

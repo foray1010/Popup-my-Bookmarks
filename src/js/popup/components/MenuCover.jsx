@@ -3,8 +3,6 @@ import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
 import CSSModules from 'react-css-modules'
 
-import styles from '../../../css/popup/menu-cover.scss'
-
 import {
   resetBodySize
 } from '../functions'
@@ -12,6 +10,8 @@ import {
   updateEditorTarget,
   updateMenuTarget
 } from '../actions'
+
+import styles from '../../../css/popup/menu-cover.scss'
 
 class MenuCover extends Component {
   @autobind
