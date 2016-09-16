@@ -5,12 +5,12 @@
   display: inline-block;
   position: relative;
 
-  & > input,
+  & > input[type="text"],
   & > select {
     border: 0;
   }
 
-  & > input {
+  & > input[type="text"] {
     box-sizing: border-box;
     height: 100%;
     left: 0;
