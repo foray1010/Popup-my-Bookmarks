@@ -1,7 +1,9 @@
 import {connect} from 'react-redux'
 import {createElement, PropTypes} from 'react'
+import CSSModules from 'react-css-modules'
 
 import Option from './Option'
+import styles from '../../../../../css/options/select-button.scss'
 
 const SelectButton = (props) => {
   const {
@@ -25,8 +27,8 @@ const SelectButton = (props) => {
   }
 
   return (
-    <div className='select-button-box'>
-      <div className='select-button-cover' style={selectButtonCoverStyle} />
+    <div styleName='main'>
+      <div styleName='cover' style={selectButtonCoverStyle} />
       {optionItems}
     </div>
   )
@@ -43,4 +45,6 @@ const mapStateToProps = (state) => ({
   options: state.options
 })
 
-export default connect(mapStateToProps)(SelectButton)
+export default connect(mapStateToProps)(
+  CSSModules(SelectButton, styles)
+)

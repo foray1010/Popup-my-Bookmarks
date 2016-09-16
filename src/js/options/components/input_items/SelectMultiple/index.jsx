@@ -1,6 +1,8 @@
 import {createElement, PropTypes} from 'react'
+import CSSModules from 'react-css-modules'
 
 import Option from './Option'
+import styles from '../../../../../css/options/select-multiple.scss'
 
 const SelectMultiple = (props) => {
   const {
@@ -24,7 +26,7 @@ const SelectMultiple = (props) => {
   }
 
   return (
-    <span className='select-multiple-box'>
+    <span styleName='main'>
       {checkboxItems}
     </span>
   )
@@ -37,4 +39,4 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
-export default SelectMultiple
+export default CSSModules(SelectMultiple, styles)

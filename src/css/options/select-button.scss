@@ -1,0 +1,24 @@
+@import "../common/variables.scss";
+
+.cover {
+  background-color: currentcolor;
+  height: 100%;
+  position: absolute;
+  transition-duration: inherit;
+  transition-property: left;
+  width: 50%;
+}
+
+.main {
+  align-items: center;
+  background-color: $blank-color;
+  border: 1px solid currentcolor;
+  box-sizing: border-box;
+  color: $main-color1;
+  display: flex;
+  height: $options-input-height;
+  position: relative;
+  text-align: center;
+  transition-duration: .4s;
+  width: 80px;
+}

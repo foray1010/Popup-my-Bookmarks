@@ -1,0 +1,16 @@
+@import "../common/variables.scss";
+
+.main {
+  border: 1px solid $main-color1;
+  display: inline-block;
+  padding: $golden-gap-2x;
+
+  & > label {
+    align-items: center;
+    display: flex;
+
+    & > input {
+      margin-right: $golden-gap-2x;
+    }
+  }
+}

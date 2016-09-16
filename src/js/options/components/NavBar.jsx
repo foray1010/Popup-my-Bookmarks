@@ -1,4 +1,5 @@
 import {createElement} from 'react'
+import CSSModules from 'react-css-modules'
 
 import {
   NAV_MODULE_CONTRIBUTORS,
@@ -7,6 +8,7 @@ import {
   NAV_MODULE_USER_INTERFACE
 } from '../constants'
 import NavBarItem from './NavBarItem'
+import styles from '../../../css/options/nav-bar.scss'
 
 const navBarItemInfos = [
   {
@@ -36,10 +38,10 @@ const NavBar = () => {
   ))
 
   return (
-    <nav id='nav-bar'>
+    <nav styleName='main'>
       {navItems}
     </nav>
   )
 }
 
-export default NavBar
+export default CSSModules(NavBar, styles)

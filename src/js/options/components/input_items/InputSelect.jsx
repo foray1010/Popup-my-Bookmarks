@@ -1,8 +1,10 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
+import CSSModules from 'react-css-modules'
 
 import {updateSingleOption} from '../../actions'
+import styles from '../../../../css/options/input-select.scss'
 
 class InputSelect extends Component {
   @autobind
@@ -63,7 +65,7 @@ class InputSelect extends Component {
     ))
 
     return (
-      <div className='input-select-box'>
+      <div styleName='main'>
         <input
           ref={(ref) => {
             this.inputEl = ref
@@ -99,4 +101,6 @@ const mapStateToProps = (state) => ({
   options: state.options
 })
 
-export default connect(mapStateToProps)(InputSelect)
+export default connect(mapStateToProps)(
+  CSSModules(InputSelect, styles)
+)
