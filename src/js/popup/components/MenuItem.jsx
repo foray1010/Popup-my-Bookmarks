@@ -65,7 +65,6 @@ async function removeBookmarkItem(menuTarget) {
 
 async function sortByName(parentId) {
   const childrenInfo = await chromep.bookmarks.getChildren(parentId)
-
   const classifiedItemsList = []
 
   const genClassifiedItems = () => {
@@ -80,26 +79,24 @@ async function sortByName(parentId) {
     return newClassifiedItems
   }
 
-  let newChildrenInfo = []
-  let selectedClassifiedItems = genClassifiedItems()
-
   /**
    * Split all bookmarks into n main group,
    * where n = the number of separators + 1
    * Each main group contains 3 small groups
    * (Separators, Folders, Bookmarks)
    */
+  let selectedClassifiedItems = genClassifiedItems()
   for (const itemInfo of childrenInfo) {
     let classifiedItemsIndex
 
     switch (getBookmarkType(itemInfo)) {
-      case TYPE_FOLDER:
-        classifiedItemsIndex = 1
-        break
-
       case TYPE_SEPARATOR:
         classifiedItemsIndex = 0
         selectedClassifiedItems = genClassifiedItems()
+        break
+
+      case TYPE_FOLDER:
+        classifiedItemsIndex = 1
         break
 
       case TYPE_BOOKMARK:
@@ -113,6 +110,7 @@ async function sortByName(parentId) {
   }
 
   // Concatenate all lists into single list
+  let newChildrenInfo = []
   for (const thisChildrenInfo of classifiedItemsList) {
     for (const classifiedItems of thisChildrenInfo) {
       newChildrenInfo = newChildrenInfo.concat(
