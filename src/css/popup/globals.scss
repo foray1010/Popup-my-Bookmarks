@@ -5,6 +5,10 @@
     -webkit-user-select: none;
   }
 
+  #container {
+    background-color: inherit;
+  }
+
   ::-webkit-scrollbar {
     background-color: transparent;
     height: 5px;

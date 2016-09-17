@@ -1,0 +1,14 @@
+@import "./variables.scss";
+
+@mixin grey-list-item() {
+  color: $highlight-level4 !important;
+
+  & > img {
+    opacity: .4;
+  }
+}
+
+@mixin highlight-list-item() {
+  background-color: $highlight-level1;
+  border-color: $highlight-level2;
+}

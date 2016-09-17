@@ -2,6 +2,7 @@ import {autobind, debounce} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
 import classNames from 'classnames'
+import CSSModules from 'react-css-modules'
 
 import {
   getBookmarkType,
@@ -30,6 +31,8 @@ import {
 } from '../constants'
 import chromep from '../../common/lib/chromePromise'
 
+import styles from '../../../css/popup/bookmark-item.scss'
+
 const dragHackEl = document.getElementById('drag-hack')
 const msgAlertBookmarklet = chrome.i18n.getMessage('alert_bookmarklet')
 
@@ -46,8 +49,8 @@ class BookmarkItem extends Component {
 
   shouldComponentUpdate(nextProps) {
     const propNames = [
-      'isGreyItem',
       'isSelected',
+      'isUnclickable',
       'itemInfo',
       'searchKeyword',
       'shouldKeepInView'
@@ -419,26 +422,32 @@ class BookmarkItem extends Component {
 
   render() {
     const {
-      isGreyItem,
       isSelected,
+      isUnclickable,
       itemInfo,
       searchKeyword
     } = this.props
 
     const bookmarkType = getBookmarkType(itemInfo)
-    const itemClassName = classNames(
-      'item',
-      'bookmark-item',
-      bookmarkType,
+    const itemStyleName = classNames(
+      'main',
       {
-        'grey-item': isGreyItem,
-        selected: isSelected
+        'root-folder': bookmarkType === TYPE_ROOT_FOLDER,
+        selected: isSelected,
+        separator: bookmarkType === TYPE_SEPARATOR,
+        unclickable: isUnclickable
       }
     )
     const itemTitle = itemInfo.title || itemInfo.url || null
 
     let iconSrc = null
+    let isIconHidden = false
     switch (bookmarkType) {
+      case TYPE_NO_BOOKMARK:
+      case TYPE_SEPARATOR:
+        isIconHidden = true
+        break
+
       case TYPE_ROOT_FOLDER:
       case TYPE_FOLDER:
         iconSrc = '/img/folder.png'
@@ -476,7 +485,13 @@ class BookmarkItem extends Component {
         onDragStart={this.handleDragStart}
       >
         <a
-          className={itemClassName}
+          styleName={itemStyleName}
+          className={classNames(
+            'bookmark-item',
+            {
+              separator: bookmarkType === TYPE_SEPARATOR
+            }
+          )}
           href={itemInfo.url || '#'}
           draggable={false}
           tabIndex='-1'
@@ -485,8 +500,14 @@ class BookmarkItem extends Component {
           onMouseEnter={this.handleMouse}
           onMouseLeave={this.handleMouse}
         >
-          <img className='icon' src={iconSrc} alt='' draggable={false} />
-          <span className='no-text-overflow'>{itemTitle}</span>
+          <img
+            styleName='icon'
+            className='icon'
+            src={iconSrc}
+            alt=''
+            hidden={isIconHidden}
+          />
+          <span styleName='title'>{itemTitle}</span>
         </a>
       </li>
     )
@@ -498,8 +519,8 @@ if (process.env.NODE_ENV !== 'production') {
     dispatch: PropTypes.func.isRequired,
     dragIndicator: PropTypes.object,
     dragTarget: PropTypes.object,
-    isGreyItem: PropTypes.bool.isRequired,
     isSelected: PropTypes.bool.isRequired,
+    isUnclickable: PropTypes.bool.isRequired,
     itemInfo: PropTypes.object.isRequired,
     itemOffsetHeight: PropTypes.number.isRequired,
     options: PropTypes.object.isRequired,
@@ -527,8 +548,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     dragIndicator: state.dragIndicator,
     dragTarget: dragTarget,
-    isGreyItem: isCutTarget || isDragTarget,
     isSelected: isDragTarget || isKeyboardTarget || isMenuTarget,
+    isUnclickable: isCutTarget || isDragTarget,
     itemOffsetHeight: state.itemOffsetHeight,
     options: state.options,
     searchKeyword: state.searchKeyword,
@@ -537,4 +558,6 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(BookmarkItem)
+export default connect(mapStateToProps)(
+  CSSModules(BookmarkItem, styles, {allowMultiple: true})
+)

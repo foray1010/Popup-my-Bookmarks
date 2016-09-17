@@ -2,8 +2,11 @@ import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
 import classNames from 'classnames'
+import CSSModules from 'react-css-modules'
 
 import {updateSingleOption} from '../../../actions'
+
+import styles from '../../../../../css/options/select-button-option.scss'
 
 const msgNo = chrome.i18n.getMessage('opt_no')
 const msgYes = chrome.i18n.getMessage('opt_yes')
@@ -34,15 +37,15 @@ class Option extends Component {
 
     const isChecked = optionValue === optionChoice
 
-    const selectButtonClassName = classNames(
-      'select-button-item',
+    const selectButtonStyleName = classNames(
+      'item',
       {
-        'select-button-item-active': isChecked
+        'item-active': isChecked
       }
     )
 
     return (
-      <label className='select-button-label' htmlFor={id}>
+      <label styleName='main' htmlFor={id}>
         <input
           id={id}
           name={optionName}
@@ -52,7 +55,7 @@ class Option extends Component {
           hidden
           onChange={this.handleChange}
         />
-        <div className={selectButtonClassName}>
+        <div styleName={selectButtonStyleName}>
           {buttonText}
         </div>
       </label>
@@ -73,4 +76,6 @@ const mapStateToProps = (state) => ({
   options: state.options
 })
 
-export default connect(mapStateToProps)(Option)
+export default connect(mapStateToProps)(
+  CSSModules(Option, styles, {allowMultiple: true})
+)

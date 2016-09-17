@@ -1,0 +1,26 @@
+@import "../common/variables.scss";
+
+._panel {
+  background-color: inherit;
+  position: relative;
+
+  &:not(:first-child) {
+    margin-right: $golden-gap;
+  }
+}
+
+.main {
+  background-color: inherit;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.master {
+  color: $main-color2;
+  composes: _panel;
+}
+
+.slave {
+  color: $main-color1;
+  composes: _panel;
+}

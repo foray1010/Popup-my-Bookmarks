@@ -2,6 +2,7 @@ import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
 import classNames from 'classnames'
+import CSSModules from 'react-css-modules'
 
 import {
   getBookmarkType,
@@ -23,6 +24,8 @@ import {
   updateMenuTarget
 } from '../actions'
 import chromep from '../../common/lib/chromePromise'
+
+import styles from '../../../css/popup/menu-item.scss'
 
 async function addCurrentPage(menuTarget) {
   const results = await chromep.tabs.query({
@@ -145,16 +148,18 @@ class MenuItem extends Component {
     evt.persist()
     evt.preventDefault()
 
-    const {target} = evt
-    if (target.classList.contains('grey-item')) return
-
     const {
       cutTarget,
       dispatch,
+      isUnclickable,
       menuTarget
     } = this.props
 
+    if (isUnclickable) return
+
     const actionList = []
+    const {target} = evt
+
     const menuItemNum = getMenuItemNum(target)
 
     switch (menuItemNum) {
@@ -263,23 +268,21 @@ class MenuItem extends Component {
 
   render() {
     const {
-      copyTarget,
-      cutTarget,
+      isUnclickable,
       menuItemKey
     } = this.props
 
-    const menuItemClassName = classNames(
-      'item',
-      'menu-item',
+    const menuItemStyleName = classNames(
+      'main',
       {
-        'grey-item': menuItemKey === 'paste' && !copyTarget && !cutTarget
+        unclickable: isUnclickable
       }
     )
 
     return (
       <li>
         <a
-          className={menuItemClassName}
+          styleName={menuItemStyleName}
           href=''
           onClick={this.handleClick}
         >
@@ -295,15 +298,27 @@ if (process.env.NODE_ENV !== 'production') {
     copyTarget: PropTypes.object,
     cutTarget: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
+    isUnclickable: PropTypes.bool.isRequired,
     menuItemKey: PropTypes.string.isRequired,
     menuTarget: PropTypes.object.isRequired
   }
 }
 
-const mapStateToProps = (state) => ({
-  copyTarget: state.copyTarget,
-  cutTarget: state.cutTarget,
-  menuTarget: state.menuTarget
-})
+const mapStateToProps = (state, ownProps) => {
+  const {
+    copyTarget,
+    cutTarget
+  } = state
+  const {menuItemKey} = ownProps
 
-export default connect(mapStateToProps)(MenuItem)
+  return {
+    copyTarget: copyTarget,
+    cutTarget: cutTarget,
+    isUnclickable: Boolean(menuItemKey === 'paste' && !copyTarget && !cutTarget),
+    menuTarget: state.menuTarget
+  }
+}
+
+export default connect(mapStateToProps)(
+  CSSModules(MenuItem, styles, {allowMultiple: true})
+)

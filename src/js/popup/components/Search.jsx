@@ -60,7 +60,6 @@ class Search extends Component {
     return (
       <header styleName='main'>
         <input
-          styleName='input'
           type='search'
           placeholder={msgSearch}
           tabIndex='-1'

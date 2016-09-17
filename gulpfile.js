@@ -7,11 +7,9 @@ const gulp = require('gulp')
 const gulpFilter = require('gulp-filter')
 const gutil = require('gulp-util')
 const imageGrayScale = require('gulp-image-grayscale')
-const nano = require('gulp-cssnano')
 const path = require('path')
 const plumber = require('gulp-plumber')
 const pug = require('gulp-pug')
-const stylus = require('gulp-stylus')
 const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
 const YAML = require('yamljs')
@@ -30,11 +28,6 @@ const sourceDir = 'src'
 
 // language config
 const lang = {
-  css: {
-    extname: '.styl',
-    destDir: 'css',
-    srcDir: path.join(sourceDir, 'css')
-  },
   html: {
     extname: '.pug',
     destDir: '.',
@@ -46,16 +39,6 @@ const lang = {
 }
 
 // language handlers
-function buildJS(workingDir) {
-  const thisLang = lang.js
-
-  const destDir = path.join(workingDir, thisLang.destDir)
-
-  return plumber()
-    .pipe(webpackStream(webpackConfig, webpack))
-    .pipe(gulp.dest(destDir))
-}
-
 function buildLang(langName, workingDir, options) {
   if (!options) {
     options = {}
@@ -102,6 +85,16 @@ function* buildManifest(workingDir, updateFn) {
   yield fs.writeJSONAsync(destPath, manifestJSON)
 }
 
+function runWebpack(workingDir) {
+  const thisLang = lang.js
+
+  const destDir = path.join(workingDir, thisLang.destDir)
+
+  return plumber()
+    .pipe(webpackStream(webpackConfig, webpack))
+    .pipe(gulp.dest(destDir))
+}
+
 function validatePackageVersion() {
   const version = packageJSON.version
   if (!/^([1-9]?\d\.){2}[1-9]?\d$/.test(version)) {
@@ -144,24 +137,14 @@ gulp.task('build:init', () => {
   })
 })
 
-gulp.task('build:css', ['build:init'], () => {
-  return buildLang('css', buildDir, {
-    builderPipe: () => stylus({'include css': true}),
-    miniferPipe: () => nano({
-      autoprefixer: false,
-      discardComments: {removeAll: true}
-    })
-  })
-})
-
 gulp.task('build:html', ['build:init'], () => {
   return buildLang('html', buildDir, {
     builderPipe: () => pug()
   })
 })
 
-gulp.task('build:js', ['build:init'], () => {
-  return buildJS(buildDir)
+gulp.task('build:webpack', ['build:init'], () => {
+  return runWebpack(buildDir)
 })
 
 gulp.task('build:others', ['build:init'], () => {
@@ -187,9 +170,8 @@ gulp.task('build:others', ['build:init'], () => {
 })
 
 gulp.task('build:zip', [
-  'build:css',
   'build:html',
-  'build:js',
+  'build:webpack',
   'build:others'
 ], () => {
   return gulp.src(path.join(buildDir, '**'))
@@ -215,12 +197,6 @@ gulp.task('dev:init', () => {
   })
 })
 
-gulp.task('dev:css', ['dev:init'], () => {
-  return buildLang('css', devDir, {
-    builderPipe: () => stylus({'include css': true})
-  })
-})
-
 gulp.task('dev:html', ['dev:init'], () => {
   return buildLang('html', devDir, {
     builderPipe: () => pug({pretty: true})
@@ -241,9 +217,9 @@ gulp.task('dev:img', ['dev:init'], () => {
     .pipe(gulp.dest(path.join(devDir, 'img')))
 })
 
-gulp.task('dev:js', ['dev:init'], () => {
+gulp.task('dev:webpack', ['dev:init'], () => {
   // don't return because webpack `watch` will hold the pipe
-  buildJS(devDir)
+  runWebpack(devDir)
 })
 
 gulp.task('dev:others', ['dev:init'], () => {
@@ -265,10 +241,9 @@ gulp.task('dev:others', ['dev:init'], () => {
 })
 
 gulp.task('dev', [
-  'dev:css',
   'dev:html',
   'dev:img',
-  'dev:js',
+  'dev:webpack',
   'dev:others'
 ])
 

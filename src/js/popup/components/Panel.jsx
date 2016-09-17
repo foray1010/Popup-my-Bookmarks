@@ -1,17 +1,16 @@
 import {connect} from 'react-redux'
 import {createElement, PropTypes} from 'react'
-import classNames from 'classnames'
+import CSSModules from 'react-css-modules'
 
 import BookmarkTree from './BookmarkTree'
 import Search from './Search'
 
+import styles from '../../../css/popup/panel.scss'
+
 const Panel = (props) => {
   const {trees} = props
 
-  const mainPanelItems = [
-    <Search key='search-box' />
-  ]
-  const panelClassName = classNames('panel', 'panel-width')
+  const mainPanelItems = []
   const subPanelItems = []
 
   for (const [treeIndex] of trees.entries()) {
@@ -25,12 +24,16 @@ const Panel = (props) => {
     )
   }
 
+  mainPanelItems.unshift(
+    <Search key='search' />
+  )
+
   return (
-    <main id='panel-box'>
-      <section id='main' className={panelClassName}>
+    <main styleName='main'>
+      <section styleName='master' className='panel-width'>
         {mainPanelItems}
       </section>
-      <section id='sub' className={panelClassName} hidden={!subPanelItems.length}>
+      <section styleName='slave' className='panel-width' hidden={!subPanelItems.length}>
         {subPanelItems}
       </section>
     </main>
@@ -47,4 +50,6 @@ const mapStateToProps = (state) => ({
   trees: state.trees
 })
 
-export default connect(mapStateToProps)(Panel)
+export default connect(mapStateToProps)(
+  CSSModules(Panel, styles)
+)
