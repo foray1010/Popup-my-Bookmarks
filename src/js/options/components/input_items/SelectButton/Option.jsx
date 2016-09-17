@@ -37,7 +37,7 @@ class Option extends Component {
 
     const isChecked = optionValue === optionChoice
 
-    const selectButtonStyleName = classNames(
+    const thisStyleName = classNames(
       'item',
       {
         'item-active': isChecked
@@ -55,7 +55,7 @@ class Option extends Component {
           hidden
           onChange={this.handleChange}
         />
-        <div styleName={selectButtonStyleName}>
+        <div styleName={thisStyleName}>
           {buttonText}
         </div>
       </label>

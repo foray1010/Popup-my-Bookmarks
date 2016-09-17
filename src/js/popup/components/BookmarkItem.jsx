@@ -429,7 +429,8 @@ class BookmarkItem extends Component {
     } = this.props
 
     const bookmarkType = getBookmarkType(itemInfo)
-    const itemStyleName = classNames(
+    const itemTitle = itemInfo.title || itemInfo.url || null
+    const thisStyleName = classNames(
       'main',
       {
         'root-folder': bookmarkType === TYPE_ROOT_FOLDER,
@@ -438,7 +439,6 @@ class BookmarkItem extends Component {
         unclickable: isUnclickable
       }
     )
-    const itemTitle = itemInfo.title || itemInfo.url || null
 
     let iconSrc = null
     let isIconHidden = false
@@ -485,7 +485,7 @@ class BookmarkItem extends Component {
         onDragStart={this.handleDragStart}
       >
         <a
-          styleName={itemStyleName}
+          styleName={thisStyleName}
           className={classNames(
             'bookmark-item',
             {

@@ -37,7 +37,7 @@ class NavBarItem extends Component {
       selectedNavModule
     } = this.props
 
-    const navBarItemStyleName = classNames(
+    const thisStyleName = classNames(
       'main',
       {
         'main-active': navBarItemInfo.navModule === selectedNavModule
@@ -46,7 +46,7 @@ class NavBarItem extends Component {
 
     return (
       <a
-        styleName={navBarItemStyleName}
+        styleName={thisStyleName}
         href=''
         onClick={this.handleClick}
       >

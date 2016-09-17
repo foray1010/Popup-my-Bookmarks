@@ -272,7 +272,7 @@ class MenuItem extends Component {
       menuItemKey
     } = this.props
 
-    const menuItemStyleName = classNames(
+    const thisStyleName = classNames(
       'main',
       {
         unclickable: isUnclickable
@@ -282,7 +282,7 @@ class MenuItem extends Component {
     return (
       <li>
         <a
-          styleName={menuItemStyleName}
+          styleName={thisStyleName}
           href=''
           onClick={this.handleClick}
         >
