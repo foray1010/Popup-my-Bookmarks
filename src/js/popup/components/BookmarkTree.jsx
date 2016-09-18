@@ -19,12 +19,6 @@ import TreeHeader from './TreeHeader'
 import styles from '../../../css/popup/bookmark-tree.scss'
 
 class BookmarkTree extends Component {
-  constructor() {
-    super()
-
-    this.genBookmarkList = genBookmarkList.bind(this)
-  }
-
   componentDidMount() {
     this.afterRender()
   }
@@ -79,7 +73,7 @@ class BookmarkTree extends Component {
     const isFirstTree = treeIndex === 0
     const treeInfo = trees[treeIndex]
 
-    const bookmarkList = this.genBookmarkList(treeInfo, treeIndex)
+    const bookmarkList = genBookmarkList(treeInfo, {rootTree, searchKeyword, treeIndex})
 
     const treeItems = bookmarkList.asMutable().map((itemInfo) => (
       <BookmarkItem

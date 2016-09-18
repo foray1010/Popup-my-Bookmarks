@@ -32,12 +32,6 @@ import Panel from '../components/Panel'
 import styles from '../../../css/popup/app.scss'
 
 class App extends Component {
-  constructor() {
-    super()
-
-    this.genBookmarkList = genBookmarkList.bind(this)
-  }
-
   componentWillMount() {
     const {options} = this.props
 
@@ -193,6 +187,8 @@ class App extends Component {
       editorTarget,
       keyboardTarget,
       menuTarget,
+      rootTree,
+      searchKeyword,
       trees
     } = this.props
 
@@ -206,7 +202,11 @@ class App extends Component {
         const prevTreeIndex = targetTreeIndex - 1
         const prevTreeInfo = trees[prevTreeIndex]
 
-        const prevBookmarkList = this.genBookmarkList(prevTreeInfo, prevTreeIndex)
+        const prevBookmarkList = genBookmarkList(prevTreeInfo, {
+          rootTree,
+          searchKeyword,
+          treeIndex: prevTreeIndex
+        })
 
         dispatch([
           removeTreeInfosFromIndex(targetTreeIndex),
@@ -220,7 +220,11 @@ class App extends Component {
         const nextTreeIndex = targetTreeIndex + 1
         const nextTreeInfo = await getFlatTree(keyboardTarget.id)
 
-        const nextBookmarkList = this.genBookmarkList(nextTreeInfo, nextTreeIndex)
+        const nextBookmarkList = genBookmarkList(nextTreeInfo, {
+          rootTree,
+          searchKeyword,
+          treeIndex: nextTreeIndex
+        })
 
         dispatch([
           await replaceTreeInfoByIndex(nextTreeIndex, nextTreeInfo),
@@ -236,6 +240,8 @@ class App extends Component {
       editorTarget,
       keyboardTarget,
       menuTarget,
+      rootTree,
+      searchKeyword,
       trees
     } = this.props
 
@@ -243,7 +249,11 @@ class App extends Component {
 
     const targetTreeIndex = this.getKeyboardTargetTreeIndex()
 
-    const targetBookmarkList = this.genBookmarkList(trees[targetTreeIndex], targetTreeIndex)
+    const targetBookmarkList = genBookmarkList(trees[targetTreeIndex], {
+      rootTree,
+      searchKeyword,
+      treeIndex: targetTreeIndex
+    })
 
     const lastItemIndex = targetBookmarkList.length - 1
 
@@ -296,6 +306,7 @@ if (process.env.NODE_ENV !== 'production') {
     keyboardTarget: PropTypes.object,
     menuTarget: PropTypes.object,
     options: PropTypes.object.isRequired,
+    rootTree: PropTypes.object.isRequired,
     searchKeyword: PropTypes.string.isRequired,
     trees: PropTypes.arrayOf(PropTypes.object).isRequired
   }
@@ -306,6 +317,7 @@ const mapStateToProps = (state) => ({
   keyboardTarget: state.keyboardTarget,
   menuTarget: state.menuTarget,
   options: state.options,
+  rootTree: state.rootTree,
   searchKeyword: state.searchKeyword,
   trees: state.trees
 })

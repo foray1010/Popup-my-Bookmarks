@@ -15,12 +15,7 @@ import css from '../../common/lib/css'
 const noBookmarkIdPrefix = 'no-bookmark-'
 const msgNoBookmark = chrome.i18n.getMessage('noBkmark')
 
-export function genBookmarkList(treeInfo, treeIndex) {
-  const {
-    rootTree,
-    searchKeyword
-  } = this.props
-
+export function genBookmarkList(treeInfo, {rootTree, searchKeyword, treeIndex}) {
   let childrenInfo = treeInfo.children
 
   if (!searchKeyword) {
