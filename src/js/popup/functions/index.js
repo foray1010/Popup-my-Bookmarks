@@ -105,9 +105,7 @@ export function getItemOffsetHeight(options) {
   return ((1 + GOLDEN_GAP) * 2) + itemHeight
 }
 
-export async function getSearchResult(newSearchKeyword) {
-  const {options} = this.props
-
+export async function getSearchResult(newSearchKeyword, options) {
   const filteredResult = []
   const isOnlySearchTitle = options.searchTarget === 1
   const results = await chromep.bookmarks.search(newSearchKeyword)

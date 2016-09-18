@@ -36,7 +36,6 @@ class App extends Component {
     super()
 
     this.genBookmarkList = genBookmarkList.bind(this)
-    this.getSearchResult = getSearchResult.bind(this)
   }
 
   componentWillMount() {
@@ -161,12 +160,13 @@ class App extends Component {
     const renewTrees = _debounce(async (oldTrees) => {
       const {
         dispatch,
+        options,
         searchKeyword
       } = this.props
 
       const newTrees = await Promise.all(oldTrees.asMutable().map((treeInfo) => {
         if (treeInfo.id === 'search-result') {
-          return this.getSearchResult(searchKeyword)
+          return getSearchResult(searchKeyword, options)
         }
 
         return getFlatTree(treeInfo.id)

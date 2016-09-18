@@ -17,12 +17,6 @@ import styles from '../../../css/popup/search.scss'
 const msgSearch = chrome.i18n.getMessage('search')
 
 class Search extends Component {
-  constructor() {
-    super()
-
-    this.getSearchResult = getSearchResult.bind(this)
-  }
-
   @autobind
   handleInput(evt) {
     evt.persist()
@@ -45,7 +39,7 @@ class Search extends Component {
 
       newTrees.push(defExpandTree)
     } else {
-      const searchResult = await this.getSearchResult(newSearchKeyword)
+      const searchResult = await getSearchResult(newSearchKeyword, options)
 
       newTrees.push(searchResult)
     }
