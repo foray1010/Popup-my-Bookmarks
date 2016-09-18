@@ -79,18 +79,18 @@ export function getBookmarkType(itemInfo) {
   return TYPE_BOOKMARK
 }
 
+export async function getFirstTree(options) {
+  const firstTree = await getFlatTree(String(options.defExpand))
+
+  return firstTree
+}
+
 export async function getFlatTree(id) {
   const treeInfo = (await chromep.bookmarks.get(id))[0]
 
   treeInfo.children = await chromep.bookmarks.getChildren(id)
 
   return treeInfo
-}
-
-export async function getFirstTree(options) {
-  const firstTree = await getFlatTree(String(options.defExpand))
-
-  return firstTree
 }
 
 export function getItemHeight(options) {
