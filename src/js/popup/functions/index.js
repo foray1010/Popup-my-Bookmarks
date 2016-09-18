@@ -12,6 +12,7 @@ import {
 import chromep from '../../common/lib/chromePromise'
 import css from '../../common/lib/css'
 
+const noBookmarkIdPrefix = 'no-bookmark-'
 const msgNoBookmark = chrome.i18n.getMessage('noBkmark')
 
 export function genBookmarkList(treeInfo, treeIndex) {
@@ -51,7 +52,7 @@ export function genDummyItemInfo() {
 export function genNoBookmarkInfo(parentId) {
   return Immutable({
     ...genDummyItemInfo(),
-    id: `no-bookmark-${parentId}`,
+    id: `${noBookmarkIdPrefix}${parentId}`,
     index: -1, // as it is not appeared in the childrenInfo
     parentId: parentId,
     title: msgNoBookmark
@@ -59,7 +60,7 @@ export function genNoBookmarkInfo(parentId) {
 }
 
 export function getBookmarkType(itemInfo) {
-  if (/^no-bookmark/.test(itemInfo.id)) {
+  if (RegExp(`^${noBookmarkIdPrefix}`).test(itemInfo.id)) {
     return TYPE_NO_BOOKMARK
   }
 
