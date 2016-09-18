@@ -1,0 +1,20 @@
+@import "../common/variables.scss";
+
+.list {
+  composes: plain-list from "../common/composes.scss";
+  overflow-y: auto;
+
+  &::after {
+    background-color: currentcolor;
+    content: "";
+    display: block;
+    height: $golden-gap;
+    margin-top: $golden-gap;
+  }
+}
+
+.main {
+  background-color: inherit;
+  position: absolute;
+  width: 100%;
+}

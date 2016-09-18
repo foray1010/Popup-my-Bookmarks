@@ -1,0 +1,23 @@
+@import "../common/variables.scss";
+
+.main {
+  border: 1px solid $main-color1;
+  display: inline-block;
+  position: relative;
+
+  & > input[type="text"],
+  & > select {
+    border: 0;
+  }
+
+  & > input[type="text"] {
+    box-sizing: border-box;
+    height: 100%;
+    left: 0;
+    padding: 0 $golden-gap-2x;
+    position: absolute;
+    text-align: left;
+    top: 0;
+    width: calc(100% - #{$options-input-height});
+  }
+}

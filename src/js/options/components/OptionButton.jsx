@@ -1,6 +1,7 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
+import CSSModules from 'react-css-modules'
 
 import {
   initOptionsValue,
@@ -13,6 +14,8 @@ import {
   updateOptions
 } from '../actions'
 import chromep from '../../common/lib/chromePromise'
+
+import styles from '../../../css/options/option-button.scss'
 
 const msgConfirm = chrome.i18n.getMessage('confirm')
 const msgDefault = chrome.i18n.getMessage('default')
@@ -72,7 +75,7 @@ class OptionButton extends Component {
 
   render() {
     return (
-      <div id='option-button-box'>
+      <div styleName='main'>
         <button type='submit' onClick={this.handleConfirm}>{msgConfirm}</button>
         <button type='reset' onClick={this.handleDefault}>{msgDefault}</button>
       </div>
@@ -95,4 +98,6 @@ const mapStateToProps = (state) => ({
   selectedNavModule: state.selectedNavModule
 })
 
-export default connect(mapStateToProps)(OptionButton)
+export default connect(mapStateToProps)(
+  CSSModules(OptionButton, styles)
+)

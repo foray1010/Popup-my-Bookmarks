@@ -1,11 +1,12 @@
 import {createElement} from 'react'
+import CSSModules from 'react-css-modules'
 
-import {DRAG_INDICATOR} from '../constants'
+import styles from '../../../css/popup/drag-indicator.scss'
 
 const DragIndicator = () => (
   <li>
-    <div className={DRAG_INDICATOR} />
+    <div styleName='main' />
   </li>
 )
 
-export default DragIndicator
+export default CSSModules(DragIndicator, styles)

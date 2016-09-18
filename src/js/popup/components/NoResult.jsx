@@ -1,13 +1,16 @@
 import {createElement} from 'react'
+import CSSModules from 'react-css-modules'
+
+import styles from '../../../css/popup/no-result.scss'
 
 const msgNoResult = chrome.i18n.getMessage('noResult')
 
 const NoResult = () => (
   <li>
-    <p className='no-result no-text-overflow'>
+    <p styleName='main'>
       {msgNoResult}
     </p>
   </li>
 )
 
-export default NoResult
+export default CSSModules(NoResult, styles)

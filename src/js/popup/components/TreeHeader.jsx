@@ -1,10 +1,13 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
+import CSSModules from 'react-css-modules'
 
 import {
   removeTreeInfosFromIndex
 } from '../actions'
+
+import styles from '../../../css/popup/tree-header.scss'
 
 class TreeHeader extends Component {
   @autobind
@@ -28,12 +31,12 @@ class TreeHeader extends Component {
 
     return (
       <header hidden={isHidden}>
-        <div className='tree-header-box'>
-          <h1 className='tree-header-title no-text-overflow'>
+        <div styleName='main'>
+          <h1 styleName='title'>
             {treeInfo.title}
           </h1>
           <button
-            className='tree-header-close'
+            styleName='close'
             type='button'
             tabIndex='-1'
             onClick={this.handleClose}
@@ -58,4 +61,6 @@ const mapStateToProps = (state, ownProps) => ({
   trees: state.trees
 })
 
-export default connect(mapStateToProps)(TreeHeader)
+export default connect(mapStateToProps)(
+  CSSModules(TreeHeader, styles)
+)

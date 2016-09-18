@@ -1,5 +1,6 @@
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
+import CSSModules from 'react-css-modules'
 
 import {
   getBookmarkType,
@@ -11,6 +12,8 @@ import {
   TYPE_ROOT_FOLDER
 } from '../constants'
 import MenuArea from './MenuArea'
+
+import styles from '../../../css/popup/menu.scss'
 
 class Menu extends Component {
   componentDidUpdate() {
@@ -126,7 +129,7 @@ class Menu extends Component {
         ref={(ref) => {
           this.baseEl = ref
         }}
-        className='menu'
+        styleName='main'
         hidden={isHidden}
       >
         {menuItems}
@@ -149,4 +152,6 @@ const mapStateToProps = (state) => ({
   searchKeyword: state.searchKeyword
 })
 
-export default connect(mapStateToProps)(Menu)
+export default connect(mapStateToProps)(
+  CSSModules(Menu, styles)
+)

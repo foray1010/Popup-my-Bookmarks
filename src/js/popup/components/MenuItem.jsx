@@ -2,6 +2,7 @@ import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
 import classNames from 'classnames'
+import CSSModules from 'react-css-modules'
 
 import {
   getBookmarkType,
@@ -23,6 +24,8 @@ import {
   updateMenuTarget
 } from '../actions'
 import chromep from '../../common/lib/chromePromise'
+
+import styles from '../../../css/popup/menu-item.scss'
 
 async function addCurrentPage(menuTarget) {
   const results = await chromep.tabs.query({
@@ -46,12 +49,6 @@ async function createBookmarkBelowMenuTarget(menuTarget, title, url) {
   return createdItemInfo
 }
 
-function getMenuItemNum(menuItem) {
-  const menuItemList = document.getElementsByClassName('menu-item')
-
-  return Array.from(menuItemList).indexOf(menuItem)
-}
-
 async function removeBookmarkItem(menuTarget) {
   const removeFunc = isFolder(menuTarget) ?
     chromep.bookmarks.removeTree :
@@ -62,7 +59,6 @@ async function removeBookmarkItem(menuTarget) {
 
 async function sortByName(parentId) {
   const childrenInfo = await chromep.bookmarks.getChildren(parentId)
-
   const classifiedItemsList = []
 
   const genClassifiedItems = () => {
@@ -77,26 +73,24 @@ async function sortByName(parentId) {
     return newClassifiedItems
   }
 
-  let newChildrenInfo = []
-  let selectedClassifiedItems = genClassifiedItems()
-
   /**
    * Split all bookmarks into n main group,
    * where n = the number of separators + 1
    * Each main group contains 3 small groups
    * (Separators, Folders, Bookmarks)
    */
+  let selectedClassifiedItems = genClassifiedItems()
   for (const itemInfo of childrenInfo) {
     let classifiedItemsIndex
 
     switch (getBookmarkType(itemInfo)) {
-      case TYPE_FOLDER:
-        classifiedItemsIndex = 1
-        break
-
       case TYPE_SEPARATOR:
         classifiedItemsIndex = 0
         selectedClassifiedItems = genClassifiedItems()
+        break
+
+      case TYPE_FOLDER:
+        classifiedItemsIndex = 1
         break
 
       case TYPE_BOOKMARK:
@@ -110,6 +104,7 @@ async function sortByName(parentId) {
   }
 
   // Concatenate all lists into single list
+  let newChildrenInfo = []
   for (const thisChildrenInfo of classifiedItemsList) {
     for (const classifiedItems of thisChildrenInfo) {
       newChildrenInfo = newChildrenInfo.concat(
@@ -134,53 +129,65 @@ async function sortByName(parentId) {
 }
 
 class MenuItem extends Component {
-  constructor() {
-    super()
-
-    this.openMultipleBookmarks = openMultipleBookmarks.bind(this)
-  }
-
   @autobind
   async handleClick(evt) {
-    evt.persist()
     evt.preventDefault()
-
-    const {target} = evt
-    if (target.classList.contains('grey-item')) return
 
     const {
       cutTarget,
       dispatch,
-      menuTarget
+      isUnclickable,
+      menuItemKey,
+      menuTarget,
+      options
     } = this.props
 
-    const actionList = []
-    const menuItemNum = getMenuItemNum(target)
+    if (isUnclickable) return
 
-    switch (menuItemNum) {
-      case 0: // Open bookmark(s) in background tab or this window
-      case 1: // in new window
-      case 2: // in incognito window
-        await this.openMultipleBookmarks(menuTarget, menuItemNum)
+    const actionList = []
+    switch (menuItemKey) {
+      case 'openAll':
+      case 'openInB':
+        await openMultipleBookmarks(menuTarget, {
+          isWarnWhenOpenMany: options.warnOpenMany
+        })
         break
 
-      case 3: // Edit... or Rename...
+      case 'openAllInN':
+      case 'openInN':
+        await openMultipleBookmarks(menuTarget, {
+          isNewWindow: true,
+          isWarnWhenOpenMany: options.warnOpenMany
+        })
+        break
+
+      case 'openAllInI':
+      case 'openInI':
+        await openMultipleBookmarks(menuTarget, {
+          isNewWindow: true,
+          isIncognito: true,
+          isWarnWhenOpenMany: options.warnOpenMany
+        })
+        break
+
+      case 'rename':
+      case 'edit':
         actionList.push(updateEditorTarget(menuTarget))
         break
 
-      case 4: // Delete
+      case 'del':
         await removeBookmarkItem(menuTarget)
         break
 
-      case 5: // Cut
+      case 'cut':
         actionList.push(updateCutTarget(menuTarget))
         break
 
-      case 6: // Copy
+      case 'copy':
         actionList.push(updateCopyTarget(menuTarget))
         break
 
-      case 7: // Paste
+      case 'paste':
         await this.pasteItem()
 
         if (cutTarget) {
@@ -188,14 +195,14 @@ class MenuItem extends Component {
         }
         break
 
-      case 9: // Add folder...
-        return
-
-      case 8: // Add current page
+      case 'addPage':
         await addCurrentPage(menuTarget)
         break
 
-      case 10: // Add separator
+      case 'addFolder':
+        return
+
+      case 'addSeparator':
         await createBookmarkBelowMenuTarget(
           menuTarget,
           '- '.repeat(42),
@@ -203,7 +210,7 @@ class MenuItem extends Component {
         )
         break
 
-      case 11: // Sort by name
+      case 'sortByName':
         await sortByName(menuTarget.parentId)
         break
 
@@ -263,23 +270,21 @@ class MenuItem extends Component {
 
   render() {
     const {
-      copyTarget,
-      cutTarget,
+      isUnclickable,
       menuItemKey
     } = this.props
 
-    const menuItemClassName = classNames(
-      'item',
-      'menu-item',
+    const thisStyleName = classNames(
+      'main',
       {
-        'grey-item': menuItemKey === 'paste' && !copyTarget && !cutTarget
+        unclickable: isUnclickable
       }
     )
 
     return (
       <li>
         <a
-          className={menuItemClassName}
+          styleName={thisStyleName}
           href=''
           onClick={this.handleClick}
         >
@@ -295,15 +300,29 @@ if (process.env.NODE_ENV !== 'production') {
     copyTarget: PropTypes.object,
     cutTarget: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
+    isUnclickable: PropTypes.bool.isRequired,
     menuItemKey: PropTypes.string.isRequired,
-    menuTarget: PropTypes.object.isRequired
+    menuTarget: PropTypes.object.isRequired,
+    options: PropTypes.object.isRequired
   }
 }
 
-const mapStateToProps = (state) => ({
-  copyTarget: state.copyTarget,
-  cutTarget: state.cutTarget,
-  menuTarget: state.menuTarget
-})
+const mapStateToProps = (state, ownProps) => {
+  const {
+    copyTarget,
+    cutTarget
+  } = state
+  const {menuItemKey} = ownProps
 
-export default connect(mapStateToProps)(MenuItem)
+  return {
+    copyTarget: copyTarget,
+    cutTarget: cutTarget,
+    isUnclickable: Boolean(menuItemKey === 'paste' && !copyTarget && !cutTarget),
+    menuTarget: state.menuTarget,
+    options: state.options
+  }
+}
+
+export default connect(mapStateToProps)(
+  CSSModules(MenuItem, styles, {allowMultiple: true})
+)

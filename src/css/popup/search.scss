@@ -1,0 +1,26 @@
+@import "../common/variables.scss";
+
+$search-height: 21px;
+
+.main {
+  border: solid $highlight-level3;
+  border-width: 0 0 1px 0;
+  display: flex;
+  height: $search-height;
+  margin-bottom: $golden-gap;
+
+  & > input[type="search"] {
+    background-color: transparent;
+    border: 0;
+    color: $main-font-color;
+    font-size: 12px;
+    outline: 0;
+    padding: 0 1px;
+    width: 100%;
+  }
+
+  &::before {
+    content: url("/img/search.png");
+    padding: 5px 4px 4px 5px;
+  }
+}

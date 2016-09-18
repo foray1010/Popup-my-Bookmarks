@@ -12,14 +12,10 @@ import {
 import chromep from '../../common/lib/chromePromise'
 import css from '../../common/lib/css'
 
+const noBookmarkIdPrefix = 'no-bookmark-'
 const msgNoBookmark = chrome.i18n.getMessage('noBkmark')
 
-export function genBookmarkList(treeInfo, treeIndex) {
-  const {
-    rootTree,
-    searchKeyword
-  } = this.props
-
+export function genBookmarkList(treeInfo, {rootTree, searchKeyword, treeIndex}) {
   let childrenInfo = treeInfo.children
 
   if (!searchKeyword) {
@@ -51,7 +47,7 @@ export function genDummyItemInfo() {
 export function genNoBookmarkInfo(parentId) {
   return Immutable({
     ...genDummyItemInfo(),
-    id: `no-bookmark-${parentId}`,
+    id: `${noBookmarkIdPrefix}${parentId}`,
     index: -1, // as it is not appeared in the childrenInfo
     parentId: parentId,
     title: msgNoBookmark
@@ -59,7 +55,7 @@ export function genNoBookmarkInfo(parentId) {
 }
 
 export function getBookmarkType(itemInfo) {
-  if (/^no-bookmark/.test(itemInfo.id)) {
+  if (RegExp(`^${noBookmarkIdPrefix}`).test(itemInfo.id)) {
     return TYPE_NO_BOOKMARK
   }
 
@@ -78,18 +74,18 @@ export function getBookmarkType(itemInfo) {
   return TYPE_BOOKMARK
 }
 
+export async function getFirstTree(options) {
+  const firstTree = await getFlatTree(String(options.defExpand))
+
+  return firstTree
+}
+
 export async function getFlatTree(id) {
   const treeInfo = (await chromep.bookmarks.get(id))[0]
 
   treeInfo.children = await chromep.bookmarks.getChildren(id)
 
   return treeInfo
-}
-
-export async function getFirstTree(options) {
-  const firstTree = await getFlatTree(String(options.defExpand))
-
-  return firstTree
 }
 
 export function getItemHeight(options) {
@@ -105,9 +101,7 @@ export function getItemOffsetHeight(options) {
   return ((1 + GOLDEN_GAP) * 2) + itemHeight
 }
 
-export async function getSearchResult(newSearchKeyword) {
-  const {options} = this.props
-
+export async function getSearchResult(newSearchKeyword, options) {
   const filteredResult = []
   const isOnlySearchTitle = options.searchTarget === 1
   const results = await chromep.bookmarks.search(newSearchKeyword)
@@ -181,9 +175,11 @@ export function isFolderOpened(trees, itemInfo) {
   return trees.some((treeInfo) => treeInfo.id === itemInfo.id)
 }
 
-export async function openMultipleBookmarks(itemInfo, menuItemNum) {
-  const {options} = this.props
-
+export async function openMultipleBookmarks(itemInfo, {
+  isNewWindow = false,
+  isIncognito = false,
+  isWarnWhenOpenMany = false
+}) {
   const urlList = []
 
   if (isFolder(itemInfo)) {
@@ -197,14 +193,14 @@ export async function openMultipleBookmarks(itemInfo, menuItemNum) {
       }
     }
 
-    const msgAskOpenAll = chrome.i18n.getMessage(
-      'askOpenAll', String(urlList.length)
-    )
+    if (isWarnWhenOpenMany) {
+      const msgAskOpenAll = chrome.i18n.getMessage(
+        'askOpenAll', String(urlList.length)
+      )
 
-    if (options.warnOpenMany &&
-        urlList.length > 5 &&
-        !window.confirm(msgAskOpenAll)) {
-      return
+      if (urlList.length > 5 && !window.confirm(msgAskOpenAll)) {
+        return
+      }
     }
   } else {
     const results = await chromep.bookmarks.get(itemInfo.id)
@@ -214,7 +210,7 @@ export async function openMultipleBookmarks(itemInfo, menuItemNum) {
     urlList.push(thisItemInfo.url)
   }
 
-  if (menuItemNum === 0) {
+  if (!isNewWindow) {
     await Promise.all(urlList.map((url) => {
       return chromep.tabs.create({
         url,
@@ -224,7 +220,7 @@ export async function openMultipleBookmarks(itemInfo, menuItemNum) {
   } else {
     await chromep.windows.create({
       url: urlList,
-      incognito: menuItemNum !== 1
+      incognito: isIncognito
     })
   }
 

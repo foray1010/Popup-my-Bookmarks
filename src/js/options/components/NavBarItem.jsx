@@ -2,11 +2,14 @@ import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
 import classNames from 'classnames'
+import CSSModules from 'react-css-modules'
 
 import {
   reloadOptions,
   selectNavModule
 } from '../actions'
+
+import styles from '../../../css/options/nav-bar-item.scss'
 
 class NavBarItem extends Component {
   @autobind
@@ -34,16 +37,16 @@ class NavBarItem extends Component {
       selectedNavModule
     } = this.props
 
-    const navBarItemClassName = classNames(
-      'nav-bar-item',
+    const thisStyleName = classNames(
+      'main',
       {
-        'nav-bar-item-active': navBarItemInfo.navModule === selectedNavModule
+        'main-active': navBarItemInfo.navModule === selectedNavModule
       }
     )
 
     return (
       <a
-        className={navBarItemClassName}
+        styleName={thisStyleName}
         href=''
         onClick={this.handleClick}
       >
@@ -65,4 +68,6 @@ const mapStateToProps = (state) => ({
   selectedNavModule: state.selectedNavModule
 })
 
-export default connect(mapStateToProps)(NavBarItem)
+export default connect(mapStateToProps)(
+  CSSModules(NavBarItem, styles, {allowMultiple: true})
+)

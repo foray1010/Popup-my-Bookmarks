@@ -1,0 +1,10 @@
+@import "../common/variables.scss";
+
+.main {
+  color: $main-font-color;
+  composes: no-text-overflow from "../common/composes.scss";
+  cursor: default;
+  margin: $golden-gap-2x;
+  padding: $golden-gap 0;
+  text-align: center;
+}

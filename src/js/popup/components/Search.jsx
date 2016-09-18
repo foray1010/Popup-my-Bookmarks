@@ -1,6 +1,7 @@
 import {autobind, debounce} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
+import CSSModules from 'react-css-modules'
 
 import {
   getFirstTree,
@@ -11,15 +12,11 @@ import {
   updateTrees
 } from '../actions'
 
+import styles from '../../../css/popup/search.scss'
+
 const msgSearch = chrome.i18n.getMessage('search')
 
 class Search extends Component {
-  constructor() {
-    super()
-
-    this.getSearchResult = getSearchResult.bind(this)
-  }
-
   @autobind
   handleInput(evt) {
     evt.persist()
@@ -42,7 +39,7 @@ class Search extends Component {
 
       newTrees.push(defExpandTree)
     } else {
-      const searchResult = await this.getSearchResult(newSearchKeyword)
+      const searchResult = await getSearchResult(newSearchKeyword, options)
 
       newTrees.push(searchResult)
     }
@@ -55,9 +52,8 @@ class Search extends Component {
 
   render() {
     return (
-      <header id='search-box'>
+      <header styleName='main'>
         <input
-          id='search-input'
           type='search'
           placeholder={msgSearch}
           tabIndex='-1'
@@ -80,4 +76,6 @@ const mapStateToProps = (state) => ({
   options: state.options
 })
 
-export default connect(mapStateToProps)(Search)
+export default connect(mapStateToProps)(
+  CSSModules(Search, styles)
+)

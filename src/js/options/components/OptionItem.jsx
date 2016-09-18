@@ -1,11 +1,14 @@
 import {connect} from 'react-redux'
 import {createElement, PropTypes} from 'react'
+import CSSModules from 'react-css-modules'
 
 import InputNumber from './input_items/InputNumber'
 import InputSelect from './input_items/InputSelect'
 import SelectButton from './input_items/SelectButton'
 import SelectMultiple from './input_items/SelectMultiple'
 import SelectString from './input_items/SelectString'
+
+import styles from '../../../css/options/option-item.scss'
 
 const OptionItem = (props) => {
   const {
@@ -39,9 +42,9 @@ const OptionItem = (props) => {
   })()
 
   return (
-    <div className='option-item'>
-      <div className='option-desc'>{chrome.i18n.getMessage('opt_' + optionName)}</div>
-      <div className='option-input'>
+    <div styleName='main'>
+      <div styleName='desc'>{chrome.i18n.getMessage('opt_' + optionName)}</div>
+      <div styleName='input'>
         <InputItem
           optionConfig={optionConfig}
           optionName={optionName}
@@ -62,4 +65,6 @@ const mapStateToProps = (state) => ({
   optionsConfig: state.optionsConfig
 })
 
-export default connect(mapStateToProps)(OptionItem)
+export default connect(mapStateToProps)(
+  CSSModules(OptionItem, styles)
+)

@@ -1,0 +1,17 @@
+@import "../common/mixins.scss";
+@import "../common/variables.scss";
+
+.main {
+  composes: list-item from "../common/composes.scss";
+  display: block;
+  padding: $golden-gap 8px;
+  text-decoration: none;
+
+  &.unclickable {
+    @include grey-list-item();
+  }
+
+  &:not(.unclickable):hover {
+    @include highlight-list-item();
+  }
+}

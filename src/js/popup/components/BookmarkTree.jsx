@@ -1,6 +1,7 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
+import CSSModules from 'react-css-modules'
 
 import {
   DRAG_INDICATOR,
@@ -15,13 +16,9 @@ import FolderCover from './FolderCover'
 import NoResult from './NoResult'
 import TreeHeader from './TreeHeader'
 
+import styles from '../../../css/popup/bookmark-tree.scss'
+
 class BookmarkTree extends Component {
-  constructor() {
-    super()
-
-    this.genBookmarkList = genBookmarkList.bind(this)
-  }
-
   componentDidMount() {
     this.afterRender()
   }
@@ -76,7 +73,7 @@ class BookmarkTree extends Component {
     const isFirstTree = treeIndex === 0
     const treeInfo = trees[treeIndex]
 
-    const bookmarkList = this.genBookmarkList(treeInfo, treeIndex)
+    const bookmarkList = genBookmarkList(treeInfo, {rootTree, searchKeyword, treeIndex})
 
     const treeItems = bookmarkList.asMutable().map((itemInfo) => (
       <BookmarkItem
@@ -103,13 +100,13 @@ class BookmarkTree extends Component {
     }
 
     return (
-      <section className='bookmark-tree'>
+      <section styleName='main'>
         <TreeHeader treeIndex={treeIndex} />
         <ul
           ref={(ref) => {
             this.bookmarkListEl = ref
           }}
-          className='bookmark-list'
+          styleName='list'
           onKeyDown={this.handleKeyDown}
           onScroll={this.handleScroll}
           onWheel={this.handleWheel}
@@ -141,4 +138,6 @@ const mapStateToProps = (state) => ({
   trees: state.trees
 })
 
-export default connect(mapStateToProps)(BookmarkTree)
+export default connect(mapStateToProps)(
+  CSSModules(BookmarkTree, styles)
+)
