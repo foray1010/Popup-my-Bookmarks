@@ -181,9 +181,11 @@ export function isFolderOpened(trees, itemInfo) {
   return trees.some((treeInfo) => treeInfo.id === itemInfo.id)
 }
 
-export async function openMultipleBookmarks(itemInfo, menuItemNum) {
-  const {options} = this.props
-
+export async function openMultipleBookmarks(itemInfo, {
+  isNewWindow = false,
+  isIncognito = false,
+  isWarnWhenOpenMany = false
+}) {
   const urlList = []
 
   if (isFolder(itemInfo)) {
@@ -197,14 +199,14 @@ export async function openMultipleBookmarks(itemInfo, menuItemNum) {
       }
     }
 
-    const msgAskOpenAll = chrome.i18n.getMessage(
-      'askOpenAll', String(urlList.length)
-    )
+    if (isWarnWhenOpenMany) {
+      const msgAskOpenAll = chrome.i18n.getMessage(
+        'askOpenAll', String(urlList.length)
+      )
 
-    if (options.warnOpenMany &&
-        urlList.length > 5 &&
-        !window.confirm(msgAskOpenAll)) {
-      return
+      if (urlList.length > 5 && !window.confirm(msgAskOpenAll)) {
+        return
+      }
     }
   } else {
     const results = await chromep.bookmarks.get(itemInfo.id)
@@ -214,7 +216,7 @@ export async function openMultipleBookmarks(itemInfo, menuItemNum) {
     urlList.push(thisItemInfo.url)
   }
 
-  if (menuItemNum === 0) {
+  if (!isNewWindow) {
     await Promise.all(urlList.map((url) => {
       return chromep.tabs.create({
         url,
@@ -224,7 +226,7 @@ export async function openMultipleBookmarks(itemInfo, menuItemNum) {
   } else {
     await chromep.windows.create({
       url: urlList,
-      incognito: menuItemNum !== 1
+      incognito: isIncognito
     })
   }
 

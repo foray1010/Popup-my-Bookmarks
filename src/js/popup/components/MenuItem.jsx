@@ -49,12 +49,6 @@ async function createBookmarkBelowMenuTarget(menuTarget, title, url) {
   return createdItemInfo
 }
 
-function getMenuItemNum(menuItem) {
-  const menuItemList = document.getElementsByClassName('menu-item')
-
-  return Array.from(menuItemList).indexOf(menuItem)
-}
-
 async function removeBookmarkItem(menuTarget) {
   const removeFunc = isFolder(menuTarget) ?
     chromep.bookmarks.removeTree :
@@ -135,55 +129,65 @@ async function sortByName(parentId) {
 }
 
 class MenuItem extends Component {
-  constructor() {
-    super()
-
-    this.openMultipleBookmarks = openMultipleBookmarks.bind(this)
-  }
-
   @autobind
   async handleClick(evt) {
-    evt.persist()
     evt.preventDefault()
 
     const {
       cutTarget,
       dispatch,
       isUnclickable,
-      menuTarget
+      menuItemKey,
+      menuTarget,
+      options
     } = this.props
 
     if (isUnclickable) return
 
     const actionList = []
-    const {target} = evt
-
-    const menuItemNum = getMenuItemNum(target)
-
-    switch (menuItemNum) {
-      case 0: // Open bookmark(s) in background tab or this window
-      case 1: // in new window
-      case 2: // in incognito window
-        await this.openMultipleBookmarks(menuTarget, menuItemNum)
+    switch (menuItemKey) {
+      case 'openAll':
+      case 'openInB':
+        await openMultipleBookmarks(menuTarget, {
+          isWarnWhenOpenMany: options.warnOpenMany
+        })
         break
 
-      case 3: // Edit... or Rename...
+      case 'openAllInN':
+      case 'openInN':
+        await openMultipleBookmarks(menuTarget, {
+          isNewWindow: true,
+          isWarnWhenOpenMany: options.warnOpenMany
+        })
+        break
+
+      case 'openAllInI':
+      case 'openInI':
+        await openMultipleBookmarks(menuTarget, {
+          isNewWindow: true,
+          isIncognito: true,
+          isWarnWhenOpenMany: options.warnOpenMany
+        })
+        break
+
+      case 'rename':
+      case 'edit':
         actionList.push(updateEditorTarget(menuTarget))
         break
 
-      case 4: // Delete
+      case 'del':
         await removeBookmarkItem(menuTarget)
         break
 
-      case 5: // Cut
+      case 'cut':
         actionList.push(updateCutTarget(menuTarget))
         break
 
-      case 6: // Copy
+      case 'copy':
         actionList.push(updateCopyTarget(menuTarget))
         break
 
-      case 7: // Paste
+      case 'paste':
         await this.pasteItem()
 
         if (cutTarget) {
@@ -191,14 +195,14 @@ class MenuItem extends Component {
         }
         break
 
-      case 9: // Add folder...
-        return
-
-      case 8: // Add current page
+      case 'addPage':
         await addCurrentPage(menuTarget)
         break
 
-      case 10: // Add separator
+      case 'addFolder':
+        return
+
+      case 'addSeparator':
         await createBookmarkBelowMenuTarget(
           menuTarget,
           '- '.repeat(42),
@@ -206,7 +210,7 @@ class MenuItem extends Component {
         )
         break
 
-      case 11: // Sort by name
+      case 'sortByName':
         await sortByName(menuTarget.parentId)
         break
 
@@ -298,7 +302,8 @@ if (process.env.NODE_ENV !== 'production') {
     dispatch: PropTypes.func.isRequired,
     isUnclickable: PropTypes.bool.isRequired,
     menuItemKey: PropTypes.string.isRequired,
-    menuTarget: PropTypes.object.isRequired
+    menuTarget: PropTypes.object.isRequired,
+    options: PropTypes.object.isRequired
   }
 }
 
@@ -313,7 +318,8 @@ const mapStateToProps = (state, ownProps) => {
     copyTarget: copyTarget,
     cutTarget: cutTarget,
     isUnclickable: Boolean(menuItemKey === 'paste' && !copyTarget && !cutTarget),
-    menuTarget: state.menuTarget
+    menuTarget: state.menuTarget,
+    options: state.options
   }
 }
 

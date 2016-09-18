@@ -37,12 +37,6 @@ const dragHackEl = document.getElementById('drag-hack')
 const msgAlertBookmarklet = chrome.i18n.getMessage('alert_bookmarklet')
 
 class BookmarkItem extends Component {
-  constructor() {
-    super()
-
-    this.openMultipleBookmarks = openMultipleBookmarks.bind(this)
-  }
-
   componentDidMount() {
     this.afterRender()
   }
@@ -171,7 +165,10 @@ class BookmarkItem extends Component {
             }
           }
         } else {
-          this.openMultipleBookmarks(itemInfo, 0)
+          await openMultipleBookmarks(itemInfo, {
+            isNewWindow: false,
+            isWarnWhenOpenMany: options.warnOpenMany
+          })
         }
         break
 
