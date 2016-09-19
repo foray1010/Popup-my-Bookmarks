@@ -14,7 +14,7 @@
   }
 
   &.selected {
-    @include highlight-list-item()
+    @include highlight-list-item();
   }
 
   &.separator {

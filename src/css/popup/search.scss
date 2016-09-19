@@ -4,7 +4,7 @@ $search-height: 21px;
 
 .main {
   border: solid $highlight-level3;
-  border-width: 0 0 1px 0;
+  border-width: 0 0 1px;
   display: flex;
   height: $search-height;
   margin-bottom: $golden-gap;
