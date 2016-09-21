@@ -83,13 +83,11 @@ class OptionButton extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  OptionButton.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    options: PropTypes.object.isRequired,
-    optionsConfig: PropTypes.object.isRequired,
-    selectedNavModule: PropTypes.string.isRequired
-  }
+OptionButton.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  options: PropTypes.object.isRequired,
+  optionsConfig: PropTypes.object.isRequired,
+  selectedNavModule: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => ({

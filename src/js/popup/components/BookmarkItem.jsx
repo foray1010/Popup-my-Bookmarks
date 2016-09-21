@@ -511,21 +511,19 @@ class BookmarkItem extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  BookmarkItem.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    dragIndicator: PropTypes.object,
-    dragTarget: PropTypes.object,
-    isSelected: PropTypes.bool.isRequired,
-    isUnclickable: PropTypes.bool.isRequired,
-    itemInfo: PropTypes.object.isRequired,
-    itemOffsetHeight: PropTypes.number.isRequired,
-    options: PropTypes.object.isRequired,
-    searchKeyword: PropTypes.string.isRequired,
-    shouldKeepInView: PropTypes.bool.isRequired,
-    treeIndex: PropTypes.number.isRequired,
-    trees: PropTypes.arrayOf(PropTypes.object).isRequired
-  }
+BookmarkItem.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  dragIndicator: PropTypes.object,
+  dragTarget: PropTypes.object,
+  isSelected: PropTypes.bool.isRequired,
+  isUnclickable: PropTypes.bool.isRequired,
+  itemInfo: PropTypes.object.isRequired,
+  itemOffsetHeight: PropTypes.number.isRequired,
+  options: PropTypes.object.isRequired,
+  searchKeyword: PropTypes.string.isRequired,
+  shouldKeepInView: PropTypes.bool.isRequired,
+  treeIndex: PropTypes.number.isRequired,
+  trees: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 const mapStateToProps = (state, ownProps) => {

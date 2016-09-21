@@ -35,11 +35,9 @@ const SelectButton = (props) => {
   )
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  SelectButton.propTypes = {
-    optionName: PropTypes.string.isRequired,
-    options: PropTypes.object.isRequired
-  }
+SelectButton.propTypes = {
+  optionName: PropTypes.string.isRequired,
+  options: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({

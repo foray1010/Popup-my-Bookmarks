@@ -39,11 +39,9 @@ class MenuCover extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  MenuCover.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    isHidden: PropTypes.bool.isRequired
-  }
+MenuCover.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  isHidden: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state) => ({

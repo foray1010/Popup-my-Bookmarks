@@ -54,11 +54,9 @@ const OptionItem = (props) => {
   )
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  OptionItem.propTypes = {
-    optionName: PropTypes.string.isRequired,
-    optionsConfig: PropTypes.object.isRequired
-  }
+OptionItem.propTypes = {
+  optionName: PropTypes.string.isRequired,
+  optionsConfig: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({

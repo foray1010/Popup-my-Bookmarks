@@ -28,11 +28,9 @@ const MenuArea = (props) => {
   )
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  MenuArea.propTypes = {
-    isHidden: PropTypes.bool.isRequired,
-    menuAreaKeys: PropTypes.arrayOf(PropTypes.string).isRequired
-  }
+MenuArea.propTypes = {
+  isHidden: PropTypes.bool.isRequired,
+  menuAreaKeys: PropTypes.arrayOf(PropTypes.string).isRequired
 }
 
 export default CSSModules(MenuArea, styles)

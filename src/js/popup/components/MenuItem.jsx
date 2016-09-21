@@ -295,16 +295,14 @@ class MenuItem extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  MenuItem.propTypes = {
-    copyTarget: PropTypes.object,
-    cutTarget: PropTypes.object,
-    dispatch: PropTypes.func.isRequired,
-    isUnclickable: PropTypes.bool.isRequired,
-    menuItemKey: PropTypes.string.isRequired,
-    menuTarget: PropTypes.object.isRequired,
-    options: PropTypes.object.isRequired
-  }
+MenuItem.propTypes = {
+  copyTarget: PropTypes.object,
+  cutTarget: PropTypes.object,
+  dispatch: PropTypes.func.isRequired,
+  isUnclickable: PropTypes.bool.isRequired,
+  menuItemKey: PropTypes.string.isRequired,
+  menuTarget: PropTypes.object.isRequired,
+  options: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => {

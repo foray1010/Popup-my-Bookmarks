@@ -65,11 +65,9 @@ class Search extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  Search.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    options: PropTypes.object.isRequired
-  }
+Search.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  options: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({

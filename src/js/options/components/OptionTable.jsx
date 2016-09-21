@@ -37,11 +37,9 @@ const OptionTable = (props) => {
   )
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  OptionTable.propTypes = {
-    options: PropTypes.object.isRequired,
-    selectedNavModule: PropTypes.string.isRequired
-  }
+OptionTable.propTypes = {
+  options: PropTypes.object.isRequired,
+  selectedNavModule: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => ({

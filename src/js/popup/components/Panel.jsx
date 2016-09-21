@@ -40,10 +40,8 @@ const Panel = (props) => {
   )
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  Panel.propTypes = {
-    trees: PropTypes.arrayOf(PropTypes.object).isRequired
-  }
+Panel.propTypes = {
+  trees: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 const mapStateToProps = (state) => ({

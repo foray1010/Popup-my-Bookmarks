@@ -27,10 +27,8 @@ const NavModuleMapper = (props) => {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  NavModuleMapper.propTypes = {
-    selectedNavModule: PropTypes.string.isRequired
-  }
+NavModuleMapper.propTypes = {
+  selectedNavModule: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => ({

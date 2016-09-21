@@ -147,11 +147,9 @@ class Editor extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  Editor.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    editorTarget: PropTypes.object
-  }
+Editor.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  editorTarget: PropTypes.object
 }
 
 const mapStateToProps = (state) => ({

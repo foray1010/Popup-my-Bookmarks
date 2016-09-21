@@ -59,14 +59,12 @@ class Option extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  Option.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    optionChoice: PropTypes.string.isRequired,
-    optionChoiceIndex: PropTypes.number.isRequired,
-    optionName: PropTypes.string.isRequired,
-    options: PropTypes.object.isRequired
-  }
+Option.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  optionChoice: PropTypes.string.isRequired,
+  optionChoiceIndex: PropTypes.number.isRequired,
+  optionName: PropTypes.string.isRequired,
+  options: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({

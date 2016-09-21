@@ -89,13 +89,11 @@ class InputSelect extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  InputSelect.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    optionConfig: PropTypes.object.isRequired,
-    optionName: PropTypes.string.isRequired,
-    options: PropTypes.object.isRequired
-  }
+InputSelect.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  optionConfig: PropTypes.object.isRequired,
+  optionName: PropTypes.string.isRequired,
+  options: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({

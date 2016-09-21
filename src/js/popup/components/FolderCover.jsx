@@ -76,12 +76,10 @@ class FolderCover extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  FolderCover.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    isHidden: PropTypes.bool.isRequired,
-    treeIndex: PropTypes.number.isRequired
-  }
+FolderCover.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  isHidden: PropTypes.bool.isRequired,
+  treeIndex: PropTypes.number.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => ({

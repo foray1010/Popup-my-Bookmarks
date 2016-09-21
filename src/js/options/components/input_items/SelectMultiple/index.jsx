@@ -33,11 +33,9 @@ const SelectMultiple = (props) => {
   )
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  SelectMultiple.propTypes = {
-    optionConfig: PropTypes.object.isRequired,
-    optionName: PropTypes.string.isRequired
-  }
+SelectMultiple.propTypes = {
+  optionConfig: PropTypes.object.isRequired,
+  optionName: PropTypes.string.isRequired
 }
 
 export default CSSModules(SelectMultiple, styles)

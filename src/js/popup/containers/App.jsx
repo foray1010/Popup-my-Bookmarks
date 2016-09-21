@@ -299,17 +299,15 @@ class App extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  App.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    editorTarget: PropTypes.object,
-    keyboardTarget: PropTypes.object,
-    menuTarget: PropTypes.object,
-    options: PropTypes.object.isRequired,
-    rootTree: PropTypes.object.isRequired,
-    searchKeyword: PropTypes.string.isRequired,
-    trees: PropTypes.arrayOf(PropTypes.object).isRequired
-  }
+App.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  editorTarget: PropTypes.object,
+  keyboardTarget: PropTypes.object,
+  menuTarget: PropTypes.object,
+  options: PropTypes.object.isRequired,
+  rootTree: PropTypes.object.isRequired,
+  searchKeyword: PropTypes.string.isRequired,
+  trees: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 const mapStateToProps = (state) => ({

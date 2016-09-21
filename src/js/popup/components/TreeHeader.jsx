@@ -47,13 +47,11 @@ class TreeHeader extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  TreeHeader.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    isHidden: PropTypes.bool.isRequired,
-    treeIndex: PropTypes.number.isRequired,
-    trees: PropTypes.arrayOf(PropTypes.object).isRequired
-  }
+TreeHeader.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  isHidden: PropTypes.bool.isRequired,
+  treeIndex: PropTypes.number.isRequired,
+  trees: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 const mapStateToProps = (state, ownProps) => ({

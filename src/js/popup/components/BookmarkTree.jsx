@@ -119,15 +119,13 @@ class BookmarkTree extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  BookmarkTree.propTypes = {
-    dragIndicator: PropTypes.object,
-    itemOffsetHeight: PropTypes.number.isRequired,
-    rootTree: PropTypes.object.isRequired,
-    searchKeyword: PropTypes.string.isRequired,
-    treeIndex: PropTypes.number.isRequired,
-    trees: PropTypes.arrayOf(PropTypes.object).isRequired
-  }
+BookmarkTree.propTypes = {
+  dragIndicator: PropTypes.object,
+  itemOffsetHeight: PropTypes.number.isRequired,
+  rootTree: PropTypes.object.isRequired,
+  searchKeyword: PropTypes.string.isRequired,
+  treeIndex: PropTypes.number.isRequired,
+  trees: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 const mapStateToProps = (state) => ({

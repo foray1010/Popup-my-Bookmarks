@@ -138,12 +138,10 @@ class Menu extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  Menu.propTypes = {
-    menuTarget: PropTypes.object,
-    mousePosition: PropTypes.objectOf(PropTypes.number).isRequired,
-    searchKeyword: PropTypes.string.isRequired
-  }
+Menu.propTypes = {
+  menuTarget: PropTypes.object,
+  mousePosition: PropTypes.objectOf(PropTypes.number).isRequired,
+  searchKeyword: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => ({

@@ -56,12 +56,10 @@ class NavBarItem extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  NavBarItem.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    navBarItemInfo: PropTypes.object.isRequired,
-    selectedNavModule: PropTypes.string.isRequired
-  }
+NavBarItem.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  navBarItemInfo: PropTypes.object.isRequired,
+  selectedNavModule: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => ({

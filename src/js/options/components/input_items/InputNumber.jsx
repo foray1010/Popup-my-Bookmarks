@@ -70,13 +70,11 @@ class InputNumber extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  InputNumber.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    optionConfig: PropTypes.object.isRequired,
-    optionName: PropTypes.string.isRequired,
-    options: PropTypes.object.isRequired
-  }
+InputNumber.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  optionConfig: PropTypes.object.isRequired,
+  optionName: PropTypes.string.isRequired,
+  options: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({

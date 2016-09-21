@@ -52,13 +52,11 @@ class SelectString extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  SelectString.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    optionConfig: PropTypes.object.isRequired,
-    optionName: PropTypes.string.isRequired,
-    options: PropTypes.object.isRequired
-  }
+SelectString.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  optionConfig: PropTypes.object.isRequired,
+  optionName: PropTypes.string.isRequired,
+  options: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
