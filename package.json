@@ -12,8 +12,8 @@
   "repository": "foray1010/Popup-my-Bookmarks",
   "bugs": "https://github.com/foray1010/Popup-my-Bookmarks/issues",
   "scripts": {
-    "build": "NODE_ENV=production gulp build",
-    "dev": "NODE_ENV=development gulp dev",
+    "build": "cross-env NODE_ENV=production gulp build",
+    "dev": "cross-env NODE_ENV=development gulp dev",
     "help": "gulp help",
     "lint": "eslint --ext .js,.jsx . && stylelint src/css/**/*.scss",
     "md": "gulp md",
@@ -45,6 +45,7 @@
     "babel-preset-foray1010": "^1.1.0",
     "bluebird": "^3.3.1",
     "co": "^4.6.0",
+    "cross-env": "^2.0.1",
     "css-loader": "^0.25.0",
     "eslint-config-foray1010": "^3.0.0",
     "extract-text-webpack-plugin": "^1.0.1",
