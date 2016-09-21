@@ -32,9 +32,6 @@ const lang = {
     extname: '.pug',
     destDir: '.',
     srcDir: path.join(sourceDir, 'html')
-  },
-  js: {
-    destDir: 'js'
   }
 }
 
@@ -86,13 +83,9 @@ function* buildManifest(workingDir, updateFn) {
 }
 
 function runWebpack(workingDir) {
-  const thisLang = lang.js
-
-  const destDir = path.join(workingDir, thisLang.destDir)
-
   return plumber()
     .pipe(webpackStream(webpackConfig, webpack))
-    .pipe(gulp.dest(destDir))
+    .pipe(gulp.dest(workingDir))
 }
 
 function validatePackageVersion() {

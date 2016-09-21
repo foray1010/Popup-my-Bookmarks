@@ -19,13 +19,13 @@ const webpackConfig = {
     ]
   },
   output: {
-    filename: '[name].js'
+    filename: './js/[name].js'
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
-    new webpack.optimize.CommonsChunkPlugin('common.js'),
+    new webpack.optimize.CommonsChunkPlugin('./js/common.js'),
     new webpack.optimize.OccurenceOrderPlugin(true)
   ],
   resolve: {
@@ -60,22 +60,17 @@ switch (process.env.NODE_ENV) {
   case 'production':
     webpackConfig.module.loaders.push({
       test: /\.scss$/,
-      loader: ExtractTextPlugin.extract({
-        notExtractLoader: 'style-loader',
-        loaders: [
-          'css-loader?' + querystring.stringify({
-            modules: true,
-            importLoaders: 1,
-            localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
-          }),
-          'sass-loader',
-          'resolve-url-loader',
-          'postcss-loader'
-        ]
-      })
+      loader: ExtractTextPlugin.extract('style-loader', [
+        'css-loader?' + querystring.stringify({
+          modules: true,
+          importLoaders: 1,
+          localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
+        }),
+        'sass-loader'
+      ])
     })
     webpackConfig.plugins.push(
-      new ExtractTextPlugin('app.css', {
+      new ExtractTextPlugin('./css/[name].css', {
         allChunks: true
       }),
       new webpack.optimize.DedupePlugin(),
