@@ -1,20 +1,5 @@
 {
   "presets": [
-    "es2015",
-    "stage-2"
-  ],
-  "plugins": [
-    "transform-decorators-legacy",
-    ["transform-react-jsx", {
-      "pragma": "createElement"
-    }]
-  ],
-  "env": {
-    "production": {
-      "plugins": [
-        "transform-react-constant-elements",
-        "transform-react-inline-elements"
-      ]
-    }
-  }
+    "babel-preset-foray1010/react"
+  ]
 }
