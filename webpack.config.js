@@ -61,7 +61,7 @@ switch (process.env.NODE_ENV) {
   case 'production':
     webpackConfig.module.loaders.push({
       test: /\.scss$/,
-      loader: ExtractTextPlugin.extract('style-loader', [
+      loader: ExtractTextPlugin.extract([
         'css-loader?' + querystring.stringify({
           modules: true,
           importLoaders: 1,
