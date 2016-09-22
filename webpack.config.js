@@ -38,6 +38,11 @@ const webpackConfig = {
   }
 }
 
+const cssLoaderConfigQS = querystring.stringify({
+  modules: true,
+  importLoaders: 1,
+  localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
+})
 switch (process.env.NODE_ENV) {
   case 'development':
     webpackConfig.devtool = 'source-map'
@@ -47,11 +52,7 @@ switch (process.env.NODE_ENV) {
         'style-loader?' + querystring.stringify({
           sourceMap: true
         }),
-        'css-loader?' + querystring.stringify({
-          modules: true,
-          importLoaders: 1,
-          localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
-        }),
+        'css-loader?' + cssLoaderConfigQS,
         'sass-loader'
       ]
     })
@@ -62,11 +63,7 @@ switch (process.env.NODE_ENV) {
     webpackConfig.module.loaders.push({
       test: /\.scss$/,
       loader: ExtractTextPlugin.extract([
-        'css-loader?' + querystring.stringify({
-          modules: true,
-          importLoaders: 1,
-          localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
-        }),
+        'css-loader?' + cssLoaderConfigQS,
         'sass-loader'
       ])
     })
