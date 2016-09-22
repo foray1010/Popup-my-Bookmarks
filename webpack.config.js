@@ -1,6 +1,7 @@
 'use strict'
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const OptimizeJsPlugin = require('optimize-js-plugin')
 const querystring = require('querystring')
 const webpack = require('webpack')
 
@@ -85,7 +86,8 @@ switch (process.env.NODE_ENV) {
           comments: false,
           screw_ie8: true
         }
-      })
+      }),
+      new OptimizeJsPlugin()
     )
     break
 
