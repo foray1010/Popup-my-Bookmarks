@@ -142,7 +142,7 @@
 		"description": "2015.01.11"
 	},
 	"opt_fontSize": {
-		"message": "Font size:\n(12 - 30px)",
+		"message": "Font size:",
 		"description": "2013.07.26"
 	},
 	"opt_general": {
@@ -154,7 +154,7 @@
 		"description": "2015.02.18 | Root folder means the top level folder"
 	},
 	"opt_maxResults": {
-		"message": "Maximum number of search results:\n(10 - 200)",
+		"message": "Maximum number of search results:",
 		"description": "2013.03.24"
 	},
 	"opt_no": {
@@ -182,7 +182,7 @@
 		"description": "2013.09.11"
 	},
 	"opt_setWidth": {
-		"message": "Panel width:\n(100 - 399px)",
+		"message": "Panel width:",
 		"description": "2013.03.24"
 	},
 	"opt_tooltip": {

@@ -85,7 +85,7 @@ async function getOptionsConfig() {
     [OPTIONS_FONT_SIZE]: {
       type: 'integer',
       default: 12,
-      minimum: 12,
+      minimum: 10,
       maximum: 30
     },
     [OPTIONS_HIDE_ROOT_FOLDER]: {
