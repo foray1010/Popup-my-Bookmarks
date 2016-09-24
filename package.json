@@ -16,6 +16,7 @@
     "dev": "cross-env NODE_ENV=development gulp dev",
     "help": "gulp help",
     "lint": "eslint --ext .js,.jsx . && stylelint src/css/**/*.scss",
+    "locales": "node scripts/generateLocalesFromTransifex.js",
     "md": "gulp md",
     "test": "exit 0"
   },
@@ -61,9 +62,11 @@
     "node-sass": "^3.9.3",
     "optimize-js-plugin": "0.0.4",
     "pre-commit": "^1.1.2",
+    "prompt": "^1.0.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "stylelint-config-foray1010": "^1.0.2",
+    "transifex": "^1.4.4",
     "webpack": "^1.12.13",
     "webpack-stream": "^3.1.0",
     "yamljs": "^0.2.6"
