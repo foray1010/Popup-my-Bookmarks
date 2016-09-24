@@ -41,7 +41,7 @@ function buildLang(langName, workingDir, options) {
     options = {}
   }
 
-  const isDev = process.argv[2] === 'dev'
+  const isDev = process.env.NODE_ENV === 'development'
   const thisLang = lang[langName]
 
   const srcPath = path.join(thisLang.srcDir, '*' + thisLang.extname)
@@ -122,8 +122,6 @@ gulp.task('default', ['help'])
 // build and zip PmB
 gulp.task('build:init', () => {
   return co(function* () {
-    process.env.NODE_ENV = 'production'
-
     validatePackageVersion()
 
     yield initDir(buildDir)
@@ -182,8 +180,6 @@ gulp.task('build', ['build:zip'], () => {
 // create a watched folder for testing
 gulp.task('dev:init', () => {
   return co(function* () {
-    process.env.NODE_ENV = 'development'
-
     validatePackageVersion()
 
     yield initDir(devDir)

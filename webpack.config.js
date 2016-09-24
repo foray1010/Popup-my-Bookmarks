@@ -56,7 +56,7 @@ switch (process.env.NODE_ENV) {
               'style-loader?' + querystring.stringify({
                 sourceMap: true
               }),
-              'css-loader?' + cssLoaderConfigQS,
+              `css-loader?${cssLoaderConfigQS}`,
               'sass-loader'
             ]
           }
@@ -73,7 +73,7 @@ switch (process.env.NODE_ENV) {
           {
             test: /\.scss$/,
             loader: ExtractTextPlugin.extract([
-              'css-loader?' + cssLoaderConfigQS,
+              `css-loader?${cssLoaderConfigQS}`,
               'sass-loader'
             ])
           }
