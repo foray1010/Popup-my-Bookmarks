@@ -1,7 +1,7 @@
 import {autobind, debounce} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, Component, PropTypes} from 'react'
-import _debounce from 'lodash.debounce'
+import _debounce from 'lodash/debounce'
 import CSSModules from 'react-css-modules'
 
 import {

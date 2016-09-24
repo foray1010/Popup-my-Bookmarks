@@ -1,6 +1,7 @@
 'use strict'
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const mergeAndConcat = require('merge-and-concat')
 const OptimizeJsPlugin = require('optimize-js-plugin')
 const querystring = require('querystring')
 const webpack = require('webpack')
@@ -45,47 +46,59 @@ const cssLoaderConfigQS = querystring.stringify({
 })
 switch (process.env.NODE_ENV) {
   case 'development':
-    webpackConfig.devtool = 'source-map'
-    webpackConfig.module.loaders.push({
-      test: /\.scss$/,
-      loaders: [
-        'style-loader?' + querystring.stringify({
-          sourceMap: true
-        }),
-        'css-loader?' + cssLoaderConfigQS,
-        'sass-loader'
-      ]
+    mergeAndConcat(webpackConfig, {
+      devtool: 'source-map',
+      module: {
+        loaders: [
+          {
+            test: /\.scss$/,
+            loaders: [
+              'style-loader?' + querystring.stringify({
+                sourceMap: true
+              }),
+              'css-loader?' + cssLoaderConfigQS,
+              'sass-loader'
+            ]
+          }
+        ]
+      },
+      watch: true
     })
-    webpackConfig.watch = true
     break
 
   case 'production':
-    webpackConfig.module.loaders.push({
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract([
-        'css-loader?' + cssLoaderConfigQS,
-        'sass-loader'
-      ])
+    mergeAndConcat(webpackConfig, {
+      module: {
+        loaders: [
+          {
+            test: /\.scss$/,
+            loader: ExtractTextPlugin.extract([
+              'css-loader?' + cssLoaderConfigQS,
+              'sass-loader'
+            ])
+          }
+        ]
+      },
+      plugins: [
+        new ExtractTextPlugin('./css/[name].css', {
+          allChunks: true
+        }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+          compress: {
+            drop_console: true,
+            pure_getters: true,
+            unsafe: true,
+            warnings: false
+          },
+          output: {
+            comments: false,
+            screw_ie8: true
+          }
+        }),
+        new OptimizeJsPlugin()
+      ]
     })
-    webpackConfig.plugins.push(
-      new ExtractTextPlugin('./css/[name].css', {
-        allChunks: true
-      }),
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          drop_console: true,
-          pure_getters: true,
-          unsafe: true,
-          warnings: false
-        },
-        output: {
-          comments: false,
-          screw_ie8: true
-        }
-      }),
-      new OptimizeJsPlugin()
-    )
     break
 
   default:
