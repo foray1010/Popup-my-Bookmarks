@@ -1,208 +1,186 @@
 {
-	"addFolder": {
-		"message": "Nieuwe map...",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"addPage": {
-		"message": "Huidige pagina toevoegen",
-		"description": "2013.01.23"
-	},
-	"addSeparator": {
-		"message": "Scheidingslijn toevoegen",
-		"description": "2013.07.26 | Refer to Firefox Bookmark menu"
-	},
-	"alert_bookmarklet": {
-		"message": "U hebt bookmarklets nog niet ingeschakeld.\nWilt u deze inschakelen via de pagina opties?",
-		"description": "2013.08.12"
-	},
-	"askOpenAll": {
-		"message": "U staat op het punt $bkmarkCount$ bladwijzers te openen.\nWeet u zeker dat u door wilt gaan?",
-		"description": "2013.01.29 | Refer to Firefox Bookmark menu",
-		"placeholders": {
-			"bkmarkCount": {
-				"content": "$1"
-			}
-		}
-	},
-	"cancel": {
-		"message": "Annuleren",
-		"description": "2013.01.30"
-	},
-	"confirm": {
-		"message": "Bevestigen",
-		"description": "2013.01.30"
-	},
-	"copy": {
-		"message": "Kopiëren",
-		"description": "2013.07.07 | Refer to Chrome Bookmark manager"
-	},
-	"cut": {
-		"message": "Knippen",
-		"description": "2013.07.07 | Refer to Chrome Bookmark manager"
-	},
-	"default": {
-		"message": "Standaard",
-		"description": "2013.03.26"
-	},
-	"del": {
-		"message": "Verwijderen",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"edit": {
-		"message": "Bewerken...",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"extDesc": {
-		"message": "Een efficiëntere manier om uw bladwijzermenu te bekijken en beheren",
-		"description": "2013.01.21"
-	},
-	"newFolder": {
-		"message": "Nieuwe map",
-		"description": "2013.01.28 | Refer to Chrome Bookmark manager"
-	},
-	"noBkmark": {
-		"message": "Rechter muisknop opent bladwijzers hier ;-)",
-		"description": "2013.01.22"
-	},
-	"noResult": {
-		"message": "Geen overeenkomstige bladwijzers gevonden",
-		"description": "2013.01.27"
-	},
-	"openAll": {
-		"message": "Alle bladwijzers openen",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"openAllInI": {
-		"message": "Open alle bladwijzers in incognitovenster",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"openAllInN": {
-		"message": "Open alle bladwijzers in nieuw venster",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"openInB": {
-		"message": "Openen in tabblad op achtergrond",
-		"description": "2013.01.23"
-	},
-	"openInI": {
-		"message": "Open in incognitovenster",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"openInN": {
-		"message": "Openen in nieuw venster",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"opt_bookmarklet": {
-		"message": "Bookmarklet ondersteunen:<br>(Javascript Bookmark Script)",
-		"description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
-	},
-	"opt_clickByLeft": {
-		"message": "Linker muisknop opent bladwijzers in:",
-		"description": "2013.06.01"
-	},
-	"opt_clickByLeftCtrl": {
-		"message": "Ctrl + linker muisknop opent bladwijzers in:",
-		"description": "2013.06.01"
-	},
-	"opt_clickByLeftShift": {
-		"message": "Shift + linker muisknop opent bladwijzers in:",
-		"description": "2013.06.01"
-	},
-	"opt_clickByMiddle": {
-		"message": "Middelste muisknop opent bladwijzers in:",
-		"description": "2013.06.01"
-	},
-	"opt_clickOption": {
-		"message": "huidig tabblad|huidig tabblad (PmB open)|nieuw tabblad|tabblad op achtergrond|tabblad op achtergrond (PmB open)|nieuw venster|incognitovenster",
-		"description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
-	},
-	"opt_defExpand": {
-		"message": "Standaard opengeklapte map",
-		"description": "2013.07.30"
-	},
-	"opt_defExpandOpt": {
-		"message": "|Bladwijzerbalk|Andere bladwijzers|Mobiele bladwijzers",
-		"description": "2013.07.30 - Don't remove '|'"
-	},
-	"opt_error": {
-		"message": "Verkeerde input bij optie $fieldNum$",
-		"description": "2013.03.27",
-		"placeholders": {
-			"fieldNum": {
-				"content": "$1"
-			}
-		}
-	},
-	"opt_fontSize": {
-		"message": "Lettergrootte:<br>(12 - 30px)",
-		"description": "2013.07.26"
-	},
-	"opt_hideMobile": {
-		"message": "Verberg map \"Mobiele bladwijzers\" indien aanwezig:",
-		"description": "2013.03.24"
-	},
-	"opt_maxResults": {
-		"message": "Het maximum aantal zoekresultaten:<br>(10 - 200)",
-		"description": "2013.03.24"
-	},
-	"opt_no": {
-		"message": "Nee",
-		"description": "2013.03.27"
-	},
-	"opt_opFolderBy": {
-		"message": "Open mappen met linker muisknop:",
-		"description": "2013.06.29"
-	},
-	"opt_rememberPos": {
-		"message": "Laatste positie onthouden:",
-		"description": "2014.02.24"
-	},
-	"opt_saved": {
-		"message": "Opgeslagen",
-		"description": "2013.03.27"
-	},
-	"opt_searchTarget": {
-		"message": "Toegestane zoekopdrachten:",
-		"description": "2013.09.11"
-	},
-	"opt_searchTargetOpt": {
-		"message": "zowel titel als URL|alleen titel",
-		"description": "2013.09.11"
-	},
-	"opt_setWidth": {
-		"message": "Breedte paneel:<br>(100 - 399px)",
-		"description": "2013.03.24"
-	},
-	"opt_tooltip": {
-		"message": "Toon tooltip met gedetailleerde informatie over bladwijzers:",
-		"description": "2013.03.24"
-	},
-	"opt_warnOpenMany": {
-		"message": "Waarschuw mij wanneer het openen van meerdere tabs Chrome kan vertragen:",
-		"description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
-	},
-	"opt_yes": {
-		"message": "Ja",
-		"description": "2013.03.27"
-	},
-	"options": {
-		"message": "Opties",
-		"description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
-	},
-	"paste": {
-		"message": "Plakken",
-		"description": "2013.07.7 | Refer to Chrome Bookmark manager"
-	},
-	"rename": {
-		"message": "Naam wijzigen...",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"search": {
-		"message": "Zoeken",
-		"description": "2013.01.10"
-	},
-	"sortByName": {
-		"message": "Sorteren op naam",
-		"description": "2013.09.17 | Refer to Firefox Bookmark menu"
-	}
+  "addFolder": {
+    "message": "Nieuwe map...",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "addPage": {
+    "message": "Huidige pagina toevoegen",
+    "description": "2013.01.23"
+  },
+  "addSeparator": {
+    "message": "Scheidingslijn toevoegen",
+    "description": "2013.07.26 | Refer to Firefox Bookmark menu"
+  },
+  "alert_bookmarklet": {
+    "message": "U hebt bookmarklets nog niet ingeschakeld.\nWilt u deze inschakelen via de pagina opties?",
+    "description": "2013.08.12"
+  },
+  "askOpenAll": {
+    "message": "U staat op het punt %bkmarkCount% bladwijzers te openen.\nWeet u zeker dat u door wilt gaan?",
+    "description": "2013.01.29 | Refer to Firefox Bookmark menu"
+  },
+  "cancel": {
+    "message": "Annuleren",
+    "description": "2013.01.30"
+  },
+  "confirm": {
+    "message": "Bevestigen",
+    "description": "2013.01.30"
+  },
+  "copy": {
+    "message": "Kopiëren",
+    "description": "2013.07.07 | Refer to Chrome Bookmark manager"
+  },
+  "cut": {
+    "message": "Knippen",
+    "description": "2013.07.07 | Refer to Chrome Bookmark manager"
+  },
+  "default": {
+    "message": "Standaard",
+    "description": "2013.03.26"
+  },
+  "del": {
+    "message": "Verwijderen",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "edit": {
+    "message": "Bewerken...",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "extDesc": {
+    "message": "Een efficiëntere manier om uw bladwijzermenu te bekijken en beheren",
+    "description": "2013.01.21"
+  },
+  "newFolder": {
+    "message": "Nieuwe map",
+    "description": "2013.01.28 | Refer to Chrome Bookmark manager"
+  },
+  "noBkmark": {
+    "message": "Rechter muisknop opent bladwijzers hier ;-)",
+    "description": "2013.01.22"
+  },
+  "noResult": {
+    "message": "Geen overeenkomstige bladwijzers gevonden",
+    "description": "2013.01.27"
+  },
+  "openAll": {
+    "message": "Alle bladwijzers openen",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openAllInI": {
+    "message": "Open alle bladwijzers in incognitovenster",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openAllInN": {
+    "message": "Open alle bladwijzers in nieuw venster",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openInB": {
+    "message": "Openen in tabblad op achtergrond",
+    "description": "2013.01.23"
+  },
+  "openInI": {
+    "message": "Open in incognitovenster",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openInN": {
+    "message": "Openen in nieuw venster",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "opt_bookmarklet": {
+    "message": "Bookmarklet ondersteunen\n(Javascript Bookmark Script)",
+    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
+  },
+  "opt_clickByLeft": {
+    "message": "Linker muisknop opent bladwijzers in",
+    "description": "2013.06.01"
+  },
+  "opt_clickByLeftCtrl": {
+    "message": "Ctrl / CMD + linker muisknop opent bladwijzers in",
+    "description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
+  },
+  "opt_clickByLeftShift": {
+    "message": "Shift + linker muisknop opent bladwijzers in",
+    "description": "2013.06.01"
+  },
+  "opt_clickByMiddle": {
+    "message": "Middelste muisknop opent bladwijzers in",
+    "description": "2013.06.01"
+  },
+  "opt_clickOption": {
+    "message": "huidig tabblad|huidig tabblad (PmB open)|nieuw tabblad|tabblad op achtergrond|tabblad op achtergrond (PmB open)|nieuw venster|incognitovenster",
+    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  },
+  "opt_defExpand": {
+    "message": "Standaard opengeklapte map",
+    "description": "2013.07.30"
+  },
+  "opt_fontSize": {
+    "message": "Lettergrootte",
+    "description": "2013.07.26"
+  },
+  "opt_maxResults": {
+    "message": "Het maximum aantal zoekresultaten",
+    "description": "2013.03.24"
+  },
+  "opt_no": {
+    "message": "Nee",
+    "description": "2013.03.27"
+  },
+  "opt_opFolderBy": {
+    "message": "Open mappen met linker muisknop",
+    "description": "2013.06.29"
+  },
+  "opt_rememberPos": {
+    "message": "Laatste positie onthouden",
+    "description": "2014.02.24"
+  },
+  "opt_saved": {
+    "message": "Opgeslagen",
+    "description": "2013.03.27"
+  },
+  "opt_searchTarget": {
+    "message": "Toegestane zoekopdrachten",
+    "description": "2013.09.11"
+  },
+  "opt_searchTargetOpt": {
+    "message": "zowel titel als URL|alleen titel",
+    "description": "2013.09.11"
+  },
+  "opt_setWidth": {
+    "message": "Breedte paneel",
+    "description": "2013.03.24"
+  },
+  "opt_tooltip": {
+    "message": "Toon tooltip met gedetailleerde informatie over bladwijzers",
+    "description": "2013.03.24"
+  },
+  "opt_warnOpenMany": {
+    "message": "Waarschuw mij wanneer het openen van meerdere tabs Chrome kan vertragen",
+    "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
+  },
+  "opt_yes": {
+    "message": "Ja",
+    "description": "2013.03.27"
+  },
+  "options": {
+    "message": "Opties",
+    "description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
+  },
+  "paste": {
+    "message": "Plakken",
+    "description": "2013.07.7 | Refer to Chrome Bookmark manager"
+  },
+  "rename": {
+    "message": "Naam wijzigen...",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "search": {
+    "message": "Zoeken",
+    "description": "2013.01.10"
+  },
+  "sortByName": {
+    "message": "Sorteren op naam",
+    "description": "2013.09.17 | Refer to Firefox Bookmark menu"
+  }
 }

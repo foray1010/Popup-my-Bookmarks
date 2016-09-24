@@ -1,192 +1,170 @@
 {
-	"addFolder": {
-		"message": "Thêm thư mục...",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"addPage": {
-		"message": "Đánh dấu trang hiện tại",
-		"description": "2013.01.23"
-	},
-	"addSeparator": {
-		"message": "Thêm dấu ngăn cách",
-		"description": "2013.07.26 | Refer to Firefox Bookmark menu"
-	},
-	"alert_bookmarklet": {
-		"message": "Bạn vẫn chưa bật phần đánh dấu.\nBạn có muốn bật phần này trong trang tùy chọn hay không?",
-		"description": "2013.08.12"
-	},
-	"askOpenAll": {
-		"message": "Bạn sắp sửa mở phần đánh dấu $bkmarkCount$.\nBạn có chắc rằng bạn muốn tiếp tục hay không?",
-		"description": "2013.01.29 | Refer to Firefox Bookmark menu",
-		"placeholders": {
-			"bkmarkCount": {
-				"content": "$1"
-			}
-		}
-	},
-	"cancel": {
-		"message": "Hủy bỏ",
-		"description": "2013.01.30"
-	},
-	"confirm": {
-		"message": "Xác nhận",
-		"description": "2013.01.30"
-	},
-	"copy": {
-		"message": "Sao chép",
-		"description": "2013.07.7 | Refer to Chrome Bookmark manager"
-	},
-	"cut": {
-		"message": "Cắt",
-		"description": "2013.07.7 | Refer to Chrome Bookmark manager"
-	},
-	"default": {
-		"message": "Mặc định",
-		"description": "2013.03.26"
-	},
-	"del": {
-		"message": "Xóa",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"edit": {
-		"message": "Chỉnh sửa...",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"extDesc": {
-		"message": "Đây là cách tiện lợi hơn khi xem và quản lý phần menu đánh dấu.",
-		"description": "2013.01.21"
-	},
-	"newFolder": {
-		"message": "Thư mục mới",
-		"description": "2013.01.28 | Refer to Chrome Bookmark manager"
-	},
-	"noBkmark": {
-		"message": "Click chuột phải để thêm vào phần đánh dấu :)",
-		"description": "2013.01.22"
-	},
-	"noResult": {
-		"message": "Không có phần đánh dấu nào khớp nhau",
-		"description": "2013.01.27"
-	},
-	"openAll": {
-		"message": "Mở tất cả các phần đánh dấu",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"openAllInI": {
-		"message": "Mở tất cả các phần đánh dấu trong một cửa sổ mới ở chế độ ẩn mình",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"openAllInN": {
-		"message": "Mở tất cả các phần đánh dấu trong một cửa sổ mới",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"openInB": {
-		"message": "Mở ngay trong tab đang bật",
-		"description": "2013.01.23"
-	},
-	"openInI": {
-		"message": "Mở ở một cửa sổ mới trong chế độ ẩn mình",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"openInN": {
-		"message": "Mở trong một cửa sổ mới",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"opt_bookmarklet": {
-		"message": "Hỗ trợ trang đánh dấu:<br>(Javascript Bookmark Script)",
-		"description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
-	},
-	"opt_clickByLeft": {
-		"message": "Click chuột trái để mở phần đánh dấu trong:",
-		"description": "2013.06.01"
-	},
-	"opt_clickByLeftCtrl": {
-		"message": "Ctrl+click chuột trái để mở phần đánh dấu trong:",
-		"description": "2013.06.01"
-	},
-	"opt_clickByLeftShift": {
-		"message": "Shift + Click chuột trái để mở phần đánh dấu trong:",
-		"description": "2013.06.01"
-	},
-	"opt_clickByMiddle": {
-		"message": "Click chuột giữa để mở phần đánh dấu trong:",
-		"description": "2013.06.01"
-	},
-	"opt_clickOption": {
-		"message": "tab hiện tại|tab hiện tại (không cần đóng lại PmB)|tab mới|tab đang mở|tab đang mở (không cần đóng lại PmB)|cửa sổ mới|cửa sổ mới trong chế độ ẩn mình",
-		"description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
-	},
-	"opt_defExpand": {
-		"message": "Mặc định mở rộng thư mục:",
-		"description": "2013.07.30"
-	},
-	"opt_defExpandOpt": {
-		"message": "|Thanh đánh dấu|Phần đánh dấu khác|Phần đánh dấu trên di động",
-		"description": "2013.07.30 - Don't remove '|'"
-	},
-	"opt_error": {
-		"message": "Dữ liệu đầu vào không hợp lệ trong phần tùy chọn $fieldNum$",
-		"description": "2013.03.27",
-		"placeholders": {
-			"fieldNum": {
-				"content": "$1"
-			}
-		}
-	},
-	"opt_fontSize": {
-		"message": "Kích thước kiểu chữ:<br>(12 - 30điểm ảnh)",
-		"description": "2013.07.26"
-	},
-	"opt_hideMobile": {
-		"message": "Ẩn thư mục \"Đánh dấu trên Di Động\" nếu có phần này:",
-		"description": "2013.03.24"
-	},
-	"opt_maxResults": {
-		"message": "Số lượng tối đa của các kết quả tìm kiếm:<br>(10 - 200)",
-		"description": "2013.03.24"
-	},
-	"opt_no": {
-		"message": "Không",
-		"description": "2013.03.27"
-	},
-	"opt_opFolderBy": {
-		"message": "Mở các thư mục bằng cách click chuột trái:",
-		"description": "2013.06.29"
-	},
-	"opt_saved": {
-		"message": "Đã lưu",
-		"description": "2013.03.27"
-	},
-	"opt_setWidth": {
-		"message": "Độ rộng khung hiển thị:<br>(100 - 399điểm ảnh)",
-		"description": "2013.03.24"
-	},
-	"opt_tooltip": {
-		"message": "Hiển thị gợi ý với thông tin chi tiết về phần đánh dấu:",
-		"description": "2013.03.24"
-	},
-	"opt_warnOpenMany": {
-		"message": "Cảnh báo tôi khi mở nhiều tab - vì thao tác này có thể làm chậm lại Chrome:",
-		"description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
-	},
-	"opt_yes": {
-		"message": "Đồng Ý",
-		"description": "2013.03.27"
-	},
-	"options": {
-		"message": "Tùy chọn",
-		"description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
-	},
-	"paste": {
-		"message": "Dán",
-		"description": "2013.07.7 | Refer to Chrome Bookmark manager"
-	},
-	"rename": {
-		"message": "Đổi tên..",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"search": {
-		"message": "Tìm kiếm",
-		"description": "2013.01.10"
-	}
+  "addFolder": {
+    "message": "Thêm thư mục...",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "addPage": {
+    "message": "Đánh dấu trang hiện tại",
+    "description": "2013.01.23"
+  },
+  "addSeparator": {
+    "message": "Thêm dấu ngăn cách",
+    "description": "2013.07.26 | Refer to Firefox Bookmark menu"
+  },
+  "alert_bookmarklet": {
+    "message": "Bạn vẫn chưa bật phần đánh dấu.\nBạn có muốn bật phần này trong trang tùy chọn hay không?",
+    "description": "2013.08.12"
+  },
+  "askOpenAll": {
+    "message": "Bạn sắp sửa mở phần đánh dấu %bkmarkCount%.\nBạn có chắc rằng bạn muốn tiếp tục hay không?",
+    "description": "2013.01.29 | Refer to Firefox Bookmark menu"
+  },
+  "cancel": {
+    "message": "Hủy bỏ",
+    "description": "2013.01.30"
+  },
+  "confirm": {
+    "message": "Xác nhận",
+    "description": "2013.01.30"
+  },
+  "copy": {
+    "message": "Sao chép",
+    "description": "2013.07.07 | Refer to Chrome Bookmark manager"
+  },
+  "cut": {
+    "message": "Cắt",
+    "description": "2013.07.07 | Refer to Chrome Bookmark manager"
+  },
+  "default": {
+    "message": "Mặc định",
+    "description": "2013.03.26"
+  },
+  "del": {
+    "message": "Xóa",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "edit": {
+    "message": "Chỉnh sửa...",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "extDesc": {
+    "message": "Đây là cách tiện lợi hơn khi xem và quản lý phần menu đánh dấu.",
+    "description": "2013.01.21"
+  },
+  "newFolder": {
+    "message": "Thư mục mới",
+    "description": "2013.01.28 | Refer to Chrome Bookmark manager"
+  },
+  "noBkmark": {
+    "message": "Click chuột phải để thêm vào phần đánh dấu :)",
+    "description": "2013.01.22"
+  },
+  "noResult": {
+    "message": "Không có phần đánh dấu nào khớp nhau",
+    "description": "2013.01.27"
+  },
+  "openAll": {
+    "message": "Mở tất cả các phần đánh dấu",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openAllInI": {
+    "message": "Mở tất cả các phần đánh dấu trong một cửa sổ mới ở chế độ ẩn mình",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openAllInN": {
+    "message": "Mở tất cả các phần đánh dấu trong một cửa sổ mới",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openInB": {
+    "message": "Mở ngay trong tab đang bật",
+    "description": "2013.01.23"
+  },
+  "openInI": {
+    "message": "Mở ở một cửa sổ mới trong chế độ ẩn mình",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openInN": {
+    "message": "Mở trong một cửa sổ mới",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "opt_bookmarklet": {
+    "message": "Hỗ trợ trang đánh dấu\n(Javascript Bookmark Script)",
+    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
+  },
+  "opt_clickByLeft": {
+    "message": "Click chuột trái để mở phần đánh dấu trong",
+    "description": "2013.06.01"
+  },
+  "opt_clickByLeftCtrl": {
+    "message": "Ctrl / CMD + click chuột trái để mở phần đánh dấu trong",
+    "description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
+  },
+  "opt_clickByLeftShift": {
+    "message": "Shift + Click chuột trái để mở phần đánh dấu trong",
+    "description": "2013.06.01"
+  },
+  "opt_clickByMiddle": {
+    "message": "Click chuột giữa để mở phần đánh dấu trong",
+    "description": "2013.06.01"
+  },
+  "opt_clickOption": {
+    "message": "tab hiện tại|tab hiện tại (không cần đóng lại PmB)|tab mới|tab đang mở|tab đang mở (không cần đóng lại PmB)|cửa sổ mới|cửa sổ mới trong chế độ ẩn mình",
+    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  },
+  "opt_defExpand": {
+    "message": "Mặc định mở rộng thư mục",
+    "description": "2013.07.30"
+  },
+  "opt_fontSize": {
+    "message": "Kích thước kiểu chữ",
+    "description": "2013.07.26"
+  },
+  "opt_maxResults": {
+    "message": "Số lượng tối đa của các kết quả tìm kiếm",
+    "description": "2013.03.24"
+  },
+  "opt_no": {
+    "message": "Không",
+    "description": "2013.03.27"
+  },
+  "opt_opFolderBy": {
+    "message": "Mở các thư mục bằng cách click chuột trái",
+    "description": "2013.06.29"
+  },
+  "opt_saved": {
+    "message": "Đã lưu",
+    "description": "2013.03.27"
+  },
+  "opt_setWidth": {
+    "message": "Độ rộng khung hiển thị",
+    "description": "2013.03.24"
+  },
+  "opt_tooltip": {
+    "message": "Hiển thị gợi ý với thông tin chi tiết về phần đánh dấu",
+    "description": "2013.03.24"
+  },
+  "opt_warnOpenMany": {
+    "message": "Cảnh báo tôi khi mở nhiều tab - vì thao tác này có thể làm chậm lại Chrome",
+    "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
+  },
+  "opt_yes": {
+    "message": "Đồng Ý",
+    "description": "2013.03.27"
+  },
+  "options": {
+    "message": "Tùy chọn",
+    "description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
+  },
+  "paste": {
+    "message": "Dán",
+    "description": "2013.07.7 | Refer to Chrome Bookmark manager"
+  },
+  "rename": {
+    "message": "Đổi tên..",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "search": {
+    "message": "Tìm kiếm",
+    "description": "2013.01.10"
+  }
 }

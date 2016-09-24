@@ -1,192 +1,170 @@
 {
-	"addFolder": {
-		"message": "Ordner hinzufügen...",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"addPage": {
-		"message": "Lesezeichen für aktuelle Seite erstellen",
-		"description": "2013.01.23"
-	},
-	"addSeparator": {
-		"message": "Neue Trennlinie einfügen",
-		"description": "2013.07.26 | Refer to Firefox Bookmark menu"
-	},
-	"alert_bookmarklet": {
-		"message": "\"Bookmarklet\" ist nicht eingeschaltet.\nMöchten Sie es in den Optionen aktivieren?",
-		"description": "2013.08.12"
-	},
-	"askOpenAll": {
-		"message": "Hiermit werden $bkmarkCount$ Lesezeichen gleichzeitig geöffnet.\nMöchten Sie diesen Vorgang fortsetzen?",
-		"description": "2013.01.29 | Refer to Firefox Bookmark menu",
-		"placeholders": {
-			"bkmarkCount": {
-				"content": "$1"
-			}
-		}
-	},
-	"cancel": {
-		"message": "Abbrechen",
-		"description": "2013.01.30"
-	},
-	"confirm": {
-		"message": "Bestätigen",
-		"description": "2013.01.30"
-	},
-	"copy": {
-		"message": "Kopieren",
-		"description": "2013.07.7 | Refer to Chrome Bookmark manager"
-	},
-	"cut": {
-		"message": "Ausschneiden",
-		"description": "2013.07.7 | Refer to Chrome Bookmark manager"
-	},
-	"default": {
-		"message": "Voreinstellung",
-		"description": "2013.03.26"
-	},
-	"del": {
-		"message": "Löschen",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"edit": {
-		"message": "Bearbeiten...",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"extDesc": {
-		"message": "Die effiziente Art zum Anzeigen und Verwalten von Lesezeichen.",
-		"description": "2013.01.21"
-	},
-	"newFolder": {
-		"message": "Neuer Ordner",
-		"description": "2013.01.28 | Refer to Chrome Bookmark manager"
-	},
-	"noBkmark": {
-		"message": "Rechtsklick zum Lesezeichen Hinzufügen :-)",
-		"description": "2013.01.22"
-	},
-	"noResult": {
-		"message": "Keine passenden Lesezeichen gefunden!",
-		"description": "2013.01.27"
-	},
-	"openAll": {
-		"message": "Alle Lesezeichen öffnen",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"openAllInI": {
-		"message": "Alle Lesezeichen in Inkognito-Fenster öffnen",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"openAllInN": {
-		"message": "Alle Lesezeichen in neuem Fenster öffnen",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"openInB": {
-		"message": "In neuem Tab öffnen",
-		"description": "2013.01.23"
-	},
-	"openInI": {
-		"message": "In Inkognito-Fenster öffnen",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"openInN": {
-		"message": "In neuem Fenster öffnen",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"opt_bookmarklet": {
-		"message": "Unterstützung für \"Bookmarklet\":<br>(JavaScript-Code für Lesezeichen)",
-		"description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
-	},
-	"opt_clickByLeft": {
-		"message": "Aktion für linke Maustaste:",
-		"description": "2013.06.01"
-	},
-	"opt_clickByLeftCtrl": {
-		"message": "Aktion für STRG + Linke Maustaste:",
-		"description": "2013.06.01"
-	},
-	"opt_clickByLeftShift": {
-		"message": "Aktion für Umschalt/Hochstelltaste + Linke Maustaste:",
-		"description": "2013.06.01"
-	},
-	"opt_clickByMiddle": {
-		"message": "Aktion für mittlere Maustaste:",
-		"description": "2013.06.01"
-	},
-	"opt_clickOption": {
-		"message": "In aktuellem Tab öffnen|In aktuellem Tab öffnen (PmB schließt)|In neuem Tab öffnen|In neuem Hintergrundtab öffnen|In neuem Hintergrundtab öffnen (PmB schließt)|In neuem Fenster öffnen|In neuem Inkognito-Fenster öffnen",
-		"description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
-	},
-	"opt_defExpand": {
-		"message": "Voreinstellung für anzuzeigende Lesezeichen:",
-		"description": "2013.07.30"
-	},
-	"opt_defExpandOpt": {
-		"message": "|Lesezeichenleiste|Weitere Lesezeichen|Mobile Lesezeichen",
-		"description": "2013.07.30 - Don't remove '|'"
-	},
-	"opt_error": {
-		"message": "Ungültiger Wert in Einstellung Nr.  $fieldNum$",
-		"description": "2013.03.27",
-		"placeholders": {
-			"fieldNum": {
-				"content": "$1"
-			}
-		}
-	},
-	"opt_fontSize": {
-		"message": "Schriftgröße für die Lesezeichenliste:<br>(12 - 30 Pixel)",
-		"description": "2013.07.26"
-	},
-	"opt_hideMobile": {
-		"message": "Ordner \"Mobile Lesezeichen\" nicht anzeigen:",
-		"description": "2013.03.24"
-	},
-	"opt_maxResults": {
-		"message": "Höchstanzahl für Suchresultate:<br>(10 - 200)",
-		"description": "2013.03.24"
-	},
-	"opt_no": {
-		"message": "Nein",
-		"description": "2013.03.27"
-	},
-	"opt_opFolderBy": {
-		"message": "Ordner mit linker Maustaste öffnen:",
-		"description": "2013.06.29"
-	},
-	"opt_saved": {
-		"message": "Gespeichert",
-		"description": "2013.03.27"
-	},
-	"opt_setWidth": {
-		"message": "Breite für Lesezeichenliste:<br>(100 - 399 Pixel)",
-		"description": "2013.03.24"
-	},
-	"opt_tooltip": {
-		"message": "Quickinfo mit Details zum Lesezeichen anzeigen:",
-		"description": "2013.03.24"
-	},
-	"opt_warnOpenMany": {
-		"message": "Hinweis anzeigen, falls Chrome durch gleichzeitiges Öffnen mehrerer Tabs langsamer wird:",
-		"description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
-	},
-	"opt_yes": {
-		"message": "Ja",
-		"description": "2013.03.27"
-	},
-	"options": {
-		"message": "Optionen",
-		"description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
-	},
-	"paste": {
-		"message": "Einfügen",
-		"description": "2013.07.7 | Refer to Chrome Bookmark manager"
-	},
-	"rename": {
-		"message": "Umbenennen...",
-		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
-	},
-	"search": {
-		"message": "Suchen ...",
-		"description": "2013.01.10"
-	}
+  "addFolder": {
+    "message": "Ordner hinzufügen...",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "addPage": {
+    "message": "Lesezeichen für aktuelle Seite erstellen",
+    "description": "2013.01.23"
+  },
+  "addSeparator": {
+    "message": "Neue Trennlinie einfügen",
+    "description": "2013.07.26 | Refer to Firefox Bookmark menu"
+  },
+  "alert_bookmarklet": {
+    "message": "\"Bookmarklet\" ist nicht eingeschaltet.\nMöchten Sie es in den Optionen aktivieren?",
+    "description": "2013.08.12"
+  },
+  "askOpenAll": {
+    "message": "Hiermit werden %bkmarkCount% Lesezeichen gleichzeitig geöffnet.\nMöchten Sie diesen Vorgang fortsetzen?",
+    "description": "2013.01.29 | Refer to Firefox Bookmark menu"
+  },
+  "cancel": {
+    "message": "Abbrechen",
+    "description": "2013.01.30"
+  },
+  "confirm": {
+    "message": "Bestätigen",
+    "description": "2013.01.30"
+  },
+  "copy": {
+    "message": "Kopieren",
+    "description": "2013.07.07 | Refer to Chrome Bookmark manager"
+  },
+  "cut": {
+    "message": "Ausschneiden",
+    "description": "2013.07.07 | Refer to Chrome Bookmark manager"
+  },
+  "default": {
+    "message": "Voreinstellung",
+    "description": "2013.03.26"
+  },
+  "del": {
+    "message": "Löschen",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "edit": {
+    "message": "Bearbeiten...",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "extDesc": {
+    "message": "Die effiziente Art zum Anzeigen und Verwalten von Lesezeichen.",
+    "description": "2013.01.21"
+  },
+  "newFolder": {
+    "message": "Neuer Ordner",
+    "description": "2013.01.28 | Refer to Chrome Bookmark manager"
+  },
+  "noBkmark": {
+    "message": "Rechtsklick zum Lesezeichen Hinzufügen :-)",
+    "description": "2013.01.22"
+  },
+  "noResult": {
+    "message": "Keine passenden Lesezeichen gefunden!",
+    "description": "2013.01.27"
+  },
+  "openAll": {
+    "message": "Alle Lesezeichen öffnen",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openAllInI": {
+    "message": "Alle Lesezeichen in Inkognito-Fenster öffnen",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openAllInN": {
+    "message": "Alle Lesezeichen in neuem Fenster öffnen",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openInB": {
+    "message": "In neuem Tab öffnen",
+    "description": "2013.01.23"
+  },
+  "openInI": {
+    "message": "In Inkognito-Fenster öffnen",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openInN": {
+    "message": "In neuem Fenster öffnen",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "opt_bookmarklet": {
+    "message": "Unterstützung für \"Bookmarklet\"\n(JavaScript-Code für Lesezeichen)",
+    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
+  },
+  "opt_clickByLeft": {
+    "message": "Aktion für linke Maustaste",
+    "description": "2013.06.01"
+  },
+  "opt_clickByLeftCtrl": {
+    "message": "Aktion für STRG / CMD + Linke Maustaste",
+    "description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
+  },
+  "opt_clickByLeftShift": {
+    "message": "Aktion für Umschalt/Hochstelltaste + Linke Maustaste",
+    "description": "2013.06.01"
+  },
+  "opt_clickByMiddle": {
+    "message": "Aktion für mittlere Maustaste",
+    "description": "2013.06.01"
+  },
+  "opt_clickOption": {
+    "message": "In aktuellem Tab öffnen|In aktuellem Tab öffnen (PmB schließt)|In neuem Tab öffnen|In neuem Hintergrundtab öffnen|In neuem Hintergrundtab öffnen (PmB schließt)|In neuem Fenster öffnen|In neuem Inkognito-Fenster öffnen",
+    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  },
+  "opt_defExpand": {
+    "message": "Voreinstellung für anzuzeigende Lesezeichen",
+    "description": "2013.07.30"
+  },
+  "opt_fontSize": {
+    "message": "Schriftgröße für die Lesezeichenliste",
+    "description": "2013.07.26"
+  },
+  "opt_maxResults": {
+    "message": "Höchstanzahl für Suchresultate",
+    "description": "2013.03.24"
+  },
+  "opt_no": {
+    "message": "Nein",
+    "description": "2013.03.27"
+  },
+  "opt_opFolderBy": {
+    "message": "Ordner mit linker Maustaste öffnen",
+    "description": "2013.06.29"
+  },
+  "opt_saved": {
+    "message": "Gespeichert",
+    "description": "2013.03.27"
+  },
+  "opt_setWidth": {
+    "message": "Breite für Lesezeichenliste",
+    "description": "2013.03.24"
+  },
+  "opt_tooltip": {
+    "message": "Quickinfo mit Details zum Lesezeichen anzeigen",
+    "description": "2013.03.24"
+  },
+  "opt_warnOpenMany": {
+    "message": "Hinweis anzeigen, falls Chrome durch gleichzeitiges Öffnen mehrerer Tabs langsamer wird",
+    "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
+  },
+  "opt_yes": {
+    "message": "Ja",
+    "description": "2013.03.27"
+  },
+  "options": {
+    "message": "Optionen",
+    "description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
+  },
+  "paste": {
+    "message": "Einfügen",
+    "description": "2013.07.7 | Refer to Chrome Bookmark manager"
+  },
+  "rename": {
+    "message": "Umbenennen...",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "search": {
+    "message": "Suchen ...",
+    "description": "2013.01.10"
+  }
 }

@@ -194,9 +194,8 @@ export async function openMultipleBookmarks(itemInfo, {
     }
 
     if (isWarnWhenOpenMany) {
-      const msgAskOpenAll = chrome.i18n.getMessage(
-        'askOpenAll', String(urlList.length)
-      )
+      const msgAskOpenAll = chrome.i18n.getMessage('askOpenAll')
+        .replace('%bkmarkCount%', urlList.length)
 
       if (urlList.length > 5 && !window.confirm(msgAskOpenAll)) {
         return

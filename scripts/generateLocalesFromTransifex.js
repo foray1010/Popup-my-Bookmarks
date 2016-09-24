@@ -68,8 +68,7 @@ co(function* () {
 
     yield fs.outputJsonAsync(
       path.join(localesPath, availableLanguage, 'messages.json'),
-      sortedMessagesJson,
-      {spaces: '\t'}
+      sortedMessagesJson
     )
 
     console.log(`"${availableLanguage}" is completed`)
