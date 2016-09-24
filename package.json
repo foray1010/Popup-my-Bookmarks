@@ -46,7 +46,7 @@
     "babel-preset-foray1010": "^1.1.0",
     "bluebird": "^3.3.1",
     "co": "^4.6.0",
-    "cross-env": "^2.0.1",
+    "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "eslint-config-foray1010": "^3.0.0",
     "extract-text-webpack-plugin": "^1.0.1",
