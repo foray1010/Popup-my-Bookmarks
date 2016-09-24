@@ -93,23 +93,23 @@
 		"description": "2013.01.23 | Refer to Chrome Bookmark manager"
 	},
 	"opt_bookmarklet": {
-		"message": "Bookmarklet supported:\n(Javascript Bookmark Script)",
+		"message": "Bookmarklet supported\n(Javascript Bookmark Script)",
 		"description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
 	},
 	"opt_clickByLeft": {
-		"message": "Left Click to open bookmarks in:",
+		"message": "Left Click to open bookmarks in",
 		"description": "2013.06.01"
 	},
 	"opt_clickByLeftCtrl": {
-		"message": "Ctrl / CMD + Left Click to open bookmarks in:",
+		"message": "Ctrl / CMD + Left Click to open bookmarks in",
 		"description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
 	},
 	"opt_clickByLeftShift": {
-		"message": "Shift + Left Click to open bookmarks in:",
+		"message": "Shift + Left Click to open bookmarks in",
 		"description": "2013.06.01"
 	},
 	"opt_clickByMiddle": {
-		"message": "Middle Click to open bookmarks in:",
+		"message": "Middle Click to open bookmarks in",
 		"description": "2013.06.01"
 	},
 	"opt_clickOption": {
@@ -125,7 +125,7 @@
 		"description": "2015.08.22"
 	},
 	"opt_defExpand": {
-		"message": "Default expanded folder:",
+		"message": "Default expanded folder",
 		"description": "2013.07.30"
 	},
 	"opt_error": {
@@ -138,11 +138,11 @@
 		}
 	},
 	"opt_fontFamily": {
-		"message": "Font family:",
+		"message": "Font family",
 		"description": "2015.01.11"
 	},
 	"opt_fontSize": {
-		"message": "Font size:",
+		"message": "Font size",
 		"description": "2013.07.26"
 	},
 	"opt_general": {
@@ -150,11 +150,11 @@
 		"description": "2015.08.22"
 	},
 	"opt_hideRootFolder": {
-		"message": "Hide root folder:",
+		"message": "Hide root folder",
 		"description": "2015.02.18 | Root folder means the top level folder"
 	},
 	"opt_maxResults": {
-		"message": "Maximum number of search results:",
+		"message": "Maximum number of search results",
 		"description": "2013.03.24"
 	},
 	"opt_no": {
@@ -162,11 +162,11 @@
 		"description": "2013.03.27"
 	},
 	"opt_opFolderBy": {
-		"message": "Open folders by Left Click:",
+		"message": "Open folders by Left Click",
 		"description": "2013.06.29"
 	},
 	"opt_rememberPos": {
-		"message": "Remember last position:",
+		"message": "Remember last position",
 		"description": "2014.02.24"
 	},
 	"opt_saved": {
@@ -174,7 +174,7 @@
 		"description": "2013.03.27"
 	},
 	"opt_searchTarget": {
-		"message": "Search queries allowed:",
+		"message": "Search queries allowed",
 		"description": "2013.09.11"
 	},
 	"opt_searchTargetOpt": {
@@ -182,11 +182,11 @@
 		"description": "2013.09.11"
 	},
 	"opt_setWidth": {
-		"message": "Panel width:",
+		"message": "Panel width",
 		"description": "2013.03.24"
 	},
 	"opt_tooltip": {
-		"message": "Show tooltip with detailed information of bookmarks:",
+		"message": "Show tooltip with detailed information of bookmarks",
 		"description": "2013.03.24"
 	},
 	"opt_userInterface": {
@@ -194,7 +194,7 @@
 		"description": "2015.08.22"
 	},
 	"opt_warnOpenMany": {
-		"message": "Warn me when opening multiple tabs might slow down Chrome:",
+		"message": "Warn me when opening multiple tabs might slow down Chrome",
 		"description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
 	},
 	"opt_yes": {
