@@ -90,7 +90,7 @@ class BookmarkTree extends Component {
         dragIndicatorIndex += rootTree.children.length
       }
 
-      treeItems.splice(dragIndicator.index, 0, <DragIndicator key={DRAG_INDICATOR} />)
+      treeItems.splice(dragIndicatorIndex, 0, <DragIndicator key={DRAG_INDICATOR} />)
     }
 
     if (searchKeyword && treeItems.length === 0) {
