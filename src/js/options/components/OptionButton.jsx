@@ -15,7 +15,7 @@ import {
 } from '../actions'
 import chromep from '../../common/lib/chromePromise'
 
-import styles from '../../../css/options/option-button.scss'
+import styles from '../../../css/options/option-button.css'
 
 const msgConfirm = chrome.i18n.getMessage('confirm')
 const msgDefault = chrome.i18n.getMessage('default')

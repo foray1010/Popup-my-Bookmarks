@@ -1,0 +1,35 @@
+@import "../common/variables.css";
+
+:global(body) {
+  -webkit-user-select: none;
+}
+
+:global(#container) {
+  background-color: inherit;
+}
+
+:global(::-webkit-scrollbar) {
+  background-color: transparent;
+  height: 5px;
+  width: calc(5px + var(--golden-gap));
+}
+
+:global(::-webkit-scrollbar-thumb) {
+  background-color: var(--highlight-level3);
+  border-left: var(--golden-gap) solid var(--blank-color);
+
+  &:hover {
+    background-color: var(--highlight-level4);
+    border: 0;
+  }
+
+  &:active {
+    background-color: var(--highlight-level5);
+  }
+}
+
+:global(::-webkit-search-cancel-button) {
+  content: url("/img/cancel.png");
+  height: 10px;
+  width: 14px;
+}

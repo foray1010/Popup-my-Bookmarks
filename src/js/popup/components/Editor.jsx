@@ -12,7 +12,7 @@ import {
 } from '../actions'
 import chromep from '../../common/lib/chromePromise'
 
-import styles from '../../../css/popup/editor.scss'
+import styles from '../../../css/popup/editor.css'
 
 const msgCancel = chrome.i18n.getMessage('cancel')
 const msgConfirm = chrome.i18n.getMessage('confirm')

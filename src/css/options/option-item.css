@@ -1,0 +1,26 @@
+@import "../common/variables.css";
+
+.desc {
+  text-align: right;
+  white-space: pre-wrap;
+}
+
+.input {
+  padding-left: 20px;
+
+  & > input[type="number"],
+  & > input[type="text"],
+  & > select {
+    box-sizing: border-box;
+    height: var(--options-input-height);
+  }
+
+  & > input[type="number"] {
+    text-align: right;
+    width: 50px;
+  }
+}
+
+.main {
+  padding: var(--golden-gap-2x);
+}

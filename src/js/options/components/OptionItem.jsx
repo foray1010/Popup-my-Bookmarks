@@ -8,7 +8,7 @@ import SelectButton from './input_items/SelectButton'
 import SelectMultiple from './input_items/SelectMultiple'
 import SelectString from './input_items/SelectString'
 
-import styles from '../../../css/options/option-item.scss'
+import styles from '../../../css/options/option-item.css'
 
 const OptionItem = (props) => {
   const {

@@ -1,0 +1,31 @@
+@import "../common/variables.css";
+
+.main {
+  background-color: var(--blank-color);
+  border: solid var(--highlight-level4);
+  border-width: 1px 0;
+  box-sizing: border-box;
+  padding: var(--golden-gap-2x) var(--golden-gap);
+  position: absolute;
+  text-align: right;
+
+  & > button {
+    margin: var(--golden-gap-2x) 0 0 var(--golden-gap-2x);
+  }
+
+  & > input[type="text"] {
+    border-color: var(--highlight-level3);
+    box-sizing: border-box;
+    margin: var(--golden-gap-2x) 0 0;
+    padding: var(--golden-gap);
+    width: 100%;
+  }
+}
+
+.title {
+  background-color: var(--main-color2);
+  color: var(--blank-color);
+  cursor: default;
+  float: left;
+  padding: 1px 6px;
+}

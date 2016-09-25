@@ -1,0 +1,3 @@
+.main {
+  composes: plain-list from "../common/composes.css";
+}

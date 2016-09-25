@@ -16,7 +16,7 @@ import FolderCover from './FolderCover'
 import NoResult from './NoResult'
 import TreeHeader from './TreeHeader'
 
-import styles from '../../../css/popup/bookmark-tree.scss'
+import styles from '../../../css/popup/bookmark-tree.css'
 
 class BookmarkTree extends Component {
   componentDidMount() {

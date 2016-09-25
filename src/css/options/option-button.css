@@ -1,0 +1,10 @@
+@import "../common/variables.css";
+
+.main {
+  margin-right: 150px;
+  text-align: right;
+
+  & > button {
+    margin: var(--golden-gap-2x) 0 0 var(--golden-gap-2x);
+  }
+}

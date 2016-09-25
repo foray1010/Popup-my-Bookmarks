@@ -1,15 +1,15 @@
-@import "../common/variables.scss";
+@import "../common/variables.css";
 
 .list {
-  composes: plain-list from "../common/composes.scss";
+  composes: plain-list from "../common/composes.css";
   overflow-y: auto;
 
   &::after {
     background-color: currentcolor;
     content: "";
     display: block;
-    height: $golden-gap;
-    margin-top: $golden-gap;
+    height: var(--golden-gap);
+    margin-top: var(--golden-gap);
   }
 }
 

@@ -1,11 +1,11 @@
-@import "../common/variables.scss";
+@import "../common/variables.css";
 
 ._panel {
   background-color: inherit;
   position: relative;
 
   &:not(:first-child) {
-    margin-right: $golden-gap;
+    margin-right: var(--golden-gap);
   }
 }
 
@@ -16,11 +16,11 @@
 }
 
 .master {
-  color: $main-color2;
+  color: var(--main-color2);
   composes: _panel;
 }
 
 .slave {
-  color: $main-color1;
+  color: var(--main-color1);
   composes: _panel;
 }
