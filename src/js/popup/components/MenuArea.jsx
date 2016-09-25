@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 
 import MenuItem from './MenuItem'
 
-import styles from '../../../css/popup/menu-area.scss'
+import styles from '../../../css/popup/menu-area.css'
 
 const MenuArea = (props) => {
   const {

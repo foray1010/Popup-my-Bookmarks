@@ -12,7 +12,7 @@ import {
   updateTrees
 } from '../actions'
 
-import styles from '../../../css/popup/search.scss'
+import styles from '../../../css/popup/search.css'
 
 const msgSearch = chrome.i18n.getMessage('search')
 

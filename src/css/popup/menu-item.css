@@ -1,0 +1,17 @@
+@import "../common/mixins.css";
+@import "../common/variables.css";
+
+.main {
+  composes: list-item from "../common/composes.css";
+  display: block;
+  padding: var(--golden-gap) 8px;
+  text-decoration: none;
+
+  &.unclickable {
+    @apply --grey-list-item;
+  }
+
+  &:not(.unclickable):hover {
+    @apply --highlight-list-item;
+  }
+}

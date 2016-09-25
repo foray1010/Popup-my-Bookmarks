@@ -5,7 +5,7 @@ import Donate from '../components/Donate'
 import NavBar from '../components/NavBar'
 import NavModuleMapper from '../components/NavModuleMapper'
 
-import styles from '../../../css/options/app.scss'
+import styles from '../../../css/options/app.css'
 
 const App = () => (
   <div>

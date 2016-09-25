@@ -1,0 +1,46 @@
+@import "normalize.css/normalize.css";
+@import "./variables.css";
+
+@font-face {
+  font-family: ArchivoNarrow;
+  src: url("/font/ArchivoNarrow-Regular.woff");
+}
+
+:global(body) {
+  background-color: var(--blank-color);
+  color: var(--main-font-color);
+}
+
+:global(button) {
+  background-color: var(--highlight-level1);
+  border: 0;
+  padding: 4px 8px;
+
+  &:hover {
+    color: var(--main-color1);
+  }
+}
+
+:global(a),
+:global(button),
+:global(input[type="checkbox"]),
+:global(input[type="number"]),
+:global(input[type="search"]),
+:global(input[type="text"]),
+:global(select) {
+  outline-color: var(--highlight-level5);
+  outline-width: 1px;
+
+  &:focus {
+    outline-style: solid;
+  }
+}
+
+:global(input[type="number"]),
+:global(input[type="search"]),
+:global(input[type="text"]),
+:global(select) {
+  background-color: var(--blank-color);
+  border: 1px solid var(--main-color1);
+  padding: 0 var(--golden-gap-2x);
+}

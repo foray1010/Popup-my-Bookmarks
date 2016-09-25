@@ -29,7 +29,7 @@ import Menu from '../components/Menu'
 import MenuCover from '../components/MenuCover'
 import Panel from '../components/Panel'
 
-import styles from '../../../css/popup/app.scss'
+import styles from '../../../css/popup/app.css'
 
 class App extends Component {
   componentWillMount() {

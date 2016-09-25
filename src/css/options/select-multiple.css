@@ -1,0 +1,16 @@
+@import "../common/variables.css";
+
+.main {
+  border: 1px solid var(--main-color1);
+  display: inline-block;
+  padding: var(--golden-gap-2x);
+
+  & > label {
+    align-items: center;
+    display: flex;
+
+    & > input {
+      margin-right: var(--golden-gap-2x);
+    }
+  }
+}

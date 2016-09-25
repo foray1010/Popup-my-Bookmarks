@@ -1,0 +1,6 @@
+@import "../common/globals.css";
+@import "./globals.css";
+
+.main {
+  background-color: inherit;
+}

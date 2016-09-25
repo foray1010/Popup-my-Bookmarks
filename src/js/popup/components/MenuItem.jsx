@@ -25,7 +25,7 @@ import {
 } from '../actions'
 import chromep from '../../common/lib/chromePromise'
 
-import styles from '../../../css/popup/menu-item.scss'
+import styles from '../../../css/popup/menu-item.css'
 
 async function addCurrentPage(menuTarget) {
   const results = await chromep.tabs.query({

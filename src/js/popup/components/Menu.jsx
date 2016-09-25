@@ -13,7 +13,7 @@ import {
 } from '../constants'
 import MenuArea from './MenuArea'
 
-import styles from '../../../css/popup/menu.scss'
+import styles from '../../../css/popup/menu.css'
 
 class Menu extends Component {
   componentDidUpdate() {

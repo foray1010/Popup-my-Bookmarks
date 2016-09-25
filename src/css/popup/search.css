@@ -1,18 +1,20 @@
-@import "../common/variables.scss";
+@import "../common/variables.css";
 
-$search-height: 21px;
+:root {
+  --search-height: 21px;
+}
 
 .main {
-  border: solid $highlight-level3;
+  border: solid var(--highlight-level3);
   border-width: 0 0 1px;
   display: flex;
-  height: $search-height;
-  margin-bottom: $golden-gap;
+  height: var(--search-height);
+  margin-bottom: var(--golden-gap);
 
   & > input[type="search"] {
     background-color: transparent;
     border: 0;
-    color: $main-font-color;
+    color: var(--main-font-color);
     font-size: 12px;
     outline: 0;
     padding: 0 1px;

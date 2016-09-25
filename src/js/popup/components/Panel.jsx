@@ -5,7 +5,7 @@ import CSSModules from 'react-css-modules'
 import BookmarkTree from './BookmarkTree'
 import Search from './Search'
 
-import styles from '../../../css/popup/panel.scss'
+import styles from '../../../css/popup/panel.css'
 
 const Panel = (props) => {
   const {trees} = props

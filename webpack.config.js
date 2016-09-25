@@ -1,8 +1,10 @@
 'use strict'
 
+const cssnext = require('postcss-cssnext')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const mergeAndConcat = require('merge-and-concat')
 const OptimizeJsPlugin = require('optimize-js-plugin')
+const postcssImport = require('postcss-import')
 const querystring = require('querystring')
 const webpack = require('webpack')
 
@@ -30,6 +32,16 @@ const webpackConfig = {
     new webpack.optimize.CommonsChunkPlugin('./js/common.js'),
     new webpack.optimize.OccurenceOrderPlugin(true)
   ],
+  postcss: () => [
+    postcssImport({
+      addDependencyTo: webpack
+    }),
+    cssnext({
+      // autoprefixer: {
+      //   browsers: 'Chrome >= 31'
+      // }
+    })
+  ],
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
@@ -51,13 +63,13 @@ switch (process.env.NODE_ENV) {
       module: {
         loaders: [
           {
-            test: /\.scss$/,
+            test: /\.css$/,
             loaders: [
               'style-loader?' + querystring.stringify({
                 sourceMap: true
               }),
               `css-loader?${cssLoaderConfigQS}`,
-              'sass-loader'
+              'postcss-loader'
             ]
           }
         ]
@@ -71,10 +83,10 @@ switch (process.env.NODE_ENV) {
       module: {
         loaders: [
           {
-            test: /\.scss$/,
+            test: /\.css$/,
             loader: ExtractTextPlugin.extract([
               `css-loader?${cssLoaderConfigQS}`,
-              'sass-loader'
+              'postcss-loader'
             ])
           }
         ]

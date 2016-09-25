@@ -1,7 +1,7 @@
 import {createElement} from 'react'
 import CSSModules from 'react-css-modules'
 
-import styles from '../../../css/options/donate.scss'
+import styles from '../../../css/options/donate.css'
 
 const paypalUrl = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick' +
   '&hosted_button_id=TP67BBZ7VK934'

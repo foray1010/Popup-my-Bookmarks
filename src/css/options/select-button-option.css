@@ -1,4 +1,4 @@
-@import "../common/variables.scss";
+@import "../common/variables.css";
 
 .item {
   align-items: center;
@@ -13,7 +13,7 @@
 }
 
 .item-active {
-  color: $blank-color;
+  color: var(--blank-color);
   cursor: default;
 }
 

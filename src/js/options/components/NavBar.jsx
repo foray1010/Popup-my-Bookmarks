@@ -9,7 +9,7 @@ import {
 } from '../constants'
 import NavBarItem from './NavBarItem'
 
-import styles from '../../../css/options/nav-bar.scss'
+import styles from '../../../css/options/nav-bar.css'
 
 const navBarItemInfos = [
   {

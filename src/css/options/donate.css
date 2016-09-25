@@ -1,0 +1,35 @@
+@import "../common/variables.css";
+
+:root {
+  --desc-width: 380px;
+  --img-width: 160px;
+  --main-width: calc(var(--desc-width) + var(--img-width));
+}
+
+.desc {
+  width: var(--desc-width);
+}
+
+.img {
+  width: var(--img-width);
+}
+
+.link {
+  color: var(--main-color1);
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--main-color2);
+  }
+}
+
+.main {
+  align-items: center;
+  display: flex;
+  height: 50px;
+  margin: auto;
+  padding: 8px;
+  width: var(--main-width);
+}

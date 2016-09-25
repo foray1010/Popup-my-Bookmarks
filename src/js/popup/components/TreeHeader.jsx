@@ -7,7 +7,7 @@ import {
   removeTreeInfosFromIndex
 } from '../actions'
 
-import styles from '../../../css/popup/tree-header.scss'
+import styles from '../../../css/popup/tree-header.css'
 
 class TreeHeader extends Component {
   @autobind

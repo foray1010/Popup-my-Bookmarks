@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@import "./variables.css";
 
 .cover {
   background-color: rgba(0, 0, 0, 0.16);
@@ -10,7 +10,7 @@
 
 .list-item {
   border: 1px solid transparent;
-  color: $main-font-color;
+  color: var(--main-font-color);
   cursor: default;
 }
 

@@ -9,7 +9,7 @@ import {
   selectNavModule
 } from '../actions'
 
-import styles from '../../../css/options/nav-bar-item.scss'
+import styles from '../../../css/options/nav-bar-item.css'
 
 class NavBarItem extends Component {
   @autobind

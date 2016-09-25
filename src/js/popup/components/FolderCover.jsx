@@ -7,7 +7,7 @@ import {
   removeTreeInfosFromIndex
 } from '../actions'
 
-import styles from '../../../css/popup/folder-cover.scss'
+import styles from '../../../css/popup/folder-cover.css'
 
 class FolderCover extends Component {
   @autobind

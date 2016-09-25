@@ -5,7 +5,7 @@ import CSSModules from 'react-css-modules'
 
 import {updateSingleOption} from '../../actions'
 
-import styles from '../../../../css/options/input-select.scss'
+import styles from '../../../../css/options/input-select.css'
 
 class InputSelect extends Component {
   @autobind

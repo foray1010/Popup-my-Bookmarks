@@ -8,7 +8,7 @@ import {
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 
-import styles from '../../../css/options/option-form.scss'
+import styles from '../../../css/options/option-form.css'
 
 const OptionForm = (props) => {
   const {

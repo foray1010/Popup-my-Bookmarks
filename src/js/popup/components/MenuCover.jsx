@@ -11,7 +11,7 @@ import {
   updateMenuTarget
 } from '../actions'
 
-import styles from '../../../css/popup/menu-cover.scss'
+import styles from '../../../css/popup/menu-cover.css'
 
 class MenuCover extends Component {
   @autobind

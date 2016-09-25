@@ -4,7 +4,7 @@ import CSSModules from 'react-css-modules'
 
 import Option from './Option'
 
-import styles from '../../../../../css/options/select-button.scss'
+import styles from '../../../../../css/options/select-button.css'
 
 const SelectButton = (props) => {
   const {

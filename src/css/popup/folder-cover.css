@@ -1,0 +1,3 @@
+.main {
+  composes: cover from "../common/composes.css";
+}

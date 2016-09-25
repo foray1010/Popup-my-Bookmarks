@@ -1,0 +1,44 @@
+@import "../common/mixins.css";
+@import "../common/variables.css";
+
+.main {
+  align-items: center;
+  composes: list-item from "../common/composes.css";
+  display: flex;
+  outline: 0;
+  padding: var(--golden-gap) 0 var(--golden-gap) var(--golden-gap);
+  text-decoration: none;
+
+  &.root-folder {
+    color: inherit !important;
+  }
+
+  &.selected {
+    @apply --highlight-list-item;
+  }
+
+  &.separator {
+    box-sizing: border-box;
+    color: var(--highlight-level4);
+
+    & > .title {
+      text-overflow: clip;
+    }
+  }
+
+  &.unclickable {
+    @apply --grey-list-item;
+  }
+
+  &:hover {
+    @apply --highlight-list-item;
+  }
+}
+
+.icon {
+  margin-right: var(--golden-gap-2x);
+}
+
+.title {
+  composes: no-text-overflow from "../common/composes.css";
+}
