@@ -1,5 +1,6 @@
 import {connect} from 'react-redux'
 import {createElement, PropTypes} from 'react'
+import CSSModules from 'react-css-modules'
 
 import {
   OPTION_TABLE_MAP
@@ -7,18 +8,20 @@ import {
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 
-const OptionTable = (props) => {
+import styles from '../../../css/options/option-form.scss'
+
+const OptionForm = (props) => {
   const {
     options,
     selectedNavModule
   } = props
 
-  const optionTableItems = []
-  const selectedOptionTableMap = OPTION_TABLE_MAP[selectedNavModule]
+  const OptionFormItems = []
+  const selectedOptionFormMap = OPTION_TABLE_MAP[selectedNavModule]
 
-  for (const optionName of selectedOptionTableMap) {
+  for (const optionName of selectedOptionFormMap) {
     if (options[optionName] !== undefined) {
-      optionTableItems.push(
+      OptionFormItems.push(
         <OptionItem
           key={optionName}
           optionName={optionName}
@@ -29,15 +32,17 @@ const OptionTable = (props) => {
 
   return (
     <form>
-      <div>
-        {optionTableItems}
-      </div>
+      <table styleName='table'>
+        <tbody>
+          {OptionFormItems}
+        </tbody>
+      </table>
       <OptionButton />
     </form>
   )
 }
 
-OptionTable.propTypes = {
+OptionForm.propTypes = {
   options: PropTypes.object.isRequired,
   selectedNavModule: PropTypes.string.isRequired
 }
@@ -47,4 +52,6 @@ const mapStateToProps = (state) => ({
   selectedNavModule: state.selectedNavModule
 })
 
-export default connect(mapStateToProps)(OptionTable)
+export default connect(mapStateToProps)(
+  CSSModules(OptionForm, styles)
+)

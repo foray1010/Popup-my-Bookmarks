@@ -42,15 +42,15 @@ const OptionItem = (props) => {
   })()
 
   return (
-    <div styleName='main'>
-      <div styleName='desc'>{chrome.i18n.getMessage('opt_' + optionName)}</div>
-      <div styleName='input'>
+    <tr styleName='main'>
+      <td styleName='desc'>{chrome.i18n.getMessage('opt_' + optionName)}</td>
+      <td styleName='input'>
         <InputItem
           optionConfig={optionConfig}
           optionName={optionName}
         />
-      </div>
-    </div>
+      </td>
+    </tr>
   )
 }
 

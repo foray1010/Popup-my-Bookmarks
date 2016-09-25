@@ -1,16 +1,14 @@
+@import "../common/variables.scss";
+
 .desc {
-  flex: 1 0 0;
   text-align: right;
-  white-space: pre;
+  white-space: pre-wrap;
 }
 
 .input {
-  flex: 1 0 0;
   padding-left: 20px;
 }
 
 .main {
-  align-items: center;
-  display: flex;
-  height: 42px;
+  padding: $golden-gap-2x;
 }

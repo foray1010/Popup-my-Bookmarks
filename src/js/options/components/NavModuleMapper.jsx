@@ -8,7 +8,7 @@ import {
   NAV_MODULE_USER_INTERFACE
 } from '../constants'
 import Contributors from './Contributors'
-import OptionTable from './OptionTable'
+import OptionForm from './OptionForm'
 
 const NavModuleMapper = (props) => {
   const {selectedNavModule} = props
@@ -20,7 +20,7 @@ const NavModuleMapper = (props) => {
     case NAV_MODULE_CONTROL:
     case NAV_MODULE_GENERAL:
     case NAV_MODULE_USER_INTERFACE:
-      return <OptionTable />
+      return <OptionForm />
 
     default:
       return null
