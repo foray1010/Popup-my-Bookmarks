@@ -7,10 +7,10 @@
     & > img {
       opacity: 0.4;
     }
-  };
+  }
 
   --highlight-list-item: {
     background-color: var(--highlight-level1);
     border-color: var(--highlight-level2);
-  };
+  }
 }

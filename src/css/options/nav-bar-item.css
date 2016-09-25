@@ -17,7 +17,7 @@
     &:nth-of-type(4) {
       border-bottom-color: var(--main-color4);
     }
-  };
+  }
 }
 
 .main {
