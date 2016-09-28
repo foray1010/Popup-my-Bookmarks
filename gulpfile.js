@@ -28,8 +28,6 @@ const sourceDir = config.sourceDir
 
 // language handlers
 function buildHtml(options) {
-  const isDev = process.env.NODE_ENV === 'development'
-
   const destDir = outputDir
   const srcPath = path.join(sourceDir, 'html', '*.pug')
 
@@ -41,7 +39,7 @@ function buildHtml(options) {
       .pipe(gulp.dest(destDir))
   }
 
-  if (isDev) {
+  if (options.watch) {
     gulp.watch(srcPath, (evt) => {
       const thisSrcPath = path.relative(__dirname, evt.path)
 
@@ -109,7 +107,8 @@ gulp.task('build:init', () => {
 
 gulp.task('build:html', ['build:init'], () => {
   return buildHtml({
-    builderPipe: () => pug()
+    builderPipe: () => pug(),
+    watch: false
   })
 })
 
@@ -167,7 +166,8 @@ gulp.task('dev:init', () => {
 
 gulp.task('dev:html', ['dev:init'], () => {
   return buildHtml({
-    builderPipe: () => pug({pretty: true})
+    builderPipe: () => pug({pretty: true}),
+    watch: true
   })
 })
 
