@@ -8,10 +8,12 @@ const postcssImport = require('postcss-import')
 const querystring = require('querystring')
 const webpack = require('webpack')
 
+const config = require('./config')
+
 const webpackConfig = {
   entry: {
-    options: './src/js/options/index.jsx',
-    popup: './src/js/popup/index.jsx'
+    options: `./${config.sourceDir}/js/options/index.jsx`,
+    popup: `./${config.sourceDir}/js/popup/index.jsx`
   },
   module: {
     loaders: [
@@ -23,13 +25,13 @@ const webpackConfig = {
     ]
   },
   output: {
-    filename: './js/[name].js'
+    filename: `./${config.outputDir}/js/[name].js`
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
-    new webpack.optimize.CommonsChunkPlugin('./js/common.js'),
+    new webpack.optimize.CommonsChunkPlugin(`./${config.outputDir}/js/common.js`),
     new webpack.optimize.OccurenceOrderPlugin(true)
   ],
   postcss: () => [
@@ -92,7 +94,7 @@ switch (process.env.NODE_ENV) {
         ]
       },
       plugins: [
-        new ExtractTextPlugin('./css/[name].css', {
+        new ExtractTextPlugin(`./${config.outputDir}/css/[name].css`, {
           allChunks: true
         }),
         new webpack.optimize.DedupePlugin(),

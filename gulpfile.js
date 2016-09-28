@@ -15,40 +15,25 @@ const webpackStream = require('webpack-stream')
 const YAML = require('yamljs')
 const zip = require('gulp-zip')
 
-const packageJSON = require('./package')
+const config = require('./config')
+const pkg = require('./package')
 const webpackConfig = require('./webpack.config')
 
 // promisify
 bluebird.promisifyAll(fs)
 
 // predefined dir path
-const buildDir = '__build'
-const devDir = '__dev'
-const sourceDir = 'src'
-
-// language config
-const lang = {
-  html: {
-    extname: '.pug',
-    destDir: '.',
-    srcDir: path.join(sourceDir, 'html')
-  }
-}
+const outputDir = config.outputDir
+const sourceDir = config.sourceDir
 
 // language handlers
-function buildLang(langName, workingDir, options) {
-  if (!options) {
-    options = {}
-  }
-
+function buildHtml(options) {
   const isDev = process.env.NODE_ENV === 'development'
-  const thisLang = lang[langName]
 
-  const srcPath = path.join(thisLang.srcDir, '*' + thisLang.extname)
+  const destDir = outputDir
+  const srcPath = path.join(sourceDir, 'html', '*.pug')
 
   const buildHandler = (thisSrcPath) => {
-    const destDir = path.join(workingDir, thisLang.destDir)
-
     return gulp.src(thisSrcPath)
       .pipe(plumber())
       .pipe(options.builderPipe ? options.builderPipe() : gutil.noop())
@@ -70,26 +55,26 @@ function buildLang(langName, workingDir, options) {
   return buildHandler(srcPath)
 }
 
-function* buildManifest(workingDir, updateFn) {
-  const destPath = path.join(workingDir, 'manifest.json')
-  const manifestJSON = YAML.load(path.join(sourceDir, 'manifest.yml'))
+function* buildManifest(updateFn) {
+  const destPath = path.join(outputDir, 'manifest.json')
+  const manifestJson = YAML.load(path.join(sourceDir, 'manifest.yml'))
 
-  manifestJSON.version = packageJSON.version
+  manifestJson.version = pkg.version
   if (updateFn) {
-    updateFn(manifestJSON)
+    updateFn(manifestJson)
   }
 
-  yield fs.writeJSONAsync(destPath, manifestJSON)
+  yield fs.writeJsonAsync(destPath, manifestJson)
 }
 
-function runWebpack(workingDir) {
+function runWebpack() {
   return plumber()
     .pipe(webpackStream(webpackConfig, webpack))
-    .pipe(gulp.dest(workingDir))
+    .pipe(gulp.dest('.'))
 }
 
 function validatePackageVersion() {
-  const version = packageJSON.version
+  const version = pkg.version
   if (!/^([1-9]?\d\.){2}[1-9]?\d$/.test(version)) {
     throw Error('You need to input a version number x.y.z, each number between 0 - 99')
   }
@@ -105,15 +90,9 @@ function* getMarkdownData(titleList) {
 }
 
 // initiate the output folder
-function* initDir(workingDir) {
-  yield fs.removeAsync(workingDir)
-  yield fs.mkdirAsync(workingDir)
-
-  for (const langName of Object.keys(lang)) {
-    const thisLang = lang[langName]
-
-    yield fs.mkdirsAsync(path.join(workingDir, thisLang.destDir))
-  }
+function* initDir() {
+  yield fs.removeAsync(outputDir)
+  yield fs.mkdirAsync(outputDir)
 }
 
 // default when no task
@@ -124,18 +103,18 @@ gulp.task('build:init', () => {
   return co(function* () {
     validatePackageVersion()
 
-    yield initDir(buildDir)
+    yield initDir()
   })
 })
 
 gulp.task('build:html', ['build:init'], () => {
-  return buildLang('html', buildDir, {
+  return buildHtml({
     builderPipe: () => pug()
   })
 })
 
 gulp.task('build:webpack', ['build:init'], () => {
-  return runWebpack(buildDir)
+  return runWebpack()
 })
 
 gulp.task('build:others', ['build:init'], () => {
@@ -147,16 +126,16 @@ gulp.task('build:others', ['build:init'], () => {
     ]
     yield fileList.map((fileName) => fs.copyAsync(
       path.join(sourceDir, fileName),
-      path.join(buildDir, fileName)
+      path.join(outputDir, fileName)
     ))
 
     const licenseFile = 'LICENSE'
     yield fs.copyAsync(
       licenseFile,
-      path.join(buildDir, licenseFile)
+      path.join(outputDir, licenseFile)
     )
 
-    yield buildManifest(buildDir)
+    yield buildManifest()
   })
 })
 
@@ -165,15 +144,15 @@ gulp.task('build:zip', [
   'build:webpack',
   'build:others'
 ], () => {
-  return gulp.src(path.join(buildDir, '**'))
-    .pipe(zip(packageJSON.version + '.zip'))
+  return gulp.src(path.join(outputDir, '**'))
+    .pipe(zip(pkg.version + '.zip'))
     .pipe(gulp.dest('.'))
 })
 
 gulp.task('build', ['build:zip'], () => {
   return co(function* () {
     // useless after zipped
-    yield fs.removeAsync(buildDir)
+    yield fs.removeAsync(outputDir)
   })
 })
 
@@ -182,12 +161,12 @@ gulp.task('dev:init', () => {
   return co(function* () {
     validatePackageVersion()
 
-    yield initDir(devDir)
+    yield initDir()
   })
 })
 
 gulp.task('dev:html', ['dev:init'], () => {
-  return buildLang('html', devDir, {
+  return buildHtml({
     builderPipe: () => pug({pretty: true})
   })
 })
@@ -203,12 +182,12 @@ gulp.task('dev:img', ['dev:init'], () => {
         logProgress: false
       }))
     .pipe(iconFilter.restore)
-    .pipe(gulp.dest(path.join(devDir, 'img')))
+    .pipe(gulp.dest(path.join(outputDir, 'img')))
 })
 
 gulp.task('dev:webpack', ['dev:init'], () => {
   // don't return because webpack `watch` will hold the pipe
-  runWebpack(devDir)
+  runWebpack()
 })
 
 gulp.task('dev:others', ['dev:init'], () => {
@@ -219,12 +198,12 @@ gulp.task('dev:others', ['dev:init'], () => {
     ]
     yield fileList.map((fileName) => fs.symlinkAsync(
       path.join('..', sourceDir, fileName),
-      path.join(devDir, fileName),
+      path.join(outputDir, fileName),
       'dir'
     ))
 
-    yield buildManifest(devDir, (manifestJSON) => {
-      manifestJSON.name += ' (dev)'
+    yield buildManifest((manifestJson) => {
+      manifestJson.name += ' (dev)'
     })
   })
 })
