@@ -11,7 +11,7 @@
     "message": "新增分隔線",
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
-  "alert_bookmarklet": {
+  "alertBookmarklet": {
     "message": "你還沒有啟用書籤小程式。\n你要在設定頁面啟用它嗎？",
     "description": "2013.08.12"
   },
@@ -19,13 +19,45 @@
     "message": "你正嘗試開啟 %bkmarkCount% 個書籤。\n你確定要繼續嗎？",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
   },
+  "bookmarklet": {
+    "message": "支援書籤小程式\n(Javascript 書籤腳本)",
+    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
+  },
   "cancel": {
     "message": "取消",
     "description": "2013.01.30"
   },
+  "clickByLeft": {
+    "message": "左鍵開啟書籤於",
+    "description": "2013.06.01"
+  },
+  "clickByLeftCtrl": {
+    "message": "Ctrl / CMD + 左鍵開啟書籤於",
+    "description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
+  },
+  "clickByLeftShift": {
+    "message": "Shift + 左鍵開啟書籤於",
+    "description": "2013.06.01"
+  },
+  "clickByMiddle": {
+    "message": "中鍵開啟書籤於",
+    "description": "2013.06.01"
+  },
+  "clickOption": {
+    "message": "當前分頁|當前分頁 (不關閉PmB)|新分頁|背景分頁|背景分頁 (不關閉PmB)|新視窗|無痕式視窗",
+    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  },
   "confirm": {
     "message": "確定",
     "description": "2013.01.30"
+  },
+  "contributors": {
+    "message": "貢獻者",
+    "description": "2015.08.22"
+  },
+  "control": {
+    "message": "控制",
+    "description": "2015.08.22"
   },
   "copy": {
     "message": "複製",
@@ -34,6 +66,10 @@
   "cut": {
     "message": "剪下",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
+  },
+  "defExpand": {
+    "message": "預設展開資料夾",
+    "description": "2013.07.30"
   },
   "default": {
     "message": "預設",
@@ -51,9 +87,33 @@
     "message": "更有效率地查看及管理你的書籤選單。",
     "description": "2013.01.21"
   },
+  "fontFamily": {
+    "message": "字型",
+    "description": "2015.01.11"
+  },
+  "fontSize": {
+    "message": "字型大小",
+    "description": "2013.07.26"
+  },
+  "general": {
+    "message": "一般",
+    "description": "2015.08.22"
+  },
+  "hideRootFolder": {
+    "message": "隱藏根目錄",
+    "description": "2015.02.18 | Root folder means the top level folder"
+  },
+  "maxResults": {
+    "message": "搜尋結果的最大數量",
+    "description": "2013.03.24"
+  },
   "newFolder": {
     "message": "新增資料夾",
     "description": "2013.01.28 | Refer to Chrome Bookmark manager"
+  },
+  "no": {
+    "message": "否",
+    "description": "2013.03.27"
   },
   "noBkmark": {
     "message": "在此按右鍵新增書籤吧 :-)",
@@ -62,6 +122,10 @@
   "noResult": {
     "message": "沒有對應的書籤",
     "description": "2013.01.27"
+  },
+  "opFolderBy": {
+    "message": "通過點擊左鍵開啟資料夾",
+    "description": "2013.06.29"
   },
   "openAll": {
     "message": "開啟所有書籤",
@@ -87,106 +151,6 @@
     "message": "在新視窗中開啟",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
   },
-  "opt_bookmarklet": {
-    "message": "支援書籤小程式\n(Javascript 書籤腳本)",
-    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
-  },
-  "opt_clickByLeft": {
-    "message": "左鍵開啟書籤於",
-    "description": "2013.06.01"
-  },
-  "opt_clickByLeftCtrl": {
-    "message": "Ctrl / CMD + 左鍵開啟書籤於",
-    "description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
-  },
-  "opt_clickByLeftShift": {
-    "message": "Shift + 左鍵開啟書籤於",
-    "description": "2013.06.01"
-  },
-  "opt_clickByMiddle": {
-    "message": "中鍵開啟書籤於",
-    "description": "2013.06.01"
-  },
-  "opt_clickOption": {
-    "message": "當前分頁|當前分頁 (不關閉PmB)|新分頁|背景分頁|背景分頁 (不關閉PmB)|新視窗|無痕式視窗",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
-  },
-  "opt_contributors": {
-    "message": "貢獻者",
-    "description": "2015.08.22"
-  },
-  "opt_control": {
-    "message": "控制",
-    "description": "2015.08.22"
-  },
-  "opt_defExpand": {
-    "message": "預設展開資料夾",
-    "description": "2013.07.30"
-  },
-  "opt_fontFamily": {
-    "message": "字型",
-    "description": "2015.01.11"
-  },
-  "opt_fontSize": {
-    "message": "字型大小",
-    "description": "2013.07.26"
-  },
-  "opt_general": {
-    "message": "一般",
-    "description": "2015.08.22"
-  },
-  "opt_hideRootFolder": {
-    "message": "隱藏根目錄",
-    "description": "2015.02.18 | Root folder means the top level folder"
-  },
-  "opt_maxResults": {
-    "message": "搜尋結果的最大數量",
-    "description": "2013.03.24"
-  },
-  "opt_no": {
-    "message": "否",
-    "description": "2013.03.27"
-  },
-  "opt_opFolderBy": {
-    "message": "通過點擊左鍵開啟資料夾",
-    "description": "2013.06.29"
-  },
-  "opt_rememberPos": {
-    "message": "記住最後的位置",
-    "description": "2014.02.24"
-  },
-  "opt_saved": {
-    "message": "已儲存",
-    "description": "2013.03.27"
-  },
-  "opt_searchTarget": {
-    "message": "搜尋範圍",
-    "description": "2013.09.11"
-  },
-  "opt_searchTargetOpt": {
-    "message": "標題及網址|標題",
-    "description": "2013.09.11"
-  },
-  "opt_setWidth": {
-    "message": "面板寬度",
-    "description": "2013.03.24"
-  },
-  "opt_tooltip": {
-    "message": "提示書籤的詳細內容",
-    "description": "2013.03.24"
-  },
-  "opt_userInterface": {
-    "message": "介面",
-    "description": "2015.08.22"
-  },
-  "opt_warnOpenMany": {
-    "message": "當開啟多個分頁可能使 Chrome 變慢時警告我",
-    "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
-  },
-  "opt_yes": {
-    "message": "是",
-    "description": "2013.03.27"
-  },
   "options": {
     "message": "設定",
     "description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
@@ -195,13 +159,33 @@
     "message": "貼上",
     "description": "2013.07.7 | Refer to Chrome Bookmark manager"
   },
+  "rememberPos": {
+    "message": "記住最後的位置",
+    "description": "2014.02.24"
+  },
   "rename": {
     "message": "重新命名...",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
   },
+  "saved": {
+    "message": "已儲存",
+    "description": "2013.03.27"
+  },
   "search": {
     "message": "搜尋",
     "description": "2013.01.10"
+  },
+  "searchTarget": {
+    "message": "搜尋範圍",
+    "description": "2013.09.11"
+  },
+  "searchTargetOpt": {
+    "message": "標題及網址|標題",
+    "description": "2013.09.11"
+  },
+  "setWidth": {
+    "message": "面板寬度",
+    "description": "2013.03.24"
   },
   "showInFolder": {
     "message": "在資料夾中顯示",
@@ -210,5 +194,21 @@
   "sortByName": {
     "message": "依名稱排序",
     "description": "2013.09.17 | Refer to Firefox Bookmark menu"
+  },
+  "tooltip": {
+    "message": "提示書籤的詳細內容",
+    "description": "2013.03.24"
+  },
+  "userInterface": {
+    "message": "介面",
+    "description": "2015.08.22"
+  },
+  "warnOpenMany": {
+    "message": "當開啟多個分頁可能使 Chrome 變慢時警告我",
+    "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
+  },
+  "yes": {
+    "message": "是",
+    "description": "2013.03.27"
   }
 }

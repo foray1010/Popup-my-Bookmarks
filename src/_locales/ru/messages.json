@@ -11,7 +11,7 @@
     "message": "Добавить разделитель",
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
-  "alert_bookmarklet": {
+  "alertBookmarklet": {
     "message": "Расширение отключено.\nХотите включить его на странице настроек?",
     "description": "2013.08.12"
   },
@@ -19,9 +19,33 @@
     "message": "Вы собираетесь открыть %bkmarkCount% закладок.\nУверены, что хотите продолжить?",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
   },
+  "bookmarklet": {
+    "message": "Включить поддержку Javascript в закладках",
+    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
+  },
   "cancel": {
     "message": "Отмена",
     "description": "2013.01.30"
+  },
+  "clickByLeft": {
+    "message": "Левый клик для открытия закладки в",
+    "description": "2013.06.01"
+  },
+  "clickByLeftCtrl": {
+    "message": "Ctrl / CMD + Левый клик для открытия закладки в",
+    "description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
+  },
+  "clickByLeftShift": {
+    "message": "Shift + Левый клик для открытия закладки в",
+    "description": "2013.06.01"
+  },
+  "clickByMiddle": {
+    "message": "Средний клик для открытия закладки в",
+    "description": "2013.06.01"
+  },
+  "clickOption": {
+    "message": "Текущая вкладка|Текущая вкладка (без закрытия)|Новая вкладка|Фоновая вкладка|Фоновая вкладка (без закрытия)|Новое окно|Окно инкогнито",
+    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
   },
   "confirm": {
     "message": "Подтвердить",
@@ -34,6 +58,10 @@
   "cut": {
     "message": "Вырезать",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
+  },
+  "defExpand": {
+    "message": "Директория расширений по умолчанию",
+    "description": "2013.07.30"
   },
   "default": {
     "message": "Умолчание",
@@ -51,9 +79,29 @@
     "message": "Более эффективный способ для просмотра и управления меню закладок.",
     "description": "2013.01.21"
   },
+  "fontFamily": {
+    "message": "Шрифт",
+    "description": "2015.01.11"
+  },
+  "fontSize": {
+    "message": "Размер шрифта",
+    "description": "2013.07.26"
+  },
+  "hideRootFolder": {
+    "message": "Скрыть корневую директорию",
+    "description": "2015.02.18 | Root folder means the top level folder"
+  },
+  "maxResults": {
+    "message": "Максимальное количество закладок в результатах поиска",
+    "description": "2013.03.24"
+  },
   "newFolder": {
     "message": "Новая папка",
     "description": "2013.01.28 | Refer to Chrome Bookmark manager"
+  },
+  "no": {
+    "message": "Нет",
+    "description": "2013.03.27"
   },
   "noBkmark": {
     "message": "Правый клик для добавления закладки",
@@ -62,6 +110,10 @@
   "noResult": {
     "message": "Ничего не найдено",
     "description": "2013.01.27"
+  },
+  "opFolderBy": {
+    "message": "Открывать папки левым кликом",
+    "description": "2013.06.29"
   },
   "openAll": {
     "message": "Открыть все закладки",
@@ -87,90 +139,6 @@
     "message": "Открыть в новом окне",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
   },
-  "opt_bookmarklet": {
-    "message": "Включить поддержку Javascript в закладках",
-    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
-  },
-  "opt_clickByLeft": {
-    "message": "Левый клик для открытия закладки в",
-    "description": "2013.06.01"
-  },
-  "opt_clickByLeftCtrl": {
-    "message": "Ctrl / CMD + Левый клик для открытия закладки в",
-    "description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
-  },
-  "opt_clickByLeftShift": {
-    "message": "Shift + Левый клик для открытия закладки в",
-    "description": "2013.06.01"
-  },
-  "opt_clickByMiddle": {
-    "message": "Средний клик для открытия закладки в",
-    "description": "2013.06.01"
-  },
-  "opt_clickOption": {
-    "message": "Текущая вкладка|Текущая вкладка (без закрытия)|Новая вкладка|Фоновая вкладка|Фоновая вкладка (без закрытия)|Новое окно|Окно инкогнито",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
-  },
-  "opt_defExpand": {
-    "message": "Директория расширений по умолчанию",
-    "description": "2013.07.30"
-  },
-  "opt_fontFamily": {
-    "message": "Шрифт",
-    "description": "2015.01.11"
-  },
-  "opt_fontSize": {
-    "message": "Размер шрифта",
-    "description": "2013.07.26"
-  },
-  "opt_hideRootFolder": {
-    "message": "Скрыть корневую директорию",
-    "description": "2015.02.18 | Root folder means the top level folder"
-  },
-  "opt_maxResults": {
-    "message": "Максимальное количество закладок в результатах поиска",
-    "description": "2013.03.24"
-  },
-  "opt_no": {
-    "message": "Нет",
-    "description": "2013.03.27"
-  },
-  "opt_opFolderBy": {
-    "message": "Открывать папки левым кликом",
-    "description": "2013.06.29"
-  },
-  "opt_rememberPos": {
-    "message": "Запоминать последнюю позицию",
-    "description": "2014.02.24"
-  },
-  "opt_saved": {
-    "message": "Сохранено",
-    "description": "2013.03.27"
-  },
-  "opt_searchTarget": {
-    "message": "Разрешить поиск в",
-    "description": "2013.09.11"
-  },
-  "opt_searchTargetOpt": {
-    "message": "Заголовок и адрес|Только заголовок",
-    "description": "2013.09.11"
-  },
-  "opt_setWidth": {
-    "message": "Ширина панели",
-    "description": "2013.03.24"
-  },
-  "opt_tooltip": {
-    "message": "Показывать подсказки с полной информацией о закладке",
-    "description": "2013.03.24"
-  },
-  "opt_warnOpenMany": {
-    "message": "Предупреждать при открытии нескольких закладок (это может замедлить Chrome)",
-    "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
-  },
-  "opt_yes": {
-    "message": "Да",
-    "description": "2013.03.27"
-  },
   "options": {
     "message": "Опции",
     "description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
@@ -179,13 +147,33 @@
     "message": "Вставить",
     "description": "2013.07.7 | Refer to Chrome Bookmark manager"
   },
+  "rememberPos": {
+    "message": "Запоминать последнюю позицию",
+    "description": "2014.02.24"
+  },
   "rename": {
     "message": "Переименовать...",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
   },
+  "saved": {
+    "message": "Сохранено",
+    "description": "2013.03.27"
+  },
   "search": {
     "message": "Поиск",
     "description": "2013.01.10"
+  },
+  "searchTarget": {
+    "message": "Разрешить поиск в",
+    "description": "2013.09.11"
+  },
+  "searchTargetOpt": {
+    "message": "Заголовок и адрес|Только заголовок",
+    "description": "2013.09.11"
+  },
+  "setWidth": {
+    "message": "Ширина панели",
+    "description": "2013.03.24"
   },
   "showInFolder": {
     "message": "Показать в папке",
@@ -194,5 +182,17 @@
   "sortByName": {
     "message": "Сортировать по имени",
     "description": "2013.09.17 | Refer to Firefox Bookmark menu"
+  },
+  "tooltip": {
+    "message": "Показывать подсказки с полной информацией о закладке",
+    "description": "2013.03.24"
+  },
+  "warnOpenMany": {
+    "message": "Предупреждать при открытии нескольких закладок (это может замедлить Chrome)",
+    "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
+  },
+  "yes": {
+    "message": "Да",
+    "description": "2013.03.27"
   }
 }

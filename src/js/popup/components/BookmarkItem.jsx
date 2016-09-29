@@ -34,7 +34,7 @@ import chromep from '../../common/lib/chromePromise'
 import styles from '../../../css/popup/bookmark-item.css'
 
 const dragHackEl = document.getElementById('drag-hack')
-const msgAlertBookmarklet = chrome.i18n.getMessage('alert_bookmarklet')
+const msgAlertBookmarklet = chrome.i18n.getMessage('alertBookmarklet')
 
 class BookmarkItem extends Component {
   componentDidMount() {

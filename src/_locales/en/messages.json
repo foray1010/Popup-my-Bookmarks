@@ -11,7 +11,7 @@
     "message": "Add separator",
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
-  "alert_bookmarklet": {
+  "alertBookmarklet": {
     "message": "You haven't enabled bookmarklet yet.\nDo you want to enable it in options page?",
     "description": "2013.08.12"
   },
@@ -19,13 +19,45 @@
     "message": "You are about to open %bkmarkCount% bookmarks.\nAre you sure you want to continue?",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
   },
+  "bookmarklet": {
+    "message": "Bookmarklet supported\n(Javascript Bookmark Script)",
+    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
+  },
   "cancel": {
     "message": "Cancel",
     "description": "2013.01.30"
   },
+  "clickByLeft": {
+    "message": "Left Click to open bookmarks in",
+    "description": "2013.06.01"
+  },
+  "clickByLeftCtrl": {
+    "message": "Ctrl / CMD + Left Click to open bookmarks in",
+    "description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
+  },
+  "clickByLeftShift": {
+    "message": "Shift + Left Click to open bookmarks in",
+    "description": "2013.06.01"
+  },
+  "clickByMiddle": {
+    "message": "Middle Click to open bookmarks in",
+    "description": "2013.06.01"
+  },
+  "clickOption": {
+    "message": "current tab|current tab (w/o closing PmB)|new tab|background tab|background tab (w/o closing PmB)|new window|incognito window",
+    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  },
   "confirm": {
     "message": "Confirm",
     "description": "2013.01.30"
+  },
+  "contributors": {
+    "message": "Contributors",
+    "description": "2015.08.22"
+  },
+  "control": {
+    "message": "Control",
+    "description": "2015.08.22"
   },
   "copy": {
     "message": "Copy",
@@ -34,6 +66,10 @@
   "cut": {
     "message": "Cut",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
+  },
+  "defExpand": {
+    "message": "Default expanded folder",
+    "description": "2013.07.30"
   },
   "default": {
     "message": "Default",
@@ -51,9 +87,33 @@
     "message": "A more efficient way to view and manage your bookmarks menu.",
     "description": "2013.01.21"
   },
+  "fontFamily": {
+    "message": "Font family",
+    "description": "2015.01.11"
+  },
+  "fontSize": {
+    "message": "Font size",
+    "description": "2013.07.26"
+  },
+  "general": {
+    "message": "General",
+    "description": "2015.08.22"
+  },
+  "hideRootFolder": {
+    "message": "Hide root folder",
+    "description": "2015.02.18 | Root folder means the top level folder"
+  },
+  "maxResults": {
+    "message": "Maximum number of search results",
+    "description": "2013.03.24"
+  },
   "newFolder": {
     "message": "New folder",
     "description": "2013.01.28 | Refer to Chrome Bookmark manager"
+  },
+  "no": {
+    "message": "No",
+    "description": "2013.03.27"
   },
   "noBkmark": {
     "message": "Right click here to add bookmarks :-)",
@@ -62,6 +122,10 @@
   "noResult": {
     "message": "No bookmarks are matched",
     "description": "2013.01.27"
+  },
+  "opFolderBy": {
+    "message": "Open folders by Left Click",
+    "description": "2013.06.29"
   },
   "openAll": {
     "message": "Open all bookmarks",
@@ -87,106 +151,6 @@
     "message": "Open in new window",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
   },
-  "opt_bookmarklet": {
-    "message": "Bookmarklet supported\n(Javascript Bookmark Script)",
-    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
-  },
-  "opt_clickByLeft": {
-    "message": "Left Click to open bookmarks in",
-    "description": "2013.06.01"
-  },
-  "opt_clickByLeftCtrl": {
-    "message": "Ctrl / CMD + Left Click to open bookmarks in",
-    "description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
-  },
-  "opt_clickByLeftShift": {
-    "message": "Shift + Left Click to open bookmarks in",
-    "description": "2013.06.01"
-  },
-  "opt_clickByMiddle": {
-    "message": "Middle Click to open bookmarks in",
-    "description": "2013.06.01"
-  },
-  "opt_clickOption": {
-    "message": "current tab|current tab (w/o closing PmB)|new tab|background tab|background tab (w/o closing PmB)|new window|incognito window",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
-  },
-  "opt_contributors": {
-    "message": "Contributors",
-    "description": "2015.08.22"
-  },
-  "opt_control": {
-    "message": "Control",
-    "description": "2015.08.22"
-  },
-  "opt_defExpand": {
-    "message": "Default expanded folder",
-    "description": "2013.07.30"
-  },
-  "opt_fontFamily": {
-    "message": "Font family",
-    "description": "2015.01.11"
-  },
-  "opt_fontSize": {
-    "message": "Font size",
-    "description": "2013.07.26"
-  },
-  "opt_general": {
-    "message": "General",
-    "description": "2015.08.22"
-  },
-  "opt_hideRootFolder": {
-    "message": "Hide root folder",
-    "description": "2015.02.18 | Root folder means the top level folder"
-  },
-  "opt_maxResults": {
-    "message": "Maximum number of search results",
-    "description": "2013.03.24"
-  },
-  "opt_no": {
-    "message": "No",
-    "description": "2013.03.27"
-  },
-  "opt_opFolderBy": {
-    "message": "Open folders by Left Click",
-    "description": "2013.06.29"
-  },
-  "opt_rememberPos": {
-    "message": "Remember last position",
-    "description": "2014.02.24"
-  },
-  "opt_saved": {
-    "message": "Saved",
-    "description": "2013.03.27"
-  },
-  "opt_searchTarget": {
-    "message": "Search queries allowed",
-    "description": "2013.09.11"
-  },
-  "opt_searchTargetOpt": {
-    "message": "both title and URL|title only",
-    "description": "2013.09.11"
-  },
-  "opt_setWidth": {
-    "message": "Panel width",
-    "description": "2013.03.24"
-  },
-  "opt_tooltip": {
-    "message": "Show tooltip with detailed information of bookmarks",
-    "description": "2013.03.24"
-  },
-  "opt_userInterface": {
-    "message": "UI",
-    "description": "2015.08.22"
-  },
-  "opt_warnOpenMany": {
-    "message": "Warn me when opening multiple tabs might slow down Chrome",
-    "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
-  },
-  "opt_yes": {
-    "message": "Yes",
-    "description": "2013.03.27"
-  },
   "options": {
     "message": "Options",
     "description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
@@ -195,13 +159,33 @@
     "message": "Paste",
     "description": "2013.07.7 | Refer to Chrome Bookmark manager"
   },
+  "rememberPos": {
+    "message": "Remember last position",
+    "description": "2014.02.24"
+  },
   "rename": {
     "message": "Rename...",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
   },
+  "saved": {
+    "message": "Saved",
+    "description": "2013.03.27"
+  },
   "search": {
     "message": "Search",
     "description": "2013.01.10"
+  },
+  "searchTarget": {
+    "message": "Search queries allowed",
+    "description": "2013.09.11"
+  },
+  "searchTargetOpt": {
+    "message": "both title and URL|title only",
+    "description": "2013.09.11"
+  },
+  "setWidth": {
+    "message": "Panel width",
+    "description": "2013.03.24"
   },
   "showInFolder": {
     "message": "Show in folder",
@@ -210,5 +194,21 @@
   "sortByName": {
     "message": "Sort by name",
     "description": "2013.09.17 | Refer to Firefox Bookmark menu"
+  },
+  "tooltip": {
+    "message": "Show tooltip with detailed information of bookmarks",
+    "description": "2013.03.24"
+  },
+  "userInterface": {
+    "message": "UI",
+    "description": "2015.08.22"
+  },
+  "warnOpenMany": {
+    "message": "Warn me when opening multiple tabs might slow down Chrome",
+    "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
+  },
+  "yes": {
+    "message": "Yes",
+    "description": "2013.03.27"
   }
 }

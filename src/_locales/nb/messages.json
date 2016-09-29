@@ -11,7 +11,7 @@
     "message": "Legg til separator",
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
-  "alert_bookmarklet": {
+  "alertBookmarklet": {
     "message": "Du har ikke aktivert bookmarklet enda.\nVil du aktivere det i opsjons-panelet?",
     "description": "2013.08.12"
   },
@@ -19,9 +19,33 @@
     "message": "Du holder på å åpne %bkmarkCount% bokmerker.\nEr du sikker på at du vil fortsette?",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
   },
+  "bookmarklet": {
+    "message": "Bookmarklet støttet\n(Javascript Bookmark Script)",
+    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
+  },
   "cancel": {
     "message": "Avbryt",
     "description": "2013.01.30"
+  },
+  "clickByLeft": {
+    "message": "Venstre-klikk for å åpne bokmerker i",
+    "description": "2013.06.01"
+  },
+  "clickByLeftCtrl": {
+    "message": "Ctrl / CMD + Venstre-klikk for å åpne bokmerker i",
+    "description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
+  },
+  "clickByLeftShift": {
+    "message": "Shift + Venstre-klikk for å åpne bokmerker i",
+    "description": "2013.06.01"
+  },
+  "clickByMiddle": {
+    "message": "Midt-klikk for å åpne bokmerker i",
+    "description": "2013.06.01"
+  },
+  "clickOption": {
+    "message": "gjeldende fane/gjeldende fane (uten å lukke PmB/ny fane|bakgrunnsfane|bakgrunnsfane (uten å lukke PmB)|nytt vindu|anonymisert vindu",
+    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
   },
   "confirm": {
     "message": "Bekrefte",
@@ -34,6 +58,10 @@
   "cut": {
     "message": "Klipp ut",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
+  },
+  "defExpand": {
+    "message": "Standard utvidet mappe",
+    "description": "2013.07.30"
   },
   "default": {
     "message": "Standard",
@@ -51,9 +79,29 @@
     "message": "En mer effektiv måte å vise og vedlikeholde bokmerke-menyen din.",
     "description": "2013.01.21"
   },
+  "fontFamily": {
+    "message": "Font-familie",
+    "description": "2015.01.11"
+  },
+  "fontSize": {
+    "message": "Font-størrelse",
+    "description": "2013.07.26"
+  },
+  "hideRootFolder": {
+    "message": "Skjul rot-mappe",
+    "description": "2015.02.18 | Root folder means the top level folder"
+  },
+  "maxResults": {
+    "message": "Maksimalt antall søkeresultater",
+    "description": "2013.03.24"
+  },
   "newFolder": {
     "message": "Ny mappe",
     "description": "2013.01.28 | Refer to Chrome Bookmark manager"
+  },
+  "no": {
+    "message": "Nei",
+    "description": "2013.03.27"
   },
   "noBkmark": {
     "message": "Høyre-klikk her for å legge til bokmerker :-)",
@@ -62,6 +110,10 @@
   "noResult": {
     "message": "Ingen bokmerker matchet",
     "description": "2013.01.27"
+  },
+  "opFolderBy": {
+    "message": "Åpne mapper ved å Venstre-klikke",
+    "description": "2013.06.29"
   },
   "openAll": {
     "message": "Åpne alle bokmerker",
@@ -87,90 +139,6 @@
     "message": "Åpne i nytt vindu",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
   },
-  "opt_bookmarklet": {
-    "message": "Bookmarklet støttet\n(Javascript Bookmark Script)",
-    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
-  },
-  "opt_clickByLeft": {
-    "message": "Venstre-klikk for å åpne bokmerker i",
-    "description": "2013.06.01"
-  },
-  "opt_clickByLeftCtrl": {
-    "message": "Ctrl / CMD + Venstre-klikk for å åpne bokmerker i",
-    "description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
-  },
-  "opt_clickByLeftShift": {
-    "message": "Shift + Venstre-klikk for å åpne bokmerker i",
-    "description": "2013.06.01"
-  },
-  "opt_clickByMiddle": {
-    "message": "Midt-klikk for å åpne bokmerker i",
-    "description": "2013.06.01"
-  },
-  "opt_clickOption": {
-    "message": "gjeldende fane/gjeldende fane (uten å lukke PmB/ny fane|bakgrunnsfane|bakgrunnsfane (uten å lukke PmB)|nytt vindu|anonymisert vindu",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
-  },
-  "opt_defExpand": {
-    "message": "Standard utvidet mappe",
-    "description": "2013.07.30"
-  },
-  "opt_fontFamily": {
-    "message": "Font-familie",
-    "description": "2015.01.11"
-  },
-  "opt_fontSize": {
-    "message": "Font-størrelse",
-    "description": "2013.07.26"
-  },
-  "opt_hideRootFolder": {
-    "message": "Skjul rot-mappe",
-    "description": "2015.02.18 | Root folder means the top level folder"
-  },
-  "opt_maxResults": {
-    "message": "Maksimalt antall søkeresultater",
-    "description": "2013.03.24"
-  },
-  "opt_no": {
-    "message": "Nei",
-    "description": "2013.03.27"
-  },
-  "opt_opFolderBy": {
-    "message": "Åpne mapper ved å Venstre-klikke",
-    "description": "2013.06.29"
-  },
-  "opt_rememberPos": {
-    "message": "Husk siste posisjon",
-    "description": "2014.02.24"
-  },
-  "opt_saved": {
-    "message": "Lagret",
-    "description": "2013.03.27"
-  },
-  "opt_searchTarget": {
-    "message": "Tillatte spørringer",
-    "description": "2013.09.11"
-  },
-  "opt_searchTargetOpt": {
-    "message": "både tittel og URL|kun tittel",
-    "description": "2013.09.11"
-  },
-  "opt_setWidth": {
-    "message": "Panelbredde",
-    "description": "2013.03.24"
-  },
-  "opt_tooltip": {
-    "message": "Vis ballongtips med detaljert informasjon om bokmerker",
-    "description": "2013.03.24"
-  },
-  "opt_warnOpenMany": {
-    "message": "Advar meg ved åpning så mange faner at Chrome kan bli tregt",
-    "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
-  },
-  "opt_yes": {
-    "message": "Ja",
-    "description": "2013.03.27"
-  },
   "options": {
     "message": "Opsjoner",
     "description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
@@ -179,13 +147,33 @@
     "message": "Lim inn",
     "description": "2013.07.7 | Refer to Chrome Bookmark manager"
   },
+  "rememberPos": {
+    "message": "Husk siste posisjon",
+    "description": "2014.02.24"
+  },
   "rename": {
     "message": "Endre navn...",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
   },
+  "saved": {
+    "message": "Lagret",
+    "description": "2013.03.27"
+  },
   "search": {
     "message": "Søk",
     "description": "2013.01.10"
+  },
+  "searchTarget": {
+    "message": "Tillatte spørringer",
+    "description": "2013.09.11"
+  },
+  "searchTargetOpt": {
+    "message": "både tittel og URL|kun tittel",
+    "description": "2013.09.11"
+  },
+  "setWidth": {
+    "message": "Panelbredde",
+    "description": "2013.03.24"
   },
   "showInFolder": {
     "message": "Vis i mappe",
@@ -194,5 +182,17 @@
   "sortByName": {
     "message": "Sorter på navn",
     "description": "2013.09.17 | Refer to Firefox Bookmark menu"
+  },
+  "tooltip": {
+    "message": "Vis ballongtips med detaljert informasjon om bokmerker",
+    "description": "2013.03.24"
+  },
+  "warnOpenMany": {
+    "message": "Advar meg ved åpning så mange faner at Chrome kan bli tregt",
+    "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
+  },
+  "yes": {
+    "message": "Ja",
+    "description": "2013.03.27"
   }
 }

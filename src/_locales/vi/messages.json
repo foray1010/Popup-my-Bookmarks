@@ -11,7 +11,7 @@
     "message": "Thêm dấu ngăn cách",
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
-  "alert_bookmarklet": {
+  "alertBookmarklet": {
     "message": "Bạn vẫn chưa bật phần đánh dấu.\nBạn có muốn bật phần này trong trang tùy chọn hay không?",
     "description": "2013.08.12"
   },
@@ -19,9 +19,33 @@
     "message": "Bạn sắp sửa mở phần đánh dấu %bkmarkCount%.\nBạn có chắc rằng bạn muốn tiếp tục hay không?",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
   },
+  "bookmarklet": {
+    "message": "Hỗ trợ trang đánh dấu\n(Javascript Bookmark Script)",
+    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
+  },
   "cancel": {
     "message": "Hủy bỏ",
     "description": "2013.01.30"
+  },
+  "clickByLeft": {
+    "message": "Click chuột trái để mở phần đánh dấu trong",
+    "description": "2013.06.01"
+  },
+  "clickByLeftCtrl": {
+    "message": "Ctrl / CMD + click chuột trái để mở phần đánh dấu trong",
+    "description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
+  },
+  "clickByLeftShift": {
+    "message": "Shift + Click chuột trái để mở phần đánh dấu trong",
+    "description": "2013.06.01"
+  },
+  "clickByMiddle": {
+    "message": "Click chuột giữa để mở phần đánh dấu trong",
+    "description": "2013.06.01"
+  },
+  "clickOption": {
+    "message": "tab hiện tại|tab hiện tại (không cần đóng lại PmB)|tab mới|tab đang mở|tab đang mở (không cần đóng lại PmB)|cửa sổ mới|cửa sổ mới trong chế độ ẩn mình",
+    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
   },
   "confirm": {
     "message": "Xác nhận",
@@ -34,6 +58,10 @@
   "cut": {
     "message": "Cắt",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
+  },
+  "defExpand": {
+    "message": "Mặc định mở rộng thư mục",
+    "description": "2013.07.30"
   },
   "default": {
     "message": "Mặc định",
@@ -51,9 +79,21 @@
     "message": "Đây là cách tiện lợi hơn khi xem và quản lý phần menu đánh dấu.",
     "description": "2013.01.21"
   },
+  "fontSize": {
+    "message": "Kích thước kiểu chữ",
+    "description": "2013.07.26"
+  },
+  "maxResults": {
+    "message": "Số lượng tối đa của các kết quả tìm kiếm",
+    "description": "2013.03.24"
+  },
   "newFolder": {
     "message": "Thư mục mới",
     "description": "2013.01.28 | Refer to Chrome Bookmark manager"
+  },
+  "no": {
+    "message": "Không",
+    "description": "2013.03.27"
   },
   "noBkmark": {
     "message": "Click chuột phải để thêm vào phần đánh dấu :)",
@@ -62,6 +102,10 @@
   "noResult": {
     "message": "Không có phần đánh dấu nào khớp nhau",
     "description": "2013.01.27"
+  },
+  "opFolderBy": {
+    "message": "Mở các thư mục bằng cách click chuột trái",
+    "description": "2013.06.29"
   },
   "openAll": {
     "message": "Mở tất cả các phần đánh dấu",
@@ -87,70 +131,6 @@
     "message": "Mở trong một cửa sổ mới",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
   },
-  "opt_bookmarklet": {
-    "message": "Hỗ trợ trang đánh dấu\n(Javascript Bookmark Script)",
-    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
-  },
-  "opt_clickByLeft": {
-    "message": "Click chuột trái để mở phần đánh dấu trong",
-    "description": "2013.06.01"
-  },
-  "opt_clickByLeftCtrl": {
-    "message": "Ctrl / CMD + click chuột trái để mở phần đánh dấu trong",
-    "description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
-  },
-  "opt_clickByLeftShift": {
-    "message": "Shift + Click chuột trái để mở phần đánh dấu trong",
-    "description": "2013.06.01"
-  },
-  "opt_clickByMiddle": {
-    "message": "Click chuột giữa để mở phần đánh dấu trong",
-    "description": "2013.06.01"
-  },
-  "opt_clickOption": {
-    "message": "tab hiện tại|tab hiện tại (không cần đóng lại PmB)|tab mới|tab đang mở|tab đang mở (không cần đóng lại PmB)|cửa sổ mới|cửa sổ mới trong chế độ ẩn mình",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
-  },
-  "opt_defExpand": {
-    "message": "Mặc định mở rộng thư mục",
-    "description": "2013.07.30"
-  },
-  "opt_fontSize": {
-    "message": "Kích thước kiểu chữ",
-    "description": "2013.07.26"
-  },
-  "opt_maxResults": {
-    "message": "Số lượng tối đa của các kết quả tìm kiếm",
-    "description": "2013.03.24"
-  },
-  "opt_no": {
-    "message": "Không",
-    "description": "2013.03.27"
-  },
-  "opt_opFolderBy": {
-    "message": "Mở các thư mục bằng cách click chuột trái",
-    "description": "2013.06.29"
-  },
-  "opt_saved": {
-    "message": "Đã lưu",
-    "description": "2013.03.27"
-  },
-  "opt_setWidth": {
-    "message": "Độ rộng khung hiển thị",
-    "description": "2013.03.24"
-  },
-  "opt_tooltip": {
-    "message": "Hiển thị gợi ý với thông tin chi tiết về phần đánh dấu",
-    "description": "2013.03.24"
-  },
-  "opt_warnOpenMany": {
-    "message": "Cảnh báo tôi khi mở nhiều tab - vì thao tác này có thể làm chậm lại Chrome",
-    "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
-  },
-  "opt_yes": {
-    "message": "Đồng Ý",
-    "description": "2013.03.27"
-  },
   "options": {
     "message": "Tùy chọn",
     "description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
@@ -163,8 +143,28 @@
     "message": "Đổi tên..",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
   },
+  "saved": {
+    "message": "Đã lưu",
+    "description": "2013.03.27"
+  },
   "search": {
     "message": "Tìm kiếm",
     "description": "2013.01.10"
+  },
+  "setWidth": {
+    "message": "Độ rộng khung hiển thị",
+    "description": "2013.03.24"
+  },
+  "tooltip": {
+    "message": "Hiển thị gợi ý với thông tin chi tiết về phần đánh dấu",
+    "description": "2013.03.24"
+  },
+  "warnOpenMany": {
+    "message": "Cảnh báo tôi khi mở nhiều tab - vì thao tác này có thể làm chậm lại Chrome",
+    "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
+  },
+  "yes": {
+    "message": "Đồng Ý",
+    "description": "2013.03.27"
   }
 }

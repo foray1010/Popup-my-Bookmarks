@@ -8,8 +8,8 @@ import {updateSingleOption} from '../../../actions'
 
 import styles from '../../../../../css/options/select-button-option.css'
 
-const msgNo = chrome.i18n.getMessage('opt_no')
-const msgYes = chrome.i18n.getMessage('opt_yes')
+const msgNo = chrome.i18n.getMessage('no')
+const msgYes = chrome.i18n.getMessage('yes')
 
 class Option extends Component {
   @autobind

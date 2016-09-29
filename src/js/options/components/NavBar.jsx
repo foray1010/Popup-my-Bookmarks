@@ -14,19 +14,19 @@ import styles from '../../../css/options/nav-bar.css'
 const navBarItemInfos = [
   {
     navModule: NAV_MODULE_GENERAL,
-    title: chrome.i18n.getMessage('opt_general')
+    title: chrome.i18n.getMessage('general')
   },
   {
     navModule: NAV_MODULE_USER_INTERFACE,
-    title: chrome.i18n.getMessage('opt_userInterface')
+    title: chrome.i18n.getMessage('userInterface')
   },
   {
     navModule: NAV_MODULE_CONTROL,
-    title: chrome.i18n.getMessage('opt_control')
+    title: chrome.i18n.getMessage('control')
   },
   {
     navModule: NAV_MODULE_CONTRIBUTORS,
-    title: chrome.i18n.getMessage('opt_contributors')
+    title: chrome.i18n.getMessage('contributors')
   }
 ]
 
