@@ -2,6 +2,7 @@
 
 .item {
   align-items: center;
+  background-color: transparent;
   color: inherit;
   cursor: pointer;
   display: flex;
