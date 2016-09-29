@@ -28,7 +28,7 @@
 
   To make a temporary folder `__dev` for you to load unpacked extension
   - ES6 JavaScript to ES5 JavaScript by [Babel](//github.com/babel/babel)
-  - *.styl to *.css by [Stylus](//github.com/stylus/stylus)
+  - CSS4 to CSS3 by [postcss-cssnext](//github.com/MoOx/postcss-cssnext)
   - *.pug to *.html by [Pug](//github.com/pugjs/pug)
 
 3. help
@@ -47,7 +47,7 @@
 
   To lint
   - ES6 JavaScript code by [ESLint](//github.com/eslint/eslint)
-  - Stylus code by [Stylint](//github.com/rossPatton/stylint)
+  - CSS4 code by [Stylelint](//github.com/stylelint/stylelint)
 
 5. md
 
