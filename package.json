@@ -38,7 +38,7 @@
     "redux-batched-subscribe": "^0.1.4",
     "redux-logger": "^2.5.2",
     "redux-multi": "0.1.12",
-    "seamless-immutable": "^6.0.0"
+    "seamless-immutable": "^6.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.5.2",
