@@ -2,7 +2,7 @@
 
 .button {
   background-color: var(--highlight-level1);
-  padding: 4px 8px;
+  padding: var(--golden-gap-2x) var(--golden-gap-4x);
 
   &:hover {
     color: var(--main-color1);

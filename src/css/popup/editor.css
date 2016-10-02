@@ -34,5 +34,5 @@
   color: var(--blank-color);
   cursor: default;
   float: left;
-  padding: 1px 6px;
+  padding: var(--golden-gap) var(--golden-gap-4x);
 }
