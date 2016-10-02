@@ -13,15 +13,18 @@
   position: absolute;
   text-align: right;
 
-  & > button {
-    margin: var(--golden-gap-2x) 0 0 var(--golden-gap-2x);
+  & > *:not(:first-child) {
+    margin-top: var(--golden-gap-2x);
+  }
+
+  & > button + button {
+    margin-left: var(--golden-gap-2x);
   }
 
   & > input[type="text"] {
     border-color: var(--highlight-level3);
     box-sizing: border-box;
-    margin: var(--golden-gap-2x) 0 0;
-    padding: var(--golden-gap);
+    padding: var(--golden-gap-2x);
     width: 100%;
   }
 }
