@@ -140,8 +140,20 @@ class Editor extends Component {
           type='text'
           hidden={isFolderItem}
         />
-        <button type='submit' onClick={this.handleConfirm}>{msgConfirm}</button>
-        <button type='button' onClick={this.handleCancel}>{msgCancel}</button>
+        <button
+          styleName='button'
+          type='submit'
+          onClick={this.handleConfirm}
+        >
+          {msgConfirm}
+        </button>
+        <button
+          styleName='button'
+          type='button'
+          onClick={this.handleCancel}
+        >
+          {msgCancel}
+        </button>
       </form>
     )
   }

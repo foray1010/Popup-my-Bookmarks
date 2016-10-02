@@ -1,5 +1,14 @@
 @import "./variables.css";
 
+.button {
+  background-color: var(--highlight-level1);
+  padding: 4px 8px;
+
+  &:hover {
+    color: var(--main-color1);
+  }
+}
+
 .cover {
   background-color: rgba(0, 0, 0, 0.16);
   bottom: 0;

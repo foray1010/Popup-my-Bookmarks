@@ -1,5 +1,9 @@
 @import "../common/variables.css";
 
+.button {
+  composes: button from "../common/composes.css";
+}
+
 .main {
   background-color: var(--blank-color);
   border: solid var(--highlight-level4);

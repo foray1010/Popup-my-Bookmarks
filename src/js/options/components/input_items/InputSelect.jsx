@@ -71,6 +71,7 @@ class InputSelect extends Component {
           ref={(ref) => {
             this.inputEl = ref
           }}
+          styleName='input'
           name={optionName}
           type='text'
           value={optionValue}
@@ -79,6 +80,7 @@ class InputSelect extends Component {
           onKeyDown={this.handleKeyDown}
         />
         <select
+          styleName='select'
           defaultValue={optionValue}
           onChange={this.handleChange}
         >

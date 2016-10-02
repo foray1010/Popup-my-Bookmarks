@@ -76,8 +76,20 @@ class OptionButton extends Component {
   render() {
     return (
       <div styleName='main'>
-        <button type='submit' onClick={this.handleConfirm}>{msgConfirm}</button>
-        <button type='reset' onClick={this.handleDefault}>{msgDefault}</button>
+        <button
+          styleName='button'
+          type='submit'
+          onClick={this.handleConfirm}
+        >
+          {msgConfirm}
+        </button>
+        <button
+          styleName='button'
+          type='reset'
+          onClick={this.handleDefault}
+        >
+          {msgDefault}
+        </button>
       </div>
     )
   }

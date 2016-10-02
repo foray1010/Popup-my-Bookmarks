@@ -2,6 +2,7 @@
   --blank-color: #fff;
   --golden-gap: 2px;
   --golden-gap-2x: calc(var(--golden-gap) * 2);
+  --golden-gap-4x: calc(var(--golden-gap) * 4);
   --highlight-level1: #eee;
   --highlight-level2: #ddd;
   --highlight-level3: #ccc;

@@ -3,21 +3,22 @@
 .main {
   border: 1px solid var(--main-color1);
   display: inline-block;
+  height: var(--options-input-height);
   position: relative;
+}
 
-  & > input[type="text"],
-  & > select {
-    border: 0;
-  }
+.input,
+.select {
+  border: 0 !important;
+  height: 100%;
+  padding: 0 var(--golden-gap-2x);
+}
 
-  & > input[type="text"] {
-    box-sizing: border-box;
-    height: 100%;
-    left: 0;
-    padding: 0 var(--golden-gap-2x);
-    position: absolute;
-    text-align: left;
-    top: 0;
-    width: calc(100% - var(--options-input-height));
-  }
+.input {
+  box-sizing: border-box;
+  left: 0;
+  position: absolute;
+  text-align: left;
+  top: 0;
+  width: calc(100% - var(--options-input-height));
 }
