@@ -11,7 +11,7 @@
 
 .main {
   align-items: center;
-  background-color: var(--blank-color);
+  background-color: var(--oc-white);
   border: 1px solid currentcolor;
   box-sizing: border-box;
   color: var(--main-color1);

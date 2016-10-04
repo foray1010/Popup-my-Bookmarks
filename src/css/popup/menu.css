@@ -1,7 +1,7 @@
 @import "../common/variables.css";
 
 .main {
-  background-color: var(--blank-color);
+  background-color: var(--oc-white);
   border: 1px solid var(--highlight-level4);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   padding: var(--golden-gap-2x);

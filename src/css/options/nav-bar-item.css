@@ -22,7 +22,7 @@
 
 .main {
   border-bottom: var(--golden-gap-2x) solid transparent;
-  color: var(--blank-color);
+  color: var(--oc-white);
   cursor: default;
   flex: 1 0 0;
   font: 16px ArchivoNarrow;

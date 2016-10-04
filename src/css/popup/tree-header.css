@@ -17,7 +17,7 @@
 
   &::before,
   &::after {
-    background-color: var(--blank-color);
+    background-color: var(--oc-white);
     content: "";
     position: absolute;
     -webkit-transform: rotate(45deg);
@@ -46,7 +46,7 @@
 }
 
 .title {
-  color: var(--blank-color);
+  color: var(--oc-white);
   composes: no-text-overflow from "../common/composes.css";
   cursor: default;
   font: 22px ArchivoNarrow, simhei;

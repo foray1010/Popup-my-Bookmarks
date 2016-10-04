@@ -15,7 +15,7 @@
 }
 
 .item-active {
-  color: var(--blank-color);
+  color: var(--oc-white);
   cursor: default;
 }
 
