@@ -3,7 +3,7 @@
 .main {
   border: 1px solid var(--main-color1);
   display: inline-block;
-  height: var(--options-input-height);
+  height: var(--input-height);
   position: relative;
 }
 
@@ -20,5 +20,5 @@
   position: absolute;
   text-align: left;
   top: 0;
-  width: calc(100% - var(--options-input-height));
+  width: calc(100% - var(--input-height));
 }
