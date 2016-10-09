@@ -1,5 +1,6 @@
 'use strict'
 
+const _ = require('lodash')
 const bluebird = require('bluebird')
 const co = require('co')
 const fs = require('fs-extra')
@@ -28,41 +29,54 @@ const sourceDir = config.sourceDir
 
 // language handlers
 function buildHtml(options) {
-  const destDir = outputDir
-  const srcPath = path.join(sourceDir, 'html', '*.pug')
+  return co(function* () {
+    const manifest = getManifest()
+    _.set(options, 'pugOptions.data.name', manifest.name)
 
-  const buildHandler = (thisSrcPath) => {
-    return gulp.src(thisSrcPath)
-      .pipe(plumber())
-      .pipe(options.builderPipe ? options.builderPipe() : gutil.noop())
-      .pipe(options.miniferPipe ? options.miniferPipe() : gutil.noop())
-      .pipe(gulp.dest(destDir))
-  }
+    const srcPath = path.join(sourceDir, 'html', '*.pug')
 
-  if (options.watch) {
-    gulp.watch(srcPath, (evt) => {
-      const thisSrcPath = path.relative(__dirname, evt.path)
+    const buildHandler = (thisSrcPath) => {
+      return gulp.src(thisSrcPath)
+        .pipe(plumber())
+        .pipe(pug(options.pugOptions))
+        .pipe(gulp.dest(outputDir))
+    }
 
-      buildHandler(thisSrcPath)
-        .on('end', () => {
-          gutil.log(gutil.colors.magenta(thisSrcPath), 'is built')
-        })
-    })
-  }
+    if (options.watch) {
+      gulp.watch(srcPath, (evt) => {
+        const thisSrcPath = path.relative(__dirname, evt.path)
 
-  return buildHandler(srcPath)
+        buildHandler(thisSrcPath)
+          .on('end', () => {
+            gutil.log(gutil.colors.magenta(thisSrcPath), 'is built')
+          })
+      })
+    }
+
+    return buildHandler(srcPath)
+  })
 }
 
-function* buildManifest(updateFn) {
-  const destPath = path.join(outputDir, 'manifest.json')
-  const manifestJson = YAML.load(path.join(sourceDir, 'manifest.yml'))
+function* buildManifest() {
+  const manifest = getManifest()
 
-  manifestJson.version = pkg.version
-  if (updateFn) {
-    updateFn(manifestJson)
+  yield fs.writeJsonAsync(
+    path.join(outputDir, 'manifest.json'),
+    manifest
+  )
+}
+
+function getManifest() {
+  const manifest = YAML.load(
+    path.join(sourceDir, 'manifest.yml')
+  )
+
+  manifest.version = pkg.version
+  if (process.env.NODE_ENV === 'development') {
+    manifest.name += ' (dev)'
   }
 
-  yield fs.writeJsonAsync(destPath, manifestJson)
+  return manifest
 }
 
 function runWebpack() {
@@ -107,7 +121,6 @@ gulp.task('build:init', () => {
 
 gulp.task('build:html', ['build:init'], () => {
   return buildHtml({
-    builderPipe: () => pug(),
     watch: false
   })
 })
@@ -166,7 +179,9 @@ gulp.task('dev:init', () => {
 
 gulp.task('dev:html', ['dev:init'], () => {
   return buildHtml({
-    builderPipe: () => pug({pretty: true}),
+    pugOptions: {
+      pretty: true
+    },
     watch: true
   })
 })
@@ -202,9 +217,7 @@ gulp.task('dev:others', ['dev:init'], () => {
       'dir'
     ))
 
-    yield buildManifest((manifestJson) => {
-      manifestJson.name += ' (dev)'
-    })
+    yield buildManifest()
   })
 })
 
