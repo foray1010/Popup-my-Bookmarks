@@ -1,14 +1,11 @@
 @import "../common/variables.css";
 
-:root {
-  --search-height: 21px;
-}
-
 .main {
   border: solid var(--highlight-level3);
   border-width: 0 0 1px;
+  box-sizing: inline-box;
   display: flex;
-  height: var(--search-height);
+  height: var(--input-height);
   margin-bottom: var(--golden-gap);
 
   & > input[type="search"] {
@@ -17,7 +14,7 @@
     color: var(--main-font-color);
     font-size: 12px;
     outline: 0;
-    padding: 0 1px;
+    padding: 0 var(--golden-gap);
     width: 100%;
   }
 
