@@ -10,7 +10,7 @@
   /* separator between div */
   & > ul + ul:not([hidden]) {
     border-top: 1px solid var(--highlight-level2);
-    margin-top: var(--golden-gap);
-    padding-top: var(--golden-gap);
+    margin-top: var(--golden-gap-2x);
+    padding-top: var(--golden-gap-2x);
   }
 }
