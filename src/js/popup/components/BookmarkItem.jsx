@@ -210,11 +210,6 @@ class BookmarkItem extends Component {
       dragTarget
     } = this.props
 
-    // because we move the original dragTargetEl to #drag-hack
-    // the original dragTargetEl cannot be updated by react, so the model will not be updated
-    // that's why we need to store the updated context in currentContext
-    // const {dragIndicator, dragTarget} = currentContext
-
     // remove cached dragTargetEl
     dragHackEl.innerHTML = ''
 
