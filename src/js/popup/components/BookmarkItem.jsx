@@ -33,7 +33,6 @@ import chromep from '../../common/lib/chromePromise'
 
 import styles from '../../../css/popup/bookmark-item.css'
 
-const dragHackEl = document.getElementById('drag-hack')
 const msgAlertBookmarklet = chrome.i18n.getMessage('alertBookmarklet')
 
 class BookmarkItem extends Component {
@@ -210,9 +209,6 @@ class BookmarkItem extends Component {
       dragTarget
     } = this.props
 
-    // remove cached dragTargetEl
-    dragHackEl.innerHTML = ''
-
     if (dragIndicator) {
       await chromep.bookmarks.move(dragTarget.id, {
         parentId: dragIndicator.parentId,
@@ -293,24 +289,10 @@ class BookmarkItem extends Component {
       treeIndex
     } = this.props
 
-    // hack to prevent dragover and dragend event stop working when dragTargetEl is removed
-    setTimeout(() => {
-      const dragTargetEl = this.baseEl
-
-      // create a cloned dragged item to replace the original one
-      const clonedDragTargetEl = dragTargetEl.cloneNode(true)
-      dragTargetEl.parentNode.insertBefore(clonedDragTargetEl, dragTargetEl)
-
-      // move the original one to #drag-hack
-      // it can prevent dragged item from removing by removeTreeInfosFromIndex,
-      // which stop dragend event from firing
-      dragHackEl.appendChild(dragTargetEl)
-
-      dispatch([
-        removeTreeInfosFromIndex(treeIndex + 1),
-        updateDragTarget(itemInfo)
-      ])
-    })
+    dispatch([
+      removeTreeInfosFromIndex(treeIndex + 1),
+      updateDragTarget(itemInfo)
+    ])
   }
 
   @autobind
