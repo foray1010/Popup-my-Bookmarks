@@ -63,7 +63,7 @@
     "optimize-js-plugin": "0.0.4",
     "postcss-cssnext": "^2.8.0",
     "postcss-import": "^8.1.2",
-    "postcss-loader": "^0.13.0",
+    "postcss-loader": "^1.0.0",
     "pre-commit": "^1.1.2",
     "prompt": "^1.0.0",
     "style-loader": "^0.13.1",
