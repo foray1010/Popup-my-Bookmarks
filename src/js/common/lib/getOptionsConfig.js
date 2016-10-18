@@ -1,5 +1,4 @@
 import {
-  OPTIONS_BOOKMARKLET,
   OPTIONS_CLICK_BY_LEFT,
   OPTIONS_CLICK_BY_LEFT_CTRL,
   OPTIONS_CLICK_BY_LEFT_SHIFT,
@@ -31,14 +30,6 @@ async function getOptionsConfig() {
   }
 
   return {
-    [OPTIONS_BOOKMARKLET]: {
-      type: 'boolean',
-      default: false,
-      permissions: [
-        'http://*/',
-        'https://*/'
-      ]
-    },
     [OPTIONS_CLICK_BY_LEFT]: {
       type: 'integer',
       default: 0,

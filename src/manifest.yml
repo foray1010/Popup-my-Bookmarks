@@ -27,11 +27,8 @@ commands:
       default: "Ctrl+B"
 
 permissions:
+  - "activeTab"
   - "chrome://favicon/"
   - "bookmarks"
   - "storage"
   - "tabs"
-
-optional_permissions:
-  - "http://*/"
-  - "https://*/"

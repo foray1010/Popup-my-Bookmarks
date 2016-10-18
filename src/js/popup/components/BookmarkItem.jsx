@@ -10,7 +10,6 @@ import {
   isFolder,
   isFolderOpened,
   openMultipleBookmarks,
-  openOptionsPage,
   scrollIntoViewIfNeeded
 } from '../functions'
 import {
@@ -32,8 +31,6 @@ import {
 import chromep from '../../common/lib/chromePromise'
 
 import styles from '../../../css/popup/bookmark-item.css'
-
-const msgAlertBookmarklet = chrome.i18n.getMessage('alertBookmarklet')
 
 class BookmarkItem extends Component {
   componentDidMount() {
@@ -335,8 +332,7 @@ class BookmarkItem extends Component {
 
   async openBookmark(handlerId) {
     const {
-      itemInfo,
-      options
+      itemInfo
     } = this.props
 
     const itemUrl = itemInfo.url
@@ -345,11 +341,7 @@ class BookmarkItem extends Component {
       case 0: // current tab
       case 1: // current tab (w/o closing PmB)
         if (itemUrl.startsWith('javascript:')) {
-          if (options.bookmarklet) {
-            await chromep.tabs.executeScript(null, {code: itemUrl})
-          } else if (window.confirm(msgAlertBookmarklet)) {
-            await openOptionsPage()
-          }
+          await chromep.tabs.executeScript(null, {code: itemUrl})
         } else {
           await chromep.tabs.update({url: itemUrl})
         }

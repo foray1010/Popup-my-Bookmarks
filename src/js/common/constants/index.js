@@ -1,4 +1,3 @@
-export const OPTIONS_BOOKMARKLET = 'bookmarklet'
 export const OPTIONS_CLICK_BY_LEFT = 'clickByLeft'
 export const OPTIONS_CLICK_BY_LEFT_CTRL = 'clickByLeftCtrl'
 export const OPTIONS_CLICK_BY_LEFT_SHIFT = 'clickByLeftShift'

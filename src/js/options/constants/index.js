@@ -1,7 +1,6 @@
 import Immutable from 'seamless-immutable'
 
 import {
-  OPTIONS_BOOKMARKLET,
   OPTIONS_CLICK_BY_LEFT,
   OPTIONS_CLICK_BY_LEFT_CTRL,
   OPTIONS_CLICK_BY_LEFT_SHIFT,
@@ -26,7 +25,6 @@ export const NAV_MODULE_USER_INTERFACE = 'userInterface'
 
 export const OPTION_TABLE_MAP = Immutable({
   [NAV_MODULE_GENERAL]: [
-    OPTIONS_BOOKMARKLET,
     OPTIONS_DEF_EXPAND,
     OPTIONS_HIDE_ROOT_FOLDER,
     OPTIONS_SEARCH_TARGET,

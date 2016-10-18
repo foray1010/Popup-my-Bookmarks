@@ -4,12 +4,8 @@ import {createElement, Component, PropTypes} from 'react'
 import CSSModules from 'react-css-modules'
 
 import {
-  initOptionsValue,
-  setPermission
+  initOptionsValue
 } from '../functions'
-import {
-  OPTION_TABLE_MAP
-} from '../constants'
 import {
   updateOptions
 } from '../actions'
@@ -28,28 +24,10 @@ class OptionButton extends Component {
 
     const {
       dispatch,
-      options,
-      optionsConfig,
-      selectedNavModule
+      options
     } = this.props
 
     const newOptions = options.asMutable()
-
-    for (const optionName of OPTION_TABLE_MAP[selectedNavModule]) {
-      const optionConfig = optionsConfig[optionName]
-
-      if (optionConfig.permissions) {
-        const isSuccess = await setPermission(
-          optionName,
-          optionConfig,
-          newOptions[optionName]
-        )
-
-        if (!isSuccess) {
-          newOptions[optionName] = optionConfig.default
-        }
-      }
-    }
 
     await chromep.storage.sync.set(newOptions)
 
@@ -98,8 +76,7 @@ class OptionButton extends Component {
 OptionButton.propTypes = {
   dispatch: PropTypes.func.isRequired,
   options: PropTypes.object.isRequired,
-  optionsConfig: PropTypes.object.isRequired,
-  selectedNavModule: PropTypes.string.isRequired
+  optionsConfig: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
