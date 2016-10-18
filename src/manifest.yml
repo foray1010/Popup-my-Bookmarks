@@ -31,4 +31,3 @@ permissions:
   - "chrome://favicon/"
   - "bookmarks"
   - "storage"
-  - "tabs"

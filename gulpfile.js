@@ -248,8 +248,7 @@ gulp.task('md:readme', () => {
       'stable_version',
       'developer_guide',
       'todo',
-      'contributing',
-      'faq'
+      'contributing'
     ])
 
     // enlarge first header
@@ -266,8 +265,7 @@ gulp.task('md:store', () => {
     let fileData = yield getMarkdownData([
       'description',
       'todo',
-      'contributing',
-      'faq'
+      'contributing'
     ])
 
     fileData = fileData

@@ -107,10 +107,3 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
 - Fork me on GitHub, join our development!
 
   Repo: https://github.com/foray1010/Popup-my-Bookmarks
-
-
-## FAQ
-
-##### Why does PmB need to `Access your tabs and browsing activity`?
-
-- `Add current page` and `Open bookmark in tab` require permission - `Access your tabs and browsing activity`
