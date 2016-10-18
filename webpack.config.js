@@ -12,8 +12,8 @@ const config = require('./config')
 
 const webpackConfig = {
   entry: {
-    options: `./${config.sourceDir}/js/options/index.jsx`,
-    popup: `./${config.sourceDir}/js/popup/index.jsx`
+    options: ['babel-polyfill', `./${config.sourceDir}/js/options/index.jsx`],
+    popup: ['babel-polyfill', `./${config.sourceDir}/js/popup/index.jsx`]
   },
   module: {
     loaders: [
