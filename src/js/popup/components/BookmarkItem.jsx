@@ -37,18 +37,6 @@ class BookmarkItem extends Component {
     this.afterRender()
   }
 
-  shouldComponentUpdate(nextProps) {
-    const propNames = [
-      'isSelected',
-      'isUnclickable',
-      'itemInfo',
-      'searchKeyword',
-      'shouldKeepInView'
-    ]
-
-    return propNames.some((propName) => this.props[propName] !== nextProps[propName])
-  }
-
   componentDidUpdate() {
     const {
       shouldKeepInView
