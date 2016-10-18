@@ -28,6 +28,6 @@ commands:
 
 permissions:
   - "activeTab"
-  - "chrome://favicon/"
   - "bookmarks"
+  - "chrome://favicon/"
   - "storage"
