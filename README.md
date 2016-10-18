@@ -21,6 +21,8 @@
 
 - Save 24px of your vertical workspace (Rock on Chromebook!)
 
+- Take as few permissions as possible, no more scary permissions!
+
 - No background running application, save your memory and privacy!
 
 Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG.md
