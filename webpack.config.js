@@ -39,9 +39,9 @@ const webpackConfig = {
       addDependencyTo: webpack
     }),
     cssnext({
-      // autoprefixer: {
-      //   browsers: 'Chrome >= 31'
-      // }
+      autoprefixer: {
+        browsers: 'Chrome >= 31'
+      }
     })
   ],
   resolve: {
