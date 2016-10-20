@@ -2,7 +2,7 @@
   "name": "Popup-my-Bookmarks",
   "version": "5.0.0",
   "engines": {
-    "node": ">= 4.2"
+    "node": ">= 6.9"
   },
   "description": "A more efficient way to view and manage your bookmarks menu.",
   "private": true,

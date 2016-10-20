@@ -28,21 +28,21 @@ const outputDir = config.outputDir
 const sourceDir = config.sourceDir
 
 // language handlers
-function buildHtml(options) {
+function buildHtml({pugOptions = {}, watch = false}) {
   return co(function* () {
     const manifest = getManifest()
-    _.set(options, 'pugOptions.data.name', manifest.name)
+    _.set(pugOptions, 'data.name', manifest.name)
 
     const srcPath = path.join(sourceDir, 'html', '*.pug')
 
     const buildHandler = (thisSrcPath) => {
       return gulp.src(thisSrcPath)
         .pipe(plumber())
-        .pipe(pug(options.pugOptions))
+        .pipe(pug(pugOptions))
         .pipe(gulp.dest(outputDir))
     }
 
-    if (options.watch) {
+    if (watch) {
       gulp.watch(srcPath, (evt) => {
         const thisSrcPath = path.relative(__dirname, evt.path)
 
@@ -161,12 +161,8 @@ gulp.task('build:zip', [
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('build', ['build:zip'], () => {
-  return co(function* () {
-    // useless after zipped
-    yield fs.removeAsync(outputDir)
-  })
-})
+// cleanup
+gulp.task('build', ['build:zip'], () => fs.removeAsync(outputDir))
 
 // create a watched folder for testing
 gulp.task('dev:init', () => {
