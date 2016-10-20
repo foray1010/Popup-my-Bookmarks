@@ -11,17 +11,9 @@
     "message": "Scheidingslijn toevoegen",
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
-  "alertBookmarklet": {
-    "message": "U hebt bookmarklets nog niet ingeschakeld.\nWilt u deze inschakelen via de pagina opties?",
-    "description": "2013.08.12"
-  },
   "askOpenAll": {
     "message": "U staat op het punt %bkmarkCount% bladwijzers te openen.\nWeet u zeker dat u door wilt gaan?",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
-  },
-  "bookmarklet": {
-    "message": "Bookmarklet ondersteunen\n(Javascript Bookmark Script)",
-    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
   },
   "cancel": {
     "message": "Annuleren",

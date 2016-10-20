@@ -11,17 +11,9 @@
     "message": "添加分割条",
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
-  "alertBookmarklet": {
-    "message": "你还没有启用书签小程序。\n你要在设定页面启用它吗？",
-    "description": "2013.08.12"
-  },
   "askOpenAll": {
     "message": "你正尝试打开 %bkmarkCount% 个书签。\n你确定要继续吗？",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
-  },
-  "bookmarklet": {
-    "message": "支持书签小程序\n(Javascript 书签脚本)",
-    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
   },
   "cancel": {
     "message": "取消",

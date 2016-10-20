@@ -11,17 +11,9 @@
     "message": "新增分隔線",
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
-  "alertBookmarklet": {
-    "message": "你還沒有啟用書籤小程式。\n你要在設定頁面啟用它嗎？",
-    "description": "2013.08.12"
-  },
   "askOpenAll": {
     "message": "你正嘗試開啟 %bkmarkCount% 個書籤。\n你確定要繼續嗎？",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
-  },
-  "bookmarklet": {
-    "message": "支援書籤小程式\n(Javascript 書籤腳本)",
-    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
   },
   "cancel": {
     "message": "取消",

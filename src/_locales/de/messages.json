@@ -11,17 +11,9 @@
     "message": "Neue Trennlinie einfügen",
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
-  "alertBookmarklet": {
-    "message": "\"Bookmarklet\" ist nicht eingeschaltet.\nMöchten Sie es in den Optionen aktivieren?",
-    "description": "2013.08.12"
-  },
   "askOpenAll": {
     "message": "Hiermit werden %bkmarkCount% Lesezeichen gleichzeitig geöffnet.\nMöchten Sie diesen Vorgang fortsetzen?",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
-  },
-  "bookmarklet": {
-    "message": "Unterstützung für \"Bookmarklet\"\n(JavaScript-Code für Lesezeichen)",
-    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
   },
   "cancel": {
     "message": "Abbrechen",

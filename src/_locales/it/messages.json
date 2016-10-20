@@ -11,17 +11,9 @@
     "message": "Aggiungi separatore",
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
-  "alertBookmarklet": {
-    "message": "Non hai ancora abilitato il bookmarklet.\nDesideri abilitarlo dalla pagina delle opzioni?",
-    "description": "2013.08.12"
-  },
   "askOpenAll": {
     "message": "Stai per aprire %bkmarkCount% Preferiti.\nSei certo di voler continuare?",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
-  },
-  "bookmarklet": {
-    "message": "Bookmarklet supportato\n(Javascript Bookmark Script)",
-    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
   },
   "cancel": {
     "message": "Annulla",

@@ -11,17 +11,9 @@
     "message": "구분선 추가",
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
-  "alertBookmarklet": {
-    "message": "아직 북마클릿이 활성화 되지 않았습니다.\n옵션 페이지에서 활성화하시겠습니까?",
-    "description": "2013.08.12"
-  },
   "askOpenAll": {
     "message": "%bkmarkCount% 개의 북마크를 열려고 합니다.\n계속할까요?",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
-  },
-  "bookmarklet": {
-    "message": "북마클릿 지원\n(자바스크립트 북마크 스크립트)",
-    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
   },
   "cancel": {
     "message": "취소",

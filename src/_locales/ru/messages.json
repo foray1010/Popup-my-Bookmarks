@@ -11,17 +11,9 @@
     "message": "Добавить разделитель",
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
-  "alertBookmarklet": {
-    "message": "Расширение отключено.\nХотите включить его на странице настроек?",
-    "description": "2013.08.12"
-  },
   "askOpenAll": {
     "message": "Вы собираетесь открыть %bkmarkCount% закладок.\nУверены, что хотите продолжить?",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
-  },
-  "bookmarklet": {
-    "message": "Включить поддержку Javascript в закладках",
-    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
   },
   "cancel": {
     "message": "Отмена",

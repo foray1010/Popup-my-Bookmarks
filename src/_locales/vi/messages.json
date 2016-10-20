@@ -11,17 +11,9 @@
     "message": "Thêm dấu ngăn cách",
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
-  "alertBookmarklet": {
-    "message": "Bạn vẫn chưa bật phần đánh dấu.\nBạn có muốn bật phần này trong trang tùy chọn hay không?",
-    "description": "2013.08.12"
-  },
   "askOpenAll": {
     "message": "Bạn sắp sửa mở phần đánh dấu %bkmarkCount%.\nBạn có chắc rằng bạn muốn tiếp tục hay không?",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
-  },
-  "bookmarklet": {
-    "message": "Hỗ trợ trang đánh dấu\n(Javascript Bookmark Script)",
-    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
   },
   "cancel": {
     "message": "Hủy bỏ",

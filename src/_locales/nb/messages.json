@@ -11,17 +11,9 @@
     "message": "Legg til separator",
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
-  "alertBookmarklet": {
-    "message": "Du har ikke aktivert bookmarklet enda.\nVil du aktivere det i opsjons-panelet?",
-    "description": "2013.08.12"
-  },
   "askOpenAll": {
     "message": "Du holder på å åpne %bkmarkCount% bokmerker.\nEr du sikker på at du vil fortsette?",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
-  },
-  "bookmarklet": {
-    "message": "Bookmarklet støttet\n(Javascript Bookmark Script)",
-    "description": "2013.08.12 | Refer the translation of 'bookmarklet' to Wikipedia"
   },
   "cancel": {
     "message": "Avbryt",
