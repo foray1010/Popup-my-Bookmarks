@@ -66,6 +66,7 @@
     "postcss-loader": "^1.0.0",
     "pre-commit": "^1.1.2",
     "prompt": "^1.0.0",
+    "pug": "^2.0.0-beta6",
     "pug-loader": "^2.3.0",
     "style-loader": "^0.13.1",
     "stylelint-config-foray1010": "^1.0.2",
