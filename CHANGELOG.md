@@ -1,6 +1,7 @@
 ## 5.0.0 (unreleased)
 Features:
   - Open popup by Ctrl / CMD + B (suggested by Sebastian B)
+  - Use `Tab` and `Shift + Tab` to navigate bookmarks
 
 Changes:
   - Increase minimum Chrome version from 26 to 32
