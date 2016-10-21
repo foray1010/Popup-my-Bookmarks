@@ -10,8 +10,13 @@ const postcssImport = require('postcss-import')
 const querystring = require('querystring')
 const validate = require('webpack-validator')
 const webpack = require('webpack')
+const YAML = require('yamljs')
 
 const config = require('./config')
+
+const manifest = YAML.load(
+  path.join(config.sourceDir, 'manifest.yml')
+)
 
 const webpackConfig = {
   module: {
@@ -44,7 +49,7 @@ const webpackConfig = {
     }),
     cssnext({
       autoprefixer: {
-        browsers: 'Chrome >= 31'
+        browsers: `Chrome >= ${manifest.minimum_chrome_version}`
       }
     })
   ],
@@ -66,7 +71,8 @@ for (const appName of ['options', 'popup']) {
       new HtmlWebpackPlugin({
         filename: `${appName}.html`,
         inject: false,
-        template: path.join(config.sourceDir, 'html', `${appName}.pug`)
+        template: path.join(config.sourceDir, 'html', `${appName}.pug`),
+        title: manifest.name
       })
     ]
   })
