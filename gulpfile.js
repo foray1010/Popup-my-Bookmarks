@@ -1,6 +1,5 @@
 'use strict'
 
-const _ = require('lodash')
 const bluebird = require('bluebird')
 const co = require('co')
 const fs = require('fs-extra')
@@ -10,7 +9,6 @@ const gutil = require('gulp-util')
 const imageGrayScale = require('gulp-image-grayscale')
 const path = require('path')
 const plumber = require('gulp-plumber')
-const pug = require('gulp-pug')
 const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
 const YAML = require('yamljs')
@@ -26,36 +24,6 @@ bluebird.promisifyAll(fs)
 // predefined dir path
 const outputDir = config.outputDir
 const sourceDir = config.sourceDir
-
-// language handlers
-function buildHtml({pugOptions = {}, watch = false}) {
-  return co(function* () {
-    const manifest = getManifest()
-    _.set(pugOptions, 'data.name', manifest.name)
-
-    const srcPath = path.join(sourceDir, 'html', '*.pug')
-
-    const buildHandler = (thisSrcPath) => {
-      return gulp.src(thisSrcPath)
-        .pipe(plumber())
-        .pipe(pug(pugOptions))
-        .pipe(gulp.dest(outputDir))
-    }
-
-    if (watch) {
-      gulp.watch(srcPath, (evt) => {
-        const thisSrcPath = path.relative(__dirname, evt.path)
-
-        buildHandler(thisSrcPath)
-          .on('end', () => {
-            gutil.log(gutil.colors.magenta(thisSrcPath), 'is built')
-          })
-      })
-    }
-
-    return buildHandler(srcPath)
-  })
-}
 
 function* buildManifest() {
   const manifest = getManifest()
@@ -82,7 +50,7 @@ function getManifest() {
 function runWebpack() {
   return plumber()
     .pipe(webpackStream(webpackConfig, webpack))
-    .pipe(gulp.dest('.'))
+    .pipe(gulp.dest(webpackConfig.output.path))
 }
 
 function validatePackageVersion() {
@@ -119,12 +87,6 @@ gulp.task('build:init', () => {
   })
 })
 
-gulp.task('build:html', ['build:init'], () => {
-  return buildHtml({
-    watch: false
-  })
-})
-
 gulp.task('build:webpack', ['build:init'], () => {
   return runWebpack()
 })
@@ -152,7 +114,6 @@ gulp.task('build:others', ['build:init'], () => {
 })
 
 gulp.task('build:zip', [
-  'build:html',
   'build:webpack',
   'build:others'
 ], () => {
@@ -170,15 +131,6 @@ gulp.task('dev:init', () => {
     validatePackageVersion()
 
     yield initDir()
-  })
-})
-
-gulp.task('dev:html', ['dev:init'], () => {
-  return buildHtml({
-    pugOptions: {
-      pretty: true
-    },
-    watch: true
   })
 })
 
@@ -218,7 +170,6 @@ gulp.task('dev:others', ['dev:init'], () => {
 })
 
 gulp.task('dev', [
-  'dev:html',
   'dev:img',
   'dev:webpack',
   'dev:others'

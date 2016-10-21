@@ -56,9 +56,9 @@
     "gulp-filter": "^4.0.0",
     "gulp-image-grayscale": "^2.0.1",
     "gulp-plumber": "^1.1.0",
-    "gulp-pug": "^3.0.4",
     "gulp-util": "^3.0.7",
     "gulp-zip": "^3.2.0",
+    "html-webpack-plugin": "^2.22.0",
     "merge-and-concat": "^1.0.2",
     "optimize-js-plugin": "0.0.4",
     "postcss-cssnext": "^2.8.0",
@@ -66,11 +66,13 @@
     "postcss-loader": "^1.0.0",
     "pre-commit": "^1.1.2",
     "prompt": "^1.0.0",
+    "pug-loader": "^2.3.0",
     "style-loader": "^0.13.1",
     "stylelint-config-foray1010": "^1.0.2",
     "transifex": "^1.4.4",
     "webpack": "^1.12.13",
     "webpack-stream": "^3.1.0",
+    "webpack-validator": "^2.2.9",
     "yamljs": "^0.2.6"
   }
 }

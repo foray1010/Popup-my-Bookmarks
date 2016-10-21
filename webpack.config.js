@@ -2,36 +2,40 @@
 
 const cssnext = require('postcss-cssnext')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const mergeAndConcat = require('merge-and-concat')
 const OptimizeJsPlugin = require('optimize-js-plugin')
+const path = require('path')
 const postcssImport = require('postcss-import')
 const querystring = require('querystring')
+const validate = require('webpack-validator')
 const webpack = require('webpack')
 
 const config = require('./config')
 
 const webpackConfig = {
-  entry: {
-    options: ['babel-polyfill', `./${config.sourceDir}/js/options/index.jsx`],
-    popup: ['babel-polyfill', `./${config.sourceDir}/js/popup/index.jsx`]
-  },
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
         exclude: /\/node_modules\//,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.pug$/,
+        loader: 'pug-loader'
       }
     ]
   },
   output: {
-    filename: `./${config.outputDir}/js/[name].js`
+    path: path.resolve(__dirname, config.outputDir),
+    filename: path.join('js', '[name].js')
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
-    new webpack.optimize.CommonsChunkPlugin(`./${config.outputDir}/js/common.js`),
+    new webpack.optimize.CommonsChunkPlugin(path.join('js', 'common.js')),
     new webpack.optimize.OccurenceOrderPlugin(true)
   ],
   postcss: () => [
@@ -51,6 +55,21 @@ const webpackConfig = {
     timings: true,
     version: false
   }
+}
+
+for (const appName of ['options', 'popup']) {
+  mergeAndConcat(webpackConfig, {
+    entry: {
+      [appName]: ['babel-polyfill', `./${config.sourceDir}/js/${appName}/index.jsx`]
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        filename: `${appName}.html`,
+        inject: false,
+        template: path.join(config.sourceDir, 'html', `${appName}.pug`)
+      })
+    ]
+  })
 }
 
 const cssLoaderConfigQS = querystring.stringify({
@@ -94,7 +113,7 @@ switch (process.env.NODE_ENV) {
         ]
       },
       plugins: [
-        new ExtractTextPlugin(`./${config.outputDir}/css/[name].css`, {
+        new ExtractTextPlugin(path.join('css', '[name].css'), {
           allChunks: true
         }),
         new webpack.optimize.DedupePlugin(),
@@ -118,4 +137,4 @@ switch (process.env.NODE_ENV) {
   default:
 }
 
-module.exports = webpackConfig
+module.exports = validate(webpackConfig)
