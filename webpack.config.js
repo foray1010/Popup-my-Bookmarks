@@ -12,10 +12,10 @@ const validate = require('webpack-validator')
 const webpack = require('webpack')
 const YAML = require('yamljs')
 
-const config = require('./config')
+const {outputDir, sourceDir} = require('./config')
 
 const manifest = YAML.load(
-  path.join(config.sourceDir, 'manifest.yml')
+  path.join(sourceDir, 'manifest.yml')
 )
 
 const webpackConfig = {
@@ -33,7 +33,7 @@ const webpackConfig = {
     ]
   },
   output: {
-    path: path.resolve(__dirname, config.outputDir),
+    path: path.resolve(__dirname, outputDir),
     filename: path.join('js', '[name].js')
   },
   plugins: [
@@ -65,13 +65,13 @@ const webpackConfig = {
 for (const appName of ['options', 'popup']) {
   mergeAndConcat(webpackConfig, {
     entry: {
-      [appName]: ['babel-polyfill', `./${config.sourceDir}/js/${appName}/index.jsx`]
+      [appName]: ['babel-polyfill', `./${sourceDir}/js/${appName}/index.jsx`]
     },
     plugins: [
       new HtmlWebpackPlugin({
         filename: `${appName}.html`,
         inject: false,
-        template: path.join(config.sourceDir, 'html', `${appName}.pug`),
+        template: path.join(sourceDir, 'html', `${appName}.pug`),
         title: manifest.name
       })
     ]

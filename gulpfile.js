@@ -14,16 +14,12 @@ const webpackStream = require('webpack-stream')
 const YAML = require('yamljs')
 const zip = require('gulp-zip')
 
-const config = require('./config')
+const {outputDir, sourceDir} = require('./config')
 const pkg = require('./package')
 const webpackConfig = require('./webpack.config')
 
 // promisify
 bluebird.promisifyAll(fs)
-
-// predefined dir path
-const outputDir = config.outputDir
-const sourceDir = config.sourceDir
 
 function* buildManifest() {
   const manifest = getManifest()
