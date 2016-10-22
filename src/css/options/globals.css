@@ -1,5 +1,3 @@
-@import "../common/variables.css";
-
 :global(body) {
   font: 12px sans-serif;
 }
