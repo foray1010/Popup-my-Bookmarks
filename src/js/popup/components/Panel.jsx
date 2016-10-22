@@ -13,12 +13,12 @@ const Panel = (props) => {
   const mainPanelItems = []
   const subPanelItems = []
 
-  for (const [treeIndex] of trees.entries()) {
+  for (const [treeIndex, treeInfo] of trees.entries()) {
     const targetPanelItems = treeIndex % 2 === 0 ? mainPanelItems : subPanelItems
 
     targetPanelItems.push(
       <BookmarkTree
-        key={String(treeIndex)}
+        key={treeInfo.id}
         treeIndex={treeIndex}
       />
     )
