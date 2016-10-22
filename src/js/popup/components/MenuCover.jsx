@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component, PropTypes} from 'react'
+import {createElement, PropTypes, PureComponent} from 'react'
 import CSSModules from 'react-css-modules'
 
 import {
@@ -13,7 +13,7 @@ import {
 
 import styles from '../../../css/popup/menu-cover.css'
 
-class MenuCover extends Component {
+class MenuCover extends PureComponent {
   @autobind
   handleClick() {
     const {dispatch} = this.props

@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component, PropTypes} from 'react'
+import {createElement, PropTypes, PureComponent} from 'react'
 import classNames from 'classnames'
 import CSSModules from 'react-css-modules'
 
@@ -128,7 +128,7 @@ async function sortByName(parentId) {
   }
 }
 
-class MenuItem extends Component {
+class MenuItem extends PureComponent {
   @autobind
   async handleClick(evt) {
     evt.preventDefault()

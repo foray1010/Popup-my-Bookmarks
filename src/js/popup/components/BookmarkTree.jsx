@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component, PropTypes} from 'react'
+import {createElement, PropTypes, PureComponent} from 'react'
 import CSSModules from 'react-css-modules'
 
 import {
@@ -18,7 +18,7 @@ import TreeHeader from './TreeHeader'
 
 import styles from '../../../css/popup/bookmark-tree.css'
 
-class BookmarkTree extends Component {
+class BookmarkTree extends PureComponent {
   componentDidMount() {
     this.afterRender()
   }

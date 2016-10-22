@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component, PropTypes} from 'react'
+import {createElement, PropTypes, PureComponent} from 'react'
 import classNames from 'classnames'
 import CSSModules from 'react-css-modules'
 
@@ -11,7 +11,7 @@ import styles from '../../../../../css/options/select-button-option.css'
 const msgNo = chrome.i18n.getMessage('no')
 const msgYes = chrome.i18n.getMessage('yes')
 
-class Option extends Component {
+class Option extends PureComponent {
   @autobind
   handleChange(evt) {
     const {

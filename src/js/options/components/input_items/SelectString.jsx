@@ -1,10 +1,10 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component, PropTypes} from 'react'
+import {createElement, PropTypes, PureComponent} from 'react'
 
 import {updateSingleOption} from '../../actions'
 
-class SelectString extends Component {
+class SelectString extends PureComponent {
   @autobind
   handleChange(evt) {
     const {

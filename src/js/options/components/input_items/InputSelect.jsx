@@ -1,13 +1,13 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component, PropTypes} from 'react'
+import {createElement, PropTypes, PureComponent} from 'react'
 import CSSModules from 'react-css-modules'
 
 import {updateSingleOption} from '../../actions'
 
 import styles from '../../../../css/options/input-select.css'
 
-class InputSelect extends Component {
+class InputSelect extends PureComponent {
   @autobind
   handleBlur(evt) {
     const {

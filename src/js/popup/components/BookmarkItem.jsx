@@ -1,6 +1,6 @@
 import {autobind, debounce} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component, PropTypes} from 'react'
+import {createElement, PropTypes, PureComponent} from 'react'
 import classNames from 'classnames'
 import CSSModules from 'react-css-modules'
 
@@ -32,7 +32,7 @@ import chromep from '../../common/lib/chromePromise'
 
 import styles from '../../../css/popup/bookmark-item.css'
 
-class BookmarkItem extends Component {
+class BookmarkItem extends PureComponent {
   componentDidMount() {
     this.afterRender()
   }

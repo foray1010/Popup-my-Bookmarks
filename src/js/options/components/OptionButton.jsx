@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component, PropTypes} from 'react'
+import {createElement, PropTypes, PureComponent} from 'react'
 import CSSModules from 'react-css-modules'
 
 import {
@@ -16,7 +16,7 @@ import styles from '../../../css/options/option-button.css'
 const msgConfirm = chrome.i18n.getMessage('confirm')
 const msgDefault = chrome.i18n.getMessage('default')
 
-class OptionButton extends Component {
+class OptionButton extends PureComponent {
   @autobind
   async handleConfirm(evt) {
     evt.persist()

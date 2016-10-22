@@ -1,6 +1,6 @@
 import {autobind, debounce} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component, PropTypes} from 'react'
+import {createElement, PropTypes, PureComponent} from 'react'
 import CSSModules from 'react-css-modules'
 
 import {
@@ -16,7 +16,7 @@ import styles from '../../../css/popup/search.css'
 
 const msgSearch = chrome.i18n.getMessage('search')
 
-class Search extends Component {
+class Search extends PureComponent {
   @autobind
   handleInput(evt) {
     evt.persist()

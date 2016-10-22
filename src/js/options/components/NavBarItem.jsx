@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component, PropTypes} from 'react'
+import {createElement, PropTypes, PureComponent} from 'react'
 import classNames from 'classnames'
 import CSSModules from 'react-css-modules'
 
@@ -11,7 +11,7 @@ import {
 
 import styles from '../../../css/options/nav-bar-item.css'
 
-class NavBarItem extends Component {
+class NavBarItem extends PureComponent {
   @autobind
   async handleClick(evt) {
     evt.persist()

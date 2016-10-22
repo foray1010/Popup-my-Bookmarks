@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component, PropTypes} from 'react'
+import {createElement, PropTypes, PureComponent} from 'react'
 import CSSModules from 'react-css-modules'
 
 import {
@@ -19,7 +19,7 @@ const msgConfirm = chrome.i18n.getMessage('confirm')
 const msgEdit = chrome.i18n.getMessage('edit')
 const msgRename = chrome.i18n.getMessage('rename')
 
-class Editor extends Component {
+class Editor extends PureComponent {
   componentDidUpdate() {
     const {editorTarget} = this.props
 

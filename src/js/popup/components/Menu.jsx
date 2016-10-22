@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {createElement, Component, PropTypes} from 'react'
+import {createElement, PropTypes, PureComponent} from 'react'
 import CSSModules from 'react-css-modules'
 
 import {
@@ -15,7 +15,7 @@ import MenuArea from './MenuArea'
 
 import styles from '../../../css/popup/menu.css'
 
-class Menu extends Component {
+class Menu extends PureComponent {
   componentDidUpdate() {
     this.setMenuPosition()
   }

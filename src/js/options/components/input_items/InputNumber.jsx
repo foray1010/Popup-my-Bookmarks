@@ -1,10 +1,10 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component, PropTypes} from 'react'
+import {createElement, PropTypes, PureComponent} from 'react'
 
 import {updateSingleOption} from '../../actions'
 
-class InputNumber extends Component {
+class InputNumber extends PureComponent {
   @autobind
   handleBlur(evt) {
     const {

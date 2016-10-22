@@ -1,6 +1,6 @@
 import {autobind, debounce} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component, PropTypes} from 'react'
+import {createElement, PropTypes, PureComponent} from 'react'
 import _debounce from 'lodash/debounce'
 import CSSModules from 'react-css-modules'
 
@@ -31,7 +31,7 @@ import Panel from '../components/Panel'
 
 import styles from '../../../css/popup/app.css'
 
-class App extends Component {
+class App extends PureComponent {
   componentWillMount() {
     const {options} = this.props
 

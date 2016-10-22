@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
-import {createElement, Component, PropTypes} from 'react'
+import {createElement, PropTypes, PureComponent} from 'react'
 import CSSModules from 'react-css-modules'
 
 import {
@@ -9,7 +9,7 @@ import {
 
 import styles from '../../../css/popup/tree-header.css'
 
-class TreeHeader extends Component {
+class TreeHeader extends PureComponent {
   @autobind
   handleClose() {
     const {
