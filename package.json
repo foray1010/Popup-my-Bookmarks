@@ -25,7 +25,7 @@
   ],
   "dependencies": {
     "babel-polyfill": "^6.5.0",
-    "chrome-promise": "^1.0.6",
+    "chrome-promise": "^2.0.2",
     "classnames": "^2.2.3",
     "core-decorators": "^0.13.0",
     "lodash": "^4.16.1",
