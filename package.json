@@ -27,7 +27,7 @@
     "babel-polyfill": "^6.5.0",
     "chrome-promise": "^2.0.2",
     "classnames": "^2.2.3",
-    "core-decorators": "^0.13.0",
+    "core-decorators": "^0.14.0",
     "lodash": "^4.16.1",
     "normalize.css": "^5.0.0",
     "open-color": "^1.4.0",
