@@ -286,6 +286,7 @@ class MenuItem extends PureComponent {
         <a
           styleName={thisStyleName}
           href=''
+          tabIndex={isUnclickable ? -1 : null} // not accessible by Tab
           onClick={this.handleClick}
         >
           {chrome.i18n.getMessage(menuItemKey)}

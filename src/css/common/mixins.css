@@ -12,5 +12,6 @@
   --highlight-list-item: {
     background-color: var(--highlight-level1);
     border-color: var(--highlight-level2);
+    outline: 0;
   }
 }
