@@ -107,6 +107,9 @@ class App extends PureComponent {
         await this.keyboardArrowUpDownHandler(evt.shiftKey)
         break
 
+      case 13: // enter
+        break
+
       case 37: // left
         await this.keyboardArrowLeftRightHandler(true)
         break
@@ -121,6 +124,10 @@ class App extends PureComponent {
 
       case 40: // down
         await this.keyboardArrowUpDownHandler(false)
+        break
+
+      case 91: // command
+      case 93: // command
         break
 
       default:
