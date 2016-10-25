@@ -30,10 +30,10 @@ const Panel = (props) => {
 
   return (
     <main styleName='main'>
-      <section styleName='master' className='panel-width'>
+      <section styleName='master'>
         {mainPanelItems}
       </section>
-      <section styleName='slave' className='panel-width' hidden={!subPanelItems.length}>
+      <section styleName='slave' hidden={!subPanelItems.length}>
         {subPanelItems}
       </section>
     </main>

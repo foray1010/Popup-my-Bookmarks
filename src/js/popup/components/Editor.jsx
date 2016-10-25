@@ -122,7 +122,6 @@ class Editor extends PureComponent {
         ref={(ref) => {
           this.baseEl = ref
         }}
-        className='panel-width'
         styleName='main'
         hidden={isHidden}
       >

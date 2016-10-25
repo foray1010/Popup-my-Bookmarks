@@ -440,12 +440,6 @@ class BookmarkItem extends PureComponent {
       >
         <a
           styleName={thisStyleName}
-          className={classNames(
-            'bookmark-item',
-            {
-              separator: bookmarkType === TYPE_SEPARATOR
-            }
-          )}
           href={itemInfo.url || '#'}
           draggable={false}
           tabIndex='-1'
@@ -456,7 +450,6 @@ class BookmarkItem extends PureComponent {
         >
           <img
             styleName='icon'
-            className='icon'
             src={iconSrc}
             alt=''
             hidden={isIconHidden}

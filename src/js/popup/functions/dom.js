@@ -5,6 +5,10 @@ import {
 
 import css from '../../common/lib/css'
 
+import bookmarkItemStyles from '../../../css/popup/bookmark-item.css'
+import editorStyles from '../../../css/popup/editor.css'
+import panelStyles from '../../../css/popup/panel.css'
+
 export function resetBodySize() {
   const bodyStyle = document.body.style
 
@@ -39,28 +43,41 @@ export function setPredefinedStyleSheet(options) {
     setWidth
   } = options
 
+  const getClassSelector = (className) => {
+    // remove class name from compose
+    className = className.split(' ')[0]
+
+    return `.${className}`
+  }
+
   const itemHeight = getItemHeight(options)
   const itemOffsetHeight = getItemOffsetHeight(options)
+  const panelWidthSelector = [
+    editorStyles.main,
+    panelStyles.master,
+    panelStyles.slave
+  ]
+    .map(getClassSelector)
+    .join(',')
 
   css.set({
     body: {
       'font-family': fontFamily,
       'font-size': `${fontSize}px`
     },
-    '.bookmark-item': {
-      height: `${itemHeight}px`
-    },
-    '.icon': {
+    [getClassSelector(bookmarkItemStyles.icon)]: {
       // set the width same as item height, as it is a square
       width: `${itemHeight}px`
     },
-    '.panel-width': {
-      // set panel (#main, #sub) width
-      width: `${setWidth}px`
+    [getClassSelector(bookmarkItemStyles.main)]: {
+      height: `${itemHeight}px`
     },
-    '.separator': {
+    [getClassSelector(bookmarkItemStyles.separator)]: {
       // set separator height depend on item height
       height: `${itemOffsetHeight / 2}px`
+    },
+    [panelWidthSelector]: {
+      width: `${setWidth}px`
     }
   })
 }
