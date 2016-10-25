@@ -18,6 +18,7 @@ import {
   replaceTreeInfoByIndex,
   removeTreeInfosFromIndex,
   updateDragTarget,
+  updateKeyboardTarget,
   updateMenuTarget,
   updateMousePosition
 } from '../actions'
@@ -299,17 +300,26 @@ class BookmarkItem extends PureComponent {
     } = this.props
 
     switch (evt.type) {
-      case 'mouseenter':
+      case 'mouseenter': {
+        const actionList = [
+          updateKeyboardTarget(null)
+        ]
+
         if (!searchKeyword && !options.opFolderBy) {
           if (isFolder(itemInfo)) {
             if (!isFolderOpened(trees, itemInfo)) {
-              dispatch(await this.openFolder())
+              actionList.push(await this.openFolder())
+
+              dispatch
             }
           } else {
-            dispatch(removeTreeInfosFromIndex(treeIndex + 1))
+            actionList.push(removeTreeInfosFromIndex(treeIndex + 1))
           }
         }
+
+        dispatch(actionList)
         break
+      }
 
       case 'mouseleave':
         break
