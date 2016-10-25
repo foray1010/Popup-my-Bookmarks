@@ -2,8 +2,7 @@ import {
   getItemHeight,
   getItemOffsetHeight
 } from '.'
-
-import css from '../../common/lib/css'
+import * as css from '../../common/lib/css'
 
 import bookmarkItemStyles from '../../../css/popup/bookmark-item.css'
 import editorStyles from '../../../css/popup/editor.css'

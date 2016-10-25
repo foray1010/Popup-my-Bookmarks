@@ -1,44 +1,38 @@
-function propEach(obj, fn) {
-  for (const propName of Object.keys(obj)) {
-    fn(propName, obj[propName])
-  }
-}
+import _forEach from 'lodash/forEach'
 
-const css = (() => {
+const sheet = genStyleEl().sheet
+
+function genStyleEl() {
   const styleEl = document.createElement('style')
 
   document.head.appendChild(styleEl)
 
-  const sheet = styleEl.sheet
+  return styleEl
+}
 
-  const set = (param1, param2) => {
-    const _action = (styleSelector, styleList) => {
-      let styleValue = ''
+export const set = (param1, param2) => {
+  const _action = (styleList, styleSelector) => {
+    let styleValue = ''
 
-      propEach(styleList, (propName, propValue) => {
-        styleValue += `${propName}:${propValue};`
-      })
+    _forEach(styleList, (propValue, propName) => {
+      styleValue += `${propName}:${propValue};`
+    })
 
-      sheet.insertRule(
-        styleSelector + '{' + styleValue + '}',
-        sheet.cssRules.length
-      )
-    }
-
-    if (param2 === undefined) {
-      propEach(param1, _action)
-    } else {
-      _action(param1, param2)
-    }
+    sheet.insertRule(
+      styleSelector + '{' + styleValue + '}',
+      sheet.cssRules.length
+    )
   }
 
-  const unsetAll = () => {
-    while (sheet.cssRules[0]) {
-      sheet.deleteRule(0)
-    }
+  if (param2 === undefined) {
+    _forEach(param1, _action)
+  } else {
+    _action(param1, param2)
   }
+}
 
-  return {set, unsetAll}
-})()
-
-export default css
+export const unsetAll = () => {
+  while (sheet.cssRules[0]) {
+    sheet.deleteRule(0)
+  }
+}
