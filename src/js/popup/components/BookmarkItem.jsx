@@ -283,7 +283,14 @@ class BookmarkItem extends PureComponent {
 
   @autobind
   handleMouse(evt) {
+    const {
+      dispatch
+    } = this.props
+
     evt.persist()
+
+    // should not focus on more than one itemZ
+    dispatch(updateKeyboardTarget(null))
 
     this._handleMouse(evt)
   }
@@ -300,26 +307,17 @@ class BookmarkItem extends PureComponent {
     } = this.props
 
     switch (evt.type) {
-      case 'mouseenter': {
-        const actionList = [
-          updateKeyboardTarget(null)
-        ]
-
+      case 'mouseenter':
         if (!searchKeyword && !options.opFolderBy) {
           if (isFolder(itemInfo)) {
             if (!isFolderOpened(trees, itemInfo)) {
-              actionList.push(await this.openFolder())
-
-              dispatch
+              dispatch(await this.openFolder())
             }
           } else {
-            actionList.push(removeTreeInfosFromIndex(treeIndex + 1))
+            dispatch(removeTreeInfosFromIndex(treeIndex + 1))
           }
         }
-
-        dispatch(actionList)
         break
-      }
 
       case 'mouseleave':
         break
