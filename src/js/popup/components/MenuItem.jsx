@@ -28,12 +28,10 @@ import chromep from '../../common/lib/chromePromise'
 import styles from '../../../css/popup/menu-item.css'
 
 async function addCurrentPage(menuTarget) {
-  const results = await chromep.tabs.query({
+  const [currentTab] = await chromep.tabs.query({
     currentWindow: true,
     active: true
   })
-
-  const currentTab = results[0]
 
   await createBookmarkBelowMenuTarget(menuTarget, currentTab.title, currentTab.url)
 }
@@ -245,18 +243,16 @@ class MenuItem extends PureComponent {
         }
       }
 
-      const treeInfo = await chromep.bookmarks.getSubTree(copyTarget.id)
-
-      const itemInfo = treeInfo[0]
+      const [treeInfo] = await chromep.bookmarks.getSubTree(copyTarget.id)
 
       const createdItemInfo = await createBookmarkBelowMenuTarget(
         menuTarget,
-        itemInfo.title,
-        itemInfo.url
+        treeInfo.title,
+        treeInfo.url
       )
 
-      if (getBookmarkType(itemInfo) === TYPE_FOLDER) {
-        await copyChildFn(itemInfo, createdItemInfo.id)
+      if (getBookmarkType(treeInfo) === TYPE_FOLDER) {
+        await copyChildFn(treeInfo, createdItemInfo.id)
       }
     }
 

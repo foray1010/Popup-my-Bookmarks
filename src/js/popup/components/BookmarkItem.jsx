@@ -86,21 +86,17 @@ class BookmarkItem extends PureComponent {
     if (searchKeyword) {
       const breadcrumbArr = []
 
-      const getBreadcrumb = async (breadId) => {
-        const results = await chromep.bookmarks.get(breadId)
-
-        const thisItemInfo = results[0]
+      let breadId = itemInfo.parentId
+      while (breadId !== '0') {
+        const [thisItemInfo] = await chromep.bookmarks.get(breadId)
 
         breadcrumbArr.unshift(thisItemInfo.title)
-
-        if (thisItemInfo.parentId === '0') {
-          tooltipArr.unshift(breadcrumbArr.join(' > '))
-        } else {
-          await getBreadcrumb(thisItemInfo.parentId)
-        }
+        breadId = thisItemInfo.parentId
       }
 
-      await getBreadcrumb(itemInfo.parentId)
+      tooltipArr.unshift(
+        `[${breadcrumbArr.join(' > ')}]`
+      )
     }
 
     return tooltipArr.join('\n')

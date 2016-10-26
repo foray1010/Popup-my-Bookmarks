@@ -151,9 +151,9 @@ export async function openMultipleBookmarks(itemInfo, {
   const urlList = []
 
   if (isFolder(itemInfo)) {
-    const results = await chromep.bookmarks.getSubTree(itemInfo.id)
+    const [treeInfo] = await chromep.bookmarks.getSubTree(itemInfo.id)
 
-    const childrenInfo = results[0].children
+    const childrenInfo = treeInfo.children
 
     for (const thisItemInfo of childrenInfo) {
       if (getBookmarkType(thisItemInfo) === TYPE_BOOKMARK) {
@@ -170,9 +170,7 @@ export async function openMultipleBookmarks(itemInfo, {
       }
     }
   } else {
-    const results = await chromep.bookmarks.get(itemInfo.id)
-
-    const thisItemInfo = results[0]
+    const [thisItemInfo] = await chromep.bookmarks.get(itemInfo.id)
 
     urlList.push(thisItemInfo.url)
   }
