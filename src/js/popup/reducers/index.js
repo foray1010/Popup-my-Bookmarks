@@ -17,7 +17,7 @@ import {
   UPDATE_CUT_TARGET,
   UPDATE_DRAG_TARGET,
   UPDATE_EDITOR_TARGET,
-  UPDATE_KEYBOARD_TARGET,
+  UPDATE_FOCUS_TARGET,
   UPDATE_MENU_TARGET,
   UPDATE_MOUSE_POSITION,
   UPDATE_SEARCH_KEYWORD,
@@ -92,18 +92,18 @@ const rootReducer = combineReducers({
     }
   },
 
-  itemOffsetHeight(state = 0) {
-    return state
-  },
-
-  keyboardTarget(state = null, action) {
+  focusTarget(state = null, action) {
     switch (action.type) {
-      case UPDATE_KEYBOARD_TARGET:
-        return action.keyboardTarget
+      case UPDATE_FOCUS_TARGET:
+        return action.focusTarget
 
       default:
         return state
     }
+  },
+
+  itemOffsetHeight(state = 0) {
+    return state
   },
 
   menuTarget(state = null, action) {

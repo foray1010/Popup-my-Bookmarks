@@ -17,8 +17,8 @@ import {
   removeTreeInfosFromIndex,
   replaceTreeInfoByIndex,
   updateEditorTarget,
+  updateFocusTarget,
   updateMenuTarget,
-  updateKeyboardTarget,
   updateTrees
 } from '../actions'
 import {
@@ -42,21 +42,21 @@ class App extends PureComponent {
     this.initBookmarkEvent()
   }
 
-  getKeyboardTargetTreeIndex() {
+  getFocusTargetTreeIndex() {
     const {
-      keyboardTarget,
+      focusTarget,
       trees
     } = this.props
 
-    if (!keyboardTarget) {
+    if (!focusTarget) {
       return trees.length - 1
     }
 
-    if (getBookmarkType(keyboardTarget) === TYPE_ROOT_FOLDER) {
+    if (getBookmarkType(focusTarget) === TYPE_ROOT_FOLDER) {
       return 0
     }
 
-    const matchedIndex = trees.findIndex((treeInfo) => treeInfo.id === keyboardTarget.parentId)
+    const matchedIndex = trees.findIndex((treeInfo) => treeInfo.id === focusTarget.parentId)
 
     if (matchedIndex < 0) {
       return trees.length - 1
@@ -192,7 +192,7 @@ class App extends PureComponent {
     const {
       dispatch,
       editorTarget,
-      keyboardTarget,
+      focusTarget,
       menuTarget,
       rootTree,
       searchKeyword,
@@ -200,9 +200,9 @@ class App extends PureComponent {
     } = this.props
 
     if (editorTarget || menuTarget) return
-    if (!keyboardTarget) return
+    if (!focusTarget) return
 
-    const targetTreeIndex = this.getKeyboardTargetTreeIndex()
+    const targetTreeIndex = this.getFocusTargetTreeIndex()
 
     if (isLeft) {
       if (trees.length > 0) {
@@ -217,15 +217,15 @@ class App extends PureComponent {
 
         dispatch([
           removeTreeInfosFromIndex(targetTreeIndex),
-          updateKeyboardTarget(
-            prevBookmarkList.find((itemInfo) => itemInfo.id === keyboardTarget.parentId)
+          updateFocusTarget(
+            prevBookmarkList.find((itemInfo) => itemInfo.id === focusTarget.parentId)
           )
         ])
       }
     } else {
-      if (isFolder(keyboardTarget)) {
+      if (isFolder(focusTarget)) {
         const nextTreeIndex = targetTreeIndex + 1
-        const nextTreeInfo = await getFlatTree(keyboardTarget.id)
+        const nextTreeInfo = await getFlatTree(focusTarget.id)
 
         const nextBookmarkList = genBookmarkList(nextTreeInfo, {
           rootTree,
@@ -235,7 +235,7 @@ class App extends PureComponent {
 
         dispatch([
           await replaceTreeInfoByIndex(nextTreeIndex, nextTreeInfo),
-          updateKeyboardTarget(nextBookmarkList[0])
+          updateFocusTarget(nextBookmarkList[0])
         ])
       }
     }
@@ -245,7 +245,7 @@ class App extends PureComponent {
     const {
       dispatch,
       editorTarget,
-      keyboardTarget,
+      focusTarget,
       menuTarget,
       rootTree,
       searchKeyword,
@@ -254,7 +254,7 @@ class App extends PureComponent {
 
     if (editorTarget || menuTarget) return
 
-    const targetTreeIndex = this.getKeyboardTargetTreeIndex()
+    const targetTreeIndex = this.getFocusTargetTreeIndex()
 
     const targetBookmarkList = genBookmarkList(trees[targetTreeIndex], {
       rootTree,
@@ -265,9 +265,9 @@ class App extends PureComponent {
     const lastItemIndex = targetBookmarkList.length - 1
 
     let nextSelectedIndex
-    if (keyboardTarget) {
+    if (focusTarget) {
       const origSelectedIndex = targetBookmarkList
-        .findIndex((itemInfo) => itemInfo.id === keyboardTarget.id)
+        .findIndex((itemInfo) => itemInfo.id === focusTarget.id)
 
       if (isUp) {
         nextSelectedIndex = origSelectedIndex - 1
@@ -284,7 +284,7 @@ class App extends PureComponent {
       nextSelectedIndex = isUp ? lastItemIndex : 0
     }
 
-    dispatch(updateKeyboardTarget(targetBookmarkList[nextSelectedIndex]))
+    dispatch(updateFocusTarget(targetBookmarkList[nextSelectedIndex]))
   }
 
   render() {
@@ -309,7 +309,7 @@ class App extends PureComponent {
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
   editorTarget: PropTypes.object,
-  keyboardTarget: PropTypes.object,
+  focusTarget: PropTypes.object,
   menuTarget: PropTypes.object,
   options: PropTypes.object.isRequired,
   rootTree: PropTypes.object.isRequired,
@@ -319,7 +319,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   editorTarget: state.editorTarget,
-  keyboardTarget: state.keyboardTarget,
+  focusTarget: state.focusTarget,
   menuTarget: state.menuTarget,
   options: state.options,
   rootTree: state.rootTree,

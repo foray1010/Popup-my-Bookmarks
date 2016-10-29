@@ -29,10 +29,6 @@
   &.unclickable {
     @apply --grey-list-item;
   }
-
-  &:hover {
-    @apply --highlight-list-item;
-  }
 }
 
 .icon {

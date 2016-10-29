@@ -18,7 +18,7 @@ import {
   replaceTreeInfoByIndex,
   removeTreeInfosFromIndex,
   updateDragTarget,
-  updateKeyboardTarget,
+  updateFocusTarget,
   updateMenuTarget,
   updateMousePosition
 } from '../actions'
@@ -280,13 +280,28 @@ class BookmarkItem extends PureComponent {
   @autobind
   handleMouse(evt) {
     const {
-      dispatch
+      dispatch,
+      focusTarget,
+      itemInfo
     } = this.props
 
     evt.persist()
 
-    // should not focus on more than one itemZ
-    dispatch(updateKeyboardTarget(null))
+    switch (evt.type) {
+      case 'mouseenter':
+        if (focusTarget !== itemInfo) {
+          dispatch(updateFocusTarget(itemInfo))
+        }
+        break
+
+      case 'mouseleave':
+        if (focusTarget === itemInfo) {
+          dispatch(updateFocusTarget(null))
+        }
+        break
+
+      default:
+    }
 
     this._handleMouse(evt)
   }
@@ -313,9 +328,6 @@ class BookmarkItem extends PureComponent {
             dispatch(removeTreeInfosFromIndex(treeIndex + 1))
           }
         }
-        break
-
-      case 'mouseleave':
         break
 
       default:
@@ -469,6 +481,7 @@ BookmarkItem.propTypes = {
   dispatch: PropTypes.func.isRequired,
   dragIndicator: PropTypes.object,
   dragTarget: PropTypes.object,
+  focusTarget: PropTypes.object,
   isSelected: PropTypes.bool.isRequired,
   isUnclickable: PropTypes.bool.isRequired,
   itemInfo: PropTypes.object.isRequired,
@@ -484,25 +497,26 @@ const mapStateToProps = (state, ownProps) => {
   const {
     cutTarget,
     dragTarget,
-    keyboardTarget,
+    focusTarget,
     menuTarget
   } = state
   const {itemInfo} = ownProps
 
   const isCutTarget = Boolean(cutTarget && cutTarget.id === itemInfo.id)
   const isDragTarget = Boolean(dragTarget && dragTarget.id === itemInfo.id)
-  const isKeyboardTarget = Boolean(keyboardTarget && keyboardTarget.id === itemInfo.id)
+  const isFocusTarget = Boolean(focusTarget && focusTarget.id === itemInfo.id)
   const isMenuTarget = Boolean(menuTarget && menuTarget.id === itemInfo.id)
 
   return {
     dragIndicator: state.dragIndicator,
     dragTarget: dragTarget,
-    isSelected: isDragTarget || isKeyboardTarget || isMenuTarget,
+    focusTarget: focusTarget,
+    isSelected: isDragTarget || isFocusTarget || isMenuTarget,
     isUnclickable: isCutTarget || isDragTarget,
     itemOffsetHeight: state.itemOffsetHeight,
     options: state.options,
     searchKeyword: state.searchKeyword,
-    shouldKeepInView: isKeyboardTarget || isMenuTarget,
+    shouldKeepInView: isFocusTarget || isMenuTarget,
     trees: state.trees
   }
 }
