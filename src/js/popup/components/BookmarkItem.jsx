@@ -411,13 +411,7 @@ class BookmarkItem extends PureComponent {
     )
 
     let iconSrc = null
-    let isIconHidden = false
     switch (bookmarkType) {
-      case TYPE_NO_BOOKMARK:
-      case TYPE_SEPARATOR:
-        isIconHidden = true
-        break
-
       case TYPE_ROOT_FOLDER:
       case TYPE_FOLDER:
         iconSrc = '/img/folder.png'
@@ -468,7 +462,7 @@ class BookmarkItem extends PureComponent {
             styleName='icon'
             src={iconSrc}
             alt=''
-            hidden={isIconHidden}
+            hidden={iconSrc === null}
           />
           <span styleName='title'>{itemTitle}</span>
         </a>
