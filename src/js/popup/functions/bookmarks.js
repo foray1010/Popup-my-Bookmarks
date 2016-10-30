@@ -86,6 +86,23 @@ export async function getFlatTree(id) {
   return treeInfo
 }
 
+export async function getRootTree(options) {
+  const rootTree = await getFlatTree('0')
+
+  rootTree.children = rootTree.children.filter((itemInfo) => {
+    const itemIdNum = Number(itemInfo.id)
+
+    const isFilterThisItem = (
+      itemIdNum === options.defExpand ||
+      options.hideRootFolder.includes(itemIdNum)
+    )
+
+    return !isFilterThisItem
+  })
+
+  return rootTree
+}
+
 export async function getSearchResult(newSearchKeyword, options) {
   const filteredResult = []
   const isOnlySearchTitle = options.searchTarget === 1
@@ -131,6 +148,12 @@ export function getSlicedTrees(trees, removeFromIndex) {
   }
 
   return trees
+}
+
+export async function initTrees(options) {
+  const firstTree = await getFirstTree(options)
+
+  return [firstTree]
 }
 
 export function isFolder(itemInfo) {
