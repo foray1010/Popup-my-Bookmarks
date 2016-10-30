@@ -56,12 +56,12 @@ const rootReducer = combineReducers({
       case PUT_DRAG_INDICATOR: {
         const {isPlaceAfter, itemInfo} = action
 
-        return {
+        return Immutable({
           ...genDummyItemInfo(),
           id: DRAG_INDICATOR,
           index: Math.max(itemInfo.index, 0) + (isPlaceAfter ? 1 : 0),
           parentId: itemInfo.parentId
-        }
+        })
       }
 
       case REMOVE_DRAG_INDICATOR:
@@ -150,6 +150,10 @@ const rootReducer = combineReducers({
         return getSlicedTrees(state, action.removeFromIndex)
 
       case REPLACE_TREE_INFO_BY_INDEX: {
+        if (state[action.treeIndex] === action.treeInfo) {
+          return state
+        }
+
         const mutableTrees = state.asMutable()
 
         mutableTrees[action.treeIndex] = action.treeInfo
