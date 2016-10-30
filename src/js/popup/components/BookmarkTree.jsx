@@ -8,7 +8,9 @@ import {
   MAX_HEIGHT
 } from '../constants'
 import {
-  genBookmarkList
+  genBookmarkList,
+  lastScrollTopListStorage,
+  updateLastScrollTopList
 } from '../functions'
 import BookmarkItem from './BookmarkItem'
 import DragIndicator from './DragIndicator'
@@ -20,15 +22,24 @@ import styles from '../../../css/popup/bookmark-tree.css'
 
 class BookmarkTree extends PureComponent {
   componentDidMount() {
-    this.afterRender()
+    this.setHeight()
+    this.setScrollTop()
   }
 
   componentDidUpdate() {
-    this.afterRender()
+    this.setHeight()
+  }
+
+  setHeight() {
+    window.requestAnimationFrame(this._setHeight)
+  }
+
+  setScrollTop() {
+    window.requestAnimationFrame(this._setScrollTop)
   }
 
   @autobind
-  setHeight() {
+  _setHeight() {
     const {bookmarkListEl} = this
 
     if (bookmarkListEl) {
@@ -43,12 +54,32 @@ class BookmarkTree extends PureComponent {
     }
   }
 
-  afterRender() {
-    window.requestAnimationFrame(this.setHeight)
+  @autobind
+  _setScrollTop() {
+    const {
+      options,
+      treeIndex
+    } = this.props
+
+    if (options.rememberPos) {
+      const lastScrollTopList = lastScrollTopListStorage.get()
+
+      const lastScrollTop = lastScrollTopList[treeIndex]
+      if (lastScrollTop) {
+        this.bookmarkListEl.scrollTop = lastScrollTop
+      }
+    }
   }
 
   @autobind
   handleScroll() {
+    const {
+      options
+    } = this.props
+
+    if (options.rememberPos) {
+      updateLastScrollTopList()
+    }
   }
 
   @autobind
@@ -122,6 +153,7 @@ class BookmarkTree extends PureComponent {
 BookmarkTree.propTypes = {
   dragIndicator: PropTypes.object,
   itemOffsetHeight: PropTypes.number.isRequired,
+  options: PropTypes.object.isRequired,
   rootTree: PropTypes.object.isRequired,
   searchKeyword: PropTypes.string.isRequired,
   treeIndex: PropTypes.number.isRequired,
@@ -131,6 +163,7 @@ BookmarkTree.propTypes = {
 const mapStateToProps = (state) => ({
   dragIndicator: state.dragIndicator,
   itemOffsetHeight: state.itemOffsetHeight,
+  options: state.options,
   rootTree: state.rootTree,
   searchKeyword: state.searchKeyword,
   trees: state.trees

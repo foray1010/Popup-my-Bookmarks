@@ -1,6 +1,9 @@
 import Immutable from 'seamless-immutable'
 
 import {
+  lastUsedTreeIdsStorage
+} from './lastPosition'
+import {
   SEPARATE_THIS_URL,
   TYPE_BOOKMARK,
   TYPE_FOLDER,
@@ -151,8 +154,22 @@ export function getSlicedTrees(trees, removeFromIndex) {
 }
 
 export async function initTrees(options) {
-  const firstTree = await getFirstTree(options)
+  if (options.rememberPos) {
+    const lastUsedTreeIds = lastUsedTreeIdsStorage.get()
+    if (
+      lastUsedTreeIds.length &&
+      // if default expand folder changed, the tree structure changed,
+      // so can't use the original lastUsedTreeIds
+      lastUsedTreeIds[0] === String(options.defExpand)
+    ) {
+      const trees = await Promise.all(
+        lastUsedTreeIds.map(getFlatTree)
+      )
+      return trees
+    }
+  }
 
+  const firstTree = await getFirstTree(options)
   return [firstTree]
 }
 

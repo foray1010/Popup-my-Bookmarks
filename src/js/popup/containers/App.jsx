@@ -11,7 +11,8 @@ import {
   getSearchResult,
   getSlicedTrees,
   isFolder,
-  setPredefinedStyleSheet
+  setPredefinedStyleSheet,
+  updateLastUsedTreeIds
 } from '../functions'
 import {
   removeTreeInfosFromIndex,
@@ -40,6 +41,16 @@ class App extends PureComponent {
 
   componentDidMount() {
     this.initBookmarkEvent()
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      trees
+    } = this.props
+
+    if (trees !== prevProps.trees) {
+      updateLastUsedTreeIds(trees)
+    }
   }
 
   getFocusTargetTreeIndex() {

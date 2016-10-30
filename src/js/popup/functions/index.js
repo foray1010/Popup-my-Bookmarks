@@ -5,6 +5,7 @@ import chromep from '../../common/lib/chromePromise'
 
 export * from './bookmarks'
 export * from './dom'
+export * from './lastPosition'
 
 export function getItemHeight(options) {
   const {fontSize} = options

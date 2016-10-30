@@ -15,6 +15,7 @@ Bugfixes:
   - Cannot display the whole popup in OSX
   - Wrong menu/editor position in some situations
   - Setting of `Hide root folder` will be lost on second save
+  - `Remember last position` may fail if `Default expanded folder` is changed
 
 Translations:
   - Support Norwegian Bokmål locales (thanks Bjorn Tore Asheim)
