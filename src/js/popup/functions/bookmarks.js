@@ -10,8 +10,8 @@ import {
 } from '../constants'
 import chromep from '../../common/lib/chromePromise'
 
-const noBookmarkIdPrefix = 'no-bookmark-'
 const msgNoBookmark = chrome.i18n.getMessage('noBkmark')
+const noBookmarkIdPrefix = 'no-bookmark-'
 
 export function genBookmarkList(treeInfo, {rootTree, searchKeyword, treeIndex}) {
   let childrenInfo = treeInfo.children
