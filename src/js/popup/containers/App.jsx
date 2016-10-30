@@ -45,10 +45,13 @@ class App extends PureComponent {
 
   componentDidUpdate(prevProps) {
     const {
+      options,
+      searchKeyword,
       trees
     } = this.props
 
-    if (trees !== prevProps.trees) {
+    const isRememberLastPosition = options.rememberPos && !searchKeyword
+    if (isRememberLastPosition && trees !== prevProps.trees) {
       updateLastUsedTreeIds(trees)
     }
   }

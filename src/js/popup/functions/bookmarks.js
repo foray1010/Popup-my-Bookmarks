@@ -75,12 +75,6 @@ export function getBookmarkType(itemInfo) {
   return TYPE_BOOKMARK
 }
 
-export async function getFirstTree(options) {
-  const firstTree = await getFlatTree(String(options.defExpand))
-
-  return firstTree
-}
-
 export async function getFlatTree(id) {
   const treeInfo = (await chromep.bookmarks.get(id))[0]
 
@@ -169,7 +163,7 @@ export async function initTrees(options) {
     }
   }
 
-  const firstTree = await getFirstTree(options)
+  const firstTree = await getFlatTree(String(options.defExpand))
   return [firstTree]
 }
 

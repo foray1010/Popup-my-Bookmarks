@@ -57,11 +57,10 @@ class BookmarkTree extends PureComponent {
   @autobind
   _setScrollTop() {
     const {
-      options,
       treeIndex
     } = this.props
 
-    if (options.rememberPos) {
+    if (this.isRememberLastPosition()) {
       const lastScrollTopList = lastScrollTopListStorage.get()
 
       const lastScrollTop = lastScrollTopList[treeIndex]
@@ -73,11 +72,7 @@ class BookmarkTree extends PureComponent {
 
   @autobind
   handleScroll() {
-    const {
-      options
-    } = this.props
-
-    if (options.rememberPos) {
+    if (this.isRememberLastPosition()) {
       updateLastScrollTopList()
     }
   }
@@ -90,6 +85,15 @@ class BookmarkTree extends PureComponent {
 
     // control scrolling speed
     this.bookmarkListEl.scrollTop += Math.floor(itemOffsetHeight * evt.deltaY / 40)
+  }
+
+  isRememberLastPosition() {
+    const {
+      options,
+      searchKeyword
+    } = this.props
+
+    return options.rememberPos && !searchKeyword
   }
 
   render() {

@@ -4,8 +4,8 @@ import {createElement, PropTypes, PureComponent} from 'react'
 import CSSModules from 'react-css-modules'
 
 import {
-  getFirstTree,
-  getSearchResult
+  getSearchResult,
+  initTrees
 } from '../functions'
 import {
   updateSearchKeyword,
@@ -42,16 +42,14 @@ class Search extends PureComponent {
     } = this.props
 
     const newSearchKeyword = this.inputEl.value.trim().replace(/\s+/g, ' ')
-    const newTrees = []
 
+    let newTrees
     if (newSearchKeyword === '') {
-      const defExpandTree = await getFirstTree(options)
-
-      newTrees.push(defExpandTree)
+      newTrees = await initTrees(options)
     } else {
       const searchResult = await getSearchResult(newSearchKeyword, options)
 
-      newTrees.push(searchResult)
+      newTrees = [searchResult]
     }
 
     dispatch([
