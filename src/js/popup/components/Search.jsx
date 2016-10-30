@@ -17,21 +17,31 @@ import styles from '../../../css/popup/search.css'
 const msgSearch = chrome.i18n.getMessage('search')
 
 class Search extends PureComponent {
-  @autobind
-  handleInput(evt) {
-    evt.persist()
+  componentDidUpdate(prevProps) {
+    const {
+      isMenuCoverHidden
+    } = this.props
 
-    this._handleInput(evt)
+    if (isMenuCoverHidden !== prevProps.isMenuCoverHidden) {
+      this.tryFocusToInput()
+    }
   }
 
+  @autobind
+  @debounce(1000) // not sure about it, use timeout because blur fire before props update
+  handleBlur() {
+    this.tryFocusToInput()
+  }
+
+  @autobind
   @debounce(200)
-  async _handleInput(evt) {
+  async handleInput() {
     const {
       dispatch,
       options
     } = this.props
 
-    const newSearchKeyword = evt.target.value.trim().replace(/\s+/g, ' ')
+    const newSearchKeyword = this.inputEl.value.trim().replace(/\s+/g, ' ')
     const newTrees = []
 
     if (newSearchKeyword === '') {
@@ -50,14 +60,28 @@ class Search extends PureComponent {
     ])
   }
 
+  tryFocusToInput() {
+    const {
+      isMenuCoverHidden
+    } = this.props
+
+    if (isMenuCoverHidden) {
+      this.inputEl.focus()
+    }
+  }
+
   render() {
     return (
       <header styleName='main'>
         <input
+          ref={(ref) => {
+            this.inputEl = ref
+          }}
           type='search'
           placeholder={msgSearch}
           tabIndex='-1'
           autoFocus
+          onBlur={this.handleBlur}
           onInput={this.handleInput}
         />
       </header>
@@ -67,10 +91,12 @@ class Search extends PureComponent {
 
 Search.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  isMenuCoverHidden: PropTypes.bool.isRequired,
   options: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
+  isMenuCoverHidden: !(state.editorTarget || state.menuTarget),
   options: state.options
 })
 
