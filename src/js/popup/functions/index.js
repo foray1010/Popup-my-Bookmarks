@@ -7,6 +7,22 @@ export * from './bookmarks'
 export * from './dom'
 export * from './lastPosition'
 
+export function getClickType(evt) {
+  if (evt.button === 1) {
+    return 'clickByMiddle'
+  }
+
+  if (evt.ctrlKey || evt.metaKey) {
+    return 'clickByLeftCtrl'
+  }
+
+  if (evt.shiftKey) {
+    return 'clickByLeftShift'
+  }
+
+  return 'clickByLeft'
+}
+
 export function getItemHeight(options) {
   const {fontSize} = options
 

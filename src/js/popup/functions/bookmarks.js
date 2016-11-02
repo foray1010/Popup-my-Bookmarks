@@ -177,6 +177,50 @@ export function isFolderOpened(trees, itemInfo) {
   return trees.some((treeInfo) => treeInfo.id === itemInfo.id)
 }
 
+export async function openBookmark(itemInfo, clickType, options) {
+  const itemUrl = itemInfo.url
+  const openMethod = options[clickType]
+
+  if (itemUrl.startsWith('javascript:')) {
+    await chromep.tabs.executeScript(null, {code: itemUrl})
+  } else {
+    switch (openMethod) {
+      case 0: // current tab
+      case 1: // current tab (w/o closing PmB)
+        await chromep.tabs.update({url: itemUrl})
+        break
+
+      case 2: // new tab
+      case 3: // background tab
+      case 4: // background tab (w/o closing PmB)
+        await chromep.tabs.create({
+          url: itemUrl,
+          active: openMethod === 2
+        })
+        break
+
+      case 5: // new window
+      case 6: // incognito window
+        await chromep.windows.create({
+          url: itemUrl,
+          incognito: openMethod === 6
+        })
+        break
+
+      default:
+    }
+  }
+
+  switch (openMethod) {
+    case 1: // current tab (w/o closing PmB)
+    case 4: // background tab (w/o closing PmB)
+      break
+
+    default:
+      window.close()
+  }
+}
+
 export async function openMultipleBookmarks(itemInfo, {
   isNewWindow = false,
   isIncognito = false,

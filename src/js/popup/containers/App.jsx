@@ -7,10 +7,12 @@ import CSSModules from 'react-css-modules'
 import {
   genBookmarkList,
   getBookmarkType,
+  getClickType,
   getFlatTree,
   getSearchResult,
   getSlicedTrees,
   isFolder,
+  openBookmark,
   setPredefinedStyleSheet,
   updateLastUsedTreeIds
 } from '../functions'
@@ -116,12 +118,21 @@ class App extends PureComponent {
 
   @debounce(30)
   async _handleKeyDown(evt) {
+    const {
+      focusTarget,
+      options
+    } = this.props
+
     switch (evt.keyCode) {
       case 9: // tab
         await this.keyboardArrowUpDownHandler(evt.shiftKey)
         break
 
       case 13: // enter
+        if (focusTarget) {
+          const clickType = getClickType(evt)
+          await openBookmark(focusTarget, clickType, options)
+        }
         break
 
       case 37: // left

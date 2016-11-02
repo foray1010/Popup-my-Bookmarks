@@ -6,9 +6,11 @@ import CSSModules from 'react-css-modules'
 
 import {
   getBookmarkType,
+  getClickType,
   getFlatTree,
   isFolder,
   isFolderOpened,
+  openBookmark,
   openMultipleBookmarks,
   scrollIntoViewIfNeeded
 } from '../functions'
@@ -48,26 +50,6 @@ class BookmarkItem extends PureComponent {
     if (shouldKeepInView) {
       scrollIntoViewIfNeeded(this.baseEl)
     }
-  }
-
-  getOpenBookmarkHandlerId(evt) {
-    const {options} = this.props
-
-    let switcher
-
-    if (evt.button === 0) {
-      if (evt.ctrlKey || evt.metaKey) {
-        switcher = 'clickByLeftCtrl'
-      } else if (evt.shiftKey) {
-        switcher = 'clickByLeftShift'
-      } else {
-        switcher = 'clickByLeft'
-      }
-    } else {
-      switcher = 'clickByMiddle'
-    }
-
-    return options[switcher]
   }
 
   async getTooltip() {
@@ -155,8 +137,8 @@ class BookmarkItem extends PureComponent {
 
       case TYPE_SEPARATOR:
       case TYPE_BOOKMARK: {
-        const handlerId = this.getOpenBookmarkHandlerId(evt)
-        await this.openBookmark(handlerId)
+        const clickType = getClickType(evt)
+        await openBookmark(itemInfo, clickType, options)
         break
       }
 
@@ -331,50 +313,6 @@ class BookmarkItem extends PureComponent {
         break
 
       default:
-    }
-  }
-
-  async openBookmark(handlerId) {
-    const {
-      itemInfo
-    } = this.props
-
-    const itemUrl = itemInfo.url
-
-    switch (handlerId) {
-      case 0: // current tab
-      case 1: // current tab (w/o closing PmB)
-        if (itemUrl.startsWith('javascript:')) {
-          await chromep.tabs.executeScript(null, {code: itemUrl})
-        } else {
-          await chromep.tabs.update({url: itemUrl})
-        }
-
-        break
-
-      case 2: // new tab
-      case 3: // background tab
-      case 4: // background tab (w/o closing PmB)
-        await chromep.tabs.create({
-          url: itemUrl,
-          active: handlerId === 2
-        })
-        break
-
-      case 5: // new window
-      case 6: // incognito window
-        await chromep.windows.create({
-          url: itemUrl,
-          incognito: handlerId === 6
-        })
-        break
-
-      default:
-    }
-
-    // if not (w/o closing PmB)
-    if (handlerId !== 1 && handlerId !== 4) {
-      window.close()
     }
   }
 
