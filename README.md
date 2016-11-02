@@ -40,7 +40,7 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
   - [nvm](//github.com/creationix/nvm) (Linux/Mac)
   - [Node.js official website](//nodejs.org/en/download/) (Windows)
 
-2. **cd** to your workspace and install all dependencies
+2. `cd` to your workspace and install all dependencies
 
   ```
   npm install
@@ -95,9 +95,9 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
   - `README.md` - Description for GitHub
 
 
-## Todo
+## Todo & Working Progress
 
-1. Bookmarks selector (allow drag and manage a group of bookmarks)
+See https://trello.com/b/bREPCfDk/popup-my-bookmarks
 
 
 ## Contributing

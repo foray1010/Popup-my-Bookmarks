@@ -5,7 +5,7 @@
   - [nvm](//github.com/creationix/nvm) (Linux/Mac)
   - [Node.js official website](//nodejs.org/en/download/) (Windows)
 
-2. **cd** to your workspace and install all dependencies
+2. `cd` to your workspace and install all dependencies
 
   ```
   npm install

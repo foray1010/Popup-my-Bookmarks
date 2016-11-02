@@ -1,3 +1,3 @@
-## Todo
+## Todo & Working Progress
 
-1. Bookmarks selector (allow drag and manage a group of bookmarks)
+See https://trello.com/b/bREPCfDk/popup-my-bookmarks
