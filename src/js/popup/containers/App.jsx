@@ -120,7 +120,9 @@ class App extends PureComponent {
   async _handleKeyDown(evt) {
     const {
       focusTarget,
-      options
+      searchKeyword,
+      options,
+      trees
     } = this.props
 
     switch (evt.keyCode) {
@@ -128,12 +130,20 @@ class App extends PureComponent {
         await this.keyboardArrowUpDownHandler(evt.shiftKey)
         break
 
-      case 13: // enter
+      case 13: { // enter
+        let itemInfo
         if (focusTarget) {
+          itemInfo = focusTarget
+        } else if (searchKeyword) {
+          itemInfo = trees[0].children[0]
+        }
+
+        if (itemInfo) {
           const clickType = getClickType(evt)
-          await openBookmark(focusTarget, clickType, options)
+          await openBookmark(itemInfo, clickType, options)
         }
         break
+      }
 
       case 37: // left
         await this.keyboardArrowLeftRightHandler(true)
