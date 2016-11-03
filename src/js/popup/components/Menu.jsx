@@ -22,8 +22,8 @@ class Menu extends PureComponent {
 
   getChildrenHiddenStatus() {
     const {
-      menuTarget,
-      searchKeyword
+      isSearching,
+      menuTarget
     } = this.props
 
     let childrenHiddenStatus = [false, false, false, false, false]
@@ -34,7 +34,7 @@ class Menu extends PureComponent {
         break
 
       case TYPE_BOOKMARK:
-        if (searchKeyword) {
+        if (isSearching) {
           childrenHiddenStatus = [false, false, false, true, true]
         }
 
@@ -139,15 +139,15 @@ class Menu extends PureComponent {
 }
 
 Menu.propTypes = {
+  isSearching: PropTypes.bool.isRequired,
   menuTarget: PropTypes.object,
-  mousePosition: PropTypes.objectOf(PropTypes.number).isRequired,
-  searchKeyword: PropTypes.string.isRequired
+  mousePosition: PropTypes.objectOf(PropTypes.number).isRequired
 }
 
 const mapStateToProps = (state) => ({
+  isSearching: Boolean(state.searchKeyword),
   menuTarget: state.menuTarget,
-  mousePosition: state.mousePosition,
-  searchKeyword: state.searchKeyword
+  mousePosition: state.mousePosition
 })
 
 export default connect(mapStateToProps)(

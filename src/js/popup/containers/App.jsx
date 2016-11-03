@@ -235,8 +235,8 @@ class App extends PureComponent {
         const prevTreeInfo = trees[prevTreeIndex]
 
         const prevBookmarkList = genBookmarkList(prevTreeInfo, {
+          isSearching: Boolean(searchKeyword),
           rootTree,
-          searchKeyword,
           treeIndex: prevTreeIndex
         })
 
@@ -253,8 +253,8 @@ class App extends PureComponent {
         const nextTreeInfo = await getFlatTree(focusTarget.id)
 
         const nextBookmarkList = genBookmarkList(nextTreeInfo, {
+          isSearching: Boolean(searchKeyword),
           rootTree,
-          searchKeyword,
           treeIndex: nextTreeIndex
         })
 
@@ -282,8 +282,8 @@ class App extends PureComponent {
     const targetTreeIndex = this.getFocusTargetTreeIndex()
 
     const targetBookmarkList = genBookmarkList(trees[targetTreeIndex], {
+      isSearching: Boolean(searchKeyword),
       rootTree,
-      searchKeyword,
       treeIndex: targetTreeIndex
     })
 

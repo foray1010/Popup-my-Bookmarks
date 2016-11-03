@@ -54,9 +54,9 @@ class BookmarkItem extends PureComponent {
 
   async getTooltip() {
     const {
+      isSearching,
       itemInfo,
-      options,
-      searchKeyword
+      options
     } = this.props
 
     const tooltipArr = []
@@ -65,7 +65,7 @@ class BookmarkItem extends PureComponent {
       tooltipArr.push(itemInfo.title, itemInfo.url)
     }
 
-    if (searchKeyword) {
+    if (isSearching) {
       const breadcrumbArr = []
 
       let breadId = itemInfo.parentId
@@ -294,14 +294,14 @@ class BookmarkItem extends PureComponent {
       dispatch,
       itemInfo,
       options,
-      searchKeyword,
+      isSearching,
       treeIndex,
       trees
     } = this.props
 
     switch (evt.type) {
       case 'mouseenter':
-        if (!searchKeyword && !options.opFolderBy) {
+        if (!isSearching && !options.opFolderBy) {
           if (isFolder(itemInfo)) {
             if (!isFolderOpened(trees, itemInfo)) {
               dispatch(await this.openFolder())
@@ -330,10 +330,10 @@ class BookmarkItem extends PureComponent {
 
   render() {
     const {
+      isSearching,
       isSelected,
       isUnclickable,
-      itemInfo,
-      searchKeyword
+      itemInfo
     } = this.props
 
     const bookmarkType = getBookmarkType(itemInfo)
@@ -370,7 +370,7 @@ class BookmarkItem extends PureComponent {
         break
 
       default:
-        if (searchKeyword) {
+        if (isSearching) {
           isDraggable = false
         }
     }
@@ -414,12 +414,12 @@ BookmarkItem.propTypes = {
   dragIndicator: PropTypes.object,
   dragTarget: PropTypes.object,
   focusTarget: PropTypes.object,
+  isSearching: PropTypes.bool.isRequired,
   isSelected: PropTypes.bool.isRequired,
   isUnclickable: PropTypes.bool.isRequired,
   itemInfo: PropTypes.object.isRequired,
   itemOffsetHeight: PropTypes.number.isRequired,
   options: PropTypes.object.isRequired,
-  searchKeyword: PropTypes.string.isRequired,
   shouldKeepInView: PropTypes.bool.isRequired,
   treeIndex: PropTypes.number.isRequired,
   trees: PropTypes.arrayOf(PropTypes.object).isRequired
@@ -443,11 +443,11 @@ const mapStateToProps = (state, ownProps) => {
     dragIndicator: state.dragIndicator,
     dragTarget: dragTarget,
     focusTarget: focusTarget,
+    isSearching: Boolean(state.searchKeyword),
     isSelected: isDragTarget || isFocusTarget || isMenuTarget,
     isUnclickable: isCutTarget || isDragTarget,
     itemOffsetHeight: state.itemOffsetHeight,
     options: state.options,
-    searchKeyword: state.searchKeyword,
     shouldKeepInView: isFocusTarget || isMenuTarget,
     trees: state.trees
   }

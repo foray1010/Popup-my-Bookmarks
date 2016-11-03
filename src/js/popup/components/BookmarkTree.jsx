@@ -89,18 +89,18 @@ class BookmarkTree extends PureComponent {
 
   isRememberLastPosition() {
     const {
-      options,
-      searchKeyword
+      isSearching,
+      options
     } = this.props
 
-    return options.rememberPos && !searchKeyword
+    return options.rememberPos && !isSearching
   }
 
   render() {
     const {
       dragIndicator,
+      isSearching,
       rootTree,
-      searchKeyword,
       treeIndex,
       trees
     } = this.props
@@ -108,7 +108,7 @@ class BookmarkTree extends PureComponent {
     const isFirstTree = treeIndex === 0
     const treeInfo = trees[treeIndex]
 
-    const bookmarkList = genBookmarkList(treeInfo, {rootTree, searchKeyword, treeIndex})
+    const bookmarkList = genBookmarkList(treeInfo, {isSearching, rootTree, treeIndex})
 
     const treeItems = bookmarkList.asMutable().map((itemInfo) => (
       <BookmarkItem
@@ -121,14 +121,14 @@ class BookmarkTree extends PureComponent {
     if (dragIndicator && dragIndicator.parentId === treeInfo.id) {
       let dragIndicatorIndex = dragIndicator.index
 
-      if (isFirstTree && !searchKeyword) {
+      if (isFirstTree && !isSearching) {
         dragIndicatorIndex += rootTree.children.length
       }
 
       treeItems.splice(dragIndicatorIndex, 0, <DragIndicator key={DRAG_INDICATOR} />)
     }
 
-    if (searchKeyword && treeItems.length === 0) {
+    if (isSearching && treeItems.length === 0) {
       treeItems.push(
         <NoResult key='no-result' />
       )
@@ -156,20 +156,20 @@ class BookmarkTree extends PureComponent {
 
 BookmarkTree.propTypes = {
   dragIndicator: PropTypes.object,
+  isSearching: PropTypes.bool.isRequired,
   itemOffsetHeight: PropTypes.number.isRequired,
   options: PropTypes.object.isRequired,
   rootTree: PropTypes.object.isRequired,
-  searchKeyword: PropTypes.string.isRequired,
   treeIndex: PropTypes.number.isRequired,
   trees: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 const mapStateToProps = (state) => ({
   dragIndicator: state.dragIndicator,
+  isSearching: Boolean(state.searchKeyword),
   itemOffsetHeight: state.itemOffsetHeight,
   options: state.options,
   rootTree: state.rootTree,
-  searchKeyword: state.searchKeyword,
   trees: state.trees
 })
 

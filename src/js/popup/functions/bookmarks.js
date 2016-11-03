@@ -16,10 +16,10 @@ import chromep from '../../common/lib/chromePromise'
 const msgNoBookmark = chrome.i18n.getMessage('noBkmark')
 const noBookmarkIdPrefix = 'no-bookmark-'
 
-export function genBookmarkList(treeInfo, {rootTree, searchKeyword, treeIndex}) {
+export function genBookmarkList(treeInfo, {isSearching, rootTree, treeIndex}) {
   let childrenInfo = treeInfo.children
 
-  if (!searchKeyword) {
+  if (!isSearching) {
     if (childrenInfo.length === 0) {
       childrenInfo = childrenInfo.concat([
         genNoBookmarkInfo(treeInfo.id)
