@@ -65,7 +65,10 @@ const webpackConfig = {
 for (const appName of ['options', 'popup']) {
   mergeAndConcat(webpackConfig, {
     entry: {
-      [appName]: ['babel-polyfill', `./${sourceDir}/js/${appName}/index.jsx`]
+      [appName]: [
+        'babel-polyfill',
+        `./${sourceDir}/js/${appName}`
+      ]
     },
     plugins: [
       new HtmlWebpackPlugin({
