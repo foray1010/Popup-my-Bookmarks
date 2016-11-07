@@ -31,9 +31,7 @@ class InputNumber extends PureComponent {
 
     const newOptionValue = parseInt(evt.target.value, 10)
 
-    if (isNaN(newOptionValue)) {
-      return
-    } else {
+    if (!Number.isNaN(newOptionValue)) {
       dispatch(updateSingleOption(optionName, newOptionValue))
     }
   }
