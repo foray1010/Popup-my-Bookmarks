@@ -5,11 +5,11 @@ export async function initOptionsValue(optionsConfig) {
   const updatedOptions = {}
 
   for (const optionName of Object.keys(optionsConfig)) {
-    const optionConfig = optionsConfig[optionName]
-
-    const optionDefaultValue = optionConfig.default
-
     if (options[optionName] === undefined) {
+      const optionConfig = optionsConfig[optionName]
+
+      const optionDefaultValue = optionConfig.default
+
       options[optionName] = optionDefaultValue
       updatedOptions[optionName] = optionDefaultValue
     }
