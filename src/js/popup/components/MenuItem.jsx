@@ -15,6 +15,7 @@ import {
   SEPARATE_THIS_URL,
   TYPE_BOOKMARK,
   TYPE_FOLDER,
+  TYPE_NO_BOOKMARK,
   TYPE_SEPARATOR
 } from '../constants'
 import {
@@ -310,15 +311,33 @@ MenuItem.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   const {
     copyTarget,
-    cutTarget
+    cutTarget,
+    menuTarget
   } = state
   const {menuItemKey} = ownProps
+
+  const isUnclickable = (() => {
+    if (!menuTarget) return true
+
+    switch (menuItemKey) {
+      case 'copy':
+      case 'cut':
+        return getBookmarkType(menuTarget) === TYPE_NO_BOOKMARK
+
+      case 'paste':
+        return !copyTarget && !cutTarget
+
+      default:
+    }
+
+    return false
+  })()
 
   return {
     copyTarget: copyTarget,
     cutTarget: cutTarget,
-    isUnclickable: Boolean(menuItemKey === 'paste' && !copyTarget && !cutTarget),
-    menuTarget: state.menuTarget,
+    isUnclickable: isUnclickable,
+    menuTarget: menuTarget,
     options: state.options
   }
 }
