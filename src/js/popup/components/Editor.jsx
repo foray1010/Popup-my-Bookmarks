@@ -17,19 +17,27 @@ import styles from '../../../css/popup/editor.css'
 const msgCancel = chrome.i18n.getMessage('cancel')
 const msgConfirm = chrome.i18n.getMessage('confirm')
 const msgEdit = chrome.i18n.getMessage('edit')
+const msgNewFolder = chrome.i18n.getMessage('newFolder')
 const msgRename = chrome.i18n.getMessage('rename')
 
 class Editor extends PureComponent {
   componentDidUpdate() {
-    const {editorTarget} = this.props
+    const {
+      editorTarget,
+      isCreatingNewFolder
+    } = this.props
 
     const isHidden = !editorTarget
 
     this.setEditorPosition()
 
     if (!isHidden) {
-      this.titleInputEl.value = editorTarget.title
-      this.urlInputEl.value = editorTarget.url
+      if (isCreatingNewFolder) {
+        this.titleInputEl.value = msgNewFolder
+      } else {
+        this.titleInputEl.value = editorTarget.title
+        this.urlInputEl.value = editorTarget.url
+      }
 
       // auto focus to title field
       this.titleInputEl.focus()
@@ -85,37 +93,44 @@ class Editor extends PureComponent {
     evt.persist()
     evt.preventDefault()
 
-    const {editorTarget} = this.props
+    const {
+      editorTarget,
+      isCreatingNewFolder,
+      isUIForFolder
+    } = this.props
 
-    const updatedTitle = this.titleInputEl.value.trim()
+    const newTitle = this.titleInputEl.value.trim()
 
-    let updatedUrl
-
-    if (!isFolder(editorTarget)) {
-      updatedUrl = this.urlInputEl.value.trim()
+    let newUrl
+    if (!isUIForFolder) {
+      newUrl = this.urlInputEl.value.trim()
     }
 
-    await chromep.bookmarks.update(editorTarget.id, {
-      title: updatedTitle,
-      url: updatedUrl
-    })
+    if (isCreatingNewFolder) {
+      await chromep.bookmarks.create({
+        parentId: editorTarget.parentId,
+        title: newTitle,
+        url: newUrl,
+        index: editorTarget.index + 1
+      })
+    } else {
+      await chromep.bookmarks.update(editorTarget.id, {
+        title: newTitle,
+        url: newUrl
+      })
+    }
 
     this.closeEditor()
   }
 
   render() {
-    const {editorTarget} = this.props
+    const {
+      editorTarget,
+      isUIForFolder
+    } = this.props
 
+    const editorTitle = isUIForFolder ? msgRename : msgEdit
     const isHidden = !editorTarget
-
-    let editorTitle = null
-    let isFolderItem = false
-
-    if (editorTarget) {
-      isFolderItem = isFolder(editorTarget)
-
-      editorTitle = isFolderItem ? msgRename : msgEdit
-    }
 
     return (
       <form
@@ -137,7 +152,7 @@ class Editor extends PureComponent {
             this.urlInputEl = ref
           }}
           type='text'
-          hidden={isFolderItem}
+          hidden={isUIForFolder}
         />
         <button
           styleName='button'
@@ -160,12 +175,23 @@ class Editor extends PureComponent {
 
 Editor.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  editorTarget: PropTypes.object
+  editorTarget: PropTypes.object,
+  isCreatingNewFolder: PropTypes.bool.isRequired,
+  isUIForFolder: PropTypes.bool.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  editorTarget: state.editorTarget
-})
+const mapStateToProps = (state) => {
+  const {
+    editorTarget,
+    isCreatingNewFolder
+  } = state
+
+  return {
+    editorTarget: editorTarget,
+    isCreatingNewFolder: isCreatingNewFolder,
+    isUIForFolder: isCreatingNewFolder || (editorTarget ? isFolder(editorTarget) : false)
+  }
+}
 
 export default connect(mapStateToProps)(
   CSSModules(Editor, styles)

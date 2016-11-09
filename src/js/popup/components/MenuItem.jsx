@@ -21,6 +21,7 @@ import {
   updateCopyTarget,
   updateCutTarget,
   updateEditorTarget,
+  updateIsCreatingNewFolder,
   updateMenuTarget
 } from '../actions'
 import chromep from '../../common/lib/chromePromise'
@@ -198,7 +199,11 @@ class MenuItem extends PureComponent {
         break
 
       case 'addFolder':
-        return
+        actionList.push(
+          updateEditorTarget(menuTarget),
+          updateIsCreatingNewFolder(true)
+        )
+        break
 
       case 'addSeparator':
         await createBookmarkBelowMenuTarget(

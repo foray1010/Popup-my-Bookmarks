@@ -18,6 +18,7 @@ import {
   UPDATE_DRAG_TARGET,
   UPDATE_EDITOR_TARGET,
   UPDATE_FOCUS_TARGET,
+  UPDATE_IS_CREATING_NEW_FOLDER,
   UPDATE_MENU_TARGET,
   UPDATE_MOUSE_POSITION,
   UPDATE_SEARCH_KEYWORD,
@@ -96,6 +97,20 @@ const rootReducer = combineReducers({
     switch (action.type) {
       case UPDATE_FOCUS_TARGET:
         return action.focusTarget
+
+      default:
+        return state
+    }
+  },
+
+  isCreatingNewFolder(state = false, action) {
+    switch (action.type) {
+      case UPDATE_EDITOR_TARGET:
+        if (action.editorTarget === null) return false
+        return state
+
+      case UPDATE_IS_CREATING_NEW_FOLDER:
+        return action.isCreatingNewFolder
 
       default:
         return state

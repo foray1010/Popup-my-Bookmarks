@@ -10,6 +10,7 @@ import {
   UPDATE_DRAG_TARGET,
   UPDATE_EDITOR_TARGET,
   UPDATE_FOCUS_TARGET,
+  UPDATE_IS_CREATING_NEW_FOLDER,
   UPDATE_MENU_TARGET,
   UPDATE_MOUSE_POSITION,
   UPDATE_SEARCH_KEYWORD,
@@ -78,6 +79,13 @@ export function updateFocusTarget(focusTarget) {
   return Immutable({
     type: UPDATE_FOCUS_TARGET,
     focusTarget: focusTarget
+  })
+}
+
+export function updateIsCreatingNewFolder(isCreatingNewFolder) {
+  return Immutable({
+    type: UPDATE_IS_CREATING_NEW_FOLDER,
+    isCreatingNewFolder: isCreatingNewFolder
   })
 }
 
