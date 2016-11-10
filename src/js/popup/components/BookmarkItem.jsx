@@ -27,7 +27,6 @@ import {
 import {
   TYPE_BOOKMARK,
   TYPE_FOLDER,
-  TYPE_NO_BOOKMARK,
   TYPE_ROOT_FOLDER,
   TYPE_SEPARATOR
 } from '../constants'
@@ -362,17 +361,16 @@ class BookmarkItem extends PureComponent {
       default:
     }
 
-    let isDraggable = true
+    let isDraggable = false
     switch (bookmarkType) {
-      case TYPE_NO_BOOKMARK:
-      case TYPE_ROOT_FOLDER:
-        isDraggable = false
+      case TYPE_FOLDER:
+      case TYPE_BOOKMARK:
+        if (!isSearching) {
+          isDraggable = true
+        }
         break
 
       default:
-        if (isSearching) {
-          isDraggable = false
-        }
     }
 
     return (
