@@ -18,6 +18,8 @@ import {
   OPTIONS_WARN_OPEN_MANY
 } from '../../common/constants'
 
+export * from './actionTypes'
+
 export const NAV_MODULE_CONTRIBUTORS = 'contributors'
 export const NAV_MODULE_CONTROL = 'control'
 export const NAV_MODULE_GENERAL = 'general'

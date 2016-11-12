@@ -5,7 +5,7 @@ import {
   SELECT_NAV_MODULE,
   UPDATE_OPTIONS,
   UPDATE_SINGLE_OPTION
-} from '../constants/actionTypes'
+} from '../constants'
 
 const rootReducer = combineReducers({
   options(state = Immutable({}), action) {

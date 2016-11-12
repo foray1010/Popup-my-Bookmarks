@@ -15,7 +15,7 @@ import {
   UPDATE_MOUSE_POSITION,
   UPDATE_SEARCH_KEYWORD,
   UPDATE_TREES
-} from '../constants/actionTypes'
+} from '../constants'
 
 /* basic action */
 export function putDragIndicator(itemInfo, isPlaceAfter) {

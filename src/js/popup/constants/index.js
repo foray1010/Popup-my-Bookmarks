@@ -1,4 +1,5 @@
 export * from '../../common/constants'
+export * from './actionTypes'
 
 export const DRAG_INDICATOR = 'drag-indicator'
 export const GOLDEN_GAP = 2

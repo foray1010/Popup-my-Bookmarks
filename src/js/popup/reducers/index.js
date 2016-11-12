@@ -2,13 +2,7 @@ import {combineReducers} from 'redux'
 import Immutable from 'seamless-immutable'
 
 import {
-  DRAG_INDICATOR
-} from '../constants'
-import {
-  genDummyItemInfo,
-  getSlicedTrees
-} from '../functions'
-import {
+  DRAG_INDICATOR,
   PUT_DRAG_INDICATOR,
   REMOVE_DRAG_INDICATOR,
   REMOVE_TREE_INFOS_FROM_INDEX,
@@ -23,7 +17,11 @@ import {
   UPDATE_MOUSE_POSITION,
   UPDATE_SEARCH_KEYWORD,
   UPDATE_TREES
-} from '../constants/actionTypes'
+} from '../constants'
+import {
+  genDummyItemInfo,
+  getSlicedTrees
+} from '../functions'
 
 const rootReducer = combineReducers({
   copyTarget(state = null, action) {

@@ -4,7 +4,7 @@ import {
   SELECT_NAV_MODULE,
   UPDATE_OPTIONS,
   UPDATE_SINGLE_OPTION
-} from '../constants/actionTypes'
+} from '../constants'
 import chromep from '../../common/lib/chromePromise'
 
 /* basic action */
