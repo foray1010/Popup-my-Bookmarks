@@ -13,7 +13,8 @@ import {
   OPTIONS_SEARCH_TARGET,
   OPTIONS_SET_WIDTH,
   OPTIONS_TOOLTIP,
-  OPTIONS_WARN_OPEN_MANY
+  OPTIONS_WARN_OPEN_MANY,
+  ROOT_ID
 } from '../constants'
 import chromep from './chromePromise'
 
@@ -22,7 +23,7 @@ async function getOptionsConfig() {
   const rootFolderChoices = []
 
   // get the root folders' title and set as the choices of 'defExpand'
-  const rootFolders = await chromep.bookmarks.getChildren('0')
+  const rootFolders = await chromep.bookmarks.getChildren(ROOT_ID)
   for (const rootFolder of rootFolders) {
     const rootFolderIdNum = Number(rootFolder.id)
 

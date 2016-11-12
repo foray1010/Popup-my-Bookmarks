@@ -13,3 +13,5 @@ export const OPTIONS_SEARCH_TARGET = 'searchTarget'
 export const OPTIONS_SET_WIDTH = 'setWidth'
 export const OPTIONS_TOOLTIP = 'tooltip'
 export const OPTIONS_WARN_OPEN_MANY = 'warnOpenMany'
+
+export const ROOT_ID = '0'

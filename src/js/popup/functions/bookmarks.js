@@ -4,6 +4,7 @@ import {
   lastUsedTreeIdsStorage
 } from './lastPosition'
 import {
+  ROOT_ID,
   SEPARATE_THIS_URL,
   TYPE_BOOKMARK,
   TYPE_FOLDER,
@@ -60,7 +61,7 @@ export function getBookmarkType(itemInfo) {
     return TYPE_NO_BOOKMARK
   }
 
-  if (itemInfo.parentId === '0') {
+  if (itemInfo.parentId === ROOT_ID) {
     return TYPE_ROOT_FOLDER
   }
 
@@ -84,7 +85,7 @@ export async function getFlatTree(id) {
 }
 
 export async function getRootTree(options) {
-  const rootTree = await getFlatTree('0')
+  const rootTree = await getFlatTree(ROOT_ID)
 
   rootTree.children = rootTree.children.filter((itemInfo) => {
     const itemIdNum = Number(itemInfo.id)
@@ -148,22 +149,52 @@ export function getSlicedTrees(trees, removeFromIndex) {
 }
 
 export async function initTrees(options) {
+  const defaultExpandFolderId = String(options.defExpand)
+
+  const firstTree = await getFlatTree(defaultExpandFolderId)
+
   if (options.rememberPos) {
     const lastUsedTreeIds = lastUsedTreeIdsStorage.get()
-    if (
-      lastUsedTreeIds.length &&
-      // if default expand folder changed, the tree structure changed,
-      // so can't use the original lastUsedTreeIds
-      lastUsedTreeIds[0] === String(options.defExpand)
-    ) {
-      const trees = await Promise.all(
-        lastUsedTreeIds.map(getFlatTree)
-      )
+
+    // the target is to open the last existing folder in lastUsedTreeIds
+    // so we get the last existing item first and get all its parent
+    // it can prevent bugs when user rearrange bookmarks location without updating lastUsedTreeIds
+    let lastExistingTree
+    for (let i = lastUsedTreeIds.length - 1; i >= 0; i -= 1) {
+      // we already have firstTree
+      if (lastUsedTreeIds[i] === defaultExpandFolderId) break
+
+      try {
+        lastExistingTree = await getFlatTree(lastUsedTreeIds[i])
+      } catch (err) {
+        // if it does not exist, we don't care
+      }
+
+      if (lastExistingTree) break
+    }
+
+    if (lastExistingTree) {
+      const trees = []
+
+      let parentId = lastExistingTree.parentId
+      while (
+        parentId &&
+        parentId !== ROOT_ID &&
+        parentId !== defaultExpandFolderId
+      ) {
+        const tree = await getFlatTree(parentId)
+        trees.unshift(tree)
+
+        parentId = tree.parentId
+      }
+
+      trees.unshift(firstTree)
+      trees.push(lastExistingTree)
+
       return trees
     }
   }
 
-  const firstTree = await getFlatTree(String(options.defExpand))
   return [firstTree]
 }
 

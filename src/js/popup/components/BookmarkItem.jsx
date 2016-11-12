@@ -25,6 +25,7 @@ import {
   updateMousePosition
 } from '../actions'
 import {
+  ROOT_ID,
   TYPE_BOOKMARK,
   TYPE_FOLDER,
   TYPE_ROOT_FOLDER,
@@ -68,7 +69,7 @@ class BookmarkItem extends PureComponent {
       const breadcrumbArr = []
 
       let breadId = itemInfo.parentId
-      while (breadId !== '0') {
+      while (breadId !== ROOT_ID) {
         const [thisItemInfo] = await chromep.bookmarks.get(breadId)
 
         breadcrumbArr.unshift(thisItemInfo.title)

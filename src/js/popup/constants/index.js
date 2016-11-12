@@ -1,3 +1,5 @@
+export * from '../../common/constants'
+
 export const DRAG_INDICATOR = 'drag-indicator'
 export const GOLDEN_GAP = 2
 export const MAX_HEIGHT = 596

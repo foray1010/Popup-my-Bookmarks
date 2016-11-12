@@ -5,7 +5,7 @@ Features:
 
 Changes:
   - Increase minimum Chrome version from 26 to 34
-  - New option page using options V2 standard
+  - New option page (following options V2 standard)
   - Support all kind of separators in separatethis.com
   - Remove option: `Bookmarklet supported`, now we always support bookmarklet WITHOUT scary permissions
   - Remove permission: `Read and change all your data on the websites you visit`, now it replaced by `Read the icons of the websites you visit`!
@@ -16,6 +16,7 @@ Bugfixes:
   - Wrong menu/editor position in some situations
   - Setting of `Hide root folder` will be lost on second save
   - `Remember last position` may fail if `Default expanded folder` is changed
+  - `Remember last position` may fail if any last used folder is removed
 
 Translations:
   - Support Norwegian Bokmål locales (thanks Bjorn Tore Asheim)
