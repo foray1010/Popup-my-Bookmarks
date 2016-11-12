@@ -77,7 +77,7 @@ export function getBookmarkType(itemInfo) {
 }
 
 export async function getFlatTree(id) {
-  const treeInfo = (await chromep.bookmarks.get(id))[0]
+  const [treeInfo] = await chromep.bookmarks.get(id)
 
   treeInfo.children = await chromep.bookmarks.getChildren(id)
 
