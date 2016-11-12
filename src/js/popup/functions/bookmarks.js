@@ -168,6 +168,7 @@ export async function initTrees(options) {
         lastExistingTree = await getFlatTree(lastUsedTreeIds[i])
       } catch (err) {
         // if it does not exist, we don't care
+        console.error(err.stack)
       }
 
       if (lastExistingTree) break
