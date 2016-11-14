@@ -6,6 +6,7 @@ import CSSModules from 'react-css-modules'
 
 import {
   genBookmarkList,
+  getBookmark,
   getBookmarkType,
   getClickType,
   getFlatTree,
@@ -235,30 +236,23 @@ class App extends PureComponent {
     } = this.props
 
     if (editorTarget || menuTarget) return
-    if (!focusTarget) return
 
     const targetTreeIndex = this.getFocusTargetTreeIndex()
 
     if (isLeft) {
-      if (trees.length > 0) {
-        const prevTreeIndex = targetTreeIndex - 1
-        const prevTreeInfo = trees[prevTreeIndex]
+      // at least we need one tree
+      if (trees.length > 1) {
+        const targetTree = trees[targetTreeIndex]
 
-        const prevBookmarkList = genBookmarkList(prevTreeInfo, {
-          isSearching: Boolean(searchKeyword),
-          rootTree,
-          treeIndex: prevTreeIndex
-        })
+        const targetTreeItemInfo = await getBookmark(targetTree.id)
 
         dispatch([
           removeTreeInfosFromIndex(targetTreeIndex),
-          updateFocusTarget(
-            prevBookmarkList.find((itemInfo) => itemInfo.id === focusTarget.parentId)
-          )
+          updateFocusTarget(targetTreeItemInfo)
         ])
       }
     } else {
-      if (isFolder(focusTarget)) {
+      if (focusTarget && isFolder(focusTarget)) {
         const nextTreeIndex = targetTreeIndex + 1
         const nextTreeInfo = await getFlatTree(focusTarget.id)
 

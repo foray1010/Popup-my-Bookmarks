@@ -56,6 +56,11 @@ export function genNoBookmarkInfo(parentId) {
   })
 }
 
+export async function getBookmark(id) {
+  const [itemInfo] = await chromep.bookmarks.get(id)
+  return itemInfo
+}
+
 export function getBookmarkType(itemInfo) {
   if (RegExp(`^${noBookmarkIdPrefix}`).test(itemInfo.id)) {
     return TYPE_NO_BOOKMARK
@@ -77,7 +82,7 @@ export function getBookmarkType(itemInfo) {
 }
 
 export async function getFlatTree(id) {
-  const [treeInfo] = await chromep.bookmarks.get(id)
+  const treeInfo = await getBookmark(id)
 
   treeInfo.children = await chromep.bookmarks.getChildren(id)
 
@@ -280,7 +285,7 @@ export async function openMultipleBookmarks(itemInfo, {
       }
     }
   } else {
-    const [thisItemInfo] = await chromep.bookmarks.get(itemInfo.id)
+    const thisItemInfo = await getBookmark(itemInfo.id)
 
     urlList.push(thisItemInfo.url)
   }

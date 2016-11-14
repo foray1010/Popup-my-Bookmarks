@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import CSSModules from 'react-css-modules'
 
 import {
+  getBookmark,
   getBookmarkType,
   getClickType,
   getFlatTree,
@@ -70,7 +71,7 @@ class BookmarkItem extends PureComponent {
 
       let breadId = itemInfo.parentId
       while (breadId !== ROOT_ID) {
-        const [thisItemInfo] = await chromep.bookmarks.get(breadId)
+        const thisItemInfo = await getBookmark(breadId)
 
         breadcrumbArr.unshift(thisItemInfo.title)
         breadId = thisItemInfo.parentId
