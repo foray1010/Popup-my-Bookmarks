@@ -1,5 +1,3 @@
-import Immutable from 'seamless-immutable'
-
 import {
   lastUsedTreeIdsStorage
 } from './lastPosition'
@@ -46,14 +44,14 @@ export function genDummyItemInfo() {
   }
 }
 
-export function genNoBookmarkInfo(parentId) {
-  return Immutable({
+function genNoBookmarkInfo(parentId) {
+  return {
     ...genDummyItemInfo(),
     id: `${noBookmarkIdPrefix}${parentId}`,
     index: -1, // as it is not appeared in the childrenInfo
     parentId: parentId,
     title: msgNoBookmark
-  })
+  }
 }
 
 export async function getBookmark(id) {
@@ -308,7 +306,7 @@ export async function openMultipleBookmarks(itemInfo, {
 }
 
 export function sortByTitle(bookmarkList) {
-  const {compare} = new window.Intl.Collator()
+  const {compare} = new Intl.Collator()
 
   return bookmarkList.sort((a, b) => compare(a.title, b.title))
 }
