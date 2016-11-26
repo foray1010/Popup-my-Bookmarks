@@ -7,8 +7,7 @@ Changes:
   - Increase minimum Chrome version from 26 to 34
   - New option page (following options V2 standard)
   - Support all kind of separators in separatethis.com
-  - Remove option: `Bookmarklet supported`, now we always support bookmarklet WITHOUT scary permissions
-  - Remove permission: `Read and change all your data on the websites you visit`, now it replaced by `Read the icons of the websites you visit`!
+  - Remove option: `Bookmarklet supported`, now we always support bookmarklet without permission `Read and change all your data on the websites you visit`
 
 Bugfixes:
   - Cannot `Copy` a folder
