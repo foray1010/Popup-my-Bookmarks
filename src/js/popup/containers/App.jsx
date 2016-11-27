@@ -120,6 +120,7 @@ class App extends PureComponent {
 
     const {
       editorTarget,
+      focusTarget,
       menuTarget
     } = this.props
 
@@ -130,6 +131,13 @@ class App extends PureComponent {
         case 38: // up
         case 40: // down
           evt.preventDefault()
+          break
+
+        case 91: // command
+        case 93: // command
+          if (focusTarget) {
+            evt.preventDefault()
+          }
           break
 
         default:
