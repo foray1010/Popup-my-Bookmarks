@@ -2,6 +2,7 @@
 Features:
   - Open popup by Ctrl / CMD + B (suggested by Sebastian B)
   - Use `Tab` and `Shift + Tab` to navigate bookmarks
+  - Support trigger context menu by `Menu Key`
 
 Changes:
   - Increase minimum Chrome version from 26 to 34

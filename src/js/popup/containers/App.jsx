@@ -23,6 +23,7 @@ import {
   updateEditorTarget,
   updateFocusTarget,
   updateMenuTarget,
+  updateMousePosition,
   updateTrees
 } from '../actions'
 import {
@@ -92,6 +93,27 @@ class App extends PureComponent {
     evt.preventDefault()
   }
 
+  async handleEnter(evt) {
+    const {
+      focusTarget,
+      searchKeyword,
+      options,
+      trees
+    } = this.props
+
+    let itemInfo
+    if (focusTarget) {
+      itemInfo = focusTarget
+    } else if (searchKeyword) {
+      itemInfo = trees[0].children[0]
+    }
+
+    if (itemInfo) {
+      const clickType = getClickType(evt)
+      await openBookmark(itemInfo, clickType, options)
+    }
+  }
+
   @autobind
   handleKeyDown(evt) {
     evt.persist()
@@ -119,32 +141,14 @@ class App extends PureComponent {
 
   @debounce(30)
   async _handleKeyDown(evt) {
-    const {
-      focusTarget,
-      searchKeyword,
-      options,
-      trees
-    } = this.props
-
     switch (evt.keyCode) {
       case 9: // tab
         await this.keyboardArrowUpDownHandler(evt.shiftKey)
         break
 
-      case 13: { // enter
-        let itemInfo
-        if (focusTarget) {
-          itemInfo = focusTarget
-        } else if (searchKeyword) {
-          itemInfo = trees[0].children[0]
-        }
-
-        if (itemInfo) {
-          const clickType = getClickType(evt)
-          await openBookmark(itemInfo, clickType, options)
-        }
+      case 13: // enter
+        await this.handleEnter(evt)
         break
-      }
 
       case 37: // left
         await this.keyboardArrowLeftRightHandler(true)
@@ -164,6 +168,7 @@ class App extends PureComponent {
 
       case 91: // command
       case 93: // command
+        this.triggerContextMenu()
         break
 
       default:
@@ -314,6 +319,32 @@ class App extends PureComponent {
     }
 
     dispatch(updateFocusTarget(targetBookmarkList[nextSelectedIndex]))
+  }
+
+  triggerContextMenu() {
+    const {
+      dispatch,
+      focusTarget
+    } = this.props
+
+    const actions = []
+
+    const el = document.getElementById(focusTarget.id)
+    if (el) {
+      const elOffset = el.getBoundingClientRect()
+
+      actions.push(
+        updateMousePosition({
+          x: elOffset.left,
+          y: elOffset.top
+        })
+      )
+    }
+
+    dispatch([
+      ...actions,
+      updateMenuTarget(focusTarget)
+    ])
   }
 
   render() {
