@@ -9,6 +9,9 @@
   padding: var(--golden-gap) 0 var(--golden-gap) var(--golden-gap);
   text-decoration: none;
 
+  /* normalize.css will crop vertical part of the bookmark title by `line-height: 1.15;` */
+  line-height: 1.5;
+
   &.root-folder {
     color: inherit !important;
   }
