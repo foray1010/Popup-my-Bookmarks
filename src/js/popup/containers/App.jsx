@@ -124,59 +124,45 @@ class App extends PureComponent {
       menuTarget
     } = this.props
 
-    if (!editorTarget && !menuTarget) {
-      // preventDefault here because default operation may run before debounced/async function
-      switch (evt.keyCode) {
-        case 9: // tab
-        case 38: // up
-        case 40: // down
-          evt.preventDefault()
-          break
+    if (editorTarget || menuTarget) return
 
-        case 91: // command
-        case 93: // command
-          if (focusTarget) {
-            evt.preventDefault()
-          }
-          break
-
-        default:
-      }
-
-      this._handleKeyDown(evt)
-    }
-  }
-
-  @debounce(30)
-  async _handleKeyDown(evt) {
     switch (evt.keyCode) {
       case 9: // tab
-        await this.keyboardArrowUpDownHandler(evt.shiftKey)
+        evt.preventDefault()
+        this.keyboardArrowUpDownHandler(evt.shiftKey)
         break
 
       case 13: // enter
-        await this.handleEnter(evt)
+        evt.preventDefault()
+        this.handleEnter(evt)
         break
 
       case 37: // left
-        await this.keyboardArrowLeftRightHandler(true)
+        evt.preventDefault()
+        this.keyboardArrowLeftRightHandler(true)
         break
 
       case 38: // up
-        await this.keyboardArrowUpDownHandler(true)
+        evt.preventDefault()
+        this.keyboardArrowUpDownHandler(true)
         break
 
       case 39: // right
-        await this.keyboardArrowLeftRightHandler(false)
+        evt.preventDefault()
+        this.keyboardArrowLeftRightHandler(false)
         break
 
       case 40: // down
-        await this.keyboardArrowUpDownHandler(false)
+        evt.preventDefault()
+        this.keyboardArrowUpDownHandler(false)
         break
 
       case 91: // command
       case 93: // command
-        this.triggerContextMenu()
+        if (focusTarget) {
+          evt.preventDefault()
+          this.triggerContextMenu()
+        }
         break
 
       default:
@@ -237,6 +223,7 @@ class App extends PureComponent {
     chrome.bookmarks.onRemoved.addListener(renewSlicedTreesById)
   }
 
+  @debounce(30)
   async keyboardArrowLeftRightHandler(isLeft) {
     const {
       dispatch,
@@ -283,6 +270,7 @@ class App extends PureComponent {
     }
   }
 
+  @debounce(30)
   async keyboardArrowUpDownHandler(isUp) {
     const {
       dispatch,
