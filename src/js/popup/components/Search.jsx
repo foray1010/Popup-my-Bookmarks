@@ -17,6 +17,14 @@ import styles from '../../../css/popup/search.css'
 const msgSearch = chrome.i18n.getMessage('search')
 
 class Search extends PureComponent {
+  constructor(...args) {
+    super(...args)
+
+    this.state = {
+      inputValue: this.props.searchKeyword
+    }
+  }
+
   componentDidUpdate(prevProps) {
     const {
       isMenuCoverHidden
@@ -34,14 +42,35 @@ class Search extends PureComponent {
   }
 
   @autobind
-  @debounce(200)
-  async handleInput() {
+  handleInput() {
+    this.setState({
+      inputValue: this.inputEl.value.trimLeft()
+    })
+
+    this.genNewTreesBySearchKeyword()
+  }
+
+  tryFocusToInput() {
+    const {
+      isMenuCoverHidden
+    } = this.props
+
+    if (isMenuCoverHidden) {
+      this.inputEl.focus()
+    }
+  }
+
+  @debounce(300)
+  async updateTreesBySearchKeyword() {
     const {
       dispatch,
       options
     } = this.props
+    const {
+      inputValue
+    } = this.state
 
-    const newSearchKeyword = this.inputEl.value.trim().replace(/\s+/g, ' ')
+    const newSearchKeyword = inputValue.trim().replace(/\s+/g, ' ')
 
     let newTrees
     if (newSearchKeyword === '') {
@@ -58,17 +87,11 @@ class Search extends PureComponent {
     ])
   }
 
-  tryFocusToInput() {
-    const {
-      isMenuCoverHidden
-    } = this.props
-
-    if (isMenuCoverHidden) {
-      this.inputEl.focus()
-    }
-  }
-
   render() {
+    const {
+      inputValue
+    } = this.state
+
     return (
       <header styleName='main'>
         <input
@@ -77,6 +100,7 @@ class Search extends PureComponent {
           }}
           type='search'
           placeholder={msgSearch}
+          value={inputValue}
           tabIndex='-1'
           autoFocus
           onBlur={this.handleBlur}
@@ -90,12 +114,14 @@ class Search extends PureComponent {
 Search.propTypes = {
   dispatch: PropTypes.func.isRequired,
   isMenuCoverHidden: PropTypes.bool.isRequired,
-  options: PropTypes.object.isRequired
+  options: PropTypes.object.isRequired,
+  searchKeyword: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => ({
   isMenuCoverHidden: !(state.editorTarget || state.menuTarget),
-  options: state.options
+  options: state.options,
+  searchKeyword: state.searchKeyword
 })
 
 export default connect(mapStateToProps)(
