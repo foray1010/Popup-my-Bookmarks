@@ -119,46 +119,65 @@ class App extends PureComponent {
     evt.persist()
 
     const {
+      dispatch,
       editorTarget,
       focusTarget,
       menuTarget
     } = this.props
 
-    if (editorTarget || menuTarget) return
+    // no custom handle for editor
+    if (editorTarget) return
 
     switch (evt.keyCode) {
       case 9: // tab
+        if (menuTarget) return
+
         evt.preventDefault()
         this.keyboardArrowUpDownHandler(evt.shiftKey)
         break
 
       case 13: // enter
+        if (menuTarget) return
+
         evt.preventDefault()
         this.handleEnter(evt)
         break
 
       case 37: // left
+        if (menuTarget) return
+
         evt.preventDefault()
         this.keyboardArrowLeftRightHandler(true)
         break
 
       case 38: // up
+        if (menuTarget) return
+
         evt.preventDefault()
         this.keyboardArrowUpDownHandler(true)
         break
 
       case 39: // right
+        if (menuTarget) return
+
         evt.preventDefault()
         this.keyboardArrowLeftRightHandler(false)
         break
 
       case 40: // down
+        if (menuTarget) return
+
         evt.preventDefault()
         this.keyboardArrowUpDownHandler(false)
         break
 
       case 91: // command
       case 93: // command
+        if (menuTarget) {
+          dispatch(updateMenuTarget(null))
+          return
+        }
+
         if (focusTarget) {
           evt.preventDefault()
           this.triggerContextMenu()
