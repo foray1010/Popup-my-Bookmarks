@@ -122,7 +122,8 @@ class App extends PureComponent {
       dispatch,
       editorTarget,
       focusTarget,
-      menuTarget
+      menuTarget,
+      searchKeyword
     } = this.props
 
     // no custom handle for editor
@@ -144,31 +145,20 @@ class App extends PureComponent {
         break
 
       case 37: // left
-        if (menuTarget) return
+      case 39: // right
+        // when searching, allow user to use left right key to navigate
+        if (menuTarget || searchKeyword) return
 
         evt.preventDefault()
-        this.keyboardArrowLeftRightHandler(true)
+        this.keyboardArrowLeftRightHandler(evt.keyCode === 37)
         break
 
       case 38: // up
-        if (menuTarget) return
-
-        evt.preventDefault()
-        this.keyboardArrowUpDownHandler(true)
-        break
-
-      case 39: // right
-        if (menuTarget) return
-
-        evt.preventDefault()
-        this.keyboardArrowLeftRightHandler(false)
-        break
-
       case 40: // down
         if (menuTarget) return
 
         evt.preventDefault()
-        this.keyboardArrowUpDownHandler(false)
+        this.keyboardArrowUpDownHandler(evt.keyCode === 38)
         break
 
       case 91: // command
