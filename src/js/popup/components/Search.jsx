@@ -47,7 +47,7 @@ class Search extends PureComponent {
       inputValue: this.inputEl.value.trimLeft()
     })
 
-    this.genNewTreesBySearchKeyword()
+    this.updateTreesBySearchKeyword()
   }
 
   tryFocusToInput() {
