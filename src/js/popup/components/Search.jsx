@@ -25,13 +25,17 @@ class Search extends PureComponent {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const {
       isMenuCoverHidden
     } = this.props
 
     if (isMenuCoverHidden !== prevProps.isMenuCoverHidden) {
       this.tryFocusToInput()
+    }
+
+    if (this.state.inputValue !== prevState.inputValue) {
+      this.updateTreesBySearchKeyword()
     }
   }
 
@@ -46,8 +50,6 @@ class Search extends PureComponent {
     this.setState({
       inputValue: this.inputEl.value.trimLeft()
     })
-
-    this.updateTreesBySearchKeyword()
   }
 
   tryFocusToInput() {
@@ -66,11 +68,8 @@ class Search extends PureComponent {
       dispatch,
       options
     } = this.props
-    const {
-      inputValue
-    } = this.state
 
-    const newSearchKeyword = inputValue.trim().replace(/\s+/g, ' ')
+    const newSearchKeyword = this.state.inputValue.trim().replace(/\s+/g, ' ')
 
     let newTrees
     if (newSearchKeyword === '') {
@@ -88,10 +87,6 @@ class Search extends PureComponent {
   }
 
   render() {
-    const {
-      inputValue
-    } = this.state
-
     return (
       <header styleName='main'>
         <input
@@ -100,7 +95,7 @@ class Search extends PureComponent {
           }}
           type='search'
           placeholder={msgSearch}
-          value={inputValue}
+          value={this.state.inputValue}
           tabIndex='-1'
           autoFocus
           onBlur={this.handleBlur}
