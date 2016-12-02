@@ -153,13 +153,10 @@ class App extends PureComponent {
           return
         }
 
+        evt.preventDefault()
         if (menuTarget) {
           dispatch(updateMenuTarget(null))
-          return
-        }
-
-        if (focusTarget) {
-          evt.preventDefault()
+        } else if (focusTarget) {
           this.triggerContextMenu()
         }
         break
