@@ -144,6 +144,27 @@ class App extends PureComponent {
         this.handleEnter(evt)
         break
 
+      case 17: // ctrl
+      case 91: // command
+      case 93: { // command
+        const isMac = /^Mac/.test(window.navigator.platform)
+        const isCtrlKey = evt.keyCode === 17
+        if (isMac !== isCtrlKey) {
+          return
+        }
+
+        if (menuTarget) {
+          dispatch(updateMenuTarget(null))
+          return
+        }
+
+        if (focusTarget) {
+          evt.preventDefault()
+          this.triggerContextMenu()
+        }
+        break
+      }
+
       case 37: // left
       case 39: // right
         // when searching, allow user to use left right key to navigate
@@ -159,19 +180,6 @@ class App extends PureComponent {
 
         evt.preventDefault()
         this.keyboardArrowUpDownHandler(evt.keyCode === 38)
-        break
-
-      case 91: // command
-      case 93: // command
-        if (menuTarget) {
-          dispatch(updateMenuTarget(null))
-          return
-        }
-
-        if (focusTarget) {
-          evt.preventDefault()
-          this.triggerContextMenu()
-        }
         break
 
       default:
