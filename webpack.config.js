@@ -44,9 +44,7 @@ const webpackConfig = {
     new webpack.optimize.OccurenceOrderPlugin(true)
   ],
   postcss: () => [
-    postcssImport({
-      addDependencyTo: webpack
-    }),
+    postcssImport(),
     cssnext({
       autoprefixer: {
         browsers: `Chrome >= ${manifest.minimum_chrome_version}`
