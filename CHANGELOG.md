@@ -21,6 +21,10 @@ Bugfixes:
 Translations:
   - Support Norwegian Bokmål locales (thanks Bjorn Tore Asheim)
 
+## 4.0.2.812 (8/12/2016)
+Bugfixes:
+  - Middle click is not working on Chrome 55
+
 ## 4.0.1.706 (7/6/2015)
 Improvements:
   - Dragging is now much more sensitive
