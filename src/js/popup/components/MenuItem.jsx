@@ -6,8 +6,8 @@ import CSSModules from 'react-css-modules'
 
 import {
   getBookmarkType,
-  isFolder,
   openMultipleBookmarks,
+  removeBookmark,
   resetBodySize,
   sortByTitle
 } from '../functions'
@@ -47,14 +47,6 @@ async function createBookmarkBelowMenuTarget(menuTarget, title, url) {
   })
 
   return createdItemInfo
-}
-
-async function removeBookmarkItem(menuTarget) {
-  const removeFunc = isFolder(menuTarget) ?
-    chromep.bookmarks.removeTree :
-    chromep.bookmarks.remove
-
-  await removeFunc(menuTarget.id)
 }
 
 async function sortByName(parentId) {
@@ -176,7 +168,7 @@ class MenuItem extends PureComponent {
         break
 
       case 'del':
-        await removeBookmarkItem(menuTarget)
+        await removeBookmark(menuTarget)
         break
 
       case 'cut':

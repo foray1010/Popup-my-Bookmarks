@@ -305,6 +305,14 @@ export async function openMultipleBookmarks(itemInfo, {
   window.close()
 }
 
+export async function removeBookmark(target) {
+  if (isFolder(target)) {
+    await chromep.bookmarks.removeTree(target.id)
+  } else {
+    await chromep.bookmarks.remove(target.id)
+  }
+}
+
 export function sortByTitle(bookmarkList) {
   const {compare} = new Intl.Collator()
 
