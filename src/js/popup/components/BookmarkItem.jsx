@@ -388,7 +388,7 @@ class BookmarkItem extends PureComponent {
       >
         <a
           styleName={thisStyleName}
-          href={itemInfo.url || '#'}
+          href={itemInfo.url || ''}
           draggable={false}
           tabIndex='-1'
           onClick={this.handleClick}
