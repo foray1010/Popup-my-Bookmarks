@@ -93,43 +93,8 @@ chrome.storage.sync.get(null, (STORAGE) => {
 
   // event delegation
   BODY.on({
-    click(event) {
-      const mouseButton = event.button;
-      const target = event.target;
-
-      let item;
-
-      // reset the cursor to search-input after clicking
-      focusSearchInput();
-
-      if (target.hasClass('head-close')) {
-        resetBox(target.parentNode.next().data(DATATEXT_BOX_NUM) - 1);
-
-        return true;
-      }
-
-      item = getItem(target);
-      if (item) {
-        switch (item.data(DATATEXT_BOOKMARK_TYPE)) {
-          case 'folder':
-            if (mouseButton === 1) {
-              openBkmarks(item.id, true, 0);
-            } else if (STORAGE.opFolderBy) {
-              if (!BOX_PID.includes(item.id)) {
-                openFolder(item.id);
-              } else {
-                resetBox(getParentBoxNum(item));
-              }
-            }
-            break;
-
-          case 'bkmark':
-            _bookmark.get(item.id, (node) => {
-              clickSwitcher(mouseButton, node[0].url);
-            });
-        }
-      }
-    },
+    auxclick: handleClickEvent,
+    click: handleClickEvent,
     // Customize right click menu
     contextmenu(event) {
       const target = event.target;
@@ -763,6 +728,42 @@ chrome.storage.sync.get(null, (STORAGE) => {
     greyArr.ascEach((itemNum) => {
       menu.children[itemNum].toggleClass('grey-item', isGrey);
     });
+  }
+
+  function handleClickEvent(event) {
+    const mouseButton = event.button;
+    const target = event.target;
+
+    // reset the cursor to search-input after clicking
+    focusSearchInput();
+
+    if (target.hasClass('head-close')) {
+      resetBox(target.parentNode.next().data(DATATEXT_BOX_NUM) - 1);
+
+      return true;
+    }
+
+    let item = getItem(target);
+    if (item) {
+      switch (item.data(DATATEXT_BOOKMARK_TYPE)) {
+        case 'folder':
+          if (mouseButton === 1) {
+            openBkmarks(item.id, true, 0);
+          } else if (STORAGE.opFolderBy) {
+            if (!BOX_PID.includes(item.id)) {
+              openFolder(item.id);
+            } else {
+              resetBox(getParentBoxNum(item));
+            }
+          }
+          break;
+
+        case 'bkmark':
+          _bookmark.get(item.id, (node) => {
+            clickSwitcher(mouseButton, node[0].url);
+          });
+      }
+    }
   }
 
   function hideMenu(isHideCover) {
