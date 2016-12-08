@@ -9,7 +9,7 @@
     "cson": "^4.0.0",
     "fs-extra": "^1.0.0",
     "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
+    "gulp-babel": "^5.0.0",
     "gulp-coffeelint": "^0.6.0",
     "gulp-eslint": "^1.0.0",
     "gulp-if": "^2.0.2",
