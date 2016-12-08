@@ -11,7 +11,7 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-coffeelint": "^0.6.0",
-    "gulp-eslint": "^3.0.1",
+    "gulp-eslint": "^1.0.0",
     "gulp-if": "^2.0.2",
     "gulp-jade": "^1.1.0",
     "gulp-load-plugins": "^1.4.0",

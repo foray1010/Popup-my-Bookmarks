@@ -346,7 +346,7 @@
   };
 
   // Private function
-  function argumentsConstructor(args, typePatterns, defaultValues=[]) {
+  function argumentsConstructor(args, typePatterns, defaultValues = []) {
     // remove the non-optional arguments
     const argsSliceNum = args.length - typePatterns.length;
     const returnList = [];

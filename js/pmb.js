@@ -1091,7 +1091,7 @@ chrome.storage.sync.get(null, (STORAGE) => {
     });
   }
 
-  function onHoverTimeout(element, fn, delay, xyRange=20, isInsideRange=true) {
+  function onHoverTimeout(element, fn, delay, xyRange = 20, isInsideRange = true) {
     const mousemoveFn = (mouseXYOrig) => {
       const isTriggerPoint = (axis) => {
         const displacement = Math.abs(mouseXY[axis] - mouseXYOrig[axis]);
