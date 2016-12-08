@@ -174,9 +174,6 @@ gulp.task('dev', ->
 
 # Lints
 gulp.task('lint', ->
-  gulp.src(path.join(lang.css.source, '*'))
-    .pipe(plugins.stylint())
-
   gulp.src(path.join(lang.js.source, '*'))
     .pipe(plugins.eslint())
     .pipe(plugins.eslint.format())
