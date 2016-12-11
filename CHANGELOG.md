@@ -1,3 +1,7 @@
+## 4.0.3.1112 (11/12/2016)
+Bugfixes:
+  - Right click cannot trigger context menu on Chrome 55
+
 ## 4.0.2.812 (8/12/2016)
 Bugfixes:
   - Middle click is not working on Chrome 55

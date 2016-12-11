@@ -734,6 +734,11 @@ chrome.storage.sync.get(null, (STORAGE) => {
     const mouseButton = event.button;
     const target = event.target;
 
+    // if it is not left/middle click
+    if (mouseButton !== 0 && mouseButton !== 1) {
+      return;
+    }
+
     // reset the cursor to search-input after clicking
     focusSearchInput();
 
