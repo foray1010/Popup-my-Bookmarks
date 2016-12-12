@@ -1,6 +1,7 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
+import {static as Immutable} from 'seamless-immutable'
 import CSSModules from 'react-css-modules'
 
 import {
@@ -110,7 +111,7 @@ class BookmarkTree extends PureComponent {
 
     const bookmarkList = genBookmarkList(treeInfo, {isSearching, rootTree, treeIndex})
 
-    const treeItems = bookmarkList.asMutable().map((itemInfo) => (
+    const treeItems = Immutable.asMutable(bookmarkList).map((itemInfo) => (
       <BookmarkItem
         key={itemInfo.id}
         itemInfo={itemInfo}

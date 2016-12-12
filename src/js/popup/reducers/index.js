@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import Immutable from 'seamless-immutable'
+import {static as Immutable} from 'seamless-immutable'
 
 import {
   DRAG_INDICATOR,
@@ -167,7 +167,7 @@ const rootReducer = combineReducers({
           return state
         }
 
-        const mutableTrees = state.asMutable()
+        const mutableTrees = Immutable.asMutable(state)
 
         mutableTrees[action.treeIndex] = action.treeInfo
 

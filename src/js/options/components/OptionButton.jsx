@@ -1,6 +1,7 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
+import {static as Immutable} from 'seamless-immutable'
 import CSSModules from 'react-css-modules'
 
 import {
@@ -27,7 +28,7 @@ class OptionButton extends PureComponent {
       options
     } = this.props
 
-    const newOptions = options.asMutable()
+    const newOptions = Immutable.asMutable(options)
 
     await chromep.storage.sync.set(newOptions)
 

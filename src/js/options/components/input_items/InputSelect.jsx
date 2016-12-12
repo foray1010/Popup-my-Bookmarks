@@ -1,6 +1,7 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
+import {static as Immutable} from 'seamless-immutable'
 import CSSModules from 'react-css-modules'
 
 import {updateSingleOption} from '../../actions'
@@ -59,7 +60,7 @@ class InputSelect extends PureComponent {
 
     const optionValue = options[optionName]
 
-    const optionItems = optionConfig.choices.asMutable().map((optionChoice, optionChoiceIndex) => (
+    const optionItems = Immutable.asMutable(optionConfig.choices).map((optionChoice, optionChoiceIndex) => (
       <option key={String(optionChoiceIndex)}>
         {optionChoice}
       </option>

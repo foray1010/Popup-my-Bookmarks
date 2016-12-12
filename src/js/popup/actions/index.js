@@ -1,4 +1,4 @@
-import Immutable from 'seamless-immutable'
+import {static as Immutable} from 'seamless-immutable'
 
 import {
   PUT_DRAG_INDICATOR,

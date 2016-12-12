@@ -1,6 +1,7 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
+import {static as Immutable} from 'seamless-immutable'
 
 import {updateSingleOption} from '../../../actions'
 
@@ -13,7 +14,7 @@ class Option extends PureComponent {
       options
     } = this.props
 
-    const newOptionValue = options[optionName].asMutable()
+    const newOptionValue = Immutable.asMutable(options[optionName])
     const targetValue = parseInt(evt.target.value, 10)
 
     const targetValueIndex = newOptionValue.indexOf(targetValue)

@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import Immutable from 'seamless-immutable'
+import {static as Immutable} from 'seamless-immutable'
 
 import {
   SELECT_NAV_MODULE,
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
         return action.options
 
       case UPDATE_SINGLE_OPTION: {
-        const mutableOptions = state.asMutable()
+        const mutableOptions = Immutable.asMutable(state)
 
         mutableOptions[action.optionName] = action.optionValue
 

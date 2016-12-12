@@ -1,6 +1,7 @@
 import {autobind, debounce} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
+import {static as Immutable} from 'seamless-immutable'
 import _debounce from 'lodash/debounce'
 import CSSModules from 'react-css-modules'
 
@@ -214,7 +215,7 @@ class App extends PureComponent {
         searchKeyword
       } = this.props
 
-      const newTrees = await Promise.all(oldTrees.asMutable().map((treeInfo) => {
+      const newTrees = await Promise.all(Immutable.asMutable(oldTrees).map((treeInfo) => {
         if (treeInfo.id === 'search-result') {
           return getSearchResult(searchKeyword, options)
         }

@@ -1,3 +1,4 @@
+import {static as Immutable} from 'seamless-immutable'
 import _debounce from 'lodash/debounce'
 
 import {
@@ -20,6 +21,6 @@ export const updateLastScrollTopList = _debounce(() => {
 
 export const updateLastUsedTreeIds = (trees) => {
   lastUsedTreeIdsStorage.set(
-    trees.asMutable().map((treeInfo) => treeInfo.id)
+    Immutable.asMutable(trees).map((treeInfo) => treeInfo.id)
   )
 }

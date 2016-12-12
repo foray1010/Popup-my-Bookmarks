@@ -1,4 +1,4 @@
-import Immutable from 'seamless-immutable'
+import {static as Immutable} from 'seamless-immutable'
 
 import {
   SELECT_NAV_MODULE,

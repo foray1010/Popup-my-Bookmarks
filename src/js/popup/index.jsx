@@ -1,7 +1,7 @@
 import {createElement} from 'react'
 import {Provider} from 'react-redux'
 import {render} from 'react-dom'
-import Immutable from 'seamless-immutable'
+import {static as Immutable} from 'seamless-immutable'
 
 import {
   getItemOffsetHeight,
