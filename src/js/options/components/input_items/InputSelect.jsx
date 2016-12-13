@@ -60,11 +60,12 @@ class InputSelect extends PureComponent {
 
     const optionValue = options[optionName]
 
-    const optionItems = Immutable.asMutable(optionConfig.choices).map((optionChoice, optionChoiceIndex) => (
-      <option key={String(optionChoiceIndex)}>
-        {optionChoice}
-      </option>
-    ))
+    const optionItems = Immutable.asMutable(optionConfig.choices)
+      .map((optionChoice, optionChoiceIndex) => (
+        <option key={String(optionChoiceIndex)}>
+          {optionChoice}
+        </option>
+      ))
 
     return (
       <div styleName='main'>
