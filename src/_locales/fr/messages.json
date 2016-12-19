@@ -43,6 +43,14 @@
     "message": "Confirmer",
     "description": "2013.01.30"
   },
+  "contributors": {
+    "message": "Contributeurs",
+    "description": "2015.08.22"
+  },
+  "control": {
+    "message": "Ctrl",
+    "description": "2015.08.22"
+  },
   "copy": {
     "message": "Copier",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
@@ -71,9 +79,21 @@
     "message": "Une méthode plus efficace pour visualiser et gérer votre menu de favoris.",
     "description": "2013.01.21"
   },
+  "fontFamily": {
+    "message": "Famille de polices d'écriture",
+    "description": "2015.01.11"
+  },
   "fontSize": {
     "message": "Taille police",
     "description": "2013.07.26"
+  },
+  "general": {
+    "message": "Général",
+    "description": "2015.08.22"
+  },
+  "hideRootFolder": {
+    "message": "Cacher le dossier racine",
+    "description": "2015.02.18 | Root folder means the top level folder"
   },
   "maxResults": {
     "message": "Nombre maximum de résultats de recherche",
@@ -170,6 +190,10 @@
   "tooltip": {
     "message": "Afficher info-bulle contenant des informations sur les favoris",
     "description": "2013.03.24"
+  },
+  "userInterface": {
+    "message": "Interface d'utilisateur",
+    "description": "2015.08.22"
   },
   "warnOpenMany": {
     "message": "Avertir lors de l'ouverture de plusieurs onglets qui pourrait ralentir Chrome",

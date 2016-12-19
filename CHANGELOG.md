@@ -20,6 +20,7 @@ Bugfixes:
 
 Translations:
   - Support Norwegian Bokmål locales (thanks Bjorn Tore Asheim)
+  - Locales update: French(Alexis Schapman)
 
 ## 4.0.2.812 (8/12/2016)
 Bugfixes:
