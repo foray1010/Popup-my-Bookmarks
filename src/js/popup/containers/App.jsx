@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
 import {static as Immutable} from 'seamless-immutable'
 import _debounce from 'lodash/debounce'
-import CSSModules from 'react-css-modules'
 
 import {
   genBookmarkList,
@@ -30,12 +29,7 @@ import {
 import {
   TYPE_ROOT_FOLDER
 } from '../constants'
-import Editor from '../components/Editor'
-import Menu from '../components/Menu'
-import MenuCover from '../components/MenuCover'
-import Panel from '../components/Panel'
-
-import styles from '../../../css/popup/app.css'
+import Main from '../components/Main'
 
 class App extends PureComponent {
   componentWillMount() {
@@ -55,6 +49,7 @@ class App extends PureComponent {
       trees
     } = this.props
 
+    // TODO - move it to redux or redux-saga
     const isRememberLastPosition = options.rememberPos && !searchKeyword
     if (isRememberLastPosition && trees !== prevProps.trees) {
       updateLastUsedTreeIds(trees)
@@ -359,20 +354,12 @@ class App extends PureComponent {
   }
 
   render() {
-    console.log('render')
-
     return (
-      <div
-        styleName='main'
+      <Main
         onContextMenu={this.handleContextMenu}
         onKeyDown={this.handleKeyDown}
         onMouseDown={this.handleMouseDown}
-      >
-        <Panel />
-        <MenuCover />
-        <Menu />
-        <Editor />
-      </div>
+      />
     )
   }
 }
@@ -398,6 +385,4 @@ const mapStateToProps = (state) => ({
   trees: state.trees
 })
 
-export default connect(mapStateToProps)(
-  CSSModules(App, styles)
-)
+export default connect(mapStateToProps)(App)

@@ -1,18 +1,9 @@
 import {createElement} from 'react'
-import CSSModules from 'react-css-modules'
 
-import Donate from '../components/Donate'
-import NavBar from '../components/NavBar'
-import NavModuleMapper from '../components/NavModuleMapper'
-
-import styles from '../../../css/options/app.css'
+import Main from '../components/Main'
 
 const App = () => (
-  <div>
-    <NavBar />
-    <NavModuleMapper />
-    <Donate />
-  </div>
+  <Main />
 )
 
-export default CSSModules(App, styles)
+export default App

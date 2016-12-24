@@ -1,2 +1,5 @@
 @import "../common/globals.css";
-@import "./globals.css";
+
+.main {
+  font: 12px sans-serif;
+}
