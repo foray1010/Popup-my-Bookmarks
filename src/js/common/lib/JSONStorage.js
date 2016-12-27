@@ -9,7 +9,7 @@ class JSONStorage {
     this.namespace = namespace
   }
 
-  get(): Object {
+  get(): any {
     const unparsedValue: ?string = window.localStorage.getItem(this.namespace)
 
     if (!unparsedValue) {
