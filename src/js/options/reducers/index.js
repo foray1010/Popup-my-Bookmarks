@@ -13,13 +13,8 @@ const rootReducer = combineReducers({
       case UPDATE_OPTIONS:
         return action.options
 
-      case UPDATE_SINGLE_OPTION: {
-        const mutableOptions = Immutable.asMutable(state)
-
-        mutableOptions[action.optionName] = action.optionValue
-
-        return Immutable(mutableOptions)
-      }
+      case UPDATE_SINGLE_OPTION:
+        return Immutable.set(state, action.optionName, action.optionValue)
 
       default:
         return state

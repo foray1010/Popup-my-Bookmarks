@@ -1,7 +1,6 @@
 import {autobind} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
-import {static as Immutable} from 'seamless-immutable'
 import CSSModules from 'react-css-modules'
 
 import {
@@ -24,15 +23,10 @@ class OptionButton extends PureComponent {
     evt.preventDefault()
 
     const {
-      dispatch,
       options
     } = this.props
 
-    const newOptions = Immutable.asMutable(options)
-
-    await chromep.storage.sync.set(newOptions)
-
-    dispatch(updateOptions(newOptions))
+    await chromep.storage.sync.set(options)
   }
 
   @autobind

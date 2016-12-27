@@ -162,17 +162,8 @@ const rootReducer = combineReducers({
       case REMOVE_TREE_INFOS_FROM_INDEX:
         return getSlicedTrees(state, action.removeFromIndex)
 
-      case REPLACE_TREE_INFO_BY_INDEX: {
-        if (state[action.treeIndex] === action.treeInfo) {
-          return state
-        }
-
-        const mutableTrees = Immutable.asMutable(state)
-
-        mutableTrees[action.treeIndex] = action.treeInfo
-
-        return Immutable(mutableTrees)
-      }
+      case REPLACE_TREE_INFO_BY_INDEX:
+        return Immutable.set(state, action.treeIndex, action.treeInfo)
 
       case UPDATE_TREES:
         return action.trees
