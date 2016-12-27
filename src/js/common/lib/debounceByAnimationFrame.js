@@ -1,15 +1,17 @@
+/* @flow */
+
 const {
   cancelAnimationFrame,
   requestAnimationFrame
 } = window
 
-export default (fn) => {
-  let requestId = null
+export default (fn: Function): Function => {
+  let requestId: ?number = null
 
-  return (...args) => {
+  return (...args): void => {
     if (requestId) cancelAnimationFrame(requestId)
 
-    requestId = requestAnimationFrame(() => {
+    requestId = requestAnimationFrame((): void => {
       fn(...args)
 
       requestId = null

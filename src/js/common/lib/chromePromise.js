@@ -1,5 +1,7 @@
+/* @flow */
+
 import ChromePromise from 'chrome-promise'
 
-const chromePromise = new ChromePromise()
+const chromePromise: ChromePromise = new ChromePromise()
 
 export default chromePromise

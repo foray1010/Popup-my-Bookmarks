@@ -1,3 +1,5 @@
+/* @flow */
+
 import {static as Immutable} from 'seamless-immutable'
 
 import {
@@ -20,10 +22,10 @@ import {
 
 export * from './actionTypes'
 
-export const NAV_MODULE_CONTRIBUTORS = 'contributors'
-export const NAV_MODULE_CONTROL = 'control'
-export const NAV_MODULE_GENERAL = 'general'
-export const NAV_MODULE_USER_INTERFACE = 'userInterface'
+export const NAV_MODULE_CONTRIBUTORS: string = 'contributors'
+export const NAV_MODULE_CONTROL: string = 'control'
+export const NAV_MODULE_GENERAL: string = 'general'
+export const NAV_MODULE_USER_INTERFACE: string = 'userInterface'
 
 export const OPTION_TABLE_MAP = Immutable({
   [NAV_MODULE_GENERAL]: [

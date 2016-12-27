@@ -1,3 +1,5 @@
+/* @flow */
+
 import {
   OPTIONS_CLICK_BY_LEFT,
   OPTIONS_CLICK_BY_LEFT_CTRL,
@@ -18,14 +20,14 @@ import {
 } from '../constants'
 import chromep from './chromePromise'
 
-async function getOptionsConfig() {
-  const openBookmarkChoices = getSelectChoices('clickOption')
-  const rootFolderChoices = []
+async function getOptionsConfig(): Object {
+  const openBookmarkChoices: string[] = getSelectChoices('clickOption')
+  const rootFolderChoices: string[] = []
 
   // get the root folders' title and set as the choices of 'defExpand'
-  const rootFolders = await chromep.bookmarks.getChildren(ROOT_ID)
+  const rootFolders: Object[] = await chromep.bookmarks.getChildren(ROOT_ID)
   for (const rootFolder of rootFolders) {
-    const rootFolderIdNum = Number(rootFolder.id)
+    const rootFolderIdNum: number = Number(rootFolder.id)
 
     rootFolderChoices[rootFolderIdNum] = rootFolder.title
   }
@@ -120,8 +122,8 @@ async function getOptionsConfig() {
   }
 }
 
-function getSelectChoices(optionName) {
-  return chrome.i18n.getMessage(optionName).split('|')
+function getSelectChoices(optionName: string): string[] {
+  return window.chrome.i18n.getMessage(optionName).split('|')
 }
 
 export default getOptionsConfig
