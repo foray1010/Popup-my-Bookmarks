@@ -8,7 +8,7 @@ const {
 export default (fn: Function): Function => {
   let requestId: ?number = null
 
-  return (...args): void => {
+  return (...args: any[]): void => {
     if (requestId) cancelAnimationFrame(requestId)
 
     requestId = requestAnimationFrame((): void => {

@@ -1,3 +1,5 @@
+/* @flow */
+
 import {combineReducers} from 'redux'
 import {static as Immutable} from 'seamless-immutable'
 
@@ -7,8 +9,11 @@ import {
   UPDATE_SINGLE_OPTION
 } from '../constants'
 
-const rootReducer = combineReducers({
-  options(state = Immutable({}), action) {
+const rootReducer: Function = combineReducers({
+  options(
+    state: Object = Immutable({}),
+    action: Object
+  ): Object {
     switch (action.type) {
       case UPDATE_OPTIONS:
         return action.options
@@ -21,11 +26,16 @@ const rootReducer = combineReducers({
     }
   },
 
-  optionsConfig(state = Immutable({})) {
+  optionsConfig(
+    state: Object = Immutable({})
+  ): Object {
     return state
   },
 
-  selectedNavModule(state = null, action) {
+  selectedNavModule(
+    state: ?string = null,
+    action: Object
+  ): ?string {
     switch (action.type) {
       case SELECT_NAV_MODULE:
         return action.navModule

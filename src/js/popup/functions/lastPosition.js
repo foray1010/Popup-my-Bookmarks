@@ -1,3 +1,5 @@
+/* @flow */
+
 import {static as Immutable} from 'seamless-immutable'
 import _debounce from 'lodash/debounce'
 
@@ -6,21 +8,17 @@ import {
 } from './dom'
 import JSONStorage from '../../common/lib/JSONStorage'
 
-export const lastScrollTopListStorage = new JSONStorage('lastScrollTop', [])
-export const lastUsedTreeIdsStorage = new JSONStorage('lastBoxPID', [])
+export const lastScrollTopListStorage: JSONStorage = new JSONStorage('lastScrollTop', [])
+export const lastUsedTreeIdsStorage: JSONStorage = new JSONStorage('lastBoxPID', [])
 
-const getLastScrollTopList = () => {
-  return getBookmarkListEls()
+export const updateLastScrollTopList: Function = _debounce((): void => {
+  const value: number[] = getBookmarkListEls()
     .map((el) => el.scrollTop)
-}
-
-export const updateLastScrollTopList = _debounce(() => {
-  const value = getLastScrollTopList()
   lastScrollTopListStorage.set(value)
 }, 200)
 
-export const updateLastUsedTreeIds = (trees) => {
-  lastUsedTreeIdsStorage.set(
-    Immutable.asMutable(trees).map((treeInfo) => treeInfo.id)
-  )
+export const updateLastUsedTreeIds: Function = (trees: Object[]): void => {
+  const value: string[] = Immutable.asMutable(trees)
+    .map((treeInfo: Object): string => treeInfo.id)
+  lastUsedTreeIdsStorage.set(value)
 }

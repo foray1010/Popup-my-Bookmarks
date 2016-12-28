@@ -1,3 +1,5 @@
+/* @flow */
+
 import {combineReducers} from 'redux'
 import {static as Immutable} from 'seamless-immutable'
 
@@ -23,8 +25,11 @@ import {
   getSlicedTrees
 } from '../functions'
 
-const rootReducer = combineReducers({
-  copyTarget(state = null, action) {
+const rootReducer: Function = combineReducers({
+  copyTarget(
+    state: ?Object = null,
+    action: Object
+  ): ?Object {
     switch (action.type) {
       case UPDATE_COPY_TARGET:
         return action.copyTarget
@@ -37,7 +42,10 @@ const rootReducer = combineReducers({
     }
   },
 
-  cutTarget(state = null, action) {
+  cutTarget(
+    state: ?Object = null,
+    action: Object
+  ): ?Object {
     switch (action.type) {
       case UPDATE_COPY_TARGET:
         return null
@@ -50,10 +58,19 @@ const rootReducer = combineReducers({
     }
   },
 
-  dragIndicator(state = null, action) {
+  dragIndicator(
+    state: ?Object = null,
+    action: Object
+  ): ?Object {
     switch (action.type) {
       case PUT_DRAG_INDICATOR: {
-        const {isPlaceAfter, itemInfo} = action
+        const {
+          isPlaceAfter,
+          itemInfo
+        }: {
+          isPlaceAfter: boolean,
+          itemInfo: Object
+        } = action
 
         return Immutable({
           ...genDummyItemInfo(),
@@ -71,7 +88,10 @@ const rootReducer = combineReducers({
     }
   },
 
-  dragTarget(state = null, action) {
+  dragTarget(
+    state: ?Object = null,
+    action: Object
+  ): ?Object {
     switch (action.type) {
       case UPDATE_DRAG_TARGET:
         return action.dragTarget
@@ -81,7 +101,10 @@ const rootReducer = combineReducers({
     }
   },
 
-  editorTarget(state = null, action) {
+  editorTarget(
+    state: ?Object = null,
+    action: Object
+  ): ?Object {
     switch (action.type) {
       case UPDATE_EDITOR_TARGET:
         return action.editorTarget
@@ -91,7 +114,10 @@ const rootReducer = combineReducers({
     }
   },
 
-  focusTarget(state = null, action) {
+  focusTarget(
+    state: ?Object = null,
+    action: Object
+  ): ?Object {
     switch (action.type) {
       case UPDATE_FOCUS_TARGET:
         return action.focusTarget
@@ -101,7 +127,10 @@ const rootReducer = combineReducers({
     }
   },
 
-  isCreatingNewFolder(state = false, action) {
+  isCreatingNewFolder(
+    state: boolean = false,
+    action: Object
+  ): boolean {
     switch (action.type) {
       case UPDATE_EDITOR_TARGET:
         if (action.editorTarget === null) return false
@@ -115,11 +144,16 @@ const rootReducer = combineReducers({
     }
   },
 
-  itemOffsetHeight(state = 0) {
+  itemOffsetHeight(
+    state: number = 0
+  ): number {
     return state
   },
 
-  menuTarget(state = null, action) {
+  menuTarget(
+    state: ?Object = null,
+    action: Object
+  ): ?Object {
     switch (action.type) {
       case UPDATE_MENU_TARGET:
         return action.menuTarget
@@ -129,7 +163,10 @@ const rootReducer = combineReducers({
     }
   },
 
-  mousePosition(state = Immutable({x: 0, y: 0}), action) {
+  mousePosition(
+    state: Object = Immutable({x: 0, y: 0}),
+    action: Object
+  ): Object {
     switch (action.type) {
       case UPDATE_MOUSE_POSITION:
         return action.mousePosition
@@ -139,15 +176,22 @@ const rootReducer = combineReducers({
     }
   },
 
-  options(state = Immutable({})) {
+  options(
+    state: Object = Immutable({})
+  ): Object {
     return state
   },
 
-  rootTree(state = Immutable({})) {
+  rootTree(
+    state: Object = Immutable({})
+  ): Object {
     return state
   },
 
-  searchKeyword(state = '', action) {
+  searchKeyword(
+    state: string = '',
+    action: Object
+  ): string {
     switch (action.type) {
       case UPDATE_SEARCH_KEYWORD:
         return action.searchKeyword
@@ -157,7 +201,10 @@ const rootReducer = combineReducers({
     }
   },
 
-  trees(state = Immutable([]), action) {
+  trees(
+    state: Object[] = Immutable([]),
+    action: Object
+  ): Object[] {
     switch (action.type) {
       case REMOVE_TREE_INFOS_FROM_INDEX:
         return getSlicedTrees(state, action.removeFromIndex)

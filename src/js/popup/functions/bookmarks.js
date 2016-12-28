@@ -1,3 +1,5 @@
+/* @flow */
+
 import {
   lastUsedTreeIdsStorage
 } from './lastPosition'
@@ -12,11 +14,22 @@ import {
 } from '../constants'
 import chromep from '../../common/lib/chromePromise'
 
-const msgNoBookmark = chrome.i18n.getMessage('noBkmark')
-const noBookmarkIdPrefix = 'no-bookmark-'
+const msgNoBookmark: string = window.chrome.i18n.getMessage('noBkmark')
+const noBookmarkIdPrefix: string = 'no-bookmark-'
 
-export function genBookmarkList(treeInfo, {isSearching, rootTree, treeIndex}) {
-  let childrenInfo = treeInfo.children
+export function genBookmarkList(
+  treeInfo: Object,
+  {
+    isSearching,
+    rootTree,
+    treeIndex
+  }: {
+    isSearching: boolean,
+    rootTree: Object,
+    treeIndex: number
+  }
+): Object[] {
+  let childrenInfo: Object[] = treeInfo.children
 
   if (!isSearching) {
     if (childrenInfo.length === 0) {
@@ -33,7 +46,7 @@ export function genBookmarkList(treeInfo, {isSearching, rootTree, treeIndex}) {
   return childrenInfo
 }
 
-export function genDummyItemInfo() {
+export function genDummyItemInfo(): Object {
   return {
     dateAdded: null,
     dateGroupModified: null,
@@ -44,7 +57,7 @@ export function genDummyItemInfo() {
   }
 }
 
-function genNoBookmarkInfo(parentId) {
+function genNoBookmarkInfo(parentId: string): Object {
   return {
     ...genDummyItemInfo(),
     id: `${noBookmarkIdPrefix}${parentId}`,
@@ -54,12 +67,12 @@ function genNoBookmarkInfo(parentId) {
   }
 }
 
-export async function getBookmark(id) {
+export async function getBookmark(id: string): Promise<Object> {
   const [itemInfo] = await chromep.bookmarks.get(id)
   return itemInfo
 }
 
-export function getBookmarkType(itemInfo) {
+export function getBookmarkType(itemInfo: Object): string {
   if (RegExp(`^${noBookmarkIdPrefix}`).test(itemInfo.id)) {
     return TYPE_NO_BOOKMARK
   }
@@ -79,21 +92,23 @@ export function getBookmarkType(itemInfo) {
   return TYPE_BOOKMARK
 }
 
-export async function getFlatTree(id) {
-  const treeInfo = await getBookmark(id)
+export async function getFlatTree(id: string): Promise<Object> {
+  const treeInfo: Object = await getBookmark(id)
 
   treeInfo.children = await chromep.bookmarks.getChildren(id)
 
   return treeInfo
 }
 
-export async function getRootTree(options) {
-  const rootTree = await getFlatTree(ROOT_ID)
+export async function getRootTree(options: Object): Promise<Object> {
+  const rootTree: Object = await getFlatTree(ROOT_ID)
 
-  rootTree.children = rootTree.children.filter((itemInfo) => {
-    const itemIdNum = Number(itemInfo.id)
+  rootTree.children = rootTree.children.filter((
+    itemInfo: Object
+  ): boolean => {
+    const itemIdNum: number = Number(itemInfo.id)
 
-    const isFilterThisItem = (
+    const isFilterThisItem: boolean = (
       itemIdNum === options.defExpand ||
       options.hideRootFolder.includes(itemIdNum)
     )
@@ -104,11 +119,14 @@ export async function getRootTree(options) {
   return rootTree
 }
 
-export async function getSearchResult(newSearchKeyword, options) {
-  const filteredResult = []
-  const isOnlySearchTitle = options.searchTarget === 1
-  const results = await chromep.bookmarks.search(newSearchKeyword)
-  const splittedKeyArr = []
+export async function getSearchResult(
+  newSearchKeyword: string,
+  options: Object
+): Promise<Object> {
+  const filteredResult: Object[] = []
+  const isOnlySearchTitle: boolean = options.searchTarget === 1
+  const results: Object[] = await chromep.bookmarks.search(newSearchKeyword)
+  const splittedKeyArr: string[] = []
 
   if (isOnlySearchTitle) {
     splittedKeyArr.push(
@@ -116,12 +134,13 @@ export async function getSearchResult(newSearchKeyword, options) {
     )
   }
 
-  for (const itemInfo of results) {
+  for (const itemInfo: Object of results) {
     if (getBookmarkType(itemInfo) === TYPE_BOOKMARK) {
       if (isOnlySearchTitle) {
-        const itemTitle = itemInfo.title.toLowerCase()
+        const itemTitle: string = itemInfo.title.toLowerCase()
 
-        const isTitleMatched = splittedKeyArr.every((x) => itemTitle.includes(x))
+        const isTitleMatched: boolean = splittedKeyArr
+          .every((x: string): boolean => itemTitle.includes(x))
 
         if (!isTitleMatched) {
           continue
@@ -143,7 +162,10 @@ export async function getSearchResult(newSearchKeyword, options) {
   }
 }
 
-export function getSlicedTrees(trees, removeFromIndex) {
+export function getSlicedTrees(
+  trees: Object[],
+  removeFromIndex: number
+): Object[] {
   if (trees.length > removeFromIndex) {
     return trees.slice(0, removeFromIndex)
   }
@@ -151,18 +173,18 @@ export function getSlicedTrees(trees, removeFromIndex) {
   return trees
 }
 
-export async function initTrees(options) {
-  const defaultExpandFolderId = String(options.defExpand)
+export async function initTrees(options: Object): Promise<Object[]> {
+  const defaultExpandFolderId: string = String(options.defExpand)
 
-  const firstTree = await getFlatTree(defaultExpandFolderId)
+  const firstTree: Object = await getFlatTree(defaultExpandFolderId)
 
   if (options.rememberPos) {
-    const lastUsedTreeIds = lastUsedTreeIdsStorage.get()
+    const lastUsedTreeIds: string[] = lastUsedTreeIdsStorage.get()
 
     // the target is to open the last existing folder in lastUsedTreeIds
     // so we get the last existing item first and get all its parent
     // it can prevent bugs when user rearrange bookmarks location without updating lastUsedTreeIds
-    let lastExistingTree
+    let lastExistingTree: ?Object
     for (let i = lastUsedTreeIds.length - 1; i >= 0; i -= 1) {
       // we already have firstTree
       if (lastUsedTreeIds[i] === defaultExpandFolderId) break
@@ -178,15 +200,15 @@ export async function initTrees(options) {
     }
 
     if (lastExistingTree) {
-      const trees = []
+      const trees: Object[] = []
 
-      let parentId = lastExistingTree.parentId
+      let parentId: string = lastExistingTree.parentId
       while (
         parentId &&
         parentId !== ROOT_ID &&
         parentId !== defaultExpandFolderId
       ) {
-        const tree = await getFlatTree(parentId)
+        const tree: Object = await getFlatTree(parentId)
         trees.unshift(tree)
 
         parentId = tree.parentId
@@ -202,19 +224,26 @@ export async function initTrees(options) {
   return [firstTree]
 }
 
-export function isFolder(itemInfo) {
+export function isFolder(itemInfo: Object): boolean {
   const bookmarkType = getBookmarkType(itemInfo)
 
   return bookmarkType.includes(TYPE_FOLDER)
 }
 
-export function isFolderOpened(trees, itemInfo) {
-  return trees.some((treeInfo) => treeInfo.id === itemInfo.id)
+export function isFolderOpened(
+  trees: Object[],
+  itemInfo: Object
+): boolean {
+  return trees.some((treeInfo: Object): boolean => treeInfo.id === itemInfo.id)
 }
 
-export async function openBookmark(itemInfo, clickType, options) {
-  const itemUrl = itemInfo.url
-  const openMethod = options[clickType]
+export async function openBookmark(
+  itemInfo: Object,
+  clickType: string,
+  options: Object
+): Promise<void> {
+  const itemUrl: string = itemInfo.url
+  const openMethod: number = options[clickType]
 
   if (itemUrl.startsWith('javascript:')) {
     await chromep.tabs.executeScript(null, {code: itemUrl})
@@ -256,17 +285,24 @@ export async function openBookmark(itemInfo, clickType, options) {
   }
 }
 
-export async function openMultipleBookmarks(itemInfo, {
-  isNewWindow = false,
-  isIncognito = false,
-  isWarnWhenOpenMany = false
-}) {
-  const urlList = []
+export async function openMultipleBookmarks(
+  itemInfo: Object,
+  {
+    isNewWindow = false,
+    isIncognito = false,
+    isWarnWhenOpenMany = false
+  }: {
+    isNewWindow: boolean,
+    isIncognito: boolean,
+    isWarnWhenOpenMany: boolean
+  }
+): Promise<void> {
+  const urlList: string[] = []
 
   if (isFolder(itemInfo)) {
     const [treeInfo] = await chromep.bookmarks.getSubTree(itemInfo.id)
 
-    const childrenInfo = treeInfo.children
+    const childrenInfo: Object = treeInfo.children
 
     for (const thisItemInfo of childrenInfo) {
       if (getBookmarkType(thisItemInfo) === TYPE_BOOKMARK) {
@@ -275,7 +311,7 @@ export async function openMultipleBookmarks(itemInfo, {
     }
 
     if (isWarnWhenOpenMany) {
-      const msgAskOpenAll = chrome.i18n.getMessage('askOpenAll')
+      const msgAskOpenAll: string = window.chrome.i18n.getMessage('askOpenAll')
         .replace('%bkmarkCount%', urlList.length)
 
       if (urlList.length > 5 && !window.confirm(msgAskOpenAll)) {
@@ -283,18 +319,20 @@ export async function openMultipleBookmarks(itemInfo, {
       }
     }
   } else {
-    const thisItemInfo = await getBookmark(itemInfo.id)
+    const thisItemInfo: Object = await getBookmark(itemInfo.id)
 
     urlList.push(thisItemInfo.url)
   }
 
   if (!isNewWindow) {
-    await Promise.all(urlList.map((url) => {
-      return chromep.tabs.create({
-        url,
-        active: false
+    await Promise.all(
+      urlList.map((url: string): Promise<Object> => {
+        return chromep.tabs.create({
+          url,
+          active: false
+        })
       })
-    }))
+    )
   } else {
     await chromep.windows.create({
       url: urlList,
@@ -305,7 +343,7 @@ export async function openMultipleBookmarks(itemInfo, {
   window.close()
 }
 
-export async function removeBookmark(target) {
+export async function removeBookmark(target: Object): Promise<void> {
   if (isFolder(target)) {
     await chromep.bookmarks.removeTree(target.id)
   } else {
@@ -313,8 +351,12 @@ export async function removeBookmark(target) {
   }
 }
 
-export function sortByTitle(bookmarkList) {
-  const {compare} = new Intl.Collator()
+export function sortByTitle(bookmarkList: Object[]): Object[] {
+  const {
+    compare
+  }: {
+    compare: Function
+  } = new window.Intl.Collator()
 
   return bookmarkList.sort((a, b) => compare(a.title, b.title))
 }

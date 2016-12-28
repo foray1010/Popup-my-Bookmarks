@@ -13,10 +13,16 @@ function genStyleEl(): Object {
 }
 
 export const set = (styleList: Object): void => {
-  _forEach(styleList, (props: Object, styleSelector: string): void => {
+  _forEach(styleList, (
+    props: Object,
+    styleSelector: string
+  ): void => {
     let styleValue: string = ''
 
-    _forEach(props, (propValue: number | string, propName: string) => {
+    _forEach(props, (
+      propValue: number | string,
+      propName: string
+    ): void => {
       styleValue += `${propName}:${propValue};`
     })
 

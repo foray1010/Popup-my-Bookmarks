@@ -1,3 +1,5 @@
+/* @flow */
+
 import {static as Immutable} from 'seamless-immutable'
 
 import {
@@ -18,7 +20,10 @@ import {
 } from '../constants'
 
 /* basic action */
-export function putDragIndicator(itemInfo, isPlaceAfter) {
+export function putDragIndicator(
+  itemInfo: Object,
+  isPlaceAfter: boolean
+): Object {
   return Immutable({
     type: PUT_DRAG_INDICATOR,
     itemInfo: itemInfo,
@@ -26,20 +31,23 @@ export function putDragIndicator(itemInfo, isPlaceAfter) {
   })
 }
 
-export function removeDragIndicator() {
+export function removeDragIndicator(): Object {
   return Immutable({
     type: REMOVE_DRAG_INDICATOR
   })
 }
 
-export function removeTreeInfosFromIndex(removeFromIndex) {
+export function removeTreeInfosFromIndex(removeFromIndex: number): Object {
   return Immutable({
     type: REMOVE_TREE_INFOS_FROM_INDEX,
     removeFromIndex: removeFromIndex
   })
 }
 
-export function replaceTreeInfoByIndex(treeIndex, treeInfo) {
+export function replaceTreeInfoByIndex(
+  treeIndex: number,
+  treeInfo: Object
+): Object {
   return Immutable({
     type: REPLACE_TREE_INFO_BY_INDEX,
     treeIndex: treeIndex,
@@ -47,70 +55,70 @@ export function replaceTreeInfoByIndex(treeIndex, treeInfo) {
   })
 }
 
-export function updateCopyTarget(copyTarget) {
+export function updateCopyTarget(copyTarget: ?Object): Object {
   return Immutable({
     type: UPDATE_COPY_TARGET,
     copyTarget: copyTarget
   })
 }
 
-export function updateCutTarget(cutTarget) {
+export function updateCutTarget(cutTarget: ?Object): Object {
   return Immutable({
     type: UPDATE_CUT_TARGET,
     cutTarget: cutTarget
   })
 }
 
-export function updateDragTarget(dragTarget) {
+export function updateDragTarget(dragTarget: ?Object): Object {
   return Immutable({
     type: UPDATE_DRAG_TARGET,
     dragTarget: dragTarget
   })
 }
 
-export function updateEditorTarget(editorTarget) {
+export function updateEditorTarget(editorTarget: ?Object): Object {
   return Immutable({
     type: UPDATE_EDITOR_TARGET,
     editorTarget: editorTarget
   })
 }
 
-export function updateFocusTarget(focusTarget) {
+export function updateFocusTarget(focusTarget: ?Object): Object {
   return Immutable({
     type: UPDATE_FOCUS_TARGET,
     focusTarget: focusTarget
   })
 }
 
-export function updateIsCreatingNewFolder(isCreatingNewFolder) {
+export function updateIsCreatingNewFolder(isCreatingNewFolder: boolean): Object {
   return Immutable({
     type: UPDATE_IS_CREATING_NEW_FOLDER,
     isCreatingNewFolder: isCreatingNewFolder
   })
 }
 
-export function updateMenuTarget(menuTarget) {
+export function updateMenuTarget(menuTarget: ?Object): Object {
   return Immutable({
     type: UPDATE_MENU_TARGET,
     menuTarget: menuTarget
   })
 }
 
-export function updateMousePosition(mousePosition) {
+export function updateMousePosition(mousePosition: Object): Object {
   return Immutable({
     type: UPDATE_MOUSE_POSITION,
     mousePosition: mousePosition
   })
 }
 
-export function updateSearchKeyword(searchKeyword) {
+export function updateSearchKeyword(searchKeyword: string): Object {
   return Immutable({
     type: UPDATE_SEARCH_KEYWORD,
     searchKeyword: searchKeyword
   })
 }
 
-export function updateTrees(trees) {
+export function updateTrees(trees: Object[]): Object {
   return Immutable({
     type: UPDATE_TREES,
     trees: trees

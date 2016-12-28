@@ -1,14 +1,16 @@
+/* @flow */
+
 import chromep from '../../common/lib/chromePromise'
 
-export async function initOptionsValue(optionsConfig) {
-  const options = await chromep.storage.sync.get(null)
-  const updatedOptions = {}
+export async function initOptionsValue(optionsConfig: Object): Object {
+  const options: Object = await chromep.storage.sync.get(null)
+  const updatedOptions: Object = {}
 
-  for (const optionName of Object.keys(optionsConfig)) {
+  for (const optionName: string of Object.keys(optionsConfig)) {
     if (options[optionName] === undefined) {
-      const optionConfig = optionsConfig[optionName]
+      const optionConfig: Object = optionsConfig[optionName]
 
-      const optionDefaultValue = optionConfig.default
+      const optionDefaultValue: any = optionConfig.default
 
       options[optionName] = optionDefaultValue
       updatedOptions[optionName] = optionDefaultValue

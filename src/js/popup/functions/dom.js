@@ -1,3 +1,5 @@
+/* @flow */
+
 import {
   getItemHeight,
   getItemOffsetHeight
@@ -9,21 +11,21 @@ import bookmarkTreeStyles from '../../../css/popup/bookmark-tree.css'
 import editorStyles from '../../../css/popup/editor.css'
 import panelStyles from '../../../css/popup/panel.css'
 
-export function getBookmarkListEls() {
-  const getBookmarkListElsFromPanel = (...args) => {
-    const selector = args
+export function getBookmarkListEls(): Object[] {
+  const getBookmarkListElsFromPanel = (...args: string[]): Object[] => {
+    const selector: string = args
       .map(getClassSelector)
       .join(' > ')
-    const els = document.querySelectorAll(selector)
+    const els: NodeList<*> = document.querySelectorAll(selector)
     return Array.from(els)
   }
 
-  const bookmarkListElsInMaster = getBookmarkListElsFromPanel(
+  const bookmarkListElsInMaster: Object[] = getBookmarkListElsFromPanel(
     panelStyles.master,
     bookmarkTreeStyles.main,
     bookmarkTreeStyles.list
   )
-  const bookmarkListElsInSlave = getBookmarkListElsFromPanel(
+  const bookmarkListElsInSlave: Object[] = getBookmarkListElsFromPanel(
     panelStyles.slave,
     bookmarkTreeStyles.main,
     bookmarkTreeStyles.list
@@ -37,10 +39,10 @@ export function getBookmarkListEls() {
     throw new Error()
   }
 
-  const bookmarkListEls = []
-  const totalLength = bookmarkListElsInMaster.length + bookmarkListElsInSlave.length
-  for (let i = 0; i < totalLength; i += 1) {
-    const el = i % 2 === 0 ?
+  const bookmarkListEls: Object[] = []
+  const totalLength: number = bookmarkListElsInMaster.length + bookmarkListElsInSlave.length
+  for (let i: number = 0; i < totalLength; i += 1) {
+    const el: Object = i % 2 === 0 ?
       bookmarkListElsInMaster.shift() :
       bookmarkListElsInSlave.shift()
     bookmarkListEls.push(el)
@@ -49,22 +51,22 @@ export function getBookmarkListEls() {
   return bookmarkListEls
 }
 
-function getClassSelector(className) {
+function getClassSelector(className: string): string {
   // remove class name from compose
   className = className.split(' ')[0]
 
   return `.${className}`
 }
 
-export function resetBodySize() {
-  const bodyStyle = document.body.style
+export function resetBodySize(): void {
+  const bodyStyle: Object = document.body.style
 
   // reset to original size
   bodyStyle.height = ''
   bodyStyle.width = ''
 }
 
-export function scrollIntoViewIfNeeded(el) {
+export function scrollIntoViewIfNeeded(el: Object): void {
   const {
     bottom,
     top
@@ -73,26 +75,33 @@ export function scrollIntoViewIfNeeded(el) {
   const {
     height: parentHeight,
     top: parentTop
+  }: {
+    height: number,
+    top: number
   } = el.parentNode.getBoundingClientRect()
 
-  const isScrolledOutOfBottomView = bottom > parentTop + parentHeight
-  const isScrolledOutOfTopView = top < parentTop
+  const isScrolledOutOfBottomView: boolean = bottom > parentTop + parentHeight
+  const isScrolledOutOfTopView: boolean = top < parentTop
 
   if (isScrolledOutOfBottomView || isScrolledOutOfTopView) {
     el.scrollIntoView(isScrolledOutOfTopView)
   }
 }
 
-export function setPredefinedStyleSheet(options) {
+export function setPredefinedStyleSheet(options: Object): void {
   const {
     fontFamily,
     fontSize,
     setWidth
+  }: {
+    fontFamily: string,
+    fontSize: number,
+    setWidth: number
   } = options
 
-  const itemHeight = getItemHeight(options)
-  const itemOffsetHeight = getItemOffsetHeight(options)
-  const panelWidthSelector = [
+  const itemHeight: number = getItemHeight(options)
+  const itemOffsetHeight: number = getItemOffsetHeight(options)
+  const panelWidthSelector: string = [
     editorStyles.main,
     panelStyles.master,
     panelStyles.slave

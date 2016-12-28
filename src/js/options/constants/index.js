@@ -27,7 +27,7 @@ export const NAV_MODULE_CONTROL: string = 'control'
 export const NAV_MODULE_GENERAL: string = 'general'
 export const NAV_MODULE_USER_INTERFACE: string = 'userInterface'
 
-export const OPTION_TABLE_MAP = Immutable({
+export const OPTION_TABLE_MAP: Object = Immutable({
   [NAV_MODULE_GENERAL]: [
     OPTIONS_DEF_EXPAND,
     OPTIONS_HIDE_ROOT_FOLDER,
