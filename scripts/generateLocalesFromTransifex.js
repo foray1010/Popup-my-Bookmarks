@@ -38,39 +38,37 @@ co(function* () {
   })
   bluebird.promisifyAll(transifex)
 
-  const allAvailableLanguages = yield transifex.statisticsMethodsAsync(
+  const availableLanguages = yield transifex.statisticsMethodsAsync(
     projectSlug,
     resourceSlug
   )
-  for (const availableLanguage of Object.keys(allAvailableLanguages)) {
-    console.log('\n' + '='.repeat(10))
-    console.log(`working on "${availableLanguage}"`)
+  yield Object.keys(availableLanguages)
+    .map(function* (availableLanguage) {
+      const messagesJsonStr = yield transifex.translationInstanceMethodAsync(
+        projectSlug,
+        resourceSlug,
+        availableLanguage,
+        {mode: 'onlytranslated'}
+      )
+      const messagesJson = JSON.parse(messagesJsonStr)
 
-    yield fs.mkdirsAsync(
-      path.join(localesPath, availableLanguage)
-    )
+      const sortedMessagesJson = Object.keys(messagesJson)
+        .filter((key) => Boolean(_.get(messagesJson, `${key}.message`)))
+        .sort()
+        .reduce((obj, key) => {
+          obj[key] = messagesJson[key]
+          return obj
+        }, {})
 
-    const messagesJsonStr = yield transifex.translationInstanceMethodAsync(
-      projectSlug,
-      resourceSlug,
-      availableLanguage,
-      {mode: 'onlytranslated'}
-    )
-    const messagesJson = JSON.parse(messagesJsonStr)
+      yield fs.mkdirsAsync(
+        path.join(localesPath, availableLanguage)
+      )
 
-    const sortedMessagesJson = Object.keys(messagesJson)
-      .filter((key) => Boolean(_.get(messagesJson, `${key}.message`)))
-      .sort()
-      .reduce((obj, key) => {
-        obj[key] = messagesJson[key]
-        return obj
-      }, {})
+      yield fs.outputJsonAsync(
+        path.join(localesPath, availableLanguage, 'messages.json'),
+        sortedMessagesJson
+      )
 
-    yield fs.outputJsonAsync(
-      path.join(localesPath, availableLanguage, 'messages.json'),
-      sortedMessagesJson
-    )
-
-    console.log(`"${availableLanguage}" is completed`)
-  }
+      console.log(`"${availableLanguage}" is generated`)
+    })
 }).catch((err) => console.error(err.stack))
