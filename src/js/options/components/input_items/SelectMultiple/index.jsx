@@ -13,21 +13,23 @@ const SelectMultiple = (props) => {
     updateSingleOption
   } = props
 
-  const checkboxItems = []
-  for (const [optionChoiceIndex, optionChoice] of choices.entries()) {
-    if (optionChoice !== undefined) {
-      checkboxItems.push(
-        <Option
-          key={String(optionChoiceIndex)}
-          optionChoice={optionChoice}
-          optionChoiceIndex={optionChoiceIndex}
-          optionName={optionName}
-          optionValue={optionValue}
-          updateSingleOption={updateSingleOption}
-        />
-      )
-    }
-  }
+  const checkboxItems = choices
+    .reduce((accumulator, optionChoice, optionChoiceIndex) => {
+      if (optionChoice !== undefined) {
+        return accumulator.concat(
+          <Option
+            key={String(optionChoiceIndex)}
+            optionChoice={optionChoice}
+            optionChoiceIndex={optionChoiceIndex}
+            optionName={optionName}
+            optionValue={optionValue}
+            updateSingleOption={updateSingleOption}
+          />
+        )
+      }
+
+      return accumulator
+    }, [])
 
   return (
     <span styleName='main'>

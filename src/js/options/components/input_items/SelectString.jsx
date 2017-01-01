@@ -21,19 +21,21 @@ class SelectString extends PureComponent {
       optionValue
     } = this.props
 
-    const optionItems = []
-    for (const [optionChoiceIndex, optionChoice] of choices.entries()) {
-      if (optionChoice !== undefined) {
-        optionItems.push(
-          <option
-            key={String(optionChoiceIndex)}
-            value={String(optionChoiceIndex)}
-          >
-            {optionChoice}
-          </option>
-        )
-      }
-    }
+    const optionItems = choices
+      .reduce((accumulator, optionChoice, optionChoiceIndex) => {
+        if (optionChoice !== undefined) {
+          return accumulator.concat(
+            <option
+              key={String(optionChoiceIndex)}
+              value={String(optionChoiceIndex)}
+            >
+              {optionChoice}
+            </option>
+          )
+        }
+
+        return accumulator
+      }, [])
 
     return (
       <select
