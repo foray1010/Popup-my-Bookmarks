@@ -183,8 +183,8 @@ const rootReducer: Function = combineReducers({
   },
 
   rootTree(
-    state: Object = Immutable({})
-  ): Object {
+    state: ?Object = null
+  ): ?Object {
     return state
   },
 
