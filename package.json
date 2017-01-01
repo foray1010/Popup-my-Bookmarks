@@ -25,6 +25,7 @@
   ],
   "dependencies": {
     "babel-polyfill": "^6.5.0",
+    "blueimp-md5": "^2.6.0",
     "chrome-promise": "^2.0.2",
     "classnames": "^2.2.3",
     "core-decorators": "^0.15.0",
@@ -39,6 +40,7 @@
     "redux-batched-subscribe": "^0.1.4",
     "redux-logger": "^2.5.2",
     "redux-multi": "0.1.12",
+    "redux-thunk": "^2.1.0",
     "seamless-immutable": "^7.0.0"
   },
   "devDependencies": {

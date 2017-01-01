@@ -1,10 +1,7 @@
 import {autobind} from 'core-decorators'
-import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
 import {static as Immutable} from 'seamless-immutable'
 import CSSModules from 'react-css-modules'
-
-import {updateSingleOption} from '../../actions'
 
 import styles from '../../../../css/options/input-select.css'
 
@@ -12,8 +9,8 @@ class InputSelect extends PureComponent {
   @autobind
   handleBlur(evt) {
     const {
-      dispatch,
-      optionName
+      optionName,
+      updateSingleOption
     } = this.props
 
     const newOptionValue = evt.target.value
@@ -21,14 +18,14 @@ class InputSelect extends PureComponent {
       .replace(/,\s/g, ',')
       .replace(/,$/, '')
 
-    dispatch(updateSingleOption(optionName, newOptionValue))
+    updateSingleOption(optionName, newOptionValue)
   }
 
   @autobind
   handleChange(evt) {
     const {
-      dispatch,
-      optionName
+      optionName,
+      updateSingleOption
     } = this.props
 
     const newOptionValue = evt.target.value
@@ -36,7 +33,7 @@ class InputSelect extends PureComponent {
       .replace(/\s+/g, ' ')
       .replace(/^,/, '')
 
-    dispatch(updateSingleOption(optionName, newOptionValue))
+    updateSingleOption(optionName, newOptionValue)
 
     if (evt.target.tagName === 'SELECT') {
       this.inputEl.focus()
@@ -44,23 +41,21 @@ class InputSelect extends PureComponent {
   }
 
   @autobind
+  // prevent user try to save by pressing enter
   handleKeyDown(evt) {
-    // when click Enter, it will submit the form
     if (evt.keyCode === 13) {
-      this.handleBlur(evt)
+      evt.preventDefault()
     }
   }
 
   render() {
     const {
-      optionConfig,
+      choices,
       optionName,
-      options
+      optionValue
     } = this.props
 
-    const optionValue = options[optionName]
-
-    const optionItems = Immutable.asMutable(optionConfig.choices)
+    const optionItems = Immutable.asMutable(choices)
       .map((optionChoice, optionChoiceIndex) => (
         <option key={String(optionChoiceIndex)}>
           {optionChoice}
@@ -94,16 +89,10 @@ class InputSelect extends PureComponent {
 }
 
 InputSelect.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  optionConfig: PropTypes.object.isRequired,
+  choices: PropTypes.arrayOf(PropTypes.string).isRequired,
   optionName: PropTypes.string.isRequired,
-  options: PropTypes.object.isRequired
+  optionValue: PropTypes.string.isRequired,
+  updateSingleOption: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  options: state.options
-})
-
-export default connect(mapStateToProps)(
-  CSSModules(InputSelect, styles)
-)
+export default CSSModules(InputSelect, styles)

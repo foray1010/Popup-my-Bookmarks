@@ -1,14 +1,3 @@
-@import "../common/variables.css";
-
-.button {
-  composes: button from "../common/composes.css";
-}
-
 .main {
-  padding-top: var(--golden-gap-4x);
-  text-align: center;
-
-  & > button + button {
-    margin-left: var(--golden-gap-2x);
-  }
+  composes: button from "../common/composes.css";
 }

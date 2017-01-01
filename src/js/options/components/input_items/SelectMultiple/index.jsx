@@ -7,13 +7,14 @@ import styles from '../../../../../css/options/select-multiple.css'
 
 const SelectMultiple = (props) => {
   const {
-    optionConfig,
-    optionName
+    choices,
+    optionName,
+    optionValue,
+    updateSingleOption
   } = props
 
   const checkboxItems = []
-
-  for (const [optionChoiceIndex, optionChoice] of optionConfig.choices.entries()) {
+  for (const [optionChoiceIndex, optionChoice] of choices.entries()) {
     if (optionChoice !== undefined) {
       checkboxItems.push(
         <Option
@@ -21,6 +22,8 @@ const SelectMultiple = (props) => {
           optionChoice={optionChoice}
           optionChoiceIndex={optionChoiceIndex}
           optionName={optionName}
+          optionValue={optionValue}
+          updateSingleOption={updateSingleOption}
         />
       )
     }
@@ -34,8 +37,10 @@ const SelectMultiple = (props) => {
 }
 
 SelectMultiple.propTypes = {
-  optionConfig: PropTypes.object.isRequired,
-  optionName: PropTypes.string.isRequired
+  choices: PropTypes.arrayOf(PropTypes.string).isRequired,
+  optionName: PropTypes.string.isRequired,
+  optionValue: PropTypes.arrayOf(PropTypes.number).isRequired,
+  updateSingleOption: PropTypes.func.isRequired
 }
 
 export default CSSModules(SelectMultiple, styles)

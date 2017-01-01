@@ -1,34 +1,33 @@
 import {autobind} from 'core-decorators'
-import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
 import {static as Immutable} from 'seamless-immutable'
-
-import {updateSingleOption} from '../../../actions'
+import md5 from 'blueimp-md5'
 
 class Option extends PureComponent {
   @autobind
   handleChange(evt) {
     const {
-      dispatch,
       optionName,
-      options
+      optionValue,
+      updateSingleOption
     } = this.props
 
-    const newOptionValue = Immutable.asMutable(options[optionName])
-    const targetValue = parseInt(evt.target.value, 10)
+    const checkboxValue = parseInt(evt.target.value, 10)
 
-    const targetValueIndex = newOptionValue.indexOf(targetValue)
+    const wasChecked = optionValue.includes(checkboxValue)
 
-    const wasChecked = targetValueIndex >= 0
-
+    let newOptionValue
     if (wasChecked) {
-      newOptionValue.splice(targetValueIndex, 1)
+      newOptionValue = optionValue
+        .filter((x) => x !== checkboxValue)
     } else {
-      newOptionValue.push(targetValue)
-      newOptionValue.sort()
+      const mutableNewOptionValue = [checkboxValue]
+        .concat(optionValue)
+        .sort()
+      newOptionValue = Immutable(mutableNewOptionValue)
     }
 
-    dispatch(updateSingleOption(optionName, newOptionValue))
+    updateSingleOption(optionName, newOptionValue)
   }
 
   render() {
@@ -36,12 +35,15 @@ class Option extends PureComponent {
       optionChoice,
       optionChoiceIndex,
       optionName,
-      options
+      optionValue
     } = this.props
 
-    const id = `_${optionName}-${optionChoice}`.toLowerCase().replace(/\s/g, '')
-    const optionValue = options[optionName]
-
+    const id = md5(
+      [
+        optionName,
+        optionChoice
+      ].join()
+    )
     const isChecked = optionValue.includes(optionChoiceIndex)
 
     return (
@@ -61,15 +63,11 @@ class Option extends PureComponent {
 }
 
 Option.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   optionChoice: PropTypes.string.isRequired,
   optionChoiceIndex: PropTypes.number.isRequired,
   optionName: PropTypes.string.isRequired,
-  options: PropTypes.object.isRequired
+  optionValue: PropTypes.arrayOf(PropTypes.number).isRequired,
+  updateSingleOption: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  options: state.options
-})
-
-export default connect(mapStateToProps)(Option)
+export default Option

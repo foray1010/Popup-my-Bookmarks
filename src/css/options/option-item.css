@@ -1,14 +1,10 @@
 @import "../common/variables.css";
 
 .desc {
-  padding-right: var(--golden-gap-4x);
-  text-align: right;
   white-space: pre-wrap;
 }
 
 .input {
-  padding-left: var(--golden-gap-4x);
-
   & > input[type="number"],
   & > input[type="text"],
   & > select {
@@ -22,8 +18,4 @@
     text-align: right;
     width: 50px;
   }
-}
-
-.main {
-  padding: var(--golden-gap-2x);
 }

@@ -1,10 +1,7 @@
 import {autobind} from 'core-decorators'
-import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
 import classNames from 'classnames'
 import CSSModules from 'react-css-modules'
-
-import {updateSingleOption} from '../../../actions'
 
 import styles from '../../../../../css/options/select-button-option.css'
 
@@ -15,13 +12,13 @@ class Option extends PureComponent {
   @autobind
   handleChange(evt) {
     const {
-      dispatch,
-      optionName
+      optionName,
+      updateSingleOption
     } = this.props
 
-    const newOptionValue = evt.target.value === 'true'
+    const newOptionValue = evt.target.value === String(true)
 
-    dispatch(updateSingleOption(optionName, newOptionValue))
+    updateSingleOption(optionName, newOptionValue)
   }
 
   @autobind
@@ -33,11 +30,10 @@ class Option extends PureComponent {
     const {
       optionChoice,
       optionName,
-      options
+      optionValue
     } = this.props
 
     const buttonText = optionChoice ? msgYes : msgNo
-    const optionValue = options[optionName]
 
     const isChecked = optionValue === optionChoice
 
@@ -74,16 +70,10 @@ class Option extends PureComponent {
 }
 
 Option.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   optionChoice: PropTypes.bool.isRequired,
   optionName: PropTypes.string.isRequired,
-  options: PropTypes.object.isRequired
+  optionValue: PropTypes.bool.isRequired,
+  updateSingleOption: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  options: state.options
-})
-
-export default connect(mapStateToProps)(
-  CSSModules(Option, styles, {allowMultiple: true})
-)
+export default CSSModules(Option, styles, {allowMultiple: true})

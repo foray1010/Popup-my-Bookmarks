@@ -9,7 +9,7 @@ import {
 import {
   NAV_MODULE_GENERAL
 } from './constants'
-import App from './containers/App'
+import App from './components/App'
 import configureStore from '../common/store/configureStore'
 import getOptionsConfig from '../common/lib/getOptionsConfig'
 import reducers from './reducers'

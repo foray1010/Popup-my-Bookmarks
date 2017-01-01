@@ -1,4 +1,4 @@
-import {createElement} from 'react'
+import {createElement, PropTypes} from 'react'
 import CSSModules from 'react-css-modules'
 
 import {
@@ -6,10 +6,10 @@ import {
   NAV_MODULE_CONTROL,
   NAV_MODULE_GENERAL,
   NAV_MODULE_USER_INTERFACE
-} from '../constants'
+} from '../../constants'
 import NavBarItem from './NavBarItem'
 
-import styles from '../../../css/options/nav-bar.css'
+import styles from '../../../../css/options/nav-bar.css'
 
 const navBarItemInfos = [
   {
@@ -30,19 +30,39 @@ const navBarItemInfos = [
   }
 ]
 
-const NavBar = () => {
-  const navItems = navBarItemInfos.map((navBarItemInfo) => (
-    <NavBarItem
-      key={navBarItemInfo.navModule}
-      navBarItemInfo={navBarItemInfo}
-    />
-  ))
+const NavBar = (props) => {
+  const {
+    selectedNavModule,
+    switchNavModule
+  } = props
+
+  const navItems = navBarItemInfos.map((navBarItemInfo) => {
+    const {
+      navModule,
+      title
+    } = navBarItemInfo
+
+    return (
+      <NavBarItem
+        key={navModule}
+        isActive={navModule === selectedNavModule}
+        navModule={navModule}
+        switchNavModule={switchNavModule}
+        title={title}
+      />
+    )
+  })
 
   return (
     <nav styleName='main'>
       {navItems}
     </nav>
   )
+}
+
+NavBar.propTypes = {
+  selectedNavModule: PropTypes.string.isRequired,
+  switchNavModule: PropTypes.func.isRequired
 }
 
 export default CSSModules(NavBar, styles)

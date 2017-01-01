@@ -1,4 +1,3 @@
-import {connect} from 'react-redux'
 import {createElement, PropTypes} from 'react'
 import CSSModules from 'react-css-modules'
 
@@ -9,27 +8,33 @@ import styles from '../../../../../css/options/select-button.css'
 const SelectButton = (props) => {
   const {
     optionName,
-    options
+    optionValue,
+    updateSingleOption
   } = props
 
-  const optionItems = [true, false].map((optionChoice) => (
+  const optionChoices = [true, false]
+  const selectdButtonIndex = optionValue ? 0 : 1
+
+  const leftPercentage = selectdButtonIndex * (100 / optionChoices.length)
+
+  const optionItems = optionChoices.map((optionChoice) => (
     <Option
       key={String(optionChoice)}
       optionChoice={optionChoice}
       optionName={optionName}
+      optionValue={optionValue}
+      updateSingleOption={updateSingleOption}
     />
   ))
-  const optionValue = options[optionName]
-
-  const selectdButtonIndex = optionValue ? 0 : 1
-
-  const selectButtonCoverStyle = {
-    left: `${selectdButtonIndex * 50}%`
-  }
 
   return (
     <div styleName='main'>
-      <div styleName='cover' style={selectButtonCoverStyle} />
+      <div
+        styleName='cover'
+        style={{
+          left: `${leftPercentage}%`
+        }}
+      />
       {optionItems}
     </div>
   )
@@ -37,13 +42,8 @@ const SelectButton = (props) => {
 
 SelectButton.propTypes = {
   optionName: PropTypes.string.isRequired,
-  options: PropTypes.object.isRequired
+  optionValue: PropTypes.bool.isRequired,
+  updateSingleOption: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  options: state.options
-})
-
-export default connect(mapStateToProps)(
-  CSSModules(SelectButton, styles)
-)
+export default CSSModules(SelectButton, styles)

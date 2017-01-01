@@ -1,33 +1,28 @@
 import {autobind} from 'core-decorators'
-import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
-
-import {updateSingleOption} from '../../actions'
 
 class SelectString extends PureComponent {
   @autobind
   handleChange(evt) {
     const {
-      dispatch,
-      optionName
+      optionName,
+      updateSingleOption
     } = this.props
 
     const newOptionValue = parseInt(evt.target.value, 10)
 
-    dispatch(updateSingleOption(optionName, newOptionValue))
+    updateSingleOption(optionName, newOptionValue)
   }
 
   render() {
     const {
-      optionConfig,
+      choices,
       optionName,
-      options
+      optionValue
     } = this.props
 
     const optionItems = []
-    const optionValue = options[optionName]
-
-    for (const [optionChoiceIndex, optionChoice] of optionConfig.choices.entries()) {
+    for (const [optionChoiceIndex, optionChoice] of choices.entries()) {
       if (optionChoice !== undefined) {
         optionItems.push(
           <option
@@ -53,14 +48,10 @@ class SelectString extends PureComponent {
 }
 
 SelectString.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  optionConfig: PropTypes.object.isRequired,
+  choices: PropTypes.arrayOf(PropTypes.string).isRequired,
   optionName: PropTypes.string.isRequired,
-  options: PropTypes.object.isRequired
+  optionValue: PropTypes.number.isRequired,
+  updateSingleOption: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  options: state.options
-})
-
-export default connect(mapStateToProps)(SelectString)
+export default SelectString
