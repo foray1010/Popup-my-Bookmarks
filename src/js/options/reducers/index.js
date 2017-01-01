@@ -16,10 +16,14 @@ const rootReducer: Function = combineReducers({
   ): Object {
     switch (action.type) {
       case UPDATE_OPTIONS:
-        return action.options
+        return action.payload
 
       case UPDATE_SINGLE_OPTION:
-        return Immutable.set(state, action.optionName, action.optionValue)
+        return Immutable.set(
+          state,
+          action.payload.optionName,
+          action.payload.optionValue
+        )
 
       default:
         return state
@@ -38,7 +42,7 @@ const rootReducer: Function = combineReducers({
   ): ?string {
     switch (action.type) {
       case SELECT_NAV_MODULE:
-        return action.navModule
+        return action.payload
 
       default:
         return state

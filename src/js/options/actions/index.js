@@ -1,7 +1,8 @@
 /* @flow */
 
-import {static as Immutable} from 'seamless-immutable'
-
+import {
+  createAction
+} from '../../common/functions'
 import {
   initOptionsValue
 } from '../functions'
@@ -12,37 +13,33 @@ import {
 } from '../constants'
 import chromep from '../../common/lib/chromePromise'
 
-function selectNavModule(navModule: string): Object {
-  return Immutable({
-    type: SELECT_NAV_MODULE,
-    navModule: navModule
-  })
-}
+const selectNavModule = createAction(
+  SELECT_NAV_MODULE,
+  (navModule: string): string => navModule
+)
 
-export function updateOptions(options: Object): Object {
-  return Immutable({
-    type: UPDATE_OPTIONS,
-    options: options
-  })
-}
+export const updateOptions = createAction(
+  UPDATE_OPTIONS,
+  (options: Object): Object => options
+)
 
-export function updateSingleOption(
-  optionName: string,
-  optionValue: boolean | number | number[] | string
-): Object {
-  return Immutable({
-    type: UPDATE_SINGLE_OPTION,
-    optionName: optionName,
-    optionValue: optionValue
+export const updateSingleOption = createAction(
+  UPDATE_SINGLE_OPTION,
+  (
+    optionName: string,
+    optionValue: boolean | number | number[] | string
+  ): Object => ({
+    optionName,
+    optionValue
   })
-}
+)
 
 
 /**
  * Following functions have side effect
  */
 
-export async function reloadOptions(): Object {
+async function reloadOptions(): Object {
   const options: Object = await chromep.storage.sync.get(null)
 
   return updateOptions(options)

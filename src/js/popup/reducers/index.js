@@ -32,7 +32,7 @@ const rootReducer: Function = combineReducers({
   ): ?Object {
     switch (action.type) {
       case UPDATE_COPY_TARGET:
-        return action.copyTarget
+        return action.payload
 
       case UPDATE_CUT_TARGET:
         return null
@@ -51,7 +51,7 @@ const rootReducer: Function = combineReducers({
         return null
 
       case UPDATE_CUT_TARGET:
-        return action.cutTarget
+        return action.payload
 
       default:
         return state
@@ -70,7 +70,7 @@ const rootReducer: Function = combineReducers({
         }: {
           isPlaceAfter: boolean,
           itemInfo: Object
-        } = action
+        } = action.payload
 
         return Immutable({
           ...genDummyItemInfo(),
@@ -94,7 +94,7 @@ const rootReducer: Function = combineReducers({
   ): ?Object {
     switch (action.type) {
       case UPDATE_DRAG_TARGET:
-        return action.dragTarget
+        return action.payload
 
       default:
         return state
@@ -107,7 +107,7 @@ const rootReducer: Function = combineReducers({
   ): ?Object {
     switch (action.type) {
       case UPDATE_EDITOR_TARGET:
-        return action.editorTarget
+        return action.payload
 
       default:
         return state
@@ -120,7 +120,7 @@ const rootReducer: Function = combineReducers({
   ): ?Object {
     switch (action.type) {
       case UPDATE_FOCUS_TARGET:
-        return action.focusTarget
+        return action.payload
 
       default:
         return state
@@ -133,11 +133,11 @@ const rootReducer: Function = combineReducers({
   ): boolean {
     switch (action.type) {
       case UPDATE_EDITOR_TARGET:
-        if (action.editorTarget === null) return false
+        if (action.payload === null) return false
         return state
 
       case UPDATE_IS_CREATING_NEW_FOLDER:
-        return action.isCreatingNewFolder
+        return action.payload
 
       default:
         return state
@@ -156,7 +156,7 @@ const rootReducer: Function = combineReducers({
   ): ?Object {
     switch (action.type) {
       case UPDATE_MENU_TARGET:
-        return action.menuTarget
+        return action.payload
 
       default:
         return state
@@ -169,7 +169,7 @@ const rootReducer: Function = combineReducers({
   ): Object {
     switch (action.type) {
       case UPDATE_MOUSE_POSITION:
-        return action.mousePosition
+        return action.payload
 
       default:
         return state
@@ -194,7 +194,7 @@ const rootReducer: Function = combineReducers({
   ): string {
     switch (action.type) {
       case UPDATE_SEARCH_KEYWORD:
-        return action.searchKeyword
+        return action.payload
 
       default:
         return state
@@ -207,10 +207,14 @@ const rootReducer: Function = combineReducers({
   ): Object[] {
     switch (action.type) {
       case REMOVE_TREE_INFOS_FROM_INDEX:
-        return getSlicedTrees(state, action.removeFromIndex)
+        return getSlicedTrees(state, action.payload)
 
       case REPLACE_TREE_INFO_BY_INDEX:
-        return Immutable.set(state, action.treeIndex, action.treeInfo)
+        return Immutable.set(
+          state,
+          action.payload.treeIndex,
+          action.payload.treeInfo
+        )
 
       case UPDATE_TREES:
         return action.trees

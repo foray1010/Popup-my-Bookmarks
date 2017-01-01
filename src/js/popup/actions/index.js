@@ -1,7 +1,8 @@
 /* @flow */
 
-import {static as Immutable} from 'seamless-immutable'
-
+import {
+  createAction
+} from '../../common/functions'
 import {
   PUT_DRAG_INDICATOR,
   REMOVE_DRAG_INDICATOR,
@@ -19,111 +20,83 @@ import {
   UPDATE_TREES
 } from '../constants'
 
-/* basic action */
-export function putDragIndicator(
-  itemInfo: Object,
-  isPlaceAfter: boolean
-): Object {
-  return Immutable({
-    type: PUT_DRAG_INDICATOR,
-    itemInfo: itemInfo,
-    isPlaceAfter: isPlaceAfter
+export const putDragIndicator = createAction(
+  PUT_DRAG_INDICATOR,
+  (
+    itemInfo: Object,
+    isPlaceAfter: boolean
+  ): Object => ({
+    itemInfo,
+    isPlaceAfter
   })
-}
+)
 
-export function removeDragIndicator(): Object {
-  return Immutable({
-    type: REMOVE_DRAG_INDICATOR
+export const removeDragIndicator = createAction(
+  REMOVE_DRAG_INDICATOR
+)
+
+export const removeTreeInfosFromIndex = createAction(
+  REMOVE_TREE_INFOS_FROM_INDEX,
+  (removeFromIndex: number): number => removeFromIndex
+)
+
+export const replaceTreeInfoByIndex = createAction(
+  REPLACE_TREE_INFO_BY_INDEX,
+  (
+    treeIndex: number,
+    treeInfo: Object
+  ): Object => ({
+    treeIndex,
+    treeInfo
   })
-}
+)
 
-export function removeTreeInfosFromIndex(removeFromIndex: number): Object {
-  return Immutable({
-    type: REMOVE_TREE_INFOS_FROM_INDEX,
-    removeFromIndex: removeFromIndex
-  })
-}
+export const updateCopyTarget = createAction(
+  UPDATE_COPY_TARGET,
+  (copyTarget: ?Object): ?Object => copyTarget
+)
 
-export function replaceTreeInfoByIndex(
-  treeIndex: number,
-  treeInfo: Object
-): Object {
-  return Immutable({
-    type: REPLACE_TREE_INFO_BY_INDEX,
-    treeIndex: treeIndex,
-    treeInfo: treeInfo
-  })
-}
+export const updateCutTarget = createAction(
+  UPDATE_CUT_TARGET,
+  (cutTarget: ?Object): ?Object => cutTarget
+)
 
-export function updateCopyTarget(copyTarget: ?Object): Object {
-  return Immutable({
-    type: UPDATE_COPY_TARGET,
-    copyTarget: copyTarget
-  })
-}
+export const updateDragTarget = createAction(
+  UPDATE_DRAG_TARGET,
+  (dragTarget: ?Object): ?Object => dragTarget
+)
 
-export function updateCutTarget(cutTarget: ?Object): Object {
-  return Immutable({
-    type: UPDATE_CUT_TARGET,
-    cutTarget: cutTarget
-  })
-}
+export const updateEditorTarget = createAction(
+  UPDATE_EDITOR_TARGET,
+  (editorTarget: ?Object): ?Object => editorTarget
+)
 
-export function updateDragTarget(dragTarget: ?Object): Object {
-  return Immutable({
-    type: UPDATE_DRAG_TARGET,
-    dragTarget: dragTarget
-  })
-}
+export const updateFocusTarget = createAction(
+  UPDATE_FOCUS_TARGET,
+  (focusTarget: ?Object): ?Object => focusTarget
+)
 
-export function updateEditorTarget(editorTarget: ?Object): Object {
-  return Immutable({
-    type: UPDATE_EDITOR_TARGET,
-    editorTarget: editorTarget
-  })
-}
+export const updateIsCreatingNewFolder = createAction(
+  UPDATE_IS_CREATING_NEW_FOLDER,
+  (isCreatingNewFolder: boolean): boolean => isCreatingNewFolder
+)
 
-export function updateFocusTarget(focusTarget: ?Object): Object {
-  return Immutable({
-    type: UPDATE_FOCUS_TARGET,
-    focusTarget: focusTarget
-  })
-}
+export const updateMenuTarget = createAction(
+  UPDATE_MENU_TARGET,
+  (menuTarget: ?Object): ?Object => menuTarget
+)
 
-export function updateIsCreatingNewFolder(isCreatingNewFolder: boolean): Object {
-  return Immutable({
-    type: UPDATE_IS_CREATING_NEW_FOLDER,
-    isCreatingNewFolder: isCreatingNewFolder
-  })
-}
+export const updateMousePosition = createAction(
+  UPDATE_MOUSE_POSITION,
+  (mousePosition: Object): Object => mousePosition
+)
 
-export function updateMenuTarget(menuTarget: ?Object): Object {
-  return Immutable({
-    type: UPDATE_MENU_TARGET,
-    menuTarget: menuTarget
-  })
-}
+export const updateSearchKeyword = createAction(
+  UPDATE_SEARCH_KEYWORD,
+  (searchKeyword: string): string => searchKeyword
+)
 
-export function updateMousePosition(mousePosition: Object): Object {
-  return Immutable({
-    type: UPDATE_MOUSE_POSITION,
-    mousePosition: mousePosition
-  })
-}
-
-export function updateSearchKeyword(searchKeyword: string): Object {
-  return Immutable({
-    type: UPDATE_SEARCH_KEYWORD,
-    searchKeyword: searchKeyword
-  })
-}
-
-export function updateTrees(trees: Object[]): Object {
-  return Immutable({
-    type: UPDATE_TREES,
-    trees: trees
-  })
-}
-
-
-/* advanced action */
+export const updateTrees = createAction(
+  UPDATE_TREES,
+  (trees: Object[]): Object[] => trees
+)
