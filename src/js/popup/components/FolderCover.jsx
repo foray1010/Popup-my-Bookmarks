@@ -1,6 +1,7 @@
-import {autobind} from 'core-decorators'
+import {autobind, decorate} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
+import _debounce from 'lodash/debounce'
 import CSSModules from 'react-css-modules'
 
 import {
@@ -10,8 +11,8 @@ import {
 import styles from '../../../css/popup/folder-cover.css'
 
 class FolderCover extends PureComponent {
-  @autobind
-  handleClose() {
+  @decorate(_debounce, 200)
+  closeCover() {
     const {
       dispatch,
       treeIndex
@@ -20,57 +21,31 @@ class FolderCover extends PureComponent {
     dispatch(removeTreeInfosFromIndex(treeIndex + 1))
   }
 
+  @autobind
+  handleClick() {
+    this.closeCover()
+  }
+
+  @autobind
+  handleMouseLeave() {
+    this.closeCover.cancel()
+  }
+
+  @autobind
+  handleMouseMove() {
+    this.closeCover()
+  }
+
   render() {
     const {isHidden} = this.props
-
-    const delay = 300
-    const xyRange = 20
-
-    let mousePosition = null
-    let triggerOnClickTimer = null
-
-    const handleMouseLeave = () => {
-      clearTimeout(triggerOnClickTimer)
-      triggerOnClickTimer = null
-    }
-
-    const handleMouseMove = (evt) => {
-      mousePosition = {
-        x: evt.x,
-        y: evt.y
-      }
-
-      if (!triggerOnClickTimer) {
-        triggerOnClickByXYRange(mousePosition)
-      }
-    }
-
-    const triggerOnClickByXYRange = (mousePositionOrig) => {
-      const isInTriggerPoint = (axis) => {
-        const displacement = Math.abs(mousePosition[axis] - mousePositionOrig[axis])
-
-        return displacement < xyRange
-      }
-
-      triggerOnClickTimer = setTimeout(() => {
-        const isTrigger = isInTriggerPoint('x') && isInTriggerPoint('y')
-
-        if (isTrigger) {
-          this.handleClose()
-          triggerOnClickTimer = null
-        } else {
-          triggerOnClickByXYRange(mousePosition)
-        }
-      }, delay)
-    }
 
     return (
       <div
         styleName='main'
         hidden={isHidden}
-        onClick={this.handleClose}
-        onMouseLeave={handleMouseLeave}
-        onMouseMove={handleMouseMove}
+        onClick={this.handleClick}
+        onMouseLeave={this.handleMouseLeave}
+        onMouseMove={this.handleMouseMove}
       />
     )
   }
