@@ -217,7 +217,7 @@ const rootReducer: Function = combineReducers({
         )
 
       case UPDATE_TREES:
-        return action.trees
+        return action.payload
 
       default:
         return state
