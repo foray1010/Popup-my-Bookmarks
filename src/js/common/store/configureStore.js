@@ -3,11 +3,9 @@
 
 import {applyMiddleware, compose, createStore} from 'redux'
 import {batchedSubscribe} from 'redux-batched-subscribe'
+import {unstable_batchedUpdates as batchedUpdates} from 'react-dom'
 import multi from 'redux-multi'
-import ReactDOM from 'react-dom'
 import thunk from 'redux-thunk'
-
-import debounceByAnimationFrame from '../lib/debounceByAnimationFrame'
 
 const middlewares: Function[] = [
   multi,
@@ -22,5 +20,5 @@ if (process.env.NODE_ENV === 'development') {
 
 export default compose(
   applyMiddleware(...middlewares),
-  batchedSubscribe(debounceByAnimationFrame(ReactDOM.unstable_batchedUpdates))
+  batchedSubscribe(batchedUpdates)
 )(createStore)
