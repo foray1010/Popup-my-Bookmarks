@@ -1,6 +1,7 @@
 import {autobind, debounce} from 'core-decorators'
 import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
+import {static as Immutable} from 'seamless-immutable'
 import CSSModules from 'react-css-modules'
 
 import {
@@ -20,9 +21,9 @@ class Search extends PureComponent {
   constructor(...args) {
     super(...args)
 
-    this.state = {
+    this.state = Immutable({
       inputValue: this.props.searchKeyword
-    }
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
