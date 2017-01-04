@@ -9,6 +9,9 @@ import {
   initTrees
 } from '../functions'
 import {
+  normalizeInputtingValue
+} from '../../common/functions'
+import {
   updateSearchKeyword,
   updateTrees
 } from '../actions'
@@ -49,7 +52,7 @@ class Search extends PureComponent {
   @autobind
   handleInput() {
     this.setState({
-      inputValue: this.inputEl.value.trimLeft()
+      inputValue: normalizeInputtingValue(this.inputEl.value)
     })
   }
 
@@ -70,7 +73,7 @@ class Search extends PureComponent {
       options
     } = this.props
 
-    const newSearchKeyword = this.state.inputValue.trim().replace(/\s+/g, ' ')
+    const newSearchKeyword = this.state.inputValue.trim()
 
     let newTrees
     if (newSearchKeyword === '') {

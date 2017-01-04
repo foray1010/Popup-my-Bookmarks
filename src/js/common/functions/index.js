@@ -13,3 +13,7 @@ export function createAction(
     })
   }
 }
+
+export function normalizeInputtingValue(value: string): string {
+  return value.trimLeft().replace(/\s+/g, ' ')
+}

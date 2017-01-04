@@ -3,6 +3,9 @@ import {createElement, PropTypes, PureComponent} from 'react'
 import {static as Immutable} from 'seamless-immutable'
 import CSSModules from 'react-css-modules'
 
+import {
+  normalizeInputtingValue
+} from '../../../common/functions'
 import styles from '../../../../css/options/input-select.css'
 
 class InputSelect extends PureComponent {
@@ -28,10 +31,7 @@ class InputSelect extends PureComponent {
       updateSingleOption
     } = this.props
 
-    const newOptionValue = evt.target.value
-      .trimLeft()
-      .replace(/\s+/g, ' ')
-      .replace(/^,/, '')
+    const newOptionValue = normalizeInputtingValue(evt.target.value).replace(/^,/, '')
 
     updateSingleOption(optionName, newOptionValue)
 

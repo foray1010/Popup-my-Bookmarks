@@ -4,6 +4,9 @@ import {static as Immutable} from 'seamless-immutable'
 import CSSModules from 'react-css-modules'
 
 import {
+  normalizeInputtingValue
+} from '../../../common/functions'
+import {
   resetBodySize
 } from '../../functions'
 import chromep from '../../../common/lib/chromePromise'
@@ -136,14 +139,14 @@ class Editor extends PureComponent {
   @autobind
   handleTitleChange(evt) {
     this.setState({
-      title: evt.target.value.trimLeft().replace(/\s+/g, ' ')
+      title: normalizeInputtingValue(evt.target.value)
     })
   }
 
   @autobind
   handleUrlChange(evt) {
     this.setState({
-      url: evt.target.value.trimLeft().replace(/\s+/g, ' ')
+      url: normalizeInputtingValue(evt.target.value)
     })
   }
 
