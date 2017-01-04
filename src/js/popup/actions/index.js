@@ -100,3 +100,10 @@ export const updateTrees = createAction(
   UPDATE_TREES,
   (trees: Object[]): Object[] => trees
 )
+
+
+/**
+ * Following functions are predefined actions
+ */
+
+export const closeEditor = (): Object => updateEditorTarget(null)
