@@ -1,53 +1,83 @@
-import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
+import {static as Immutable} from 'seamless-immutable'
 import CSSModules from 'react-css-modules'
 
 import {
   getBookmarkType,
-  isFolder
-} from '../functions'
+  isFolder,
+  resetBodySize
+} from '../../functions'
 import {
   TYPE_BOOKMARK,
   TYPE_NO_BOOKMARK,
   TYPE_ROOT_FOLDER
-} from '../constants'
+} from '../../constants'
 import MenuArea from './MenuArea'
 
-import styles from '../../../css/popup/menu.css'
+import styles from '../../../../css/popup/menu.css'
 
 class Menu extends PureComponent {
-  componentDidUpdate() {
-    this.setMenuPosition()
+  componentDidUpdate(prevProps) {
+    const {menuTarget} = this.props
+
+    const isHidden = !menuTarget
+
+    if (menuTarget !== prevProps.menuTarget) {
+      this.setMenuPosition()
+
+      if (isHidden) {
+        resetBodySize()
+      }
+    }
   }
 
-  getChildrenHiddenStatus() {
+  getIsMenuAreasHidden() {
     const {
       isSearching,
       menuTarget
     } = this.props
 
-    let childrenHiddenStatus = [false, false, false, false, false]
-
     switch (getBookmarkType(menuTarget)) {
       case TYPE_ROOT_FOLDER:
-        childrenHiddenStatus = [false, true, true, true, true]
-        break
+        return [false, true, true, true, true]
 
       case TYPE_BOOKMARK:
         if (isSearching) {
-          childrenHiddenStatus = [false, false, false, true, true]
+          return [false, false, false, true, true]
         }
-
         break
 
       case TYPE_NO_BOOKMARK:
-        childrenHiddenStatus = [true, true, false, false, true]
-        break
+        return [true, true, false, false, true]
 
       default:
     }
 
-    return childrenHiddenStatus
+    return [false, false, false, false, false]
+  }
+
+  getMenuPattern() {
+    const {menuTarget} = this.props
+
+    const partialMenuPattern = [
+      ['cut', 'copy', 'paste'],
+      ['addPage', 'addFolder', 'addSeparator'],
+      ['sortByName']
+    ]
+
+    if (isFolder(menuTarget)) {
+      return Immutable([
+        ['openAll', 'openAllInN', 'openAllInI'],
+        ['rename', 'del'],
+        ...partialMenuPattern
+      ])
+    }
+
+    return Immutable([
+      ['openInB', 'openInN', 'openInI'],
+      ['edit', 'del'],
+      ...partialMenuPattern
+    ])
   }
 
   setMenuPosition() {
@@ -56,7 +86,6 @@ class Menu extends PureComponent {
       mousePosition
     } = this.props
 
-    const {baseEl} = this
     const isHidden = !menuTarget
 
     let bottomPosPx = ''
@@ -65,14 +94,17 @@ class Menu extends PureComponent {
     if (!isHidden) {
       const body = document.body
       const html = document.documentElement
-      const menuHeight = baseEl.offsetHeight
-      const menuWidth = baseEl.offsetWidth
+      const menuHeight = this.baseEl.offsetHeight
+      const menuWidth = this.baseEl.offsetWidth
 
       const bodyWidth = body.offsetWidth
       const htmlHeight = html.clientHeight
 
       const bottomPos = htmlHeight - menuHeight - mousePosition.y
       const rightPos = bodyWidth - menuWidth - mousePosition.x
+
+      bottomPosPx = Math.max(bottomPos, 0) + 'px'
+      rightPosPx = Math.max(rightPos, 0) + 'px'
 
       if (menuHeight > htmlHeight) {
         body.style.height = menuHeight + 'px'
@@ -81,13 +113,10 @@ class Menu extends PureComponent {
       if (menuWidth > bodyWidth) {
         body.style.width = menuWidth + 'px'
       }
-
-      bottomPosPx = Math.max(bottomPos, 0) + 'px'
-      rightPosPx = Math.max(rightPos, 0) + 'px'
     }
 
-    baseEl.style.bottom = bottomPosPx
-    baseEl.style.right = rightPosPx
+    this.baseEl.style.bottom = bottomPosPx
+    this.baseEl.style.right = rightPosPx
   }
 
   render() {
@@ -98,27 +127,13 @@ class Menu extends PureComponent {
     let menuItems = null
 
     if (menuTarget) {
-      const childrenHiddenStatus = this.getChildrenHiddenStatus()
-      const menuPattern = [
-        [],
-        [],
-        ['cut', 'copy', 'paste'],
-        ['addPage', 'addFolder', 'addSeparator'],
-        ['sortByName']
-      ]
-
-      if (isFolder(menuTarget)) {
-        menuPattern[0].push('openAll', 'openAllInN', 'openAllInI')
-        menuPattern[1].push('rename', 'del')
-      } else {
-        menuPattern[0].push('openInB', 'openInN', 'openInI')
-        menuPattern[1].push('edit', 'del')
-      }
+      const isMenuAreasHidden = this.getIsMenuAreasHidden()
+      const menuPattern = this.getMenuPattern()
 
       menuItems = menuPattern.map((menuAreaKeys, menuAreaIndex) => (
         <MenuArea
           key={menuAreaKeys.join()}
-          isHidden={childrenHiddenStatus[menuAreaIndex]}
+          isHidden={isMenuAreasHidden[menuAreaIndex]}
           menuAreaKeys={menuAreaKeys}
         />
       ))
@@ -144,12 +159,4 @@ Menu.propTypes = {
   mousePosition: PropTypes.objectOf(PropTypes.number).isRequired
 }
 
-const mapStateToProps = (state) => ({
-  isSearching: Boolean(state.searchKeyword),
-  menuTarget: state.menuTarget,
-  mousePosition: state.mousePosition
-})
-
-export default connect(mapStateToProps)(
-  CSSModules(Menu, styles)
-)
+export default CSSModules(Menu, styles)

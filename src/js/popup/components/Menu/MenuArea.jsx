@@ -1,9 +1,9 @@
 import {createElement, PropTypes} from 'react'
 import CSSModules from 'react-css-modules'
 
-import MenuItem from './MenuItem'
+import MenuItemContainer from './MenuItemContainer'
 
-import styles from '../../../css/popup/menu-area.css'
+import styles from '../../../../css/popup/menu-area.css'
 
 const MenuArea = (props) => {
   const {
@@ -12,7 +12,7 @@ const MenuArea = (props) => {
   } = props
 
   const menuAreaItems = menuAreaKeys.map((menuItemKey) => (
-    <MenuItem
+    <MenuItemContainer
       key={menuItemKey}
       menuItemKey={menuItemKey}
     />

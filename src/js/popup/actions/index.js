@@ -4,6 +4,9 @@ import {
   createAction
 } from '../../common/functions'
 import {
+  pasteItemBelowTarget
+} from '../functions'
+import {
   PUT_DRAG_INDICATOR,
   REMOVE_DRAG_INDICATOR,
   REMOVE_TREE_INFOS_FROM_INDEX,
@@ -106,4 +109,48 @@ export const updateTrees = createAction(
  * Following functions are predefined actions
  */
 
+export const addFolder = (belowTarget: Object): Object[] => {
+  return [
+    updateEditorTarget(belowTarget),
+    updateIsCreatingNewFolder(true)
+  ]
+}
+
 export const closeEditor = (): Object => updateEditorTarget(null)
+
+export const closeMenu = (): Object => updateMenuTarget(null)
+
+export const closeMenuCover = (): Object[] => {
+  return [
+    closeEditor(),
+    closeMenu()
+  ]
+}
+
+
+/**
+ * Following functions have side effect
+ */
+
+export const pasteItem = () => {
+  return async (
+    dispatch: Function,
+    getState: Function
+  ): Promise<void> => {
+    const {
+      copyTarget,
+      cutTarget,
+      menuTarget
+    } = getState()
+
+    const isCut = Boolean(cutTarget)
+
+    const fromTarget = isCut ? cutTarget : copyTarget
+
+    await pasteItemBelowTarget(fromTarget, menuTarget, isCut)
+
+    if (isCut) {
+      dispatch(updateCutTarget(null))
+    }
+  }
+}

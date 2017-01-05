@@ -3,9 +3,7 @@
 
 .main {
   composes: list-item from "../common/composes.css";
-  display: block;
   padding: var(--golden-gap) var(--golden-gap-4x);
-  text-decoration: none;
 
   &.unclickable {
     @apply --grey-list-item;

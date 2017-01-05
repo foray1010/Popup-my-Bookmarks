@@ -1,5 +1,8 @@
 /* @flow */
 
+import _flatMapDeep from 'lodash/flatMapDeep'
+import _last from 'lodash/last'
+
 import {
   lastUsedTreeIdsStorage
 } from './lastPosition'
@@ -16,6 +19,30 @@ import chromep from '../../common/lib/chromePromise'
 
 const msgNoBookmark: string = window.chrome.i18n.getMessage('noBkmark')
 const noBookmarkIdPrefix: string = 'no-bookmark-'
+
+export async function addCurrentPage(belowTarget: Object): Promise<void> {
+  const [currentTab] = await chromep.tabs.query({
+    currentWindow: true,
+    active: true
+  })
+
+  await createBookmarkBelowTarget(belowTarget, currentTab.title, currentTab.url)
+}
+
+export async function createBookmarkBelowTarget(
+  target: Object,
+  title: string,
+  url: ?string
+): Promise<Object> {
+  const createdItemInfo: Object = await chromep.bookmarks.create({
+    index: target.index + 1,
+    parentId: target.parentId,
+    title: title.trim(),
+    url: url && url.trim()
+  })
+
+  return createdItemInfo
+}
 
 export function genBookmarkList(
   treeInfo: Object,
@@ -343,11 +370,120 @@ export async function openMultipleBookmarks(
   window.close()
 }
 
+export async function pasteItemBelowTarget(
+  fromTarget: Object,
+  belowTarget: Object,
+  isCut: boolean
+): Promise<void> {
+  if (isCut) {
+    await chromep.bookmarks.move(fromTarget.id, {
+      parentId: belowTarget.parentId,
+      index: belowTarget.index + 1
+    })
+  } else {
+    const copyChildrenIfFolder = async (
+      thisTreeInfo: Object,
+      parentId: string
+    ): Promise<void> => {
+      if (isFolder(thisTreeInfo)) {
+        for (const thisItemInfo of thisTreeInfo.children) {
+          const thisCreatedItemInfo = await chromep.bookmarks.create({
+            parentId: parentId,
+            title: thisItemInfo.title,
+            url: thisItemInfo.url
+          })
+
+          await copyChildrenIfFolder(thisItemInfo, thisCreatedItemInfo.id)
+        }
+      }
+    }
+
+    const [treeInfo] = await chromep.bookmarks.getSubTree(fromTarget.id)
+
+    const createdItemInfo = await createBookmarkBelowTarget(
+      belowTarget,
+      treeInfo.title,
+      treeInfo.url
+    )
+
+    await copyChildrenIfFolder(treeInfo, createdItemInfo.id)
+  }
+}
+
 export async function removeBookmark(target: Object): Promise<void> {
   if (isFolder(target)) {
     await chromep.bookmarks.removeTree(target.id)
   } else {
     await chromep.bookmarks.remove(target.id)
+  }
+}
+
+export async function sortByName(parentId: string): Promise<void> {
+  const childrenInfo: Object[] = await chromep.bookmarks.getChildren(parentId)
+
+  const genClassifiedItems = (): Array<Object[]> => ([
+    [/* Separators */],
+    [/* Folders */],
+    [/* Bookmarks */]
+  ])
+  const getClassifiedItemIndex = (itemInfo): number => {
+    switch (getBookmarkType(itemInfo)) {
+      case TYPE_SEPARATOR:
+        return 0
+
+      case TYPE_FOLDER:
+        return 1
+
+      case TYPE_BOOKMARK:
+      default:
+        return 2
+    }
+  }
+
+  /**
+   * Split all bookmarks into n main group,
+   * where n = the number of separators + 1
+   * Each main group contains 3 small groups
+   * [Separators, Folders, Bookmarks]
+   */
+  const classifiedItemsList: Array<Array<Object[]>> = childrenInfo
+    .reduce((accumulator, itemInfo) => {
+      const classifiedItemIndex = getClassifiedItemIndex(itemInfo)
+
+      if (accumulator.length === 0 || classifiedItemIndex === 0) {
+        accumulator.push(genClassifiedItems())
+      }
+
+      const lastClassifiedItems = _last(accumulator)
+
+      lastClassifiedItems[classifiedItemIndex].push(itemInfo)
+
+      return accumulator
+    }, [])
+
+  // Sort and concatenate all lists into single list
+  const sortedChildrenInfo: Object[] = _flatMapDeep(
+    classifiedItemsList,
+    (classifiedItems) => classifiedItems.map(sortByTitle)
+  )
+
+  // Moving bookmarks to sorted index
+  for (const [
+    index: number,
+    itemInfo: Object
+  ] of sortedChildrenInfo.entries()) {
+    const oldItemInfo = await getBookmark(itemInfo.id)
+
+    const oldIndex: number = oldItemInfo.index
+
+    if (oldIndex !== index) {
+      await chromep.bookmarks.move(itemInfo.id, {
+        // if new index is after old index, need to add 1,
+        // because index means the position in current array,
+        // which also count the current position
+        index: index + (index > oldIndex ? 1 : 0)
+      })
+    }
   }
 }
 
