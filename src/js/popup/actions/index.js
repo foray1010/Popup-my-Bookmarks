@@ -4,7 +4,9 @@ import {
   createAction
 } from '../../common/functions'
 import {
-  pasteItemBelowTarget
+  getSearchResult,
+  pasteItemBelowTarget,
+  initTrees
 } from '../functions'
 import {
   PUT_DRAG_INDICATOR,
@@ -152,5 +154,30 @@ export const pasteItem = () => {
     if (isCut) {
       dispatch(updateCutTarget(null))
     }
+  }
+}
+
+export const updateTreesBySearchKeyword = (newSearchKeyword: string) => {
+  return async (
+    dispatch: Function,
+    getState: Function
+  ): Promise<void> => {
+    const {
+      options
+    } = getState()
+
+    let newTrees
+    if (newSearchKeyword === '') {
+      newTrees = await initTrees(options)
+    } else {
+      const searchResult = await getSearchResult(newSearchKeyword, options)
+
+      newTrees = [searchResult]
+    }
+
+    dispatch([
+      updateSearchKeyword(newSearchKeyword),
+      updateTrees(newTrees)
+    ])
   }
 }

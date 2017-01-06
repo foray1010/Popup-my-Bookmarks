@@ -1,22 +1,13 @@
 import {autobind, debounce} from 'core-decorators'
-import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
 import {static as Immutable} from 'seamless-immutable'
 import CSSModules from 'react-css-modules'
 
 import {
-  getSearchResult,
-  initTrees
-} from '../functions'
-import {
   normalizeInputtingValue
-} from '../../common/functions'
-import {
-  updateSearchKeyword,
-  updateTrees
-} from '../actions'
+} from '../../../common/functions'
 
-import styles from '../../../css/popup/search.css'
+import styles from '../../../../css/popup/search.css'
 
 const msgSearch = chrome.i18n.getMessage('search')
 
@@ -39,7 +30,7 @@ class Search extends PureComponent {
     }
 
     if (this.state.inputValue !== prevState.inputValue) {
-      this.updateTreesBySearchKeyword()
+      this.handleSearchKeywordChange()
     }
   }
 
@@ -56,6 +47,17 @@ class Search extends PureComponent {
     })
   }
 
+  @debounce(300)
+  handleSearchKeywordChange() {
+    const {
+      updateTreesBySearchKeyword
+    } = this.props
+
+    const newSearchKeyword = this.state.inputValue.trim()
+
+    updateTreesBySearchKeyword(newSearchKeyword)
+  }
+
   tryFocusToInput() {
     const {
       isMenuCoverHidden
@@ -66,33 +68,9 @@ class Search extends PureComponent {
     }
   }
 
-  @debounce(300)
-  async updateTreesBySearchKeyword() {
-    const {
-      dispatch,
-      options
-    } = this.props
-
-    const newSearchKeyword = this.state.inputValue.trim()
-
-    let newTrees
-    if (newSearchKeyword === '') {
-      newTrees = await initTrees(options)
-    } else {
-      const searchResult = await getSearchResult(newSearchKeyword, options)
-
-      newTrees = [searchResult]
-    }
-
-    dispatch([
-      updateSearchKeyword(newSearchKeyword),
-      updateTrees(newTrees)
-    ])
-  }
-
   render() {
     return (
-      <header styleName='main'>
+      <div styleName='main'>
         <input
           ref={(ref) => {
             this.inputEl = ref
@@ -105,24 +83,15 @@ class Search extends PureComponent {
           onBlur={this.handleBlur}
           onInput={this.handleInput}
         />
-      </header>
+      </div>
     )
   }
 }
 
 Search.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   isMenuCoverHidden: PropTypes.bool.isRequired,
-  options: PropTypes.object.isRequired,
-  searchKeyword: PropTypes.string.isRequired
+  searchKeyword: PropTypes.string.isRequired,
+  updateTreesBySearchKeyword: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  isMenuCoverHidden: !(state.editorTarget || state.menuTarget),
-  options: state.options,
-  searchKeyword: state.searchKeyword
-})
-
-export default connect(mapStateToProps)(
-  CSSModules(Search, styles)
-)
+export default CSSModules(Search, styles)
