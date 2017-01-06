@@ -1,5 +1,4 @@
 import {autobind} from 'core-decorators'
-import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
 import {static as Immutable} from 'seamless-immutable'
 import CSSModules from 'react-css-modules'
@@ -7,19 +6,19 @@ import CSSModules from 'react-css-modules'
 import {
   DRAG_INDICATOR,
   MAX_HEIGHT
-} from '../constants'
+} from '../../constants'
 import {
   genBookmarkList,
   lastScrollTopListStorage,
   updateLastScrollTopList
-} from '../functions'
+} from '../../functions'
 import BookmarkItem from './BookmarkItem'
 import DragIndicator from './DragIndicator'
-import FolderCover from './FolderCover'
+import FolderCover from '../FolderCover'
 import NoResult from './NoResult'
 import TreeHeader from './TreeHeader'
 
-import styles from '../../../css/popup/bookmark-tree.css'
+import styles from '../../../../css/popup/bookmark-tree.css'
 
 class BookmarkTree extends PureComponent {
   componentDidMount() {
@@ -29,6 +28,43 @@ class BookmarkTree extends PureComponent {
 
   componentDidUpdate() {
     this.setHeight()
+  }
+
+  getTreeItems() {
+    const {
+      dragIndicator,
+      isSearching,
+      rootTree,
+      treeIndex,
+      treeInfo
+    } = this.props
+
+    const bookmarkList = genBookmarkList(treeInfo, {isSearching, rootTree, treeIndex})
+
+    const treeItems = bookmarkList.map((itemInfo) => (
+      <BookmarkItem
+        key={itemInfo.id}
+        itemInfo={itemInfo}
+        treeIndex={treeIndex}
+      />
+    ))
+
+    if (dragIndicator && dragIndicator.parentId === treeInfo.id) {
+      let dragIndicatorIndex = dragIndicator.index
+
+      const isFirstTree = treeIndex === 0
+      if (isFirstTree && !isSearching) {
+        dragIndicatorIndex += rootTree.children.length
+      }
+
+      return Immutable([
+        ...treeItems.slice(0, dragIndicatorIndex),
+        <DragIndicator key={DRAG_INDICATOR} />,
+        ...treeItems.slice(dragIndicatorIndex)
+      ])
+    }
+
+    return treeItems
   }
 
   setHeight() {
@@ -41,27 +77,26 @@ class BookmarkTree extends PureComponent {
 
   @autobind
   _setHeight() {
-    const {bookmarkListEl} = this
-
-    if (bookmarkListEl) {
+    if (this.bookmarkListEl) {
       // search-box and tree-header-box height
-      const bookmarkListElOffsetTop = bookmarkListEl.getBoundingClientRect().top
+      const bookmarkListElOffsetTop = this.bookmarkListEl.getBoundingClientRect().top
 
       const maxListHeight = MAX_HEIGHT - bookmarkListElOffsetTop
 
-      const listHeight = Math.min(bookmarkListEl.scrollHeight, maxListHeight)
+      const listHeight = Math.min(this.bookmarkListEl.scrollHeight, maxListHeight)
 
-      bookmarkListEl.style.maxHeight = listHeight + 'px'
+      this.bookmarkListEl.style.maxHeight = listHeight + 'px'
     }
   }
 
   @autobind
   _setScrollTop() {
     const {
+      isRememberLastPosition,
       treeIndex
     } = this.props
 
-    if (this.isRememberLastPosition()) {
+    if (isRememberLastPosition) {
       const lastScrollTopList = lastScrollTopListStorage.get()
 
       const lastScrollTop = lastScrollTopList[treeIndex]
@@ -73,7 +108,11 @@ class BookmarkTree extends PureComponent {
 
   @autobind
   handleScroll() {
-    if (this.isRememberLastPosition()) {
+    const {
+      isRememberLastPosition
+    } = this.props
+
+    if (isRememberLastPosition) {
       updateLastScrollTopList()
     }
   }
@@ -88,52 +127,13 @@ class BookmarkTree extends PureComponent {
     this.bookmarkListEl.scrollTop += Math.floor(itemOffsetHeight * evt.deltaY / 40)
   }
 
-  isRememberLastPosition() {
-    const {
-      isSearching,
-      options
-    } = this.props
-
-    return options.rememberPos && !isSearching
-  }
-
   render() {
     const {
-      dragIndicator,
       isSearching,
-      rootTree,
-      treeIndex,
-      trees
+      treeIndex
     } = this.props
 
-    const isFirstTree = treeIndex === 0
-    const treeInfo = trees[treeIndex]
-
-    const bookmarkList = genBookmarkList(treeInfo, {isSearching, rootTree, treeIndex})
-
-    const treeItems = Immutable.asMutable(bookmarkList).map((itemInfo) => (
-      <BookmarkItem
-        key={itemInfo.id}
-        itemInfo={itemInfo}
-        treeIndex={treeIndex}
-      />
-    ))
-
-    if (dragIndicator && dragIndicator.parentId === treeInfo.id) {
-      let dragIndicatorIndex = dragIndicator.index
-
-      if (isFirstTree && !isSearching) {
-        dragIndicatorIndex += rootTree.children.length
-      }
-
-      treeItems.splice(dragIndicatorIndex, 0, <DragIndicator key={DRAG_INDICATOR} />)
-    }
-
-    if (isSearching && treeItems.length === 0) {
-      treeItems.push(
-        <NoResult key='no-result' />
-      )
-    }
+    const treeItems = this.getTreeItems()
 
     return (
       <section styleName='main'>
@@ -148,6 +148,7 @@ class BookmarkTree extends PureComponent {
           onWheel={this.handleWheel}
         >
           {treeItems}
+          {isSearching && treeItems.length === 0 ? <NoResult /> : null}
         </ul>
         <FolderCover treeIndex={treeIndex} />
       </section>
@@ -157,23 +158,12 @@ class BookmarkTree extends PureComponent {
 
 BookmarkTree.propTypes = {
   dragIndicator: PropTypes.object,
+  isRememberLastPosition: PropTypes.bool.isRequired,
   isSearching: PropTypes.bool.isRequired,
   itemOffsetHeight: PropTypes.number.isRequired,
-  options: PropTypes.object.isRequired,
   rootTree: PropTypes.object.isRequired,
   treeIndex: PropTypes.number.isRequired,
-  trees: PropTypes.arrayOf(PropTypes.object).isRequired
+  treeInfo: PropTypes.object.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  dragIndicator: state.dragIndicator,
-  isSearching: Boolean(state.searchKeyword),
-  itemOffsetHeight: state.itemOffsetHeight,
-  options: state.options,
-  rootTree: state.rootTree,
-  trees: state.trees
-})
-
-export default connect(mapStateToProps)(
-  CSSModules(BookmarkTree, styles)
-)
+export default CSSModules(BookmarkTree, styles)

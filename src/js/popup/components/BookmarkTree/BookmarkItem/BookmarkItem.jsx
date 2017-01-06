@@ -1,5 +1,4 @@
 import {autobind, debounce} from 'core-decorators'
-import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
 import classNames from 'classnames'
 import CSSModules from 'react-css-modules'
@@ -8,33 +7,20 @@ import {
   getBookmark,
   getBookmarkType,
   getClickType,
-  getFlatTree,
-  isFolder,
-  isFolderOpened,
   openBookmark,
   openMultipleBookmarks,
   scrollIntoViewIfNeeded
-} from '../functions'
-import {
-  putDragIndicator,
-  removeDragIndicator,
-  replaceTreeInfoByIndex,
-  removeTreeInfosFromIndex,
-  updateDragTarget,
-  updateFocusTarget,
-  updateMenuTarget,
-  updateMousePosition
-} from '../actions'
+} from '../../../functions'
 import {
   ROOT_ID,
   TYPE_BOOKMARK,
   TYPE_FOLDER,
   TYPE_ROOT_FOLDER,
   TYPE_SEPARATOR
-} from '../constants'
-import chromep from '../../common/lib/chromePromise'
+} from '../../../constants'
+import chromep from '../../../../common/lib/chromePromise'
 
-import styles from '../../../css/popup/bookmark-item.css'
+import styles from '../../../../../css/popup/bookmark-item.css'
 
 class BookmarkItem extends PureComponent {
   componentDidMount() {
@@ -92,11 +78,10 @@ class BookmarkItem extends PureComponent {
       const bookmarkType = getBookmarkType(itemInfo)
 
       if (bookmarkType === TYPE_BOOKMARK) {
-        const {baseEl} = this
         const tooltip = await this.getTooltip()
 
-        if (baseEl && tooltip) {
-          baseEl.title = tooltip
+        if (this.baseEl && tooltip) {
+          this.baseEl.title = tooltip
         }
       }
     })
@@ -108,11 +93,10 @@ class BookmarkItem extends PureComponent {
     evt.preventDefault()
 
     const {
-      dispatch,
       itemInfo,
+      leftClickBookmarkItem,
       options,
-      treeIndex,
-      trees
+      treeIndex
     } = this.props
 
     const bookmarkType = getBookmarkType(itemInfo)
@@ -121,13 +105,7 @@ class BookmarkItem extends PureComponent {
       case TYPE_ROOT_FOLDER:
       case TYPE_FOLDER:
         if (evt.button === 0) {
-          if (options.opFolderBy) {
-            if (!isFolderOpened(trees, itemInfo)) {
-              dispatch(await this.openFolder())
-            } else {
-              dispatch(removeTreeInfosFromIndex(treeIndex + 1))
-            }
-          }
+          leftClickBookmarkItem(itemInfo, treeIndex + 1)
         } else {
           await openMultipleBookmarks(itemInfo, {
             isNewWindow: false,
@@ -153,23 +131,20 @@ class BookmarkItem extends PureComponent {
     evt.preventDefault()
 
     const {
-      dispatch,
-      itemInfo
+      itemInfo,
+      openMenu
     } = this.props
 
-    dispatch([
-      updateMousePosition({
-        x: evt.clientX,
-        y: evt.clientY
-      }),
-      updateMenuTarget(itemInfo)
-    ])
+    openMenu(itemInfo, {
+      x: evt.clientX,
+      y: evt.clientY
+    })
   }
 
   @autobind
   async handleDragEnd() {
     const {
-      dispatch,
+      dragEnd,
       dragIndicator,
       dragTarget
     } = this.props
@@ -181,10 +156,7 @@ class BookmarkItem extends PureComponent {
       })
     }
 
-    dispatch([
-      removeDragIndicator(),
-      updateDragTarget(null)
-    ])
+    dragEnd()
   }
 
   @autobind
@@ -197,136 +169,64 @@ class BookmarkItem extends PureComponent {
   @debounce(50)
   async _handleDragEnter(evt) {
     const {
-      dispatch,
-      dragTarget,
+      dragOver,
       itemInfo,
       itemOffsetHeight,
       treeIndex
     } = this.props
 
-    const actionList = []
-    const isDragTarget = dragTarget.id === itemInfo.id
     const isPlaceAfter = evt.offsetY > itemOffsetHeight / 2
 
-    const shouldRemoveDragIndicator = (() => {
-      const isSiblingOfDragTarget = (
-        dragTarget.parentId === itemInfo.parentId &&
-        Math.abs(dragTarget.index - itemInfo.index) === 1
-      )
-
-      if (isSiblingOfDragTarget) {
-        const isDragTargetAfterItemInfo = dragTarget.index - itemInfo.index > 0
-
-        if (isPlaceAfter) {
-          return isDragTargetAfterItemInfo
-        } else {
-          return !isDragTargetAfterItemInfo
-        }
-      }
-
-      return (
-        isDragTarget ||
-        getBookmarkType(itemInfo) === TYPE_ROOT_FOLDER
-      )
-    })()
-
-    // item cannot be the parent folder of itself
-    if (!isDragTarget && isFolder(itemInfo)) {
-      actionList.push(await this.openFolder())
-    } else {
-      actionList.push(removeTreeInfosFromIndex(treeIndex + 1))
-    }
-
-    if (shouldRemoveDragIndicator) {
-      actionList.push(removeDragIndicator())
-    } else {
-      actionList.push(putDragIndicator(itemInfo, isPlaceAfter))
-    }
-
-    dispatch(actionList)
+    dragOver(itemInfo, treeIndex, isPlaceAfter)
   }
 
   @autobind
   handleDragStart() {
     const {
-      dispatch,
+      dragStart,
       itemInfo,
       treeIndex
     } = this.props
 
-    dispatch([
-      removeTreeInfosFromIndex(treeIndex + 1),
-      updateDragTarget(itemInfo)
-    ])
+    dragStart(itemInfo, treeIndex)
   }
 
   @autobind
   handleMouse(evt) {
     const {
-      dispatch,
       focusTarget,
-      itemInfo
+      itemInfo,
+      updateFocusTarget
     } = this.props
-
-    evt.persist()
 
     switch (evt.type) {
       case 'mouseenter':
         if (focusTarget !== itemInfo) {
-          dispatch(updateFocusTarget(itemInfo))
+          updateFocusTarget(itemInfo)
         }
+
+        this._handleMouseEnter()
         break
 
       case 'mouseleave':
         if (focusTarget === itemInfo) {
-          dispatch(updateFocusTarget(null))
+          updateFocusTarget(null)
         }
         break
 
       default:
     }
-
-    this._handleMouse(evt)
   }
 
   @debounce(200)
-  async _handleMouse(evt) {
+  _handleMouseEnter() {
     const {
-      dispatch,
-      itemInfo,
-      options,
-      isSearching,
-      treeIndex,
-      trees
-    } = this.props
-
-    switch (evt.type) {
-      case 'mouseenter':
-        if (!isSearching && !options.opFolderBy) {
-          if (isFolder(itemInfo)) {
-            if (!isFolderOpened(trees, itemInfo)) {
-              dispatch(await this.openFolder())
-            }
-          } else {
-            dispatch(removeTreeInfosFromIndex(treeIndex + 1))
-          }
-        }
-        break
-
-      default:
-    }
-  }
-
-  async openFolder() {
-    const {
+      hoverBookmarkItem,
       itemInfo,
       treeIndex
     } = this.props
 
-    const nextTreeIndex = treeIndex + 1
-    const treeInfo = await getFlatTree(itemInfo.id)
-
-    return replaceTreeInfoByIndex(nextTreeIndex, treeInfo)
+    hoverBookmarkItem(itemInfo, treeIndex + 1)
   }
 
   render() {
@@ -410,49 +310,24 @@ class BookmarkItem extends PureComponent {
 }
 
 BookmarkItem.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  dragEnd: PropTypes.func.isRequired,
   dragIndicator: PropTypes.object,
+  dragOver: PropTypes.func.isRequired,
+  dragStart: PropTypes.func.isRequired,
   dragTarget: PropTypes.object,
   focusTarget: PropTypes.object,
+  hoverBookmarkItem: PropTypes.func.isRequired,
   isSearching: PropTypes.bool.isRequired,
   isSelected: PropTypes.bool.isRequired,
   isUnclickable: PropTypes.bool.isRequired,
   itemInfo: PropTypes.object.isRequired,
   itemOffsetHeight: PropTypes.number.isRequired,
+  leftClickBookmarkItem: PropTypes.func.isRequired,
+  openMenu: PropTypes.func.isRequired,
   options: PropTypes.object.isRequired,
   shouldKeepInView: PropTypes.bool.isRequired,
   treeIndex: PropTypes.number.isRequired,
-  trees: PropTypes.arrayOf(PropTypes.object).isRequired
+  updateFocusTarget: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const {
-    cutTarget,
-    dragTarget,
-    focusTarget,
-    menuTarget
-  } = state
-  const {itemInfo} = ownProps
-
-  const isCutTarget = Boolean(cutTarget && cutTarget.id === itemInfo.id)
-  const isDragTarget = Boolean(dragTarget && dragTarget.id === itemInfo.id)
-  const isFocusTarget = Boolean(focusTarget && focusTarget.id === itemInfo.id)
-  const isMenuTarget = Boolean(menuTarget && menuTarget.id === itemInfo.id)
-
-  return {
-    dragIndicator: state.dragIndicator,
-    dragTarget: dragTarget,
-    focusTarget: focusTarget,
-    isSearching: Boolean(state.searchKeyword),
-    isSelected: isDragTarget || isFocusTarget || isMenuTarget,
-    isUnclickable: isCutTarget || isDragTarget,
-    itemOffsetHeight: state.itemOffsetHeight,
-    options: state.options,
-    shouldKeepInView: isFocusTarget || isMenuTarget,
-    trees: state.trees
-  }
-}
-
-export default connect(mapStateToProps)(
-  CSSModules(BookmarkItem, styles, {allowMultiple: true})
-)
+export default CSSModules(BookmarkItem, styles, {allowMultiple: true})

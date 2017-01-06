@@ -1,33 +1,25 @@
 import {autobind} from 'core-decorators'
-import {connect} from 'react-redux'
 import {createElement, PropTypes, PureComponent} from 'react'
 import CSSModules from 'react-css-modules'
 
-import {
-  removeTreeInfosFromIndex
-} from '../actions'
-
-import styles from '../../../css/popup/tree-header.css'
+import styles from '../../../../../css/popup/tree-header.css'
 
 class TreeHeader extends PureComponent {
   @autobind
   handleClose() {
     const {
-      dispatch,
+      removeTreeInfosFromIndex,
       treeIndex
     } = this.props
 
-    dispatch(removeTreeInfosFromIndex(treeIndex))
+    removeTreeInfosFromIndex(treeIndex)
   }
 
   render() {
     const {
       isHidden,
-      treeIndex,
-      trees
+      treeInfo
     } = this.props
-
-    const treeInfo = trees[treeIndex]
 
     return (
       <header hidden={isHidden}>
@@ -48,17 +40,10 @@ class TreeHeader extends PureComponent {
 }
 
 TreeHeader.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   isHidden: PropTypes.bool.isRequired,
+  removeTreeInfosFromIndex: PropTypes.func.isRequired,
   treeIndex: PropTypes.number.isRequired,
-  trees: PropTypes.arrayOf(PropTypes.object).isRequired
+  treeInfo: PropTypes.object.isRequired
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  isHidden: Boolean(ownProps.treeIndex === 0 || state.searchKeyword),
-  trees: state.trees
-})
-
-export default connect(mapStateToProps)(
-  CSSModules(TreeHeader, styles)
-)
+export default CSSModules(TreeHeader, styles)

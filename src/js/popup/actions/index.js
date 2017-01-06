@@ -4,7 +4,11 @@ import {
   createAction
 } from '../../common/functions'
 import {
+  getBookmarkType,
+  getFlatTree,
   getSearchResult,
+  isFolder,
+  isFolderOpened,
   pasteItemBelowTarget,
   initTrees
 } from '../functions'
@@ -13,6 +17,7 @@ import {
   REMOVE_DRAG_INDICATOR,
   REMOVE_TREE_INFOS_FROM_INDEX,
   REPLACE_TREE_INFO_BY_INDEX,
+  TYPE_ROOT_FOLDER,
   UPDATE_COPY_TARGET,
   UPDATE_CUT_TARGET,
   UPDATE_DRAG_TARGET,
@@ -129,10 +134,160 @@ export const closeMenuCover = (): Object[] => {
   ]
 }
 
+export const dragEnd = (): Object[] => ([
+  removeDragIndicator(),
+  updateDragTarget(null)
+])
+
+export const dragStart = (
+  itemInfo: Object,
+  currentTreeIndex: number
+): Object[] => ([
+  removeTreeInfosFromIndex(currentTreeIndex + 1),
+  updateDragTarget(itemInfo)
+])
+
+export const openMenu = (
+  menuTarget: Object,
+  {x, y}: {x: number, y: number}
+): Object[] => {
+  return [
+    updateMousePosition({x, y}),
+    updateMenuTarget(menuTarget)
+  ]
+}
+
 
 /**
  * Following functions have side effect
  */
+
+export const dragOver = (
+  itemInfo: Object,
+  currentTreeIndex: number,
+  isPlaceAfter: boolean
+) => {
+  return (
+    dispatch: Function,
+    getState: Function
+  ): void => {
+    const {
+      dragTarget
+    } = getState()
+
+    const actionList = []
+
+    const isDragTarget = dragTarget.id === itemInfo.id
+
+    const shouldRemoveDragIndicator: boolean = (() => {
+      const isSiblingOfDragTarget = (
+        dragTarget.parentId === itemInfo.parentId &&
+        Math.abs(dragTarget.index - itemInfo.index) === 1
+      )
+
+      if (isSiblingOfDragTarget) {
+        const isDragTargetAfterItemInfo = dragTarget.index - itemInfo.index > 0
+
+        if (isPlaceAfter) {
+          return isDragTargetAfterItemInfo
+        } else {
+          return !isDragTargetAfterItemInfo
+        }
+      }
+
+      return (
+        isDragTarget ||
+        getBookmarkType(itemInfo) === TYPE_ROOT_FOLDER
+      )
+    })()
+
+    // item cannot be the parent folder of itself
+    if (!isDragTarget && isFolder(itemInfo)) {
+      actionList.push(openFolder(itemInfo, currentTreeIndex + 1))
+    } else {
+      actionList.push(removeTreeInfosFromIndex(currentTreeIndex + 1))
+    }
+
+    if (shouldRemoveDragIndicator) {
+      actionList.push(removeDragIndicator())
+    } else {
+      actionList.push(putDragIndicator(itemInfo, isPlaceAfter))
+    }
+
+    dispatch(actionList)
+  }
+}
+
+export const hoverBookmarkItem = (
+  itemInfo: Object,
+  targetTreeIndex: number
+) => {
+  return (
+    dispatch: Function,
+    getState: Function
+  ): void => {
+    const {
+      options,
+      trees
+    } = getState()
+
+    if (!options.opFolderBy) {
+      if (isFolder(itemInfo)) {
+        if (!isFolderOpened(trees, itemInfo)) {
+          dispatch(
+            openFolder(itemInfo, targetTreeIndex)
+          )
+        }
+      } else {
+        dispatch(
+          removeTreeInfosFromIndex(targetTreeIndex)
+        )
+      }
+    }
+  }
+}
+
+export const leftClickBookmarkItem = (
+  itemInfo: Object,
+  targetTreeIndex: number
+) => {
+  return (
+    dispatch: Function,
+    getState: Function
+  ): void => {
+    const {
+      options,
+      trees
+    } = getState()
+
+    if (options.opFolderBy) {
+      if (!isFolderOpened(trees, itemInfo)) {
+        dispatch(
+          openFolder(itemInfo, targetTreeIndex)
+        )
+      } else {
+        dispatch(
+          removeTreeInfosFromIndex(targetTreeIndex)
+        )
+      }
+    }
+  }
+}
+
+const openFolder = (
+  itemInfo: Object,
+  targetTreeIndex: number
+) => {
+  return async (
+    dispatch: Function
+  ): Promise<void> => {
+    const treeInfo = await getFlatTree(itemInfo.id)
+
+    dispatch(
+      replaceTreeInfoByIndex(targetTreeIndex, treeInfo)
+    )
+  }
+}
 
 export const pasteItem = () => {
   return async (
