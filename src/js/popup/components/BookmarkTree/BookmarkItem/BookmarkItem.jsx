@@ -1,5 +1,6 @@
-import {autobind, debounce} from 'core-decorators'
+import {autobind, debounce, decorate} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
+import _debounce from 'lodash/debounce'
 import classNames from 'classnames'
 import CSSModules from 'react-css-modules'
 
@@ -89,7 +90,6 @@ class BookmarkItem extends PureComponent {
 
   @autobind
   async handleClick(evt) {
-    evt.persist()
     evt.preventDefault()
 
     const {
@@ -212,13 +212,15 @@ class BookmarkItem extends PureComponent {
         if (focusTarget === itemInfo) {
           updateFocusTarget(null)
         }
+
+        this._handleMouseEnter.cancel()
         break
 
       default:
     }
   }
 
-  @debounce(200)
+  @decorate(_debounce, 200)
   _handleMouseEnter() {
     const {
       hoverBookmarkItem,

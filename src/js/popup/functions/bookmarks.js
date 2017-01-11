@@ -127,6 +127,27 @@ export async function getFlatTree(id: string): Promise<Object> {
   return treeInfo
 }
 
+export function getFocusTargetTreeIndex(
+  focusTarget: any, // use `any` because of https://github.com/facebook/flow/issues/52
+  trees: Object[]
+): number {
+  if (!focusTarget) {
+    return trees.length - 1
+  }
+
+  if (getBookmarkType(focusTarget) === TYPE_ROOT_FOLDER) {
+    return 0
+  }
+
+  const matchedIndex = trees.findIndex((treeInfo) => treeInfo.id === focusTarget.parentId)
+
+  if (matchedIndex < 0) {
+    return trees.length - 1
+  }
+
+  return matchedIndex
+}
+
 export async function getRootTree(options: Object): Promise<Object> {
   const rootTree: Object = await getFlatTree(ROOT_ID)
 

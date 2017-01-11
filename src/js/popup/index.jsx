@@ -9,7 +9,7 @@ import {
   initTrees,
   openOptionsPage
 } from './functions'
-import App from './containers/App'
+import App from './components/App'
 import chromep from '../common/lib/chromePromise'
 import configureStore from '../common/store/configureStore'
 import getOptionsConfig from '../common/lib/getOptionsConfig'

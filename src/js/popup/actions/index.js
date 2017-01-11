@@ -1,11 +1,16 @@
 /* @flow */
 
+import {static as Immutable} from 'seamless-immutable'
+
 import {
   createAction
 } from '../../common/functions'
 import {
+  genBookmarkList,
+  getBookmark,
   getBookmarkType,
   getFlatTree,
+  getFocusTargetTreeIndex,
   getSearchResult,
   isFolder,
   isFolderOpened,
@@ -147,16 +152,6 @@ export const dragStart = (
   updateDragTarget(itemInfo)
 ])
 
-export const openMenu = (
-  menuTarget: Object,
-  {x, y}: {x: number, y: number}
-): Object[] => {
-  return [
-    updateMousePosition({x, y}),
-    updateMenuTarget(menuTarget)
-  ]
-}
-
 
 /**
  * Following functions have side effect
@@ -274,6 +269,100 @@ export const leftClickBookmarkItem = (
   }
 }
 
+export const onPressArrowKey = (
+  arrowDirection: 'down' | 'left' | 'right' | 'up'
+) => {
+  return async (
+    dispatch: Function,
+    getState: Function
+  ): Promise<void> => {
+    const {
+      editorTarget,
+      focusTarget,
+      menuTarget,
+      rootTree,
+      searchKeyword,
+      trees
+    } = getState()
+
+    if (editorTarget || menuTarget) return
+
+    const targetTreeIndex = getFocusTargetTreeIndex(focusTarget, trees)
+
+    switch (arrowDirection) {
+      case 'down':
+      case 'up': {
+        const isUp = arrowDirection === 'up'
+
+        const targetBookmarkList = genBookmarkList(trees[targetTreeIndex], {
+          isSearching: Boolean(searchKeyword),
+          rootTree,
+          treeIndex: targetTreeIndex
+        })
+
+        const lastItemIndex = targetBookmarkList.length - 1
+
+        let nextSelectedIndex
+        if (focusTarget) {
+          const origSelectedIndex = targetBookmarkList
+            .findIndex((itemInfo) => itemInfo.id === focusTarget.id)
+
+          if (isUp) {
+            nextSelectedIndex = origSelectedIndex - 1
+            if (nextSelectedIndex < 0) {
+              nextSelectedIndex = lastItemIndex
+            }
+          } else {
+            nextSelectedIndex = origSelectedIndex + 1
+            if (nextSelectedIndex > lastItemIndex) {
+              nextSelectedIndex = 0
+            }
+          }
+        } else {
+          nextSelectedIndex = isUp ? lastItemIndex : 0
+        }
+
+        dispatch(updateFocusTarget(targetBookmarkList[nextSelectedIndex]))
+        break
+      }
+
+      case 'left':
+        // at least we need one tree
+        if (trees.length > 1) {
+          const targetTree = trees[targetTreeIndex]
+
+          const targetTreeItemInfo = await getBookmark(targetTree.id)
+
+          dispatch([
+            removeTreeInfosFromIndex(targetTreeIndex),
+            updateFocusTarget(targetTreeItemInfo)
+          ])
+        }
+        break
+
+      case 'right':
+        if (focusTarget && isFolder(focusTarget)) {
+          const nextTreeIndex = targetTreeIndex + 1
+          const nextTreeInfo = await getFlatTree(focusTarget.id)
+
+          const nextBookmarkList = genBookmarkList(nextTreeInfo, {
+            isSearching: Boolean(searchKeyword),
+            rootTree,
+            treeIndex: nextTreeIndex
+          })
+
+          dispatch([
+            replaceTreeInfoByIndex(nextTreeIndex, nextTreeInfo),
+            updateFocusTarget(nextBookmarkList[0])
+          ])
+        }
+        break
+
+      default:
+    }
+  }
+}
+
 const openFolder = (
   itemInfo: Object,
   targetTreeIndex: number
@@ -286,6 +375,39 @@ const openFolder = (
     dispatch(
       replaceTreeInfoByIndex(targetTreeIndex, treeInfo)
     )
+  }
+}
+
+export const openMenu = (
+  menuTarget: Object,
+  mousePosition: ?{x: number, y: number}
+) => {
+  return (
+    dispatch: Function
+  ): void => {
+    const actions = []
+
+    if (mousePosition) {
+      actions.push(
+        updateMousePosition(mousePosition)
+      )
+    } else {
+      const el = document.getElementById(menuTarget.id)
+
+      const elOffset = el.getBoundingClientRect()
+
+      actions.push(
+        updateMousePosition({
+          x: elOffset.left,
+          y: elOffset.top
+        })
+      )
+    }
+
+    dispatch([
+      ...actions,
+      updateMenuTarget(menuTarget)
+    ])
   }
 }
 
@@ -309,6 +431,36 @@ export const pasteItem = () => {
     if (isCut) {
       dispatch(updateCutTarget(null))
     }
+  }
+}
+
+export const renewTrees = (oldTrees: Object[]) => {
+  return async (
+    dispatch: Function,
+    getState: Function
+  ): Promise<void> => {
+    const {
+      options,
+      searchKeyword
+    } = getState()
+
+    const newTrees = await Promise.all(
+      // Promise.all doesn't accept immutable array
+      Immutable.asMutable(oldTrees).map((treeInfo) => {
+        if (treeInfo.id === 'search-result') {
+          return getSearchResult(searchKeyword, options)
+        }
+
+        return getFlatTree(treeInfo.id)
+      })
+    )
+
+    dispatch([
+      // to make sure the menu and editor is not activated when bookmark is updating
+      closeMenuCover(),
+
+      updateTrees(newTrees)
+    ])
   }
 }
 
