@@ -277,15 +277,11 @@ export const onPressArrowKey = (
     getState: Function
   ): Promise<void> => {
     const {
-      editorTarget,
       focusTarget,
-      menuTarget,
       rootTree,
       searchKeyword,
       trees
     } = getState()
-
-    if (editorTarget || menuTarget) return
 
     const targetTreeIndex = getFocusTargetTreeIndex(focusTarget, trees)
 

@@ -116,9 +116,7 @@ class App extends PureComponent {
       case 93: { // command
         const isMac = /^Mac/.test(window.navigator.platform)
         const isCtrlKey = evt.keyCode === 17
-        if (isMac !== isCtrlKey) {
-          return
-        }
+        if (isMac && !isCtrlKey) return
 
         evt.preventDefault()
         if (menuTarget) {
