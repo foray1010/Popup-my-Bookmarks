@@ -1,13 +1,20 @@
 @import "../common/variables.css";
 
 :root {
-  --desc-width: 380px;
-  --img-width: 160px;
+  --desc-width: 300px;
+  --img-width: 170px;
   --main-width: calc(var(--desc-width) + var(--img-width));
 }
 
 .desc {
+  line-height: 1.5;
   width: var(--desc-width);
+
+  & > ol {
+    list-style-position: inside;
+    margin: 0;
+    -webkit-padding-start: 0;
+  }
 }
 
 .img {
@@ -27,9 +34,10 @@
 
 .main {
   align-items: center;
+  background-color: var(--oc-gray-0);
   display: flex;
-  height: 50px;
-  margin: auto;
+  height: 70px;
+  margin: var(--golden-gap-4x) auto;
   padding: var(--golden-gap-4x);
   width: var(--main-width);
 }
