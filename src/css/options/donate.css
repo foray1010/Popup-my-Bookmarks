@@ -25,7 +25,6 @@
   align-items: center;
   background-color: var(--oc-gray-0);
   display: flex;
-  height: 70px;
   margin: var(--golden-gap-4x) auto;
   padding: var(--golden-gap-4x);
   width: var(--main-width);

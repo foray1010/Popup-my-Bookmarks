@@ -15,7 +15,7 @@ const ExternalLink = (props) => (
 )
 
 ExternalLink.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   href: PropTypes.string.isRequired
 }
 

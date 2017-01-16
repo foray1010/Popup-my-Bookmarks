@@ -9,14 +9,11 @@ const paypalUrl = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_bu
 
 const Donate = () => (
   <footer styleName='main'>
-    <a
-      styleName='img'
-      href={paypalUrl}
-      target='_blank'
-      rel='noopener noreferrer'
-    >
-      <img src='/img/btn_donateCC_LG.png' alt='' />
-    </a>
+    <section styleName='img'>
+      <ExternalLink href={paypalUrl}>
+        <img src='/img/btn_donateCC_LG.png' alt='' />
+      </ExternalLink>
+    </section>
     <section styleName='desc'>
       If you like Popup my Bookmarks, please consider to:
       <ol>
