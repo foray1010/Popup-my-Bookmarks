@@ -1,0 +1,12 @@
+@import "../common/variables.css";
+
+.main {
+  color: var(--main-color1);
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--main-color2);
+  }
+}

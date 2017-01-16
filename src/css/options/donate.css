@@ -21,17 +21,6 @@
   width: var(--img-width);
 }
 
-.link {
-  color: var(--main-color1);
-  cursor: pointer;
-  font-weight: bold;
-  text-decoration: none;
-
-  &:hover {
-    color: var(--main-color2);
-  }
-}
-
 .main {
   align-items: center;
   background-color: var(--oc-gray-0);

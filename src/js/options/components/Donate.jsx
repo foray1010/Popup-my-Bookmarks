@@ -1,6 +1,8 @@
 import {createElement} from 'react'
 import CSSModules from 'react-css-modules'
 
+import ExternalLink from './ExternalLink'
+
 import styles from '../../../css/options/donate.css'
 
 const paypalUrl = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TP67BBZ7VK934'
@@ -20,45 +22,25 @@ const Donate = () => (
       <ol>
         <li>
           rate it on&nbsp;
-          <a
-            styleName='link'
-            href='http://goo.gl/x9Wlq'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
+          <ExternalLink href='http://goo.gl/x9Wlq'>
             Chrome Web Store
-          </a>
+          </ExternalLink>
         </li>
         <li>
           fork me on&nbsp;
-          <a
-            styleName='link'
-            href='https://github.com/foray1010/Popup-my-Bookmarks'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
+          <ExternalLink href='https://github.com/foray1010/Popup-my-Bookmarks'>
             GitHub
-          </a>
+          </ExternalLink>
         </li>
         <li>
           buy me a drink via&nbsp;
-          <a
-            styleName='link'
-            href={paypalUrl}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
+          <ExternalLink href={paypalUrl}>
             PayPal
-          </a>
+          </ExternalLink>
           &nbsp;or&nbsp;
-          <a
-            styleName='link'
-            href='bitcoin:16sJwjWsUWrFn5iAGGBCiQbqUD4Pb5YdDR'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
+          <ExternalLink href='bitcoin:16sJwjWsUWrFn5iAGGBCiQbqUD4Pb5YdDR'>
             Bitcoin
-          </a>
+          </ExternalLink>
           &nbsp;:)
         </li>
       </ol>
