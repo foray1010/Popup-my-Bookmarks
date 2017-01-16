@@ -54,7 +54,7 @@
     "eslint-config-foray1010": "^3.0.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "flow-bin": "^0.37.4",
-    "fs-extra": "^1.0.0",
+    "fs-extra": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-filter": "^5.0.0",
     "gulp-image-grayscale": "^2.0.1",
