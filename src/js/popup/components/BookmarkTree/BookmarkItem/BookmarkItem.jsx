@@ -282,30 +282,24 @@ class BookmarkItem extends PureComponent {
         ref={(ref) => {
           this.baseEl = ref
         }}
+        styleName={thisStyleName}
         id={itemInfo.id}
         draggable={isDraggable}
+        onClick={this.handleClick}
+        onContextMenu={this.handleContextMenu}
         onDragEnd={this.handleDragEnd}
         onDragEnter={this.handleDragEnter}
         onDragStart={this.handleDragStart}
+        onMouseEnter={this.handleMouse}
+        onMouseLeave={this.handleMouse}
       >
-        <a
-          styleName={thisStyleName}
-          href={itemInfo.url || ''}
-          draggable={false}
-          tabIndex='-1'
-          onClick={this.handleClick}
-          onContextMenu={this.handleContextMenu}
-          onMouseEnter={this.handleMouse}
-          onMouseLeave={this.handleMouse}
-        >
-          <img
-            styleName='icon'
-            src={iconSrc}
-            alt=''
-            hidden={iconSrc === null}
-          />
-          <span styleName='title'>{itemTitle}</span>
-        </a>
+        <img
+          styleName='icon'
+          src={iconSrc}
+          alt=''
+          hidden={iconSrc === null}
+        />
+        <span styleName='title'>{itemTitle}</span>
       </li>
     )
   }
