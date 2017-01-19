@@ -5,9 +5,9 @@ import _forEach from 'lodash/forEach'
 const sheet: Object = genStyleEl().sheet
 
 function genStyleEl(): Object {
-  const styleEl: Object = document.createElement('style')
+  const styleEl: Object = window.document.createElement('style')
 
-  document.head.appendChild(styleEl)
+  window.document.head.appendChild(styleEl)
 
   return styleEl
 }

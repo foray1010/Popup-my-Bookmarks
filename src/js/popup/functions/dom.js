@@ -16,7 +16,7 @@ export function getBookmarkListEls(): Object[] {
     const selector: string = args
       .map(getClassSelector)
       .join(' > ')
-    const els: NodeList<*> = document.querySelectorAll(selector)
+    const els: NodeList<*> = window.document.querySelectorAll(selector)
     return Array.from(els)
   }
 
@@ -59,7 +59,7 @@ function getClassSelector(className: string): string {
 }
 
 export function resetBodySize(): void {
-  const bodyStyle: Object = document.body.style
+  const bodyStyle: Object = window.document.body.style
 
   // reset to original size
   bodyStyle.height = ''

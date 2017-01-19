@@ -388,7 +388,7 @@ export const openMenu = (
         updateMousePosition(mousePosition)
       )
     } else {
-      const el = document.getElementById(menuTarget.id)
+      const el: Object = window.document.getElementById(menuTarget.id)
 
       const elOffset = el.getBoundingClientRect()
 
