@@ -25,6 +25,7 @@ import styles from '../../../../../css/popup/bookmark-item.css'
 
 class BookmarkItem extends PureComponent {
   componentDidMount() {
+    this.afterMount()
     this.afterRender()
   }
 
@@ -70,6 +71,13 @@ class BookmarkItem extends PureComponent {
     }
 
     return tooltipArr.join('\n')
+  }
+
+  afterMount() {
+    window.requestAnimationFrame(() => {
+      // temp fix for https://github.com/facebook/react/issues/8529
+      this.baseEl.addEventListener('auxclick', this.handleClick)
+    })
   }
 
   afterRender() {
