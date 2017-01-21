@@ -13,6 +13,9 @@ import {
   scrollIntoViewIfNeeded
 } from '../../../functions'
 import {
+  requestAnimationFrame
+} from '../../../../common/lib/decoraters'
+import {
   ROOT_ID,
   TYPE_BOOKMARK,
   TYPE_FOLDER,
@@ -73,27 +76,25 @@ class BookmarkItem extends PureComponent {
     return tooltipArr.join('\n')
   }
 
+  @requestAnimationFrame
   afterMount() {
-    window.requestAnimationFrame(() => {
-      // temp fix for https://github.com/facebook/react/issues/8529
-      this.baseEl.addEventListener('auxclick', this.handleClick)
-    })
+    // temp fix for https://github.com/facebook/react/issues/8529
+    this.baseEl.addEventListener('auxclick', this.handleClick)
   }
 
-  afterRender() {
-    window.requestAnimationFrame(async () => {
-      const {itemInfo} = this.props
+  @requestAnimationFrame
+  async afterRender() {
+    const {itemInfo} = this.props
 
-      const bookmarkType = getBookmarkType(itemInfo)
+    const bookmarkType = getBookmarkType(itemInfo)
 
-      if (bookmarkType === TYPE_BOOKMARK) {
-        const tooltip = await this.getTooltip()
+    if (bookmarkType === TYPE_BOOKMARK) {
+      const tooltip = await this.getTooltip()
 
-        if (this.baseEl && tooltip) {
-          this.baseEl.title = tooltip
-        }
+      if (this.baseEl && tooltip) {
+        this.baseEl.title = tooltip
       }
-    })
+    }
   }
 
   @autobind
