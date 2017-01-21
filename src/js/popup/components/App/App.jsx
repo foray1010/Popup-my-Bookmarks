@@ -164,7 +164,7 @@ class App extends PureComponent {
   }
 
   @debounce(30)
-  async keyboardArrowHandler(arrowDirection) {
+  keyboardArrowHandler(arrowDirection) {
     const {
       onPressArrowKey
     } = this.props

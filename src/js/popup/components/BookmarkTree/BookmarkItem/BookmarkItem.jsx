@@ -176,7 +176,7 @@ class BookmarkItem extends PureComponent {
   }
 
   @debounce(50)
-  async _handleDragEnter(evt) {
+  _handleDragEnter(evt) {
     const {
       dragOver,
       itemInfo,
