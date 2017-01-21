@@ -388,16 +388,17 @@ export const openMenu = (
         updateMousePosition(mousePosition)
       )
     } else {
-      const el: Object = window.document.getElementById(menuTarget.id)
+      const el = document.getElementById(menuTarget.id)
+      if (el) {
+        const elOffset = el.getBoundingClientRect()
 
-      const elOffset = el.getBoundingClientRect()
-
-      actions.push(
-        updateMousePosition({
-          x: elOffset.left,
-          y: elOffset.top
-        })
-      )
+        actions.push(
+          updateMousePosition({
+            x: elOffset.left,
+            y: elOffset.top
+          })
+        )
+      }
     }
 
     dispatch([
