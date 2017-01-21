@@ -7,11 +7,7 @@ import {
   isFolder,
   resetBodySize
 } from '../../functions'
-import {
-  TYPE_BOOKMARK,
-  TYPE_NO_BOOKMARK,
-  TYPE_ROOT_FOLDER
-} from '../../constants'
+import * as CST from '../../constants'
 import MenuArea from './MenuArea'
 
 import styles from '../../../../css/popup/menu.css'
@@ -38,16 +34,16 @@ class Menu extends PureComponent {
     } = this.props
 
     switch (getBookmarkType(menuTarget)) {
-      case TYPE_ROOT_FOLDER:
+      case CST.TYPE_ROOT_FOLDER:
         return [false, true, true, true, true]
 
-      case TYPE_BOOKMARK:
+      case CST.TYPE_BOOKMARK:
         if (isSearching) {
           return [false, false, false, true, true]
         }
         break
 
-      case TYPE_NO_BOOKMARK:
+      case CST.TYPE_NO_BOOKMARK:
         return [true, true, false, false, true]
 
       default:
@@ -60,22 +56,22 @@ class Menu extends PureComponent {
     const {menuTarget} = this.props
 
     const partialMenuPattern = [
-      ['cut', 'copy', 'paste'],
-      ['addPage', 'addFolder', 'addSeparator'],
-      ['sortByName']
+      [CST.MENU_CUT, CST.MENU_COPY, CST.MENU_PASTE],
+      [CST.MENU_ADD_PAGE, CST.MENU_ADD_FOLDER, CST.MENU_ADD_SEPARATOR],
+      [CST.MENU_SORT_BY_NAME]
     ]
 
     if (isFolder(menuTarget)) {
       return Immutable([
-        ['openAll', 'openAllInN', 'openAllInI'],
-        ['rename', 'del'],
+        [CST.MENU_OPEN_ALL, CST.MENU_OPEN_ALL_IN_N, CST.MENU_OPEN_ALL_IN_I],
+        [CST.MENU_RENAME, CST.MENU_DEL],
         ...partialMenuPattern
       ])
     }
 
     return Immutable([
-      ['openInB', 'openInN', 'openInI'],
-      ['edit', 'del'],
+      [CST.MENU_OPEN_IN_B, CST.MENU_OPEN_IN_N, CST.MENU_OPEN_IN_I],
+      [CST.MENU_EDIT, CST.MENU_DEL],
       ...partialMenuPattern
     ])
   }

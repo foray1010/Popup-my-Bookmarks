@@ -10,9 +10,7 @@ import {
   removeBookmark,
   sortByName
 } from '../../functions'
-import {
-  SEPARATE_THIS_URL
-} from '../../constants'
+import * as CST from '../../constants'
 
 import styles from '../../../../css/popup/menu-item.css'
 
@@ -37,23 +35,23 @@ class MenuItem extends PureComponent {
     if (isUnclickable) return
 
     switch (menuItemKey) {
-      case 'openAll':
-      case 'openInB':
+      case CST.MENU_OPEN_ALL:
+      case CST.MENU_OPEN_IN_B:
         await openMultipleBookmarks(menuTarget, {
           isWarnWhenOpenMany: options.warnOpenMany
         })
         break
 
-      case 'openAllInN':
-      case 'openInN':
+      case CST.MENU_OPEN_ALL_IN_N:
+      case CST.MENU_OPEN_IN_N:
         await openMultipleBookmarks(menuTarget, {
           isNewWindow: true,
           isWarnWhenOpenMany: options.warnOpenMany
         })
         break
 
-      case 'openAllInI':
-      case 'openInI':
+      case CST.MENU_OPEN_ALL_IN_I:
+      case CST.MENU_OPEN_IN_I:
         await openMultipleBookmarks(menuTarget, {
           isNewWindow: true,
           isIncognito: true,
@@ -61,44 +59,44 @@ class MenuItem extends PureComponent {
         })
         break
 
-      case 'rename':
-      case 'edit':
+      case CST.MENU_RENAME:
+      case CST.MENU_EDIT:
         updateEditorTarget(menuTarget)
         break
 
-      case 'del':
+      case CST.MENU_DEL:
         await removeBookmark(menuTarget)
         break
 
-      case 'cut':
+      case CST.MENU_CUT:
         updateCutTarget(menuTarget)
         break
 
-      case 'copy':
+      case CST.MENU_COPY:
         updateCopyTarget(menuTarget)
         break
 
-      case 'paste':
+      case CST.MENU_PASTE:
         await pasteItem()
         break
 
-      case 'addPage':
+      case CST.MENU_ADD_PAGE:
         await addCurrentPage(menuTarget)
         break
 
-      case 'addFolder':
+      case CST.MENU_ADD_FOLDER:
         addFolder(menuTarget)
         break
 
-      case 'addSeparator':
+      case CST.MENU_ADD_SEPARATOR:
         await createBookmarkBelowTarget(
           menuTarget,
           '- '.repeat(42),
-          SEPARATE_THIS_URL
+          CST.SEPARATE_THIS_URL
         )
         break
 
-      case 'sortByName':
+      case CST.MENU_SORT_BY_NAME:
         await sortByName(menuTarget.parentId)
         break
 
