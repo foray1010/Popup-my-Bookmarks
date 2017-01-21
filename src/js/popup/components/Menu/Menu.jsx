@@ -94,24 +94,25 @@ class Menu extends PureComponent {
     if (!isHidden) {
       const body = document.body
       const html = document.documentElement
-      const menuHeight = this.baseEl.offsetHeight
-      const menuWidth = this.baseEl.offsetWidth
+      if (body && html) {
+        const bodyWidth = body.offsetWidth
+        const htmlHeight = html.clientHeight
+        const menuHeight = this.baseEl.offsetHeight
+        const menuWidth = this.baseEl.offsetWidth
 
-      const bodyWidth = body.offsetWidth
-      const htmlHeight = html.clientHeight
+        if (menuHeight > htmlHeight) {
+          body.style.height = menuHeight + 'px'
+        }
 
-      const bottomPos = htmlHeight - menuHeight - mousePosition.y
-      const rightPos = bodyWidth - menuWidth - mousePosition.x
+        if (menuWidth > bodyWidth) {
+          body.style.width = menuWidth + 'px'
+        }
 
-      bottomPosPx = Math.max(bottomPos, 0) + 'px'
-      rightPosPx = Math.max(rightPos, 0) + 'px'
+        const bottomPos = htmlHeight - menuHeight - mousePosition.y
+        const rightPos = bodyWidth - menuWidth - mousePosition.x
 
-      if (menuHeight > htmlHeight) {
-        body.style.height = menuHeight + 'px'
-      }
-
-      if (menuWidth > bodyWidth) {
-        body.style.width = menuWidth + 'px'
+        bottomPosPx = Math.max(bottomPos, 0) + 'px'
+        rightPosPx = Math.max(rightPos, 0) + 'px'
       }
     }
 
