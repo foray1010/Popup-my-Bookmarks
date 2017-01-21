@@ -99,6 +99,9 @@ class BookmarkItem extends PureComponent {
 
   @autobind
   async handleClick(evt) {
+    // only allow left and middle click
+    if (![0, 1].includes(evt.button)) return
+
     evt.preventDefault()
 
     const {

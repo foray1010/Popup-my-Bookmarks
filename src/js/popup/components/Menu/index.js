@@ -11,6 +11,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   isSearching: Boolean(state.searchKeyword),
+  menuPattern: state.menuPattern,
   menuTarget: state.menuTarget,
   mousePosition: state.mousePosition
 })

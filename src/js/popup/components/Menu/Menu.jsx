@@ -1,10 +1,8 @@
 import {createElement, PropTypes, PureComponent} from 'react'
-import {static as Immutable} from 'seamless-immutable'
 import CSSModules from 'react-css-modules'
 
 import {
   getBookmarkType,
-  isFolder,
   resetBodySize
 } from '../../functions'
 import * as CST from '../../constants'
@@ -52,30 +50,6 @@ class Menu extends PureComponent {
     return [false, false, false, false, false]
   }
 
-  getMenuPattern() {
-    const {menuTarget} = this.props
-
-    const partialMenuPattern = [
-      [CST.MENU_CUT, CST.MENU_COPY, CST.MENU_PASTE],
-      [CST.MENU_ADD_PAGE, CST.MENU_ADD_FOLDER, CST.MENU_ADD_SEPARATOR],
-      [CST.MENU_SORT_BY_NAME]
-    ]
-
-    if (isFolder(menuTarget)) {
-      return Immutable([
-        [CST.MENU_OPEN_ALL, CST.MENU_OPEN_ALL_IN_N, CST.MENU_OPEN_ALL_IN_I],
-        [CST.MENU_RENAME, CST.MENU_DEL],
-        ...partialMenuPattern
-      ])
-    }
-
-    return Immutable([
-      [CST.MENU_OPEN_IN_B, CST.MENU_OPEN_IN_N, CST.MENU_OPEN_IN_I],
-      [CST.MENU_EDIT, CST.MENU_DEL],
-      ...partialMenuPattern
-    ])
-  }
-
   setMenuPosition() {
     const {
       menuTarget,
@@ -117,7 +91,10 @@ class Menu extends PureComponent {
   }
 
   render() {
-    const {menuTarget} = this.props
+    const {
+      menuPattern,
+      menuTarget
+    } = this.props
 
     const isHidden = !menuTarget
 
@@ -125,7 +102,6 @@ class Menu extends PureComponent {
 
     if (menuTarget) {
       const isMenuAreasHidden = this.getIsMenuAreasHidden()
-      const menuPattern = this.getMenuPattern()
 
       menuItems = menuPattern.map((menuAreaKeys, menuAreaIndex) => (
         <MenuArea
@@ -152,6 +128,9 @@ class Menu extends PureComponent {
 
 Menu.propTypes = {
   isSearching: PropTypes.bool.isRequired,
+  menuPattern: PropTypes.arrayOf(
+    PropTypes.arrayOf(PropTypes.string)
+  ).isRequired,
   menuTarget: PropTypes.object,
   mousePosition: PropTypes.objectOf(PropTypes.number).isRequired
 }
