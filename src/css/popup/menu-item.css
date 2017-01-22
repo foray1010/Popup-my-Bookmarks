@@ -9,8 +9,7 @@
     @apply --grey-list-item;
   }
 
-  &:not(.unclickable):hover,
-  &:not(.unclickable):focus {
+  &.selected:not(.unclickable) {
     @apply --highlight-list-item;
   }
 }

@@ -9,6 +9,9 @@ import {
   setPredefinedStyleSheet,
   updateLastUsedTreeIds
 } from '../../functions'
+import {
+  requestAnimationFrame
+} from '../../../common/lib/decoraters'
 import Main from './Main'
 
 class App extends PureComponent {
@@ -19,6 +22,7 @@ class App extends PureComponent {
   }
 
   componentDidMount() {
+    this.afterMount()
     this.initBookmarkEvent()
   }
 
@@ -37,6 +41,14 @@ class App extends PureComponent {
     }
   }
 
+  @requestAnimationFrame
+  afterMount() {
+    const body = document.body
+    body.addEventListener('contextmenu', this.handleContextMenu)
+    body.addEventListener('keydown', this.handleKeyDown)
+    body.addEventListener('mousedown', this.handleMouseDown)
+  }
+
   handleContextMenu(evt) {
     // allow native context menu if it is an input element
     if (evt.target.tagName === 'INPUT') {
@@ -50,28 +62,35 @@ class App extends PureComponent {
   async handleEnter(evt) {
     const {
       focusTarget,
-      searchKeyword,
+      menuTarget,
       options,
+      searchKeyword,
+      selectedMenuItem,
       trees
     } = this.props
 
-    let itemInfo
-    if (focusTarget) {
-      itemInfo = focusTarget
-    } else if (searchKeyword) {
-      itemInfo = trees[0].children[0]
-    }
+    if (menuTarget) {
+      if (selectedMenuItem) {
+        const el = document.getElementById(selectedMenuItem)
+        if (el) el.click()
+      }
+    } else {
+      let itemInfo
+      if (focusTarget) {
+        itemInfo = focusTarget
+      } else if (searchKeyword) {
+        itemInfo = trees[0].children[0]
+      }
 
-    if (itemInfo) {
-      const clickType = getClickType(evt)
-      await openBookmark(itemInfo, clickType, options)
+      if (itemInfo) {
+        const clickType = getClickType(evt)
+        await openBookmark(itemInfo, clickType, options)
+      }
     }
   }
 
   @autobind
   handleKeyDown(evt) {
-    evt.persist()
-
     const {
       closeMenu,
       editorTarget,
@@ -89,8 +108,6 @@ class App extends PureComponent {
       case 38: // up
       case 39: // right
       case 40: { // down
-        if (menuTarget) return
-
         const mapping = {
           9: evt.shiftKey ? 'up' : 'down',
           37: 'left',
@@ -105,8 +122,6 @@ class App extends PureComponent {
       }
 
       case 13: // enter
-        if (menuTarget) return
-
         evt.preventDefault()
         this.handleEnter(evt)
         break
@@ -174,11 +189,7 @@ class App extends PureComponent {
 
   render() {
     return (
-      <Main
-        onContextMenu={this.handleContextMenu}
-        onKeyDown={this.handleKeyDown}
-        onMouseDown={this.handleMouseDown}
-      />
+      <Main />
     )
   }
 }
@@ -193,6 +204,7 @@ App.propTypes = {
   options: PropTypes.object.isRequired,
   renewTrees: PropTypes.func.isRequired,
   searchKeyword: PropTypes.string.isRequired,
+  selectedMenuItem: PropTypes.string,
   trees: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 

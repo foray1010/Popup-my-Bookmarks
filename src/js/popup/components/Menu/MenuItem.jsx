@@ -106,8 +106,36 @@ class MenuItem extends PureComponent {
     closeMenu()
   }
 
+  @autobind
+  handleMouseEnter() {
+    const {
+      menuItemKey,
+      selectedMenuItem,
+      updateSelectedMenuItem
+    } = this.props
+
+    if (selectedMenuItem !== menuItemKey) {
+      updateSelectedMenuItem(menuItemKey)
+    }
+  }
+
+  @autobind
+  handleMouseLeave() {
+    const {
+      menuItemKey,
+      selectedMenuItem,
+      updateSelectedMenuItem
+    } = this.props
+
+    if (selectedMenuItem === menuItemKey) {
+      updateSelectedMenuItem(null)
+    }
+  }
+
+
   render() {
     const {
+      isSelected,
       isUnclickable,
       menuItemKey
     } = this.props
@@ -115,18 +143,20 @@ class MenuItem extends PureComponent {
     const thisStyleName = classNames(
       'main',
       {
+        selected: isSelected,
         unclickable: isUnclickable
       }
     )
 
     return (
-      <li>
-        <div
-          styleName={thisStyleName}
-          onClick={this.handleClick}
-        >
-          {chrome.i18n.getMessage(menuItemKey)}
-        </div>
+      <li
+        styleName={thisStyleName}
+        id={menuItemKey}
+        onClick={this.handleClick}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+      >
+        {chrome.i18n.getMessage(menuItemKey)}
       </li>
     )
   }
@@ -135,14 +165,17 @@ class MenuItem extends PureComponent {
 MenuItem.propTypes = {
   addFolder: PropTypes.func.isRequired,
   closeMenu: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
   isUnclickable: PropTypes.bool.isRequired,
   menuItemKey: PropTypes.string.isRequired,
   menuTarget: PropTypes.object.isRequired,
   options: PropTypes.object.isRequired,
   pasteItem: PropTypes.func.isRequired,
+  selectedMenuItem: PropTypes.string,
   updateCopyTarget: PropTypes.func.isRequired,
   updateCutTarget: PropTypes.func.isRequired,
-  updateEditorTarget: PropTypes.func.isRequired
+  updateEditorTarget: PropTypes.func.isRequired,
+  updateSelectedMenuItem: PropTypes.func.isRequired
 }
 
 export default CSSModules(MenuItem, styles, {allowMultiple: true})

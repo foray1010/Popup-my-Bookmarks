@@ -6,7 +6,8 @@ import {
   pasteItem,
   updateCopyTarget,
   updateCutTarget,
-  updateEditorTarget
+  updateEditorTarget,
+  updateSelectedMenuItem
 } from '../../actions'
 import {
   getBookmarkType
@@ -22,14 +23,16 @@ const mapDispatchToProps = {
   pasteItem,
   updateCopyTarget,
   updateCutTarget,
-  updateEditorTarget
+  updateEditorTarget,
+  updateSelectedMenuItem
 }
 
 const mapStateToProps = (state, ownProps) => {
   const {
     copyTarget,
     cutTarget,
-    menuTarget
+    menuTarget,
+    selectedMenuItem
   } = state
   const {menuItemKey} = ownProps
 
@@ -53,9 +56,11 @@ const mapStateToProps = (state, ownProps) => {
   return {
     copyTarget: copyTarget,
     cutTarget: cutTarget,
+    isSelected: selectedMenuItem === menuItemKey,
     isUnclickable: isUnclickable,
     menuTarget: menuTarget,
-    options: state.options
+    options: state.options,
+    selectedMenuItem: selectedMenuItem
   }
 }
 

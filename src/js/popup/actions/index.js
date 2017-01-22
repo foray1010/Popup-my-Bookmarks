@@ -1,6 +1,7 @@
 /* @flow */
 
 import {static as Immutable} from 'seamless-immutable'
+import _flatten from 'lodash/flatten'
 
 import {
   createAction
@@ -93,6 +94,11 @@ export const updateMousePosition = createAction(
 export const updateSearchKeyword = createAction(
   CST.UPDATE_SEARCH_KEYWORD,
   (searchKeyword: string): string => searchKeyword
+)
+
+export const updateSelectedMenuItem = createAction(
+  CST.UPDATE_SELECTED_MENU_ITEM,
+  (selectedMenuItem: ?string): ?string => selectedMenuItem
 )
 
 export const updateTrees = createAction(
@@ -256,6 +262,27 @@ export const leftClickBookmarkItem = (
 export const onPressArrowKey = (
   arrowDirection: 'down' | 'left' | 'right' | 'up'
 ) => {
+  return (
+    dispatch: Function,
+    getState: Function
+  ): void => {
+    const {
+      menuTarget
+    } = getState()
+
+    if (menuTarget) {
+      dispatch(
+        onPressArrowKeyOnMenu(arrowDirection)
+      )
+    } else {
+      dispatch(
+        onPressArrowKeyOnBookmarkTree(arrowDirection)
+      )
+    }
+  }
+}
+
+export const onPressArrowKeyOnBookmarkTree = (arrowDirection: string) => {
   return async (
     dispatch: Function,
     getState: Function
@@ -337,6 +364,50 @@ export const onPressArrowKey = (
           ])
         }
         break
+
+      default:
+    }
+  }
+}
+
+export const onPressArrowKeyOnMenu = (arrowDirection: string) => {
+  return (
+    dispatch: Function,
+    getState: Function
+  ): void => {
+    const {
+      menuPattern,
+      selectedMenuItem
+    } = getState()
+
+    switch (arrowDirection) {
+      case 'down':
+      case 'up': {
+        const flattenMenuPattern = _flatten(menuPattern)
+
+        const lastItemIndex = flattenMenuPattern.length - 1
+        const origSelectedIndex = flattenMenuPattern.indexOf(selectedMenuItem)
+
+        const isUp = arrowDirection === 'up'
+
+        let nextSelectedIndex
+        if (isUp) {
+          nextSelectedIndex = origSelectedIndex - 1
+          if (nextSelectedIndex < 0) {
+            nextSelectedIndex = lastItemIndex
+          }
+        } else {
+          nextSelectedIndex = origSelectedIndex + 1
+          if (nextSelectedIndex > lastItemIndex) {
+            nextSelectedIndex = 0
+          }
+        }
+
+        dispatch(
+          updateSelectedMenuItem(flattenMenuPattern[nextSelectedIndex])
+        )
+        break
+      }
 
       default:
     }

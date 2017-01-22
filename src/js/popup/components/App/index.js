@@ -21,6 +21,7 @@ const mapStateToProps = (state) => ({
   menuTarget: state.menuTarget,
   options: state.options,
   searchKeyword: state.searchKeyword,
+  selectedMenuItem: state.selectedMenuItem,
   trees: state.trees
 })
 

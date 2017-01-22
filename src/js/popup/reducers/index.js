@@ -221,6 +221,26 @@ const rootReducer: Function = combineReducers({
     }
   },
 
+  selectedMenuItem(
+    state: ?string = null,
+    action: Object
+  ): ?string {
+    switch (action.type) {
+      case CST.UPDATE_MENU_TARGET: {
+        const menuTarget = action.payload
+        if (!menuTarget) return null
+
+        return state
+      }
+
+      case CST.UPDATE_SELECTED_MENU_ITEM:
+        return action.payload
+
+      default:
+        return state
+    }
+  },
+
   trees(
     state: Object[] = Immutable([]),
     action: Object
