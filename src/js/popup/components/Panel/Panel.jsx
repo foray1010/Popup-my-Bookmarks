@@ -9,14 +9,12 @@ import styles from '../../../../css/popup/panel.css'
 const Panel = (props) => {
   const {trees} = props
 
-  const panelItems = trees.reduce((accumulator, treeInfo, treeIndex) => {
-    return accumulator.concat(
-      <BookmarkTree
-        key={treeInfo.id}
-        treeIndex={treeIndex}
-      />
-    )
-  }, [])
+  const panelItems = trees.map((treeInfo, treeIndex) => (
+    <BookmarkTree
+      key={treeInfo.id}
+      treeIndex={treeIndex}
+    />
+  ))
 
   const mainPanelItems = panelItems.filter((x, treeIndex) => treeIndex % 2 === 0)
   const subPanelItems = panelItems.filter((x, treeIndex) => treeIndex % 2 === 1)
