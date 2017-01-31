@@ -46,7 +46,7 @@
   "devDependencies": {
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.3",
-    "babel-preset-foray1010": "^2.0.0",
+    "babel-preset-foray1010": "^3.0.0",
     "bluebird": "^3.3.1",
     "co": "^4.6.0",
     "cross-env": "^3.0.0",
