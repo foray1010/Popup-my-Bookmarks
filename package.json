@@ -73,7 +73,6 @@
     "pug-loader": "^2.3.0",
     "style-loader": "^0.13.1",
     "stylelint-config-foray1010": "^1.0.2",
-    "tcomb": "^3.2.16",
     "transifex": "^1.4.4",
     "webpack": "^2.2.1",
     "webpack-stream": "^3.1.0",
