@@ -15,4 +15,4 @@ if (process.env.NODE_ENV === 'development') {
   manifest.name += ' (dev)'
 }
 
-return manifest
+module.exports = manifest
