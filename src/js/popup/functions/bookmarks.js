@@ -340,9 +340,9 @@ export async function openMultipleBookmarks(
     isIncognito = false,
     isWarnWhenOpenMany = false
   }: {
-    isNewWindow: boolean,
-    isIncognito: boolean,
-    isWarnWhenOpenMany: boolean
+    isNewWindow?: boolean,
+    isIncognito?: boolean,
+    isWarnWhenOpenMany?: boolean
   }
 ): Promise<void> {
   const urlList: string[] = []
