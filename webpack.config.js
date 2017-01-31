@@ -113,6 +113,9 @@ switch (process.env.NODE_ENV) {
           filename: path.join('css', '[name].css'),
           allChunks: true
         }),
+        new webpack.LoaderOptionsPlugin({
+          minimize: true
+        }),
         new webpack.optimize.UglifyJsPlugin({
           compress: {
             drop_console: true,
