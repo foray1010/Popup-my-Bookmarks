@@ -1,26 +1,20 @@
 'use strict'
 
-const cssnext = require('postcss-cssnext')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const mergeAndConcat = require('merge-and-concat')
 const OptimizeJsPlugin = require('optimize-js-plugin')
 const path = require('path')
-const postcssImport = require('postcss-import')
 const querystring = require('querystring')
-const validate = require('webpack-validator')
 const webpack = require('webpack')
-const YAML = require('yamljs')
 
 const {outputDir, sourceDir} = require('./config')
 
-const manifest = YAML.load(
-  path.join(sourceDir, 'manifest.yml')
-)
+const manifest = require('./manifest')
 
 const webpackConfig = {
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
@@ -40,19 +34,11 @@ const webpackConfig = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
-    new webpack.optimize.CommonsChunkPlugin(path.join('js', 'common.js')),
-    new webpack.optimize.OccurenceOrderPlugin(true)
-  ],
-  postcss: () => [
-    postcssImport(),
-    cssnext({
-      autoprefixer: {
-        browsers: `Chrome >= ${manifest.minimum_chrome_version}`
-      }
-    })
+    new webpack.optimize.CommonsChunkPlugin('common'),
+    new webpack.optimize.OccurrenceOrderPlugin(true)
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
   stats: {
     timings: true,
@@ -89,7 +75,7 @@ switch (process.env.NODE_ENV) {
     mergeAndConcat(webpackConfig, {
       devtool: 'source-map',
       module: {
-        loaders: [
+        rules: [
           {
             test: /\.css$/,
             loaders: [
@@ -109,21 +95,24 @@ switch (process.env.NODE_ENV) {
   case 'production':
     mergeAndConcat(webpackConfig, {
       module: {
-        loaders: [
+        rules: [
           {
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract([
-              `css-loader?${cssLoaderConfigQS}`,
-              'postcss-loader'
-            ])
+            use: ExtractTextPlugin.extract({
+              fallbackLoader: 'style-loader',
+              loader: [
+                `css-loader?${cssLoaderConfigQS}`,
+                'postcss-loader'
+              ]
+            })
           }
         ]
       },
       plugins: [
-        new ExtractTextPlugin(path.join('css', '[name].css'), {
+        new ExtractTextPlugin({
+          filename: path.join('css', '[name].css'),
           allChunks: true
         }),
-        new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
           compress: {
             drop_console: true,
@@ -144,4 +133,4 @@ switch (process.env.NODE_ENV) {
   default:
 }
 
-module.exports = validate(webpackConfig)
+module.exports = webpackConfig

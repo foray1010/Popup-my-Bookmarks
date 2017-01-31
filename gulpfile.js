@@ -11,10 +11,10 @@ const path = require('path')
 const plumber = require('gulp-plumber')
 const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
-const YAML = require('yamljs')
 const zip = require('gulp-zip')
 
 const {outputDir, sourceDir} = require('./config')
+const manifest = require('./manifest')
 const pkg = require('./package')
 const webpackConfig = require('./webpack.config')
 
@@ -22,25 +22,10 @@ const webpackConfig = require('./webpack.config')
 bluebird.promisifyAll(fs)
 
 function* buildManifest() {
-  const manifest = getManifest()
-
   yield fs.writeJsonAsync(
     path.join(outputDir, 'manifest.json'),
     manifest
   )
-}
-
-function getManifest() {
-  const manifest = YAML.load(
-    path.join(sourceDir, 'manifest.yml')
-  )
-
-  manifest.version = pkg.version
-  if (process.env.NODE_ENV === 'development') {
-    manifest.name += ' (dev)'
-  }
-
-  return manifest
 }
 
 function runWebpack() {
