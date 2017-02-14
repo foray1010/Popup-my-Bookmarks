@@ -1,5 +1,3 @@
-/* @flow */
-
 import {combineReducers} from 'redux'
 import {static as Immutable} from 'seamless-immutable'
 
@@ -11,9 +9,9 @@ import {
 
 const rootReducer: Function = combineReducers({
   options(
-    state: Object = Immutable({}),
-    action: Object
-  ): Object {
+    state = Immutable({}),
+    action
+  ) {
     switch (action.type) {
       case UPDATE_OPTIONS:
         return action.payload
@@ -31,15 +29,15 @@ const rootReducer: Function = combineReducers({
   },
 
   optionsConfig(
-    state: Object = Immutable({})
-  ): Object {
+    state = Immutable({})
+  ) {
     return state
   },
 
   selectedNavModule(
-    state: ?string = null,
-    action: Object
-  ): ?string {
+    state = null,
+    action
+  ) {
     switch (action.type) {
       case SELECT_NAV_MODULE:
         return action.payload

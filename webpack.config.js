@@ -18,11 +18,11 @@ const webpackConfig = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        use: 'babel-loader'
       },
       {
         test: /\.pug$/,
-        loader: 'pug-loader'
+        use: 'pug-loader'
       }
     ]
   },
@@ -49,10 +49,7 @@ const webpackConfig = {
 for (const appName of ['options', 'popup']) {
   mergeAndConcat(webpackConfig, {
     entry: {
-      [appName]: [
-        'babel-polyfill',
-        `./${sourceDir}/js/${appName}`
-      ]
+      [appName]: `./${sourceDir}/js/${appName}`
     },
     plugins: [
       new HtmlWebpackPlugin({
@@ -78,7 +75,7 @@ switch (process.env.NODE_ENV) {
         rules: [
           {
             test: /\.css$/,
-            loaders: [
+            use: [
               'style-loader?' + querystring.stringify({
                 sourceMap: true
               }),
@@ -99,8 +96,8 @@ switch (process.env.NODE_ENV) {
           {
             test: /\.css$/,
             use: ExtractTextPlugin.extract({
-              fallbackLoader: 'style-loader',
-              loader: [
+              fallback: 'style-loader',
+              use: [
                 `css-loader?${cssLoaderConfigQS}`,
                 'postcss-loader'
               ]

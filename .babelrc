@@ -1,5 +1,5 @@
 {
   "presets": [
-    "babel-preset-foray1010/react"
+    "babel-preset-foray1010/chromeExtension"
   ]
 }

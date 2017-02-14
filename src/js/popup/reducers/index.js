@@ -1,5 +1,3 @@
-/* @flow */
-
 import {combineReducers} from 'redux'
 import {static as Immutable} from 'seamless-immutable'
 
@@ -12,9 +10,9 @@ import * as CST from '../constants'
 
 const rootReducer: Function = combineReducers({
   copyTarget(
-    state: ?Object = null,
-    action: Object
-  ): ?Object {
+    state = null,
+    action
+  ) {
     switch (action.type) {
       case CST.UPDATE_COPY_TARGET:
         return action.payload
@@ -28,9 +26,9 @@ const rootReducer: Function = combineReducers({
   },
 
   cutTarget(
-    state: ?Object = null,
-    action: Object
-  ): ?Object {
+    state = null,
+    action
+  ) {
     switch (action.type) {
       case CST.UPDATE_COPY_TARGET:
         return null
@@ -44,17 +42,14 @@ const rootReducer: Function = combineReducers({
   },
 
   dragIndicator(
-    state: ?Object = null,
-    action: Object
-  ): ?Object {
+    state = null,
+    action
+  ) {
     switch (action.type) {
       case CST.PUT_DRAG_INDICATOR: {
         const {
           isPlaceAfter,
           itemInfo
-        }: {
-          isPlaceAfter: boolean,
-          itemInfo: Object
         } = action.payload
 
         return Immutable({
@@ -74,9 +69,9 @@ const rootReducer: Function = combineReducers({
   },
 
   dragTarget(
-    state: ?Object = null,
-    action: Object
-  ): ?Object {
+    state = null,
+    action
+  ) {
     switch (action.type) {
       case CST.UPDATE_DRAG_TARGET:
         return action.payload
@@ -87,9 +82,9 @@ const rootReducer: Function = combineReducers({
   },
 
   editorTarget(
-    state: ?Object = null,
-    action: Object
-  ): ?Object {
+    state = null,
+    action
+  ) {
     switch (action.type) {
       case CST.UPDATE_EDITOR_TARGET:
         return action.payload
@@ -100,9 +95,9 @@ const rootReducer: Function = combineReducers({
   },
 
   focusTarget(
-    state: ?Object = null,
-    action: Object
-  ): ?Object {
+    state = null,
+    action
+  ) {
     switch (action.type) {
       case CST.UPDATE_FOCUS_TARGET:
         return action.payload
@@ -113,9 +108,9 @@ const rootReducer: Function = combineReducers({
   },
 
   isCreatingNewFolder(
-    state: boolean = false,
-    action: Object
-  ): boolean {
+    state = false,
+    action
+  ) {
     switch (action.type) {
       case CST.UPDATE_EDITOR_TARGET:
         if (action.payload === null) return false
@@ -130,15 +125,15 @@ const rootReducer: Function = combineReducers({
   },
 
   itemOffsetHeight(
-    state: number = 0
-  ): number {
+    state = 0
+  ) {
     return state
   },
 
   menuPattern(
-    state: Array<string[]> = [],
-    action: Object
-  ): Array<string[]> {
+    state = [],
+    action
+  ) {
     switch (action.type) {
       case CST.UPDATE_MENU_TARGET: {
         const menuTarget = action.payload
@@ -171,9 +166,9 @@ const rootReducer: Function = combineReducers({
   },
 
   menuTarget(
-    state: ?Object = null,
-    action: Object
-  ): ?Object {
+    state = null,
+    action
+  ) {
     switch (action.type) {
       case CST.UPDATE_MENU_TARGET:
         return action.payload
@@ -184,9 +179,9 @@ const rootReducer: Function = combineReducers({
   },
 
   mousePosition(
-    state: Object = Immutable({x: 0, y: 0}),
-    action: Object
-  ): Object {
+    state = Immutable({x: 0, y: 0}),
+    action
+  ) {
     switch (action.type) {
       case CST.UPDATE_MOUSE_POSITION:
         return action.payload
@@ -197,21 +192,21 @@ const rootReducer: Function = combineReducers({
   },
 
   options(
-    state: Object = Immutable({})
-  ): Object {
+    state = Immutable({})
+  ) {
     return state
   },
 
   rootTree(
-    state: ?Object = null
-  ): ?Object {
+    state = null
+  ) {
     return state
   },
 
   searchKeyword(
-    state: string = '',
-    action: Object
-  ): string {
+    state = '',
+    action
+  ) {
     switch (action.type) {
       case CST.UPDATE_SEARCH_KEYWORD:
         return action.payload
@@ -222,9 +217,9 @@ const rootReducer: Function = combineReducers({
   },
 
   selectedMenuItem(
-    state: ?string = null,
-    action: Object
-  ): ?string {
+    state = null,
+    action
+  ) {
     switch (action.type) {
       case CST.UPDATE_MENU_TARGET: {
         const menuTarget = action.payload
@@ -242,9 +237,9 @@ const rootReducer: Function = combineReducers({
   },
 
   trees(
-    state: Object[] = Immutable([]),
-    action: Object
-  ): Object[] {
+    state = Immutable([]),
+    action
+  ) {
     switch (action.type) {
       case CST.REMOVE_TREE_INFOS_FROM_INDEX:
         return getSlicedTrees(state, action.payload)
