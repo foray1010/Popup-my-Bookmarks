@@ -1,6 +1,5 @@
 import {autobind} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
-import {static as Immutable} from 'seamless-immutable'
 import CSSModules from 'react-css-modules'
 
 import {
@@ -23,10 +22,10 @@ class Editor extends PureComponent {
   constructor(...args) {
     super(...args)
 
-    this.state = Immutable({
+    this.state = {
       title: '',
       url: ''
-    })
+    }
   }
 
   componentWillReceiveProps(nextProps) {

@@ -38,6 +38,12 @@ const webpackConfig = {
     new webpack.optimize.OccurrenceOrderPlugin(true)
   ],
   resolve: {
+    alias: {
+      react: 'preact-compat',
+      'react-dom': 'preact-compat'
+    },
+    // hack to use preact [https://github.com/developit/preact-compat/issues/192]
+    mainFields: ['main', 'web'],
     extensions: ['.js', '.jsx']
   },
   stats: {

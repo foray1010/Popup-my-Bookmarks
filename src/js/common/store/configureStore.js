@@ -3,7 +3,7 @@
 
 import {applyMiddleware, compose, createStore} from 'redux'
 import {batchedSubscribe} from 'redux-batched-subscribe'
-import {unstable_batchedUpdates as batchedUpdates} from 'react-dom'
+import _debounce from 'lodash/debounce'
 import multi from 'redux-multi'
 import thunk from 'redux-thunk'
 
@@ -20,5 +20,5 @@ if (process.env.NODE_ENV === 'development') {
 
 export default compose(
   applyMiddleware(...middlewares),
-  batchedSubscribe(batchedUpdates)
+  batchedSubscribe(_debounce((notify) => notify()))
 )(createStore)
