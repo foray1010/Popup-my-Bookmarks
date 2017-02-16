@@ -29,7 +29,7 @@
 }
 
 :global(::-webkit-search-cancel-button) {
-  content: url("/img/cancel.png");
+  content: url("../../img/cancel.png");
   height: 10px;
   width: 14px;
 }

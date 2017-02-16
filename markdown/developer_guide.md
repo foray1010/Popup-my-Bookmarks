@@ -18,7 +18,7 @@
   npm run build
   ```
 
-  To build the whole extension and output a zip file ([version in package.json].zip) for uploading to Chrome Web Store
+  To build the whole extension and output a zip file (./__build/[version in package.json].zip) for uploading to Chrome Web Store
 
 2. dev
 
@@ -31,15 +31,7 @@
   - CSS4 to CSS3 by [postcss-cssnext](//github.com/MoOx/postcss-cssnext)
   - *.pug to *.html by [Pug](//github.com/pugjs/pug)
 
-3. help
-
-  ```
-  npm run help
-  ```
-
-  Display developer guide on terminal
-
-4. lint
+3. lint
 
   ```
   npm run lint
@@ -49,7 +41,7 @@
   - ES6 JavaScript code by [ESLint](//github.com/eslint/eslint)
   - CSS4 code by [Stylelint](//github.com/stylelint/stylelint)
 
-5. md
+4. md
 
   ```
   npm run md

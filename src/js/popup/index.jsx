@@ -16,6 +16,8 @@ import configureStore from '../common/store/configureStore'
 import getOptionsConfig from '../common/lib/getOptionsConfig'
 import reducers from './reducers'
 
+require.context('../../img')
+
 !async function () {
   const options = await chromep.storage.sync.get(null)
 

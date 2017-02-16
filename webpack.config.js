@@ -1,14 +1,17 @@
 'use strict'
 
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const GenerateJsonPlugin = require('generate-json-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const mergeAndConcat = require('merge-and-concat')
 const OptimizeJsPlugin = require('optimize-js-plugin')
 const path = require('path')
 const webpack = require('webpack')
+const ZipPlugin = require('zip-webpack-plugin')
 
 const {outputDir, sourceDir} = require('./config')
-
 const manifest = require('./manifest')
 
 const webpackConfig = {
@@ -22,6 +25,20 @@ const webpackConfig = {
       {
         test: /\.pug$/,
         loader: 'pug-loader'
+      },
+      {
+        test: /\.woff$/,
+        loader: 'file-loader',
+        options: {
+          name: 'font/[name].[ext]'
+        }
+      },
+      {
+        test: /\.png$/,
+        loader: 'file-loader',
+        options: {
+          name: 'img/[name].[ext]'
+        }
       }
     ]
   },
@@ -30,6 +47,17 @@ const webpackConfig = {
     filename: path.join('js', '[name].js')
   },
   plugins: [
+    new CleanWebpackPlugin([outputDir]),
+    new CopyWebpackPlugin([
+      {
+        context: sourceDir,
+        from: path.join('_locales', '*', '*.json')
+      },
+      {
+        from: 'LICENSE'
+      }
+    ]),
+    new GenerateJsonPlugin('manifest.json', manifest),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
@@ -141,7 +169,10 @@ switch (process.env.NODE_ENV) {
             screw_ie8: true
           }
         }),
-        new OptimizeJsPlugin()
+        new OptimizeJsPlugin(),
+        new ZipPlugin({
+          filename: `${manifest.version}.zip`
+        })
       ]
     })
     break

@@ -19,7 +19,7 @@
   }
 
   &::before {
-    content: url("/img/search.png");
+    content: url("../../img/search.png");
     padding: 5px 4px 4px 5px;
   }
 }

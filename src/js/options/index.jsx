@@ -15,6 +15,8 @@ import configureStore from '../common/store/configureStore'
 import getOptionsConfig from '../common/lib/getOptionsConfig'
 import reducers from './reducers'
 
+require.context('../../img')
+
 !async function () {
   const optionsConfig = await getOptionsConfig()
 
