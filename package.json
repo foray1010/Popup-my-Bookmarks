@@ -13,7 +13,7 @@
   "bugs": "https://github.com/foray1010/Popup-my-Bookmarks/issues",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development webpack",
+    "dev": "webpack-dashboard -- cross-env NODE_ENV=development webpack",
     "lint": "eslint --ext .js,.jsx . && flow check && stylelint src/css/**/*.css",
     "locales": "node scripts/generateLocalesFromTransifex.js",
     "md": "node scripts/generateMarkdown.js",
@@ -72,6 +72,8 @@
     "stylelint-config-foray1010": "^1.0.2",
     "transifex": "^1.4.4",
     "webpack": "^2.2.1",
+    "webpack-bundle-analyzer": "^2.3.0",
+    "webpack-dashboard": "^0.3.0",
     "yamljs": "^0.2.6",
     "zip-webpack-plugin": "^0.3.0"
   }

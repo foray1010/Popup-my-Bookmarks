@@ -1,7 +1,9 @@
 'use strict'
 
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const DashboardPlugin = require('webpack-dashboard/plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const GenerateJsonPlugin = require('generate-json-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -126,6 +128,9 @@ switch (process.env.NODE_ENV) {
           }
         ]
       },
+      plugins: [
+        new DashboardPlugin()
+      ],
       watch: true
     })
     break
@@ -150,6 +155,10 @@ switch (process.env.NODE_ENV) {
         ]
       },
       plugins: [
+        new BundleAnalyzerPlugin({
+          analyzerMode: 'static',
+          reportFilename: path.join('..', '__report.html')
+        }),
         new ExtractTextPlugin({
           filename: path.join('css', '[name].css'),
           allChunks: true
