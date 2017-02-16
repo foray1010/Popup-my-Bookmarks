@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const mergeAndConcat = require('merge-and-concat')
 const OptimizeJsPlugin = require('optimize-js-plugin')
 const path = require('path')
-const querystring = require('querystring')
 const webpack = require('webpack')
 
 const {outputDir, sourceDir} = require('./config')
@@ -18,11 +17,11 @@ const webpackConfig = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        loader: 'babel-loader'
       },
       {
         test: /\.pug$/,
-        use: 'pug-loader'
+        loader: 'pug-loader'
       }
     ]
   },
@@ -38,12 +37,14 @@ const webpackConfig = {
     new webpack.optimize.OccurrenceOrderPlugin(true)
   ],
   resolve: {
+    /*
     alias: {
       react: 'preact-compat',
       'react-dom': 'preact-compat'
     },
     // hack to use preact [https://github.com/developit/preact-compat/issues/192]
     mainFields: ['main', 'web'],
+    */
     extensions: ['.js', '.jsx']
   },
   stats: {
@@ -68,11 +69,11 @@ for (const appName of ['options', 'popup']) {
   })
 }
 
-const cssLoaderConfigQS = querystring.stringify({
+const cssLoaderOptions = {
   modules: true,
   importLoaders: 1,
   localIdentName: '[name]__[local]___[hash:base64:5]'
-})
+}
 switch (process.env.NODE_ENV) {
   case 'development':
     mergeAndConcat(webpackConfig, {
@@ -82,10 +83,16 @@ switch (process.env.NODE_ENV) {
           {
             test: /\.css$/,
             use: [
-              'style-loader?' + querystring.stringify({
-                sourceMap: true
-              }),
-              `css-loader?${cssLoaderConfigQS}`,
+              {
+                loader: 'style-loader',
+                options: {
+                  sourceMap: true
+                }
+              },
+              {
+                loader: 'css-loader',
+                options: cssLoaderOptions
+              },
               'postcss-loader'
             ]
           }
@@ -104,7 +111,10 @@ switch (process.env.NODE_ENV) {
             use: ExtractTextPlugin.extract({
               fallback: 'style-loader',
               use: [
-                `css-loader?${cssLoaderConfigQS}`,
+                {
+                  loader: 'css-loader',
+                  options: cssLoaderOptions
+                },
                 'postcss-loader'
               ]
             })
