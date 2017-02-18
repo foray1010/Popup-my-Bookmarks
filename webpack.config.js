@@ -125,6 +125,13 @@ switch (process.env.NODE_ENV) {
               },
               'postcss-loader'
             ]
+          },
+          {
+            test: /\/icon.+\.png$/,
+            loader: 'image-process-loader',
+            options: {
+              greyscale: true
+            }
           }
         ]
       },
