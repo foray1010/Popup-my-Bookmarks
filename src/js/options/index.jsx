@@ -4,6 +4,7 @@ import {Provider} from 'react-redux'
 import {render} from 'react-dom'
 import {static as Immutable} from 'seamless-immutable'
 
+import '../../manifest.yml'
 import {
   initOptionsValue
 } from './functions'
@@ -14,8 +15,6 @@ import App from './components/App'
 import configureStore from '../common/store/configureStore'
 import getOptionsConfig from '../common/lib/getOptionsConfig'
 import reducers from './reducers'
-
-require.context('../../img')
 
 !async function () {
   const optionsConfig = await getOptionsConfig()

@@ -5,8 +5,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const DashboardPlugin = require('webpack-dashboard/plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const GenerateJsonPlugin = require('generate-json-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const mergeAndConcat = require('merge-and-concat')
 const OptimizeJsPlugin = require('optimize-js-plugin')
 const path = require('path')
@@ -14,9 +12,13 @@ const webpack = require('webpack')
 const ZipPlugin = require('zip-webpack-plugin')
 
 const {outputDir, sourceDir} = require('./config')
-const manifest = require('./manifest')
+const pkg = require('./package')
 
 const webpackConfig = {
+  entry: {
+    options: `./${sourceDir}/js/options`,
+    popup: `./${sourceDir}/js/popup`
+  },
   module: {
     rules: [
       {
@@ -26,7 +28,23 @@ const webpackConfig = {
       },
       {
         test: /\.pug$/,
-        loader: 'pug-loader'
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].html'
+            }
+          },
+          'extract-loader',
+          {
+            loader: 'pug-html-loader',
+            options: {
+              data: {
+                name: pkg.name
+              }
+            }
+          }
+        ]
       },
       {
         test: /\.woff$/,
@@ -41,6 +59,25 @@ const webpackConfig = {
         options: {
           name: 'img/[name].[ext]'
         }
+      },
+      {
+        test: /\/manifest\.yml$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].json'
+            }
+          },
+          'extract-loader',
+          {
+            loader: 'chrome-manifest-loader',
+            options: {
+              mapVersion: true
+            }
+          },
+          'yaml-loader'
+        ]
       }
     ]
   },
@@ -59,7 +96,6 @@ const webpackConfig = {
         from: 'LICENSE'
       }
     ]),
-    new GenerateJsonPlugin('manifest.json', manifest),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
@@ -81,22 +117,6 @@ const webpackConfig = {
     timings: true,
     version: false
   }
-}
-
-for (const appName of ['options', 'popup']) {
-  mergeAndConcat(webpackConfig, {
-    entry: {
-      [appName]: `./${sourceDir}/js/${appName}`
-    },
-    plugins: [
-      new HtmlWebpackPlugin({
-        filename: `${appName}.html`,
-        inject: false,
-        template: path.join(sourceDir, 'html', `${appName}.pug`),
-        title: manifest.name
-      })
-    ]
-  })
 }
 
 const cssLoaderOptions = {
@@ -187,7 +207,7 @@ switch (process.env.NODE_ENV) {
         }),
         new OptimizeJsPlugin(),
         new ZipPlugin({
-          filename: `${manifest.version}.zip`
+          filename: `${pkg.version}.zip`
         })
       ]
     })

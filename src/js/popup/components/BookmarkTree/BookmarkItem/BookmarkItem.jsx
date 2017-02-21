@@ -24,6 +24,7 @@ import {
 } from '../../../constants'
 import chromep from '../../../../common/lib/chromePromise'
 
+import folderIcon from '../../../../../img/folder.png'
 import styles from '../../../../../css/popup/bookmark-item.css'
 
 class BookmarkItem extends PureComponent {
@@ -267,7 +268,7 @@ class BookmarkItem extends PureComponent {
     switch (bookmarkType) {
       case TYPE_ROOT_FOLDER:
       case TYPE_FOLDER:
-        iconSrc = '/img/folder.png'
+        iconSrc = folderIcon
         break
 
       case TYPE_BOOKMARK:

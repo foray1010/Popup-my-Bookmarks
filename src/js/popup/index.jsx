@@ -4,6 +4,7 @@ import {Provider} from 'react-redux'
 import {render} from 'react-dom'
 import {static as Immutable} from 'seamless-immutable'
 
+import '../../manifest.yml'
 import {
   getItemOffsetHeight,
   getRootTree,
@@ -15,8 +16,6 @@ import chromep from '../common/lib/chromePromise'
 import configureStore from '../common/store/configureStore'
 import getOptionsConfig from '../common/lib/getOptionsConfig'
 import reducers from './reducers'
-
-require.context('../../img')
 
 !async function () {
   const options = await chromep.storage.sync.get(null)
