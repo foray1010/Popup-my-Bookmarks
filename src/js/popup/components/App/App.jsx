@@ -11,7 +11,7 @@ import {
 } from '../../functions'
 import {
   requestAnimationFrame
-} from '../../../common/lib/decoraters'
+} from '../../../common/lib/decorators'
 import Main from './Main'
 
 class App extends PureComponent {

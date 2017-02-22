@@ -14,7 +14,7 @@ import {
 } from '../../functions'
 import {
   requestAnimationFrame
-} from '../../../common/lib/decoraters'
+} from '../../../common/lib/decorators'
 import BookmarkItem from './BookmarkItem'
 import DragIndicator from './DragIndicator'
 import FolderCover from '../FolderCover'
