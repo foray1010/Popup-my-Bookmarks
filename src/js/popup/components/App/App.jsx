@@ -12,6 +12,7 @@ import {
 import {
   requestAnimationFrame
 } from '../../../common/lib/decorators'
+import chromep from '../../../common/lib/chromePromise'
 import Main from './Main'
 
 class App extends PureComponent {
@@ -43,10 +44,11 @@ class App extends PureComponent {
 
   @requestAnimationFrame
   afterMount() {
-    const body = document.body
-    body.addEventListener('contextmenu', this.handleContextMenu)
-    body.addEventListener('keydown', this.handleKeyDown)
-    body.addEventListener('mousedown', this.handleMouseDown)
+    const html = document.documentElement
+    html.addEventListener('contextmenu', this.handleContextMenu)
+    html.addEventListener('keydown', this.handleKeyDown)
+    html.addEventListener('mousedown', this.handleMouseDown)
+    html.addEventListener('mouseup', this.handleDragEnd)
   }
 
   handleContextMenu(evt) {
@@ -57,6 +59,29 @@ class App extends PureComponent {
 
     // disable native context menu
     evt.preventDefault()
+  }
+
+  // hack to stimulate onDragEnd event
+  // onDragEnd doesn't work when original drag element is removed from DOM,
+  // but onMouseUp still fire
+  @autobind
+  async handleDragEnd() {
+    const {
+      dragEnd,
+      dragIndicator,
+      dragTarget
+    } = this.props
+
+    if (dragTarget) {
+      if (dragIndicator) {
+        await chromep.bookmarks.move(dragTarget.id, {
+          parentId: dragIndicator.parentId,
+          index: dragIndicator.index
+        })
+      }
+
+      dragEnd()
+    }
   }
 
   async handleEnter(evt) {
@@ -196,6 +221,9 @@ class App extends PureComponent {
 
 App.propTypes = {
   closeMenu: PropTypes.func.isRequired,
+  dragEnd: PropTypes.func.isRequired,
+  dragIndicator: PropTypes.object,
+  dragTarget: PropTypes.object,
   editorTarget: PropTypes.object,
   focusTarget: PropTypes.object,
   menuTarget: PropTypes.object,

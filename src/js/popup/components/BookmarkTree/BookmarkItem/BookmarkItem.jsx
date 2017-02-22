@@ -22,7 +22,6 @@ import {
   TYPE_ROOT_FOLDER,
   TYPE_SEPARATOR
 } from '../../../constants'
-import chromep from '../../../../common/lib/chromePromise'
 
 import folderIcon from '../../../../../img/folder.png'
 import styles from '../../../../../css/popup/bookmark-item.css'
@@ -155,24 +154,6 @@ class BookmarkItem extends PureComponent {
   }
 
   @autobind
-  async handleDragEnd() {
-    const {
-      dragEnd,
-      dragIndicator,
-      dragTarget
-    } = this.props
-
-    if (dragIndicator) {
-      await chromep.bookmarks.move(dragTarget.id, {
-        parentId: dragIndicator.parentId,
-        index: dragIndicator.index
-      })
-    }
-
-    dragEnd()
-  }
-
-  @autobind
   handleDragEnter(evt) {
     evt.persist()
 
@@ -300,7 +281,6 @@ class BookmarkItem extends PureComponent {
         draggable={isDraggable}
         onClick={this.handleClick}
         onContextMenu={this.handleContextMenu}
-        onDragEnd={this.handleDragEnd}
         onDragEnter={this.handleDragEnter}
         onDragStart={this.handleDragStart}
         onMouseEnter={this.handleMouse}
@@ -319,11 +299,8 @@ class BookmarkItem extends PureComponent {
 }
 
 BookmarkItem.propTypes = {
-  dragEnd: PropTypes.func.isRequired,
-  dragIndicator: PropTypes.object,
   dragOver: PropTypes.func.isRequired,
   dragStart: PropTypes.func.isRequired,
-  dragTarget: PropTypes.object,
   focusTarget: PropTypes.object,
   hoverBookmarkItem: PropTypes.func.isRequired,
   isSearching: PropTypes.bool.isRequired,
