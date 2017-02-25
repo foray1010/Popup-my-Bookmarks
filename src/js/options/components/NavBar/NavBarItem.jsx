@@ -1,9 +1,8 @@
 import {autobind} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
 import classNames from 'classnames'
-import CSSModules from 'react-css-modules'
 
-import styles from '../../../../css/options/nav-bar-item.css'
+import '../../../../css/options/nav-bar-item.css'
 
 class NavBarItem extends PureComponent {
   @autobind
@@ -47,4 +46,4 @@ NavBarItem.propTypes = {
   title: PropTypes.string.isRequired
 }
 
-export default CSSModules(NavBarItem, styles, {allowMultiple: true})
+export default NavBarItem

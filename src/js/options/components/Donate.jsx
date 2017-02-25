@@ -1,9 +1,8 @@
 import {createElement} from 'react'
-import CSSModules from 'react-css-modules'
 
 import ExternalLink from './ExternalLink'
 
-import styles from '../../../css/options/donate.css'
+import '../../../css/options/donate.css'
 
 const paypalUrl = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TP67BBZ7VK934'
 
@@ -45,4 +44,4 @@ const Donate = () => (
   </footer>
 )
 
-export default CSSModules(Donate, styles)
+export default Donate

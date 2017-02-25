@@ -1,7 +1,6 @@
 import {createElement} from 'react'
-import CSSModules from 'react-css-modules'
 
-import styles from '../../../../css/popup/no-result.css'
+import '../../../../css/popup/no-result.css'
 
 const msgNoResult = chrome.i18n.getMessage('noResult')
 
@@ -13,4 +12,4 @@ const NoResult = () => (
   </li>
 )
 
-export default CSSModules(NoResult, styles)
+export default NoResult

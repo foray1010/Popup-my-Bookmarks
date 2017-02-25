@@ -1,13 +1,12 @@
 import {autobind, debounce} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
 import {static as Immutable} from 'seamless-immutable'
-import CSSModules from 'react-css-modules'
 
 import {
   normalizeInputtingValue
 } from '../../../common/functions'
 
-import styles from '../../../../css/popup/search.css'
+import '../../../../css/popup/search.css'
 
 const msgSearch = chrome.i18n.getMessage('search')
 
@@ -94,4 +93,4 @@ Search.propTypes = {
   updateTreesBySearchKeyword: PropTypes.func.isRequired
 }
 
-export default CSSModules(Search, styles)
+export default Search

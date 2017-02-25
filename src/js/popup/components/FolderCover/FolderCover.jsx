@@ -1,9 +1,8 @@
 import {autobind, decorate} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
 import _debounce from 'lodash/debounce'
-import CSSModules from 'react-css-modules'
 
-import styles from '../../../../css/popup/folder-cover.css'
+import '../../../../css/popup/folder-cover.css'
 
 class FolderCover extends PureComponent {
   @decorate(_debounce, 200)
@@ -52,4 +51,4 @@ FolderCover.propTypes = {
   treeIndex: PropTypes.number.isRequired
 }
 
-export default CSSModules(FolderCover, styles)
+export default FolderCover

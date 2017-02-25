@@ -1,7 +1,6 @@
 import {createElement, PropTypes} from 'react'
-import CSSModules from 'react-css-modules'
 
-import styles from '../../../../css/options/option-button.css'
+import '../../../../css/options/option-button.css'
 
 const OptionButton = (props) => {
   const {
@@ -25,4 +24,4 @@ OptionButton.propTypes = {
   onClick: PropTypes.func.isRequired
 }
 
-export default CSSModules(OptionButton, styles)
+export default OptionButton

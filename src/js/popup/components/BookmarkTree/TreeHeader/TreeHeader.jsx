@@ -1,8 +1,7 @@
 import {autobind} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
-import CSSModules from 'react-css-modules'
 
-import styles from '../../../../../css/popup/tree-header.css'
+import '../../../../../css/popup/tree-header.css'
 
 class TreeHeader extends PureComponent {
   @autobind
@@ -46,4 +45,4 @@ TreeHeader.propTypes = {
   treeInfo: PropTypes.object.isRequired
 }
 
-export default CSSModules(TreeHeader, styles)
+export default TreeHeader

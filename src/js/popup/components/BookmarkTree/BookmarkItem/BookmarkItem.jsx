@@ -2,7 +2,6 @@ import {autobind, debounce, decorate} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
 import _debounce from 'lodash/debounce'
 import classNames from 'classnames'
-import CSSModules from 'react-css-modules'
 
 import {
   getBookmark,
@@ -23,8 +22,8 @@ import {
   TYPE_SEPARATOR
 } from '../../../constants'
 
+import '../../../../../css/popup/bookmark-item.css'
 import folderIcon from '../../../../../img/folder.png'
-import styles from '../../../../../css/popup/bookmark-item.css'
 
 class BookmarkItem extends PureComponent {
   componentDidMount() {
@@ -316,4 +315,4 @@ BookmarkItem.propTypes = {
   updateFocusTarget: PropTypes.func.isRequired
 }
 
-export default CSSModules(BookmarkItem, styles, {allowMultiple: true})
+export default BookmarkItem

@@ -1,12 +1,12 @@
 import {autobind} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
 import {static as Immutable} from 'seamless-immutable'
-import CSSModules from 'react-css-modules'
 
 import {
   normalizeInputtingValue
 } from '../../../common/functions'
-import styles from '../../../../css/options/input-select.css'
+
+import '../../../../css/options/input-select.css'
 
 class InputSelect extends PureComponent {
   @autobind
@@ -95,4 +95,4 @@ InputSelect.propTypes = {
   updateSingleOption: PropTypes.func.isRequired
 }
 
-export default CSSModules(InputSelect, styles)
+export default InputSelect

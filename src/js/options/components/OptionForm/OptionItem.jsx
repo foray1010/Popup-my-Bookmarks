@@ -1,5 +1,4 @@
 import {createElement, PropTypes} from 'react'
-import CSSModules from 'react-css-modules'
 
 import InputNumber from '../input_items/InputNumber'
 import InputSelect from '../input_items/InputSelect'
@@ -7,7 +6,7 @@ import SelectButton from '../input_items/SelectButton'
 import SelectMultiple from '../input_items/SelectMultiple'
 import SelectString from '../input_items/SelectString'
 
-import styles from '../../../../css/options/option-item.css'
+import '../../../../css/options/option-item.css'
 
 const OptionItem = (props) => {
   const {
@@ -69,4 +68,4 @@ OptionItem.propTypes = {
   updateSingleOption: PropTypes.func.isRequired
 }
 
-export default CSSModules(OptionItem, styles)
+export default OptionItem

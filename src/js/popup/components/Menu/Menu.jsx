@@ -1,5 +1,4 @@
 import {createElement, PropTypes, PureComponent} from 'react'
-import CSSModules from 'react-css-modules'
 
 import {
   getBookmarkType,
@@ -8,7 +7,7 @@ import {
 import * as CST from '../../constants'
 import MenuArea from './MenuArea'
 
-import styles from '../../../../css/popup/menu.css'
+import '../../../../css/popup/menu.css'
 
 class Menu extends PureComponent {
   componentDidUpdate(prevProps) {
@@ -135,4 +134,4 @@ Menu.propTypes = {
   mousePosition: PropTypes.objectOf(PropTypes.number).isRequired
 }
 
-export default CSSModules(Menu, styles)
+export default Menu

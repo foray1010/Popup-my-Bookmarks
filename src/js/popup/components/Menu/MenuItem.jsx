@@ -1,7 +1,6 @@
 import {autobind} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
 import classNames from 'classnames'
-import CSSModules from 'react-css-modules'
 
 import {
   addCurrentPage,
@@ -12,7 +11,7 @@ import {
 } from '../../functions'
 import * as CST from '../../constants'
 
-import styles from '../../../../css/popup/menu-item.css'
+import '../../../../css/popup/menu-item.css'
 
 class MenuItem extends PureComponent {
   @autobind
@@ -178,4 +177,4 @@ MenuItem.propTypes = {
   updateSelectedMenuItem: PropTypes.func.isRequired
 }
 
-export default CSSModules(MenuItem, styles, {allowMultiple: true})
+export default MenuItem

@@ -1,9 +1,8 @@
 import {createElement, PropTypes} from 'react'
-import CSSModules from 'react-css-modules'
 
 import Option from './Option'
 
-import styles from '../../../../../css/options/select-button.css'
+import '../../../../../css/options/select-button.css'
 
 const SelectButton = (props) => {
   const {
@@ -46,4 +45,4 @@ SelectButton.propTypes = {
   updateSingleOption: PropTypes.func.isRequired
 }
 
-export default CSSModules(SelectButton, styles)
+export default SelectButton

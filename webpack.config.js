@@ -122,7 +122,7 @@ const webpackConfig = {
 const cssLoaderOptions = {
   modules: true,
   importLoaders: 1,
-  localIdentName: '[name]__[local]___[hash:base64:5]'
+  localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
 }
 switch (process.env.NODE_ENV) {
   case 'development':

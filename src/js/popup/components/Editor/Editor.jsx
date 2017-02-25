@@ -1,6 +1,5 @@
 import {autobind} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
-import CSSModules from 'react-css-modules'
 
 import {
   normalizeInputtingValue
@@ -10,7 +9,7 @@ import {
 } from '../../functions'
 import chromep from '../../../common/lib/chromePromise'
 
-import styles from '../../../../css/popup/editor.css'
+import '../../../../css/popup/editor.css'
 
 const msgCancel = chrome.i18n.getMessage('cancel')
 const msgConfirm = chrome.i18n.getMessage('confirm')
@@ -209,4 +208,4 @@ Editor.propTypes = {
   isUIForFolder: PropTypes.bool.isRequired
 }
 
-export default CSSModules(Editor, styles)
+export default Editor

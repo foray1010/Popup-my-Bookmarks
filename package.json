@@ -32,7 +32,6 @@
     "normalize.css": "^5.0.0",
     "open-color": "^1.4.0",
     "react": "^15.0.1",
-    "react-css-modules": "^4.0.3",
     "react-dom": "^15.0.1",
     "react-redux": "^5.0.0",
     "redux": "^3.3.1",

@@ -1,7 +1,6 @@
 import {createElement, PropTypes} from 'react'
-import CSSModules from 'react-css-modules'
 
-import styles from '../../../css/options/external-link.css'
+import '../../../css/options/external-link.css'
 
 const ExternalLink = (props) => (
   <a
@@ -19,4 +18,4 @@ ExternalLink.propTypes = {
   href: PropTypes.string.isRequired
 }
 
-export default CSSModules(ExternalLink, styles)
+export default ExternalLink

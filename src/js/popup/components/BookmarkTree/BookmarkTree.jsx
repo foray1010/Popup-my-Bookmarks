@@ -1,7 +1,6 @@
 import {autobind} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
 import {static as Immutable} from 'seamless-immutable'
-import CSSModules from 'react-css-modules'
 
 import {
   DRAG_INDICATOR,
@@ -21,7 +20,7 @@ import FolderCover from '../FolderCover'
 import NoResult from './NoResult'
 import TreeHeader from './TreeHeader'
 
-import styles from '../../../../css/popup/bookmark-tree.css'
+import '../../../../css/popup/bookmark-tree.css'
 
 class BookmarkTree extends PureComponent {
   componentDidMount() {
@@ -161,4 +160,4 @@ BookmarkTree.propTypes = {
   treeInfo: PropTypes.object.isRequired
 }
 
-export default CSSModules(BookmarkTree, styles)
+export default BookmarkTree

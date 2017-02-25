@@ -1,10 +1,9 @@
 import {createElement, PropTypes} from 'react'
-import CSSModules from 'react-css-modules'
 
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 
-import styles from '../../../../css/options/option-form.css'
+import '../../../../css/options/option-form.css'
 
 const msgConfirm = chrome.i18n.getMessage('confirm')
 const msgDefault = chrome.i18n.getMessage('default')
@@ -73,4 +72,4 @@ OptionForm.propTypes = {
   updateSingleOption: PropTypes.func.isRequired
 }
 
-export default CSSModules(OptionForm, styles)
+export default OptionForm

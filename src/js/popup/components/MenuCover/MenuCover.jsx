@@ -1,8 +1,7 @@
 import {autobind} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
-import CSSModules from 'react-css-modules'
 
-import styles from '../../../../css/popup/menu-cover.css'
+import '../../../../css/popup/menu-cover.css'
 
 class MenuCover extends PureComponent {
   @autobind
@@ -28,4 +27,4 @@ MenuCover.propTypes = {
   isHidden: PropTypes.bool.isRequired
 }
 
-export default CSSModules(MenuCover, styles)
+export default MenuCover

@@ -1,8 +1,7 @@
 import {createElement} from 'react'
 import {static as Immutable} from 'seamless-immutable'
-import CSSModules from 'react-css-modules'
 
-import styles from '../../../css/options/contributors.css'
+import '../../../css/options/contributors.css'
 
 const contributors = Immutable({
   Developer: [
@@ -63,4 +62,4 @@ const Contributors = () => (
   </dl>
 )
 
-export default CSSModules(Contributors, styles)
+export default Contributors

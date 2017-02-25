@@ -1,10 +1,9 @@
 import {createElement, PropTypes} from 'react'
-import CSSModules from 'react-css-modules'
 
 import BookmarkTree from '../BookmarkTree'
 import Search from '../Search'
 
-import styles from '../../../../css/popup/panel.css'
+import '../../../../css/popup/panel.css'
 
 const Panel = (props) => {
   const {trees} = props
@@ -36,4 +35,4 @@ Panel.propTypes = {
   trees: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
-export default CSSModules(Panel, styles)
+export default Panel

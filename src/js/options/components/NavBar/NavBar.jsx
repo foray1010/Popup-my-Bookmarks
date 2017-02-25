@@ -1,5 +1,4 @@
 import {createElement, PropTypes} from 'react'
-import CSSModules from 'react-css-modules'
 
 import {
   NAV_MODULE_CONTRIBUTORS,
@@ -9,7 +8,7 @@ import {
 } from '../../constants'
 import NavBarItem from './NavBarItem'
 
-import styles from '../../../../css/options/nav-bar.css'
+import '../../../../css/options/nav-bar.css'
 
 const navBarItemInfos = [
   {
@@ -65,4 +64,4 @@ NavBar.propTypes = {
   switchNavModule: PropTypes.func.isRequired
 }
 
-export default CSSModules(NavBar, styles)
+export default NavBar

@@ -1,9 +1,8 @@
 import {autobind} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
 import classNames from 'classnames'
-import CSSModules from 'react-css-modules'
 
-import styles from '../../../../../css/options/select-button-option.css'
+import '../../../../../css/options/select-button-option.css'
 
 const msgNo = chrome.i18n.getMessage('no')
 const msgYes = chrome.i18n.getMessage('yes')
@@ -76,4 +75,4 @@ Option.propTypes = {
   updateSingleOption: PropTypes.func.isRequired
 }
 
-export default CSSModules(Option, styles, {allowMultiple: true})
+export default Option
