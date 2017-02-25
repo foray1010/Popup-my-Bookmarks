@@ -1,6 +1,5 @@
 import {autobind, debounce} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
-import {static as Immutable} from 'seamless-immutable'
 
 import {
   normalizeInputtingValue
@@ -14,9 +13,9 @@ class Search extends PureComponent {
   constructor(...args) {
     super(...args)
 
-    this.state = Immutable({
+    this.state = {
       inputValue: this.props.searchKeyword
-    })
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
