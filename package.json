@@ -24,7 +24,6 @@
   ],
   "dependencies": {
     "babel-polyfill": "^6.5.0",
-    "blueimp-md5": "^2.6.0",
     "chrome-promise": "^2.0.2",
     "classnames": "^2.2.3",
     "core-decorators": "^0.15.0",

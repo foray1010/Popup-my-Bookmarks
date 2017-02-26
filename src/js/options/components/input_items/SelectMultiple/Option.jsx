@@ -1,9 +1,13 @@
 import {autobind} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
 import {static as Immutable} from 'seamless-immutable'
-import md5 from 'blueimp-md5'
+import _uniqueId from 'lodash/uniqueId'
 
 class Option extends PureComponent {
+  componentWillMount() {
+    this.id = _uniqueId(Option.name)
+  }
+
   @autobind
   handleChange(evt) {
     const {
@@ -38,18 +42,12 @@ class Option extends PureComponent {
       optionValue
     } = this.props
 
-    const id = md5(
-      [
-        optionName,
-        optionChoice
-      ].join()
-    )
     const isChecked = optionValue.includes(optionChoiceIndex)
 
     return (
-      <label htmlFor={id}>
+      <label htmlFor={this.id}>
         <input
-          id={id}
+          id={this.id}
           name={optionName}
           type='checkbox'
           value={String(optionChoiceIndex)}
