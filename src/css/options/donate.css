@@ -1,7 +1,7 @@
 @import "../common/variables.css";
 
 :root {
-  --desc-width: 300px;
+  --desc-width: 280px;
   --img-width: 170px;
   --main-width: calc(var(--desc-width) + var(--img-width));
 }
