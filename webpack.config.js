@@ -103,6 +103,9 @@ const webpackConfig = {
     new webpack.optimize.OccurrenceOrderPlugin(true)
   ],
   resolve: {
+    alias: {
+      'seamless-immutable': 'seamless-immutable/src/seamless-immutable'
+    },
     /*
     alias: {
       react: 'preact-compat',
