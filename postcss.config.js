@@ -8,10 +8,6 @@ module.exports = {
   plugins: [
     postcssUrl(),
     postcssImport(),
-    cssnext({
-      autoprefixer: {
-        browsers: 'chrome >= 34'
-      }
-    })
+    cssnext()
   ]
 }
