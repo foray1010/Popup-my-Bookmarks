@@ -2,7 +2,7 @@
 @import "./variables.css";
 
 @font-face {
-  font-family: ArchivoNarrow;
+  font-family: "Archivo Narrow";
   src: url("typeface-archivo-narrow/files/archivo-narrow-latin-400.woff");
 }
 

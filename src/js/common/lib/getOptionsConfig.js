@@ -65,7 +65,7 @@ async function getOptionsConfig(): Object {
         'monospace',
         'sans-serif',
         'serif',
-        'ArchivoNarrow',
+        'Archivo Narrow',
         'Arial',
         'Comic Sans MS',
         'Georgia',

@@ -49,7 +49,7 @@
   color: var(--oc-white);
   composes: no-text-overflow from "../common/composes.css";
   cursor: default;
-  font: 22px ArchivoNarrow, simhei;
+  font: 22px "Archivo Narrow", simhei;
   line-height: calc(var(--tree-header-height) + 1px);
   margin: 0;
   margin-right: auto;
