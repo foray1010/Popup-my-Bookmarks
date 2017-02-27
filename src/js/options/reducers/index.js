@@ -7,7 +7,7 @@ import {
   UPDATE_SINGLE_OPTION
 } from '../constants'
 
-const rootReducer: Function = combineReducers({
+const rootReducer = combineReducers({
   options(
     state = Immutable({}),
     action

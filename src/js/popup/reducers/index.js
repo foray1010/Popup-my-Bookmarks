@@ -8,7 +8,7 @@ import {
 } from '../functions'
 import * as CST from '../constants'
 
-const rootReducer: Function = combineReducers({
+const rootReducer = combineReducers({
   copyTarget(
     state = null,
     action
