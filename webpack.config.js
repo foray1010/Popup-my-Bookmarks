@@ -1,5 +1,6 @@
 'use strict'
 
+const {outputDir, sourceDir} = require('config')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -11,7 +12,6 @@ const path = require('path')
 const webpack = require('webpack')
 const ZipPlugin = require('zip-webpack-plugin')
 
-const {outputDir, sourceDir} = require('./config')
 const pkg = require('./package')
 
 const webpackConfig = {
