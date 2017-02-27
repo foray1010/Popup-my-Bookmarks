@@ -3,7 +3,7 @@
 
 @font-face {
   font-family: ArchivoNarrow;
-  src: url("../../font/ArchivoNarrow-Regular.woff");
+  src: url("typeface-archivo-narrow/files/archivo-narrow-latin-400.woff");
 }
 
 :global(body) {
