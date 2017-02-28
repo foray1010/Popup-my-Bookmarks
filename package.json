@@ -41,7 +41,7 @@
     "typeface-archivo-narrow": "0.0.22"
   },
   "devDependencies": {
-    "babel-core": "^6.5.2",
+    "babel-core": "^6.17.0",
     "babel-loader": "^6.2.3",
     "babel-preset-foray1010": "^4.0.0",
     "bluebird": "^3.3.1",
