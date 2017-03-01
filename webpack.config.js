@@ -35,7 +35,6 @@ const webpackConfig = {
               name: '[name].html'
             }
           },
-          'extract-loader',
           {
             loader: 'pug-html-loader',
             options: {
