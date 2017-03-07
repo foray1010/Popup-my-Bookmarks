@@ -40,17 +40,23 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
   - [nvm](//github.com/creationix/nvm) (Linux/Mac)
   - [Node.js official website](//nodejs.org/en/download/) (Windows)
 
-2. `cd` to your workspace and install all dependencies
+2. Install [yarn](https://github.com/yarnpkg/yarn)
 
   ```
-  npm install
+  npm install -g yarn
+  ```
+
+3. `cd` to your workspace and install all dependencies
+
+  ```
+  yarn install
   ```
 
 ##### Commands
 1. build
 
   ```
-  npm run build
+  yarn run build
   ```
 
   To build the whole extension and output a zip file (./__build/[version in package.json].zip) for uploading to Chrome Web Store
@@ -58,7 +64,7 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
 2. dev
 
   ```
-  npm run dev
+  yarn run dev
   ```
 
   To make a temporary folder `__dev` for you to load unpacked extension
@@ -69,7 +75,7 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
 3. lint
 
   ```
-  npm run lint
+  yarn run lint
   ```
 
   To lint
@@ -79,7 +85,7 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
 4. md
 
   ```
-  npm run md
+  yarn run md
   ```
 
   To generate markdown file on the current directory
