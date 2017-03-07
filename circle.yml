@@ -2,11 +2,6 @@ machine:
   node:
     version: "6"
 
-general:
-  branches:
-    only:
-      - "master"
-
 test:
   pre:
     - "npm run lint"
