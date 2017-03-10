@@ -36,7 +36,6 @@
     "redux-multi": "0.1.12",
     "redux-thunk": "^2.1.0",
     "seamless-immutable": "^7.0.0",
-    "stylelint": "^7.9.0",
     "typeface-archivo-narrow": "0.0.22"
   },
   "devDependencies": {
@@ -70,6 +69,7 @@
     "pug-html-loader": "^1.1.0",
     "sharp": "^0.17.2",
     "style-loader": "^0.13.1",
+    "stylelint": "^7.9.0",
     "stylelint-config-foray1010": "^2.0.0",
     "transifex": "^1.4.4",
     "webpack": "^2.2.1",
