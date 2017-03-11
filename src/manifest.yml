@@ -15,10 +15,10 @@ icons:
 
 browser_action:
   default_icon: "require(./img/icon38.png)"
-  default_popup: "require(./html/popup.pug)"
-options_page: "require(./html/options.pug)"
+  default_popup: "./popup.html"
+options_page: "./options.html"
 options_ui:
-  page: "require(./html/options.pug)"
+  page: "./options.html"
   chrome_style: false
 
 commands:

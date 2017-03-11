@@ -1,9 +1,7 @@
 doctype html
-meta(charset="utf-8")
-title #{name}
-block css
-
-div#container
-
-script(src="/js/common.js")
-block js
+html
+  head
+    meta(charset="utf-8")
+    title #{htmlWebpackPlugin.options.title}
+  body
+    div#container

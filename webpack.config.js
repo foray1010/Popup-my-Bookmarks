@@ -1,11 +1,12 @@
 'use strict'
 
-const {outputDir, sourceDir} = require('config')
+const {appNames, commonChunkName, outputDir, sourceDir} = require('config')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const DashboardPlugin = require('webpack-dashboard/plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const mergeAndConcat = require('merge-and-concat')
 const OptimizeJsPlugin = require('optimize-js-plugin')
 const path = require('path')
@@ -15,10 +16,6 @@ const ZipPlugin = require('zip-webpack-plugin')
 const pkg = require('./package')
 
 const webpackConfig = {
-  entry: {
-    options: `./${sourceDir}/js/options`,
-    popup: `./${sourceDir}/js/popup`
-  },
   module: {
     rules: [
       {
@@ -28,22 +25,7 @@ const webpackConfig = {
       },
       {
         test: /\.pug$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].html'
-            }
-          },
-          {
-            loader: 'pug-html-loader',
-            options: {
-              data: {
-                name: pkg.name
-              }
-            }
-          }
-        ]
+        loader: 'pug-loader'
       },
       {
         test: /\.woff$/,
@@ -98,7 +80,7 @@ const webpackConfig = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
-    new webpack.optimize.CommonsChunkPlugin('common'),
+    new webpack.optimize.CommonsChunkPlugin(commonChunkName),
     new webpack.optimize.OccurrenceOrderPlugin(true)
   ],
   resolve: {
@@ -120,6 +102,23 @@ const webpackConfig = {
     version: false
   }
 }
+
+appNames.forEach((appName) => {
+  mergeAndConcat(webpackConfig, {
+    entry: {
+      [appName]: `./${sourceDir}/js/${appName}`
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        chunks: [commonChunkName, appName],
+        filename: `${appName}.html`,
+        inject: 'body',
+        template: path.join(sourceDir, 'html', 'common', 'layout.pug'),
+        title: pkg.name
+      })
+    ]
+  })
+})
 
 const cssLoaderOptions = {
   modules: true,
