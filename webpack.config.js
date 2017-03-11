@@ -96,10 +96,6 @@ const webpackConfig = {
     mainFields: ['main', 'web'],
     */
     extensions: ['.js', '.jsx']
-  },
-  stats: {
-    timings: true,
-    version: false
   }
 }
 
