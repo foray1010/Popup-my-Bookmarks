@@ -112,7 +112,7 @@ export function setPredefinedStyleSheet(options: Object): void {
 
   css.set({
     body: {
-      'font-family': fontFamily,
+      'font-family': `${fontFamily}, sans-serif`,
       'font-size': `${fontSize}px`
     },
     [getClassSelector(bookmarkItemStyles.icon)]: {
