@@ -33,5 +33,5 @@ import reducers from './reducers'
     <Provider store={store}>
       <App />
     </Provider>
-  ), document.getElementById('container'))
+  ), document.getElementById('root'))
 }().catch((err) => console.error(err.stack))

@@ -4,7 +4,7 @@
   -webkit-user-select: none;
 }
 
-:global(#container) {
+:global(#root) {
   background-color: inherit;
 }
 
