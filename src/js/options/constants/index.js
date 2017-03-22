@@ -1,6 +1,6 @@
 /* @flow */
 
-import {static as Immutable} from 'seamless-immutable'
+import Immutable from 'seamless-immutable'
 
 import {
   OPTIONS_CLICK_BY_LEFT,

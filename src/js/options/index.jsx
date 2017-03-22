@@ -2,7 +2,7 @@ import 'babel-polyfill'
 import {createElement} from 'react'
 import {Provider} from 'react-redux'
 import {render} from 'react-dom'
-import {static as Immutable} from 'seamless-immutable'
+import Immutable from 'seamless-immutable'
 
 import '../../manifest.yml'
 import {

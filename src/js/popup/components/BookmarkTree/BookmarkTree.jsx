@@ -1,6 +1,6 @@
 import {autobind} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
-import {static as Immutable} from 'seamless-immutable'
+import Immutable from 'seamless-immutable'
 
 import {
   DRAG_INDICATOR,

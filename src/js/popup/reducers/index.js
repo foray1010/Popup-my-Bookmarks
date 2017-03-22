@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import {static as Immutable} from 'seamless-immutable'
+import Immutable from 'seamless-immutable'
 
 import {
   genDummyItemInfo,

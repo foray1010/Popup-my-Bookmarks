@@ -1,5 +1,5 @@
 import {createElement} from 'react'
-import {static as Immutable} from 'seamless-immutable'
+import Immutable from 'seamless-immutable'
 
 import '../../../css/options/contributors.css'
 
