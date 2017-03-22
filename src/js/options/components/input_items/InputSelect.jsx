@@ -1,6 +1,5 @@
 import {autobind} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
-import {static as Immutable} from 'seamless-immutable'
 
 import {
   normalizeInputtingValue
@@ -55,7 +54,7 @@ class InputSelect extends PureComponent {
       optionValue
     } = this.props
 
-    const optionItems = Immutable.asMutable(choices)
+    const optionItems = choices
       .map((optionChoice, optionChoiceIndex) => (
         <option key={String(optionChoiceIndex)}>
           {optionChoice}

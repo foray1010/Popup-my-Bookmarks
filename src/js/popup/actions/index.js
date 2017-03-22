@@ -1,6 +1,5 @@
 /* @flow */
 
-import {static as Immutable} from 'seamless-immutable'
 import _flatten from 'lodash/flatten'
 
 import {
@@ -497,8 +496,7 @@ export const renewTrees = (oldTrees: Object[]) => {
     } = getState()
 
     const newTrees = await Promise.all(
-      // Promise.all doesn't accept immutable array
-      Immutable.asMutable(oldTrees).map((treeInfo) => {
+      oldTrees.map((treeInfo) => {
         if (treeInfo.id === 'search-result') {
           return getSearchResult(searchKeyword, options)
         }

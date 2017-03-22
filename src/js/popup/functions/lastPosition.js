@@ -1,6 +1,5 @@
 /* @flow */
 
-import {static as Immutable} from 'seamless-immutable'
 import _debounce from 'lodash/debounce'
 
 import {
@@ -18,7 +17,7 @@ export const updateLastScrollTopList: Function = _debounce((): void => {
 }, 200)
 
 export const updateLastUsedTreeIds: Function = (trees: Object[]): void => {
-  const value: string[] = Immutable.asMutable(trees)
+  const value: string[] = trees
     .map((treeInfo: Object): string => treeInfo.id)
   lastUsedTreeIdsStorage.set(value)
 }
