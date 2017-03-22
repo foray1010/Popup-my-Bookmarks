@@ -1,6 +1,8 @@
 import {connect} from 'react-redux'
 
 import {
+  closeEditor,
+  closeMenu,
   dragEnd,
   dragOver,
   dragStart,
@@ -12,6 +14,8 @@ import {
 import BookmarkItem from './BookmarkItem'
 
 const mapDispatchToProps = {
+  closeEditor,
+  closeMenu,
   dragEnd,
   dragOver,
   dragStart,
@@ -25,6 +29,7 @@ const mapStateToProps = (state, ownProps) => {
   const {
     cutTarget,
     dragTarget,
+    editorTarget,
     focusTarget,
     menuTarget
   } = state
@@ -32,15 +37,18 @@ const mapStateToProps = (state, ownProps) => {
 
   const isCutTarget = Boolean(cutTarget && cutTarget.id === itemInfo.id)
   const isDragTarget = Boolean(dragTarget && dragTarget.id === itemInfo.id)
+  const isEditorTarget = Boolean(editorTarget && editorTarget.id === itemInfo.id)
   const isFocusTarget = Boolean(focusTarget && focusTarget.id === itemInfo.id)
   const isMenuTarget = Boolean(menuTarget && menuTarget.id === itemInfo.id)
 
   return {
     dragIndicator: state.dragIndicator,
     dragTarget: dragTarget,
-    focusTarget: focusTarget,
+    isEditorTarget: isEditorTarget,
+    isFocusTarget: isFocusTarget,
+    isMenuTarget: isMenuTarget,
     isSearching: Boolean(state.searchKeyword),
-    isSelected: isDragTarget || isFocusTarget || isMenuTarget,
+    isSelected: isDragTarget || isEditorTarget || isFocusTarget || isMenuTarget,
     isUnclickable: isCutTarget || isDragTarget,
     itemOffsetHeight: state.itemOffsetHeight,
     options: state.options,

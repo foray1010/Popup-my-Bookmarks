@@ -507,12 +507,7 @@ export const renewTrees = (oldTrees: Object[]) => {
       })
     )
 
-    dispatch([
-      // to make sure the menu and editor is not activated when bookmark is updating
-      closeMenuCover(),
-
-      updateTrees(newTrees)
-    ])
+    dispatch(updateTrees(newTrees))
   }
 }
 

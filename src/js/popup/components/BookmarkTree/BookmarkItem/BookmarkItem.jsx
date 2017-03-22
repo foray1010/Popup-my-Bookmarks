@@ -43,6 +43,29 @@ class BookmarkItem extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    const {
+      closeEditor,
+      closeMenu,
+      isEditorTarget,
+      isFocusTarget,
+      isMenuTarget,
+      updateFocusTarget
+    } = this.props
+
+    if (isEditorTarget) {
+      closeEditor()
+    }
+
+    if (isFocusTarget) {
+      updateFocusTarget(null)
+    }
+
+    if (isMenuTarget) {
+      closeMenu()
+    }
+  }
+
   async getTooltip() {
     const {
       isSearching,
@@ -187,14 +210,14 @@ class BookmarkItem extends PureComponent {
   @autobind
   handleMouse(evt) {
     const {
-      focusTarget,
+      isFocusTarget,
       itemInfo,
       updateFocusTarget
     } = this.props
 
     switch (evt.type) {
       case 'mouseenter':
-        if (focusTarget !== itemInfo) {
+        if (!isFocusTarget) {
           updateFocusTarget(itemInfo)
         }
 
@@ -202,7 +225,7 @@ class BookmarkItem extends PureComponent {
         break
 
       case 'mouseleave':
-        if (focusTarget === itemInfo) {
+        if (isFocusTarget) {
           updateFocusTarget(null)
         }
 
@@ -298,10 +321,14 @@ class BookmarkItem extends PureComponent {
 }
 
 BookmarkItem.propTypes = {
+  closeEditor: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func.isRequired,
   dragOver: PropTypes.func.isRequired,
   dragStart: PropTypes.func.isRequired,
-  focusTarget: PropTypes.object,
   hoverBookmarkItem: PropTypes.func.isRequired,
+  isEditorTarget: PropTypes.bool.isRequired,
+  isFocusTarget: PropTypes.bool.isRequired,
+  isMenuTarget: PropTypes.bool.isRequired,
   isSearching: PropTypes.bool.isRequired,
   isSelected: PropTypes.bool.isRequired,
   isUnclickable: PropTypes.bool.isRequired,
