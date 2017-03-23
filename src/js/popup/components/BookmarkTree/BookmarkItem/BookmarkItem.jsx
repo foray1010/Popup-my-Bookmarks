@@ -48,18 +48,16 @@ class BookmarkItem extends PureComponent {
       closeEditor,
       closeMenu,
       isEditorTarget,
-      isFocusTarget,
       isMenuTarget,
-      updateFocusTarget
+      itemInfo,
+      removeFocusTargetById
     } = this.props
 
     if (isEditorTarget) {
       closeEditor()
     }
 
-    if (isFocusTarget) {
-      updateFocusTarget(null)
-    }
+    removeFocusTargetById(itemInfo.id)
 
     if (isMenuTarget) {
       closeMenu()
@@ -210,24 +208,20 @@ class BookmarkItem extends PureComponent {
   @autobind
   handleMouse(evt) {
     const {
-      isFocusTarget,
       itemInfo,
+      removeFocusTargetById,
       updateFocusTarget
     } = this.props
 
     switch (evt.type) {
       case 'mouseenter':
-        if (!isFocusTarget) {
-          updateFocusTarget(itemInfo)
-        }
+        updateFocusTarget(itemInfo)
 
         this._handleMouseEnter()
         break
 
       case 'mouseleave':
-        if (isFocusTarget) {
-          updateFocusTarget(null)
-        }
+        removeFocusTargetById(itemInfo.id)
 
         this._handleMouseEnter.cancel()
         break
@@ -327,7 +321,6 @@ BookmarkItem.propTypes = {
   dragStart: PropTypes.func.isRequired,
   hoverBookmarkItem: PropTypes.func.isRequired,
   isEditorTarget: PropTypes.bool.isRequired,
-  isFocusTarget: PropTypes.bool.isRequired,
   isMenuTarget: PropTypes.bool.isRequired,
   isSearching: PropTypes.bool.isRequired,
   isSelected: PropTypes.bool.isRequired,
@@ -337,6 +330,7 @@ BookmarkItem.propTypes = {
   leftClickBookmarkItem: PropTypes.func.isRequired,
   openMenu: PropTypes.func.isRequired,
   options: PropTypes.object.isRequired,
+  removeFocusTargetById: PropTypes.func.isRequired,
   shouldKeepInView: PropTypes.bool.isRequired,
   treeIndex: PropTypes.number.isRequired,
   updateFocusTarget: PropTypes.func.isRequired

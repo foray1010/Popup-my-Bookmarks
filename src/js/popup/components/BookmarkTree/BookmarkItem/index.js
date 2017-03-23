@@ -9,6 +9,7 @@ import {
   hoverBookmarkItem,
   leftClickBookmarkItem,
   openMenu,
+  removeFocusTargetById,
   updateFocusTarget
 } from '../../../actions'
 import BookmarkItem from './BookmarkItem'
@@ -22,6 +23,7 @@ const mapDispatchToProps = {
   hoverBookmarkItem,
   leftClickBookmarkItem,
   openMenu,
+  removeFocusTargetById,
   updateFocusTarget
 }
 
@@ -45,7 +47,6 @@ const mapStateToProps = (state, ownProps) => {
     dragIndicator: state.dragIndicator,
     dragTarget: dragTarget,
     isEditorTarget: isEditorTarget,
-    isFocusTarget: isFocusTarget,
     isMenuTarget: isMenuTarget,
     isSearching: Boolean(state.searchKeyword),
     isSelected: isDragTarget || isEditorTarget || isFocusTarget || isMenuTarget,

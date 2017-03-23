@@ -99,6 +99,12 @@ const rootReducer = combineReducers({
     action
   ) {
     switch (action.type) {
+      case CST.REMOVE_FOCUS_TARGET_BY_ID:
+        if (state && state.id === action.payload) {
+          return null
+        }
+        return state
+
       case CST.UPDATE_FOCUS_TARGET:
         return action.payload
 

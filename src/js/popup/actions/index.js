@@ -34,6 +34,11 @@ export const removeDragIndicator = createAction(
   CST.REMOVE_DRAG_INDICATOR
 )
 
+export const removeFocusTargetById = createAction(
+  CST.REMOVE_FOCUS_TARGET_BY_ID,
+  (id: string): string => id
+)
+
 export const removeTreeInfosFromIndex = createAction(
   CST.REMOVE_TREE_INFOS_FROM_INDEX,
   (removeFromIndex: number): number => removeFromIndex
@@ -340,8 +345,8 @@ export const onPressArrowKeyOnBookmarkTree = (arrowDirection: string) => {
           const targetTreeItemInfo = await getBookmark(targetTree.id)
 
           dispatch([
-            removeTreeInfosFromIndex(targetTreeIndex),
-            updateFocusTarget(targetTreeItemInfo)
+            updateFocusTarget(targetTreeItemInfo),
+            removeTreeInfosFromIndex(targetTreeIndex)
           ])
         }
         break
