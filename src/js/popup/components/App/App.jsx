@@ -7,6 +7,7 @@ import {
   getSlicedTrees,
   openBookmark,
   setPredefinedStyleSheet,
+  tryFocusToSearchInput,
   updateLastUsedTreeIds
 } from '../../functions'
 import {
@@ -29,13 +30,13 @@ class App extends PureComponent {
 
   componentDidUpdate(prevProps) {
     const {
+      isSearching,
       options,
-      searchKeyword,
       trees
     } = this.props
 
     if (trees !== prevProps.trees) {
-      const isRememberLastPosition = options.rememberPos && !searchKeyword
+      const isRememberLastPosition = options.rememberPos && !isSearching
       if (isRememberLastPosition) {
         updateLastUsedTreeIds(trees)
       }
@@ -87,9 +88,9 @@ class App extends PureComponent {
   async handleEnter(evt) {
     const {
       focusTarget,
+      isSearching,
       menuTarget,
       options,
-      searchKeyword,
       selectedMenuItem,
       trees
     } = this.props
@@ -103,7 +104,7 @@ class App extends PureComponent {
       let itemInfo
       if (focusTarget) {
         itemInfo = focusTarget
-      } else if (searchKeyword) {
+      } else if (isSearching) {
         itemInfo = trees[0].children[0]
       }
 
@@ -120,6 +121,7 @@ class App extends PureComponent {
       closeMenu,
       editorTarget,
       focusTarget,
+      isSearching,
       menuTarget,
       openMenu
     } = this.props
@@ -127,22 +129,19 @@ class App extends PureComponent {
     // no custom handle for editor
     if (editorTarget) return
 
-    switch (evt.keyCode) {
+    const {keyCode} = evt
+    switch (keyCode) {
       case 9: // tab
-      case 37: // left
       case 38: // up
-      case 39: // right
       case 40: { // down
         const mapping = {
           9: evt.shiftKey ? 'up' : 'down',
-          37: 'left',
           38: 'up',
-          39: 'right',
           40: 'down'
         }
 
         evt.preventDefault()
-        this.keyboardArrowHandler(mapping[evt.keyCode])
+        this.keyboardArrowHandler(mapping[keyCode])
         break
       }
 
@@ -155,7 +154,7 @@ class App extends PureComponent {
       case 91: // command
       case 93: { // command
         const isMac = /^Mac/.test(window.navigator.platform)
-        const isCtrlKey = evt.keyCode === 17
+        const isCtrlKey = keyCode === 17
         if (isMac && !isCtrlKey) return
 
         evt.preventDefault()
@@ -167,7 +166,22 @@ class App extends PureComponent {
         break
       }
 
+      case 37: // left
+      case 39: { // right
+        if (isSearching) return
+
+        const mapping = {
+          37: 'left',
+          39: 'right'
+        }
+
+        evt.preventDefault()
+        this.keyboardArrowHandler(mapping[keyCode])
+        break
+      }
+
       default:
+        tryFocusToSearchInput()
     }
   }
 
@@ -226,12 +240,12 @@ App.propTypes = {
   dragTarget: PropTypes.object,
   editorTarget: PropTypes.object,
   focusTarget: PropTypes.object,
+  isSearching: PropTypes.bool.isRequired,
   menuTarget: PropTypes.object,
   onPressArrowKey: PropTypes.func.isRequired,
   openMenu: PropTypes.func.isRequired,
   options: PropTypes.object.isRequired,
   renewTrees: PropTypes.func.isRequired,
-  searchKeyword: PropTypes.string.isRequired,
   selectedMenuItem: PropTypes.string,
   trees: PropTypes.arrayOf(PropTypes.object).isRequired
 }

@@ -10,7 +10,6 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  isMenuCoverHidden: !(state.editorTarget || state.menuTarget),
   options: state.options,
   searchKeyword: state.searchKeyword
 })

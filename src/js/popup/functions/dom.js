@@ -131,3 +131,10 @@ export function setPredefinedStyleSheet(options: Object): void {
     }
   })
 }
+
+export function tryFocusToSearchInput(): void {
+  const searchEl = document.getElementById('search')
+  if (searchEl && searchEl !== document.activeElement) {
+    searchEl.focus()
+  }
+}

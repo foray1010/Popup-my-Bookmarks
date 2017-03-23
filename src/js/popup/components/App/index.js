@@ -22,9 +22,9 @@ const mapStateToProps = (state) => ({
   dragTarget: state.dragTarget,
   editorTarget: state.editorTarget,
   focusTarget: state.focusTarget,
+  isSearching: Boolean(state.searchKeyword),
   menuTarget: state.menuTarget,
   options: state.options,
-  searchKeyword: state.searchKeyword,
   selectedMenuItem: state.selectedMenuItem,
   trees: state.trees
 })

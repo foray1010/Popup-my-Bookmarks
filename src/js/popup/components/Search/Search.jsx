@@ -19,29 +19,15 @@ class Search extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {
-      isMenuCoverHidden
-    } = this.props
-
-    if (isMenuCoverHidden !== prevProps.isMenuCoverHidden) {
-      this.tryFocusToInput()
-    }
-
     if (this.state.inputValue !== prevState.inputValue) {
       this.handleSearchKeywordChange()
     }
   }
 
   @autobind
-  @debounce(1000) // not sure about it, use timeout because blur fire before props update
-  handleBlur() {
-    this.tryFocusToInput()
-  }
-
-  @autobind
-  handleInput() {
+  handleInput(evt) {
     this.setState({
-      inputValue: normalizeInputtingValue(this.inputEl.value)
+      inputValue: normalizeInputtingValue(evt.target.value)
     })
   }
 
@@ -56,29 +42,15 @@ class Search extends PureComponent {
     updateTreesBySearchKeyword(newSearchKeyword)
   }
 
-  tryFocusToInput() {
-    const {
-      isMenuCoverHidden
-    } = this.props
-
-    if (isMenuCoverHidden) {
-      this.inputEl.focus()
-    }
-  }
-
   render() {
     return (
       <div styleName='main'>
         <input
-          ref={(ref) => {
-            this.inputEl = ref
-          }}
+          id='search'
           type='search'
           placeholder={msgSearch}
           value={this.state.inputValue}
           tabIndex='-1'
-          autoFocus
-          onBlur={this.handleBlur}
           onInput={this.handleInput}
         />
       </div>
@@ -87,7 +59,6 @@ class Search extends PureComponent {
 }
 
 Search.propTypes = {
-  isMenuCoverHidden: PropTypes.bool.isRequired,
   searchKeyword: PropTypes.string.isRequired,
   updateTreesBySearchKeyword: PropTypes.func.isRequired
 }
