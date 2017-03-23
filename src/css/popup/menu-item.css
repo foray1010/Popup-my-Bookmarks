@@ -4,6 +4,7 @@
 .main {
   composes: list-item from "../common/composes.css";
   padding: var(--golden-gap) var(--golden-gap-4x);
+  white-space: nowrap;
 
   &.unclickable {
     @apply --grey-list-item;
