@@ -3,7 +3,6 @@
 .main {
   border: solid var(--highlight-level3);
   border-width: 0 0 1px;
-  box-sizing: inline-box;
   display: flex;
   height: var(--input-height);
   margin-bottom: var(--golden-gap);
