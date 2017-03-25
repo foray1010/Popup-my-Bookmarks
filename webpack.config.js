@@ -163,6 +163,7 @@ switch (process.env.NODE_ENV) {
             test: /\.css$/,
             use: ExtractTextPlugin.extract({
               fallback: 'style-loader',
+              publicPath: '../',
               use: [
                 {
                   loader: 'css-loader',

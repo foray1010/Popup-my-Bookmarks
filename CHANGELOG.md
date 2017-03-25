@@ -1,3 +1,7 @@
+## 5.0.1 (25/3/2017)
+Bugfixes:
+  - Wrong image/font path in css
+
 ## 5.0.0 (25/3/2017)
 Features:
   - Open popup by Ctrl / CMD + B (suggested by Sebastian B)

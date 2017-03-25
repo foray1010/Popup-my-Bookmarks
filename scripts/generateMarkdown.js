@@ -23,7 +23,7 @@ const generateReadme = co.wrap(function* () {
   let fileData = yield getMarkdownData([
     'title',
     'description',
-    'stable_version',
+    'legacy_version',
     'developer_guide',
     'todo',
     'contributing'
