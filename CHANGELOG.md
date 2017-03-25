@@ -1,4 +1,4 @@
-## 5.0.0 (unreleased)
+## 5.0.0 (25/3/2017)
 Features:
   - Open popup by Ctrl / CMD + B (suggested by Sebastian B)
   - Use `Tab` and `Shift + Tab` to navigate bookmarks
