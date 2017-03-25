@@ -180,11 +180,12 @@ class BookmarkItem extends PureComponent {
     const {
       dragOver,
       itemInfo,
-      itemOffsetHeight,
       treeIndex
     } = this.props
 
-    const isPlaceAfter = evt.offsetY > itemOffsetHeight / 2
+    const targetOffset = evt.target.getBoundingClientRect()
+
+    const isPlaceAfter = evt.clientY - targetOffset.top > targetOffset.height / 2
 
     dragOver(itemInfo, treeIndex, isPlaceAfter)
   }
@@ -321,7 +322,6 @@ BookmarkItem.propTypes = {
   isSelected: PropTypes.bool.isRequired,
   isUnclickable: PropTypes.bool.isRequired,
   itemInfo: PropTypes.object.isRequired,
-  itemOffsetHeight: PropTypes.number.isRequired,
   leftClickBookmarkItem: PropTypes.func.isRequired,
   openMenu: PropTypes.func.isRequired,
   options: PropTypes.object.isRequired,

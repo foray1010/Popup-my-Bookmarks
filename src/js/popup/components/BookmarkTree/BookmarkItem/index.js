@@ -51,7 +51,6 @@ const mapStateToProps = (state, ownProps) => {
     isSearching: Boolean(state.searchKeyword),
     isSelected: isDragTarget || isEditorTarget || isFocusTarget || isMenuTarget,
     isUnclickable: isCutTarget || isDragTarget,
-    itemOffsetHeight: state.itemOffsetHeight,
     options: state.options,
     shouldKeepInView: isFocusTarget || isMenuTarget
   }
