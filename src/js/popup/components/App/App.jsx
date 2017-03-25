@@ -10,9 +10,6 @@ import {
   tryFocusToSearchInput,
   updateLastUsedTreeIds
 } from '../../functions'
-import {
-  requestAnimationFrame
-} from '../../../common/lib/decorators'
 import chromep from '../../../common/lib/chromePromise'
 import Main from './Main'
 
@@ -24,7 +21,7 @@ class App extends PureComponent {
   }
 
   componentDidMount() {
-    this.afterMount()
+    this.initGlobalEvents()
     this.initBookmarkEvent()
   }
 
@@ -41,15 +38,6 @@ class App extends PureComponent {
         updateLastUsedTreeIds(trees)
       }
     }
-  }
-
-  @requestAnimationFrame
-  afterMount() {
-    const html = document.documentElement
-    html.addEventListener('contextmenu', this.handleContextMenu)
-    html.addEventListener('keydown', this.handleKeyDown)
-    html.addEventListener('mousedown', this.handleMouseDown)
-    html.addEventListener('mouseup', this.handleDragEnd)
   }
 
   handleContextMenu(evt) {
@@ -215,6 +203,14 @@ class App extends PureComponent {
     chrome.bookmarks.onCreated.addListener(renewCurrentTrees)
     chrome.bookmarks.onMoved.addListener(renewSlicedTreesById)
     chrome.bookmarks.onRemoved.addListener(renewSlicedTreesById)
+  }
+
+  initGlobalEvents() {
+    const html = document.documentElement
+    html.addEventListener('contextmenu', this.handleContextMenu)
+    html.addEventListener('keydown', this.handleKeyDown)
+    html.addEventListener('mousedown', this.handleMouseDown)
+    html.addEventListener('mouseup', this.handleDragEnd)
   }
 
   @debounce(30)

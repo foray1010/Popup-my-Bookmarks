@@ -12,9 +12,6 @@ import {
   scrollIntoViewIfNeeded
 } from '../../../functions'
 import {
-  requestAnimationFrame
-} from '../../../../common/lib/decorators'
-import {
   ROOT_ID,
   TYPE_BOOKMARK,
   TYPE_FOLDER,
@@ -27,8 +24,8 @@ import folderIcon from '../../../../../img/folder.png'
 
 class BookmarkItem extends PureComponent {
   componentDidMount() {
-    this.afterMount()
-    this.afterRender()
+    this.setAuxClickEvent()
+    this.setTooltip()
   }
 
   componentDidUpdate() {
@@ -36,7 +33,7 @@ class BookmarkItem extends PureComponent {
       shouldKeepInView
     } = this.props
 
-    this.afterRender()
+    this.setTooltip()
 
     if (shouldKeepInView) {
       scrollIntoViewIfNeeded(this.baseEl)
@@ -96,14 +93,12 @@ class BookmarkItem extends PureComponent {
     return tooltipArr.join('\n')
   }
 
-  @requestAnimationFrame
-  afterMount() {
+  setAuxClickEvent() {
     // temp fix for https://github.com/facebook/react/issues/8529
     this.baseEl.addEventListener('auxclick', this.handleClick)
   }
 
-  @requestAnimationFrame
-  async afterRender() {
+  async setTooltip() {
     const {itemInfo} = this.props
 
     const bookmarkType = getBookmarkType(itemInfo)

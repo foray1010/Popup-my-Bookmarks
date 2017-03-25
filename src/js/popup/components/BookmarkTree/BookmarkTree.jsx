@@ -11,9 +11,6 @@ import {
   lastScrollTopListStorage,
   updateLastScrollTopList
 } from '../../functions'
-import {
-  requestAnimationFrame
-} from '../../../common/lib/decorators'
 import BookmarkItem from './BookmarkItem'
 import DragIndicator from './DragIndicator'
 import FolderCover from '../FolderCover'
@@ -69,21 +66,17 @@ class BookmarkTree extends PureComponent {
     return treeItems
   }
 
-  @requestAnimationFrame
   setHeight() {
-    if (this.bookmarkListEl) {
-      // search-box and tree-header-box height
-      const bookmarkListElOffsetTop = this.bookmarkListEl.getBoundingClientRect().top
+    // search-box and tree-header-box height
+    const bookmarkListElOffsetTop = this.bookmarkListEl.getBoundingClientRect().top
 
-      const maxListHeight = MAX_HEIGHT - bookmarkListElOffsetTop
+    const maxListHeight = MAX_HEIGHT - bookmarkListElOffsetTop
 
-      const listHeight = Math.min(this.bookmarkListEl.scrollHeight, maxListHeight)
+    const listHeight = Math.min(this.bookmarkListEl.scrollHeight, maxListHeight)
 
-      this.bookmarkListEl.style.maxHeight = listHeight + 'px'
-    }
+    this.bookmarkListEl.style.maxHeight = listHeight + 'px'
   }
 
-  @requestAnimationFrame
   setScrollTop() {
     const {
       isRememberLastPosition,
