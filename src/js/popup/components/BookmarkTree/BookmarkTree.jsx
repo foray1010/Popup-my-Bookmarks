@@ -72,9 +72,7 @@ class BookmarkTree extends PureComponent {
 
     const maxListHeight = MAX_HEIGHT - bookmarkListElOffsetTop
 
-    const listHeight = Math.min(this.bookmarkListEl.scrollHeight, maxListHeight)
-
-    this.bookmarkListEl.style.maxHeight = listHeight + 'px'
+    this.bookmarkListEl.style.maxHeight = `${maxListHeight}px`
   }
 
   setScrollTop() {
