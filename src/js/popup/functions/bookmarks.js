@@ -120,11 +120,15 @@ export function getBookmarkType(itemInfo: Object): string {
 }
 
 export async function getFlatTree(id: string): Promise<Object> {
-  const treeInfo: Object = await getBookmark(id)
+  const childrenInfo = await chromep.bookmarks.getChildren(id)
+  const itemInfo = await getBookmark(id)
 
-  treeInfo.children = await chromep.bookmarks.getChildren(id)
-
-  return treeInfo
+  return Object.assign(
+    {
+      children: childrenInfo
+    },
+    itemInfo
+  )
 }
 
 export function getFocusTargetTreeIndex(
