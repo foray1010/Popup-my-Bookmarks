@@ -29,12 +29,13 @@ class NavBarItem extends PureComponent {
     )
 
     return (
-      <span
+      <button
         styleName={thisStyleName}
+        type='button'
         onClick={this.handleClick}
       >
         {title}
-      </span>
+      </button>
     )
   }
 }

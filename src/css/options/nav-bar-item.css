@@ -21,6 +21,7 @@
 }
 
 .main {
+  background-color: transparent;
   border-bottom: var(--golden-gap-2x) solid transparent;
   color: var(--oc-white);
   cursor: default;
