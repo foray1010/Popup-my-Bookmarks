@@ -1,3 +1,7 @@
+## 5.0.3 (29/3/2017)
+Bugfixes:
+  - Cannot use Norwegian Bokmål locale
+
 ## 5.0.2 (27/3/2017)
 Changes:
   - Use `Ctrl / CMD + Shift + B` as keyboard shortcut (reported by kaitan32 in [#63](https://github.com/foray1010/Popup-my-Bookmarks/issues/63))
