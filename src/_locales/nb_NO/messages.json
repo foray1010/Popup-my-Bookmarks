@@ -35,9 +35,33 @@
     "message": "Midt-klikk for å åpne bokmerker i",
     "description": "2013.06.01"
   },
-  "clickOption": {
-    "message": "gjeldende fane/gjeldende fane (uten å lukke PmB/ny fane|bakgrunnsfane|bakgrunnsfane (uten å lukke PmB)|nytt vindu|anonymisert vindu",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  "clickOption1": {
+    "message": "gjeldende fane",
+    "description": "2017.03.29"
+  },
+  "clickOption2": {
+    "message": "gjeldende fane (uten å lukke PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption3": {
+    "message": "ny fane",
+    "description": "2017.03.29"
+  },
+  "clickOption4": {
+    "message": "bakgrunnsfane",
+    "description": "2017.03.29"
+  },
+  "clickOption5": {
+    "message": "bakgrunnsfane (uten å lukke PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption6": {
+    "message": "nytt vindu",
+    "description": "2017.03.29"
+  },
+  "clickOption7": {
+    "message": "anonymisert vindu",
+    "description": "2017.03.29"
   },
   "confirm": {
     "message": "Bekrefte",
@@ -159,8 +183,12 @@
     "message": "Tillatte spørringer",
     "description": "2013.09.11"
   },
-  "searchTargetOpt": {
-    "message": "både tittel og URL|kun tittel",
+  "searchTargetOption1": {
+    "message": "både tittel og URL",
+    "description": "2013.09.11"
+  },
+  "searchTargetOption2": {
+    "message": "kun tittel",
     "description": "2013.09.11"
   },
   "setWidth": {

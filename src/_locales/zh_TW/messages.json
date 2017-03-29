@@ -35,9 +35,33 @@
     "message": "中鍵開啟書籤於",
     "description": "2013.06.01"
   },
-  "clickOption": {
-    "message": "當前分頁|當前分頁 (不關閉PmB)|新分頁|背景分頁|背景分頁 (不關閉PmB)|新視窗|無痕式視窗",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  "clickOption1": {
+    "message": "當前分頁",
+    "description": "2017.03.29"
+  },
+  "clickOption2": {
+    "message": "當前分頁 (不關閉PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption3": {
+    "message": "新分頁",
+    "description": "2017.03.29"
+  },
+  "clickOption4": {
+    "message": "背景分頁",
+    "description": "2017.03.29"
+  },
+  "clickOption5": {
+    "message": "背景分頁 (不關閉PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption6": {
+    "message": "新視窗",
+    "description": "2017.03.29"
+  },
+  "clickOption7": {
+    "message": "無痕式視窗",
+    "description": "2017.03.29"
   },
   "confirm": {
     "message": "確定",
@@ -171,8 +195,12 @@
     "message": "搜尋範圍",
     "description": "2013.09.11"
   },
-  "searchTargetOpt": {
-    "message": "標題及網址|標題",
+  "searchTargetOption1": {
+    "message": "標題及網址",
+    "description": "2013.09.11"
+  },
+  "searchTargetOption2": {
+    "message": "標題",
     "description": "2013.09.11"
   },
   "setWidth": {

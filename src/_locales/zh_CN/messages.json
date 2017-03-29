@@ -35,9 +35,33 @@
     "message": "中键打开书签於",
     "description": "2013.06.01"
   },
-  "clickOption": {
-    "message": "当前分页|当前分页 (不关闭PmB)|新分页|背景分页|背景分页 (不关闭PmB)|新窗口|隐身窗口",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  "clickOption1": {
+    "message": "当前分页",
+    "description": "2017.03.29"
+  },
+  "clickOption2": {
+    "message": "当前分页 (不关闭PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption3": {
+    "message": "新分页",
+    "description": "2017.03.29"
+  },
+  "clickOption4": {
+    "message": "背景分页",
+    "description": "2017.03.29"
+  },
+  "clickOption5": {
+    "message": "背景分页 (不关闭PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption6": {
+    "message": "新窗口",
+    "description": "2017.03.29"
+  },
+  "clickOption7": {
+    "message": "隐身窗口",
+    "description": "2017.03.29"
   },
   "confirm": {
     "message": "确定",
@@ -171,8 +195,12 @@
     "message": "搜索范围",
     "description": "2013.09.11"
   },
-  "searchTargetOpt": {
-    "message": "标题及网址|标题",
+  "searchTargetOption1": {
+    "message": "标题及网址",
+    "description": "2013.09.11"
+  },
+  "searchTargetOption2": {
+    "message": "标题",
     "description": "2013.09.11"
   },
   "setWidth": {

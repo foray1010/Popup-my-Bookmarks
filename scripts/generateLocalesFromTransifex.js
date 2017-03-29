@@ -56,6 +56,11 @@ co(function* () {
         .filter((key) => Boolean(_.get(messagesJson, `${key}.message`)))
         .sort()
         .reduce((obj, key) => {
+          // trim message
+          if (messagesJson[key].message) {
+            messagesJson[key].message = messagesJson[key].message.trim()
+          }
+
           obj[key] = messagesJson[key]
           return obj
         }, {})

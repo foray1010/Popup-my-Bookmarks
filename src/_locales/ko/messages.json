@@ -35,9 +35,33 @@
     "message": "북마크 휠클릭시",
     "description": "2013.06.01"
   },
-  "clickOption": {
-    "message": "현재 탭|현재 탭(PmB 닫지 않음)|새 탭|백그라운드 탭|백그라운드 탭(PmB 닫지 않음)|새 창|시크릿 창",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  "clickOption1": {
+    "message": "현재 탭",
+    "description": "2017.03.29"
+  },
+  "clickOption2": {
+    "message": "현재 탭(PmB 닫지 않음)",
+    "description": "2017.03.29"
+  },
+  "clickOption3": {
+    "message": "새 탭",
+    "description": "2017.03.29"
+  },
+  "clickOption4": {
+    "message": "백그라운드 탭",
+    "description": "2017.03.29"
+  },
+  "clickOption5": {
+    "message": "백그라운드 탭(PmB 닫지 않음)",
+    "description": "2017.03.29"
+  },
+  "clickOption6": {
+    "message": "새 창",
+    "description": "2017.03.29"
+  },
+  "clickOption7": {
+    "message": "시크릿 창",
+    "description": "2017.03.29"
   },
   "confirm": {
     "message": "확인",
@@ -151,8 +175,12 @@
     "message": "검색 가능 대상",
     "description": "2013.09.11"
   },
-  "searchTargetOpt": {
-    "message": "제목과 URL|제목만",
+  "searchTargetOption1": {
+    "message": "제목과 URL",
+    "description": "2013.09.11"
+  },
+  "searchTargetOption2": {
+    "message": "제목만",
     "description": "2013.09.11"
   },
   "setWidth": {

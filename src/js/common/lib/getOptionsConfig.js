@@ -114,8 +114,8 @@ async function getOptionsConfig(): Object {
       type: 'integer',
       default: 0,
       choices: [
-        getMessage('searchTargetOpt1'),
-        getMessage('searchTargetOpt2')
+        getMessage('searchTargetOption1'),
+        getMessage('searchTargetOption2')
       ]
     },
     [OPTIONS_SET_WIDTH]: {

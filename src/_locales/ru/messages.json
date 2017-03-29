@@ -35,9 +35,33 @@
     "message": "Средний клик для открытия закладки в",
     "description": "2013.06.01"
   },
-  "clickOption": {
-    "message": "Текущая вкладка|Текущая вкладка (без закрытия)|Новая вкладка|Фоновая вкладка|Фоновая вкладка (без закрытия)|Новое окно|Окно инкогнито",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  "clickOption1": {
+    "message": "Текущая вкладка",
+    "description": "2017.03.29"
+  },
+  "clickOption2": {
+    "message": "Текущая вкладка (без закрытия)",
+    "description": "2017.03.29"
+  },
+  "clickOption3": {
+    "message": "Новая вкладка",
+    "description": "2017.03.29"
+  },
+  "clickOption4": {
+    "message": "Фоновая вкладка",
+    "description": "2017.03.29"
+  },
+  "clickOption5": {
+    "message": "Фоновая вкладка (без закрытия)",
+    "description": "2017.03.29"
+  },
+  "clickOption6": {
+    "message": "Новое окно",
+    "description": "2017.03.29"
+  },
+  "clickOption7": {
+    "message": "Окно инкогнито",
+    "description": "2017.03.29"
   },
   "confirm": {
     "message": "Подтвердить",
@@ -159,8 +183,12 @@
     "message": "Разрешить поиск в",
     "description": "2013.09.11"
   },
-  "searchTargetOpt": {
-    "message": "Заголовок и адрес|Только заголовок",
+  "searchTargetOption1": {
+    "message": "Заголовок и адрес",
+    "description": "2013.09.11"
+  },
+  "searchTargetOption2": {
+    "message": "Только заголовок",
     "description": "2013.09.11"
   },
   "setWidth": {

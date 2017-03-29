@@ -35,9 +35,33 @@
     "message": "Middelste muisknop opent bladwijzers in",
     "description": "2013.06.01"
   },
-  "clickOption": {
-    "message": "huidig tabblad|huidig tabblad (PmB open)|nieuw tabblad|tabblad op achtergrond|tabblad op achtergrond (PmB open)|nieuw venster|incognitovenster",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  "clickOption1": {
+    "message": "huidig tabblad",
+    "description": "2017.03.29"
+  },
+  "clickOption2": {
+    "message": "huidig tabblad (PmB open)",
+    "description": "2017.03.29"
+  },
+  "clickOption3": {
+    "message": "nieuw tabblad",
+    "description": "2017.03.29"
+  },
+  "clickOption4": {
+    "message": "tabblad op achtergrond",
+    "description": "2017.03.29"
+  },
+  "clickOption5": {
+    "message": "tabblad op achtergrond (PmB open)",
+    "description": "2017.03.29"
+  },
+  "clickOption6": {
+    "message": "nieuw venster",
+    "description": "2017.03.29"
+  },
+  "clickOption7": {
+    "message": "incognitovenster",
+    "description": "2017.03.29"
   },
   "confirm": {
     "message": "Bevestigen",
@@ -151,8 +175,12 @@
     "message": "Toegestane zoekopdrachten",
     "description": "2013.09.11"
   },
-  "searchTargetOpt": {
-    "message": "zowel titel als URL|alleen titel",
+  "searchTargetOption1": {
+    "message": "zowel titel als URL",
+    "description": "2013.09.11"
+  },
+  "searchTargetOption2": {
+    "message": "alleen titel",
     "description": "2013.09.11"
   },
   "setWidth": {

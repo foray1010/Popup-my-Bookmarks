@@ -4,7 +4,7 @@
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
   },
   "addPage": {
-    "message": "Ajouter a la page courante ",
+    "message": "Ajouter a la page courante",
     "description": "2013.01.23"
   },
   "addSeparator": {
@@ -35,9 +35,33 @@
     "message": "Clic central pour ouvrir favoris dans",
     "description": "2013.06.01"
   },
-  "clickOption": {
-    "message": "onglet actuel|onglet actuel (w/o closing PmB)|nouvel onglet|onglet d'arrière-plan|onglet d'arrière-plan (w/o closing PmB)|nouvelle fenêtre|navigation privée",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  "clickOption1": {
+    "message": "onglet actuel",
+    "description": "2017.03.29"
+  },
+  "clickOption2": {
+    "message": "onglet actuel (without closing PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption3": {
+    "message": "nouvel onglet",
+    "description": "2017.03.29"
+  },
+  "clickOption4": {
+    "message": "onglet d'arrière-plan",
+    "description": "2017.03.29"
+  },
+  "clickOption5": {
+    "message": "onglet d'arrière-plan (without closing PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption6": {
+    "message": "nouvelle fenêtre",
+    "description": "2017.03.29"
+  },
+  "clickOption7": {
+    "message": "navigation privée",
+    "description": "2017.03.29"
   },
   "confirm": {
     "message": "Confirmer",
@@ -171,8 +195,12 @@
     "message": "Requêtes de recherche autorisés",
     "description": "2013.09.11"
   },
-  "searchTargetOpt": {
-    "message": "Le titre et URL|titre seulement",
+  "searchTargetOption1": {
+    "message": "Le titre et URL",
+    "description": "2013.09.11"
+  },
+  "searchTargetOption2": {
+    "message": "titre seulement",
     "description": "2013.09.11"
   },
   "setWidth": {

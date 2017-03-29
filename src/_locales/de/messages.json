@@ -35,9 +35,33 @@
     "message": "Aktion für mittlere Maustaste",
     "description": "2013.06.01"
   },
-  "clickOption": {
-    "message": "In aktuellem Tab öffnen|In aktuellem Tab öffnen (PmB schließt)|In neuem Tab öffnen|In neuem Hintergrundtab öffnen|In neuem Hintergrundtab öffnen (PmB schließt)|In neuem Fenster öffnen|In neuem Inkognito-Fenster öffnen",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  "clickOption1": {
+    "message": "In aktuellem Tab öffnen",
+    "description": "2017.03.29"
+  },
+  "clickOption2": {
+    "message": "In aktuellem Tab öffnen (PmB schließt)",
+    "description": "2017.03.29"
+  },
+  "clickOption3": {
+    "message": "In neuem Tab öffnen",
+    "description": "2017.03.29"
+  },
+  "clickOption4": {
+    "message": "In neuem Hintergrundtab öffnen",
+    "description": "2017.03.29"
+  },
+  "clickOption5": {
+    "message": "In neuem Hintergrundtab öffnen (PmB schließt)",
+    "description": "2017.03.29"
+  },
+  "clickOption6": {
+    "message": "In neuem Fenster öffnen",
+    "description": "2017.03.29"
+  },
+  "clickOption7": {
+    "message": "In neuem Inkognito-Fenster öffnen",
+    "description": "2017.03.29"
   },
   "confirm": {
     "message": "Bestätigen",

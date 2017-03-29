@@ -35,9 +35,33 @@
     "message": "Click chuột giữa để mở phần đánh dấu trong",
     "description": "2013.06.01"
   },
-  "clickOption": {
-    "message": "tab hiện tại|tab hiện tại (không cần đóng lại PmB)|tab mới|tab đang mở|tab đang mở (không cần đóng lại PmB)|cửa sổ mới|cửa sổ mới trong chế độ ẩn mình",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  "clickOption1": {
+    "message": "tab hiện tại",
+    "description": "2017.03.29"
+  },
+  "clickOption2": {
+    "message": "tab hiện tại (không cần đóng lại PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption3": {
+    "message": "tab mới",
+    "description": "2017.03.29"
+  },
+  "clickOption4": {
+    "message": "tab đang mở",
+    "description": "2017.03.29"
+  },
+  "clickOption5": {
+    "message": "tab đang mở (không cần đóng lại PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption6": {
+    "message": "cửa sổ mới",
+    "description": "2017.03.29"
+  },
+  "clickOption7": {
+    "message": "cửa sổ mới trong chế độ ẩn mình",
+    "description": "2017.03.29"
   },
   "confirm": {
     "message": "Xác nhận",

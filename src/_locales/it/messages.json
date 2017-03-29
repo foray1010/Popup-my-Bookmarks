@@ -35,9 +35,33 @@
     "message": "Clic centrale apre i Preferiti in",
     "description": "2013.06.01"
   },
-  "clickOption": {
-    "message": "scheda corrente|scheda corrente (non chiude PmB)|nuova scheda|scheda in secondo piano|scheda in secondo piano (non chiude PmB)|nuova finestra|finestra in incognito",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  "clickOption1": {
+    "message": "scheda corrente",
+    "description": "2017.03.29"
+  },
+  "clickOption2": {
+    "message": "scheda corrente (non chiude PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption3": {
+    "message": "nuova scheda",
+    "description": "2017.03.29"
+  },
+  "clickOption4": {
+    "message": "scheda in secondo piano",
+    "description": "2017.03.29"
+  },
+  "clickOption5": {
+    "message": "scheda in secondo piano (non chiude PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption6": {
+    "message": "nuova finestra",
+    "description": "2017.03.29"
+  },
+  "clickOption7": {
+    "message": "finestra in incognito",
+    "description": "2017.03.29"
   },
   "confirm": {
     "message": "Salva",
@@ -151,8 +175,12 @@
     "message": "Query di ricerca consentite",
     "description": "2013.09.11"
   },
-  "searchTargetOpt": {
-    "message": "sia titolo che URL|solo il titolo",
+  "searchTargetOption1": {
+    "message": "sia titolo che URL",
+    "description": "2013.09.11"
+  },
+  "searchTargetOption2": {
+    "message": "solo il titolo",
     "description": "2013.09.11"
   },
   "setWidth": {

@@ -195,11 +195,11 @@
     "message": "Search queries allowed",
     "description": "2013.09.11"
   },
-  "searchTargetOpt1": {
+  "searchTargetOption1": {
     "message": "both title and URL",
     "description": "2013.09.11"
   },
-  "searchTargetOpt2": {
+  "searchTargetOption2": {
     "message": "title only",
     "description": "2013.09.11"
   },
