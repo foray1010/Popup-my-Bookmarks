@@ -61,7 +61,17 @@ co(function* () {
             messagesJson[key].message = messagesJson[key].message.trim()
           }
 
-          obj[key] = messagesJson[key]
+          let mappedKey
+          switch (mappedKey) {
+            case 'nb_NO':
+              mappedKey = 'nb'
+              break
+
+            default:
+              mappedKey = key
+          }
+
+          obj[mappedKey] = messagesJson[key]
           return obj
         }, {})
 
