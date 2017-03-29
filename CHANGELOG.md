@@ -1,3 +1,7 @@
+## 5.0.4 (29/3/2017)
+Bugfixes:
+  - Cannot use Norwegian Bokmål locale (again)
+
 ## 5.0.3 (29/3/2017)
 Bugfixes:
   - Cannot use Norwegian Bokmål locale
