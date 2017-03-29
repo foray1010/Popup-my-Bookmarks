@@ -20,8 +20,18 @@ import {
 } from '../constants'
 import chromep from './chromePromise'
 
+const getMessage = window.chrome.i18n.getMessage
+
 async function getOptionsConfig(): Object {
-  const openBookmarkChoices: string[] = getSelectChoices('clickOption')
+  const openBookmarkChoices: string[] = [
+    getMessage('clickOption1'),
+    getMessage('clickOption2'),
+    getMessage('clickOption3'),
+    getMessage('clickOption4'),
+    getMessage('clickOption5'),
+    getMessage('clickOption6'),
+    getMessage('clickOption7')
+  ]
   const rootFolderChoices: string[] = []
 
   // get the root folders' title and set as the choices of 'defExpand'
@@ -103,7 +113,10 @@ async function getOptionsConfig(): Object {
     [OPTIONS_SEARCH_TARGET]: {
       type: 'integer',
       default: 0,
-      choices: getSelectChoices('searchTargetOpt')
+      choices: [
+        getMessage('searchTargetOpt1'),
+        getMessage('searchTargetOpt2')
+      ]
     },
     [OPTIONS_SET_WIDTH]: {
       type: 'integer',
@@ -120,10 +133,6 @@ async function getOptionsConfig(): Object {
       default: true
     }
   }
-}
-
-function getSelectChoices(optionName: string): string[] {
-  return window.chrome.i18n.getMessage(optionName).split('|')
 }
 
 export default getOptionsConfig

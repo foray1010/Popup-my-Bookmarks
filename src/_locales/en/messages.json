@@ -35,9 +35,33 @@
     "message": "Middle Click to open bookmarks in",
     "description": "2013.06.01"
   },
-  "clickOption": {
-    "message": "current tab|current tab (w/o closing PmB)|new tab|background tab|background tab (w/o closing PmB)|new window|incognito window",
-    "description": "2013.06.01 - Don't remove '|', try to make each phrase not longer than 35 words"
+  "clickOption1": {
+    "message": "current tab",
+    "description": "2017.03.29"
+  },
+  "clickOption2": {
+    "message": "current tab (without closing PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption3": {
+    "message": "new tab",
+    "description": "2017.03.29"
+  },
+  "clickOption4": {
+    "message": "background tab",
+    "description": "2017.03.29"
+  },
+  "clickOption5": {
+    "message": "background tab (without closing PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption6": {
+    "message": "new window",
+    "description": "2017.03.29"
+  },
+  "clickOption7": {
+    "message": "incognito window",
+    "description": "2017.03.29"
   },
   "confirm": {
     "message": "Confirm",
@@ -171,8 +195,12 @@
     "message": "Search queries allowed",
     "description": "2013.09.11"
   },
-  "searchTargetOpt": {
-    "message": "both title and URL|title only",
+  "searchTargetOpt1": {
+    "message": "both title and URL",
+    "description": "2013.09.11"
+  },
+  "searchTargetOpt2": {
+    "message": "title only",
     "description": "2013.09.11"
   },
   "setWidth": {
