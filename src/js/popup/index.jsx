@@ -2,6 +2,7 @@ import 'babel-polyfill'
 import {createElement} from 'react'
 import {Provider} from 'react-redux'
 import {render} from 'react-dom'
+import _difference from 'lodash/difference'
 import Immutable from 'seamless-immutable'
 
 import '../../manifest.yml'
@@ -18,23 +19,34 @@ import getOptionsConfig from '../common/lib/getOptionsConfig'
 import reducers from './reducers'
 
 !async function () {
-  const options = await chromep.storage.sync.get(null)
+  const optionsPromise = chromep.storage.sync.get(null)
+  const optionsConfigPromise = getOptionsConfig()
 
-  /* if first run */
-  const optionsConfig = await getOptionsConfig()
-  for (const optionName of Object.keys(optionsConfig)) {
-    if (options[optionName] === undefined) {
-      await openOptionsPage()
-      return
-    }
+  const options = await optionsPromise
+  const optionsConfig = await optionsConfigPromise
+
+  /* if missing option */
+  const missingOptionKeys = _difference(
+    Object.keys(optionsConfig),
+    Object.keys(options)
+  )
+  if (missingOptionKeys.length !== 0) {
+    openOptionsPage()
+    return
   }
 
   /* Create a Redux store to handle all UI actions and side-effects */
+  const rootTreePromise = getRootTree(options)
+  const treesPromise = initTrees(options)
+
+  const rootTree = await rootTreePromise
+  const trees = await treesPromise
+
   const store = configureStore(reducers, Immutable({
     itemOffsetHeight: getItemOffsetHeight(options),
     options: options,
-    rootTree: await getRootTree(options),
-    trees: await initTrees(options)
+    rootTree: rootTree,
+    trees: trees
   }))
 
   /* render the app */

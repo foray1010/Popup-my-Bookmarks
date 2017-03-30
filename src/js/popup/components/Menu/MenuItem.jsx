@@ -15,7 +15,7 @@ import '../../../../css/popup/menu-item.css'
 
 class MenuItem extends PureComponent {
   @autobind
-  async handleClick(evt) {
+  handleClick(evt) {
     evt.preventDefault()
 
     const {
@@ -36,14 +36,14 @@ class MenuItem extends PureComponent {
     switch (menuItemKey) {
       case CST.MENU_OPEN_ALL:
       case CST.MENU_OPEN_IN_B:
-        await openMultipleBookmarks(menuTarget, {
+        openMultipleBookmarks(menuTarget, {
           isWarnWhenOpenMany: options.warnOpenMany
         })
         break
 
       case CST.MENU_OPEN_ALL_IN_N:
       case CST.MENU_OPEN_IN_N:
-        await openMultipleBookmarks(menuTarget, {
+        openMultipleBookmarks(menuTarget, {
           isNewWindow: true,
           isWarnWhenOpenMany: options.warnOpenMany
         })
@@ -51,7 +51,7 @@ class MenuItem extends PureComponent {
 
       case CST.MENU_OPEN_ALL_IN_I:
       case CST.MENU_OPEN_IN_I:
-        await openMultipleBookmarks(menuTarget, {
+        openMultipleBookmarks(menuTarget, {
           isNewWindow: true,
           isIncognito: true,
           isWarnWhenOpenMany: options.warnOpenMany
@@ -64,7 +64,7 @@ class MenuItem extends PureComponent {
         break
 
       case CST.MENU_DEL:
-        await removeBookmark(menuTarget)
+        removeBookmark(menuTarget)
         break
 
       case CST.MENU_CUT:
@@ -76,11 +76,11 @@ class MenuItem extends PureComponent {
         break
 
       case CST.MENU_PASTE:
-        await pasteItem()
+        pasteItem()
         break
 
       case CST.MENU_ADD_PAGE:
-        await addCurrentPage(menuTarget)
+        addCurrentPage(menuTarget)
         break
 
       case CST.MENU_ADD_FOLDER:
@@ -88,7 +88,7 @@ class MenuItem extends PureComponent {
         break
 
       case CST.MENU_ADD_SEPARATOR:
-        await createBookmarkBelowTarget(
+        createBookmarkBelowTarget(
           menuTarget,
           '- '.repeat(42),
           CST.SEPARATE_THIS_URL
@@ -96,7 +96,7 @@ class MenuItem extends PureComponent {
         break
 
       case CST.MENU_SORT_BY_NAME:
-        await sortByName(menuTarget.parentId)
+        sortByName(menuTarget.parentId)
         break
 
       default:

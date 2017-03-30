@@ -120,15 +120,16 @@ export function getBookmarkType(itemInfo: Object): string {
 }
 
 export async function getFlatTree(id: string): Promise<Object> {
-  const childrenInfo = await chromep.bookmarks.getChildren(id)
-  const itemInfo = await getBookmark(id)
+  const childrenInfoPromise = chromep.bookmarks.getChildren(id)
+  const itemInfoPromise = getBookmark(id)
 
-  return Object.assign(
-    {
-      children: childrenInfo
-    },
-    itemInfo
-  )
+  const childrenInfo = await childrenInfoPromise
+  const itemInfo = await itemInfoPromise
+
+  return {
+    ...itemInfo,
+    children: childrenInfo
+  }
 }
 
 export function getFocusTargetTreeIndex(
@@ -155,7 +156,7 @@ export function getFocusTargetTreeIndex(
 export async function getRootTree(options: Object): Promise<Object> {
   const rootTree: Object = await getFlatTree(ROOT_ID)
 
-  rootTree.children = rootTree.children.filter((
+  const filteredChildrenInfo = rootTree.children.filter((
     itemInfo: Object
   ): boolean => {
     const itemIdNum: number = Number(itemInfo.id)
@@ -168,44 +169,38 @@ export async function getRootTree(options: Object): Promise<Object> {
     return !isFilterThisItem
   })
 
-  return rootTree
+  return {
+    ...rootTree,
+    children: filteredChildrenInfo
+  }
 }
 
 export async function getSearchResult(
   newSearchKeyword: string,
   options: Object
 ): Promise<Object> {
-  const filteredResult: Object[] = []
   const isOnlySearchTitle: boolean = options.searchTarget === 1
-  const results: Object[] = await chromep.bookmarks.search(newSearchKeyword)
-  const splittedKeyArr: string[] = []
+  const searchResult: Object[] = await chromep.bookmarks.search(newSearchKeyword)
 
-  if (isOnlySearchTitle) {
-    splittedKeyArr.push(
-      ...newSearchKeyword.split(' ').map((x) => x.toLowerCase())
-    )
-  }
+  const splittedKeyArr: string[] = isOnlySearchTitle ?
+    newSearchKeyword.split(' ').map((x) => x.toLowerCase()) : []
 
-  for (const itemInfo: Object of results) {
-    if (getBookmarkType(itemInfo) === TYPE_BOOKMARK) {
+  const filteredResult: Object[] = searchResult
+    .filter((itemInfo: Object) => getBookmarkType(itemInfo) === TYPE_BOOKMARK)
+    .reduce((acc: Object[], itemInfo: Object) => {
+      if (acc.length === options.maxResults) return acc
+
       if (isOnlySearchTitle) {
         const itemTitle: string = itemInfo.title.toLowerCase()
 
         const isTitleMatched: boolean = splittedKeyArr
           .every((x: string): boolean => itemTitle.includes(x))
 
-        if (!isTitleMatched) {
-          continue
-        }
+        if (!isTitleMatched) return acc
       }
 
-      filteredResult.push(itemInfo)
-
-      if (filteredResult.length === options.maxResults) {
-        break
-      }
-    }
-  }
+      return acc.concat(itemInfo)
+    }, [])
 
   return {
     ...genDummyItemInfo(),
@@ -245,7 +240,7 @@ export async function initTrees(options: Object): Promise<Object[]> {
         lastExistingTree = await getFlatTree(lastUsedTreeIds[i])
       } catch (err) {
         // if it does not exist, we don't care
-        console.error(err.stack)
+        console.warn(err.stack)
       }
 
       if (lastExistingTree) break
@@ -302,13 +297,13 @@ export async function openBookmark(
   } else {
     switch (openMethod) {
       case 0: // current tab
-      case 1: // current tab (w/o closing PmB)
+      case 1: // current tab (without closing PmB)
         await chromep.tabs.update({url: itemUrl})
         break
 
       case 2: // new tab
       case 3: // background tab
-      case 4: // background tab (w/o closing PmB)
+      case 4: // background tab (without closing PmB)
         await chromep.tabs.create({
           url: itemUrl,
           active: openMethod === 2
@@ -328,8 +323,8 @@ export async function openBookmark(
   }
 
   switch (openMethod) {
-    case 1: // current tab (w/o closing PmB)
-    case 4: // background tab (w/o closing PmB)
+    case 1: // current tab (without closing PmB)
+    case 4: // background tab (without closing PmB)
       break
 
     default:
