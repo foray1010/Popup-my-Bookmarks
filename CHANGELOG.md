@@ -1,3 +1,8 @@
+## 5.0.5 (30/3/2017)
+Bugfixes:
+  - Should not allow to trigger contextmenu by CTRL key on Windows
+  - Should not trigger contextmenu multiple time by long press
+
 ## 5.0.4 (29/3/2017)
 Bugfixes:
   - Cannot use Norwegian Bokmål locale (again)

@@ -134,16 +134,20 @@ class App extends PureComponent {
       }
 
       case 13: // enter
+        if (evt.repeat) return
+
         evt.preventDefault()
         this.handleEnter(evt)
         break
 
       case 17: // ctrl
-      case 91: // command
-      case 93: { // command
+      case 91: // menu
+      case 93: { // menu
+        if (evt.repeat) return
+
         const isMac = /^Mac/.test(window.navigator.platform)
-        const isCtrlKey = keyCode === 17
-        if (isMac && !isCtrlKey) return
+        const isMenuKey = [91, 93].includes(keyCode)
+        if (isMac === isMenuKey) return
 
         evt.preventDefault()
         if (menuTarget) {
