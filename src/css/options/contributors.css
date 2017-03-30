@@ -2,13 +2,13 @@
 
 .main {
   line-height: 2;
-  margin: 0 2rem;
+
+  &,
+  & > dd {
+    margin: 0 2rem;
+  }
 
   & > dt {
     font-weight: bold;
-  }
-
-  & > dd {
-    -webkit-margin-start: 2rem;
   }
 }

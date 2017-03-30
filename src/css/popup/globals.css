@@ -1,7 +1,7 @@
 @import "../common/variables.css";
 
 :global(body) {
-  -webkit-user-select: none;
+  user-select: none;
 }
 
 :global(#root) {

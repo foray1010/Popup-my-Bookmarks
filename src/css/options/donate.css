@@ -13,7 +13,7 @@
   & > ol {
     list-style-position: inside;
     margin: 0;
-    -webkit-padding-start: 0;
+    padding: 0;
   }
 }
 

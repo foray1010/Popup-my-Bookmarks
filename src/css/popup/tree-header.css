@@ -20,7 +20,7 @@
     background-color: var(--oc-white);
     content: "";
     position: absolute;
-    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
   }
 
   &::before {
