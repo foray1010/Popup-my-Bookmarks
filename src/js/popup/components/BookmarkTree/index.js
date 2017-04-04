@@ -2,9 +2,6 @@ import {connect} from 'react-redux'
 
 import BookmarkTree from './BookmarkTree'
 
-const mapDispatchToProps = {
-}
-
 const mapStateToProps = (state, ownProps) => {
   const {
     options
@@ -23,6 +20,5 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(BookmarkTree)
