@@ -126,12 +126,7 @@ switch (process.env.NODE_ENV) {
           {
             test: /\.css$/,
             use: [
-              {
-                loader: 'style-loader',
-                options: {
-                  sourceMap: true
-                }
-              },
+              'style-loader',
               {
                 loader: 'css-loader',
                 options: cssLoaderOptions
