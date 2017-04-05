@@ -8,10 +8,10 @@ import {
   openMultipleBookmarks,
   removeBookmark,
   sortByName
-} from '../../functions'
-import * as CST from '../../constants'
+} from '../../../functions'
+import * as CST from '../../../constants'
 
-import '../../../../css/popup/menu-item.css'
+import '../../../../../css/popup/menu-item.css'
 
 class MenuItem extends PureComponent {
   @autobind

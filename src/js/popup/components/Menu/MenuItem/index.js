@@ -8,13 +8,13 @@ import {
   updateCutTarget,
   updateEditorTarget,
   updateSelectedMenuItem
-} from '../../actions'
+} from '../../../actions'
 import {
   getBookmarkType
-} from '../../functions'
+} from '../../../functions'
 import {
   TYPE_NO_BOOKMARK
-} from '../../constants'
+} from '../../../constants'
 import MenuItem from './MenuItem'
 
 const mapDispatchToProps = {

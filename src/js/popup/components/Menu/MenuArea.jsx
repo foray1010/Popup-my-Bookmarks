@@ -1,6 +1,6 @@
 import {createElement, PropTypes} from 'react'
 
-import MenuItemContainer from './MenuItemContainer'
+import MenuItem from './MenuItem'
 
 import '../../../../css/popup/menu-area.css'
 
@@ -11,7 +11,7 @@ const MenuArea = (props) => {
   } = props
 
   const menuAreaItems = menuAreaKeys.map((menuItemKey) => (
-    <MenuItemContainer
+    <MenuItem
       key={menuItemKey}
       menuItemKey={menuItemKey}
     />
