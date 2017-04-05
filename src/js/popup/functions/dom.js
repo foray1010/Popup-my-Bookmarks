@@ -1,55 +1,13 @@
 /* @flow */
 
 import {
-  getItemHeight,
-  getItemOffsetHeight
+  getItemIconHeight
 } from '.'
 import * as css from '../../common/lib/css'
 
 import bookmarkItemStyles from '../../../css/popup/bookmark-item.css'
-import bookmarkTreeStyles from '../../../css/popup/bookmark-tree.css'
 import editorStyles from '../../../css/popup/editor.css'
 import panelStyles from '../../../css/popup/panel.css'
-
-export function getBookmarkListEls(): Object[] {
-  const getBookmarkListElsFromPanel = (...args: string[]): Object[] => {
-    const selector: string = args
-      .map(getClassSelector)
-      .join(' > ')
-    const els: NodeList<*> = document.querySelectorAll(selector)
-    return Array.from(els)
-  }
-
-  const bookmarkListElsInMaster: Object[] = getBookmarkListElsFromPanel(
-    panelStyles.master,
-    bookmarkTreeStyles.main,
-    bookmarkTreeStyles.list
-  )
-  const bookmarkListElsInSlave: Object[] = getBookmarkListElsFromPanel(
-    panelStyles.slave,
-    bookmarkTreeStyles.main,
-    bookmarkTreeStyles.list
-  )
-
-  // it should NEVER happen
-  if (
-    bookmarkListElsInMaster.length < bookmarkListElsInSlave.length ||
-    bookmarkListElsInMaster.length - bookmarkListElsInSlave.length > 1
-  ) {
-    throw new Error()
-  }
-
-  const bookmarkListEls: Object[] = []
-  const totalLength: number = bookmarkListElsInMaster.length + bookmarkListElsInSlave.length
-  for (let i: number = 0; i < totalLength; i += 1) {
-    const el: Object = i % 2 === 0 ?
-      bookmarkListElsInMaster.shift() :
-      bookmarkListElsInSlave.shift()
-    bookmarkListEls.push(el)
-  }
-
-  return bookmarkListEls
-}
 
 function getClassSelector(className: string): string {
   // remove class name from compose
@@ -67,28 +25,6 @@ export function resetBodySize(): void {
   }
 }
 
-export function scrollIntoViewIfNeeded(el: Object): void {
-  const {
-    bottom,
-    top
-  } = el.getBoundingClientRect()
-
-  const {
-    height: parentHeight,
-    top: parentTop
-  }: {
-    height: number,
-    top: number
-  } = el.parentNode.getBoundingClientRect()
-
-  const isScrolledOutOfBottomView: boolean = bottom > parentTop + parentHeight
-  const isScrolledOutOfTopView: boolean = top < parentTop
-
-  if (isScrolledOutOfBottomView || isScrolledOutOfTopView) {
-    el.scrollIntoView(isScrolledOutOfTopView)
-  }
-}
-
 export function setPredefinedStyleSheet(options: Object): void {
   const {
     fontFamily,
@@ -100,8 +36,7 @@ export function setPredefinedStyleSheet(options: Object): void {
     setWidth: number
   } = options
 
-  const itemHeight: number = getItemHeight(options)
-  const itemOffsetHeight: number = getItemOffsetHeight(options)
+  const itemIconHeight: number = getItemIconHeight(options)
   const panelWidthSelector: string = [
     editorStyles.main,
     panelStyles.master,
@@ -116,15 +51,8 @@ export function setPredefinedStyleSheet(options: Object): void {
       'font-size': `${fontSize}px`
     },
     [getClassSelector(bookmarkItemStyles.icon)]: {
-      // set the width same as item height, as it is a square
-      width: `${itemHeight}px`
-    },
-    [getClassSelector(bookmarkItemStyles.main)]: {
-      height: `${itemHeight}px`
-    },
-    [getClassSelector(bookmarkItemStyles.separator)]: {
-      // set separator height depend on item height
-      height: `${itemOffsetHeight / 2}px`
+      height: `${itemIconHeight}px`,
+      width: `${itemIconHeight}px`
     },
     [panelWidthSelector]: {
       width: `${setWidth}px`

@@ -8,8 +8,7 @@ import {
   getBookmarkType,
   getClickType,
   openBookmark,
-  openMultipleBookmarks,
-  scrollIntoViewIfNeeded
+  openMultipleBookmarks
 } from '../../../functions'
 import {
   ROOT_ID,
@@ -29,15 +28,7 @@ class BookmarkItem extends PureComponent {
   }
 
   componentDidUpdate() {
-    const {
-      shouldKeepInView
-    } = this.props
-
     this.setTooltip()
-
-    if (shouldKeepInView) {
-      scrollIntoViewIfNeeded(this.baseEl)
-    }
   }
 
   componentWillUnmount() {
@@ -284,7 +275,7 @@ class BookmarkItem extends PureComponent {
     }
 
     return (
-      <li
+      <div
         ref={(ref) => {
           this.baseEl = ref
         }}
@@ -305,7 +296,7 @@ class BookmarkItem extends PureComponent {
           hidden={iconSrc === null}
         />
         <span styleName='title'>{itemTitle}</span>
-      </li>
+      </div>
     )
   }
 }
@@ -326,7 +317,6 @@ BookmarkItem.propTypes = {
   openMenu: PropTypes.func.isRequired,
   options: PropTypes.object.isRequired,
   removeFocusTargetById: PropTypes.func.isRequired,
-  shouldKeepInView: PropTypes.bool.isRequired,
   treeIndex: PropTypes.number.isRequired,
   updateFocusTarget: PropTypes.func.isRequired
 }

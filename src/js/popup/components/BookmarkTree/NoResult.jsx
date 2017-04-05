@@ -5,11 +5,9 @@ import '../../../../css/popup/no-result.css'
 const msgNoResult = chrome.i18n.getMessage('noResult')
 
 const NoResult = () => (
-  <li>
-    <p styleName='main'>
-      {msgNoResult}
-    </p>
-  </li>
+  <p styleName='main'>
+    {msgNoResult}
+  </p>
 )
 
 export default NoResult

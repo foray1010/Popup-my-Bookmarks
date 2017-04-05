@@ -25,7 +25,7 @@ export function getClickType(evt: Object): string {
   return 'clickByLeft'
 }
 
-export function getItemHeight(options: Object): number {
+export function getItemIconHeight(options: Object): number {
   const {
     fontSize
   }: {
@@ -36,10 +36,10 @@ export function getItemHeight(options: Object): number {
 }
 
 export function getItemOffsetHeight(options: Object): number {
-  const itemHeight: number = getItemHeight(options)
+  const itemIconHeight: number = getItemIconHeight(options)
 
   // +1 for border width, GOLDEN_GAP for padding
-  return (1 + GOLDEN_GAP) * 2 + itemHeight
+  return (1 + GOLDEN_GAP) * 2 + itemIconHeight
 }
 
 export async function openOptionsPage(): Promise<void> {

@@ -2,18 +2,30 @@
 
 import _debounce from 'lodash/debounce'
 
-import {
-  getBookmarkListEls
-} from './dom'
 import JSONStorage from '../../common/lib/JSONStorage'
 
 export const lastScrollTopListStorage: JSONStorage = new JSONStorage('lastScrollTop', [])
 export const lastUsedTreeIdsStorage: JSONStorage = new JSONStorage('lastBoxPID', [])
 
-export const updateLastScrollTopList: Function = _debounce((): void => {
-  const value: number[] = getBookmarkListEls()
-    .map((el) => el.scrollTop)
-  lastScrollTopListStorage.set(value)
+const defaultScrollTop = 0
+
+export const updateLastScrollTopList: Function = _debounce((
+  index: number,
+  scrollTop: number = defaultScrollTop
+): void => {
+  const lastScrollTopList: number[] = lastScrollTopListStorage.get()
+
+  const previousLength = lastScrollTopList.length
+
+  const isLongerThanBefore = index > previousLength - 1
+
+  lastScrollTopList[index] = scrollTop
+
+  if (isLongerThanBefore) {
+    lastScrollTopList.fill(defaultScrollTop, previousLength, index)
+  }
+
+  lastScrollTopListStorage.set(lastScrollTopList)
 }, 200)
 
 export const updateLastUsedTreeIds: Function = (trees: Object[]): void => {

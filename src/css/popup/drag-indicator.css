@@ -2,5 +2,6 @@
 
 .main {
   border: 1px dashed var(--highlight-level5);
-  height: 20px;
+  box-sizing: border-box;
+  height: 100%;
 }

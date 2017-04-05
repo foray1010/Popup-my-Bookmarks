@@ -21,18 +21,16 @@ class TreeHeader extends PureComponent {
     } = this.props
 
     return (
-      <header hidden={isHidden}>
-        <div styleName='main'>
-          <h1 styleName='title'>
-            {treeInfo.title}
-          </h1>
-          <button
-            styleName='close'
-            type='button'
-            tabIndex='-1'
-            onClick={this.handleClose}
-          />
-        </div>
+      <header styleName='main' hidden={isHidden}>
+        <h1 styleName='title'>
+          {treeInfo.title}
+        </h1>
+        <button
+          styleName='close'
+          type='button'
+          tabIndex='-1'
+          onClick={this.handleClose}
+        />
       </header>
     )
   }

@@ -1,15 +1,11 @@
 @import "../common/variables.css";
 
-.list {
-  composes: plain-list from "../common/composes.css";
-  overflow-y: auto;
+.list-item {
+  box-sizing: border-box;
 
-  &::after {
-    background-color: currentcolor;
-    content: "";
-    display: block;
-    height: var(--golden-gap);
-    margin-top: var(--golden-gap);
+  &:last-child {
+    border-bottom: currentcolor solid var(--golden-gap);
+    padding-bottom: var(--golden-gap);
   }
 }
 

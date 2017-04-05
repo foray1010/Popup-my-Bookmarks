@@ -31,6 +31,7 @@
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-redux": "^5.0.0",
+    "react-virtualized": "^9.5.0",
     "redux": "^3.3.1",
     "redux-batched-subscribe": "^0.1.4",
     "redux-multi": "0.1.12",

@@ -1,13 +1,17 @@
 import {autobind} from 'core-decorators'
 import {createElement, PropTypes, PureComponent} from 'react'
+import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
 import Immutable from 'seamless-immutable'
+import List from 'react-virtualized/dist/commonjs/List'
 
 import {
-  DRAG_INDICATOR,
-  MAX_HEIGHT
+  GOLDEN_GAP,
+  MAX_HEIGHT,
+  TYPE_SEPARATOR
 } from '../../constants'
 import {
   genBookmarkList,
+  getBookmarkType,
   lastScrollTopListStorage,
   updateLastScrollTopList
 } from '../../functions'
@@ -20,9 +24,16 @@ import TreeHeader from './TreeHeader'
 import '../../../../css/popup/bookmark-tree.css'
 
 class BookmarkTree extends PureComponent {
+  constructor(...args) {
+    super(...args)
+
+    this.state = {
+      listHeight: 0
+    }
+  }
+
   componentDidMount() {
     this.setHeight()
-    this.setScrollTop()
   }
 
   componentDidUpdate() {
@@ -42,11 +53,16 @@ class BookmarkTree extends PureComponent {
 
     const treeItems = bookmarkList.map((itemInfo) => (
       <BookmarkItem
-        key={itemInfo.id}
         itemInfo={itemInfo}
         treeIndex={treeIndex}
       />
     ))
+
+    if (isSearching && treeItems.length === 0) {
+      return treeItems.concat(
+        <NoResult />
+      )
+    }
 
     if (dragIndicator && dragIndicator.parentId === treeInfo.id) {
       let dragIndicatorIndex = dragIndicator.index
@@ -58,83 +74,127 @@ class BookmarkTree extends PureComponent {
 
       return Immutable([
         ...treeItems.slice(0, dragIndicatorIndex),
-        <DragIndicator key={DRAG_INDICATOR} />,
+        <DragIndicator />,
         ...treeItems.slice(dragIndicatorIndex)
       ])
     }
-
     return treeItems
   }
 
   setHeight() {
     // search-box and tree-header-box height
-    const bookmarkListElOffsetTop = this.bookmarkListEl.getBoundingClientRect().top
+    const listContainerElOffsetTop = this.listContainerEl.getBoundingClientRect().top
 
-    const maxListHeight = MAX_HEIGHT - bookmarkListElOffsetTop
+    const maxListHeight = MAX_HEIGHT - listContainerElOffsetTop
+    const totalRowHeight = this.list.Grid._rowSizeAndPositionManager.getTotalSize()
 
-    this.bookmarkListEl.style.maxHeight = `${maxListHeight}px`
+    const listHeight = Math.min(maxListHeight, totalRowHeight)
+
+    if (this.state.listHeight !== listHeight) {
+      this.setState({
+        listHeight: listHeight
+      })
+    }
   }
 
-  setScrollTop() {
+  @autobind
+  handleScroll({scrollTop}) {
     const {
       isRememberLastPosition,
       treeIndex
     } = this.props
 
     if (isRememberLastPosition) {
-      const lastScrollTopList = lastScrollTopListStorage.get()
+      updateLastScrollTopList(treeIndex, scrollTop)
+    }
+  }
 
-      const lastScrollTop = lastScrollTopList[treeIndex]
-      if (lastScrollTop) {
-        this.bookmarkListEl.scrollTop = lastScrollTop
+  makeGetRowHeight(treeItems) {
+    return ({
+      index
+    }) => {
+      const {
+        itemOffsetHeight
+      } = this.props
+
+      let rowHeight = itemOffsetHeight
+
+      const itemInfo = treeItems[index].props.itemInfo
+      if (itemInfo) {
+        const bookmarkType = getBookmarkType(itemInfo)
+        if (bookmarkType === TYPE_SEPARATOR) {
+          rowHeight /= 2
+        }
       }
+
+      // for the indicator show the end of folder
+      if (index === treeItems.length - 1) {
+        rowHeight += GOLDEN_GAP * 2
+      }
+
+      return rowHeight
     }
   }
 
-  @autobind
-  handleScroll() {
-    const {
-      isRememberLastPosition
-    } = this.props
-
-    if (isRememberLastPosition) {
-      updateLastScrollTopList()
-    }
-  }
-
-  @autobind
-  handleWheel(evt) {
-    evt.preventDefault()
-
-    const {itemOffsetHeight} = this.props
-
-    // control scrolling speed
-    this.bookmarkListEl.scrollTop += Math.floor(itemOffsetHeight * evt.deltaY / 40)
+  makeRowRenderer(treeItems) {
+    return ({
+      index,
+      key,
+      style
+    }) => (
+      <div key={key} styleName='list-item' style={style}>
+        {treeItems[index]}
+      </div>
+    )
   }
 
   render() {
     const {
-      isSearching,
+      isRememberLastPosition,
+      scrollToIndex,
       treeIndex
     } = this.props
 
     const treeItems = this.getTreeItems()
 
+    const getRowHeight = this.makeGetRowHeight(treeItems)
+    const rowRenderer = this.makeRowRenderer(treeItems)
+
+    let lastScrollTop
+    if (isRememberLastPosition) {
+      const lastScrollTopList = lastScrollTopListStorage.get()
+
+      lastScrollTop = lastScrollTopList[treeIndex]
+    }
+
     return (
       <section styleName='main'>
         <TreeHeader treeIndex={treeIndex} />
-        <ul
+        <div
           ref={(ref) => {
-            this.bookmarkListEl = ref
+            this.listContainerEl = ref
           }}
-          styleName='list'
-          onKeyDown={this.handleKeyDown}
-          onScroll={this.handleScroll}
-          onWheel={this.handleWheel}
         >
-          {treeItems}
-          {isSearching && treeItems.length === 0 ? <NoResult /> : null}
-        </ul>
+          <AutoSizer disableHeight>
+            {({width}) => (
+              <List
+                ref={(ref) => {
+                  this.list = ref
+                }}
+                height={this.state.listHeight}
+                noRowsRenderer={this.noRowsRenderer}
+                onScroll={this.handleScroll}
+                rowCount={treeItems.length}
+                rowHeight={getRowHeight}
+                rowRenderer={rowRenderer}
+                scrollToIndex={scrollToIndex >= 0 ? scrollToIndex : undefined}
+                scrollTop={lastScrollTop}
+                tabIndex={null}
+                width={width}
+              />
+            )}
+          </AutoSizer>
+        </div>
         <FolderCover treeIndex={treeIndex} />
       </section>
     )
@@ -147,6 +207,7 @@ BookmarkTree.propTypes = {
   isSearching: PropTypes.bool.isRequired,
   itemOffsetHeight: PropTypes.number.isRequired,
   rootTree: PropTypes.object.isRequired,
+  scrollToIndex: PropTypes.number.isRequired,
   treeIndex: PropTypes.number.isRequired,
   treeInfo: PropTypes.object.isRequired
 }

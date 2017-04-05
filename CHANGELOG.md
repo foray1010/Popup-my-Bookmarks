@@ -1,3 +1,7 @@
+## 5.1.0 (Unreleased)
+Improvements:
+  - Greatly improve performance when you have a very large set of bookmarks in the same folder
+
 ## 5.0.5 (30/3/2017)
 Bugfixes:
   - Should not allow to trigger contextmenu by CTRL key on Windows

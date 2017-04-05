@@ -3,9 +3,7 @@ import {createElement} from 'react'
 import '../../../../css/popup/drag-indicator.css'
 
 const DragIndicator = () => (
-  <li>
-    <div styleName='main' />
-  </li>
+  <div styleName='main' />
 )
 
 export default DragIndicator
