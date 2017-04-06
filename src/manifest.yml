@@ -24,7 +24,7 @@ options_ui:
 commands:
   _execute_browser_action:
     suggested_key:
-      default: "Ctrl+Shift+B"
+      default: "Alt+Shift+B"
 
 permissions:
   # this grant permission to run bookmarklet on current page
