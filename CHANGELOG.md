@@ -1,4 +1,4 @@
-## 5.1.0 (Unreleased)
+## 5.1.0 (6/4/2017)
 Changes:
   - Use `Alt + Shift + B` as keyboard shortcut (reported by n8wood in [#63](https://github.com/foray1010/Popup-my-Bookmarks/issues/63#issuecomment-291903966))
 
