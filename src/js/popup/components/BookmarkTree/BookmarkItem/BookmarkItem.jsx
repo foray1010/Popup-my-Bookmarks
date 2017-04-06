@@ -295,7 +295,7 @@ class BookmarkItem extends PureComponent {
           alt=''
           hidden={iconSrc === null}
         />
-        <span styleName='title'>{itemTitle}</span>
+        <div styleName='title'>{itemTitle}</div>
       </div>
     )
   }

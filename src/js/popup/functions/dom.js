@@ -51,7 +51,6 @@ export function setPredefinedStyleSheet(options: Object): void {
       'font-size': `${fontSize}px`
     },
     [getClassSelector(bookmarkItemStyles.icon)]: {
-      height: `${itemIconHeight}px`,
       width: `${itemIconHeight}px`
     },
     [panelWidthSelector]: {
