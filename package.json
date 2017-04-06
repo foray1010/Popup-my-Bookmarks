@@ -14,10 +14,13 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "webpack-dashboard -- cross-env NODE_ENV=development webpack",
-    "lint": "eslint --ext .js,.jsx . && flow check && stylelint src/css/**/*.css",
+    "lint": "npm-run-all -p lint:*",
+    "lint:css": "stylelint src/**/*.css",
+    "lint:es": "eslint --ext .js,.jsx .",
+    "lint:flow": "flow check",
     "locales": "node scripts/generateLocalesFromTransifex.js",
     "md": "node scripts/generateMarkdown.js",
-    "precommit": "yarn run lint",
+    "precommit": "npm run lint",
     "test": "exit 0"
   },
   "dependencies": {
@@ -62,6 +65,7 @@
     "husky": "^0.13.2",
     "image-process-loader": "^0.1.0",
     "merge-and-concat": "^1.0.2",
+    "npm-run-all": "^4.0.2",
     "optimize-js-plugin": "0.0.4",
     "postcss-cssnext": "^2.8.0",
     "postcss-import": "^9.0.0",
