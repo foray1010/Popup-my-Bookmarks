@@ -1,4 +1,5 @@
-import {createElement, PropTypes} from 'react'
+import {createElement} from 'react'
+import PropTypes from 'prop-types'
 
 import BookmarkTree from '../BookmarkTree'
 import Search from '../Search'

@@ -1,7 +1,8 @@
 import {autobind, debounce, decorate} from 'core-decorators'
-import {createElement, PropTypes, PureComponent} from 'react'
+import {createElement, PureComponent} from 'react'
 import _debounce from 'lodash/debounce'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
 
 import {
   getBookmark,

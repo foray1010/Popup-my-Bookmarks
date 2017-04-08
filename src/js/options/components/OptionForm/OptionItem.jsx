@@ -1,4 +1,5 @@
-import {createElement, PropTypes} from 'react'
+import {createElement} from 'react'
+import PropTypes from 'prop-types'
 
 import InputNumber from '../input_items/InputNumber'
 import InputSelect from '../input_items/InputSelect'

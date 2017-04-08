@@ -1,5 +1,6 @@
 import {autobind} from 'core-decorators'
-import {createElement, PropTypes, PureComponent} from 'react'
+import {createElement, PureComponent} from 'react'
+import PropTypes from 'prop-types'
 
 class SelectString extends PureComponent {
   @autobind

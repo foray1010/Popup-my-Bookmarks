@@ -1,7 +1,8 @@
 import {autobind} from 'core-decorators'
-import {createElement, PropTypes, PureComponent} from 'react'
+import {createElement, PureComponent} from 'react'
 import _uniqueId from 'lodash/uniqueId'
 import Immutable from 'seamless-immutable'
+import PropTypes from 'prop-types'
 
 class Option extends PureComponent {
   componentWillMount() {

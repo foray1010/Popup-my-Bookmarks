@@ -1,6 +1,7 @@
 import {autobind, decorate} from 'core-decorators'
-import {createElement, PropTypes, PureComponent} from 'react'
+import {createElement, PureComponent} from 'react'
 import _debounce from 'lodash/debounce'
+import PropTypes from 'prop-types'
 
 import '../../../../css/popup/folder-cover.css'
 

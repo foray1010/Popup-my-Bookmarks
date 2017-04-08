@@ -1,8 +1,9 @@
 import {autobind} from 'core-decorators'
-import {createElement, PropTypes, PureComponent} from 'react'
+import {createElement, PureComponent} from 'react'
 import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
 import Immutable from 'seamless-immutable'
 import List from 'react-virtualized/dist/commonjs/List'
+import PropTypes from 'prop-types'
 
 import {
   GOLDEN_GAP,

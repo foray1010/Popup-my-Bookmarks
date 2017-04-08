@@ -1,6 +1,7 @@
 import {autobind} from 'core-decorators'
-import {createElement, PropTypes, PureComponent} from 'react'
+import {createElement, PureComponent} from 'react'
 import _clamp from 'lodash/clamp'
+import PropTypes from 'prop-types'
 
 class InputNumber extends PureComponent {
   @autobind

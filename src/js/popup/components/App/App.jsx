@@ -1,6 +1,7 @@
 import {autobind, debounce} from 'core-decorators'
-import {createElement, PropTypes, PureComponent} from 'react'
+import {createElement, PureComponent} from 'react'
 import _debounce from 'lodash/debounce'
+import PropTypes from 'prop-types'
 
 import {
   getClickType,
