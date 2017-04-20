@@ -1,5 +1,7 @@
 # Popup my Bookmarks
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/foray1010/Popup-my-Bookmarks.svg)](https://greenkeeper.io/)
+
 [![Version On Chrome Web Store](https://img.shields.io/chrome-web-store/v/mppflflkbbafeopeoeigkbbdjdbeifni.svg?maxAge=3600)](//chrome.google.com/webstore/detail/popup-my-bookmarks/mppflflkbbafeopeoeigkbbdjdbeifni)
 [![Download Count On Chrome Web Store](https://img.shields.io/chrome-web-store/d/mppflflkbbafeopeoeigkbbdjdbeifni.svg?maxAge=3600)](//chrome.google.com/webstore/detail/popup-my-bookmarks/mppflflkbbafeopeoeigkbbdjdbeifni)
 
