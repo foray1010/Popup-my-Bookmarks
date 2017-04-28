@@ -8,7 +8,6 @@ const path = require('path')
 const prompt = require('prompt')
 const Transifex = require('transifex')
 
-bluebird.promisifyAll(fs)
 bluebird.promisifyAll(prompt)
 
 const schema = {
@@ -61,29 +60,30 @@ co(function* () {
             messagesJson[key].message = messagesJson[key].message.trim()
           }
 
-          let mappedKey
-          switch (mappedKey) {
-            case 'nb_NO':
-              mappedKey = 'nb'
-              break
-
-            default:
-              mappedKey = key
-          }
-
-          obj[mappedKey] = messagesJson[key]
+          obj[key] = messagesJson[key]
           return obj
         }, {})
 
-      yield fs.mkdirsAsync(
-        path.join(localesPath, availableLanguage)
+      let mappedLanguage
+      switch (availableLanguage) {
+        case 'nb_NO':
+          mappedLanguage = 'nb'
+          break
+
+        default:
+          mappedLanguage = availableLanguage
+      }
+
+      yield fs.mkdirs(
+        path.join(localesPath, mappedLanguage)
       )
 
-      yield fs.outputJsonAsync(
-        path.join(localesPath, availableLanguage, 'messages.json'),
-        sortedMessagesJson
+      yield fs.outputJson(
+        path.join(localesPath, mappedLanguage, 'messages.json'),
+        sortedMessagesJson,
+        {spaces: 2}
       )
 
-      console.log(`"${availableLanguage}" is generated`)
+      console.log(`"${mappedLanguage}" is generated`)
     })
 }).catch((err) => console.error(err.stack))
