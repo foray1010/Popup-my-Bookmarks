@@ -29,7 +29,7 @@
     "classnames": "^2.2.3",
     "core-decorators": "^0.17.0",
     "lodash": "^4.16.1",
-    "normalize.css": "^6.0.0",
+    "normalize.css": "^7.0.0",
     "open-color": "^1.4.0",
     "prop-types": "^15.5.4",
     "react": "^15.5.3",
