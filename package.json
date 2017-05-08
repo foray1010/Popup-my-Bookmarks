@@ -70,7 +70,7 @@
     "optimize-js-plugin": "0.0.4",
     "postcss-cssnext": "^2.8.0",
     "postcss-import": "^9.0.0",
-    "postcss-loader": "^1.0.0",
+    "postcss-loader": "^2.0.0",
     "postcss-url": "^6.0.4",
     "prompt": "^1.0.0",
     "pug": "^2.0.0-beta11",
