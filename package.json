@@ -53,7 +53,7 @@
     "co": "^4.6.0",
     "config": "^1.25.1",
     "copy-webpack-plugin": "^4.0.1",
-    "cross-env": "^4.0.0",
+    "cross-env": "^5.0.0",
     "css-loader": "^0.28.0",
     "eslint": "^3.17.1",
     "eslint-config-foray1010": "^4.0.0",
