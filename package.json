@@ -63,7 +63,7 @@
     "flow-bin": "^0.48.0",
     "fs-extra": "^3.0.0",
     "html-webpack-plugin": "^2.28.0",
-    "husky": "^0.13.2",
+    "husky": "^0.14.0",
     "image-process-loader": "^0.1.0",
     "merge-and-concat": "^1.0.2",
     "npm-run-all": "^4.0.2",
