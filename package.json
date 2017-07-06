@@ -68,7 +68,7 @@
     "merge-and-concat": "^1.0.2",
     "npm-run-all": "^4.0.2",
     "optimize-js-plugin": "0.0.4",
-    "postcss-cssnext": "^2.8.0",
+    "postcss-cssnext": "^3.0.0",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.0",
     "postcss-url": "^7.0.0",
