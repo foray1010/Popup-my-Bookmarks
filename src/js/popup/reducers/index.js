@@ -3,6 +3,7 @@ import Immutable from 'seamless-immutable'
 
 import {
   genDummyItemInfo,
+  getBookmarkType,
   getSlicedTrees,
   isFolder
 } from '../functions'
@@ -52,10 +53,21 @@ const rootReducer = combineReducers({
           itemInfo
         } = action.payload
 
+        let dragIndicatorIndex = 0
+        switch (getBookmarkType(itemInfo)) {
+          case CST.TYPE_BOOKMARK:
+          case CST.TYPE_FOLDER:
+          case CST.TYPE_SEPARATOR:
+            dragIndicatorIndex = itemInfo.index + (isPlaceAfter ? 1 : 0)
+            break
+
+          default:
+        }
+
         return Immutable({
           ...genDummyItemInfo(),
           id: CST.DRAG_INDICATOR,
-          index: Math.max(itemInfo.index, 0) + (isPlaceAfter ? 1 : 0),
+          index: dragIndicatorIndex,
           parentId: itemInfo.parentId
         })
       }

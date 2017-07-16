@@ -1,3 +1,7 @@
+## 5.1.2 (Not ready to release yet)
+Bugfixes:
+  - Cannot drag item into empty folder
+
 ## 5.1.1 (6/4/2017)
 Bugfixes:
   - Bookmark icon shrinks if title is too long
