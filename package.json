@@ -79,7 +79,7 @@
     "sharp": "^0.18.1",
     "style-loader": "^0.18.2",
     "stylelint": "^7.9.0",
-    "stylelint-config-foray1010": "^2.0.0",
+    "stylelint-config-foray1010": "^3.0.0",
     "transifex": "^1.4.4",
     "webpack": "^3.0.0",
     "webpack-bundle-analyzer": "^2.3.0",
