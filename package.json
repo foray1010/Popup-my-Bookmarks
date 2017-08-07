@@ -41,7 +41,7 @@
     "redux-multi": "0.1.12",
     "redux-thunk": "^2.1.0",
     "seamless-immutable": "^7.0.0",
-    "typeface-archivo-narrow": "0.0.33"
+    "typeface-archivo-narrow": "0.0.34"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
