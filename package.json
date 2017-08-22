@@ -13,14 +13,15 @@
   "bugs": "https://github.com/foray1010/Popup-my-Bookmarks/issues",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
-    "dev": "webpack-dashboard -- cross-env NODE_ENV=development webpack",
+    "dev": "webpack-dashboard -- yarn dev:plain",
+    "dev:plain": "cross-env NODE_ENV=development webpack",
     "lint": "npm-run-all -p lint:*",
     "lint:css": "stylelint src/**/*.css",
     "lint:es": "eslint --ext .js,.jsx .",
     "lint:flow": "flow check",
     "locales": "node scripts/generateLocalesFromTransifex.js",
     "md": "node scripts/generateMarkdown.js",
-    "precommit": "npm run lint",
+    "precommit": "yarn lint",
     "test": "exit 0"
   },
   "dependencies": {
