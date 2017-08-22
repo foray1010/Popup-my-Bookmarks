@@ -1,12 +1,10 @@
-import {autobind} from 'core-decorators'
 import {createElement, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 
 import '../../../../css/popup/menu-cover.css'
 
 class MenuCover extends PureComponent {
-  @autobind
-  handleClick() {
+  handleClick = () => {
     this.props.closeMenuCover()
   }
 

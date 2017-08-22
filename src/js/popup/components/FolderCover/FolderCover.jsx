@@ -1,4 +1,3 @@
-import {autobind, decorate} from 'core-decorators'
 import {createElement, PureComponent} from 'react'
 import _debounce from 'lodash/debounce'
 import PropTypes from 'prop-types'
@@ -6,28 +5,24 @@ import PropTypes from 'prop-types'
 import '../../../../css/popup/folder-cover.css'
 
 class FolderCover extends PureComponent {
-  @decorate(_debounce, 200)
-  closeCover() {
+  closeCover = _debounce(() => {
     const {
       removeTreeInfosFromIndex,
       treeIndex
     } = this.props
 
     removeTreeInfosFromIndex(treeIndex + 1)
-  }
+  }, 200)
 
-  @autobind
-  handleClick() {
+  handleClick = () => {
     this.closeCover()
   }
 
-  @autobind
-  handleMouseLeave() {
+  handleMouseLeave = () => {
     this.closeCover.cancel()
   }
 
-  @autobind
-  handleMouseMove() {
+  handleMouseMove = () => {
     this.closeCover()
   }
 

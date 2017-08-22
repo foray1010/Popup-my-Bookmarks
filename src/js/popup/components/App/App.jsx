@@ -1,4 +1,3 @@
-import {autobind, debounce} from 'core-decorators'
 import {createElement, PureComponent} from 'react'
 import _debounce from 'lodash/debounce'
 import PropTypes from 'prop-types'
@@ -41,7 +40,7 @@ class App extends PureComponent {
     }
   }
 
-  handleContextMenu(evt) {
+  handleContextMenu = (evt) => {
     // allow native context menu if it is an input element
     if (evt.target.tagName === 'INPUT') {
       return
@@ -54,8 +53,7 @@ class App extends PureComponent {
   // hack to stimulate onDragEnd event
   // onDragEnd doesn't work when original drag element is removed from DOM,
   // but onMouseUp still fire
-  @autobind
-  async handleDragEnd() {
+  handleDragEnd = async () => {
     const {
       dragEnd,
       dragIndicator,
@@ -74,7 +72,7 @@ class App extends PureComponent {
     }
   }
 
-  async handleEnter(evt) {
+  handleEnter = async (evt) => {
     const {
       focusTarget,
       isSearching,
@@ -104,8 +102,7 @@ class App extends PureComponent {
     }
   }
 
-  @autobind
-  handleKeyDown(evt) {
+  handleKeyDown = async (evt) => {
     const {
       closeMenu,
       editorTarget,
@@ -178,7 +175,7 @@ class App extends PureComponent {
     }
   }
 
-  handleMouseDown(evt) {
+  handleMouseDown = (evt) => {
     // disable the scrolling arrows after middle click
     if (evt.button === 1) {
       evt.preventDefault()
@@ -218,14 +215,13 @@ class App extends PureComponent {
     html.addEventListener('mouseup', this.handleDragEnd)
   }
 
-  @debounce(30)
-  keyboardArrowHandler(arrowDirection) {
+  keyboardArrowHandler = _debounce((arrowDirection) => {
     const {
       onPressArrowKey
     } = this.props
 
     onPressArrowKey(arrowDirection)
-  }
+  }, 30)
 
   render() {
     return (

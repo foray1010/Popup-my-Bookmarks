@@ -1,4 +1,3 @@
-import {autobind} from 'core-decorators'
 import {createElement, PureComponent} from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
@@ -15,8 +14,7 @@ import * as CST from '../../../constants'
 import '../../../../../css/popup/menu-item.css'
 
 class MenuItem extends PureComponent {
-  @autobind
-  handleClick(evt) {
+  handleClick = (evt) => {
     evt.preventDefault()
 
     const {
@@ -106,8 +104,7 @@ class MenuItem extends PureComponent {
     closeMenu()
   }
 
-  @autobind
-  handleMouseEnter() {
+  handleMouseEnter = () => {
     const {
       menuItemKey,
       selectedMenuItem,
@@ -119,8 +116,7 @@ class MenuItem extends PureComponent {
     }
   }
 
-  @autobind
-  handleMouseLeave() {
+  handleMouseLeave = () => {
     const {
       menuItemKey,
       selectedMenuItem,

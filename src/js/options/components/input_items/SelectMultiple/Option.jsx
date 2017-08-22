@@ -1,4 +1,3 @@
-import {autobind} from 'core-decorators'
 import {createElement, PureComponent} from 'react'
 import _uniqueId from 'lodash/uniqueId'
 import Immutable from 'seamless-immutable'
@@ -9,8 +8,7 @@ class Option extends PureComponent {
     this.id = _uniqueId(Option.name)
   }
 
-  @autobind
-  handleChange(evt) {
+  handleChange = (evt) => {
     const {
       optionName,
       optionValue,

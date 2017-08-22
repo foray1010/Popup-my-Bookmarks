@@ -1,10 +1,8 @@
-import {autobind} from 'core-decorators'
 import {createElement, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 
 class SelectString extends PureComponent {
-  @autobind
-  handleChange(evt) {
+  handleChange = (evt) => {
     const {
       optionName,
       updateSingleOption

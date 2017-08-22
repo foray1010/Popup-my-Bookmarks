@@ -1,5 +1,5 @@
-import {autobind, debounce} from 'core-decorators'
 import {createElement, PureComponent} from 'react'
+import _debounce from 'lodash/debounce'
 import PropTypes from 'prop-types'
 
 import {
@@ -11,12 +11,8 @@ import '../../../../css/popup/search.css'
 const msgSearch = chrome.i18n.getMessage('search')
 
 class Search extends PureComponent {
-  constructor(...args) {
-    super(...args)
-
-    this.state = {
-      inputValue: this.props.searchKeyword
-    }
+  state = {
+    inputValue: this.props.searchKeyword
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -25,15 +21,13 @@ class Search extends PureComponent {
     }
   }
 
-  @autobind
-  handleInput(evt) {
+  handleInput = (evt) => {
     this.setState({
       inputValue: normalizeInputtingValue(evt.target.value)
     })
   }
 
-  @debounce(300)
-  handleSearchKeywordChange() {
+  handleSearchKeywordChange = _debounce(() => {
     const {
       updateTreesBySearchKeyword
     } = this.props
@@ -41,7 +35,7 @@ class Search extends PureComponent {
     const newSearchKeyword = this.state.inputValue.trim()
 
     updateTreesBySearchKeyword(newSearchKeyword)
-  }
+  }, 300)
 
   render() {
     return (

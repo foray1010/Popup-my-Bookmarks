@@ -1,4 +1,3 @@
-import {autobind} from 'core-decorators'
 import {createElement, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 
@@ -19,13 +18,9 @@ const msgNewFolder = chrome.i18n.getMessage('newFolder')
 const msgRename = chrome.i18n.getMessage('rename')
 
 class Editor extends PureComponent {
-  constructor(...args) {
-    super(...args)
-
-    this.state = {
-      title: '',
-      url: ''
-    }
+  state = {
+    title: '',
+    url: ''
   }
 
   componentWillReceiveProps(nextProps) {
@@ -98,13 +93,11 @@ class Editor extends PureComponent {
     this.baseEl.style.left = leftPositionPx
   }
 
-  @autobind
-  handleCancel() {
+  handleCancel = () => {
     this.props.closeEditor()
   }
 
-  @autobind
-  async handleConfirm(evt) {
+  handleConfirm = async (evt) => {
     evt.persist()
     evt.preventDefault()
 
@@ -135,15 +128,13 @@ class Editor extends PureComponent {
     closeEditor()
   }
 
-  @autobind
-  handleTitleChange(evt) {
+  handleTitleChange = (evt) => {
     this.setState({
       title: normalizeInputtingValue(evt.target.value)
     })
   }
 
-  @autobind
-  handleUrlChange(evt) {
+  handleUrlChange = (evt) => {
     this.setState({
       url: normalizeInputtingValue(evt.target.value)
     })

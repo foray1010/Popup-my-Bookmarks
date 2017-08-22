@@ -1,4 +1,3 @@
-import {autobind} from 'core-decorators'
 import {createElement, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 
@@ -9,8 +8,7 @@ import {
 import '../../../../css/options/input-select.css'
 
 class InputSelect extends PureComponent {
-  @autobind
-  handleBlur(evt) {
+  handleBlur = (evt) => {
     const {
       optionName,
       updateSingleOption
@@ -24,8 +22,7 @@ class InputSelect extends PureComponent {
     updateSingleOption(optionName, newOptionValue)
   }
 
-  @autobind
-  handleChange(evt) {
+  handleChange = (evt) => {
     const {
       optionName,
       updateSingleOption
@@ -40,9 +37,8 @@ class InputSelect extends PureComponent {
     }
   }
 
-  @autobind
   // prevent user try to save by pressing enter
-  handleKeyDown(evt) {
+  handleKeyDown = (evt) => {
     if (evt.keyCode === 13) {
       evt.preventDefault()
     }

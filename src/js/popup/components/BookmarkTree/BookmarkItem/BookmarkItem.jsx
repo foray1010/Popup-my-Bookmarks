@@ -1,4 +1,3 @@
-import {autobind, debounce, decorate} from 'core-decorators'
 import {createElement, PureComponent} from 'react'
 import _debounce from 'lodash/debounce'
 import classNames from 'classnames'
@@ -104,8 +103,7 @@ class BookmarkItem extends PureComponent {
     }
   }
 
-  @autobind
-  async handleClick(evt) {
+  handleClick = async (evt) => {
     // only allow left and middle click
     if (![0, 1].includes(evt.button)) return
 
@@ -144,8 +142,7 @@ class BookmarkItem extends PureComponent {
     }
   }
 
-  @autobind
-  handleContextMenu(evt) {
+  handleContextMenu = (evt) => {
     // disable native context menu
     evt.preventDefault()
 
@@ -160,15 +157,13 @@ class BookmarkItem extends PureComponent {
     })
   }
 
-  @autobind
-  handleDragEnter(evt) {
+  handleDragEnter = (evt) => {
     evt.persist()
 
     this._handleDragEnter(evt)
   }
 
-  @debounce(50)
-  _handleDragEnter(evt) {
+  _handleDragEnter = _debounce((evt) => {
     const {
       dragOver,
       itemInfo,
@@ -180,10 +175,9 @@ class BookmarkItem extends PureComponent {
     const isPlaceAfter = evt.clientY - targetOffset.top > targetOffset.height / 2
 
     dragOver(itemInfo, treeIndex, isPlaceAfter)
-  }
+  }, 50)
 
-  @autobind
-  handleDragStart() {
+  handleDragStart = () => {
     const {
       dragStart,
       itemInfo,
@@ -193,8 +187,7 @@ class BookmarkItem extends PureComponent {
     dragStart(itemInfo, treeIndex)
   }
 
-  @autobind
-  handleMouse(evt) {
+  handleMouse = (evt) => {
     const {
       itemInfo,
       removeFocusTargetById,
@@ -218,8 +211,7 @@ class BookmarkItem extends PureComponent {
     }
   }
 
-  @decorate(_debounce, 200)
-  _handleMouseEnter() {
+  _handleMouseEnter = _debounce(() => {
     const {
       hoverBookmarkItem,
       itemInfo,
@@ -227,7 +219,7 @@ class BookmarkItem extends PureComponent {
     } = this.props
 
     hoverBookmarkItem(itemInfo, treeIndex + 1)
-  }
+  }, 200)
 
   render() {
     const {

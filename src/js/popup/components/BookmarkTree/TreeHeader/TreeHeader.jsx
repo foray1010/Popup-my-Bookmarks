@@ -1,12 +1,10 @@
-import {autobind} from 'core-decorators'
 import {createElement, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 
 import '../../../../../css/popup/tree-header.css'
 
 class TreeHeader extends PureComponent {
-  @autobind
-  handleClose() {
+  handleClose = () => {
     const {
       removeTreeInfosFromIndex,
       treeIndex

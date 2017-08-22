@@ -1,4 +1,3 @@
-import {autobind} from 'core-decorators'
 import {createElement, PureComponent} from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
@@ -6,8 +5,7 @@ import PropTypes from 'prop-types'
 import '../../../../css/options/nav-bar-item.css'
 
 class NavBarItem extends PureComponent {
-  @autobind
-  handleClick() {
+  handleClick = () => {
     const {
       navModule,
       switchNavModule

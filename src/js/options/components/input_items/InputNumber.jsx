@@ -1,11 +1,9 @@
-import {autobind} from 'core-decorators'
 import {createElement, PureComponent} from 'react'
 import _clamp from 'lodash/clamp'
 import PropTypes from 'prop-types'
 
 class InputNumber extends PureComponent {
-  @autobind
-  handleBlur(evt) {
+  handleBlur = (evt) => {
     const {
       maximum,
       minimum,
@@ -20,8 +18,7 @@ class InputNumber extends PureComponent {
     updateSingleOption(optionName, newOptionValue)
   }
 
-  @autobind
-  handleChange(evt) {
+  handleChange = (evt) => {
     const {
       optionName,
       updateSingleOption
@@ -35,9 +32,8 @@ class InputNumber extends PureComponent {
     updateSingleOption(optionName, parsedValue)
   }
 
-  @autobind
   // prevent user try to save by pressing enter
-  handleKeyDown(evt) {
+  handleKeyDown = (evt) => {
     if (evt.keyCode === 13) {
       evt.preventDefault()
     }

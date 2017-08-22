@@ -1,4 +1,3 @@
-import {autobind} from 'core-decorators'
 import {createElement, PureComponent} from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
@@ -9,8 +8,7 @@ const msgNo = chrome.i18n.getMessage('no')
 const msgYes = chrome.i18n.getMessage('yes')
 
 class Option extends PureComponent {
-  @autobind
-  handleChange(evt) {
+  handleChange = (evt) => {
     const {
       optionName,
       updateSingleOption
@@ -21,8 +19,7 @@ class Option extends PureComponent {
     updateSingleOption(optionName, newOptionValue)
   }
 
-  @autobind
-  handleClick() {
+  handleClick = () => {
     this.inputEl.click()
   }
 

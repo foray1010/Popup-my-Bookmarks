@@ -1,4 +1,3 @@
-import {autobind} from 'core-decorators'
 import {createElement, PureComponent} from 'react'
 import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
 import Immutable from 'seamless-immutable'
@@ -25,12 +24,8 @@ import TreeHeader from './TreeHeader'
 import '../../../../css/popup/bookmark-tree.css'
 
 class BookmarkTree extends PureComponent {
-  constructor(...args) {
-    super(...args)
-
-    this.state = {
-      listHeight: 0
-    }
+  state = {
+    listHeight: 0
   }
 
   componentDidMount() {
@@ -98,8 +93,7 @@ class BookmarkTree extends PureComponent {
     }
   }
 
-  @autobind
-  handleScroll({scrollTop}) {
+  handleScroll = ({scrollTop}) => {
     const {
       isRememberLastPosition,
       treeIndex
