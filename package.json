@@ -2,7 +2,7 @@
   "name": "Popup-my-Bookmarks",
   "version": "5.1.1",
   "engines": {
-    "node": ">=6.9"
+    "node": ">=8"
   },
   "description": "A more efficient way to view and manage your bookmarks menu.",
   "private": true,
@@ -51,7 +51,6 @@
     "bluebird": "^3.3.1",
     "chrome-manifest-loader": "^0.1.1",
     "clean-webpack-plugin": "^0.1.15",
-    "co": "^4.6.0",
     "config": "^1.25.1",
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^5.0.0",

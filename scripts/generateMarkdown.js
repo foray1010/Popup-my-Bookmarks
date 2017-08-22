@@ -1,26 +1,22 @@
 'use strict'
 
-const bluebird = require('bluebird')
-const co = require('co')
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 
-bluebird.promisifyAll(fs)
-
 // markdown handler
-function* getMarkdownData(titleList) {
-  const dataList = yield titleList.map((title) => {
-    return fs.readFileAsync(path.join('markdown', `${title}.md`), 'utf-8')
-  })
+const getMarkdownData = async (titleList) => {
+  const dataList = await Promise.all(titleList.map((title) => {
+    return fs.readFile(path.join('markdown', `${title}.md`), 'utf-8')
+  }))
 
   return dataList.join('\n\n')
 }
 
 // generate markdown file
-const generateReadme = co.wrap(function* () {
+const generateReadme = async () => {
   const fileName = 'README.md'
 
-  let fileData = yield getMarkdownData([
+  let fileData = await getMarkdownData([
     'title',
     'description',
     'legacy_version',
@@ -32,13 +28,13 @@ const generateReadme = co.wrap(function* () {
   // enlarge first header
   fileData = fileData.replace(/^##/, '#')
 
-  yield fs.writeFileAsync(fileName, fileData)
-})
+  await fs.writeFile(fileName, fileData)
+}
 
-const generateStoreDescription = co.wrap(function* () {
+const generateStoreDescription = async () => {
   const fileName = '__store.md'
 
-  let fileData = yield getMarkdownData([
+  let fileData = await getMarkdownData([
     'description',
     'todo',
     'contributing'
@@ -49,12 +45,16 @@ const generateStoreDescription = co.wrap(function* () {
     .replace(/##### /g, '')
     .trim()
 
-  yield fs.writeFileAsync(fileName, fileData)
-})
+  await fs.writeFile(fileName, fileData)
+}
 
-co(function* () {
-  yield [
-    generateReadme(),
-    generateStoreDescription()
-  ]
-}).catch((err) => console.error(err.stack))
+;(async () => {
+  try {
+    await Promise.all([
+      generateReadme(),
+      generateStoreDescription()
+    ])
+  } catch (err) {
+    console.error(err.stack)
+  }
+})()
