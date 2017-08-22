@@ -7,8 +7,8 @@
   padding: var(--golden-gap-2x);
   position: absolute;
 
-  /* separator between div */
-  & > ul + ul:not([hidden]) {
+  /* separator between menu item */
+  & > * + *:not([hidden]) {
     border-top: 1px solid var(--highlight-level2);
     margin-top: var(--golden-gap-2x);
     padding-top: var(--golden-gap-2x);

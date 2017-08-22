@@ -149,7 +149,7 @@ class MenuItem extends PureComponent {
     )
 
     return (
-      <li
+      <div
         styleName={thisStyleName}
         id={menuItemKey}
         onClick={this.handleClick}
@@ -157,7 +157,7 @@ class MenuItem extends PureComponent {
         onMouseLeave={this.handleMouseLeave}
       >
         {chrome.i18n.getMessage(menuItemKey)}
-      </li>
+      </div>
     )
   }
 }

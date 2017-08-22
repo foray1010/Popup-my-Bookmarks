@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 
 import MenuItem from './MenuItem'
 
-import '../../../../css/popup/menu-area.css'
-
 const MenuArea = (props) => {
   const {
     isHidden,
@@ -19,12 +17,9 @@ const MenuArea = (props) => {
   ))
 
   return (
-    <ul
-      styleName='main'
-      hidden={isHidden}
-    >
+    <div hidden={isHidden}>
       {menuAreaItems}
-    </ul>
+    </div>
   )
 }
 
