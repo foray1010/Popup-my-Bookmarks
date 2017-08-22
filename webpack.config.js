@@ -7,16 +7,18 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const DashboardPlugin = require('webpack-dashboard/plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const mergeAndConcat = require('merge-and-concat')
 const OptimizeJsPlugin = require('optimize-js-plugin')
 const path = require('path')
+const R = require('ramda')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const webpack = require('webpack')
 const ZipPlugin = require('zip-webpack-plugin')
 
 const pkg = require('./package')
 
-const webpackConfig = {
+const mergeAndConcat = R.mergeDeepWith(R.concat)
+
+let webpackConfig = {
   module: {
     rules: [
       {
@@ -96,7 +98,7 @@ const webpackConfig = {
 }
 
 appNames.forEach((appName) => {
-  mergeAndConcat(webpackConfig, {
+  webpackConfig = mergeAndConcat(webpackConfig, {
     entry: {
       [appName]: `./${sourceDir}/js/${appName}`
     },
@@ -119,7 +121,7 @@ const cssLoaderOptions = {
 }
 switch (process.env.NODE_ENV) {
   case 'development':
-    mergeAndConcat(webpackConfig, {
+    webpackConfig = mergeAndConcat(webpackConfig, {
       devtool: 'source-map',
       module: {
         rules: [
@@ -151,7 +153,7 @@ switch (process.env.NODE_ENV) {
     break
 
   case 'production':
-    mergeAndConcat(webpackConfig, {
+    webpackConfig = mergeAndConcat(webpackConfig, {
       module: {
         rules: [
           {

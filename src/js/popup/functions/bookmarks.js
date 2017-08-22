@@ -1,7 +1,6 @@
 /* @flow */
 
-import _flatMapDeep from 'lodash/flatMapDeep'
-import _last from 'lodash/last'
+import R from 'ramda'
 
 import {
   lastUsedTreeIdsStorage
@@ -474,7 +473,7 @@ export async function sortByName(parentId: string): Promise<void> {
         accumulator.push(genClassifiedItems())
       }
 
-      const lastClassifiedItems = _last(accumulator)
+      const lastClassifiedItems = R.last(accumulator)
 
       lastClassifiedItems[classifiedItemIndex].push(itemInfo)
 
@@ -482,10 +481,10 @@ export async function sortByName(parentId: string): Promise<void> {
     }, [])
 
   // Sort and concatenate all lists into single list
-  const sortedChildrenInfo: Object[] = _flatMapDeep(
-    classifiedItemsList,
-    (classifiedItems) => classifiedItems.map(sortByTitle)
-  )
+  const sortedChildrenInfo: Object[] = R.compose(
+    R.flatten,
+    R.map((classifiedItems) => classifiedItems.map(sortByTitle))
+  )(classifiedItemsList)
 
   // Moving bookmarks to sorted index
   for (const [

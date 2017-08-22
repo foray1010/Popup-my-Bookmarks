@@ -1,12 +1,10 @@
 import {createElement, PureComponent} from 'react'
-import _uniqueId from 'lodash/uniqueId'
 import Immutable from 'seamless-immutable'
 import PropTypes from 'prop-types'
+import shortid from 'shortid'
 
 class Option extends PureComponent {
-  componentWillMount() {
-    this.id = _uniqueId(Option.name)
-  }
+  id = shortid.generate()
 
   handleChange = (evt) => {
     const {

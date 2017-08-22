@@ -2,8 +2,8 @@ import 'babel-polyfill'
 import {createElement} from 'react'
 import {Provider} from 'react-redux'
 import {render} from 'react-dom'
-import _difference from 'lodash/difference'
 import Immutable from 'seamless-immutable'
+import R from 'ramda'
 
 import '../../manifest.yml'
 import {
@@ -26,7 +26,7 @@ import reducers from './reducers'
   const optionsConfig = await optionsConfigPromise
 
   /* if missing option */
-  const missingOptionKeys = _difference(
+  const missingOptionKeys = R.difference(
     Object.keys(optionsConfig),
     Object.keys(options)
   )

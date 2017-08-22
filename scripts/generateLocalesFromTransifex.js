@@ -1,10 +1,10 @@
 'use strict'
 
-const _ = require('lodash')
 const bluebird = require('bluebird')
 const fs = require('fs-extra')
 const path = require('path')
 const prompt = require('prompt')
+const R = require('ramda')
 const Transifex = require('transifex')
 
 bluebird.promisifyAll(prompt)
@@ -52,7 +52,7 @@ const localesPath = path.join('src', '_locales')
         const messagesJson = JSON.parse(messagesJsonStr)
 
         const sortedMessagesJson = Object.keys(messagesJson)
-          .filter((key) => Boolean(_.get(messagesJson, `${key}.message`)))
+          .filter((key) => Boolean(R.path([key, 'message'], messagesJson)))
           .sort()
           .reduce((obj, key) => {
             // trim message

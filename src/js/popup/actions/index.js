@@ -1,6 +1,6 @@
 /* @flow */
 
-import _flatten from 'lodash/flatten'
+import R from 'ramda'
 
 import {
   createAction
@@ -387,7 +387,7 @@ export const onPressArrowKeyOnMenu = (arrowDirection: string) => {
     switch (arrowDirection) {
       case 'down':
       case 'up': {
-        const flattenMenuPattern = _flatten(menuPattern)
+        const flattenMenuPattern = R.flatten(menuPattern)
 
         const lastItemIndex = flattenMenuPattern.length - 1
         const origSelectedIndex = flattenMenuPattern.indexOf(selectedMenuItem)

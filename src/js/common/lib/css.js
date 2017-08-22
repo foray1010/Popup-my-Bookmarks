@@ -1,6 +1,6 @@
 /* @flow */
 
-import _forEach from 'lodash/forEach'
+import R from 'ramda'
 
 const sheet: Object = genStyleEl().sheet
 
@@ -14,24 +14,24 @@ function genStyleEl(): Object {
 }
 
 export const set = (styleList: Object): void => {
-  _forEach(styleList, (
+  R.forEachObjIndexed((
     props: Object,
     styleSelector: string
   ): void => {
     let styleValue: string = ''
 
-    _forEach(props, (
+    R.forEachObjIndexed((
       propValue: number | string,
       propName: string
     ): void => {
       styleValue += `${propName}:${propValue};`
-    })
+    }, props)
 
     sheet.insertRule(
       styleSelector + '{' + styleValue + '}',
       sheet.cssRules.length
     )
-  })
+  }, styleList)
 }
 
 export const unsetAll = (): void => {

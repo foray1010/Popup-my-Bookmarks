@@ -1,6 +1,6 @@
 import {createElement, PureComponent} from 'react'
-import _clamp from 'lodash/clamp'
 import PropTypes from 'prop-types'
+import R from 'ramda'
 
 class InputNumber extends PureComponent {
   handleBlur = (evt) => {
@@ -13,7 +13,7 @@ class InputNumber extends PureComponent {
 
     const parsedValue = parseInt(evt.target.value, 10)
 
-    const newOptionValue = _clamp(parsedValue, minimum, maximum)
+    const newOptionValue = R.clamp(minimum, maximum, parsedValue)
 
     updateSingleOption(optionName, newOptionValue)
   }

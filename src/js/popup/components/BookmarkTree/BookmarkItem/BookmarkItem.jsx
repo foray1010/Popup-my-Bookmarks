@@ -1,5 +1,5 @@
 import {createElement, PureComponent} from 'react'
-import _debounce from 'lodash/debounce'
+import _debounce from 'lodash.debounce'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 

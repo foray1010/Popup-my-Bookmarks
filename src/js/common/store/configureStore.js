@@ -2,7 +2,7 @@
 
 import {applyMiddleware, compose, createStore} from 'redux'
 import {batchedSubscribe} from 'redux-batched-subscribe'
-import _debounce from 'lodash/debounce'
+import _debounce from 'lodash.debounce'
 import multi from 'redux-multi'
 import thunk from 'redux-thunk'
 

@@ -1,6 +1,6 @@
 /* @flow */
 
-import _debounce from 'lodash/debounce'
+import _debounce from 'lodash.debounce'
 
 import JSONStorage from '../../common/lib/JSONStorage'
 

@@ -1,5 +1,5 @@
 import {createElement, PureComponent} from 'react'
-import _debounce from 'lodash/debounce'
+import _debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
 
 import '../../../../css/popup/folder-cover.css'
