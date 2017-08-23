@@ -1,27 +1,33 @@
 /* @flow */
 
 import _debounce from 'lodash.debounce'
+import R from 'ramda'
 import store from 'store'
 
-const defaultScrollTop = 0
+const _updateLastScrollTopList: Function = (
+  index: number,
+  scrollTop: number
+): Function => (
+  R.compose(
+    R.update(index, scrollTop),
+    (list) => R.concat(
+      list,
+      R.times(
+        R.always(0),
+        R.max(index - list.length + 1, 0)
+      )
+    )
+  )
+)
 
 export const updateLastScrollTopList: Function = _debounce((
   index: number,
-  scrollTop: number = defaultScrollTop
+  scrollTop: number
 ): void => {
+  const updateList = _updateLastScrollTopList(index, scrollTop)
+
   const lastScrollTopList: number[] = store.get('lastScrollTop') || []
-
-  const previousLength = lastScrollTopList.length
-
-  const isLongerThanBefore = index > previousLength - 1
-
-  lastScrollTopList[index] = scrollTop
-
-  if (isLongerThanBefore) {
-    lastScrollTopList.fill(defaultScrollTop, previousLength, index)
-  }
-
-  store.set('lastScrollTop', lastScrollTopList)
+  store.set('lastScrollTop', updateList(lastScrollTopList))
 }, 200)
 
 export const updateLastUsedTreeIds: Function = (trees: Object[]): void => {

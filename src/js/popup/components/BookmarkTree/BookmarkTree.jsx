@@ -103,7 +103,7 @@ class BookmarkTree extends PureComponent {
     } = this.props
 
     if (isRememberLastPosition) {
-      updateLastScrollTopList(treeIndex, scrollTop)
+      updateLastScrollTopList(treeIndex, scrollTop || 0)
     }
   }
 
