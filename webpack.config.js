@@ -91,7 +91,8 @@ let webpackConfig = {
   ],
   resolve: {
     alias: {
-      'seamless-immutable': 'seamless-immutable/src/seamless-immutable'
+      'seamless-immutable': 'seamless-immutable/src/seamless-immutable',
+      store: 'store/dist/store.modern'
     },
     extensions: ['.js', '.jsx']
   }

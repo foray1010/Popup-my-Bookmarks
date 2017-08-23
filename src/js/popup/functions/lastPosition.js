@@ -1,11 +1,7 @@
 /* @flow */
 
 import _debounce from 'lodash.debounce'
-
-import JSONStorage from '../../common/lib/JSONStorage'
-
-export const lastScrollTopListStorage: JSONStorage = new JSONStorage('lastScrollTop', [])
-export const lastUsedTreeIdsStorage: JSONStorage = new JSONStorage('lastBoxPID', [])
+import store from 'store'
 
 const defaultScrollTop = 0
 
@@ -13,7 +9,7 @@ export const updateLastScrollTopList: Function = _debounce((
   index: number,
   scrollTop: number = defaultScrollTop
 ): void => {
-  const lastScrollTopList: number[] = lastScrollTopListStorage.get()
+  const lastScrollTopList: number[] = store.get('lastScrollTop') || []
 
   const previousLength = lastScrollTopList.length
 
@@ -25,11 +21,11 @@ export const updateLastScrollTopList: Function = _debounce((
     lastScrollTopList.fill(defaultScrollTop, previousLength, index)
   }
 
-  lastScrollTopListStorage.set(lastScrollTopList)
+  store.set('lastScrollTop', lastScrollTopList)
 }, 200)
 
 export const updateLastUsedTreeIds: Function = (trees: Object[]): void => {
   const value: string[] = trees
     .map((treeInfo: Object): string => treeInfo.id)
-  lastUsedTreeIdsStorage.set(value)
+  store.set('lastBoxPID', value)
 }

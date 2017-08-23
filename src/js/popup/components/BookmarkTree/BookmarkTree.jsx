@@ -4,6 +4,7 @@ import Immutable from 'seamless-immutable'
 import List from 'react-virtualized/dist/commonjs/List'
 import PropTypes from 'prop-types'
 import R from 'ramda'
+import store from 'store'
 
 import {
   GOLDEN_GAP,
@@ -13,7 +14,6 @@ import {
 import {
   genBookmarkList,
   getBookmarkType,
-  lastScrollTopListStorage,
   updateLastScrollTopList
 } from '../../functions'
 import BookmarkItem from './BookmarkItem'
@@ -160,7 +160,7 @@ class BookmarkTree extends PureComponent {
 
     let lastScrollTop
     if (isRememberLastPosition) {
-      const lastScrollTopList = lastScrollTopListStorage.get()
+      const lastScrollTopList = store.get('lastScrollTop') || []
 
       lastScrollTop = lastScrollTopList[treeIndex]
     }

@@ -1,10 +1,8 @@
 /* @flow */
 
 import R from 'ramda'
+import store from 'store'
 
-import {
-  lastUsedTreeIdsStorage
-} from './lastPosition'
 import {
   ROOT_ID,
   SEPARATE_THIS_URL,
@@ -225,7 +223,7 @@ export async function initTrees(options: Object): Promise<Object[]> {
   const firstTree: Object = await getFlatTree(defaultExpandFolderId)
 
   if (options.rememberPos) {
-    const lastUsedTreeIds: string[] = lastUsedTreeIdsStorage.get()
+    const lastUsedTreeIds: string[] = store.get('lastBoxPID') || []
 
     // the target is to open the last existing folder in lastUsedTreeIds
     // so we get the last existing item first and get all its parent
