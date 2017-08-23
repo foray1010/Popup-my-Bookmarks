@@ -3,6 +3,7 @@ import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
 import Immutable from 'seamless-immutable'
 import List from 'react-virtualized/dist/commonjs/List'
 import PropTypes from 'prop-types'
+import R from 'ramda'
 
 import {
   GOLDEN_GAP,
@@ -68,11 +69,13 @@ class BookmarkTree extends PureComponent {
         dragIndicatorIndex += rootTree.children.length
       }
 
-      return Immutable([
-        ...treeItems.slice(0, dragIndicatorIndex),
-        <DragIndicator />,
-        ...treeItems.slice(dragIndicatorIndex)
-      ])
+      return Immutable(
+        R.insert(
+          dragIndicatorIndex,
+          <DragIndicator />,
+          treeItems
+        )
+      )
     }
     return treeItems
   }
