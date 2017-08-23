@@ -481,7 +481,7 @@ export async function sortByName(parentId: string): Promise<void> {
   // Sort and concatenate all lists into single list
   const sortedChildrenInfo: Object[] = R.compose(
     R.flatten,
-    R.map((classifiedItems) => classifiedItems.map(sortByTitle))
+    R.map(R.map(sortByTitle))
   )(classifiedItemsList)
 
   // Moving bookmarks to sorted index
