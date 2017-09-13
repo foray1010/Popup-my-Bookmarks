@@ -1,3 +1,5 @@
-We will not collect any of your personal data neither on our side nor your side, we use them just for necessary features:
+We will not collect nor sell any of your personal data neither on your side nor our side, we use them just for necessary features:
 
-- `Add current page` and `Open bookmark in tab` require permission - `Access your tabs and browsing activity`
+- `Listing bookmarks` and `Edit bookmarks` require permission - `Read and change your bookmarks`
+
+- `Add current page` and `Open bookmark in tab` require permission - `Read your browsing history`
