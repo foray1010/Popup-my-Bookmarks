@@ -187,7 +187,7 @@ class BookmarkTree extends PureComponent {
                 rowRenderer={rowRenderer}
                 scrollToIndex={scrollToIndex >= 0 ? scrollToIndex : undefined}
                 scrollTop={lastScrollTop}
-                tabIndex={null}
+                tabIndex={-1}
                 width={width}
               />
             )}
