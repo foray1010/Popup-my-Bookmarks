@@ -857,9 +857,9 @@ babel-preset-flow@^6.23.0:
   dependencies:
     babel-plugin-transform-flow-strip-types "^6.22.0"
 
-babel-preset-foray1010@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/babel-preset-foray1010/-/babel-preset-foray1010-6.0.0.tgz#76e411152f300126fb11756a407e52c6a7f6c76d"
+babel-preset-foray1010@^7.0.0:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/babel-preset-foray1010/-/babel-preset-foray1010-7.0.1.tgz#237def8b253ad0b7ca33ee231fe2eafd322b2589"
   dependencies:
     app-root-path "^2.0.1"
     babel-plugin-istanbul "^4.1.1"
@@ -874,7 +874,6 @@ babel-preset-foray1010@^6.0.0:
     babel-plugin-transform-react-remove-prop-types "^0.4.0"
     babel-preset-env "^1.1.8"
     babel-preset-react "^6.16.0"
-    browserslist "^2.0.0"
     ramda "^0.24.1"
     tcomb "^3.2.16"
 
@@ -3607,8 +3606,8 @@ levn@^0.3.0, levn@~0.3.0:
     type-check "~0.3.2"
 
 lint-staged@^4.2.2:
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-4.2.2.tgz#a308ceb3f1031b78c832fbe4570744b3c7fd5a4e"
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-4.2.3.tgz#5a1f12256af06110b96225f109dbf215009a37a9"
   dependencies:
     app-root-path "^2.0.0"
     chalk "^2.1.0"
