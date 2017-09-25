@@ -1325,8 +1325,8 @@ chrome-manifest-loader@^0.1.1:
     uuid "^3.0.1"
 
 chrome-promise@^2.0.2:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/chrome-promise/-/chrome-promise-2.1.0.tgz#57481f3efa75ac1a68e88d837e445e9272b0c02c"
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/chrome-promise/-/chrome-promise-2.1.1.tgz#5c2d5a172c2ab82cbecaa88f2f5fc00af8773e0f"
 
 ci-info@^1.0.0:
   version "1.0.0"
