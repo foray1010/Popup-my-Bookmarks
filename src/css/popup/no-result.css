@@ -1,9 +1,9 @@
-@import "../common/variables.css";
+@import '../common/variables.css';
 
 .main {
   box-sizing: border-box;
   color: var(--main-font-color);
-  composes: no-text-overflow from "../common/composes.css";
+  composes: no-text-overflow from '../common/composes.css';
   cursor: default;
   height: 100%;
   margin: var(--golden-gap-2x);

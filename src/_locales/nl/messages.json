@@ -12,7 +12,8 @@
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
   "askOpenAll": {
-    "message": "U staat op het punt %bkmarkCount% bladwijzers te openen.\nWeet u zeker dat u door wilt gaan?",
+    "message":
+      "U staat op het punt %bkmarkCount% bladwijzers te openen.\nWeet u zeker dat u door wilt gaan?",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
   },
   "cancel": {

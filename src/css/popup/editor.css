@@ -1,7 +1,7 @@
-@import "../common/variables.css";
+@import '../common/variables.css';
 
 .button {
-  composes: button from "../common/composes.css";
+  composes: button from '../common/composes.css';
 }
 
 .main {
@@ -21,7 +21,7 @@
     margin-left: var(--golden-gap-2x);
   }
 
-  & > input[type="text"] {
+  & > input[type='text'] {
     border-color: var(--highlight-level3);
     box-sizing: border-box;
     padding: var(--golden-gap-2x);

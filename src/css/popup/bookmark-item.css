@@ -1,10 +1,10 @@
-@import "../common/mixins.css";
-@import "../common/variables.css";
+@import '../common/mixins.css';
+@import '../common/variables.css';
 
 .main {
   align-items: center;
   box-sizing: border-box;
-  composes: list-item from "../common/composes.css";
+  composes: list-item from '../common/composes.css';
   display: flex;
   height: 100%;
   padding: var(--golden-gap) 0 var(--golden-gap) var(--golden-gap);
@@ -36,5 +36,5 @@
 }
 
 .title {
-  composes: no-text-overflow from "../common/composes.css";
+  composes: no-text-overflow from '../common/composes.css';
 }

@@ -1,4 +1,4 @@
-@import "../common/variables.css";
+@import '../common/variables.css';
 
 .table {
   border-spacing: var(--golden-gap-4x);

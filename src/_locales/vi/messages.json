@@ -12,7 +12,8 @@
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
   "askOpenAll": {
-    "message": "Bạn sắp sửa mở phần đánh dấu %bkmarkCount%.\nBạn có chắc rằng bạn muốn tiếp tục hay không?",
+    "message":
+      "Bạn sắp sửa mở phần đánh dấu %bkmarkCount%.\nBạn có chắc rằng bạn muốn tiếp tục hay không?",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
   },
   "cancel": {

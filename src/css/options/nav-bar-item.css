@@ -1,4 +1,4 @@
-@import "../common/variables.css";
+@import '../common/variables.css';
 
 :root {
   --colorizing: {
@@ -26,7 +26,7 @@
   color: var(--oc-white);
   cursor: default;
   flex: 1 0 0;
-  font: 16px "Archivo Narrow", sans-serif;
+  font: 16px 'Archivo Narrow', sans-serif;
   padding-top: var(--golden-gap-2x);
   text-align: center;
 

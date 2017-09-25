@@ -1,4 +1,4 @@
-@import "../common/variables.css";
+@import '../common/variables.css';
 
 :root {
   --tree-header-height: 30px;
@@ -18,7 +18,7 @@
   &::before,
   &::after {
     background-color: var(--oc-white);
-    content: "";
+    content: '';
     position: absolute;
     transform: rotate(45deg);
   }
@@ -47,9 +47,9 @@
 
 .title {
   color: var(--oc-white);
-  composes: no-text-overflow from "../common/composes.css";
+  composes: no-text-overflow from '../common/composes.css';
   cursor: default;
-  font: 22px "Archivo Narrow", simhei, sans-serif;
+  font: 22px 'Archivo Narrow', simhei, sans-serif;
   line-height: calc(var(--tree-header-height) + 1px);
   margin: 0;
   margin-right: auto;

@@ -12,7 +12,8 @@
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
   "askOpenAll": {
-    "message": "Vous êtes sur le point d'ouvrir %bkmarkCount% favoris.\nÊtes-vous sûr de vouloir continuer ?",
+    "message":
+      "Vous êtes sur le point d'ouvrir %bkmarkCount% favoris.\nÊtes-vous sûr de vouloir continuer ?",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
   },
   "cancel": {

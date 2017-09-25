@@ -20,15 +20,9 @@
     "test": "exit 0"
   },
   "lint-staged": {
-    "*.css": [
-      "stylelint --fix",
-      "git add"
-    ],
-    "*.{js,jsx}": [
-      "prettier-eslint --write",
-      "eslint --fix",
-      "git add"
-    ]
+    "*.css": ["prettier-eslint --write", "stylelint --fix", "git add"],
+    "*.{js,jsx}": ["prettier-eslint --write", "eslint --fix", "git add"],
+    "*.json": ["prettier-eslint --write", "git add"]
   },
   "dependencies": {
     "babel-polyfill": "^6.5.0",

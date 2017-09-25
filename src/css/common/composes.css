@@ -1,4 +1,4 @@
-@import "./variables.css";
+@import './variables.css';
 
 .button {
   background-color: var(--highlight-level1);

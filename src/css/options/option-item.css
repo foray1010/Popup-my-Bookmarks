@@ -1,12 +1,12 @@
-@import "../common/variables.css";
+@import '../common/variables.css';
 
 .desc {
   white-space: pre-wrap;
 }
 
 .input {
-  & > input[type="number"],
-  & > input[type="text"],
+  & > input[type='number'],
+  & > input[type='text'],
   & > select {
     border-color: var(--main-color1);
     box-sizing: border-box;
@@ -14,7 +14,7 @@
     padding: 0 var(--golden-gap-2x);
   }
 
-  & > input[type="number"] {
+  & > input[type='number'] {
     text-align: right;
     width: 50px;
   }

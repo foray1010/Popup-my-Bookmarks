@@ -1,4 +1,4 @@
-@import "../common/variables.css";
+@import '../common/variables.css';
 
 .main {
   border: solid var(--highlight-level3);
@@ -7,7 +7,7 @@
   height: var(--input-height);
   margin-bottom: var(--golden-gap);
 
-  & > input[type="search"] {
+  & > input[type='search'] {
     background-color: transparent;
     border: 0;
     color: var(--main-font-color);
@@ -18,7 +18,7 @@
   }
 
   &::before {
-    content: url("../../img/search.png");
+    content: url('../../img/search.png');
     padding: 5px 4px 4px 5px;
   }
 }

@@ -1,8 +1,8 @@
-@import "./variables.css";
+@import './variables.css';
 
 @font-face {
-  font-family: "Archivo Narrow";
-  src: url("typeface-archivo-narrow/files/archivo-narrow-latin-400.woff");
+  font-family: 'Archivo Narrow';
+  src: url('typeface-archivo-narrow/files/archivo-narrow-latin-400.woff');
 }
 
 :global(body) {
@@ -13,10 +13,10 @@
 
 :global(a),
 :global(button),
-:global(input[type="checkbox"]),
-:global(input[type="number"]),
-:global(input[type="search"]),
-:global(input[type="text"]),
+:global(input[type='checkbox']),
+:global(input[type='number']),
+:global(input[type='search']),
+:global(input[type='text']),
 :global(select) {
   outline-color: var(--highlight-level5);
   outline-width: 1px;
@@ -26,9 +26,9 @@
   }
 }
 
-:global(input[type="number"]),
-:global(input[type="search"]),
-:global(input[type="text"]),
+:global(input[type='number']),
+:global(input[type='search']),
+:global(input[type='text']),
 :global(select) {
   background-color: var(--oc-white);
   border-style: solid;

@@ -1,5 +1,5 @@
-@import "../common/globals.css";
-@import "./globals.css";
+@import '../common/globals.css';
+@import './globals.css';
 
 .main {
   background-color: inherit;

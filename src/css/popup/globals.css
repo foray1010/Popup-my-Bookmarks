@@ -1,4 +1,4 @@
-@import "../common/variables.css";
+@import '../common/variables.css';
 
 :global(body) {
   user-select: none;
@@ -29,7 +29,7 @@
 }
 
 :global(::-webkit-search-cancel-button) {
-  content: url("../../img/cancel.png");
+  content: url('../../img/cancel.png');
   height: 10px;
   width: 14px;
 }
