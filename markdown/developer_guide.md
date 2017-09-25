@@ -33,11 +33,22 @@
   ```
 
   To make a temporary folder `__dev` for you to load unpacked extension
-  - ES6 JavaScript to ES5 JavaScript by [Babel](//github.com/babel/babel)
+  - ES2015-2017 JavaScript to ES5 JavaScript by [Babel](//github.com/babel/babel)
   - CSS4 to CSS3 by [postcss-cssnext](//github.com/MoOx/postcss-cssnext)
   - *.pug to *.html by [Pug](//github.com/pugjs/pug)
 
-3. md
+3. lint
+
+  ```
+  yarn lint
+  ```
+
+  To lint
+  - ES2015-2017 JavaScript code by [ESLint](//github.com/eslint/eslint)
+  - flowtype by [flow](//github.com/facebook/flow)
+  - CSS4 code by [Stylelint](//github.com/stylelint/stylelint)
+
+4. md
 
   ```
   yarn md

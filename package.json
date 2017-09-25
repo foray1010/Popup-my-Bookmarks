@@ -15,9 +15,13 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "cross-env NODE_ENV=development webpack",
+    "lint": "npm-run-all -p lint:*",
+    "lint:css": "stylelint src/**/*.css",
+    "lint:es": "eslint --ext .js,.jsx .",
+    "lint:flow": "flow check",
     "locales": "node scripts/generateLocalesFromTransifex.js",
     "md": "node scripts/generateMarkdown.js",
-    "precommit": "lint-staged && flow check",
+    "precommit": "lint-staged && yarn lint:flow",
     "test": "exit 0"
   },
   "lint-staged": {
@@ -70,6 +74,7 @@
     "husky": "^0.14.0",
     "image-process-loader": "^0.1.0",
     "lint-staged": "^4.2.2",
+    "npm-run-all": "^4.1.1",
     "optimize-js-plugin": "0.0.4",
     "postcss-cssnext": "^3.0.0",
     "postcss-import": "^11.0.0",

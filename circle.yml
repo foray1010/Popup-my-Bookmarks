@@ -12,6 +12,6 @@ dependencies:
 
 test:
   pre:
-    - "yarn run lint"
+    - "yarn lint"
   override:
     - "yarn test"
