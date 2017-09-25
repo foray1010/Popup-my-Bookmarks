@@ -1,18 +1,13 @@
 import {createElement, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  normalizeInputtingValue
-} from '../../../common/functions'
+import {normalizeInputtingValue} from '../../../common/functions'
 
 import '../../../../css/options/input-select.css'
 
 class InputSelect extends PureComponent {
   handleBlur = (evt) => {
-    const {
-      optionName,
-      updateSingleOption
-    } = this.props
+    const {optionName, updateSingleOption} = this.props
 
     const newOptionValue = evt.target.value
       .trim()
@@ -23,10 +18,7 @@ class InputSelect extends PureComponent {
   }
 
   handleChange = (evt) => {
-    const {
-      optionName,
-      updateSingleOption
-    } = this.props
+    const {optionName, updateSingleOption} = this.props
 
     const newOptionValue = normalizeInputtingValue(evt.target.value).replace(/^,/, '')
 
@@ -45,18 +37,11 @@ class InputSelect extends PureComponent {
   }
 
   render() {
-    const {
-      choices,
-      optionName,
-      optionValue
-    } = this.props
+    const {choices, optionName, optionValue} = this.props
 
-    const optionItems = choices
-      .map((optionChoice, optionChoiceIndex) => (
-        <option key={String(optionChoiceIndex)}>
-          {optionChoice}
-        </option>
-      ))
+    const optionItems = choices.map((optionChoice, optionChoiceIndex) => (
+      <option key={String(optionChoiceIndex)}>{optionChoice}</option>
+    ))
 
     return (
       <div styleName='main'>
@@ -72,11 +57,7 @@ class InputSelect extends PureComponent {
           onChange={this.handleChange}
           onKeyDown={this.handleKeyDown}
         />
-        <select
-          styleName='select'
-          defaultValue={optionValue}
-          onChange={this.handleChange}
-        >
+        <select styleName='select' defaultValue={optionValue} onChange={this.handleChange}>
           {optionItems}
         </select>
       </div>

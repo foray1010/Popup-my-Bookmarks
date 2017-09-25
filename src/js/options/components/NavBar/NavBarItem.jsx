@@ -6,33 +6,20 @@ import '../../../../css/options/nav-bar-item.css'
 
 class NavBarItem extends PureComponent {
   handleClick = () => {
-    const {
-      navModule,
-      switchNavModule
-    } = this.props
+    const {navModule, switchNavModule} = this.props
 
     switchNavModule(navModule)
   }
 
   render() {
-    const {
-      isActive,
-      title
-    } = this.props
+    const {isActive, title} = this.props
 
-    const thisStyleName = classNames(
-      'main',
-      {
-        'main-active': isActive
-      }
-    )
+    const thisStyleName = classNames('main', {
+      'main-active': isActive
+    })
 
     return (
-      <button
-        styleName={thisStyleName}
-        type='button'
-        onClick={this.handleClick}
-      >
+      <button styleName={thisStyleName} type='button' onClick={this.handleClick}>
         {title}
       </button>
     )

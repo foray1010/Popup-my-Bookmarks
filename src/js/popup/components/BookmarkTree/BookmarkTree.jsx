@@ -6,16 +6,8 @@ import PropTypes from 'prop-types'
 import R from 'ramda'
 import store from 'store'
 
-import {
-  GOLDEN_GAP,
-  MAX_HEIGHT,
-  TYPE_SEPARATOR
-} from '../../constants'
-import {
-  genBookmarkList,
-  getBookmarkType,
-  updateLastScrollTopList
-} from '../../functions'
+import {GOLDEN_GAP, MAX_HEIGHT, TYPE_SEPARATOR} from '../../constants'
+import {genBookmarkList, getBookmarkType, updateLastScrollTopList} from '../../functions'
 import BookmarkItem from './BookmarkItem'
 import DragIndicator from './DragIndicator'
 import FolderCover from '../FolderCover'
@@ -38,27 +30,20 @@ class BookmarkTree extends PureComponent {
   }
 
   getTreeItems() {
-    const {
-      dragIndicator,
+    const {dragIndicator, isSearching, rootTree, treeIndex, treeInfo} = this.props
+
+    const bookmarkList = genBookmarkList(treeInfo, {
       isSearching,
       rootTree,
-      treeIndex,
-      treeInfo
-    } = this.props
-
-    const bookmarkList = genBookmarkList(treeInfo, {isSearching, rootTree, treeIndex})
+      treeIndex
+    })
 
     const treeItems = bookmarkList.map((itemInfo) => (
-      <BookmarkItem
-        itemInfo={itemInfo}
-        treeIndex={treeIndex}
-      />
+      <BookmarkItem itemInfo={itemInfo} treeIndex={treeIndex} />
     ))
 
     if (isSearching && treeItems.length === 0) {
-      return treeItems.concat(
-        <NoResult />
-      )
+      return treeItems.concat(<NoResult />)
     }
 
     if (dragIndicator && dragIndicator.parentId === treeInfo.id) {
@@ -69,13 +54,7 @@ class BookmarkTree extends PureComponent {
         dragIndicatorIndex += rootTree.children.length
       }
 
-      return Immutable(
-        R.insert(
-          dragIndicatorIndex,
-          <DragIndicator />,
-          treeItems
-        )
-      )
+      return Immutable(R.insert(dragIndicatorIndex, <DragIndicator />, treeItems))
     }
     return treeItems
   }
@@ -97,10 +76,7 @@ class BookmarkTree extends PureComponent {
   }
 
   handleScroll = ({scrollTop}) => {
-    const {
-      isRememberLastPosition,
-      treeIndex
-    } = this.props
+    const {isRememberLastPosition, treeIndex} = this.props
 
     if (isRememberLastPosition) {
       updateLastScrollTopList(treeIndex, scrollTop || 0)
@@ -108,12 +84,8 @@ class BookmarkTree extends PureComponent {
   }
 
   makeGetRowHeight(treeItems) {
-    return ({
-      index
-    }) => {
-      const {
-        itemOffsetHeight
-      } = this.props
+    return ({index}) => {
+      const {itemOffsetHeight} = this.props
 
       let rowHeight = itemOffsetHeight
 
@@ -135,11 +107,7 @@ class BookmarkTree extends PureComponent {
   }
 
   makeRowRenderer(treeItems) {
-    return ({
-      index,
-      key,
-      style
-    }) => (
+    return ({index, key, style}) => (
       <div key={key} styleName='list-item' style={style}>
         {treeItems[index]}
       </div>
@@ -147,11 +115,7 @@ class BookmarkTree extends PureComponent {
   }
 
   render() {
-    const {
-      isRememberLastPosition,
-      scrollToIndex,
-      treeIndex
-    } = this.props
+    const {isRememberLastPosition, scrollToIndex, treeIndex} = this.props
 
     const treeItems = this.getTreeItems()
 

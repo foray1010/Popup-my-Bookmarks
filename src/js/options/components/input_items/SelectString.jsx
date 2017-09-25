@@ -3,10 +3,7 @@ import PropTypes from 'prop-types'
 
 class SelectString extends PureComponent {
   handleChange = (evt) => {
-    const {
-      optionName,
-      updateSingleOption
-    } = this.props
+    const {optionName, updateSingleOption} = this.props
 
     const newOptionValue = parseInt(evt.target.value, 10)
 
@@ -14,34 +11,22 @@ class SelectString extends PureComponent {
   }
 
   render() {
-    const {
-      choices,
-      optionName,
-      optionValue
-    } = this.props
+    const {choices, optionName, optionValue} = this.props
 
-    const optionItems = choices
-      .reduce((accumulator, optionChoice, optionChoiceIndex) => {
-        if (optionChoice !== undefined) {
-          return accumulator.concat(
-            <option
-              key={String(optionChoiceIndex)}
-              value={String(optionChoiceIndex)}
-            >
-              {optionChoice}
-            </option>
-          )
-        }
+    const optionItems = choices.reduce((accumulator, optionChoice, optionChoiceIndex) => {
+      if (optionChoice !== undefined) {
+        return accumulator.concat(
+          <option key={String(optionChoiceIndex)} value={String(optionChoiceIndex)}>
+            {optionChoice}
+          </option>
+        )
+      }
 
-        return accumulator
-      }, [])
+      return accumulator
+    }, [])
 
     return (
-      <select
-        name={optionName}
-        value={optionValue}
-        onChange={this.handleChange}
-      >
+      <select name={optionName} value={optionValue} onChange={this.handleChange}>
         {optionItems}
       </select>
     )

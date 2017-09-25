@@ -26,11 +26,7 @@ class App extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      isSearching,
-      options,
-      trees
-    } = this.props
+    const {isSearching, options, trees} = this.props
 
     if (trees !== prevProps.trees) {
       const isRememberLastPosition = options.rememberPos && !isSearching
@@ -54,11 +50,7 @@ class App extends PureComponent {
   // onDragEnd doesn't work when original drag element is removed from DOM,
   // but onMouseUp still fire
   handleDragEnd = async () => {
-    const {
-      dragEnd,
-      dragIndicator,
-      dragTarget
-    } = this.props
+    const {dragEnd, dragIndicator, dragTarget} = this.props
 
     if (dragTarget) {
       if (dragIndicator) {
@@ -73,14 +65,7 @@ class App extends PureComponent {
   }
 
   handleEnter = async (evt) => {
-    const {
-      focusTarget,
-      isSearching,
-      menuTarget,
-      options,
-      selectedMenuItem,
-      trees
-    } = this.props
+    const {focusTarget, isSearching, menuTarget, options, selectedMenuItem, trees} = this.props
 
     if (menuTarget) {
       if (selectedMenuItem) {
@@ -103,14 +88,7 @@ class App extends PureComponent {
   }
 
   handleKeyDown = async (evt) => {
-    const {
-      closeMenu,
-      editorTarget,
-      focusTarget,
-      isSearching,
-      menuTarget,
-      openMenu
-    } = this.props
+    const {closeMenu, editorTarget, focusTarget, isSearching, menuTarget, openMenu} = this.props
 
     // no custom handle for editor
     if (editorTarget) return
@@ -119,7 +97,8 @@ class App extends PureComponent {
     switch (keyCode) {
       case 9: // tab
       case 38: // up
-      case 40: { // down
+      case 40: {
+        // down
         const mapping = {
           9: evt.shiftKey ? 'up' : 'down',
           38: 'up',
@@ -140,7 +119,8 @@ class App extends PureComponent {
 
       case 17: // ctrl
       case 91: // menu
-      case 93: { // menu
+      case 93: {
+        // menu
         if (evt.repeat) return
 
         const isMac = /^Mac/.test(window.navigator.platform)
@@ -157,7 +137,8 @@ class App extends PureComponent {
       }
 
       case 37: // left
-      case 39: { // right
+      case 39: {
+        // right
         if (isSearching) return
 
         const mapping = {
@@ -216,17 +197,13 @@ class App extends PureComponent {
   }
 
   keyboardArrowHandler = _debounce((arrowDirection) => {
-    const {
-      onPressArrowKey
-    } = this.props
+    const {onPressArrowKey} = this.props
 
     onPressArrowKey(arrowDirection)
   }, 30)
 
   render() {
-    return (
-      <Main />
-    )
+    return <Main />
   }
 }
 

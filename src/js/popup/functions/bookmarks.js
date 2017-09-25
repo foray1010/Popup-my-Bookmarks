@@ -57,9 +57,7 @@ export function genBookmarkList(
 
   if (!isSearching) {
     if (childrenInfo.length === 0) {
-      childrenInfo = childrenInfo.concat([
-        genNoBookmarkInfo(treeInfo.id)
-      ])
+      childrenInfo = childrenInfo.concat([genNoBookmarkInfo(treeInfo.id)])
     }
 
     if (treeIndex === 0) {
@@ -153,15 +151,11 @@ export function getFocusTargetTreeIndex(
 export async function getRootTree(options: Object): Promise<Object> {
   const rootTree: Object = await getFlatTree(ROOT_ID)
 
-  const filteredChildrenInfo = rootTree.children.filter((
-    itemInfo: Object
-  ): boolean => {
+  const filteredChildrenInfo = rootTree.children.filter((itemInfo: Object): boolean => {
     const itemIdNum: number = Number(itemInfo.id)
 
-    const isFilterThisItem: boolean = (
-      itemIdNum === options.defExpand ||
-      options.hideRootFolder.includes(itemIdNum)
-    )
+    const isFilterThisItem: boolean =
+      itemIdNum === options.defExpand || options.hideRootFolder.includes(itemIdNum)
 
     return !isFilterThisItem
   })
@@ -172,28 +166,31 @@ export async function getRootTree(options: Object): Promise<Object> {
   }
 }
 
-export async function getSearchResult(
-  newSearchKeyword: string,
-  options: Object
-): Promise<Object> {
+export async function getSearchResult(newSearchKeyword: string, options: Object): Promise<Object> {
   const isOnlySearchTitle: boolean = options.searchTarget === 1
   const searchResult: Object[] = await chromep.bookmarks.search(newSearchKeyword)
 
   const splittedKeyArr: string[] = isOnlySearchTitle ?
-    newSearchKeyword.split(' ').map((x) => x.toLowerCase()) : []
+    newSearchKeyword.split(' ').map((x) => x.toLowerCase()) :
+    []
 
   const filteredResult: Object[] = searchResult
     .filter((itemInfo: Object) => getBookmarkType(itemInfo) === TYPE_BOOKMARK)
     .reduce((acc: Object[], itemInfo: Object) => {
-      if (acc.length === options.maxResults) return acc
+      if (acc.length === options.maxResults) {
+        return acc
+      }
 
       if (isOnlySearchTitle) {
         const itemTitle: string = itemInfo.title.toLowerCase()
 
-        const isTitleMatched: boolean = splittedKeyArr
-          .every((x: string): boolean => itemTitle.includes(x))
+        const isTitleMatched: boolean = splittedKeyArr.every((x: string): boolean =>
+          itemTitle.includes(x)
+        )
 
-        if (!isTitleMatched) return acc
+        if (!isTitleMatched) {
+          return acc
+        }
       }
 
       return acc.concat(itemInfo)
@@ -206,10 +203,7 @@ export async function getSearchResult(
   }
 }
 
-export function getSlicedTrees(
-  trees: Object[],
-  removeFromIndex: number
-): Object[] {
+export function getSlicedTrees(trees: Object[], removeFromIndex: number): Object[] {
   if (trees.length > removeFromIndex) {
     return trees.slice(0, removeFromIndex)
   }
@@ -231,7 +225,9 @@ export async function initTrees(options: Object): Promise<Object[]> {
     let lastExistingTree: ?Object
     for (let i = lastUsedTreeIds.length - 1; i >= 0; i -= 1) {
       // we already have firstTree
-      if (lastUsedTreeIds[i] === defaultExpandFolderId) break
+      if (lastUsedTreeIds[i] === defaultExpandFolderId) {
+        break
+      }
 
       try {
         lastExistingTree = await getFlatTree(lastUsedTreeIds[i])
@@ -247,11 +243,7 @@ export async function initTrees(options: Object): Promise<Object[]> {
       const trees: Object[] = []
 
       let parentId: string = lastExistingTree.parentId
-      while (
-        parentId &&
-        parentId !== ROOT_ID &&
-        parentId !== defaultExpandFolderId
-      ) {
+      while (parentId && parentId !== ROOT_ID && parentId !== defaultExpandFolderId) {
         const tree: Object = await getFlatTree(parentId)
         trees.unshift(tree)
 
@@ -274,10 +266,7 @@ export function isFolder(itemInfo: Object): boolean {
   return bookmarkType.includes(TYPE_FOLDER)
 }
 
-export function isFolderOpened(
-  trees: Object[],
-  itemInfo: Object
-): boolean {
+export function isFolderOpened(trees: Object[], itemInfo: Object): boolean {
   return trees.some((treeInfo: Object): boolean => treeInfo.id === itemInfo.id)
 }
 
@@ -290,12 +279,16 @@ export async function openBookmark(
   const openMethod: number = options[clickType]
 
   if (itemUrl.startsWith('javascript:')) {
-    await chromep.tabs.executeScript(null, {code: itemUrl})
+    await chromep.tabs.executeScript(null, {
+      code: itemUrl
+    })
   } else {
     switch (openMethod) {
       case 0: // current tab
       case 1: // current tab (without closing PmB)
-        await chromep.tabs.update({url: itemUrl})
+        await chromep.tabs.update({
+          url: itemUrl
+        })
         break
 
       case 2: // new tab
@@ -355,7 +348,8 @@ export async function openMultipleBookmarks(
     }
 
     if (isWarnWhenOpenMany) {
-      const msgAskOpenAll: string = window.chrome.i18n.getMessage('askOpenAll')
+      const msgAskOpenAll: string = window.chrome.i18n
+        .getMessage('askOpenAll')
         .replace('%bkmarkCount%', urlList.length)
 
       if (urlList.length > 5 && !window.confirm(msgAskOpenAll)) {
@@ -398,10 +392,7 @@ export async function pasteItemBelowTarget(
       index: belowTarget.index + 1
     })
   } else {
-    const copyChildrenIfFolder = async (
-      thisTreeInfo: Object,
-      parentId: string
-    ): Promise<void> => {
+    const copyChildrenIfFolder = async (thisTreeInfo: Object, parentId: string): Promise<void> => {
       if (isFolder(thisTreeInfo)) {
         for (const thisItemInfo of thisTreeInfo.children) {
           const thisCreatedItemInfo = await chromep.bookmarks.create({
@@ -438,11 +429,17 @@ export async function removeBookmark(target: Object): Promise<void> {
 export async function sortByName(parentId: string): Promise<void> {
   const childrenInfo: Object[] = await chromep.bookmarks.getChildren(parentId)
 
-  const genClassifiedItems = (): Array<Object[]> => ([
-    [/* Separators */],
-    [/* Folders */],
-    [/* Bookmarks */]
-  ])
+  const genClassifiedItems = (): Array<Object[]> => [
+    [
+      /* Separators */
+    ],
+    [
+      /* Folders */
+    ],
+    [
+      /* Bookmarks */
+    ]
+  ]
   const getClassifiedItemIndex = (itemInfo): number => {
     switch (getBookmarkType(itemInfo)) {
       case TYPE_SEPARATOR:
@@ -463,32 +460,27 @@ export async function sortByName(parentId: string): Promise<void> {
    * Each main group contains 3 small groups
    * [Separators, Folders, Bookmarks]
    */
-  const classifiedItemsList: Array<Array<Object[]>> = childrenInfo
-    .reduce((accumulator, itemInfo) => {
-      const classifiedItemIndex = getClassifiedItemIndex(itemInfo)
+  const classifiedItemsList: Array<Array<Object[]>> = childrenInfo.reduce((acc, itemInfo) => {
+    const classifiedItemIndex = getClassifiedItemIndex(itemInfo)
 
-      if (accumulator.length === 0 || classifiedItemIndex === 0) {
-        accumulator.push(genClassifiedItems())
-      }
+    if (acc.length === 0 || classifiedItemIndex === 0) {
+      acc.push(genClassifiedItems())
+    }
 
-      const lastClassifiedItems = R.last(accumulator)
+    const lastClassifiedItems = R.last(acc)
 
-      lastClassifiedItems[classifiedItemIndex].push(itemInfo)
+    lastClassifiedItems[classifiedItemIndex].push(itemInfo)
 
-      return accumulator
-    }, [])
+    return acc
+  }, [])
 
   // Sort and concatenate all lists into single list
-  const sortedChildrenInfo: Object[] = R.compose(
-    R.flatten,
-    R.map(R.map(sortByTitle))
-  )(classifiedItemsList)
+  const sortedChildrenInfo: Object[] = R.compose(R.flatten, R.map(R.map(sortByTitle)))(
+    classifiedItemsList
+  )
 
   // Moving bookmarks to sorted index
-  for (const [
-    index: number,
-    itemInfo: Object
-  ] of sortedChildrenInfo.entries()) {
+  for (const [index: number, itemInfo: Object] of sortedChildrenInfo.entries()) {
     const oldItemInfo = await getBookmark(itemInfo.id)
 
     const oldIndex: number = oldItemInfo.index

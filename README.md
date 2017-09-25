@@ -36,7 +36,7 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
 ## Developer guide
 
 ##### Before you start
-1. Install [Node.js](//github.com/nodejs/node) (version >= 6.9) via:
+1. Install [Node.js](//github.com/nodejs/node) (version >= 8.4) via:
   - [nvm](//github.com/creationix/nvm) (Linux/Mac)
   - [Node.js official website](//nodejs.org/en/download/) (Windows)
 
@@ -56,7 +56,7 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
 1. build
 
   ```
-  yarn run build
+  yarn build
   ```
 
   To build the whole extension and output a zip file (./__build/[version in package.json].zip) for uploading to Chrome Web Store
@@ -64,7 +64,7 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
 2. dev
 
   ```
-  yarn run dev
+  yarn dev
   ```
 
   To make a temporary folder `__dev` for you to load unpacked extension
@@ -72,20 +72,10 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
   - CSS4 to CSS3 by [postcss-cssnext](//github.com/MoOx/postcss-cssnext)
   - *.pug to *.html by [Pug](//github.com/pugjs/pug)
 
-3. lint
+3. md
 
   ```
-  yarn run lint
-  ```
-
-  To lint
-  - ES6 JavaScript code by [ESLint](//github.com/eslint/eslint)
-  - CSS4 code by [Stylelint](//github.com/stylelint/stylelint)
-
-4. md
-
-  ```
-  yarn run md
+  yarn md
   ```
 
   To generate markdown file on the current directory

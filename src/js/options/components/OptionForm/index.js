@@ -1,13 +1,7 @@
 import {connect} from 'react-redux'
 
-import {
-  OPTION_TABLE_MAP
-} from '../../constants'
-import {
-  saveOptions,
-  resetToDefaultOptions,
-  updateSingleOption
-} from '../../actions'
+import {OPTION_TABLE_MAP} from '../../constants'
+import {saveOptions, resetToDefaultOptions, updateSingleOption} from '../../actions'
 import OptionForm from './OptionForm'
 
 const mapDispatchToProps = {
@@ -22,7 +16,4 @@ const mapStateToProps = (state) => ({
   selectedOptionFormMap: OPTION_TABLE_MAP[state.selectedNavModule]
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(OptionForm)
+export default connect(mapStateToProps, mapDispatchToProps)(OptionForm)

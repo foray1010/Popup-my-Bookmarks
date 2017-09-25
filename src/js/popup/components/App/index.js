@@ -1,12 +1,6 @@
 import {connect} from 'react-redux'
 
-import {
-  closeMenu,
-  dragEnd,
-  onPressArrowKey,
-  openMenu,
-  renewTrees
-} from '../../actions'
+import {closeMenu, dragEnd, onPressArrowKey, openMenu, renewTrees} from '../../actions'
 import App from './App'
 
 const mapDispatchToProps = {
@@ -29,7 +23,4 @@ const mapStateToProps = (state) => ({
   trees: state.trees
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

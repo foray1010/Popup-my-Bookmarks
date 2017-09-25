@@ -9,10 +9,7 @@ const msgYes = chrome.i18n.getMessage('yes')
 
 class Option extends PureComponent {
   handleChange = (evt) => {
-    const {
-      optionName,
-      updateSingleOption
-    } = this.props
+    const {optionName, updateSingleOption} = this.props
 
     const newOptionValue = evt.target.value === String(true)
 
@@ -24,22 +21,15 @@ class Option extends PureComponent {
   }
 
   render() {
-    const {
-      optionChoice,
-      optionName,
-      optionValue
-    } = this.props
+    const {optionChoice, optionName, optionValue} = this.props
 
     const buttonText = optionChoice ? msgYes : msgNo
 
     const isChecked = optionValue === optionChoice
 
-    const thisStyleName = classNames(
-      'item',
-      {
-        'item-active': isChecked
-      }
-    )
+    const thisStyleName = classNames('item', {
+      'item-active': isChecked
+    })
 
     return (
       <div styleName='main'>
@@ -54,11 +44,7 @@ class Option extends PureComponent {
           hidden
           onChange={this.handleChange}
         />
-        <button
-          styleName={thisStyleName}
-          type='button'
-          onClick={this.handleClick}
-        >
+        <button styleName={thisStyleName} type='button' onClick={this.handleClick}>
           {buttonText}
         </button>
       </div>

@@ -1,8 +1,6 @@
 import {connect} from 'react-redux'
 
-import {
-  closeMenuCover
-} from '../../actions'
+import {closeMenuCover} from '../../actions'
 import MenuCover from './MenuCover'
 
 const mapDispatchToProps = {
@@ -14,7 +12,4 @@ const mapStateToProps = (state) => ({
   isHidden: !(state.editorTarget || state.menuTarget)
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MenuCover)
+export default connect(mapStateToProps, mapDispatchToProps)(MenuCover)

@@ -4,38 +4,16 @@ import Immutable from 'seamless-immutable'
 import '../../../css/options/contributors.css'
 
 const contributors = Immutable({
-  Developer: [
-    'foray1010'
-  ],
-  Tester: [
-    'David Bryant'
-  ],
-  'Dutch Translator': [
-    'Marzas'
-  ],
-  'French Translator': [
-    'foXaCe',
-    'Alexis Schapman'
-  ],
-  'German Translator': [
-    'Gürkan ZENGIN'
-  ],
-  'Italian Translator': [
-    'Giacomo Fabio Leone'
-  ],
-  'Korean Translator': [
-    'zenyr'
-  ],
-  'Norwegian Bokmål Translator': [
-    'Bjorn Tore Asheim'
-  ],
-  'Russian Translator': [
-    'kameo',
-    'Oleg K,'
-  ],
-  'Vietnamese Translator': [
-    'Anh Phan'
-  ],
+  Developer: ['foray1010'],
+  Tester: ['David Bryant'],
+  'Dutch Translator': ['Marzas'],
+  'French Translator': ['foXaCe', 'Alexis Schapman'],
+  'German Translator': ['Gürkan ZENGIN'],
+  'Italian Translator': ['Giacomo Fabio Leone'],
+  'Korean Translator': ['zenyr'],
+  'Norwegian Bokmål Translator': ['Bjorn Tore Asheim'],
+  'Russian Translator': ['kameo', 'Oleg K,'],
+  'Vietnamese Translator': ['Anh Phan'],
   Donor: [
     'Abtin Samadi',
     'Drake Roman',
@@ -53,12 +31,10 @@ const contributors = Immutable({
 
 const Contributors = () => (
   <dl styleName='main'>
-    {Object.keys(contributors).map((contributeType) => ([
+    {Object.keys(contributors).map((contributeType) => [
       <dt>{contributeType}</dt>,
-      ...contributors[contributeType].map((contributor) => (
-        <dd>{contributor}</dd>
-      ))
-    ]))}
+      ...contributors[contributeType].map((contributor) => <dd>{contributor}</dd>)
+    ])}
   </dl>
 )
 

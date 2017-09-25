@@ -6,10 +6,7 @@ import _debounce from 'lodash.debounce'
 import multi from 'redux-multi'
 import thunk from 'redux-thunk'
 
-const middlewares: Function[] = [
-  multi,
-  thunk
-]
+const middlewares: Function[] = [multi, thunk]
 
 export default compose(
   applyMiddleware(...middlewares),

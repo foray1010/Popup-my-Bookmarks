@@ -11,13 +11,7 @@ class MenuCover extends PureComponent {
   render() {
     const {isHidden} = this.props
 
-    return (
-      <div
-        styleName='main'
-        hidden={isHidden}
-        onClick={this.handleClick}
-      />
-    )
+    return <div styleName='main' hidden={isHidden} onClick={this.handleClick} />
   }
 }
 

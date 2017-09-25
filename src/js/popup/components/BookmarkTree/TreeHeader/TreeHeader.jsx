@@ -5,31 +5,18 @@ import '../../../../../css/popup/tree-header.css'
 
 class TreeHeader extends PureComponent {
   handleClose = () => {
-    const {
-      removeTreeInfosFromIndex,
-      treeIndex
-    } = this.props
+    const {removeTreeInfosFromIndex, treeIndex} = this.props
 
     removeTreeInfosFromIndex(treeIndex)
   }
 
   render() {
-    const {
-      isHidden,
-      treeInfo
-    } = this.props
+    const {isHidden, treeInfo} = this.props
 
     return (
       <header styleName='main' hidden={isHidden}>
-        <h1 styleName='title'>
-          {treeInfo.title}
-        </h1>
-        <button
-          styleName='close'
-          type='button'
-          tabIndex='-1'
-          onClick={this.handleClose}
-        />
+        <h1 styleName='title'>{treeInfo.title}</h1>
+        <button styleName='close' type='button' tabIndex='-1' onClick={this.handleClose} />
       </header>
     )
   }

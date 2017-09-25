@@ -2,9 +2,7 @@
 
 import R from 'ramda'
 
-import {
-  createAction
-} from '../../common/functions'
+import {createAction} from '../../common/functions'
 import {
   genBookmarkList,
   getBookmark,
@@ -21,18 +19,13 @@ import * as CST from '../constants'
 
 export const putDragIndicator = createAction(
   CST.PUT_DRAG_INDICATOR,
-  (
-    itemInfo: Object,
-    isPlaceAfter: boolean
-  ): Object => ({
+  (itemInfo: Object, isPlaceAfter: boolean): Object => ({
     itemInfo,
     isPlaceAfter
   })
 )
 
-export const removeDragIndicator = createAction(
-  CST.REMOVE_DRAG_INDICATOR
-)
+export const removeDragIndicator = createAction(CST.REMOVE_DRAG_INDICATOR)
 
 export const removeFocusTargetById = createAction(
   CST.REMOVE_FOCUS_TARGET_BY_ID,
@@ -46,10 +39,7 @@ export const removeTreeInfosFromIndex = createAction(
 
 export const replaceTreeInfoByIndex = createAction(
   CST.REPLACE_TREE_INFO_BY_INDEX,
-  (
-    treeIndex: number,
-    treeInfo: Object
-  ): Object => ({
+  (treeIndex: number, treeInfo: Object): Object => ({
     treeIndex,
     treeInfo
   })
@@ -105,21 +95,14 @@ export const updateSelectedMenuItem = createAction(
   (selectedMenuItem: ?string): ?string => selectedMenuItem
 )
 
-export const updateTrees = createAction(
-  CST.UPDATE_TREES,
-  (trees: Object[]): Object[] => trees
-)
-
+export const updateTrees = createAction(CST.UPDATE_TREES, (trees: Object[]): Object[] => trees)
 
 /**
  * Following functions are predefined actions
  */
 
 export const addFolder = (belowTarget: Object): Object[] => {
-  return [
-    updateEditorTarget(belowTarget),
-    updateIsCreatingNewFolder(true)
-  ]
+  return [updateEditorTarget(belowTarget), updateIsCreatingNewFolder(true)]
 }
 
 export const closeEditor = (): Object => updateEditorTarget(null)
@@ -127,52 +110,32 @@ export const closeEditor = (): Object => updateEditorTarget(null)
 export const closeMenu = (): Object => updateMenuTarget(null)
 
 export const closeMenuCover = (): Object[] => {
-  return [
-    closeEditor(),
-    closeMenu()
-  ]
+  return [closeEditor(), closeMenu()]
 }
 
-export const dragEnd = (): Object[] => ([
-  removeDragIndicator(),
-  updateDragTarget(null)
-])
+export const dragEnd = (): Object[] => [removeDragIndicator(), updateDragTarget(null)]
 
-export const dragStart = (
-  itemInfo: Object,
-  currentTreeIndex: number
-): Object[] => ([
+export const dragStart = (itemInfo: Object, currentTreeIndex: number): Object[] => [
   removeTreeInfosFromIndex(currentTreeIndex + 1),
   updateDragTarget(itemInfo)
-])
-
+]
 
 /**
  * Following functions have side effect
  */
 
-export const dragOver = (
-  itemInfo: Object,
-  currentTreeIndex: number,
-  isPlaceAfter: boolean
-) => {
-  return (
-    dispatch: Function,
-    getState: Function
-  ): void => {
-    const {
-      dragTarget
-    } = getState()
+export const dragOver = (itemInfo: Object, currentTreeIndex: number, isPlaceAfter: boolean) => {
+  return (dispatch: Function, getState: Function): void => {
+    const {dragTarget} = getState()
 
     const actionList = []
 
     const isDragTarget = dragTarget.id === itemInfo.id
 
     const shouldRemoveDragIndicator: boolean = (() => {
-      const isSiblingOfDragTarget = (
+      const isSiblingOfDragTarget =
         dragTarget.parentId === itemInfo.parentId &&
         Math.abs(dragTarget.index - itemInfo.index) === 1
-      )
 
       if (isSiblingOfDragTarget) {
         const isDragTargetAfterItemInfo = dragTarget.index - itemInfo.index > 0
@@ -184,10 +147,7 @@ export const dragOver = (
         }
       }
 
-      return (
-        isDragTarget ||
-        getBookmarkType(itemInfo) === CST.TYPE_ROOT_FOLDER
-      )
+      return isDragTarget || getBookmarkType(itemInfo) === CST.TYPE_ROOT_FOLDER
     })()
 
     // item cannot be the parent folder of itself
@@ -207,96 +167,51 @@ export const dragOver = (
   }
 }
 
-export const hoverBookmarkItem = (
-  itemInfo: Object,
-  targetTreeIndex: number
-) => {
-  return (
-    dispatch: Function,
-    getState: Function
-  ): void => {
-    const {
-      options,
-      trees
-    } = getState()
+export const hoverBookmarkItem = (itemInfo: Object, targetTreeIndex: number) => {
+  return (dispatch: Function, getState: Function): void => {
+    const {options, trees} = getState()
 
     if (!options.opFolderBy) {
       if (isFolder(itemInfo)) {
         if (!isFolderOpened(trees, itemInfo)) {
-          dispatch(
-            openFolder(itemInfo, targetTreeIndex)
-          )
+          dispatch(openFolder(itemInfo, targetTreeIndex))
         }
       } else {
-        dispatch(
-          removeTreeInfosFromIndex(targetTreeIndex)
-        )
+        dispatch(removeTreeInfosFromIndex(targetTreeIndex))
       }
     }
   }
 }
 
-export const leftClickBookmarkItem = (
-  itemInfo: Object,
-  targetTreeIndex: number
-) => {
-  return (
-    dispatch: Function,
-    getState: Function
-  ): void => {
-    const {
-      options,
-      trees
-    } = getState()
+export const leftClickBookmarkItem = (itemInfo: Object, targetTreeIndex: number) => {
+  return (dispatch: Function, getState: Function): void => {
+    const {options, trees} = getState()
 
     if (options.opFolderBy) {
       if (!isFolderOpened(trees, itemInfo)) {
-        dispatch(
-          openFolder(itemInfo, targetTreeIndex)
-        )
+        dispatch(openFolder(itemInfo, targetTreeIndex))
       } else {
-        dispatch(
-          removeTreeInfosFromIndex(targetTreeIndex)
-        )
+        dispatch(removeTreeInfosFromIndex(targetTreeIndex))
       }
     }
   }
 }
 
-export const onPressArrowKey = (
-  arrowDirection: 'down' | 'left' | 'right' | 'up'
-) => {
-  return (
-    dispatch: Function,
-    getState: Function
-  ): void => {
-    const {
-      menuTarget
-    } = getState()
+export const onPressArrowKey = (arrowDirection: 'down' | 'left' | 'right' | 'up') => {
+  return (dispatch: Function, getState: Function): void => {
+    const {menuTarget} = getState()
 
     if (menuTarget) {
-      dispatch(
-        onPressArrowKeyOnMenu(arrowDirection)
-      )
+      dispatch(onPressArrowKeyOnMenu(arrowDirection))
     } else {
-      dispatch(
-        onPressArrowKeyOnBookmarkTree(arrowDirection)
-      )
+      dispatch(onPressArrowKeyOnBookmarkTree(arrowDirection))
     }
   }
 }
 
 export const onPressArrowKeyOnBookmarkTree = (arrowDirection: string) => {
-  return async (
-    dispatch: Function,
-    getState: Function
-  ): Promise<void> => {
-    const {
-      focusTarget,
-      rootTree,
-      searchKeyword,
-      trees
-    } = getState()
+  return async (dispatch: Function, getState: Function): Promise<void> => {
+    const {focusTarget, rootTree, searchKeyword, trees} = getState()
 
     const targetTreeIndex = getFocusTargetTreeIndex(focusTarget, trees)
 
@@ -315,8 +230,9 @@ export const onPressArrowKeyOnBookmarkTree = (arrowDirection: string) => {
 
         let nextSelectedIndex
         if (focusTarget) {
-          const origSelectedIndex = targetBookmarkList
-            .findIndex((itemInfo) => itemInfo.id === focusTarget.id)
+          const origSelectedIndex = targetBookmarkList.findIndex(
+            (itemInfo) => itemInfo.id === focusTarget.id
+          )
 
           if (isUp) {
             nextSelectedIndex = origSelectedIndex - 1
@@ -375,14 +291,8 @@ export const onPressArrowKeyOnBookmarkTree = (arrowDirection: string) => {
 }
 
 export const onPressArrowKeyOnMenu = (arrowDirection: string) => {
-  return (
-    dispatch: Function,
-    getState: Function
-  ): void => {
-    const {
-      menuPattern,
-      selectedMenuItem
-    } = getState()
+  return (dispatch: Function, getState: Function): void => {
+    const {menuPattern, selectedMenuItem} = getState()
 
     switch (arrowDirection) {
       case 'down':
@@ -407,9 +317,7 @@ export const onPressArrowKeyOnMenu = (arrowDirection: string) => {
           }
         }
 
-        dispatch(
-          updateSelectedMenuItem(flattenMenuPattern[nextSelectedIndex])
-        )
+        dispatch(updateSelectedMenuItem(flattenMenuPattern[nextSelectedIndex]))
         break
       }
 
@@ -418,34 +326,26 @@ export const onPressArrowKeyOnMenu = (arrowDirection: string) => {
   }
 }
 
-const openFolder = (
-  itemInfo: Object,
-  targetTreeIndex: number
-) => {
-  return async (
-    dispatch: Function
-  ): Promise<void> => {
+const openFolder = (itemInfo: Object, targetTreeIndex: number) => {
+  return async (dispatch: Function): Promise<void> => {
     const treeInfo = await getFlatTree(itemInfo.id)
 
-    dispatch(
-      replaceTreeInfoByIndex(targetTreeIndex, treeInfo)
-    )
+    dispatch(replaceTreeInfoByIndex(targetTreeIndex, treeInfo))
   }
 }
 
 export const openMenu = (
   menuTarget: Object,
-  mousePosition: ?{x: number, y: number}
+  mousePosition: ?{
+    x: number,
+    y: number
+  }
 ) => {
-  return (
-    dispatch: Function
-  ): void => {
+  return (dispatch: Function): void => {
     const actions = []
 
     if (mousePosition) {
-      actions.push(
-        updateMousePosition(mousePosition)
-      )
+      actions.push(updateMousePosition(mousePosition))
     } else {
       const el = document.getElementById(menuTarget.id)
       if (el) {
@@ -460,23 +360,13 @@ export const openMenu = (
       }
     }
 
-    dispatch([
-      ...actions,
-      updateMenuTarget(menuTarget)
-    ])
+    dispatch([...actions, updateMenuTarget(menuTarget)])
   }
 }
 
 export const pasteItem = () => {
-  return async (
-    dispatch: Function,
-    getState: Function
-  ): Promise<void> => {
-    const {
-      copyTarget,
-      cutTarget,
-      menuTarget
-    } = getState()
+  return async (dispatch: Function, getState: Function): Promise<void> => {
+    const {copyTarget, cutTarget, menuTarget} = getState()
 
     const isCut = Boolean(cutTarget)
 
@@ -491,14 +381,8 @@ export const pasteItem = () => {
 }
 
 export const renewTrees = (oldTrees: Object[]) => {
-  return async (
-    dispatch: Function,
-    getState: Function
-  ): Promise<void> => {
-    const {
-      options,
-      searchKeyword
-    } = getState()
+  return async (dispatch: Function, getState: Function): Promise<void> => {
+    const {options, searchKeyword} = getState()
 
     const newTrees = await Promise.all(
       oldTrees.map((treeInfo) => {
@@ -515,13 +399,8 @@ export const renewTrees = (oldTrees: Object[]) => {
 }
 
 export const updateTreesBySearchKeyword = (newSearchKeyword: string) => {
-  return async (
-    dispatch: Function,
-    getState: Function
-  ): Promise<void> => {
-    const {
-      options
-    } = getState()
+  return async (dispatch: Function, getState: Function): Promise<void> => {
+    const {options} = getState()
 
     let newTrees
     if (newSearchKeyword === '') {
@@ -532,9 +411,6 @@ export const updateTreesBySearchKeyword = (newSearchKeyword: string) => {
       newTrees = [searchResult]
     }
 
-    dispatch([
-      updateSearchKeyword(newSearchKeyword),
-      updateTrees(newTrees)
-    ])
+    dispatch([updateSearchKeyword(newSearchKeyword), updateTrees(newTrees)])
   }
 }

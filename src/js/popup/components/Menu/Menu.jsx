@@ -1,10 +1,7 @@
 import {createElement, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  getBookmarkType,
-  resetBodySize
-} from '../../functions'
+import {getBookmarkType, resetBodySize} from '../../functions'
 import * as CST from '../../constants'
 import MenuArea from './MenuArea'
 
@@ -26,10 +23,7 @@ class Menu extends PureComponent {
   }
 
   getIsMenuAreasHidden() {
-    const {
-      isSearching,
-      menuTarget
-    } = this.props
+    const {isSearching, menuTarget} = this.props
 
     switch (getBookmarkType(menuTarget)) {
       case CST.TYPE_ROOT_FOLDER:
@@ -51,10 +45,7 @@ class Menu extends PureComponent {
   }
 
   setMenuPosition() {
-    const {
-      menuTarget,
-      mousePosition
-    } = this.props
+    const {menuTarget, mousePosition} = this.props
 
     const isHidden = !menuTarget
 
@@ -91,10 +82,7 @@ class Menu extends PureComponent {
   }
 
   render() {
-    const {
-      menuPattern,
-      menuTarget
-    } = this.props
+    const {menuPattern, menuTarget} = this.props
 
     const isHidden = !menuTarget
 
@@ -128,9 +116,7 @@ class Menu extends PureComponent {
 
 Menu.propTypes = {
   isSearching: PropTypes.bool.isRequired,
-  menuPattern: PropTypes.arrayOf(
-    PropTypes.arrayOf(PropTypes.string)
-  ).isRequired,
+  menuPattern: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
   menuTarget: PropTypes.object,
   mousePosition: PropTypes.objectOf(PropTypes.number).isRequired
 }

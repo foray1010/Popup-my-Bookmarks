@@ -3,13 +3,7 @@ import {connect} from 'react-redux'
 import BookmarkTree from './BookmarkTree'
 
 const mapStateToProps = (state, ownProps) => {
-  const {
-    dragIndicator,
-    focusTarget,
-    itemOffsetHeight,
-    options,
-    rootTree
-  } = state
+  const {dragIndicator, focusTarget, itemOffsetHeight, options, rootTree} = state
 
   const isSearching = Boolean(state.searchKeyword)
   const treeInfo = state.trees[ownProps.treeIndex]
@@ -37,6 +31,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(BookmarkTree)
+export default connect(mapStateToProps)(BookmarkTree)

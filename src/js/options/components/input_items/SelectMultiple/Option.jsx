@@ -7,11 +7,7 @@ class Option extends PureComponent {
   id = shortid.generate()
 
   handleChange = (evt) => {
-    const {
-      optionName,
-      optionValue,
-      updateSingleOption
-    } = this.props
+    const {optionName, optionValue, updateSingleOption} = this.props
 
     const checkboxValue = parseInt(evt.target.value, 10)
 
@@ -19,12 +15,9 @@ class Option extends PureComponent {
 
     let newOptionValue
     if (wasChecked) {
-      newOptionValue = optionValue
-        .filter((x) => x !== checkboxValue)
+      newOptionValue = optionValue.filter((x) => x !== checkboxValue)
     } else {
-      const mutableNewOptionValue = [checkboxValue]
-        .concat(optionValue)
-        .sort()
+      const mutableNewOptionValue = [checkboxValue].concat(optionValue).sort()
       newOptionValue = Immutable(mutableNewOptionValue)
     }
 
@@ -32,12 +25,7 @@ class Option extends PureComponent {
   }
 
   render() {
-    const {
-      optionChoice,
-      optionChoiceIndex,
-      optionName,
-      optionValue
-    } = this.props
+    const {optionChoice, optionChoiceIndex, optionName, optionValue} = this.props
 
     const isChecked = optionValue.includes(optionChoiceIndex)
 

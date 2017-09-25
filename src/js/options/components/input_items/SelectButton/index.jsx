@@ -6,11 +6,7 @@ import Option from './Option'
 import '../../../../../css/options/select-button.css'
 
 const SelectButton = (props) => {
-  const {
-    optionName,
-    optionValue,
-    updateSingleOption
-  } = props
+  const {optionName, optionValue, updateSingleOption} = props
 
   const optionChoices = [true, false]
   const selectdButtonIndex = optionValue ? 0 : 1

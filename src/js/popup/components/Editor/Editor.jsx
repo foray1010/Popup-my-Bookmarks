@@ -1,12 +1,8 @@
 import {createElement, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  normalizeInputtingValue
-} from '../../../common/functions'
-import {
-  resetBodySize
-} from '../../functions'
+import {normalizeInputtingValue} from '../../../common/functions'
+import {resetBodySize} from '../../functions'
 import chromep from '../../../common/lib/chromePromise'
 
 import '../../../../css/popup/editor.css'
@@ -24,10 +20,7 @@ class Editor extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {
-      editorTarget,
-      isCreatingNewFolder
-    } = nextProps
+    const {editorTarget, isCreatingNewFolder} = nextProps
 
     const isHidden = !editorTarget
 
@@ -45,9 +38,7 @@ class Editor extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      editorTarget
-    } = this.props
+    const {editorTarget} = this.props
 
     const isHidden = !editorTarget
 
@@ -101,16 +92,9 @@ class Editor extends PureComponent {
     evt.persist()
     evt.preventDefault()
 
-    const {
-      closeEditor,
-      editorTarget,
-      isCreatingNewFolder
-    } = this.props
+    const {closeEditor, editorTarget, isCreatingNewFolder} = this.props
 
-    const {
-      title,
-      url
-    } = this.state
+    const {title, url} = this.state
 
     if (isCreatingNewFolder) {
       await chromep.bookmarks.create({
@@ -141,15 +125,9 @@ class Editor extends PureComponent {
   }
 
   render() {
-    const {
-      editorTarget,
-      isUIForFolder
-    } = this.props
+    const {editorTarget, isUIForFolder} = this.props
 
-    const {
-      title,
-      url
-    } = this.state
+    const {title, url} = this.state
 
     const editorTitle = isUIForFolder ? msgRename : msgEdit
     const isHidden = !editorTarget
@@ -163,17 +141,8 @@ class Editor extends PureComponent {
         hidden={isHidden}
       >
         <span styleName='title'>{editorTitle}</span>
-        <input
-          type='text'
-          value={title}
-          onChange={this.handleTitleChange}
-        />
-        <input
-          type='text'
-          value={url}
-          hidden={isUIForFolder}
-          onChange={this.handleUrlChange}
-        />
+        <input type='text' value={title} onChange={this.handleTitleChange} />
+        <input type='text' value={url} hidden={isUIForFolder} onChange={this.handleUrlChange} />
         <button
           styleName='button'
           type='submit' // support `Enter` to submit
@@ -181,11 +150,7 @@ class Editor extends PureComponent {
         >
           {msgConfirm}
         </button>
-        <button
-          styleName='button'
-          type='button'
-          onClick={this.handleCancel}
-        >
+        <button styleName='button' type='button' onClick={this.handleCancel}>
           {msgCancel}
         </button>
       </form>

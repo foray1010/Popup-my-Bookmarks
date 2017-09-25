@@ -6,10 +6,7 @@ import '../../../../css/popup/folder-cover.css'
 
 class FolderCover extends PureComponent {
   closeCover = _debounce(() => {
-    const {
-      removeTreeInfosFromIndex,
-      treeIndex
-    } = this.props
+    const {removeTreeInfosFromIndex, treeIndex} = this.props
 
     removeTreeInfosFromIndex(treeIndex + 1)
   }, 200)

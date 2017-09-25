@@ -53,11 +53,7 @@ class BookmarkItem extends PureComponent {
   }
 
   async getTooltip() {
-    const {
-      isSearching,
-      itemInfo,
-      options
-    } = this.props
+    const {isSearching, itemInfo, options} = this.props
 
     const tooltipArr = []
 
@@ -76,9 +72,7 @@ class BookmarkItem extends PureComponent {
         breadId = thisItemInfo.parentId
       }
 
-      tooltipArr.unshift(
-        `[${breadcrumbArr.join(' > ')}]`
-      )
+      tooltipArr.unshift(`[${breadcrumbArr.join(' > ')}]`)
     }
 
     return tooltipArr.join('\n')
@@ -105,16 +99,13 @@ class BookmarkItem extends PureComponent {
 
   handleClick = async (evt) => {
     // only allow left and middle click
-    if (![0, 1].includes(evt.button)) return
+    if (![0, 1].includes(evt.button)) {
+      return
+    }
 
     evt.preventDefault()
 
-    const {
-      itemInfo,
-      leftClickBookmarkItem,
-      options,
-      treeIndex
-    } = this.props
+    const {itemInfo, leftClickBookmarkItem, options, treeIndex} = this.props
 
     const bookmarkType = getBookmarkType(itemInfo)
 
@@ -146,10 +137,7 @@ class BookmarkItem extends PureComponent {
     // disable native context menu
     evt.preventDefault()
 
-    const {
-      itemInfo,
-      openMenu
-    } = this.props
+    const {itemInfo, openMenu} = this.props
 
     openMenu(itemInfo, {
       x: evt.clientX,
@@ -164,11 +152,7 @@ class BookmarkItem extends PureComponent {
   }
 
   _handleDragEnter = _debounce((evt) => {
-    const {
-      dragOver,
-      itemInfo,
-      treeIndex
-    } = this.props
+    const {dragOver, itemInfo, treeIndex} = this.props
 
     const targetOffset = evt.target.getBoundingClientRect()
 
@@ -178,21 +162,13 @@ class BookmarkItem extends PureComponent {
   }, 50)
 
   handleDragStart = () => {
-    const {
-      dragStart,
-      itemInfo,
-      treeIndex
-    } = this.props
+    const {dragStart, itemInfo, treeIndex} = this.props
 
     dragStart(itemInfo, treeIndex)
   }
 
   handleMouse = (evt) => {
-    const {
-      itemInfo,
-      removeFocusTargetById,
-      updateFocusTarget
-    } = this.props
+    const {itemInfo, removeFocusTargetById, updateFocusTarget} = this.props
 
     switch (evt.type) {
       case 'mouseenter':
@@ -212,34 +188,22 @@ class BookmarkItem extends PureComponent {
   }
 
   _handleMouseEnter = _debounce(() => {
-    const {
-      hoverBookmarkItem,
-      itemInfo,
-      treeIndex
-    } = this.props
+    const {hoverBookmarkItem, itemInfo, treeIndex} = this.props
 
     hoverBookmarkItem(itemInfo, treeIndex + 1)
   }, 200)
 
   render() {
-    const {
-      isSearching,
-      isSelected,
-      isUnclickable,
-      itemInfo
-    } = this.props
+    const {isSearching, isSelected, isUnclickable, itemInfo} = this.props
 
     const bookmarkType = getBookmarkType(itemInfo)
     const itemTitle = itemInfo.title || itemInfo.url || null
-    const thisStyleName = classNames(
-      'main',
-      {
-        'root-folder': bookmarkType === TYPE_ROOT_FOLDER,
-        selected: isSelected,
-        separator: bookmarkType === TYPE_SEPARATOR,
-        unclickable: isUnclickable
-      }
-    )
+    const thisStyleName = classNames('main', {
+      'root-folder': bookmarkType === TYPE_ROOT_FOLDER,
+      selected: isSelected,
+      separator: bookmarkType === TYPE_SEPARATOR,
+      unclickable: isUnclickable
+    })
 
     let iconSrc = null
     switch (bookmarkType) {
@@ -282,12 +246,7 @@ class BookmarkItem extends PureComponent {
         onMouseEnter={this.handleMouse}
         onMouseLeave={this.handleMouse}
       >
-        <img
-          styleName='icon'
-          src={iconSrc}
-          alt=''
-          hidden={iconSrc === null}
-        />
+        <img styleName='icon' src={iconSrc} alt='' hidden={iconSrc === null} />
         <div styleName='title'>{itemTitle}</div>
       </div>
     )

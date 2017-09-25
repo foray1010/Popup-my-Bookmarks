@@ -6,19 +6,14 @@ import Immutable from 'seamless-immutable'
 import R from 'ramda'
 
 import '../../manifest.yml'
-import {
-  getItemOffsetHeight,
-  getRootTree,
-  initTrees,
-  openOptionsPage
-} from './functions'
+import {getItemOffsetHeight, getRootTree, initTrees, openOptionsPage} from './functions'
 import App from './components/App'
 import chromep from '../common/lib/chromePromise'
 import configureStore from '../common/store/configureStore'
 import getOptionsConfig from '../common/lib/getOptionsConfig'
 import reducers from './reducers'
 
-!async function () {
+!(async function () {
   const optionsPromise = chromep.storage.sync.get(null)
   const optionsConfigPromise = getOptionsConfig()
 
@@ -26,10 +21,7 @@ import reducers from './reducers'
   const optionsConfig = await optionsConfigPromise
 
   /* if missing option */
-  const missingOptionKeys = R.difference(
-    Object.keys(optionsConfig),
-    Object.keys(options)
-  )
+  const missingOptionKeys = R.difference(Object.keys(optionsConfig), Object.keys(options))
   if (missingOptionKeys.length !== 0) {
     openOptionsPage()
     return
@@ -42,17 +34,21 @@ import reducers from './reducers'
   const rootTree = await rootTreePromise
   const trees = await treesPromise
 
-  const store = configureStore(reducers, Immutable({
-    itemOffsetHeight: getItemOffsetHeight(options),
-    options: options,
-    rootTree: rootTree,
-    trees: trees
-  }))
+  const store = configureStore(
+    reducers,
+    Immutable({
+      itemOffsetHeight: getItemOffsetHeight(options),
+      options: options,
+      rootTree: rootTree,
+      trees: trees
+    })
+  )
 
   /* render the app */
-  render((
+  render(
     <Provider store={store}>
       <App />
-    </Provider>
-  ), document.getElementById('root'))
-}().catch((err) => console.error(err.stack))
+    </Provider>,
+    document.getElementById('root')
+  )
+})().catch((err) => console.error(err.stack))

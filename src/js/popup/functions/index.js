@@ -1,8 +1,6 @@
 /* @flow */
 
-import {
-  GOLDEN_GAP
-} from '../constants'
+import {GOLDEN_GAP} from '../constants'
 import chromep from '../../common/lib/chromePromise'
 
 export * from './bookmarks'

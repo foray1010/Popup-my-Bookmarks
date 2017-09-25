@@ -1,39 +1,21 @@
 /* @flow */
 
-import {
-  createAction
-} from '../../common/functions'
-import {
-  initOptionsValue
-} from '../functions'
-import {
-  SELECT_NAV_MODULE,
-  UPDATE_OPTIONS,
-  UPDATE_SINGLE_OPTION
-} from '../constants'
+import {createAction} from '../../common/functions'
+import {initOptionsValue} from '../functions'
+import {SELECT_NAV_MODULE, UPDATE_OPTIONS, UPDATE_SINGLE_OPTION} from '../constants'
 import chromep from '../../common/lib/chromePromise'
 
-const selectNavModule = createAction(
-  SELECT_NAV_MODULE,
-  (navModule: string): string => navModule
-)
+const selectNavModule = createAction(SELECT_NAV_MODULE, (navModule: string): string => navModule)
 
-export const updateOptions = createAction(
-  UPDATE_OPTIONS,
-  (options: Object): Object => options
-)
+export const updateOptions = createAction(UPDATE_OPTIONS, (options: Object): Object => options)
 
 export const updateSingleOption = createAction(
   UPDATE_SINGLE_OPTION,
-  (
-    optionName: string,
-    optionValue: boolean | number | number[] | string
-  ): Object => ({
+  (optionName: string, optionValue: boolean | number | number[] | string): Object => ({
     optionName,
     optionValue
   })
 )
-
 
 /**
  * Following functions have side effect
@@ -46,10 +28,7 @@ async function reloadOptions(): Object {
 }
 
 export function resetToDefaultOptions(): Function {
-  return async (
-    dispatch: Function,
-    getState: Function
-  ): Promise<void> => {
+  return async (dispatch: Function, getState: Function): Promise<void> => {
     const {
       optionsConfig
     }: {
@@ -65,10 +44,7 @@ export function resetToDefaultOptions(): Function {
 }
 
 export function saveOptions(): Function {
-  return async (
-    dispatch: Function,
-    getState: Function
-  ): Promise<void> => {
+  return async (dispatch: Function, getState: Function): Promise<void> => {
     const {
       options
     }: {
@@ -83,10 +59,7 @@ export function saveOptions(): Function {
 }
 
 export function switchNavModule(navModule: string): Function {
-  return async (
-    dispatch: Function,
-    getState: Function
-  ): Promise<void> => {
+  return async (dispatch: Function, getState: Function): Promise<void> => {
     const {
       selectedNavModule
     }: {
@@ -94,10 +67,7 @@ export function switchNavModule(navModule: string): Function {
     } = getState()
 
     if (navModule !== selectedNavModule) {
-      dispatch([
-        await reloadOptions(),
-        selectNavModule(navModule)
-      ])
+      dispatch([await reloadOptions(), selectNavModule(navModule)])
     }
   }
 }

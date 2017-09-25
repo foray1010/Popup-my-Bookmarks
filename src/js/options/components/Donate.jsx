@@ -5,7 +5,8 @@ import ExternalLink from './ExternalLink'
 import '../../../css/options/donate.css'
 import donateIcon from '../../../img/btn_donateCC_LG.png'
 
-const paypalUrl = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TP67BBZ7VK934'
+const paypalUrl =
+  'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TP67BBZ7VK934'
 
 const Donate = () => (
   <footer styleName='main'>
@@ -19,25 +20,17 @@ const Donate = () => (
       <ol>
         <li>
           rate it on&nbsp;
-          <ExternalLink href='http://goo.gl/x9Wlq'>
-            Chrome Web Store
-          </ExternalLink>
+          <ExternalLink href='http://goo.gl/x9Wlq'>Chrome Web Store</ExternalLink>
         </li>
         <li>
           fork me on&nbsp;
-          <ExternalLink href='https://github.com/foray1010/Popup-my-Bookmarks'>
-            GitHub
-          </ExternalLink>
+          <ExternalLink href='https://github.com/foray1010/Popup-my-Bookmarks'>GitHub</ExternalLink>
         </li>
         <li>
           buy me a drink via&nbsp;
-          <ExternalLink href={paypalUrl}>
-            PayPal
-          </ExternalLink>
+          <ExternalLink href={paypalUrl}>PayPal</ExternalLink>
           &nbsp;or&nbsp;
-          <ExternalLink href='bitcoin:16sJwjWsUWrFn5iAGGBCiQbqUD4Pb5YdDR'>
-            Bitcoin
-          </ExternalLink>
+          <ExternalLink href='bitcoin:16sJwjWsUWrFn5iAGGBCiQbqUD4Pb5YdDR'>Bitcoin</ExternalLink>
           &nbsp;:)
         </li>
       </ol>

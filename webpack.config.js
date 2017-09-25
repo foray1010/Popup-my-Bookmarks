@@ -4,7 +4,6 @@ const {appNames, commonChunkName, outputDir, sourceDir} = require('config')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const DashboardPlugin = require('webpack-dashboard/plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeJsPlugin = require('optimize-js-plugin')
@@ -29,11 +28,15 @@ const cssLoaderOptions = {
 
 const webpackConfig = getMergedConfigByEnv({
   default: {
-    entry: R.reduce((acc, appName) => {
-      return R.merge(acc, {
-        [appName]: `./${sourceDir}/js/${appName}`
-      })
-    }, {}, appNames),
+    entry: R.reduce(
+      (acc, appName) => {
+        return R.merge(acc, {
+          [appName]: `./${sourceDir}/js/${appName}`
+        })
+      },
+      {},
+      appNames
+    ),
     module: {
       rules: [
         {
@@ -145,9 +148,6 @@ const webpackConfig = getMergedConfigByEnv({
         }
       ]
     },
-    plugins: [
-      new DashboardPlugin()
-    ],
     watch: true
   },
   production: {

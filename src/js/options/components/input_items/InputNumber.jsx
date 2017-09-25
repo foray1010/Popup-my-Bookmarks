@@ -4,12 +4,7 @@ import R from 'ramda'
 
 class InputNumber extends PureComponent {
   handleBlur = (evt) => {
-    const {
-      maximum,
-      minimum,
-      optionName,
-      updateSingleOption
-    } = this.props
+    const {maximum, minimum, optionName, updateSingleOption} = this.props
 
     const parsedValue = parseInt(evt.target.value, 10)
 
@@ -19,15 +14,14 @@ class InputNumber extends PureComponent {
   }
 
   handleChange = (evt) => {
-    const {
-      optionName,
-      updateSingleOption
-    } = this.props
+    const {optionName, updateSingleOption} = this.props
 
     const parsedValue = parseInt(evt.target.value, 10)
 
     // only allow input number
-    if (Number.isNaN(parsedValue)) return
+    if (Number.isNaN(parsedValue)) {
+      return
+    }
 
     updateSingleOption(optionName, parsedValue)
   }
@@ -40,12 +34,7 @@ class InputNumber extends PureComponent {
   }
 
   render() {
-    const {
-      maximum,
-      minimum,
-      optionName,
-      optionValue
-    } = this.props
+    const {maximum, minimum, optionName, optionValue} = this.props
 
     return (
       <input

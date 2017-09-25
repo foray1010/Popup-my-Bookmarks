@@ -14,23 +14,14 @@ function genStyleEl(): Object {
 }
 
 export const set = (styleList: Object): void => {
-  R.forEachObjIndexed((
-    props: Object,
-    styleSelector: string
-  ): void => {
+  R.forEachObjIndexed((props: Object, styleSelector: string): void => {
     let styleValue: string = ''
 
-    R.forEachObjIndexed((
-      propValue: number | string,
-      propName: string
-    ): void => {
+    R.forEachObjIndexed((propValue: number | string, propName: string): void => {
       styleValue += `${propName}:${propValue};`
     }, props)
 
-    sheet.insertRule(
-      styleSelector + '{' + styleValue + '}',
-      sheet.cssRules.length
-    )
+    sheet.insertRule(styleSelector + '{' + styleValue + '}', sheet.cssRules.length)
   }, styleList)
 }
 

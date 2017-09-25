@@ -87,11 +87,7 @@ class MenuItem extends PureComponent {
         break
 
       case CST.MENU_ADD_SEPARATOR:
-        createBookmarkBelowTarget(
-          menuTarget,
-          '- '.repeat(42),
-          CST.SEPARATE_THIS_URL
-        )
+        createBookmarkBelowTarget(menuTarget, '- '.repeat(42), CST.SEPARATE_THIS_URL)
         break
 
       case CST.MENU_SORT_BY_NAME:
@@ -105,11 +101,7 @@ class MenuItem extends PureComponent {
   }
 
   handleMouseEnter = () => {
-    const {
-      menuItemKey,
-      selectedMenuItem,
-      updateSelectedMenuItem
-    } = this.props
+    const {menuItemKey, selectedMenuItem, updateSelectedMenuItem} = this.props
 
     if (selectedMenuItem !== menuItemKey) {
       updateSelectedMenuItem(menuItemKey)
@@ -117,32 +109,20 @@ class MenuItem extends PureComponent {
   }
 
   handleMouseLeave = () => {
-    const {
-      menuItemKey,
-      selectedMenuItem,
-      updateSelectedMenuItem
-    } = this.props
+    const {menuItemKey, selectedMenuItem, updateSelectedMenuItem} = this.props
 
     if (selectedMenuItem === menuItemKey) {
       updateSelectedMenuItem(null)
     }
   }
 
-
   render() {
-    const {
-      isSelected,
-      isUnclickable,
-      menuItemKey
-    } = this.props
+    const {isSelected, isUnclickable, menuItemKey} = this.props
 
-    const thisStyleName = classNames(
-      'main',
-      {
-        selected: isSelected,
-        unclickable: isUnclickable
-      }
-    )
+    const thisStyleName = classNames('main', {
+      selected: isSelected,
+      unclickable: isUnclickable
+    })
 
     return (
       <div

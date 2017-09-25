@@ -6,6 +6,4 @@ const mapStateToProps = (state) => ({
   trees: state.trees
 })
 
-export default connect(
-  mapStateToProps
-)(Panel)
+export default connect(mapStateToProps)(Panel)

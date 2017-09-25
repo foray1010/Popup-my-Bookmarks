@@ -4,17 +4,10 @@ import PropTypes from 'prop-types'
 import '../../../../css/options/option-button.css'
 
 const OptionButton = (props) => {
-  const {
-    msg,
-    onClick
-  } = props
+  const {msg, onClick} = props
 
   return (
-    <button
-      styleName='main'
-      type='button'
-      onClick={onClick}
-    >
+    <button styleName='main' type='button' onClick={onClick}>
       {msg}
     </button>
   )

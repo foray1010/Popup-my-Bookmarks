@@ -9,12 +9,8 @@ import {
   updateEditorTarget,
   updateSelectedMenuItem
 } from '../../../actions'
-import {
-  getBookmarkType
-} from '../../../functions'
-import {
-  TYPE_NO_BOOKMARK
-} from '../../../constants'
+import {getBookmarkType} from '../../../functions'
+import {TYPE_NO_BOOKMARK} from '../../../constants'
 import MenuItem from './MenuItem'
 
 const mapDispatchToProps = {
@@ -28,12 +24,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {
-    copyTarget,
-    cutTarget,
-    menuTarget,
-    selectedMenuItem
-  } = state
+  const {copyTarget, cutTarget, menuTarget, selectedMenuItem} = state
   const {menuItemKey} = ownProps
 
   const isUnclickable = (() => {
@@ -64,7 +55,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MenuItem)
+export default connect(mapStateToProps, mapDispatchToProps)(MenuItem)

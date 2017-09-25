@@ -31,16 +31,10 @@ const navBarItemInfos = [
 ]
 
 const NavBar = (props) => {
-  const {
-    selectedNavModule,
-    switchNavModule
-  } = props
+  const {selectedNavModule, switchNavModule} = props
 
   const navItems = navBarItemInfos.map((navBarItemInfo) => {
-    const {
-      navModule,
-      title
-    } = navBarItemInfo
+    const {navModule, title} = navBarItemInfo
 
     return (
       <NavBarItem
@@ -53,11 +47,7 @@ const NavBar = (props) => {
     )
   })
 
-  return (
-    <nav styleName='main'>
-      {navItems}
-    </nav>
-  )
+  return <nav styleName='main'>{navItems}</nav>
 }
 
 NavBar.propTypes = {

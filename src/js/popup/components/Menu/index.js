@@ -1,8 +1,6 @@
 import {connect} from 'react-redux'
 
-import {
-  closeMenuCover
-} from '../../actions'
+import {closeMenuCover} from '../../actions'
 import Menu from './Menu'
 
 const mapDispatchToProps = {
@@ -16,7 +14,4 @@ const mapStateToProps = (state) => ({
   mousePosition: state.mousePosition
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Menu)
+export default connect(mapStateToProps, mapDispatchToProps)(Menu)

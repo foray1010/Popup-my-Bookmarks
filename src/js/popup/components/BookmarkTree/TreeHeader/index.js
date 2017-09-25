@@ -1,8 +1,6 @@
 import {connect} from 'react-redux'
 
-import {
-  removeTreeInfosFromIndex
-} from '../../../actions'
+import {removeTreeInfosFromIndex} from '../../../actions'
 import TreeHeader from './TreeHeader'
 
 const mapDispatchToProps = {
@@ -10,9 +8,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {
-    treeIndex
-  } = ownProps
+  const {treeIndex} = ownProps
 
   return {
     isHidden: Boolean(treeIndex === 0 || state.searchKeyword),
@@ -20,7 +16,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TreeHeader)
+export default connect(mapStateToProps, mapDispatchToProps)(TreeHeader)

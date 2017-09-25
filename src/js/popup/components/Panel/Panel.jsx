@@ -10,10 +10,7 @@ const Panel = (props) => {
   const {trees} = props
 
   const panelItems = trees.map((treeInfo, treeIndex) => (
-    <BookmarkTree
-      key={treeInfo.id}
-      treeIndex={treeIndex}
-    />
+    <BookmarkTree key={treeInfo.id} treeIndex={treeIndex} />
   ))
 
   const mainPanelItems = panelItems.filter((x, treeIndex) => treeIndex % 2 === 0)

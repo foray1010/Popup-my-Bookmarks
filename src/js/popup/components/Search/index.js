@@ -1,8 +1,6 @@
 import {connect} from 'react-redux'
 
-import {
-  updateTreesBySearchKeyword
-} from '../../actions'
+import {updateTreesBySearchKeyword} from '../../actions'
 import Search from './Search'
 
 const mapDispatchToProps = {
@@ -14,7 +12,4 @@ const mapStateToProps = (state) => ({
   searchKeyword: state.searchKeyword
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Search)
+export default connect(mapStateToProps, mapDispatchToProps)(Search)
