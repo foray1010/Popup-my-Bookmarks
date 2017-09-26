@@ -20,7 +20,7 @@ const Donate = () => (
       <ol>
         <li>
           rate it on&nbsp;
-          <ExternalLink href='http://goo.gl/x9Wlq'>Chrome Web Store</ExternalLink>
+          <ExternalLink href='https://goo.gl/x9Wlq'>Chrome Web Store</ExternalLink>
         </li>
         <li>
           fork me on&nbsp;
@@ -30,7 +30,7 @@ const Donate = () => (
           buy me a drink via&nbsp;
           <ExternalLink href={paypalUrl}>PayPal</ExternalLink>
           &nbsp;or&nbsp;
-          <ExternalLink href='bitcoin:16sJwjWsUWrFn5iAGGBCiQbqUD4Pb5YdDR'>Bitcoin</ExternalLink>
+          <ExternalLink href='bitcoin:3G8ZSQPeLWNvyo8AQJzMjVHvyzCSMFwhfA'>Bitcoin</ExternalLink>
           &nbsp;:)
         </li>
       </ol>
