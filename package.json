@@ -1,6 +1,6 @@
 {
   "name": "Popup-my-Bookmarks",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "engines": {
     "node": ">=8.4"
   },
