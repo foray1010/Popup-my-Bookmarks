@@ -38,7 +38,7 @@
     "open-color": "^1.4.0",
     "prop-types": "^15.5.4",
     "ramda": "^0.24.1",
-    "react": "^15.5.3",
+    "react": "^16.0.0",
     "react-dom": "^15.5.3",
     "react-redux": "^5.0.0",
     "react-virtualized": "^9.5.0",
