@@ -1,6 +1,9 @@
-## 5.1.2 (Not ready to release yet)
+## 5.1.2 (26/9/2017)
 Bugfixes:
   - Cannot drag item into empty folder
+
+Others:
+  - Update bitcoin donation url
 
 ## 5.1.1 (6/4/2017)
 Bugfixes:
