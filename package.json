@@ -33,7 +33,6 @@
     "babel-polyfill": "^6.5.0",
     "chrome-promise": "^2.0.2",
     "classnames": "^2.2.3",
-    "lodash": "^4.16.1",
     "lodash.debounce": "^4.0.8",
     "open-color": "^1.4.0",
     "prop-types": "^15.5.4",
