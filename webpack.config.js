@@ -1,6 +1,6 @@
 'use strict'
 
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -28,15 +28,7 @@ const cssLoaderOptions = {
 
 const webpackConfig = getMergedConfigByEnv({
   default: {
-    entry: R.reduce(
-      (acc, appName) => {
-        return R.merge(acc, {
-          [appName]: `./${sourceDir}/js/${appName}`
-        })
-      },
-      {},
-      appNames
-    ),
+    entry: R.converge(R.zipObj, [R.identity, R.map(R.concat(`./${sourceDir}/js/`))])(appNames),
     module: {
       rules: [
         {
