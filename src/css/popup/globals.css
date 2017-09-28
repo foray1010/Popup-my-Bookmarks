@@ -4,10 +4,6 @@
   user-select: none;
 }
 
-:global(#root) {
-  background-color: inherit;
-}
-
 :global(::-webkit-scrollbar) {
   background-color: transparent;
   height: 5px;

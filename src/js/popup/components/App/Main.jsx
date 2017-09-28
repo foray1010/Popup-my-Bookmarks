@@ -8,7 +8,7 @@ import Panel from '../Panel'
 import '../../../../css/popup/app.css'
 
 const Main = () => (
-  <div styleName='main'>
+  <div>
     <Panel />
     <MenuCover />
     <Menu />

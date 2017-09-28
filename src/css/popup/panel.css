@@ -1,7 +1,6 @@
 @import '../common/variables.css';
 
 ._panel {
-  background-color: inherit;
   position: relative;
 
   &:not(:first-child) {
@@ -10,7 +9,6 @@
 }
 
 .main {
-  background-color: inherit;
   display: flex;
   flex-direction: row-reverse;
 }

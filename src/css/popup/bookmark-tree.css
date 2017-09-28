@@ -10,7 +10,7 @@
 }
 
 .main {
-  background-color: inherit;
+  background-color: var(--oc-white);
   position: absolute;
   width: 100%;
 }
