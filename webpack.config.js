@@ -45,10 +45,6 @@ const webpackConfig = getMergedConfigByEnv({
           loader: 'babel-loader'
         },
         {
-          test: /\.pug$/,
-          loader: 'pug-loader'
-        },
-        {
           test: /\.woff$/,
           loader: 'file-loader',
           options: {
@@ -98,15 +94,29 @@ const webpackConfig = getMergedConfigByEnv({
           from: 'LICENSE'
         }
       ]),
-      ...R.map((appName) => {
-        return new HtmlWebpackPlugin({
-          chunks: [commonChunkName, appName],
-          filename: `${appName}.html`,
-          inject: 'body',
-          template: path.join(sourceDir, 'html', 'common', 'layout.pug'),
-          title: pkg.name
-        })
-      }, appNames),
+      ...R.map(
+        (appName) =>
+          new HtmlWebpackPlugin({
+            chunks: [commonChunkName, appName],
+            filename: `${appName}.html`,
+            inject: 'body',
+            minify: {
+              collapseWhitespace: true,
+              keepClosingSlash: true,
+              minifyCSS: true,
+              minifyJS: true,
+              removeAttributeQuotes: true,
+              removeCDATASectionsFromCDATA: true,
+              removeComments: true,
+              removeCommentsFromCDATA: true,
+              removeScriptTypeAttributes: true,
+              removeStyleTypeAttributes: true,
+              useShortDoctype: true
+            },
+            title: pkg.name
+          }),
+        appNames
+      ),
       new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: 'defer'
       }),

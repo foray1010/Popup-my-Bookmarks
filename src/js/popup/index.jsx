@@ -45,10 +45,12 @@ import reducers from './reducers'
   )
 
   /* render the app */
+  const rootEl = document.createElement('div')
+  document.body.appendChild(rootEl)
   render(
     <Provider store={store}>
       <App />
     </Provider>,
-    document.getElementById('root')
+    rootEl
   )
 })().catch((err) => console.error(err.stack))
