@@ -1,6 +1,5 @@
 'use strict'
 
-const {appNames, commonChunkName, outputDir, sourceDir} = require('config')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -13,6 +12,7 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const webpack = require('webpack')
 const ZipPlugin = require('zip-webpack-plugin')
 
+const {appNames, commonChunkName, outputDir, sourceDir} = require('./config')
 const pkg = require('./package')
 
 const getMergedConfigByEnv = R.converge(R.mergeDeepWith(R.concat), [

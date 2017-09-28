@@ -1,8 +1,0 @@
-{
-  "appNames": [
-    "options",
-    "popup"
-  ],
-  "commonChunkName": "common",
-  "sourceDir": "src"
-}
