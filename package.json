@@ -65,7 +65,7 @@
     "eslint-config-foray1010": "^5.0.0",
     "extract-loader": "^1.0.0",
     "extract-text-webpack-plugin": "^3.0.0",
-    "file-loader": "^0.11.2",
+    "file-loader": "^1.1.0",
     "flow-bin": "^0.56.0",
     "fs-extra": "^4.0.0",
     "html-webpack-plugin": "^2.28.0",
