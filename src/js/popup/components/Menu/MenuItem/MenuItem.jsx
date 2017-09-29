@@ -1,7 +1,9 @@
-import {createElement, PureComponent} from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import {createElement, PureComponent} from 'react'
 
+import '../../../../../css/popup/menu-item.css'
+import * as CST from '../../../constants'
 import {
   addCurrentPage,
   createBookmarkBelowTarget,
@@ -9,9 +11,6 @@ import {
   removeBookmark,
   sortByName
 } from '../../../functions'
-import * as CST from '../../../constants'
-
-import '../../../../../css/popup/menu-item.css'
 
 class MenuItem extends PureComponent {
   handleClick = (evt) => {

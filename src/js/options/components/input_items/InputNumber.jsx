@@ -1,6 +1,6 @@
-import {createElement, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import R from 'ramda'
+import {createElement, PureComponent} from 'react'
 
 class InputNumber extends PureComponent {
   handleBlur = (evt) => {

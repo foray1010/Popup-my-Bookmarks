@@ -1,8 +1,8 @@
 import {connect} from 'react-redux'
 
+import OptionForm from './OptionForm'
 import {OPTION_TABLE_MAP} from '../../constants'
 import {saveOptions, resetToDefaultOptions, updateSingleOption} from '../../actions'
-import OptionForm from './OptionForm'
 
 const mapDispatchToProps = {
   saveOptions,

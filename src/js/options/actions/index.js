@@ -1,9 +1,9 @@
-/* @flow */
+// @flow
 
+import chromep from '../../common/lib/chromePromise'
 import {createAction} from '../../common/functions'
 import {initOptionsValue} from '../functions'
 import {SELECT_NAV_MODULE, UPDATE_OPTIONS, UPDATE_SINGLE_OPTION} from '../constants'
-import chromep from '../../common/lib/chromePromise'
 
 const selectNavModule = createAction(SELECT_NAV_MODULE, (navModule: string): string => navModule)
 

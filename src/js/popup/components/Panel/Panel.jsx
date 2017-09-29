@@ -1,10 +1,9 @@
-import {createElement} from 'react'
 import PropTypes from 'prop-types'
-
-import BookmarkTree from '../BookmarkTree'
-import Search from '../Search'
+import {createElement} from 'react'
 
 import '../../../../css/popup/panel.css'
+import BookmarkTree from '../BookmarkTree'
+import Search from '../Search'
 
 const Panel = (props) => {
   const {trees} = props

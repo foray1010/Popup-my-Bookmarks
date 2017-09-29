@@ -1,5 +1,6 @@
 import {connect} from 'react-redux'
 
+import BookmarkItem from './BookmarkItem'
 import {
   closeEditor,
   closeMenu,
@@ -12,7 +13,6 @@ import {
   removeFocusTargetById,
   updateFocusTarget
 } from '../../../actions'
-import BookmarkItem from './BookmarkItem'
 
 const mapDispatchToProps = {
   closeEditor,

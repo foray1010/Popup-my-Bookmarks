@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 export const OPTIONS_CLICK_BY_LEFT: string = 'clickByLeft'
 export const OPTIONS_CLICK_BY_LEFT_CTRL: string = 'clickByLeftCtrl'

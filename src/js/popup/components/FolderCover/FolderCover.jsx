@@ -1,11 +1,11 @@
-import {createElement, PureComponent} from 'react'
-import _debounce from 'lodash.debounce'
+import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
+import {createElement, PureComponent} from 'react'
 
 import '../../../../css/popup/folder-cover.css'
 
 class FolderCover extends PureComponent {
-  closeCover = _debounce(() => {
+  closeCover = debounce(() => {
     const {removeTreeInfosFromIndex, treeIndex} = this.props
 
     removeTreeInfosFromIndex(treeIndex + 1)

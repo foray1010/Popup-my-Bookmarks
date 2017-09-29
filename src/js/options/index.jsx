@@ -1,16 +1,16 @@
 import 'babel-polyfill'
+import Immutable from 'seamless-immutable'
 import {createElement} from 'react'
 import {Provider} from 'react-redux'
 import {render} from 'react-dom'
-import Immutable from 'seamless-immutable'
 
 import '../../manifest.yml'
-import {initOptionsValue} from './functions'
-import {NAV_MODULE_GENERAL} from './constants'
 import App from './components/App'
 import configureStore from '../common/store/configureStore'
 import getOptionsConfig from '../common/lib/getOptionsConfig'
 import reducers from './reducers'
+import {initOptionsValue} from './functions'
+import {NAV_MODULE_GENERAL} from './constants'
 
 !(async function () {
   const optionsConfig = await getOptionsConfig()

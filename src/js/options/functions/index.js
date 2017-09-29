@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import R from 'ramda'
 
@@ -7,10 +7,7 @@ import chromep from '../../common/lib/chromePromise'
 export async function initOptionsValue(optionsConfig: Object): Object {
   const options: Object = await chromep.storage.sync.get(null)
 
-  const missingOptionKeys: string[] = R.difference(
-    Object.keys(optionsConfig),
-    Object.keys(options)
-  )
+  const missingOptionKeys: string[] = R.difference(Object.keys(optionsConfig), Object.keys(options))
   const updatedOptions: Object = missingOptionKeys.reduce((acc, optionName) => {
     const optionConfig: Object = optionsConfig[optionName]
 

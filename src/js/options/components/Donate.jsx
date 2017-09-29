@@ -1,9 +1,8 @@
 import {createElement} from 'react'
 
-import ExternalLink from './ExternalLink'
-
 import '../../../css/options/donate.css'
 import donateIcon from '../../../img/btn_donateCC_LG.png'
+import ExternalLink from './ExternalLink'
 
 const paypalUrl =
   'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TP67BBZ7VK934'

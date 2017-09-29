@@ -1,5 +1,5 @@
-import {createElement, PureComponent} from 'react'
 import PropTypes from 'prop-types'
+import {createElement, PureComponent} from 'react'
 
 import '../../../../../css/popup/tree-header.css'
 

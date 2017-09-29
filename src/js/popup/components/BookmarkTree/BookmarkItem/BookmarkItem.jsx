@@ -1,8 +1,10 @@
-import {createElement, PureComponent} from 'react'
-import _debounce from 'lodash.debounce'
 import classNames from 'classnames'
+import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
+import {createElement, PureComponent} from 'react'
 
+import '../../../../../css/popup/bookmark-item.css'
+import folderIcon from '../../../../../img/folder.png'
 import {
   getBookmark,
   getBookmarkType,
@@ -17,9 +19,6 @@ import {
   TYPE_ROOT_FOLDER,
   TYPE_SEPARATOR
 } from '../../../constants'
-
-import '../../../../../css/popup/bookmark-item.css'
-import folderIcon from '../../../../../img/folder.png'
 
 class BookmarkItem extends PureComponent {
   componentDidMount() {
@@ -151,7 +150,7 @@ class BookmarkItem extends PureComponent {
     this._handleDragEnter(evt)
   }
 
-  _handleDragEnter = _debounce((evt) => {
+  _handleDragEnter = debounce((evt) => {
     const {dragOver, itemInfo, treeIndex} = this.props
 
     const targetOffset = evt.target.getBoundingClientRect()
@@ -187,7 +186,7 @@ class BookmarkItem extends PureComponent {
     }
   }
 
-  _handleMouseEnter = _debounce(() => {
+  _handleMouseEnter = debounce(() => {
     const {hoverBookmarkItem, itemInfo, treeIndex} = this.props
 
     hoverBookmarkItem(itemInfo, treeIndex + 1)

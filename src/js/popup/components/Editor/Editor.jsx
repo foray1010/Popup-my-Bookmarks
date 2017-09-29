@@ -1,11 +1,10 @@
-import {createElement, PureComponent} from 'react'
 import PropTypes from 'prop-types'
-
-import {normalizeInputtingValue} from '../../../common/functions'
-import {resetBodySize} from '../../functions'
-import chromep from '../../../common/lib/chromePromise'
+import {createElement, PureComponent} from 'react'
 
 import '../../../../css/popup/editor.css'
+import chromep from '../../../common/lib/chromePromise'
+import {normalizeInputtingValue} from '../../../common/functions'
+import {resetBodySize} from '../../functions'
 
 const msgCancel = chrome.i18n.getMessage('cancel')
 const msgConfirm = chrome.i18n.getMessage('confirm')

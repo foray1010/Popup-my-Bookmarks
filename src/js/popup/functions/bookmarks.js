@@ -1,8 +1,9 @@
-/* @flow */
+// @flow
 
 import R from 'ramda'
 import store from 'store'
 
+import chromep from '../../common/lib/chromePromise'
 import {
   ROOT_ID,
   SEPARATE_THIS_URL,
@@ -12,7 +13,6 @@ import {
   TYPE_ROOT_FOLDER,
   TYPE_SEPARATOR
 } from '../constants'
-import chromep from '../../common/lib/chromePromise'
 
 const msgNoBookmark: string = window.chrome.i18n.getMessage('noBkmark')
 const noBookmarkIdPrefix: string = 'no-bookmark-'

@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 export const PUT_DRAG_INDICATOR: string = 'PUT_DRAG_INDICATOR'
 export const REMOVE_DRAG_INDICATOR: string = 'REMOVE_DRAG_INDICATOR'

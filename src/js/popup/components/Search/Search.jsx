@@ -1,10 +1,9 @@
-import {createElement, PureComponent} from 'react'
-import _debounce from 'lodash.debounce'
+import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
-
-import {normalizeInputtingValue} from '../../../common/functions'
+import {createElement, PureComponent} from 'react'
 
 import '../../../../css/popup/search.css'
+import {normalizeInputtingValue} from '../../../common/functions'
 
 const msgSearch = chrome.i18n.getMessage('search')
 
@@ -25,7 +24,7 @@ class Search extends PureComponent {
     })
   }
 
-  handleSearchKeywordChange = _debounce(() => {
+  handleSearchKeywordChange = debounce(() => {
     const {updateTreesBySearchKeyword} = this.props
 
     const newSearchKeyword = this.state.inputValue.trim()

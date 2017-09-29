@@ -1,17 +1,17 @@
 import 'babel-polyfill'
+import Immutable from 'seamless-immutable'
+import R from 'ramda'
 import {createElement} from 'react'
 import {Provider} from 'react-redux'
 import {render} from 'react-dom'
-import Immutable from 'seamless-immutable'
-import R from 'ramda'
 
 import '../../manifest.yml'
-import {getItemOffsetHeight, getRootTree, initTrees, openOptionsPage} from './functions'
 import App from './components/App'
 import chromep from '../common/lib/chromePromise'
 import configureStore from '../common/store/configureStore'
 import getOptionsConfig from '../common/lib/getOptionsConfig'
 import reducers from './reducers'
+import {getItemOffsetHeight, getRootTree, initTrees, openOptionsPage} from './functions'
 
 !(async function () {
   const optionsPromise = chromep.storage.sync.get(null)

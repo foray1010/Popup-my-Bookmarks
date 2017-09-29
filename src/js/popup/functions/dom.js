@@ -1,11 +1,10 @@
-/* @flow */
+// @flow
 
-import {getItemIconHeight} from '.'
 import * as css from '../../common/lib/css'
-
 import bookmarkItemStyles from '../../../css/popup/bookmark-item.css'
 import editorStyles from '../../../css/popup/editor.css'
 import panelStyles from '../../../css/popup/panel.css'
+import {getItemIconHeight} from '.'
 
 function getClassSelector(className: string): string {
   // remove class name from compose

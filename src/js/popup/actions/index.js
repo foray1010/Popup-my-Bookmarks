@@ -1,7 +1,8 @@
-/* @flow */
+// @flow
 
 import R from 'ramda'
 
+import * as CST from '../constants'
 import {createAction} from '../../common/functions'
 import {
   genBookmarkList,
@@ -15,7 +16,6 @@ import {
   pasteItemBelowTarget,
   initTrees
 } from '../functions'
-import * as CST from '../constants'
 
 export const putDragIndicator = createAction(
   CST.PUT_DRAG_INDICATOR,

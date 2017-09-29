@@ -1,5 +1,6 @@
-/* @flow */
+// @flow
 
+import chromep from './chromePromise'
 import {
   OPTIONS_CLICK_BY_LEFT,
   OPTIONS_CLICK_BY_LEFT_CTRL,
@@ -18,7 +19,6 @@ import {
   OPTIONS_WARN_OPEN_MANY,
   ROOT_ID
 } from '../constants'
-import chromep from './chromePromise'
 
 const getMessage = window.chrome.i18n.getMessage
 
@@ -113,10 +113,7 @@ async function getOptionsConfig(): Object {
     [OPTIONS_SEARCH_TARGET]: {
       type: 'integer',
       default: 0,
-      choices: [
-        getMessage('searchTargetOption1'),
-        getMessage('searchTargetOption2')
-      ]
+      choices: [getMessage('searchTargetOption1'), getMessage('searchTargetOption2')]
     },
     [OPTIONS_SET_WIDTH]: {
       type: 'integer',

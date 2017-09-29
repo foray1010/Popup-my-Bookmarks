@@ -1,5 +1,5 @@
-import {createElement, PureComponent} from 'react'
 import PropTypes from 'prop-types'
+import {createElement, PureComponent} from 'react'
 
 class SelectString extends PureComponent {
   handleChange = (evt) => {

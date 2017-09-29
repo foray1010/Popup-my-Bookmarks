@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 
-import {updateTreesBySearchKeyword} from '../../actions'
 import Search from './Search'
+import {updateTreesBySearchKeyword} from '../../actions'
 
 const mapDispatchToProps = {
   updateTreesBySearchKeyword

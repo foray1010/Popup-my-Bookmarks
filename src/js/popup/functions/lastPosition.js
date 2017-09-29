@@ -1,6 +1,6 @@
-/* @flow */
+// @flow
 
-import _debounce from 'lodash.debounce'
+import debounce from 'lodash.debounce'
 import R from 'ramda'
 import store from 'store'
 
@@ -9,7 +9,7 @@ const _updateLastScrollTopList: Function = (index: number, scrollTop: number): F
     R.concat(list, R.times(R.always(0), R.max(index - list.length + 1, 0)))
   )
 
-export const updateLastScrollTopList: Function = _debounce(
+export const updateLastScrollTopList: Function = debounce(
   (index: number, scrollTop: number): void => {
     const updateList = _updateLastScrollTopList(index, scrollTop)
 

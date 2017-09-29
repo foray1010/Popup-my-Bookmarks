@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 
-import {removeTreeInfosFromIndex} from '../../../actions'
 import TreeHeader from './TreeHeader'
+import {removeTreeInfosFromIndex} from '../../../actions'
 
 const mapDispatchToProps = {
   removeTreeInfosFromIndex

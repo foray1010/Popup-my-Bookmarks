@@ -1,11 +1,10 @@
-import {createElement, PureComponent} from 'react'
 import PropTypes from 'prop-types'
-
-import {getBookmarkType, resetBodySize} from '../../functions'
-import * as CST from '../../constants'
-import MenuArea from './MenuArea'
+import {createElement, PureComponent} from 'react'
 
 import '../../../../css/popup/menu.css'
+import * as CST from '../../constants'
+import MenuArea from './MenuArea'
+import {getBookmarkType, resetBodySize} from '../../functions'
 
 class Menu extends PureComponent {
   componentDidUpdate(prevProps) {

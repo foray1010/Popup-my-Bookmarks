@@ -1,5 +1,6 @@
 import {connect} from 'react-redux'
 
+import MenuItem from './MenuItem'
 import {
   addFolder,
   closeMenu,
@@ -11,7 +12,6 @@ import {
 } from '../../../actions'
 import {getBookmarkType} from '../../../functions'
 import {TYPE_NO_BOOKMARK} from '../../../constants'
-import MenuItem from './MenuItem'
 
 const mapDispatchToProps = {
   addFolder,

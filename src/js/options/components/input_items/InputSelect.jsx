@@ -1,9 +1,8 @@
-import {createElement, PureComponent} from 'react'
 import PropTypes from 'prop-types'
-
-import {normalizeInputtingValue} from '../../../common/functions'
+import {createElement, PureComponent} from 'react'
 
 import '../../../../css/options/input-select.css'
+import {normalizeInputtingValue} from '../../../common/functions'
 
 class InputSelect extends PureComponent {
   handleBlur = (evt) => {

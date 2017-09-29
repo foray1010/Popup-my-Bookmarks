@@ -1,5 +1,5 @@
-import {combineReducers} from 'redux'
 import Immutable from 'seamless-immutable'
+import {combineReducers} from 'redux'
 
 import {SELECT_NAV_MODULE, UPDATE_OPTIONS, UPDATE_SINGLE_OPTION} from '../constants'
 

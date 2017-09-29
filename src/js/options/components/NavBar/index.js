@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 
-import {switchNavModule} from '../../actions'
 import NavBar from './NavBar'
+import {switchNavModule} from '../../actions'
 
 const mapDispatchToProps = {
   switchNavModule

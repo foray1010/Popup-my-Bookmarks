@@ -1,11 +1,8 @@
-/* @flow */
+// @flow
 
 import Immutable from 'seamless-immutable'
 
-export function createAction(
-  type: string,
-  payloadCreator: ?Function
-): Function {
+export function createAction(type: string, payloadCreator: ?Function): Function {
   return (...args: Array<*>): Object => {
     return Immutable({
       type,

@@ -1,11 +1,10 @@
 import {createElement} from 'react'
 
+import '../../../../css/popup/app.css'
 import Editor from '../Editor'
 import Menu from '../Menu'
 import MenuCover from '../MenuCover'
 import Panel from '../Panel'
-
-import '../../../../css/popup/app.css'
 
 const Main = () => (
   <div>

@@ -1,7 +1,9 @@
-import {createElement, PureComponent} from 'react'
-import _debounce from 'lodash.debounce'
+import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
+import {createElement, PureComponent} from 'react'
 
+import chromep from '../../../common/lib/chromePromise'
+import Main from './Main'
 import {
   getClickType,
   getSlicedTrees,
@@ -10,8 +12,6 @@ import {
   tryFocusToSearchInput,
   updateLastUsedTreeIds
 } from '../../functions'
-import chromep from '../../../common/lib/chromePromise'
-import Main from './Main'
 
 class App extends PureComponent {
   componentWillMount() {
@@ -180,7 +180,7 @@ class App extends PureComponent {
       }
     }
 
-    const renewTrees = _debounce(this.props.renewTrees, 100)
+    const renewTrees = debounce(this.props.renewTrees, 100)
 
     chrome.bookmarks.onChanged.addListener(renewCurrentTrees)
     chrome.bookmarks.onCreated.addListener(renewCurrentTrees)
@@ -196,7 +196,7 @@ class App extends PureComponent {
     html.addEventListener('mouseup', this.handleDragEnd)
   }
 
-  keyboardArrowHandler = _debounce((arrowDirection) => {
+  keyboardArrowHandler = debounce((arrowDirection) => {
     const {onPressArrowKey} = this.props
 
     onPressArrowKey(arrowDirection)

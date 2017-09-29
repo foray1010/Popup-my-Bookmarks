@@ -1,10 +1,9 @@
-import {createElement} from 'react'
 import PropTypes from 'prop-types'
-
-import OptionButton from './OptionButton'
-import OptionItem from './OptionItem'
+import {createElement} from 'react'
 
 import '../../../../css/options/option-form.css'
+import OptionButton from './OptionButton'
+import OptionItem from './OptionItem'
 
 const msgConfirm = chrome.i18n.getMessage('confirm')
 const msgDefault = chrome.i18n.getMessage('default')

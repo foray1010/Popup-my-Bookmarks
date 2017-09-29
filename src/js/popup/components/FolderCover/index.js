@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 
-import {removeTreeInfosFromIndex} from '../../actions'
 import FolderCover from './FolderCover'
+import {removeTreeInfosFromIndex} from '../../actions'
 
 const mapDispatchToProps = {
   removeTreeInfosFromIndex

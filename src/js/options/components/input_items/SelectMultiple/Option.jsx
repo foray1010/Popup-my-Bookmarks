@@ -1,7 +1,7 @@
-import {createElement, PureComponent} from 'react'
 import Immutable from 'seamless-immutable'
 import PropTypes from 'prop-types'
 import shortid from 'shortid'
+import {createElement, PureComponent} from 'react'
 
 class Option extends PureComponent {
   id = shortid.generate()

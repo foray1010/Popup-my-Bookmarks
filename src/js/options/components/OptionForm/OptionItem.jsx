@@ -1,21 +1,15 @@
-import {createElement} from 'react'
 import PropTypes from 'prop-types'
+import {createElement} from 'react'
 
+import '../../../../css/options/option-item.css'
 import InputNumber from '../input_items/InputNumber'
 import InputSelect from '../input_items/InputSelect'
 import SelectButton from '../input_items/SelectButton'
 import SelectMultiple from '../input_items/SelectMultiple'
 import SelectString from '../input_items/SelectString'
 
-import '../../../../css/options/option-item.css'
-
 const OptionItem = (props) => {
-  const {
-    optionConfig,
-    optionName,
-    optionValue,
-    updateSingleOption
-  } = props
+  const {optionConfig, optionName, optionValue, updateSingleOption} = props
 
   const InputItem = (() => {
     switch (optionConfig.type) {
@@ -42,9 +36,7 @@ const OptionItem = (props) => {
 
   return (
     <tr>
-      <td styleName='desc'>
-        {chrome.i18n.getMessage(optionName)}
-      </td>
+      <td styleName='desc'>{chrome.i18n.getMessage(optionName)}</td>
       <td styleName='input'>
         <InputItem
           {...optionConfig}

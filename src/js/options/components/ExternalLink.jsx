@@ -1,15 +1,10 @@
-import {createElement} from 'react'
 import PropTypes from 'prop-types'
+import {createElement} from 'react'
 
 import '../../../css/options/external-link.css'
 
 const ExternalLink = (props) => (
-  <a
-    styleName='main'
-    href={props.href}
-    target='_blank'
-    rel='noopener noreferrer'
-  >
+  <a styleName='main' href={props.href} target='_blank' rel='noopener noreferrer'>
     {props.children}
   </a>
 )

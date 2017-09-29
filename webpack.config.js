@@ -1,6 +1,5 @@
 'use strict'
 
-const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -11,9 +10,10 @@ const R = require('ramda')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const webpack = require('webpack')
 const ZipPlugin = require('zip-webpack-plugin')
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 
-const {appNames, commonChunkName, outputDir, sourceDir} = require('./config')
 const pkg = require('./package')
+const {appNames, commonChunkName, outputDir, sourceDir} = require('./config')
 
 const getMergedConfigByEnv = R.converge(R.mergeDeepWith(R.concat), [
   R.prop('default'),
