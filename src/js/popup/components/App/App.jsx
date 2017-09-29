@@ -1,5 +1,6 @@
 import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
+import R from 'ramda'
 import {createElement, PureComponent} from 'react'
 
 import chromep from '../../../common/lib/chromePromise'
@@ -88,7 +89,7 @@ class App extends PureComponent {
   }
 
   handleKeyDown = async (evt) => {
-    const {closeMenu, editorTarget, focusTarget, isSearching, menuTarget, openMenu} = this.props
+    const {closeMenu, editorTarget, focusTarget, menuTarget, openMenu} = this.props
 
     // no custom handle for editor
     if (editorTarget) return
@@ -96,17 +97,21 @@ class App extends PureComponent {
     const {keyCode} = evt
     switch (keyCode) {
       case 9: // tab
+      case 37: // left
       case 38: // up
+      case 39: // right
       case 40: {
         // down
-        const mapping = {
-          9: evt.shiftKey ? 'up' : 'down',
-          38: 'up',
-          40: 'down'
-        }
+        const mapping = R.cond([
+          [R.equals(9), R.always(evt.shiftKey ? 'up' : 'down')],
+          [R.equals(37), R.always('left')],
+          [R.equals(38), R.always('up')],
+          [R.equals(39), R.always('right')],
+          [R.equals(40), R.always('down')]
+        ])
 
         evt.preventDefault()
-        this.keyboardArrowHandler(mapping[keyCode])
+        this.keyboardArrowHandler(mapping(keyCode))
         break
       }
 
@@ -133,21 +138,6 @@ class App extends PureComponent {
         } else if (focusTarget) {
           openMenu(focusTarget)
         }
-        break
-      }
-
-      case 37: // left
-      case 39: {
-        // right
-        if (isSearching) return
-
-        const mapping = {
-          37: 'left',
-          39: 'right'
-        }
-
-        evt.preventDefault()
-        this.keyboardArrowHandler(mapping[keyCode])
         break
       }
 
