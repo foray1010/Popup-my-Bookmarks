@@ -62,7 +62,7 @@
     "cross-env": "^5.0.0",
     "css-loader": "^0.28.0",
     "eslint": "^4.3.0",
-    "eslint-config-foray1010": "^5.0.0",
+    "eslint-config-foray1010": "^6.0.0",
     "extract-loader": "^1.0.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
