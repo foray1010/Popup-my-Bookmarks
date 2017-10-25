@@ -4,10 +4,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const OptimizeJsPlugin = require('optimize-js-plugin')
 const path = require('path')
 const R = require('ramda')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const webpack = require('webpack')
 const ZipPlugin = require('zip-webpack-plugin')
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
@@ -185,19 +185,27 @@ const webpackConfig = getMergedConfigByEnv({
       new webpack.LoaderOptionsPlugin({
         minimize: true
       }),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          drop_console: true,
-          pure_getters: true,
-          unsafe: true,
-          warnings: false
-        },
-        output: {
-          comments: false,
-          screw_ie8: true
+      new UglifyJSPlugin({
+        parallel: true,
+        uglifyOptions: {
+          compress: {
+            drop_console: true,
+            pure_getters: true,
+            unsafe: true,
+            unsafe_arrows: true,
+            unsafe_comps: true,
+            unsafe_Func: true,
+            unsafe_math: true,
+            unsafe_methods: true,
+            unsafe_proto: true,
+            unsafe_regexp: true
+          },
+          ecma: 6,
+          output: {
+            wrap_iife: true
+          }
         }
       }),
-      new OptimizeJsPlugin(),
       new ZipPlugin({
         filename: `${pkg.version}.zip`
       })
