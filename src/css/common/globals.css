@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'Archivo Narrow';
-  src: url('typeface-archivo-narrow/files/archivo-narrow-latin-400.woff');
+  src: url('typeface-archivo-narrow/files/archivo-narrow-latin-400.woff2');
 }
 
 :global(body) {

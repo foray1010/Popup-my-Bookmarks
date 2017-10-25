@@ -13,7 +13,9 @@ const ZipPlugin = require('zip-webpack-plugin')
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 
 const pkg = require('./package')
-const {appNames, commonChunkName, outputDir, sourceDir} = require('./config')
+const {
+  appNames, commonChunkName, outputDir, sourceDir
+} = require('./config')
 
 const getMergedConfigByEnv = R.converge(R.mergeDeepWith(R.concat), [
   R.prop('default'),
@@ -37,7 +39,7 @@ const webpackConfig = getMergedConfigByEnv({
           loader: 'babel-loader'
         },
         {
-          test: /\.woff$/,
+          test: /\.woff2$/,
           loader: 'file-loader',
           options: {
             name: 'fonts/[name].[ext]'

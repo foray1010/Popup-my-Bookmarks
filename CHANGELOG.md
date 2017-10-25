@@ -1,3 +1,10 @@
+## 5.1.3 (not yet released)
+Improvements:
+  - Reduce file size by using woff2 instead of woff
+
+Changes:
+  - Increase minimum Chrome version from 34 to 36
+
 ## 5.1.2 (26/9/2017)
 Bugfixes:
   - Cannot drag item into empty folder
