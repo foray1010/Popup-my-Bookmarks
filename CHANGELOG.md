@@ -1,6 +1,6 @@
 ## 6.0.0 (not yet released)
 Improvements:
-  - Reduce file size by using `woff2` instead of `woff` and removing polyfill like `promise` and `regenerator`
+  - Reduce file size by using `woff2` instead of `woff` and removing trivial dependencies & polyfills like `promise` and `regenerator`
 
 Changes:
   - Increase minimum Chrome version from 34 to 51

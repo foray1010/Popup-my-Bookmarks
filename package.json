@@ -42,13 +42,11 @@
     "react-redux": "^5.0.0",
     "react-virtualized": "^9.5.0",
     "redux": "^3.3.1",
-    "redux-batched-subscribe": "^0.1.4",
     "redux-multi": "0.1.12",
     "redux-thunk": "^2.1.0",
     "seamless-immutable": "^7.0.0",
-    "shortid": "^2.2.8",
     "store": "^2.0.12",
-    "typeface-archivo-narrow": "0.0.40"
+    "typeface-archivo-narrow": "0.0.43"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
@@ -86,7 +84,7 @@
     "stylelint": "^8.2.0",
     "stylelint-config-foray1010": "^3.0.0",
     "transifex": "^1.4.4",
-    "uglifyjs-webpack-plugin": "^1.0.0-rc.0",
+    "uglifyjs-webpack-plugin": "^1.0.1",
     "webpack": "^3.7.1",
     "webpack-bundle-analyzer": "^2.3.0",
     "yaml-loader": "^0.5.0",

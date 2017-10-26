@@ -900,8 +900,8 @@ babel-preset-flow@^6.23.0:
     babel-plugin-transform-flow-strip-types "^6.22.0"
 
 babel-preset-foray1010@^7.1.1:
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/babel-preset-foray1010/-/babel-preset-foray1010-7.1.1.tgz#f7415549c3a4413d7ea5f4dafe36e343f4773fa3"
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/babel-preset-foray1010/-/babel-preset-foray1010-7.2.0.tgz#fbc5cfc25e0f34c8f53985186c1a4d2a7f51a28b"
   dependencies:
     app-root-path "^2.0.1"
     babel-plugin-flow-react-proptypes "^6.0.0"
@@ -1196,9 +1196,9 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
 
-cacache@^9.2.9:
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/cacache/-/cacache-9.3.0.tgz#9cd58f2dd0b8c8cacf685b7067b416d6d3cf9db1"
+cacache@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/cacache/-/cacache-10.0.0.tgz#3bba88bf62b0773fd9a691605f60c9d3c595e853"
   dependencies:
     bluebird "^3.5.0"
     chownr "^1.0.1"
@@ -1210,7 +1210,7 @@ cacache@^9.2.9:
     move-concurrently "^1.0.1"
     promise-inflight "^1.0.1"
     rimraf "^2.6.1"
-    ssri "^4.1.6"
+    ssri "^5.0.0"
     unique-filename "^1.1.0"
     y18n "^3.2.1"
 
@@ -2637,8 +2637,8 @@ extract-loader@^1.0.0:
     loader-utils "^1.1.0"
 
 extract-text-webpack-plugin@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/extract-text-webpack-plugin/-/extract-text-webpack-plugin-3.0.1.tgz#605a8893faca1dd49bb0d2ca87493f33fd43d102"
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/extract-text-webpack-plugin/-/extract-text-webpack-plugin-3.0.2.tgz#5f043eaa02f9750a9258b78c0a6e0dc1408fb2f7"
   dependencies:
     async "^2.4.1"
     loader-utils "^1.1.0"
@@ -5770,10 +5770,6 @@ reduce-function-call@^1.0.1, reduce-function-call@^1.0.2:
   dependencies:
     balanced-match "^0.4.2"
 
-redux-batched-subscribe@^0.1.4:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/redux-batched-subscribe/-/redux-batched-subscribe-0.1.6.tgz#de928602708df7198b4d0c98c7119df993780d59"
-
 redux-multi@0.1.12:
   version "0.1.12"
   resolved "https://registry.yarnpkg.com/redux-multi/-/redux-multi-0.1.12.tgz#28e1fe5e49672cbc5bd8a07f0b2aeaf0ef8355c2"
@@ -6143,10 +6139,6 @@ shell-quote@^1.6.1:
     array-reduce "~0.0.0"
     jsonify "~0.0.0"
 
-shortid@^2.2.8:
-  version "2.2.8"
-  resolved "https://registry.yarnpkg.com/shortid/-/shortid-2.2.8.tgz#033b117d6a2e975804f6f0969dbe7d3d0b355131"
-
 should-equal@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/should-equal/-/should-equal-1.0.1.tgz#0b6e9516f2601a9fb0bb2dcc369afa1c7e200af7"
@@ -6287,9 +6279,9 @@ sshpk@^1.7.0:
     jsbn "~0.1.0"
     tweetnacl "~0.14.0"
 
-ssri@^4.1.6:
-  version "4.1.6"
-  resolved "https://registry.yarnpkg.com/ssri/-/ssri-4.1.6.tgz#0cb49b6ac84457e7bdd466cb730c3cb623e9a25b"
+ssri@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/ssri/-/ssri-5.0.0.tgz#13c19390b606c821f2a10d02b351c1729b94d8cf"
   dependencies:
     safe-buffer "^5.1.0"
 
@@ -6731,9 +6723,9 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typeface-archivo-narrow@0.0.40:
-  version "0.0.40"
-  resolved "https://registry.yarnpkg.com/typeface-archivo-narrow/-/typeface-archivo-narrow-0.0.40.tgz#07dcea1d57b87abdc52d47f4516d5793ab8c1939"
+typeface-archivo-narrow@0.0.43:
+  version "0.0.43"
+  resolved "https://registry.yarnpkg.com/typeface-archivo-narrow/-/typeface-archivo-narrow-0.0.43.tgz#5a09631cd9b09e047241bbe662c5064d46c38cf2"
 
 typescript-eslint-parser@^7.0.0:
   version "7.0.0"
@@ -6785,11 +6777,11 @@ uglifyjs-webpack-plugin@^0.4.6:
     uglify-js "^2.8.29"
     webpack-sources "^1.0.1"
 
-uglifyjs-webpack-plugin@^1.0.0-rc.0:
-  version "1.0.0-rc.0"
-  resolved "https://registry.yarnpkg.com/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-1.0.0-rc.0.tgz#f046e7eb667c111c8052ca3adeadf798da2d2fef"
+uglifyjs-webpack-plugin@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-1.0.1.tgz#d324da7144d321202df0968c09f6f8e057d5cdc2"
   dependencies:
-    cacache "^9.2.9"
+    cacache "^10.0.0"
     find-cache-dir "^1.0.0"
     schema-utils "^0.3.0"
     source-map "^0.5.6"

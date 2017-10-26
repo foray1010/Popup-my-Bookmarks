@@ -1,10 +1,11 @@
 import Immutable from 'seamless-immutable'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 import {createElement, PureComponent} from 'react'
 
 class Option extends PureComponent {
-  id = shortid.generate()
+  inputId = Math.random()
+    .toString(36)
+    .substring(2)
 
   handleChange = (evt) => {
     const {optionName, optionValue, updateSingleOption} = this.props
@@ -25,14 +26,16 @@ class Option extends PureComponent {
   }
 
   render() {
-    const {optionChoice, optionChoiceIndex, optionName, optionValue} = this.props
+    const {
+      optionChoice, optionChoiceIndex, optionName, optionValue
+    } = this.props
 
     const isChecked = optionValue.includes(optionChoiceIndex)
 
     return (
-      <label htmlFor={this.id}>
+      <label htmlFor={this.inputId}>
         <input
-          id={this.id}
+          id={this.inputId}
           name={optionName}
           type='checkbox'
           value={String(optionChoiceIndex)}
