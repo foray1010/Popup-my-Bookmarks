@@ -2,31 +2,27 @@
 
 import R from 'ramda'
 
-const sheet: Object = genStyleEl().sheet
+const sheet = genStyleSheet()
 
-function genStyleEl(): Object {
-  const styleEl = document.createElement('style')
+function genStyleSheet(): CSSStyleSheet {
+  const styleEl: Object = document.createElement('style')
 
   if (!document.head) throw new Error() // it should never happen
   document.head.appendChild(styleEl)
 
-  return styleEl
+  return styleEl.sheet
 }
 
-export const set = (styleList: Object): void => {
+export default (styleList: Object): void => {
   R.forEachObjIndexed((props: Object, styleSelector: string): void => {
-    let styleValue: string = ''
+    const styleValue: string = R.compose(
+      R.reduce(
+        (acc, [propName: string, propValue: number | string]) => acc + `${propName}:${propValue};`,
+        ''
+      ),
+      R.toPairs
+    )(props)
 
-    R.forEachObjIndexed((propValue: number | string, propName: string): void => {
-      styleValue += `${propName}:${propValue};`
-    }, props)
-
-    sheet.insertRule(styleSelector + '{' + styleValue + '}', sheet.cssRules.length)
+    sheet.insertRule(`${styleSelector}{${styleValue}}`, sheet.cssRules.length)
   }, styleList)
-}
-
-export const unsetAll = (): void => {
-  while (sheet.cssRules[0]) {
-    sheet.deleteRule(0)
-  }
 }

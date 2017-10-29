@@ -1,7 +1,7 @@
 // @flow
 
-import * as css from '../../common/lib/css'
 import bookmarkItemStyles from '../../../css/popup/bookmark-item.css'
+import css from '../../common/lib/css'
 import editorStyles from '../../../css/popup/editor.css'
 import panelStyles from '../../../css/popup/panel.css'
 import {getItemIconHeight} from '.'
@@ -38,7 +38,7 @@ export function setPredefinedStyleSheet(options: Object): void {
     .map(getClassSelector)
     .join(',')
 
-  css.set({
+  css({
     body: {
       'font-family': `${fontFamily}, sans-serif`,
       'font-size': `${fontSize}px`
