@@ -2,7 +2,7 @@
   "name": "Popup-my-Bookmarks",
   "version": "6.0.0",
   "engines": {
-    "node": ">=8.4"
+    "node": ">=8.9"
   },
   "browserslist": ["chrome >= 51"],
   "description": "A more efficient way to view and manage your bookmarks menu.",

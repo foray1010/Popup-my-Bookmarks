@@ -36,7 +36,7 @@ Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum
 ## Developer guide
 
 ##### Before you start
-1. Install [Node.js](//github.com/nodejs/node) (version >= 8.4) via:
+1. Install [Node.js](//github.com/nodejs/node) (version >= 8.9) via:
   - [nvm](//github.com/creationix/nvm) (Linux/Mac)
   - [Node.js official website](//nodejs.org/en/download/) (Windows)
 
@@ -103,7 +103,7 @@ See https://trello.com/b/bREPCfDk/popup-my-bookmarks
 
 - Translate to other languages, It's all depended on volunteers as I am not a linguist. ;-)
 
-  Please join our translation team on http://goo.gl/ZET77
+  Please join our translation team on https://goo.gl/ZET77
 
 - Fork me on GitHub, join our development!
 

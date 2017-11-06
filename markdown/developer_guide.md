@@ -1,7 +1,7 @@
 ## Developer guide
 
 ##### Before you start
-1. Install [Node.js](//github.com/nodejs/node) (version >= 8.4) via:
+1. Install [Node.js](//github.com/nodejs/node) (version >= 8.9) via:
   - [nvm](//github.com/creationix/nvm) (Linux/Mac)
   - [Node.js official website](//nodejs.org/en/download/) (Windows)
 
