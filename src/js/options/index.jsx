@@ -12,7 +12,7 @@ import reducers from './reducers'
 import {initOptionsValue} from './functions'
 import {NAV_MODULE_GENERAL} from './constants'
 
-!(async function () {
+!(async () => {
   const optionsConfig = await getOptionsConfig()
 
   const options = await initOptionsValue(optionsConfig)

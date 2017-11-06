@@ -7,7 +7,7 @@ export * from './bookmarks'
 export * from './dom'
 export * from './lastPosition'
 
-export function getClickType(evt: Object): string {
+export const getClickType = (evt: Object): string => {
   if (evt.button === 1) {
     return 'clickByMiddle'
   }
@@ -23,7 +23,7 @@ export function getClickType(evt: Object): string {
   return 'clickByLeft'
 }
 
-export function getItemIconHeight(options: Object): number {
+export const getItemIconHeight = (options: Object): number => {
   const {
     fontSize
   }: {
@@ -33,14 +33,14 @@ export function getItemIconHeight(options: Object): number {
   return GOLDEN_GAP * 2 + fontSize
 }
 
-export function getItemOffsetHeight(options: Object): number {
+export const getItemOffsetHeight = (options: Object): number => {
   const itemIconHeight: number = getItemIconHeight(options)
 
   // +1 for border width, GOLDEN_GAP for padding
   return (1 + GOLDEN_GAP) * 2 + itemIconHeight
 }
 
-export async function openOptionsPage(): Promise<void> {
+export const openOptionsPage = async (): Promise<void> => {
   if (chromep.runtime.openOptionsPage) {
     await chromep.runtime.openOptionsPage()
   } else {

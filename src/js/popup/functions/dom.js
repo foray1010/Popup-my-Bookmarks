@@ -6,14 +6,14 @@ import editorStyles from '../../../css/popup/editor.css'
 import panelStyles from '../../../css/popup/panel.css'
 import {getItemIconHeight} from '.'
 
-function getClassSelector(className: string): string {
+const getClassSelector = (className: string): string => {
   // remove class name from compose
   className = className.split(' ')[0]
 
   return `.${className}`
 }
 
-export function resetBodySize(): void {
+export const resetBodySize = (): void => {
   const body = document.body
   if (body) {
     // reset to original size
@@ -22,7 +22,7 @@ export function resetBodySize(): void {
   }
 }
 
-export function setPredefinedStyleSheet(options: Object): void {
+export const setPredefinedStyleSheet = (options: Object): void => {
   const {
     fontFamily,
     fontSize,
@@ -52,7 +52,7 @@ export function setPredefinedStyleSheet(options: Object): void {
   })
 }
 
-export function tryFocusToSearchInput(): void {
+export const tryFocusToSearchInput = (): void => {
   const searchEl = document.getElementById('search')
   if (searchEl && searchEl !== document.activeElement) {
     searchEl.focus()

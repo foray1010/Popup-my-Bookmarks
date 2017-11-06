@@ -2,9 +2,7 @@
 
 import R from 'ramda'
 
-const sheet = genStyleSheet()
-
-function genStyleSheet(): CSSStyleSheet {
+const genStyleSheet = (): CSSStyleSheet => {
   const styleEl: Object = document.createElement('style')
 
   if (!document.head) throw new Error() // it should never happen
@@ -13,6 +11,7 @@ function genStyleSheet(): CSSStyleSheet {
   return styleEl.sheet
 }
 
+const sheet = genStyleSheet()
 export default (styleList: Object): void => {
   R.forEachObjIndexed((props: Object, styleSelector: string): void => {
     const styleValue: string = R.compose(

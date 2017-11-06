@@ -2,15 +2,13 @@
 
 import Immutable from 'seamless-immutable'
 
-export function createAction(type: string, payloadCreator: ?Function): Function {
-  return (...args: Array<*>): Object => {
-    return Immutable({
-      type,
-      payload: payloadCreator ? payloadCreator(...args) : null
-    })
-  }
-}
+export const createAction = (type: string, payloadCreator: ?Function) => (
+  ...args: Array<*>
+): Object =>
+  Immutable({
+    type,
+    payload: payloadCreator ? payloadCreator(...args) : null
+  })
 
-export function normalizeInputtingValue(value: string): string {
-  return value.trimLeft().replace(/\s+/g, ' ')
-}
+export const normalizeInputtingValue = (value: string): string =>
+  value.trimLeft().replace(/\s+/g, ' ')

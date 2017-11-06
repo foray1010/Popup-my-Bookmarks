@@ -21,53 +21,53 @@ export const updateSingleOption = createAction(
  * Following functions have side effect
  */
 
-async function reloadOptions(): Object {
+export const reloadOptions = async (): Promise<Object> => {
   const options: Object = await chromep.storage.sync.get(null)
 
   return updateOptions(options)
 }
 
-export function resetToDefaultOptions(): Function {
-  return async (dispatch: Function, getState: Function): Promise<void> => {
-    const {
-      optionsConfig
-    }: {
-      optionsConfig: Object
-    } = getState()
+export const resetToDefaultOptions = () => async (
+  dispatch: Function,
+  getState: Function
+): Promise<void> => {
+  const {
+    optionsConfig
+  }: {
+    optionsConfig: Object
+  } = getState()
 
-    await chromep.storage.sync.clear()
+  await chromep.storage.sync.clear()
 
-    const options = await initOptionsValue(optionsConfig)
+  const options = await initOptionsValue(optionsConfig)
 
-    dispatch(updateOptions(options))
-  }
+  dispatch(updateOptions(options))
 }
 
-export function saveOptions(): Function {
-  return async (dispatch: Function, getState: Function): Promise<void> => {
-    const {
-      options
-    }: {
-      options: Object
-    } = getState()
+export const saveOptions = () => async (dispatch: Function, getState: Function): Promise<void> => {
+  const {
+    options
+  }: {
+    options: Object
+  } = getState()
 
-    await chromep.storage.sync.set(options)
+  await chromep.storage.sync.set(options)
 
-    // seems meaningless for now
-    dispatch(updateOptions(options))
-  }
+  // seems meaningless for now
+  dispatch(updateOptions(options))
 }
 
-export function switchNavModule(navModule: string): Function {
-  return async (dispatch: Function, getState: Function): Promise<void> => {
-    const {
-      selectedNavModule
-    }: {
-      selectedNavModule: string
-    } = getState()
+export const switchNavModule = (navModule: string) => async (
+  dispatch: Function,
+  getState: Function
+): Promise<void> => {
+  const {
+    selectedNavModule
+  }: {
+    selectedNavModule: string
+  } = getState()
 
-    if (navModule !== selectedNavModule) {
-      dispatch([await reloadOptions(), selectNavModule(navModule)])
-    }
+  if (navModule !== selectedNavModule) {
+    dispatch([await reloadOptions(), selectNavModule(navModule)])
   }
 }

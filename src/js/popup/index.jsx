@@ -13,7 +13,7 @@ import getOptionsConfig from '../common/lib/getOptionsConfig'
 import reducers from './reducers'
 import {getItemOffsetHeight, getRootTree, initTrees, openOptionsPage} from './functions'
 
-!(async function () {
+!(async () => {
   const optionsPromise = chromep.storage.sync.get(null)
   const optionsConfigPromise = getOptionsConfig()
 

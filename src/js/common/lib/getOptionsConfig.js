@@ -22,7 +22,7 @@ import {
 
 const getMessage = window.chrome.i18n.getMessage
 
-async function getOptionsConfig(): Object {
+const getOptionsConfig = async (): Promise<Object> => {
   const openBookmarkChoices: string[] = [
     getMessage('clickOption1'),
     getMessage('clickOption2'),
