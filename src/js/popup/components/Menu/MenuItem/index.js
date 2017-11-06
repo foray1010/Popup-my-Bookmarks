@@ -24,7 +24,9 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {copyTarget, cutTarget, menuTarget, selectedMenuItem} = state
+  const {
+    copyTarget, cutTarget, menuTarget, selectedMenuItem
+  } = state
   const {menuItemKey} = ownProps
 
   const isUnclickable = (() => {

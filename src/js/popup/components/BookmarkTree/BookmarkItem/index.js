@@ -28,7 +28,9 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {cutTarget, dragTarget, editorTarget, focusTarget, menuTarget} = state
+  const {
+    cutTarget, dragTarget, editorTarget, focusTarget, menuTarget
+  } = state
   const {itemInfo} = ownProps
 
   const isCutTarget = Boolean(cutTarget && cutTarget.id === itemInfo.id)

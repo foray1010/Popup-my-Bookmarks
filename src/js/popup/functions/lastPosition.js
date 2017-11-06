@@ -6,8 +6,7 @@ import store from 'store'
 
 const _updateLastScrollTopList: Function = (index: number, scrollTop: number): Function =>
   R.compose(R.update(index, scrollTop), (list) =>
-    R.concat(list, R.times(R.always(0), R.max(index - list.length + 1, 0)))
-  )
+    R.concat(list, R.times(R.always(0), R.max(index - list.length + 1, 0))))
 
 export const updateLastScrollTopList: Function = debounce(
   (index: number, scrollTop: number): void => {

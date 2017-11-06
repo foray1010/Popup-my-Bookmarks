@@ -9,7 +9,9 @@ import SelectMultiple from '../input_items/SelectMultiple'
 import SelectString from '../input_items/SelectString'
 
 const OptionItem = (props) => {
-  const {optionConfig, optionName, optionValue, updateSingleOption} = props
+  const {
+    optionConfig, optionName, optionValue, updateSingleOption
+  } = props
 
   const InputItem = (() => {
     switch (optionConfig.type) {

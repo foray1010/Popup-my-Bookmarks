@@ -5,7 +5,9 @@ import '../../../../../css/options/select-multiple.css'
 import Option from './Option'
 
 const SelectMultiple = (props) => {
-  const {choices, optionName, optionValue, updateSingleOption} = props
+  const {
+    choices, optionName, optionValue, updateSingleOption
+  } = props
 
   const checkboxItems = choices.reduce((accumulator, optionChoice, optionChoiceIndex) => {
     if (optionChoice !== undefined) {

@@ -211,7 +211,9 @@ export const onPressArrowKey = (arrowDirection: 'down' | 'left' | 'right' | 'up'
 
 export const onPressArrowKeyOnBookmarkTree = (arrowDirection: string) => {
   return async (dispatch: Function, getState: Function): Promise<void> => {
-    const {focusTarget, rootTree, searchKeyword, trees} = getState()
+    const {
+      focusTarget, rootTree, searchKeyword, trees
+    } = getState()
 
     const targetTreeIndex = getFocusTargetTreeIndex(focusTarget, trees)
 

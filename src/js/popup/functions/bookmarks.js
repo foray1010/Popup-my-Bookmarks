@@ -185,8 +185,7 @@ export async function getSearchResult(newSearchKeyword: string, options: Object)
         const itemTitle: string = itemInfo.title.toLowerCase()
 
         const isTitleMatched: boolean = splittedKeyArr.every((x: string): boolean =>
-          itemTitle.includes(x)
-        )
+          itemTitle.includes(x))
 
         if (!isTitleMatched) {
           return acc

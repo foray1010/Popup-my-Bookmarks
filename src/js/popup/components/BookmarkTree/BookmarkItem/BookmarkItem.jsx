@@ -104,7 +104,9 @@ class BookmarkItem extends PureComponent {
 
     evt.preventDefault()
 
-    const {itemInfo, leftClickBookmarkItem, options, treeIndex} = this.props
+    const {
+      itemInfo, leftClickBookmarkItem, options, treeIndex
+    } = this.props
 
     const bookmarkType = getBookmarkType(itemInfo)
 
@@ -193,7 +195,9 @@ class BookmarkItem extends PureComponent {
   }, 200)
 
   render() {
-    const {isSearching, isSelected, isUnclickable, itemInfo} = this.props
+    const {
+      isSearching, isSelected, isUnclickable, itemInfo
+    } = this.props
 
     const bookmarkType = getBookmarkType(itemInfo)
     const itemTitle = itemInfo.title || itemInfo.url || null

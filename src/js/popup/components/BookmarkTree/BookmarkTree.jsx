@@ -30,7 +30,9 @@ class BookmarkTree extends PureComponent {
   }
 
   getTreeItems() {
-    const {dragIndicator, isSearching, rootTree, treeIndex, treeInfo} = this.props
+    const {
+      dragIndicator, isSearching, rootTree, treeIndex, treeInfo
+    } = this.props
 
     const bookmarkList = genBookmarkList(treeInfo, {
       isSearching,
