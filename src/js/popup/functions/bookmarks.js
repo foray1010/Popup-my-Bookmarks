@@ -338,7 +338,7 @@ export async function openMultipleBookmarks(
   if (isFolder(itemInfo)) {
     const [treeInfo] = await chromep.bookmarks.getSubTree(itemInfo.id)
 
-    const childrenInfo: Object = treeInfo.children
+    const childrenInfo: Object[] = treeInfo.children
 
     for (const thisItemInfo of childrenInfo) {
       if (getBookmarkType(thisItemInfo) === TYPE_BOOKMARK) {
