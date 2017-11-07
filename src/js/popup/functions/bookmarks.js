@@ -17,7 +17,7 @@ import {
 const msgNoBookmark: string = window.chrome.i18n.getMessage('noBkmark')
 const noBookmarkIdPrefix: string = 'no-bookmark-'
 
-export async function addCurrentPage(belowTarget: Object): Promise<void> {
+export const addCurrentPage = async (belowTarget: Object): Promise<void> => {
   const [currentTab] = await chromep.tabs.query({
     currentWindow: true,
     active: true
@@ -26,11 +26,11 @@ export async function addCurrentPage(belowTarget: Object): Promise<void> {
   await createBookmarkBelowTarget(belowTarget, currentTab.title, currentTab.url)
 }
 
-export async function createBookmarkBelowTarget(
+export const createBookmarkBelowTarget = async (
   target: Object,
   title: string,
   url: ?string
-): Promise<Object> {
+): Promise<Object> => {
   const createdItemInfo: Object = await chromep.bookmarks.create({
     index: target.index + 1,
     parentId: target.parentId,
@@ -41,7 +41,7 @@ export async function createBookmarkBelowTarget(
   return createdItemInfo
 }
 
-export function genBookmarkList(
+export const genBookmarkList = (
   treeInfo: Object,
   {
     isSearching,
@@ -52,7 +52,7 @@ export function genBookmarkList(
     rootTree: Object,
     treeIndex: number
   }
-): Object[] {
+): Object[] => {
   let childrenInfo: Object[] = treeInfo.children
 
   if (!isSearching) {
@@ -68,7 +68,7 @@ export function genBookmarkList(
   return childrenInfo
 }
 
-export function genDummyItemInfo(): Object {
+export const genDummyItemInfo = (): Object => {
   return {
     dateAdded: null,
     dateGroupModified: null,
@@ -79,7 +79,7 @@ export function genDummyItemInfo(): Object {
   }
 }
 
-function genNoBookmarkInfo(parentId: string): Object {
+const genNoBookmarkInfo = (parentId: string): Object => {
   return {
     ...genDummyItemInfo(),
     id: `${noBookmarkIdPrefix}${parentId}`,
@@ -89,12 +89,12 @@ function genNoBookmarkInfo(parentId: string): Object {
   }
 }
 
-export async function getBookmark(id: string): Promise<Object> {
+export const getBookmark = async (id: string): Promise<Object> => {
   const [itemInfo] = await chromep.bookmarks.get(id)
   return itemInfo
 }
 
-export function getBookmarkType(itemInfo: Object): string {
+export const getBookmarkType = (itemInfo: Object): string => {
   if (RegExp(`^${noBookmarkIdPrefix}`).test(itemInfo.id)) {
     return TYPE_NO_BOOKMARK
   }
@@ -114,7 +114,7 @@ export function getBookmarkType(itemInfo: Object): string {
   return TYPE_BOOKMARK
 }
 
-export async function getFlatTree(id: string): Promise<Object> {
+export const getFlatTree = async (id: string): Promise<Object> => {
   const childrenInfoPromise = chromep.bookmarks.getChildren(id)
   const itemInfoPromise = getBookmark(id)
 
@@ -127,10 +127,10 @@ export async function getFlatTree(id: string): Promise<Object> {
   }
 }
 
-export function getFocusTargetTreeIndex(
+export const getFocusTargetTreeIndex = (
   focusTarget: any, // use `any` because of https://github.com/facebook/flow/issues/52
   trees: Object[]
-): number {
+): number => {
   if (!focusTarget) {
     return trees.length - 1
   }
@@ -148,7 +148,7 @@ export function getFocusTargetTreeIndex(
   return matchedIndex
 }
 
-export async function getRootTree(options: Object): Promise<Object> {
+export const getRootTree = async (options: Object): Promise<Object> => {
   const rootTree: Object = await getFlatTree(ROOT_ID)
 
   const filteredChildrenInfo = rootTree.children.filter((itemInfo: Object): boolean => {
@@ -166,7 +166,10 @@ export async function getRootTree(options: Object): Promise<Object> {
   }
 }
 
-export async function getSearchResult(newSearchKeyword: string, options: Object): Promise<Object> {
+export const getSearchResult = async (
+  newSearchKeyword: string,
+  options: Object
+): Promise<Object> => {
   const isOnlySearchTitle: boolean = options.searchTarget === 1
   const searchResult: Object[] = await chromep.bookmarks.search(newSearchKeyword)
 
@@ -202,7 +205,7 @@ export async function getSearchResult(newSearchKeyword: string, options: Object)
   }
 }
 
-export function getSlicedTrees(trees: Object[], removeFromIndex: number): Object[] {
+export const getSlicedTrees = (trees: Object[], removeFromIndex: number): Object[] => {
   if (trees.length > removeFromIndex) {
     return trees.slice(0, removeFromIndex)
   }
@@ -210,7 +213,7 @@ export function getSlicedTrees(trees: Object[], removeFromIndex: number): Object
   return trees
 }
 
-export async function initTrees(options: Object): Promise<Object[]> {
+export const initTrees = async (options: Object): Promise<Object[]> => {
   const defaultExpandFolderId: string = String(options.defExpand)
 
   const firstTree: Object = await getFlatTree(defaultExpandFolderId)
@@ -259,21 +262,21 @@ export async function initTrees(options: Object): Promise<Object[]> {
   return [firstTree]
 }
 
-export function isFolder(itemInfo: Object): boolean {
+export const isFolder = (itemInfo: Object): boolean => {
   const bookmarkType = getBookmarkType(itemInfo)
 
   return bookmarkType.includes(TYPE_FOLDER)
 }
 
-export function isFolderOpened(trees: Object[], itemInfo: Object): boolean {
+export const isFolderOpened = (trees: Object[], itemInfo: Object): boolean => {
   return trees.some((treeInfo: Object): boolean => treeInfo.id === itemInfo.id)
 }
 
-export async function openBookmark(
+export const openBookmark = async (
   itemInfo: Object,
   clickType: string,
   options: Object
-): Promise<void> {
+): Promise<void> => {
   const itemUrl: string = itemInfo.url
   const openMethod: number = options[clickType]
 
@@ -321,7 +324,7 @@ export async function openBookmark(
   }
 }
 
-export async function openMultipleBookmarks(
+export const openMultipleBookmarks = async (
   itemInfo: Object,
   {
     isNewWindow = false,
@@ -332,7 +335,7 @@ export async function openMultipleBookmarks(
     isIncognito?: boolean,
     isWarnWhenOpenMany?: boolean
   }
-): Promise<void> {
+): Promise<void> => {
   const urlList: string[] = []
 
   if (isFolder(itemInfo)) {
@@ -380,11 +383,11 @@ export async function openMultipleBookmarks(
   window.close()
 }
 
-export async function pasteItemBelowTarget(
+export const pasteItemBelowTarget = async (
   fromTarget: Object,
   belowTarget: Object,
   isCut: boolean
-): Promise<void> {
+): Promise<void> => {
   if (isCut) {
     await chromep.bookmarks.move(fromTarget.id, {
       parentId: belowTarget.parentId,
@@ -417,7 +420,7 @@ export async function pasteItemBelowTarget(
   }
 }
 
-export async function removeBookmark(target: Object): Promise<void> {
+export const removeBookmark = async (target: Object): Promise<void> => {
   if (isFolder(target)) {
     await chromep.bookmarks.removeTree(target.id)
   } else {
@@ -425,7 +428,7 @@ export async function removeBookmark(target: Object): Promise<void> {
   }
 }
 
-export async function sortByName(parentId: string): Promise<void> {
+export const sortByName = async (parentId: string): Promise<void> => {
   const childrenInfo: Object[] = await chromep.bookmarks.getChildren(parentId)
 
   const genClassifiedItems = (): Array<Object[]> => [
@@ -495,12 +498,5 @@ export async function sortByName(parentId: string): Promise<void> {
   }
 }
 
-export function sortByTitle(bookmarkList: Object[]): Object[] {
-  const {
-    compare
-  }: {
-    compare: Function
-  } = new window.Intl.Collator()
-
-  return bookmarkList.sort((a, b) => compare(a.title, b.title))
-}
+const collator = new window.Intl.Collator()
+export const sortByTitle = R.sort((a, b) => collator.compare(a.title, b.title))
