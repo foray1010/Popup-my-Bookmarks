@@ -1,17 +1,18 @@
-machine:
-  node:
-    version: "8"
-  environment:
-    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
-
-dependencies:
-  override:
-    - "yarn"
-  cache_directories:
-    - "~/.cache/yarn"
-
-test:
-  pre:
-    - "yarn lint"
-  override:
-    - "yarn test"
+version: 2
+jobs:
+  build:
+    docker:
+      - image: "circleci/node:8"
+    steps:
+      - "checkout"
+      -
+        restore_cache:
+          key: "yarn-{{ .Branch }}-{{ checksum \"yarn.lock\" }}"
+      - run: "yarn install"
+      - run: "yarn lint"
+      - run: "yarn test"
+      -
+        save_cache:
+          key: "yarn-{{ .Branch }}-{{ checksum \"yarn.lock\" }}"
+          paths:
+            - "~/.yarn-cache"
