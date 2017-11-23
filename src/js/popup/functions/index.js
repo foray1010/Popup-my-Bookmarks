@@ -1,6 +1,5 @@
 // @flow
 
-import webExtension from 'webextension-polyfill'
 import {GOLDEN_GAP} from '../constants'
 
 export * from './bookmarks'
@@ -38,16 +37,4 @@ export const getItemOffsetHeight = (options: Object): number => {
 
   // +1 for border width, GOLDEN_GAP for padding
   return (1 + GOLDEN_GAP) * 2 + itemIconHeight
-}
-
-export const openOptionsPage = async (): Promise<void> => {
-  if (webExtension.runtime.openOptionsPage) {
-    await webExtension.runtime.openOptionsPage()
-  } else {
-    const manifest: Object = window.chrome.runtime.getManifest()
-
-    await webExtension.tabs.create({
-      url: manifest.options_page
-    })
-  }
 }

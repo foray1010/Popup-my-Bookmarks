@@ -11,7 +11,7 @@ import App from './components/App'
 import configureStore from '../common/store/configureStore'
 import getOptionsConfig from '../common/lib/getOptionsConfig'
 import reducers from './reducers'
-import {getItemOffsetHeight, getRootTree, initTrees, openOptionsPage} from './functions'
+import {getItemOffsetHeight, getRootTree, initTrees} from './functions'
 
 !(async () => {
   const optionsPromise = webExtension.storage.sync.get(null)
@@ -23,7 +23,7 @@ import {getItemOffsetHeight, getRootTree, initTrees, openOptionsPage} from './fu
   /* if missing option */
   const missingOptionKeys = R.difference(Object.keys(optionsConfig), Object.keys(options))
   if (missingOptionKeys.length !== 0) {
-    openOptionsPage()
+    await webExtension.runtime.openOptionsPage()
     return
   }
 
