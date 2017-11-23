@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.5.0",
-    "chrome-promise": "^2.0.2",
     "classnames": "^2.2.3",
     "lodash.debounce": "^4.0.8",
     "open-color": "^1.4.0",
@@ -46,7 +45,8 @@
     "redux-thunk": "^2.1.0",
     "seamless-immutable": "^7.0.0",
     "store": "^2.0.12",
-    "typeface-archivo-narrow": "0.0.44"
+    "typeface-archivo-narrow": "0.0.44",
+    "webextension-polyfill": "^0.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

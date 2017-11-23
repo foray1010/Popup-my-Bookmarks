@@ -1,6 +1,6 @@
 // @flow
 
-import chromep from '../../common/lib/chromePromise'
+import webExtension from 'webextension-polyfill'
 import {createAction} from '../../common/functions'
 import {initOptionsValue} from '../functions'
 import {SELECT_NAV_MODULE, UPDATE_OPTIONS, UPDATE_SINGLE_OPTION} from '../constants'
@@ -22,7 +22,7 @@ export const updateSingleOption = createAction(
  */
 
 export const reloadOptions = async (): Promise<Object> => {
-  const options: Object = await chromep.storage.sync.get(null)
+  const options: Object = await webExtension.storage.sync.get(null)
 
   return updateOptions(options)
 }
@@ -37,7 +37,7 @@ export const resetToDefaultOptions = () => async (
     optionsConfig: Object
   } = getState()
 
-  await chromep.storage.sync.clear()
+  await webExtension.storage.sync.clear()
 
   const options = await initOptionsValue(optionsConfig)
 
@@ -51,7 +51,7 @@ export const saveOptions = () => async (dispatch: Function, getState: Function):
     options: Object
   } = getState()
 
-  await chromep.storage.sync.set(options)
+  await webExtension.storage.sync.set(options)
 
   // seems meaningless for now
   dispatch(updateOptions(options))

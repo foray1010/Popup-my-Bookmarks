@@ -1,6 +1,7 @@
 // @flow
 
-import chromep from './chromePromise'
+import webExtension from 'webextension-polyfill'
+
 import {
   OPTIONS_CLICK_BY_LEFT,
   OPTIONS_CLICK_BY_LEFT_CTRL,
@@ -35,7 +36,7 @@ const getOptionsConfig = async (): Promise<Object> => {
   const rootFolderChoices: string[] = []
 
   // get the root folders' title and set as the choices of 'defExpand'
-  const rootFolders: Object[] = await chromep.bookmarks.getChildren(ROOT_ID)
+  const rootFolders: Object[] = await webExtension.bookmarks.getChildren(ROOT_ID)
   for (const rootFolder of rootFolders) {
     const rootFolderIdNum: number = Number(rootFolder.id)
 

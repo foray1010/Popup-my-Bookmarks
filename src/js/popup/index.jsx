@@ -1,20 +1,20 @@
 import 'babel-polyfill'
 import Immutable from 'seamless-immutable'
 import R from 'ramda'
+import webExtension from 'webextension-polyfill'
 import {createElement} from 'react'
 import {Provider} from 'react-redux'
 import {render} from 'react-dom'
 
 import '../../manifest.yml'
 import App from './components/App'
-import chromep from '../common/lib/chromePromise'
 import configureStore from '../common/store/configureStore'
 import getOptionsConfig from '../common/lib/getOptionsConfig'
 import reducers from './reducers'
 import {getItemOffsetHeight, getRootTree, initTrees, openOptionsPage} from './functions'
 
 !(async () => {
-  const optionsPromise = chromep.storage.sync.get(null)
+  const optionsPromise = webExtension.storage.sync.get(null)
   const optionsConfigPromise = getOptionsConfig()
 
   const options = await optionsPromise

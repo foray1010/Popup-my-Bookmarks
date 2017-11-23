@@ -2,8 +2,8 @@
 
 import R from 'ramda'
 import store from 'store'
+import webExtension from 'webextension-polyfill'
 
-import chromep from '../../common/lib/chromePromise'
 import {
   ROOT_ID,
   SEPARATE_THIS_URL,
@@ -18,7 +18,7 @@ const msgNoBookmark: string = window.chrome.i18n.getMessage('noBkmark')
 const noBookmarkIdPrefix: string = 'no-bookmark-'
 
 export const addCurrentPage = async (belowTarget: Object): Promise<void> => {
-  const [currentTab] = await chromep.tabs.query({
+  const [currentTab] = await webExtension.tabs.query({
     currentWindow: true,
     active: true
   })
@@ -31,7 +31,7 @@ export const createBookmarkBelowTarget = async (
   title: string,
   url: ?string
 ): Promise<Object> => {
-  const createdItemInfo: Object = await chromep.bookmarks.create({
+  const createdItemInfo: Object = await webExtension.bookmarks.create({
     index: target.index + 1,
     parentId: target.parentId,
     title: title.trim(),
@@ -90,7 +90,7 @@ const genNoBookmarkInfo = (parentId: string): Object => {
 }
 
 export const getBookmark = async (id: string): Promise<Object> => {
-  const [itemInfo] = await chromep.bookmarks.get(id)
+  const [itemInfo] = await webExtension.bookmarks.get(id)
   return itemInfo
 }
 
@@ -115,7 +115,7 @@ export const getBookmarkType = (itemInfo: Object): string => {
 }
 
 export const getFlatTree = async (id: string): Promise<Object> => {
-  const childrenInfoPromise = chromep.bookmarks.getChildren(id)
+  const childrenInfoPromise = webExtension.bookmarks.getChildren(id)
   const itemInfoPromise = getBookmark(id)
 
   const childrenInfo = await childrenInfoPromise
@@ -171,7 +171,7 @@ export const getSearchResult = async (
   options: Object
 ): Promise<Object> => {
   const isOnlySearchTitle: boolean = options.searchTarget === 1
-  const searchResult: Object[] = await chromep.bookmarks.search(newSearchKeyword)
+  const searchResult: Object[] = await webExtension.bookmarks.search(newSearchKeyword)
 
   const splittedKeyArr: string[] = isOnlySearchTitle ?
     newSearchKeyword.split(' ').map((x) => x.toLowerCase()) :
@@ -281,14 +281,14 @@ export const openBookmark = async (
   const openMethod: number = options[clickType]
 
   if (itemUrl.startsWith('javascript:')) {
-    await chromep.tabs.executeScript(null, {
+    await webExtension.tabs.executeScript(null, {
       code: itemUrl
     })
   } else {
     switch (openMethod) {
       case 0: // current tab
       case 1: // current tab (without closing PmB)
-        await chromep.tabs.update({
+        await webExtension.tabs.update({
           url: itemUrl
         })
         break
@@ -296,7 +296,7 @@ export const openBookmark = async (
       case 2: // new tab
       case 3: // background tab
       case 4: // background tab (without closing PmB)
-        await chromep.tabs.create({
+        await webExtension.tabs.create({
           url: itemUrl,
           active: openMethod === 2
         })
@@ -304,7 +304,7 @@ export const openBookmark = async (
 
       case 5: // new window
       case 6: // incognito window
-        await chromep.windows.create({
+        await webExtension.windows.create({
           url: itemUrl,
           incognito: openMethod === 6
         })
@@ -339,7 +339,7 @@ export const openMultipleBookmarks = async (
   const urlList: string[] = []
 
   if (isFolder(itemInfo)) {
-    const [treeInfo] = await chromep.bookmarks.getSubTree(itemInfo.id)
+    const [treeInfo] = await webExtension.bookmarks.getSubTree(itemInfo.id)
 
     const childrenInfo: Object[] = treeInfo.children
 
@@ -367,14 +367,14 @@ export const openMultipleBookmarks = async (
   if (!isNewWindow) {
     await Promise.all(
       urlList.map((url: string): Promise<Object> => {
-        return chromep.tabs.create({
+        return webExtension.tabs.create({
           url,
           active: false
         })
       })
     )
   } else {
-    await chromep.windows.create({
+    await webExtension.windows.create({
       url: urlList,
       incognito: isIncognito
     })
@@ -389,7 +389,7 @@ export const pasteItemBelowTarget = async (
   isCut: boolean
 ): Promise<void> => {
   if (isCut) {
-    await chromep.bookmarks.move(fromTarget.id, {
+    await webExtension.bookmarks.move(fromTarget.id, {
       parentId: belowTarget.parentId,
       index: belowTarget.index + 1
     })
@@ -397,7 +397,7 @@ export const pasteItemBelowTarget = async (
     const copyChildrenIfFolder = async (thisTreeInfo: Object, parentId: string): Promise<void> => {
       if (isFolder(thisTreeInfo)) {
         for (const thisItemInfo of thisTreeInfo.children) {
-          const thisCreatedItemInfo = await chromep.bookmarks.create({
+          const thisCreatedItemInfo = await webExtension.bookmarks.create({
             parentId: parentId,
             title: thisItemInfo.title,
             url: thisItemInfo.url
@@ -408,7 +408,7 @@ export const pasteItemBelowTarget = async (
       }
     }
 
-    const [treeInfo] = await chromep.bookmarks.getSubTree(fromTarget.id)
+    const [treeInfo] = await webExtension.bookmarks.getSubTree(fromTarget.id)
 
     const createdItemInfo = await createBookmarkBelowTarget(
       belowTarget,
@@ -422,14 +422,14 @@ export const pasteItemBelowTarget = async (
 
 export const removeBookmark = async (target: Object): Promise<void> => {
   if (isFolder(target)) {
-    await chromep.bookmarks.removeTree(target.id)
+    await webExtension.bookmarks.removeTree(target.id)
   } else {
-    await chromep.bookmarks.remove(target.id)
+    await webExtension.bookmarks.remove(target.id)
   }
 }
 
 export const sortByName = async (parentId: string): Promise<void> => {
-  const childrenInfo: Object[] = await chromep.bookmarks.getChildren(parentId)
+  const childrenInfo: Object[] = await webExtension.bookmarks.getChildren(parentId)
 
   const genClassifiedItems = (): Array<Object[]> => [
     [
@@ -488,7 +488,7 @@ export const sortByName = async (parentId: string): Promise<void> => {
     const oldIndex: number = oldItemInfo.index
 
     if (oldIndex !== index) {
-      await chromep.bookmarks.move(itemInfo.id, {
+      await webExtension.bookmarks.move(itemInfo.id, {
         // if new index is after old index, need to add 1,
         // because index means the position in current array,
         // which also count the current position

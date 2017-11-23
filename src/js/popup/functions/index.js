@@ -1,6 +1,6 @@
 // @flow
 
-import chromep from '../../common/lib/chromePromise'
+import webExtension from 'webextension-polyfill'
 import {GOLDEN_GAP} from '../constants'
 
 export * from './bookmarks'
@@ -41,12 +41,12 @@ export const getItemOffsetHeight = (options: Object): number => {
 }
 
 export const openOptionsPage = async (): Promise<void> => {
-  if (chromep.runtime.openOptionsPage) {
-    await chromep.runtime.openOptionsPage()
+  if (webExtension.runtime.openOptionsPage) {
+    await webExtension.runtime.openOptionsPage()
   } else {
     const manifest: Object = window.chrome.runtime.getManifest()
 
-    await chromep.tabs.create({
+    await webExtension.tabs.create({
       url: manifest.options_page
     })
   }

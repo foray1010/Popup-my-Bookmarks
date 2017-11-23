@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
+import webExtension from 'webextension-polyfill'
 import {createElement, PureComponent} from 'react'
 
 import '../../../../css/popup/editor.css'
-import chromep from '../../../common/lib/chromePromise'
 import {normalizeInputtingValue} from '../../../common/functions'
 import {resetBodySize} from '../../functions'
 
@@ -96,13 +96,13 @@ class Editor extends PureComponent {
     const {title, url} = this.state
 
     if (isCreatingNewFolder) {
-      await chromep.bookmarks.create({
+      await webExtension.bookmarks.create({
         parentId: editorTarget.parentId,
         title: title.trim(),
         index: editorTarget.index + 1
       })
     } else {
-      await chromep.bookmarks.update(editorTarget.id, {
+      await webExtension.bookmarks.update(editorTarget.id, {
         title: title,
         url: url.trim()
       })

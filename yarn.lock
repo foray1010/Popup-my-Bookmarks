@@ -1392,10 +1392,6 @@ chrome-manifest-loader@^0.1.1:
     lodash "^4.17.4"
     uuid "^3.0.1"
 
-chrome-promise@^2.0.2:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/chrome-promise/-/chrome-promise-2.1.1.tgz#5c2d5a172c2ab82cbecaa88f2f5fc00af8773e0f"
-
 ci-info@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-1.1.2.tgz#03561259db48d0474c8bdc90f5b47b068b6bbfb4"
@@ -7025,6 +7021,10 @@ watchpack@^1.4.0:
     async "^2.1.2"
     chokidar "^1.7.0"
     graceful-fs "^4.1.2"
+
+webextension-polyfill@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/webextension-polyfill/-/webextension-polyfill-0.2.1.tgz#cdfc9126033039f1713553157d35beff1d4d6f4a"
 
 webpack-bundle-analyzer@^2.3.0:
   version "2.9.1"

@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
+import webExtension from 'webextension-polyfill'
 import {createElement, PureComponent} from 'react'
-
-import chromep from '../../../common/lib/chromePromise'
 
 export default (WrappedComponent) => {
   return class extends PureComponent {
@@ -35,7 +34,7 @@ export default (WrappedComponent) => {
 
       if (dragTarget) {
         if (dragIndicator) {
-          await chromep.bookmarks.move(dragTarget.id, {
+          await webExtension.bookmarks.move(dragTarget.id, {
             parentId: dragIndicator.parentId,
             index: dragIndicator.index
           })
