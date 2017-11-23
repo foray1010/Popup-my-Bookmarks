@@ -118,7 +118,7 @@ const webpackConfig = getMergedConfigByEnv({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       }),
       new webpack.optimize.CommonsChunkPlugin(commonChunkName),
-      new webpack.optimize.OccurrenceOrderPlugin(true)
+      new webpack.optimize.ModuleConcatenationPlugin()
     ],
     resolve: {
       alias: {
