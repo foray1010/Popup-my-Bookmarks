@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import webExtension from 'webextension-polyfill'
 import {createElement} from 'react'
 
 import '../../../../css/options/option-item.css'
@@ -38,7 +39,7 @@ const OptionItem = (props) => {
 
   return (
     <tr>
-      <td styleName='desc'>{chrome.i18n.getMessage(optionName)}</td>
+      <td styleName='desc'>{webExtension.i18n.getMessage(optionName)}</td>
       <td styleName='input'>
         <InputItem
           {...optionConfig}

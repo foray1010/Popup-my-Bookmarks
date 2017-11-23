@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import webExtension from 'webextension-polyfill'
 import {createElement, PureComponent} from 'react'
 
 import '../../../../../css/popup/menu-item.css'
@@ -131,7 +132,7 @@ class MenuItem extends PureComponent {
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
-        {chrome.i18n.getMessage(menuItemKey)}
+        {webExtension.i18n.getMessage(menuItemKey)}
       </div>
     )
   }

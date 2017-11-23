@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import webExtension from 'webextension-polyfill'
 import {createElement} from 'react'
 
 import '../../../../css/options/nav-bar.css'
@@ -13,19 +14,19 @@ import {
 const navBarItemInfos = [
   {
     navModule: NAV_MODULE_GENERAL,
-    title: chrome.i18n.getMessage('general')
+    title: webExtension.i18n.getMessage('general')
   },
   {
     navModule: NAV_MODULE_USER_INTERFACE,
-    title: chrome.i18n.getMessage('userInterface')
+    title: webExtension.i18n.getMessage('userInterface')
   },
   {
     navModule: NAV_MODULE_CONTROL,
-    title: chrome.i18n.getMessage('control')
+    title: webExtension.i18n.getMessage('control')
   },
   {
     navModule: NAV_MODULE_CONTRIBUTORS,
-    title: chrome.i18n.getMessage('contributors')
+    title: webExtension.i18n.getMessage('contributors')
   }
 ]
 

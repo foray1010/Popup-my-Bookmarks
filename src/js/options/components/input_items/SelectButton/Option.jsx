@@ -1,11 +1,9 @@
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import webExtension from 'webextension-polyfill'
 import {createElement, PureComponent} from 'react'
 
 import '../../../../../css/options/select-button-option.css'
-
-const msgNo = chrome.i18n.getMessage('no')
-const msgYes = chrome.i18n.getMessage('yes')
 
 class Option extends PureComponent {
   handleChange = (evt) => {
@@ -23,7 +21,9 @@ class Option extends PureComponent {
   render() {
     const {optionChoice, optionName, optionValue} = this.props
 
-    const buttonText = optionChoice ? msgYes : msgNo
+    const buttonText = optionChoice ?
+      webExtension.i18n.getMessage('yes') :
+      webExtension.i18n.getMessage('no')
 
     const isChecked = optionValue === optionChoice
 

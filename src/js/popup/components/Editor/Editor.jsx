@@ -6,12 +6,6 @@ import '../../../../css/popup/editor.css'
 import {normalizeInputtingValue} from '../../../common/functions'
 import {resetBodySize} from '../../functions'
 
-const msgCancel = chrome.i18n.getMessage('cancel')
-const msgConfirm = chrome.i18n.getMessage('confirm')
-const msgEdit = chrome.i18n.getMessage('edit')
-const msgNewFolder = chrome.i18n.getMessage('newFolder')
-const msgRename = chrome.i18n.getMessage('rename')
-
 class Editor extends PureComponent {
   state = {
     title: '',
@@ -25,7 +19,7 @@ class Editor extends PureComponent {
 
     if (!isHidden) {
       this.setState({
-        title: isCreatingNewFolder ? msgNewFolder : editorTarget.title,
+        title: isCreatingNewFolder ? webExtension.i18n.getMessage('newFolder') : editorTarget.title,
         url: editorTarget.url || ''
       })
     } else {
@@ -128,7 +122,9 @@ class Editor extends PureComponent {
 
     const {title, url} = this.state
 
-    const editorTitle = isUIForFolder ? msgRename : msgEdit
+    const editorTitle = isUIForFolder ?
+      webExtension.i18n.getMessage('rename') :
+      webExtension.i18n.getMessage('edit')
     const isHidden = !editorTarget
 
     return (
@@ -147,10 +143,10 @@ class Editor extends PureComponent {
           type='submit' // support `Enter` to submit
           onClick={this.handleConfirm}
         >
-          {msgConfirm}
+          {webExtension.i18n.getMessage('confirm')}
         </button>
         <button styleName='button' type='button' onClick={this.handleCancel}>
-          {msgCancel}
+          {webExtension.i18n.getMessage('cancel')}
         </button>
       </form>
     )

@@ -1,5 +1,6 @@
 // @flow
 
+import R from 'ramda'
 import webExtension from 'webextension-polyfill'
 
 import {
@@ -21,18 +22,18 @@ import {
   ROOT_ID
 } from '../constants'
 
-const getMessage = window.chrome.i18n.getMessage
-
 const getOptionsConfig = async (): Promise<Object> => {
-  const openBookmarkChoices: string[] = [
-    getMessage('clickOption1'),
-    getMessage('clickOption2'),
-    getMessage('clickOption3'),
-    getMessage('clickOption4'),
-    getMessage('clickOption5'),
-    getMessage('clickOption6'),
-    getMessage('clickOption7')
-  ]
+  const getMessages = R.map(webExtension.i18n.getMessage)
+
+  const openBookmarkChoices: string[] = getMessages([
+    'clickOption1',
+    'clickOption2',
+    'clickOption3',
+    'clickOption4',
+    'clickOption5',
+    'clickOption6',
+    'clickOption7'
+  ])
   const rootFolderChoices: string[] = []
 
   // get the root folders' title and set as the choices of 'defExpand'
@@ -114,7 +115,7 @@ const getOptionsConfig = async (): Promise<Object> => {
     [OPTIONS_SEARCH_TARGET]: {
       type: 'integer',
       default: 0,
-      choices: [getMessage('searchTargetOption1'), getMessage('searchTargetOption2')]
+      choices: getMessages(['searchTargetOption1', 'searchTargetOption2'])
     },
     [OPTIONS_SET_WIDTH]: {
       type: 'integer',

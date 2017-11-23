@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types'
+import webExtension from 'webextension-polyfill'
 import {createElement} from 'react'
 
 import '../../../../css/options/option-form.css'
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
-
-const msgConfirm = chrome.i18n.getMessage('confirm')
-const msgDefault = chrome.i18n.getMessage('default')
 
 const OptionForm = (props) => {
   const {
@@ -42,10 +40,13 @@ const OptionForm = (props) => {
         <tfoot>
           <tr>
             <td>
-              <OptionButton msg={msgConfirm} onClick={saveOptions} />
+              <OptionButton msg={webExtension.i18n.getMessage('confirm')} onClick={saveOptions} />
             </td>
             <td>
-              <OptionButton msg={msgDefault} onClick={resetToDefaultOptions} />
+              <OptionButton
+                msg={webExtension.i18n.getMessage('default')}
+                onClick={resetToDefaultOptions}
+              />
             </td>
           </tr>
         </tfoot>

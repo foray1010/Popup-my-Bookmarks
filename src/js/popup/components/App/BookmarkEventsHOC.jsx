@@ -1,6 +1,7 @@
 import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
 import R from 'ramda'
+import webExtension from 'webextension-polyfill'
 import {createElement, PureComponent} from 'react'
 
 import {getSlicedTrees} from '../../functions'
@@ -13,10 +14,10 @@ export default (WrappedComponent) => {
     }
 
     componentDidMount() {
-      chrome.bookmarks.onChanged.addListener(this.renewCurrentTrees)
-      chrome.bookmarks.onCreated.addListener(this.renewCurrentTrees)
-      chrome.bookmarks.onMoved.addListener(this.renewSlicedTreesById)
-      chrome.bookmarks.onRemoved.addListener(this.renewSlicedTreesById)
+      webExtension.bookmarks.onChanged.addListener(this.renewCurrentTrees)
+      webExtension.bookmarks.onCreated.addListener(this.renewCurrentTrees)
+      webExtension.bookmarks.onMoved.addListener(this.renewSlicedTreesById)
+      webExtension.bookmarks.onRemoved.addListener(this.renewSlicedTreesById)
     }
 
     renewCurrentTrees = () => this.renewTrees(this.props.trees)

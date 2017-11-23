@@ -14,7 +14,6 @@ import {
   TYPE_SEPARATOR
 } from '../constants'
 
-const msgNoBookmark: string = window.chrome.i18n.getMessage('noBkmark')
 const noBookmarkIdPrefix: string = 'no-bookmark-'
 
 export const addCurrentPage = async (belowTarget: Object): Promise<void> => {
@@ -85,7 +84,7 @@ const genNoBookmarkInfo = (parentId: string): Object => {
     id: `${noBookmarkIdPrefix}${parentId}`,
     index: -1, // as it is not appeared in the childrenInfo
     parentId: parentId,
-    title: msgNoBookmark
+    title: webExtension.i18n.getMessage('noBkmark')
   }
 }
 
@@ -350,7 +349,7 @@ export const openMultipleBookmarks = async (
     }
 
     if (isWarnWhenOpenMany) {
-      const msgAskOpenAll: string = window.chrome.i18n
+      const msgAskOpenAll: string = webExtension.i18n
         .getMessage('askOpenAll')
         .replace('%bkmarkCount%', urlList.length)
 

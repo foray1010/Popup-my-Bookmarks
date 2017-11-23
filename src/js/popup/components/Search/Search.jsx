@@ -1,11 +1,10 @@
 import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
+import webExtension from 'webextension-polyfill'
 import {createElement, PureComponent} from 'react'
 
 import '../../../../css/popup/search.css'
 import {normalizeInputtingValue} from '../../../common/functions'
-
-const msgSearch = chrome.i18n.getMessage('search')
 
 class Search extends PureComponent {
   state = {
@@ -38,7 +37,7 @@ class Search extends PureComponent {
         <input
           id='search'
           type='search'
-          placeholder={msgSearch}
+          placeholder={webExtension.i18n.getMessage('search')}
           value={this.state.inputValue}
           tabIndex='-1'
           onInput={this.handleInput}
