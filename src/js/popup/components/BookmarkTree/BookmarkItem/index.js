@@ -41,9 +41,9 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     dragIndicator: state.dragIndicator,
-    dragTarget: dragTarget,
-    isEditorTarget: isEditorTarget,
-    isMenuTarget: isMenuTarget,
+    dragTarget,
+    isEditorTarget,
+    isMenuTarget,
     isSearching: Boolean(state.searchKeyword),
     isSelected: isDragTarget || isEditorTarget || isFocusTarget || isMenuTarget,
     isUnclickable: isCutTarget || isDragTarget,

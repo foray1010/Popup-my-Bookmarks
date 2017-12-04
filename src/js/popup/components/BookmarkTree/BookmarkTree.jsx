@@ -72,7 +72,7 @@ class BookmarkTree extends PureComponent {
 
     if (this.state.listHeight !== listHeight) {
       this.setState({
-        listHeight: listHeight
+        listHeight
       })
     }
   }

@@ -97,7 +97,7 @@ class Editor extends PureComponent {
       })
     } else {
       await webExtension.bookmarks.update(editorTarget.id, {
-        title: title,
+        title,
         url: url.trim()
       })
     }

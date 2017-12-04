@@ -26,7 +26,6 @@ const projectSlug = 'popup-my-bookmarks'
 const resourceSlug = 'messagesjson-1'
 
 const localesPath = path.join('src', '_locales')
-
 ;(async () => {
   try {
     prompt.start()
@@ -37,10 +36,7 @@ const localesPath = path.join('src', '_locales')
     })
     bluebird.promisifyAll(transifex)
 
-    const availableLanguages = await transifex.statisticsMethodsAsync(
-      projectSlug,
-      resourceSlug
-    )
+    const availableLanguages = await transifex.statisticsMethodsAsync(projectSlug, resourceSlug)
     await Promise.all(
       Object.keys(availableLanguages).map(async (availableLanguage) => {
         const messagesJsonStr = await transifex.translationInstanceMethodAsync(
@@ -60,8 +56,10 @@ const localesPath = path.join('src', '_locales')
               messagesJson[key].message = messagesJson[key].message.trim()
             }
 
-            obj[key] = messagesJson[key]
-            return obj
+            return {
+              ...obj,
+              [key]: messagesJson[key]
+            }
           }, {})
 
         let mappedLanguage
@@ -74,9 +72,7 @@ const localesPath = path.join('src', '_locales')
             mappedLanguage = availableLanguage
         }
 
-        await fs.mkdirs(
-          path.join(localesPath, mappedLanguage)
-        )
+        await fs.mkdirs(path.join(localesPath, mappedLanguage))
 
         await fs.outputJson(
           path.join(localesPath, mappedLanguage, 'messages.json'),

@@ -83,7 +83,7 @@ const genNoBookmarkInfo = (parentId: string): Object => {
     ...genDummyItemInfo(),
     id: `${noBookmarkIdPrefix}${parentId}`,
     index: -1, // as it is not appeared in the childrenInfo
-    parentId: parentId,
+    parentId,
     title: webExtension.i18n.getMessage('noBkmark')
   }
 }
@@ -397,7 +397,7 @@ export const pasteItemBelowTarget = async (
       if (isFolder(thisTreeInfo)) {
         for (const thisItemInfo of thisTreeInfo.children) {
           const thisCreatedItemInfo = await webExtension.bookmarks.create({
-            parentId: parentId,
+            parentId,
             title: thisItemInfo.title,
             url: thisItemInfo.url
           })

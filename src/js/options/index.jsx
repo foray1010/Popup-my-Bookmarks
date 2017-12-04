@@ -12,7 +12,7 @@ import reducers from './reducers'
 import {initOptionsValue} from './functions'
 import {NAV_MODULE_GENERAL} from './constants'
 
-!(async () => {
+const main = async () => {
   const optionsConfig = await getOptionsConfig()
 
   const options = await initOptionsValue(optionsConfig)
@@ -21,8 +21,8 @@ import {NAV_MODULE_GENERAL} from './constants'
   const store = configureStore(
     reducers,
     Immutable({
-      options: options,
-      optionsConfig: optionsConfig,
+      options,
+      optionsConfig,
       selectedNavModule: NAV_MODULE_GENERAL
     })
   )
@@ -36,4 +36,6 @@ import {NAV_MODULE_GENERAL} from './constants'
     </Provider>,
     rootEl
   )
-})().catch((err) => console.error(err.stack))
+}
+
+main().catch((err) => console.error(err.stack))

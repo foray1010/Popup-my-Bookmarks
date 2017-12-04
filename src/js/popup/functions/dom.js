@@ -8,9 +8,9 @@ import {getItemIconHeight} from '.'
 
 const getClassSelector = (className: string): string => {
   // remove class name from compose
-  className = className.split(' ')[0]
+  const classNameWithoutCompose = className.split(' ')[0]
 
-  return `.${className}`
+  return `.${classNameWithoutCompose}`
 }
 
 export const resetBodySize = (): void => {

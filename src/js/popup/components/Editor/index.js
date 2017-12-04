@@ -12,8 +12,8 @@ const mapStateToProps = (state) => {
   const {editorTarget, isCreatingNewFolder} = state
 
   return {
-    editorTarget: editorTarget,
-    isCreatingNewFolder: isCreatingNewFolder,
+    editorTarget,
+    isCreatingNewFolder,
     isUIForFolder: isCreatingNewFolder || (editorTarget ? isFolder(editorTarget) : false)
   }
 }

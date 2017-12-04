@@ -47,13 +47,13 @@ const mapStateToProps = (state, ownProps) => {
   })()
 
   return {
-    copyTarget: copyTarget,
-    cutTarget: cutTarget,
+    copyTarget,
+    cutTarget,
     isSelected: selectedMenuItem === menuItemKey,
-    isUnclickable: isUnclickable,
-    menuTarget: menuTarget,
+    isUnclickable,
+    menuTarget,
     options: state.options,
-    selectedMenuItem: selectedMenuItem
+    selectedMenuItem
   }
 }
 

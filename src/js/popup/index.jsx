@@ -13,7 +13,7 @@ import getOptionsConfig from '../common/lib/getOptionsConfig'
 import reducers from './reducers'
 import {getItemOffsetHeight, getRootTree, initTrees} from './functions'
 
-!(async () => {
+const main = async () => {
   const optionsPromise = webExtension.storage.sync.get(null)
   const optionsConfigPromise = getOptionsConfig()
 
@@ -38,9 +38,9 @@ import {getItemOffsetHeight, getRootTree, initTrees} from './functions'
     reducers,
     Immutable({
       itemOffsetHeight: getItemOffsetHeight(options),
-      options: options,
-      rootTree: rootTree,
-      trees: trees
+      options,
+      rootTree,
+      trees
     })
   )
 
@@ -53,4 +53,6 @@ import {getItemOffsetHeight, getRootTree, initTrees} from './functions'
     </Provider>,
     rootEl
   )
-})().catch((err) => console.error(err.stack))
+}
+
+main().catch((err) => console.error(err.stack))
