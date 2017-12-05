@@ -27,7 +27,8 @@
   "lint-staged": {
     "*.css": ["prettier-eslint --write", "stylelint --fix", "git add"],
     "*.{js,jsx}": ["prettier-eslint --write", "eslint --fix", "git add"],
-    "*.json": ["prettier-eslint --write", "git add"]
+    "*.json": ["prettier-eslint --write", "git add"],
+    "*ignore-sync": ["ignore-sync", "git add"]
   },
   "dependencies": {
     "babel-polyfill": "^6.5.0",
@@ -68,6 +69,7 @@
     "fs-extra": "^4.0.0",
     "html-webpack-plugin": "^2.28.0",
     "husky": "^0.14.0",
+    "ignore-sync": "^1.0.0",
     "image-process-loader": "^0.1.0",
     "lint-staged": "^6.0.0",
     "npm-run-all": "^4.1.1",
