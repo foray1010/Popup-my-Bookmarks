@@ -1,31 +1,18 @@
 import PropTypes from 'prop-types'
-import {createElement, PureComponent} from 'react'
+import {createElement} from 'react'
 
 import '../../../../../css/popup/tree-header.css'
 
-class TreeHeader extends PureComponent {
-  handleClose = () => {
-    const {removeTreeInfosFromIndex, treeIndex} = this.props
-
-    removeTreeInfosFromIndex(treeIndex)
-  }
-
-  render() {
-    const {isHidden, treeInfo} = this.props
-
-    return (
-      <header styleName='main' hidden={isHidden}>
-        <h1 styleName='title'>{treeInfo.title}</h1>
-        <button styleName='close' type='button' tabIndex='-1' onClick={this.handleClose} />
-      </header>
-    )
-  }
-}
+const TreeHeader = (props) => (
+  <header styleName='main' hidden={props.isHidden}>
+    <h1 styleName='title'>{props.treeInfo.title}</h1>
+    <button styleName='close' type='button' tabIndex='-1' onClick={props.onClose} />
+  </header>
+)
 
 TreeHeader.propTypes = {
   isHidden: PropTypes.bool.isRequired,
-  removeTreeInfosFromIndex: PropTypes.func.isRequired,
-  treeIndex: PropTypes.number.isRequired,
+  onClose: PropTypes.func.isRequired,
   treeInfo: PropTypes.object.isRequired
 }
 

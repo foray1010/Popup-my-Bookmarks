@@ -6,9 +6,7 @@ import BookmarkTree from '../BookmarkTree'
 import Search from '../Search'
 
 const Panel = (props) => {
-  const {trees} = props
-
-  const panelItems = trees.map((treeInfo, treeIndex) => (
+  const panelItems = props.trees.map((treeInfo, treeIndex) => (
     <BookmarkTree key={treeInfo.id} treeIndex={treeIndex} />
   ))
 

@@ -1,47 +1,23 @@
-import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
-import {createElement, PureComponent} from 'react'
+import {createElement} from 'react'
 
 import '../../../../css/popup/folder-cover.css'
 
-class FolderCover extends PureComponent {
-  closeCover = debounce(() => {
-    const {removeTreeInfosFromIndex, treeIndex} = this.props
-
-    removeTreeInfosFromIndex(treeIndex + 1)
-  }, 200)
-
-  handleClick = () => {
-    this.closeCover()
-  }
-
-  handleMouseLeave = () => {
-    this.closeCover.cancel()
-  }
-
-  handleMouseMove = () => {
-    this.closeCover()
-  }
-
-  render() {
-    const {isHidden} = this.props
-
-    return (
-      <div
-        styleName='main'
-        hidden={isHidden}
-        onClick={this.handleClick}
-        onMouseLeave={this.handleMouseLeave}
-        onMouseMove={this.handleMouseMove}
-      />
-    )
-  }
-}
+const FolderCover = (props) => (
+  <div
+    styleName='main'
+    hidden={props.isHidden}
+    onClick={props.onClick}
+    onMouseLeave={props.onMouseLeave}
+    onMouseMove={props.onMouseMove}
+  />
+)
 
 FolderCover.propTypes = {
   isHidden: PropTypes.bool.isRequired,
-  removeTreeInfosFromIndex: PropTypes.func.isRequired,
-  treeIndex: PropTypes.number.isRequired
+  onClick: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
+  onMouseMove: PropTypes.func.isRequired
 }
 
 export default FolderCover
