@@ -8,9 +8,9 @@ import '../../manifest.yml'
 import App from './components/App'
 import configureStore from '../common/store/configureStore'
 import getOptionsConfig from '../common/lib/getOptionsConfig'
-import reducers from './reducers'
+import reducers from './reduxs'
+import sagas from './sagas'
 import {initOptionsValue} from './functions'
-import {NAV_MODULE_GENERAL} from './constants'
 
 const main = async () => {
   const optionsConfig = await getOptionsConfig()
@@ -18,14 +18,13 @@ const main = async () => {
   const options = await initOptionsValue(optionsConfig)
 
   /* Create a Redux store to handle all UI actions and side-effects */
-  const store = configureStore(
+  const store = configureStore({
     reducers,
-    Immutable({
-      options,
-      optionsConfig,
-      selectedNavModule: NAV_MODULE_GENERAL
+    sagas,
+    preloadedState: Immutable({
+      options
     })
-  )
+  })
 
   /* render the app */
   const rootEl = document.createElement('div')

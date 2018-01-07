@@ -31,10 +31,14 @@ const contributors = Immutable({
 
 const Contributors = () => (
   <dl styleName='main'>
-    {Object.keys(contributors).map((contributeType) => [
-      <dt>{contributeType}</dt>,
-      ...contributors[contributeType].map((contributor) => <dd>{contributor}</dd>)
-    ])}
+    {Object.keys(contributors).map((contributeType) => (
+      <div key={contributeType}>
+        <dt>{contributeType}</dt>
+        {contributors[contributeType].map((contributor) => (
+          <dd key={contributor}>{contributor}</dd>
+        ))}
+      </div>
+    ))}
   </dl>
 )
 

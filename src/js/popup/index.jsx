@@ -34,15 +34,15 @@ const main = async () => {
   const rootTree = await rootTreePromise
   const trees = await treesPromise
 
-  const store = configureStore(
+  const store = configureStore({
     reducers,
-    Immutable({
+    preloadedState: Immutable({
       itemOffsetHeight: getItemOffsetHeight(options),
       options,
       rootTree,
       trees
     })
-  )
+  })
 
   /* render the app */
   const rootEl = document.createElement('div')

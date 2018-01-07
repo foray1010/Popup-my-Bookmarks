@@ -1,14 +1,13 @@
+import R from 'ramda'
 import {connect} from 'react-redux'
 
 import NavBar from './NavBar'
-import {switchNavModule} from '../../actions'
+import {Creators as navigationCreators} from '../../reduxs/navigationRedux'
 
-const mapDispatchToProps = {
-  switchNavModule
-}
+const mapDispatchToProps = R.pick(['switchNavModule'], navigationCreators)
 
 const mapStateToProps = (state) => ({
-  selectedNavModule: state.selectedNavModule
+  selectedNavModule: state.navigation.selectedNavModule
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
