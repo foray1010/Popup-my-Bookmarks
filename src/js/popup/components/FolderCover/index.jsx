@@ -21,15 +21,11 @@ class FolderCoverContainer extends PureComponent {
     this.props.removeTreeInfosFromIndex(this.props.treeIndex + 1)
   }, 200)
 
-  cancelCloseCover = () => {
-    this.closeCover.cancel()
-  }
-
   render = () => (
     <FolderCover
       {...this.props}
       onClick={this.closeCover}
-      onMouseLeave={this.cancelCloseCover}
+      onMouseLeave={this.closeCover.cancel}
       onMouseMove={this.closeCover}
     />
   )

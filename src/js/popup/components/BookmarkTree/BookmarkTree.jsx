@@ -85,36 +85,32 @@ class BookmarkTree extends PureComponent {
     }
   }
 
-  makeGetRowHeight(treeItems) {
-    return ({index}) => {
-      const {itemOffsetHeight} = this.props
+  makeGetRowHeight = (treeItems) => ({index}) => {
+    const {itemOffsetHeight} = this.props
 
-      let rowHeight = itemOffsetHeight
+    let rowHeight = itemOffsetHeight
 
-      const itemInfo = treeItems[index].props.itemInfo
-      if (itemInfo) {
-        const bookmarkType = getBookmarkType(itemInfo)
-        if (bookmarkType === TYPE_SEPARATOR) {
-          rowHeight /= 2
-        }
+    const itemInfo = treeItems[index].props.itemInfo
+    if (itemInfo) {
+      const bookmarkType = getBookmarkType(itemInfo)
+      if (bookmarkType === TYPE_SEPARATOR) {
+        rowHeight /= 2
       }
-
-      // for the indicator show the end of folder
-      if (index === treeItems.length - 1) {
-        rowHeight += GOLDEN_GAP * 2
-      }
-
-      return rowHeight
     }
+
+    // for the indicator show the end of folder
+    if (index === treeItems.length - 1) {
+      rowHeight += GOLDEN_GAP * 2
+    }
+
+    return rowHeight
   }
 
-  makeRowRenderer(treeItems) {
-    return ({index, key, style}) => (
-      <div key={key} styleName='list-item' style={style}>
-        {treeItems[index]}
-      </div>
-    )
-  }
+  makeRowRenderer = (treeItems) => ({index, key, style}) => (
+    <div key={key} styleName='list-item' style={style}>
+      {treeItems[index]}
+    </div>
+  )
 
   render() {
     const {isRememberLastPosition, scrollToIndex, treeIndex} = this.props
