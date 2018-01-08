@@ -3,7 +3,7 @@ import {all, call, put, select, takeLatest} from 'redux-saga/effects'
 import {initOptionsValue} from '../functions'
 
 import getOptionsConfig from '../../common/lib/getOptionsConfig'
-import {Types as optionsTypes} from '../reduxs/optionsRedux'
+import {Creators as optionsCreators, Types as optionsTypes} from '../reduxs/optionsRedux'
 
 // workaround as following functions cannot pass redux-saga
 // and throw error: `TypeError: Function.prototype.toString requires that 'this' be a Function`
@@ -11,11 +11,7 @@ const clearStorage = (...args) => webExtension.storage.sync.clear(...args)
 const setStorage = (...args) => webExtension.storage.sync.set(...args)
 const getStorage = (...args) => webExtension.storage.sync.get(...args)
 
-const updateOptions = (options) =>
-  put({
-    type: optionsTypes.UPDATE_OPTIONS,
-    options
-  })
+const updateOptions = (options) => put(optionsCreators.updateOptions(options))
 
 export function* reloadOptions() {
   const options = yield call(getStorage, null)
