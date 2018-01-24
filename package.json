@@ -48,7 +48,7 @@
     "reduxsauce": "^0.7.0",
     "seamless-immutable": "^7.0.0",
     "store": "^2.0.12",
-    "typeface-archivo-narrow": "0.0.44",
+    "typeface-archivo-narrow": "0.0.54",
     "webextension-polyfill": "^0.2.1"
   },
   "devDependencies": {
