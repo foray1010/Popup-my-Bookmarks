@@ -194,11 +194,12 @@ const webpackConfig = getMergedConfigByEnv({
             unsafe: true,
             unsafe_arrows: true,
             unsafe_comps: true,
-            unsafe_Func: true,
+            unsafe_Function: true,
             unsafe_math: true,
             unsafe_methods: true,
             unsafe_proto: true,
-            unsafe_regexp: true
+            unsafe_regexp: true,
+            unsafe_undefined: true
           },
           ecma: 6,
           output: {

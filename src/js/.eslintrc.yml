@@ -1,4 +1,3 @@
 extends:
   - "eslint-config-foray1010/react"
-  - "eslint-config-foray1010/rules/babel"
   - "eslint-config-foray1010/rules/flow"
