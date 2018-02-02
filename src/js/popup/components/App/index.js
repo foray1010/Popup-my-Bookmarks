@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 
-import App from './App'
 import {closeMenu, dragEnd, onPressArrowKey, openMenu, renewTrees} from '../../actions'
+import App from './App'
 
 const mapDispatchToProps = {
   closeMenu,

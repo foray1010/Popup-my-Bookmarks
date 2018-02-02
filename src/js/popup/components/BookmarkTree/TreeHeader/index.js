@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
+import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
-import {createElement, PureComponent} from 'react'
 
-import TreeHeader from './TreeHeader'
 import {removeTreeInfosFromIndex} from '../../../actions'
+import TreeHeader from './TreeHeader'
 
 const mapDispatchToProps = {
   removeTreeInfosFromIndex

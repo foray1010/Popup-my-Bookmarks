@@ -1,6 +1,7 @@
+import '../../../css/options/donate.css'
+
 import {createElement} from 'react'
 
-import '../../../css/options/donate.css'
 import donateIcon from '../../../img/btn_donateCC_LG.png'
 import ExternalLink from './ExternalLink'
 

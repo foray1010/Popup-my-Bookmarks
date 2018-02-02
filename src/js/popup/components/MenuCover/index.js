@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
 import {createElement} from 'react'
+import {connect} from 'react-redux'
 
-import MenuCover from './MenuCover'
 import {closeMenuCover} from '../../actions'
+import MenuCover from './MenuCover'
 
 const mapDispatchToProps = {
   closeMenuCover

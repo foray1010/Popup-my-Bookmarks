@@ -1,9 +1,9 @@
+import '../../../../../css/options/select-button-option.css'
+
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import {PureComponent, createElement} from 'react'
 import webExtension from 'webextension-polyfill'
-import {createElement, PureComponent} from 'react'
-
-import '../../../../../css/options/select-button-option.css'
 
 class Option extends PureComponent {
   handleChange = (evt) => {

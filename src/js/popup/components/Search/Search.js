@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types'
-import webExtension from 'webextension-polyfill'
-import {createElement} from 'react'
-
 import '../../../../css/popup/search.css'
+
+import PropTypes from 'prop-types'
+import {createElement} from 'react'
+import webExtension from 'webextension-polyfill'
 
 const Search = (props) => (
   <div styleName='main'>

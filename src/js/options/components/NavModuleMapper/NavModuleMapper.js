@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types'
 import {createElement} from 'react'
 
-import Contributors from '../Contributors'
-import OptionForm from '../OptionForm'
 import {
   NAV_MODULE_CONTRIBUTORS,
   NAV_MODULE_CONTROL,
   NAV_MODULE_GENERAL,
   NAV_MODULE_USER_INTERFACE
 } from '../../constants'
+import Contributors from '../Contributors'
+import OptionForm from '../OptionForm'
 
 const NavModuleMapper = (props) => {
   const {selectedNavModule} = props

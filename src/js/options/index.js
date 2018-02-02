@@ -1,16 +1,18 @@
 import 'babel-polyfill'
-import Immutable from 'seamless-immutable'
-import {createElement} from 'react'
-import {Provider} from 'react-redux'
-import {render} from 'react-dom'
 
 import '../../manifest.yml'
-import App from './components/App'
-import configureStore from '../common/store/configureStore'
+
+import {createElement} from 'react'
+import {render} from 'react-dom'
+import {Provider} from 'react-redux'
+import Immutable from 'seamless-immutable'
+
 import getOptionsConfig from '../common/lib/getOptionsConfig'
+import configureStore from '../common/store/configureStore'
+import App from './components/App'
+import {initOptionsValue} from './functions'
 import reducers from './reduxs'
 import sagas from './sagas'
-import {initOptionsValue} from './functions'
 
 const main = async () => {
   const optionsConfig = await getOptionsConfig()

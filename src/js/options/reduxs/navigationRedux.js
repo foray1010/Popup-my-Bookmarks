@@ -1,5 +1,5 @@
-import Immutable from 'seamless-immutable'
 import {createActions, createReducer} from 'reduxsauce'
+import Immutable from 'seamless-immutable'
 
 import {NAV_MODULE_GENERAL} from '../constants'
 

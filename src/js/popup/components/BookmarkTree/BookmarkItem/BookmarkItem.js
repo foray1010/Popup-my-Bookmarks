@@ -1,17 +1,11 @@
+import '../../../../../css/popup/bookmark-item.css'
+
 import classNames from 'classnames'
 import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
-import {createElement, PureComponent} from 'react'
+import {PureComponent, createElement} from 'react'
 
-import '../../../../../css/popup/bookmark-item.css'
 import folderIcon from '../../../../../img/folder.png'
-import {
-  getBookmark,
-  getBookmarkType,
-  getClickType,
-  openBookmark,
-  openMultipleBookmarks
-} from '../../../functions'
 import {
   ROOT_ID,
   TYPE_BOOKMARK,
@@ -19,6 +13,13 @@ import {
   TYPE_ROOT_FOLDER,
   TYPE_SEPARATOR
 } from '../../../constants'
+import {
+  getBookmark,
+  getBookmarkType,
+  getClickType,
+  openBookmark,
+  openMultipleBookmarks
+} from '../../../functions'
 
 class BookmarkItem extends PureComponent {
   componentDidMount() {

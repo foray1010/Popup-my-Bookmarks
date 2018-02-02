@@ -1,17 +1,19 @@
 import 'babel-polyfill'
-import Immutable from 'seamless-immutable'
-import R from 'ramda'
-import webExtension from 'webextension-polyfill'
-import {createElement} from 'react'
-import {Provider} from 'react-redux'
-import {render} from 'react-dom'
 
 import '../../manifest.yml'
-import App from './components/App'
-import configureStore from '../common/store/configureStore'
+
+import R from 'ramda'
+import {createElement} from 'react'
+import {render} from 'react-dom'
+import {Provider} from 'react-redux'
+import Immutable from 'seamless-immutable'
+import webExtension from 'webextension-polyfill'
+
 import getOptionsConfig from '../common/lib/getOptionsConfig'
-import reducers from './reducers'
+import configureStore from '../common/store/configureStore'
+import App from './components/App'
 import {getItemOffsetHeight, getRootTree, initTrees} from './functions'
+import reducers from './reducers'
 
 const main = async () => {
   const optionsPromise = webExtension.storage.sync.get(null)

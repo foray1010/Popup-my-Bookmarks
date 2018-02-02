@@ -1,11 +1,11 @@
 import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
+import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
-import {createElement, PureComponent} from 'react'
 
-import Search from './Search'
 import {normalizeInputtingValue} from '../../../common/functions'
 import {updateTreesBySearchKeyword} from '../../actions'
+import Search from './Search'
 
 const mapDispatchToProps = {
   updateTreesBySearchKeyword

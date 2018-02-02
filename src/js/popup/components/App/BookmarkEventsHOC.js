@@ -1,8 +1,8 @@
 import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
 import R from 'ramda'
+import {PureComponent, createElement} from 'react'
 import webExtension from 'webextension-polyfill'
-import {createElement, PureComponent} from 'react'
 
 import {getSlicedTrees} from '../../functions'
 

@@ -1,16 +1,17 @@
+import '../../../../css/popup/app.css'
+
 import PropTypes from 'prop-types'
 import R from 'ramda'
-import {createElement, PureComponent} from 'react'
+import {PureComponent, createElement} from 'react'
 
-import '../../../../css/popup/app.css'
-import BookmarkEventsHOC from './BookmarkEventsHOC'
+import {setPredefinedStyleSheet, updateLastUsedTreeIds} from '../../functions'
 import Editor from '../Editor'
-import KeyboardNavHOC from './KeyboardNavHOC'
 import Menu from '../Menu'
 import MenuCover from '../MenuCover'
-import MouseControlHOC from './MouseControlHOC'
 import Panel from '../Panel'
-import {setPredefinedStyleSheet, updateLastUsedTreeIds} from '../../functions'
+import BookmarkEventsHOC from './BookmarkEventsHOC'
+import KeyboardNavHOC from './KeyboardNavHOC'
+import MouseControlHOC from './MouseControlHOC'
 
 class App extends PureComponent {
   componentWillMount() {

@@ -2,8 +2,8 @@
 
 import R from 'ramda'
 
-import * as CST from '../constants'
 import {createAction} from '../../common/functions'
+import * as CST from '../constants'
 import {
   genBookmarkList,
   getBookmark,
@@ -11,10 +11,10 @@ import {
   getFlatTree,
   getFocusTargetTreeIndex,
   getSearchResult,
+  initTrees,
   isFolder,
   isFolderOpened,
-  pasteItemBelowTarget,
-  initTrees
+  pasteItemBelowTarget
 } from '../functions'
 
 export const putDragIndicator = createAction(

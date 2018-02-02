@@ -1,6 +1,6 @@
-import Immutable from 'seamless-immutable'
 import PropTypes from 'prop-types'
-import {createElement, PureComponent} from 'react'
+import {PureComponent, createElement} from 'react'
+import Immutable from 'seamless-immutable'
 
 class Option extends PureComponent {
   inputId = Math.random()

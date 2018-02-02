@@ -1,7 +1,8 @@
+import '../../../../../css/options/select-multiple.css'
+
 import PropTypes from 'prop-types'
 import {createElement} from 'react'
 
-import '../../../../../css/options/select-multiple.css'
 import Option from './Option'
 
 const SelectMultiple = (props) => {

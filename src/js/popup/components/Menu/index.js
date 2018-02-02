@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 
-import Menu from './Menu'
 import {closeMenuCover} from '../../actions'
+import Menu from './Menu'
 
 const mapDispatchToProps = {
   closeMenuCover

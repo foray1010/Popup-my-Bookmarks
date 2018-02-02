@@ -24,9 +24,15 @@
     "precommit": "lint-staged && yarn lint:flow",
     "test": "exit 0"
   },
+  "importSort": {
+    ".js": {
+      "parser": "import-sort-parser-babylon",
+      "style": "import-sort-style-module"
+    }
+  },
   "lint-staged": {
     "*.css": ["prettier-eslint --write", "stylelint --fix", "git add"],
-    "*.js": ["prettier-eslint --write", "eslint --fix", "git add"],
+    "*.js": ["import-sort --write", "prettier-eslint --write", "eslint --fix", "git add"],
     "*.json": ["prettier-eslint --write", "git add"],
     "*ignore-sync": ["ignore-sync", "git add"]
   },
@@ -73,6 +79,9 @@
     "husky": "^0.14.0",
     "ignore-sync": "^1.0.0",
     "image-process-loader": "^0.1.0",
+    "import-sort-cli": "^4.2.0",
+    "import-sort-parser-babylon": "^4.2.0",
+    "import-sort-style-module": "^4.2.0",
     "lint-staged": "^6.0.0",
     "npm-run-all": "^4.1.1",
     "postcss-cssnext": "^3.0.0",

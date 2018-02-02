@@ -1,7 +1,7 @@
-import Immutable from 'seamless-immutable'
-import {createElement} from 'react'
-
 import '../../../css/options/contributors.css'
+
+import {createElement} from 'react'
+import Immutable from 'seamless-immutable'
 
 const contributors = Immutable({
   Developer: ['foray1010'],

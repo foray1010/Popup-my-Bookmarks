@@ -1,7 +1,8 @@
-import PropTypes from 'prop-types'
-import {createElement, PureComponent} from 'react'
-
 import '../../../../css/options/input-select.css'
+
+import PropTypes from 'prop-types'
+import {PureComponent, createElement} from 'react'
+
 import {normalizeInputtingValue} from '../../../common/functions'
 
 class InputSelect extends PureComponent {

@@ -1,11 +1,11 @@
 import R from 'ramda'
+import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
-import {createElement, PureComponent} from 'react'
 
 import getOptionsConfig from '../../../common/lib/getOptionsConfig'
-import OptionForm from './OptionForm'
-import {Creators as optionsCreators} from '../../reduxs/optionsRedux'
 import {OPTION_TABLE_MAP} from '../../constants'
+import {Creators as optionsCreators} from '../../reduxs/optionsRedux'
+import OptionForm from './OptionForm'
 
 const mapDispatchToProps = R.pick(
   ['saveOptions', 'resetToDefaultOptions', 'updateSingleOption'],

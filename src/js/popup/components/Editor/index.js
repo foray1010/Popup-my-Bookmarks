@@ -1,8 +1,8 @@
 import {connect} from 'react-redux'
 
-import Editor from './Editor'
 import {closeEditor} from '../../actions'
 import {isFolder} from '../../functions'
+import Editor from './Editor'
 
 const mapDispatchToProps = {
   closeEditor

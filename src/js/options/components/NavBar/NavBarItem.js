@@ -1,8 +1,8 @@
+import '../../../../css/options/nav-bar-item.css'
+
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import {createElement, PureComponent} from 'react'
-
-import '../../../../css/options/nav-bar-item.css'
+import {PureComponent, createElement} from 'react'
 
 class NavBarItem extends PureComponent {
   handleClick = () => {

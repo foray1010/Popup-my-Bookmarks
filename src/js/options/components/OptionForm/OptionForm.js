@@ -1,8 +1,9 @@
-import PropTypes from 'prop-types'
-import webExtension from 'webextension-polyfill'
-import {createElement} from 'react'
-
 import '../../../../css/options/option-form.css'
+
+import PropTypes from 'prop-types'
+import {createElement} from 'react'
+import webExtension from 'webextension-polyfill'
+
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 

@@ -1,8 +1,9 @@
-import PropTypes from 'prop-types'
-import webExtension from 'webextension-polyfill'
-import {createElement, PureComponent} from 'react'
-
 import '../../../../css/popup/editor.css'
+
+import PropTypes from 'prop-types'
+import {PureComponent, createElement} from 'react'
+import webExtension from 'webextension-polyfill'
+
 import {normalizeInputtingValue} from '../../../common/functions'
 import {resetBodySize} from '../../functions'
 

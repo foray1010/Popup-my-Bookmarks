@@ -1,8 +1,8 @@
-import createSagaMiddleware from 'redux-saga'
-import multi from 'redux-multi'
 import R from 'ramda'
-import thunk from 'redux-thunk'
 import {applyMiddleware, createStore} from 'redux'
+import multi from 'redux-multi'
+import createSagaMiddleware from 'redux-saga'
+import thunk from 'redux-thunk'
 
 export default ({reducers, sagas, preloadedState}) => {
   const sagaMiddleware = createSagaMiddleware()

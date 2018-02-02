@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types'
 import R from 'ramda'
+import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
-import {createElement, PureComponent} from 'react'
 
-import MenuItem from './MenuItem'
 import * as actions from '../../../actions'
 import * as CST from '../../../constants'
 import {
@@ -14,6 +13,7 @@ import {
   removeBookmark,
   sortByName
 } from '../../../functions'
+import MenuItem from './MenuItem'
 
 const mapDispatchToProps = R.pick(
   [

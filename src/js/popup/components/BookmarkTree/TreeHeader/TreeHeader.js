@@ -1,7 +1,7 @@
+import '../../../../../css/popup/tree-header.css'
+
 import PropTypes from 'prop-types'
 import {createElement} from 'react'
-
-import '../../../../../css/popup/tree-header.css'
 
 const TreeHeader = (props) => (
   <header styleName='main' hidden={props.isHidden}>

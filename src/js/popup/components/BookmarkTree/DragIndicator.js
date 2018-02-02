@@ -1,6 +1,6 @@
-import {createElement} from 'react'
-
 import '../../../../css/popup/drag-indicator.css'
+
+import {createElement} from 'react'
 
 const DragIndicator = () => <div styleName='main' />
 

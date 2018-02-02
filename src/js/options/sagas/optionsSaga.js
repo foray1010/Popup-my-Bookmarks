@@ -1,8 +1,8 @@
-import webExtension from 'webextension-polyfill'
 import {all, call, put, select, takeLatest} from 'redux-saga/effects'
-import {initOptionsValue} from '../functions'
+import webExtension from 'webextension-polyfill'
 
 import getOptionsConfig from '../../common/lib/getOptionsConfig'
+import {initOptionsValue} from '../functions'
 import {Creators as optionsCreators, Types as optionsTypes} from '../reduxs/optionsRedux'
 
 // workaround as following functions cannot pass redux-saga

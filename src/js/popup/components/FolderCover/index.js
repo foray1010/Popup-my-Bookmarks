@@ -1,10 +1,10 @@
 import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
+import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
-import {createElement, PureComponent} from 'react'
 
-import FolderCover from './FolderCover'
 import {removeTreeInfosFromIndex} from '../../actions'
+import FolderCover from './FolderCover'
 
 const mapDispatchToProps = {
   removeTreeInfosFromIndex

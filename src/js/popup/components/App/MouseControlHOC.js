@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
+import {PureComponent, createElement} from 'react'
 import webExtension from 'webextension-polyfill'
-import {createElement, PureComponent} from 'react'
 
 export default (WrappedComponent) => {
   return class extends PureComponent {

@@ -1,5 +1,5 @@
-import Immutable from 'seamless-immutable'
 import {createActions, createReducer} from 'reduxsauce'
+import Immutable from 'seamless-immutable'
 
 export const {Types, Creators} = createActions({
   reloadOptions: null,

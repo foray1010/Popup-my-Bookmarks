@@ -1,7 +1,7 @@
+import '../../../../css/popup/folder-cover.css'
+
 import PropTypes from 'prop-types'
 import {createElement} from 'react'
-
-import '../../../../css/popup/folder-cover.css'
 
 const FolderCover = (props) => (
   <div

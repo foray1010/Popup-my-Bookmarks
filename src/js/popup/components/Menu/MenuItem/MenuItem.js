@@ -1,9 +1,9 @@
+import '../../../../../css/popup/menu-item.css'
+
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import webExtension from 'webextension-polyfill'
 import {createElement} from 'react'
-
-import '../../../../../css/popup/menu-item.css'
+import webExtension from 'webextension-polyfill'
 
 const MenuItem = (props) => (
   <div

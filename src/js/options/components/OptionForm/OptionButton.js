@@ -1,7 +1,7 @@
+import '../../../../css/options/option-button.css'
+
 import PropTypes from 'prop-types'
 import {createElement} from 'react'
-
-import '../../../../css/options/option-button.css'
 
 const OptionButton = (props) => {
   const {msg, onClick} = props

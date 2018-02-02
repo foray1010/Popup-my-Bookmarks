@@ -1,7 +1,7 @@
+import '../../../css/options/external-link.css'
+
 import PropTypes from 'prop-types'
 import {createElement} from 'react'
-
-import '../../../css/options/external-link.css'
 
 const ExternalLink = (props) => (
   <a styleName='main' href={props.href} target='_blank' rel='noopener noreferrer'>

@@ -1,5 +1,5 @@
-import Immutable from 'seamless-immutable'
 import {combineReducers} from 'redux'
+import Immutable from 'seamless-immutable'
 
 import * as CST from '../constants'
 import {genDummyItemInfo, getBookmarkType, getSlicedTrees, isFolder} from '../functions'

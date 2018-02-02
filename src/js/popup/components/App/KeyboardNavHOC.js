@@ -1,7 +1,7 @@
 import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
 import R from 'ramda'
-import {createElement, PureComponent} from 'react'
+import {PureComponent, createElement} from 'react'
 
 import {getClickType, openBookmark, tryFocusToSearchInput} from '../../functions'
 

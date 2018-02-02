@@ -1,20 +1,20 @@
-import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
-import Immutable from 'seamless-immutable'
-import List from 'react-virtualized/dist/commonjs/List'
+import '../../../../css/popup/bookmark-tree.css'
+
 import PropTypes from 'prop-types'
 import R from 'ramda'
+import {PureComponent, createElement} from 'react'
+import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
+import List from 'react-virtualized/dist/commonjs/List'
+import Immutable from 'seamless-immutable'
 import store from 'store'
-import {createElement, PureComponent} from 'react'
 
+import {GOLDEN_GAP, MAX_HEIGHT, TYPE_SEPARATOR} from '../../constants'
+import {genBookmarkList, getBookmarkType, updateLastScrollTopList} from '../../functions'
+import FolderCover from '../FolderCover'
 import BookmarkItem from './BookmarkItem'
 import DragIndicator from './DragIndicator'
-import FolderCover from '../FolderCover'
 import NoResult from './NoResult'
 import TreeHeader from './TreeHeader'
-import {genBookmarkList, getBookmarkType, updateLastScrollTopList} from '../../functions'
-import {GOLDEN_GAP, MAX_HEIGHT, TYPE_SEPARATOR} from '../../constants'
-
-import '../../../../css/popup/bookmark-tree.css'
 
 class BookmarkTree extends PureComponent {
   state = {

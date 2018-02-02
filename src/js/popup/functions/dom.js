@@ -1,9 +1,9 @@
 // @flow
 
 import bookmarkItemStyles from '../../../css/popup/bookmark-item.css'
-import css from '../../common/lib/css'
 import editorStyles from '../../../css/popup/editor.css'
 import panelStyles from '../../../css/popup/panel.css'
+import css from '../../common/lib/css'
 import {getItemIconHeight} from '.'
 
 const getClassSelector = (className: string): string => {
