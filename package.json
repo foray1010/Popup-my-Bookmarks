@@ -17,11 +17,12 @@
     "dev": "cross-env NODE_ENV=development webpack",
     "lint": "npm-run-all -p lint:*",
     "lint:css": "stylelint src/**/*.css",
-    "lint:es": "eslint .",
     "lint:flow": "flow check",
+    "lint:js": "eslint .",
+    "lint-staged": "lint-staged",
     "locales": "node scripts/generateLocalesFromTransifex.js",
     "md": "node scripts/generateMarkdown.js",
-    "precommit": "lint-staged && yarn lint:flow",
+    "precommit": "npm-run-all -p lint:flow lint-staged",
     "test": "exit 0"
   },
   "importSort": {
