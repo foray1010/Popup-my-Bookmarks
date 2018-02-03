@@ -1,9 +1,9 @@
 import {all, call, put, select, takeLatest} from 'redux-saga/effects'
 import webExtension from 'webextension-polyfill'
 
-import getOptionsConfig from '../../common/lib/getOptionsConfig'
-import {initOptionsValue} from '../functions'
-import {Creators as optionsCreators, Types as optionsTypes} from '../reduxs/optionsRedux'
+import getOptionsConfig from '../../../common/lib/getOptionsConfig'
+import {initOptionsValue} from '../../functions'
+import {optionsCreators, optionsTypes} from './actions'
 
 // workaround as following functions cannot pass redux-saga
 // and throw error: `TypeError: Function.prototype.toString requires that 'this' be a Function`
@@ -36,7 +36,7 @@ function* saveOptions() {
   yield updateOptions(options)
 }
 
-export default function* optionsSaga() {
+export function* optionsSaga() {
   yield all([
     takeLatest(optionsTypes.RELOAD_OPTIONS, reloadOptions),
     takeLatest(optionsTypes.RESET_TO_DEFAULT_OPTIONS, resetToDefaultOptions),

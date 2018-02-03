@@ -37,7 +37,7 @@ const main = async () => {
   const trees = await treesPromise
 
   const store = configureStore({
-    reducers,
+    rootReducer: reducers,
     preloadedState: Immutable({
       itemOffsetHeight: getItemOffsetHeight(options),
       options,

@@ -1,7 +1,7 @@
 import R from 'ramda'
 import {connect} from 'react-redux'
 
-import {Creators as navigationCreators} from '../../reduxs/navigationRedux'
+import {navigationCreators} from '../../reduxs'
 import NavBar from './NavBar'
 
 const mapDispatchToProps = R.pick(['switchNavModule'], navigationCreators)

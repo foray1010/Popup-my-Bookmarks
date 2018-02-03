@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 import getOptionsConfig from '../../../common/lib/getOptionsConfig'
 import {OPTION_TABLE_MAP} from '../../constants'
-import {Creators as optionsCreators} from '../../reduxs/optionsRedux'
+import {optionsCreators} from '../../reduxs'
 import OptionForm from './OptionForm'
 
 const mapDispatchToProps = R.pick(

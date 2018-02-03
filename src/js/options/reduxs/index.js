@@ -1,9 +1,4 @@
-import {combineReducers} from 'redux'
-
-import navigationRedux from './navigationRedux'
-import optionsRedux from './optionsRedux'
-
-export default combineReducers({
-  navigation: navigationRedux,
-  options: optionsRedux
-})
+export * from './navigation/actions'
+export * from './options/actions'
+export * from './rootReducer'
+export * from './rootSaga'

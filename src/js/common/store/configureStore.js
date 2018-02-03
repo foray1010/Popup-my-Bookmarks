@@ -4,17 +4,17 @@ import multi from 'redux-multi'
 import createSagaMiddleware from 'redux-saga'
 import thunk from 'redux-thunk'
 
-export default ({reducers, sagas, preloadedState}) => {
+export default ({rootReducer, rootSaga, preloadedState}) => {
   const sagaMiddleware = createSagaMiddleware()
 
   const createStoreWithFilteredArgs = R.compose(R.apply(createStore), R.reject(R.isNil))
   const store = createStoreWithFilteredArgs([
-    reducers,
+    rootReducer,
     preloadedState,
     applyMiddleware(multi, thunk, sagaMiddleware)
   ])
 
-  if (sagas) sagaMiddleware.run(sagas)
+  if (rootSaga) sagaMiddleware.run(rootSaga)
 
   return store
 }
