@@ -1,8 +1,12 @@
-import {takeLatest} from 'redux-saga/effects'
+import {put, takeLatest} from 'redux-saga/effects'
 
-import {reloadOptions} from '../options/saga'
+import {optionsCreators} from '../options/actions'
 import {navigationTypes} from './actions'
 
+function* switchNavModule() {
+  yield put(optionsCreators.reloadOptions())
+}
+
 export function* navigationSaga() {
-  yield takeLatest(navigationTypes.SWITCH_NAV_MODULE, reloadOptions)
+  yield takeLatest(navigationTypes.SWITCH_NAV_MODULE, switchNavModule)
 }

@@ -13,7 +13,7 @@ const getStorage = (...args) => webExtension.storage.sync.get(...args)
 
 const updateOptions = (options) => put(optionsCreators.updateOptions(options))
 
-export function* reloadOptions() {
+function* reloadOptions() {
   const options = yield call(getStorage, null)
 
   yield updateOptions(options)
