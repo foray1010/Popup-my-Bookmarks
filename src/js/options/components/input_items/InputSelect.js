@@ -1,32 +1,24 @@
 import '../../../../css/options/input-select.css'
 
 import PropTypes from 'prop-types'
+import R from 'ramda'
 import {PureComponent, createElement} from 'react'
 
 import {normalizeInputtingValue} from '../../../common/functions'
 
 class InputSelect extends PureComponent {
   handleBlur = (evt) => {
-    const {optionName, updateSingleOption} = this.props
-
-    const newOptionValue = evt.target.value
-      .trim()
-      .replace(/,\s/g, ',')
-      .replace(/,$/, '')
-
-    updateSingleOption(optionName, newOptionValue)
+    const normalize = R.compose(R.join(','), R.filter(R.identity), R.map(R.trim), R.split(','))
+    this.props.updateSingleOption(this.props.optionName, normalize(evt.target.value))
   }
 
   handleChange = (evt) => {
-    const {optionName, updateSingleOption} = this.props
-
-    const newOptionValue = normalizeInputtingValue(evt.target.value).replace(/^,/, '')
-
-    updateSingleOption(optionName, newOptionValue)
-
-    if (evt.target.tagName === 'SELECT') {
+    if (evt.target === this.selectEl) {
       this.inputEl.focus()
     }
+
+    const normalize = R.compose(R.replace(/^,/, ''), normalizeInputtingValue)
+    this.props.updateSingleOption(this.props.optionName, normalize(evt.target.value))
   }
 
   // prevent user try to save by pressing enter
@@ -36,33 +28,34 @@ class InputSelect extends PureComponent {
     }
   }
 
-  render() {
-    const {choices, optionName, optionValue} = this.props
-
-    const optionItems = choices.map((optionChoice, optionChoiceIndex) => (
-      <option key={String(optionChoiceIndex)}>{optionChoice}</option>
-    ))
-
-    return (
-      <div styleName='main'>
-        <input
-          ref={(ref) => {
-            this.inputEl = ref
-          }}
-          styleName='input'
-          name={optionName}
-          type='text'
-          value={optionValue}
-          onBlur={this.handleBlur}
-          onChange={this.handleChange}
-          onKeyDown={this.handleKeyDown}
-        />
-        <select styleName='select' defaultValue={optionValue} onChange={this.handleChange}>
-          {optionItems}
-        </select>
-      </div>
-    )
-  }
+  render = () => (
+    <div styleName='main'>
+      <input
+        ref={(ref) => {
+          this.inputEl = ref
+        }}
+        styleName='input'
+        name={this.props.optionName}
+        type='text'
+        value={this.props.optionValue}
+        onBlur={this.handleBlur}
+        onChange={this.handleChange}
+        onKeyDown={this.handleKeyDown}
+      />
+      <select
+        ref={(ref) => {
+          this.selectEl = ref
+        }}
+        styleName='select'
+        defaultValue={this.props.optionValue}
+        onChange={this.handleChange}
+      >
+        {this.props.choices.map((optionChoice, optionChoiceIndex) => (
+          <option key={String(optionChoiceIndex)}>{optionChoice}</option>
+        ))}
+      </select>
+    </div>
+  )
 }
 
 InputSelect.propTypes = {

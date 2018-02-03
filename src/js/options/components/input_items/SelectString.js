@@ -3,34 +3,29 @@ import {PureComponent, createElement} from 'react'
 
 class SelectString extends PureComponent {
   handleChange = (evt) => {
-    const {optionName, updateSingleOption} = this.props
-
-    const newOptionValue = parseInt(evt.target.value, 10)
-
-    updateSingleOption(optionName, newOptionValue)
+    this.props.updateSingleOption(this.props.optionName, parseInt(evt.target.value, 10))
   }
 
-  render() {
-    const {choices, optionName, optionValue} = this.props
+  render = () => (
+    <select
+      name={this.props.optionName}
+      value={this.props.optionValue}
+      onChange={this.handleChange}
+    >
+      {this.props.choices.reduce((accumulator, optionChoice, optionChoiceIndex) => {
+        if (optionChoice !== undefined) {
+          return [
+            ...accumulator,
+            <option key={String(optionChoiceIndex)} value={String(optionChoiceIndex)}>
+              {optionChoice}
+            </option>
+          ]
+        }
 
-    const optionItems = choices.reduce((accumulator, optionChoice, optionChoiceIndex) => {
-      if (optionChoice !== undefined) {
-        return accumulator.concat(
-          <option key={String(optionChoiceIndex)} value={String(optionChoiceIndex)}>
-            {optionChoice}
-          </option>
-        )
-      }
-
-      return accumulator
-    }, [])
-
-    return (
-      <select name={optionName} value={optionValue} onChange={this.handleChange}>
-        {optionItems}
-      </select>
-    )
-  }
+        return accumulator
+      }, [])}
+    </select>
+  )
 }
 
 SelectString.propTypes = {

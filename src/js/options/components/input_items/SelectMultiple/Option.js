@@ -18,34 +18,26 @@ class Option extends PureComponent {
     if (wasChecked) {
       newOptionValue = optionValue.filter((x) => x !== checkboxValue)
     } else {
-      const mutableNewOptionValue = [checkboxValue].concat(optionValue).sort()
+      const mutableNewOptionValue = [checkboxValue, ...optionValue].sort()
       newOptionValue = Immutable(mutableNewOptionValue)
     }
 
     updateSingleOption(optionName, newOptionValue)
   }
 
-  render() {
-    const {
-      optionChoice, optionChoiceIndex, optionName, optionValue
-    } = this.props
-
-    const isChecked = optionValue.includes(optionChoiceIndex)
-
-    return (
-      <label htmlFor={this.inputId}>
-        <input
-          id={this.inputId}
-          name={optionName}
-          type='checkbox'
-          value={String(optionChoiceIndex)}
-          checked={isChecked}
-          onChange={this.handleChange}
-        />
-        {optionChoice}
-      </label>
-    )
-  }
+  render = () => (
+    <label htmlFor={this.inputId}>
+      <input
+        id={this.inputId}
+        name={this.props.optionName}
+        type='checkbox'
+        value={String(this.props.optionChoiceIndex)}
+        checked={this.props.optionValue.includes(this.props.optionChoiceIndex)}
+        onChange={this.handleChange}
+      />
+      {this.props.optionChoice}
+    </label>
+  )
 }
 
 Option.propTypes = {

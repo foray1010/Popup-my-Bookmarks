@@ -2384,8 +2384,8 @@ eslint-config-airbnb@16.1.0:
     eslint-config-airbnb-base "^12.1.0"
 
 eslint-config-foray1010@^6.2.0:
-  version "6.5.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-foray1010/-/eslint-config-foray1010-6.5.1.tgz#6633a9109546fdc6cdd81d81aa27a8ba84adc1d8"
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-foray1010/-/eslint-config-foray1010-6.5.2.tgz#a1df1836c963c0ec435d482416d3c1b70ad3f6bc"
   dependencies:
     app-root-path "^2.0.1"
     babel-eslint "^8.0.0"

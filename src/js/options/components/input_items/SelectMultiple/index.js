@@ -5,30 +5,27 @@ import {createElement} from 'react'
 
 import Option from './Option'
 
-const SelectMultiple = (props) => {
-  const {
-    choices, optionName, optionValue, updateSingleOption
-  } = props
+const SelectMultiple = (props) => (
+  <span styleName='main'>
+    {props.choices.reduce((accumulator, optionChoice, optionChoiceIndex) => {
+      if (optionChoice !== undefined) {
+        return [
+          ...accumulator,
+          <Option
+            key={String(optionChoiceIndex)}
+            optionChoice={optionChoice}
+            optionChoiceIndex={optionChoiceIndex}
+            optionName={props.optionName}
+            optionValue={props.optionValue}
+            updateSingleOption={props.updateSingleOption}
+          />
+        ]
+      }
 
-  const checkboxItems = choices.reduce((accumulator, optionChoice, optionChoiceIndex) => {
-    if (optionChoice !== undefined) {
-      return accumulator.concat(
-        <Option
-          key={String(optionChoiceIndex)}
-          optionChoice={optionChoice}
-          optionChoiceIndex={optionChoiceIndex}
-          optionName={optionName}
-          optionValue={optionValue}
-          updateSingleOption={updateSingleOption}
-        />
-      )
-    }
-
-    return accumulator
-  }, [])
-
-  return <span styleName='main'>{checkboxItems}</span>
-}
+      return accumulator
+    }, [])}
+  </span>
+)
 
 SelectMultiple.propTypes = {
   choices: PropTypes.arrayOf(PropTypes.string).isRequired,

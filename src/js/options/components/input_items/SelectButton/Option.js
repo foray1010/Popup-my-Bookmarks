@@ -7,11 +7,7 @@ import webExtension from 'webextension-polyfill'
 
 class Option extends PureComponent {
   handleChange = (evt) => {
-    const {optionName, updateSingleOption} = this.props
-
-    const newOptionValue = evt.target.value === String(true)
-
-    updateSingleOption(optionName, newOptionValue)
+    this.props.updateSingleOption(this.props.optionName, evt.target.value === 'true')
   }
 
   handleClick = () => {
@@ -21,15 +17,7 @@ class Option extends PureComponent {
   render() {
     const {optionChoice, optionName, optionValue} = this.props
 
-    const buttonText = optionChoice ?
-      webExtension.i18n.getMessage('yes') :
-      webExtension.i18n.getMessage('no')
-
     const isChecked = optionValue === optionChoice
-
-    const thisStyleName = classNames('item', {
-      'item-active': isChecked
-    })
 
     return (
       <div styleName='main'>
@@ -44,8 +32,12 @@ class Option extends PureComponent {
           hidden
           onChange={this.handleChange}
         />
-        <button styleName={thisStyleName} type='button' onClick={this.handleClick}>
-          {buttonText}
+        <button
+          styleName={classNames('item', {'item-active': isChecked})}
+          type='button'
+          onClick={this.handleClick}
+        >
+          {webExtension.i18n.getMessage(optionChoice ? 'yes' : 'no')}
         </button>
       </div>
     )

@@ -4,28 +4,19 @@ import {PureComponent, createElement} from 'react'
 
 class InputNumber extends PureComponent {
   handleBlur = (evt) => {
-    const {
-      maximum, minimum, optionName, updateSingleOption
-    } = this.props
-
     const parsedValue = parseInt(evt.target.value, 10)
 
-    const newOptionValue = R.clamp(minimum, maximum, parsedValue)
+    const newOptionValue = R.clamp(this.props.minimum, this.props.maximum, parsedValue)
 
-    updateSingleOption(optionName, newOptionValue)
+    this.props.updateSingleOption(this.props.optionName, newOptionValue)
   }
 
   handleChange = (evt) => {
-    const {optionName, updateSingleOption} = this.props
-
     const parsedValue = parseInt(evt.target.value, 10)
 
     // only allow input number
-    if (Number.isNaN(parsedValue)) {
-      return
-    }
-
-    updateSingleOption(optionName, parsedValue)
+    if (Number.isNaN(parsedValue)) return
+    this.props.updateSingleOption(this.props.optionName, parsedValue)
   }
 
   // prevent user try to save by pressing enter
@@ -35,24 +26,18 @@ class InputNumber extends PureComponent {
     }
   }
 
-  render() {
-    const {
-      maximum, minimum, optionName, optionValue
-    } = this.props
-
-    return (
-      <input
-        name={optionName}
-        type='number'
-        min={minimum}
-        max={maximum}
-        value={String(optionValue)}
-        onBlur={this.handleBlur}
-        onChange={this.handleChange}
-        onKeyDown={this.handleKeyDown}
-      />
-    )
-  }
+  render = () => (
+    <input
+      name={this.props.optionName}
+      type='number'
+      min={this.props.minimum}
+      max={this.props.maximum}
+      value={String(this.props.optionValue)}
+      onBlur={this.handleBlur}
+      onChange={this.handleChange}
+      onKeyDown={this.handleKeyDown}
+    />
+  )
 }
 
 InputNumber.propTypes = {
