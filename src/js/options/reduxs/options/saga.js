@@ -1,8 +1,7 @@
 import {all, call, put, select, takeLatest} from 'redux-saga/effects'
 import webExtension from 'webextension-polyfill'
 
-import getOptionsConfig from '../../../common/lib/getOptionsConfig'
-import {initOptionsValue} from '../../functions'
+import {initOptions} from '../../functions'
 import {optionsCreators, optionsTypes} from './actions'
 
 // workaround as following functions cannot pass redux-saga
@@ -22,8 +21,7 @@ function* reloadOptions() {
 function* resetToDefaultOptions() {
   yield call(clearStorage)
 
-  const optionsConfig = yield call(getOptionsConfig)
-  const options = yield call(initOptionsValue, optionsConfig)
+  const options = yield call(initOptions)
 
   yield updateOptions(options)
 }

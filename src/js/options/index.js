@@ -7,16 +7,13 @@ import {render} from 'react-dom'
 import {Provider} from 'react-redux'
 import Immutable from 'seamless-immutable'
 
-import getOptionsConfig from '../common/lib/getOptionsConfig'
 import configureStore from '../common/store/configureStore'
 import App from './components/App'
-import {initOptionsValue} from './functions'
+import {initOptions} from './functions'
 import {rootReducer, rootSaga} from './reduxs'
 
 const main = async () => {
-  const optionsConfig = await getOptionsConfig()
-
-  const options = await initOptionsValue(optionsConfig)
+  const options = await initOptions()
 
   /* Create a Redux store to handle all UI actions and side-effects */
   const store = configureStore({

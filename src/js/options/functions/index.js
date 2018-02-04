@@ -3,25 +3,31 @@
 import R from 'ramda'
 import webExtension from 'webextension-polyfill'
 
-export const initOptionsValue = async (optionsConfig: Object): Promise<Object> => {
-  const options: Object = await webExtension.storage.sync.get(null)
+import getOptionsConfig from '../../common/lib/getOptionsConfig'
 
-  const missingOptionKeys: string[] = R.difference(Object.keys(optionsConfig), Object.keys(options))
-  const updatedOptions: Object = missingOptionKeys.reduce((acc, optionName) => {
-    const optionConfig: Object = optionsConfig[optionName]
+export const initOptions = async (): Promise<Object> => {
+  const [options: Object, optionsConfig: Object] = await Promise.all([
+    webExtension.storage.sync.get(null),
+    getOptionsConfig()
+  ])
 
-    const optionDefaultValue: any = optionConfig.default
-
-    return {
+  const missingOptionKeys: string[] = R.difference(
+    Object.keys(optionsConfig),
+    Object.keys(options)
+  )
+  const missingOptions: Object = missingOptionKeys.reduce(
+    (acc, optionName) => ({
       ...acc,
-      [optionName]: optionDefaultValue
-    }
-  }, {})
-
-  await webExtension.storage.sync.set(updatedOptions)
+      [optionName]: R.path([optionName, 'default'], optionsConfig)
+    }),
+    {}
+  )
+  if (missingOptions.length) {
+    await webExtension.storage.sync.set(missingOptions)
+  }
 
   return {
     ...options,
-    ...updatedOptions
+    ...missingOptions
   }
 }
