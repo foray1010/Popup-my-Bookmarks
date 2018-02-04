@@ -3,7 +3,6 @@ import '../../../../css/popup/bookmark-tree.css'
 import PropTypes from 'prop-types'
 import R from 'ramda'
 import {PureComponent, createElement} from 'react'
-import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
 import List from 'react-virtualized/dist/commonjs/List'
 import Immutable from 'seamless-immutable'
 import store from 'store'
@@ -113,7 +112,9 @@ class BookmarkTree extends PureComponent {
   )
 
   render() {
-    const {isRememberLastPosition, scrollToIndex, treeIndex} = this.props
+    const {
+      isRememberLastPosition, listItemWidth, scrollToIndex, treeIndex
+    } = this.props
 
     const treeItems = this.getTreeItems()
 
@@ -135,25 +136,21 @@ class BookmarkTree extends PureComponent {
             this.listContainerEl = ref
           }}
         >
-          <AutoSizer disableHeight>
-            {({width}) => (
-              <List
-                ref={(ref) => {
-                  this.list = ref
-                }}
-                height={this.state.listHeight}
-                noRowsRenderer={this.noRowsRenderer}
-                onScroll={this.handleScroll}
-                rowCount={treeItems.length}
-                rowHeight={getRowHeight}
-                rowRenderer={rowRenderer}
-                scrollToIndex={scrollToIndex >= 0 ? scrollToIndex : undefined}
-                scrollTop={lastScrollTop}
-                tabIndex={-1}
-                width={width}
-              />
-            )}
-          </AutoSizer>
+          <List
+            ref={(ref) => {
+              this.list = ref
+            }}
+            height={this.state.listHeight}
+            noRowsRenderer={this.noRowsRenderer}
+            onScroll={this.handleScroll}
+            rowCount={treeItems.length}
+            rowHeight={getRowHeight}
+            rowRenderer={rowRenderer}
+            scrollToIndex={scrollToIndex >= 0 ? scrollToIndex : undefined}
+            scrollTop={lastScrollTop}
+            tabIndex={-1}
+            width={listItemWidth}
+          />
         </div>
         <FolderCover treeIndex={treeIndex} />
       </section>
@@ -166,6 +163,7 @@ BookmarkTree.propTypes = {
   isRememberLastPosition: PropTypes.bool.isRequired,
   isSearching: PropTypes.bool.isRequired,
   itemOffsetHeight: PropTypes.number.isRequired,
+  listItemWidth: PropTypes.number.isRequired,
   rootTree: PropTypes.object.isRequired,
   scrollToIndex: PropTypes.number.isRequired,
   treeIndex: PropTypes.number.isRequired,

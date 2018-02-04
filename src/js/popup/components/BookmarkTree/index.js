@@ -27,6 +27,7 @@ const mapStateToProps = (state, ownProps) => {
     isRememberLastPosition: options.rememberPos && !isSearching,
     isSearching,
     itemOffsetHeight,
+    listItemWidth: options.setWidth,
     rootTree,
     scrollToIndex,
     treeInfo
