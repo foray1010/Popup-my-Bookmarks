@@ -1,21 +1,29 @@
 import '../../../../css/popup/bookmark-tree.css'
 
 import PropTypes from 'prop-types'
-import R from 'ramda'
 import {PureComponent, createElement} from 'react'
 import List from 'react-virtualized/dist/commonjs/List'
-import Immutable from 'seamless-immutable'
-import store from 'store'
 
 import {GOLDEN_GAP, MAX_HEIGHT, TYPE_SEPARATOR} from '../../constants'
-import {genBookmarkList, getBookmarkType, updateLastScrollTopList} from '../../functions'
+import {getBookmarkType} from '../../functions'
 import FolderCover from '../FolderCover'
-import BookmarkItem from './BookmarkItem'
-import DragIndicator from './DragIndicator'
-import NoResult from './NoResult'
 import TreeHeader from './TreeHeader'
 
 class BookmarkTree extends PureComponent {
+  static defaultProps = {
+    lastScrollTop: 0
+  }
+
+  static propTypes = {
+    itemOffsetHeight: PropTypes.number.isRequired,
+    lastScrollTop: PropTypes.number.isRequired,
+    listItemWidth: PropTypes.number.isRequired,
+    onScroll: PropTypes.func.isRequired,
+    scrollToIndex: PropTypes.number.isRequired,
+    treeIndex: PropTypes.number.isRequired,
+    treeItems: PropTypes.arrayOf(PropTypes.node).isRequired
+  }
+
   state = {
     listHeight: 0
   }
@@ -24,40 +32,36 @@ class BookmarkTree extends PureComponent {
     this.setHeight()
   }
 
-  componentDidUpdate() {
-    this.setHeight()
+  componentDidUpdate(prevProps) {
+    if (prevProps.treeItems !== this.props.treeItems) {
+      // `treeItems` doesn't pass to react-virtualized as props, it never know it is updated
+      this.list.forceUpdateGrid()
+
+      // force recalculate all row heights as it doesn't recalculate
+      this.props.treeItems.forEach((treeItem, index) => {
+        this.list.recomputeRowHeights(index)
+      })
+      this.setHeight()
+    }
   }
 
-  getTreeItems() {
-    const {
-      dragIndicator, isSearching, rootTree, treeIndex, treeInfo
-    } = this.props
+  getRowHeight = ({index}) => {
+    let rowHeight = this.props.itemOffsetHeight
 
-    const bookmarkList = genBookmarkList(treeInfo, {
-      isSearching,
-      rootTree,
-      treeIndex
-    })
-
-    const treeItems = bookmarkList.map((itemInfo) => (
-      <BookmarkItem itemInfo={itemInfo} treeIndex={treeIndex} />
-    ))
-
-    if (isSearching && treeItems.length === 0) {
-      return treeItems.concat(<NoResult />)
-    }
-
-    if (dragIndicator && dragIndicator.parentId === treeInfo.id) {
-      let dragIndicatorIndex = dragIndicator.index
-
-      const isFirstTree = treeIndex === 0
-      if (isFirstTree && !isSearching) {
-        dragIndicatorIndex += rootTree.children.length
+    const itemInfo = this.props.treeItems[index].props.itemInfo
+    if (itemInfo) {
+      const bookmarkType = getBookmarkType(itemInfo)
+      if (bookmarkType === TYPE_SEPARATOR) {
+        rowHeight /= 2
       }
-
-      return Immutable(R.insert(dragIndicatorIndex, <DragIndicator />, treeItems))
     }
-    return treeItems
+
+    // for the indicator show the end of folder
+    if (index === this.props.treeItems.length - 1) {
+      rowHeight += GOLDEN_GAP * 2
+    }
+
+    return rowHeight
   }
 
   setHeight() {
@@ -67,107 +71,44 @@ class BookmarkTree extends PureComponent {
     const maxListHeight = MAX_HEIGHT - listContainerElOffsetTop
     const totalRowHeight = this.list.Grid._rowSizeAndPositionManager.getTotalSize()
 
-    const listHeight = Math.min(maxListHeight, totalRowHeight)
-
-    if (this.state.listHeight !== listHeight) {
-      this.setState({
-        listHeight
-      })
-    }
+    this.setState({
+      listHeight: Math.min(maxListHeight, totalRowHeight)
+    })
   }
 
-  handleScroll = ({scrollTop}) => {
-    const {isRememberLastPosition, treeIndex} = this.props
-
-    if (isRememberLastPosition) {
-      updateLastScrollTopList(treeIndex, scrollTop || 0)
-    }
-  }
-
-  makeGetRowHeight = (treeItems) => ({index}) => {
-    const {itemOffsetHeight} = this.props
-
-    let rowHeight = itemOffsetHeight
-
-    const itemInfo = treeItems[index].props.itemInfo
-    if (itemInfo) {
-      const bookmarkType = getBookmarkType(itemInfo)
-      if (bookmarkType === TYPE_SEPARATOR) {
-        rowHeight /= 2
-      }
-    }
-
-    // for the indicator show the end of folder
-    if (index === treeItems.length - 1) {
-      rowHeight += GOLDEN_GAP * 2
-    }
-
-    return rowHeight
-  }
-
-  makeRowRenderer = (treeItems) => ({index, key, style}) => (
+  rowRenderer = ({index, key, style}) => (
     <div key={key} styleName='list-item' style={style}>
-      {treeItems[index]}
+      {this.props.treeItems[index]}
     </div>
   )
 
-  render() {
-    const {
-      isRememberLastPosition, listItemWidth, scrollToIndex, treeIndex
-    } = this.props
-
-    const treeItems = this.getTreeItems()
-
-    const getRowHeight = this.makeGetRowHeight(treeItems)
-    const rowRenderer = this.makeRowRenderer(treeItems)
-
-    let lastScrollTop
-    if (isRememberLastPosition) {
-      const lastScrollTopList = store.get('lastScrollTop') || []
-
-      lastScrollTop = lastScrollTopList[treeIndex]
-    }
-
-    return (
-      <section styleName='main'>
-        <TreeHeader treeIndex={treeIndex} />
-        <div
+  render = () => (
+    <section styleName='main'>
+      <TreeHeader treeIndex={this.props.treeIndex} />
+      <div
+        ref={(ref) => {
+          this.listContainerEl = ref
+        }}
+      >
+        <List
           ref={(ref) => {
-            this.listContainerEl = ref
+            this.list = ref
           }}
-        >
-          <List
-            ref={(ref) => {
-              this.list = ref
-            }}
-            height={this.state.listHeight}
-            noRowsRenderer={this.noRowsRenderer}
-            onScroll={this.handleScroll}
-            rowCount={treeItems.length}
-            rowHeight={getRowHeight}
-            rowRenderer={rowRenderer}
-            scrollToIndex={scrollToIndex >= 0 ? scrollToIndex : undefined}
-            scrollTop={lastScrollTop}
-            tabIndex={-1}
-            width={listItemWidth}
-          />
-        </div>
-        <FolderCover treeIndex={treeIndex} />
-      </section>
-    )
-  }
-}
-
-BookmarkTree.propTypes = {
-  dragIndicator: PropTypes.object,
-  isRememberLastPosition: PropTypes.bool.isRequired,
-  isSearching: PropTypes.bool.isRequired,
-  itemOffsetHeight: PropTypes.number.isRequired,
-  listItemWidth: PropTypes.number.isRequired,
-  rootTree: PropTypes.object.isRequired,
-  scrollToIndex: PropTypes.number.isRequired,
-  treeIndex: PropTypes.number.isRequired,
-  treeInfo: PropTypes.object.isRequired
+          height={this.state.listHeight}
+          noRowsRenderer={this.noRowsRenderer}
+          onScroll={this.props.onScroll}
+          rowCount={this.props.treeItems.length}
+          rowHeight={this.getRowHeight}
+          rowRenderer={this.rowRenderer}
+          scrollToIndex={this.props.scrollToIndex >= 0 ? this.props.scrollToIndex : undefined}
+          scrollTop={this.props.lastScrollTop}
+          tabIndex={-1}
+          width={this.props.listItemWidth}
+        />
+      </div>
+      <FolderCover treeIndex={this.props.treeIndex} />
+    </section>
+  )
 }
 
 export default BookmarkTree
