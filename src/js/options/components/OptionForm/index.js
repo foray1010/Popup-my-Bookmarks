@@ -2,7 +2,7 @@ import R from 'ramda'
 import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
-import getOptionsConfig from '../../../common/lib/getOptionsConfig'
+import {getOptionsConfig} from '../../../common/functions'
 import {OPTION_TABLE_MAP} from '../../constants'
 import {optionsCreators} from '../../reduxs'
 import OptionForm from './OptionForm'

@@ -3,7 +3,7 @@
 import R from 'ramda'
 import webExtension from 'webextension-polyfill'
 
-import getOptionsConfig from '../../common/lib/getOptionsConfig'
+import {getOptionsConfig} from '../../common/functions'
 
 export const initOptions = async (): Promise<Object> => {
   const [options: Object, optionsConfig: Object] = await Promise.all([

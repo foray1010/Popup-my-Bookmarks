@@ -4,12 +4,11 @@ import '../../manifest.yml'
 
 import R from 'ramda'
 import {createElement} from 'react'
-import {render} from 'react-dom'
 import {Provider} from 'react-redux'
 import Immutable from 'seamless-immutable'
 import webExtension from 'webextension-polyfill'
 
-import getOptionsConfig from '../common/lib/getOptionsConfig'
+import {getOptionsConfig, renderToBody} from '../common/functions'
 import configureStore from '../common/store/configureStore'
 import App from './components/App'
 import {getItemOffsetHeight, getRootTree, initTrees} from './functions'
@@ -47,13 +46,10 @@ const main = async () => {
   })
 
   /* render the app */
-  const rootEl = document.createElement('div')
-  document.body.appendChild(rootEl)
-  render(
+  renderToBody(
     <Provider store={store}>
       <App />
-    </Provider>,
-    rootEl
+    </Provider>
   )
 }
 

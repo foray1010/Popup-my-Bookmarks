@@ -3,10 +3,10 @@ import 'babel-polyfill'
 import '../../manifest.yml'
 
 import {createElement} from 'react'
-import {render} from 'react-dom'
 import {Provider} from 'react-redux'
 import Immutable from 'seamless-immutable'
 
+import {renderToBody} from '../common/functions'
 import configureStore from '../common/store/configureStore'
 import App from './components/App'
 import {initOptions} from './functions'
@@ -25,13 +25,10 @@ const main = async () => {
   })
 
   /* render the app */
-  const rootEl = document.createElement('div')
-  document.body.appendChild(rootEl)
-  render(
+  renderToBody(
     <Provider store={store}>
       <App />
-    </Provider>,
-    rootEl
+    </Provider>
   )
 }
 
