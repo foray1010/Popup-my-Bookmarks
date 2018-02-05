@@ -1,6 +1,6 @@
 import '../../../css/options/contributors.css'
 
-import {createElement} from 'react'
+import {Fragment, createElement} from 'react'
 import Immutable from 'seamless-immutable'
 
 const contributors = Immutable({
@@ -32,12 +32,12 @@ const contributors = Immutable({
 const Contributors = () => (
   <dl styleName='main'>
     {Object.keys(contributors).map((contributeType) => (
-      <div key={contributeType}>
+      <Fragment key={contributeType}>
         <dt>{contributeType}</dt>
         {contributors[contributeType].map((contributor) => (
           <dd key={contributor}>{contributor}</dd>
         ))}
-      </div>
+      </Fragment>
     ))}
   </dl>
 )

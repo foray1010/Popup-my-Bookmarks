@@ -2,7 +2,7 @@ import '../../../../css/popup/app.css'
 
 import PropTypes from 'prop-types'
 import R from 'ramda'
-import {PureComponent, createElement} from 'react'
+import {Fragment, PureComponent, createElement} from 'react'
 
 import {setPredefinedStyleSheet, updateLastUsedTreeIds} from '../../functions'
 import Editor from '../Editor'
@@ -32,12 +32,12 @@ class App extends PureComponent {
   }
 
   render = () => (
-    <div>
+    <Fragment>
       <Panel />
       <MenuCover />
       <Menu />
       <Editor />
-    </div>
+    </Fragment>
   )
 }
 
