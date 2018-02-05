@@ -1,7 +1,37 @@
+import PropTypes from 'prop-types'
+import R from 'ramda'
+import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
 import {closeMenu, dragEnd, onPressArrowKey, openMenu, renewTrees} from '../../actions'
+import {setPredefinedStyleSheet, updateLastUsedTreeIds} from '../../functions'
 import App from './App'
+import BookmarkEventsHOC from './BookmarkEventsHOC'
+import KeyboardNavHOC from './KeyboardNavHOC'
+import MouseControlHOC from './MouseControlHOC'
+
+class AppContainer extends PureComponent {
+  static propTypes = {
+    isSearching: PropTypes.bool.isRequired,
+    options: PropTypes.object.isRequired,
+    trees: PropTypes.arrayOf(PropTypes.object).isRequired
+  }
+
+  componentDidMount() {
+    setPredefinedStyleSheet(this.props.options)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.trees !== prevProps.trees) {
+      const isRememberLastPosition = this.props.options.rememberPos && !this.props.isSearching
+      if (isRememberLastPosition) {
+        updateLastUsedTreeIds(this.props.trees)
+      }
+    }
+  }
+
+  render = () => <App {...this.props} />
+}
 
 const mapDispatchToProps = {
   closeMenu,
@@ -23,4 +53,9 @@ const mapStateToProps = (state) => ({
   trees: state.trees
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default R.compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  BookmarkEventsHOC,
+  KeyboardNavHOC,
+  MouseControlHOC
+)(AppContainer)
