@@ -34,7 +34,7 @@ const webpackConfig = getMergedConfigByEnv({
     module: {
       rules: [
         {
-          test: /\.jsx?$/,
+          test: /\.js$/,
           exclude: /node_modules/,
           loader: 'babel-loader'
         },
@@ -93,7 +93,7 @@ const webpackConfig = getMergedConfigByEnv({
           new HtmlWebpackPlugin({
             chunks: [commonChunkName, appName],
             filename: `${appName}.html`,
-            inject: 'body',
+            inject: 'head',
             minify: {
               collapseWhitespace: true,
               keepClosingSlash: true,
@@ -124,8 +124,7 @@ const webpackConfig = getMergedConfigByEnv({
       alias: {
         'seamless-immutable': 'seamless-immutable/src/seamless-immutable',
         store: 'store/dist/store.modern'
-      },
-      extensions: ['.js', '.jsx']
+      }
     }
   },
   development: {

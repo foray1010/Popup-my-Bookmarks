@@ -1,10 +1,16 @@
+// @flow
+// @jsx createElement
+
 import '../../../../css/popup/search.css'
 
-import PropTypes from 'prop-types'
 import {createElement} from 'react'
 import webExtension from 'webextension-polyfill'
 
-const Search = (props) => (
+type Props = {
+  inputValue: string,
+  onInput: (SyntheticInputEvent<HTMLInputElement>) => void
+};
+const Search = (props: Props) => (
   <div styleName='main'>
     <input
       id='search'
@@ -16,10 +22,5 @@ const Search = (props) => (
     />
   </div>
 )
-
-Search.propTypes = {
-  inputValue: PropTypes.string.isRequired,
-  onInput: PropTypes.func.isRequired
-}
 
 export default Search

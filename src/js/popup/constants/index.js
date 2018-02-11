@@ -1,11 +1,11 @@
 // @flow
 
 export * from '../../common/constants'
-export * from './actionTypes'
 
 export const DRAG_INDICATOR: string = 'drag-indicator'
 export const GOLDEN_GAP: number = 2
 export const MAX_HEIGHT: number = 598
+export const SEARCH_RESULT_ID: string = 'SEARCH_RESULT_ID'
 export const SEPARATE_THIS_URL: string = 'http://separatethis.com/'
 
 export const MENU_ADD_FOLDER: string = 'addFolder'

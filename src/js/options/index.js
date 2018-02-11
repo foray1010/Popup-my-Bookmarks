@@ -15,16 +15,12 @@ import {rootReducer, rootSaga} from './reduxs'
 const main = async () => {
   const options = await initOptions()
 
-  /* Create a Redux store to handle all UI actions and side-effects */
   const store = configureStore({
     rootReducer,
     rootSaga,
-    preloadedState: Immutable({
-      options
-    })
+    preloadedState: Immutable({options})
   })
 
-  /* render the app */
   renderToBody(
     <Provider store={store}>
       <App />

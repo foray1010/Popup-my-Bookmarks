@@ -32,7 +32,7 @@
     }
   },
   "lint-staged": {
-    "*.css": ["prettier-eslint --write", "stylelint --fix", "git add"],
+    "*.css": ["prettier --write", "stylelint --fix", "git add"],
     "*.js": ["import-sort --write", "prettier-eslint --write", "eslint --fix", "git add"],
     "*.json": ["prettier-eslint --write", "git add"],
     "*ignore-sync": ["ignore-sync", "git add"]
@@ -49,10 +49,9 @@
     "react-redux": "^5.0.0",
     "react-virtualized": "^9.5.0",
     "redux": "^3.3.1",
-    "redux-multi": "0.1.12",
     "redux-saga": "^0.16.0",
-    "redux-thunk": "^2.1.0",
     "reduxsauce": "^0.7.0",
+    "remote-redux-devtools": "^0.5.12",
     "seamless-immutable": "^7.0.0",
     "store": "^2.0.12",
     "typeface-archivo-narrow": "0.0.54",
@@ -74,7 +73,7 @@
     "extract-loader": "^1.0.0",
     "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^1.1.5",
-    "flow-bin": "^0.64.0",
+    "flow-bin": "^0.65.0",
     "fs-extra": "^5.0.0",
     "html-webpack-plugin": "^2.28.0",
     "husky": "^0.14.0",

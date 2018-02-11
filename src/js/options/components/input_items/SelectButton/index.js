@@ -1,7 +1,7 @@
 import '../../../../../css/options/select-button.css'
 
 import PropTypes from 'prop-types'
-import R from 'ramda'
+import * as R from 'ramda'
 import {createElement} from 'react'
 
 import Option from './Option'

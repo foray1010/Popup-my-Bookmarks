@@ -1,51 +1,47 @@
+// @flow
+// @jsx createElement
+
 import debounce from 'lodash.debounce'
-import PropTypes from 'prop-types'
+import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
 import {normalizeInputtingValue} from '../../../common/functions'
-import {updateTreesBySearchKeyword} from '../../actions'
+import {bookmarkCreators} from '../../reduxs'
 import Search from './Search'
 
-const mapDispatchToProps = {
-  updateTreesBySearchKeyword
-}
+const SEARCH_TIMEOUT = 300
 
-class SearchContainer extends PureComponent {
-  static propTypes = {
-    searchKeyword: PropTypes.string.isRequired,
-    updateTreesBySearchKeyword: PropTypes.func.isRequired
-  }
-
+type Props = {
+  getSearchResult: (string) => void
+};
+type State = {
+  inputValue: string
+};
+class SearchContainer extends PureComponent<Props, State> {
   state = {
-    inputValue: this.props.searchKeyword
+    inputValue: ''
   }
 
-  handleInput = (evt) => {
-    const newInputValue = normalizeInputtingValue(evt.target.value)
-
-    if (this.state.inputValue !== newInputValue) {
-      this.setState({
-        inputValue: newInputValue
-      })
-
-      this.handleSearchKeywordChange()
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.inputValue !== prevState.inputValue) {
+      this.getSearchResult()
     }
   }
 
-  handleSearchKeywordChange = debounce(() => {
-    const newSearchKeyword = this.state.inputValue.trim()
+  getSearchResult = debounce(() => {
+    this.props.getSearchResult(this.state.inputValue.trim())
+  }, SEARCH_TIMEOUT)
 
-    this.props.updateTreesBySearchKeyword(newSearchKeyword)
-  }, 300)
+  handleInput = (evt) => {
+    this.setState({
+      inputValue: normalizeInputtingValue(evt.target.value)
+    })
+  }
 
-  render = () => (
-    <Search {...this.props} inputValue={this.state.inputValue} onInput={this.handleInput} />
-  )
+  render = () => <Search inputValue={this.state.inputValue} onInput={this.handleInput} />
 }
 
-const mapStateToProps = (state) => ({
-  searchKeyword: state.searchKeyword
-})
+const mapDispatchToProps = R.pick(['getSearchResult'], bookmarkCreators)
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer)
+export default connect(null, mapDispatchToProps)(SearchContainer)

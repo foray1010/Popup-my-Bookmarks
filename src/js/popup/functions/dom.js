@@ -1,8 +1,8 @@
 // @flow
 
 import bookmarkItemStyles from '../../../css/popup/bookmark-item.css'
+import bookmarkTreesStyles from '../../../css/popup/bookmark-trees.css'
 import editorStyles from '../../../css/popup/editor.css'
-import panelStyles from '../../../css/popup/panel.css'
 import css from '../../common/lib/css'
 import {getItemIconHeight} from '.'
 
@@ -34,7 +34,11 @@ export const setPredefinedStyleSheet = (options: Object): void => {
   } = options
 
   const itemIconHeight: number = getItemIconHeight(options)
-  const panelWidthSelector: string = [editorStyles.main, panelStyles.master, panelStyles.slave]
+  const panelWidthSelector: string = [
+    editorStyles.main,
+    bookmarkTreesStyles.master,
+    bookmarkTreesStyles.slave
+  ]
     .map(getClassSelector)
     .join(',')
 

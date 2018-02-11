@@ -1,8 +1,10 @@
-import R from 'ramda'
+import * as R from 'ramda'
 import {applyMiddleware, createStore} from 'redux'
-import multi from 'redux-multi'
 import createSagaMiddleware from 'redux-saga'
-import thunk from 'redux-thunk'
+import {composeWithDevTools} from 'remote-redux-devtools'
+
+const composeEnhancers =
+  process.env.NODE_ENV === 'development' ? composeWithDevTools({port: 8000}) : R.compose
 
 export default ({rootReducer, rootSaga, preloadedState}) => {
   const sagaMiddleware = createSagaMiddleware()
@@ -11,10 +13,10 @@ export default ({rootReducer, rootSaga, preloadedState}) => {
   const store = createStoreWithFilteredArgs([
     rootReducer,
     preloadedState,
-    applyMiddleware(multi, thunk, sagaMiddleware)
+    composeEnhancers(applyMiddleware(sagaMiddleware))
   ])
 
-  if (rootSaga) sagaMiddleware.run(rootSaga)
+  sagaMiddleware.run(rootSaga)
 
   return store
 }

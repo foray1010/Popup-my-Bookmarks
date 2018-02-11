@@ -1,6 +1,6 @@
 // @flow
 
-import R from 'ramda'
+import * as R from 'ramda'
 import webExtension from 'webextension-polyfill'
 
 import {getOptionsConfig} from '../../common/functions'
@@ -22,7 +22,7 @@ export const initOptions = async (): Promise<Object> => {
     }),
     {}
   )
-  if (missingOptions.length) {
+  if (Object.keys(missingOptions).length) {
     await webExtension.storage.sync.set(missingOptions)
   }
 

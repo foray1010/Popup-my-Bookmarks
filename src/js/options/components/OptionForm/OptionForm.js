@@ -7,54 +7,47 @@ import webExtension from 'webextension-polyfill'
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 
-const OptionForm = (props) => {
-  const {
-    options,
-    optionsConfig,
-    saveOptions,
-    selectedOptionFormMap,
-    resetToDefaultOptions,
-    updateSingleOption
-  } = props
-
-  const optionFormItems = selectedOptionFormMap.reduce((accumulator, optionName) => {
-    const optionValue = options[optionName]
-    if (optionValue !== undefined) {
-      return accumulator.concat(
-        <OptionItem
-          key={optionName}
-          optionConfig={optionsConfig[optionName]}
-          optionName={optionName}
-          optionValue={optionValue}
-          updateSingleOption={updateSingleOption}
-        />
-      )
-    }
-
-    return accumulator
-  }, [])
-
-  return (
-    <form>
-      <table styleName='table'>
-        <tbody>{optionFormItems}</tbody>
-        <tfoot>
-          <tr>
-            <td>
-              <OptionButton msg={webExtension.i18n.getMessage('confirm')} onClick={saveOptions} />
-            </td>
-            <td>
-              <OptionButton
-                msg={webExtension.i18n.getMessage('default')}
-                onClick={resetToDefaultOptions}
+const OptionForm = (props) => (
+  <form>
+    <table styleName='table'>
+      <tbody>
+        {props.selectedOptionFormMap.reduce((acc, optionName) => {
+          const optionValue = props.options[optionName]
+          if (optionValue !== undefined) {
+            return [
+              ...acc,
+              <OptionItem
+                key={optionName}
+                optionConfig={props.optionsConfig[optionName]}
+                optionName={optionName}
+                optionValue={optionValue}
+                updateSingleOption={props.updateSingleOption}
               />
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-    </form>
-  )
-}
+            ]
+          }
+
+          return acc
+        }, [])}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>
+            <OptionButton
+              msg={webExtension.i18n.getMessage('confirm')}
+              onClick={props.saveOptions}
+            />
+          </td>
+          <td>
+            <OptionButton
+              msg={webExtension.i18n.getMessage('default')}
+              onClick={props.resetToDefaultOptions}
+            />
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </form>
+)
 
 OptionForm.propTypes = {
   options: PropTypes.object.isRequired,

@@ -1,6 +1,6 @@
 // @flow
 
-import R from 'ramda'
+import * as R from 'ramda'
 
 const genStyleSheet = (): CSSStyleSheet => {
   const styleEl: Object = document.createElement('style')

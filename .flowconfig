@@ -1,11 +1,3 @@
-[ignore]
-.*/node_modules/config-chain/*
-.*/node_modules/stylelint/*
-
-[include]
-
-[libs]
-
 [options]
 module.ignore_non_literal_requires=true
 module.use_strict=true

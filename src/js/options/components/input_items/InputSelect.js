@@ -1,7 +1,7 @@
 import '../../../../css/options/input-select.css'
 
 import PropTypes from 'prop-types'
-import R from 'ramda'
+import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 
 import {normalizeInputtingValue} from '../../../common/functions'

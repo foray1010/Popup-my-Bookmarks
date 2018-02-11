@@ -1,4 +1,4 @@
-import R from 'ramda'
+import * as R from 'ramda'
 import {all, fork} from 'redux-saga/effects'
 
 export default (sagas) =>

@@ -2,7 +2,11 @@
   "presets": [
     "babel-preset-foray1010/react"
   ],
-  "plugins": [
-    "babel-plugin-ramda"
-  ]
+  "env": {
+    "production": {
+      "plugins": [
+        "babel-plugin-ramda"
+      ]
+    }
+  }
 }

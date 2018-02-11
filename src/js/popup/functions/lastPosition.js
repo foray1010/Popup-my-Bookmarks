@@ -1,7 +1,7 @@
 // @flow
 
 import debounce from 'lodash.debounce'
-import R from 'ramda'
+import * as R from 'ramda'
 import store from 'store'
 
 const _updateLastScrollTopList: Function = (index: number, scrollTop: number): Function =>

@@ -1,4 +1,4 @@
-import R from 'ramda'
+import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
@@ -6,11 +6,6 @@ import {getOptionsConfig} from '../../../common/functions'
 import {OPTION_TABLE_MAP} from '../../constants'
 import {optionsCreators} from '../../reduxs'
 import OptionForm from './OptionForm'
-
-const mapDispatchToProps = R.pick(
-  ['saveOptions', 'resetToDefaultOptions', 'updateSingleOption'],
-  optionsCreators
-)
 
 class OptionFormContainer extends PureComponent {
   state = {
@@ -33,5 +28,10 @@ const mapStateToProps = (state) => ({
   options: state.options,
   selectedOptionFormMap: OPTION_TABLE_MAP[state.navigation.selectedNavModule]
 })
+
+const mapDispatchToProps = R.pick(
+  ['saveOptions', 'resetToDefaultOptions', 'updateSingleOption'],
+  optionsCreators
+)
 
 export default connect(mapStateToProps, mapDispatchToProps)(OptionFormContainer)

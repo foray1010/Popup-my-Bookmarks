@@ -1,19 +1,13 @@
+// @flow
+// @jsx createElement
+
 import '../../../../css/popup/app.css'
 
-import {Fragment, createElement} from 'react'
+import {createElement} from 'react'
 
-import Editor from '../Editor'
-import Menu from '../Menu'
-import MenuCover from '../MenuCover'
-import Panel from '../Panel'
+import BookmarkTrees from '../BookmarkTrees'
+import Search from '../Search'
 
-const App = () => (
-  <Fragment>
-    <Panel />
-    <MenuCover />
-    <Menu />
-    <Editor />
-  </Fragment>
-)
+const App = () => <BookmarkTrees mainTreeHeader={<Search />} />
 
 export default App

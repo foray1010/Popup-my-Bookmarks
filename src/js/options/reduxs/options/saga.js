@@ -13,25 +13,37 @@ const getStorage = (...args) => webExtension.storage.sync.get(...args)
 const updateOptions = (options) => put(optionsCreators.updateOptions(options))
 
 function* reloadOptions() {
-  const options = yield call(getStorage, null)
+  try {
+    const options = yield call(getStorage, null)
 
-  yield updateOptions(options)
+    yield updateOptions(options)
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 function* resetToDefaultOptions() {
-  yield call(clearStorage)
+  try {
+    yield call(clearStorage)
 
-  const options = yield call(initOptions)
+    const options = yield call(initOptions)
 
-  yield updateOptions(options)
+    yield updateOptions(options)
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 function* saveOptions() {
-  const {options} = yield select()
+  try {
+    const {options} = yield select()
 
-  yield call(setStorage, options)
+    yield call(setStorage, options)
 
-  yield updateOptions(options)
+    yield updateOptions(options)
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 export function* optionsSaga() {

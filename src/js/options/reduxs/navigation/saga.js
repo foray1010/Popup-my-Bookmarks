@@ -4,7 +4,11 @@ import {optionsCreators} from '../options/actions'
 import {navigationTypes} from './actions'
 
 function* switchNavModule() {
-  yield put(optionsCreators.reloadOptions())
+  try {
+    yield put(optionsCreators.reloadOptions())
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 export function* navigationSaga() {

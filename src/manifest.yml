@@ -35,3 +35,5 @@ permissions:
   # this is a fix for we cannot save current page as bookmark,
   # if we open the popup before the current page finished loading
   - "tabs"
+  # for development with `remote-redux-devtools`, should remove
+  - "wss://*"

@@ -1,6 +1,6 @@
 // @flow
 
-import R from 'ramda'
+import * as R from 'ramda'
 import store from 'store'
 import webExtension from 'webextension-polyfill'
 
