@@ -36,7 +36,10 @@ const webpackConfig = getMergedConfigByEnv({
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true
+          }
         },
         {
           test: /\.woff2$/,
