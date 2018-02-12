@@ -14,20 +14,21 @@ const ZipPlugin = require('zip-webpack-plugin')
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 
 const pkg = require('./package')
-const {
-  appNames, commonChunkName, outputDir, sourceDir
-} = require('./config')
 
 const getMergedConfigByEnv = R.converge(R.mergeDeepWith(R.concat), [
   R.prop('default'),
   R.propOr({}, process.env.NODE_ENV)
 ])
 
+const appNames = ['options', 'popup']
+const commonChunkName = 'common'
 const cssLoaderOptions = {
   modules: true,
   importLoaders: 1,
   localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
 }
+const sourceDir = 'src'
+const outputDir = path.join('build', process.env.NODE_ENV)
 
 const webpackConfig = getMergedConfigByEnv({
   default: {
@@ -185,7 +186,7 @@ const webpackConfig = getMergedConfigByEnv({
     plugins: [
       new BundleAnalyzerPlugin({
         analyzerMode: 'static',
-        reportFilename: path.join('..', '__report.html')
+        reportFilename: path.join('..', 'report.html')
       }),
       new ExtractTextPlugin({
         filename: path.join('css', '[name].css'),

@@ -9,12 +9,12 @@ import {searchBookmarks} from '../utils/getters'
 
 export function* getSearchResult({searchKeyword}) {
   try {
-    const {options} = yield select()
-
     if (!searchKeyword) {
-      yield put(bookmarkCreators.initBookmarkTrees(options))
+      yield put(bookmarkCreators.initBookmarkTrees())
       return
     }
+
+    const {options} = yield select()
 
     const isSearchTitleOnly = options.searchTarget === 1
     const searchResult = yield call(searchBookmarks, {

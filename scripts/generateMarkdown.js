@@ -5,9 +5,11 @@ const path = require('path')
 
 // markdown handler
 const getMarkdownData = async (titleList) => {
-  const dataList = await Promise.all(titleList.map((title) => {
-    return fs.readFile(path.join('markdown', `${title}.md`), 'utf-8')
-  }))
+  const dataList = await Promise.all(
+    titleList.map((title) => {
+      return fs.readFile(path.join('markdown', `${title}.md`), 'utf-8')
+    })
+  )
 
   return dataList.join('\n\n')
 }
@@ -32,13 +34,9 @@ const generateReadme = async () => {
 }
 
 const generateStoreDescription = async () => {
-  const fileName = '__store.md'
+  const fileName = path.join('build', 'store.md')
 
-  let fileData = await getMarkdownData([
-    'description',
-    'todo',
-    'contributing'
-  ])
+  let fileData = await getMarkdownData(['description', 'todo', 'contributing'])
 
   fileData = fileData
     // remove style of subheader
@@ -47,13 +45,9 @@ const generateStoreDescription = async () => {
 
   await fs.writeFile(fileName, fileData)
 }
-
 ;(async () => {
   try {
-    await Promise.all([
-      generateReadme(),
-      generateStoreDescription()
-    ])
+    await Promise.all([generateReadme(), generateStoreDescription()])
   } catch (err) {
     console.error(err.stack)
   }

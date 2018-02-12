@@ -57,6 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# next.js build output
+.next
 
 # General
 .DS_Store
@@ -122,4 +124,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-__*
+build

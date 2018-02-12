@@ -5,4 +5,4 @@ Global/Linux.gitignore
 Global/Windows.gitignore
 
 [inline]
-__*
+build
