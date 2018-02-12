@@ -2,6 +2,7 @@
 
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
@@ -91,6 +92,10 @@ const webpackConfig = getMergedConfigByEnv({
           from: 'LICENSE'
         }
       ]),
+      new DuplicatePackageCheckerPlugin({
+        emitError: true,
+        strict: true
+      }),
       ...R.map(
         (appName) =>
           new HtmlWebpackPlugin({
@@ -125,6 +130,8 @@ const webpackConfig = getMergedConfigByEnv({
     ],
     resolve: {
       alias: {
+        // as reduxsauce use older version, force it to use our newer version to reduce file size
+        ramda: path.resolve(__dirname, 'node_modules/ramda'),
         'seamless-immutable': 'seamless-immutable/src/seamless-immutable',
         store: 'store/dist/store.modern'
       }
