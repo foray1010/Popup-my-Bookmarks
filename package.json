@@ -34,6 +34,7 @@
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": ["src/**/*.js"],
+    "coveragePathIgnorePatterns": ["/__fixtures__/"],
     "coverageReporters": ["lcov", "text-summary"],
     "moduleNameMapper": {
       "\\.css$": "<rootDir>/__mocks__/styleMock.js",
