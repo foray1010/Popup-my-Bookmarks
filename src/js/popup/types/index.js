@@ -11,11 +11,7 @@ export type BookmarkInfo = {
   isRoot: boolean,
   isUnmodifiable: boolean
 }
-;export type BookmarkTree = {
-  children: BookmarkInfo[],
-  parent: BookmarkInfo
-}
-;export type BookmarkTreeNode = {
+;export type BookmarkNode = {
   id: string,
   parentId?: string,
   index?: number,
@@ -24,6 +20,10 @@ export type BookmarkInfo = {
   dateAdded?: number,
   dateGroupModified?: number,
   unmodifiable?: string
+}
+;export type BookmarkTree = {
+  children: BookmarkInfo[],
+  parent: BookmarkInfo
 }
 ;export type Bookmark = {
   copyId: string,

@@ -72,6 +72,7 @@
     "babel-loader": "^7.0.0",
     "babel-preset-foray1010": "^7.4.0",
     "bluebird": "^3.5.1",
+    "chance": "^1.0.13",
     "chrome-manifest-loader": "^0.1.1",
     "clean-webpack-plugin": "^0.1.15",
     "copy-webpack-plugin": "^4.1.1",
