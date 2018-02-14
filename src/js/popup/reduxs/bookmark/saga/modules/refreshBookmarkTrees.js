@@ -4,7 +4,7 @@ import {call, put, select} from 'redux-saga/effects'
 import {bookmarkCreators} from '../../actions'
 import {getBookmarkTrees} from '../utils/getters'
 
-const getTailTreeIds = R.compose(R.tail, R.map(R.prop('id')))
+export const getTailTreeIds = R.compose(R.tail, R.map(R.path(['parent', 'id'])))
 
 export function* refreshBookmarkTrees() {
   try {
@@ -12,7 +12,7 @@ export function* refreshBookmarkTrees() {
     const {searchKeyword, trees} = bookmark
 
     if (searchKeyword) {
-      yield put(bookmarkCreators.getSearchResult(searchKeyword, options))
+      yield put(bookmarkCreators.getSearchResult(searchKeyword))
     } else {
       const bookmarkTrees = yield call(getBookmarkTrees, getTailTreeIds(trees), options)
       yield put(bookmarkCreators.setBookmarkTrees(bookmarkTrees))

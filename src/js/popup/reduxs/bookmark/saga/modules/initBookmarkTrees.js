@@ -8,11 +8,9 @@ export function* initBookmarkTrees() {
   try {
     const {options} = yield select()
 
-    const bookmarkTrees = yield call(
-      getBookmarkTrees,
-      options.rememberPos ? store.get('lastBoxPID') || [] : [],
-      options
-    )
+    const treeIds = options.rememberPos ? (yield call([store, store.get], 'lastBoxPID')) || [] : []
+
+    const bookmarkTrees = yield call(getBookmarkTrees, treeIds, options)
 
     yield put(bookmarkCreators.setBookmarkTrees(bookmarkTrees))
   } catch (err) {

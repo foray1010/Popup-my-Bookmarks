@@ -3,25 +3,23 @@
 import * as R from 'ramda'
 
 import folderIcon from '../../../../../../img/folder.png'
-import {ROOT_ID} from '../../../../../common/constants'
 import * as CST from '../../../../constants'
 import * as TYPES from '../../../../types'
 
-const getIconUrl = (bookmarkInfo: TYPES.BookmarkInfo): string => {
+export const getIconUrl = (bookmarkInfo: TYPES.BookmarkInfo): string => {
+  if (bookmarkInfo.type === CST.TYPE_BOOKMARK) return `chrome://favicon/${bookmarkInfo.url}`
   if (bookmarkInfo.type === CST.TYPE_FOLDER) return folderIcon
-  if (bookmarkInfo.type === CST.TYPE_SEPARATOR) return ''
-  if (bookmarkInfo.url) return `chrome://favicon/${bookmarkInfo.url}`
   return ''
 }
 
-const getType = (BookmarkNode: TYPES.BookmarkNode): string => {
+export const getType = (BookmarkNode: TYPES.BookmarkNode): string => {
   if (!BookmarkNode.url) return CST.TYPE_FOLDER
   if (BookmarkNode.url.startsWith(CST.SEPARATE_THIS_URL)) return CST.TYPE_SEPARATOR
   return CST.TYPE_BOOKMARK
 }
 
-const isRoot = (BookmarkNode: TYPES.BookmarkNode): boolean =>
-  BookmarkNode.id === ROOT_ID || BookmarkNode.parentId === ROOT_ID
+export const isRoot = (BookmarkNode: TYPES.BookmarkNode): boolean =>
+  BookmarkNode.id === CST.ROOT_ID || BookmarkNode.parentId === CST.ROOT_ID
 
 export const simulateBookmark = (partialBookmarkInfo: Object): TYPES.BookmarkInfo => ({
   ...partialBookmarkInfo,
