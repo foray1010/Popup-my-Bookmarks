@@ -31,7 +31,7 @@ export const simulateBookmark = (partialBookmarkInfo: Object): TYPES.BookmarkInf
   isUnmodifiable: true
 })
 
-export const toBookmark = R.compose(
+export const toBookmarkInfo = R.compose(
   (bookmarkInfo: TYPES.BookmarkInfo): TYPES.BookmarkInfo => ({
     ...bookmarkInfo,
     iconUrl: getIconUrl(bookmarkInfo)

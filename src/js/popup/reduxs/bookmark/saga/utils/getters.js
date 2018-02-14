@@ -3,30 +3,30 @@ import {all, call} from 'redux-saga/effects'
 import webExtension from 'webextension-polyfill'
 
 import {ROOT_ID} from '../../../../constants'
-import {toBookmark} from './converters'
+import {toBookmarkInfo} from './converters'
 
 const getBookmarkChildNodes = (...args) => webExtension.bookmarks.getChildren(...args)
 const getBookmarkNodes = (...args) => webExtension.bookmarks.get(...args)
 const searchBookmarkNodes = (...args) => webExtension.bookmarks.search(...args)
 
-export function* getBookmark(id) {
+export function* getBookmarkInfo(id) {
   const bookmarkNodes = yield call(getBookmarkNodes, id)
-  return toBookmark(bookmarkNodes[0])
+  return toBookmarkInfo(bookmarkNodes[0])
 }
 
 export function* getBookmarkChildren(id) {
   const bookmarkChildNodes = yield call(getBookmarkChildNodes, id)
-  return R.map(toBookmark, bookmarkChildNodes)
+  return R.map(toBookmarkInfo, bookmarkChildNodes)
 }
 
 export function* getBookmarkTree(id) {
-  const [bookmark, bookmarkChildren] = yield all([
-    call(getBookmark, id),
+  const [bookmarkInfo, bookmarkChildren] = yield all([
+    call(getBookmarkInfo, id),
     call(getBookmarkChildren, id)
   ])
   return {
     children: bookmarkChildren,
-    parent: bookmark
+    parent: bookmarkInfo
   }
 }
 
@@ -68,7 +68,7 @@ export function* getFirstBookmarkTree(options) {
 
 export function* searchBookmarks(searchQuery) {
   const searchResultNodes = yield call(searchBookmarkNodes, searchQuery)
-  return R.map(toBookmark, searchResultNodes)
+  return R.map(toBookmarkInfo, searchResultNodes)
 }
 
 export function* tryGetBookmarkTree(id) {

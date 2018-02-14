@@ -121,10 +121,10 @@ describe('simulateBookmark', () => {
   })
 })
 
-describe('toBookmark', () => {
+describe('toBookmarkInfo', () => {
   test('convert bookmarkNode to bookmarkInfo', () => {
     expect(
-      converters.toBookmark({
+      converters.toBookmarkInfo({
         id: '123',
         index: 1,
         parentId: '234',
@@ -147,7 +147,7 @@ describe('toBookmark', () => {
 
   test('should fill default value', () => {
     expect(
-      converters.toBookmark({
+      converters.toBookmarkInfo({
         id: '123',
         title: 'fake-title'
       })
@@ -166,7 +166,7 @@ describe('toBookmark', () => {
 
   test('if it is root, it must be unmodifiable', () => {
     expect(
-      converters.toBookmark({
+      converters.toBookmarkInfo({
         id: '123',
         parentId: CST.ROOT_ID,
         title: 'fake-title'
