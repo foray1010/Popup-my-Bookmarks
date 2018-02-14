@@ -33,7 +33,7 @@
   },
   "jest": {
     "collectCoverage": true,
-    "collectCoverageFrom": ["src/**/*.js"],
+    "collectCoverageFrom": ["<rootDir>/src/**/*.js"],
     "coveragePathIgnorePatterns": ["/__fixtures__/"],
     "coverageReporters": ["lcov", "text-summary"],
     "moduleNameMapper": {
@@ -94,7 +94,7 @@
     "import-sort-cli": "^4.2.0",
     "import-sort-parser-babylon": "^4.2.0",
     "import-sort-style-module": "^4.2.0",
-    "jest": "^22.2.2",
+    "jest": "^22.3.0",
     "lint-staged": "^6.0.0",
     "npm-run-all": "^4.1.1",
     "postcss-cssnext": "^3.0.0",
