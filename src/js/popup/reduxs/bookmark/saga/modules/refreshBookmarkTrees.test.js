@@ -9,15 +9,15 @@ import {getTailTreeIds, refreshBookmarkTrees} from './refreshBookmarkTrees'
 const chance = new Chance('refreshBookmarkTrees')
 
 const getTailTreeIdsResult = [
-  '5679',
-  '6044',
-  '9249',
-  '3726',
-  '8693',
-  '8955',
-  '3584',
-  '9641',
-  '6578'
+  '8659',
+  '3490',
+  '6906',
+  '5605',
+  '2976',
+  '5492',
+  '3540',
+  '4091',
+  '5759'
 ]
 
 describe('getTailTreeIds', () => {

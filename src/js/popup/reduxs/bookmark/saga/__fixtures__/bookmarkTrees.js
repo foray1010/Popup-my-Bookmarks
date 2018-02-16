@@ -20,7 +20,7 @@ const generateBookmarkInfo = (type) => ({
 })
 
 const generateBookmarkTree = () => ({
-  children: R.times(generateBookmarkInfo, 100),
+  children: R.times(generateBookmarkInfo, 20),
   parent: generateBookmarkInfo(CST.TYPE_FOLDER)
 })
 

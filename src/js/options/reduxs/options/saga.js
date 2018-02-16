@@ -1,14 +1,8 @@
 import {all, call, put, select, takeLatest} from 'redux-saga/effects'
-import webExtension from 'webextension-polyfill'
 
+import {clearStorage, getStorage, setStorage} from '../../../common/functions'
 import {initOptions} from '../../functions'
 import {optionsCreators, optionsTypes} from './actions'
-
-// workaround as following functions cannot pass redux-saga
-// and throw error: `TypeError: Function.prototype.toString requires that 'this' be a Function`
-const clearStorage = (...args) => webExtension.storage.sync.clear(...args)
-const setStorage = (...args) => webExtension.storage.sync.set(...args)
-const getStorage = (...args) => webExtension.storage.sync.get(...args)
 
 const updateOptions = (options) => put(optionsCreators.updateOptions(options))
 

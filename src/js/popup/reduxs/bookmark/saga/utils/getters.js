@@ -1,13 +1,13 @@
 import * as R from 'ramda'
 import {all, call} from 'redux-saga/effects'
-import webExtension from 'webextension-polyfill'
 
+import {
+  getBookmarkChildNodes,
+  getBookmarkNodes,
+  searchBookmarkNodes
+} from '../../../../../common/functions'
 import {ROOT_ID} from '../../../../constants'
 import {toBookmarkInfo} from './converters'
-
-const getBookmarkChildNodes = (...args) => webExtension.bookmarks.getChildren(...args)
-const getBookmarkNodes = (...args) => webExtension.bookmarks.get(...args)
-const searchBookmarkNodes = (...args) => webExtension.bookmarks.search(...args)
 
 export function* getBookmarkInfo(id) {
   const bookmarkNodes = yield call(getBookmarkNodes, id)
@@ -39,7 +39,7 @@ export function* getBookmarkTrees(restTreeIds, options) {
     (acc, tree) => {
       // if `tree` is deleted or not belong to this parent anymore,
       // ignore all its children
-      const isReduced = !tree && R.last(acc).id === tree.parentId
+      const isReduced = tree === null || R.last(acc).parent.id !== tree.parent.parentId
       if (isReduced) return R.reduced(acc)
 
       return [...acc, tree]
@@ -75,7 +75,6 @@ export function* tryGetBookmarkTree(id) {
   try {
     return yield call(getBookmarkTree, id)
   } catch (err) {
-    console.warn(err)
     return null
   }
 }
