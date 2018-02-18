@@ -1,11 +1,11 @@
 // @flow
 // @jsx createElement
 
+import {css} from 'emotion'
 import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
-import {setPredefinedStyleSheet} from '../../functions'
 import App from './App'
 import withMouseEvents from './withMouseEvents'
 
@@ -14,7 +14,13 @@ type Props = {
 };
 class AppContainer extends PureComponent<Props> {
   componentDidMount() {
-    setPredefinedStyleSheet(this.props.options)
+    if (document.body) {
+      const bodyStyle = css`
+        font-family: ${this.props.options.fontFamily}, sans-serif;
+        font-size: ${this.props.options.fontSize}px;
+      `
+      document.body.classList.add(bodyStyle)
+    }
   }
 
   render = () => <App />

@@ -13,7 +13,6 @@ type Props = {
 const Search = (props: Props) => (
   <div styleName='main'>
     <input
-      id='search'
       type='search'
       placeholder={webExtension.i18n.getMessage('search')}
       value={props.inputValue}

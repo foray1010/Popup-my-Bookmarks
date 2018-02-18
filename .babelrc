@@ -1,3 +1,4 @@
 {
-  "presets": ["babel-preset-foray1010/react"]
+  "presets": ["babel-preset-foray1010/react"],
+  "plugins": ["babel-plugin-emotion"]
 }

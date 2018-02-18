@@ -15,6 +15,7 @@ const getTreeIds = R.compose(R.map(R.path(['parent', 'id'])), R.path(['bookmark'
 type Props = {
   initBookmarkTrees: () => void,
   mainTreeHeader: Element<*>,
+  options: Object,
   treeIds: string[]
 };
 class BookmarkTreesContainer extends PureComponent<Props> {
@@ -26,6 +27,7 @@ class BookmarkTreesContainer extends PureComponent<Props> {
 }
 
 const mapStateToProps = (state) => ({
+  options: state.options,
   treeIds: getTreeIds(state)
 })
 

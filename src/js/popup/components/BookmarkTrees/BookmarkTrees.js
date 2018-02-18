@@ -5,10 +5,12 @@ import '../../../../css/popup/bookmark-trees.css'
 
 import {createElement} from 'react'
 import type {Element} from 'react'
+import styled from 'react-emotion'
 
 import BookmarkTree from '../BookmarkTree'
 
 type Props = {
+  className: string,
   mainTreeHeader: Element<*>,
   treeIds: string[]
 };
@@ -19,7 +21,7 @@ const BookmarkTrees = (props: Props) => {
   const subTree = trees.filter((x, index) => index % 2 === 1)
 
   return (
-    <main styleName='main'>
+    <main className={props.className} styleName='main'>
       <section styleName='master'>
         {props.mainTreeHeader}
         {mainTree}
@@ -29,4 +31,8 @@ const BookmarkTrees = (props: Props) => {
   )
 }
 
-export default BookmarkTrees
+export default styled(BookmarkTrees)`
+  & > section {
+    width: ${(props) => props.options.setWidth}px;
+  }
+`
