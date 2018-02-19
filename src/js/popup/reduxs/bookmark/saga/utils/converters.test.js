@@ -99,6 +99,7 @@ describe('simulateBookmark', () => {
     const type = chance.pickone([CST.TYPE_BOOKMARK, CST.TYPE_FOLDER, CST.TYPE_SEPARATOR])
     expect(
       converters.simulateBookmark({
+        iconUrl: chance.url(),
         id,
         isRoot: true,
         isUnmodifiable: false,
@@ -109,6 +110,7 @@ describe('simulateBookmark', () => {
         url: chance.url()
       })
     ).toEqual({
+      iconUrl: '',
       id,
       isRoot: false,
       isUnmodifiable: true,

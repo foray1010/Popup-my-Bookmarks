@@ -2,7 +2,7 @@ import Chance from 'chance'
 import {call, put, select} from 'redux-saga/effects'
 
 import {bookmarkCreators} from '../../actions'
-import bookmarkNodes from '../__fixtures__/bookmarkNodes'
+import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import searchResult from '../__fixtures__/searchResult.json'
 import {searchBookmarks} from '../utils/getters'
 import {getSearchResult} from './getSearchResult'
@@ -37,7 +37,7 @@ describe('getSearchResult', () => {
       })
     )
 
-    expect(generator.next(bookmarkNodes).value).toEqual(
+    expect(generator.next(bookmarkTrees[0].children).value).toEqual(
       put(bookmarkCreators.setBookmarkTrees(searchResult))
     )
 
@@ -58,7 +58,7 @@ describe('getSearchResult', () => {
       })
     )
 
-    expect(generator.next(bookmarkNodes).value).toEqual(
+    expect(generator.next(bookmarkTrees[0].children).value).toEqual(
       put(bookmarkCreators.setBookmarkTrees(searchResult))
     )
 

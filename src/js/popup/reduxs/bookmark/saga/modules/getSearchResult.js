@@ -22,9 +22,11 @@ export function* getSearchResult({searchKeyword}) {
       ...(isSearchTitleOnly ? null : {url: searchKeyword})
     })
 
-    const sortedPartialResult = R.compose(sortByTitle, R.slice(0, options.maxResults))(
-      searchResult
-    )
+    const sortedPartialResult = R.compose(
+      sortByTitle,
+      R.slice(0, options.maxResults),
+      R.filter(R.propEq('type', CST.TYPE_BOOKMARK))
+    )(searchResult)
 
     const searchResultTrees = [
       {

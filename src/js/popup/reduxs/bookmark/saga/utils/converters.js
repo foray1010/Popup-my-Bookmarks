@@ -26,6 +26,7 @@ export const simulateBookmark = (partialBookmarkInfo: Object): TYPES.BookmarkInf
   parentId: '',
   title: '',
   url: '',
+  iconUrl: '',
   storageIndex: -1,
   isRoot: false,
   isUnmodifiable: true
