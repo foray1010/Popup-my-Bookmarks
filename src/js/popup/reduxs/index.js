@@ -1,3 +1,3 @@
-export * from './bookmark/actions'
-export * from './rootReducer'
-export * from './rootSaga'
+export {bookmarkCreators} from './bookmark/actions'
+export {rootReducer} from './rootReducer'
+export {rootSaga} from './rootSaga'
