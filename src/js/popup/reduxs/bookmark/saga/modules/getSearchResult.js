@@ -7,6 +7,11 @@ import {bookmarkCreators} from '../../actions'
 import {simulateBookmark} from '../utils/converters'
 import {searchBookmarks} from '../utils/getters'
 
+export const generateSearchKeywordMatcher = (searchKeyword) => (title) =>
+  R.compose(R.all(R.compose(R.flip(R.contains), R.toLower)(title)), R.map(R.toLower), R.split(' '))(
+    searchKeyword
+  )
+
 export function* getSearchResult({searchKeyword}) {
   try {
     if (!searchKeyword) {
@@ -16,15 +21,17 @@ export function* getSearchResult({searchKeyword}) {
 
     const {options} = yield select()
 
-    const isSearchTitleOnly = options.searchTarget === 1
     const searchResult = yield call(searchBookmarks, {
-      title: searchKeyword,
-      ...(isSearchTitleOnly ? null : {url: searchKeyword})
+      query: searchKeyword
     })
 
+    const isSearchTitleOnly = options.searchTarget === 1
     const sortedPartialResult = R.compose(
       sortByTitle,
       R.slice(0, options.maxResults),
+      isSearchTitleOnly ?
+        R.filter(R.compose(generateSearchKeywordMatcher(searchKeyword), R.prop('title'))) :
+        R.identity,
       R.filter(R.propEq('type', CST.TYPE_BOOKMARK))
     )(searchResult)
 

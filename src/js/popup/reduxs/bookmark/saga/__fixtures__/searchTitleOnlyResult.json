@@ -1,0 +1,28 @@
+[
+  {
+    "children": [
+      {
+        "iconUrl": "http://ma.ky/vawujij",
+        "id": "3284",
+        "isRoot": true,
+        "isUnmodifiable": true,
+        "parentId": "5594",
+        "storageIndex": 7839,
+        "title": "ahobaom",
+        "type": "bookmark",
+        "url": "http://bigeha.pa/bejozkal"
+      }
+    ],
+    "parent": {
+      "iconUrl": "",
+      "id": "SEARCH_RESULT_ID",
+      "isRoot": false,
+      "isUnmodifiable": true,
+      "parentId": "",
+      "storageIndex": -1,
+      "title": "",
+      "type": "folder",
+      "url": ""
+    }
+  }
+]

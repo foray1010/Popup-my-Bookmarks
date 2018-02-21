@@ -43,13 +43,7 @@
   },
   "lint-staged": {
     "*.css": ["prettier --write", "stylelint --fix", "git add"],
-    "*.js": [
-      "import-sort --write",
-      "prettier-eslint --write",
-      "stylelint",
-      "eslint --fix",
-      "git add"
-    ],
+    "*.js": ["import-sort --write", "prettier-eslint --write", "eslint --fix", "git add"],
     "*.json": ["prettier-eslint --write", "git add"],
     "*ignore-sync": ["ignore-sync", "git add"]
   },
