@@ -1,4 +1,5 @@
 [options]
-module.ignore_non_literal_requires=true
 module.use_strict=true
-munge_underscores=true
+
+# webpack loaders
+module.name_mapper='.*\.yml$' -> '<PROJECT_ROOT>/__mocks__/fileMock.js'

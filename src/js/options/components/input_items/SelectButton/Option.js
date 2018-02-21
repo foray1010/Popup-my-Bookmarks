@@ -1,33 +1,40 @@
+// @flow
+// @jsx createElement
+
 import '../../../../../css/options/select-button-option.css'
 
 import classNames from 'classnames'
-import PropTypes from 'prop-types'
 import {PureComponent, createElement} from 'react'
 import webExtension from 'webextension-polyfill'
 
-class Option extends PureComponent {
-  handleChange = (evt) => {
-    this.props.updateSingleOption(this.props.optionName, evt.target.value === 'true')
+type Props = {
+  optionChoice: boolean,
+  optionName: string,
+  optionValue: boolean,
+  updateSingleOption: (string, boolean) => void
+};
+class Option extends PureComponent<Props> {
+  inputEl: ?HTMLInputElement
+
+  handleChange = (evt: SyntheticEvent<HTMLInputElement>) => {
+    this.props.updateSingleOption(this.props.optionName, evt.currentTarget.value === 'true')
   }
 
   handleClick = () => {
-    this.inputEl.click()
+    if (this.inputEl) this.inputEl.click()
   }
 
   render() {
-    const {optionChoice, optionName, optionValue} = this.props
-
-    const isChecked = optionValue === optionChoice
-
+    const isChecked = this.props.optionValue === this.props.optionChoice
     return (
       <div styleName='main'>
         <input
           ref={(ref) => {
             this.inputEl = ref
           }}
-          name={optionName}
+          name={this.props.optionName}
           type='radio'
-          value={String(optionChoice)}
+          value={String(this.props.optionChoice)}
           checked={isChecked}
           hidden
           onChange={this.handleChange}
@@ -37,18 +44,11 @@ class Option extends PureComponent {
           type='button'
           onClick={this.handleClick}
         >
-          {webExtension.i18n.getMessage(optionChoice ? 'yes' : 'no')}
+          {webExtension.i18n.getMessage(this.props.optionChoice ? 'yes' : 'no')}
         </button>
       </div>
     )
   }
-}
-
-Option.propTypes = {
-  optionChoice: PropTypes.bool.isRequired,
-  optionName: PropTypes.string.isRequired,
-  optionValue: PropTypes.bool.isRequired,
-  updateSingleOption: PropTypes.func.isRequired
 }
 
 export default Option

@@ -1,3 +1,6 @@
+// @flow
+
+import type {Saga} from 'redux-saga'
 import {all, call, put, select, takeLatest} from 'redux-saga/effects'
 
 import {clearStorage, getStorage, setStorage} from '../../../common/functions'
@@ -6,7 +9,7 @@ import {optionsCreators, optionsTypes} from './actions'
 
 const updateOptions = (options) => put(optionsCreators.updateOptions(options))
 
-function* reloadOptions() {
+function* reloadOptions(): Saga<void> {
   try {
     const options = yield call(getStorage, null)
 
@@ -16,7 +19,7 @@ function* reloadOptions() {
   }
 }
 
-function* resetToDefaultOptions() {
+function* resetToDefaultOptions(): Saga<void> {
   try {
     yield call(clearStorage)
 
@@ -28,7 +31,7 @@ function* resetToDefaultOptions() {
   }
 }
 
-function* saveOptions() {
+function* saveOptions(): Saga<void> {
   try {
     const {options} = yield select()
 
@@ -40,7 +43,7 @@ function* saveOptions() {
   }
 }
 
-export function* optionsSaga() {
+export function* optionsSaga(): Saga<void> {
   yield all([
     takeLatest(optionsTypes.RELOAD_OPTIONS, reloadOptions),
     takeLatest(optionsTypes.RESET_TO_DEFAULT_OPTIONS, resetToDefaultOptions),

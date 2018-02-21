@@ -1,17 +1,19 @@
+// @flow
+// @jsx createElement
+
 import '../../../css/options/external-link.css'
 
-import PropTypes from 'prop-types'
 import {createElement} from 'react'
+import type {Element} from 'react'
 
-const ExternalLink = (props) => (
+type Props = {
+  children: string | Element<*>,
+  href: string
+};
+const ExternalLink = (props: Props) => (
   <a styleName='main' href={props.href} target='_blank' rel='noopener noreferrer'>
     {props.children}
   </a>
 )
-
-ExternalLink.propTypes = {
-  children: PropTypes.node.isRequired,
-  href: PropTypes.string.isRequired
-}
 
 export default ExternalLink

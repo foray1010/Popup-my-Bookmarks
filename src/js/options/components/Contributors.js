@@ -1,3 +1,6 @@
+// @flow
+// @jsx createElement
+
 import '../../../css/options/contributors.css'
 
 import {Fragment, createElement} from 'react'

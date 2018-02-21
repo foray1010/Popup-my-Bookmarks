@@ -1,3 +1,6 @@
+// @flow
+
+import type {Saga} from 'redux-saga'
 import {all, takeLatest} from 'redux-saga/effects'
 
 import {bookmarkTypes} from '../actions'
@@ -6,7 +9,7 @@ import {initBookmarkTrees} from './modules/initBookmarkTrees'
 import {openBookmarkTree} from './modules/openBookmarkTree'
 import {refreshBookmarkTrees} from './modules/refreshBookmarkTrees'
 
-export function* bookmarkSaga() {
+export function* bookmarkSaga(): Saga<void> {
   yield all([
     takeLatest(bookmarkTypes.GET_SEARCH_RESULT, getSearchResult),
     takeLatest(bookmarkTypes.INIT_BOOKMARK_TREES, initBookmarkTrees),

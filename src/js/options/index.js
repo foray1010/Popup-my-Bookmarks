@@ -1,3 +1,6 @@
+// @flow
+// @jsx createElement
+
 import 'babel-polyfill'
 
 import '../../manifest.yml'

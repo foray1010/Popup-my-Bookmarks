@@ -1,18 +1,27 @@
-import PropTypes from 'prop-types'
+// @flow
+// @jsx createElement
+
 import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 
-class InputNumber extends PureComponent {
-  handleBlur = (evt) => {
-    const parsedValue = parseInt(evt.target.value, 10)
+type Props = {
+  maximum: number,
+  minimum: number,
+  optionName: string,
+  optionValue: number,
+  updateSingleOption: (string, number) => void
+};
+class InputNumber extends PureComponent<Props> {
+  handleBlur = (evt: SyntheticEvent<HTMLInputElement>) => {
+    const parsedValue = parseInt(evt.currentTarget.value, 10)
 
     const newOptionValue = R.clamp(this.props.minimum, this.props.maximum, parsedValue)
 
     this.props.updateSingleOption(this.props.optionName, newOptionValue)
   }
 
-  handleChange = (evt) => {
-    const parsedValue = parseInt(evt.target.value, 10)
+  handleChange = (evt: SyntheticEvent<HTMLInputElement>) => {
+    const parsedValue = parseInt(evt.currentTarget.value, 10)
 
     // only allow input number
     if (Number.isNaN(parsedValue)) return
@@ -20,7 +29,7 @@ class InputNumber extends PureComponent {
   }
 
   // prevent user try to save by pressing enter
-  handleKeyDown = (evt) => {
+  handleKeyDown = (evt: SyntheticEvent<HTMLInputElement>) => {
     if (evt.keyCode === 13) {
       evt.preventDefault()
     }
@@ -38,14 +47,6 @@ class InputNumber extends PureComponent {
       onKeyDown={this.handleKeyDown}
     />
   )
-}
-
-InputNumber.propTypes = {
-  maximum: PropTypes.number.isRequired,
-  minimum: PropTypes.number.isRequired,
-  optionName: PropTypes.string.isRequired,
-  optionValue: PropTypes.number.isRequired,
-  updateSingleOption: PropTypes.func.isRequired
 }
 
 export default InputNumber

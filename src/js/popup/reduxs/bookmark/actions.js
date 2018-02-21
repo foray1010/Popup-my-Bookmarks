@@ -1,3 +1,5 @@
+// @flow
+
 import {createActions} from 'reduxsauce'
 
 export const {Creators: bookmarkCreators, Types: bookmarkTypes} = createActions({

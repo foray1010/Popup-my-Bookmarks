@@ -1,28 +1,35 @@
-import PropTypes from 'prop-types'
+// @flow
+// @jsx createElement
+
 import {PureComponent, createElement} from 'react'
 import Immutable from 'seamless-immutable'
 
-class Option extends PureComponent {
+type Props = {
+  optionChoice: string,
+  optionChoiceIndex: number,
+  optionName: string,
+  optionValue: number[],
+  updateSingleOption: (string, number[]) => void
+};
+class Option extends PureComponent<Props> {
   inputId = Math.random()
     .toString(36)
     .substring(2)
 
-  handleChange = (evt) => {
-    const {optionName, optionValue, updateSingleOption} = this.props
+  handleChange = (evt: SyntheticEvent<HTMLInputElement>) => {
+    const checkboxValue = parseInt(evt.currentTarget.value, 10)
 
-    const checkboxValue = parseInt(evt.target.value, 10)
-
-    const wasChecked = optionValue.includes(checkboxValue)
+    const wasChecked = this.props.optionValue.includes(checkboxValue)
 
     let newOptionValue
     if (wasChecked) {
-      newOptionValue = optionValue.filter((x) => x !== checkboxValue)
+      newOptionValue = this.props.optionValue.filter((x) => x !== checkboxValue)
     } else {
-      const mutableNewOptionValue = [checkboxValue, ...optionValue].sort()
+      const mutableNewOptionValue = [checkboxValue, ...this.props.optionValue].sort()
       newOptionValue = Immutable(mutableNewOptionValue)
     }
 
-    updateSingleOption(optionName, newOptionValue)
+    this.props.updateSingleOption(this.props.optionName, newOptionValue)
   }
 
   render = () => (
@@ -38,14 +45,6 @@ class Option extends PureComponent {
       {this.props.optionChoice}
     </label>
   )
-}
-
-Option.propTypes = {
-  optionChoice: PropTypes.string.isRequired,
-  optionChoiceIndex: PropTypes.number.isRequired,
-  optionName: PropTypes.string.isRequired,
-  optionValue: PropTypes.arrayOf(PropTypes.number).isRequired,
-  updateSingleOption: PropTypes.func.isRequired
 }
 
 export default Option

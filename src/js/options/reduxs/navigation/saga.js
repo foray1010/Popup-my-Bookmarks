@@ -1,9 +1,12 @@
+// @flow
+
+import type {Saga} from 'redux-saga'
 import {put, takeLatest} from 'redux-saga/effects'
 
 import {optionsCreators} from '../options/actions'
 import {navigationTypes} from './actions'
 
-function* switchNavModule() {
+function* switchNavModule(): Saga<void> {
   try {
     yield put(optionsCreators.reloadOptions())
   } catch (err) {
@@ -11,6 +14,6 @@ function* switchNavModule() {
   }
 }
 
-export function* navigationSaga() {
+export function* navigationSaga(): Saga<void> {
   yield takeLatest(navigationTypes.SWITCH_NAV_MODULE, switchNavModule)
 }

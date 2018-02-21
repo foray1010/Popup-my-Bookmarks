@@ -1,6 +1,8 @@
+// @flow
+// @jsx createElement
+
 import '../../../../css/options/nav-bar.css'
 
-import PropTypes from 'prop-types'
 import {createElement} from 'react'
 import webExtension from 'webextension-polyfill'
 
@@ -31,29 +33,22 @@ const navBarItemInfos = [
   }
 ]
 
-const NavBar = (props) => {
-  const {selectedNavModule, switchNavModule} = props
-
-  const navItems = navBarItemInfos.map((navBarItemInfo) => {
-    const {navModule, title} = navBarItemInfo
-
-    return (
+type Props = {
+  selectedNavModule: string,
+  switchNavModule: (string) => void
+};
+const NavBar = (props: Props) => (
+  <nav styleName='main'>
+    {navBarItemInfos.map(({navModule, title}) => (
       <NavBarItem
         key={navModule}
-        isActive={navModule === selectedNavModule}
+        isActive={navModule === props.selectedNavModule}
         navModule={navModule}
-        switchNavModule={switchNavModule}
+        switchNavModule={props.switchNavModule}
         title={title}
       />
-    )
-  })
-
-  return <nav styleName='main'>{navItems}</nav>
-}
-
-NavBar.propTypes = {
-  selectedNavModule: PropTypes.string.isRequired,
-  switchNavModule: PropTypes.func.isRequired
-}
+    ))}
+  </nav>
+)
 
 export default NavBar

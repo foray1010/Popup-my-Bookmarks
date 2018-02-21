@@ -1,3 +1,6 @@
+// @flow
+// @jsx createElement
+
 import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
@@ -7,7 +10,17 @@ import {OPTION_TABLE_MAP} from '../../constants'
 import {optionsCreators} from '../../reduxs'
 import OptionForm from './OptionForm'
 
-class OptionFormContainer extends PureComponent {
+type Props = {
+  options: Object,
+  resetToDefaultOptions: () => void,
+  saveOptions: () => void,
+  selectedOptionFormMap: string[],
+  updateSingleOption: (string, any) => void
+};
+type State = {
+  optionsConfig: ?Object
+};
+class OptionFormContainer extends PureComponent<Props, State> {
   state = {
     optionsConfig: null
   }

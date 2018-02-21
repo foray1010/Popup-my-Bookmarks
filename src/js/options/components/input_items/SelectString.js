@@ -1,9 +1,17 @@
-import PropTypes from 'prop-types'
+// @flow
+// @jsx createElement
+
 import {PureComponent, createElement} from 'react'
 
-class SelectString extends PureComponent {
-  handleChange = (evt) => {
-    this.props.updateSingleOption(this.props.optionName, parseInt(evt.target.value, 10))
+type Props = {
+  choices: Array<string | void>,
+  optionName: string,
+  optionValue: number,
+  updateSingleOption: (string, number) => void
+};
+class SelectString extends PureComponent<Props> {
+  handleChange = (evt: SyntheticEvent<HTMLSelectElement>) => {
+    this.props.updateSingleOption(this.props.optionName, parseInt(evt.currentTarget.value, 10))
   }
 
   render = () => (
@@ -26,13 +34,6 @@ class SelectString extends PureComponent {
       }, [])}
     </select>
   )
-}
-
-SelectString.propTypes = {
-  choices: PropTypes.arrayOf(PropTypes.string).isRequired,
-  optionName: PropTypes.string.isRequired,
-  optionValue: PropTypes.number.isRequired,
-  updateSingleOption: PropTypes.func.isRequired
 }
 
 export default SelectString

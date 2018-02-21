@@ -1,13 +1,23 @@
+// @flow
+// @jsx createElement
+
 import '../../../../css/options/option-form.css'
 
-import PropTypes from 'prop-types'
 import {createElement} from 'react'
 import webExtension from 'webextension-polyfill'
 
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 
-const OptionForm = (props) => (
+type Props = {
+  options: Object,
+  optionsConfig: Object,
+  resetToDefaultOptions: () => void,
+  saveOptions: () => void,
+  selectedOptionFormMap: string[],
+  updateSingleOption: (string, any) => void
+};
+const OptionForm = (props: Props) => (
   <form>
     <table styleName='table'>
       <tbody>
@@ -48,14 +58,5 @@ const OptionForm = (props) => (
     </table>
   </form>
 )
-
-OptionForm.propTypes = {
-  options: PropTypes.object.isRequired,
-  optionsConfig: PropTypes.object.isRequired,
-  saveOptions: PropTypes.func.isRequired,
-  selectedOptionFormMap: PropTypes.arrayOf(PropTypes.string).isRequired,
-  resetToDefaultOptions: PropTypes.func.isRequired,
-  updateSingleOption: PropTypes.func.isRequired
-}
 
 export default OptionForm

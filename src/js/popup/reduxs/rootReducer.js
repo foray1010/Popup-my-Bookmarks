@@ -1,3 +1,5 @@
+// @flow
+
 import {combineReducers} from 'redux'
 
 import {bookmarkReducer} from './bookmark/reducer'
