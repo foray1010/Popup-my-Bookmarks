@@ -10,6 +10,7 @@ import BookmarkTree from './BookmarkTree'
 
 type Props = {|
   focusId: string,
+  listItemWidth: number,
   removeFocusId: () => void,
   setFocusId: (string) => void,
   treeInfo: Object
@@ -26,6 +27,7 @@ class BookmarkTreeContainer extends PureComponent<Props> {
   render = () => (
     <BookmarkTree
       focusId={this.props.focusId}
+      listItemWidth={this.props.listItemWidth}
       onMouseEnter={this.handleMouseEnter}
       onMouseLeave={this.handleMouseLeave}
       treeInfo={this.props.treeInfo}
@@ -35,6 +37,7 @@ class BookmarkTreeContainer extends PureComponent<Props> {
 
 const mapStateToProps = (state, ownProps) => ({
   focusId: R.path(['bookmark', 'focusId'], state),
+  listItemWidth: state.options.setWidth,
   treeInfo: state.bookmark.trees.find(R.pathEq(['parent', 'id'], ownProps.treeId))
 })
 
