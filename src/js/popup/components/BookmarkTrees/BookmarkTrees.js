@@ -18,7 +18,7 @@ const BookmarkTrees = (props: Props) => {
   const trees = props.treeIds.map((treeId) => <BookmarkTree key={treeId} treeId={treeId} />)
 
   const mainTree = trees.filter((x, index) => index % 2 === 0)
-  const subTree = trees.filter((x, index) => index % 2 === 1)
+  const subTree = trees.filter((x, index) => index % 2 !== 0)
 
   return (
     <main className={props.className} styleName='main'>
