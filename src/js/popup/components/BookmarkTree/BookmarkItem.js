@@ -6,6 +6,8 @@ import '../../../../css/popup/bookmark-item.css'
 import classNames from 'classnames'
 import {PureComponent, createElement} from 'react'
 
+import * as CST from '../../constants'
+
 type Props = {|
   bookmarkInfo: Object,
   isFocused: boolean,
@@ -17,7 +19,11 @@ class BookmarkItem extends PureComponent<Props> {
 
   render = () => (
     <div
-      styleName={classNames('main', {focused: this.props.isFocused})}
+      styleName={classNames('main', {
+        focused: this.props.isFocused,
+        'root-folder': this.props.bookmarkInfo.isRoot,
+        separator: this.props.bookmarkInfo.type === CST.TYPE_SEPARATOR
+      })}
       onMouseEnter={this.handleMouseEnter}
       onMouseLeave={this.props.onMouseLeave}
     >
