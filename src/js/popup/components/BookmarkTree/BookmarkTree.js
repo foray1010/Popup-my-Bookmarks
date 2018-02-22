@@ -11,6 +11,7 @@ import BookmarkItem from './BookmarkItem'
 
 type Props = {|
   focusId: string,
+  iconSize: number,
   listItemWidth: number,
   onMouseEnter: (string) => () => void,
   onMouseLeave: () => void,
@@ -97,6 +98,7 @@ class BookmarkTree extends PureComponent<Props, State> {
                 <BookmarkItem
                   key={bookmarkInfo.id}
                   bookmarkInfo={bookmarkInfo}
+                  iconSize={this.props.iconSize}
                   isFocused={this.props.focusId === bookmarkInfo.id}
                   onMouseEnter={this.props.onMouseEnter}
                   onMouseLeave={this.props.onMouseLeave}

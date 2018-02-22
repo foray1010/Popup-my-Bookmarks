@@ -11,6 +11,7 @@ import BookmarkTree from './BookmarkTree'
 
 type Props = {|
   focusId: string,
+  iconSize: number,
   listItemWidth: number,
   removeFocusId: () => void,
   rowHeight: number,
@@ -29,6 +30,7 @@ class BookmarkTreeContainer extends PureComponent<Props> {
   render = () => (
     <BookmarkTree
       focusId={this.props.focusId}
+      iconSize={this.props.iconSize}
       listItemWidth={this.props.listItemWidth}
       onMouseEnter={this.handleMouseEnter}
       onMouseLeave={this.handleMouseLeave}
@@ -38,14 +40,15 @@ class BookmarkTreeContainer extends PureComponent<Props> {
   )
 }
 
+const getIconSize = R.max(CST.MIN_BOOKMARK_ICON_SIZE)
 const getRowHeight = (fontSize) =>
-  // icon size
-  Math.max(fontSize, CST.MIN_BOOKMARK_ICON_SIZE) +
+  getIconSize(fontSize) +
   // +1 for border width, GOLDEN_GAP for padding
   (1 + CST.GOLDEN_GAP) * 2
 
 const mapStateToProps = (state, ownProps) => ({
   focusId: R.path(['bookmark', 'focusId'], state),
+  iconSize: getIconSize(state.options.fontSize),
   listItemWidth: state.options.setWidth,
   rowHeight: getRowHeight(state.options.fontSize),
   treeInfo: state.bookmark.trees.find(R.pathEq(['parent', 'id'], ownProps.treeId))
