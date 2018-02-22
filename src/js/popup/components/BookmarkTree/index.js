@@ -5,6 +5,7 @@ import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
+import * as CST from '../../constants'
 import {bookmarkCreators} from '../../reduxs'
 import BookmarkTree from './BookmarkTree'
 
@@ -12,6 +13,7 @@ type Props = {|
   focusId: string,
   listItemWidth: number,
   removeFocusId: () => void,
+  rowHeight: number,
   setFocusId: (string) => void,
   treeInfo: Object
 |}
@@ -30,14 +32,22 @@ class BookmarkTreeContainer extends PureComponent<Props> {
       listItemWidth={this.props.listItemWidth}
       onMouseEnter={this.handleMouseEnter}
       onMouseLeave={this.handleMouseLeave}
+      rowHeight={this.props.rowHeight}
       treeInfo={this.props.treeInfo}
     />
   )
 }
 
+const getRowHeight = (fontSize) =>
+  // icon size
+  Math.max(fontSize, CST.MIN_BOOKMARK_ICON_SIZE) +
+  // +1 for border width, GOLDEN_GAP for padding
+  (1 + CST.GOLDEN_GAP) * 2
+
 const mapStateToProps = (state, ownProps) => ({
   focusId: R.path(['bookmark', 'focusId'], state),
   listItemWidth: state.options.setWidth,
+  rowHeight: getRowHeight(state.options.fontSize),
   treeInfo: state.bookmark.trees.find(R.pathEq(['parent', 'id'], ownProps.treeId))
 })
 

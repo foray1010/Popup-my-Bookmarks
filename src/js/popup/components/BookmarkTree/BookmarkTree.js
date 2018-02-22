@@ -21,10 +21,6 @@ type State = {|
   listHeight: number
 |}
 class BookmarkTree extends PureComponent<Props, State> {
-  static defaultProps = {
-    rowHeight: 22 // to remove
-  }
-
   state = {
     listHeight: 0
   }

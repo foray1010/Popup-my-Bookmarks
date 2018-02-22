@@ -5,6 +5,7 @@ export * from '../../common/constants'
 export const DRAG_INDICATOR = 'drag-indicator'
 export const GOLDEN_GAP = 2
 export const MAX_HEIGHT = 598
+export const MIN_BOOKMARK_ICON_SIZE = 16
 export const SEARCH_RESULT_ID = 'SEARCH_RESULT_ID'
 export const SEPARATE_THIS_URL = 'http://separatethis.com/'
 
