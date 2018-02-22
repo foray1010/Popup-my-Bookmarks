@@ -1,5 +1,6 @@
 [options]
+experimental.const_params=true
 module.use_strict=true
 
 # webpack loaders
-module.name_mapper='.*\.yml$' -> '<PROJECT_ROOT>/__mocks__/fileMock.js'
+module.name_mapper.extension='yml' -> '<PROJECT_ROOT>/__mocks__/fileMock.js'
