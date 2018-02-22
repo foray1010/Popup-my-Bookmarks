@@ -6,12 +6,12 @@ import '../../../../css/popup/bookmark-item.css'
 import classNames from 'classnames'
 import {PureComponent, createElement} from 'react'
 
-type Props = {
+type Props = {|
   bookmarkInfo: Object,
   isFocused: boolean,
   onMouseEnter: (string) => () => void,
   onMouseLeave: () => void
-};
+|}
 class BookmarkItem extends PureComponent<Props> {
   handleMouseEnter = this.props.onMouseEnter(this.props.bookmarkInfo.id)
 

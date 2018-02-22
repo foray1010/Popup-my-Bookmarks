@@ -25,7 +25,7 @@ import {
 const getOptionsConfig = async (): Promise<Object> => {
   const getMessages = R.map(webExtension.i18n.getMessage)
 
-  const openBookmarkChoices: string[] = getMessages([
+  const openBookmarkChoices = getMessages([
     'clickOption1',
     'clickOption2',
     'clickOption3',
@@ -34,12 +34,12 @@ const getOptionsConfig = async (): Promise<Object> => {
     'clickOption6',
     'clickOption7'
   ])
-  const rootFolderChoices: string[] = []
+  const rootFolderChoices = []
 
   // get the root folders' title and set as the choices of 'defExpand'
-  const rootFolders: Object[] = await webExtension.bookmarks.getChildren(ROOT_ID)
+  const rootFolders = await webExtension.bookmarks.getChildren(ROOT_ID)
   for (const rootFolder of rootFolders) {
-    const rootFolderIdNum: number = Number(rootFolder.id)
+    const rootFolderIdNum = Number(rootFolder.id)
 
     rootFolderChoices[rootFolderIdNum] = rootFolder.title
   }

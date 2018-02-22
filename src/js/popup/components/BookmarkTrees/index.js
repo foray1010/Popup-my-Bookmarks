@@ -12,12 +12,12 @@ import withBookmarkEvents from './withBookmarkEvents'
 
 const getTreeIds = R.compose(R.map(R.path(['parent', 'id'])), R.path(['bookmark', 'trees']))
 
-type Props = {
+type Props = {|
   initBookmarkTrees: () => void,
   mainTreeHeader: Element<*>,
   options: Object,
-  treeIds: string[]
-};
+  treeIds: $ReadOnlyArray<string>
+|}
 class BookmarkTreesContainer extends PureComponent<Props> {
   componentDidMount() {
     this.props.initBookmarkTrees()

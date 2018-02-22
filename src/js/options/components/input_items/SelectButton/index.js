@@ -13,12 +13,12 @@ const getLeftPercentage = R.compose(
   (optionChoices, optionValue) => optionChoices.indexOf(optionValue) * (100 / optionChoices.length)
 )
 
-type Props = {
-  optionChoices: boolean[],
+type Props = {|
+  optionChoices: $ReadOnlyArray<boolean>,
   optionName: string,
   optionValue: boolean,
   updateSingleOption: (string, boolean) => void
-};
+|}
 const SelectButton = (props: Props) => (
   <div styleName='main'>
     <div

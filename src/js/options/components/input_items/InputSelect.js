@@ -8,12 +8,12 @@ import {PureComponent, createElement} from 'react'
 
 import {normalizeInputtingValue} from '../../../common/functions'
 
-type Props = {
-  choices: string[],
+type Props = {|
+  choices: $ReadOnlyArray<string>,
   optionName: string,
   optionValue: string,
   updateSingleOption: (string, string) => void
-};
+|}
 class InputSelect extends PureComponent<Props> {
   inputEl: ?HTMLInputElement
   selectEl: ?HTMLSelectElement

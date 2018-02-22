@@ -4,13 +4,13 @@
 import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 
-type Props = {
+type Props = {|
   maximum: number,
   minimum: number,
   optionName: string,
   optionValue: number,
   updateSingleOption: (string, number) => void
-};
+|}
 class InputNumber extends PureComponent<Props> {
   handleBlur = (evt: SyntheticEvent<HTMLInputElement>) => {
     const parsedValue = parseInt(evt.currentTarget.value, 10)

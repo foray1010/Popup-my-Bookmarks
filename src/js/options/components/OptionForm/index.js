@@ -10,16 +10,16 @@ import {OPTION_TABLE_MAP} from '../../constants'
 import {optionsCreators} from '../../reduxs'
 import OptionForm from './OptionForm'
 
-type Props = {
+type Props = {|
   options: Object,
   resetToDefaultOptions: () => void,
   saveOptions: () => void,
-  selectedOptionFormMap: string[],
+  selectedOptionFormMap: $ReadOnlyArray<string>,
   updateSingleOption: (string, any) => void
-};
-type State = {
+|}
+type State = {|
   optionsConfig: ?Object
-};
+|}
 class OptionFormContainer extends PureComponent<Props, State> {
   state = {
     optionsConfig: null
@@ -33,7 +33,14 @@ class OptionFormContainer extends PureComponent<Props, State> {
 
   render = () =>
     (this.state.optionsConfig ? (
-      <OptionForm {...this.props} optionsConfig={this.state.optionsConfig} />
+      <OptionForm
+        options={this.props.options}
+        optionsConfig={this.state.optionsConfig}
+        resetToDefaultOptions={this.props.resetToDefaultOptions}
+        saveOptions={this.props.saveOptions}
+        selectedOptionFormMap={this.props.selectedOptionFormMap}
+        updateSingleOption={this.props.updateSingleOption}
+      />
     ) : null)
 }
 

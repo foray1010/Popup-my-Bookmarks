@@ -9,14 +9,14 @@ import webExtension from 'webextension-polyfill'
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 
-type Props = {
+type Props = {|
   options: Object,
   optionsConfig: Object,
   resetToDefaultOptions: () => void,
   saveOptions: () => void,
-  selectedOptionFormMap: string[],
+  selectedOptionFormMap: $ReadOnlyArray<string>,
   updateSingleOption: (string, any) => void
-};
+|}
 const OptionForm = (props: Props) => (
   <form>
     <table styleName='table'>

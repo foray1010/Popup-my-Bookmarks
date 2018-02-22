@@ -3,12 +3,12 @@
 
 import {PureComponent, createElement} from 'react'
 
-type Props = {
-  choices: Array<string | void>,
+type Props = {|
+  choices: $ReadOnlyArray<string | void>,
   optionName: string,
   optionValue: number,
   updateSingleOption: (string, number) => void
-};
+|}
 class SelectString extends PureComponent<Props> {
   handleChange = (evt: SyntheticEvent<HTMLSelectElement>) => {
     this.props.updateSingleOption(this.props.optionName, parseInt(evt.currentTarget.value, 10))

@@ -15,9 +15,9 @@ export const generateSearchKeywordMatcher = (searchKeyword: string) => (title: s
     searchKeyword
   )
 
-type Payload = {
+type Payload = {|
   searchKeyword: string
-};
+|}
 export function* getSearchResult({searchKeyword}: Payload): Saga<void> {
   try {
     if (!searchKeyword) {

@@ -10,11 +10,11 @@ import {composeWithDevTools} from 'remote-redux-devtools'
 const composeEnhancers =
   process.env.NODE_ENV === 'development' ? composeWithDevTools({port: 8000}) : R.compose
 
-type Payload = {
+type Payload = {|
+  preloadedState?: Object,
   rootReducer: CombinedReducer<*, *>,
-  rootSaga: Saga<void>,
-  preloadedState?: Object
-};
+  rootSaga: Saga<void>
+|}
 export default ({rootReducer, rootSaga, preloadedState}: Payload) => {
   const sagaMiddleware = createSagaMiddleware()
 

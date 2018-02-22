@@ -9,11 +9,11 @@ import styled from 'react-emotion'
 
 import BookmarkTree from '../BookmarkTree'
 
-type Props = {
+type Props = {|
   className: string,
   mainTreeHeader: Element<*>,
-  treeIds: string[]
-};
+  treeIds: $ReadOnlyArray<string>
+|}
 const BookmarkTrees = (props: Props) => {
   const trees = props.treeIds.map((treeId) => <BookmarkTree key={treeId} treeId={treeId} />)
 
@@ -31,8 +31,11 @@ const BookmarkTrees = (props: Props) => {
   )
 }
 
+type StyleProps = {|
+  options: Object
+|}
 export default styled(BookmarkTrees)`
   & > section {
-    width: ${(props) => props.options.setWidth}px;
+    width: ${(props: StyleProps) => props.options.setWidth}px;
   }
 `

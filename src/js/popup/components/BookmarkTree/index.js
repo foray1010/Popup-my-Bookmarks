@@ -8,12 +8,12 @@ import {connect} from 'react-redux'
 import {bookmarkCreators} from '../../reduxs'
 import BookmarkTree from './BookmarkTree'
 
-type Props = {
+type Props = {|
   focusId: string,
   removeFocusId: () => void,
   setFocusId: (string) => void,
   treeInfo: Object
-};
+|}
 class BookmarkTreeContainer extends PureComponent<Props> {
   handleMouseEnter = (bookmarkId: string) => () => {
     this.props.setFocusId(bookmarkId)
@@ -25,9 +25,10 @@ class BookmarkTreeContainer extends PureComponent<Props> {
 
   render = () => (
     <BookmarkTree
-      {...this.props}
+      focusId={this.props.focusId}
       onMouseEnter={this.handleMouseEnter}
       onMouseLeave={this.handleMouseLeave}
+      treeInfo={this.props.treeInfo}
     />
   )
 }

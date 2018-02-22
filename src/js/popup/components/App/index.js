@@ -9,9 +9,9 @@ import {connect} from 'react-redux'
 import App from './App'
 import withMouseEvents from './withMouseEvents'
 
-type Props = {
+type Props = {|
   options: Object
-};
+|}
 class AppContainer extends PureComponent<Props> {
   componentDidMount() {
     if (document.body) {

@@ -33,10 +33,10 @@ const navBarItemInfos = [
   }
 ]
 
-type Props = {
+type Props = {|
   selectedNavModule: string,
   switchNavModule: (string) => void
-};
+|}
 const NavBar = (props: Props) => (
   <nav styleName='main'>
     {navBarItemInfos.map(({navModule, title}) => (

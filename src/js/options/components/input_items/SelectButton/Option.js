@@ -7,12 +7,12 @@ import classNames from 'classnames'
 import {PureComponent, createElement} from 'react'
 import webExtension from 'webextension-polyfill'
 
-type Props = {
+type Props = {|
   optionChoice: boolean,
   optionName: string,
   optionValue: boolean,
   updateSingleOption: (string, boolean) => void
-};
+|}
 class Option extends PureComponent<Props> {
   inputEl: ?HTMLInputElement
 

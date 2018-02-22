@@ -1,35 +1,38 @@
 // @flow
 
-export type BookmarkInfo = {
-  id: string,
-  parentId: string,
-  title: string,
-  url: string,
+export type BookmarkInfo = {|
   iconUrl: string,
-  storageIndex: number,
-  type: string,
-  isRoot: boolean,
-  isUnmodifiable: boolean
-}
-;export type BookmarkNode = {
   id: string,
-  parentId?: string,
-  index?: number,
-  url?: string,
+  isRoot: boolean,
+  isUnmodifiable: boolean,
+  parentId: string,
+  storageIndex: number,
   title: string,
+  type: string,
+  url: string
+|}
+
+export type BookmarkNode = {|
   dateAdded?: number,
   dateGroupModified?: number,
-  unmodifiable?: string
-}
-;export type BookmarkTree = {
-  children: BookmarkInfo[],
+  id: string,
+  index?: number,
+  parentId?: string,
+  title: string,
+  unmodifiable?: string,
+  url?: string
+|}
+
+export type BookmarkTree = {|
+  children: $ReadOnlyArray<BookmarkInfo>,
   parent: BookmarkInfo
-}
-;export type Bookmark = {
+|}
+
+export type Bookmark = {|
   copyId: string,
   cutId: string,
   dragId: string,
   focusId: string,
   searchKeyword: string,
-  trees: BookmarkTree[]
-};
+  trees: $ReadOnlyArray<BookmarkTree>
+|}

@@ -15,13 +15,17 @@ const INITIAL_STATE: TYPES.Bookmark = Immutable({
   trees: []
 })
 
-type GetSearchResultPayload = { searchKeyword: string };
+type GetSearchResultPayload = {|
+  searchKeyword: string
+|}
 const getSearchResult = (
   state: TYPES.Bookmark,
   {searchKeyword}: GetSearchResultPayload
 ): TYPES.Bookmark => Immutable.merge(state, {searchKeyword})
 
-type RemoveBookmarkTreesPayload = { startIndex: number };
+type RemoveBookmarkTreesPayload = {|
+  startIndex: number
+|}
 const removeBookmarkTrees = (
   state: TYPES.Bookmark,
   {startIndex}: RemoveBookmarkTreesPayload
@@ -30,17 +34,24 @@ const removeBookmarkTrees = (
 const removeFocusId = (state: TYPES.Bookmark): TYPES.Bookmark =>
   Immutable.set(state, 'focusId', '')
 
-type SetBookmarkTreesPayload = { bookmarkTrees: TYPES.BookmarkTree[] };
+type SetBookmarkTreesPayload = {|
+  bookmarkTrees: $ReadOnlyArray<TYPES.BookmarkTree>
+|}
 const setBookmarkTrees = (
   state: TYPES.Bookmark,
   {bookmarkTrees}: SetBookmarkTreesPayload
 ): TYPES.Bookmark => Immutable.set(state, 'trees', bookmarkTrees)
 
-type SetFocusIdPayload = { focusId: string };
+type SetFocusIdPayload = {|
+  focusId: string
+|}
 const setFocusId = (state: TYPES.Bookmark, {focusId}: SetFocusIdPayload): TYPES.Bookmark =>
   Immutable.merge(state, {focusId})
 
-type SpliceBookmarkTreesPayload = { index: number, bookmarkTrees: TYPES.BookmarkTree[] };
+type SpliceBookmarkTreesPayload = {|
+  bookmarkTrees: $ReadOnlyArray<TYPES.BookmarkTree>,
+  index: number
+|}
 const spliceBookmarkTrees = (
   state: TYPES.Bookmark,
   {index, bookmarkTrees}: SpliceBookmarkTreesPayload

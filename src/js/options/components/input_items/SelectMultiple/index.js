@@ -7,12 +7,12 @@ import {createElement} from 'react'
 
 import Option from './Option'
 
-type Props = {
-  choices: Array<string | void>,
+type Props = {|
+  choices: $ReadOnlyArray<string | void>,
   optionName: string,
-  optionValue: number[],
-  updateSingleOption: (string, number[]) => void
-};
+  optionValue: $ReadOnlyArray<number>,
+  updateSingleOption: (string, $ReadOnlyArray<number>) => void
+|}
 const SelectMultiple = (props: Props) => (
   <span styleName='main'>
     {props.choices.reduce((accumulator, optionChoice, optionChoiceIndex) => {

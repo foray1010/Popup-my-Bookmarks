@@ -12,9 +12,9 @@ import {
 import Contributors from '../Contributors'
 import OptionForm from '../OptionForm'
 
-type Props = {
+type Props = {|
   selectedNavModule: string
-};
+|}
 const NavModuleMapper = (props: Props) => {
   switch (props.selectedNavModule) {
     case NAV_MODULE_CONTRIBUTORS:

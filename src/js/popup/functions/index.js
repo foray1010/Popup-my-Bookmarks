@@ -2,7 +2,7 @@
 
 import {GOLDEN_GAP} from '../constants'
 
-export * from './bookmarks'
+export {sortByTitle} from './sortByTitle'
 export * from './dom'
 export * from './lastPosition'
 

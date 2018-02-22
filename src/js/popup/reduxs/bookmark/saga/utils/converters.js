@@ -23,29 +23,30 @@ export const isRoot = (BookmarkNode: TYPES.BookmarkNode): boolean =>
 
 export const simulateBookmark = (partialBookmarkInfo: Object): TYPES.BookmarkInfo => ({
   ...partialBookmarkInfo,
-  parentId: '',
-  title: '',
-  url: '',
   iconUrl: '',
-  storageIndex: -1,
   isRoot: false,
-  isUnmodifiable: true
+  isUnmodifiable: true,
+  parentId: '',
+  storageIndex: -1,
+  title: '',
+  url: ''
 })
 
 export const toBookmarkInfo = R.compose(
-  (bookmarkInfo: TYPES.BookmarkInfo): TYPES.BookmarkInfo => ({
-    ...bookmarkInfo,
-    iconUrl: getIconUrl(bookmarkInfo)
-  }),
+  // use R.merge to replace spread as bug on flow: https://github.com/facebook/flow/issues/2405
+  (bookmarkInfo: TYPES.BookmarkInfo): TYPES.BookmarkInfo =>
+    R.merge(bookmarkInfo, {
+      iconUrl: getIconUrl(bookmarkInfo)
+    }),
   (BookmarkNode: TYPES.BookmarkNode): TYPES.BookmarkInfo => ({
-    id: BookmarkNode.id,
-    parentId: BookmarkNode.parentId || '',
-    title: BookmarkNode.title,
-    url: BookmarkNode.url || '',
     iconUrl: '',
-    storageIndex: typeof BookmarkNode.index === 'number' ? BookmarkNode.index : -1,
-    type: getType(BookmarkNode),
+    id: BookmarkNode.id,
     isRoot: isRoot(BookmarkNode),
-    isUnmodifiable: isRoot(BookmarkNode) || Boolean(BookmarkNode.unmodifiable)
+    isUnmodifiable: isRoot(BookmarkNode) || Boolean(BookmarkNode.unmodifiable),
+    parentId: BookmarkNode.parentId || '',
+    storageIndex: typeof BookmarkNode.index === 'number' ? BookmarkNode.index : -1,
+    title: BookmarkNode.title,
+    type: getType(BookmarkNode),
+    url: BookmarkNode.url || ''
   })
 )

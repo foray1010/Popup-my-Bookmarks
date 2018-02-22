@@ -4,13 +4,13 @@
 import {PureComponent, createElement} from 'react'
 import Immutable from 'seamless-immutable'
 
-type Props = {
+type Props = {|
   optionChoice: string,
   optionChoiceIndex: number,
   optionName: string,
-  optionValue: number[],
-  updateSingleOption: (string, number[]) => void
-};
+  optionValue: $ReadOnlyArray<number>,
+  updateSingleOption: (string, $ReadOnlyArray<number>) => void
+|}
 class Option extends PureComponent<Props> {
   inputId = Math.random()
     .toString(36)

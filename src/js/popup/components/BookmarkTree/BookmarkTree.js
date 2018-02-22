@@ -7,12 +7,12 @@ import {createElement} from 'react'
 
 import BookmarkItem from './BookmarkItem'
 
-type Props = {
+type Props = {|
   focusId: string,
   onMouseEnter: (string) => () => void,
   onMouseLeave: () => void,
   treeInfo: Object
-};
+|}
 const BookmarkTree = (props: Props) => (
   <section styleName='main'>
     <div>

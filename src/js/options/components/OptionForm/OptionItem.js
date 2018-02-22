@@ -12,12 +12,12 @@ import SelectButton from '../input_items/SelectButton'
 import SelectMultiple from '../input_items/SelectMultiple'
 import SelectString from '../input_items/SelectString'
 
-type Props = {
-  optionName: string,
+type Props = {|
   optionConfig: Object,
-  optionValue: boolean | number | number[] | string,
+  optionName: string,
+  optionValue: boolean | number | $ReadOnlyArray<number> | string,
   updateSingleOption: (string, any) => void
-};
+|}
 const OptionItem = ({
   optionConfig, optionName, optionValue, updateSingleOption
 }: Props) => {

@@ -18,7 +18,7 @@ export function* getBookmarkInfo(id: string): Saga<TYPES.BookmarkInfo> {
   return toBookmarkInfo(bookmarkNodes[0])
 }
 
-export function* getBookmarkChildren(id: string): Saga<TYPES.BookmarkInfo[]> {
+export function* getBookmarkChildren(id: string): Saga<$ReadOnlyArray<TYPES.BookmarkInfo>> {
   const bookmarkChildNodes = yield call(getBookmarkChildNodes, id)
   return R.map(toBookmarkInfo, bookmarkChildNodes)
 }
@@ -35,12 +35,12 @@ export function* getBookmarkTree(id: string): Saga<TYPES.BookmarkTree> {
 }
 
 export function* getBookmarkTrees(
-  restTreeIds: string[],
+  restTreeIds: $ReadOnlyArray<string>,
   options: Object
-): Saga<TYPES.BookmarkTree[]> {
-  const [firstTree, ...restTrees] = yield all([
+): Saga<$ReadOnlyArray<TYPES.BookmarkTree>> {
+  const [firstTree, ...restTrees]: $ReadOnlyArray<TYPES.BookmarkTree> = yield all([
     call(getFirstBookmarkTree, options),
-    ...R.map((id) => call(tryGetBookmarkTree, id), restTreeIds)
+    ...restTreeIds.map((id) => call(tryGetBookmarkTree, id))
   ])
   return R.reduce(
     (acc, tree) => {
@@ -73,7 +73,7 @@ export function* getFirstBookmarkTree(options: Object): Saga<TYPES.BookmarkTree>
   }
 }
 
-export function* searchBookmarks(searchQuery: string): Saga<TYPES.BookmarkInfo[]> {
+export function* searchBookmarks(searchQuery: string): Saga<$ReadOnlyArray<TYPES.BookmarkInfo>> {
   const searchResultNodes = yield call(searchBookmarkNodes, searchQuery)
   return R.map(toBookmarkInfo, searchResultNodes)
 }

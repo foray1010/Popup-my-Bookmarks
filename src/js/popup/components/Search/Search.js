@@ -6,10 +6,10 @@ import '../../../../css/popup/search.css'
 import {createElement} from 'react'
 import webExtension from 'webextension-polyfill'
 
-type Props = {
+type Props = {|
   inputValue: string,
   onInput: (SyntheticInputEvent<HTMLInputElement>) => void
-};
+|}
 const Search = (props: Props) => (
   <div styleName='main'>
     <input

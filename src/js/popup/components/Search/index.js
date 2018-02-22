@@ -12,12 +12,12 @@ import Search from './Search'
 
 const SEARCH_TIMEOUT = 300
 
-type Props = {
+type Props = {|
   getSearchResult: (string) => void
-};
-type State = {
+|}
+type State = {|
   inputValue: string
-};
+|}
 class SearchContainer extends PureComponent<Props, State> {
   state = {
     inputValue: ''
@@ -33,9 +33,9 @@ class SearchContainer extends PureComponent<Props, State> {
     this.props.getSearchResult(this.state.inputValue.trim())
   }, SEARCH_TIMEOUT)
 
-  handleInput = (evt) => {
+  handleInput = (evt: SyntheticInputEvent<HTMLInputElement>) => {
     this.setState({
-      inputValue: normalizeInputtingValue(evt.target.value)
+      inputValue: normalizeInputtingValue(evt.currentTarget.value)
     })
   }
 
