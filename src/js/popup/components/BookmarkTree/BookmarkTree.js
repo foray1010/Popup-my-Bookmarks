@@ -59,7 +59,7 @@ class BookmarkTree extends PureComponent<Props, State> {
     return rowHeight
   }
 
-  setHeight() {
+  setHeight = () => {
     // search-box and tree-header-box height
     const listContainerElOffsetTop = this.listContainerEl ?
       this.listContainerEl.getBoundingClientRect().top :
