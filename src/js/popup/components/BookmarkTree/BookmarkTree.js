@@ -7,6 +7,7 @@ import {PureComponent, createElement} from 'react'
 import List from 'react-virtualized/dist/es/List'
 
 import * as CST from '../../constants'
+import type {BookmarkTree as BookmarkTreeType} from '../../types'
 import BookmarkItem from './BookmarkItem'
 
 type Props = {|
@@ -16,7 +17,7 @@ type Props = {|
   onMouseEnter: (string) => () => void,
   onMouseLeave: () => void,
   rowHeight: number,
-  treeInfo: Object
+  treeInfo: BookmarkTreeType
 |}
 type State = {|
   listHeight: number

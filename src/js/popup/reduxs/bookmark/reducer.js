@@ -3,7 +3,7 @@
 import {createReducer} from 'reduxsauce'
 import Immutable from 'seamless-immutable'
 
-import * as TYPES from '../../types'
+import type {BookmarkTree} from '../../types'
 import {bookmarkTypes} from './actions'
 
 const INITIAL_STATE = Immutable({
@@ -30,7 +30,7 @@ const removeBookmarkTrees = (state, {startIndex}: RemoveBookmarkTreesPayload) =>
 const removeFocusId = (state) => Immutable.set(state, 'focusId', '')
 
 type SetBookmarkTreesPayload = {|
-  bookmarkTrees: $ReadOnlyArray<TYPES.BookmarkTree>
+  bookmarkTrees: $ReadOnlyArray<BookmarkTree>
 |}
 const setBookmarkTrees = (state, {bookmarkTrees}: SetBookmarkTreesPayload) =>
   Immutable.set(state, 'trees', bookmarkTrees)
@@ -41,7 +41,7 @@ type SetFocusIdPayload = {|
 const setFocusId = (state, {focusId}: SetFocusIdPayload) => Immutable.merge(state, {focusId})
 
 type SpliceBookmarkTreesPayload = {|
-  bookmarkTrees: $ReadOnlyArray<TYPES.BookmarkTree>,
+  bookmarkTrees: $ReadOnlyArray<BookmarkTree>,
   index: number
 |}
 const spliceBookmarkTrees = (state, {index, bookmarkTrees}: SpliceBookmarkTreesPayload) =>

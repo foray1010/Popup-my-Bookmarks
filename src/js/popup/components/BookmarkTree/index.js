@@ -7,6 +7,7 @@ import {connect} from 'react-redux'
 
 import * as CST from '../../constants'
 import {bookmarkCreators} from '../../reduxs'
+import type {BookmarkTree as BookmarkTreeType} from '../../types'
 import BookmarkTree from './BookmarkTree'
 
 type Props = {|
@@ -16,7 +17,7 @@ type Props = {|
   removeFocusId: () => void,
   rowHeight: number,
   setFocusId: (string) => void,
-  treeInfo: Object
+  treeInfo: BookmarkTreeType
 |}
 class BookmarkTreeContainer extends PureComponent<Props> {
   handleMouseEnter = (bookmarkId: string) => () => {

@@ -9,13 +9,14 @@ import {PureComponent, createElement} from 'react'
 import styled from 'react-emotion'
 
 import * as CST from '../../constants'
+import type {BookmarkInfo} from '../../types'
 
 const IconImg = styled('img')`
   width: ${R.prop('iconSize')}px;
 `
 
 type Props = {|
-  bookmarkInfo: Object,
+  bookmarkInfo: BookmarkInfo,
   iconSize: number,
   isFocused: boolean,
   onMouseEnter: (string) => () => void,
