@@ -6,7 +6,7 @@ import Immutable from 'seamless-immutable'
 import * as TYPES from '../../types'
 import {bookmarkTypes} from './actions'
 
-const INITIAL_STATE: TYPES.Bookmark = Immutable({
+const INITIAL_STATE = Immutable({
   copyId: '',
   cutId: '',
   dragId: '',
@@ -18,44 +18,33 @@ const INITIAL_STATE: TYPES.Bookmark = Immutable({
 type GetSearchResultPayload = {|
   searchKeyword: string
 |}
-const getSearchResult = (
-  state: TYPES.Bookmark,
-  {searchKeyword}: GetSearchResultPayload
-): TYPES.Bookmark => Immutable.merge(state, {searchKeyword})
+const getSearchResult = (state, {searchKeyword}: GetSearchResultPayload) =>
+  Immutable.merge(state, {searchKeyword})
 
 type RemoveBookmarkTreesPayload = {|
   startIndex: number
 |}
-const removeBookmarkTrees = (
-  state: TYPES.Bookmark,
-  {startIndex}: RemoveBookmarkTreesPayload
-): TYPES.Bookmark => Immutable.set(state, 'trees', state.trees.slice(0, startIndex))
+const removeBookmarkTrees = (state, {startIndex}: RemoveBookmarkTreesPayload) =>
+  Immutable.set(state, 'trees', state.trees.slice(0, startIndex))
 
-const removeFocusId = (state: TYPES.Bookmark): TYPES.Bookmark =>
-  Immutable.set(state, 'focusId', '')
+const removeFocusId = (state) => Immutable.set(state, 'focusId', '')
 
 type SetBookmarkTreesPayload = {|
   bookmarkTrees: $ReadOnlyArray<TYPES.BookmarkTree>
 |}
-const setBookmarkTrees = (
-  state: TYPES.Bookmark,
-  {bookmarkTrees}: SetBookmarkTreesPayload
-): TYPES.Bookmark => Immutable.set(state, 'trees', bookmarkTrees)
+const setBookmarkTrees = (state, {bookmarkTrees}: SetBookmarkTreesPayload) =>
+  Immutable.set(state, 'trees', bookmarkTrees)
 
 type SetFocusIdPayload = {|
   focusId: string
 |}
-const setFocusId = (state: TYPES.Bookmark, {focusId}: SetFocusIdPayload): TYPES.Bookmark =>
-  Immutable.merge(state, {focusId})
+const setFocusId = (state, {focusId}: SetFocusIdPayload) => Immutable.merge(state, {focusId})
 
 type SpliceBookmarkTreesPayload = {|
   bookmarkTrees: $ReadOnlyArray<TYPES.BookmarkTree>,
   index: number
 |}
-const spliceBookmarkTrees = (
-  state: TYPES.Bookmark,
-  {index, bookmarkTrees}: SpliceBookmarkTreesPayload
-): TYPES.Bookmark =>
+const spliceBookmarkTrees = (state, {index, bookmarkTrees}: SpliceBookmarkTreesPayload) =>
   Immutable.set(state, 'trees', state.trees.slice(0, index).concat(bookmarkTrees))
 
 export const bookmarkReducer = createReducer(INITIAL_STATE, {

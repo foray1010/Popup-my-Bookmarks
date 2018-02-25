@@ -3,17 +3,20 @@
 
 import debounce from 'lodash.debounce'
 import * as R from 'ramda'
-import {PureComponent, createElement} from 'react'
+import {Fragment, PureComponent, createElement} from 'react'
+import EventListener from 'react-event-listener'
 import {connect} from 'react-redux'
 
 import {normalizeInputtingValue} from '../../../common/functions'
-import {bookmarkCreators} from '../../reduxs'
+import {bookmarkCreators, uiCreators} from '../../reduxs'
 import Search from './Search'
 
 const SEARCH_TIMEOUT = 300
 
 type Props = {|
-  getSearchResult: (string) => void
+  getSearchResult: (string) => void,
+  isFocusSearchInput: boolean,
+  setIsFocusSearchInput: (boolean) => void
 |}
 type State = {|
   inputValue: string
@@ -33,15 +36,46 @@ class SearchContainer extends PureComponent<Props, State> {
     this.props.getSearchResult(this.state.inputValue.trim())
   }, SEARCH_TIMEOUT)
 
+  handleBlur = () => {
+    this.props.setIsFocusSearchInput(false)
+  }
+
+  handleDocumentKeyDown = (evt: KeyboardEvent) => {
+    // if it is not `Shift`, `Control` etc
+    if (evt.key.length === 1) {
+      this.props.setIsFocusSearchInput(true)
+    }
+  }
+
+  handleFocus = () => {
+    this.props.setIsFocusSearchInput(true)
+  }
+
   handleInput = (evt: SyntheticInputEvent<HTMLInputElement>) => {
     this.setState({
       inputValue: normalizeInputtingValue(evt.currentTarget.value)
     })
   }
 
-  render = () => <Search inputValue={this.state.inputValue} onInput={this.handleInput} />
+  render = () => (
+    <Fragment>
+      <Search
+        inputValue={this.state.inputValue}
+        isFocus={this.props.isFocusSearchInput}
+        onBlur={this.handleBlur}
+        onFocus={this.handleFocus}
+        onInput={this.handleInput}
+      />
+      <EventListener target={document} onKeyDown={this.handleDocumentKeyDown} />
+    </Fragment>
+  )
 }
 
-const mapDispatchToProps = R.pick(['getSearchResult'], bookmarkCreators)
+const mapStateToProps = R.compose(R.pick(['isFocusSearchInput']), R.prop('ui'))
 
-export default connect(null, mapDispatchToProps)(SearchContainer)
+const mapDispatchToProps = {
+  ...R.pick(['getSearchResult'], bookmarkCreators),
+  ...R.pick(['setIsFocusSearchInput'], uiCreators)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer)

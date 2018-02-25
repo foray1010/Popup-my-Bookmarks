@@ -7,11 +7,8 @@ import type {ComponentType} from 'react'
 export default (WrappedComponent: ComponentType<*>) => {
   return class MouseEvents extends PureComponent<*> {
     componentDidMount() {
-      const html = document.documentElement
-      if (html) {
-        html.addEventListener('contextmenu', this.handleContextMenu)
-        html.addEventListener('mousedown', this.handleMouseDown)
-      }
+      document.addEventListener('contextmenu', this.handleContextMenu)
+      document.addEventListener('mousedown', this.handleMouseDown)
     }
 
     handleContextMenu = (evt: MouseEvent) => {
