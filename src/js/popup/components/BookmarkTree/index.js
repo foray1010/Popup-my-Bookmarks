@@ -6,7 +6,7 @@ import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
 import * as CST from '../../constants'
-import {bookmarkCreators} from '../../reduxs'
+import {bookmarkCreators, menuCreators} from '../../reduxs'
 import type {BookmarkTree as BookmarkTreeType} from '../../types'
 import BookmarkTree from './BookmarkTree'
 
@@ -14,12 +14,20 @@ type Props = {|
   focusId: string,
   iconSize: number,
   listItemWidth: number,
+  openMenu: (string, number, number) => void,
   removeFocusId: () => void,
   rowHeight: number,
   setFocusId: (string) => void,
   treeInfo: BookmarkTreeType
 |}
 class BookmarkTreeContainer extends PureComponent<Props> {
+  handleAuxClick = (bookmarkId: string) => (evt: MouseEvent) => {
+    if (!(evt.currentTarget instanceof window.HTMLElement)) return
+
+    const position = evt.currentTarget.getBoundingClientRect()
+    this.props.openMenu(bookmarkId, position.left, position.top)
+  }
+
   handleMouseEnter = (bookmarkId: string) => () => {
     this.props.setFocusId(bookmarkId)
   }
@@ -33,6 +41,7 @@ class BookmarkTreeContainer extends PureComponent<Props> {
       focusId={this.props.focusId}
       iconSize={this.props.iconSize}
       listItemWidth={this.props.listItemWidth}
+      onAuxClick={this.handleAuxClick}
       onMouseEnter={this.handleMouseEnter}
       onMouseLeave={this.handleMouseLeave}
       rowHeight={this.props.rowHeight}
@@ -55,9 +64,9 @@ const mapStateToProps = (state, ownProps) => ({
   treeInfo: state.bookmark.trees.find(R.pathEq(['parent', 'id'], ownProps.treeId))
 })
 
-const mapDispatchToProps = R.pick(
-  ['openBookmarkTree', 'removeFocusId', 'setFocusId'],
-  bookmarkCreators
-)
+const mapDispatchToProps = {
+  ...R.pick(['openBookmarkTree', 'removeFocusId', 'setFocusId'], bookmarkCreators),
+  ...R.pick(['openMenu'], menuCreators)
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookmarkTreeContainer)

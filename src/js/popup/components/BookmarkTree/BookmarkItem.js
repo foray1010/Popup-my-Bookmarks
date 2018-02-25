@@ -19,14 +19,31 @@ type Props = {|
   bookmarkInfo: BookmarkInfo,
   iconSize: number,
   isFocused: boolean,
+  onAuxClick: (string) => (MouseEvent) => void,
   onMouseEnter: (string) => () => void,
   onMouseLeave: () => void
 |}
 class BookmarkItem extends PureComponent<Props> {
+  componentDidMount() {
+    // temp fix for https://github.com/facebook/react/issues/8529
+    // $FlowFixMe // flow does not support auxclick event
+    if (this.baseEl) this.baseEl.addEventListener('auxclick', this.handleAuxClick)
+  }
+
+  componentWillUnmount() {
+    // $FlowFixMe // flow does not support auxclick event
+    if (this.baseEl) this.baseEl.removeEventListener('auxclick', this.handleAuxClick)
+  }
+
+  handleAuxClick = this.props.onAuxClick(this.props.bookmarkInfo.id)
   handleMouseEnter = this.props.onMouseEnter(this.props.bookmarkInfo.id)
 
+  baseEl: ?HTMLElement
   render = () => (
     <div
+      ref={(ref) => {
+        this.baseEl = ref
+      }}
       styleName={classNames('main', {
         focused: this.props.isFocused,
         'root-folder': this.props.bookmarkInfo.isRoot,
