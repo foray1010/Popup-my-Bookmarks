@@ -10,6 +10,7 @@ import App from './App'
 import withMouseEvents from './withMouseEvents'
 
 type Props = {|
+  isShowMenu: boolean,
   options: Object
 |}
 class AppContainer extends PureComponent<Props> {
@@ -23,9 +24,12 @@ class AppContainer extends PureComponent<Props> {
     }
   }
 
-  render = () => <App />
+  render = () => <App isShowMenu={this.props.isShowMenu} />
 }
 
-const mapStateToProps = R.pick(['options'])
+const mapStateToProps = (state) => ({
+  isShowMenu: Boolean(state.menu.targetId),
+  options: state.options
+})
 
 export default R.compose(withMouseEvents, connect(mapStateToProps))(AppContainer)

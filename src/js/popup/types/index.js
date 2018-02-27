@@ -36,3 +36,5 @@ export type Bookmark = {|
   searchKeyword: string,
   trees: $ReadOnlyArray<BookmarkTree>
 |}
+
+export type MenuPattern = $ReadOnlyArray<$ReadOnlyArray<string>>

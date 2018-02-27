@@ -59,6 +59,8 @@
     "react-dom": "^16.0.0",
     "react-emotion": "^9.0.1",
     "react-event-listener": "^0.5.3",
+    "react-helmet": "^5.2.0",
+    "react-measure": "^2.0.0",
     "react-redux": "^5.0.0",
     "react-virtualized": "^9.5.0",
     "redux": "^3.3.1",

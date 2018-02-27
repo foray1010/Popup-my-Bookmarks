@@ -24,8 +24,7 @@ class BookmarkTreeContainer extends PureComponent<Props> {
   handleAuxClick = (bookmarkId: string) => (evt: MouseEvent) => {
     if (!(evt.currentTarget instanceof window.HTMLElement)) return
 
-    const position = evt.currentTarget.getBoundingClientRect()
-    this.props.openMenu(bookmarkId, position.left, position.top)
+    this.props.openMenu(bookmarkId, evt.clientX, evt.clientY)
   }
 
   handleMouseEnter = (bookmarkId: string) => () => {
