@@ -1,8 +1,8 @@
-@import "../common/mixins.css";
-@import "../common/variables.css";
+@import '../common/mixins.css';
+@import '../common/variables.css';
 
 .main {
-  composes: list-item from "../common/composes.css";
+  composes: list-item from '../common/composes.css';
   padding: var(--golden-gap) var(--golden-gap-4x);
   white-space: nowrap;
 
