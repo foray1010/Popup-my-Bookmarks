@@ -15,6 +15,12 @@ const INITIAL_STATE = Immutable({
   trees: []
 })
 
+type CopyBookmarkPayload = {| copyId: string |}
+const copyBookmark = (state, {copyId}: CopyBookmarkPayload) => Immutable.merge(state, {copyId})
+
+type CutBookmarkPayload = {| cutId: string |}
+const cutBookmark = (state, {cutId}: CutBookmarkPayload) => Immutable.merge(state, {cutId})
+
 type GetSearchResultPayload = {|
   searchKeyword: string
 |}
@@ -48,6 +54,8 @@ const spliceBookmarkTrees = (state, {index, bookmarkTrees}: SpliceBookmarkTreesP
   Immutable.set(state, 'trees', state.trees.slice(0, index).concat(bookmarkTrees))
 
 export const bookmarkReducer = createReducer(INITIAL_STATE, {
+  [bookmarkTypes.COPY_BOOKMARK]: copyBookmark,
+  [bookmarkTypes.CUT_BOOKMARK]: cutBookmark,
   [bookmarkTypes.GET_SEARCH_RESULT]: getSearchResult,
   [bookmarkTypes.REMOVE_BOOKMARK_TREES]: removeBookmarkTrees,
   [bookmarkTypes.REMOVE_FOCUS_ID]: removeFocusId,
