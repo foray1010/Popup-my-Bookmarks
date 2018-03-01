@@ -22,11 +22,24 @@ type Payload = {|
   params: {|
     isIncognito: boolean,
     isNewWindow: boolean,
+    isOpenInBackground: boolean,
     isWarnWhenOpenMany: boolean
   |}
 |}
-export function* openBookmarks({ids, params}: Payload): Saga<void> {
+export function* openBookmarks({
+  ids,
+  params: {
+    isIncognito = false,
+    isNewWindow = false,
+    isOpenInBackground = false
+    // isWarnWhenOpenMany = false
+  }
+}: Payload): Saga<void> {
   try {
+    // logic check
+    if (isIncognito && !isNewWindow) throw new Error('incognito window must be new window')
+    if (isOpenInBackground && isNewWindow) throw new Error('cannot open in background window')
+
     const urls = yield call(getUrls, ids)
 
     /*
@@ -38,13 +51,13 @@ export function* openBookmarks({ids, params}: Payload): Saga<void> {
     }
     */
 
-    if (params.isNewWindow) {
+    if (isNewWindow) {
       yield call(createWindow, {
         url: urls,
-        incognito: params.isIncognito
+        incognito: isIncognito
       })
     } else {
-      yield all(urls.map((url) => call(createTab, {url, active: false})))
+      yield all(urls.map((url) => call(createTab, {url, active: !isOpenInBackground})))
     }
   } catch (err) {
     console.error(err)

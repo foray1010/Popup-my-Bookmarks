@@ -13,6 +13,7 @@ import Mask from '../Mask'
 import Menu from './Menu'
 
 type Props = {|
+  clickMenuRow: (string) => void,
   closeMenu: () => void,
   focusedRow: string,
   menuPattern: MenuPattern,
@@ -22,7 +23,8 @@ type Props = {|
   setFocusedRow: (string) => void
 |}
 class MenuContainer extends PureComponent<Props> {
-  handleClick = () => () => {
+  handleClick = (rowKey: string) => () => {
+    this.props.clickMenuRow(rowKey)
     this.props.closeMenu()
   }
 
@@ -52,6 +54,9 @@ class MenuContainer extends PureComponent<Props> {
 
 const mapStateToProps = R.prop('menu')
 
-const mapDispatchToProps = R.pick(['closeMenu', 'removeFocusedRow', 'setFocusedRow'], menuCreators)
+const mapDispatchToProps = R.pick(
+  ['clickMenuRow', 'closeMenu', 'removeFocusedRow', 'setFocusedRow'],
+  menuCreators
+)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuContainer)
