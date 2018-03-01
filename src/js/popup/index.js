@@ -11,8 +11,8 @@ import {Provider} from 'react-redux'
 import Immutable from 'seamless-immutable'
 import webExtension from 'webextension-polyfill'
 
-import {getOptionsConfig, renderToBody} from '../common/functions'
 import configureStore from '../common/store/configureStore'
+import {getOptionsConfig, renderToBody} from '../common/utils'
 import App from './components/App'
 import {rootReducer, rootSaga} from './reduxs'
 

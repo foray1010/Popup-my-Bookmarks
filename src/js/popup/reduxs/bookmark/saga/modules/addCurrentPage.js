@@ -3,7 +3,7 @@
 import type {Saga} from 'redux-saga'
 import {call} from 'redux-saga/effects'
 
-import {createBookmark, queryTabs} from '../../../../../common/functions'
+import {createBookmark, queryTabs} from '../../../../../common/utils'
 
 type Payload = {|
   index: number,

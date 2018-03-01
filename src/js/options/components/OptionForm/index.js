@@ -5,7 +5,7 @@ import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
-import {getOptionsConfig} from '../../../common/functions'
+import {getOptionsConfig} from '../../../common/utils'
 import {OPTION_TABLE_MAP} from '../../constants'
 import {optionsCreators} from '../../reduxs'
 import OptionForm from './OptionForm'

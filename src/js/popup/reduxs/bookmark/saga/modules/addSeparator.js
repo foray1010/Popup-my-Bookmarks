@@ -3,7 +3,7 @@
 import type {Saga} from 'redux-saga'
 import {call} from 'redux-saga/effects'
 
-import {createBookmark} from '../../../../../common/functions'
+import {createBookmark} from '../../../../../common/utils'
 import * as CST from '../../../../constants'
 
 type Payload = {|

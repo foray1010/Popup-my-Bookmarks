@@ -7,7 +7,7 @@ import {Fragment, PureComponent, createElement} from 'react'
 import EventListener from 'react-event-listener'
 import {connect} from 'react-redux'
 
-import {normalizeInputtingValue} from '../../../common/functions'
+import {normalizeInputtingValue} from '../../../common/utils'
 import {bookmarkCreators, uiCreators} from '../../reduxs'
 import Search from './Search'
 

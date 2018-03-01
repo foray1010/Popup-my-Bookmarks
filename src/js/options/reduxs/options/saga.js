@@ -3,8 +3,8 @@
 import type {Saga} from 'redux-saga'
 import {all, call, put, select, takeLatest} from 'redux-saga/effects'
 
-import {clearStorage, getStorage, setStorage} from '../../../common/functions'
-import {initOptions} from '../../functions'
+import {clearStorage, getStorage, setStorage} from '../../../common/utils'
+import {initOptions} from '../../utils'
 import {optionsCreators, optionsTypes} from './actions'
 
 const updateOptions = (options) => put(optionsCreators.updateOptions(options))

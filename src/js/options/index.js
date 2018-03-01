@@ -9,11 +9,11 @@ import {createElement} from 'react'
 import {Provider} from 'react-redux'
 import Immutable from 'seamless-immutable'
 
-import {renderToBody} from '../common/functions'
 import configureStore from '../common/store/configureStore'
+import {renderToBody} from '../common/utils'
 import App from './components/App'
-import {initOptions} from './functions'
 import {rootReducer, rootSaga} from './reduxs'
+import {initOptions} from './utils'
 
 const main = async () => {
   const options = await initOptions()

@@ -4,7 +4,7 @@ import * as R from 'ramda'
 import type {Saga} from 'redux-saga'
 import {all, call} from 'redux-saga/effects'
 
-import {createTab, createWindow} from '../../../../../common/functions'
+import {createTab, createWindow} from '../../../../../common/utils'
 import * as CST from '../../../../constants'
 import {getBookmarkInfo} from '../utils/getters'
 

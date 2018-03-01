@@ -8,7 +8,7 @@ import {
   getBookmarkChildNodes,
   getBookmarkNodes,
   searchBookmarkNodes
-} from '../../../../../common/functions'
+} from '../../../../../common/utils'
 import {ROOT_ID} from '../../../../constants'
 import type {BookmarkInfo, BookmarkTree} from '../../../../types'
 import {toBookmarkInfo} from './converters'

@@ -5,7 +5,7 @@ import type {Saga} from 'redux-saga'
 import {call, put, select} from 'redux-saga/effects'
 
 import * as CST from '../../../../constants'
-import {sortByTitle} from '../../../../functions'
+import {sortByTitle} from '../../../../utils'
 import {bookmarkCreators} from '../../actions'
 import {simulateBookmark} from '../utils/converters'
 import {searchBookmarks} from '../utils/getters'

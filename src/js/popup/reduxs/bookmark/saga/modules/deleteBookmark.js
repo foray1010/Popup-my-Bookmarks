@@ -3,7 +3,7 @@
 import type {Saga} from 'redux-saga'
 import {call} from 'redux-saga/effects'
 
-import {removeBookmark, removeBookmarkTree} from '../../../../../common/functions'
+import {removeBookmark, removeBookmarkTree} from '../../../../../common/utils'
 import * as CST from '../../../../constants'
 import {getBookmarkInfo} from '../utils/getters'
 

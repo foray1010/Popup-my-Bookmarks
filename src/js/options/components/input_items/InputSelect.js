@@ -6,7 +6,7 @@ import '../../../../css/options/input-select.css'
 import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 
-import {normalizeInputtingValue} from '../../../common/functions'
+import {normalizeInputtingValue} from '../../../common/utils'
 
 type Props = {|
   choices: $ReadOnlyArray<string>,

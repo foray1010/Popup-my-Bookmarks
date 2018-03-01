@@ -7,7 +7,7 @@ import {
   getBookmarkChildNodes,
   getBookmarkNodes,
   searchBookmarkNodes
-} from '../../../../../common/functions'
+} from '../../../../../common/utils'
 import * as CST from '../../../../constants'
 import bookmarkNodes from '../__fixtures__/bookmarkNodes'
 import bookmarkTrees from '../__fixtures__/bookmarkTrees'
