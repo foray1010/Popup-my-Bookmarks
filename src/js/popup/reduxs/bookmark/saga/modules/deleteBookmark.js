@@ -11,15 +11,11 @@ type Payload = {|
   id: string
 |}
 export function* deleteBookmark({id}: Payload): Saga<void> {
-  try {
-    const bookmarkInfo = yield call(getBookmarkInfo, id)
+  const bookmarkInfo = yield call(getBookmarkInfo, id)
 
-    if (bookmarkInfo.type === CST.TYPE_FOLDER) {
-      yield call(removeBookmarkTree, id)
-    } else {
-      yield call(removeBookmark, id)
-    }
-  } catch (err) {
-    console.error(err)
+  if (bookmarkInfo.type === CST.TYPE_FOLDER) {
+    yield call(removeBookmarkTree, id)
+  } else {
+    yield call(removeBookmark, id)
   }
 }

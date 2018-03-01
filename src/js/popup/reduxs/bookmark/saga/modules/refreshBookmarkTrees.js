@@ -10,17 +10,13 @@ import {getBookmarkTrees} from '../utils/getters'
 export const getTailTreeIds = R.compose(R.tail, R.map(R.path(['parent', 'id'])))
 
 export function* refreshBookmarkTrees(): Saga<void> {
-  try {
-    const {bookmark, options} = yield select()
-    const {searchKeyword, trees} = bookmark
+  const {bookmark, options} = yield select()
+  const {searchKeyword, trees} = bookmark
 
-    if (searchKeyword) {
-      yield put(bookmarkCreators.getSearchResult(searchKeyword))
-    } else {
-      const bookmarkTrees = yield call(getBookmarkTrees, getTailTreeIds(trees), options)
-      yield put(bookmarkCreators.setBookmarkTrees(bookmarkTrees))
-    }
-  } catch (err) {
-    console.error(err)
+  if (searchKeyword) {
+    yield put(bookmarkCreators.getSearchResult(searchKeyword))
+  } else {
+    const bookmarkTrees = yield call(getBookmarkTrees, getTailTreeIds(trees), options)
+    yield put(bookmarkCreators.setBookmarkTrees(bookmarkTrees))
   }
 }

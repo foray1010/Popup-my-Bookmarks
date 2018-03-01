@@ -10,19 +10,15 @@ type Payload = {|
   parentId: string
 |}
 export function* addCurrentPage({parentId, index}: Payload): Saga<void> {
-  try {
-    const [currentTab] = yield call(queryTabs, {
-      currentWindow: true,
-      active: true
-    })
+  const [currentTab] = yield call(queryTabs, {
+    currentWindow: true,
+    active: true
+  })
 
-    yield call(createBookmark, {
-      index,
-      parentId,
-      title: currentTab.title.trim(),
-      url: currentTab.url && currentTab.url.trim()
-    })
-  } catch (err) {
-    console.error(err)
-  }
+  yield call(createBookmark, {
+    index,
+    parentId,
+    title: currentTab.title.trim(),
+    url: currentTab.url && currentTab.url.trim()
+  })
 }

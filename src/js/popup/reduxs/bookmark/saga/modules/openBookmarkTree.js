@@ -11,10 +11,6 @@ type Payload = {|
   index: number
 |}
 export function* openBookmarkTree({id, index}: Payload): Saga<void> {
-  try {
-    const bookmarkTree = yield call(getBookmarkTree, id)
-    yield put(bookmarkCreators.spliceBookmarkTrees(index, [bookmarkTree]))
-  } catch (err) {
-    console.error(err)
-  }
+  const bookmarkTree = yield call(getBookmarkTree, id)
+  yield put(bookmarkCreators.spliceBookmarkTrees(index, [bookmarkTree]))
 }

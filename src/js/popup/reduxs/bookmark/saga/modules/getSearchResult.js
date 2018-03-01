@@ -19,39 +19,35 @@ type Payload = {|
   searchKeyword: string
 |}
 export function* getSearchResult({searchKeyword}: Payload): Saga<void> {
-  try {
-    if (!searchKeyword) {
-      yield put(bookmarkCreators.initBookmarkTrees())
-      return
-    }
-
-    const {options} = yield select()
-
-    const searchResult = yield call(searchBookmarks, {
-      query: searchKeyword
-    })
-
-    const isSearchTitleOnly = options.searchTarget === 1
-    const sortedPartialResult = R.compose(
-      sortByTitle,
-      R.slice(0, options.maxResults),
-      isSearchTitleOnly ?
-        R.filter(R.compose(generateSearchKeywordMatcher(searchKeyword), R.prop('title'))) :
-        R.identity,
-      R.filter(R.propEq('type', CST.TYPE_BOOKMARK))
-    )(searchResult)
-
-    const searchResultTrees = [
-      {
-        children: sortedPartialResult,
-        parent: simulateBookmark({
-          id: CST.SEARCH_RESULT_ID,
-          type: CST.TYPE_FOLDER
-        })
-      }
-    ]
-    yield put(bookmarkCreators.setBookmarkTrees(searchResultTrees))
-  } catch (err) {
-    console.error(err)
+  if (!searchKeyword) {
+    yield put(bookmarkCreators.initBookmarkTrees())
+    return
   }
+
+  const {options} = yield select()
+
+  const searchResult = yield call(searchBookmarks, {
+    query: searchKeyword
+  })
+
+  const isSearchTitleOnly = options.searchTarget === 1
+  const sortedPartialResult = R.compose(
+    sortByTitle,
+    R.slice(0, options.maxResults),
+    isSearchTitleOnly ?
+      R.filter(R.compose(generateSearchKeywordMatcher(searchKeyword), R.prop('title'))) :
+      R.identity,
+    R.filter(R.propEq('type', CST.TYPE_BOOKMARK))
+  )(searchResult)
+
+  const searchResultTrees = [
+    {
+      children: sortedPartialResult,
+      parent: simulateBookmark({
+        id: CST.SEARCH_RESULT_ID,
+        type: CST.TYPE_FOLDER
+      })
+    }
+  ]
+  yield put(bookmarkCreators.setBookmarkTrees(searchResultTrees))
 }

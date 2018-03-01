@@ -11,14 +11,10 @@ type Payload = {|
   parentId: string
 |}
 export function* addSeparator({parentId, index}: Payload): Saga<void> {
-  try {
-    yield call(createBookmark, {
-      index,
-      parentId,
-      title: '- '.repeat(42),
-      url: CST.SEPARATE_THIS_URL
-    })
-  } catch (err) {
-    console.error(err)
-  }
+  yield call(createBookmark, {
+    index,
+    parentId,
+    title: '- '.repeat(42),
+    url: CST.SEPARATE_THIS_URL
+  })
 }

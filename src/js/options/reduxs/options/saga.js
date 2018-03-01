@@ -3,50 +3,38 @@
 import type {Saga} from 'redux-saga'
 import {all, call, put, select, takeLatest} from 'redux-saga/effects'
 
-import {clearStorage, getStorage, setStorage} from '../../../common/utils'
+import {clearStorage, getStorage, setStorage, silenceSaga} from '../../../common/utils'
 import {initOptions} from '../../utils'
 import {optionsCreators, optionsTypes} from './actions'
 
 const updateOptions = (options) => put(optionsCreators.updateOptions(options))
 
 function* reloadOptions(): Saga<void> {
-  try {
-    const options = yield call(getStorage, null)
+  const options = yield call(getStorage, null)
 
-    yield updateOptions(options)
-  } catch (err) {
-    console.error(err)
-  }
+  yield updateOptions(options)
 }
 
 function* resetToDefaultOptions(): Saga<void> {
-  try {
-    yield call(clearStorage)
+  yield call(clearStorage)
 
-    const options = yield call(initOptions)
+  const options = yield call(initOptions)
 
-    yield updateOptions(options)
-  } catch (err) {
-    console.error(err)
-  }
+  yield updateOptions(options)
 }
 
 function* saveOptions(): Saga<void> {
-  try {
-    const {options} = yield select()
+  const {options} = yield select()
 
-    yield call(setStorage, options)
+  yield call(setStorage, options)
 
-    yield updateOptions(options)
-  } catch (err) {
-    console.error(err)
-  }
+  yield updateOptions(options)
 }
 
 export function* optionsSaga(): Saga<void> {
   yield all([
-    takeLatest(optionsTypes.RELOAD_OPTIONS, reloadOptions),
-    takeLatest(optionsTypes.RESET_TO_DEFAULT_OPTIONS, resetToDefaultOptions),
-    takeLatest(optionsTypes.SAVE_OPTIONS, saveOptions)
+    takeLatest(optionsTypes.RELOAD_OPTIONS, silenceSaga(reloadOptions)),
+    takeLatest(optionsTypes.RESET_TO_DEFAULT_OPTIONS, silenceSaga(resetToDefaultOptions)),
+    takeLatest(optionsTypes.SAVE_OPTIONS, silenceSaga(saveOptions))
   ])
 }

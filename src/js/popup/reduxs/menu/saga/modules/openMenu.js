@@ -11,14 +11,10 @@ type Payload = {|
   targetId: string
 |}
 export function* openMenu({targetId}: Payload): Saga<void> {
-  try {
-    const isSearching = yield select((state) => Boolean(state.bookmark.searchKeyword))
+  const isSearching = yield select((state) => Boolean(state.bookmark.searchKeyword))
 
-    const bookmarkInfo = yield call(getBookmarkInfo, targetId)
+  const bookmarkInfo = yield call(getBookmarkInfo, targetId)
 
-    const menuPattern = getMenuPattern(bookmarkInfo, isSearching)
-    yield put(menuCreators.setMenuPattern(menuPattern))
-  } catch (err) {
-    console.error(err)
-  }
+  const menuPattern = getMenuPattern(bookmarkInfo, isSearching)
+  yield put(menuCreators.setMenuPattern(menuPattern))
 }
