@@ -20,24 +20,26 @@ function* getUrls(ids: Ids): Saga<$ReadOnlyArray<string>> {
 type Payload = {|
   ids: Ids,
   params: {|
-    isIncognito: boolean,
-    isNewWindow: boolean,
-    isOpenInBackground: boolean,
-    isWarnWhenOpenMany: boolean
+    openInBackground: boolean,
+    openInIncognitoWindow: boolean,
+    openInNewWindow: boolean,
+    warnWhenOpenMany: boolean
   |}
 |}
 export function* openBookmarks({
   ids,
   params: {
-    isIncognito = false,
-    isNewWindow = false,
-    isOpenInBackground = false
-    // isWarnWhenOpenMany = false
+    openInIncognitoWindow = false,
+    openInNewWindow = false,
+    openInBackground = false
+    // warnWhenOpenMany = false
   }
 }: Payload): Saga<void> {
   // logic check
-  if (isIncognito && !isNewWindow) throw new Error('incognito window must be new window')
-  if (isOpenInBackground && isNewWindow) throw new Error('cannot open in background window')
+  if (openInIncognitoWindow && !openInNewWindow) {
+    throw new Error('incognito window must be new window')
+  }
+  if (openInBackground && openInNewWindow) throw new Error('cannot open in background window')
 
   const urls = yield call(getUrls, ids)
 
@@ -50,12 +52,12 @@ export function* openBookmarks({
   }
   */
 
-  if (isNewWindow) {
+  if (openInNewWindow) {
     yield call(createWindow, {
       url: urls,
-      incognito: isIncognito
+      incognito: openInIncognitoWindow
     })
   } else {
-    yield all(urls.map((url) => call(createTab, {url, active: !isOpenInBackground})))
+    yield all(urls.map((url) => call(createTab, {url, active: !openInBackground})))
   }
 }

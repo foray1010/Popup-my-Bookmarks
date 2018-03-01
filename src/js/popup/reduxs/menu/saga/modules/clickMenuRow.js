@@ -54,9 +54,9 @@ export function* clickMenuRow({rowName}: Payload): Saga<void> {
       const ids = R.compose(R.map(R.prop('id')), R.prop('children'))(targetBookmarkTree)
       yield put(
         bookmarkCreators.openBookmarks(ids, {
-          isIncognito: rowName === CST.MENU_OPEN_ALL_IN_N,
-          isNewWindow: rowName === CST.MENU_OPEN_ALL_IN_I || rowName === CST.MENU_OPEN_ALL_IN_N,
-          isWarnWhenOpenMany: options.warnOpenMany
+          openInIncognitoWindow: rowName === CST.MENU_OPEN_ALL_IN_N,
+          openInNewWindow: rowName === CST.MENU_OPEN_ALL_IN_I || rowName === CST.MENU_OPEN_ALL_IN_N,
+          warnWhenOpenMany: options.warnOpenMany
         })
       )
       break
@@ -67,10 +67,10 @@ export function* clickMenuRow({rowName}: Payload): Saga<void> {
     case CST.MENU_OPEN_IN_N:
       yield put(
         bookmarkCreators.openBookmarks([targetBookmarkInfo.id], {
-          isIncognito: rowName === CST.MENU_OPEN_IN_N,
-          isNewWindow: rowName === CST.MENU_OPEN_IN_I || rowName === CST.MENU_OPEN_IN_N,
-          isOpenInBackground: rowName === CST.MENU_OPEN_IN_B,
-          isWarnWhenOpenMany: options.warnOpenMany
+          openInBackground: rowName === CST.MENU_OPEN_IN_B,
+          openInIncognitoWindow: rowName === CST.MENU_OPEN_IN_N,
+          openInNewWindow: rowName === CST.MENU_OPEN_IN_I || rowName === CST.MENU_OPEN_IN_N,
+          warnWhenOpenMany: options.warnOpenMany
         })
       )
       break
