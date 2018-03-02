@@ -131,8 +131,6 @@ const webpackConfig = getMergedConfigByEnv({
     ],
     resolve: {
       alias: {
-        // as react-measure use older version, force it to use our newer version to reduce file size
-        'prop-types': path.resolve(__dirname, 'node_modules/prop-types'),
         // as reduxsauce use older version, force it to use our newer version to reduce file size
         ramda: path.resolve(__dirname, 'node_modules/ramda'),
         'seamless-immutable': 'seamless-immutable/src/seamless-immutable',
