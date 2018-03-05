@@ -15,6 +15,7 @@ export const getBookmarkChildNodes = (...args: $ReadOnlyArray<*>) =>
 export const getBookmarkNodes = (...args: $ReadOnlyArray<*>) => webExtension.bookmarks.get(...args)
 export const getI18n = (...args: $ReadOnlyArray<*>) => webExtension.i18n.getMessage(...args)
 export const getStorage = (...args: $ReadOnlyArray<*>) => webExtension.storage.sync.get(...args)
+export const moveBookmark = (...args: $ReadOnlyArray<*>) => webExtension.bookmarks.move(...args)
 export const queryTabs = (...args: $ReadOnlyArray<*>) => webExtension.tabs.query(...args)
 export const removeBookmark = (...args: $ReadOnlyArray<*>) =>
   webExtension.bookmarks.remove(...args)

@@ -13,6 +13,7 @@ import {initBookmarkTrees} from './modules/initBookmarkTrees'
 import {openBookmarks} from './modules/openBookmarks'
 import {openBookmarkTree} from './modules/openBookmarkTree'
 import {refreshBookmarkTrees} from './modules/refreshBookmarkTrees'
+import {sortBookmarksByName} from './modules/sortBookmarksByName'
 
 export function* bookmarkSaga(): Saga<void> {
   yield all([
@@ -23,6 +24,7 @@ export function* bookmarkSaga(): Saga<void> {
     takeLatest(bookmarkTypes.INIT_BOOKMARK_TREES, silenceSaga(initBookmarkTrees)),
     takeLatest(bookmarkTypes.OPEN_BOOKMARKS, silenceSaga(openBookmarks)),
     takeLatest(bookmarkTypes.OPEN_BOOKMARK_TREE, silenceSaga(openBookmarkTree)),
-    takeLatest(bookmarkTypes.REFRESH_BOOKMARK_TREES, silenceSaga(refreshBookmarkTrees))
+    takeLatest(bookmarkTypes.REFRESH_BOOKMARK_TREES, silenceSaga(refreshBookmarkTrees)),
+    takeLatest(bookmarkTypes.SORT_BOOKMARKS_BY_NAME, silenceSaga(sortBookmarksByName))
   ])
 }

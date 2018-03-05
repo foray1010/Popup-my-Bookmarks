@@ -17,5 +17,6 @@ export const {Creators: bookmarkCreators, Types: bookmarkTypes} = createActions(
   removeFocusId: null,
   setBookmarkTrees: ['bookmarkTrees'],
   setFocusId: ['focusId'],
+  sortBookmarksByName: ['parentId'],
   spliceBookmarkTrees: ['index', 'bookmarkTrees']
 })
