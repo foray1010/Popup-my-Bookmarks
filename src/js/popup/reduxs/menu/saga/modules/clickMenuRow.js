@@ -75,6 +75,15 @@ export function* clickMenuRow({rowName}: Payload): Saga<void> {
       )
       break
 
+    case CST.MENU_PASTE:
+      yield put(
+        bookmarkCreators.pasteBookmark(
+          targetBookmarkInfo.parentId,
+          targetBookmarkInfo.storageIndex + 1
+        )
+      )
+      break
+
     case CST.MENU_SORT_BY_NAME:
       yield put(bookmarkCreators.sortBookmarksByName(targetBookmarkInfo.parentId))
       break

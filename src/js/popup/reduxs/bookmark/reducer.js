@@ -7,19 +7,29 @@ import type {BookmarkTree} from '../../types'
 import {bookmarkTypes} from './actions'
 
 const INITIAL_STATE = Immutable({
-  copyId: '',
-  cutId: '',
+  clipboard: {
+    id: '',
+    isRemoveAfterPaste: false
+  },
   dragId: '',
   focusId: '',
   searchKeyword: '',
   trees: []
 })
 
-type CopyBookmarkPayload = {| copyId: string |}
-const copyBookmark = (state, {copyId}: CopyBookmarkPayload) => Immutable.merge(state, {copyId})
+type CopyBookmarkPayload = {| id: string |}
+const copyBookmark = (state, {id}: CopyBookmarkPayload) =>
+  Immutable.set(state, 'clipboard', {
+    id,
+    isRemoveAfterPaste: false
+  })
 
-type CutBookmarkPayload = {| cutId: string |}
-const cutBookmark = (state, {cutId}: CutBookmarkPayload) => Immutable.merge(state, {cutId})
+type CutBookmarkPayload = {| id: string |}
+const cutBookmark = (state, {id}: CutBookmarkPayload) =>
+  Immutable.set(state, 'clipboard', {
+    id,
+    isRemoveAfterPaste: true
+  })
 
 type GetSearchResultPayload = {|
   searchKeyword: string
@@ -34,6 +44,8 @@ const removeBookmarkTrees = (state, {startIndex}: RemoveBookmarkTreesPayload) =>
   Immutable.set(state, 'trees', state.trees.slice(0, startIndex))
 
 const removeFocusId = (state) => Immutable.set(state, 'focusId', '')
+
+const resetClipboard = (state) => Immutable.set(state, 'clipboard', INITIAL_STATE.clipboard)
 
 type SetBookmarkTreesPayload = {|
   bookmarkTrees: $ReadOnlyArray<BookmarkTree>
@@ -59,6 +71,7 @@ export const bookmarkReducer = createReducer(INITIAL_STATE, {
   [bookmarkTypes.GET_SEARCH_RESULT]: getSearchResult,
   [bookmarkTypes.REMOVE_BOOKMARK_TREES]: removeBookmarkTrees,
   [bookmarkTypes.REMOVE_FOCUS_ID]: removeFocusId,
+  [bookmarkTypes.RESET_CLIPBOARD]: resetClipboard,
   [bookmarkTypes.SET_BOOKMARK_TREES]: setBookmarkTrees,
   [bookmarkTypes.SET_FOCUS_ID]: setFocusId,
   [bookmarkTypes.SPLICE_BOOKMARK_TREES]: spliceBookmarkTrees
