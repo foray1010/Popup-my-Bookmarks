@@ -12,9 +12,7 @@ type Ids = $ReadOnlyArray<string>
 function* getUrls(ids: Ids): Saga<$ReadOnlyArray<string>> {
   const bookmarkInfos = yield all(R.map(getBookmarkInfo, ids))
 
-  return R.compose(R.map(R.prop('url')), R.filter(R.propEq('type', CST.TYPE_BOOKMARK)))(
-    bookmarkInfos
-  )
+  return R.compose(R.pluck('url'), R.filter(R.propEq('type', CST.TYPE_BOOKMARK)))(bookmarkInfos)
 }
 
 type Payload = {|

@@ -698,8 +698,8 @@ babel-plugin-emotion@^9.0.1:
     touch "^1.0.0"
 
 babel-plugin-flow-react-proptypes@^20.0.0:
-  version "20.0.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-flow-react-proptypes/-/babel-plugin-flow-react-proptypes-20.0.0.tgz#a019f2c3624d09848a24115bb397773fb672f9af"
+  version "20.1.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-flow-react-proptypes/-/babel-plugin-flow-react-proptypes-20.1.0.tgz#c32d9044537dda3609712b8b13234ca538b18911"
   dependencies:
     babel-core "^6.25.0"
     babel-template "^6.25.0"
@@ -725,8 +725,8 @@ babel-plugin-macros@^2.0.0:
     cosmiconfig "^4.0.0"
 
 babel-plugin-ramda@^1.4.3:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/babel-plugin-ramda/-/babel-plugin-ramda-1.4.3.tgz#265b54a92f29f5ed56180b95c499d1ae2a8a25a7"
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-ramda/-/babel-plugin-ramda-1.5.0.tgz#9ef604267acca531549a020d4c19fa543dd30a4b"
   dependencies:
     ramda "0.x"
 
@@ -1694,8 +1694,8 @@ clean-css@4.1.x:
     source-map "0.5.x"
 
 clean-webpack-plugin@^0.1.15:
-  version "0.1.18"
-  resolved "https://registry.yarnpkg.com/clean-webpack-plugin/-/clean-webpack-plugin-0.1.18.tgz#2e2173897c76646031bff047c14b9c22c80d8c4a"
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/clean-webpack-plugin/-/clean-webpack-plugin-0.1.19.tgz#ceda8bb96b00fe168e9b080272960d20fdcadd6d"
   dependencies:
     rimraf "^2.6.1"
 
@@ -1864,7 +1864,7 @@ combined-stream@1.0.6, combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@2.14.x, commander@^2.11.0, commander@^2.13.0, commander@^2.14.1, commander@^2.9.0, commander@~2.14.1:
+commander@2.14.x, commander@~2.14.1:
   version "2.14.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.14.1.tgz#2235123e37af8ca3c65df45b026dbd357b01b9aa"
 
@@ -1873,6 +1873,10 @@ commander@2.9.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.9.0.tgz#9c99094176e12240cb22d6c5146098400fe0f7d4"
   dependencies:
     graceful-readlink ">= 1.0.0"
+
+commander@^2.11.0, commander@^2.13.0, commander@^2.14.1, commander@^2.9.0:
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.0.tgz#ad2a23a1c3b036e392469b8012cec6b33b4c1322"
 
 commander@~2.13.0:
   version "2.13.0"
@@ -2040,6 +2044,12 @@ create-emotion@^9.0.2:
     emotion-utils "^9.0.1"
     stylis "^3.3.2"
     stylis-rule-sheet "^0.0.5"
+
+create-eslint-index@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/create-eslint-index/-/create-eslint-index-1.0.0.tgz#d954372d86d5792fcd67e9f2b791b1ab162411bb"
+  dependencies:
+    lodash.get "^4.3.0"
 
 create-hash@^1.1.0, create-hash@^1.1.2:
   version "1.1.3"
@@ -2760,8 +2770,8 @@ eslint-config-airbnb@16.1.0:
     eslint-config-airbnb-base "^12.1.0"
 
 eslint-config-foray1010@^6.2.0:
-  version "6.6.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-foray1010/-/eslint-config-foray1010-6.6.1.tgz#265b049d9f31b23ca0d6b86d2759dd423ee2f57a"
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-foray1010/-/eslint-config-foray1010-6.7.0.tgz#f6c9cbb1955cccb150e085974c063417154a72ed"
   dependencies:
     app-root-path "^2.0.1"
     babel-eslint "^8.0.0"
@@ -2770,6 +2780,7 @@ eslint-config-foray1010@^6.2.0:
     eslint-plugin-flowtype "^2.35.0"
     eslint-plugin-import "^2.8.0"
     eslint-plugin-jsx-a11y "^6.0.2"
+    eslint-plugin-ramda "^2.5.0"
     eslint-plugin-react "^7.4.0"
 
 eslint-import-resolver-node@^0.3.1:
@@ -2822,6 +2833,14 @@ eslint-plugin-jsx-a11y@^6.0.2:
     damerau-levenshtein "^1.0.0"
     emoji-regex "^6.1.0"
     jsx-ast-utils "^2.0.0"
+
+eslint-plugin-ramda@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ramda/-/eslint-plugin-ramda-2.5.0.tgz#4c6de02fde494f0c312e9129dbb45bf1ffe85feb"
+  dependencies:
+    create-eslint-index "^1.0.0"
+    ramda "0.25.0"
+    req-all "^1.0.0"
 
 eslint-plugin-react@^7.4.0:
   version "7.7.0"
@@ -3789,8 +3808,8 @@ home-or-tmp@^2.0.0:
     os-tmpdir "^1.0.1"
 
 hosted-git-info@^2.1.4:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.5.0.tgz#6d60e34b3abbc8313062c3b798ef8d901a07af3c"
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.6.0.tgz#23235b29ab230c576aab0d4f13fc046b0b038222"
 
 html-comment-regex@^1.1.0:
   version "1.1.1"
@@ -3820,8 +3839,8 @@ html-tags@^2.0.0:
   resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-2.0.0.tgz#10b30a386085f43cede353cc8fa7cb0deeea668b"
 
 html-webpack-plugin@^3.0.4:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-3.0.5.tgz#c8f388fa8296f0ead3f79205a9bf1eebc4a7522f"
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-3.0.6.tgz#d35b0452aae129a8a9f3fac44a169a625d8cf3fa"
   dependencies:
     html-minifier "^3.2.3"
     loader-utils "^0.2.16"
@@ -5057,8 +5076,8 @@ locate-path@^2.0.0:
     path-exists "^3.0.0"
 
 lodash-es@^4.17.5, lodash-es@^4.2.1:
-  version "4.17.5"
-  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.5.tgz#9fc6e737b1c4d151d8f9cae2247305d552ce748f"
+  version "4.17.7"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.7.tgz#db240a3252c3dd8360201ac9feef91ac977ea856"
 
 lodash._arrayeach@^3.0.0:
   version "3.0.0"
@@ -5125,6 +5144,10 @@ lodash.foreach@^3.0.3:
     lodash._baseeach "^3.0.0"
     lodash._bindcallback "^3.0.0"
     lodash.isarray "^3.0.0"
+
+lodash.get@^4.3.0:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
 
 lodash.isarguments@^3.0.0:
   version "3.1.0"
@@ -7035,7 +7058,7 @@ quick-lru@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
 
-ramda@0.x, ramda@^0.25.0:
+ramda@0.25.0, ramda@0.x, ramda@^0.25.0:
   version "0.25.0"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.25.0.tgz#8fdf68231cffa90bc2f9460390a0cb74a29b29a9"
 
@@ -7487,6 +7510,10 @@ repeating@^2.0.0:
 replace-ext@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/replace-ext/-/replace-ext-1.0.0.tgz#de63128373fcbf7c3ccfa4de5a480c45a67958eb"
+
+req-all@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/req-all/-/req-all-1.0.0.tgz#d128569451c340b432409c656cf166260cd2628d"
 
 request-promise-core@1.1.1:
   version "1.1.1"
