@@ -19,6 +19,6 @@ export function* addCurrentPage({parentId, index}: Payload): Saga<void> {
     index,
     parentId,
     title: currentTab.title.trim(),
-    url: currentTab.url && currentTab.url.trim()
+    url: currentTab.url.trim()
   })
 }
