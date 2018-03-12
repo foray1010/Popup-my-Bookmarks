@@ -33,6 +33,7 @@ const outputDir = path.join('build', process.env.NODE_ENV)
 const webpackConfig = getMergedConfigByEnv({
   default: {
     entry: R.converge(R.zipObj, [R.identity, R.map(R.concat(`./${sourceDir}/js/`))])(appNames),
+    mode: process.env.NODE_ENV,
     module: {
       rules: [
         {
@@ -66,7 +67,12 @@ const webpackConfig = getMergedConfigByEnv({
                 name: '[name].json'
               }
             },
-            'extract-loader',
+            {
+              loader: 'extract-loader',
+              options: {
+                publicPath: './'
+              }
+            },
             {
               loader: 'chrome-manifest-loader',
               options: {
@@ -77,6 +83,12 @@ const webpackConfig = getMergedConfigByEnv({
           ]
         }
       ]
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+        name: commonChunkName
+      }
     },
     output: {
       path: path.resolve(__dirname, outputDir),
@@ -122,12 +134,7 @@ const webpackConfig = getMergedConfigByEnv({
       ),
       new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: 'defer'
-      }),
-      new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-      }),
-      new webpack.optimize.CommonsChunkPlugin(commonChunkName),
-      new webpack.optimize.ModuleConcatenationPlugin()
+      })
     ],
     resolve: {
       alias: {
