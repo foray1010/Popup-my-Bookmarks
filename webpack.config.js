@@ -133,7 +133,7 @@ const webpackConfig = getMergedConfigByEnv({
         appNames
       ),
       new ScriptExtHtmlWebpackPlugin({
-        defaultAttribute: 'defer'
+        defaultAttribute: 'async'
       })
     ],
     resolve: {
