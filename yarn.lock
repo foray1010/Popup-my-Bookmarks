@@ -730,9 +730,9 @@ babel-plugin-emotion@^9.0.1:
     source-map "^0.5.7"
     touch "^1.0.0"
 
-babel-plugin-flow-react-proptypes@^20.0.0:
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-flow-react-proptypes/-/babel-plugin-flow-react-proptypes-20.1.0.tgz#c32d9044537dda3609712b8b13234ca538b18911"
+babel-plugin-flow-react-proptypes@^21.0.0:
+  version "21.0.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-flow-react-proptypes/-/babel-plugin-flow-react-proptypes-21.0.0.tgz#bc34593122cbc3cbdb571c9cf8d7275d93ab9616"
   dependencies:
     babel-core "^6.25.0"
     babel-template "^6.25.0"
@@ -1204,11 +1204,11 @@ babel-preset-flow@^6.23.0:
     babel-plugin-transform-flow-strip-types "^6.22.0"
 
 babel-preset-foray1010@^7.4.0:
-  version "7.8.0"
-  resolved "https://registry.yarnpkg.com/babel-preset-foray1010/-/babel-preset-foray1010-7.8.0.tgz#a03adf926beb82f011155361c7fa693fc7c77ab1"
+  version "7.9.0"
+  resolved "https://registry.yarnpkg.com/babel-preset-foray1010/-/babel-preset-foray1010-7.9.0.tgz#f58d7ab8ea80bb43c6317c704fd73ed5ab23065a"
   dependencies:
     app-root-path "^2.0.1"
-    babel-plugin-flow-react-proptypes "^20.0.0"
+    babel-plugin-flow-react-proptypes "^21.0.0"
     babel-plugin-ramda "^1.4.3"
     babel-plugin-react-css-modules "^3.0.0"
     babel-plugin-transform-class-properties "^6.24.1"

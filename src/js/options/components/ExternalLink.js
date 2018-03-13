@@ -4,10 +4,10 @@
 import '../../../css/options/external-link.css'
 
 import {createElement} from 'react'
-import type {Element} from 'react'
+import type {Node} from 'react'
 
 type Props = {|
-  children: string | Element<*>,
+  children: Node,
   href: string
 |}
 const ExternalLink = (props: Props) => (

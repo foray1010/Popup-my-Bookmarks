@@ -4,14 +4,14 @@
 import '../../../../css/popup/bookmark-trees.css'
 
 import {createElement} from 'react'
-import type {Element} from 'react'
+import type {Node} from 'react'
 import styled from 'react-emotion'
 
 import BookmarkTree from '../BookmarkTree'
 
 type Props = {|
   className: string,
-  mainTreeHeader: Element<*>,
+  mainTreeHeader: Node,
   treeIds: $ReadOnlyArray<string>
 |}
 const BookmarkTrees = (props: Props) => {

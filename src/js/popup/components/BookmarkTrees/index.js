@@ -3,7 +3,7 @@
 
 import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
-import type {Element} from 'react'
+import type {Node} from 'react'
 import {connect} from 'react-redux'
 
 import {bookmarkCreators} from '../../reduxs'
@@ -14,7 +14,7 @@ const getTreeIds = R.compose(R.map(R.path(['parent', 'id'])), R.path(['bookmark'
 
 type Props = {|
   initBookmarkTrees: () => void,
-  mainTreeHeader: Element<*>,
+  mainTreeHeader: Node,
   options: Object,
   treeIds: $ReadOnlyArray<string>
 |}
