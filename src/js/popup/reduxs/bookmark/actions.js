@@ -10,7 +10,7 @@ export const {Creators: bookmarkCreators, Types: bookmarkTypes} = createActions(
   deleteBookmark: ['id'],
   getSearchResult: ['searchKeyword'],
   initBookmarkTrees: null,
-  openBookmarks: ['ids', 'params'],
+  openBookmarksInBrowser: ['ids', 'params'],
   openBookmarkTree: ['index', 'id'],
   pasteBookmark: ['parentId', 'index'],
   refreshBookmarkTrees: null,

@@ -24,7 +24,7 @@ type Payload = {|
     warnWhenOpenMany: boolean
   |}
 |}
-export function* openBookmarks({
+export function* openBookmarksInBrowser({
   ids,
   params: {
     openInIncognitoWindow = false,
