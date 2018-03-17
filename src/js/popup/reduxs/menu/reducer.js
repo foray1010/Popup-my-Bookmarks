@@ -6,7 +6,15 @@ import Immutable from 'seamless-immutable'
 import type {MenuPattern} from '../../types'
 import {menuTypes} from './actions'
 
-const INITIAL_STATE = Immutable({
+type MenuState = {|
+  focusedRow: string,
+  menuPattern: MenuPattern,
+  positionLeft: number,
+  positionTop: number,
+  targetId: string
+|}
+
+const INITIAL_STATE: MenuState = Immutable({
   focusedRow: '',
   menuPattern: [],
   positionLeft: 0,
@@ -21,25 +29,25 @@ type OpenMenuPayload = {|
   positionTop: number,
   targetId: string
 |}
-const openMenu = (state, {positionLeft, positionTop, targetId}: OpenMenuPayload) =>
+const openMenu = (state: MenuState, {positionLeft, positionTop, targetId}: OpenMenuPayload) =>
   Immutable.merge(state, {
     positionLeft,
     positionTop,
     targetId
   })
 
-const removeFocusedRow = (state) => Immutable.set(state, 'focusedRow', '')
+const removeFocusedRow = (state: MenuState) => Immutable.set(state, 'focusedRow', '')
 
 type SetFocusedRowPayload = {|
   focusedRow: string
 |}
-const setFocusedRow = (state, {focusedRow}: SetFocusedRowPayload) =>
+const setFocusedRow = (state: MenuState, {focusedRow}: SetFocusedRowPayload) =>
   Immutable.merge(state, {focusedRow})
 
 type SetMenuPatternPayload = {|
   menuPattern: MenuPattern
 |}
-const setMenuPattern = (state, {menuPattern}: SetMenuPatternPayload) =>
+const setMenuPattern = (state: MenuState, {menuPattern}: SetMenuPatternPayload) =>
   Immutable.merge(state, {menuPattern})
 
 export const menuReducer = createReducer(INITIAL_STATE, {

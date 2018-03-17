@@ -7,7 +7,18 @@ import Immutable from 'seamless-immutable'
 import type {BookmarkTree} from '../../types'
 import {bookmarkTypes} from './actions'
 
-const INITIAL_STATE = Immutable({
+type BookmarkState = {|
+  clipboard: {|
+    id: string,
+    isRemoveAfterPaste: boolean
+  |},
+  dragId: string,
+  focusId: string,
+  searchKeyword: string,
+  trees: $ReadOnlyArray<BookmarkTree>
+|}
+
+const INITIAL_STATE: BookmarkState = Immutable({
   clipboard: {
     id: '',
     isRemoveAfterPaste: false
@@ -19,14 +30,14 @@ const INITIAL_STATE = Immutable({
 })
 
 type CopyBookmarkPayload = {| id: string |}
-const copyBookmark = (state, {id}: CopyBookmarkPayload) =>
+const copyBookmark = (state: BookmarkState, {id}: CopyBookmarkPayload) =>
   Immutable.set(state, 'clipboard', {
     id,
     isRemoveAfterPaste: false
   })
 
 type CutBookmarkPayload = {| id: string |}
-const cutBookmark = (state, {id}: CutBookmarkPayload) =>
+const cutBookmark = (state: BookmarkState, {id}: CutBookmarkPayload) =>
   Immutable.set(state, 'clipboard', {
     id,
     isRemoveAfterPaste: true
@@ -35,33 +46,38 @@ const cutBookmark = (state, {id}: CutBookmarkPayload) =>
 type GetSearchResultPayload = {|
   searchKeyword: string
 |}
-const getSearchResult = (state, {searchKeyword}: GetSearchResultPayload) =>
+const getSearchResult = (state: BookmarkState, {searchKeyword}: GetSearchResultPayload) =>
   Immutable.merge(state, {searchKeyword})
 
 type RemoveBookmarkTreesPayload = {|
   removeAfterId: string
 |}
-const removeBookmarkTrees = (state, {removeAfterId}: RemoveBookmarkTreesPayload) => {
+const removeBookmarkTrees = (
+  state: BookmarkState,
+  {removeAfterId}: RemoveBookmarkTreesPayload
+) => {
   const removeAfterIndex = state.trees.findIndex(R.pathEq(['parent', 'id'], removeAfterId))
   if (removeAfterIndex < 0) return state
 
   return Immutable.set(state, 'trees', state.trees.slice(0, removeAfterIndex + 1))
 }
 
-const removeFocusId = (state) => Immutable.set(state, 'focusId', '')
+const removeFocusId = (state: BookmarkState) => Immutable.set(state, 'focusId', '')
 
-const resetClipboard = (state) => Immutable.set(state, 'clipboard', INITIAL_STATE.clipboard)
+const resetClipboard = (state: BookmarkState) =>
+  Immutable.set(state, 'clipboard', INITIAL_STATE.clipboard)
 
 type SetBookmarkTreesPayload = {|
   bookmarkTrees: $ReadOnlyArray<BookmarkTree>
 |}
-const setBookmarkTrees = (state, {bookmarkTrees}: SetBookmarkTreesPayload) =>
+const setBookmarkTrees = (state: BookmarkState, {bookmarkTrees}: SetBookmarkTreesPayload) =>
   Immutable.set(state, 'trees', bookmarkTrees)
 
 type SetFocusIdPayload = {|
   focusId: string
 |}
-const setFocusId = (state, {focusId}: SetFocusIdPayload) => Immutable.merge(state, {focusId})
+const setFocusId = (state: BookmarkState, {focusId}: SetFocusIdPayload) =>
+  Immutable.merge(state, {focusId})
 
 export const bookmarkReducer = createReducer(INITIAL_STATE, {
   [bookmarkTypes.COPY_BOOKMARK]: copyBookmark,
