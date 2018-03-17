@@ -9,11 +9,14 @@ import List from 'react-virtualized/dist/es/List'
 import * as CST from '../../constants'
 import type {BookmarkInfo, BookmarkTree as BookmarkTreeType} from '../../types'
 import BookmarkRow from './BookmarkRow'
+import TreeHeader from './TreeHeader'
 
 type Props = {|
   focusId: string,
   iconSize: number,
+  isShowHeader: boolean,
   listItemWidth: number,
+  onHeaderClose: () => void,
   onRowAuxClick: (string) => (MouseEvent) => void,
   onRowMouseEnter: (BookmarkInfo) => () => void,
   onRowMouseLeave: () => void,
@@ -80,6 +83,9 @@ class BookmarkTree extends PureComponent<Props, State> {
   listEl: ?Object
   render = () => (
     <section styleName='main'>
+      {this.props.isShowHeader && (
+        <TreeHeader title={this.props.treeInfo.parent.title} onClose={this.props.onHeaderClose} />
+      )}
       <div
         ref={(ref) => {
           this.listContainerEl = ref

@@ -13,6 +13,7 @@ import BookmarkTree from './BookmarkTree'
 type Props = {|
   focusId: string,
   iconSize: number,
+  isShowHeader: boolean,
   listItemWidth: number,
   openBookmarkTree: (string, string) => void,
   openMenu: (string, number, number) => void,
@@ -23,6 +24,10 @@ type Props = {|
   treeInfo: BookmarkTreeType
 |}
 class BookmarkTreeContainer extends PureComponent<Props> {
+  closeCurrentTree = () => {
+    this.props.removeBookmarkTrees(this.props.treeInfo.parent.id)
+  }
+
   handleRowAuxClick = (bookmarkId: string) => (evt: MouseEvent) => {
     if (!(evt.currentTarget instanceof window.HTMLElement)) return
 
@@ -30,12 +35,10 @@ class BookmarkTreeContainer extends PureComponent<Props> {
   }
 
   handleRowMouseEnter = (bookmarkInfo: BookmarkInfo) => () => {
-    const parentId = this.props.treeInfo.parent.id
-
     if (bookmarkInfo.type === CST.TYPE_FOLDER) {
-      this.props.openBookmarkTree(bookmarkInfo.id, parentId)
+      this.props.openBookmarkTree(bookmarkInfo.id, this.props.treeInfo.parent.id)
     } else {
-      this.props.removeBookmarkTrees(parentId)
+      this.closeCurrentTree()
     }
 
     this.props.setFocusId(bookmarkInfo.id)
@@ -49,7 +52,9 @@ class BookmarkTreeContainer extends PureComponent<Props> {
     <BookmarkTree
       focusId={this.props.focusId}
       iconSize={this.props.iconSize}
+      isShowHeader={this.props.isShowHeader}
       listItemWidth={this.props.listItemWidth}
+      onHeaderClose={this.closeCurrentTree}
       onRowAuxClick={this.handleRowAuxClick}
       onRowMouseEnter={this.handleRowMouseEnter}
       onRowMouseLeave={this.handleRowMouseLeave}
@@ -65,13 +70,17 @@ const getRowHeight = (fontSize) =>
   // +1 for border width, GOLDEN_GAP for padding
   (1 + CST.GOLDEN_GAP) * 2
 
-const mapStateToProps = (state, ownProps) => ({
-  focusId: R.path(['bookmark', 'focusId'], state),
-  iconSize: getIconSize(state.options.fontSize),
-  listItemWidth: state.options.setWidth,
-  rowHeight: getRowHeight(state.options.fontSize),
-  treeInfo: state.bookmark.trees.find(R.pathEq(['parent', 'id'], ownProps.treeId))
-})
+const mapStateToProps = (state, ownProps) => {
+  const treeIndex = state.bookmark.trees.findIndex(R.pathEq(['parent', 'id'], ownProps.treeId))
+  return {
+    focusId: R.path(['bookmark', 'focusId'], state),
+    iconSize: getIconSize(state.options.fontSize),
+    isShowHeader: treeIndex !== 0,
+    listItemWidth: state.options.setWidth,
+    rowHeight: getRowHeight(state.options.fontSize),
+    treeInfo: state.bookmark.trees[treeIndex]
+  }
+}
 
 const mapDispatchToProps = {
   ...R.pick(
