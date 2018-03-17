@@ -8,15 +8,15 @@ import List from 'react-virtualized/dist/es/List'
 
 import * as CST from '../../constants'
 import type {BookmarkInfo, BookmarkTree as BookmarkTreeType} from '../../types'
-import BookmarkItem from './BookmarkItem'
+import BookmarkRow from './BookmarkRow'
 
 type Props = {|
   focusId: string,
   iconSize: number,
   listItemWidth: number,
-  onAuxClick: (string) => (MouseEvent) => void,
-  onMouseEnter: (BookmarkInfo) => () => void,
-  onMouseLeave: () => void,
+  onRowAuxClick: (string) => (MouseEvent) => void,
+  onRowMouseEnter: (BookmarkInfo) => () => void,
+  onRowMouseLeave: () => void,
   rowHeight: number,
   treeInfo: BookmarkTreeType
 |}
@@ -97,14 +97,14 @@ class BookmarkTree extends PureComponent<Props, State> {
             const bookmarkInfo = this.props.treeInfo.children[rendererProps.index]
             return (
               <div key={rendererProps.key} styleName='list-item' style={rendererProps.style}>
-                <BookmarkItem
+                <BookmarkRow
                   key={bookmarkInfo.id}
                   bookmarkInfo={bookmarkInfo}
                   iconSize={this.props.iconSize}
                   isFocused={this.props.focusId === bookmarkInfo.id}
-                  onAuxClick={this.props.onAuxClick}
-                  onMouseEnter={this.props.onMouseEnter}
-                  onMouseLeave={this.props.onMouseLeave}
+                  onAuxClick={this.props.onRowAuxClick}
+                  onMouseEnter={this.props.onRowMouseEnter}
+                  onMouseLeave={this.props.onRowMouseLeave}
                 />
               </div>
             )

@@ -23,13 +23,13 @@ type Props = {|
   treeInfo: BookmarkTreeType
 |}
 class BookmarkTreeContainer extends PureComponent<Props> {
-  handleAuxClick = (bookmarkId: string) => (evt: MouseEvent) => {
+  handleRowAuxClick = (bookmarkId: string) => (evt: MouseEvent) => {
     if (!(evt.currentTarget instanceof window.HTMLElement)) return
 
     this.props.openMenu(bookmarkId, evt.clientX, evt.clientY)
   }
 
-  handleMouseEnter = (bookmarkInfo: BookmarkInfo) => () => {
+  handleRowMouseEnter = (bookmarkInfo: BookmarkInfo) => () => {
     const parentId = this.props.treeInfo.parent.id
 
     if (bookmarkInfo.type === CST.TYPE_FOLDER) {
@@ -41,7 +41,7 @@ class BookmarkTreeContainer extends PureComponent<Props> {
     this.props.setFocusId(bookmarkInfo.id)
   }
 
-  handleMouseLeave = () => {
+  handleRowMouseLeave = () => {
     this.props.removeFocusId()
   }
 
@@ -50,9 +50,9 @@ class BookmarkTreeContainer extends PureComponent<Props> {
       focusId={this.props.focusId}
       iconSize={this.props.iconSize}
       listItemWidth={this.props.listItemWidth}
-      onAuxClick={this.handleAuxClick}
-      onMouseEnter={this.handleMouseEnter}
-      onMouseLeave={this.handleMouseLeave}
+      onRowAuxClick={this.handleRowAuxClick}
+      onRowMouseEnter={this.handleRowMouseEnter}
+      onRowMouseLeave={this.handleRowMouseLeave}
       rowHeight={this.props.rowHeight}
       treeInfo={this.props.treeInfo}
     />

@@ -23,7 +23,7 @@ type Props = {|
   onMouseEnter: (BookmarkInfo) => () => void,
   onMouseLeave: () => void
 |}
-class BookmarkItem extends PureComponent<Props> {
+class BookmarkRow extends PureComponent<Props> {
   componentDidMount() {
     // temp fix for https://github.com/facebook/react/issues/8529
     // $FlowFixMe // flow does not support auxclick event
@@ -65,4 +65,4 @@ class BookmarkItem extends PureComponent<Props> {
   )
 }
 
-export default BookmarkItem
+export default BookmarkRow
