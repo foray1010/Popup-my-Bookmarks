@@ -9,6 +9,7 @@ import {connect} from 'react-redux'
 
 import {menuCreators} from '../../reduxs'
 import type {MenuPattern} from '../../types'
+import AbsPositionWithinBody from '../AbsPositionWithinBody'
 import Mask from '../Mask'
 import Menu from './Menu'
 
@@ -23,31 +24,34 @@ type Props = {|
   setFocusedRow: (string) => void
 |}
 class MenuContainer extends PureComponent<Props> {
-  handleClick = (rowKey: string) => () => {
+  handleRowClick = (rowKey: string) => () => {
     this.props.clickMenuRow(rowKey)
     this.props.closeMenu()
   }
 
-  handleMouseEnter = (rowKey: string) => () => {
+  handleRowMouseEnter = (rowKey: string) => () => {
     this.props.setFocusedRow(rowKey)
   }
 
-  handleMouseLeave = () => {
+  handleRowMouseLeave = () => {
     this.props.removeFocusedRow()
   }
 
   render = () => (
     <Fragment>
       <Mask onClick={this.props.closeMenu} />
-      <Menu
-        focusedRow={this.props.focusedRow}
-        menuPattern={this.props.menuPattern}
+      <AbsPositionWithinBody
         positionLeft={this.props.positionLeft}
         positionTop={this.props.positionTop}
-        onClick={this.handleClick}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-      />
+      >
+        <Menu
+          focusedRow={this.props.focusedRow}
+          menuPattern={this.props.menuPattern}
+          onRowClick={this.handleRowClick}
+          onRowMouseEnter={this.handleRowMouseEnter}
+          onRowMouseLeave={this.handleRowMouseLeave}
+        />
+      </AbsPositionWithinBody>
     </Fragment>
   )
 }
