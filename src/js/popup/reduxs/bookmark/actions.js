@@ -11,14 +11,13 @@ export const {Creators: bookmarkCreators, Types: bookmarkTypes} = createActions(
   getSearchResult: ['searchKeyword'],
   initBookmarkTrees: null,
   openBookmarksInBrowser: ['ids', 'params'],
-  openBookmarkTree: ['index', 'id'],
+  openBookmarkTree: ['id', 'parentId'],
   pasteBookmark: ['parentId', 'index'],
   refreshBookmarkTrees: null,
-  removeBookmarkTrees: ['startIndex'],
+  removeBookmarkTrees: ['removeAfterId'],
   removeFocusId: null,
   resetClipboard: null,
   setBookmarkTrees: ['bookmarkTrees'],
   setFocusId: ['focusId'],
-  sortBookmarksByName: ['parentId'],
-  spliceBookmarkTrees: ['index', 'bookmarkTrees']
+  sortBookmarksByName: ['parentId']
 })

@@ -7,14 +7,16 @@ import {connect} from 'react-redux'
 
 import * as CST from '../../constants'
 import {bookmarkCreators, menuCreators} from '../../reduxs'
-import type {BookmarkTree as BookmarkTreeType} from '../../types'
+import type {BookmarkInfo, BookmarkTree as BookmarkTreeType} from '../../types'
 import BookmarkTree from './BookmarkTree'
 
 type Props = {|
   focusId: string,
   iconSize: number,
   listItemWidth: number,
+  openBookmarkTree: (string, string) => void,
   openMenu: (string, number, number) => void,
+  removeBookmarkTrees: (string) => void,
   removeFocusId: () => void,
   rowHeight: number,
   setFocusId: (string) => void,
@@ -27,8 +29,16 @@ class BookmarkTreeContainer extends PureComponent<Props> {
     this.props.openMenu(bookmarkId, evt.clientX, evt.clientY)
   }
 
-  handleMouseEnter = (bookmarkId: string) => () => {
-    this.props.setFocusId(bookmarkId)
+  handleMouseEnter = (bookmarkInfo: BookmarkInfo) => () => {
+    const parentId = this.props.treeInfo.parent.id
+
+    if (bookmarkInfo.type === CST.TYPE_FOLDER) {
+      this.props.openBookmarkTree(bookmarkInfo.id, parentId)
+    } else {
+      this.props.removeBookmarkTrees(parentId)
+    }
+
+    this.props.setFocusId(bookmarkInfo.id)
   }
 
   handleMouseLeave = () => {
@@ -64,7 +74,10 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = {
-  ...R.pick(['openBookmarkTree', 'removeFocusId', 'setFocusId'], bookmarkCreators),
+  ...R.pick(
+    ['openBookmarkTree', 'removeBookmarkTrees', 'removeFocusId', 'setFocusId'],
+    bookmarkCreators
+  ),
   ...R.pick(['openMenu'], menuCreators)
 }
 

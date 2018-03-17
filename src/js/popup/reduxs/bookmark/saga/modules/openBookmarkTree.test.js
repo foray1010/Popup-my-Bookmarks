@@ -1,29 +1,63 @@
-import Chance from 'chance'
-import {call, put} from 'redux-saga/effects'
+import {all, call, put, select} from 'redux-saga/effects'
 
 import {bookmarkCreators} from '../../actions'
-import bookmarkTrees from '../__fixtures__/bookmarkTrees'
+import bookmarkTrees, {generateBookmarkTree} from '../__fixtures__/bookmarkTrees'
 import {getBookmarkTree} from '../utils/getters'
-import {openBookmarkTree} from './openBookmarkTree'
-
-const chance = new Chance('openBookmarkTree')
-
-const fakedId = String(chance.integer())
-const fakedIndex = chance.integer()
+import {bookmarkTreesSelector, openBookmarkTree} from './openBookmarkTree'
 
 describe('openBookmarkTree', () => {
-  test('get bookmark trees by `id` and replace bookmark trees starting from `index`', () => {
+  test('get bookmark trees by `id` and replace bookmark trees after `parentId`', () => {
+    const fakeBookmarkTree = generateBookmarkTree()
+    fakeBookmarkTree.parent.parentId = bookmarkTrees[3].parent.id
+
+    const {id, parentId} = fakeBookmarkTree.parent
+
     const generator = openBookmarkTree({
-      id: fakedId,
-      index: fakedIndex
+      id,
+      parentId
     })
 
-    expect(generator.next().value).toEqual(call(getBookmarkTree, fakedId))
+    expect(generator.next().value).toEqual(
+      all([select(bookmarkTreesSelector), call(getBookmarkTree, id)])
+    )
 
-    expect(generator.next(bookmarkTrees[0]).value).toEqual(
-      put(bookmarkCreators.spliceBookmarkTrees(fakedIndex, [bookmarkTrees[0]]))
+    expect(generator.next([bookmarkTrees, fakeBookmarkTree]).value).toEqual(
+      put(bookmarkCreators.setBookmarkTrees([...bookmarkTrees.slice(0, 4), fakeBookmarkTree]))
     )
 
     expect(generator.next().done).toBe(true)
+  })
+
+  test('skip if `id` already exist in current trees', () => {
+    const {id, parentId} = bookmarkTrees[0].parent
+
+    const generator = openBookmarkTree({
+      id,
+      parentId
+    })
+
+    expect(generator.next().value).toEqual(
+      all([select(bookmarkTreesSelector), call(getBookmarkTree, id)])
+    )
+
+    expect(generator.next([bookmarkTrees, bookmarkTrees[0]]).done).toBe(true)
+  })
+
+  test('skip if `parentId` is not exist in current trees', () => {
+    const fakeBookmarkTree = generateBookmarkTree()
+    fakeBookmarkTree.parent.parentId = 'NOT_EXIST'
+
+    const {id, parentId} = fakeBookmarkTree.parent
+
+    const generator = openBookmarkTree({
+      id,
+      parentId
+    })
+
+    expect(generator.next().value).toEqual(
+      all([select(bookmarkTreesSelector), call(getBookmarkTree, id)])
+    )
+
+    expect(generator.next([bookmarkTrees, fakeBookmarkTree]).done).toBe(true)
   })
 })

@@ -20,7 +20,7 @@ type Props = {|
   iconSize: number,
   isFocused: boolean,
   onAuxClick: (string) => (MouseEvent) => void,
-  onMouseEnter: (string) => () => void,
+  onMouseEnter: (BookmarkInfo) => () => void,
   onMouseLeave: () => void
 |}
 class BookmarkItem extends PureComponent<Props> {
@@ -36,7 +36,7 @@ class BookmarkItem extends PureComponent<Props> {
   }
 
   handleAuxClick = this.props.onAuxClick(this.props.bookmarkInfo.id)
-  handleMouseEnter = this.props.onMouseEnter(this.props.bookmarkInfo.id)
+  handleMouseEnter = this.props.onMouseEnter(this.props.bookmarkInfo)
 
   baseEl: ?HTMLElement
   render = () => (

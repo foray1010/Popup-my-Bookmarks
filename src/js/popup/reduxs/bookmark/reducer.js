@@ -1,5 +1,6 @@
 // @flow
 
+import * as R from 'ramda'
 import {createReducer} from 'reduxsauce'
 import Immutable from 'seamless-immutable'
 
@@ -38,10 +39,14 @@ const getSearchResult = (state, {searchKeyword}: GetSearchResultPayload) =>
   Immutable.merge(state, {searchKeyword})
 
 type RemoveBookmarkTreesPayload = {|
-  startIndex: number
+  removeAfterId: string
 |}
-const removeBookmarkTrees = (state, {startIndex}: RemoveBookmarkTreesPayload) =>
-  Immutable.set(state, 'trees', state.trees.slice(0, startIndex))
+const removeBookmarkTrees = (state, {removeAfterId}: RemoveBookmarkTreesPayload) => {
+  const removeAfterIndex = state.trees.findIndex(R.pathEq(['parent', 'id'], removeAfterId))
+  if (removeAfterIndex < 0) return state
+
+  return Immutable.set(state, 'trees', state.trees.slice(0, removeAfterIndex + 1))
+}
 
 const removeFocusId = (state) => Immutable.set(state, 'focusId', '')
 
@@ -58,13 +63,6 @@ type SetFocusIdPayload = {|
 |}
 const setFocusId = (state, {focusId}: SetFocusIdPayload) => Immutable.merge(state, {focusId})
 
-type SpliceBookmarkTreesPayload = {|
-  bookmarkTrees: $ReadOnlyArray<BookmarkTree>,
-  index: number
-|}
-const spliceBookmarkTrees = (state, {index, bookmarkTrees}: SpliceBookmarkTreesPayload) =>
-  Immutable.set(state, 'trees', state.trees.slice(0, index).concat(bookmarkTrees))
-
 export const bookmarkReducer = createReducer(INITIAL_STATE, {
   [bookmarkTypes.COPY_BOOKMARK]: copyBookmark,
   [bookmarkTypes.CUT_BOOKMARK]: cutBookmark,
@@ -73,6 +71,5 @@ export const bookmarkReducer = createReducer(INITIAL_STATE, {
   [bookmarkTypes.REMOVE_FOCUS_ID]: removeFocusId,
   [bookmarkTypes.RESET_CLIPBOARD]: resetClipboard,
   [bookmarkTypes.SET_BOOKMARK_TREES]: setBookmarkTrees,
-  [bookmarkTypes.SET_FOCUS_ID]: setFocusId,
-  [bookmarkTypes.SPLICE_BOOKMARK_TREES]: spliceBookmarkTrees
+  [bookmarkTypes.SET_FOCUS_ID]: setFocusId
 })

@@ -19,7 +19,7 @@ const generateBookmarkInfo = (type) => ({
   isUnmodifiable: chance.bool()
 })
 
-const generateBookmarkTree = () => ({
+export const generateBookmarkTree = () => ({
   children: R.times(() => generateBookmarkInfo(null), 20),
   parent: generateBookmarkInfo(CST.TYPE_FOLDER)
 })
