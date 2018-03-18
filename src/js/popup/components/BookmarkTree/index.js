@@ -16,7 +16,15 @@ type Props = {|
   isShowHeader: boolean,
   listItemWidth: number,
   openBookmarkTree: (string, string) => void,
-  openMenu: (string, number, number) => void,
+  openMenu: (
+    string,
+    {|
+      positionLeft: number,
+      positionTop: number,
+      targetLeft: number,
+      targetTop: number
+    |}
+  ) => void,
   removeBookmarkTrees: (string) => void,
   removeFocusId: () => void,
   rowHeight: number,
@@ -31,7 +39,13 @@ class BookmarkTreeContainer extends PureComponent<Props> {
   handleRowAuxClick = (bookmarkId: string) => (evt: MouseEvent) => {
     if (!(evt.currentTarget instanceof window.HTMLElement)) return
 
-    this.props.openMenu(bookmarkId, evt.clientX, evt.clientY)
+    const targetOffset = evt.currentTarget.getBoundingClientRect()
+    this.props.openMenu(bookmarkId, {
+      positionLeft: evt.clientX,
+      positionTop: evt.clientY,
+      targetLeft: targetOffset.left,
+      targetTop: targetOffset.top
+    })
   }
 
   handleRowMouseEnter = (bookmarkInfo: BookmarkInfo) => () => {

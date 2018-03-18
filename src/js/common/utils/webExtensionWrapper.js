@@ -24,3 +24,5 @@ export const removeBookmarkTree = (...args: $ReadOnlyArray<*>) =>
 export const searchBookmarkNodes = (...args: $ReadOnlyArray<*>) =>
   webExtension.bookmarks.search(...args)
 export const setStorage = (...args: $ReadOnlyArray<*>) => webExtension.storage.sync.set(...args)
+export const updateBookmark = (...args: $ReadOnlyArray<*>) =>
+  webExtension.bookmarks.update(...args)

@@ -7,6 +7,7 @@ import {call, put, select} from 'redux-saga/effects'
 import * as CST from '../../../../constants'
 import {bookmarkCreators} from '../../../bookmark/actions'
 import {getBookmarkInfo, getBookmarkTree} from '../../../bookmark/saga/utils/getters'
+import {editorCreators} from '../../../editor/actions'
 
 type Payload = {|
   rowName: string
@@ -45,6 +46,16 @@ export function* clickMenuRow({rowName}: Payload): Saga<void> {
 
     case CST.MENU_DEL:
       yield put(bookmarkCreators.deleteBookmark(targetBookmarkInfo.id))
+      break
+
+    case CST.MENU_EDIT:
+    case CST.MENU_RENAME:
+      yield put(
+        editorCreators.openEditor(menu.targetId, {
+          positionLeft: menu.targetLeft,
+          positionTop: menu.targetTop
+        })
+      )
       break
 
     case CST.MENU_OPEN_ALL:

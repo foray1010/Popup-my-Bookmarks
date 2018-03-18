@@ -41,8 +41,10 @@ class SearchContainer extends PureComponent<Props, State> {
   }
 
   handleDocumentKeyDown = (evt: KeyboardEvent) => {
-    // if it is not `Shift`, `Control` etc
-    if (evt.key.length === 1) {
+    const isCharKey = evt.key.length === 1
+    const notFocusOnInputElement =
+      !document.activeElement || !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)
+    if (notFocusOnInputElement && isCharKey) {
       this.props.setIsFocusSearchInput(true)
     }
   }

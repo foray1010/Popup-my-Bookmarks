@@ -11,7 +11,9 @@ type MenuState = {|
   menuPattern: MenuPattern,
   positionLeft: number,
   positionTop: number,
-  targetId: string
+  targetId: string,
+  targetLeft: number,
+  targetTop: number
 |}
 
 const INITIAL_STATE: MenuState = Immutable({
@@ -19,20 +21,25 @@ const INITIAL_STATE: MenuState = Immutable({
   menuPattern: [],
   positionLeft: 0,
   positionTop: 0,
-  targetId: ''
+  targetId: '',
+  targetLeft: 0,
+  targetTop: 0
 })
 
 const closeMenu = () => INITIAL_STATE
 
 type OpenMenuPayload = {|
-  positionLeft: number,
-  positionTop: number,
+  coordinates: {|
+    positionLeft: number,
+    positionTop: number,
+    targetLeft: number,
+    targetTop: number
+  |},
   targetId: string
 |}
-const openMenu = (state: MenuState, {positionLeft, positionTop, targetId}: OpenMenuPayload) =>
+const openMenu = (state: MenuState, {coordinates, targetId}: OpenMenuPayload) =>
   Immutable.merge(state, {
-    positionLeft,
-    positionTop,
+    ...coordinates,
     targetId
   })
 

@@ -10,6 +10,7 @@ import App from './App'
 import withMouseEvents from './withMouseEvents'
 
 type Props = {|
+  isShowEditor: boolean,
   isShowMenu: boolean,
   options: Object
 |}
@@ -24,10 +25,11 @@ class AppContainer extends PureComponent<Props> {
     }
   }
 
-  render = () => <App isShowMenu={this.props.isShowMenu} />
+  render = () => <App isShowEditor={this.props.isShowEditor} isShowMenu={this.props.isShowMenu} />
 }
 
 const mapStateToProps = (state) => ({
+  isShowEditor: Boolean(state.editor.targetId),
   isShowMenu: Boolean(state.menu.targetId),
   options: state.options
 })

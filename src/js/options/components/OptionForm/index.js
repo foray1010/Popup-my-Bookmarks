@@ -25,7 +25,7 @@ class OptionFormContainer extends PureComponent<Props, State> {
     optionsConfig: null
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     this.setState({
       optionsConfig: await getOptionsConfig()
     })
