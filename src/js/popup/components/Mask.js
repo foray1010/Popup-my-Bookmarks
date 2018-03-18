@@ -3,11 +3,27 @@
 
 import '../../../css/popup/mask.css'
 
+import * as R from 'ramda'
 import {createElement} from 'react'
+import styled from 'react-emotion'
+
+const Main = styled('div')`
+  background-color: ${R.prop('backgroundColor')};
+  opacity: ${R.prop('opacity')};
+`
 
 type Props = {|
-  onClick: () => void
+  backgroundColor: string,
+  onClick: () => void,
+  opacity: number
 |}
-const Mask = (props: Props) => <div styleName='main' onClick={props.onClick} />
+const Mask = (props: Props) => (
+  <Main
+    styleName='main'
+    backgroundColor={props.backgroundColor}
+    opacity={props.opacity}
+    onClick={props.onClick}
+  />
+)
 
 export default Mask

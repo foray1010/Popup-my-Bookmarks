@@ -36,7 +36,7 @@ class EditorContainer extends PureComponent<Props> {
 
   render = () => (
     <Fragment>
-      <Mask onClick={this.props.closeEditor} />
+      <Mask backgroundColor='#fff' opacity={0.3} onClick={this.props.closeEditor} />
       <AbsPositionWithinBody
         positionLeft={this.props.positionLeft}
         positionTop={this.props.positionTop}

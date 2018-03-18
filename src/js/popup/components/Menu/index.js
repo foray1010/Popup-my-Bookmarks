@@ -39,7 +39,7 @@ class MenuContainer extends PureComponent<Props> {
 
   render = () => (
     <Fragment>
-      <Mask onClick={this.props.closeMenu} />
+      <Mask backgroundColor='#fff' opacity={0.3} onClick={this.props.closeMenu} />
       <AbsPositionWithinBody
         positionLeft={this.props.positionLeft}
         positionTop={this.props.positionTop}

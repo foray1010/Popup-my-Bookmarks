@@ -16,6 +16,7 @@ const TOGGLE_BOOKMARK_TREE_TIMEOUT = 200
 type Props = {|
   focusId: string,
   iconSize: number,
+  isShowCover: boolean,
   isShowHeader: boolean,
   listItemWidth: number,
   openBookmarkTree: (string, string) => void,
@@ -74,9 +75,10 @@ class BookmarkTreeContainer extends PureComponent<Props> {
     <BookmarkTree
       focusId={this.props.focusId}
       iconSize={this.props.iconSize}
+      isShowCover={this.props.isShowCover}
       isShowHeader={this.props.isShowHeader}
       listItemWidth={this.props.listItemWidth}
-      onHeaderClose={this.closeCurrentTree}
+      onClose={this.closeCurrentTree}
       onRowAuxClick={this.handleRowAuxClick}
       onRowMouseEnter={this.handleRowMouseEnter}
       onRowMouseLeave={this.handleRowMouseLeave}
@@ -97,6 +99,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     focusId: R.path(['bookmark', 'focusId'], state),
     iconSize: getIconSize(state.options.fontSize),
+    // cover the folder if it is not the top two folder
+    isShowCover: state.bookmark.trees.length - treeIndex > 2,
     isShowHeader: treeIndex !== 0,
     listItemWidth: state.options.setWidth,
     rowHeight: getRowHeight(state.options.fontSize),
