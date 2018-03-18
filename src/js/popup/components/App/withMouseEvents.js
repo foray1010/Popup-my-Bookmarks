@@ -13,7 +13,7 @@ export default (WrappedComponent: ComponentType<*>) => {
 
     handleContextMenu = (evt: MouseEvent) => {
       // allow native context menu if it is an input element
-      if (evt.target.tagName === 'INPUT') {
+      if (evt.target instanceof window.HTMLElement && evt.target.tagName === 'INPUT') {
         return
       }
 

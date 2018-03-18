@@ -29,7 +29,7 @@ class InputNumber extends PureComponent<Props> {
   }
 
   // prevent user try to save by pressing enter
-  handleKeyDown = (evt: SyntheticEvent<HTMLInputElement>) => {
+  handleKeyDown = (evt: SyntheticKeyboardEvent<HTMLInputElement>) => {
     if (evt.keyCode === 13) {
       evt.preventDefault()
     }
