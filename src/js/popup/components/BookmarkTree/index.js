@@ -1,6 +1,7 @@
 // @flow
 // @jsx createElement
 
+import debounce from 'lodash.debounce'
 import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
@@ -9,6 +10,8 @@ import * as CST from '../../constants'
 import {bookmarkCreators, menuCreators} from '../../reduxs'
 import type {BookmarkInfo, BookmarkTree as BookmarkTreeType} from '../../types'
 import BookmarkTree from './BookmarkTree'
+
+const TOGGLE_BOOKMARK_TREE_TIMEOUT = 200
 
 type Props = {|
   focusId: string,
@@ -49,18 +52,23 @@ class BookmarkTreeContainer extends PureComponent<Props> {
   }
 
   handleRowMouseEnter = (bookmarkInfo: BookmarkInfo) => () => {
+    this.toggleBookmarkTree(bookmarkInfo)
+    this.props.setFocusId(bookmarkInfo.id)
+  }
+
+  handleRowMouseLeave = () => {
+    this.toggleBookmarkTree.cancel()
+    this.props.removeFocusId()
+  }
+
+  _toggleBookmarkTree = (bookmarkInfo: BookmarkInfo) => {
     if (bookmarkInfo.type === CST.TYPE_FOLDER) {
       this.props.openBookmarkTree(bookmarkInfo.id, this.props.treeInfo.parent.id)
     } else {
       this.closeCurrentTree()
     }
-
-    this.props.setFocusId(bookmarkInfo.id)
   }
-
-  handleRowMouseLeave = () => {
-    this.props.removeFocusId()
-  }
+  toggleBookmarkTree = debounce(this._toggleBookmarkTree, TOGGLE_BOOKMARK_TREE_TIMEOUT)
 
   render = () => (
     <BookmarkTree
