@@ -25,10 +25,6 @@ type Props = {|
   width: number
 |}
 class EditorContainer extends PureComponent<Props> {
-  handleCancel = () => {
-    this.props.closeEditor()
-  }
-
   handleConfirm = (title, url) => {
     this.props.editBookmark(this.props.targetId, title, url)
     this.props.closeEditor()
@@ -51,7 +47,7 @@ class EditorContainer extends PureComponent<Props> {
           title={this.props.title}
           url={this.props.url}
           width={this.props.width}
-          onCancel={this.handleCancel}
+          onCancel={this.props.closeEditor}
           onConfirm={this.handleConfirm}
         />
       </AbsPositionWithinBody>
