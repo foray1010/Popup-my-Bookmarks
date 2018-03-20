@@ -14,6 +14,7 @@
   "bugs": "https://github.com/foray1010/Popup-my-Bookmarks/issues",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
     "dev": "cross-env NODE_ENV=development webpack",
     "lint": "npm-run-all -p lint:*",
     "lint:css": "stylelint src/**/*.css src/**/*.js",
@@ -25,6 +26,7 @@
     "precommit": "npm-run-all -p lint:flow lint-staged",
     "test": "cross-env NODE_ENV=test jest"
   },
+  "commitlint": {"extends": ["@commitlint/config-conventional"]},
   "importSort": {
     ".js": {
       "parser": "import-sort-parser-babylon",
@@ -73,6 +75,8 @@
     "webextension-polyfill": "^0.2.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^6.1.3",
+    "@commitlint/config-conventional": "^6.1.3",
     "babel-core": "^6.24.1",
     "babel-jest": "^22.2.2",
     "babel-loader": "^7.0.0",
