@@ -23,6 +23,7 @@ type Props = {|
   onRowMouseEnter: (BookmarkInfo) => () => void,
   onRowMouseLeave: () => void,
   rowHeight: number,
+  scrollToIndex: number,
   treeInfo: BookmarkTreeType
 |}
 type State = {|
@@ -118,7 +119,7 @@ class BookmarkTree extends PureComponent<Props, State> {
               </div>
             )
           }}
-          // scrollToIndex={this.props.scrollToIndex >= 0 ? this.props.scrollToIndex : undefined}
+          scrollToIndex={this.props.scrollToIndex >= 0 ? this.props.scrollToIndex : undefined}
           // scrollTop={this.props.lastScrollTop}
           tabIndex={-1}
           width={this.props.listItemWidth}

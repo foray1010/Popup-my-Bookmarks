@@ -32,6 +32,7 @@ type Props = {|
   removeBookmarkTrees: (string) => void,
   removeFocusId: () => void,
   rowHeight: number,
+  scrollToIndex: number,
   setFocusId: (string) => void,
   treeInfo: BookmarkTreeType
 |}
@@ -83,6 +84,7 @@ class BookmarkTreeContainer extends PureComponent<Props> {
       onRowMouseEnter={this.handleRowMouseEnter}
       onRowMouseLeave={this.handleRowMouseLeave}
       rowHeight={this.props.rowHeight}
+      scrollToIndex={this.props.scrollToIndex}
       treeInfo={this.props.treeInfo}
     />
   )
@@ -95,16 +97,19 @@ const getRowHeight = (fontSize) =>
   (1 + CST.GOLDEN_GAP) * 2
 
 const mapStateToProps = (state, ownProps) => {
-  const treeIndex = state.bookmark.trees.findIndex(R.pathEq(['parent', 'id'], ownProps.treeId))
+  const {focusId, trees} = state.bookmark
+  const treeIndex = trees.findIndex(R.pathEq(['parent', 'id'], ownProps.treeId))
+  const treeInfo = trees[treeIndex]
   return {
-    focusId: R.path(['bookmark', 'focusId'], state),
+    focusId,
     iconSize: getIconSize(state.options.fontSize),
     // cover the folder if it is not the top two folder
-    isShowCover: state.bookmark.trees.length - treeIndex > 2,
+    isShowCover: trees.length - treeIndex > 2,
     isShowHeader: treeIndex !== 0,
     listItemWidth: state.options.setWidth,
     rowHeight: getRowHeight(state.options.fontSize),
-    treeInfo: state.bookmark.trees[treeIndex]
+    scrollToIndex: treeInfo.children.findIndex(R.propEq('id', focusId)),
+    treeInfo
   }
 }
 
