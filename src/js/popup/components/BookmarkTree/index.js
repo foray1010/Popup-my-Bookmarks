@@ -3,7 +3,8 @@
 
 import debounce from 'lodash.debounce'
 import * as R from 'ramda'
-import {PureComponent, createElement} from 'react'
+import {Fragment, PureComponent, createElement} from 'react'
+import EventListener from 'react-event-listener'
 import {connect} from 'react-redux'
 
 import * as CST from '../../constants'
@@ -15,7 +16,9 @@ const TOGGLE_BOOKMARK_TREE_TIMEOUT = 200
 
 type Props = {|
   focusId: string,
+  focusedChildIndex: number,
   iconSize: number,
+  isLastTree: boolean,
   isShowCover: boolean,
   isShowHeader: boolean,
   listItemWidth: number,
@@ -32,13 +35,60 @@ type Props = {|
   removeBookmarkTrees: (string) => void,
   removeFocusId: () => void,
   rowHeight: number,
-  scrollToIndex: number,
   setFocusId: (string) => void,
   treeInfo: BookmarkTreeType
 |}
 class BookmarkTreeContainer extends PureComponent<Props> {
   closeCurrentTree = () => {
     this.props.removeBookmarkTrees(this.props.treeInfo.parent.id)
+  }
+
+  handleDocumentArrowUp = () => {
+    const treeChildren = this.props.treeInfo.children
+    if (this.props.focusId) {
+      if (this.props.focusedChildIndex >= 0) {
+        let nextIndex = this.props.focusedChildIndex - 1
+        if (nextIndex < 0) {
+          nextIndex = treeChildren.length - 1
+        }
+        this.props.setFocusId(treeChildren[nextIndex].id)
+      }
+    } else {
+      if (this.props.isLastTree) {
+        const lastChild = treeChildren[treeChildren.length - 1]
+        if (lastChild) this.props.setFocusId(lastChild.id)
+      }
+    }
+  }
+
+  handleDocumentArrowDown = () => {
+    const treeChildren = this.props.treeInfo.children
+    if (this.props.focusId) {
+      if (this.props.focusedChildIndex >= 0) {
+        let nextIndex = this.props.focusedChildIndex + 1
+        if (nextIndex >= treeChildren.length) {
+          nextIndex = 0
+        }
+        this.props.setFocusId(treeChildren[nextIndex].id)
+      }
+    } else {
+      if (this.props.isLastTree) {
+        const firstChild = treeChildren[0]
+        if (firstChild) this.props.setFocusId(firstChild.id)
+      }
+    }
+  }
+
+  handleDocumentKeyDown = (evt: KeyboardEvent) => {
+    switch (evt.key) {
+      case 'ArrowDown':
+        this.handleDocumentArrowDown()
+        break
+      case 'ArrowUp':
+        this.handleDocumentArrowUp()
+        break
+      default:
+    }
   }
 
   handleRowAuxClick = (bookmarkId: string) => (evt: MouseEvent) => {
@@ -73,20 +123,23 @@ class BookmarkTreeContainer extends PureComponent<Props> {
   toggleBookmarkTree = debounce(this._toggleBookmarkTree, TOGGLE_BOOKMARK_TREE_TIMEOUT)
 
   render = () => (
-    <BookmarkTree
-      focusId={this.props.focusId}
-      iconSize={this.props.iconSize}
-      isShowCover={this.props.isShowCover}
-      isShowHeader={this.props.isShowHeader}
-      listItemWidth={this.props.listItemWidth}
-      onClose={this.closeCurrentTree}
-      onRowAuxClick={this.handleRowAuxClick}
-      onRowMouseEnter={this.handleRowMouseEnter}
-      onRowMouseLeave={this.handleRowMouseLeave}
-      rowHeight={this.props.rowHeight}
-      scrollToIndex={this.props.scrollToIndex}
-      treeInfo={this.props.treeInfo}
-    />
+    <Fragment>
+      <BookmarkTree
+        focusId={this.props.focusId}
+        iconSize={this.props.iconSize}
+        isShowCover={this.props.isShowCover}
+        isShowHeader={this.props.isShowHeader}
+        listItemWidth={this.props.listItemWidth}
+        onClose={this.closeCurrentTree}
+        onRowAuxClick={this.handleRowAuxClick}
+        onRowMouseEnter={this.handleRowMouseEnter}
+        onRowMouseLeave={this.handleRowMouseLeave}
+        rowHeight={this.props.rowHeight}
+        scrollToIndex={this.props.focusedChildIndex}
+        treeInfo={this.props.treeInfo}
+      />
+      <EventListener target={document} onKeyDown={this.handleDocumentKeyDown} />
+    </Fragment>
   )
 }
 
@@ -102,13 +155,14 @@ const mapStateToProps = (state, ownProps) => {
   const treeInfo = trees[treeIndex]
   return {
     focusId,
+    focusedChildIndex: treeInfo.children.findIndex(R.propEq('id', focusId)),
     iconSize: getIconSize(state.options.fontSize),
+    isLastTree: treeIndex === trees.length - 1,
     // cover the folder if it is not the top two folder
     isShowCover: trees.length - treeIndex > 2,
     isShowHeader: treeIndex !== 0,
     listItemWidth: state.options.setWidth,
     rowHeight: getRowHeight(state.options.fontSize),
-    scrollToIndex: treeInfo.children.findIndex(R.propEq('id', focusId)),
     treeInfo
   }
 }
