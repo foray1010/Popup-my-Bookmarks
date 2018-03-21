@@ -26,7 +26,9 @@
     "precommit": "npm-run-all -p lint:flow lint-staged",
     "test": "cross-env NODE_ENV=test jest"
   },
-  "commitlint": {"extends": ["@commitlint/config-conventional"]},
+  "commitlint": {
+    "extends": ["@commitlint/config-conventional"]
+  },
   "importSort": {
     ".js": {
       "parser": "import-sort-parser-babylon",
@@ -89,10 +91,10 @@
     "copy-webpack-plugin": "^4.1.1",
     "cross-env": "^5.0.0",
     "css-loader": "^0.28.0",
-    "duplicate-package-checker-webpack-plugin": "^2.1.0",
+    "duplicate-package-checker-webpack-plugin": "^3.0.0",
     "eslint": "^4.8.0",
     "eslint-config-foray1010": "^6.2.0",
-    "extract-loader": "^1.0.0",
+    "extract-loader": "^2.0.1",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.5",
     "flow-bin": "^0.68.0",
