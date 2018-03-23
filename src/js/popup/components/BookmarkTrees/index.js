@@ -9,6 +9,7 @@ import {connect} from 'react-redux'
 import {bookmarkCreators} from '../../reduxs'
 import BookmarkTrees from './BookmarkTrees'
 import withBookmarkEvents from './withBookmarkEvents'
+import withKeyboardNav from './withKeyboardNav'
 
 const getTreeIds = R.compose(R.map(R.path(['parent', 'id'])), R.path(['bookmark', 'trees']))
 
@@ -33,6 +34,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = R.pick(['initBookmarkTrees'], bookmarkCreators)
 
-export default R.compose(withBookmarkEvents, connect(mapStateToProps, mapDispatchToProps))(
-  BookmarkTreesContainer
-)
+export default R.compose(
+  withBookmarkEvents,
+  withKeyboardNav,
+  connect(mapStateToProps, mapDispatchToProps)
+)(BookmarkTreesContainer)
