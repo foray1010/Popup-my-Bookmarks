@@ -33,21 +33,37 @@ const getNextFocusId = (trees, focusId, indexOffset) => {
   return ''
 }
 
-const getNthChildIdOfLastTree = (trees, n): string =>
-  R.compose(R.propOr('', 'id'), R.nth(n), R.propOr([], 'children'), R.last)(trees)
+const getNthChildId = (trees, n) =>
+  R.compose(R.propOr('', 'id'), R.nth(n), R.propOr([], 'children'))(trees)
 
-const privatePropNames = ['focusId', 'setFocusId', 'trees']
+const privatePropNames = ['focusId', 'removeBookmarkTrees', 'setFocusId', 'trees']
 const withKeyboardNav = (WrappedComponent: ComponentType<*>) => {
   type Props = {|
     focusId: string,
+    removeBookmarkTrees: (string) => void,
     setFocusId: (string) => void,
     trees: $ReadOnlyArray<BookmarkTree>
   |}
   return class KeyboardNav extends PureComponent<Props> {
+    handleDocumentArrowLeft = () => {
+      const {trees} = this.props
+
+      // at least we need one tree
+      if (trees.length > 1) {
+        const secondLastTree = trees[trees.length - 2]
+        this.props.removeBookmarkTrees(secondLastTree.parent.id)
+
+        const nextFocusId = getNthChildId(secondLastTree, 0)
+        this.props.setFocusId(nextFocusId)
+      }
+    }
+
     handleDocumentArrowVertical = (isDown) => {
-      const nextFocusId = this.props.focusId ?
-        getNextFocusId(this.props.trees, this.props.focusId, isDown ? 1 : -1) :
-        getNthChildIdOfLastTree(this.props.trees, isDown ? 0 : -1)
+      const {focusId, trees} = this.props
+
+      const nextFocusId = focusId ?
+        getNextFocusId(trees, focusId, isDown ? 1 : -1) :
+        getNthChildId(trees[trees.length - 1], isDown ? 0 : -1)
       this.props.setFocusId(nextFocusId)
     }
 
@@ -55,6 +71,9 @@ const withKeyboardNav = (WrappedComponent: ComponentType<*>) => {
       switch (evt.key) {
         case 'ArrowDown':
           this.handleDocumentArrowVertical(true)
+          break
+        case 'ArrowLeft':
+          this.handleDocumentArrowLeft()
           break
         case 'ArrowUp':
           this.handleDocumentArrowVertical(false)
@@ -77,6 +96,6 @@ const mapStateToProps = (state) => ({
   trees: state.bookmark.trees
 })
 
-const mapDispatchToProps = R.pick(['setFocusId'], bookmarkCreators)
+const mapDispatchToProps = R.pick(['removeBookmarkTrees', 'setFocusId'], bookmarkCreators)
 
 export default R.compose(connect(mapStateToProps, mapDispatchToProps), withKeyboardNav)
