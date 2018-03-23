@@ -3,6 +3,7 @@
 
 import * as R from 'ramda'
 import {Fragment, PureComponent, createElement} from 'react'
+import type {ComponentType} from 'react'
 import EventListener from 'react-event-listener'
 import {connect} from 'react-redux'
 
@@ -15,40 +16,38 @@ const cycle = (start, end, value) => {
   return value
 }
 
+const getFocusedTreeIndex = (trees, focusId) =>
+  trees.findIndex(R.compose(R.any(R.propEq('id', focusId)), R.prop('children')))
+
+const getNextFocusId = (trees, focusId, indexOffset) => {
+  const focusedTreeIndex = getFocusedTreeIndex(trees, focusId)
+  const focusedTree = trees[focusedTreeIndex]
+  if (focusedTree) {
+    const focusedChildIndex = focusedTree.children.findIndex(R.propEq('id', focusId))
+    if (focusedChildIndex >= 0) {
+      const nextIndex = cycle(0, focusedTree.children.length - 1, focusedChildIndex + indexOffset)
+      return focusedTree.children[nextIndex].id
+    }
+  }
+
+  return ''
+}
+
+const getNthChildIdOfLastTree = (trees, n): string =>
+  R.compose(R.propOr('', 'id'), R.nth(n), R.propOr([], 'children'), R.last)(trees)
+
 const privatePropNames = ['focusId', 'setFocusId', 'trees']
-const withKeyboardNav = (WrappedComponent) => {
+const withKeyboardNav = (WrappedComponent: ComponentType<*>) => {
   type Props = {|
     focusId: string,
     setFocusId: (string) => void,
     trees: $ReadOnlyArray<BookmarkTree>
   |}
   return class KeyboardNav extends PureComponent<Props> {
-    getNextFocusId = (isDown) => {
-      const equalFocusId = R.propEq('id', this.props.focusId)
-
-      const focusedTree = this.props.trees.find(R.compose(R.any(equalFocusId), R.prop('children')))
-      if (focusedTree) {
-        const focusedChildIndex = focusedTree.children.findIndex(equalFocusId)
-        if (focusedChildIndex >= 0) {
-          const nextIndex = cycle(
-            0,
-            focusedTree.children.length - 1,
-            focusedChildIndex + (isDown ? 1 : -1)
-          )
-          return focusedTree.children[nextIndex].id
-        }
-      }
-
-      return ''
-    }
-
-    getNthChildIdOfLastTree = (n): string =>
-      R.compose(R.propOr('', 'id'), R.nth(n), R.propOr([], 'children'), R.last)(this.props.trees)
-
     handleDocumentArrowVertical = (isDown) => {
       const nextFocusId = this.props.focusId ?
-        this.getNextFocusId(isDown) :
-        this.getNthChildIdOfLastTree(isDown ? 0 : -1)
+        getNextFocusId(this.props.trees, this.props.focusId, isDown ? 1 : -1) :
+        getNthChildIdOfLastTree(this.props.trees, isDown ? 0 : -1)
       this.props.setFocusId(nextFocusId)
     }
 
