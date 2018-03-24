@@ -16,6 +16,9 @@ const cycle = (start, end, value) => {
   return value
 }
 
+const getChildId = (trees, childSelector) =>
+  R.compose(R.propOr('', 'id'), childSelector, R.propOr([], 'children'))(trees)
+
 const getFocusedTree = (trees, focusId) =>
   trees.find(R.compose(R.any(R.propEq('id', focusId)), R.prop('children')))
 
@@ -31,9 +34,6 @@ const getNextFocusId = (trees, focusId, indexOffset) => {
 
   return ''
 }
-
-const getNthChildId = (trees, n) =>
-  R.compose(R.propOr('', 'id'), R.nth(n), R.propOr([], 'children'))(trees)
 
 const privatePropNames = [
   'arrowRightNavigate',
@@ -56,10 +56,12 @@ const withKeyboardNav = (WrappedComponent: ComponentType<*>) => {
 
       // at least we need one tree
       if (trees.length > 1) {
+        const lastTree = trees[trees.length - 1]
         const secondLastTree = trees[trees.length - 2]
+
         this.props.removeBookmarkTrees(secondLastTree.parent.id)
 
-        const nextFocusId = getNthChildId(secondLastTree, 0)
+        const nextFocusId = getChildId(secondLastTree, R.find(R.propEq('id', lastTree.parent.id)))
         this.props.setFocusId(nextFocusId)
       }
     }
@@ -76,7 +78,7 @@ const withKeyboardNav = (WrappedComponent: ComponentType<*>) => {
 
       const nextFocusId = focusId ?
         getNextFocusId(trees, focusId, isDown ? 1 : -1) :
-        getNthChildId(trees[trees.length - 1], isDown ? 0 : -1)
+        getChildId(trees[trees.length - 1], R.nth(isDown ? 0 : -1))
       this.props.setFocusId(nextFocusId)
     }
 
