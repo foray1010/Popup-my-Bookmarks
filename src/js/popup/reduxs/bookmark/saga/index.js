@@ -7,6 +7,7 @@ import {silenceSaga} from '../../../../common/utils'
 import {bookmarkTypes} from '../actions'
 import {addCurrentPage} from './modules/addCurrentPage'
 import {addSeparator} from './modules/addSeparator'
+import {arrowRightNavigate} from './modules/arrowRightNavigate'
 import {deleteBookmark} from './modules/deleteBookmark'
 import {editBookmark} from './modules/editBookmark'
 import {getSearchResult} from './modules/getSearchResult'
@@ -21,6 +22,7 @@ export function* bookmarkSaga(): Saga<void> {
   yield all([
     takeLatest(bookmarkTypes.ADD_CURRENT_PAGE, silenceSaga(addCurrentPage)),
     takeLatest(bookmarkTypes.ADD_SEPARATOR, silenceSaga(addSeparator)),
+    takeLatest(bookmarkTypes.ARROW_RIGHT_NAVIGATE, silenceSaga(arrowRightNavigate)),
     takeEvery(bookmarkTypes.DELETE_BOOKMARK, silenceSaga(deleteBookmark)),
     takeEvery(bookmarkTypes.EDIT_BOOKMARK, silenceSaga(editBookmark)),
     takeLatest(bookmarkTypes.GET_SEARCH_RESULT, silenceSaga(getSearchResult)),

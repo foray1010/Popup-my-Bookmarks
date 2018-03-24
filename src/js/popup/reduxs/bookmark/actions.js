@@ -5,6 +5,7 @@ import {createActions} from 'reduxsauce'
 export const {Creators: bookmarkCreators, Types: bookmarkTypes} = createActions({
   addCurrentPage: ['parentId', 'index'],
   addSeparator: ['parentId', 'index'],
+  arrowRightNavigate: ['id', 'parentId'],
   copyBookmark: ['id'],
   cutBookmark: ['id'],
   deleteBookmark: ['id'],
