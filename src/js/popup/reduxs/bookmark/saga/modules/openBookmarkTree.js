@@ -12,6 +12,7 @@ const treeIdEquals = R.pathEq(['parent', 'id'])
 
 type Payload = {|
   id: string,
+  // not necessary to be `parentId` of `id`, such as root folders
   parentId: string
 |}
 export function* openBookmarkTree({id, parentId}: Payload): Saga<void> {
