@@ -1,5 +1,7 @@
 // @flow
 
+import * as CST from '../constants'
+
 export type BookmarkInfo = {|
   iconUrl: string,
   id: string,
@@ -38,3 +40,5 @@ export type Bookmark = {|
 |}
 
 export type MenuPattern = $ReadOnlyArray<$ReadOnlyArray<string>>
+
+export type OpenIn = $Keys<typeof CST.OPEN_IN_TYPES>

@@ -13,7 +13,7 @@ type Payload = {|
   rowName: string
 |}
 export function* clickMenuRow({rowName}: Payload): Saga<void> {
-  const {menu, options} = yield select(R.pick(['menu', 'options']))
+  const {menu} = yield select(R.pick(['menu']))
 
   const targetBookmarkInfo = yield call(getBookmarkInfo, menu.targetId)
 
@@ -63,28 +63,27 @@ export function* clickMenuRow({rowName}: Payload): Saga<void> {
     case CST.MENU_OPEN_ALL_IN_N: {
       const targetBookmarkTree = yield call(getBookmarkTree, targetBookmarkInfo.id)
       const ids = R.compose(R.pluck('id'), R.prop('children'))(targetBookmarkTree)
-      yield put(
-        bookmarkCreators.openBookmarksInBrowser(ids, {
-          openInIncognitoWindow: rowName === CST.MENU_OPEN_ALL_IN_N,
-          openInNewWindow: rowName === CST.MENU_OPEN_ALL_IN_I || rowName === CST.MENU_OPEN_ALL_IN_N,
-          warnWhenOpenMany: options.warnOpenMany
-        })
-      )
+
+      const mapping = {
+        [CST.MENU_OPEN_ALL]: CST.OPEN_IN_TYPES.BACKGROUND_TAB,
+        [CST.MENU_OPEN_ALL_IN_I]: CST.OPEN_IN_TYPES.INCOGNITO_WINDOW,
+        [CST.MENU_OPEN_ALL_IN_N]: CST.OPEN_IN_TYPES.NEW_WINDOW
+      }
+      yield put(bookmarkCreators.openBookmarksInBrowser(ids, mapping[rowName]))
       break
     }
 
     case CST.MENU_OPEN_IN_B:
     case CST.MENU_OPEN_IN_I:
-    case CST.MENU_OPEN_IN_N:
-      yield put(
-        bookmarkCreators.openBookmarksInBrowser([targetBookmarkInfo.id], {
-          openInBackground: rowName === CST.MENU_OPEN_IN_B,
-          openInIncognitoWindow: rowName === CST.MENU_OPEN_IN_N,
-          openInNewWindow: rowName === CST.MENU_OPEN_IN_I || rowName === CST.MENU_OPEN_IN_N,
-          warnWhenOpenMany: options.warnOpenMany
-        })
-      )
+    case CST.MENU_OPEN_IN_N: {
+      const mapping = {
+        [CST.MENU_OPEN_IN_B]: CST.OPEN_IN_TYPES.BACKGROUND_TAB,
+        [CST.MENU_OPEN_IN_I]: CST.OPEN_IN_TYPES.INCOGNITO_WINDOW,
+        [CST.MENU_OPEN_IN_N]: CST.OPEN_IN_TYPES.NEW_WINDOW
+      }
+      yield put(bookmarkCreators.openBookmarksInBrowser([targetBookmarkInfo.id], mapping[rowName]))
       break
+    }
 
     case CST.MENU_PASTE:
       yield put(

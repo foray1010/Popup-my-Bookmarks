@@ -20,6 +20,7 @@ type Props = {|
   iconSize: number,
   isFocused: boolean,
   onAuxClick: (string) => (MouseEvent) => void,
+  onClick: (string) => () => void,
   onMouseEnter: (BookmarkInfo) => () => void,
   onMouseLeave: () => void
 |}
@@ -36,6 +37,7 @@ class BookmarkRow extends PureComponent<Props> {
   }
 
   handleAuxClick = this.props.onAuxClick(this.props.bookmarkInfo.id)
+  handleClick = this.props.onClick(this.props.bookmarkInfo.id)
   handleMouseEnter = this.props.onMouseEnter(this.props.bookmarkInfo)
 
   baseEl: ?HTMLElement
@@ -49,6 +51,7 @@ class BookmarkRow extends PureComponent<Props> {
         'root-folder': this.props.bookmarkInfo.isRoot,
         separator: this.props.bookmarkInfo.type === CST.TYPE_SEPARATOR
       })}
+      onClick={this.handleClick}
       onMouseEnter={this.handleMouseEnter}
       onMouseLeave={this.props.onMouseLeave}
     >

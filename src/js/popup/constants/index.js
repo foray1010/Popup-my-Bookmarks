@@ -26,6 +26,13 @@ export const MENU_PASTE = 'paste'
 export const MENU_RENAME = 'rename'
 export const MENU_SORT_BY_NAME = 'sortByName'
 
+export const OPEN_IN_TYPES = {
+  BACKGROUND_TAB: 'BACKGROUND_TAB',
+  CURRENT_TAB: 'CURRENT_TAB',
+  INCOGNITO_WINDOW: 'INCOGNITO_WINDOW',
+  NEW_WINDOW: 'NEW_WINDOW'
+}
+
 export const TYPE_BOOKMARK = 'bookmark'
 export const TYPE_FOLDER = 'folder'
 export const TYPE_NO_BOOKMARK = 'no-bookmark'

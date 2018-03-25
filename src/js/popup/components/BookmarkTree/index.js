@@ -8,7 +8,7 @@ import {connect} from 'react-redux'
 
 import * as CST from '../../constants'
 import {bookmarkCreators, menuCreators} from '../../reduxs'
-import type {BookmarkInfo, BookmarkTree as BookmarkTreeType} from '../../types'
+import type {BookmarkInfo, BookmarkTree as BookmarkTreeType, OpenIn} from '../../types'
 import BookmarkTree from './BookmarkTree'
 
 const TOGGLE_BOOKMARK_TREE_TIMEOUT = 200
@@ -21,6 +21,7 @@ type Props = {|
   isShowHeader: boolean,
   listItemWidth: number,
   openBookmarkTree: (string, string) => void,
+  openBookmarksInBrowser: ($ReadOnlyArray<string>, OpenIn) => void,
   openMenu: (
     string,
     {|
@@ -53,6 +54,10 @@ class BookmarkTreeContainer extends PureComponent<Props> {
     })
   }
 
+  handleRowClick = (bookmarkId: string) => () => {
+    this.props.openBookmarksInBrowser([bookmarkId], CST.OPEN_IN_TYPES.CURRENT_TAB)
+  }
+
   handleRowMouseEnter = (bookmarkInfo: BookmarkInfo) => () => {
     this.toggleBookmarkTree(bookmarkInfo)
     this.props.setFocusId(bookmarkInfo.id)
@@ -81,6 +86,7 @@ class BookmarkTreeContainer extends PureComponent<Props> {
       listItemWidth={this.props.listItemWidth}
       onClose={this.closeCurrentTree}
       onRowAuxClick={this.handleRowAuxClick}
+      onRowClick={this.handleRowClick}
       onRowMouseEnter={this.handleRowMouseEnter}
       onRowMouseLeave={this.handleRowMouseLeave}
       rowHeight={this.props.rowHeight}
@@ -115,7 +121,13 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = {
   ...R.pick(
-    ['openBookmarkTree', 'removeBookmarkTrees', 'removeFocusId', 'setFocusId'],
+    [
+      'openBookmarkTree',
+      'openBookmarksInBrowser',
+      'removeBookmarkTrees',
+      'removeFocusId',
+      'setFocusId'
+    ],
     bookmarkCreators
   ),
   ...R.pick(['openMenu'], menuCreators)

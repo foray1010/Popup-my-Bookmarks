@@ -20,6 +20,7 @@ type Props = {|
   listItemWidth: number,
   onClose: () => void,
   onRowAuxClick: (string) => (MouseEvent) => void,
+  onRowClick: (string) => () => void,
   onRowMouseEnter: (BookmarkInfo) => () => void,
   onRowMouseLeave: () => void,
   rowHeight: number,
@@ -113,6 +114,7 @@ class BookmarkTree extends PureComponent<Props, State> {
                   iconSize={this.props.iconSize}
                   isFocused={this.props.focusId === bookmarkInfo.id}
                   onAuxClick={this.props.onRowAuxClick}
+                  onClick={this.props.onRowClick}
                   onMouseEnter={this.props.onRowMouseEnter}
                   onMouseLeave={this.props.onRowMouseLeave}
                 />
