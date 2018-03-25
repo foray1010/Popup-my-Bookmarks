@@ -3,7 +3,7 @@ Improvements:
   - Reduce file size by using `woff2` instead of `woff` and removing trivial dependencies & polyfills like `promise` and `regenerator`
 
 Changes:
-  - Increase minimum Chrome version from 34 to 51
+  - Increase minimum Chrome version from 34 to 55
 
 ## 5.1.2 (26/9/2017)
 Bugfixes:
