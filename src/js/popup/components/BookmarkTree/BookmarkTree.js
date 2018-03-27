@@ -20,7 +20,7 @@ type Props = {|
   listItemWidth: number,
   onClose: () => void,
   onRowAuxClick: (string) => (MouseEvent) => void,
-  onRowClick: (string) => () => void,
+  onRowClick: (string) => (SyntheticMouseEvent<HTMLElement>) => void,
   onRowMouseEnter: (BookmarkInfo) => () => void,
   onRowMouseLeave: () => void,
   rowHeight: number,

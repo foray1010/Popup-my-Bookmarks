@@ -20,7 +20,7 @@ type Props = {|
   iconSize: number,
   isFocused: boolean,
   onAuxClick: (string) => (MouseEvent) => void,
-  onClick: (string) => () => void,
+  onClick: (string) => (SyntheticMouseEvent<HTMLElement>) => void,
   onMouseEnter: (BookmarkInfo) => () => void,
   onMouseLeave: () => void
 |}

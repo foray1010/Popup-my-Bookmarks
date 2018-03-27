@@ -42,7 +42,28 @@ class BookmarkTreeContainer extends PureComponent<Props> {
     this.props.removeBookmarkTrees(this.props.treeInfo.parent.id)
   }
 
-  handleRowAuxClick = (bookmarkId: string) => (evt: MouseEvent) => {
+  // to support `chrome < 55` as auxclick is not available
+  _handleRowAllClick = (bookmarkId: string, evt) => {
+    switch (evt.button) {
+      case 0:
+        this._handleRowLeftClick(bookmarkId)
+        break
+      case 1:
+        this._handleRowMiddleClick(bookmarkId)
+        break
+      case 2:
+        this._handleRowRightClick(bookmarkId, evt)
+        break
+      default:
+    }
+  }
+  _handleRowLeftClick = (bookmarkId: string) => {
+    this.props.openBookmarksInBrowser([bookmarkId], CST.OPEN_IN_TYPES.CURRENT_TAB)
+  }
+  _handleRowMiddleClick = (bookmarkId: string) => {
+    this.props.openBookmarksInBrowser([bookmarkId], CST.OPEN_IN_TYPES.NEW_TAB)
+  }
+  _handleRowRightClick = (bookmarkId: string, evt) => {
     if (!(evt.currentTarget instanceof window.HTMLElement)) return
 
     const targetOffset = evt.currentTarget.getBoundingClientRect()
@@ -53,9 +74,11 @@ class BookmarkTreeContainer extends PureComponent<Props> {
       targetTop: targetOffset.top
     })
   }
-
-  handleRowClick = (bookmarkId: string) => () => {
-    this.props.openBookmarksInBrowser([bookmarkId], CST.OPEN_IN_TYPES.CURRENT_TAB)
+  handleRowAuxClick = (bookmarkId: string) => (evt: MouseEvent) => {
+    this._handleRowAllClick(bookmarkId, evt)
+  }
+  handleRowClick = (bookmarkId: string) => (evt: SyntheticMouseEvent<HTMLElement>) => {
+    this._handleRowAllClick(bookmarkId, evt)
   }
 
   handleRowMouseEnter = (bookmarkInfo: BookmarkInfo) => () => {
