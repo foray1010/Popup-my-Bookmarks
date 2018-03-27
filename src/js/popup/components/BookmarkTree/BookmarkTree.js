@@ -43,7 +43,7 @@ class BookmarkTree extends PureComponent<Props, State> {
     if (prevProps.treeInfo !== this.props.treeInfo) {
       // force recalculate all row heights as it doesn't recalculate
       this.props.treeInfo.children.forEach((x, index) => {
-        if (this.listEl) this.listEl.recomputeRowHeights(index)
+        if (this.list) this.list.recomputeRowHeights(index)
       })
 
       this.setHeight()
@@ -67,14 +67,14 @@ class BookmarkTree extends PureComponent<Props, State> {
   }
 
   setHeight = () => {
+    const grid = this.list ? this.list.Grid : null
+
     // search-box and tree-header-box height
-    const listContainerElOffsetTop = this.listContainerEl ?
-      this.listContainerEl.getBoundingClientRect().top :
+    const listContainerElOffsetTop = grid ?
+      grid._scrollingContainer.getBoundingClientRect().top :
       0
 
-    const totalRowHeight = this.listEl ?
-      this.listEl.Grid._rowSizeAndPositionManager.getTotalSize() :
-      0
+    const totalRowHeight = grid ? grid._rowSizeAndPositionManager.getTotalSize() : 0
 
     const maxListHeight = CST.MAX_HEIGHT - listContainerElOffsetTop
 
@@ -83,50 +83,43 @@ class BookmarkTree extends PureComponent<Props, State> {
     })
   }
 
-  listContainerEl: ?HTMLElement
-  listEl: ?Object
+  list: ?Object
   render = () => (
     <section styleName='main'>
       {this.props.isShowHeader && (
         <TreeHeader title={this.props.treeInfo.parent.title} onClose={this.props.onClose} />
       )}
 
-      <div
+      <List
         ref={(ref) => {
-          this.listContainerEl = ref
+          this.list = ref
         }}
-      >
-        <List
-          ref={(ref) => {
-            this.listEl = ref
-          }}
-          height={this.state.listHeight}
-          // onScroll={this.props.onScroll}
-          rowCount={this.props.treeInfo.children.length}
-          rowHeight={this.getRowHeight}
-          rowRenderer={(rendererProps: {| index: number, key: string, style: Object |}) => {
-            const bookmarkInfo = this.props.treeInfo.children[rendererProps.index]
-            return (
-              <div key={rendererProps.key} styleName='list-item' style={rendererProps.style}>
-                <BookmarkRow
-                  key={bookmarkInfo.id}
-                  bookmarkInfo={bookmarkInfo}
-                  iconSize={this.props.iconSize}
-                  isFocused={this.props.focusId === bookmarkInfo.id}
-                  onAuxClick={this.props.onRowAuxClick}
-                  onClick={this.props.onRowClick}
-                  onMouseEnter={this.props.onRowMouseEnter}
-                  onMouseLeave={this.props.onRowMouseLeave}
-                />
-              </div>
-            )
-          }}
-          scrollToIndex={this.props.scrollToIndex >= 0 ? this.props.scrollToIndex : undefined}
-          // scrollTop={this.props.lastScrollTop}
-          tabIndex={-1}
-          width={this.props.listItemWidth}
-        />
-      </div>
+        height={this.state.listHeight}
+        // onScroll={this.props.onScroll}
+        rowCount={this.props.treeInfo.children.length}
+        rowHeight={this.getRowHeight}
+        rowRenderer={(rendererProps: {| index: number, key: string, style: Object |}) => {
+          const bookmarkInfo = this.props.treeInfo.children[rendererProps.index]
+          return (
+            <div key={rendererProps.key} styleName='list-item' style={rendererProps.style}>
+              <BookmarkRow
+                key={bookmarkInfo.id}
+                bookmarkInfo={bookmarkInfo}
+                iconSize={this.props.iconSize}
+                isFocused={this.props.focusId === bookmarkInfo.id}
+                onAuxClick={this.props.onRowAuxClick}
+                onClick={this.props.onRowClick}
+                onMouseEnter={this.props.onRowMouseEnter}
+                onMouseLeave={this.props.onRowMouseLeave}
+              />
+            </div>
+          )
+        }}
+        scrollToIndex={this.props.scrollToIndex >= 0 ? this.props.scrollToIndex : undefined}
+        // scrollTop={this.props.lastScrollTop}
+        tabIndex={-1}
+        width={this.props.listItemWidth}
+      />
 
       {this.props.isShowCover && (
         <Mask backgroundColor='#000' opacity={0.16} onClick={this.props.onClose} />
