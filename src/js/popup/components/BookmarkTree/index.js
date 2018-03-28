@@ -42,6 +42,9 @@ class BookmarkTreeContainer extends PureComponent<Props> {
   closeCurrentTree = () => {
     this.props.removeBookmarkTree(this.props.treeInfo.parent.id)
   }
+  closeNextTrees = () => {
+    this.props.removeNextBookmarkTrees(this.props.treeInfo.parent.id)
+  }
 
   // to support `chrome < 55` as auxclick is not available
   _handleRowAllClick = (bookmarkId: string, evt) => {
@@ -96,7 +99,7 @@ class BookmarkTreeContainer extends PureComponent<Props> {
     if (bookmarkInfo.type === CST.TYPE_FOLDER) {
       this.props.openBookmarkTree(bookmarkInfo.id, this.props.treeInfo.parent.id)
     } else {
-      this.props.removeNextBookmarkTrees(this.props.treeInfo.parent.id)
+      this.closeNextTrees()
     }
   }
   toggleBookmarkTree = debounce(this._toggleBookmarkTree, TOGGLE_BOOKMARK_TREE_TIMEOUT)
@@ -108,7 +111,8 @@ class BookmarkTreeContainer extends PureComponent<Props> {
       isShowCover={this.props.isShowCover}
       isShowHeader={this.props.isShowHeader}
       listItemWidth={this.props.listItemWidth}
-      onClose={this.closeCurrentTree}
+      onCloseButtonClick={this.closeCurrentTree}
+      onCoverClick={this.closeNextTrees}
       onRowAuxClick={this.handleRowAuxClick}
       onRowClick={this.handleRowClick}
       onRowMouseEnter={this.handleRowMouseEnter}

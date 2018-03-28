@@ -18,7 +18,8 @@ type Props = {|
   isShowCover: boolean,
   isShowHeader: boolean,
   listItemWidth: number,
-  onClose: () => void,
+  onCloseButtonClick: () => void,
+  onCoverClick: () => void,
   onRowAuxClick: (string) => (MouseEvent) => void,
   onRowClick: (string) => (SyntheticMouseEvent<HTMLElement>) => void,
   onRowMouseEnter: (BookmarkInfo) => () => void,
@@ -87,7 +88,10 @@ class BookmarkTree extends PureComponent<Props, State> {
   render = () => (
     <section styleName='main'>
       {this.props.isShowHeader && (
-        <TreeHeader title={this.props.treeInfo.parent.title} onClose={this.props.onClose} />
+        <TreeHeader
+          title={this.props.treeInfo.parent.title}
+          onClose={this.props.onCloseButtonClick}
+        />
       )}
 
       <List
@@ -122,7 +126,7 @@ class BookmarkTree extends PureComponent<Props, State> {
       />
 
       {this.props.isShowCover && (
-        <Mask backgroundColor='#000' opacity={0.16} onClick={this.props.onClose} />
+        <Mask backgroundColor='#000' opacity={0.16} onClick={this.props.onCoverClick} />
       )}
     </section>
   )
