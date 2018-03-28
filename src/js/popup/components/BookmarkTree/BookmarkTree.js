@@ -108,7 +108,6 @@ class BookmarkTree extends PureComponent<Props, State> {
           return (
             <div key={rendererProps.key} styleName='list-item' style={rendererProps.style}>
               <BookmarkRow
-                key={bookmarkInfo.id}
                 bookmarkInfo={bookmarkInfo}
                 iconSize={this.props.iconSize}
                 isFocused={this.props.focusId === bookmarkInfo.id}
