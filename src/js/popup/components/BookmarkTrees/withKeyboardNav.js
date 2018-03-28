@@ -96,6 +96,9 @@ const withKeyboardNav = (WrappedComponent: ComponentType<*>) => {
         case 'ArrowUp':
           this.handleDocumentArrowVertical(false)
           break
+        case 'Tab':
+          this.handleDocumentArrowVertical(!evt.shiftKey)
+          break
         default:
       }
     }
