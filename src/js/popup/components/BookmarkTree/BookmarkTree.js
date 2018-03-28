@@ -75,7 +75,10 @@ class BookmarkTree extends PureComponent<Props, State> {
       grid._scrollingContainer.getBoundingClientRect().top :
       0
 
-    const totalRowHeight = grid ? grid._rowSizeAndPositionManager.getTotalSize() : 0
+    const totalRowHeight = this.props.treeInfo.children.reduce(
+      (acc, x, index) => acc + this.getRowHeight({index}),
+      0
+    )
 
     const maxListHeight = CST.MAX_HEIGHT - listContainerElOffsetTop
 
