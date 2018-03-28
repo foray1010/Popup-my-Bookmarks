@@ -59,20 +59,20 @@ const removeBookmarkTree = (state: BookmarkState, {id}: RemoveBookmarkTreePayloa
   return Immutable.set(state, 'trees', state.trees.slice(0, removeFromIndex))
 }
 
-type RemoveBookmarkTreesPayload = {|
+const removeFocusId = (state: BookmarkState) => Immutable.set(state, 'focusId', '')
+
+type RemoveNextBookmarkTreesPayload = {|
   removeAfterId: string
 |}
-const removeBookmarkTrees = (
+const removeNextBookmarkTrees = (
   state: BookmarkState,
-  {removeAfterId}: RemoveBookmarkTreesPayload
+  {removeAfterId}: RemoveNextBookmarkTreesPayload
 ) => {
   const removeAfterIndex = state.trees.findIndex(R.pathEq(['parent', 'id'], removeAfterId))
   if (removeAfterIndex < 0) return state
 
   return Immutable.set(state, 'trees', state.trees.slice(0, removeAfterIndex + 1))
 }
-
-const removeFocusId = (state: BookmarkState) => Immutable.set(state, 'focusId', '')
 
 const resetClipboard = (state: BookmarkState) =>
   Immutable.set(state, 'clipboard', INITIAL_STATE.clipboard)
@@ -94,8 +94,8 @@ export const bookmarkReducer = createReducer(INITIAL_STATE, {
   [bookmarkTypes.CUT_BOOKMARK]: cutBookmark,
   [bookmarkTypes.GET_SEARCH_RESULT]: getSearchResult,
   [bookmarkTypes.REMOVE_BOOKMARK_TREE]: removeBookmarkTree,
-  [bookmarkTypes.REMOVE_BOOKMARK_TREES]: removeBookmarkTrees,
   [bookmarkTypes.REMOVE_FOCUS_ID]: removeFocusId,
+  [bookmarkTypes.REMOVE_NEXT_BOOKMARK_TREES]: removeNextBookmarkTrees,
   [bookmarkTypes.RESET_CLIPBOARD]: resetClipboard,
   [bookmarkTypes.SET_BOOKMARK_TREES]: setBookmarkTrees,
   [bookmarkTypes.SET_FOCUS_ID]: setFocusId

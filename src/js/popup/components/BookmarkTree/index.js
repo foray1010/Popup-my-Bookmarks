@@ -32,8 +32,8 @@ type Props = {|
     |}
   ) => void,
   removeBookmarkTree: (string) => void,
-  removeBookmarkTrees: (string) => void,
   removeFocusId: () => void,
+  removeNextBookmarkTrees: (string) => void,
   rowHeight: number,
   setFocusId: (string) => void,
   treeInfo: BookmarkTreeType
@@ -96,7 +96,7 @@ class BookmarkTreeContainer extends PureComponent<Props> {
     if (bookmarkInfo.type === CST.TYPE_FOLDER) {
       this.props.openBookmarkTree(bookmarkInfo.id, this.props.treeInfo.parent.id)
     } else {
-      this.props.removeBookmarkTrees(this.props.treeInfo.parent.id)
+      this.props.removeNextBookmarkTrees(this.props.treeInfo.parent.id)
     }
   }
   toggleBookmarkTree = debounce(this._toggleBookmarkTree, TOGGLE_BOOKMARK_TREE_TIMEOUT)
@@ -146,11 +146,11 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = {
   ...R.pick(
     [
-      'openBookmarkTree',
       'openBookmarksInBrowser',
+      'openBookmarkTree',
       'removeBookmarkTree',
-      'removeBookmarkTrees',
       'removeFocusId',
+      'removeNextBookmarkTrees',
       'setFocusId'
     ],
     bookmarkCreators

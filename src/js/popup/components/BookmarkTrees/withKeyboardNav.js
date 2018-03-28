@@ -38,7 +38,7 @@ const getNextFocusId = (trees, focusId, indexOffset) => {
 const privatePropNames = [
   'arrowRightNavigate',
   'focusId',
-  'removeBookmarkTrees',
+  'removeNextBookmarkTrees',
   'setFocusId',
   'trees'
 ]
@@ -46,7 +46,7 @@ const withKeyboardNav = (WrappedComponent: ComponentType<*>) => {
   type Props = {|
     arrowRightNavigate: (string, string) => void,
     focusId: string,
-    removeBookmarkTrees: (string) => void,
+    removeNextBookmarkTrees: (string) => void,
     setFocusId: (string) => void,
     trees: $ReadOnlyArray<BookmarkTree>
   |}
@@ -59,7 +59,7 @@ const withKeyboardNav = (WrappedComponent: ComponentType<*>) => {
         const lastTree = trees[trees.length - 1]
         const secondLastTree = trees[trees.length - 2]
 
-        this.props.removeBookmarkTrees(secondLastTree.parent.id)
+        this.props.removeNextBookmarkTrees(secondLastTree.parent.id)
 
         const nextFocusId = getChildId(secondLastTree, R.find(R.propEq('id', lastTree.parent.id)))
         this.props.setFocusId(nextFocusId)
@@ -118,7 +118,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = R.pick(
-  ['arrowRightNavigate', 'removeBookmarkTrees', 'setFocusId'],
+  ['arrowRightNavigate', 'removeNextBookmarkTrees', 'setFocusId'],
   bookmarkCreators
 )
 
