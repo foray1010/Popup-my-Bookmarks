@@ -1,9 +1,14 @@
 ## 6.0.0 (not yet released)
 Improvements:
-  - Reduce file size by using `woff2` instead of `woff` and removing trivial dependencies & polyfills like `promise` and `regenerator`
+  - Rewrite the whole extension with better structure, very likely with fewer bugs
+  - Reduce file size and improve startup speed by removing unnecessary polyfills such as `promise` and `regenerator`
+  - Reduce file size by using `woff2` instead of `woff`
 
 Changes:
-  - Increase minimum Chrome version from 34 to 55
+  - Increase minimum Chrome version from 34 to 51
+
+Bugfixes:
+  - some bookmark rows may not have correct height after sorting/adding/deleting bookmarks
 
 ## 5.1.2 (26/9/2017)
 Bugfixes:
