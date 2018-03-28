@@ -11,12 +11,11 @@ import {bookmarkCreators} from '../../reduxs'
 
 const REFRESH_BOOKMARKS_TIMEOUT = 100
 
-const privatePropNames = ['refreshBookmarkTrees', 'removeBookmarkTrees']
+const privatePropNames = ['refreshBookmarkTrees']
 
 const withBookmarkEvents = (WrappedComponent) => {
   type Props = {|
-    refreshBookmarkTrees: () => void,
-    removeBookmarkTrees: () => void
+    refreshBookmarkTrees: () => void
   |}
   return class BookmarkEvents extends PureComponent<Props> {
     componentDidMount() {
