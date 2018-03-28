@@ -4,11 +4,11 @@
 import debounce from 'lodash.debounce'
 import * as R from 'ramda'
 import {Fragment, PureComponent, createElement} from 'react'
-import EventListener from 'react-event-listener'
 import {connect} from 'react-redux'
 
 import {normalizeInputtingValue} from '../../../common/utils'
 import {bookmarkCreators, uiCreators} from '../../reduxs'
+import GlobalKeyboardEventListener from '../GlobalKeyboardEventListener'
 import Search from './Search'
 
 const SEARCH_TIMEOUT = 300
@@ -68,7 +68,7 @@ class SearchContainer extends PureComponent<Props, State> {
         onFocus={this.handleFocus}
         onInput={this.handleInput}
       />
-      <EventListener target={document} onKeyDown={this.handleDocumentKeyDown} />
+      <GlobalKeyboardEventListener onKeyDown={this.handleDocumentKeyDown} />
     </Fragment>
   )
 }

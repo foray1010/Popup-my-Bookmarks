@@ -4,11 +4,11 @@
 import * as R from 'ramda'
 import {Fragment, PureComponent, createElement} from 'react'
 import type {ComponentType} from 'react'
-import EventListener from 'react-event-listener'
 import {connect} from 'react-redux'
 
 import {bookmarkCreators} from '../../reduxs'
 import type {BookmarkTree} from '../../types'
+import GlobalKeyboardEventListener from '../GlobalKeyboardEventListener'
 
 const cycle = (start, end, value) => {
   if (value < start) return end
@@ -106,7 +106,7 @@ const withKeyboardNav = (WrappedComponent: ComponentType<*>) => {
     render = () => (
       <Fragment>
         <WrappedComponent {...R.without(privatePropNames, this.props)} />
-        <EventListener target={document} onKeyDown={this.handleDocumentKeyDown} />
+        <GlobalKeyboardEventListener onKeyDown={this.handleDocumentKeyDown} />
       </Fragment>
     )
   }

@@ -4,6 +4,7 @@ import type {Saga} from 'redux-saga'
 import {call, put} from 'redux-saga/effects'
 
 import {getBookmarkInfo} from '../../../bookmark/saga/utils/getters'
+import {uiCreators} from '../../../ui/actions'
 import {editorCreators} from '../../actions'
 
 type Payload = {|
@@ -27,4 +28,5 @@ export function* openEditor({coordinates, isCreating = false, targetId}: Payload
       url: bookmarkInfo.url
     })
   )
+  yield put(uiCreators.setIsDisableGlobalKeyboardEvent(true))
 }
