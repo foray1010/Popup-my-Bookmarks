@@ -27,8 +27,11 @@ export default (WrappedComponent: ComponentType<*>) => {
     render = () => (
       <Fragment>
         <WrappedComponent {...this.props} />
-        <EventListener target={document} onContextMenu={this.handleContextMenu} />
-        <EventListener target={document} onMouseDown={this.handleMouseDown} />
+        <EventListener
+          target={document}
+          onContextMenu={this.handleContextMenu}
+          onMouseDown={this.handleMouseDown}
+        />
       </Fragment>
     )
   }
