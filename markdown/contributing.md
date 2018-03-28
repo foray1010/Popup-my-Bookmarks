@@ -1,6 +1,6 @@
 ## Contributing
 
-- Translate to other languages, It's all depended on volunteers as I am not a linguist. ;-)
+- Translate to other languages. It's all depended on volunteers as I am not a linguist. ;-)
 
   Please join our translation team on https://goo.gl/ZET77
 
