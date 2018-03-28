@@ -49,6 +49,16 @@ type GetSearchResultPayload = {|
 const getSearchResult = (state: BookmarkState, {searchKeyword}: GetSearchResultPayload) =>
   Immutable.merge(state, {searchKeyword})
 
+type RemoveBookmarkTreePayload = {|
+  id: string
+|}
+const removeBookmarkTree = (state: BookmarkState, {id}: RemoveBookmarkTreePayload) => {
+  const removeFromIndex = state.trees.findIndex(R.pathEq(['parent', 'id'], id))
+  if (removeFromIndex < 0) return state
+
+  return Immutable.set(state, 'trees', state.trees.slice(0, removeFromIndex))
+}
+
 type RemoveBookmarkTreesPayload = {|
   removeAfterId: string
 |}
@@ -83,6 +93,7 @@ export const bookmarkReducer = createReducer(INITIAL_STATE, {
   [bookmarkTypes.COPY_BOOKMARK]: copyBookmark,
   [bookmarkTypes.CUT_BOOKMARK]: cutBookmark,
   [bookmarkTypes.GET_SEARCH_RESULT]: getSearchResult,
+  [bookmarkTypes.REMOVE_BOOKMARK_TREE]: removeBookmarkTree,
   [bookmarkTypes.REMOVE_BOOKMARK_TREES]: removeBookmarkTrees,
   [bookmarkTypes.REMOVE_FOCUS_ID]: removeFocusId,
   [bookmarkTypes.RESET_CLIPBOARD]: resetClipboard,

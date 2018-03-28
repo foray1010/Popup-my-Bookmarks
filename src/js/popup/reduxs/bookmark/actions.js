@@ -16,6 +16,7 @@ export const {Creators: bookmarkCreators, Types: bookmarkTypes} = createActions(
   openBookmarkTree: ['id', 'parentId'],
   pasteBookmark: ['parentId', 'index'],
   refreshBookmarkTrees: null,
+  removeBookmarkTree: ['id'],
   removeBookmarkTrees: ['removeAfterId'],
   removeFocusId: null,
   resetClipboard: null,
