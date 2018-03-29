@@ -13,7 +13,7 @@
     color: inherit !important;
   }
 
-  &.focused {
+  &.highlighted {
     @apply --highlight-list-item;
   }
 

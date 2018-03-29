@@ -13,7 +13,7 @@ import BookmarkRow from './BookmarkRow'
 import TreeHeader from './TreeHeader'
 
 type Props = {|
-  focusId: string,
+  highlightedId: string,
   iconSize: number,
   isShowCover: boolean,
   isShowHeader: boolean,
@@ -108,7 +108,7 @@ class BookmarkTree extends PureComponent<Props, State> {
               <BookmarkRow
                 bookmarkInfo={bookmarkInfo}
                 iconSize={this.props.iconSize}
-                isFocused={this.props.focusId === bookmarkInfo.id}
+                isHighlighted={this.props.highlightedId === bookmarkInfo.id}
                 onAuxClick={this.props.onRowAuxClick}
                 onClick={this.props.onRowClick}
                 onMouseEnter={this.props.onRowMouseEnter}

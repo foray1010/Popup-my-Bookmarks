@@ -1,7 +1,7 @@
 // @flow
 // @jsx createElement
 
-import '../../../../css/popup/bookmark-item.css'
+import '../../../../css/popup/bookmark-row.css'
 
 import classNames from 'classnames'
 import * as R from 'ramda'
@@ -18,7 +18,7 @@ const IconImg = styled('img')`
 type Props = {|
   bookmarkInfo: BookmarkInfo,
   iconSize: number,
-  isFocused: boolean,
+  isHighlighted: boolean,
   onAuxClick: (string) => (MouseEvent) => void,
   onClick: (string) => (SyntheticMouseEvent<HTMLElement>) => void,
   onMouseEnter: (BookmarkInfo) => () => void,
@@ -47,7 +47,7 @@ class BookmarkRow extends PureComponent<Props> {
         this.baseEl = ref
       }}
       styleName={classNames('main', {
-        focused: this.props.isFocused,
+        highlighted: this.props.isHighlighted,
         'root-folder': this.props.bookmarkInfo.isRoot,
         separator: this.props.bookmarkInfo.type === CST.TYPE_SEPARATOR
       })}

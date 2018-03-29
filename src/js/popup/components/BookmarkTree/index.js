@@ -14,8 +14,8 @@ import BookmarkTree from './BookmarkTree'
 const TOGGLE_BOOKMARK_TREE_TIMEOUT = 200
 
 type Props = {|
-  focusId: string,
-  focusedChildIndex: number,
+  highlightedId: string,
+  highlightedIndex: number,
   iconSize: number,
   isShowCover: boolean,
   isShowHeader: boolean,
@@ -106,7 +106,7 @@ class BookmarkTreeContainer extends PureComponent<Props> {
 
   render = () => (
     <BookmarkTree
-      focusId={this.props.focusId}
+      highlightedId={this.props.highlightedId}
       iconSize={this.props.iconSize}
       isShowCover={this.props.isShowCover}
       isShowHeader={this.props.isShowHeader}
@@ -118,7 +118,7 @@ class BookmarkTreeContainer extends PureComponent<Props> {
       onRowMouseEnter={this.handleRowMouseEnter}
       onRowMouseLeave={this.handleRowMouseLeave}
       rowHeight={this.props.rowHeight}
-      scrollToIndex={this.props.focusedChildIndex}
+      scrollToIndex={this.props.highlightedIndex}
       treeInfo={this.props.treeInfo}
     />
   )
@@ -131,15 +131,15 @@ const getRowHeight = (fontSize) =>
   (1 + CST.GOLDEN_GAP) * 2
 
 const mapStateToProps = (state, ownProps) => {
-  const {focusId, trees} = state.bookmark
-  const treeIndex = trees.findIndex(R.pathEq(['parent', 'id'], ownProps.treeId))
-  const treeInfo = trees[treeIndex]
+  const highlightedId = state.bookmark.focusId || state.menu.targetId || state.editor.targetId
+  const treeIndex = state.bookmark.trees.findIndex(R.pathEq(['parent', 'id'], ownProps.treeId))
+  const treeInfo = state.bookmark.trees[treeIndex]
   return {
-    focusId,
-    focusedChildIndex: treeInfo.children.findIndex(R.propEq('id', focusId)),
+    highlightedId,
+    highlightedIndex: treeInfo.children.findIndex(R.propEq('id', highlightedId)),
     iconSize: getIconSize(state.options.fontSize),
     // cover the folder if it is not the top two folder
-    isShowCover: trees.length - treeIndex > 2,
+    isShowCover: state.bookmark.trees.length - treeIndex > 2,
     isShowHeader: treeIndex !== 0,
     listItemWidth: state.options.setWidth,
     rowHeight: getRowHeight(state.options.fontSize),
