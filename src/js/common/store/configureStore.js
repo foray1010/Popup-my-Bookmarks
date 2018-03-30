@@ -13,7 +13,7 @@ const composeEnhancers =
 type Payload = {|
   preloadedState?: Object,
   rootReducer: CombinedReducer<*, *>,
-  rootSaga: Saga<void>
+  rootSaga: () => Saga<void>
 |}
 export default ({rootReducer, rootSaga, preloadedState}: Payload) => {
   const sagaMiddleware = createSagaMiddleware()

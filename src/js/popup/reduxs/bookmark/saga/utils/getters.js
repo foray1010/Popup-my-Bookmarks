@@ -73,7 +73,8 @@ export function* getFirstBookmarkTree(options: Object): Saga<BookmarkTree> {
   }
 }
 
-export function* searchBookmarks(searchQuery: string): Saga<$ReadOnlyArray<BookmarkInfo>> {
+type SearchQuery = {| query: string |}
+export function* searchBookmarks(searchQuery: SearchQuery): Saga<$ReadOnlyArray<BookmarkInfo>> {
   const searchResultNodes = yield call(searchBookmarkNodes, searchQuery)
   return R.map(toBookmarkInfo, searchResultNodes)
 }

@@ -1,5 +1,6 @@
 // @flow
 
+import * as R from 'ramda'
 import type {Saga} from 'redux-saga'
 import {all, call, put, select, takeLatest} from 'redux-saga/effects'
 
@@ -24,7 +25,7 @@ function* resetToDefaultOptions(): Saga<void> {
 }
 
 function* saveOptions(): Saga<void> {
-  const {options} = yield select()
+  const {options} = yield select(R.identity)
 
   yield call(setStorage, options)
 

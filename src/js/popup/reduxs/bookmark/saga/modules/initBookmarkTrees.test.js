@@ -1,3 +1,4 @@
+import * as R from 'ramda'
 import {call, put, select} from 'redux-saga/effects'
 import store from 'store'
 
@@ -10,7 +11,7 @@ describe('initBookmarkTrees', () => {
   test('get extra trees if rememberPos is `true`', () => {
     const generator = initBookmarkTrees()
 
-    expect(generator.next().value).toEqual(select())
+    expect(generator.next().value).toEqual(select(R.identity))
 
     const options = {
       rememberPos: true
@@ -30,7 +31,7 @@ describe('initBookmarkTrees', () => {
   test('empty array if store.get return falsy result', () => {
     const generator = initBookmarkTrees()
 
-    expect(generator.next().value).toEqual(select())
+    expect(generator.next().value).toEqual(select(R.identity))
 
     const options = {
       rememberPos: true
@@ -49,7 +50,7 @@ describe('initBookmarkTrees', () => {
   test('do not get extra trees if rememberPos is `false`', () => {
     const generator = initBookmarkTrees()
 
-    expect(generator.next().value).toEqual(select())
+    expect(generator.next().value).toEqual(select(R.identity))
 
     const options = {
       rememberPos: false

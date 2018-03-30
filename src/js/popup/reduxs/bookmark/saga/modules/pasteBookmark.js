@@ -1,5 +1,6 @@
 // @flow
 
+import * as R from 'ramda'
 import type {Saga} from 'redux-saga'
 import {call, put, select} from 'redux-saga/effects'
 
@@ -41,7 +42,7 @@ type Payload = {|
   parentId: string
 |}
 export function* pasteBookmark({parentId, index}: Payload): Saga<void> {
-  const {bookmark} = yield select()
+  const {bookmark} = yield select(R.identity)
   const {clipboard} = bookmark
 
   if (clipboard.isRemoveAfterPaste) {

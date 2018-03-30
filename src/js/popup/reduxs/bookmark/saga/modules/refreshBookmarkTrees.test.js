@@ -1,4 +1,5 @@
 import Chance from 'chance'
+import * as R from 'ramda'
 import {call, put, select} from 'redux-saga/effects'
 
 import {bookmarkCreators} from '../../actions'
@@ -34,7 +35,7 @@ describe('refreshBookmarkTrees', () => {
   test('get search result if search keyword is not empty', () => {
     const generator = refreshBookmarkTrees()
 
-    expect(generator.next().value).toEqual(select())
+    expect(generator.next().value).toEqual(select(R.identity))
 
     const searchKeyword = chance.word()
     expect(
@@ -49,7 +50,7 @@ describe('refreshBookmarkTrees', () => {
   test('get updated bookmark trees if search keyword is empty', () => {
     const generator = refreshBookmarkTrees()
 
-    expect(generator.next().value).toEqual(select())
+    expect(generator.next().value).toEqual(select(R.identity))
 
     const options = {
       fakeKey: chance.word()

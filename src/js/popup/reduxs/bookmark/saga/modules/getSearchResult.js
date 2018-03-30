@@ -24,7 +24,7 @@ export function* getSearchResult({searchKeyword}: Payload): Saga<void> {
     return
   }
 
-  const {options} = yield select()
+  const {options} = yield select(R.identity)
 
   const searchResult = yield call(searchBookmarks, {
     query: searchKeyword

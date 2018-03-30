@@ -1,4 +1,5 @@
 import Chance from 'chance'
+import * as R from 'ramda'
 import {call, put, select} from 'redux-saga/effects'
 
 import {bookmarkCreators} from '../../actions'
@@ -57,7 +58,7 @@ describe('getSearchResult', () => {
 
     const generator = getSearchResult({searchKeyword})
 
-    expect(generator.next().value).toEqual(select())
+    expect(generator.next().value).toEqual(select(R.identity))
 
     expect(generator.next({options}).value).toEqual(
       call(searchBookmarks, {
@@ -78,7 +79,7 @@ describe('getSearchResult', () => {
 
     const generator = getSearchResult({searchKeyword})
 
-    expect(generator.next().value).toEqual(select())
+    expect(generator.next().value).toEqual(select(R.identity))
 
     expect(generator.next({options}).value).toEqual(
       call(searchBookmarks, {
