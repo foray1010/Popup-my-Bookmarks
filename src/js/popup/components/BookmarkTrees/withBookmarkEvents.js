@@ -27,7 +27,7 @@ const withBookmarkEvents = (WrappedComponent) => {
 
     refreshTrees = debounce(this.props.refreshBookmarkTrees, REFRESH_BOOKMARKS_TIMEOUT)
 
-    render = () => <WrappedComponent {...R.without(privatePropNames, this.props)} />
+    render = () => <WrappedComponent {...R.omit(privatePropNames, this.props)} />
   }
 }
 

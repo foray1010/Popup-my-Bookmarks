@@ -19,7 +19,7 @@ class InputSelect extends PureComponent<Props> {
   selectEl: ?HTMLSelectElement
 
   handleBlur = (evt: SyntheticEvent<HTMLInputElement>) => {
-    const normalize = R.compose(R.join(','), R.filter(R.identity), R.map(R.trim), R.split(','))
+    const normalize = R.compose(R.join(','), R.filter(Boolean), R.map(R.trim), R.split(','))
     this.props.updateSingleOption(this.props.optionName, normalize(evt.currentTarget.value))
   }
 

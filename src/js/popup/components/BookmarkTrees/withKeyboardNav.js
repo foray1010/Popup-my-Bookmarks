@@ -105,7 +105,7 @@ const withKeyboardNav = (WrappedComponent: ComponentType<*>) => {
 
     render = () => (
       <Fragment>
-        <WrappedComponent {...R.without(privatePropNames, this.props)} />
+        <WrappedComponent {...R.omit(privatePropNames, this.props)} />
         <GlobalKeyboardEventListener onKeyDown={this.handleDocumentKeyDown} />
       </Fragment>
     )
