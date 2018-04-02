@@ -9,6 +9,7 @@ import webExtension from 'webextension-polyfill'
 
 type Props = {|
   isFocused: boolean,
+  isUnclickable: boolean,
   onClick: (string) => () => void,
   onMouseEnter: (string) => () => void,
   onMouseLeave: () => void,
@@ -21,9 +22,10 @@ class MenuRow extends PureComponent<Props> {
   render = () => (
     <div
       styleName={classNames('main', {
-        focused: this.props.isFocused
+        focused: this.props.isFocused,
+        unclickable: this.props.isUnclickable
       })}
-      onClick={this.handleClick}
+      onClick={this.props.isUnclickable ? undefined : this.handleClick}
       onMouseEnter={this.handleMouseEnter}
       onMouseLeave={this.props.onMouseLeave}
     >

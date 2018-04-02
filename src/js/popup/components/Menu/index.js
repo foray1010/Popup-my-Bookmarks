@@ -7,6 +7,7 @@ import * as R from 'ramda'
 import {Fragment, PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
+import * as CST from '../../constants'
 import {menuCreators} from '../../reduxs'
 import type {MenuPattern} from '../../types'
 import AbsPositionWithinBody from '../AbsPositionWithinBody'
@@ -21,7 +22,8 @@ type Props = {|
   positionLeft: number,
   positionTop: number,
   removeFocusedRow: () => void,
-  setFocusedRow: (string) => void
+  setFocusedRow: (string) => void,
+  unclickableRows: Array<string>
 |}
 class MenuContainer extends PureComponent<Props> {
   handleRowClick = (rowKey: string) => () => {
@@ -50,13 +52,25 @@ class MenuContainer extends PureComponent<Props> {
           onRowClick={this.handleRowClick}
           onRowMouseEnter={this.handleRowMouseEnter}
           onRowMouseLeave={this.handleRowMouseLeave}
+          unclickableRows={this.props.unclickableRows}
         />
       </AbsPositionWithinBody>
     </Fragment>
   )
 }
 
-const mapStateToProps = R.prop('menu')
+const unclickableRowsSelector = (state) => {
+  if (!state.bookmark.clipboard.id) return [CST.MENU_PASTE]
+  return []
+}
+
+const mapStateToProps = (state) => ({
+  focusedRow: state.menu.focusedRow,
+  menuPattern: state.menu.menuPattern,
+  positionLeft: state.menu.positionLeft,
+  positionTop: state.menu.positionTop,
+  unclickableRows: unclickableRowsSelector(state)
+})
 
 const mapDispatchToProps = R.pick(
   ['clickMenuRow', 'closeMenu', 'removeFocusedRow', 'setFocusedRow'],

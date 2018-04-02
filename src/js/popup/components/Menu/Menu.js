@@ -15,7 +15,8 @@ type Props = {|
   menuPattern: MenuPattern,
   onRowClick: (string) => () => void, // eslint-disable-line react/no-unused-prop-types
   onRowMouseEnter: (string) => () => void, // eslint-disable-line react/no-unused-prop-types
-  onRowMouseLeave: () => void // eslint-disable-line react/no-unused-prop-types
+  onRowMouseLeave: () => void, // eslint-disable-line react/no-unused-prop-types
+  unclickableRows: $ReadOnlyArray<string> // eslint-disable-line react/no-unused-prop-types
 |}
 const Menu = (props: Props) => (
   <div styleName='main'>
@@ -25,6 +26,7 @@ const Menu = (props: Props) => (
           <MenuRow
             key={rowName}
             isFocused={rowName === props.focusedRow}
+            isUnclickable={props.unclickableRows.includes(rowName)}
             rowName={rowName}
             onClick={props.onRowClick}
             onMouseEnter={props.onRowMouseEnter}
