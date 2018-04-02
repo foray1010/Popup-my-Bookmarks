@@ -8,6 +8,8 @@ import {bookmarkTypes} from '../actions'
 import {addCurrentPage} from './modules/addCurrentPage'
 import {addSeparator} from './modules/addSeparator'
 import {arrowRightNavigate} from './modules/arrowRightNavigate'
+import {createBookmark} from './modules/createBookmark'
+import {createBookmarkAfterId} from './modules/createBookmarkAfterId'
 import {deleteBookmark} from './modules/deleteBookmark'
 import {editBookmark} from './modules/editBookmark'
 import {getSearchResult} from './modules/getSearchResult'
@@ -23,8 +25,10 @@ export function* bookmarkSaga(): Saga<void> {
     takeLatest(bookmarkTypes.ADD_CURRENT_PAGE, silenceSaga(addCurrentPage)),
     takeLatest(bookmarkTypes.ADD_SEPARATOR, silenceSaga(addSeparator)),
     takeLatest(bookmarkTypes.ARROW_RIGHT_NAVIGATE, silenceSaga(arrowRightNavigate)),
+    takeEvery(bookmarkTypes.CREATE_BOOKMARK, silenceSaga(createBookmark)),
+    takeLatest(bookmarkTypes.CREATE_BOOKMARK_AFTER_ID, silenceSaga(createBookmarkAfterId)),
     takeEvery(bookmarkTypes.DELETE_BOOKMARK, silenceSaga(deleteBookmark)),
-    takeEvery(bookmarkTypes.EDIT_BOOKMARK, silenceSaga(editBookmark)),
+    takeLatest(bookmarkTypes.EDIT_BOOKMARK, silenceSaga(editBookmark)),
     takeLatest(bookmarkTypes.GET_SEARCH_RESULT, silenceSaga(getSearchResult)),
     takeLatest(bookmarkTypes.INIT_BOOKMARK_TREES, silenceSaga(initBookmarkTrees)),
     takeLatest(bookmarkTypes.OPEN_BOOKMARK_TREE, silenceSaga(openBookmarkTree)),

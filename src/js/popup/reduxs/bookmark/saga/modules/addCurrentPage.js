@@ -1,24 +1,20 @@
 // @flow
 
 import type {Saga} from 'redux-saga'
-import {call} from 'redux-saga/effects'
+import {call, put} from 'redux-saga/effects'
 
-import {createBookmark, queryTabs} from '../../../../../common/utils'
+import {queryTabs} from '../../../../../common/utils'
+import {bookmarkCreators} from '../../actions'
 
 type Payload = {|
   index: number,
   parentId: string
 |}
-export function* addCurrentPage({parentId, index}: Payload): Saga<void> {
+export function* addCurrentPage({index, parentId}: Payload): Saga<void> {
   const [currentTab] = yield call(queryTabs, {
     currentWindow: true,
     active: true
   })
 
-  yield call(createBookmark, {
-    index,
-    parentId,
-    title: currentTab.title.trim(),
-    url: currentTab.url.trim()
-  })
+  yield put(bookmarkCreators.createBookmark(parentId, index, currentTab.title, currentTab.url))
 }

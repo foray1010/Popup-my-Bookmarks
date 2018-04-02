@@ -20,15 +20,20 @@ const INITIAL_STATE: EditorState = Immutable({
   isCreating: false,
   positionLeft: 0,
   positionTop: 0,
-  targetId: ''
+  targetId: '',
+  title: '',
+  url: ''
 })
 
 const closeEditor = () => INITIAL_STATE
 
 type SetEditorPayload = {|
-  newState: EditorState
+  partialState: Object
 |}
-const setEditor = (state: EditorState, {newState}: SetEditorPayload) => newState
+const setEditor = (state: EditorState, {partialState}: SetEditorPayload) => ({
+  ...state,
+  ...partialState
+})
 
 export const editorReducer = createReducer(INITIAL_STATE, {
   [editorTypes.CLOSE_EDITOR]: closeEditor,

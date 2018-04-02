@@ -1,8 +1,8 @@
 import Chance from 'chance'
-import {call} from 'redux-saga/effects'
+import {put} from 'redux-saga/effects'
 
-import {createBookmark} from '../../../../../common/utils'
 import * as CST from '../../../../constants'
+import {bookmarkCreators} from '../../actions'
 import {addSeparator} from './addSeparator'
 
 const chance = new Chance('addSeparator')
@@ -15,12 +15,7 @@ describe('addSeparator', () => {
     const generator = addSeparator({parentId, index})
 
     expect(generator.next().value).toEqual(
-      call(createBookmark, {
-        index,
-        parentId,
-        title: '- '.repeat(42),
-        url: CST.SEPARATE_THIS_URL
-      })
+      put(bookmarkCreators.createBookmark(parentId, index, '- '.repeat(42), CST.SEPARATE_THIS_URL))
     )
 
     expect(generator.next().done).toBe(true)

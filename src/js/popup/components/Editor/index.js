@@ -15,8 +15,10 @@ import Editor from './Editor'
 
 type Props = {|
   closeEditor: () => void,
+  createBookmarkAfterId: (string, string, string) => void,
   editBookmark: (string, string, string) => void,
   isAllowEditUrl: boolean,
+  isCreating: boolean,
   positionLeft: number,
   positionTop: number,
   targetId: string,
@@ -26,7 +28,11 @@ type Props = {|
 |}
 class EditorContainer extends PureComponent<Props> {
   handleConfirm = (title, url) => {
-    this.props.editBookmark(this.props.targetId, title, url)
+    if (this.props.isCreating) {
+      this.props.createBookmarkAfterId(this.props.targetId, title, url)
+    } else {
+      this.props.editBookmark(this.props.targetId, title, url)
+    }
     this.props.closeEditor()
   }
 
@@ -57,14 +63,14 @@ class EditorContainer extends PureComponent<Props> {
 
 const mapStateToProps = (state) => ({
   ...R.pick(
-    ['isAllowEditUrl', 'positionLeft', 'positionTop', 'targetId', 'title', 'url'],
+    ['isAllowEditUrl', 'isCreating', 'positionLeft', 'positionTop', 'targetId', 'title', 'url'],
     state.editor
   ),
   width: state.options.setWidth
 })
 
 const mapDispatchToProps = {
-  ...R.pick(['editBookmark'], bookmarkCreators),
+  ...R.pick(['createBookmarkAfterId', 'editBookmark'], bookmarkCreators),
   ...R.pick(['closeEditor'], editorCreators)
 }
 

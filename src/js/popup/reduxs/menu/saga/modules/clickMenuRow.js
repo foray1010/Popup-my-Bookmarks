@@ -18,6 +18,15 @@ export function* clickMenuRow({rowName}: Payload): Saga<void> {
   const targetBookmarkInfo = yield call(getBookmarkInfo, menu.targetId)
 
   switch (rowName) {
+    case CST.MENU_ADD_FOLDER:
+      yield put(
+        editorCreators.createFolderInEditor(menu.targetId, {
+          positionLeft: menu.targetLeft,
+          positionTop: menu.targetTop
+        })
+      )
+      break
+
     case CST.MENU_ADD_PAGE:
       yield put(
         bookmarkCreators.addCurrentPage(

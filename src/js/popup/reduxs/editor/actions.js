@@ -4,6 +4,7 @@ import {createActions} from 'reduxsauce'
 
 export const {Creators: editorCreators, Types: editorTypes} = createActions({
   closeEditor: null,
-  openEditor: ['targetId', 'coordinates', 'isCreating'],
-  setEditor: ['newState']
+  createFolderInEditor: ['targetId', 'coordinates'],
+  openEditor: ['targetId', 'coordinates'],
+  setEditor: ['partialState']
 })

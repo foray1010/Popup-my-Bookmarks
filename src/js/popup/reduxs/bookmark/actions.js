@@ -6,6 +6,8 @@ export const {Creators: bookmarkCreators, Types: bookmarkTypes} = createActions(
   addCurrentPage: ['parentId', 'index'],
   addSeparator: ['parentId', 'index'],
   arrowRightNavigate: ['id', 'parentId'],
+  createBookmark: ['parentId', 'index', 'title', 'url'],
+  createBookmarkAfterId: ['id', 'title', 'url'],
   copyBookmark: ['id'],
   cutBookmark: ['id'],
   deleteBookmark: ['id'],

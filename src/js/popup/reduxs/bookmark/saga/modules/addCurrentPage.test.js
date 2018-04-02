@@ -1,7 +1,8 @@
 import Chance from 'chance'
-import {call} from 'redux-saga/effects'
+import {call, put} from 'redux-saga/effects'
 
-import {createBookmark, queryTabs} from '../../../../../common/utils'
+import {queryTabs} from '../../../../../common/utils'
+import {bookmarkCreators} from '../../actions'
 import {addCurrentPage} from './addCurrentPage'
 
 const chance = new Chance('addCurrentPage')
@@ -32,12 +33,7 @@ describe('addCurrentPage', () => {
     )
 
     expect(generator.next(currentTabs).value).toEqual(
-      call(createBookmark, {
-        index,
-        parentId,
-        title: 'title',
-        url: 'https://google.com/'
-      })
+      put(bookmarkCreators.createBookmark(parentId, index, '  title  ', '  https://google.com/  '))
     )
 
     expect(generator.next().done).toBe(true)
