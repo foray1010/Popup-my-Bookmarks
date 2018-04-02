@@ -3,6 +3,7 @@
 
 import '../../../../css/popup/bookmark-trees.css'
 
+import * as R from 'ramda'
 import {createElement} from 'react'
 import type {Node} from 'react'
 import styled from 'react-emotion'
@@ -31,11 +32,8 @@ const BookmarkTrees = (props: Props) => {
   )
 }
 
-type StyleProps = {|
-  options: Object
-|}
 export default styled(BookmarkTrees)`
   & > section {
-    width: ${(props: StyleProps) => props.options.setWidth}px;
+    width: ${R.path(['options', 'setWidth'])}px;
   }
 `
