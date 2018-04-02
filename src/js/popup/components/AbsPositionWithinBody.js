@@ -22,19 +22,19 @@ type Props = {|
 type State = {|
   bodyHeight: ?number,
   bodyWidth: ?number,
+  calibratedLeft: number,
+  calibratedTop: number,
   mainHeight: number,
-  mainWidth: number,
-  positionLeft: number,
-  positionTop: number
+  mainWidth: number
 |}
 class AbsPositionWithinBody extends PureComponent<Props, State> {
   state = {
     bodyHeight: null,
     bodyWidth: null,
+    calibratedLeft: 0,
+    calibratedTop: 0,
     mainHeight: 0,
-    mainWidth: 0,
-    positionLeft: this.props.positionLeft,
-    positionTop: this.props.positionTop
+    mainWidth: 0
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
@@ -62,11 +62,11 @@ class AbsPositionWithinBody extends PureComponent<Props, State> {
     this.setState({
       bodyHeight: updatedBodyHeight,
       bodyWidth: updatedBodyWidth,
-      positionLeft: Math.min(
+      calibratedLeft: Math.min(
         this.props.positionLeft,
         (updatedBodyWidth || currentBodyWidth) - menuWidth
       ),
-      positionTop: Math.min(
+      calibratedTop: Math.min(
         this.props.positionTop,
         (updatedBodyHeight || currentBodyHeight) - menuHeight
       )
@@ -96,8 +96,8 @@ class AbsPositionWithinBody extends PureComponent<Props, State> {
         {({measureRef}) => (
           <Wrapper
             innerRef={measureRef}
-            positionLeft={this.state.positionLeft}
-            positionTop={this.state.positionTop}
+            positionLeft={this.state.calibratedLeft}
+            positionTop={this.state.calibratedTop}
           >
             {this.props.children}
           </Wrapper>
