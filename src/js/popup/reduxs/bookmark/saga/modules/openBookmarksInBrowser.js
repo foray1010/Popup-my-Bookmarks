@@ -21,9 +21,10 @@ function* getUrls(ids: Ids): Saga<$ReadOnlyArray<string>> {
 
 type Payload = {|
   ids: Ids,
+  isCloseBrowser: boolean,
   openIn: OpenIn
 |}
-export function* openBookmarksInBrowser({ids, openIn}: Payload): Saga<void> {
+export function* openBookmarksInBrowser({ids, isCloseBrowser, openIn}: Payload): Saga<void> {
   const urls = yield call(getUrls, ids)
 
   /*
@@ -59,4 +60,6 @@ export function* openBookmarksInBrowser({ids, openIn}: Payload): Saga<void> {
       break
     default:
   }
+
+  if (isCloseBrowser) yield call(window.close)
 }

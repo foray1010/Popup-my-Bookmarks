@@ -78,7 +78,7 @@ export function* clickMenuRow({rowName}: Payload): Saga<void> {
         [CST.MENU_OPEN_ALL_IN_I]: CST.OPEN_IN_TYPES.INCOGNITO_WINDOW,
         [CST.MENU_OPEN_ALL_IN_N]: CST.OPEN_IN_TYPES.NEW_WINDOW
       }
-      yield put(bookmarkCreators.openBookmarksInBrowser(ids, mapping[rowName]))
+      yield put(bookmarkCreators.openBookmarksInBrowser(ids, mapping[rowName], true))
       break
     }
 
@@ -90,7 +90,9 @@ export function* clickMenuRow({rowName}: Payload): Saga<void> {
         [CST.MENU_OPEN_IN_I]: CST.OPEN_IN_TYPES.INCOGNITO_WINDOW,
         [CST.MENU_OPEN_IN_N]: CST.OPEN_IN_TYPES.NEW_WINDOW
       }
-      yield put(bookmarkCreators.openBookmarksInBrowser([targetBookmarkInfo.id], mapping[rowName]))
+      yield put(
+        bookmarkCreators.openBookmarksInBrowser([targetBookmarkInfo.id], mapping[rowName], true)
+      )
       break
     }
 

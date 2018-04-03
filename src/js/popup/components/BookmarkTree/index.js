@@ -21,7 +21,7 @@ type Props = {|
   isShowHeader: boolean,
   listItemWidth: number,
   openBookmarkTree: (string, string) => void,
-  openBookmarksInBrowser: ($ReadOnlyArray<string>, OpenIn) => void,
+  openBookmarksInBrowser: ($ReadOnlyArray<string>, OpenIn, boolean) => void,
   openMenu: (
     string,
     {|
@@ -62,10 +62,10 @@ class BookmarkTreeContainer extends PureComponent<Props> {
     }
   }
   _handleRowLeftClick = (bookmarkId: string) => {
-    this.props.openBookmarksInBrowser([bookmarkId], CST.OPEN_IN_TYPES.CURRENT_TAB)
+    this.props.openBookmarksInBrowser([bookmarkId], CST.OPEN_IN_TYPES.CURRENT_TAB, true)
   }
   _handleRowMiddleClick = (bookmarkId: string) => {
-    this.props.openBookmarksInBrowser([bookmarkId], CST.OPEN_IN_TYPES.NEW_TAB)
+    this.props.openBookmarksInBrowser([bookmarkId], CST.OPEN_IN_TYPES.NEW_TAB, true)
   }
   _handleRowRightClick = (bookmarkId: string, evt) => {
     if (!(evt.currentTarget instanceof window.HTMLElement)) return
