@@ -101,10 +101,10 @@ class BookmarkTree extends PureComponent<Props, State> {
         // onScroll={this.props.onScroll}
         rowCount={this.props.treeInfo.children.length}
         rowHeight={this.getRowHeight}
-        rowRenderer={(rendererProps: {| index: number, key: string, style: Object |}) => {
+        rowRenderer={(rendererProps: {| index: number, style: Object |}) => {
           const bookmarkInfo = this.props.treeInfo.children[rendererProps.index]
           return (
-            <div key={rendererProps.key} styleName='list-item' style={rendererProps.style}>
+            <div key={bookmarkInfo.id} styleName='list-item' style={rendererProps.style}>
               <BookmarkRow
                 bookmarkInfo={bookmarkInfo}
                 iconSize={this.props.iconSize}
