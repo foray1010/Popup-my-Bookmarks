@@ -15,12 +15,7 @@ export function* createBookmark({
   index, parentId, title, url = ''
 }: Payload): Saga<void> {
   const trimmedUrl = url.trim()
-  console.log({
-    index,
-    parentId,
-    title: title.trim(),
-    ...(trimmedUrl ? {url: trimmedUrl} : null)
-  })
+
   yield call(createBookmarkWrapper, {
     index,
     parentId,
