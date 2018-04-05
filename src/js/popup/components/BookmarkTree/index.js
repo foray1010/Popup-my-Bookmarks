@@ -10,6 +10,7 @@ import * as CST from '../../constants'
 import {bookmarkCreators, menuCreators} from '../../reduxs'
 import type {BookmarkInfo, BookmarkTree as BookmarkTreeType, OpenIn} from '../../types'
 import BookmarkTree from './BookmarkTree'
+import NoSearchResult from './NoSearchResult'
 
 const TOGGLE_BOOKMARK_TREE_TIMEOUT = 200
 
@@ -17,6 +18,7 @@ type Props = {|
   highlightedId: string,
   highlightedIndex: number,
   iconSize: number,
+  isSearching: boolean,
   isShowCover: boolean,
   isShowHeader: boolean,
   listItemWidth: number,
@@ -95,6 +97,11 @@ class BookmarkTreeContainer extends PureComponent<Props> {
     this.props.removeFocusId()
   }
 
+  noRowsRenderer = () => {
+    if (this.props.isSearching) return <NoSearchResult />
+    return null
+  }
+
   _toggleBookmarkTree = (bookmarkInfo: BookmarkInfo) => {
     if (bookmarkInfo.type === CST.TYPE_FOLDER) {
       this.props.openBookmarkTree(bookmarkInfo.id, this.props.treeInfo.parent.id)
@@ -111,6 +118,7 @@ class BookmarkTreeContainer extends PureComponent<Props> {
       isShowCover={this.props.isShowCover}
       isShowHeader={this.props.isShowHeader}
       listItemWidth={this.props.listItemWidth}
+      noRowsRenderer={this.noRowsRenderer}
       onCloseButtonClick={this.closeCurrentTree}
       onCoverClick={this.closeNextTrees}
       onRowAuxClick={this.handleRowAuxClick}
@@ -138,6 +146,7 @@ const mapStateToProps = (state, ownProps) => {
     highlightedId,
     highlightedIndex: treeInfo.children.findIndex(R.propEq('id', highlightedId)),
     iconSize: getIconSize(state.options.fontSize),
+    isSearching: Boolean(state.bookmark.searchKeyword),
     // cover the folder if it is not the top two folder
     isShowCover: state.bookmark.trees.length - treeIndex > 2,
     isShowHeader: treeIndex !== 0,

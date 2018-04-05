@@ -3,7 +3,9 @@
 
 import '../../../../css/popup/bookmark-tree.css'
 
+import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
+import type {Node} from 'react'
 import List from 'react-virtualized/dist/es/List'
 
 import * as CST from '../../constants'
@@ -18,6 +20,7 @@ type Props = {|
   isShowCover: boolean,
   isShowHeader: boolean,
   listItemWidth: number,
+  noRowsRenderer: () => Node,
   onCloseButtonClick: () => void,
   onCoverClick: () => void,
   onRowAuxClick: (string) => (MouseEvent) => void,
@@ -72,6 +75,7 @@ class BookmarkTree extends PureComponent<Props, State> {
 
     const maxListHeight =
       CST.MAX_HEIGHT - this.list.Grid._scrollingContainer.getBoundingClientRect().top
+    const minListHeight = this.props.rowHeight
 
     const totalRowHeight = this.props.treeInfo.children.reduce(
       (acc, x, index) => acc + this.getRowHeight({index}),
@@ -79,7 +83,7 @@ class BookmarkTree extends PureComponent<Props, State> {
     )
 
     this.setState({
-      listHeight: Math.min(maxListHeight, totalRowHeight)
+      listHeight: R.clamp(minListHeight, maxListHeight, totalRowHeight)
     })
   }
 
@@ -98,6 +102,7 @@ class BookmarkTree extends PureComponent<Props, State> {
           this.list = ref
         }}
         height={this.state.listHeight}
+        noRowsRenderer={this.props.noRowsRenderer}
         // onScroll={this.props.onScroll}
         rowCount={this.props.treeInfo.children.length}
         rowHeight={this.getRowHeight}

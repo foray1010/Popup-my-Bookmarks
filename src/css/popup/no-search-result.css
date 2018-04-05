@@ -5,7 +5,6 @@
   color: var(--main-font-color);
   composes: no-text-overflow from '../common/composes.css';
   cursor: default;
-  height: 100%;
   margin: var(--golden-gap-2x);
   padding: var(--golden-gap 0);
   text-align: center;
