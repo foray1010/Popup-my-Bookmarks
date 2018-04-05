@@ -7,13 +7,22 @@ import {all, call} from 'redux-saga/effects'
 import {
   getBookmarkChildNodes,
   getBookmarkNodes,
+  getI18n,
   searchBookmarkNodes
 } from '../../../../../common/utils'
-import {ROOT_ID} from '../../../../constants'
+import * as CST from '../../../../constants'
 import type {BookmarkInfo, BookmarkTree} from '../../../../types'
-import {toBookmarkInfo} from './converters'
+import {simulateBookmark, toBookmarkInfo} from './converters'
 
 export function* getBookmarkInfo(id: string): Saga<BookmarkInfo> {
+  if (id.startsWith(CST.NO_BOOKMARK_ID_PREFIX)) {
+    return simulateBookmark({
+      id,
+      title: yield call(getI18n, 'noBkmark'),
+      type: CST.TYPE_NO_BOOKMARK
+    })
+  }
+
   const bookmarkNodes = yield call(getBookmarkNodes, id)
   return toBookmarkInfo(bookmarkNodes[0])
 }
@@ -29,7 +38,9 @@ export function* getBookmarkTree(id: string): Saga<BookmarkTree> {
     call(getBookmarkChildren, id)
   ])
   return {
-    children: bookmarkChildren,
+    children: bookmarkChildren.length ?
+      bookmarkChildren :
+      [yield call(getBookmarkInfo, CST.NO_BOOKMARK_ID_PREFIX + id)],
     parent: bookmarkInfo
   }
 }
@@ -59,7 +70,7 @@ export function* getBookmarkTrees(
 export function* getFirstBookmarkTree(options: Object): Saga<BookmarkTree> {
   const [firstTreeInfo, rootFolders] = yield all([
     call(getBookmarkTree, String(options.defExpand)),
-    call(getBookmarkChildren, ROOT_ID)
+    call(getBookmarkChildren, CST.ROOT_ID)
   ])
   return {
     ...firstTreeInfo,

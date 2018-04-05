@@ -6,6 +6,7 @@ export const DRAG_INDICATOR = 'drag-indicator'
 export const GOLDEN_GAP = 2
 export const MAX_HEIGHT = 598
 export const MIN_BOOKMARK_ICON_SIZE = 16
+export const NO_BOOKMARK_ID_PREFIX = 'NO_BOOKMARK_ID_'
 export const SEARCH_RESULT_ID = 'SEARCH_RESULT_ID'
 export const SEPARATE_THIS_URL = 'http://separatethis.com/'
 
@@ -37,5 +38,4 @@ export const OPEN_IN_TYPES = {
 export const TYPE_BOOKMARK = 'bookmark'
 export const TYPE_FOLDER = 'folder'
 export const TYPE_NO_BOOKMARK = 'no-bookmark'
-export const TYPE_ROOT_FOLDER = 'root-folder'
 export const TYPE_SEPARATOR = 'separator'

@@ -116,7 +116,7 @@ describe('simulateBookmark', () => {
       isUnmodifiable: true,
       parentId: '',
       storageIndex: -1,
-      title: '',
+      title: 'ka',
       type,
       url: ''
     })

@@ -22,13 +22,13 @@ export const isRoot = (bookmarkNode: BookmarkNode): boolean =>
   bookmarkNode.id === CST.ROOT_ID || bookmarkNode.parentId === CST.ROOT_ID
 
 export const simulateBookmark = (partialBookmarkInfo: Object): BookmarkInfo => ({
+  title: '',
   ...partialBookmarkInfo,
   iconUrl: '',
   isRoot: false,
   isUnmodifiable: true,
   parentId: '',
   storageIndex: -1,
-  title: '',
   url: ''
 })
 

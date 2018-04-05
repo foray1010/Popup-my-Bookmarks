@@ -9,6 +9,7 @@ Changes:
 
 Bugfixes:
   - some bookmark rows may not have correct height after sorting/adding/deleting bookmarks
+  - should not allow paste when searching
 
 ## 5.1.2 (26/9/2017)
 Bugfixes:
