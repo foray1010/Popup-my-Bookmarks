@@ -11,7 +11,6 @@ import {
 import * as CST from '../../../../constants'
 import bookmarkNodes from '../__fixtures__/bookmarkNodes'
 import bookmarkTrees from '../__fixtures__/bookmarkTrees'
-import {simulateBookmark} from './converters'
 import * as getters from './getters'
 
 const chance = new Chance('getters')
@@ -26,6 +25,7 @@ describe('getBookmarkInfo', () => {
       iconUrl: 'chrome://favicon/http://hipul.va/bihdaeha',
       id: '8825',
       isRoot: false,
+      isSimulated: false,
       isUnmodifiable: false,
       parentId: '',
       storageIndex: 7496,
@@ -49,6 +49,7 @@ describe('getBookmarkChildren', () => {
         iconUrl: 'chrome://favicon/http://dobapudol.bd/umowimup',
         id: '5683',
         isRoot: false,
+        isSimulated: false,
         isUnmodifiable: false,
         parentId: '5863',
         storageIndex: 4116,
@@ -60,6 +61,7 @@ describe('getBookmarkChildren', () => {
         iconUrl: 'chrome://favicon/http://rucophe.sr/pakucug',
         id: '3980',
         isRoot: false,
+        isSimulated: false,
         isUnmodifiable: false,
         parentId: '',
         storageIndex: 7243,
@@ -180,51 +182,62 @@ describe('getFirstBookmarkTree', () => {
     )
 
     const rootFolders = [
-      simulateBookmark({
+      {
+        ...bookmarkTrees[0].children[0],
         type: CST.TYPE_BOOKMARK,
-        id: String(chance.integer({min: 2}))
-      }),
-      simulateBookmark({
+        id: String(chance.integer({min: 2})),
+        isRoot: true
+      },
+      {
+        ...bookmarkTrees[0].children[0],
         type: CST.TYPE_FOLDER,
-        id: String(chance.integer({min: 2}))
-      }),
-      simulateBookmark({
+        id: String(chance.integer({min: 2})),
+        isRoot: true
+      },
+      {
+        ...bookmarkTrees[0].children[0],
         type: CST.TYPE_FOLDER,
-        id: bookmarkTrees[0].parent.id
-      }),
-      simulateBookmark({
+        id: bookmarkTrees[0].parent.id,
+        isRoot: true
+      },
+      {
+        ...bookmarkTrees[0].children[0],
         type: CST.TYPE_FOLDER,
-        id: hiddenFolderId
-      })
+        id: hiddenFolderId,
+        isRoot: true
+      }
     ]
     expect(generator.next([bookmarkTrees[0], rootFolders]).value).toEqual({
       children: [
         {
-          iconUrl: '',
+          iconUrl: 'http://sidzehod.za/nowocu',
           id: '5967205401362433',
-          isRoot: false,
-          isUnmodifiable: true,
-          parentId: '',
-          storageIndex: -1,
-          title: '',
+          isRoot: true,
+          isSimulated: false,
+          isUnmodifiable: false,
+          parentId: '4146',
+          storageIndex: 3032,
+          title: 'nagcumu',
           type: 'bookmark',
-          url: ''
+          url: 'http://jefin.tk/se'
         },
         {
-          iconUrl: '',
+          iconUrl: 'http://sidzehod.za/nowocu',
           id: '4488745793355777',
-          isRoot: false,
-          isUnmodifiable: true,
-          parentId: '',
-          storageIndex: -1,
-          title: '',
+          isRoot: true,
+          isSimulated: false,
+          isUnmodifiable: false,
+          parentId: '4146',
+          storageIndex: 3032,
+          title: 'nagcumu',
           type: 'folder',
-          url: ''
+          url: 'http://jefin.tk/se'
         },
         {
           iconUrl: 'http://sidzehod.za/nowocu',
           id: '2314',
           isRoot: true,
+          isSimulated: false,
           isUnmodifiable: false,
           parentId: '4146',
           storageIndex: 3032,
@@ -236,6 +249,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://pewojli.lv/pohof',
           id: '4433',
           isRoot: true,
+          isSimulated: false,
           isUnmodifiable: false,
           parentId: '2269',
           storageIndex: 8979,
@@ -247,6 +261,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://dawtoz.ug/cicop',
           id: '6984',
           isRoot: false,
+          isSimulated: false,
           isUnmodifiable: true,
           parentId: '4161',
           storageIndex: 1272,
@@ -258,6 +273,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://sinzov.mx/retu',
           id: '9824',
           isRoot: true,
+          isSimulated: false,
           isUnmodifiable: false,
           parentId: '9928',
           storageIndex: 5093,
@@ -269,6 +285,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://remahfur.do/wek',
           id: '8165',
           isRoot: false,
+          isSimulated: false,
           isUnmodifiable: true,
           parentId: '5893',
           storageIndex: 5021,
@@ -280,6 +297,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://zahcasmi.sr/hi',
           id: '9894',
           isRoot: false,
+          isSimulated: false,
           isUnmodifiable: true,
           parentId: '1047',
           storageIndex: 4193,
@@ -291,6 +309,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://tenula.bh/letnegba',
           id: '6285',
           isRoot: true,
+          isSimulated: false,
           isUnmodifiable: true,
           parentId: '1085',
           storageIndex: 2456,
@@ -302,6 +321,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://pedet.se/vibjuwdik',
           id: '1217',
           isRoot: false,
+          isSimulated: false,
           isUnmodifiable: false,
           parentId: '2530',
           storageIndex: 620,
@@ -313,6 +333,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://buk.ax/kusa',
           id: '9557',
           isRoot: true,
+          isSimulated: false,
           isUnmodifiable: true,
           parentId: '2384',
           storageIndex: 8077,
@@ -324,6 +345,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://va.mx/aso',
           id: '9551',
           isRoot: true,
+          isSimulated: false,
           isUnmodifiable: true,
           parentId: '5517',
           storageIndex: 2338,
@@ -335,6 +357,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://nula.at/haharud',
           id: '2421',
           isRoot: false,
+          isSimulated: false,
           isUnmodifiable: true,
           parentId: '1814',
           storageIndex: 7501,
@@ -346,6 +369,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://ma.ky/vawujij',
           id: '3284',
           isRoot: true,
+          isSimulated: false,
           isUnmodifiable: true,
           parentId: '5594',
           storageIndex: 7839,
@@ -357,6 +381,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://palaw.gov/din',
           id: '4335',
           isRoot: false,
+          isSimulated: false,
           isUnmodifiable: false,
           parentId: '5176',
           storageIndex: 1909,
@@ -368,6 +393,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://sadcup.ad/ipon',
           id: '5098',
           isRoot: true,
+          isSimulated: false,
           isUnmodifiable: false,
           parentId: '8980',
           storageIndex: 1612,
@@ -379,6 +405,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://dijolagu.bz/tu',
           id: '3886',
           isRoot: false,
+          isSimulated: false,
           isUnmodifiable: false,
           parentId: '9731',
           storageIndex: 9453,
@@ -390,6 +417,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://uworodim.sz/dud',
           id: '2298',
           isRoot: false,
+          isSimulated: false,
           isUnmodifiable: true,
           parentId: '4531',
           storageIndex: 8972,
@@ -401,6 +429,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://fe.nu/hih',
           id: '5442',
           isRoot: true,
+          isSimulated: false,
           isUnmodifiable: false,
           parentId: '9273',
           storageIndex: 347,
@@ -412,6 +441,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://sumjueja.nz/ewnobti',
           id: '9548',
           isRoot: true,
+          isSimulated: false,
           isUnmodifiable: true,
           parentId: '3059',
           storageIndex: 8012,
@@ -423,6 +453,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://haoshe.ga/tohibpow',
           id: '2595',
           isRoot: false,
+          isSimulated: false,
           isUnmodifiable: false,
           parentId: '6300',
           storageIndex: 8468,
@@ -434,6 +465,7 @@ describe('getFirstBookmarkTree', () => {
           iconUrl: 'http://jop.by/etenazis',
           id: '1593',
           isRoot: false,
+          isSimulated: false,
           isUnmodifiable: false,
           parentId: '7659',
           storageIndex: 8120,
@@ -446,6 +478,7 @@ describe('getFirstBookmarkTree', () => {
         iconUrl: 'http://bingola.ke/vef',
         id: '2724',
         isRoot: true,
+        isSimulated: false,
         isUnmodifiable: false,
         parentId: '2501',
         storageIndex: 4257,
@@ -472,6 +505,7 @@ describe('searchBookmarks', () => {
         iconUrl: 'test-file-stub',
         id: '9726',
         isRoot: false,
+        isSimulated: false,
         isUnmodifiable: true,
         parentId: '',
         storageIndex: 6667,
@@ -483,6 +517,7 @@ describe('searchBookmarks', () => {
         iconUrl: 'chrome://favicon/http://selke.jo/co',
         id: '9645',
         isRoot: false,
+        isSimulated: false,
         isUnmodifiable: true,
         parentId: '',
         storageIndex: -1,

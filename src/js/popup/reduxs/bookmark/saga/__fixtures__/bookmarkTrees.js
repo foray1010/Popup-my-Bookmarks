@@ -16,6 +16,7 @@ const generateBookmarkInfo = (type) => ({
   storageIndex: chance.integer({min: -1, max: 9999}),
   type: type || generateType(),
   isRoot: chance.bool(),
+  isSimulated: false,
   isUnmodifiable: chance.bool()
 })
 
