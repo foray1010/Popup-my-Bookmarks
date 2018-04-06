@@ -6,6 +6,7 @@ export type BookmarkInfo = {|
   iconUrl: string,
   id: string,
   isRoot: boolean,
+  isSimulated: boolean,
   isUnmodifiable: boolean,
   parentId: string,
   storageIndex: number,
