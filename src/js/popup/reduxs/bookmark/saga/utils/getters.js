@@ -18,6 +18,7 @@ export function* getBookmarkInfo(id: string): Saga<BookmarkInfo> {
   if (id.startsWith(CST.NO_BOOKMARK_ID_PREFIX)) {
     return simulateBookmark({
       id,
+      parentId: id.replace(CST.NO_BOOKMARK_ID_PREFIX, ''),
       title: yield call(getI18n, 'noBkmark'),
       type: CST.TYPE_NO_BOOKMARK
     })

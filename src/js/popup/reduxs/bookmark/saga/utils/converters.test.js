@@ -96,6 +96,8 @@ describe('isRoot', () => {
 describe('simulateBookmark', () => {
   test('always overwrite target values', () => {
     const id = String(chance.integer())
+    const parentId = String(chance.integer())
+    const title = chance.word()
     const type = chance.pickone([CST.TYPE_BOOKMARK, CST.TYPE_FOLDER, CST.TYPE_SEPARATOR])
     expect(
       converters.simulateBookmark({
@@ -104,9 +106,9 @@ describe('simulateBookmark', () => {
         isRoot: true,
         isSimulated: false,
         isUnmodifiable: false,
-        parentId: String(chance.integer()),
+        parentId,
         storageIndex: chance.integer({min: 0}),
-        title: chance.word(),
+        title,
         type,
         url: chance.url()
       })
@@ -116,9 +118,9 @@ describe('simulateBookmark', () => {
       isRoot: false,
       isSimulated: true,
       isUnmodifiable: true,
-      parentId: '',
+      parentId,
       storageIndex: -1,
-      title: 'ka',
+      title,
       type,
       url: ''
     })
