@@ -58,7 +58,10 @@ export function* getBookmarkTrees(
     (acc, tree) => {
       // if `tree` is deleted or not belong to this parent anymore,
       // ignore all its children
-      const isReduced = tree === null || R.last(acc).parent.id !== tree.parent.parentId
+      const isReduced =
+        tree === null ||
+        // in case it is root folder that open from root
+        (!tree.parent.isRoot && acc[acc.length - 1].parent.id !== tree.parent.parentId)
       if (isReduced) return R.reduced(acc)
 
       return [...acc, tree]

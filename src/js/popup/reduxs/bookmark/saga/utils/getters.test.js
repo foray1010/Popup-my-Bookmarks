@@ -133,23 +133,6 @@ describe('getBookmarkTrees', () => {
     expect(clonedGenerator.next().done).toBe(true)
   })
 
-  test('should remove tree and its child trees if its parentId is not the same as previous tree', () => {
-    for (let i = 1; i < correlatedBookmarkTrees.length; i += 1) {
-      const clonedGenerator = generator.clone()
-
-      const partiallyUnrelatedBookmarkTrees = R.set(
-        R.lensPath([i, 'parent', 'parentId']),
-        '99999',
-        correlatedBookmarkTrees
-      )
-      expect(clonedGenerator.next(partiallyUnrelatedBookmarkTrees).value).toEqual(
-        R.take(i, partiallyUnrelatedBookmarkTrees)
-      )
-
-      expect(clonedGenerator.next().done).toBe(true)
-    }
-  })
-
   test('should remove tree and its child trees if cannot get that tree', () => {
     for (let i = 1; i < correlatedBookmarkTrees.length; i += 1) {
       const clonedGenerator = generator.clone()
