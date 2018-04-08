@@ -11,7 +11,7 @@ const getMarkdownData = async (titleList) => {
     })
   )
 
-  return dataList.join('\n\n')
+  return dataList.join('\n')
 }
 
 // generate markdown file

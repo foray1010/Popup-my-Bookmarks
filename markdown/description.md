@@ -14,4 +14,4 @@
 
 - No background running application, save computer memory and your privacy!
 
-Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG.md
+Changelog: <https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG.md>
