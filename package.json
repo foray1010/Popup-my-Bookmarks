@@ -17,7 +17,7 @@
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "dev": "cross-env NODE_ENV=development webpack",
     "lint": "npm-run-all -p lint:*",
-    "lint:css": "stylelint src/**/*.css src/**/*.js",
+    "lint:css": "stylelint 'src/**/*.css' 'src/**/*.js'",
     "lint:flow": "flow check",
     "lint:js": "eslint .",
     "lint-staged": "lint-staged",
