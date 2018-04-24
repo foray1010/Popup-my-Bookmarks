@@ -25,36 +25,7 @@
     "md": "node scripts/generateMarkdown.js",
     "precommit": "npm-run-all -p lint:flow lint-staged",
     "prepush": "yarn test",
-    "test": "cross-env NODE_ENV=test jest"
-  },
-  "commitlint": {
-    "extends": ["@commitlint/config-conventional"]
-  },
-  "importSort": {
-    ".js": {
-      "parser": "import-sort-parser-babylon",
-      "style": "import-sort-style-module"
-    }
-  },
-  "jest": {
-    "collectCoverage": true,
-    "collectCoverageFrom": ["<rootDir>/src/**/*.js"],
-    "coveragePathIgnorePatterns": ["/__fixtures__/"],
-    "coverageReporters": ["lcov", "text-summary"],
-    "moduleNameMapper": {
-      "\\.css$": "<rootDir>/__mocks__/styleMock.js",
-      "\\.png$": "<rootDir>/__mocks__/fileMock.js"
-    }
-  },
-  "lint-staged": {
-    "ignore": ["flow-typed/**", "markdown/**"],
-    "linters": {
-      "*.css": ["prettier-eslint --write", "stylelint --fix", "git add"],
-      "*.js": ["import-sort --write", "prettier-eslint --write", "eslint --fix", "git add"],
-      "*.json": ["prettier-eslint --write", "git add"],
-      "*.md": ["markdownlint"],
-      "*ignore-sync": ["ignore-sync", "git add"]
-    }
+    "test": "cross-env NODE_ENV=test jest --config .jestrc.json"
   },
   "dependencies": {
     "babel-polyfill": "^6.5.0",
