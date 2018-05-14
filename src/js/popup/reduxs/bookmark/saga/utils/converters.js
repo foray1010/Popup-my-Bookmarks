@@ -13,7 +13,7 @@ export const getIconUrl = (bookmarkInfo: BookmarkInfo): string => {
 }
 
 export const getType = (bookmarkNode: BookmarkNode): string => {
-  if (!bookmarkNode.url) return CST.TYPE_FOLDER
+  if (bookmarkNode.url == null) return CST.TYPE_FOLDER
   if (bookmarkNode.url.startsWith(CST.SEPARATE_THIS_URL)) return CST.TYPE_SEPARATOR
   return CST.TYPE_BOOKMARK
 }

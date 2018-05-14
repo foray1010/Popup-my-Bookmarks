@@ -7,6 +7,7 @@ module.name_mapper.extension='yml' -> '<PROJECT_ROOT>/__mocks__/fileMock.js'
 
 [lints]
 nonstrict-import=error
+sketchy-null=error
 unsafe-getters-setters=error
 untyped-type-import=error
 

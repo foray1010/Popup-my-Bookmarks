@@ -15,7 +15,6 @@ describe('getIconUrl', () => {
       })
     ).toBe(`chrome://favicon/${url}`)
   })
-
   test('return folder icon if it is folder', () => {
     expect(
       converters.getIconUrl({
@@ -23,7 +22,6 @@ describe('getIconUrl', () => {
       })
     ).toBe('test-file-stub')
   })
-
   test('return empty string if it is neither bookmark nor folder', () => {
     expect(
       converters.getIconUrl({
@@ -36,10 +34,8 @@ describe('getIconUrl', () => {
 describe('getType', () => {
   test('return folder type if url does not exist', () => {
     expect(converters.getType({})).toBe(CST.TYPE_FOLDER)
-
-    expect(converters.getType({url: ''})).toBe(CST.TYPE_FOLDER)
+    expect(converters.getType({url: null})).toBe(CST.TYPE_FOLDER)
   })
-
   test('return separate type if domain is separatethis.com', () => {
     expect(
       converters.getType({
@@ -53,7 +49,6 @@ describe('getType', () => {
       })
     ).toBe(CST.TYPE_SEPARATOR)
   })
-
   test('return bookmark type if url is set and it is not from separatethis.com', () => {
     expect(
       converters.getType({
@@ -77,7 +72,6 @@ describe('isRoot', () => {
       })
     ).toBe(false)
   })
-
   test("is root if it's parentId equal to ROOT_ID", () => {
     expect(
       converters.isRoot({
@@ -151,7 +145,6 @@ describe('toBookmarkInfo', () => {
       url: 'http://google.com'
     })
   })
-
   test('should fill default value', () => {
     expect(
       converters.toBookmarkInfo({
@@ -171,7 +164,6 @@ describe('toBookmarkInfo', () => {
       url: ''
     })
   })
-
   test('if it is root, it must be unmodifiable', () => {
     expect(
       converters.toBookmarkInfo({

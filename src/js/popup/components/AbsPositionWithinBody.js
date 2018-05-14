@@ -64,11 +64,11 @@ class AbsPositionWithinBody extends PureComponent<Props, State> {
       bodyWidth: updatedBodyWidth,
       calibratedLeft: Math.min(
         this.props.positionLeft,
-        (updatedBodyWidth || currentBodyWidth) - menuWidth
+        (updatedBodyWidth !== null ? updatedBodyWidth : currentBodyWidth) - menuWidth
       ),
       calibratedTop: Math.min(
         this.props.positionTop,
-        (updatedBodyHeight || currentBodyHeight) - menuHeight
+        (updatedBodyHeight !== null ? updatedBodyHeight : currentBodyHeight) - menuHeight
       )
     })
   }
@@ -86,8 +86,8 @@ class AbsPositionWithinBody extends PureComponent<Props, State> {
         <style>
           {`
             body {
-              ${this.state.bodyHeight ? `height: ${this.state.bodyHeight}px;` : ''}
-              ${this.state.bodyWidth ? `width: ${this.state.bodyWidth}px;` : ''}
+              ${this.state.bodyHeight != null ? `height: ${this.state.bodyHeight}px;` : ''}
+              ${this.state.bodyWidth != null ? `width: ${this.state.bodyWidth}px;` : ''}
             }
           `}
         </style>
