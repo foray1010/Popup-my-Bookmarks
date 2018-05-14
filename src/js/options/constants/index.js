@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 
 import Immutable from 'seamless-immutable'
 

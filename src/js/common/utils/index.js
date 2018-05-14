@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 
 export {default as getOptionsConfig} from './getOptionsConfig'
 export {default as normalizeInputtingValue} from './normalizeInputtingValue'

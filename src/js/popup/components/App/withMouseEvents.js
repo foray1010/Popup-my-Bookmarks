@@ -1,12 +1,12 @@
-// @flow
+// @flow strict
 // @jsx createElement
 
 import {Fragment, PureComponent, createElement} from 'react'
 import type {ComponentType} from 'react'
 import EventListener from 'react-event-listener'
 
-export default (WrappedComponent: ComponentType<*>) => {
-  return class MouseEvents extends PureComponent<*> {
+export default (WrappedComponent: ComponentType<any>) => {
+  return class MouseEvents extends PureComponent<any> {
     handleContextMenu = (evt: MouseEvent) => {
       // allow native context menu if it is an input element
       if (evt.target instanceof window.HTMLElement && evt.target.tagName === 'INPUT') {

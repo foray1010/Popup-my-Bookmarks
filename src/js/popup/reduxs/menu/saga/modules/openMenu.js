@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 
 import type {Saga} from 'redux-saga'
 import {all, call, put, select} from 'redux-saga/effects'

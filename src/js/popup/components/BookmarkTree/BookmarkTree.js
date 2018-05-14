@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 // @jsx createElement
 
 import '../../../../css/popup/bookmark-tree.css'
@@ -49,7 +49,6 @@ class BookmarkTree extends PureComponent<Props, State> {
       this.props.treeInfo.children.forEach((x, index) => {
         if (this.list) this.list.recomputeRowHeights(index)
       })
-
       this.setHeight()
     }
   }

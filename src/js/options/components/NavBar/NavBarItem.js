@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 // @jsx createElement
 
 import '../../../../css/options/nav-bar-item.css'

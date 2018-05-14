@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 
 import * as R from 'ramda'
 import {applyMiddleware, createStore} from 'redux'
@@ -8,7 +8,7 @@ import type {Saga} from 'redux-saga'
 
 type Payload = {|
   preloadedState?: Object,
-  rootReducer: CombinedReducer<*, *>,
+  rootReducer: CombinedReducer<any, any>,
   rootSaga: () => Saga<void>
 |}
 export default ({rootReducer, rootSaga, preloadedState}: Payload) => {

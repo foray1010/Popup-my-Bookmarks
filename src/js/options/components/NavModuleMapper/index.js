@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 
 import {connect} from 'react-redux'
 

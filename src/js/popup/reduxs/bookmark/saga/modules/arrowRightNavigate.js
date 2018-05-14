@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 
 import * as R from 'ramda'
 import type {Saga} from 'redux-saga'

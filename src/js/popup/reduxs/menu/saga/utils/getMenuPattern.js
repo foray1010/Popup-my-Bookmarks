@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 
 import * as CST from '../../../../constants'
 import type {BookmarkInfo, MenuPattern} from '../../../../types'

@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 
 import * as R from 'ramda'
 import type {Saga} from 'redux-saga'
@@ -14,7 +14,7 @@ export const combineSagas = (sagas: $ReadOnlyArray<SagaGeneratorFn>) =>
 // as one saga failed, all next saga actions will not be ran,
 // this helper helps silent any error thrown from saga
 export const silenceSaga = (saga: SagaGeneratorFn) =>
-  function* silencedSaga(...args: $ReadOnlyArray<*>): Saga<void> {
+  function* silencedSaga(...args: $ReadOnlyArray<any>): Saga<void> {
     try {
       yield call(saga, ...args)
     } catch (err) {

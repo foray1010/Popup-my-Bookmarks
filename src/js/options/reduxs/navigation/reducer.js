@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 
 import {createReducer} from 'reduxsauce'
 import Immutable from 'seamless-immutable'

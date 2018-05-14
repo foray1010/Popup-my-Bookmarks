@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 
 import * as R from 'ramda'
 import store from 'store'
@@ -6,7 +6,6 @@ import store from 'store'
 const _updateLastScrollTopList = (index: number, scrollTop: number) =>
   R.compose(R.update(index, scrollTop), (list: $ReadOnlyArray<number>) =>
     R.concat(list, R.times(R.always(0), R.max(index - list.length + 1, 0))))
-
 export const updateLastScrollTopList = (index: number, scrollTop: number) => {
   const updateList = _updateLastScrollTopList(index, scrollTop)
 

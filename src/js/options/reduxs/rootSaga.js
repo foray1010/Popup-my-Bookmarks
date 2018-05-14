@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 
 import {combineSagas} from '../../common/utils'
 import {navigationSaga} from './navigation/saga'

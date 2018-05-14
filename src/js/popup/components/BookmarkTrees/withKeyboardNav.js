@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 // @jsx createElement
 
 import * as R from 'ramda'
@@ -42,7 +42,7 @@ const privatePropNames = [
   'setFocusId',
   'trees'
 ]
-const withKeyboardNav = (WrappedComponent: ComponentType<*>) => {
+const withKeyboardNav = (WrappedComponent: ComponentType<any>) => {
   type Props = {|
     arrowRightNavigate: (string, string) => void,
     focusId: string,

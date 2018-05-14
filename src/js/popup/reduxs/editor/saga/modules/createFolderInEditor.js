@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 
 import type {Saga} from 'redux-saga'
 import {put} from 'redux-saga/effects'
