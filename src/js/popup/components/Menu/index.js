@@ -3,7 +3,6 @@
 
 import '../../../../css/popup/mask.css'
 
-import * as R from 'ramda'
 import {Fragment, PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
@@ -72,9 +71,11 @@ const mapStateToProps = (state) => ({
   unclickableRows: unclickableRowsSelector(state)
 })
 
-const mapDispatchToProps = R.pick(
-  ['clickMenuRow', 'closeMenu', 'removeFocusedRow', 'setFocusedRow'],
-  menuCreators
-)
+const mapDispatchToProps = {
+  clickMenuRow: menuCreators.clickMenuRow,
+  closeMenu: menuCreators.closeMenu,
+  removeFocusedRow: menuCreators.removeFocusedRow,
+  setFocusedRow: menuCreators.setFocusedRow
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuContainer)

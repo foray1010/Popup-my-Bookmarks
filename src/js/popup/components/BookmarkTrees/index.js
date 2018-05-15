@@ -32,7 +32,9 @@ const mapStateToProps = (state) => ({
   treeIds: getTreeIds(state)
 })
 
-const mapDispatchToProps = R.pick(['initBookmarkTrees'], bookmarkCreators)
+const mapDispatchToProps = {
+  initBookmarkTrees: bookmarkCreators.initBookmarkTrees
+}
 
 export default R.compose(
   withBookmarkEvents,

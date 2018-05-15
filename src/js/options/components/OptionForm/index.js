@@ -1,7 +1,6 @@
 // @flow strict
 // @jsx createElement
 
-import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
@@ -49,9 +48,10 @@ const mapStateToProps = (state) => ({
   selectedOptionFormMap: OPTION_TABLE_MAP[state.navigation.selectedNavModule]
 })
 
-const mapDispatchToProps = R.pick(
-  ['saveOptions', 'resetToDefaultOptions', 'updateSingleOption'],
-  optionsCreators
-)
+const mapDispatchToProps = {
+  saveOptions: optionsCreators.saveOptions,
+  resetToDefaultOptions: optionsCreators.resetToDefaultOptions,
+  updateSingleOption: optionsCreators.updateSingleOption
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(OptionFormContainer)

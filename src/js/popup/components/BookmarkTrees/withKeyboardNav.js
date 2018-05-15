@@ -117,9 +117,10 @@ const mapStateToProps = (state) => ({
   trees: state.bookmark.trees
 })
 
-const mapDispatchToProps = R.pick(
-  ['arrowRightNavigate', 'removeNextBookmarkTrees', 'setFocusId'],
-  bookmarkCreators
-)
+const mapDispatchToProps = {
+  arrowRightNavigate: bookmarkCreators.arrowRightNavigate,
+  removeNextBookmarkTrees: bookmarkCreators.removeNextBookmarkTrees,
+  setFocusId: bookmarkCreators.setFocusId
+}
 
 export default R.compose(connect(mapStateToProps, mapDispatchToProps), withKeyboardNav)
