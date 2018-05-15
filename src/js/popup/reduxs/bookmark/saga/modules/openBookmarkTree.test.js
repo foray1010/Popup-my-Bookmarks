@@ -13,8 +13,10 @@ describe('openBookmarkTree', () => {
     const {id, parentId} = fakeBookmarkTree.parent
 
     const generator = openBookmarkTree({
-      id,
-      parentId
+      payload: {
+        id,
+        parentId
+      }
     })
 
     expect(generator.next().value).toEqual(
@@ -27,13 +29,14 @@ describe('openBookmarkTree', () => {
 
     expect(generator.next().done).toBe(true)
   })
-
   test('skip if `id` already exist in current trees', () => {
     const {id, parentId} = bookmarkTrees[0].parent
 
     const generator = openBookmarkTree({
-      id,
-      parentId
+      payload: {
+        id,
+        parentId
+      }
     })
 
     expect(generator.next().value).toEqual(
@@ -42,7 +45,6 @@ describe('openBookmarkTree', () => {
 
     expect(generator.next([bookmarkTrees, bookmarkTrees[0]]).done).toBe(true)
   })
-
   test('skip if `parentId` is not exist in current trees', () => {
     const fakeBookmarkTree = generateBookmarkTree()
     fakeBookmarkTree.parent.parentId = 'NOT_EXIST'
@@ -50,8 +52,10 @@ describe('openBookmarkTree', () => {
     const {id, parentId} = fakeBookmarkTree.parent
 
     const generator = openBookmarkTree({
-      id,
-      parentId
+      payload: {
+        id,
+        parentId
+      }
     })
 
     expect(generator.next().value).toEqual(

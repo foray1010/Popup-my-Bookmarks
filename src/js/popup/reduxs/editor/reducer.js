@@ -1,21 +1,11 @@
 // @flow strict
 
-import {createReducer} from 'reduxsauce'
-import Immutable from 'seamless-immutable'
+import {handleActions} from 'redux-actions'
+import type {ActionType} from 'redux-actions'
 
-import {editorTypes} from './actions'
+import {editorCreators, editorTypes} from './actions'
 
-type EditorState = {|
-  isAllowEditUrl: boolean,
-  isCreating: boolean,
-  positionLeft: number,
-  positionTop: number,
-  targetId: string,
-  title: string,
-  url: string
-|}
-
-const INITIAL_STATE: EditorState = Immutable({
+const INITIAL_STATE = {
   isAllowEditUrl: false,
   isCreating: false,
   positionLeft: 0,
@@ -23,19 +13,19 @@ const INITIAL_STATE: EditorState = Immutable({
   targetId: '',
   title: '',
   url: ''
-})
+}
 
 const closeEditor = () => INITIAL_STATE
 
-type SetEditorPayload = {|
-  partialState: Object
-|}
-const setEditor = (state: EditorState, {partialState}: SetEditorPayload) => ({
+const setEditor = (state, {payload}: ActionType<typeof editorCreators.setEditor>) => ({
   ...state,
-  ...partialState
+  ...payload.partialState
 })
 
-export const editorReducer = createReducer(INITIAL_STATE, {
-  [editorTypes.CLOSE_EDITOR]: closeEditor,
-  [editorTypes.SET_EDITOR]: setEditor
-})
+export const editorReducer = handleActions(
+  {
+    [editorTypes.CLOSE_EDITOR]: closeEditor,
+    [editorTypes.SET_EDITOR]: setEditor
+  },
+  INITIAL_STATE
+)

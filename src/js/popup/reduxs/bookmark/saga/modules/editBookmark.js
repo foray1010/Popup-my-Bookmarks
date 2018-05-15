@@ -1,18 +1,17 @@
 // @flow strict
 
+import type {ActionType} from 'redux-actions'
 import type {Saga} from 'redux-saga'
 import {call} from 'redux-saga/effects'
 
 import {updateBookmark} from '../../../../../common/utils'
+import {bookmarkCreators} from '../../actions'
 
-type Payload = {|
-  id: string,
-  title: string,
-  url: string
-|}
-export function* editBookmark({id, title, url}: Payload): Saga<void> {
-  yield call(updateBookmark, id, {
-    title,
-    ...(url ? {url} : null)
+export function* editBookmark({
+  payload
+}: ActionType<typeof bookmarkCreators.editBookmark>): Saga<void> {
+  yield call(updateBookmark, payload.id, {
+    title: payload.title,
+    ...(payload.url ? {url: payload.url} : null)
   })
 }

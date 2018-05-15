@@ -23,7 +23,7 @@ describe('addCurrentPage', () => {
     const index = chance.integer()
     const parentId = String(chance.integer())
 
-    const generator = addCurrentPage({parentId, index})
+    const generator = addCurrentPage({payload: {parentId, index}})
 
     expect(generator.next().value).toEqual(
       call(queryTabs, {

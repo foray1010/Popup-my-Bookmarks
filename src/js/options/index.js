@@ -7,7 +7,6 @@ import '../../manifest.yml'
 
 import {createElement} from 'react'
 import {Provider} from 'react-redux'
-import Immutable from 'seamless-immutable'
 
 import configureStore from '../common/store/configureStore'
 import {renderToBody} from '../common/utils'
@@ -21,7 +20,7 @@ const main = async () => {
   const store = configureStore({
     rootReducer,
     rootSaga,
-    preloadedState: Immutable({options})
+    preloadedState: {options}
   })
 
   renderToBody(

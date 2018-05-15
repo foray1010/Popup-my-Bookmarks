@@ -1,37 +1,35 @@
 // @flow strict
 
-import {createReducer} from 'reduxsauce'
-import Immutable from 'seamless-immutable'
+import {handleActions} from 'redux-actions'
+import type {ActionType} from 'redux-actions'
 
-import {uiTypes} from './actions'
+import {uiCreators, uiTypes} from './actions'
 
-type UiState = {|
-  isDisableGlobalKeyboardEvent: boolean,
-  isFocusSearchInput: boolean
-|}
-
-const INITIAL_STATE: UiState = Immutable({
+const INITIAL_STATE = {
   isDisableGlobalKeyboardEvent: false,
   isFocusSearchInput: false
-})
+}
 
-type SetIsDisableGlobalKeyboardEventPayload = {|
-  isDisableGlobalKeyboardEvent: boolean
-|}
 const setIsDisableGlobalKeyboardEvent = (
-  state: UiState,
-  {isDisableGlobalKeyboardEvent}: SetIsDisableGlobalKeyboardEventPayload
-) => Immutable.merge(state, {isDisableGlobalKeyboardEvent})
-
-type SetIsFocusSearchInputPayload = {|
-  isFocusSearchInput: boolean
-|}
-const setIsFocusSearchInput = (
-  state: UiState,
-  {isFocusSearchInput}: SetIsFocusSearchInputPayload
-) => Immutable.merge(state, {isFocusSearchInput})
-
-export const uiReducer = createReducer(INITIAL_STATE, {
-  [uiTypes.SET_IS_DISABLE_GLOBAL_KEYBOARD_EVENT]: setIsDisableGlobalKeyboardEvent,
-  [uiTypes.SET_IS_FOCUS_SEARCH_INPUT]: setIsFocusSearchInput
+  state,
+  {payload}: ActionType<typeof uiCreators.setIsDisableGlobalKeyboardEvent>
+) => ({
+  ...state,
+  isDisableGlobalKeyboardEvent: payload.isDisableGlobalKeyboardEvent
 })
+
+const setIsFocusSearchInput = (
+  state,
+  {payload}: ActionType<typeof uiCreators.setIsFocusSearchInput>
+) => ({
+  ...state,
+  isFocusSearchInput: payload.isFocusSearchInput
+})
+
+export const uiReducer = handleActions(
+  {
+    [uiTypes.SET_IS_DISABLE_GLOBAL_KEYBOARD_EVENT]: setIsDisableGlobalKeyboardEvent,
+    [uiTypes.SET_IS_FOCUS_SEARCH_INPUT]: setIsFocusSearchInput
+  },
+  INITIAL_STATE
+)

@@ -1,7 +1,15 @@
 // @flow strict
 
-import {createActions} from 'reduxsauce'
+import {createAction} from 'redux-actions'
 
-export const {Creators: navigationCreators, Types: navigationTypes} = createActions({
-  switchNavModule: ['navModule']
-})
+export const navigationTypes = {
+  SWITCH_NAV_MODULE: 'SWITCH_NAV_MODULE'
+}
+
+const switchNavModule = createAction(navigationTypes.SWITCH_NAV_MODULE, (navModule: string) => ({
+  navModule
+}))
+
+export const navigationCreators = {
+  switchNavModule
+}

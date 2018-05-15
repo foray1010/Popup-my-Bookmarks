@@ -1,6 +1,7 @@
 // @flow strict
 
 import * as R from 'ramda'
+import type {ActionType} from 'redux-actions'
 import type {Saga} from 'redux-saga'
 import {call, put, select} from 'redux-saga/effects'
 
@@ -8,16 +9,16 @@ import * as CST from '../../../../constants'
 import {bookmarkCreators} from '../../../bookmark/actions'
 import {getBookmarkInfo, getBookmarkTree} from '../../../bookmark/saga/utils/getters'
 import {editorCreators} from '../../../editor/actions'
+import {menuCreators} from '../../actions'
 
-type Payload = {|
-  rowName: string
-|}
-export function* clickMenuRow({rowName}: Payload): Saga<void> {
+export function* clickMenuRow({
+  payload
+}: ActionType<typeof menuCreators.clickMenuRow>): Saga<void> {
   const {menu} = yield select(R.pick(['menu']))
 
   const targetBookmarkInfo = yield call(getBookmarkInfo, menu.targetId)
 
-  switch (rowName) {
+  switch (payload.rowName) {
     case CST.MENU_ADD_FOLDER:
       yield put(
         editorCreators.createFolderInEditor(menu.targetId, {
@@ -78,7 +79,7 @@ export function* clickMenuRow({rowName}: Payload): Saga<void> {
         [CST.MENU_OPEN_ALL_IN_I]: CST.OPEN_IN_TYPES.INCOGNITO_WINDOW,
         [CST.MENU_OPEN_ALL_IN_N]: CST.OPEN_IN_TYPES.NEW_WINDOW
       }
-      yield put(bookmarkCreators.openBookmarksInBrowser(ids, mapping[rowName], true))
+      yield put(bookmarkCreators.openBookmarksInBrowser(ids, mapping[payload.rowName], true))
       break
     }
 
@@ -91,7 +92,11 @@ export function* clickMenuRow({rowName}: Payload): Saga<void> {
         [CST.MENU_OPEN_IN_N]: CST.OPEN_IN_TYPES.NEW_WINDOW
       }
       yield put(
-        bookmarkCreators.openBookmarksInBrowser([targetBookmarkInfo.id], mapping[rowName], true)
+        bookmarkCreators.openBookmarksInBrowser(
+          [targetBookmarkInfo.id],
+          mapping[payload.rowName],
+          true
+        )
       )
       break
     }

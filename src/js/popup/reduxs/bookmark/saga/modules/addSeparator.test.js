@@ -12,7 +12,7 @@ describe('addSeparator', () => {
     const index = chance.integer()
     const parentId = String(chance.integer())
 
-    const generator = addSeparator({parentId, index})
+    const generator = addSeparator({payload: {parentId, index}})
 
     expect(generator.next().value).toEqual(
       put(bookmarkCreators.createBookmark(parentId, index, '- '.repeat(42), CST.SEPARATE_THIS_URL))

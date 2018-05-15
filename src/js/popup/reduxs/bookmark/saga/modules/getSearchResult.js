@@ -1,6 +1,7 @@
 // @flow strict
 
 import * as R from 'ramda'
+import type {ActionType} from 'redux-actions'
 import type {Saga} from 'redux-saga'
 import {call, put, select} from 'redux-saga/effects'
 
@@ -15,11 +16,10 @@ export const generateSearchKeywordMatcher = (searchKeyword: string) => (title: s
     searchKeyword
   )
 
-type Payload = {|
-  searchKeyword: string
-|}
-export function* getSearchResult({searchKeyword}: Payload): Saga<void> {
-  if (!searchKeyword) {
+export function* getSearchResult({
+  payload
+}: ActionType<typeof bookmarkCreators.getSearchResult>): Saga<void> {
+  if (!payload.searchKeyword) {
     yield put(bookmarkCreators.initBookmarkTrees())
     return
   }
@@ -27,7 +27,7 @@ export function* getSearchResult({searchKeyword}: Payload): Saga<void> {
   const {options} = yield select(R.identity)
 
   const searchResult = yield call(searchBookmarks, {
-    query: searchKeyword
+    query: payload.searchKeyword
   })
 
   const isSearchTitleOnly = options.searchTarget === 1
@@ -35,7 +35,7 @@ export function* getSearchResult({searchKeyword}: Payload): Saga<void> {
     sortByTitle,
     R.slice(0, options.maxResults),
     isSearchTitleOnly ?
-      R.filter(R.compose(generateSearchKeywordMatcher(searchKeyword), R.prop('title'))) :
+      R.filter(R.compose(generateSearchKeywordMatcher(payload.searchKeyword), R.prop('title'))) :
       R.identity,
     R.filter(R.propEq('type', CST.TYPE_BOOKMARK))
   )(searchResult)

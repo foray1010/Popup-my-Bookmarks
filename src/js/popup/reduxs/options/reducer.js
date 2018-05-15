@@ -1,8 +1,7 @@
 // @flow strict
 
-import {createReducer} from 'reduxsauce'
-import Immutable from 'seamless-immutable'
+import {handleActions} from 'redux-actions'
 
-const INITIAL_STATE = Immutable({})
+const INITIAL_STATE = {}
 
-export const optionsReducer = createReducer(INITIAL_STATE, {})
+export const optionsReducer = handleActions({}, INITIAL_STATE)

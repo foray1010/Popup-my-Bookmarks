@@ -8,7 +8,6 @@ import '../../manifest.yml'
 import * as R from 'ramda'
 import {createElement} from 'react'
 import {Provider} from 'react-redux'
-import Immutable from 'seamless-immutable'
 import webExtension from 'webextension-polyfill'
 
 import configureStore from '../common/store/configureStore'
@@ -32,7 +31,7 @@ const main = async () => {
   const store = configureStore({
     rootReducer,
     rootSaga,
-    preloadedState: Immutable({options})
+    preloadedState: {options}
   })
 
   renderToBody(

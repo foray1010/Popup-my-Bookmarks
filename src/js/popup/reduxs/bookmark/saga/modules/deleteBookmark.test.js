@@ -15,11 +15,10 @@ describe('deleteBookmark', () => {
   let generator
 
   beforeAll(() => {
-    generator = cloneableGenerator(deleteBookmark)({id})
+    generator = cloneableGenerator(deleteBookmark)({payload: {id}})
 
     expect(generator.next().value).toEqual(call(getBookmarkInfo, id))
   })
-
   test('should delete bookmark', () => {
     const clonedGenerator = generator.clone()
 
@@ -31,7 +30,6 @@ describe('deleteBookmark', () => {
 
     expect(clonedGenerator.next().done).toBe(true)
   })
-
   test('should delete folder recursively', () => {
     const clonedGenerator = generator.clone()
 

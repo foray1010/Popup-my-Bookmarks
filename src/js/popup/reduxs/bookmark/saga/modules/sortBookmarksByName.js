@@ -1,12 +1,14 @@
 // @flow strict
 
 import * as R from 'ramda'
+import type {ActionType} from 'redux-actions'
 import type {Saga} from 'redux-saga'
 import {call} from 'redux-saga/effects'
 
 import {moveBookmark} from '../../../../../common/utils'
 import * as CST from '../../../../constants'
 import {sortByTitle} from '../../../../utils'
+import {bookmarkCreators} from '../../actions'
 import {getBookmarkInfo, getBookmarkTree} from '../utils/getters'
 
 const splitSectionsBySeparator = R.groupWith(
@@ -32,11 +34,10 @@ const sortBookmarks = R.compose(
   splitSectionsBySeparator
 )
 
-type Payload = {|
-  parentId: string
-|}
-export function* sortBookmarksByName({parentId}: Payload): Saga<void> {
-  const bookmarkTree = yield call(getBookmarkTree, parentId)
+export function* sortBookmarksByName({
+  payload
+}: ActionType<typeof bookmarkCreators.sortBookmarksByName>): Saga<void> {
+  const bookmarkTree = yield call(getBookmarkTree, payload.parentId)
 
   const sortedBookmarkInfos = sortBookmarks(bookmarkTree.children)
 

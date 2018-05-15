@@ -1,6 +1,7 @@
 // @flow strict
 
 import * as R from 'ramda'
+import type {ActionType} from 'redux-actions'
 import type {Saga} from 'redux-saga'
 import {call, put, select} from 'redux-saga/effects'
 
@@ -37,21 +38,19 @@ function* recursiveCopy({fromId, toIndex, toParentId}: RecursiveCopyPayload) {
   }
 }
 
-type Payload = {|
-  index: number,
-  parentId: string
-|}
-export function* pasteBookmark({parentId, index}: Payload): Saga<void> {
+export function* pasteBookmark({
+  payload
+}: ActionType<typeof bookmarkCreators.pasteBookmark>): Saga<void> {
   const {bookmark} = yield select(R.identity)
   const {clipboard} = bookmark
 
   if (clipboard.isRemoveAfterPaste) {
-    yield call(moveBookmark, clipboard.id, {parentId, index})
+    yield call(moveBookmark, clipboard.id, {parentId: payload.parentId, index: payload.index})
   } else {
     yield call(recursiveCopy, {
       fromId: clipboard.id,
-      toIndex: index,
-      toParentId: parentId
+      toIndex: payload.index,
+      toParentId: payload.parentId
     })
   }
 

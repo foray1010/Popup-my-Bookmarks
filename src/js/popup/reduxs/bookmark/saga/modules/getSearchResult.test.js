@@ -21,7 +21,6 @@ describe('generateSearchKeywordMatcher', () => {
     expect(searchKeywordMatcher('cab')).toBe(true)
     expect(searchKeywordMatcher('cabdefg')).toBe(true)
   })
-
   test('return false if one of the keywords is not matched', () => {
     const searchKeyword = 'a b c'
 
@@ -31,7 +30,6 @@ describe('generateSearchKeywordMatcher', () => {
     expect(searchKeywordMatcher('z')).toBe(false)
     expect(searchKeywordMatcher('')).toBe(false)
   })
-
   test('should be case insensitive', () => {
     const searchKeyword = 'A b c'
 
@@ -45,18 +43,17 @@ describe('getSearchResult', () => {
   test('init bookmark trees if `searchKeyword` is empty', () => {
     const searchKeyword = ''
 
-    const generator = getSearchResult({searchKeyword})
+    const generator = getSearchResult({payload: {searchKeyword}})
 
     expect(generator.next().value).toEqual(put(bookmarkCreators.initBookmarkTrees()))
 
     expect(generator.next().done).toBe(true)
   })
-
   test('get search result with limited and sorted result if `searchKeyword` is not empty', () => {
     const options = {maxResults: 10, searchTarget: 0}
     const searchKeyword = chance.word()
 
-    const generator = getSearchResult({searchKeyword})
+    const generator = getSearchResult({payload: {searchKeyword}})
 
     expect(generator.next().value).toEqual(select(R.identity))
 
@@ -72,12 +69,11 @@ describe('getSearchResult', () => {
 
     expect(generator.next().done).toBe(true)
   })
-
   test('get search result by title only if `searchTarget` is `1`', () => {
     const options = {maxResults: 10, searchTarget: 1}
     const searchKeyword = 'a'
 
-    const generator = getSearchResult({searchKeyword})
+    const generator = getSearchResult({payload: {searchKeyword}})
 
     expect(generator.next().value).toEqual(select(R.identity))
 

@@ -1,12 +1,13 @@
 // @flow strict
 
 import * as R from 'ramda'
+import type {ActionType} from 'redux-actions'
 import type {Saga} from 'redux-saga'
 import {all, call} from 'redux-saga/effects'
 
 import {createTab, createWindow, updateTab} from '../../../../../common/utils'
 import * as CST from '../../../../constants'
-import type {OpenIn} from '../../../../types'
+import {bookmarkCreators} from '../../actions'
 import {getBookmarkInfo} from '../utils/getters'
 
 const _createTabGenerator = (active: boolean) => (url: string) => call(createTab, {url, active})
@@ -14,7 +15,7 @@ const createActiveTab = _createTabGenerator(true)
 const createBackgroundTab = _createTabGenerator(false)
 
 type Ids = $ReadOnlyArray<string>
-function* getUrls(ids: Ids): Saga<$ReadOnlyArray<string>> {
+function* getUrls(ids: Ids): Saga<Ids> {
   const bookmarkInfos = yield all(R.map(getBookmarkInfo, ids))
   return R.compose(
     R.pluck('url'),
@@ -22,13 +23,10 @@ function* getUrls(ids: Ids): Saga<$ReadOnlyArray<string>> {
   )(bookmarkInfos)
 }
 
-type Payload = {|
-  ids: Ids,
-  isCloseBrowser: boolean,
-  openIn: OpenIn
-|}
-export function* openBookmarksInBrowser({ids, isCloseBrowser, openIn}: Payload): Saga<void> {
-  const urls = yield call(getUrls, ids)
+export function* openBookmarksInBrowser({
+  payload
+}: ActionType<typeof bookmarkCreators.openBookmarksInBrowser>): Saga<void> {
+  const urls = yield call(getUrls, payload.ids)
   if (!urls.length) return
 
   /*
@@ -40,7 +38,7 @@ export function* openBookmarksInBrowser({ids, isCloseBrowser, openIn}: Payload):
   }
   */
 
-  switch (openIn) {
+  switch (payload.openIn) {
     case CST.OPEN_IN_TYPES.BACKGROUND_TAB:
       yield all(urls.map(createBackgroundTab))
       break
@@ -65,5 +63,5 @@ export function* openBookmarksInBrowser({ids, isCloseBrowser, openIn}: Payload):
     default:
   }
 
-  if (isCloseBrowser) yield call(window.close)
+  if (payload.isCloseBrowser) yield call(window.close)
 }

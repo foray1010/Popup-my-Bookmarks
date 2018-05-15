@@ -2,7 +2,6 @@
 // @jsx createElement
 
 import {PureComponent, createElement} from 'react'
-import Immutable from 'seamless-immutable'
 
 type Props = {|
   optionChoice: string,
@@ -25,8 +24,7 @@ class Option extends PureComponent<Props> {
     if (wasChecked) {
       newOptionValue = this.props.optionValue.filter((x) => x !== checkboxValue)
     } else {
-      const mutableNewOptionValue = [checkboxValue, ...this.props.optionValue].sort()
-      newOptionValue = Immutable(mutableNewOptionValue)
+      newOptionValue = [checkboxValue, ...this.props.optionValue].sort()
     }
 
     this.props.updateSingleOption(this.props.optionName, newOptionValue)

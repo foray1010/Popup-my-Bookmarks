@@ -1,6 +1,7 @@
 // @flow strict
 
 import * as R from 'ramda'
+import type {ActionType} from 'redux-actions'
 import type {Saga} from 'redux-saga'
 import {call, put, select} from 'redux-saga/effects'
 
@@ -11,16 +12,14 @@ import {openBookmarkTree} from './openBookmarkTree'
 
 export const bookmarkTreesSelector = R.path(['bookmark', 'trees'])
 
-type Payload = {|
-  id: string,
-  // not necessary to be `parentId` of `id`, such as root folders
-  parentId: string
-|}
-export function* arrowRightNavigate({id, parentId}: Payload): Saga<void> {
-  const bookmarkInfo = yield call(getBookmarkInfo, id)
+export function* arrowRightNavigate({
+  payload
+}: ActionType<typeof bookmarkCreators.arrowRightNavigate>): Saga<void> {
+  const bookmarkInfo = yield call(getBookmarkInfo, payload.id)
   if (bookmarkInfo.type === CST.TYPE_FOLDER) {
-    yield call(openBookmarkTree, {id, parentId})
+    yield call(openBookmarkTree, bookmarkCreators.openBookmarkTree(payload.id, payload.parentId))
 
+    // make sure run after `openBookmarkTree`
     const trees = yield select(bookmarkTreesSelector)
     const lastTree = trees[trees.length - 1]
     if (lastTree && lastTree.children.length) {

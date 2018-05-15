@@ -138,9 +138,6 @@ const webpackConfig = getMergedConfigByEnv({
     ],
     resolve: {
       alias: {
-        // as reduxsauce use older version, force it to use our newer version to reduce file size
-        ramda: path.resolve(__dirname, 'node_modules/ramda'),
-        'seamless-immutable': 'seamless-immutable/src/seamless-immutable',
         store: 'store/dist/store.modern'
       }
     }
