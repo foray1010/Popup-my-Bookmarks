@@ -13,7 +13,7 @@ import BookmarkTree from '../BookmarkTree'
 type Props = {|
   className: string,
   mainTreeHeader: Node,
-  treeIds: $ReadOnlyArray<string>
+  treeIds: Array<string>
 |}
 const BookmarkTrees = (props: Props) => {
   const trees = props.treeIds.map((treeId) => <BookmarkTree key={treeId} treeId={treeId} />)

@@ -13,7 +13,7 @@ type Props = {|
   options: Object,
   resetToDefaultOptions: () => void,
   saveOptions: () => void,
-  selectedOptionFormMap: $ReadOnlyArray<string>,
+  selectedOptionFormMap: Array<string>,
   updateSingleOption: (string, any) => void
 |}
 type State = {|

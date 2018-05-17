@@ -7,8 +7,8 @@ type Props = {|
   optionChoice: string,
   optionChoiceIndex: number,
   optionName: string,
-  optionValue: $ReadOnlyArray<number>,
-  updateSingleOption: (string, $ReadOnlyArray<number>) => void
+  optionValue: Array<number>,
+  updateSingleOption: (string, Array<number>) => void
 |}
 class Option extends PureComponent<Props> {
   inputId = Math.random()

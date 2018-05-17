@@ -14,9 +14,8 @@ const _createTabGenerator = (active: boolean) => (url: string) => call(createTab
 const createActiveTab = _createTabGenerator(true)
 const createBackgroundTab = _createTabGenerator(false)
 
-type Ids = $ReadOnlyArray<string>
-function* getUrls(ids: Ids): Saga<Ids> {
-  const bookmarkInfos = yield all(R.map(getBookmarkInfo, ids))
+function* getUrls(ids): Saga<Array<string>> {
+  const bookmarkInfos = yield all(ids.map((id) => call(getBookmarkInfo, id)))
   return R.compose(
     R.pluck('url'),
     R.filter(R.both(R.propEq('isSimulated', false), R.propEq('type', CST.TYPE_BOOKMARK)))

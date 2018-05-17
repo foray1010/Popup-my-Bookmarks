@@ -23,7 +23,7 @@ type Props = {|
   isShowHeader: boolean,
   listItemWidth: number,
   openBookmarkTree: (string, string) => void,
-  openBookmarksInBrowser: ($ReadOnlyArray<string>, OpenIn, boolean) => void,
+  openBookmarksInBrowser: (Array<string>, OpenIn, boolean) => void,
   openMenu: (
     string,
     {|

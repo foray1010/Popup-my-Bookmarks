@@ -16,7 +16,7 @@ type Props = {|
   onRowClick: (string) => () => void, // eslint-disable-line react/no-unused-prop-types
   onRowMouseEnter: (string) => () => void, // eslint-disable-line react/no-unused-prop-types
   onRowMouseLeave: () => void, // eslint-disable-line react/no-unused-prop-types
-  unclickableRows: $ReadOnlyArray<string> // eslint-disable-line react/no-unused-prop-types
+  unclickableRows: Array<string> // eslint-disable-line react/no-unused-prop-types
 |}
 const Menu = (props: Props) => (
   <div styleName='main'>

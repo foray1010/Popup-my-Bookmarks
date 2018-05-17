@@ -89,7 +89,7 @@ const initBookmarkTrees = createAction(bookmarkTypes.INIT_BOOKMARK_TREES)
 
 const openBookmarksInBrowser = createAction(
   bookmarkTypes.OPEN_BOOKMARKS_IN_BROWSER,
-  (ids: $ReadOnlyArray<string>, openIn: OpenIn, isCloseBrowser: boolean) => ({
+  (ids: Array<string>, openIn: OpenIn, isCloseBrowser: boolean) => ({
     ids,
     openIn,
     isCloseBrowser
@@ -123,7 +123,7 @@ const resetClipboard = createAction(bookmarkTypes.RESET_CLIPBOARD)
 
 const setBookmarkTrees = createAction(
   bookmarkTypes.SET_BOOKMARK_TREES,
-  (bookmarkTrees: $ReadOnlyArray<BookmarkTree>) => ({bookmarkTrees})
+  (bookmarkTrees: Array<BookmarkTree>) => ({bookmarkTrees})
 )
 
 const setFocusId = createAction(bookmarkTypes.SET_FOCUS_ID, (focusId: string) => ({focusId}))

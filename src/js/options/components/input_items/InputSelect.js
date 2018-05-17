@@ -9,7 +9,7 @@ import {PureComponent, createElement} from 'react'
 import {normalizeInputtingValue} from '../../../common/utils'
 
 type Props = {|
-  choices: $ReadOnlyArray<string>,
+  choices: Array<string>,
   optionName: string,
   optionValue: string,
   updateSingleOption: (string, string) => void

@@ -33,10 +33,12 @@ export function* getSearchResult({
   const isSearchTitleOnly = options.searchTarget === 1
   const sortedPartialResult = R.compose(
     sortByTitle,
-    R.slice(0, options.maxResults),
-    isSearchTitleOnly ?
-      R.filter(R.compose(generateSearchKeywordMatcher(payload.searchKeyword), R.prop('title'))) :
-      R.identity,
+    // flow throw type error in R.slice
+    (arr) => arr.slice(0, options.maxResults),
+    R.when(
+      R.always(isSearchTitleOnly),
+      R.filter(R.compose(generateSearchKeywordMatcher(payload.searchKeyword), R.prop('title')))
+    ),
     R.filter(R.propEq('type', CST.TYPE_BOOKMARK))
   )(searchResult)
 

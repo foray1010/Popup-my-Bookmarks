@@ -14,9 +14,9 @@ const REFRESH_BOOKMARKS_TIMEOUT = 100
 const privatePropNames = ['refreshBookmarkTrees']
 
 const withBookmarkEvents = (WrappedComponent) => {
-  type Props = {|
+  type Props = {
     refreshBookmarkTrees: () => void
-  |}
+  }
   return class BookmarkEvents extends PureComponent<Props> {
     componentDidMount() {
       webExtension.bookmarks.onChanged.addListener(this.refreshTrees)

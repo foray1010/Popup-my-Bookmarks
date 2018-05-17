@@ -4,7 +4,7 @@
 import {PureComponent, createElement} from 'react'
 
 type Props = {|
-  choices: $ReadOnlyArray<string | void>,
+  choices: Array<string | void>,
   optionName: string,
   optionValue: number,
   updateSingleOption: (string, number) => void

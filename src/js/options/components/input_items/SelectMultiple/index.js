@@ -8,10 +8,10 @@ import {createElement} from 'react'
 import Option from './Option'
 
 type Props = {|
-  choices: $ReadOnlyArray<string | void>,
+  choices: Array<string | void>,
   optionName: string,
-  optionValue: $ReadOnlyArray<number>,
-  updateSingleOption: (string, $ReadOnlyArray<number>) => void
+  optionValue: Array<number>,
+  updateSingleOption: (string, Array<number>) => void
 |}
 const SelectMultiple = (props: Props) => (
   <span styleName='main'>

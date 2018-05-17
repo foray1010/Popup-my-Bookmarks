@@ -4,9 +4,9 @@ import * as R from 'ramda'
 import type {Saga} from 'redux-saga'
 import {all, call, fork} from 'redux-saga/effects'
 
-type SagaGeneratorFn = (Object) => Saga<void>
+type SagaGeneratorFn = (any) => Saga<void>
 
-export const combineSagas = (sagas: $ReadOnlyArray<SagaGeneratorFn>) =>
+export const combineSagas = (sagas: Array<SagaGeneratorFn>) =>
   function* rootSaga(): Saga<void> {
     yield all(R.map(fork, sagas))
   }
@@ -14,7 +14,7 @@ export const combineSagas = (sagas: $ReadOnlyArray<SagaGeneratorFn>) =>
 // as one saga failed, all next saga actions will not be ran,
 // this helper helps silent any error thrown from saga
 export const silenceSaga = (saga: SagaGeneratorFn) =>
-  function* silencedSaga(...args: $ReadOnlyArray<any>): Saga<void> {
+  function* silencedSaga(...args: Array<any>): Saga<void> {
     try {
       yield call(saga, ...args)
     } catch (err) {

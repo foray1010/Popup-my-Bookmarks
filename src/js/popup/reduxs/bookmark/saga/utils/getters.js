@@ -28,7 +28,7 @@ export function* getBookmarkInfo(id: string): Saga<BookmarkInfo> {
   return toBookmarkInfo(bookmarkNodes[0])
 }
 
-export function* getBookmarkChildren(id: string): Saga<$ReadOnlyArray<BookmarkInfo>> {
+export function* getBookmarkChildren(id: string): Saga<Array<BookmarkInfo>> {
   const bookmarkChildNodes = yield call(getBookmarkChildNodes, id)
   return R.map(toBookmarkInfo, bookmarkChildNodes)
 }
@@ -47,28 +47,27 @@ export function* getBookmarkTree(id: string): Saga<BookmarkTree> {
 }
 
 export function* getBookmarkTrees(
-  restTreeIds: $ReadOnlyArray<string>,
+  restTreeIds: Array<string>,
   options: Object
-): Saga<$ReadOnlyArray<BookmarkTree>> {
-  const [firstTree, ...restTrees]: $ReadOnlyArray<BookmarkTree> = yield all([
+): Saga<Array<BookmarkTree>> {
+  const [firstTree, ...restTrees]: Array<BookmarkTree> = yield all([
     call(getFirstBookmarkTree, options),
     ...restTreeIds.map((id) => call(tryGetBookmarkTree, id))
   ])
-  return R.reduce(
-    (acc, tree) => {
-      // if `tree` is deleted or not belong to this parent anymore,
-      // ignore all its children
-      const isReduced =
-        tree === null ||
-        // in case it is root folder that open from root
-        (!tree.parent.isRoot && acc[acc.length - 1].parent.id !== tree.parent.parentId)
-      if (isReduced) return R.reduced(acc)
 
-      return [...acc, tree]
-    },
-    [firstTree],
-    restTrees
-  )
+  let acc = [firstTree]
+  for (const tree of restTrees) {
+    // if `tree` is deleted or not belong to this parent anymore,
+    // ignore all its children
+    const isBreak =
+      tree === null ||
+      // in case it is root folder that open from root
+      (!tree.parent.isRoot && acc[acc.length - 1].parent.id !== tree.parent.parentId)
+    if (isBreak) break
+
+    acc = [...acc, tree]
+  }
+  return acc
 }
 
 export function* getFirstBookmarkTree(options: Object): Saga<BookmarkTree> {
@@ -89,7 +88,7 @@ export function* getFirstBookmarkTree(options: Object): Saga<BookmarkTree> {
 }
 
 type SearchQuery = {| query: string |}
-export function* searchBookmarks(searchQuery: SearchQuery): Saga<$ReadOnlyArray<BookmarkInfo>> {
+export function* searchBookmarks(searchQuery: SearchQuery): Saga<Array<BookmarkInfo>> {
   const searchResultNodes = yield call(searchBookmarkNodes, searchQuery)
   return R.map(toBookmarkInfo, searchResultNodes)
 }

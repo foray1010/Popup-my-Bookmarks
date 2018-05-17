@@ -15,7 +15,7 @@ type BookmarkState = {|
   dragId: string,
   focusId: string,
   searchKeyword: string,
-  trees: $ReadOnlyArray<BookmarkTree>
+  trees: Array<BookmarkTree>
 |}
 const INITIAL_STATE: BookmarkState = {
   clipboard: {

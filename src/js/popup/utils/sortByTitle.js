@@ -2,6 +2,9 @@
 
 import * as R from 'ramda'
 
-const collator = new window.Intl.Collator()
+import type {BookmarkInfo} from '../types'
 
-export const sortByTitle = R.sort((a, b) => collator.compare(a.title, b.title))
+const collator = new Intl.Collator()
+
+export const sortByTitle = R.sort((a: BookmarkInfo, b: BookmarkInfo) =>
+  collator.compare(a.title, b.title))

@@ -27,7 +27,7 @@ export type BookmarkNode = {|
 |}
 
 export type BookmarkTree = {|
-  children: $ReadOnlyArray<BookmarkInfo>,
+  children: Array<BookmarkInfo>,
   parent: BookmarkInfo
 |}
 
@@ -37,9 +37,9 @@ export type Bookmark = {|
   dragId: string,
   focusId: string,
   searchKeyword: string,
-  trees: $ReadOnlyArray<BookmarkTree>
+  trees: Array<BookmarkTree>
 |}
 
-export type MenuPattern = $ReadOnlyArray<$ReadOnlyArray<string>>
+export type MenuPattern = Array<Array<string>>
 
 export type OpenIn = $Keys<typeof CST.OPEN_IN_TYPES>

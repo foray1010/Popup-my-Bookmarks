@@ -15,7 +15,7 @@ import SelectString from '../input_items/SelectString'
 type Props = {|
   optionConfig: Object,
   optionName: string,
-  optionValue: boolean | number | $ReadOnlyArray<number> | string,
+  optionValue: boolean | number | Array<number> | string,
   updateSingleOption: (string, any) => void
 |}
 const OptionItem = ({

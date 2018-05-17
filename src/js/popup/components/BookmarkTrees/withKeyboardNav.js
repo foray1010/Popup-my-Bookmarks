@@ -16,8 +16,11 @@ const cycle = (start, end, value) => {
   return value
 }
 
-const getChildId = (trees, childSelector) =>
-  R.compose(R.propOr('', 'id'), childSelector, R.propOr([], 'children'))(trees)
+const getChildId = (trees, childSelector) => {
+  const children = trees.children || []
+  const child = childSelector(children)
+  return child == null ? '' : child.id
+}
 
 const getFocusedTree = (trees, focusId) =>
   trees.find(R.compose(R.any(R.propEq('id', focusId)), R.prop('children')))
@@ -43,13 +46,13 @@ const privatePropNames = [
   'trees'
 ]
 const withKeyboardNav = (WrappedComponent: ComponentType<any>) => {
-  type Props = {|
+  type Props = {
     arrowRightNavigate: (string, string) => void,
     focusId: string,
     removeNextBookmarkTrees: (string) => void,
     setFocusId: (string) => void,
-    trees: $ReadOnlyArray<BookmarkTree>
-  |}
+    trees: Array<BookmarkTree>
+  }
   return class KeyboardNav extends PureComponent<Props> {
     handleDocumentArrowLeft = () => {
       const {trees} = this.props

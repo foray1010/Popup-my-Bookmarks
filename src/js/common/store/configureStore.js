@@ -1,6 +1,5 @@
 // @flow strict
 
-import * as R from 'ramda'
 import {applyMiddleware, createStore} from 'redux'
 import type {CombinedReducer} from 'redux'
 import createSagaMiddleware from 'redux-saga'
@@ -11,15 +10,10 @@ type Payload = {|
   rootReducer: CombinedReducer<any, any>,
   rootSaga: () => Saga<void>
 |}
-export default ({rootReducer, rootSaga, preloadedState}: Payload) => {
+export default ({rootReducer, rootSaga, preloadedState = {}}: Payload) => {
   const sagaMiddleware = createSagaMiddleware()
 
-  const createStoreWithFilteredArgs = R.compose(R.apply(createStore), R.reject(R.isNil))
-  const store = createStoreWithFilteredArgs([
-    rootReducer,
-    preloadedState,
-    applyMiddleware(sagaMiddleware)
-  ])
+  const store = createStore(rootReducer, preloadedState, applyMiddleware(sagaMiddleware))
 
   sagaMiddleware.run(rootSaga)
 

@@ -17,7 +17,7 @@ type Props = {|
   initBookmarkTrees: () => void,
   mainTreeHeader: Node,
   options: Object,
-  treeIds: $ReadOnlyArray<string>
+  treeIds: Array<string>
 |}
 class BookmarkTreesContainer extends PureComponent<Props> {
   componentDidMount() {

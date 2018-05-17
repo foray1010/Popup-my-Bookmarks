@@ -11,7 +11,7 @@ export const initOptions = async (): Promise<Object> => {
     getOptionsConfig()
   ])
 
-  const missingOptionKeys: $ReadOnlyArray<string> = R.difference(
+  const missingOptionKeys: Array<string> = R.difference(
     Object.keys(optionsConfig),
     Object.keys(options)
   )
