@@ -43,9 +43,11 @@ export function* sortBookmarksByName({
 
   // Moving bookmarks to sorted index
   for (const [index, bookmarkInfo] of sortedBookmarkInfos.entries()) {
+    // $FlowFixMe
     const currentBookmarkInfo = yield call(getBookmarkInfo, bookmarkInfo.id)
     const currentIndex = currentBookmarkInfo.storageIndex
     if (currentIndex !== index) {
+      // $FlowFixMe
       yield call(moveBookmark, bookmarkInfo.id, {
         // if new index is after current index, need to add 1,
         // because index means the position in current array,
