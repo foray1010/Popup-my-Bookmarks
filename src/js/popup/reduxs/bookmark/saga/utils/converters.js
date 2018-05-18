@@ -4,7 +4,7 @@ import * as R from 'ramda'
 
 import folderIcon from '../../../../../../img/folder.png'
 import * as CST from '../../../../constants'
-import type {BookmarkInfo, BookmarkNode} from '../../../../types'
+import type {BookmarkInfo, BookmarkNode, BookmarkType} from '../../../../types'
 
 export const getIconUrl = (bookmarkInfo: BookmarkInfo): string => {
   if (bookmarkInfo.type === CST.TYPE_BOOKMARK) return `chrome://favicon/${bookmarkInfo.url}`
@@ -12,7 +12,7 @@ export const getIconUrl = (bookmarkInfo: BookmarkInfo): string => {
   return ''
 }
 
-export const getType = (bookmarkNode: BookmarkNode): string => {
+export const getType = (bookmarkNode: BookmarkNode): BookmarkType => {
   if (bookmarkNode.url == null) return CST.TYPE_FOLDER
   if (bookmarkNode.url.startsWith(CST.SEPARATE_THIS_URL)) return CST.TYPE_SEPARATOR
   return CST.TYPE_BOOKMARK
@@ -34,11 +34,10 @@ export const simulateBookmark = (partialBookmarkInfo: Object): BookmarkInfo => (
 })
 
 export const toBookmarkInfo = R.compose(
-  // use R.merge to replace spread as bug on flow: https://github.com/facebook/flow/issues/2405
-  (bookmarkInfo: BookmarkInfo): BookmarkInfo =>
-    R.merge(bookmarkInfo, {
-      iconUrl: getIconUrl(bookmarkInfo)
-    }),
+  (bookmarkInfo: BookmarkInfo): BookmarkInfo => ({
+    ...bookmarkInfo,
+    iconUrl: getIconUrl(bookmarkInfo)
+  }),
   (bookmarkNode: BookmarkNode): BookmarkInfo => ({
     iconUrl: '',
     id: bookmarkNode.id,

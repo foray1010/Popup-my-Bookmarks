@@ -2,6 +2,14 @@
 
 import * as CST from '../constants'
 
+const bookmarkTypes = {
+  [CST.TYPE_BOOKMARK]: CST.TYPE_BOOKMARK,
+  [CST.TYPE_FOLDER]: CST.TYPE_FOLDER,
+  [CST.TYPE_NO_BOOKMARK]: CST.TYPE_NO_BOOKMARK,
+  [CST.TYPE_SEPARATOR]: CST.TYPE_SEPARATOR
+}
+export type BookmarkType = $Keys<typeof bookmarkTypes>
+
 export type BookmarkInfo = {|
   iconUrl: string,
   id: string,
@@ -11,7 +19,7 @@ export type BookmarkInfo = {|
   parentId: string,
   storageIndex: number,
   title: string,
-  type: string,
+  type: BookmarkType,
   url: string
 |}
 
