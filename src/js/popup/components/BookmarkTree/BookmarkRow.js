@@ -6,7 +6,7 @@ import '../../../../css/popup/bookmark-row.css'
 import classNames from 'classnames'
 import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
-import styled from 'react-emotion'
+import styled from 'styled-components'
 
 import * as CST from '../../constants'
 import type {BookmarkInfo} from '../../types'

@@ -5,7 +5,7 @@ import '../../../../css/popup/editor.css'
 
 import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
-import styled from 'react-emotion'
+import styled from 'styled-components'
 import webExtension from 'webextension-polyfill'
 
 import {normalizeInputtingValue} from '../../../common/utils'

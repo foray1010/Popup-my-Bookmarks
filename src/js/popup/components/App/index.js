@@ -1,9 +1,9 @@
 // @flow strict
 // @jsx createElement
 
-import {css} from 'emotion'
 import * as R from 'ramda'
-import {PureComponent, createElement} from 'react'
+import {Fragment, createElement} from 'react'
+import {Helmet} from 'react-helmet'
 import {connect} from 'react-redux'
 
 import App from './App'
@@ -14,19 +14,21 @@ type Props = {|
   isShowMenu: boolean,
   options: Object
 |}
-class AppContainer extends PureComponent<Props> {
-  componentDidMount() {
-    if (document.body) {
-      const bodyStyle = css`
-        font-family: ${this.props.options.fontFamily}, sans-serif;
-        font-size: ${this.props.options.fontSize}px;
-      `
-      document.body.classList.add(bodyStyle)
-    }
-  }
-
-  render = () => <App isShowEditor={this.props.isShowEditor} isShowMenu={this.props.isShowMenu} />
-}
+const AppContainer = (props: Props) => (
+  <Fragment>
+    <Helmet>
+      <style>
+        {`
+          body {
+            font-family: ${props.options.fontFamily}, sans-serif;
+            font-size: ${props.options.fontSize}px;
+          }
+        `}
+      </style>
+    </Helmet>
+    <App isShowEditor={props.isShowEditor} isShowMenu={props.isShowMenu} />
+  </Fragment>
+)
 
 const mapStateToProps = (state) => ({
   isShowEditor: Boolean(state.editor.targetId),
@@ -34,4 +36,7 @@ const mapStateToProps = (state) => ({
   options: state.options
 })
 
-export default R.compose(withMouseEvents, connect(mapStateToProps))(AppContainer)
+export default R.compose(
+  withMouseEvents,
+  connect(mapStateToProps)
+)(AppContainer)

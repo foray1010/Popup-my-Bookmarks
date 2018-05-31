@@ -6,7 +6,7 @@ import '../../../../css/popup/bookmark-trees.css'
 import * as R from 'ramda'
 import {createElement} from 'react'
 import type {Node} from 'react'
-import styled from 'react-emotion'
+import styled from 'styled-components'
 
 import BookmarkTree from '../BookmarkTree'
 

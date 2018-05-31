@@ -4,9 +4,9 @@
 import * as R from 'ramda'
 import {Fragment, PureComponent, createElement} from 'react'
 import type {Node} from 'react'
-import styled from 'react-emotion'
 import {Helmet} from 'react-helmet'
 import Measure from 'react-measure'
+import styled from 'styled-components'
 
 const Wrapper = styled('div')`
   left: ${R.prop('positionLeft')}px;
