@@ -4,7 +4,7 @@ import * as R from 'ramda'
 import type {Saga} from 'redux-saga'
 import {all, call, fork} from 'redux-saga/effects'
 
-type SagaGeneratorFn = (any) => Saga<void>
+type SagaGeneratorFn = (...Array<any>) => Saga<void>
 
 export const combineSagas = (sagas: Array<SagaGeneratorFn>) =>
   function* rootSaga(): Saga<void> {
