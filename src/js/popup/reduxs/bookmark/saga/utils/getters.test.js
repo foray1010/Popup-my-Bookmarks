@@ -481,9 +481,8 @@ describe('getFirstBookmarkTree', () => {
 
 describe('searchBookmarks', () => {
   test('search bookmarks and convert to bookmarkInfo', () => {
-    const searchQuery = chance.word()
-
-    const generator = getters.searchBookmarks({query: searchQuery})
+    const searchQuery = {query: chance.word()}
+    const generator = getters.searchBookmarks(searchQuery)
 
     expect(generator.next().value).toEqual(call(searchBookmarkNodes, searchQuery))
 
