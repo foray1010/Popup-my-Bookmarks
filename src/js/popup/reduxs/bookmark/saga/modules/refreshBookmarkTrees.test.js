@@ -1,3 +1,5 @@
+// @flow strict
+
 import Chance from 'chance'
 import * as R from 'ramda'
 import {call, put, select} from 'redux-saga/effects'
@@ -7,7 +9,7 @@ import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import {getBookmarkTrees} from '../utils/getters'
 import {getTailTreeIds, refreshBookmarkTrees} from './refreshBookmarkTrees'
 
-const chance = new Chance('refreshBookmarkTrees')
+const chance = Chance('refreshBookmarkTrees')
 
 const getTailTreeIdsResult = [
   '5242',
@@ -25,7 +27,6 @@ describe('getTailTreeIds', () => {
   test('get all tree ids except first tree', () => {
     expect(getTailTreeIds(bookmarkTrees)).toEqual(getTailTreeIdsResult)
   })
-
   test('allow empty array', () => {
     expect(getTailTreeIds([])).toEqual([])
   })
@@ -46,7 +47,6 @@ describe('refreshBookmarkTrees', () => {
 
     expect(generator.next().done).toBe(true)
   })
-
   test('get updated bookmark trees if search keyword is empty', () => {
     const generator = refreshBookmarkTrees()
 

@@ -1,6 +1,8 @@
+// @flow strict
+
 import {all, call, put, select} from 'redux-saga/effects'
 
-import {bookmarkCreators} from '../../actions'
+import {bookmarkCreators, bookmarkTypes} from '../../actions'
 import bookmarkTrees, {generateBookmarkTree} from '../__fixtures__/bookmarkTrees'
 import {getBookmarkTree} from '../utils/getters'
 import {bookmarkTreesSelector, openBookmarkTree} from './openBookmarkTree'
@@ -13,6 +15,7 @@ describe('openBookmarkTree', () => {
     const {id, parentId} = fakeBookmarkTree.parent
 
     const generator = openBookmarkTree({
+      type: bookmarkTypes.OPEN_BOOKMARK_TREE,
       payload: {
         id,
         parentId
@@ -33,6 +36,7 @@ describe('openBookmarkTree', () => {
     const {id, parentId} = bookmarkTrees[0].parent
 
     const generator = openBookmarkTree({
+      type: bookmarkTypes.OPEN_BOOKMARK_TREE,
       payload: {
         id,
         parentId
@@ -52,6 +56,7 @@ describe('openBookmarkTree', () => {
     const {id, parentId} = fakeBookmarkTree.parent
 
     const generator = openBookmarkTree({
+      type: bookmarkTypes.OPEN_BOOKMARK_TREE,
       payload: {
         id,
         parentId

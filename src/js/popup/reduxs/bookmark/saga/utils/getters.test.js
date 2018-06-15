@@ -1,3 +1,5 @@
+// @flow strict
+
 import Chance from 'chance'
 import * as R from 'ramda'
 import {all, call} from 'redux-saga/effects'
@@ -13,7 +15,7 @@ import bookmarkNodes from '../__fixtures__/bookmarkNodes'
 import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import * as getters from './getters'
 
-const chance = new Chance('getters')
+const chance = Chance('getters')
 
 describe('getBookmarkInfo', () => {
   test('should get the first bookmark node by id and convert it to bookmarkInfo', () => {
@@ -101,6 +103,7 @@ describe('getBookmarkTrees', () => {
       if (!acc.length) return [bookmarkTree]
 
       const prevBookmarkTree = R.last(acc)
+      if (!prevBookmarkTree) throw new Error('prevBookmarkTree must exist')
       const updatedBookmarkTree = R.set(
         R.lensPath(['parent', 'parentId']),
         prevBookmarkTree.parent.id,
@@ -111,7 +114,10 @@ describe('getBookmarkTrees', () => {
     R.take(4),
     R.clone
   )(bookmarkTrees)
-  const getRestTreeIds = R.compose(R.map(R.path(['parent', 'id'])), R.tail)
+  const getRestTreeIds = R.compose(
+    R.map((tree) => tree.parent.id),
+    R.tail
+  )
 
   const options = {}
   const restTreeIds = getRestTreeIds(correlatedBookmarkTrees)
@@ -132,7 +138,6 @@ describe('getBookmarkTrees', () => {
 
     expect(clonedGenerator.next().done).toBe(true)
   })
-
   test('should remove tree and its child trees if cannot get that tree', () => {
     for (let i = 1; i < correlatedBookmarkTrees.length; i += 1) {
       const clonedGenerator = generator.clone()
@@ -146,7 +151,6 @@ describe('getBookmarkTrees', () => {
     }
   })
 })
-
 describe('getFirstBookmarkTree', () => {
   test('should get default expanded tree and append root folders to its children except itself', () => {
     const hiddenFolderId = '99999'
@@ -479,7 +483,7 @@ describe('searchBookmarks', () => {
   test('search bookmarks and convert to bookmarkInfo', () => {
     const searchQuery = chance.word()
 
-    const generator = getters.searchBookmarks(searchQuery)
+    const generator = getters.searchBookmarks({query: searchQuery})
 
     expect(generator.next().value).toEqual(call(searchBookmarkNodes, searchQuery))
 
@@ -524,7 +528,6 @@ describe('tryGetBookmarkTree', () => {
 
     expect(generator.next().done).toBe(true)
   })
-
   test('return null if failed to get bookmark tree', () => {
     const generator = getters.tryGetBookmarkTree(bookmarkNodes[0].id)
 

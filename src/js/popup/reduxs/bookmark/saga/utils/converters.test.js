@@ -1,15 +1,22 @@
+// @flow strict
+
 import Chance from 'chance'
 
 import * as CST from '../../../../constants'
+import bookmarkNodes from '../__fixtures__/bookmarkNodes'
+import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import * as converters from './converters'
 
-const chance = new Chance('converters')
+const chance = Chance('converters')
+
+const templateBookmarkInfo = bookmarkTrees[0].children[0]
 
 describe('getIconUrl', () => {
   test('return bookmark url if it is bookmark', () => {
     const url = chance.url()
     expect(
       converters.getIconUrl({
+        ...templateBookmarkInfo,
         type: CST.TYPE_BOOKMARK,
         url
       })
@@ -18,6 +25,7 @@ describe('getIconUrl', () => {
   test('return folder icon if it is folder', () => {
     expect(
       converters.getIconUrl({
+        ...templateBookmarkInfo,
         type: CST.TYPE_FOLDER
       })
     ).toBe('test-file-stub')
@@ -25,6 +33,7 @@ describe('getIconUrl', () => {
   test('return empty string if it is neither bookmark nor folder', () => {
     expect(
       converters.getIconUrl({
+        ...templateBookmarkInfo,
         type: CST.TYPE_SEPARATOR
       })
     ).toBe('')
@@ -33,18 +42,24 @@ describe('getIconUrl', () => {
 
 describe('getType', () => {
   test('return folder type if url does not exist', () => {
-    expect(converters.getType({})).toBe(CST.TYPE_FOLDER)
-    expect(converters.getType({url: null})).toBe(CST.TYPE_FOLDER)
+    expect(
+      converters.getType({
+        ...bookmarkNodes[0],
+        url: undefined
+      })
+    ).toBe(CST.TYPE_FOLDER)
   })
   test('return separate type if domain is separatethis.com', () => {
     expect(
       converters.getType({
+        ...bookmarkNodes[0],
         url: 'http://separatethis.com/'
       })
     ).toBe(CST.TYPE_SEPARATOR)
 
     expect(
       converters.getType({
+        ...bookmarkNodes[0],
         url: 'http://separatethis.com/solid.html'
       })
     ).toBe(CST.TYPE_SEPARATOR)
@@ -52,6 +67,7 @@ describe('getType', () => {
   test('return bookmark type if url is set and it is not from separatethis.com', () => {
     expect(
       converters.getType({
+        ...bookmarkNodes[0],
         url: 'http://google.com/'
       })
     ).toBe(CST.TYPE_BOOKMARK)
@@ -62,12 +78,14 @@ describe('isRoot', () => {
   test("is root if it's id equal to ROOT_ID", () => {
     expect(
       converters.isRoot({
+        ...bookmarkNodes[0],
         id: CST.ROOT_ID
       })
     ).toBe(true)
 
     expect(
       converters.isRoot({
+        ...bookmarkNodes[0],
         id: CST.ROOT_ID + String(chance.integer())
       })
     ).toBe(false)
@@ -75,12 +93,14 @@ describe('isRoot', () => {
   test("is root if it's parentId equal to ROOT_ID", () => {
     expect(
       converters.isRoot({
+        ...bookmarkNodes[0],
         parentId: CST.ROOT_ID
       })
     ).toBe(true)
 
     expect(
       converters.isRoot({
+        ...bookmarkNodes[0],
         parentId: CST.ROOT_ID + String(chance.integer())
       })
     ).toBe(false)

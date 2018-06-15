@@ -1,15 +1,17 @@
+// @flow strict
+
 import Chance from 'chance'
 import * as R from 'ramda'
 import {call, put, select} from 'redux-saga/effects'
 
-import {bookmarkCreators} from '../../actions'
+import {bookmarkCreators, bookmarkTypes} from '../../actions'
 import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import searchResult from '../__fixtures__/searchResult.json'
 import searchTitleOnlyResult from '../__fixtures__/searchTitleOnlyResult.json'
 import {searchBookmarks} from '../utils/getters'
 import {generateSearchKeywordMatcher, getSearchResult} from './getSearchResult'
 
-const chance = new Chance('getSearchResult')
+const chance = Chance('getSearchResult')
 
 describe('generateSearchKeywordMatcher', () => {
   test('return true if all keywords is matched', () => {
@@ -43,7 +45,10 @@ describe('getSearchResult', () => {
   test('init bookmark trees if `searchKeyword` is empty', () => {
     const searchKeyword = ''
 
-    const generator = getSearchResult({payload: {searchKeyword}})
+    const generator = getSearchResult({
+      type: bookmarkTypes.GET_SEARCH_RESULT,
+      payload: {searchKeyword}
+    })
 
     expect(generator.next().value).toEqual(put(bookmarkCreators.initBookmarkTrees()))
 
@@ -53,7 +58,10 @@ describe('getSearchResult', () => {
     const options = {maxResults: 10, searchTarget: 0}
     const searchKeyword = chance.word()
 
-    const generator = getSearchResult({payload: {searchKeyword}})
+    const generator = getSearchResult({
+      type: bookmarkTypes.GET_SEARCH_RESULT,
+      payload: {searchKeyword}
+    })
 
     expect(generator.next().value).toEqual(select(R.identity))
 
@@ -73,7 +81,10 @@ describe('getSearchResult', () => {
     const options = {maxResults: 10, searchTarget: 1}
     const searchKeyword = 'a'
 
-    const generator = getSearchResult({payload: {searchKeyword}})
+    const generator = getSearchResult({
+      type: bookmarkTypes.GET_SEARCH_RESULT,
+      payload: {searchKeyword}
+    })
 
     expect(generator.next().value).toEqual(select(R.identity))
 

@@ -1,3 +1,5 @@
+// @flow strict
+
 import Chance from 'chance'
 import {call} from 'redux-saga/effects'
 import {cloneableGenerator} from 'redux-saga/utils'
@@ -8,7 +10,7 @@ import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import {getBookmarkInfo} from '../utils/getters'
 import {deleteBookmark} from './deleteBookmark'
 
-const chance = new Chance('deleteBookmark')
+const chance = Chance('deleteBookmark')
 
 describe('deleteBookmark', () => {
   const id = String(chance.integer())

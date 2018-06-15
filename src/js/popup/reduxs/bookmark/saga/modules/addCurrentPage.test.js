@@ -1,11 +1,13 @@
+// @flow strict
+
 import Chance from 'chance'
 import {call, put} from 'redux-saga/effects'
 
 import {queryTabs} from '../../../../../common/utils'
-import {bookmarkCreators} from '../../actions'
+import {bookmarkCreators, bookmarkTypes} from '../../actions'
 import {addCurrentPage} from './addCurrentPage'
 
-const chance = new Chance('addCurrentPage')
+const chance = Chance('addCurrentPage')
 
 const currentTabs = [
   {
@@ -23,7 +25,10 @@ describe('addCurrentPage', () => {
     const index = chance.integer()
     const parentId = String(chance.integer())
 
-    const generator = addCurrentPage({payload: {parentId, index}})
+    const generator = addCurrentPage({
+      type: bookmarkTypes.ADD_CURRENT_PAGE,
+      payload: {parentId, index}
+    })
 
     expect(generator.next().value).toEqual(
       call(queryTabs, {

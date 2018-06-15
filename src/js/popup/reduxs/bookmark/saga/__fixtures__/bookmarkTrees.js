@@ -1,9 +1,11 @@
+// @flow strict
+
 import Chance from 'chance'
 import * as R from 'ramda'
 
 import * as CST from '../../../../constants'
 
-const chance = new Chance('bookmarkTrees')
+const chance = Chance('bookmarkTrees')
 
 const generateType = () => chance.pickone([CST.TYPE_BOOKMARK, CST.TYPE_FOLDER, CST.TYPE_SEPARATOR])
 

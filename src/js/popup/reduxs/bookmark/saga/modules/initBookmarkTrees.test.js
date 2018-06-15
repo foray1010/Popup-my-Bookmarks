@@ -1,3 +1,5 @@
+// @flow strict
+
 import * as R from 'ramda'
 import {call, put, select} from 'redux-saga/effects'
 import store from 'store'
@@ -27,7 +29,6 @@ describe('initBookmarkTrees', () => {
 
     expect(generator.next().done).toBe(true)
   })
-
   test('empty array if store.get return falsy result', () => {
     const generator = initBookmarkTrees()
 
@@ -46,7 +47,6 @@ describe('initBookmarkTrees', () => {
 
     expect(generator.next().done).toBe(true)
   })
-
   test('do not get extra trees if rememberPos is `false`', () => {
     const generator = initBookmarkTrees()
 
