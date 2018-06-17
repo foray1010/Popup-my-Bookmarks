@@ -10,6 +10,7 @@ linters:
     - "import-sort --write"
     - "prettier-eslint --write"
     - "eslint --fix"
+    - "flow focus-check"
     - "git add"
   "*.json":
     - "prettier-eslint --write"
