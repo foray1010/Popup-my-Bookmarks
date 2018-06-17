@@ -89,7 +89,7 @@
     "postcss-cssnext": "^3.0.0",
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.7",
-    "postcss-normalize": "^5.0.0",
+    "postcss-normalize": "^6.0.0",
     "postcss-url": "^7.0.0",
     "prettier-eslint-cli": "^4.3.2",
     "prompt": "^1.0.0",
