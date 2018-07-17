@@ -12,7 +12,11 @@ import {bookmarkCreators} from '../../actions'
 import {getBookmarkInfo, getBookmarkTree} from '../utils/getters'
 
 const splitSectionsBySeparator = R.groupWith(
-  R.compose(R.not, R.propEq('type', CST.TYPE_SEPARATOR), R.nthArg(1))
+  R.compose(
+    R.not,
+    R.propEq('type', CST.TYPE_SEPARATOR),
+    R.nthArg(1)
+  )
 )
 
 const groupByType = R.groupBy(R.prop('type'))
@@ -28,6 +32,7 @@ const ungroupWithPriority = (groups) => {
 
 const sortBookmarks = R.compose(
   R.flatten,
+  // $FlowFixMe
   R.map(ungroupWithPriority),
   R.map(R.map(sortByTitle)),
   R.map(groupByType),

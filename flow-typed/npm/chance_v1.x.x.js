@@ -1,5 +1,5 @@
-// flow-typed signature: 9d883397a720c1d3f5f7e0d7e98aecd5
-// flow-typed version: 1c89d96f07/chance_v1.x.x/flow_>=v0.25.x
+// flow-typed signature: 0bb3748765061b0e4d1bf2fd30b5ab1a
+// flow-typed version: 8d3cea213f/chance_v1.x.x/flow_>=v0.25.x
 
 declare module 'chance' {
   declare type Currency = {
@@ -15,6 +15,7 @@ declare module 'chance' {
     utc: string[]
   };
   declare class Chance {
+    constructor (seed?: any): Chance;
     static (seed?: any): Chance;
     bool(options?: { likelihood: number }): bool;
     character(options?: {
