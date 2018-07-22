@@ -20,6 +20,9 @@ options_page: "./options.html"
 options_ui:
   page: "./options.html"
   chrome_style: false
+# hack to improve startup time
+background:
+  page: "./background.html"
 
 commands:
   _execute_browser_action:

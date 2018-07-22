@@ -132,6 +132,11 @@ const webpackConfig = getMergedConfigByEnv({
           }),
         appNames
       ),
+      new HtmlWebpackPlugin({
+        filename: 'background.html',
+        inject: false,
+        title: 'hack to improve startup speed'
+      }),
       new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: 'async'
       })

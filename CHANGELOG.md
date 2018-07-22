@@ -11,6 +11,13 @@ Bugfixes:
   - some bookmark rows may not have correct height after sorting/adding/deleting bookmarks
   - should not allow paste when searching
 
+## 5.2.0 (22/7/2018)
+
+Improvements:
+
+  - significantly improve startup speed by injecting background page that does nothing
+
+
 ## 5.1.2 (26/9/2017)
 Bugfixes:
   - Cannot drag item into empty folder
