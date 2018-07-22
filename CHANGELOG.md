@@ -1,3 +1,10 @@
+## 5.2.0 (22/7/2018)
+
+Improvements:
+
+  - significantly improve startup speed by injecting background page that does nothing
+
+
 ## 5.1.2 (26/9/2017)
 Bugfixes:
   - Cannot drag item into empty folder

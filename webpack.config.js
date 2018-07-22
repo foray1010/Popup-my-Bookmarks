@@ -107,6 +107,11 @@ const webpackConfig = getMergedConfigByEnv({
           title: pkg.name
         })
       }, appNames),
+      new HtmlWebpackPlugin({
+        filename: 'background.html',
+        inject: false,
+        title: 'hack to improve startup speed'
+      }),
       new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: 'defer'
       }),
