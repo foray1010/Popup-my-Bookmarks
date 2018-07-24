@@ -1,3 +1,5 @@
+// @flow strict @jsx createElement
+
 import '../../../../css/popup/no-search-result.css'
 
 import {createElement} from 'react'
