@@ -34,6 +34,8 @@ type State = {|
   listHeight: number
 |}
 class BookmarkTree extends PureComponent<Props, State> {
+  list: ?Object
+
   state = {
     listHeight: 0
   }
@@ -85,7 +87,6 @@ class BookmarkTree extends PureComponent<Props, State> {
     })
   }
 
-  list: ?Object
   render = () => (
     <section styleName='main'>
       {this.props.isShowHeader && (

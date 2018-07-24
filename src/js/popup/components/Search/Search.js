@@ -13,6 +13,8 @@ type Props = {|
   onInput: (SyntheticInputEvent<HTMLInputElement>) => void
 |}
 class Search extends PureComponent<Props> {
+  inputEl: ?HTMLElement
+
   componentDidMount() {
     if (this.props.isFocus) this.focusToInputEl()
   }
@@ -29,7 +31,6 @@ class Search extends PureComponent<Props> {
     }
   }
 
-  inputEl: ?HTMLElement
   render = () => (
     <div styleName='main'>
       <input

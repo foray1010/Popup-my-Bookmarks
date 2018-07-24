@@ -24,6 +24,8 @@ type Props = {|
   onMouseLeave: () => void
 |}
 class BookmarkRow extends PureComponent<Props> {
+  baseEl: ?HTMLElement
+
   componentDidMount() {
     // temp fix for https://github.com/facebook/react/issues/8529
     // $FlowFixMe // flow does not support auxclick event
@@ -39,7 +41,6 @@ class BookmarkRow extends PureComponent<Props> {
   handleClick = this.props.onClick(this.props.bookmarkInfo.id)
   handleMouseEnter = this.props.onMouseEnter(this.props.bookmarkInfo)
 
-  baseEl: ?HTMLElement
   render = () => (
     <div
       ref={(ref) => {
