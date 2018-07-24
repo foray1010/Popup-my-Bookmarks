@@ -1,5 +1,4 @@
-// @flow strict
-// @jsx createElement
+// @flow strict @jsx createElement
 
 import {Fragment, PureComponent, createElement} from 'react'
 import type {ComponentType} from 'react'

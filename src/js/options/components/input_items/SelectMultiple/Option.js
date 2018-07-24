@@ -1,5 +1,4 @@
-// @flow strict
-// @jsx createElement
+// @flow strict @jsx createElement
 
 import {PureComponent, createElement} from 'react'
 

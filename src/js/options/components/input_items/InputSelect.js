@@ -1,5 +1,4 @@
-// @flow strict
-// @jsx createElement
+// @flow strict @jsx createElement
 
 import '../../../../css/options/input-select.css'
 
@@ -19,7 +18,12 @@ class InputSelect extends PureComponent<Props> {
   selectEl: ?HTMLSelectElement
 
   handleBlur = (evt: SyntheticEvent<HTMLInputElement>) => {
-    const normalize = R.compose(R.join(','), R.filter(Boolean), R.map(R.trim), R.split(','))
+    const normalize = R.compose(
+      R.join(','),
+      R.filter(Boolean),
+      R.map(R.trim),
+      R.split(',')
+    )
     this.props.updateSingleOption(this.props.optionName, normalize(evt.currentTarget.value))
   }
 
@@ -28,7 +32,10 @@ class InputSelect extends PureComponent<Props> {
       if (this.inputEl) this.inputEl.focus()
     }
 
-    const normalize = R.compose(R.replace(/^,/, ''), normalizeInputtingValue)
+    const normalize = R.compose(
+      R.replace(/^,/, ''),
+      normalizeInputtingValue
+    )
     this.props.updateSingleOption(this.props.optionName, normalize(evt.currentTarget.value))
   }
 

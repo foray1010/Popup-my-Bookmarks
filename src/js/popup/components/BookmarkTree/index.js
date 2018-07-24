@@ -1,5 +1,4 @@
-// @flow strict
-// @jsx createElement
+// @flow strict @jsx createElement
 
 import debounce from 'lodash.debounce'
 import * as R from 'ramda'
@@ -171,4 +170,7 @@ const mapDispatchToProps = {
   ...R.pick(['openMenu'], menuCreators)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookmarkTreeContainer)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BookmarkTreeContainer)

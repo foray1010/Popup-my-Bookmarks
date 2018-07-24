@@ -1,5 +1,4 @@
-// @flow strict
-// @jsx createElement
+// @flow strict @jsx createElement
 
 import debounce from 'lodash.debounce'
 import * as R from 'ramda'
@@ -73,11 +72,17 @@ class SearchContainer extends PureComponent<Props, State> {
   )
 }
 
-const mapStateToProps = R.compose(R.pick(['isFocusSearchInput']), R.prop('ui'))
+const mapStateToProps = R.compose(
+  R.pick(['isFocusSearchInput']),
+  R.prop('ui')
+)
 
 const mapDispatchToProps = {
   ...R.pick(['getSearchResult'], bookmarkCreators),
   ...R.pick(['setIsFocusSearchInput'], uiCreators)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SearchContainer)

@@ -1,5 +1,4 @@
-// @flow strict
-// @jsx createElement
+// @flow strict @jsx createElement
 
 import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
@@ -11,7 +10,10 @@ import BookmarkTrees from './BookmarkTrees'
 import withBookmarkEvents from './withBookmarkEvents'
 import withKeyboardNav from './withKeyboardNav'
 
-const getTreeIds = R.compose(R.map(R.path(['parent', 'id'])), R.path(['bookmark', 'trees']))
+const getTreeIds = R.compose(
+  R.map(R.path(['parent', 'id'])),
+  R.path(['bookmark', 'trees'])
+)
 
 type Props = {|
   initBookmarkTrees: () => void,
@@ -39,5 +41,8 @@ const mapDispatchToProps = {
 export default R.compose(
   withBookmarkEvents,
   withKeyboardNav,
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(BookmarkTreesContainer)

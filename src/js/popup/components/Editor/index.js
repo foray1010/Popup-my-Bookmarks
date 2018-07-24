@@ -1,5 +1,4 @@
-// @flow strict
-// @jsx createElement
+// @flow strict @jsx createElement
 
 import '../../../../css/popup/mask.css'
 
@@ -74,4 +73,7 @@ const mapDispatchToProps = {
   ...R.pick(['closeEditor'], editorCreators)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditorContainer)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditorContainer)

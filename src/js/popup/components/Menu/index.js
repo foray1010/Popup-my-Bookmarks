@@ -1,5 +1,4 @@
-// @flow strict
-// @jsx createElement
+// @flow strict @jsx createElement
 
 import '../../../../css/popup/mask.css'
 
@@ -78,4 +77,7 @@ const mapDispatchToProps = {
   setFocusedRow: menuCreators.setFocusedRow
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MenuContainer)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MenuContainer)

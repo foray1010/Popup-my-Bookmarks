@@ -1,5 +1,4 @@
-// @flow strict
-// @jsx createElement
+// @flow strict @jsx createElement
 
 import debounce from 'lodash.debounce'
 import * as R from 'ramda'
@@ -33,4 +32,10 @@ const withBookmarkEvents = (WrappedComponent) => {
 
 const mapDispatchToProps = R.pick(privatePropNames, bookmarkCreators)
 
-export default R.compose(connect(null, mapDispatchToProps), withBookmarkEvents)
+export default R.compose(
+  connect(
+    null,
+    mapDispatchToProps
+  ),
+  withBookmarkEvents
+)

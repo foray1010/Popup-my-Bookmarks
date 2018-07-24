@@ -1,5 +1,4 @@
-// @flow strict
-// @jsx createElement
+// @flow strict @jsx createElement
 
 import * as R from 'ramda'
 import {Fragment, PureComponent, createElement} from 'react'
@@ -23,7 +22,12 @@ const getChildId = (trees, childSelector) => {
 }
 
 const getFocusedTree = (trees, focusId) =>
-  trees.find(R.compose(R.any(R.propEq('id', focusId)), R.prop('children')))
+  trees.find(
+    R.compose(
+      R.any(R.propEq('id', focusId)),
+      R.prop('children')
+    )
+  )
 
 const getNextFocusId = (trees, focusId, indexOffset) => {
   const focusedTree = getFocusedTree(trees, focusId)
@@ -126,4 +130,10 @@ const mapDispatchToProps = {
   setFocusId: bookmarkCreators.setFocusId
 }
 
-export default R.compose(connect(mapStateToProps, mapDispatchToProps), withKeyboardNav)
+export default R.compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  withKeyboardNav
+)

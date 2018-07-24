@@ -1,5 +1,4 @@
-// @flow strict
-// @jsx createElement
+// @flow strict @jsx createElement
 
 import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
@@ -54,4 +53,7 @@ const mapDispatchToProps = {
   updateSingleOption: optionsCreators.updateSingleOption
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OptionFormContainer)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OptionFormContainer)
