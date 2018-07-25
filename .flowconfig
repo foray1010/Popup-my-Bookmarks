@@ -6,12 +6,12 @@ module.use_strict=true
 module.name_mapper.extension='yml' -> '<PROJECT_ROOT>/__mocks__/fileMock.js'
 
 [lints]
-deprecated-call-syntax=off
-nonstrict-import=error
-sketchy-null=error
-sketchy-number=error
-unsafe-getters-setters=error
 untyped-type-import=error
 
 [strict]
 deprecated-type
+nonstrict-import
+sketchy-null
+sketchy-number
+unnecessary-optional-chain
+unsafe-getters-setters
