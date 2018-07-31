@@ -6,6 +6,7 @@ import {Helmet} from 'react-helmet'
 import {connect} from 'react-redux'
 
 import App from './App'
+import withKeyboardEvents from './withKeyboardEvents'
 import withMouseEvents from './withMouseEvents'
 
 type Props = {|
@@ -37,5 +38,6 @@ const mapStateToProps = (state) => ({
 
 export default R.compose(
   withMouseEvents,
+  withKeyboardEvents,
   connect(mapStateToProps)
 )(AppContainer)
