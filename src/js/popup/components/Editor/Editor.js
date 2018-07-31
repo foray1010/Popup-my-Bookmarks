@@ -1,164 +1,84 @@
+// @flow strict @jsx createElement
+
 import '../../../../css/popup/editor.css'
 
-import PropTypes from 'prop-types'
+import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
+import styled from 'styled-components'
 import webExtension from 'webextension-polyfill'
 
-import {normalizeInputtingValue} from '../../../common/functions'
-import {resetBodySize} from '../../functions'
+import {normalizeInputtingValue} from '../../../common/utils'
 
-class Editor extends PureComponent {
+const Form = styled('form')`
+  width: ${R.prop('width')}px;
+`
+
+type Props = {|
+  header: string,
+  isAllowEditUrl: boolean,
+  onCancel: () => void,
+  onConfirm: (string, string) => void,
+  title: string,
+  url: string,
+  width: number
+|}
+type State = {|
+  title: string,
+  url: string
+|}
+class Editor extends PureComponent<Props, State> {
   state = {
-    title: '',
-    url: ''
+    title: this.props.title,
+    url: this.props.url
   }
 
-  componentWillReceiveProps(nextProps) {
-    const {editorTarget, isCreatingNewFolder} = nextProps
-
-    const isHidden = !editorTarget
-
-    if (!isHidden) {
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.title !== this.props.title || prevProps.url !== this.props.url) {
       this.setState({
-        title: isCreatingNewFolder ? webExtension.i18n.getMessage('newFolder') : editorTarget.title,
-        url: editorTarget.url || ''
-      })
-    } else {
-      this.setState({
-        title: '',
-        url: ''
+        title: this.props.title,
+        url: this.props.url
       })
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const {editorTarget} = this.props
-
-    const isHidden = !editorTarget
-
-    if (editorTarget !== prevProps.editorTarget) {
-      this.setEditorPosition()
-
-      if (!isHidden) {
-        // auto focus to first input field
-        this.baseEl.querySelector('input[type="text"]').focus()
-      } else {
-        resetBodySize()
-      }
-    }
+  generateHandleChange = (stateName: string) => (evt: SyntheticInputEvent<HTMLInputElement>) => {
+    this.setState({
+      [stateName]: normalizeInputtingValue(evt.currentTarget.value)
+    })
   }
 
-  setEditorPosition() {
-    const {editorTarget} = this.props
-
-    const isHidden = !editorTarget
-
-    let bottomPositionPx = ''
-    let leftPositionPx = ''
-
-    if (!isHidden) {
-      const editorHeight = this.baseEl.offsetHeight
-      const editorTargetEl = document.getElementById(editorTarget.id)
-      const html = document.documentElement
-
-      const editorTargetOffset = editorTargetEl.getBoundingClientRect()
-      const htmlHeight = html.clientHeight
-
-      const bottomPosition = htmlHeight - editorHeight - editorTargetOffset.top
-
-      if (editorHeight > htmlHeight) {
-        document.body.style.height = editorHeight + 'px'
-      }
-
-      bottomPositionPx = Math.max(bottomPosition, 0) + 'px'
-      leftPositionPx = editorTargetOffset.left + 'px'
-    }
-
-    this.baseEl.style.bottom = bottomPositionPx
-    this.baseEl.style.left = leftPositionPx
+  handleConfirm = () => {
+    this.props.onConfirm(this.state.title, this.state.url)
   }
 
-  handleCancel = () => {
-    this.props.closeEditor()
-  }
-
-  handleConfirm = async (evt) => {
-    evt.persist()
+  handleSubmit = (evt: SyntheticEvent<HTMLElement>) => {
     evt.preventDefault()
-
-    const {closeEditor, editorTarget, isCreatingNewFolder} = this.props
-
-    const {title, url} = this.state
-
-    if (isCreatingNewFolder) {
-      await webExtension.bookmarks.create({
-        parentId: editorTarget.parentId,
-        title: title.trim(),
-        index: editorTarget.index + 1
-      })
-    } else {
-      await webExtension.bookmarks.update(editorTarget.id, {
-        title,
-        url: url.trim()
-      })
-    }
-
-    closeEditor()
   }
 
-  handleTitleChange = (evt) => {
-    this.setState({
-      title: normalizeInputtingValue(evt.target.value)
-    })
-  }
+  handleTitleChange = this.generateHandleChange('title')
+  handleUrlChange = this.generateHandleChange('url')
 
-  handleUrlChange = (evt) => {
-    this.setState({
-      url: normalizeInputtingValue(evt.target.value)
-    })
-  }
+  render = () => (
+    <Form styleName='main' width={this.props.width} onSubmit={this.handleSubmit}>
+      <span styleName='header'>{this.props.header}</span>
 
-  render() {
-    const {editorTarget, isUIForFolder} = this.props
+      <input type='text' value={this.state.title} onChange={this.handleTitleChange} autoFocus />
+      {this.props.isAllowEditUrl && (
+        <input type='text' value={this.state.url} onChange={this.handleUrlChange} />
+      )}
 
-    const {title, url} = this.state
-
-    const editorTitle = isUIForFolder ?
-      webExtension.i18n.getMessage('rename') :
-      webExtension.i18n.getMessage('edit')
-    const isHidden = !editorTarget
-
-    return (
-      <form
-        ref={(ref) => {
-          this.baseEl = ref
-        }}
-        styleName='main'
-        hidden={isHidden}
+      <button
+        styleName='button'
+        type='submit' // support `Enter` to submit
+        onClick={this.handleConfirm}
       >
-        <span styleName='title'>{editorTitle}</span>
-        <input type='text' value={title} onChange={this.handleTitleChange} />
-        <input type='text' value={url} hidden={isUIForFolder} onChange={this.handleUrlChange} />
-        <button
-          styleName='button'
-          type='submit' // support `Enter` to submit
-          onClick={this.handleConfirm}
-        >
-          {webExtension.i18n.getMessage('confirm')}
-        </button>
-        <button styleName='button' type='button' onClick={this.handleCancel}>
-          {webExtension.i18n.getMessage('cancel')}
-        </button>
-      </form>
-    )
-  }
-}
-
-Editor.propTypes = {
-  closeEditor: PropTypes.func.isRequired,
-  editorTarget: PropTypes.object,
-  isCreatingNewFolder: PropTypes.bool.isRequired,
-  isUIForFolder: PropTypes.bool.isRequired
+        {webExtension.i18n.getMessage('confirm')}
+      </button>
+      <button styleName='button' type='button' onClick={this.props.onCancel}>
+        {webExtension.i18n.getMessage('cancel')}
+      </button>
+    </Form>
+  )
 }
 
 export default Editor

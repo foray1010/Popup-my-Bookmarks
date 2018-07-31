@@ -1,11 +1,27 @@
-import {createReducer} from 'reduxsauce'
-import Immutable from 'seamless-immutable'
+// @flow strict
 
-import {optionsTypes} from './actions'
+import {handleActions} from 'redux-actions'
+import type {ActionType} from 'redux-actions'
 
-const INITIAL_STATE = Immutable({})
-export const optionsReducer = createReducer(INITIAL_STATE, {
-  [optionsTypes.UPDATE_OPTIONS]: (state, {options}) => Immutable(options),
-  [optionsTypes.UPDATE_SINGLE_OPTION]: (state, {optionName, optionValue}) =>
-    Immutable.set(state, optionName, optionValue)
+import {optionsCreators, optionsTypes} from './actions'
+
+const INITIAL_STATE = {}
+
+const updateOptions = (state, {payload}: ActionType<typeof optionsCreators.updateOptions>) =>
+  payload.options
+
+const updateSingleOption = (
+  state,
+  {payload}: ActionType<typeof optionsCreators.updateSingleOption>
+) => ({
+  ...state,
+  [payload.optionName]: payload.optionValue
 })
+
+export const optionsReducer = handleActions(
+  {
+    [optionsTypes.UPDATE_OPTIONS]: updateOptions,
+    [optionsTypes.UPDATE_SINGLE_OPTION]: updateSingleOption
+  },
+  INITIAL_STATE
+)

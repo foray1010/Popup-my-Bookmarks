@@ -1,24 +1,22 @@
+// @flow strict
+
+import * as R from 'ramda'
+import type {Saga} from 'redux-saga'
 import {all, call, put, select, takeLatest} from 'redux-saga/effects'
-import webExtension from 'webextension-polyfill'
 
-import {initOptions} from '../../functions'
+import {clearStorage, getStorage, setStorage, silenceSaga} from '../../../common/utils'
+import {initOptions} from '../../utils'
 import {optionsCreators, optionsTypes} from './actions'
-
-// workaround as following functions cannot pass redux-saga
-// and throw error: `TypeError: Function.prototype.toString requires that 'this' be a Function`
-const clearStorage = (...args) => webExtension.storage.sync.clear(...args)
-const setStorage = (...args) => webExtension.storage.sync.set(...args)
-const getStorage = (...args) => webExtension.storage.sync.get(...args)
 
 const updateOptions = (options) => put(optionsCreators.updateOptions(options))
 
-function* reloadOptions() {
+function* reloadOptions(): Saga<void> {
   const options = yield call(getStorage, null)
 
   yield updateOptions(options)
 }
 
-function* resetToDefaultOptions() {
+function* resetToDefaultOptions(): Saga<void> {
   yield call(clearStorage)
 
   const options = yield call(initOptions)
@@ -26,18 +24,18 @@ function* resetToDefaultOptions() {
   yield updateOptions(options)
 }
 
-function* saveOptions() {
-  const {options} = yield select()
+function* saveOptions(): Saga<void> {
+  const {options} = yield select(R.identity)
 
   yield call(setStorage, options)
 
   yield updateOptions(options)
 }
 
-export function* optionsSaga() {
+export function* optionsSaga(): Saga<void> {
   yield all([
-    takeLatest(optionsTypes.RELOAD_OPTIONS, reloadOptions),
-    takeLatest(optionsTypes.RESET_TO_DEFAULT_OPTIONS, resetToDefaultOptions),
-    takeLatest(optionsTypes.SAVE_OPTIONS, saveOptions)
+    takeLatest(optionsTypes.RELOAD_OPTIONS, silenceSaga(reloadOptions)),
+    takeLatest(optionsTypes.RESET_TO_DEFAULT_OPTIONS, silenceSaga(resetToDefaultOptions)),
+    takeLatest(optionsTypes.SAVE_OPTIONS, silenceSaga(saveOptions))
   ])
 }

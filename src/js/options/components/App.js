@@ -1,3 +1,5 @@
+// @flow strict @jsx createElement
+
 import '../../../css/options/app.css'
 
 import {createElement} from 'react'

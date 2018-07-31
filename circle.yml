@@ -12,6 +12,7 @@ jobs:
       - run: "yarn lint"
       - run: "yarn test"
       - run: "yarn build"
+      - run: "bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN"
       -
         save_cache:
           key: "yarn-{{ .Branch }}-{{ checksum \"yarn.lock\" }}"

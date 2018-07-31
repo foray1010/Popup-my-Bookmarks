@@ -1,1 +1,3 @@
-__*
+build/
+coverage/
+flow-typed/

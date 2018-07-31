@@ -1,0 +1,10 @@
+{
+  "collectCoverage": true,
+  "collectCoverageFrom": ["<rootDir>/src/**/*.js"],
+  "coveragePathIgnorePatterns": ["/__fixtures__/"],
+  "coverageReporters": ["lcov", "text-summary"],
+  "moduleNameMapper": {
+    "\\.css$": "<rootDir>/__mocks__/styleMock.js",
+    "\\.png$": "<rootDir>/__mocks__/fileMock.js"
+  }
+}

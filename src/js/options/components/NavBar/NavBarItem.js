@@ -1,36 +1,32 @@
+// @flow strict @jsx createElement
+
 import '../../../../css/options/nav-bar-item.css'
 
 import classNames from 'classnames'
-import PropTypes from 'prop-types'
 import {PureComponent, createElement} from 'react'
 
-class NavBarItem extends PureComponent {
+type Props = {|
+  isActive: boolean,
+  navModule: string,
+  switchNavModule: (string) => void,
+  title: string
+|}
+class NavBarItem extends PureComponent<Props> {
   handleClick = () => {
-    const {navModule, switchNavModule} = this.props
-
-    switchNavModule(navModule)
+    this.props.switchNavModule(this.props.navModule)
   }
 
-  render() {
-    const {isActive, title} = this.props
-
-    const thisStyleName = classNames('main', {
-      'main-active': isActive
-    })
-
-    return (
-      <button styleName={thisStyleName} type='button' onClick={this.handleClick}>
-        {title}
-      </button>
-    )
-  }
-}
-
-NavBarItem.propTypes = {
-  isActive: PropTypes.bool.isRequired,
-  navModule: PropTypes.string.isRequired,
-  switchNavModule: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired
+  render = () => (
+    <button
+      styleName={classNames('main', {
+        'main-active': this.props.isActive
+      })}
+      type='button'
+      onClick={this.handleClick}
+    >
+      {this.props.title}
+    </button>
+  )
 }
 
 export default NavBarItem

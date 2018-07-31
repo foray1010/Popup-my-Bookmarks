@@ -1,51 +1,88 @@
+// @flow strict @jsx createElement
+
 import debounce from 'lodash.debounce'
-import PropTypes from 'prop-types'
-import {PureComponent, createElement} from 'react'
+import * as R from 'ramda'
+import {Fragment, PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
-import {normalizeInputtingValue} from '../../../common/functions'
-import {updateTreesBySearchKeyword} from '../../actions'
+import {normalizeInputtingValue} from '../../../common/utils'
+import {bookmarkCreators, uiCreators} from '../../reduxs'
+import GlobalKeyboardEventListener from '../GlobalKeyboardEventListener'
 import Search from './Search'
 
-const mapDispatchToProps = {
-  updateTreesBySearchKeyword
-}
+const SEARCH_TIMEOUT = 300
 
-class SearchContainer extends PureComponent {
-  static propTypes = {
-    searchKeyword: PropTypes.string.isRequired,
-    updateTreesBySearchKeyword: PropTypes.func.isRequired
-  }
-
+type Props = {|
+  getSearchResult: (string) => void,
+  isFocusSearchInput: boolean,
+  setIsFocusSearchInput: (boolean) => void
+|}
+type State = {|
+  inputValue: string
+|}
+class SearchContainer extends PureComponent<Props, State> {
   state = {
-    inputValue: this.props.searchKeyword
+    inputValue: ''
   }
 
-  handleInput = (evt) => {
-    const newInputValue = normalizeInputtingValue(evt.target.value)
-
-    if (this.state.inputValue !== newInputValue) {
-      this.setState({
-        inputValue: newInputValue
-      })
-
-      this.handleSearchKeywordChange()
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.inputValue !== prevState.inputValue) {
+      this.getSearchResult()
     }
   }
 
-  handleSearchKeywordChange = debounce(() => {
-    const newSearchKeyword = this.state.inputValue.trim()
+  getSearchResult = debounce(() => {
+    this.props.getSearchResult(this.state.inputValue.trim())
+  }, SEARCH_TIMEOUT)
 
-    this.props.updateTreesBySearchKeyword(newSearchKeyword)
-  }, 300)
+  handleBlur = () => {
+    this.props.setIsFocusSearchInput(false)
+  }
+
+  handleDocumentKeyDown = (evt: KeyboardEvent) => {
+    const isCharKey = evt.key.length === 1
+    const notFocusOnInputElement =
+      !document.activeElement || !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)
+    if (notFocusOnInputElement && isCharKey) {
+      this.props.setIsFocusSearchInput(true)
+    }
+  }
+
+  handleFocus = () => {
+    this.props.setIsFocusSearchInput(true)
+  }
+
+  handleInput = (evt: SyntheticInputEvent<HTMLInputElement>) => {
+    this.setState({
+      inputValue: normalizeInputtingValue(evt.currentTarget.value)
+    })
+  }
 
   render = () => (
-    <Search {...this.props} inputValue={this.state.inputValue} onInput={this.handleInput} />
+    <Fragment>
+      <Search
+        inputValue={this.state.inputValue}
+        isFocus={this.props.isFocusSearchInput}
+        onBlur={this.handleBlur}
+        onFocus={this.handleFocus}
+        onInput={this.handleInput}
+      />
+      <GlobalKeyboardEventListener onKeyDown={this.handleDocumentKeyDown} />
+    </Fragment>
   )
 }
 
-const mapStateToProps = (state) => ({
-  searchKeyword: state.searchKeyword
-})
+const mapStateToProps = R.compose(
+  R.pick(['isFocusSearchInput']),
+  R.prop('ui')
+)
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer)
+const mapDispatchToProps = {
+  ...R.pick(['getSearchResult'], bookmarkCreators),
+  ...R.pick(['setIsFocusSearchInput'], uiCreators)
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SearchContainer)

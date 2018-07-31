@@ -1,0 +1,23 @@
+ignore:
+  - "flow-typed/**"
+  - "markdown/**"
+linters:
+  "*.css":
+    - "prettier-eslint --write"
+    - "stylelint --fix"
+    - "git add"
+  "*.js":
+    - "import-sort --write"
+    - "prettier-eslint --write"
+    - "eslint --fix"
+    - "flow focus-check"
+    - "jest --bail --findRelatedTests"
+    - "git add"
+  "*.json":
+    - "prettier-eslint --write"
+    - "git add"
+  "*.md":
+    - "markdownlint"
+  "*ignore-sync":
+    - "ignore-sync"
+    - "git add"

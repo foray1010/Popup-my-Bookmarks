@@ -1,110 +1,109 @@
 # Popup my Bookmarks
 
-[![Version On Chrome Web Store](https://img.shields.io/chrome-web-store/v/mppflflkbbafeopeoeigkbbdjdbeifni.svg?maxAge=3600)](//chrome.google.com/webstore/detail/popup-my-bookmarks/mppflflkbbafeopeoeigkbbdjdbeifni)
-[![Download Count On Chrome Web Store](https://img.shields.io/chrome-web-store/d/mppflflkbbafeopeoeigkbbdjdbeifni.svg?maxAge=3600)](//chrome.google.com/webstore/detail/popup-my-bookmarks/mppflflkbbafeopeoeigkbbdjdbeifni)
+[![Version On Chrome Web Store](https://img.shields.io/chrome-web-store/v/mppflflkbbafeopeoeigkbbdjdbeifni.svg?maxAge=3600)](https://chrome.google.com/webstore/detail/popup-my-bookmarks/mppflflkbbafeopeoeigkbbdjdbeifni)
+[![Download Count On Chrome Web Store](https://img.shields.io/chrome-web-store/d/mppflflkbbafeopeoeigkbbdjdbeifni.svg?maxAge=3600)](https://chrome.google.com/webstore/detail/popup-my-bookmarks/mppflflkbbafeopeoeigkbbdjdbeifni)
+[![Build Status](https://img.shields.io/circleci/project/foray1010/Popup-my-Bookmarks/master.svg?maxAge=3600)](https://circleci.com/gh/foray1010/Popup-my-Bookmarks/tree/master)
 
-[![Build Status](https://img.shields.io/circleci/project/foray1010/Popup-my-Bookmarks/master.svg?maxAge=3600)](//circleci.com/gh/foray1010/Popup-my-Bookmarks/tree/master)
-[![Dependency Status](https://img.shields.io/gemnasium/foray1010/Popup-my-Bookmarks.svg?maxAge=3600)](//gemnasium.com/foray1010/Popup-my-Bookmarks)
-
-[Popup my Bookmarks](//chrome.google.com/webstore/detail/popup-my-bookmarks/mppflflkbbafeopeoeigkbbdjdbeifni) is a Chrome extension aims at providing a more efficient way to view and manage your bookmarks menu:
-
+[Popup my Bookmarks](https://chrome.google.com/webstore/detail/popup-my-bookmarks/mppflflkbbafeopeoeigkbbdjdbeifni) is a Chrome extension aims at providing a more efficient way to view and manage your bookmarks menu:
 
 - Firefox / IE-like bookmarks menu
 
-- Display bookmark trees side by side
-
-- It is configurable!
+- Place mouse over folders to open it
 
 - Search bookmarks when you type
 
 - Do what Bookmark manager can do and more (e.g., Sort bookmarks by name, Add separator)
 
+- Highly configurable
+
 - Save 24px of your vertical workspace (Rock on Chromebook!)
 
-- Take as few permissions as possible, no more scary permissions!
+- Take as few permissions as possible, we never put your privacy at risk
 
-- No background running application, save your memory and privacy!
+- No background running application, save computer memory and your privacy!
 
-Changelog: https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG.md
-
+Changelog: <https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG.md>
 
 ## Legacy version
 
-Please visit [here](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum_chrome_version_26) for the legacy version that support Chrome 26
+Please visit following branches for the legacy versions that support older version of Chrome
 
+- [>= Chrome 32](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum_chrome_version_32)
+- [>= Chrome 26](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum_chrome_version_26)
+- [>= Chrome 20](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum_chrome_version_20)
 
 ## Developer guide
 
-##### Before you start
-1. Install [Node.js](//github.com/nodejs/node) (version >= 8.9) via:
-  - [nvm](//github.com/creationix/nvm) (Linux/Mac)
-  - [Node.js official website](//nodejs.org/en/download/) (Windows)
+### Before you start
 
-2. Install [yarn](https://github.com/yarnpkg/yarn)
+1. Install [Node.js](https://github.com/nodejs/node) (version >= 8.9) via:
 
-  ```
-  npm install -g yarn
-  ```
+    - [nvm](https://github.com/creationix/nvm) (Linux / Mac)
+    - [Node.js official website](https://nodejs.org/en/download/) (Windows)
 
-3. `cd` to your workspace and install all dependencies
+1. Install [yarn](https://github.com/yarnpkg/yarn)
 
-  ```
-  yarn install
-  ```
+    ```sh
+    npm install -g yarn
+    ```
 
-##### Commands
+1. `cd` to your workspace and install all dependencies
+
+    ```sh
+    yarn install
+    ```
+
+### Commands
+
 1. build
 
-  ```
-  yarn build
-  ```
+    ```sh
+    yarn build
+    ```
 
-  To build the whole extension and output a zip file (./__build/[version in package.json].zip) for uploading to Chrome Web Store
+    To build the whole extension and output a zip file (./build/production/[version_in_package.json].zip) for uploading to Chrome Web Store
 
-2. dev
+1. dev
 
-  ```
-  yarn dev
-  ```
+    ```sh
+    yarn dev
+    ```
 
-  To make a temporary folder `__dev` for you to load unpacked extension
-  - ES2015-2017 JavaScript to ES5 JavaScript by [Babel](//github.com/babel/babel)
-  - CSS4 to CSS3 by [postcss-cssnext](//github.com/MoOx/postcss-cssnext)
-  - *.pug to *.html by [Pug](//github.com/pugjs/pug)
+    To build a temporary folder `build/development` for loading unpacked extension
+    - ES2015-2017 JavaScript to ES5 JavaScript by [Babel](https://github.com/babel/babel)
+    - CSS4 to CSS3 by [postcss-cssnext](https://github.com/MoOx/postcss-cssnext)
 
-3. lint
+1. lint
 
-  ```
-  yarn lint
-  ```
+    ```sh
+    yarn lint
+    ```
 
-  To lint
-  - ES2015-2017 JavaScript code by [ESLint](//github.com/eslint/eslint)
-  - flowtype by [flow](//github.com/facebook/flow)
-  - CSS4 code by [Stylelint](//github.com/stylelint/stylelint)
+    To lint if all files follow our linter config
+    - ES2015-2017 JavaScript code by [ESLint](https://github.com/eslint/eslint)
+    - flowtype by [flow](https://github.com/facebook/flow)
+    - CSS4 code by [Stylelint](https://github.com/stylelint/stylelint)
 
-4. md
+1. md
 
-  ```
-  yarn md
-  ```
+    ```sh
+    yarn md
+    ```
 
-  To generate markdown file on the current directory
-  - `__store.md` - Description for Chrome Web Store
-  - `README.md` - Description for GitHub
-
+    To generate markdown files
+    - `build/store.md` - Description for Chrome Web Store
+    - `README.md` - Description for GitHub
 
 ## Todo & Working Progress
 
-See https://trello.com/b/bREPCfDk/popup-my-bookmarks
-
+See <https://trello.com/b/bREPCfDk/popup-my-bookmarks>
 
 ## Contributing
 
-- Translate to other languages, It's all depended on volunteers as I am not a linguist. ;-)
+- Translate to other languages. It's all depended on volunteers as I am not a linguist. ;-)
 
-  Please join our translation team on https://goo.gl/ZET77
+    Please join our translation team on <https://goo.gl/ZET77>
 
 - Fork me on GitHub, join our development!
 
-  Repo: https://github.com/foray1010/Popup-my-Bookmarks
+    Repo: <https://github.com/foray1010/Popup-my-Bookmarks>

@@ -5,10 +5,9 @@
   border: 1px solid var(--highlight-level4);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   padding: var(--golden-gap-2x);
-  position: absolute;
 
-  /* separator between menu item */
-  & > * + *:not([hidden]) {
+  /* separator between menu fields */
+  & > * + * {
     border-top: 1px solid var(--highlight-level2);
     margin-top: var(--golden-gap-2x);
     padding-top: var(--golden-gap-2x);

@@ -1,3 +1,5 @@
+// @flow strict @jsx createElement
+
 import '../../../css/options/donate.css'
 
 import {createElement} from 'react'

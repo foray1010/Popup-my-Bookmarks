@@ -1,3 +1,5 @@
+// @flow strict
+
 import {combineReducers} from 'redux'
 
 import {navigationReducer} from './navigation/reducer'

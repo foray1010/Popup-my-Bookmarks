@@ -1,15 +1,13 @@
-// @flow
-
-import Immutable from 'seamless-immutable'
+// @flow strict
 
 import * as CST from '../../common/constants'
 
-export const NAV_MODULE_CONTRIBUTORS: string = 'contributors'
-export const NAV_MODULE_CONTROL: string = 'control'
-export const NAV_MODULE_GENERAL: string = 'general'
-export const NAV_MODULE_USER_INTERFACE: string = 'userInterface'
+export const NAV_MODULE_CONTRIBUTORS = 'contributors'
+export const NAV_MODULE_CONTROL = 'control'
+export const NAV_MODULE_GENERAL = 'general'
+export const NAV_MODULE_USER_INTERFACE = 'userInterface'
 
-export const OPTION_TABLE_MAP: Object = Immutable({
+export const OPTION_TABLE_MAP = {
   [NAV_MODULE_GENERAL]: [
     CST.OPTIONS_DEF_EXPAND,
     CST.OPTIONS_HIDE_ROOT_FOLDER,
@@ -31,4 +29,4 @@ export const OPTION_TABLE_MAP: Object = Immutable({
     CST.OPTIONS_CLICK_BY_MIDDLE,
     CST.OPTIONS_OP_FOLDER_BY
   ]
-})
+}

@@ -1,28 +1,46 @@
+// @flow strict @jsx createElement
+
 import '../../../../css/options/input-select.css'
 
-import PropTypes from 'prop-types'
-import R from 'ramda'
+import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 
-import {normalizeInputtingValue} from '../../../common/functions'
+import {normalizeInputtingValue} from '../../../common/utils'
 
-class InputSelect extends PureComponent {
-  handleBlur = (evt) => {
-    const normalize = R.compose(R.join(','), R.filter(R.identity), R.map(R.trim), R.split(','))
-    this.props.updateSingleOption(this.props.optionName, normalize(evt.target.value))
+type Props = {|
+  choices: Array<string>,
+  optionName: string,
+  optionValue: string,
+  updateSingleOption: (string, string) => void
+|}
+class InputSelect extends PureComponent<Props> {
+  inputEl: ?HTMLInputElement
+  selectEl: ?HTMLSelectElement
+
+  handleBlur = (evt: SyntheticEvent<HTMLInputElement>) => {
+    const normalize = R.compose(
+      R.join(','),
+      R.filter(Boolean),
+      R.map(R.trim),
+      R.split(',')
+    )
+    this.props.updateSingleOption(this.props.optionName, normalize(evt.currentTarget.value))
   }
 
-  handleChange = (evt) => {
-    if (evt.target === this.selectEl) {
-      this.inputEl.focus()
+  handleChange = (evt: SyntheticEvent<HTMLSelectElement>) => {
+    if (evt.currentTarget === this.selectEl) {
+      if (this.inputEl) this.inputEl.focus()
     }
 
-    const normalize = R.compose(R.replace(/^,/, ''), normalizeInputtingValue)
-    this.props.updateSingleOption(this.props.optionName, normalize(evt.target.value))
+    const normalize = R.compose(
+      R.replace(/^,/, ''),
+      normalizeInputtingValue
+    )
+    this.props.updateSingleOption(this.props.optionName, normalize(evt.currentTarget.value))
   }
 
   // prevent user try to save by pressing enter
-  handleKeyDown = (evt) => {
+  handleKeyDown = (evt: SyntheticKeyboardEvent<HTMLInputElement>) => {
     if (evt.keyCode === 13) {
       evt.preventDefault()
     }
@@ -56,13 +74,6 @@ class InputSelect extends PureComponent {
       </select>
     </div>
   )
-}
-
-InputSelect.propTypes = {
-  choices: PropTypes.arrayOf(PropTypes.string).isRequired,
-  optionName: PropTypes.string.isRequired,
-  optionValue: PropTypes.string.isRequired,
-  updateSingleOption: PropTypes.func.isRequired
 }
 
 export default InputSelect

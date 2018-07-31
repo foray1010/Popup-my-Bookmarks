@@ -1,22 +1,26 @@
+// @flow strict @jsx createElement
+
 import '../../../../../css/options/select-button.css'
 
-import PropTypes from 'prop-types'
-import R from 'ramda'
 import {createElement} from 'react'
 
 import Option from './Option'
 
-const getLeftPercentage = R.compose(
-  (x) => `${x}%`,
-  (optionChoices, optionValue) => optionChoices.indexOf(optionValue) * (100 / optionChoices.length)
-)
+const getLeftPercentage = (optionChoices, optionValue) =>
+  optionChoices.indexOf(optionValue) * (100 / optionChoices.length)
 
-const SelectButton = (props) => (
+type Props = {|
+  optionChoices: Array<boolean>,
+  optionName: string,
+  optionValue: boolean,
+  updateSingleOption: (string, boolean) => void
+|}
+const SelectButton = (props: Props) => (
   <div styleName='main'>
     <div
       styleName='cover'
       style={{
-        left: getLeftPercentage(props.optionChoices, props.optionValue)
+        left: `${getLeftPercentage(props.optionChoices, props.optionValue)}%`
       }}
     />
     {props.optionChoices.map((optionChoice) => (
@@ -33,13 +37,6 @@ const SelectButton = (props) => (
 
 SelectButton.defaultProps = {
   optionChoices: [true, false]
-}
-
-SelectButton.propTypes = {
-  optionChoices: PropTypes.arrayOf(PropTypes.bool).isRequired,
-  optionName: PropTypes.string.isRequired,
-  optionValue: PropTypes.bool.isRequired,
-  updateSingleOption: PropTypes.func.isRequired
 }
 
 export default SelectButton

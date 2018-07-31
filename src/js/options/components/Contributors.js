@@ -1,9 +1,10 @@
+// @flow strict @jsx createElement
+
 import '../../../css/options/contributors.css'
 
 import {Fragment, createElement} from 'react'
-import Immutable from 'seamless-immutable'
 
-const contributors = Immutable({
+const contributors = {
   Developer: ['foray1010'],
   Tester: ['David Bryant'],
   'Dutch Translator': ['Marzas'],
@@ -27,7 +28,7 @@ const contributors = Immutable({
     'j*********e@g****.com',
     'J*****y@c*.com'
   ]
-})
+}
 
 const Contributors = () => (
   <dl styleName='main'>

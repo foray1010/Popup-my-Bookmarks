@@ -10,7 +10,7 @@
     @apply --grey-list-item;
   }
 
-  &.selected:not(.unclickable) {
+  &.focused:not(.unclickable) {
     @apply --highlight-list-item;
   }
 }

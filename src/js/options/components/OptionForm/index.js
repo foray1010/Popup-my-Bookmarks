@@ -1,23 +1,29 @@
-import R from 'ramda'
+// @flow strict @jsx createElement
+
 import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
-import {getOptionsConfig} from '../../../common/functions'
+import {getOptionsConfig} from '../../../common/utils'
 import {OPTION_TABLE_MAP} from '../../constants'
 import {optionsCreators} from '../../reduxs'
 import OptionForm from './OptionForm'
 
-const mapDispatchToProps = R.pick(
-  ['saveOptions', 'resetToDefaultOptions', 'updateSingleOption'],
-  optionsCreators
-)
-
-class OptionFormContainer extends PureComponent {
+type Props = {|
+  options: Object,
+  resetToDefaultOptions: () => void,
+  saveOptions: () => void,
+  selectedOptionFormMap: Array<string>,
+  updateSingleOption: (string, any) => void
+|}
+type State = {|
+  optionsConfig: ?Object
+|}
+class OptionFormContainer extends PureComponent<Props, State> {
   state = {
     optionsConfig: null
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     this.setState({
       optionsConfig: await getOptionsConfig()
     })
@@ -25,7 +31,14 @@ class OptionFormContainer extends PureComponent {
 
   render = () =>
     (this.state.optionsConfig ? (
-      <OptionForm {...this.props} optionsConfig={this.state.optionsConfig} />
+      <OptionForm
+        options={this.props.options}
+        optionsConfig={this.state.optionsConfig}
+        resetToDefaultOptions={this.props.resetToDefaultOptions}
+        saveOptions={this.props.saveOptions}
+        selectedOptionFormMap={this.props.selectedOptionFormMap}
+        updateSingleOption={this.props.updateSingleOption}
+      />
     ) : null)
 }
 
@@ -34,4 +47,13 @@ const mapStateToProps = (state) => ({
   selectedOptionFormMap: OPTION_TABLE_MAP[state.navigation.selectedNavModule]
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(OptionFormContainer)
+const mapDispatchToProps = {
+  saveOptions: optionsCreators.saveOptions,
+  resetToDefaultOptions: optionsCreators.resetToDefaultOptions,
+  updateSingleOption: optionsCreators.updateSingleOption
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OptionFormContainer)

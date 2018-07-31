@@ -1,4 +1,5 @@
-import PropTypes from 'prop-types'
+// @flow strict @jsx createElement
+
 import {createElement} from 'react'
 
 import {
@@ -10,10 +11,11 @@ import {
 import Contributors from '../Contributors'
 import OptionForm from '../OptionForm'
 
-const NavModuleMapper = (props) => {
-  const {selectedNavModule} = props
-
-  switch (selectedNavModule) {
+type Props = {|
+  selectedNavModule: string
+|}
+const NavModuleMapper = (props: Props) => {
+  switch (props.selectedNavModule) {
     case NAV_MODULE_CONTRIBUTORS:
       return <Contributors />
 
@@ -25,10 +27,6 @@ const NavModuleMapper = (props) => {
     default:
       return null
   }
-}
-
-NavModuleMapper.propTypes = {
-  selectedNavModule: PropTypes.string.isRequired
 }
 
 export default NavModuleMapper

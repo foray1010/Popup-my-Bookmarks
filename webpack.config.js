@@ -2,6 +2,7 @@
 
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
@@ -13,30 +14,35 @@ const ZipPlugin = require('zip-webpack-plugin')
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 
 const pkg = require('./package')
-const {
-  appNames, commonChunkName, outputDir, sourceDir
-} = require('./config')
 
 const getMergedConfigByEnv = R.converge(R.mergeDeepWith(R.concat), [
   R.prop('default'),
   R.propOr({}, process.env.NODE_ENV)
 ])
 
+const appNames = ['options', 'popup']
+const commonChunkName = 'common'
 const cssLoaderOptions = {
   modules: true,
   importLoaders: 1,
   localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
 }
+const sourceDir = 'src'
+const outputDir = path.join('build', process.env.NODE_ENV)
 
 const webpackConfig = getMergedConfigByEnv({
   default: {
     entry: R.converge(R.zipObj, [R.identity, R.map(R.concat(`./${sourceDir}/js/`))])(appNames),
+    mode: process.env.NODE_ENV,
     module: {
       rules: [
         {
-          test: /\.jsx?$/,
+          test: /\.js$/,
           exclude: /node_modules/,
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true
+          }
         },
         {
           test: /\.woff2$/,
@@ -61,7 +67,12 @@ const webpackConfig = getMergedConfigByEnv({
                 name: '[name].json'
               }
             },
-            'extract-loader',
+            {
+              loader: 'extract-loader',
+              options: {
+                publicPath: './'
+              }
+            },
             {
               loader: 'chrome-manifest-loader',
               options: {
@@ -72,6 +83,12 @@ const webpackConfig = getMergedConfigByEnv({
           ]
         }
       ]
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+        name: commonChunkName
+      }
     },
     output: {
       path: path.resolve(__dirname, outputDir),
@@ -88,12 +105,16 @@ const webpackConfig = getMergedConfigByEnv({
           from: 'LICENSE'
         }
       ]),
+      new DuplicatePackageCheckerPlugin({
+        emitError: true,
+        strict: true
+      }),
       ...R.map(
         (appName) =>
           new HtmlWebpackPlugin({
             chunks: [commonChunkName, appName],
             filename: `${appName}.html`,
-            inject: 'body',
+            inject: 'head',
             minify: {
               collapseWhitespace: true,
               keepClosingSlash: true,
@@ -111,21 +132,19 @@ const webpackConfig = getMergedConfigByEnv({
           }),
         appNames
       ),
+      new HtmlWebpackPlugin({
+        filename: 'background.html',
+        inject: false,
+        title: 'hack to improve startup speed'
+      }),
       new ScriptExtHtmlWebpackPlugin({
-        defaultAttribute: 'defer'
-      }),
-      new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-      }),
-      new webpack.optimize.CommonsChunkPlugin(commonChunkName),
-      new webpack.optimize.ModuleConcatenationPlugin()
+        defaultAttribute: 'async'
+      })
     ],
     resolve: {
       alias: {
-        'seamless-immutable': 'seamless-immutable/src/seamless-immutable',
         store: 'store/dist/store.modern'
-      },
-      extensions: ['.js', '.jsx']
+      }
     }
   },
   development: {
@@ -176,7 +195,7 @@ const webpackConfig = getMergedConfigByEnv({
     plugins: [
       new BundleAnalyzerPlugin({
         analyzerMode: 'static',
-        reportFilename: path.join('..', '__report.html')
+        reportFilename: path.join('..', 'report.html')
       }),
       new ExtractTextPlugin({
         filename: path.join('css', '[name].css'),

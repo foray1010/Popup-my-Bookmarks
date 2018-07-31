@@ -1,12 +1,17 @@
-[ignore]
-.*/node_modules/config-chain/*
-.*/node_modules/stylelint/*
-
-[include]
-
-[libs]
-
 [options]
-module.ignore_non_literal_requires=true
+experimental.const_params=true
 module.use_strict=true
-munge_underscores=true
+
+# webpack loaders
+module.name_mapper.extension='yml' -> '<PROJECT_ROOT>/__mocks__/fileMock.js'
+
+[lints]
+untyped-type-import=error
+
+[strict]
+deprecated-type
+nonstrict-import
+sketchy-null
+sketchy-number
+unnecessary-optional-chain
+unsafe-getters-setters

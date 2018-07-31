@@ -1,0 +1,3 @@
+.js:
+  parser: "import-sort-parser-babylon"
+  style: "import-sort-style-module"

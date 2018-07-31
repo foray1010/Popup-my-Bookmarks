@@ -1,8 +1,4 @@
 {
-  "presets": [
-    "babel-preset-foray1010/react"
-  ],
-  "plugins": [
-    "babel-plugin-ramda"
-  ]
+  "presets": ["babel-preset-foray1010/react"],
+  "plugins": ["babel-plugin-styled-components"]
 }

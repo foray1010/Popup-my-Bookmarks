@@ -1,3 +1,5 @@
+// @flow strict
+
 import {connect} from 'react-redux'
 
 import NavModuleMapper from './NavModuleMapper'

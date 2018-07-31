@@ -1,124 +1,40 @@
+// @flow strict @jsx createElement
+
 import '../../../../css/popup/menu.css'
 
-import PropTypes from 'prop-types'
-import {PureComponent, createElement} from 'react'
+import {createElement} from 'react'
 
-import * as CST from '../../constants'
-import {getBookmarkType, resetBodySize} from '../../functions'
-import MenuArea from './MenuArea'
+import type {MenuPattern} from '../../types'
+import MenuRow from './MenuRow'
 
-class Menu extends PureComponent {
-  componentDidUpdate(prevProps) {
-    const {menuTarget} = this.props
-
-    const isHidden = !menuTarget
-
-    if (menuTarget !== prevProps.menuTarget) {
-      this.setMenuPosition()
-
-      if (isHidden) {
-        resetBodySize()
-      }
-    }
-  }
-
-  getIsMenuAreasHidden() {
-    const {isSearching, menuTarget} = this.props
-
-    switch (getBookmarkType(menuTarget)) {
-      case CST.TYPE_ROOT_FOLDER:
-        return [false, true, true, true, true]
-
-      case CST.TYPE_BOOKMARK:
-        if (isSearching) {
-          return [false, false, false, true, true]
-        }
-        break
-
-      case CST.TYPE_NO_BOOKMARK:
-        return [true, true, false, false, true]
-
-      default:
-    }
-
-    return [false, false, false, false, false]
-  }
-
-  setMenuPosition() {
-    const {menuTarget, mousePosition} = this.props
-
-    const isHidden = !menuTarget
-
-    let bottomPosPx = ''
-    let rightPosPx = ''
-
-    if (!isHidden) {
-      const body = document.body
-      const html = document.documentElement
-      if (body && html) {
-        const bodyWidth = body.offsetWidth
-        const htmlHeight = html.clientHeight
-        const menuHeight = this.baseEl.offsetHeight
-        const menuWidth = this.baseEl.offsetWidth
-
-        if (menuHeight > htmlHeight) {
-          body.style.height = menuHeight + 'px'
-        }
-
-        if (menuWidth > bodyWidth) {
-          body.style.width = menuWidth + 'px'
-        }
-
-        const bottomPos = htmlHeight - menuHeight - mousePosition.y
-        const rightPos = bodyWidth - menuWidth - mousePosition.x
-
-        bottomPosPx = Math.max(bottomPos, 0) + 'px'
-        rightPosPx = Math.max(rightPos, 0) + 'px'
-      }
-    }
-
-    this.baseEl.style.bottom = bottomPosPx
-    this.baseEl.style.right = rightPosPx
-  }
-
-  render() {
-    const {menuPattern, menuTarget} = this.props
-
-    const isHidden = !menuTarget
-
-    let menuItems = null
-
-    if (menuTarget) {
-      const isMenuAreasHidden = this.getIsMenuAreasHidden()
-
-      menuItems = menuPattern.map((menuAreaKeys, menuAreaIndex) => (
-        <MenuArea
-          key={menuAreaKeys.join()}
-          isHidden={isMenuAreasHidden[menuAreaIndex]}
-          menuAreaKeys={menuAreaKeys}
-        />
-      ))
-    }
-
-    return (
-      <div
-        ref={(ref) => {
-          this.baseEl = ref
-        }}
-        styleName='main'
-        hidden={isHidden}
-      >
-        {menuItems}
+// disable some no-unused-prop-types checking
+// because eslint-plugin-react 7.7.0 gives false alarm on nested function in functional component
+type Props = {|
+  focusedRow: string, // eslint-disable-line react/no-unused-prop-types
+  menuPattern: MenuPattern,
+  onRowClick: (string) => () => void, // eslint-disable-line react/no-unused-prop-types
+  onRowMouseEnter: (string) => () => void, // eslint-disable-line react/no-unused-prop-types
+  onRowMouseLeave: () => void, // eslint-disable-line react/no-unused-prop-types
+  unclickableRows: Array<string> // eslint-disable-line react/no-unused-prop-types
+|}
+const Menu = (props: Props) => (
+  <div styleName='main'>
+    {props.menuPattern.map((rowNames) => (
+      <div key={rowNames.join()}>
+        {rowNames.map((rowName) => (
+          <MenuRow
+            key={rowName}
+            isFocused={rowName === props.focusedRow}
+            isUnclickable={props.unclickableRows.includes(rowName)}
+            rowName={rowName}
+            onClick={props.onRowClick}
+            onMouseEnter={props.onRowMouseEnter}
+            onMouseLeave={props.onRowMouseLeave}
+          />
+        ))}
       </div>
-    )
-  }
-}
-
-Menu.propTypes = {
-  isSearching: PropTypes.bool.isRequired,
-  menuPattern: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
-  menuTarget: PropTypes.object,
-  mousePosition: PropTypes.objectOf(PropTypes.number).isRequired
-}
+    ))}
+  </div>
+)
 
 export default Menu

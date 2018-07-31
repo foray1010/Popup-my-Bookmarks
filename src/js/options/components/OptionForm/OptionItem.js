@@ -1,6 +1,7 @@
+// @flow strict @jsx createElement
+
 import '../../../../css/options/option-item.css'
 
-import PropTypes from 'prop-types'
 import {createElement} from 'react'
 import webExtension from 'webextension-polyfill'
 
@@ -10,11 +11,15 @@ import SelectButton from '../input_items/SelectButton'
 import SelectMultiple from '../input_items/SelectMultiple'
 import SelectString from '../input_items/SelectString'
 
-const OptionItem = (props) => {
-  const {
-    optionConfig, optionName, optionValue, updateSingleOption
-  } = props
-
+type Props = {|
+  optionConfig: Object,
+  optionName: string,
+  optionValue: boolean | number | Array<number> | string,
+  updateSingleOption: (string, any) => void
+|}
+const OptionItem = ({
+  optionConfig, optionName, optionValue, updateSingleOption
+}: Props) => {
   const InputItem = (() => {
     switch (optionConfig.type) {
       case 'array':
@@ -34,35 +39,25 @@ const OptionItem = (props) => {
         return InputSelect
 
       default:
-        return null
     }
+    return null
   })()
 
   return (
     <tr>
       <td styleName='desc'>{webExtension.i18n.getMessage(optionName)}</td>
       <td styleName='input'>
-        <InputItem
-          {...optionConfig}
-          optionName={optionName}
-          optionValue={optionValue}
-          updateSingleOption={updateSingleOption}
-        />
+        {InputItem && (
+          <InputItem
+            {...optionConfig}
+            optionName={optionName}
+            optionValue={optionValue}
+            updateSingleOption={updateSingleOption}
+          />
+        )}
       </td>
     </tr>
   )
-}
-
-OptionItem.propTypes = {
-  optionName: PropTypes.string.isRequired,
-  optionConfig: PropTypes.object.isRequired,
-  optionValue: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.number),
-    PropTypes.bool,
-    PropTypes.number,
-    PropTypes.string
-  ]).isRequired,
-  updateSingleOption: PropTypes.func.isRequired
 }
 
 export default OptionItem
