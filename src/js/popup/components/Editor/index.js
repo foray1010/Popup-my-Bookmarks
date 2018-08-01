@@ -2,7 +2,6 @@
 
 import '../../../../css/popup/mask.css'
 
-import * as R from 'ramda'
 import {Fragment, PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 import webExtension from 'webextension-polyfill'
@@ -61,16 +60,20 @@ class EditorContainer extends PureComponent<Props> {
 }
 
 const mapStateToProps = (state) => ({
-  ...R.pick(
-    ['isAllowEditUrl', 'isCreating', 'positionLeft', 'positionTop', 'targetId', 'title', 'url'],
-    state.editor
-  ),
+  isAllowEditUrl: state.editor.isAllowEditUrl,
+  isCreating: state.editor.isCreating,
+  positionLeft: state.editor.positionLeft,
+  positionTop: state.editor.positionTop,
+  targetId: state.editor.targetId,
+  title: state.editor.title,
+  url: state.editor.url,
   width: state.options.setWidth
 })
 
 const mapDispatchToProps = {
-  ...R.pick(['createBookmarkAfterId', 'editBookmark'], bookmarkCreators),
-  ...R.pick(['closeEditor'], editorCreators)
+  createBookmarkAfterId: bookmarkCreators.createBookmarkAfterId,
+  editBookmark: bookmarkCreators.editBookmark,
+  closeEditor: editorCreators.closeEditor
 }
 
 export default connect(

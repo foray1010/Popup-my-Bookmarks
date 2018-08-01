@@ -1,6 +1,5 @@
 // @flow strict @jsx createElement
 
-import * as R from 'ramda'
 import {createElement} from 'react'
 import EventListener from 'react-event-listener'
 import {connect} from 'react-redux'
@@ -14,9 +13,8 @@ const GlobalKeyboardEventListener = (props: Props) =>
     <EventListener target={document} onKeyDown={props.onKeyDown} />
   )
 
-const mapStateToProps = R.compose(
-  R.pick(['isDisableGlobalKeyboardEvent']),
-  R.prop('ui')
-)
+const mapStateToProps = (state) => ({
+  isDisableGlobalKeyboardEvent: state.ui.isDisableGlobalKeyboardEvent
+})
 
 export default connect(mapStateToProps)(GlobalKeyboardEventListener)

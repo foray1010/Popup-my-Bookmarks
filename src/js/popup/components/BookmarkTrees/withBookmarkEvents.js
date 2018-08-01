@@ -10,8 +10,6 @@ import {bookmarkCreators} from '../../reduxs'
 
 const REFRESH_BOOKMARKS_TIMEOUT = 100
 
-const privatePropNames = ['refreshBookmarkTrees']
-
 const withBookmarkEvents = (WrappedComponent) => {
   type Props = {
     refreshBookmarkTrees: () => void
@@ -26,11 +24,13 @@ const withBookmarkEvents = (WrappedComponent) => {
 
     refreshTrees = debounce(this.props.refreshBookmarkTrees, REFRESH_BOOKMARKS_TIMEOUT)
 
-    render = () => <WrappedComponent {...R.omit(privatePropNames, this.props)} />
+    render = () => <WrappedComponent {...this.props} />
   }
 }
 
-const mapDispatchToProps = R.pick(privatePropNames, bookmarkCreators)
+const mapDispatchToProps = {
+  refreshBookmarkTrees: bookmarkCreators.refreshBookmarkTrees
+}
 
 export default R.compose(
   connect(

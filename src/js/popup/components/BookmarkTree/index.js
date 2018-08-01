@@ -13,7 +13,12 @@ import NoSearchResult from './NoSearchResult'
 
 const TOGGLE_BOOKMARK_TREE_TIMEOUT = 200
 
-type Props = {|
+type OwnProps = {
+  // `treeId` is used in `mapStateToProps`
+  // eslint-disable-next-line react/no-unused-prop-types
+  treeId: string
+}
+type Props = OwnProps & {
   highlightedId: string,
   highlightedIndex: number,
   iconSize: number,
@@ -38,7 +43,7 @@ type Props = {|
   rowHeight: number,
   setFocusId: (string) => void,
   treeInfo: BookmarkTreeType
-|}
+}
 class BookmarkTreeContainer extends PureComponent<Props> {
   closeCurrentTree = () => {
     this.props.removeBookmarkTree(this.props.treeInfo.parent.id)
@@ -112,11 +117,7 @@ class BookmarkTreeContainer extends PureComponent<Props> {
 
   render = () => (
     <BookmarkTree
-      highlightedId={this.props.highlightedId}
-      iconSize={this.props.iconSize}
-      isShowCover={this.props.isShowCover}
-      isShowHeader={this.props.isShowHeader}
-      listItemWidth={this.props.listItemWidth}
+      {...this.props}
       noRowsRenderer={this.noRowsRenderer}
       onCloseButtonClick={this.closeCurrentTree}
       onCoverClick={this.closeNextTrees}
@@ -124,9 +125,7 @@ class BookmarkTreeContainer extends PureComponent<Props> {
       onRowClick={this.handleRowClick}
       onRowMouseEnter={this.handleRowMouseEnter}
       onRowMouseLeave={this.handleRowMouseLeave}
-      rowHeight={this.props.rowHeight}
       scrollToIndex={this.props.highlightedIndex}
-      treeInfo={this.props.treeInfo}
     />
   )
 }
@@ -137,7 +136,7 @@ const getRowHeight = (fontSize) =>
   // +1 for border width, GOLDEN_GAP for padding
   (1 + CST.GOLDEN_GAP) * 2
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, ownProps: OwnProps) => {
   const highlightedId = state.bookmark.focusId || state.menu.targetId || state.editor.targetId
   const treeIndex = state.bookmark.trees.findIndex(R.pathEq(['parent', 'id'], ownProps.treeId))
   const treeInfo = state.bookmark.trees[treeIndex]
@@ -156,18 +155,13 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = {
-  ...R.pick(
-    [
-      'openBookmarksInBrowser',
-      'openBookmarkTree',
-      'removeBookmarkTree',
-      'removeFocusId',
-      'removeNextBookmarkTrees',
-      'setFocusId'
-    ],
-    bookmarkCreators
-  ),
-  ...R.pick(['openMenu'], menuCreators)
+  openBookmarksInBrowser: bookmarkCreators.openBookmarksInBrowser,
+  openBookmarkTree: bookmarkCreators.openBookmarkTree,
+  openMenu: menuCreators.openMenu,
+  removeBookmarkTree: bookmarkCreators.removeBookmarkTree,
+  removeFocusId: bookmarkCreators.removeFocusId,
+  removeNextBookmarkTrees: bookmarkCreators.removeNextBookmarkTrees,
+  setFocusId: bookmarkCreators.setFocusId
 }
 
 export default connect(
