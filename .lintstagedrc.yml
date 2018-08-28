@@ -11,7 +11,7 @@ linters:
     - "prettier-eslint --write"
     - "eslint --fix"
     - "flow focus-check"
-    - "jest --bail --findRelatedTests  --config .jestrc.json"
+    - "jest --bail --findRelatedTests --config .jestrc.json"
     - "git add"
   "*.json":
     - "prettier-eslint --write"
