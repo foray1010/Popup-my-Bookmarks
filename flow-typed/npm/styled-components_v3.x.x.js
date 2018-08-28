@@ -1,5 +1,64 @@
-// flow-typed signature: d8b3a2051d4c9ebaeefb2b3b045f7b14
-// flow-typed version: 123fc9bb3c/styled-components_v3.x.x/flow_>=v0.75.x
+// flow-typed signature: df80bdd535bfed9cf3223e077f3b4543
+// flow-typed version: c4c8963c9c/redux_v4.x.x/flow_>=v0.55.x
+
+declare module 'redux' {
+
+  /*
+
+    S = State
+    A = Action
+    D = Dispatch
+
+  */
+
+  declare export type DispatchAPI<A> = (action: A) => A;
+  declare export type Dispatch<A: { type: $Subtype<string> }> = DispatchAPI<A>;
+
+  declare export type MiddlewareAPI<S, A, D = Dispatch<A>> = {
+    dispatch: D;
+    getState(): S;
+  };
+
+  declare export type Store<S, A, D = Dispatch<A>> = {
+    // rewrite MiddlewareAPI members in order to get nicer error messages (intersections produce long messages)
+    dispatch: D;
+    getState(): S;
+    subscribe(listener: () => void): () => void;
+    replaceReducer(nextReducer: Reducer<S, A>): void
+  };
+
+  declare export type Reducer<S, A> = (state: S | void, action: A) => S;
+
+  declare export type CombinedReducer<S, A> = (state: $Shape<S> & {} | void, action: A) => S;
+
+  declare export type Middleware<S, A, D = Dispatch<A>> =
+    (api: MiddlewareAPI<S, A, D>) =>
+      (next: D) => D;
+
+  declare export type StoreCreator<S, A, D = Dispatch<A>> = {
+    (reducer: Reducer<S, A>, enhancer?: StoreEnhancer<S, A, D>): Store<S, A, D>;
+    (reducer: Reducer<S, A>, preloadedState: S, enhancer?: StoreEnhancer<S, A, D>): Store<S, A, D>;
+  };
+
+  declare export type StoreEnhancer<S, A, D = Dispatch<A>> = (next: StoreCreator<S, A, D>) => StoreCreator<S, A, D>;
+
+  declare export function createStore<S, A, D>(reducer: Reducer<S, A>, enhancer?: StoreEnhancer<S, A, D>): Store<S, A, D>;
+  declare export function createStore<S, A, D>(reducer: Reducer<S, A>, preloadedState?: S, enhancer?: StoreEnhancer<S, A, D>): Store<S, A, D>;
+
+  declare export function applyMiddleware<S, A, D>(...middlewares: Array<Middleware<S, A, D>>): StoreEnhancer<S, A, D>;
+
+  declare export type ActionCreator<A, B> = (...args: Array<B>) => A;
+  declare export type ActionCreators<K, A> = { [key: K]: ActionCreator<A, any> };
+
+  declare export function bindActionCreators<A, C: ActionCreator<A, any>, D: DispatchAPI<A>>(actionCreator: C, dispatch: D): C;
+  declare export function bindActionCreators<A, K, C: ActionCreators<K, A>, D: DispatchAPI<A>>(actionCreators: C, dispatch: D): C;
+
+  declare export function combineReducers<O: Object, A>(reducers: O): CombinedReducer<$ObjMap<O, <S>(r: Reducer<S, any>) => S>, A>;
+
+  declare export var compose: $Compose;
+}
+// flow-typed signature: f523b1ef4ab2de4542946d8ff8f9d2be
+// flow-typed version: a92e9b07d7/styled-components_v3.x.x/flow_>=v0.75.x
 
 // @flow
 
@@ -111,7 +170,7 @@ type $npm$styledComponents$WithTheme =
   & $npm$styledComponents$WithThemeReactComponentFunctionalUndefinedDefaultProps
 
 // ---- MISC ----
-type $npm$styledComponents$Theme = {[key: string]: mixed};
+type $npm$styledComponents$Theme = $ReadOnly<{[key: string]: mixed}>;
 type $npm$styledComponents$ThemeProviderProps = {
   theme: $npm$styledComponents$Theme | ((outerTheme: $npm$styledComponents$Theme) => void)
 };
