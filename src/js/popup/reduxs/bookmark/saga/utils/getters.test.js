@@ -1,3 +1,4 @@
+/* eslint max-lines: 'off' */
 // @flow strict
 
 import Chance from 'chance'
