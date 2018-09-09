@@ -29,8 +29,9 @@ class OptionFormContainer extends PureComponent<Props, State> {
     })
   }
 
-  render = () =>
-    (this.state.optionsConfig ? (
+  render() {
+    if (!this.state.optionsConfig) return null
+    return (
       <OptionForm
         options={this.props.options}
         optionsConfig={this.state.optionsConfig}
@@ -39,7 +40,8 @@ class OptionFormContainer extends PureComponent<Props, State> {
         selectedOptionFormMap={this.props.selectedOptionFormMap}
         updateSingleOption={this.props.updateSingleOption}
       />
-    ) : null)
+    )
+  }
 }
 
 const mapStateToProps = (state) => ({

@@ -10,46 +10,41 @@ import SelectButton from '../input_items/SelectButton'
 import SelectMultiple from '../input_items/SelectMultiple'
 import SelectString from '../input_items/SelectString'
 
+const getInputItem = (optionConfig) => {
+  switch (optionConfig.type) {
+    case 'array':
+      return SelectMultiple
+    case 'boolean':
+      return SelectButton
+    case 'integer':
+      if (optionConfig.choices) return SelectString
+      return InputNumber
+    case 'string':
+      return InputSelect
+    default:
+  }
+  return null
+}
+
 type Props = {|
   optionConfig: Object,
   optionName: string,
   optionValue: boolean | number | Array<number> | string,
   updateSingleOption: (string, any) => void
 |}
-const OptionItem = ({optionConfig, optionName, optionValue, updateSingleOption}: Props) => {
-  const InputItem = (() => {
-    switch (optionConfig.type) {
-      case 'array':
-        return SelectMultiple
-
-      case 'boolean':
-        return SelectButton
-
-      case 'integer':
-        if (optionConfig.choices) {
-          return SelectString
-        }
-
-        return InputNumber
-
-      case 'string':
-        return InputSelect
-
-      default:
-    }
-    return null
-  })()
+const OptionItem = (props: Props) => {
+  const InputItem = getInputItem(props.optionConfig)
 
   return (
     <tr>
-      <td className={classes.desc}>{webExtension.i18n.getMessage(optionName)}</td>
+      <td className={classes.desc}>{webExtension.i18n.getMessage(props.optionName)}</td>
       <td className={classes.input}>
         {InputItem && (
           <InputItem
-            {...optionConfig}
-            optionName={optionName}
-            optionValue={optionValue}
-            updateSingleOption={updateSingleOption}
+            {...props.optionConfig}
+            optionName={props.optionName}
+            optionValue={props.optionValue}
+            updateSingleOption={props.updateSingleOption}
           />
         )}
       </td>
