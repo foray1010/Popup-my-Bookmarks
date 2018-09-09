@@ -1,6 +1,6 @@
 // @flow strict @jsx createElement
 
-import 'babel-polyfill'
+import '@babel/polyfill'
 
 import '../../manifest.yml'
 

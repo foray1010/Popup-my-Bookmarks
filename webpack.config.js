@@ -210,7 +210,8 @@ const webpackConfig = getMergedConfigByEnv({
           compress: {
             drop_console: true,
             pure_getters: true,
-            unsafe: true,
+            // not sure why it breaks `yarn build`
+            // unsafe: true,
             unsafe_arrows: true,
             unsafe_comps: true,
             unsafe_Function: true,
