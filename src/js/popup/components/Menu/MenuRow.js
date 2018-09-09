@@ -1,10 +1,10 @@
 // @flow strict @jsx createElement
 
-import '../../../../css/popup/menu-item.css'
-
 import classNames from 'classnames'
 import {PureComponent, createElement} from 'react'
 import webExtension from 'webextension-polyfill'
+
+import classes from '../../../../css/popup/menu-item.css'
 
 type Props = {|
   isFocused: boolean,
@@ -20,9 +20,9 @@ class MenuRow extends PureComponent<Props> {
 
   render = () => (
     <div
-      styleName={classNames('main', {
-        focused: this.props.isFocused,
-        unclickable: this.props.isUnclickable
+      className={classNames(classes.main, {
+        [classes.focused]: this.props.isFocused,
+        [classes.unclickable]: this.props.isUnclickable
       })}
       onClick={this.props.isUnclickable ? undefined : this.handleClick}
       onMouseEnter={this.handleMouseEnter}

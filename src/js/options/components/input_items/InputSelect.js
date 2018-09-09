@@ -1,10 +1,9 @@
 // @flow strict @jsx createElement
 
-import '../../../../css/options/input-select.css'
-
 import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 
+import classes from '../../../../css/options/input-select.css'
 import {normalizeInputtingValue} from '../../../common/utils'
 
 type Props = {|
@@ -47,12 +46,12 @@ class InputSelect extends PureComponent<Props> {
   }
 
   render = () => (
-    <div styleName='main'>
+    <div className={classes.main}>
       <input
         ref={(ref) => {
           this.inputEl = ref
         }}
-        styleName='input'
+        className={classes.input}
         name={this.props.optionName}
         type='text'
         value={this.props.optionValue}
@@ -64,7 +63,7 @@ class InputSelect extends PureComponent<Props> {
         ref={(ref) => {
           this.selectEl = ref
         }}
-        styleName='select'
+        className={classes.select}
         defaultValue={this.props.optionValue}
         onChange={this.handleChange}
       >

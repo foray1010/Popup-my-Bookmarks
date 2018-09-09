@@ -1,10 +1,9 @@
 // @flow strict @jsx createElement
 
-import '../../../../css/options/option-item.css'
-
 import {createElement} from 'react'
 import webExtension from 'webextension-polyfill'
 
+import classes from '../../../../css/options/option-item.css'
 import InputNumber from '../input_items/InputNumber'
 import InputSelect from '../input_items/InputSelect'
 import SelectButton from '../input_items/SelectButton'
@@ -17,9 +16,7 @@ type Props = {|
   optionValue: boolean | number | Array<number> | string,
   updateSingleOption: (string, any) => void
 |}
-const OptionItem = ({
-  optionConfig, optionName, optionValue, updateSingleOption
-}: Props) => {
+const OptionItem = ({optionConfig, optionName, optionValue, updateSingleOption}: Props) => {
   const InputItem = (() => {
     switch (optionConfig.type) {
       case 'array':
@@ -45,8 +42,8 @@ const OptionItem = ({
 
   return (
     <tr>
-      <td styleName='desc'>{webExtension.i18n.getMessage(optionName)}</td>
-      <td styleName='input'>
+      <td className={classes.desc}>{webExtension.i18n.getMessage(optionName)}</td>
+      <td className={classes.input}>
         {InputItem && (
           <InputItem
             {...optionConfig}

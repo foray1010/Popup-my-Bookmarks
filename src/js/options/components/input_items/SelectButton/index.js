@@ -1,9 +1,8 @@
 // @flow strict @jsx createElement
 
-import '../../../../../css/options/select-button.css'
-
 import {createElement} from 'react'
 
+import classes from '../../../../../css/options/select-button.css'
 import Option from './Option'
 
 const getLeftPercentage = (optionChoices, optionValue) =>
@@ -16,9 +15,9 @@ type Props = {|
   updateSingleOption: (string, boolean) => void
 |}
 const SelectButton = (props: Props) => (
-  <div styleName='main'>
+  <div className={classes.main}>
     <div
-      styleName='cover'
+      className={classes.cover}
       style={{
         left: `${getLeftPercentage(props.optionChoices, props.optionValue)}%`
       }}

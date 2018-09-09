@@ -1,10 +1,10 @@
 // @flow strict @jsx createElement
 
-import '../../../../../css/options/select-button-option.css'
-
 import classNames from 'classnames'
 import {PureComponent, createElement} from 'react'
 import webExtension from 'webextension-polyfill'
+
+import classes from '../../../../../css/options/select-button-option.css'
 
 type Props = {|
   optionChoice: boolean,
@@ -26,7 +26,7 @@ class Option extends PureComponent<Props> {
   render() {
     const isChecked = this.props.optionValue === this.props.optionChoice
     return (
-      <div styleName='main'>
+      <div className={classes.main}>
         <input
           ref={(ref) => {
             this.inputEl = ref
@@ -39,7 +39,7 @@ class Option extends PureComponent<Props> {
           onChange={this.handleChange}
         />
         <button
-          styleName={classNames('item', {'item-active': isChecked})}
+          className={classNames(classes.item, {[classes['item-active']]: isChecked})}
           type='button'
           onClick={this.handleClick}
         >

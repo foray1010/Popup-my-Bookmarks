@@ -1,17 +1,17 @@
 // @flow strict @jsx createElement
 
-import '../../../../css/popup/tree-header.css'
-
 import {createElement} from 'react'
+
+import classes from '../../../../css/popup/tree-header.css'
 
 type Props = {|
   onClose: () => void,
   title: string
 |}
 const TreeHeader = (props: Props) => (
-  <header styleName='main'>
-    <h1 styleName='title'>{props.title}</h1>
-    <button styleName='close' type='button' tabIndex='-1' onClick={props.onClose} />
+  <header className={classes.main}>
+    <h1 className={classes.title}>{props.title}</h1>
+    <button className={classes.close} type='button' tabIndex='-1' onClick={props.onClose} />
   </header>
 )
 

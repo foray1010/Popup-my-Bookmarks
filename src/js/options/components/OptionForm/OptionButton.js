@@ -1,15 +1,15 @@
 // @flow strict @jsx createElement
 
-import '../../../../css/options/option-button.css'
-
 import {createElement} from 'react'
+
+import classes from '../../../../css/options/option-button.css'
 
 type Props = {|
   msg: string,
   onClick: () => void
 |}
 const OptionButton = (props: Props) => (
-  <button styleName='main' type='button' onClick={props.onClick}>
+  <button className={classes.main} type='button' onClick={props.onClick}>
     {props.msg}
   </button>
 )

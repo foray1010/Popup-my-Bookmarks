@@ -1,9 +1,9 @@
 // @flow strict @jsx createElement
 
-import '../../../../css/popup/search.css'
-
 import {PureComponent, createElement} from 'react'
 import webExtension from 'webextension-polyfill'
+
+import classes from '../../../../css/popup/search.css'
 
 type Props = {|
   inputValue: string,
@@ -32,7 +32,7 @@ class Search extends PureComponent<Props> {
   }
 
   render = () => (
-    <div styleName='main'>
+    <div className={classes.main}>
       <input
         ref={(ref) => {
           this.inputEl = ref

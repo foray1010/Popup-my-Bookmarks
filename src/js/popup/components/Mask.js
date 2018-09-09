@@ -1,10 +1,10 @@
 // @flow strict @jsx createElement
 
-import '../../../css/popup/mask.css'
-
 import * as R from 'ramda'
 import {createElement} from 'react'
 import styled from 'styled-components'
+
+import classes from '../../../css/popup/mask.css'
 
 const Main = styled('div')`
   background-color: ${R.prop('backgroundColor')};
@@ -18,7 +18,7 @@ type Props = {|
 |}
 const Mask = (props: Props) => (
   <Main
-    styleName='main'
+    className={classes.main}
     backgroundColor={props.backgroundColor}
     opacity={props.opacity}
     onClick={props.onClick}

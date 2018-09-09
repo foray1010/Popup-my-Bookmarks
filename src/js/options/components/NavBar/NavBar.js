@@ -1,10 +1,9 @@
 // @flow strict @jsx createElement
 
-import '../../../../css/options/nav-bar.css'
-
 import {createElement} from 'react'
 import webExtension from 'webextension-polyfill'
 
+import classes from '../../../../css/options/nav-bar.css'
 import {
   NAV_MODULE_CONTRIBUTORS,
   NAV_MODULE_CONTROL,
@@ -37,7 +36,7 @@ type Props = {|
   switchNavModule: (string) => void
 |}
 const NavBar = (props: Props) => (
-  <nav styleName='main'>
+  <nav className={classes.main}>
     {navBarItemInfos.map(({navModule, title}) => (
       <NavBarItem
         key={navModule}

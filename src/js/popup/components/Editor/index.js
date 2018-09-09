@@ -1,7 +1,5 @@
 // @flow strict @jsx createElement
 
-import '../../../../css/popup/mask.css'
-
 import {Fragment, PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 import webExtension from 'webextension-polyfill'

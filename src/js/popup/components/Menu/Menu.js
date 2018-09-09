@@ -1,9 +1,8 @@
 // @flow strict @jsx createElement
 
-import '../../../../css/popup/menu.css'
-
 import {createElement} from 'react'
 
+import classes from '../../../../css/popup/menu.css'
 import type {MenuPattern} from '../../types'
 import MenuRow from './MenuRow'
 
@@ -18,7 +17,7 @@ type Props = {|
   unclickableRows: Array<string> // eslint-disable-line react/no-unused-prop-types
 |}
 const Menu = (props: Props) => (
-  <div styleName='main'>
+  <div className={classes.main}>
     {props.menuPattern.map((rowNames) => (
       <div key={rowNames.join()}>
         {rowNames.map((rowName) => (

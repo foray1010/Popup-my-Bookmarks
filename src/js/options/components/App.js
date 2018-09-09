@@ -1,15 +1,14 @@
 // @flow strict @jsx createElement
 
-import '../../../css/options/app.css'
-
 import {createElement} from 'react'
 
+import classes from '../../../css/options/app.css'
 import Donate from './Donate'
 import NavBar from './NavBar'
 import NavModuleMapper from './NavModuleMapper'
 
 const App = () => (
-  <div styleName='main'>
+  <div className={classes.main}>
     <NavBar />
     <NavModuleMapper />
     <Donate />

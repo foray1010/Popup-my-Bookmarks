@@ -1,12 +1,11 @@
 // @flow strict @jsx createElement
 
-import '../../../../css/popup/bookmark-tree.css'
-
 import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 import type {Node} from 'react'
 import List from 'react-virtualized/dist/es/List'
 
+import classes from '../../../../css/popup/bookmark-tree.css'
 import * as CST from '../../constants'
 import type {BookmarkInfo, BookmarkTree as BookmarkTreeType} from '../../types'
 import Mask from '../Mask'
@@ -88,7 +87,7 @@ class BookmarkTree extends PureComponent<Props, State> {
   }
 
   render = () => (
-    <section styleName='main'>
+    <section className={classes.main}>
       {this.props.isShowHeader && (
         <TreeHeader
           title={this.props.treeInfo.parent.title}
@@ -108,7 +107,7 @@ class BookmarkTree extends PureComponent<Props, State> {
         rowRenderer={(rendererProps: {| index: number, style: Object |}) => {
           const bookmarkInfo = this.props.treeInfo.children[rendererProps.index]
           return (
-            <div key={bookmarkInfo.id} styleName='list-item' style={rendererProps.style}>
+            <div key={bookmarkInfo.id} className={classes['list-item']} style={rendererProps.style}>
               <BookmarkRow
                 bookmarkInfo={bookmarkInfo}
                 iconSize={this.props.iconSize}

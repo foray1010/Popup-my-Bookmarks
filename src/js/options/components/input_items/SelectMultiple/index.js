@@ -1,9 +1,8 @@
 // @flow strict @jsx createElement
 
-import '../../../../../css/options/select-multiple.css'
-
 import {createElement} from 'react'
 
+import classes from '../../../../../css/options/select-multiple.css'
 import Option from './Option'
 
 type Props = {|
@@ -13,7 +12,7 @@ type Props = {|
   updateSingleOption: (string, Array<number>) => void
 |}
 const SelectMultiple = (props: Props) => (
-  <span styleName='main'>
+  <span className={classes.main}>
     {props.choices.reduce((accumulator, optionChoice, optionChoiceIndex) => {
       if (optionChoice !== undefined) {
         return [

@@ -1,12 +1,11 @@
 // @flow strict @jsx createElement
 
-import '../../../../css/popup/bookmark-row.css'
-
 import classNames from 'classnames'
 import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 import styled from 'styled-components'
 
+import classes from '../../../../css/popup/bookmark-row.css'
 import * as CST from '../../constants'
 import type {BookmarkInfo} from '../../types'
 
@@ -46,10 +45,10 @@ class BookmarkRow extends PureComponent<Props> {
       ref={(ref) => {
         this.baseEl = ref
       }}
-      styleName={classNames('main', {
-        highlighted: this.props.isHighlighted,
-        'root-folder': this.props.bookmarkInfo.isRoot,
-        separator: this.props.bookmarkInfo.type === CST.TYPE_SEPARATOR
+      className={classNames(classes.main, {
+        [classes.highlighted]: this.props.isHighlighted,
+        [classes['root-folder']]: this.props.bookmarkInfo.isRoot,
+        [classes.separator]: this.props.bookmarkInfo.type === CST.TYPE_SEPARATOR
       })}
       onClick={this.handleClick}
       onMouseEnter={this.handleMouseEnter}
@@ -58,12 +57,12 @@ class BookmarkRow extends PureComponent<Props> {
       {this.props.bookmarkInfo.iconUrl && (
         <IconImg
           iconSize={this.props.iconSize}
-          styleName='icon'
+          className={classes.icon}
           src={this.props.bookmarkInfo.iconUrl}
           alt=''
         />
       )}
-      <div styleName='title'>{this.props.bookmarkInfo.title}</div>
+      <div className={classes.title}>{this.props.bookmarkInfo.title}</div>
     </div>
   )
 }

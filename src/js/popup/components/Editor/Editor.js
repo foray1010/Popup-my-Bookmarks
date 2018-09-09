@@ -1,12 +1,11 @@
 // @flow strict @jsx createElement
 
-import '../../../../css/popup/editor.css'
-
 import * as R from 'ramda'
 import {PureComponent, createElement} from 'react'
 import styled from 'styled-components'
 import webExtension from 'webextension-polyfill'
 
+import classes from '../../../../css/popup/editor.css'
 import {normalizeInputtingValue} from '../../../common/utils'
 
 const Form = styled('form')`
@@ -59,8 +58,8 @@ class Editor extends PureComponent<Props, State> {
   handleUrlChange = this.generateHandleChange('url')
 
   render = () => (
-    <Form styleName='main' width={this.props.width} onSubmit={this.handleSubmit}>
-      <span styleName='header'>{this.props.header}</span>
+    <Form className={classes.main} width={this.props.width} onSubmit={this.handleSubmit}>
+      <span className={classes.header}>{this.props.header}</span>
 
       <input type='text' value={this.state.title} onChange={this.handleTitleChange} autoFocus />
       {this.props.isAllowEditUrl && (
@@ -68,13 +67,13 @@ class Editor extends PureComponent<Props, State> {
       )}
 
       <button
-        styleName='button'
+        className={classes.button}
         type='submit' // support `Enter` to submit
         onClick={this.handleConfirm}
       >
         {webExtension.i18n.getMessage('confirm')}
       </button>
-      <button styleName='button' type='button' onClick={this.props.onCancel}>
+      <button className={classes.button} type='button' onClick={this.props.onCancel}>
         {webExtension.i18n.getMessage('cancel')}
       </button>
     </Form>

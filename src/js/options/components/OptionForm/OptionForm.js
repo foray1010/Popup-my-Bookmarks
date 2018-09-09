@@ -1,10 +1,9 @@
 // @flow strict @jsx createElement
 
-import '../../../../css/options/option-form.css'
-
 import {createElement} from 'react'
 import webExtension from 'webextension-polyfill'
 
+import classes from '../../../../css/options/option-form.css'
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 
@@ -18,7 +17,7 @@ type Props = {|
 |}
 const OptionForm = (props: Props) => (
   <form>
-    <table styleName='table'>
+    <table className={classes.table}>
       <tbody>
         {props.selectedOptionFormMap.reduce((acc, optionName) => {
           const optionValue = props.options[optionName]
