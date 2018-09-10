@@ -1,8 +1,9 @@
 'use strict'
 
-const cssnext = require('postcss-cssnext')
+const postcssApply = require('postcss-apply')
 const postcssImport = require('postcss-import')
 const postcssNormalize = require('postcss-normalize')
+const postcssPresetEnv = require('postcss-preset-env')
 const postcssUrl = require('postcss-url')
 
 module.exports = {
@@ -12,6 +13,9 @@ module.exports = {
     postcssNormalize({
       forceImport: true
     }),
-    cssnext()
+    postcssApply(),
+    postcssPresetEnv({
+      stage: 0
+    })
   ]
 }
