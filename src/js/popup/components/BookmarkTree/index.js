@@ -14,8 +14,6 @@ import NoSearchResult from './NoSearchResult'
 const TOGGLE_BOOKMARK_TREE_TIMEOUT = 200
 
 type OwnProps = {
-  // `treeId` is used in `mapStateToProps`
-  // eslint-disable-next-line react/no-unused-prop-types
   treeId: string
 }
 type Props = OwnProps & {

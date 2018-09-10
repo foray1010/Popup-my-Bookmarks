@@ -6,15 +6,13 @@ import classes from '../../../../css/popup/menu.css'
 import type {MenuPattern} from '../../types'
 import MenuRow from './MenuRow'
 
-// disable some no-unused-prop-types checking
-// because eslint-plugin-react 7.7.0 gives false alarm on nested function in functional component
 type Props = {|
-  focusedRow: string, // eslint-disable-line react/no-unused-prop-types
+  focusedRow: string,
   menuPattern: MenuPattern,
-  onRowClick: (string) => () => void, // eslint-disable-line react/no-unused-prop-types
-  onRowMouseEnter: (string) => () => void, // eslint-disable-line react/no-unused-prop-types
-  onRowMouseLeave: () => void, // eslint-disable-line react/no-unused-prop-types
-  unclickableRows: Array<string> // eslint-disable-line react/no-unused-prop-types
+  onRowClick: (string) => () => void,
+  onRowMouseEnter: (string) => () => void,
+  onRowMouseLeave: () => void,
+  unclickableRows: Array<string>
 |}
 const Menu = (props: Props) => (
   <div className={classes.main}>
