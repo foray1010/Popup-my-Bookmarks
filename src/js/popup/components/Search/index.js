@@ -1,6 +1,5 @@
 // @flow strict @jsx createElement
 
-import debounce from 'lodash.debounce'
 import {Fragment, PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
@@ -8,8 +7,6 @@ import {normalizeInputtingValue} from '../../../common/utils'
 import {bookmarkCreators, uiCreators} from '../../reduxs'
 import GlobalKeyboardEventListener from '../GlobalKeyboardEventListener'
 import Search from './Search'
-
-const SEARCH_TIMEOUT = 300
 
 type Props = {|
   getSearchResult: (string) => void,
@@ -26,13 +23,9 @@ class SearchContainer extends PureComponent<Props, State> {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.inputValue !== prevState.inputValue) {
-      this.getSearchResult()
+      this.props.getSearchResult(this.state.inputValue)
     }
   }
-
-  getSearchResult = debounce(() => {
-    this.props.getSearchResult(this.state.inputValue.trim())
-  }, SEARCH_TIMEOUT)
 
   handleBlur = () => {
     this.props.setIsFocusSearchInput(false)
