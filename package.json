@@ -16,10 +16,10 @@
   "bugs": "https://github.com/foray1010/Popup-my-Bookmarks/issues",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
+    "ci": "npm-run-all -p flow lint:* test && yarn build",
     "dev": "cross-env NODE_ENV=development webpack",
-    "lint": "npm-run-all -p lint:*",
+    "flow": "flow check",
     "lint:css": "stylelint 'src/**/*.css' 'src/**/*.js'",
-    "lint:flow": "flow check",
     "lint:js": "eslint .",
     "locales": "node scripts/generateLocalesFromTransifex.js",
     "md": "node scripts/generateMarkdown.js",
