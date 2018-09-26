@@ -1,40 +1,40 @@
-name: "Popup my Bookmarks"
-short_name: "PmB"
-version: ""
+name: 'Popup my Bookmarks'
+short_name: 'PmB'
+version: ''
 manifest_version: 2
-minimum_chrome_version: "51"
+minimum_chrome_version: '51'
 offline_enabled: true
 
-default_locale: "en"
-description: "__MSG_extDesc__"
+default_locale: 'en'
+description: '__MSG_extDesc__'
 
 icons:
-  16: "require(./img/icon16.png)"
-  48: "require(./img/icon48.png)"
-  128: "require(./img/icon128.png)"
+  16: 'require(./img/icon16.png)'
+  48: 'require(./img/icon48.png)'
+  128: 'require(./img/icon128.png)'
 
 browser_action:
-  default_icon: "require(./img/icon38.png)"
-  default_popup: "./popup.html"
-options_page: "./options.html"
+  default_icon: 'require(./img/icon38.png)'
+  default_popup: './popup.html'
+options_page: './options.html'
 options_ui:
-  page: "./options.html"
+  page: './options.html'
   chrome_style: false
 # hack to improve startup time
 background:
-  page: "./background.html"
+  page: './background.html'
 
 commands:
   _execute_browser_action:
     suggested_key:
-      default: "Alt+Shift+B"
+      default: 'Alt+Shift+B'
 
 permissions:
   # this grant permission to run bookmarklet on current page
-  - "activeTab"
-  - "bookmarks"
-  - "chrome://favicon/"
-  - "storage"
+  - 'activeTab'
+  - 'bookmarks'
+  - 'chrome://favicon/'
+  - 'storage'
   # this is a fix for we cannot save current page as bookmark,
   # if we open the popup before the current page finished loading
-  - "tabs"
+  - 'tabs'

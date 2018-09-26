@@ -2,19 +2,17 @@ version: 2
 jobs:
   build:
     docker:
-      - image: "circleci/node:8"
+      - image: 'circleci/node:8'
     steps:
-      - "checkout"
-      -
-        restore_cache:
-          key: "yarn-{{ .Branch }}-{{ checksum \"yarn.lock\" }}"
-      - run: "yarn install"
-      - run: "yarn lint"
-      - run: "yarn test"
-      - run: "yarn build"
-      - run: "bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN"
-      -
-        save_cache:
-          key: "yarn-{{ .Branch }}-{{ checksum \"yarn.lock\" }}"
+      - 'checkout'
+      - restore_cache:
+          key: 'yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}'
+      - run: 'yarn install'
+      - run: 'yarn lint'
+      - run: 'yarn test'
+      - run: 'yarn build'
+      - run: 'bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN'
+      - save_cache:
+          key: 'yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}'
           paths:
-            - "~/.yarn-cache"
+            - '~/.yarn-cache'

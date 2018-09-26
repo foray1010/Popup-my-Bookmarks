@@ -1,1 +1,1 @@
-extends: "eslint-config-foray1010"
+extends: 'eslint-config-foray1010'

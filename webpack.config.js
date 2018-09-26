@@ -8,7 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const R = require('ramda')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const webpack = require('webpack')
 const ZipPlugin = require('zip-webpack-plugin')
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
@@ -204,9 +204,9 @@ const webpackConfig = getMergedConfigByEnv({
       new webpack.LoaderOptionsPlugin({
         minimize: true
       }),
-      new UglifyJSPlugin({
+      new TerserPlugin({
         parallel: true,
-        uglifyOptions: {
+        terserOptions: {
           compress: {
             drop_console: true,
             pure_getters: true,
