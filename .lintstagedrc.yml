@@ -13,7 +13,7 @@ linters:
     - 'flow focus-check'
     - 'jest --bail --findRelatedTests --config .jestrc.json'
     - 'git add'
-  '*.{json,yml,yaml}':
+  '*.{json,yaml,yml}':
     - 'prettier-eslint --write'
     - 'git add'
   '*.md':
