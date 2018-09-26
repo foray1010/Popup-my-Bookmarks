@@ -21,6 +21,7 @@
     "flow": "flow check",
     "lint:css": "stylelint 'src/**/*.css' 'src/**/*.js'",
     "lint:js": "eslint .",
+    "lint:md": "markdownlint *.md",
     "locales": "node scripts/generateLocalesFromTransifex.js",
     "md": "node scripts/generateMarkdown.js",
     "test": "cross-env NODE_ENV=test jest --config .jestrc.json"
