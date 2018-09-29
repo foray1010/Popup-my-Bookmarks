@@ -1,3 +1,11 @@
+## 5.3.0 (29/9/2018)
+
+Improvements:
+
+- do not close window after pressing Esc (suggested by @alon91)
+- remove delay when searching (suggested by @alon91)
+
+
 ## 5.2.0 (22/7/2018)
 
 Improvements:
