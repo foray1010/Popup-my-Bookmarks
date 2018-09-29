@@ -90,6 +90,8 @@ class App extends PureComponent {
   handleKeyDown = async (evt) => {
     const {closeMenu, editorTarget, focusTarget, isSearching, menuTarget, openMenu} = this.props
 
+    if (evt.key === 'Escape') evt.preventDefault()
+
     // no custom handle for editor
     if (editorTarget) return
 
