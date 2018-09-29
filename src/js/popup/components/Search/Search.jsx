@@ -1,5 +1,4 @@
 import {createElement, PureComponent} from 'react'
-import _debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
 
 import {normalizeInputtingValue} from '../../../common/functions'
@@ -25,13 +24,13 @@ class Search extends PureComponent {
     })
   }
 
-  handleSearchKeywordChange = _debounce(() => {
+  handleSearchKeywordChange = () => {
     const {updateTreesBySearchKeyword} = this.props
 
     const newSearchKeyword = this.state.inputValue.trim()
 
     updateTreesBySearchKeyword(newSearchKeyword)
-  }, 300)
+  }
 
   render() {
     return (
