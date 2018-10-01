@@ -1,17 +1,21 @@
+## 5.3.1 (1/10/2018)
+
+Changes:
+
+- Revert "do not close window after pressing Esc"
+
 ## 5.3.0 (29/9/2018)
 
 Improvements:
 
-- do not close window after pressing Esc (suggested by @alon91)
+- do not close window after pressing Esc
 - remove delay when searching (suggested by @alon91)
-
 
 ## 5.2.0 (22/7/2018)
 
 Improvements:
 
   - significantly improve startup speed by injecting background page that does nothing
-
 
 ## 5.1.2 (26/9/2017)
 Bugfixes:
