@@ -1,5 +1,5 @@
-// flow-typed signature: 34df2979083976104e0046cfe809172e
-// flow-typed version: e8d4435ebe/bluebird_v3.x.x/flow_>=v0.70.x
+// flow-typed signature: b9b7f7cbfe41f4e7d48a790df32071b7
+// flow-typed version: e529cd1be1/bluebird_v3.x.x/flow_>=v0.70.x
 
 type Bluebird$RangeError = Error;
 type Bluebird$CancellationErrors = Error;
@@ -54,6 +54,12 @@ declare type $Promisable<T> = Promise<T> | T;
 declare class Bluebird$Disposable<R> {}
 
 declare class Bluebird$Promise<+R> extends Promise<R> {
+  static RangeError: Class<Bluebird$RangeError>;
+  static CancellationErrors: Class<Bluebird$CancellationErrors>;
+  static TimeoutError: Class<Bluebird$TimeoutError>;
+  static RejectionError: Class<Bluebird$RejectionError>;
+  static OperationalError: Class<Bluebird$OperationalError>;
+  
   static Defer: Class<Bluebird$Defer>;
   static PromiseInspection: Class<Bluebird$PromiseInspection<*>>;
 
