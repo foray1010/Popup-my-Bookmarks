@@ -1,4 +1,4 @@
-// flow-typed signature: fddd1fa36bcf36995ee81b234422ed7d
+// flow-typed signature: e3a6c61fcdf1dae8f2acf7b4381edee9
 // flow-typed version: <<STUB>>/copy-webpack-plugin_v^4.1.1/flow_v0.84.0
 
 /**
@@ -46,6 +46,18 @@ declare module 'copy-webpack-plugin/dist/utils/promisify' {
   declare module.exports: any;
 }
 
+declare module 'copy-webpack-plugin/dist/utils/readFilePromise' {
+  declare module.exports: any;
+}
+
+declare module 'copy-webpack-plugin/dist/utils/readPromise' {
+  declare module.exports: any;
+}
+
+declare module 'copy-webpack-plugin/dist/utils/statPromise' {
+  declare module.exports: any;
+}
+
 declare module 'copy-webpack-plugin/dist/writeFile' {
   declare module.exports: any;
 }
@@ -68,6 +80,15 @@ declare module 'copy-webpack-plugin/dist/utils/isObject.js' {
 }
 declare module 'copy-webpack-plugin/dist/utils/promisify.js' {
   declare module.exports: $Exports<'copy-webpack-plugin/dist/utils/promisify'>;
+}
+declare module 'copy-webpack-plugin/dist/utils/readFilePromise.js' {
+  declare module.exports: $Exports<'copy-webpack-plugin/dist/utils/readFilePromise'>;
+}
+declare module 'copy-webpack-plugin/dist/utils/readPromise.js' {
+  declare module.exports: $Exports<'copy-webpack-plugin/dist/utils/readPromise'>;
+}
+declare module 'copy-webpack-plugin/dist/utils/statPromise.js' {
+  declare module.exports: $Exports<'copy-webpack-plugin/dist/utils/statPromise'>;
 }
 declare module 'copy-webpack-plugin/dist/writeFile.js' {
   declare module.exports: $Exports<'copy-webpack-plugin/dist/writeFile'>;
