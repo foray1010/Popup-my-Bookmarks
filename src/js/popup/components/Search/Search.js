@@ -9,8 +9,8 @@ type Props = {|
   inputValue: string,
   isFocus: boolean,
   onBlur: () => void,
-  onFocus: () => void,
-  onInput: (SyntheticInputEvent<HTMLInputElement>) => void
+  onChange: (SyntheticInputEvent<HTMLInputElement>) => void,
+  onFocus: () => void
 |}
 class Search extends PureComponent<Props> {
   inputEl: ?HTMLElement
@@ -43,7 +43,7 @@ class Search extends PureComponent<Props> {
         tabIndex='-1'
         onBlur={this.props.onBlur}
         onFocus={this.props.onFocus}
-        onInput={this.props.onInput}
+        onChange={this.props.onChange}
       />
     </div>
   )

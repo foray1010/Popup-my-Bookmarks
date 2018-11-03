@@ -57,7 +57,7 @@ class SearchContainer extends PureComponent<Props, State> {
         isFocus={this.props.isFocusSearchInput}
         onBlur={this.handleBlur}
         onFocus={this.handleFocus}
-        onInput={this.handleInput}
+        onChange={this.handleInput}
       />
       <GlobalKeyboardEventListener onKeyDown={this.handleDocumentKeyDown} />
     </Fragment>
