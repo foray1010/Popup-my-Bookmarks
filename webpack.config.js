@@ -143,6 +143,7 @@ const webpackConfig = getMergedConfigByEnv({
     ],
     resolve: {
       alias: {
+        '@babel/runtime': path.resolve(__dirname, 'node_modules/@babel/runtime'),
         store: 'store/dist/store.modern'
       }
     }
