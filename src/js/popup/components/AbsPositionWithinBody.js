@@ -3,10 +3,15 @@
 import * as R from 'ramda'
 import {Fragment, PureComponent, createElement} from 'react'
 import type {Node} from 'react'
-import {Helmet} from 'react-helmet'
 import Measure from 'react-measure'
-import styled from 'styled-components'
+import styled, {createGlobalStyle} from 'styled-components'
 
+const GlobalStyles = createGlobalStyle`
+  body {
+    height: ${(props) => (props.bodyHeight != null ? `${props.bodyHeight}px` : 'auto')};
+    width: ${(props) => (props.bodyWidth != null ? `${props.bodyWidth}px` : 'auto')};
+  }
+`
 const Wrapper = styled('div')`
   left: ${R.prop('positionLeft')}px;
   position: absolute;
@@ -81,20 +86,11 @@ class AbsPositionWithinBody extends PureComponent<Props, State> {
 
   render = () => (
     <Fragment>
-      <Helmet>
-        <style>
-          {`
-            body {
-              ${this.state.bodyHeight != null ? `height: ${this.state.bodyHeight}px;` : ''}
-              ${this.state.bodyWidth != null ? `width: ${this.state.bodyWidth}px;` : ''}
-            }
-          `}
-        </style>
-      </Helmet>
+      <GlobalStyles bodyHeight={this.state.bodyHeight} bodyWidth={this.state.bodyWidth} />
       <Measure offset onResize={this.measureOnResize}>
         {({measureRef}) => (
           <Wrapper
-            innerRef={measureRef}
+            ref={measureRef}
             positionLeft={this.state.calibratedLeft}
             positionTop={this.state.calibratedTop}
           >

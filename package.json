@@ -37,7 +37,6 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-event-listener": "^0.6.0",
-    "react-helmet": "^5.2.0",
     "react-measure": "^2.0.0",
     "react-redux": "^5.0.0",
     "react-virtualized": "^9.5.0",

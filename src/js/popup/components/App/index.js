@@ -2,12 +2,19 @@
 
 import * as R from 'ramda'
 import {Fragment, createElement} from 'react'
-import {Helmet} from 'react-helmet'
 import {connect} from 'react-redux'
+import {createGlobalStyle} from 'styled-components'
 
 import App from './App'
 import withKeyboardEvents from './withKeyboardEvents'
 import withMouseEvents from './withMouseEvents'
+
+const GlobalStyles = createGlobalStyle`
+  body {
+    font-family: ${R.prop('fontFamily')}, sans-serif;
+    font-size: ${R.prop('fontSize')}px;
+  }
+`
 
 type Props = {|
   isShowEditor: boolean,
@@ -16,16 +23,7 @@ type Props = {|
 |}
 const AppContainer = (props: Props) => (
   <Fragment>
-    <Helmet>
-      <style>
-        {`
-          body {
-            font-family: ${props.options.fontFamily}, sans-serif;
-            font-size: ${props.options.fontSize}px;
-          }
-        `}
-      </style>
-    </Helmet>
+    <GlobalStyles fontFamily={props.options.fontFamily} fontSize={props.options.fontSize} />
     <App isShowEditor={props.isShowEditor} isShowMenu={props.isShowMenu} />
   </Fragment>
 )
