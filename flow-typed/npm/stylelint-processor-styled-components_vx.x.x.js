@@ -1,4 +1,4 @@
-// flow-typed signature: 8bfc3e867cd101b91f52c7150d12433a
+// flow-typed signature: a3be2a9fe9666c65fc534487ed2ab983
 // flow-typed version: <<STUB>>/stylelint-processor-styled-components_v^1.2.2/flow_v0.84.0
 
 /**
@@ -42,6 +42,10 @@ declare module 'stylelint-processor-styled-components/lib/utils/parse' {
   declare module.exports: any;
 }
 
+declare module 'stylelint-processor-styled-components/lib/utils/result' {
+  declare module.exports: any;
+}
+
 declare module 'stylelint-processor-styled-components/lib/utils/styled' {
   declare module.exports: any;
 }
@@ -67,6 +71,10 @@ declare module 'stylelint-processor-styled-components/src/utils/general' {
 }
 
 declare module 'stylelint-processor-styled-components/src/utils/parse' {
+  declare module.exports: any;
+}
+
+declare module 'stylelint-processor-styled-components/src/utils/result' {
   declare module.exports: any;
 }
 
@@ -282,6 +290,9 @@ declare module 'stylelint-processor-styled-components/lib/utils/general.js' {
 declare module 'stylelint-processor-styled-components/lib/utils/parse.js' {
   declare module.exports: $Exports<'stylelint-processor-styled-components/lib/utils/parse'>;
 }
+declare module 'stylelint-processor-styled-components/lib/utils/result.js' {
+  declare module.exports: $Exports<'stylelint-processor-styled-components/lib/utils/result'>;
+}
 declare module 'stylelint-processor-styled-components/lib/utils/styled.js' {
   declare module.exports: $Exports<'stylelint-processor-styled-components/lib/utils/styled'>;
 }
@@ -302,6 +313,9 @@ declare module 'stylelint-processor-styled-components/src/utils/general.js' {
 }
 declare module 'stylelint-processor-styled-components/src/utils/parse.js' {
   declare module.exports: $Exports<'stylelint-processor-styled-components/src/utils/parse'>;
+}
+declare module 'stylelint-processor-styled-components/src/utils/result.js' {
+  declare module.exports: $Exports<'stylelint-processor-styled-components/src/utils/result'>;
 }
 declare module 'stylelint-processor-styled-components/src/utils/styled.js' {
   declare module.exports: $Exports<'stylelint-processor-styled-components/src/utils/styled'>;

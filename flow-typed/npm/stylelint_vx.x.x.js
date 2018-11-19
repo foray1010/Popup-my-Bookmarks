@@ -1,4 +1,4 @@
-// flow-typed signature: 8f2145b21b45af6dfcdde8e093158a17
+// flow-typed signature: dbb1ba4761484471caba654653847d77
 // flow-typed version: <<STUB>>/stylelint_v^9.0.0/flow_v0.84.0
 
 /**
@@ -967,6 +967,10 @@ declare module 'stylelint/lib/utils/eachRoot' {
 }
 
 declare module 'stylelint/lib/utils/FileCache' {
+  declare module.exports: any;
+}
+
+declare module 'stylelint/lib/utils/filterFilePaths' {
   declare module.exports: any;
 }
 
@@ -1977,6 +1981,9 @@ declare module 'stylelint/lib/utils/eachRoot.js' {
 }
 declare module 'stylelint/lib/utils/FileCache.js' {
   declare module.exports: $Exports<'stylelint/lib/utils/FileCache'>;
+}
+declare module 'stylelint/lib/utils/filterFilePaths.js' {
+  declare module.exports: $Exports<'stylelint/lib/utils/filterFilePaths'>;
 }
 declare module 'stylelint/lib/utils/findAnimationName.js' {
   declare module.exports: $Exports<'stylelint/lib/utils/findAnimationName'>;
