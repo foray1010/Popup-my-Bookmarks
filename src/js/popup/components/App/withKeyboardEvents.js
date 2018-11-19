@@ -4,8 +4,8 @@ import {Fragment, PureComponent, createElement} from 'react'
 import type {ComponentType} from 'react'
 import EventListener from 'react-event-listener'
 
-export default (WrappedComponent: ComponentType<any>) => {
-  return class KeyboardEvents extends PureComponent<any> {
+export default <P>(WrappedComponent: ComponentType<P>) => {
+  return class KeyboardEvents extends PureComponent<P> {
     handleKeyDown = (evt: KeyboardEvent) => {
       if (evt.key === 'Escape') evt.preventDefault()
     }

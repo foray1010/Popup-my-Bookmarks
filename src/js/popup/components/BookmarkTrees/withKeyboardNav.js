@@ -49,8 +49,9 @@ const privatePropNames = [
   'setFocusId',
   'trees'
 ]
-const withKeyboardNav = (WrappedComponent: ComponentType<any>) => {
+const withKeyboardNav = <P>(WrappedComponent: ComponentType<P>) => {
   type Props = {
+    ...P,
     arrowRightNavigate: (string, string) => void,
     focusId: string,
     removeNextBookmarkTrees: (string) => void,
