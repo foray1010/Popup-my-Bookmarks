@@ -5,15 +5,18 @@ import type {ActionType} from 'redux-actions'
 
 import {optionsCreators, optionsTypes} from './actions'
 
-const INITIAL_STATE = {}
+type State = Object
+const INITIAL_STATE: State = {}
 
-const updateOptions = (state, {payload}: ActionType<typeof optionsCreators.updateOptions>) =>
-  payload.options
+const updateOptions = (
+  state: State,
+  {payload}: ActionType<typeof optionsCreators.updateOptions>
+): State => payload.options
 
 const updateSingleOption = (
-  state,
+  state: State,
   {payload}: ActionType<typeof optionsCreators.updateSingleOption>
-) => ({
+): State => ({
   ...state,
   [payload.optionName]: payload.optionValue
 })

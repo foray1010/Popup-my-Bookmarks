@@ -5,7 +5,16 @@ import type {ActionType} from 'redux-actions'
 
 import {editorCreators, editorTypes} from './actions'
 
-const INITIAL_STATE = {
+type State = {|
+  isAllowEditUrl: boolean,
+  isCreating: boolean,
+  positionLeft: number,
+  positionTop: number,
+  targetId: string,
+  title: string,
+  url: string
+|}
+const INITIAL_STATE: State = {
   isAllowEditUrl: false,
   isCreating: false,
   positionLeft: 0,
@@ -15,9 +24,12 @@ const INITIAL_STATE = {
   url: ''
 }
 
-const closeEditor = () => INITIAL_STATE
+const closeEditor = (): State => INITIAL_STATE
 
-const setEditor = (state, {payload}: ActionType<typeof editorCreators.setEditor>) => ({
+const setEditor = (
+  state: State,
+  {payload}: ActionType<typeof editorCreators.setEditor>
+): State => ({
   ...state,
   ...payload.partialState
 })

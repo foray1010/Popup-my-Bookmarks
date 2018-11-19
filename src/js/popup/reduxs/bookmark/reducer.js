@@ -7,7 +7,7 @@ import type {ActionType} from 'redux-actions'
 import type {BookmarkTree} from '../../types'
 import {bookmarkCreators, bookmarkTypes} from './actions'
 
-type BookmarkState = {|
+type State = {|
   clipboard: {|
     id: string,
     isRemoveAfterPaste: boolean
@@ -17,7 +17,7 @@ type BookmarkState = {|
   searchKeyword: string,
   trees: Array<BookmarkTree>
 |}
-const INITIAL_STATE: BookmarkState = {
+const INITIAL_STATE: State = {
   clipboard: {
     id: '',
     isRemoveAfterPaste: false
@@ -28,7 +28,10 @@ const INITIAL_STATE: BookmarkState = {
   trees: []
 }
 
-const copyBookmark = (state, {payload}: ActionType<typeof bookmarkCreators.copyBookmark>) => ({
+const copyBookmark = (
+  state: State,
+  {payload}: ActionType<typeof bookmarkCreators.copyBookmark>
+): State => ({
   ...state,
   clipboard: {
     id: payload.id,
@@ -36,7 +39,10 @@ const copyBookmark = (state, {payload}: ActionType<typeof bookmarkCreators.copyB
   }
 })
 
-const cutBookmark = (state, {payload}: ActionType<typeof bookmarkCreators.cutBookmark>) => ({
+const cutBookmark = (
+  state: State,
+  {payload}: ActionType<typeof bookmarkCreators.cutBookmark>
+): State => ({
   ...state,
   clipboard: {
     id: payload.id,
@@ -45,17 +51,17 @@ const cutBookmark = (state, {payload}: ActionType<typeof bookmarkCreators.cutBoo
 })
 
 const getSearchResult = (
-  state,
+  state: State,
   {payload}: ActionType<typeof bookmarkCreators.getSearchResult>
-) => ({
+): State => ({
   ...state,
   searchKeyword: payload.searchKeyword
 })
 
 const removeBookmarkTree = (
-  state,
+  state: State,
   {payload}: ActionType<typeof bookmarkCreators.removeBookmarkTree>
-) => {
+): State => {
   const removeFromIndex = state.trees.findIndex(R.pathEq(['parent', 'id'], payload.id))
   if (removeFromIndex < 0) return state
 
@@ -65,15 +71,15 @@ const removeBookmarkTree = (
   }
 }
 
-const removeFocusId = (state) => ({
+const removeFocusId = (state: State): State => ({
   ...state,
   focusId: ''
 })
 
 const removeNextBookmarkTrees = (
-  state,
+  state: State,
   {payload}: ActionType<typeof bookmarkCreators.removeNextBookmarkTrees>
-) => {
+): State => {
   const removeAfterIndex = state.trees.findIndex(R.pathEq(['parent', 'id'], payload.removeAfterId))
   if (removeAfterIndex < 0) return state
 
@@ -83,20 +89,23 @@ const removeNextBookmarkTrees = (
   }
 }
 
-const resetClipboard = (state) => ({
+const resetClipboard = (state: State): State => ({
   ...state,
   clipboard: INITIAL_STATE.clipboard
 })
 
 const setBookmarkTrees = (
-  state,
+  state: State,
   {payload}: ActionType<typeof bookmarkCreators.setBookmarkTrees>
-) => ({
+): State => ({
   ...state,
   trees: payload.bookmarkTrees
 })
 
-const setFocusId = (state, {payload}: ActionType<typeof bookmarkCreators.setFocusId>) => ({
+const setFocusId = (
+  state: State,
+  {payload}: ActionType<typeof bookmarkCreators.setFocusId>
+): State => ({
   ...state,
   focusId: payload.focusId
 })

@@ -5,23 +5,27 @@ import type {ActionType} from 'redux-actions'
 
 import {uiCreators, uiTypes} from './actions'
 
-const INITIAL_STATE = {
+type State = {|
+  isDisableGlobalKeyboardEvent: boolean,
+  isFocusSearchInput: boolean
+|}
+const INITIAL_STATE: State = {
   isDisableGlobalKeyboardEvent: false,
   isFocusSearchInput: false
 }
 
 const setIsDisableGlobalKeyboardEvent = (
-  state,
+  state: State,
   {payload}: ActionType<typeof uiCreators.setIsDisableGlobalKeyboardEvent>
-) => ({
+): State => ({
   ...state,
   isDisableGlobalKeyboardEvent: payload.isDisableGlobalKeyboardEvent
 })
 
 const setIsFocusSearchInput = (
-  state,
+  state: State,
   {payload}: ActionType<typeof uiCreators.setIsFocusSearchInput>
-) => ({
+): State => ({
   ...state,
   isFocusSearchInput: payload.isFocusSearchInput
 })

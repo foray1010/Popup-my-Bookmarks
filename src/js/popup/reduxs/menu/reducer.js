@@ -6,7 +6,7 @@ import type {ActionType} from 'redux-actions'
 import type {MenuPattern} from '../../types'
 import {menuCreators, menuTypes} from './actions'
 
-type MenuState = {|
+type State = {|
   focusedRow: string,
   menuPattern: MenuPattern,
   positionLeft: number,
@@ -15,7 +15,7 @@ type MenuState = {|
   targetLeft: number,
   targetTop: number
 |}
-const INITIAL_STATE: MenuState = {
+const INITIAL_STATE: State = {
   focusedRow: '',
   menuPattern: [],
   positionLeft: 0,
@@ -25,25 +25,31 @@ const INITIAL_STATE: MenuState = {
   targetTop: 0
 }
 
-const closeMenu = () => INITIAL_STATE
+const closeMenu = (): State => INITIAL_STATE
 
-const openMenu = (state, {payload}: ActionType<typeof menuCreators.openMenu>) => ({
+const openMenu = (state: State, {payload}: ActionType<typeof menuCreators.openMenu>): State => ({
   ...state,
   ...payload.coordinates,
   targetId: payload.targetId
 })
 
-const removeFocusedRow = (state) => ({
+const removeFocusedRow = (state: State): State => ({
   ...state,
   focusedRow: ''
 })
 
-const setFocusedRow = (state, {payload}: ActionType<typeof menuCreators.setFocusedRow>) => ({
+const setFocusedRow = (
+  state: State,
+  {payload}: ActionType<typeof menuCreators.setFocusedRow>
+): State => ({
   ...state,
   focusedRow: payload.focusedRow
 })
 
-const setMenuPattern = (state, {payload}: ActionType<typeof menuCreators.setMenuPattern>) => ({
+const setMenuPattern = (
+  state: State,
+  {payload}: ActionType<typeof menuCreators.setMenuPattern>
+): State => ({
   ...state,
   menuPattern: payload.menuPattern
 })

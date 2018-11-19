@@ -6,14 +6,17 @@ import type {ActionType} from 'redux-actions'
 import {NAV_MODULE_GENERAL} from '../../constants'
 import {navigationCreators, navigationTypes} from './actions'
 
-const INITIAL_STATE = {
+type State = {|
+  selectedNavModule: string
+|}
+const INITIAL_STATE: State = {
   selectedNavModule: NAV_MODULE_GENERAL
 }
 
 const switchNavModule = (
-  state,
+  state: State,
   {payload}: ActionType<typeof navigationCreators.switchNavModule>
-) => ({
+): State => ({
   ...state,
   selectedNavModule: payload.navModule
 })
