@@ -5,7 +5,7 @@ import {Fragment, PureComponent, createElement} from 'react'
 import type {ComponentType} from 'react'
 import {connect} from 'react-redux'
 
-import {bookmarkCreators} from '../../reduxs'
+import {type RootState, bookmarkCreators} from '../../reduxs'
 import type {BookmarkTree} from '../../types'
 import GlobalKeyboardEventListener from '../GlobalKeyboardEventListener'
 
@@ -119,7 +119,7 @@ const withKeyboardNav = (WrappedComponent: ComponentType<any>) => {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   focusId: state.bookmark.focusId,
   trees: state.bookmark.trees
 })

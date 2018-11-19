@@ -2,15 +2,18 @@
 
 import {connect} from 'react-redux'
 
-import {navigationCreators} from '../../reduxs'
+import {type RootState, navigationCreators} from '../../reduxs'
 import NavBar from './NavBar'
 
 const mapDispatchToProps = {
   switchNavModule: navigationCreators.switchNavModule
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   selectedNavModule: state.navigation.selectedNavModule
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NavBar)

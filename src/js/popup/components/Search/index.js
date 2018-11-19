@@ -4,7 +4,7 @@ import {Fragment, PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
 import {normalizeInputtingValue} from '../../../common/utils'
-import {bookmarkCreators, uiCreators} from '../../reduxs'
+import {type RootState, bookmarkCreators, uiCreators} from '../../reduxs'
 import GlobalKeyboardEventListener from '../GlobalKeyboardEventListener'
 import Search from './Search'
 
@@ -64,7 +64,7 @@ class SearchContainer extends PureComponent<Props, State> {
   )
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   isFocusSearchInput: state.ui.isFocusSearchInput
 })
 

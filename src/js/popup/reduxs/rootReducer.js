@@ -15,3 +15,6 @@ export const rootReducer = combineReducers({
   options: optionsReducer,
   ui: uiReducer
 })
+
+type ExtractReturnType = <R>(() => R) => R
+export type RootState = $Call<ExtractReturnType, typeof rootReducer>

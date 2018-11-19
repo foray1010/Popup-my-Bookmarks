@@ -5,6 +5,7 @@ import {Fragment, createElement} from 'react'
 import {connect} from 'react-redux'
 import {createGlobalStyle} from 'styled-components'
 
+import type {RootState} from '../../reduxs'
 import App from './App'
 import withKeyboardEvents from './withKeyboardEvents'
 import withMouseEvents from './withMouseEvents'
@@ -28,7 +29,7 @@ const AppContainer = (props: Props) => (
   </Fragment>
 )
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   isShowEditor: Boolean(state.editor.targetId),
   isShowMenu: Boolean(state.menu.targetId),
   options: state.options

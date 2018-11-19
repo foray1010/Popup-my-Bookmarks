@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 
 import {getOptionsConfig} from '../../../common/utils'
 import {OPTION_TABLE_MAP} from '../../constants'
-import {optionsCreators} from '../../reduxs'
+import {type RootState, optionsCreators} from '../../reduxs'
 import OptionForm from './OptionForm'
 
 type Props = {|
@@ -44,7 +44,7 @@ class OptionFormContainer extends PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   options: state.options,
   selectedOptionFormMap: OPTION_TABLE_MAP[state.navigation.selectedNavModule]
 })

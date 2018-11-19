@@ -1,6 +1,6 @@
 // @flow strict
 
-export {rootReducer} from './rootReducer'
+export {RootState, rootReducer} from './rootReducer'
 export {rootSaga} from './rootSaga'
 
 export {bookmarkCreators} from './bookmark/actions'

@@ -5,15 +5,10 @@ import {PureComponent, createElement} from 'react'
 import type {Node} from 'react'
 import {connect} from 'react-redux'
 
-import {bookmarkCreators} from '../../reduxs'
+import {type RootState, bookmarkCreators} from '../../reduxs'
 import BookmarkTrees from './BookmarkTrees'
 import withBookmarkEvents from './withBookmarkEvents'
 import withKeyboardNav from './withKeyboardNav'
-
-const getTreeIds = R.compose(
-  R.map(R.path(['parent', 'id'])),
-  R.path(['bookmark', 'trees'])
-)
 
 type Props = {|
   initBookmarkTrees: () => void,
@@ -29,7 +24,10 @@ class BookmarkTreesContainer extends PureComponent<Props> {
   render = () => <BookmarkTrees {...this.props} />
 }
 
-const mapStateToProps = (state) => ({
+const getTreeIds = (state: RootState): Array<string> =>
+  state.bookmark.trees.map((tree) => tree.parent.id)
+
+const mapStateToProps = (state: RootState) => ({
   options: state.options,
   treeIds: getTreeIds(state)
 })

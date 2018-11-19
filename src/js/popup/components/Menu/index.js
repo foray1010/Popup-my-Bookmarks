@@ -4,7 +4,7 @@ import {Fragment, PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
 import * as CST from '../../constants'
-import {menuCreators} from '../../reduxs'
+import {type RootState, menuCreators} from '../../reduxs'
 import type {MenuPattern} from '../../types'
 import AbsPositionWithinBody from '../AbsPositionWithinBody'
 import Mask from '../Mask'
@@ -55,12 +55,12 @@ class MenuContainer extends PureComponent<Props> {
   )
 }
 
-const unclickableRowsSelector = (state) => {
+const unclickableRowsSelector = (state: RootState) => {
   if (!state.bookmark.clipboard.id) return [CST.MENU_PASTE]
   return []
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   focusedRow: state.menu.focusedRow,
   menuPattern: state.menu.menuPattern,
   positionLeft: state.menu.positionLeft,

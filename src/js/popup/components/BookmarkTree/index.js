@@ -6,7 +6,7 @@ import {PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 
 import * as CST from '../../constants'
-import {bookmarkCreators, menuCreators} from '../../reduxs'
+import {type RootState, bookmarkCreators, menuCreators} from '../../reduxs'
 import type {BookmarkInfo, BookmarkTree as BookmarkTreeType, OpenIn} from '../../types'
 import BookmarkTree from './BookmarkTree'
 import NoSearchResult from './NoSearchResult'
@@ -134,7 +134,7 @@ const getRowHeight = (fontSize) =>
   // +1 for border width, GOLDEN_GAP for padding
   (1 + CST.GOLDEN_GAP) * 2
 
-const mapStateToProps = (state, ownProps: OwnProps) => {
+const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   const highlightedId = state.bookmark.focusId || state.menu.targetId || state.editor.targetId
   const treeIndex = state.bookmark.trees.findIndex(R.pathEq(['parent', 'id'], ownProps.treeId))
   const treeInfo = state.bookmark.trees[treeIndex]

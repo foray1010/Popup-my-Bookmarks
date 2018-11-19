@@ -9,6 +9,7 @@ import {
   NAV_MODULE_GENERAL,
   NAV_MODULE_USER_INTERFACE
 } from '../constants'
+import type {RootState} from '../reduxs'
 import Contributors from './Contributors'
 import OptionForm from './OptionForm'
 
@@ -30,7 +31,7 @@ const NavModuleMapper = (props: Props) => {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   selectedNavModule: state.navigation.selectedNavModule
 })
 

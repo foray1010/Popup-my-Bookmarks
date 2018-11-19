@@ -4,7 +4,7 @@ import {Fragment, PureComponent, createElement} from 'react'
 import {connect} from 'react-redux'
 import webExtension from 'webextension-polyfill'
 
-import {bookmarkCreators, editorCreators} from '../../reduxs'
+import {type RootState, bookmarkCreators, editorCreators} from '../../reduxs'
 import AbsPositionWithinBody from '../AbsPositionWithinBody'
 import Mask from '../Mask'
 import Editor from './Editor'
@@ -57,7 +57,7 @@ class EditorContainer extends PureComponent<Props> {
   )
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   isAllowEditUrl: state.editor.isAllowEditUrl,
   isCreating: state.editor.isCreating,
   positionLeft: state.editor.positionLeft,
