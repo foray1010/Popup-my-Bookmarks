@@ -29,4 +29,6 @@ const main = async () => {
   )
 }
 
-main().catch((err) => console.error(err.stack))
+main().catch((err) => {
+  console.error(err)
+})

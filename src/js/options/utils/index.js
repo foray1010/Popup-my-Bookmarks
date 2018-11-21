@@ -6,7 +6,7 @@ import webExtension from 'webextension-polyfill'
 import {getOptionsConfig} from '../../common/utils'
 
 export const initOptions = async (): Promise<Object> => {
-  const [options: Object, optionsConfig: Object] = await Promise.all([
+  const [options, optionsConfig] = await Promise.all([
     webExtension.storage.sync.get(null),
     getOptionsConfig()
   ])

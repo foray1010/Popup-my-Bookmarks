@@ -12,7 +12,7 @@ import Mask from '../Mask'
 import BookmarkRow from './BookmarkRow'
 import TreeHeader from './TreeHeader'
 
-type Props = {
+type Props = {|
   highlightedId: string,
   iconSize: number,
   isShowCover: boolean,
@@ -28,7 +28,7 @@ type Props = {
   rowHeight: number,
   scrollToIndex: number,
   treeInfo: BookmarkTreeType
-}
+|}
 type State = {|
   listHeight: number
 |}

@@ -13,10 +13,11 @@ import NoSearchResult from './NoSearchResult'
 
 const TOGGLE_BOOKMARK_TREE_TIMEOUT = 200
 
-type OwnProps = {
+type OwnProps = {|
   treeId: string
-}
-type Props = OwnProps & {
+|}
+type Props = {|
+  ...OwnProps,
   highlightedId: string,
   highlightedIndex: number,
   iconSize: number,
@@ -41,7 +42,7 @@ type Props = OwnProps & {
   rowHeight: number,
   setFocusId: (string) => void,
   treeInfo: BookmarkTreeType
-}
+|}
 class BookmarkTreeContainer extends PureComponent<Props> {
   closeCurrentTree = () => {
     this.props.removeBookmarkTree(this.props.treeInfo.parent.id)
@@ -115,7 +116,11 @@ class BookmarkTreeContainer extends PureComponent<Props> {
 
   render = () => (
     <BookmarkTree
-      {...this.props}
+      highlightedId={this.props.highlightedId}
+      iconSize={this.props.iconSize}
+      isShowCover={this.props.isShowCover}
+      isShowHeader={this.props.isShowHeader}
+      listItemWidth={this.props.listItemWidth}
       noRowsRenderer={this.noRowsRenderer}
       onCloseButtonClick={this.closeCurrentTree}
       onCoverClick={this.closeNextTrees}
@@ -123,7 +128,9 @@ class BookmarkTreeContainer extends PureComponent<Props> {
       onRowClick={this.handleRowClick}
       onRowMouseEnter={this.handleRowMouseEnter}
       onRowMouseLeave={this.handleRowMouseLeave}
+      rowHeight={this.props.rowHeight}
       scrollToIndex={this.props.highlightedIndex}
+      treeInfo={this.props.treeInfo}
     />
   )
 }

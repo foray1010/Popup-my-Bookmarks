@@ -50,14 +50,14 @@ const privatePropNames = [
   'trees'
 ]
 const withKeyboardNav = <P>(WrappedComponent: ComponentType<P>) => {
-  type Props = {
+  type Props = {|
     ...P,
     arrowRightNavigate: (string, string) => void,
     focusId: string,
     removeNextBookmarkTrees: (string) => void,
     setFocusId: (string) => void,
     trees: Array<BookmarkTree>
-  }
+  |}
   return class KeyboardNav extends PureComponent<Props> {
     handleDocumentArrowLeft = () => {
       const {trees} = this.props
