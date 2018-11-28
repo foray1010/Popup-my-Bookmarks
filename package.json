@@ -55,7 +55,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.0.1",
     "babel-loader": "^8.0.2",
-    "babel-plugin-styled-components": "^1.5.1",
+    "babel-plugin-styled-components": "^1.9.1",
     "babel-preset-foray1010": "^8.0.0",
     "bluebird": "^3.5.1",
     "chance": "^1.0.13",
