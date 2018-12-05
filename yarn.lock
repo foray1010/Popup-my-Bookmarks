@@ -2368,13 +2368,13 @@ chownr@^1.0.1, chownr@^1.1.1:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.1.tgz#54726b8b8fff4df053c42187e801fb4412df1494"
   integrity sha512-j38EvO5+LHX84jlo6h4UzmOwi0UgW61WRyPtJz4qaadK5eY3BTS5TY/S1Stc3Uk2lIM6TPevAlULiEJwie860g==
 
-chrome-manifest-loader@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/chrome-manifest-loader/-/chrome-manifest-loader-0.1.1.tgz#04685992408d4fd96f44db6e80806c1853f24ebe"
-  integrity sha1-BGhZkkCNT9lvRNtugIBsGFPyTr4=
+chrome-manifest-loader@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/chrome-manifest-loader/-/chrome-manifest-loader-0.1.2.tgz#22486ef128e4f19bdad2b27a4378dd1954377808"
+  integrity sha512-+JgaVVVjM+YhqzhS+njJ7JF57OCrHYSzQTFKMIOzPDefLKHxKYk88ijSJOxLPDZe/DnOWbbl5dE6EYzd9GB9nw==
   dependencies:
     lodash "^4.17.4"
-    uuid "^3.0.1"
+    nanoid "^2.0.0"
 
 chrome-trace-event@^1.0.0:
   version "1.0.0"
@@ -7247,6 +7247,11 @@ nan@^2.11.1, nan@^2.9.2:
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.11.1.tgz#90e22bccb8ca57ea4cd37cc83d3819b52eea6766"
   integrity sha512-iji6k87OSXa0CcrLl9z+ZiYSuR2o+c0bGuNmXdrhTQTakxytAFsC56SArGYoiHlJlFoHSnvmhpceZJaXkVuOtA==
 
+nanoid@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-2.0.0.tgz#e1ab4a4b024a38d15531ba34a712a201540de639"
+  integrity sha512-SG2qscLE3iM4C0CNzGrsAojJHSVHMS1J8NnvJ31P1lH8P0hGHOiafmniNJz6w6q7vuoDlV7RdySlJgtqkFEVtQ==
+
 nanomatch@^1.2.9:
   version "1.2.13"
   resolved "https://registry.yarnpkg.com/nanomatch/-/nanomatch-1.2.13.tgz#b87a8aa4fc0de8fe6be88895b38983ff265bd119"
@@ -11045,7 +11050,7 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
-uuid@^3.0.1, uuid@^3.3.2:
+uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
