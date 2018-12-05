@@ -5149,12 +5149,10 @@ ignore@^5.0.2, ignore@^5.0.4:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.0.4.tgz#33168af4a21e99b00c5d41cbadb6a6cb49903a45"
   integrity sha512-WLsTMEhsQuXpCiG173+f3aymI43SXa+fB1rSfbzyP4GkPP+ZFVuO0/3sFUGNBtifisPeDcl/uD/Y2NxZ7xFq4g==
 
-image-process-loader@^0.1.0:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/image-process-loader/-/image-process-loader-0.1.1.tgz#a29f45936ef50a963c55ff105d737d60bf2a16fb"
-  integrity sha512-B3WXBeIWsLLF7I1eqT6NKN90OW5OYAE8u+kcS4brIntQzTfbUIlxSFhtO8iCK4UfeeK0u3D2A/XYpxNRBVbl7Q==
-  dependencies:
-    co "^4.6.0"
+image-process-loader@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/image-process-loader/-/image-process-loader-1.0.0.tgz#b292689b0f939bb6c4f905482adee2533c1ca2ef"
+  integrity sha512-po9cAAC5o7So1+yqbO47f9Wgn74b0G6+6rZWbqzTPPKLgwWWBUgCMqmSC9J+sixpli1Ak5q0em8a+1fLCR6Gxw==
 
 import-cwd@^2.0.0:
   version "2.1.0"

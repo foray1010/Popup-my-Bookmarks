@@ -76,7 +76,7 @@
     "html-webpack-plugin": "^3.0.4",
     "husky": "^1.0.0",
     "ignore-sync": "^2.0.0",
-    "image-process-loader": "^0.1.0",
+    "image-process-loader": "^1.0.0",
     "import-sort-cli": "^5.2.0",
     "import-sort-parser-babylon": "^5.2.0",
     "import-sort-style-module": "^5.0.0",
