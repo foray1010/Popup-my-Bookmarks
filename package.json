@@ -19,12 +19,12 @@
     "ci": "npm-run-all -p flow lint:* test && yarn build",
     "dev": "cross-env NODE_ENV=development webpack",
     "flow": "flow check",
+    "flow-typed": "flow-typed install",
     "lint:css": "stylelint 'src/**/*.css' 'src/**/*.js'",
     "lint:js": "eslint .",
     "lint:md": "markdownlint *.md",
     "locales": "node scripts/generateLocalesFromTransifex.js",
     "md": "node scripts/generateMarkdown.js",
-    "postinstall": "flow-typed install",
     "test": "cross-env NODE_ENV=test jest --config .jestrc.json"
   },
   "dependencies": {
