@@ -16,7 +16,7 @@
   "bugs": "https://github.com/foray1010/Popup-my-Bookmarks/issues",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
-    "ci": "npm-run-all -p flow lint:* test && yarn build",
+    "ci": "npm-run-all -p lint:* test && yarn flow && yarn build",
     "dev": "cross-env NODE_ENV=development webpack",
     "flow": "flow check",
     "flow-typed": "flow-typed install",
