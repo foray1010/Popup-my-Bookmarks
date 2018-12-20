@@ -35,7 +35,7 @@
     "prop-types": "^15.5.4",
     "ramda": "^0.26.1",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react-dom": "^16.7.0",
     "react-event-listener": "^0.6.0",
     "react-measure": "^2.2.1",
     "react-redux": "^6.0.0",
