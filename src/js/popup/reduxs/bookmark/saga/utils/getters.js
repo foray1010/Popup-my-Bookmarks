@@ -12,7 +12,7 @@ import {
 } from '../../../../../common/utils'
 import * as CST from '../../../../constants'
 import type {BookmarkInfo, BookmarkTree} from '../../../../types'
-import {simulateBookmark, toBookmarkInfo} from './converters'
+import {simulateBookmark, toBookmarkInfo} from '../../utils/converters'
 
 export function* getBookmarkInfo(id: string): Saga<BookmarkInfo> {
   if (id.startsWith(CST.NO_BOOKMARK_ID_PREFIX)) {

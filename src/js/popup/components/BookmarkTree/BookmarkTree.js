@@ -7,6 +7,7 @@ import List from 'react-virtualized/dist/es/List'
 import classes from '../../../../css/popup/bookmark-tree.css'
 import * as CST from '../../constants'
 import type {BookmarkInfo, BookmarkTree as BookmarkTreeType} from '../../types'
+import {type ResponseEvent} from '../dragAndDrop/DragAndDropConsumer'
 import Mask from '../Mask'
 import BookmarkRow from './BookmarkRow'
 import TreeHeader from './TreeHeader'
@@ -14,6 +15,7 @@ import TreeHeader from './TreeHeader'
 type Props = {|
   highlightedId: string,
   iconSize: number,
+  isDisableDragging: boolean,
   isShowCover: boolean,
   isShowHeader: boolean,
   listItemWidth: number,
@@ -22,6 +24,8 @@ type Props = {|
   onCoverClick: () => void,
   onRowAuxClick: (string) => (MouseEvent) => void,
   onRowClick: (string) => (SyntheticMouseEvent<HTMLElement>) => void,
+  onRowDragOver: (BookmarkInfo) => (SyntheticMouseEvent<HTMLElement>, ResponseEvent) => void,
+  onRowDragStart: () => void,
   onRowMouseEnter: (BookmarkInfo) => () => void,
   onRowMouseLeave: () => void,
   rowHeight: number,
@@ -110,9 +114,16 @@ class BookmarkTree extends React.PureComponent<Props, State> {
               <BookmarkRow
                 bookmarkInfo={bookmarkInfo}
                 iconSize={this.props.iconSize}
+                isDisableDragging={
+                  this.props.isDisableDragging ||
+                  bookmarkInfo.isRoot ||
+                  bookmarkInfo.type === CST.TYPE_NO_BOOKMARK
+                }
                 isHighlighted={this.props.highlightedId === bookmarkInfo.id}
                 onAuxClick={this.props.onRowAuxClick}
                 onClick={this.props.onRowClick}
+                onDragOver={this.props.onRowDragOver}
+                onDragStart={this.props.onRowDragStart}
                 onMouseEnter={this.props.onRowMouseEnter}
                 onMouseLeave={this.props.onRowMouseLeave}
               />

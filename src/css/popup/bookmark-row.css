@@ -1,12 +1,15 @@
 @import '../common/mixins.css';
 @import '../common/variables.css';
 
+.full-height {
+  height: 100%;
+}
+
 .main {
   align-items: center;
   box-sizing: border-box;
   composes: list-item from '../common/composes.css';
   display: flex;
-  height: 100%;
   padding: var(--golden-gap) 0 var(--golden-gap) var(--golden-gap);
 
   &.root-folder {
