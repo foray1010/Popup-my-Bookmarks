@@ -63,6 +63,7 @@
     "copy-webpack-plugin": "^4.1.1",
     "cross-env": "^5.0.0",
     "css-loader": "^2.1.0",
+    "cssnano": "^4.1.8",
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
     "eslint": "^5.10.0",
     "eslint-config-foray1010": "^6.2.0",
