@@ -55,7 +55,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-loader": "8.0.5",
     "babel-plugin-styled-components": "1.10.0",
-    "babel-preset-foray1010": "8.0.3",
+    "babel-preset-foray1010": "8.1.0",
     "bluebird": "3.5.3",
     "chance": "1.0.18",
     "chrome-manifest-loader": "0.1.2",
