@@ -6,11 +6,11 @@ jobs:
     steps:
       - 'checkout'
       - restore_cache:
-          key: 'yarn-{{ checksum "yarn.lock" }}'
-      - run: 'yarn install'
+          key: 'yarn-packages-{{ checksum "yarn.lock" }}'
+      - run: 'yarn install --frozen-lockfile'
       - save_cache:
-          key: 'yarn-{{ checksum "yarn.lock" }}'
+          key: 'yarn-packages-{{ checksum "yarn.lock" }}'
           paths:
-            - '~/.yarn-cache'
+            - '~/.cache/yarn'
       - run: 'yarn ci'
       - run: 'bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN'
