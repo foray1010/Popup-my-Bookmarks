@@ -1,0 +1,8 @@
+plugins:
+  postcss-url: {}
+  postcss-import: {}
+  postcss-normalize:
+    forceImport: true
+  postcss-apply: {}
+  postcss-preset-env:
+    stage: 0
