@@ -3,8 +3,8 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const R = require('ramda')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
@@ -179,17 +179,19 @@ const webpackConfig = getMergedConfigByEnv({
       rules: [
         {
           test: /\.css$/,
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            publicPath: '../',
-            use: [
-              {
-                loader: 'css-loader',
-                options: cssLoaderOptions
-              },
-              'postcss-loader'
-            ]
-          })
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                publicPath: '../'
+              }
+            },
+            {
+              loader: 'css-loader',
+              options: cssLoaderOptions
+            },
+            'postcss-loader'
+          ]
         }
       ]
     },
@@ -198,9 +200,8 @@ const webpackConfig = getMergedConfigByEnv({
         analyzerMode: 'static',
         reportFilename: path.join('..', 'report.html')
       }),
-      new ExtractTextPlugin({
-        filename: path.join('css', '[name].css'),
-        allChunks: true
+      new MiniCssExtractPlugin({
+        filename: path.join('css', '[name].css')
       }),
       new webpack.LoaderOptionsPlugin({
         minimize: true
