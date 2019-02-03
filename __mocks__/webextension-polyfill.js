@@ -1,3 +1,3 @@
-'use strict'
+// @flow strict
 
-module.exports = jest.mock()
+export default {}
