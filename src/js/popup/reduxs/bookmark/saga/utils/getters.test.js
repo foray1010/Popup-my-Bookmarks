@@ -1,10 +1,10 @@
 /* eslint max-lines: 'off' */
 // @flow strict
 
+import {cloneableGenerator} from '@redux-saga/testing-utils'
 import Chance from 'chance'
 import * as R from 'ramda'
 import {all, call} from 'redux-saga/effects'
-import {cloneableGenerator} from 'redux-saga/utils'
 
 import {
   getBookmarkChildNodes,

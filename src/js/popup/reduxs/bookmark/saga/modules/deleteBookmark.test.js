@@ -1,8 +1,8 @@
 // @flow strict
 
+import {cloneableGenerator} from '@redux-saga/testing-utils'
 import Chance from 'chance'
 import {call} from 'redux-saga/effects'
-import {cloneableGenerator} from 'redux-saga/utils'
 
 import {removeBookmark, removeBookmarkTree} from '../../../../../common/utils'
 import * as CST from '../../../../constants'
