@@ -731,17 +731,17 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0":
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.2.0.tgz#b03e42eeddf5898e00646e4c840fa07ba8dcad7f"
-  integrity sha512-oouEibCbHMVdZSDlJBO6bZmID/zA/G/Qx3H1d3rSNPTD+L8UNKvCat7aKWSJ74zYbm5zWGh0GQN0hKj8zYFTCg==
-  dependencies:
-    regenerator-runtime "^0.12.0"
-
 "@babel/runtime@^7.0.0":
   version "7.3.1"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.1.tgz#574b03e8e8a9898eaf4a872a92ea20b7846f6f2a"
   integrity sha512-7jGW8ppV0ant637pIqAcFfQDDH1orEPGJb8aXfUozuCU3QqX7rX4DA8iwrbPrR1hcH0FTTHz47yQnk+bl5xHQA==
+  dependencies:
+    regenerator-runtime "^0.12.0"
+
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.2.0.tgz#b03e42eeddf5898e00646e4c840fa07ba8dcad7f"
+  integrity sha512-oouEibCbHMVdZSDlJBO6bZmID/zA/G/Qx3H1d3rSNPTD+L8UNKvCat7aKWSJ74zYbm5zWGh0GQN0hKj8zYFTCg==
   dependencies:
     regenerator-runtime "^0.12.0"
 
@@ -10469,6 +10469,14 @@ source-map-support@^0.5.6, source-map-support@~0.5.6:
     buffer-from "^1.0.0"
     source-map "^0.6.0"
 
+source-map-support@~0.5.9:
+  version "0.5.10"
+  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.10.tgz#2214080bc9d51832511ee2bab96e3c2f9353120c"
+  integrity sha512-YfQ3tQFTK/yzlGJuX8pTwa4tifQj4QS2Mj7UegOu8jAz59MqIiMGPXxQhVQiIMNzayuUSF/jEuVnfFF5JqybmQ==
+  dependencies:
+    buffer-from "^1.0.0"
+    source-map "^0.6.0"
+
 source-map-url@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/source-map-url/-/source-map-url-0.4.0.tgz#3e935d7ddd73631b97659956d55128e87b5084a3"
@@ -11078,7 +11086,21 @@ tar@^4, tar@^4.4.8:
     safe-buffer "^5.1.2"
     yallist "^3.0.2"
 
-terser-webpack-plugin@1.2.1, terser-webpack-plugin@^1.1.0:
+terser-webpack-plugin@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/terser-webpack-plugin/-/terser-webpack-plugin-1.2.2.tgz#9bff3a891ad614855a7dde0d707f7db5a927e3d9"
+  integrity sha512-1DMkTk286BzmfylAvLXwpJrI7dWa5BnFmscV/2dCr8+c56egFcbaeFAl7+sujAjdmpLam21XRdhA4oifLyiWWg==
+  dependencies:
+    cacache "^11.0.2"
+    find-cache-dir "^2.0.0"
+    schema-utils "^1.0.0"
+    serialize-javascript "^1.4.0"
+    source-map "^0.6.1"
+    terser "^3.16.1"
+    webpack-sources "^1.1.0"
+    worker-farm "^1.5.2"
+
+terser-webpack-plugin@^1.1.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/terser-webpack-plugin/-/terser-webpack-plugin-1.2.1.tgz#7545da9ae5f4f9ae6a0ac961eb46f5e7c845cc26"
   integrity sha512-GGSt+gbT0oKcMDmPx4SRSfJPE1XaN3kQRWG4ghxKQw9cn5G9x6aCKSsgYdvyM0na9NJ4Drv0RG6jbBByZ5CMjw==
@@ -11091,6 +11113,15 @@ terser-webpack-plugin@1.2.1, terser-webpack-plugin@^1.1.0:
     terser "^3.8.1"
     webpack-sources "^1.1.0"
     worker-farm "^1.5.2"
+
+terser@^3.16.1:
+  version "3.16.1"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-3.16.1.tgz#5b0dd4fa1ffd0b0b43c2493b2c364fd179160493"
+  integrity sha512-JDJjgleBROeek2iBcSNzOHLKsB/MdDf+E/BOAJ0Tk9r7p9/fVobfv7LMJ/g/k3v9SXdmjZnIlFd5nfn/Rt0Xow==
+  dependencies:
+    commander "~2.17.1"
+    source-map "~0.6.1"
+    source-map-support "~0.5.9"
 
 terser@^3.8.1:
   version "3.11.0"

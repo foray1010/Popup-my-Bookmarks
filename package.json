@@ -99,7 +99,7 @@
     "stylelint": "9.10.1",
     "stylelint-config-foray1010": "4.0.1",
     "stylelint-processor-styled-components": "1.5.2",
-    "terser-webpack-plugin": "1.2.1",
+    "terser-webpack-plugin": "1.2.2",
     "transifex": "1.6.6",
     "webpack": "4.29.0",
     "webpack-bundle-analyzer": "3.0.3",
