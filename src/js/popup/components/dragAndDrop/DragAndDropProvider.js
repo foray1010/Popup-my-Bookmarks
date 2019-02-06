@@ -20,27 +20,44 @@ export default class DragAndDropProvider extends PureComponent<Props, State> {
     this.state = {
       contextValue: {
         activeKey: null,
-        setActiveKey: this.setActiveKey
+        pendingKey: null,
+        setActiveKey: this.setActiveKey,
+        setPendingKey: this.setPendingKey
       }
     }
   }
 
-  setActiveKey = (activeKey: string) => {
+  updateContextValue = (partialContextValue: $Shape<ContextType>) => {
     this.setState((prevState) => ({
-      contextValue: {...prevState.contextValue, activeKey}
+      contextValue: {...prevState.contextValue, ...partialContextValue}
     }))
   }
-  unsetActiveKey = () => {
-    this.setState((prevState) => ({
-      contextValue: {...prevState.contextValue, activeKey: null}
-    }))
+
+  setActiveKey = (activeKey: string) => {
+    this.updateContextValue({
+      activeKey,
+      pendingKey: null
+    })
+  }
+  setPendingKey = (pendingKey: string) => {
+    this.updateContextValue({
+      activeKey: null,
+      pendingKey
+    })
+  }
+
+  resetContextValue = () => {
+    this.updateContextValue({
+      activeKey: null,
+      pendingKey: null
+    })
   }
 
   handleDrop = (evt: SyntheticMouseEvent<HTMLElement>) => {
-    // save it first as it will be reset by `unsetActiveKey`
+    // save it first as it will be reset by `resetContextValue`
     const {activeKey} = this.state.contextValue
 
-    this.unsetActiveKey()
+    this.resetContextValue()
     if (activeKey !== null) this.props.onDrop(evt, activeKey)
     this.props.onDragEnd(evt)
   }
@@ -51,7 +68,7 @@ export default class DragAndDropProvider extends PureComponent<Props, State> {
     // this hack let us know if user mouse up outside of the window and go back to window
     // onDrop() should not be called because we are not sure that means user wanna drop
     if (evt.buttons !== 1) {
-      this.unsetActiveKey()
+      this.resetContextValue()
       this.props.onDragEnd(evt)
     }
   }

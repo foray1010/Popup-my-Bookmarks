@@ -4,9 +4,13 @@ import {createContext} from 'react'
 
 export type ContextType = {|
   activeKey: string | null,
-  setActiveKey: (string) => void
+  pendingKey: string | null,
+  setActiveKey: (string) => void,
+  setPendingKey: (string) => void
 |}
 export default createContext<ContextType>({
   activeKey: null,
-  setActiveKey: () => {}
+  pendingKey: null,
+  setActiveKey: () => {},
+  setPendingKey: () => {}
 })

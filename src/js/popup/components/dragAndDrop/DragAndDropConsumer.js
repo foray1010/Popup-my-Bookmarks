@@ -46,35 +46,37 @@ export default class DragAndDrop extends PureComponent<Props, State> {
     }
   }
   handleMouseUpCapture = () => {
-    if (this.context.activeKey !== null) {
-      this.setState({
-        shouldDisableNextClick: true
-      })
-    }
+    this.setState({
+      shouldDisableNextClick: true
+    })
   }
 
   handleDragOver = (evt: SyntheticMouseEvent<HTMLElement>) => {
     this.props.onDragOver(evt, this.getResponseEvent())
   }
-  handleDragStart = (evt: SyntheticMouseEvent<HTMLElement>) => {
+  handleBeforeDragStart = (evt: SyntheticMouseEvent<HTMLElement>) => {
     if (evt.buttons !== 1) return
-    if (this.context.activeKey !== null) return
 
+    this.context.setPendingKey(this.props.itemKey)
+  }
+  handleDragStart = (evt: SyntheticMouseEvent<HTMLElement>) => {
     this.context.setActiveKey(this.props.itemKey)
     this.props.onDragStart(evt, this.getResponseEvent())
   }
 
   render() {
     const isDragging = this.context.activeKey !== null
+    const isPending = this.context.pendingKey === this.props.itemKey
     return (
       <div
         className={this.props.className}
         {...(this.props.enabled !== false ?
           {
             onClickCapture: this.handleClickCapture,
-            onMouseMove: this.handleDragStart,
+            onMouseDown: isDragging ? null : this.handleBeforeDragStart,
+            onMouseMove: isPending ? this.handleDragStart : null,
             onMouseOver: isDragging ? this.handleDragOver : null,
-            onMouseUpCapture: this.handleMouseUpCapture
+            onMouseUpCapture: isDragging ? this.handleMouseUpCapture : null
           } :
           {})}
       >
