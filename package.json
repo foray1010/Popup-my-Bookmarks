@@ -46,7 +46,7 @@
     "store": "2.0.12",
     "styled-components": "4.1.3",
     "typeface-archivo-narrow": "0.0.54",
-    "webextension-polyfill": "0.3.1"
+    "webextension-polyfill": "0.4.0"
   },
   "devDependencies": {
     "@babel/core": "7.2.2",
