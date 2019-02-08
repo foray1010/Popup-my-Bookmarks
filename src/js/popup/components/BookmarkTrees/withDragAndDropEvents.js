@@ -1,18 +1,18 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {type ComponentType, PureComponent, createElement} from 'react'
+import * as React from 'react'
 import {connect} from 'react-redux'
 
 import {bookmarkCreators} from '../../reduxs'
 import DragAndDropProvider from '../dragAndDrop/DragAndDropProvider'
 
-export default <P>(WrappedComponent: ComponentType<P>) => {
+export default <P>(WrappedComponent: React.ComponentType<P>) => {
   type Props = {|
     ...P,
     moveBookmarkToDragIndicator: (string) => void,
     removeDragIndicator: () => void
   |}
-  class DragAndDropEvents extends PureComponent<Props> {
+  class DragAndDropEvents extends React.PureComponent<Props> {
     handleDragEnd = () => {
       this.props.removeDragIndicator()
     }

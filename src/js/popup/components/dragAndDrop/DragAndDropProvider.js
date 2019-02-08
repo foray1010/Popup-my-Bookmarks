@@ -1,19 +1,19 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {Fragment, type Node, PureComponent, createElement} from 'react'
+import * as React from 'react'
 import EventListener from 'react-event-listener'
 
 import DragAndDropContext, {type ContextType} from './DragAndDropContext'
 
 type Props = {|
-  children: Node,
+  children: React.Node,
   onDragEnd: (SyntheticMouseEvent<HTMLElement>) => void,
   onDrop: (SyntheticMouseEvent<HTMLElement>, string) => void
 |}
 type State = {|
   contextValue: ContextType
 |}
-export default class DragAndDropProvider extends PureComponent<Props, State> {
+export default class DragAndDropProvider extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props)
 
@@ -75,7 +75,7 @@ export default class DragAndDropProvider extends PureComponent<Props, State> {
 
   render() {
     return (
-      <Fragment>
+      <React.Fragment>
         <DragAndDropContext.Provider value={this.state.contextValue}>
           {this.props.children}
         </DragAndDropContext.Provider>
@@ -86,7 +86,7 @@ export default class DragAndDropProvider extends PureComponent<Props, State> {
             onMouseUp={this.handleDrop}
           />
         )}
-      </Fragment>
+      </React.Fragment>
     )
   }
 }

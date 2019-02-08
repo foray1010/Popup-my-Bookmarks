@@ -1,6 +1,6 @@
 // @flow strict
 
-import {createContext} from 'react'
+import * as React from 'react'
 
 export type ContextType = {|
   activeKey: string | null,
@@ -8,7 +8,7 @@ export type ContextType = {|
   setActiveKey: (string) => void,
   setPendingKey: (string) => void
 |}
-export default createContext<ContextType>({
+export default React.createContext<ContextType>({
   activeKey: null,
   pendingKey: null,
   setActiveKey: () => {},

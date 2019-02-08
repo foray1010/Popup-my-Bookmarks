@@ -1,7 +1,6 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {PureComponent, createElement} from 'react'
-import type {Node} from 'react'
+import * as React from 'react'
 
 import DragAndDropContext, {type ContextType} from './DragAndDropContext'
 
@@ -11,7 +10,7 @@ export type ResponseEvent = {
 }
 
 type Props = {|
-  children: Node,
+  children: React.Node,
   className?: string,
   enabled?: boolean,
   itemKey: string,
@@ -21,7 +20,7 @@ type Props = {|
 type State = {|
   shouldDisableNextClick: boolean
 |}
-export default class DragAndDrop extends PureComponent<Props, State> {
+export default class DragAndDrop extends React.PureComponent<Props, State> {
   context: ContextType
   static contextType = DragAndDropContext
   static defaultProps = {
