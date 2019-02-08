@@ -16,6 +16,7 @@ export const bookmarkTypes = {
   EDIT_BOOKMARK: 'EDIT_BOOKMARK',
   GET_SEARCH_RESULT: 'GET_SEARCH_RESULT',
   INIT_BOOKMARK_TREES: 'INIT_BOOKMARK_TREES',
+  MOVE_BOOKMARK_TO_DRAG_INDICATOR: 'MOVE_BOOKMARK_TO_DRAG_INDICATOR',
   OPEN_BOOKMARK_TREE: 'OPEN_BOOKMARK_TREE',
   OPEN_BOOKMARKS_IN_BROWSER: 'OPEN_BOOKMARKS_IN_BROWSER',
   PASTE_BOOKMARK: 'PASTE_BOOKMARK',
@@ -86,6 +87,13 @@ const getSearchResult = createAction(bookmarkTypes.GET_SEARCH_RESULT, (searchKey
 
 const initBookmarkTrees = createAction(bookmarkTypes.INIT_BOOKMARK_TREES)
 
+const moveBookmarkToDragIndicator = createAction(
+  bookmarkTypes.MOVE_BOOKMARK_TO_DRAG_INDICATOR,
+  (bookmarkId: string) => ({
+    bookmarkId
+  })
+)
+
 const openBookmarksInBrowser = createAction(
   bookmarkTypes.OPEN_BOOKMARKS_IN_BROWSER,
   (ids: Array<string>, openIn: OpenIn, isCloseBrowser: boolean) => ({
@@ -151,6 +159,7 @@ export const bookmarkCreators = {
   editBookmark,
   getSearchResult,
   initBookmarkTrees,
+  moveBookmarkToDragIndicator,
   openBookmarksInBrowser,
   openBookmarkTree,
   pasteBookmark,

@@ -9,6 +9,7 @@ import DragAndDropProvider from '../dragAndDrop/DragAndDropProvider'
 export default <P>(WrappedComponent: ComponentType<P>) => {
   type Props = {|
     ...P,
+    moveBookmarkToDragIndicator: (string) => void,
     removeDragIndicator: () => void
   |}
   class DragAndDropEvents extends PureComponent<Props> {
@@ -16,8 +17,8 @@ export default <P>(WrappedComponent: ComponentType<P>) => {
       this.props.removeDragIndicator()
     }
 
-    handleDrop = () => {
-      console.log('drop')
+    handleDrop = (evt: SyntheticMouseEvent<HTMLElement>, activeKey: string) => {
+      this.props.moveBookmarkToDragIndicator(activeKey)
     }
 
     render = () => (
@@ -28,6 +29,7 @@ export default <P>(WrappedComponent: ComponentType<P>) => {
   }
 
   const mapDispatchToProps = {
+    moveBookmarkToDragIndicator: bookmarkCreators.moveBookmarkToDragIndicator,
     removeDragIndicator: bookmarkCreators.removeDragIndicator
   }
 
