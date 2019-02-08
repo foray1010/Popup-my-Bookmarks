@@ -3810,10 +3810,10 @@ eslint-config-airbnb@17.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-foray1010@6.19.0:
-  version "6.19.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-foray1010/-/eslint-config-foray1010-6.19.0.tgz#40208e2d1e06d162c796d666590397ffe70a2d74"
-  integrity sha512-ntNhpUMc+Fq4GZxUsJTxi49FFdPQbh0MmzM4EiWJzhMenof5ZWiPllvBmf+i/iUdVLVf++bDCiSL7wK1cnm5bw==
+eslint-config-foray1010@7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-foray1010/-/eslint-config-foray1010-7.0.0.tgz#c0b1719de7a9736a8d8a5d98aeacb8404ca1a4c0"
+  integrity sha512-yGaB7aGO/vRW6nuRbukzWQDE6c8ybLGbJBuRk7Zd7XK5GGHP3rkOTSZ8sa8AAUKa8C1w8FGCB99gS71GME9Szw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^1.0.0"
     "@typescript-eslint/parser" "^1.0.0"
@@ -3829,6 +3829,7 @@ eslint-config-foray1010@6.19.0:
     eslint-plugin-node "^8.0.0"
     eslint-plugin-ramda "^2.5.0"
     eslint-plugin-react "^7.11.0"
+    eslint-plugin-react-hooks "^1.0.1"
 
 eslint-import-resolver-node@^0.3.1:
   version "0.3.2"
@@ -3933,6 +3934,11 @@ eslint-plugin-ramda@^2.5.0:
     create-eslint-index "^1.0.0"
     ramda "0.25.0"
     req-all "^1.0.0"
+
+eslint-plugin-react-hooks@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-1.0.1.tgz#76b6fb4edafab02eab0090078977687157605dd9"
+  integrity sha512-yNhvY7EFBp0mq0Bt8BHoS57GwJ4e1qSYdvDFSfPnjmiSmyGUfQFQGcQs4K0JQFDGopWkURWq58psbUJIhWZ2Kg==
 
 eslint-plugin-react@^7.11.0:
   version "7.11.1"
