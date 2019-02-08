@@ -1,8 +1,7 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import * as R from 'ramda'
-import {PureComponent, createElement} from 'react'
-import type {Node} from 'react'
+import * as React from 'react'
 import {connect} from 'react-redux'
 
 import {type RootState, bookmarkCreators} from '../../reduxs'
@@ -12,11 +11,11 @@ import withKeyboardNav from './withKeyboardNav'
 
 type Props = {|
   initBookmarkTrees: () => void,
-  mainTreeHeader: Node,
+  mainTreeHeader: React.Node,
   options: Object,
   treeIds: Array<string>
 |}
-class BookmarkTreesContainer extends PureComponent<Props> {
+class BookmarkTreesContainer extends React.PureComponent<Props> {
   componentDidMount() {
     this.props.initBookmarkTrees()
   }

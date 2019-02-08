@@ -1,8 +1,8 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import classNames from 'classnames'
 import * as R from 'ramda'
-import {PureComponent, createElement} from 'react'
+import * as React from 'react'
 import styled from 'styled-components'
 
 import classes from '../../../../css/popup/bookmark-row.css'
@@ -22,7 +22,7 @@ type Props = {|
   onMouseEnter: (BookmarkInfo) => () => void,
   onMouseLeave: () => void
 |}
-class BookmarkRow extends PureComponent<Props> {
+class BookmarkRow extends React.PureComponent<Props> {
   baseEl: ?HTMLElement
 
   componentDidMount() {

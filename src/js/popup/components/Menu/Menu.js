@@ -1,6 +1,6 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {createElement} from 'react'
+import * as React from 'react'
 
 import classes from '../../../../css/popup/menu.css'
 import type {MenuPattern} from '../../types'

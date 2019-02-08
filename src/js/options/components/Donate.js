@@ -1,6 +1,6 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {createElement} from 'react'
+import * as React from 'react'
 
 import classes from '../../../css/options/donate.css'
 import donateIcon from '../../../img/btn_donateCC_LG.png'

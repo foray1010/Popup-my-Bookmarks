@@ -1,20 +1,19 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {Fragment, PureComponent, createElement} from 'react'
-import type {ComponentType} from 'react'
+import * as React from 'react'
 import EventListener from 'react-event-listener'
 
-export default <P>(WrappedComponent: ComponentType<P>) => {
-  return class KeyboardEvents extends PureComponent<P> {
+export default <P>(WrappedComponent: React.ComponentType<P>) => {
+  return class KeyboardEvents extends React.PureComponent<P> {
     handleKeyDown = (evt: KeyboardEvent) => {
       if (evt.key === 'Escape') evt.preventDefault()
     }
 
     render = () => (
-      <Fragment>
+      <React.Fragment>
         <WrappedComponent {...this.props} />
         <EventListener target={document} onKeyDown={this.handleKeyDown} />
-      </Fragment>
+      </React.Fragment>
     )
   }
 }

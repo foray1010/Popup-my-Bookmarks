@@ -1,9 +1,9 @@
 // @flow strict
 
-import type {Element} from 'react'
+import * as React from 'react'
 import {render} from 'react-dom'
 
-export default (app: Element<any>) => {
+export default (app: React.Element<any>) => {
   const rootEl = document.createElement('div')
 
   render(app, rootEl)

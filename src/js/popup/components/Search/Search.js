@@ -1,6 +1,6 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {PureComponent, createElement} from 'react'
+import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import classes from '../../../../css/popup/search.css'
@@ -12,7 +12,7 @@ type Props = {|
   onChange: (SyntheticInputEvent<HTMLInputElement>) => void,
   onFocus: () => void
 |}
-class Search extends PureComponent<Props> {
+class Search extends React.PureComponent<Props> {
   inputEl: ?HTMLElement
 
   componentDidMount() {

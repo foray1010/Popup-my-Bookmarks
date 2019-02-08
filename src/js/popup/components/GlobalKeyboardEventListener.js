@@ -1,6 +1,6 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {createElement} from 'react'
+import * as React from 'react'
 import EventListener from 'react-event-listener'
 import {connect} from 'react-redux'
 

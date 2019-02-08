@@ -1,6 +1,6 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {createElement} from 'react'
+import * as React from 'react'
 
 import classes from '../../../../../css/options/select-button.css'
 import Option from './Option'

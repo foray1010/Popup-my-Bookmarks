@@ -1,6 +1,6 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {Fragment, PureComponent, createElement} from 'react'
+import * as React from 'react'
 import {connect} from 'react-redux'
 
 import {normalizeInputtingValue} from '../../../common/utils'
@@ -16,7 +16,7 @@ type Props = {|
 type State = {|
   inputValue: string
 |}
-class SearchContainer extends PureComponent<Props, State> {
+class SearchContainer extends React.PureComponent<Props, State> {
   state = {
     inputValue: ''
   }
@@ -51,7 +51,7 @@ class SearchContainer extends PureComponent<Props, State> {
   }
 
   render = () => (
-    <Fragment>
+    <React.Fragment>
       <Search
         inputValue={this.state.inputValue}
         isFocus={this.props.isFocusSearchInput}
@@ -60,7 +60,7 @@ class SearchContainer extends PureComponent<Props, State> {
         onChange={this.handleInput}
       />
       <GlobalKeyboardEventListener onKeyDown={this.handleDocumentKeyDown} />
-    </Fragment>
+    </React.Fragment>
   )
 }
 

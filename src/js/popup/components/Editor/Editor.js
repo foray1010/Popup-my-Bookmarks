@@ -1,7 +1,7 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import * as R from 'ramda'
-import {PureComponent, createElement} from 'react'
+import * as React from 'react'
 import styled from 'styled-components'
 import webExtension from 'webextension-polyfill'
 
@@ -25,7 +25,7 @@ type State = {|
   title: string,
   url: string
 |}
-class Editor extends PureComponent<Props, State> {
+class Editor extends React.PureComponent<Props, State> {
   state = {
     title: this.props.title,
     url: this.props.url

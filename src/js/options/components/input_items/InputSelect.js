@@ -1,7 +1,7 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import * as R from 'ramda'
-import {PureComponent, createElement} from 'react'
+import * as React from 'react'
 
 import classes from '../../../../css/options/input-select.css'
 import {normalizeInputtingValue} from '../../../common/utils'
@@ -12,7 +12,7 @@ type Props = {|
   optionValue: string,
   updateSingleOption: (string, string) => void
 |}
-class InputSelect extends PureComponent<Props> {
+class InputSelect extends React.PureComponent<Props> {
   inputEl: ?HTMLInputElement
   selectEl: ?HTMLSelectElement
 

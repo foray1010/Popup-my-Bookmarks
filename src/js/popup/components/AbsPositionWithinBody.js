@@ -1,8 +1,7 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import * as R from 'ramda'
-import {Fragment, PureComponent, createElement} from 'react'
-import type {Node} from 'react'
+import * as React from 'react'
 import Measure from 'react-measure'
 import styled, {createGlobalStyle} from 'styled-components'
 
@@ -19,7 +18,7 @@ const Wrapper = styled('div')`
 `
 
 type Props = {|
-  children: Node,
+  children: React.Node,
   positionLeft: number,
   positionTop: number
 |}
@@ -31,7 +30,7 @@ type State = {|
   mainHeight: number,
   mainWidth: number
 |}
-class AbsPositionWithinBody extends PureComponent<Props, State> {
+class AbsPositionWithinBody extends React.PureComponent<Props, State> {
   state = {
     bodyHeight: null,
     bodyWidth: null,
@@ -85,7 +84,7 @@ class AbsPositionWithinBody extends PureComponent<Props, State> {
   }
 
   render = () => (
-    <Fragment>
+    <React.Fragment>
       <GlobalStyles bodyHeight={this.state.bodyHeight} bodyWidth={this.state.bodyWidth} />
       <Measure offset onResize={this.measureOnResize}>
         {({measureRef}) => (
@@ -98,7 +97,7 @@ class AbsPositionWithinBody extends PureComponent<Props, State> {
           </Wrapper>
         )}
       </Measure>
-    </Fragment>
+    </React.Fragment>
   )
 }
 

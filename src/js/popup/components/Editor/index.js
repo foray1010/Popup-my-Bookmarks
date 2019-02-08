@@ -1,6 +1,6 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {Fragment, PureComponent, createElement} from 'react'
+import * as React from 'react'
 import {connect} from 'react-redux'
 import webExtension from 'webextension-polyfill'
 
@@ -22,7 +22,7 @@ type Props = {|
   url: string,
   width: number
 |}
-class EditorContainer extends PureComponent<Props> {
+class EditorContainer extends React.PureComponent<Props> {
   handleConfirm = (title, url) => {
     if (this.props.isCreating) {
       this.props.createBookmarkAfterId(this.props.targetId, title, url)
@@ -33,7 +33,7 @@ class EditorContainer extends PureComponent<Props> {
   }
 
   render = () => (
-    <Fragment>
+    <React.Fragment>
       <Mask backgroundColor='#fff' opacity={0.3} onClick={this.props.closeEditor} />
       <AbsPositionWithinBody
         positionLeft={this.props.positionLeft}
@@ -53,7 +53,7 @@ class EditorContainer extends PureComponent<Props> {
           onConfirm={this.handleConfirm}
         />
       </AbsPositionWithinBody>
-    </Fragment>
+    </React.Fragment>
   )
 }
 

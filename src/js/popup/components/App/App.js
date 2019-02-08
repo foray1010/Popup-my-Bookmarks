@@ -1,8 +1,8 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import '../../../../css/popup/app.css'
 
-import {Fragment, createElement} from 'react'
+import * as React from 'react'
 
 import BookmarkTrees from '../BookmarkTrees'
 import Editor from '../Editor'
@@ -14,11 +14,11 @@ type Props = {|
   isShowMenu: boolean
 |}
 const App = (props: Props) => (
-  <Fragment>
+  <React.Fragment>
     <BookmarkTrees mainTreeHeader={<Search />} />
     {props.isShowEditor && <Editor />}
     {props.isShowMenu && <Menu />}
-  </Fragment>
+  </React.Fragment>
 )
 
 export default App

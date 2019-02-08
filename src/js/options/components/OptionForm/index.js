@@ -1,6 +1,6 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {PureComponent, createElement} from 'react'
+import * as React from 'react'
 import {connect} from 'react-redux'
 
 import {getOptionsConfig} from '../../../common/utils'
@@ -18,7 +18,7 @@ type Props = {|
 type State = {|
   optionsConfig: ?Object
 |}
-class OptionFormContainer extends PureComponent<Props, State> {
+class OptionFormContainer extends React.PureComponent<Props, State> {
   state = {
     optionsConfig: null
   }

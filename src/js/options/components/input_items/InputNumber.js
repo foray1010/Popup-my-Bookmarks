@@ -1,7 +1,7 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import * as R from 'ramda'
-import {PureComponent, createElement} from 'react'
+import * as React from 'react'
 
 type Props = {|
   maximum: number,
@@ -10,7 +10,7 @@ type Props = {|
   optionValue: number,
   updateSingleOption: (string, number) => void
 |}
-class InputNumber extends PureComponent<Props> {
+class InputNumber extends React.PureComponent<Props> {
   handleBlur = (evt: SyntheticEvent<HTMLInputElement>) => {
     const parsedValue = parseInt(evt.currentTarget.value, 10)
 

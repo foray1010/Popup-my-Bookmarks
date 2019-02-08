@@ -1,6 +1,6 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {Fragment, createElement} from 'react'
+import * as React from 'react'
 
 import classes from '../../../css/options/contributors.css'
 
@@ -33,12 +33,12 @@ const contributors = {
 const Contributors = () => (
   <dl className={classes.main}>
     {Object.keys(contributors).map((contributeType) => (
-      <Fragment key={contributeType}>
+      <React.Fragment key={contributeType}>
         <dt>{contributeType}</dt>
         {contributors[contributeType].map((contributor) => (
           <dd key={contributor}>{contributor}</dd>
         ))}
-      </Fragment>
+      </React.Fragment>
     ))}
   </dl>
 )
