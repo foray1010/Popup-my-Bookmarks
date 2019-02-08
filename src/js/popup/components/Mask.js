@@ -1,7 +1,7 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import * as R from 'ramda'
-import {createElement} from 'react'
+import * as React from 'react'
 import styled from 'styled-components'
 
 import classes from '../../../css/popup/mask.css'

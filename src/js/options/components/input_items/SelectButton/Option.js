@@ -1,7 +1,7 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import classNames from 'classnames'
-import {PureComponent, createElement} from 'react'
+import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import classes from '../../../../../css/options/select-button-option.css'
@@ -12,7 +12,7 @@ type Props = {|
   optionValue: boolean,
   updateSingleOption: (string, boolean) => void
 |}
-class Option extends PureComponent<Props> {
+class Option extends React.PureComponent<Props> {
   inputEl: ?HTMLInputElement
 
   handleChange = (evt: SyntheticEvent<HTMLInputElement>) => {

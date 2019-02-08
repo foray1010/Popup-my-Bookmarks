@@ -1,12 +1,11 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {createElement} from 'react'
-import type {Node} from 'react'
+import * as React from 'react'
 
 import classes from '../../../css/options/external-link.css'
 
 type Props = {|
-  children: Node,
+  children: React.Node,
   href: string
 |}
 const ExternalLink = (props: Props) => (

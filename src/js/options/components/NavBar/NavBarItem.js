@@ -1,7 +1,7 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import classNames from 'classnames'
-import {PureComponent, createElement} from 'react'
+import * as React from 'react'
 
 import classes from '../../../../css/options/nav-bar-item.css'
 
@@ -11,7 +11,7 @@ type Props = {|
   switchNavModule: (string) => void,
   title: string
 |}
-class NavBarItem extends PureComponent<Props> {
+class NavBarItem extends React.PureComponent<Props> {
   handleClick = () => {
     this.props.switchNavModule(this.props.navModule)
   }

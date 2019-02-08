@@ -1,9 +1,8 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import classNames from 'classnames'
 import * as R from 'ramda'
-import {createElement} from 'react'
-import type {Node} from 'react'
+import * as React from 'react'
 import styled from 'styled-components'
 
 import classes from '../../../../css/popup/bookmark-trees.css'
@@ -11,7 +10,7 @@ import BookmarkTree from '../BookmarkTree'
 
 type Props = {|
   className: string,
-  mainTreeHeader: Node,
+  mainTreeHeader: React.Node,
   treeIds: Array<string>
 |}
 const BookmarkTrees = (props: Props) => {

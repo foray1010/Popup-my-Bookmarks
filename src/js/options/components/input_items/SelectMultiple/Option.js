@@ -1,6 +1,6 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {PureComponent, createElement} from 'react'
+import * as React from 'react'
 
 type Props = {|
   optionChoice: string,
@@ -9,7 +9,7 @@ type Props = {|
   optionValue: Array<number>,
   updateSingleOption: (string, Array<number>) => void
 |}
-class Option extends PureComponent<Props> {
+class Option extends React.PureComponent<Props> {
   inputId = Math.random()
     .toString(36)
     .substring(2)

@@ -1,6 +1,6 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {PureComponent, createElement} from 'react'
+import * as React from 'react'
 
 type Props = {|
   choices: Array<string | void>,
@@ -8,7 +8,7 @@ type Props = {|
   optionValue: number,
   updateSingleOption: (string, number) => void
 |}
-class SelectString extends PureComponent<Props> {
+class SelectString extends React.PureComponent<Props> {
   handleChange = (evt: SyntheticEvent<HTMLSelectElement>) => {
     this.props.updateSingleOption(this.props.optionName, parseInt(evt.currentTarget.value, 10))
   }

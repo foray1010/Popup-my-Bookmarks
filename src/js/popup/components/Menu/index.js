@@ -1,6 +1,6 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {Fragment, PureComponent, createElement} from 'react'
+import * as React from 'react'
 import {connect} from 'react-redux'
 
 import * as CST from '../../constants'
@@ -21,7 +21,7 @@ type Props = {|
   setFocusedRow: (string) => void,
   unclickableRows: Array<string>
 |}
-class MenuContainer extends PureComponent<Props> {
+class MenuContainer extends React.PureComponent<Props> {
   handleRowClick = (rowKey: string) => () => {
     this.props.clickMenuRow(rowKey)
     this.props.closeMenu()
@@ -36,7 +36,7 @@ class MenuContainer extends PureComponent<Props> {
   }
 
   render = () => (
-    <Fragment>
+    <React.Fragment>
       <Mask backgroundColor='#fff' opacity={0.3} onClick={this.props.closeMenu} />
       <AbsPositionWithinBody
         positionLeft={this.props.positionLeft}
@@ -51,7 +51,7 @@ class MenuContainer extends PureComponent<Props> {
           unclickableRows={this.props.unclickableRows}
         />
       </AbsPositionWithinBody>
-    </Fragment>
+    </React.Fragment>
   )
 }
 

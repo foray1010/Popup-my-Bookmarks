@@ -1,7 +1,7 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import * as R from 'ramda'
-import {Fragment, createElement} from 'react'
+import * as React from 'react'
 import {connect} from 'react-redux'
 import {createGlobalStyle} from 'styled-components'
 
@@ -23,10 +23,10 @@ type Props = {|
   options: Object
 |}
 const AppContainer = (props: Props) => (
-  <Fragment>
+  <React.Fragment>
     <GlobalStyles fontFamily={props.options.fontFamily} fontSize={props.options.fontSize} />
     <App isShowEditor={props.isShowEditor} isShowMenu={props.isShowMenu} />
-  </Fragment>
+  </React.Fragment>
 )
 
 const mapStateToProps = (state: RootState) => ({

@@ -1,8 +1,7 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import * as R from 'ramda'
-import {PureComponent, createElement} from 'react'
-import type {Node} from 'react'
+import * as React from 'react'
 import List from 'react-virtualized/dist/es/List'
 
 import classes from '../../../../css/popup/bookmark-tree.css'
@@ -18,7 +17,7 @@ type Props = {|
   isShowCover: boolean,
   isShowHeader: boolean,
   listItemWidth: number,
-  noRowsRenderer: () => Node,
+  noRowsRenderer: () => React.Node,
   onCloseButtonClick: () => void,
   onCoverClick: () => void,
   onRowAuxClick: (string) => (MouseEvent) => void,
@@ -32,7 +31,7 @@ type Props = {|
 type State = {|
   listHeight: number
 |}
-class BookmarkTree extends PureComponent<Props, State> {
+class BookmarkTree extends React.PureComponent<Props, State> {
   list: ?Object
 
   state = {

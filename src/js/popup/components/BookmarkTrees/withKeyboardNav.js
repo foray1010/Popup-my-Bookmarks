@@ -1,8 +1,7 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import * as R from 'ramda'
-import {Fragment, PureComponent, createElement} from 'react'
-import type {ComponentType} from 'react'
+import * as React from 'react'
 import {connect} from 'react-redux'
 
 import {type RootState, bookmarkCreators} from '../../reduxs'
@@ -49,7 +48,7 @@ const privatePropNames = [
   'setFocusId',
   'trees'
 ]
-const withKeyboardNav = <P>(WrappedComponent: ComponentType<P>) => {
+const withKeyboardNav = <P>(WrappedComponent: React.ComponentType<P>) => {
   type Props = {|
     ...P,
     arrowRightNavigate: (string, string) => void,
@@ -58,7 +57,7 @@ const withKeyboardNav = <P>(WrappedComponent: ComponentType<P>) => {
     setFocusId: (string) => void,
     trees: Array<BookmarkTree>
   |}
-  return class KeyboardNav extends PureComponent<Props> {
+  return class KeyboardNav extends React.PureComponent<Props> {
     handleDocumentArrowLeft = () => {
       const {trees} = this.props
 
@@ -112,10 +111,10 @@ const withKeyboardNav = <P>(WrappedComponent: ComponentType<P>) => {
     }
 
     render = () => (
-      <Fragment>
+      <React.Fragment>
         <WrappedComponent {...R.omit(privatePropNames, this.props)} />
         <GlobalKeyboardEventListener onKeyDown={this.handleDocumentKeyDown} />
-      </Fragment>
+      </React.Fragment>
     )
   }
 }

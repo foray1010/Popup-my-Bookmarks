@@ -1,7 +1,7 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import classNames from 'classnames'
-import {PureComponent, createElement} from 'react'
+import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import classes from '../../../../css/popup/menu-item.css'
@@ -14,7 +14,7 @@ type Props = {|
   onMouseLeave: () => void,
   rowName: string
 |}
-class MenuRow extends PureComponent<Props> {
+class MenuRow extends React.PureComponent<Props> {
   handleClick = this.props.onClick(this.props.rowName)
   handleMouseEnter = this.props.onMouseEnter(this.props.rowName)
 

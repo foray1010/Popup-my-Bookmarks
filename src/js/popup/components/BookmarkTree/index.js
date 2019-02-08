@@ -1,8 +1,8 @@
-// @flow strict @jsx createElement
+// @flow strict
 
 import debounce from 'lodash.debounce'
 import * as R from 'ramda'
-import {PureComponent, createElement} from 'react'
+import * as React from 'react'
 import {connect} from 'react-redux'
 
 import * as CST from '../../constants'
@@ -43,7 +43,7 @@ type Props = {|
   setFocusId: (string) => void,
   treeInfo: BookmarkTreeType
 |}
-class BookmarkTreeContainer extends PureComponent<Props> {
+class BookmarkTreeContainer extends React.PureComponent<Props> {
   closeCurrentTree = () => {
     this.props.removeBookmarkTree(this.props.treeInfo.parent.id)
   }

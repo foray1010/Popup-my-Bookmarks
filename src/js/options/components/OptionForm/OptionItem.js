@@ -1,6 +1,6 @@
-// @flow strict @jsx createElement
+// @flow strict
 
-import {createElement} from 'react'
+import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import classes from '../../../../css/options/option-item.css'
