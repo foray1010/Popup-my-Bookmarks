@@ -100,16 +100,6 @@ class BookmarkTreeContainer extends React.PureComponent<Props> {
     evt: SyntheticMouseEvent<HTMLElement>,
     responseEvent: ResponseEvent
   ) => {
-    if (bookmarkInfo.isRoot) {
-      console.debug('skip as hovering root item')
-      this.props.removeDragIndicator()
-      return
-    }
-    if (bookmarkInfo.isSimulated) {
-      console.debug('skip as hovering simulated item')
-      return
-    }
-
     const activeIndex = this.props.treeInfo.children.findIndex(
       (item) => item.id === responseEvent.activeKey
     )
@@ -161,7 +151,7 @@ class BookmarkTreeContainer extends React.PureComponent<Props> {
     <BookmarkTree
       highlightedId={this.props.highlightedId}
       iconSize={this.props.iconSize}
-      isDisableDragging={this.props.isSearching}
+      isDisableDragAndDrop={this.props.isSearching}
       isShowCover={this.props.isShowCover}
       isShowHeader={this.props.isShowHeader}
       listItemWidth={this.props.listItemWidth}

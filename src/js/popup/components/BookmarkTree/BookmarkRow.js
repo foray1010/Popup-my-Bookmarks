@@ -17,7 +17,7 @@ const IconImg = styled('img')`
 type Props = {|
   bookmarkInfo: BookmarkInfo,
   iconSize: number,
-  isDisableDragging: boolean,
+  isDisableDragAndDrop: boolean,
   isHighlighted: boolean,
   onAuxClick: (string) => (MouseEvent) => void,
   onClick: (string) => (SyntheticMouseEvent<HTMLElement>) => void,
@@ -48,7 +48,12 @@ class BookmarkRow extends React.PureComponent<Props> {
   render = () => (
     <DragAndDropConsumer
       className={classes['full-height']}
-      enabled={!this.props.isDisableDragging}
+      disableDrag={
+        this.props.isDisableDragAndDrop ||
+        this.props.bookmarkInfo.isRoot ||
+        this.props.bookmarkInfo.type === CST.TYPE_NO_BOOKMARK
+      }
+      disableDrop={this.props.isDisableDragAndDrop}
       itemKey={this.props.bookmarkInfo.id}
       onDragOver={this.handleDragOver}
       onDragStart={this.props.onDragStart}

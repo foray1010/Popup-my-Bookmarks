@@ -15,7 +15,7 @@ import TreeHeader from './TreeHeader'
 type Props = {|
   highlightedId: string,
   iconSize: number,
-  isDisableDragging: boolean,
+  isDisableDragAndDrop: boolean,
   isShowCover: boolean,
   isShowHeader: boolean,
   listItemWidth: number,
@@ -114,11 +114,7 @@ class BookmarkTree extends React.PureComponent<Props, State> {
               <BookmarkRow
                 bookmarkInfo={bookmarkInfo}
                 iconSize={this.props.iconSize}
-                isDisableDragging={
-                  this.props.isDisableDragging ||
-                  bookmarkInfo.isRoot ||
-                  bookmarkInfo.type === CST.TYPE_NO_BOOKMARK
-                }
+                isDisableDragAndDrop={this.props.isDisableDragAndDrop}
                 isHighlighted={this.props.highlightedId === bookmarkInfo.id}
                 onAuxClick={this.props.onRowAuxClick}
                 onClick={this.props.onRowClick}

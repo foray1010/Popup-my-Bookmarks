@@ -12,7 +12,8 @@ export type ResponseEvent = {
 type Props = {|
   children: React.Node,
   className?: string,
-  enabled?: boolean,
+  disableDrag?: boolean,
+  disableDrop?: boolean,
   itemKey: string,
   onDragOver: (SyntheticMouseEvent<HTMLElement>, ResponseEvent) => void,
   onDragStart: (SyntheticMouseEvent<HTMLElement>, ResponseEvent) => void
@@ -23,9 +24,6 @@ type State = {|
 export default class DragAndDrop extends React.PureComponent<Props, State> {
   context: ContextType
   static contextType = DragAndDropContext
-  static defaultProps = {
-    enabled: true
-  }
 
   state = {
     shouldDisableNextClick: false
@@ -69,13 +67,21 @@ export default class DragAndDrop extends React.PureComponent<Props, State> {
     return (
       <div
         className={this.props.className}
-        {...(this.props.enabled !== false ?
+        {...(isDragging ?
           {
             onClickCapture: this.handleClickCapture,
+            onMouseUpCapture: this.handleMouseUpCapture
+          } :
+          {})}
+        {...(this.props.disableDrag !== true ?
+          {
             onMouseDown: isDragging ? null : this.handleBeforeDragStart,
-            onMouseMove: isPending ? this.handleDragStart : null,
-            onMouseOver: isDragging ? this.handleDragOver : null,
-            onMouseUpCapture: isDragging ? this.handleMouseUpCapture : null
+            onMouseMove: isPending ? this.handleDragStart : null
+          } :
+          {})}
+        {...(this.props.disableDrop !== true ?
+          {
+            onMouseOver: isDragging ? this.handleDragOver : null
           } :
           {})}
       >
