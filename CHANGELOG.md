@@ -16,6 +16,7 @@ Bugfixes:
 
 - some bookmark rows may not have correct height after sorting/adding/deleting bookmarks
 - should not allow paste when searching
+- cannot drop bookmark when dragging
 
 ## 5.2.0 (22/7/2018)
 
