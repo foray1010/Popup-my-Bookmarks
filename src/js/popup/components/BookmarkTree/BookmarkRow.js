@@ -63,8 +63,10 @@ class BookmarkRow extends React.PureComponent<Props> {
           this.baseEl = ref
         }}
         className={classNames(classes.main, classes['full-height'], {
-          [classes.highlighted]: this.props.isHighlighted,
+          [classes.highlighted]:
+            this.props.isHighlighted && this.props.bookmarkInfo.type !== CST.TYPE_DRAG_INDICATOR,
           [classes['root-folder']]: this.props.bookmarkInfo.isRoot,
+          [classes['drag-indicator']]: this.props.bookmarkInfo.type === CST.TYPE_DRAG_INDICATOR,
           [classes.separator]: this.props.bookmarkInfo.type === CST.TYPE_SEPARATOR
         })}
         onClick={this.handleClick}

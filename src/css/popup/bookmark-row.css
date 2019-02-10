@@ -12,6 +12,10 @@
   display: flex;
   padding: var(--golden-gap) 0 var(--golden-gap) var(--golden-gap);
 
+  &.drag-indicator {
+    border: 1px dashed var(--highlight-level5);
+  }
+
   &.root-folder {
     color: inherit !important;
   }
