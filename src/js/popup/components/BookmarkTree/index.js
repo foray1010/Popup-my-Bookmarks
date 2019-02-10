@@ -149,6 +149,7 @@ class BookmarkTreeContainer extends React.PureComponent<Props> {
 
   render = () => (
     <BookmarkTree
+      draggingId={this.context.activeKey}
       highlightedId={this.props.highlightedId}
       iconSize={this.props.iconSize}
       isDisableDragAndDrop={this.props.isSearching}

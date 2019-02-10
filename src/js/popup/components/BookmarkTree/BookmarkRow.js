@@ -19,6 +19,7 @@ type Props = {|
   iconSize: number,
   isDisableDragAndDrop: boolean,
   isHighlighted: boolean,
+  isUnclickable: boolean,
   onAuxClick: (string) => (MouseEvent) => void,
   onClick: (string) => (SyntheticMouseEvent<HTMLElement>) => void,
   onDragOver: (BookmarkInfo) => (SyntheticMouseEvent<HTMLElement>, ResponseEvent) => void,
@@ -67,9 +68,10 @@ class BookmarkRow extends React.PureComponent<Props> {
             this.props.isHighlighted && this.props.bookmarkInfo.type !== CST.TYPE_DRAG_INDICATOR,
           [classes['root-folder']]: this.props.bookmarkInfo.isRoot,
           [classes['drag-indicator']]: this.props.bookmarkInfo.type === CST.TYPE_DRAG_INDICATOR,
-          [classes.separator]: this.props.bookmarkInfo.type === CST.TYPE_SEPARATOR
+          [classes.separator]: this.props.bookmarkInfo.type === CST.TYPE_SEPARATOR,
+          [classes.unclickable]: this.props.isUnclickable
         })}
-        onClick={this.handleClick}
+        onClick={this.props.isUnclickable ? null : this.handleClick}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.props.onMouseLeave}
       >
