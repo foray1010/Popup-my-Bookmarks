@@ -51,7 +51,7 @@ class SearchContainer extends React.PureComponent<Props, State> {
   }
 
   render = () => (
-    <React.Fragment>
+    <>
       <Search
         inputValue={this.state.inputValue}
         isFocus={this.props.isFocusSearchInput}
@@ -60,7 +60,7 @@ class SearchContainer extends React.PureComponent<Props, State> {
         onChange={this.handleInput}
       />
       <GlobalKeyboardEventListener onKeyDown={this.handleDocumentKeyDown} />
-    </React.Fragment>
+    </>
   )
 }
 

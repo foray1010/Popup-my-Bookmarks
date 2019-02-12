@@ -75,7 +75,7 @@ export default class DragAndDropProvider extends React.PureComponent<Props, Stat
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <DragAndDropContext.Provider value={this.state.contextValue}>
           {this.props.children}
         </DragAndDropContext.Provider>
@@ -86,7 +86,7 @@ export default class DragAndDropProvider extends React.PureComponent<Props, Stat
             onMouseUp={this.handleDrop}
           />
         )}
-      </React.Fragment>
+      </>
     )
   }
 }

@@ -111,10 +111,10 @@ const withKeyboardNav = <P>(WrappedComponent: React.ComponentType<P>) => {
     }
 
     render = () => (
-      <React.Fragment>
+      <>
         <WrappedComponent {...R.omit(privatePropNames, this.props)} />
         <GlobalKeyboardEventListener onKeyDown={this.handleDocumentKeyDown} />
-      </React.Fragment>
+      </>
     )
   }
 }

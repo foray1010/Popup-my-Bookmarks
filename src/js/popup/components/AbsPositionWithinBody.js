@@ -84,7 +84,7 @@ class AbsPositionWithinBody extends React.PureComponent<Props, State> {
   }
 
   render = () => (
-    <React.Fragment>
+    <>
       <GlobalStyles bodyHeight={this.state.bodyHeight} bodyWidth={this.state.bodyWidth} />
       <Measure offset onResize={this.measureOnResize}>
         {({measureRef}) => (
@@ -97,7 +97,7 @@ class AbsPositionWithinBody extends React.PureComponent<Props, State> {
           </Wrapper>
         )}
       </Measure>
-    </React.Fragment>
+    </>
   )
 }
 

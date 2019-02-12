@@ -14,11 +14,11 @@ type Props = {|
   isShowMenu: boolean
 |}
 const App = (props: Props) => (
-  <React.Fragment>
+  <>
     <BookmarkTrees mainTreeHeader={<Search />} />
     {props.isShowEditor && <Editor />}
     {props.isShowMenu && <Menu />}
-  </React.Fragment>
+  </>
 )
 
 export default App

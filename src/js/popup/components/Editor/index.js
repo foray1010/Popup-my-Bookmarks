@@ -33,7 +33,7 @@ class EditorContainer extends React.PureComponent<Props> {
   }
 
   render = () => (
-    <React.Fragment>
+    <>
       <Mask backgroundColor='#fff' opacity={0.3} onClick={this.props.closeEditor} />
       <AbsPositionWithinBody
         positionLeft={this.props.positionLeft}
@@ -53,7 +53,7 @@ class EditorContainer extends React.PureComponent<Props> {
           onConfirm={this.handleConfirm}
         />
       </AbsPositionWithinBody>
-    </React.Fragment>
+    </>
   )
 }
 

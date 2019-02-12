@@ -36,7 +36,7 @@ class MenuContainer extends React.PureComponent<Props> {
   }
 
   render = () => (
-    <React.Fragment>
+    <>
       <Mask backgroundColor='#fff' opacity={0.3} onClick={this.props.closeMenu} />
       <AbsPositionWithinBody
         positionLeft={this.props.positionLeft}
@@ -51,7 +51,7 @@ class MenuContainer extends React.PureComponent<Props> {
           unclickableRows={this.props.unclickableRows}
         />
       </AbsPositionWithinBody>
-    </React.Fragment>
+    </>
   )
 }
 

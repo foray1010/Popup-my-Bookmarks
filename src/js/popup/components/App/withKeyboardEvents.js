@@ -10,10 +10,10 @@ export default <P>(WrappedComponent: React.ComponentType<P>) => {
     }
 
     render = () => (
-      <React.Fragment>
+      <>
         <WrappedComponent {...this.props} />
         <EventListener target={document} onKeyDown={this.handleKeyDown} />
-      </React.Fragment>
+      </>
     )
   }
 }

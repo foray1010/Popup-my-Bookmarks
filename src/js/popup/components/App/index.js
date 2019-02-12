@@ -23,10 +23,10 @@ type Props = {|
   options: Object
 |}
 const AppContainer = (props: Props) => (
-  <React.Fragment>
+  <>
     <GlobalStyles fontFamily={props.options.fontFamily} fontSize={props.options.fontSize} />
     <App isShowEditor={props.isShowEditor} isShowMenu={props.isShowMenu} />
-  </React.Fragment>
+  </>
 )
 
 const mapStateToProps = (state: RootState) => ({

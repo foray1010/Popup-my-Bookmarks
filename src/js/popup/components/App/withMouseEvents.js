@@ -23,14 +23,14 @@ export default <P>(WrappedComponent: React.ComponentType<P>) => {
     }
 
     render = () => (
-      <React.Fragment>
+      <>
         <WrappedComponent {...this.props} />
         <EventListener
           target={document}
           onContextMenu={this.handleContextMenu}
           onMouseDown={this.handleMouseDown}
         />
-      </React.Fragment>
+      </>
     )
   }
 }
