@@ -1,8 +1,5 @@
 // @flow strict
 
-import * as R from 'ramda'
-
-export default R.compose(
-  R.replace(/\s+/g, ' '),
-  (value: string) => value.trimLeft()
-)
+export default (value: string) => {
+  return value.trimLeft().replace(/\s+/g, ' ')
+}
