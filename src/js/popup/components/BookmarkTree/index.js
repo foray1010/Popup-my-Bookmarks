@@ -100,16 +100,20 @@ class BookmarkTreeContainer extends React.PureComponent<Props> {
     evt: SyntheticMouseEvent<HTMLElement>,
     responseEvent: ResponseEvent
   ) => {
-    const activeIndex = this.props.treeInfo.children.findIndex(
-      (item) => item.id === responseEvent.activeKey
-    )
-    const index = this.props.treeInfo.children.findIndex(
-      (item) => item.id === responseEvent.itemKey
-    )
-
     const targetOffset = evt.currentTarget.getBoundingClientRect()
     const isOverBottomPart = evt.clientY - targetOffset.top > targetOffset.height / 2
-    const targetIndex = index + (isOverBottomPart ? 1 : 0)
+
+    const childrenWithoutDragIndicator = this.props.treeInfo.children.filter(
+      (child) => child.type !== CST.TYPE_DRAG_INDICATOR
+    )
+
+    const activeIndex = childrenWithoutDragIndicator.findIndex(
+      (item) => item.id === responseEvent.activeKey
+    )
+    const currentIndex = childrenWithoutDragIndicator.findIndex(
+      (item) => item.id === responseEvent.itemKey
+    )
+    const targetIndex = currentIndex + (isOverBottomPart ? 1 : 0)
 
     const isNearActiveItem =
       activeIndex === -1 ? false : [activeIndex, activeIndex + 1].includes(targetIndex)
