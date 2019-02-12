@@ -67,12 +67,8 @@ export default class DragAndDrop extends React.PureComponent<Props, State> {
     return (
       <div
         className={this.props.className}
-        {...(isDragging ?
-          {
-            onClickCapture: this.handleClickCapture,
-            onMouseUpCapture: this.handleMouseUpCapture
-          } :
-          {})}
+        onClickCapture={this.handleClickCapture}
+        onMouseUpCapture={isDragging ? this.handleMouseUpCapture : null}
         {...(this.props.disableDrag !== true ?
           {
             onMouseDown: isDragging ? null : this.handleBeforeDragStart,
