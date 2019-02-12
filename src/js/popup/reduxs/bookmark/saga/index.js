@@ -14,6 +14,7 @@ import {deleteBookmark} from './modules/deleteBookmark'
 import {editBookmark} from './modules/editBookmark'
 import {getSearchResult} from './modules/getSearchResult'
 import {initBookmarkTrees} from './modules/initBookmarkTrees'
+import {moveBookmarkToDragIndicator} from './modules/moveBookmarkToDragIndicator'
 import {openBookmarksInBrowser} from './modules/openBookmarksInBrowser'
 import {openBookmarkTree} from './modules/openBookmarkTree'
 import {pasteBookmark} from './modules/pasteBookmark'
@@ -31,6 +32,10 @@ export function* bookmarkSaga(): Saga<void> {
     takeLatest(bookmarkTypes.EDIT_BOOKMARK, silenceSaga(editBookmark)),
     takeLatest(bookmarkTypes.GET_SEARCH_RESULT, silenceSaga(getSearchResult)),
     takeLatest(bookmarkTypes.INIT_BOOKMARK_TREES, silenceSaga(initBookmarkTrees)),
+    takeLatest(
+      bookmarkTypes.MOVE_BOOKMARK_TO_DRAG_INDICATOR,
+      silenceSaga(moveBookmarkToDragIndicator)
+    ),
     takeLatest(bookmarkTypes.OPEN_BOOKMARK_TREE, silenceSaga(openBookmarkTree)),
     takeLatest(bookmarkTypes.OPEN_BOOKMARKS_IN_BROWSER, silenceSaga(openBookmarksInBrowser)),
     takeLatest(bookmarkTypes.PASTE_BOOKMARK, silenceSaga(pasteBookmark)),

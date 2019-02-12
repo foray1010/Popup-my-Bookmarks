@@ -2,9 +2,9 @@
 
 import Chance from 'chance'
 
-import * as CST from '../../../../constants'
-import bookmarkNodes from '../__fixtures__/bookmarkNodes'
-import bookmarkTrees from '../__fixtures__/bookmarkTrees'
+import * as CST from '../../../constants'
+import bookmarkNodes from '../saga/__fixtures__/bookmarkNodes'
+import bookmarkTrees from '../saga/__fixtures__/bookmarkTrees'
 import * as converters from './converters'
 
 const chance = Chance('converters')

@@ -8,13 +8,20 @@ import {call, put, select} from 'redux-saga/effects'
 import * as CST from '../../../../constants'
 import {sortByTitle} from '../../../../utils'
 import {bookmarkCreators} from '../../actions'
-import {simulateBookmark} from '../utils/converters'
+import {simulateBookmark} from '../../utils/converters'
 import {searchBookmarks} from '../utils/getters'
 
 export const generateSearchKeywordMatcher = (searchKeyword: string) => (title: string) =>
-  R.compose(R.all(R.compose(R.flip(R.contains), R.toLower)(title)), R.map(R.toLower), R.split(' '))(
-    searchKeyword
-  )
+  R.compose(
+    R.all(
+      R.compose(
+        R.flip(R.contains),
+        R.toLower
+      )(title)
+    ),
+    R.map(R.toLower),
+    R.split(' ')
+  )(searchKeyword)
 
 export function* getSearchResult({
   payload
@@ -37,7 +44,12 @@ export function* getSearchResult({
     (arr) => arr.slice(0, options.maxResults),
     R.when(
       R.always(isSearchTitleOnly),
-      R.filter(R.compose(generateSearchKeywordMatcher(payload.searchKeyword), R.prop('title')))
+      R.filter(
+        R.compose(
+          generateSearchKeywordMatcher(payload.searchKeyword),
+          R.prop('title')
+        )
+      )
     ),
     R.filter(R.propEq('type', CST.TYPE_BOOKMARK))
   )(searchResult)

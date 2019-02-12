@@ -2,9 +2,9 @@
 
 import * as R from 'ramda'
 
-import folderIcon from '../../../../../../img/folder.png'
-import * as CST from '../../../../constants'
-import type {BookmarkInfo, BookmarkNode, BookmarkType} from '../../../../types'
+import folderIcon from '../../../../../img/folder.png'
+import * as CST from '../../../constants'
+import type {BookmarkInfo, BookmarkNode, BookmarkType} from '../../../types'
 
 export const getIconUrl = (bookmarkInfo: BookmarkInfo): string => {
   if (bookmarkInfo.type === CST.TYPE_BOOKMARK) return `chrome://favicon/${bookmarkInfo.url}`
@@ -21,7 +21,8 @@ export const getType = (bookmarkNode: BookmarkNode): BookmarkType => {
 export const isRoot = (bookmarkNode: BookmarkNode): boolean =>
   bookmarkNode.id === CST.ROOT_ID || bookmarkNode.parentId === CST.ROOT_ID
 
-export const simulateBookmark = (partialBookmarkInfo: Object): BookmarkInfo => ({
+export const simulateBookmark = (partialBookmarkInfo: $Shape<BookmarkInfo>): BookmarkInfo => ({
+  id: '',
   parentId: '',
   title: '',
   ...partialBookmarkInfo,

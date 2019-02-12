@@ -2,7 +2,6 @@
 
 export * from '../../common/constants'
 
-export const DRAG_INDICATOR = 'drag-indicator'
 export const GOLDEN_GAP = 2
 export const MAX_HEIGHT = 598
 export const MIN_BOOKMARK_ICON_SIZE = 16
@@ -36,6 +35,7 @@ export const OPEN_IN_TYPES = {
 }
 
 export const TYPE_BOOKMARK = 'bookmark'
+export const TYPE_DRAG_INDICATOR = 'drag-indicator'
 export const TYPE_FOLDER = 'folder'
 export const TYPE_NO_BOOKMARK = 'no-bookmark'
 export const TYPE_SEPARATOR = 'separator'

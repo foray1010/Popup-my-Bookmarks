@@ -7,13 +7,16 @@ import List from 'react-virtualized/dist/es/List'
 import classes from '../../../../css/popup/bookmark-tree.css'
 import * as CST from '../../constants'
 import type {BookmarkInfo, BookmarkTree as BookmarkTreeType} from '../../types'
+import {type ResponseEvent} from '../dragAndDrop/DragAndDropConsumer'
 import Mask from '../Mask'
 import BookmarkRow from './BookmarkRow'
 import TreeHeader from './TreeHeader'
 
 type Props = {|
+  draggingId: string | null,
   highlightedId: string,
   iconSize: number,
+  isDisableDragAndDrop: boolean,
   isShowCover: boolean,
   isShowHeader: boolean,
   listItemWidth: number,
@@ -22,6 +25,8 @@ type Props = {|
   onCoverClick: () => void,
   onRowAuxClick: (string) => (MouseEvent) => void,
   onRowClick: (string) => (SyntheticMouseEvent<HTMLElement>) => void,
+  onRowDragOver: (BookmarkInfo) => (SyntheticMouseEvent<HTMLElement>, ResponseEvent) => void,
+  onRowDragStart: () => void,
   onRowMouseEnter: (BookmarkInfo) => () => void,
   onRowMouseLeave: () => void,
   rowHeight: number,
@@ -105,14 +110,19 @@ class BookmarkTree extends React.PureComponent<Props, State> {
         rowHeight={this.getRowHeight}
         rowRenderer={(rendererProps: {| index: number, style: Object |}) => {
           const bookmarkInfo = this.props.treeInfo.children[rendererProps.index]
+          const isBeingDragged = this.props.draggingId === bookmarkInfo.id
           return (
             <div key={bookmarkInfo.id} className={classes['list-item']} style={rendererProps.style}>
               <BookmarkRow
                 bookmarkInfo={bookmarkInfo}
                 iconSize={this.props.iconSize}
-                isHighlighted={this.props.highlightedId === bookmarkInfo.id}
+                isDisableDragAndDrop={this.props.isDisableDragAndDrop}
+                isHighlighted={this.props.highlightedId === bookmarkInfo.id || isBeingDragged}
+                isUnclickable={isBeingDragged}
                 onAuxClick={this.props.onRowAuxClick}
                 onClick={this.props.onRowClick}
+                onDragOver={this.props.onRowDragOver}
+                onDragStart={this.props.onRowDragStart}
                 onMouseEnter={this.props.onRowMouseEnter}
                 onMouseLeave={this.props.onRowMouseLeave}
               />

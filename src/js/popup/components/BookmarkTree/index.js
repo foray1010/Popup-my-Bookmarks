@@ -8,6 +8,8 @@ import {connect} from 'react-redux'
 import * as CST from '../../constants'
 import {type RootState, bookmarkCreators, menuCreators} from '../../reduxs'
 import type {BookmarkInfo, BookmarkTree as BookmarkTreeType, OpenIn} from '../../types'
+import {type ResponseEvent} from '../dragAndDrop/DragAndDropConsumer'
+import DragAndDropContext, {type ContextType} from '../dragAndDrop/DragAndDropContext'
 import BookmarkTree from './BookmarkTree'
 import NoSearchResult from './NoSearchResult'
 
@@ -37,13 +39,18 @@ type Props = {|
     |}
   ) => void,
   removeBookmarkTree: (string) => void,
+  removeDragIndicator: () => void,
   removeFocusId: () => void,
   removeNextBookmarkTrees: (string) => void,
   rowHeight: number,
+  setDragIndicator: (string, number) => void,
   setFocusId: (string) => void,
   treeInfo: BookmarkTreeType
 |}
 class BookmarkTreeContainer extends React.PureComponent<Props> {
+  context: ContextType
+  static contextType = DragAndDropContext
+
   closeCurrentTree = () => {
     this.props.removeBookmarkTree(this.props.treeInfo.parent.id)
   }
@@ -89,12 +96,42 @@ class BookmarkTreeContainer extends React.PureComponent<Props> {
   handleRowClick = (bookmarkId: string) => (evt: SyntheticMouseEvent<HTMLElement>) => {
     this._handleRowAllClick(bookmarkId, evt)
   }
+  handleRowDragOver = (bookmarkInfo: BookmarkInfo) => (
+    evt: SyntheticMouseEvent<HTMLElement>,
+    responseEvent: ResponseEvent
+  ) => {
+    const targetOffset = evt.currentTarget.getBoundingClientRect()
+    const isOverBottomPart = evt.clientY - targetOffset.top > targetOffset.height / 2
 
+    const childrenWithoutDragIndicator = this.props.treeInfo.children.filter(
+      (child) => child.type !== CST.TYPE_DRAG_INDICATOR
+    )
+
+    const activeIndex = childrenWithoutDragIndicator.findIndex(
+      (item) => item.id === responseEvent.activeKey
+    )
+    const currentIndex = childrenWithoutDragIndicator.findIndex(
+      (item) => item.id === responseEvent.itemKey
+    )
+    const targetIndex = currentIndex + (isOverBottomPart ? 1 : 0)
+
+    const isNearActiveItem =
+      activeIndex === -1 ? false : [activeIndex, activeIndex + 1].includes(targetIndex)
+    if (isNearActiveItem) {
+      console.debug('skip as nearby active item')
+      this.props.removeDragIndicator()
+      return
+    }
+
+    this.props.setDragIndicator(bookmarkInfo.parentId, targetIndex)
+  }
+  handleRowDragStart = () => {
+    this.closeNextTrees()
+  }
   handleRowMouseEnter = (bookmarkInfo: BookmarkInfo) => () => {
     this.toggleBookmarkTree(bookmarkInfo)
     this.props.setFocusId(bookmarkInfo.id)
   }
-
   handleRowMouseLeave = () => {
     this.toggleBookmarkTree.cancel()
     this.props.removeFocusId()
@@ -106,7 +143,7 @@ class BookmarkTreeContainer extends React.PureComponent<Props> {
   }
 
   _toggleBookmarkTree = (bookmarkInfo: BookmarkInfo) => {
-    if (bookmarkInfo.type === CST.TYPE_FOLDER) {
+    if (bookmarkInfo.type === CST.TYPE_FOLDER && bookmarkInfo.id !== this.context.activeKey) {
       this.props.openBookmarkTree(bookmarkInfo.id, this.props.treeInfo.parent.id)
     } else {
       this.closeNextTrees()
@@ -116,8 +153,10 @@ class BookmarkTreeContainer extends React.PureComponent<Props> {
 
   render = () => (
     <BookmarkTree
+      draggingId={this.context.activeKey}
       highlightedId={this.props.highlightedId}
       iconSize={this.props.iconSize}
+      isDisableDragAndDrop={this.props.isSearching}
       isShowCover={this.props.isShowCover}
       isShowHeader={this.props.isShowHeader}
       listItemWidth={this.props.listItemWidth}
@@ -126,6 +165,8 @@ class BookmarkTreeContainer extends React.PureComponent<Props> {
       onCoverClick={this.closeNextTrees}
       onRowAuxClick={this.handleRowAuxClick}
       onRowClick={this.handleRowClick}
+      onRowDragOver={this.handleRowDragOver}
+      onRowDragStart={this.handleRowDragStart}
       onRowMouseEnter={this.handleRowMouseEnter}
       onRowMouseLeave={this.handleRowMouseLeave}
       rowHeight={this.props.rowHeight}
@@ -164,8 +205,10 @@ const mapDispatchToProps = {
   openBookmarkTree: bookmarkCreators.openBookmarkTree,
   openMenu: menuCreators.openMenu,
   removeBookmarkTree: bookmarkCreators.removeBookmarkTree,
+  removeDragIndicator: bookmarkCreators.removeDragIndicator,
   removeFocusId: bookmarkCreators.removeFocusId,
   removeNextBookmarkTrees: bookmarkCreators.removeNextBookmarkTrees,
+  setDragIndicator: bookmarkCreators.setDragIndicator,
   setFocusId: bookmarkCreators.setFocusId
 }
 

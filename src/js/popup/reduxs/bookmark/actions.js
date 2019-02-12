@@ -8,23 +8,26 @@ export const bookmarkTypes = {
   ADD_CURRENT_PAGE: 'ADD_CURRENT_PAGE',
   ADD_SEPARATOR: 'ADD_SEPARATOR',
   ARROW_RIGHT_NAVIGATE: 'ARROW_RIGHT_NAVIGATE',
+  COPY_BOOKMARK: 'COPY_BOOKMARK',
   CREATE_BOOKMARK: 'CREATE_BOOKMARK',
   CREATE_BOOKMARK_AFTER_ID: 'CREATE_BOOKMARK_AFTER_ID',
-  COPY_BOOKMARK: 'COPY_BOOKMARK',
   CUT_BOOKMARK: 'CUT_BOOKMARK',
   DELETE_BOOKMARK: 'DELETE_BOOKMARK',
   EDIT_BOOKMARK: 'EDIT_BOOKMARK',
   GET_SEARCH_RESULT: 'GET_SEARCH_RESULT',
   INIT_BOOKMARK_TREES: 'INIT_BOOKMARK_TREES',
-  OPEN_BOOKMARKS_IN_BROWSER: 'OPEN_BOOKMARKS_IN_BROWSER',
+  MOVE_BOOKMARK_TO_DRAG_INDICATOR: 'MOVE_BOOKMARK_TO_DRAG_INDICATOR',
   OPEN_BOOKMARK_TREE: 'OPEN_BOOKMARK_TREE',
+  OPEN_BOOKMARKS_IN_BROWSER: 'OPEN_BOOKMARKS_IN_BROWSER',
   PASTE_BOOKMARK: 'PASTE_BOOKMARK',
   REFRESH_BOOKMARK_TREES: 'REFRESH_BOOKMARK_TREES',
   REMOVE_BOOKMARK_TREE: 'REMOVE_BOOKMARK_TREE',
+  REMOVE_DRAG_INDICATOR: 'REMOVE_DRAG_INDICATOR',
   REMOVE_FOCUS_ID: 'REMOVE_FOCUS_ID',
   REMOVE_NEXT_BOOKMARK_TREES: 'REMOVE_NEXT_BOOKMARK_TREES',
   RESET_CLIPBOARD: 'RESET_CLIPBOARD',
   SET_BOOKMARK_TREES: 'SET_BOOKMARK_TREES',
+  SET_DRAG_INDICATOR: 'SET_DRAG_INDICATOR',
   SET_FOCUS_ID: 'SET_FOCUS_ID',
   SORT_BOOKMARKS_BY_NAME: 'SORT_BOOKMARKS_BY_NAME'
 }
@@ -36,16 +39,15 @@ const addCurrentPage = createAction(
 
 const addSeparator = createAction(
   bookmarkTypes.ADD_SEPARATOR,
-  (parentId: string, index: number) => ({
-    parentId,
-    index
-  })
+  (parentId: string, index: number) => ({parentId, index})
 )
 
 const arrowRightNavigate = createAction(
   bookmarkTypes.ARROW_RIGHT_NAVIGATE,
   (id: string, parentId: string) => ({id, parentId})
 )
+
+const copyBookmark = createAction(bookmarkTypes.COPY_BOOKMARK, (id: string) => ({id}))
 
 const createBookmark = createAction(
   bookmarkTypes.CREATE_BOOKMARK,
@@ -66,8 +68,6 @@ const createBookmarkAfterId = createAction(
   })
 )
 
-const copyBookmark = createAction(bookmarkTypes.COPY_BOOKMARK, (id: string) => ({id}))
-
 const cutBookmark = createAction(bookmarkTypes.CUT_BOOKMARK, (id: string) => ({id}))
 
 const deleteBookmark = createAction(bookmarkTypes.DELETE_BOOKMARK, (id: string) => ({id}))
@@ -86,6 +86,13 @@ const getSearchResult = createAction(bookmarkTypes.GET_SEARCH_RESULT, (searchKey
 }))
 
 const initBookmarkTrees = createAction(bookmarkTypes.INIT_BOOKMARK_TREES)
+
+const moveBookmarkToDragIndicator = createAction(
+  bookmarkTypes.MOVE_BOOKMARK_TO_DRAG_INDICATOR,
+  (bookmarkId: string) => ({
+    bookmarkId
+  })
+)
 
 const openBookmarksInBrowser = createAction(
   bookmarkTypes.OPEN_BOOKMARKS_IN_BROWSER,
@@ -112,6 +119,8 @@ const removeBookmarkTree = createAction(bookmarkTypes.REMOVE_BOOKMARK_TREE, (id:
   id
 }))
 
+const removeDragIndicator = createAction(bookmarkTypes.REMOVE_DRAG_INDICATOR)
+
 const removeFocusId = createAction(bookmarkTypes.REMOVE_FOCUS_ID)
 
 const removeNextBookmarkTrees = createAction(
@@ -126,6 +135,11 @@ const setBookmarkTrees = createAction(
   (bookmarkTrees: Array<BookmarkTree>) => ({bookmarkTrees})
 )
 
+const setDragIndicator = createAction(
+  bookmarkTypes.SET_DRAG_INDICATOR,
+  (parentId: string, index: number) => ({parentId, index})
+)
+
 const setFocusId = createAction(bookmarkTypes.SET_FOCUS_ID, (focusId: string) => ({focusId}))
 
 const sortBookmarksByName = createAction(
@@ -137,23 +151,26 @@ export const bookmarkCreators = {
   addCurrentPage,
   addSeparator,
   arrowRightNavigate,
+  copyBookmark,
   createBookmark,
   createBookmarkAfterId,
-  copyBookmark,
   cutBookmark,
   deleteBookmark,
   editBookmark,
   getSearchResult,
   initBookmarkTrees,
+  moveBookmarkToDragIndicator,
   openBookmarksInBrowser,
   openBookmarkTree,
   pasteBookmark,
   refreshBookmarkTrees,
   removeBookmarkTree,
+  removeDragIndicator,
   removeFocusId,
   removeNextBookmarkTrees,
   resetClipboard,
   setBookmarkTrees,
+  setDragIndicator,
   setFocusId,
   sortBookmarksByName
 }

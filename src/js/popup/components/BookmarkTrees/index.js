@@ -7,6 +7,7 @@ import {connect} from 'react-redux'
 import {type RootState, bookmarkCreators} from '../../reduxs'
 import BookmarkTrees from './BookmarkTrees'
 import withBookmarkEvents from './withBookmarkEvents'
+import withDragAndDropEvents from './withDragAndDropEvents'
 import withKeyboardNav from './withKeyboardNav'
 
 type Props = {|
@@ -37,6 +38,7 @@ const mapDispatchToProps = {
 
 export default R.compose(
   withBookmarkEvents,
+  withDragAndDropEvents,
   withKeyboardNav,
   connect(
     mapStateToProps,
