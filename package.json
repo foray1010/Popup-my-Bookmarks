@@ -100,7 +100,7 @@
     "stylelint-processor-styled-components": "1.5.2",
     "terser-webpack-plugin": "1.2.2",
     "transifex": "1.6.6",
-    "webpack": "4.29.3",
+    "webpack": "4.29.4",
     "webpack-bundle-analyzer": "3.0.4",
     "webpack-cli": "3.2.3",
     "yaml-loader": "0.5.0",
