@@ -78,7 +78,7 @@
     "image-process-loader": "1.1.0",
     "import-sort-cli": "5.2.0",
     "import-sort-parser-babylon": "5.2.0",
-    "import-sort-style-module": "5.0.0",
+    "import-sort-style-module": "6.0.0",
     "jest": "24.1.0",
     "lint-staged": "8.1.4",
     "markdownlint-cli": "0.13.0",
