@@ -5,6 +5,7 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 import {createGlobalStyle} from 'styled-components'
 
+import type {Options} from '../../../common/types/options'
 import type {RootState} from '../../reduxs'
 import App from './App'
 import withKeyboardEvents from './withKeyboardEvents'
@@ -20,7 +21,7 @@ const GlobalStyles = createGlobalStyle`
 type Props = {|
   isShowEditor: boolean,
   isShowMenu: boolean,
-  options: Object
+  options: Options
 |}
 const AppContainer = (props: Props) => (
   <>

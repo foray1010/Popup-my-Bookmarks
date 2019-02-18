@@ -4,6 +4,7 @@ import Chance from 'chance'
 import * as R from 'ramda'
 import {call, put, select} from 'redux-saga/effects'
 
+import optionsFixture from '../../../../../common/__fixtures__/options.json'
 import {bookmarkCreators, bookmarkTypes} from '../../actions'
 import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import searchResult from '../__fixtures__/searchResult.json'
@@ -55,7 +56,7 @@ describe('getSearchResult', () => {
     expect(generator.next().done).toBe(true)
   })
   test('get search result with limited and sorted result if `searchKeyword` is not empty', () => {
-    const options = {maxResults: 10, searchTarget: 0}
+    const options = {...optionsFixture, maxResults: 10, searchTarget: 0}
     const searchKeyword = chance.word()
 
     const generator = getSearchResult({
@@ -78,7 +79,7 @@ describe('getSearchResult', () => {
     expect(generator.next().done).toBe(true)
   })
   test('get search result by title only if `searchTarget` is `1`', () => {
-    const options = {maxResults: 10, searchTarget: 1}
+    const options = {...optionsFixture, maxResults: 10, searchTarget: 1}
     const searchKeyword = 'a'
 
     const generator = getSearchResult({

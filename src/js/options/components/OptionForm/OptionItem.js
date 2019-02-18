@@ -4,6 +4,7 @@ import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import classes from '../../../../css/options/option-item.css'
+import type {Options} from '../../../common/types/options'
 import InputNumber from '../input_items/InputNumber'
 import InputSelect from '../input_items/InputSelect'
 import SelectButton from '../input_items/SelectButton'
@@ -29,8 +30,8 @@ const getInputItem = (optionConfig) => {
 type Props = {|
   optionConfig: Object,
   optionName: string,
-  optionValue: boolean | number | Array<number> | string,
-  updateSingleOption: (string, any) => void
+  optionValue: $Values<Options>,
+  updatePartialOptions: ($Shape<Options>) => void
 |}
 const OptionItem = (props: Props) => {
   const InputItem = getInputItem(props.optionConfig)
@@ -44,7 +45,7 @@ const OptionItem = (props: Props) => {
             {...props.optionConfig}
             optionName={props.optionName}
             optionValue={props.optionValue}
-            updateSingleOption={props.updateSingleOption}
+            updatePartialOptions={props.updatePartialOptions}
           />
         )}
       </td>

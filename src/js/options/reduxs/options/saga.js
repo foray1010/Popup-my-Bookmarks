@@ -4,11 +4,12 @@ import * as R from 'ramda'
 import type {Saga} from 'redux-saga'
 import {all, call, put, select, takeLatest} from 'redux-saga/effects'
 
+import type {Options} from '../../../common/types/options'
 import {clearStorage, getStorage, setStorage, silenceSaga} from '../../../common/utils'
 import {initOptions} from '../../utils'
 import {optionsCreators, optionsTypes} from './actions'
 
-const updateOptions = (options) => put(optionsCreators.updateOptions(options))
+const updateOptions = (options: Options) => put(optionsCreators.updateOptions(options))
 
 function* reloadOptions(): Saga<void> {
   const options = yield call(getStorage, null)

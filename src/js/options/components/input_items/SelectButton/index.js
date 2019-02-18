@@ -12,7 +12,7 @@ type Props = {|
   optionChoices: Array<boolean>,
   optionName: string,
   optionValue: boolean,
-  updateSingleOption: (string, boolean) => void
+  updatePartialOptions: ({ [string]: boolean }) => void
 |}
 const SelectButton = (props: Props) => (
   <div className={classes.main}>
@@ -28,7 +28,7 @@ const SelectButton = (props: Props) => (
         optionChoice={optionChoice}
         optionName={props.optionName}
         optionValue={props.optionValue}
-        updateSingleOption={props.updateSingleOption}
+        updatePartialOptions={props.updatePartialOptions}
       />
     ))}
   </div>

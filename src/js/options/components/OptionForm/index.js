@@ -3,17 +3,18 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 
+import type {Options} from '../../../common/types/options'
 import {getOptionsConfig} from '../../../common/utils'
 import {OPTION_TABLE_MAP} from '../../constants'
 import {type RootState, optionsCreators} from '../../reduxs'
 import OptionForm from './OptionForm'
 
 type Props = {|
-  options: Object,
+  options: Options,
   resetToDefaultOptions: () => void,
   saveOptions: () => void,
   selectedOptionFormMap: Array<string>,
-  updateSingleOption: (string, any) => void
+  updatePartialOptions: ($Shape<Options>) => void
 |}
 type State = {|
   optionsConfig: ?Object
@@ -38,7 +39,7 @@ class OptionFormContainer extends React.PureComponent<Props, State> {
         resetToDefaultOptions={this.props.resetToDefaultOptions}
         saveOptions={this.props.saveOptions}
         selectedOptionFormMap={this.props.selectedOptionFormMap}
-        updateSingleOption={this.props.updateSingleOption}
+        updatePartialOptions={this.props.updatePartialOptions}
       />
     )
   }
@@ -52,7 +53,7 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = {
   saveOptions: optionsCreators.saveOptions,
   resetToDefaultOptions: optionsCreators.resetToDefaultOptions,
-  updateSingleOption: optionsCreators.updateSingleOption
+  updatePartialOptions: optionsCreators.updatePartialOptions
 }
 
 export default connect(

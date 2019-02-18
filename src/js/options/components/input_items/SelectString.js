@@ -6,11 +6,13 @@ type Props = {|
   choices: Array<string | void>,
   optionName: string,
   optionValue: number,
-  updateSingleOption: (string, number) => void
+  updatePartialOptions: ({ [string]: number }) => void
 |}
 class SelectString extends React.PureComponent<Props> {
   handleChange = (evt: SyntheticEvent<HTMLSelectElement>) => {
-    this.props.updateSingleOption(this.props.optionName, parseInt(evt.currentTarget.value, 10))
+    this.props.updatePartialOptions({
+      [this.props.optionName]: parseInt(evt.currentTarget.value, 10)
+    })
   }
 
   render = () => (

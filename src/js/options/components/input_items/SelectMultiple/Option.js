@@ -7,7 +7,9 @@ type Props = {|
   optionChoiceIndex: number,
   optionName: string,
   optionValue: Array<number>,
-  updateSingleOption: (string, Array<number>) => void
+  updatePartialOptions: ({
+    [string]: Array<number>
+  }) => void
 |}
 class Option extends React.PureComponent<Props> {
   inputId = Math.random()
@@ -26,7 +28,9 @@ class Option extends React.PureComponent<Props> {
       newOptionValue = [checkboxValue, ...this.props.optionValue].sort()
     }
 
-    this.props.updateSingleOption(this.props.optionName, newOptionValue)
+    this.props.updatePartialOptions({
+      [this.props.optionName]: newOptionValue
+    })
   }
 
   render = () => (

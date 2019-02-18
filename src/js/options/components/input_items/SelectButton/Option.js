@@ -10,13 +10,15 @@ type Props = {|
   optionChoice: boolean,
   optionName: string,
   optionValue: boolean,
-  updateSingleOption: (string, boolean) => void
+  updatePartialOptions: ({ [string]: boolean }) => void
 |}
 class Option extends React.PureComponent<Props> {
   inputEl: ?HTMLInputElement
 
   handleChange = (evt: SyntheticEvent<HTMLInputElement>) => {
-    this.props.updateSingleOption(this.props.optionName, evt.currentTarget.value === 'true')
+    this.props.updatePartialOptions({
+      [this.props.optionName]: evt.currentTarget.value === 'true'
+    })
   }
 
   handleClick = () => {

@@ -4,6 +4,7 @@ import Chance from 'chance'
 import * as R from 'ramda'
 import {call, put, select} from 'redux-saga/effects'
 
+import optionsFixture from '../../../../../common/__fixtures__/options.json'
 import {bookmarkCreators} from '../../actions'
 import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import {getBookmarkTrees} from '../utils/getters'
@@ -53,6 +54,7 @@ describe('refreshBookmarkTrees', () => {
     expect(generator.next().value).toEqual(select(R.identity))
 
     const options = {
+      ...optionsFixture,
       fakeKey: chance.word()
     }
     const searchKeyword = ''

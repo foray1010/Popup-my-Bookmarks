@@ -3,9 +3,10 @@
 import {handleActions} from 'redux-actions'
 import type {ActionType} from 'redux-actions'
 
+import type {Options} from '../../../common/types/options'
 import {optionsCreators, optionsTypes} from './actions'
 
-type State = Object
+type State = $Shape<Options>
 const INITIAL_STATE: State = {}
 
 const updateOptions = (
@@ -13,18 +14,18 @@ const updateOptions = (
   {payload}: ActionType<typeof optionsCreators.updateOptions>
 ): State => payload.options
 
-const updateSingleOption = (
+const updatePartialOptions = (
   state: State,
-  {payload}: ActionType<typeof optionsCreators.updateSingleOption>
+  {payload}: ActionType<typeof optionsCreators.updatePartialOptions>
 ): State => ({
   ...state,
-  [payload.optionName]: payload.optionValue
+  ...payload
 })
 
 export const optionsReducer = handleActions(
   {
     [optionsTypes.UPDATE_OPTIONS]: updateOptions,
-    [optionsTypes.UPDATE_SINGLE_OPTION]: updateSingleOption
+    [optionsTypes.UPDATE_PARTIAL_OPTIONS]: updatePartialOptions
   },
   INITIAL_STATE
 )
