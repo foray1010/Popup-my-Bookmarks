@@ -32,7 +32,6 @@ const ungroupWithPriority = (groups) => {
 
 const sortBookmarks = R.compose(
   R.flatten,
-  // $FlowFixMe
   R.map(ungroupWithPriority),
   R.map(R.map(sortByTitle)),
   R.map(groupByType),

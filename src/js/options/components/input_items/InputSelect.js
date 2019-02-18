@@ -10,7 +10,7 @@ type Props = {|
   choices: Array<string>,
   optionName: string,
   optionValue: string,
-  updateSingleOption: (string, string) => void
+  updatePartialOptions: ({ [string]: string }) => void
 |}
 class InputSelect extends React.PureComponent<Props> {
   inputEl: ?HTMLInputElement
@@ -23,7 +23,9 @@ class InputSelect extends React.PureComponent<Props> {
       R.map(R.trim),
       R.split(',')
     )
-    this.props.updateSingleOption(this.props.optionName, normalize(evt.currentTarget.value))
+    this.props.updatePartialOptions({
+      [this.props.optionName]: normalize(evt.currentTarget.value)
+    })
   }
 
   handleChange = (evt: SyntheticEvent<HTMLSelectElement>) => {
@@ -35,7 +37,9 @@ class InputSelect extends React.PureComponent<Props> {
       R.replace(/^,/, ''),
       normalizeInputtingValue
     )
-    this.props.updateSingleOption(this.props.optionName, normalize(evt.currentTarget.value))
+    this.props.updatePartialOptions({
+      [this.props.optionName]: normalize(evt.currentTarget.value)
+    })
   }
 
   // prevent user try to save by pressing enter

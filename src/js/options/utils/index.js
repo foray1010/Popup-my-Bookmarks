@@ -3,10 +3,11 @@
 import * as R from 'ramda'
 import webExtension from 'webextension-polyfill'
 
+import type {Options, OptionsConfig} from '../../common/types/options'
 import {getOptionsConfig} from '../../common/utils'
 
-export const initOptions = async (): Promise<Object> => {
-  const [options, optionsConfig] = await Promise.all([
+export const initOptions = async (): Promise<Options> => {
+  const [options: $Shape<Options>, optionsConfig: OptionsConfig] = await Promise.all([
     webExtension.storage.sync.get(null),
     getOptionsConfig()
   ])
@@ -15,8 +16,8 @@ export const initOptions = async (): Promise<Object> => {
     Object.keys(optionsConfig),
     Object.keys(options)
   )
-  const missingOptions: Object = missingOptionKeys.reduce(
-    (acc, optionName) => ({
+  const missingOptions = missingOptionKeys.reduce(
+    (acc: $Shape<Options>, optionName) => ({
       ...acc,
       [optionName]: R.path([optionName, 'default'], optionsConfig)
     }),

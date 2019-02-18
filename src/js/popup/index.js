@@ -10,12 +10,13 @@ import {Provider} from 'react-redux'
 import webExtension from 'webextension-polyfill'
 
 import configureStore from '../common/store/configureStore'
+import type {Options, OptionsConfig} from '../common/types/options'
 import {getOptionsConfig, renderToBody} from '../common/utils'
 import App from './components/App'
 import {rootReducer, rootSaga} from './reduxs'
 
 const main = async () => {
-  const [options, optionsConfig] = await Promise.all([
+  const [options: $Shape<Options>, optionsConfig: OptionsConfig] = await Promise.all([
     webExtension.storage.sync.get(null),
     getOptionsConfig()
   ])

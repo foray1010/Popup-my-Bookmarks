@@ -5,13 +5,20 @@ import * as React from 'react'
 import Measure from 'react-measure'
 import styled, {createGlobalStyle} from 'styled-components'
 
-const GlobalStyles = createGlobalStyle`
+const GlobalStyles: React.ComponentType<{|
+  bodyHeight: ?number,
+  bodyWidth: ?number
+|}> = createGlobalStyle`
   body {
     height: ${(props) => (props.bodyHeight != null ? `${props.bodyHeight}px` : 'auto')};
     width: ${(props) => (props.bodyWidth != null ? `${props.bodyWidth}px` : 'auto')};
   }
 `
-const Wrapper = styled('div')`
+const Wrapper: React.ComponentType<{|
+  children: React.Node,
+  positionLeft: number,
+  positionTop: number
+|}> = styled('div')`
   left: ${R.prop('positionLeft')}px;
   position: absolute;
   top: ${R.prop('positionTop')}px;

@@ -9,7 +9,9 @@ type Props = {|
   choices: Array<string | void>,
   optionName: string,
   optionValue: Array<number>,
-  updateSingleOption: (string, Array<number>) => void
+  updatePartialOptions: ({
+    [string]: Array<number>
+  }) => void
 |}
 const SelectMultiple = (props: Props) => (
   <span className={classes.main}>
@@ -23,7 +25,7 @@ const SelectMultiple = (props: Props) => (
             optionChoiceIndex={optionChoiceIndex}
             optionName={props.optionName}
             optionValue={props.optionValue}
-            updateSingleOption={props.updateSingleOption}
+            updatePartialOptions={props.updatePartialOptions}
           />
         ]
       }

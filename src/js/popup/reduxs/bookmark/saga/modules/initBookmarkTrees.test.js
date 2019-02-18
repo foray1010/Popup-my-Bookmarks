@@ -4,6 +4,7 @@ import * as R from 'ramda'
 import {call, put, select} from 'redux-saga/effects'
 import store from 'store'
 
+import optionsFixture from '../../../../../common/__fixtures__/options.json'
 import {bookmarkCreators} from '../../actions'
 import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import {getBookmarkTrees} from '../utils/getters'
@@ -16,6 +17,7 @@ describe('initBookmarkTrees', () => {
     expect(generator.next().value).toEqual(select(R.identity))
 
     const options = {
+      ...optionsFixture,
       rememberPos: true
     }
     expect(generator.next({options}).value).toEqual(call([store, store.get], 'lastBoxPID'))
@@ -35,6 +37,7 @@ describe('initBookmarkTrees', () => {
     expect(generator.next().value).toEqual(select(R.identity))
 
     const options = {
+      ...optionsFixture,
       rememberPos: true
     }
     expect(generator.next({options}).value).toEqual(call([store, store.get], 'lastBoxPID'))
@@ -53,6 +56,7 @@ describe('initBookmarkTrees', () => {
     expect(generator.next().value).toEqual(select(R.identity))
 
     const options = {
+      ...optionsFixture,
       rememberPos: false
     }
     expect(generator.next({options}).value).toEqual(call(getBookmarkTrees, [], options))

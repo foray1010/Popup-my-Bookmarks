@@ -4,6 +4,7 @@ import * as R from 'ramda'
 import type {Saga} from 'redux-saga'
 import {all, call} from 'redux-saga/effects'
 
+import type {Options} from '../../../../../common/types/options'
 import {
   getBookmarkChildNodes,
   getBookmarkNodes,
@@ -48,7 +49,7 @@ export function* getBookmarkTree(id: string): Saga<BookmarkTree> {
 
 export function* getBookmarkTrees(
   restTreeIds: Array<string>,
-  options: Object
+  options: Options
 ): Saga<Array<BookmarkTree>> {
   const [firstTree, ...restTrees]: Array<BookmarkTree> = yield all([
     call(getFirstBookmarkTree, options),
@@ -70,7 +71,7 @@ export function* getBookmarkTrees(
   return acc
 }
 
-export function* getFirstBookmarkTree(options: Object): Saga<BookmarkTree> {
+export function* getFirstBookmarkTree(options: Options): Saga<BookmarkTree> {
   const [firstTreeInfo, rootFolders] = yield all([
     call(getBookmarkTree, String(options.defExpand)),
     call(getBookmarkChildren, CST.ROOT_ID)

@@ -4,6 +4,7 @@ import * as R from 'ramda'
 import * as React from 'react'
 import {connect} from 'react-redux'
 
+import type {Options} from '../../../common/types/options'
 import {type RootState, bookmarkCreators} from '../../reduxs'
 import BookmarkTrees from './BookmarkTrees'
 import withBookmarkEvents from './withBookmarkEvents'
@@ -13,7 +14,7 @@ import withKeyboardNav from './withKeyboardNav'
 type Props = {|
   initBookmarkTrees: () => void,
   mainTreeHeader: React.Node,
-  options: Object,
+  options: Options,
   treeIds: Array<string>
 |}
 class BookmarkTreesContainer extends React.PureComponent<Props> {

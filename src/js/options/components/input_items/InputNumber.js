@@ -8,7 +8,7 @@ type Props = {|
   minimum: number,
   optionName: string,
   optionValue: number,
-  updateSingleOption: (string, number) => void
+  updatePartialOptions: ({ [string]: number }) => void
 |}
 class InputNumber extends React.PureComponent<Props> {
   handleBlur = (evt: SyntheticEvent<HTMLInputElement>) => {
@@ -16,7 +16,9 @@ class InputNumber extends React.PureComponent<Props> {
 
     const newOptionValue = R.clamp(this.props.minimum, this.props.maximum, parsedValue)
 
-    this.props.updateSingleOption(this.props.optionName, newOptionValue)
+    this.props.updatePartialOptions({
+      [this.props.optionName]: newOptionValue
+    })
   }
 
   handleChange = (evt: SyntheticEvent<HTMLInputElement>) => {
@@ -24,7 +26,10 @@ class InputNumber extends React.PureComponent<Props> {
 
     // only allow input number
     if (Number.isNaN(parsedValue)) return
-    this.props.updateSingleOption(this.props.optionName, parsedValue)
+
+    this.props.updatePartialOptions({
+      [this.props.optionName]: parsedValue
+    })
   }
 
   // prevent user try to save by pressing enter

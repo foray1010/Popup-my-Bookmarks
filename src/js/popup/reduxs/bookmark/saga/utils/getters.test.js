@@ -6,6 +6,7 @@ import Chance from 'chance'
 import * as R from 'ramda'
 import {all, call} from 'redux-saga/effects'
 
+import optionsFixture from '../../../../../common/__fixtures__/options.json'
 import {
   getBookmarkChildNodes,
   getBookmarkNodes,
@@ -120,7 +121,7 @@ describe('getBookmarkTrees', () => {
     R.tail
   )
 
-  const options = {}
+  const options = optionsFixture
   const restTreeIds = getRestTreeIds(correlatedBookmarkTrees)
 
   const generator = cloneableGenerator(getters.getBookmarkTrees)(restTreeIds, options)
@@ -156,6 +157,7 @@ describe('getFirstBookmarkTree', () => {
   test('should get default expanded tree and append root folders to its children except itself', () => {
     const hiddenFolderId = '99999'
     const options = {
+      ...optionsFixture,
       defExpand: Number(bookmarkTrees[0].parent.id),
       hideRootFolder: [Number(hiddenFolderId)]
     }
