@@ -8,6 +8,20 @@
   "node": {
     "supportPolicy": ["lts_active"]
   },
+  "packageRules": [
+    {
+      "packagePatterns": ["^eslint"],
+      "groupName": "eslint packages"
+    },
+    {
+      "packagePatterns": ["^import-sort-"],
+      "groupName": "import-sort monorepo"
+    },
+    {
+      "packagePatterns": ["^stylelint"],
+      "groupName": "stylelint packages"
+    }
+  ],
   "semanticCommits": true,
   "prCreation": "not-pending"
 }
