@@ -21,8 +21,9 @@ import {
   OPTIONS_WARN_OPEN_MANY,
   ROOT_ID
 } from '../constants'
+import type {OptionsConfig} from '../types/options'
 
-const getOptionsConfig = async (): Promise<Object> => {
+const getOptionsConfig = async (): Promise<OptionsConfig> => {
   const getMessages = R.map(webExtension.i18n.getMessage)
 
   const openBookmarkChoices = getMessages([

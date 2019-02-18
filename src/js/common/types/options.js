@@ -17,3 +17,14 @@ export type Options = {|
   tooltip: boolean,
   warnOpenMany: boolean
 |}
+
+export type OptionConfig = {|
+  choices?: Array<string>,
+  default?: $Values<Options>,
+  maximum?: number,
+  minimum?: number,
+  type: string
+|}
+export type OptionsConfig = {
+  [string]: OptionConfig
+}

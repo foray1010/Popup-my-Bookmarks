@@ -3,7 +3,7 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 
-import type {Options} from '../../../common/types/options'
+import type {Options, OptionsConfig} from '../../../common/types/options'
 import {getOptionsConfig} from '../../../common/utils'
 import {OPTION_TABLE_MAP} from '../../constants'
 import {type RootState, optionsCreators} from '../../reduxs'
@@ -17,13 +17,9 @@ type Props = {|
   updatePartialOptions: ($Shape<Options>) => void
 |}
 type State = {|
-  optionsConfig: ?Object
+  optionsConfig?: OptionsConfig
 |}
 class OptionFormContainer extends React.PureComponent<Props, State> {
-  state = {
-    optionsConfig: null
-  }
-
   async componentDidMount() {
     this.setState({
       optionsConfig: await getOptionsConfig()
