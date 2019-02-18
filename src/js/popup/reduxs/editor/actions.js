@@ -2,6 +2,8 @@
 
 import {createAction} from 'redux-actions'
 
+import type {State} from './types'
+
 export const editorTypes = {
   CLOSE_EDITOR: 'CLOSE_EDITOR',
   CREATE_FOLDER_IN_EDITOR: 'CREATE_FOLDER_IN_EDITOR',
@@ -33,7 +35,7 @@ const openEditor = createAction(
   ) => ({targetId, coordinates})
 )
 
-const setEditor = createAction(editorTypes.SET_EDITOR, (partialState: Object) => ({
+const setEditor = createAction(editorTypes.SET_EDITOR, (partialState: $Shape<State>) => ({
   partialState
 }))
 

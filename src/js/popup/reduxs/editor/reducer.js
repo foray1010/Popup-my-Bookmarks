@@ -4,16 +4,8 @@ import {handleActions} from 'redux-actions'
 import type {ActionType} from 'redux-actions'
 
 import {editorCreators, editorTypes} from './actions'
+import type {State} from './types'
 
-type State = {|
-  isAllowEditUrl: boolean,
-  isCreating: boolean,
-  positionLeft: number,
-  positionTop: number,
-  targetId: string,
-  title: string,
-  url: string
-|}
 const INITIAL_STATE: State = {
   isAllowEditUrl: false,
   isCreating: false,
