@@ -3885,10 +3885,10 @@ eslint-config-airbnb@17.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-foray1010@7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-foray1010/-/eslint-config-foray1010-7.0.0.tgz#c0b1719de7a9736a8d8a5d98aeacb8404ca1a4c0"
-  integrity sha512-yGaB7aGO/vRW6nuRbukzWQDE6c8ybLGbJBuRk7Zd7XK5GGHP3rkOTSZ8sa8AAUKa8C1w8FGCB99gS71GME9Szw==
+eslint-config-foray1010@7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-foray1010/-/eslint-config-foray1010-7.1.0.tgz#7ae2703c2e3312ff4e21d8d6eb9b655397e12ef6"
+  integrity sha512-jCKXHVGvAoqvAWQvvHUl3xgDVdAOmNMQtfTYi6kRLYP3c+xjFdL9wzG4KEAVX7RqaF6i1qxTRNv5SpUXBuz5kg==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^1.0.0"
     "@typescript-eslint/parser" "^1.0.0"
@@ -3898,6 +3898,7 @@ eslint-config-foray1010@7.0.0:
     eslint-plugin-babel "^5.0.0"
     eslint-plugin-flowtype "^3.1.1"
     eslint-plugin-fp "^2.3.0"
+    eslint-plugin-html "^5.0.3"
     eslint-plugin-import "^2.14.0"
     eslint-plugin-jest "^22.0.0"
     eslint-plugin-jsx-a11y "^6.1.1"
@@ -3953,6 +3954,13 @@ eslint-plugin-fp@^2.3.0:
     eslint-ast-utils "^1.0.0"
     lodash "^4.13.1"
     req-all "^0.1.0"
+
+eslint-plugin-html@^5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-html/-/eslint-plugin-html-5.0.3.tgz#3db133995e49a73596f6a473c16a1b83634deffd"
+  integrity sha512-46ruAnp3jVQP/5Bi5eEIOooscjUTPFU3vxCxHe/OG6ORdM7Xv5c25/Nz9fAbHklzCpiXuIiH4/mV/XBkm7MINw==
+  dependencies:
+    htmlparser2 "^3.10.0"
 
 eslint-plugin-import@^2.14.0:
   version "2.14.0"
