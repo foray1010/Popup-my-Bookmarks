@@ -37,7 +37,7 @@
     "react-dom": "16.8.3",
     "react-event-listener": "0.6.6",
     "react-measure": "2.2.4",
-    "react-redux": "6.0.0",
+    "react-redux": "6.0.1",
     "react-virtualized": "9.21.0",
     "redux": "4.0.1",
     "redux-actions": "2.6.4",
