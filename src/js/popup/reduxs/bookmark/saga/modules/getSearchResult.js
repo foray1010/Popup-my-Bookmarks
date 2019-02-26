@@ -11,17 +11,15 @@ import {bookmarkCreators} from '../../actions'
 import {simulateBookmark} from '../../utils/converters'
 import {searchBookmarks} from '../utils/getters'
 
-export const generateSearchKeywordMatcher = (searchKeyword: string) => (title: string) =>
-  R.compose(
-    R.all(
-      R.compose(
-        R.flip(R.contains),
-        R.toLower
-      )(title)
-    ),
-    R.map(R.toLower),
-    R.split(' ')
+export const generateSearchKeywordMatcher = (searchKeyword: string) => (title: string) => {
+  const lowerCaseTitle = title.toLowerCase()
+  return R.compose(
+    R.all((x) => lowerCaseTitle.includes(x)),
+    R.filter(Boolean),
+    R.split(' '),
+    R.toLower
   )(searchKeyword)
+}
 
 export function* getSearchResult({
   payload

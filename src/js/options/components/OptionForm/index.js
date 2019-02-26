@@ -20,6 +20,10 @@ type State = {|
   optionsConfig?: OptionsConfig
 |}
 class OptionFormContainer extends React.PureComponent<Props, State> {
+  state = {
+    optionsConfig: undefined
+  }
+
   async componentDidMount() {
     this.setState({
       optionsConfig: await getOptionsConfig()

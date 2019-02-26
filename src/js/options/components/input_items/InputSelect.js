@@ -4,7 +4,6 @@ import * as R from 'ramda'
 import * as React from 'react'
 
 import classes from '../../../../css/options/input-select.css'
-import {normalizeInputtingValue} from '../../../common/utils'
 
 type Props = {|
   choices: Array<string>,
@@ -33,12 +32,8 @@ class InputSelect extends React.PureComponent<Props> {
       if (this.inputEl) this.inputEl.focus()
     }
 
-    const normalize = R.compose(
-      R.replace(/^,/, ''),
-      normalizeInputtingValue
-    )
     this.props.updatePartialOptions({
-      [this.props.optionName]: normalize(evt.currentTarget.value)
+      [this.props.optionName]: evt.currentTarget.value
     })
   }
 

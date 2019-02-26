@@ -3,7 +3,6 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 
-import {normalizeInputtingValue} from '../../../common/utils'
 import {type RootState, bookmarkCreators, uiCreators} from '../../reduxs'
 import GlobalKeyboardEventListener from '../GlobalKeyboardEventListener'
 import Search from './Search'
@@ -46,7 +45,7 @@ class SearchContainer extends React.PureComponent<Props, State> {
 
   handleInput = (evt: SyntheticInputEvent<HTMLInputElement>) => {
     this.setState({
-      inputValue: normalizeInputtingValue(evt.currentTarget.value)
+      inputValue: evt.currentTarget.value
     })
   }
 

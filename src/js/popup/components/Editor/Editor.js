@@ -6,7 +6,6 @@ import styled from 'styled-components'
 import webExtension from 'webextension-polyfill'
 
 import classes from '../../../../css/popup/editor.css'
-import {normalizeInputtingValue} from '../../../common/utils'
 
 const Form = styled('form')`
   width: ${R.prop('width')}px;
@@ -42,7 +41,7 @@ class Editor extends React.PureComponent<Props, State> {
 
   generateHandleChange = (stateName: string) => (evt: SyntheticInputEvent<HTMLInputElement>) => {
     this.setState({
-      [stateName]: normalizeInputtingValue(evt.currentTarget.value)
+      [stateName]: evt.currentTarget.value
     })
   }
 
