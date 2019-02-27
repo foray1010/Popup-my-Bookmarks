@@ -1069,11 +1069,6 @@
     "@redux-saga/symbols" "^1.0.1"
     "@redux-saga/types" "^1.0.2"
 
-"@redux-saga/types@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@redux-saga/types/-/types-1.0.0.tgz#9342b7eb52ed3c903e122841407d4984b7338339"
-  integrity sha512-9I7ejD0kASU3H8gD6Wv8Y3F9VabNdvjE8apkGfSphCAjt46snJKjt79CnHdxo1xkTE0qMEZzmYmZ8hnIYDydhw==
-
 "@redux-saga/types@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@redux-saga/types/-/types-1.0.2.tgz#1d94f02800b094753f9271c206a26c2a06ca14ee"
@@ -8160,14 +8155,13 @@ posix-character-classes@^0.1.0:
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
   integrity sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
 
-postcss-apply@0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/postcss-apply/-/postcss-apply-0.11.0.tgz#4bef9b443e4bfeeec5b094c7008bfe25dca5f40d"
-  integrity sha512-Y/uBl3p0H3jby+N3kvSNyuyLKZaCElCMMFWXSfEL9llEeCKupJ9Wit5Ms7TsAXFINexkWWwjiYfqPZ1nedi1Jw==
+postcss-apply@0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/postcss-apply/-/postcss-apply-0.12.0.tgz#11a47b271b14d81db97ed7f51a6c409d025a9c34"
+  integrity sha512-u8qZLyA9P86cD08IhqjSVV8tf1eGiKQ4fPvjcG3Ic/eOU65EAkDQClp8We7d15TG+RIWRVPSy9v7cJ2D9OReqw==
   dependencies:
-    babel-runtime "^6.26.0"
     balanced-match "^1.0.0"
-    postcss "^7.0.2"
+    postcss "^7.0.14"
 
 postcss-attribute-case-insensitive@^4.0.0:
   version "4.0.1"
