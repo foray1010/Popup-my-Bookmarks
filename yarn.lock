@@ -3699,10 +3699,10 @@ eslint-config-airbnb@17.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-foray1010@7.1.1:
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-foray1010/-/eslint-config-foray1010-7.1.1.tgz#538494137e0d82af4dc91e3bc457d5fbb65f58e0"
-  integrity sha512-6ZTKLy1cyHdLgNlxqEFyzbSfPM93JkjdPSHUcX54NDluJ17FJGs0a2nDuAOzcOjX0rpEL6XIYOXJneUhweOWxg==
+eslint-config-foray1010@7.1.2:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-foray1010/-/eslint-config-foray1010-7.1.2.tgz#0271ed8a3f171779e3d11b0d4c463a2dc1818f09"
+  integrity sha512-y8MIQuKIdvG9Jnxd5r5JG0IZO+hOJ7npIl/Hx1P3ENzNbL0wd1YHeuvUuXIrdQ+8ZE4fpS5yxzLGOGdXaa413g==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^1.0.0"
     "@typescript-eslint/parser" "^1.0.0"
