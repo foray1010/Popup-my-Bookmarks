@@ -11144,10 +11144,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typeface-archivo-narrow@0.0.54:
-  version "0.0.54"
-  resolved "https://registry.yarnpkg.com/typeface-archivo-narrow/-/typeface-archivo-narrow-0.0.54.tgz#69860ee1e8e8467d1ff1225df66139fd9046fd60"
-  integrity sha512-gRnkb8qdf2EYqFqWfNpHyLQjhOYTYGIiTVek8E/0aEpN/VkHDXj7LYadjTLp5YAVcz9cznHa1LPcVPZw+/jK/w==
+typeface-archivo-narrow@0.0.72:
+  version "0.0.72"
+  resolved "https://registry.yarnpkg.com/typeface-archivo-narrow/-/typeface-archivo-narrow-0.0.72.tgz#3515626191b3fa80872d0672c7c20d281ab8e521"
+  integrity sha512-BHA/EgBhQTLAO1gCGYc4hNyCSxXqCEzLARtXblm/uF3eTfKWuu5IgVwC8VReWt1AABySVulH0XCrIa4T4A7N1A==
 
 typescript-compare@^0.0.2:
   version "0.0.2"
