@@ -20,8 +20,7 @@ interface State {
   shouldDisableNextClick: boolean
 }
 export default class DragAndDrop extends React.PureComponent<Props, State> {
-  public context: ContextType
-  public static contextType = DragAndDropContext
+  public static contextType: React.Context<ContextType> = DragAndDropContext
 
   public state = {
     shouldDisableNextClick: false

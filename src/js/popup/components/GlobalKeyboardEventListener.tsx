@@ -4,16 +4,19 @@ import {connect} from 'react-redux'
 
 import {RootState} from '../reduxs'
 
+interface OwnProps {
+  onKeyDown?: (evt: KeyboardEvent) => void
+}
+
 const mapStateToProps = (state: RootState) => ({
   isDisableGlobalKeyboardEvent: state.ui.isDisableGlobalKeyboardEvent
 })
 
-type Props = ReturnType<typeof mapStateToProps> & {
-  onKeyDown?: (evt: KeyboardEvent) => void
+type Props = OwnProps & ReturnType<typeof mapStateToProps>
+const GlobalKeyboardEventListener = (props: Props) => {
+  if (props.isDisableGlobalKeyboardEvent) return null
+
+  return <EventListener target={document} onKeyDown={props.onKeyDown} />
 }
-const GlobalKeyboardEventListener = (props: Props) =>
-  !props.isDisableGlobalKeyboardEvent && (
-    <EventListener target={document} onKeyDown={props.onKeyDown} />
-  )
 
 export default connect(mapStateToProps)(GlobalKeyboardEventListener)

@@ -53,8 +53,7 @@ const mapDispatchToProps = {
 
 type Props = OwnProps & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
 class BookmarkTreeContainer extends React.PureComponent<Props> {
-  public context: ContextType
-  public static contextType = DragAndDropContext
+  public static contextType: React.Context<ContextType> = DragAndDropContext
 
   private closeCurrentTree = () => {
     this.props.removeBookmarkTree(this.props.treeInfo.parent.id)
