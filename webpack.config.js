@@ -37,7 +37,7 @@ const webpackConfig = getMergedConfigByEnv({
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.tsx?$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
           options: {
@@ -145,7 +145,8 @@ const webpackConfig = getMergedConfigByEnv({
       alias: {
         '@babel/runtime': path.resolve(__dirname, 'node_modules/@babel/runtime'),
         store: 'store/dist/store.modern'
-      }
+      },
+      extensions: ['.tsx', '.ts', '.js']
     }
   },
   development: {

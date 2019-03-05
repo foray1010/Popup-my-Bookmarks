@@ -7,7 +7,7 @@ import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 
 interface Props {
-  options: Options
+  options: Partial<Options>
   optionsConfig: OptionsConfig
   resetToDefaultOptions: () => void
   saveOptions: () => void

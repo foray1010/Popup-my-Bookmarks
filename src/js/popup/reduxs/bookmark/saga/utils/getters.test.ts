@@ -190,7 +190,10 @@ describe('tryGetBookmarkTree', () => {
 
     expect(generator.next().value).toEqual(call(getters.getBookmarkTree, bookmarkNodes[0].id))
 
-    expect(generator.throw(new Error()).value).toBe(null)
+    // generator.throw should always exists in real world
+    if (generator.throw) {
+      expect(generator.throw(new Error()).value).toBe(null)
+    }
 
     expect(generator.next().done).toBe(true)
   })

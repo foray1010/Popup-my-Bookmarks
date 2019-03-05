@@ -18,7 +18,7 @@ interface Props {
   isShowCover: boolean
   isShowHeader: boolean
   listItemWidth: number
-  noRowsRenderer: () => React.ReactNode
+  noRowsRenderer?: () => React.ReactElement
   onCloseButtonClick: () => void
   onCoverClick: () => void
   onRowAuxClick: (bookmarkId: string) => (evt: MouseEvent) => void
@@ -55,7 +55,7 @@ class BookmarkTree extends React.PureComponent<Props, State> {
     }
   }
 
-  private list: object | null = null
+  private list: List | null = null
 
   private getRowHeight = (payload: {index: number}) => {
     let rowHeight = this.props.rowHeight
@@ -77,6 +77,7 @@ class BookmarkTree extends React.PureComponent<Props, State> {
     if (!this.list) return
 
     const maxListHeight =
+      // @ts-ignore: hacky way to access _scrollingContainer
       CST.MAX_HEIGHT - this.list.Grid._scrollingContainer.getBoundingClientRect().top
     const minListHeight = this.props.rowHeight
 

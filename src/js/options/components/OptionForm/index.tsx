@@ -34,11 +34,13 @@ class OptionFormContainer extends React.PureComponent<Props, State> {
   }
 
   public render() {
-    if (!this.state.optionsConfig) return null
+    const {optionsConfig} = this.state
+    if (!optionsConfig) return null
+
     return (
       <OptionForm
         options={this.props.options}
-        optionsConfig={this.state.optionsConfig}
+        optionsConfig={optionsConfig}
         resetToDefaultOptions={this.props.resetToDefaultOptions}
         saveOptions={this.props.saveOptions}
         selectedOptionFormMap={this.props.selectedOptionFormMap}
