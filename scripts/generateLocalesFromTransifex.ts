@@ -1,11 +1,12 @@
-'use strict'
+import path from 'path'
 
-const bluebird = require('bluebird')
-const fs = require('fs-extra')
-const path = require('path')
-const prompt = require('prompt')
-const R = require('ramda')
-const Transifex = require('transifex')
+import bluebird from 'bluebird'
+import fs from 'fs-extra'
+// @ts-ignore
+import prompt from 'prompt'
+import R from 'ramda'
+// @ts-ignore
+import Transifex from 'transifex'
 
 bluebird.promisifyAll(prompt)
 

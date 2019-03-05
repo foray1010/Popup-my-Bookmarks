@@ -10,5 +10,5 @@
     "sourceMap": false,
     "strict": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"]
+  "include": ["scripts/**/*.ts", "src/**/*.ts", "src/**/*.tsx", "webpack.config.ts"]
 }
