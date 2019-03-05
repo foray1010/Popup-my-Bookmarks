@@ -1,1 +1,1 @@
-extends: 'eslint-config-foray1010/react'
+extends: 'eslint-config-foray1010/typescript'

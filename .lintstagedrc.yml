@@ -9,11 +9,10 @@ linters:
     - 'prettier-eslint --write'
     - 'stylelint --fix'
     - 'git add'
-  '*.js':
+  '*.{js,ts,tsx}':
     - 'import-sort --write'
     - 'prettier-eslint --write'
     - 'eslint --fix'
-    - 'flow focus-check'
     - 'jest --bail --findRelatedTests --config .jestrc.json'
     - 'git add'
   '*.{json,yaml,yml}':
