@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "isolatedModules": false,
+    "jsx": "react",
+    "lib": ["es2017", "dom"],
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "sourceMap": false,
+    "strict": true
+  },
+  "include": ["scripts/**/*.ts", "src/**/*.ts", "src/**/*.tsx", "webpack.config.ts"]
+}

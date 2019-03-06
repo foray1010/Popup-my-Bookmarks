@@ -1,1 +1,16 @@
-extends: 'eslint-config-foray1010/react'
+extends:
+  - 'eslint-config-foray1010/typescript'
+  - 'eslint-config-foray1010/rules/frontend'
+  - 'eslint-config-foray1010/rules/react'
+rules:
+  '@typescript-eslint/no-object-literal-type-assertion': 'off'
+  '@typescript-eslint/no-use-before-define':
+    - 'error'
+    - functions: false
+      classes: true
+      variables: true
+      typedefs: true
+  import/no-unresolved: 'off'
+globals:
+  browser: false
+  HTMLElement: false
