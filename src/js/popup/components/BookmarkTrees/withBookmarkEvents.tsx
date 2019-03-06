@@ -29,5 +29,8 @@ export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
   return connect(
     null,
     mapDispatchToProps
-  )(BookmarkEvents)
+  )(
+    // @ts-ignore
+    BookmarkEvents
+  )
 }

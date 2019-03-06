@@ -30,5 +30,8 @@ export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
   return connect(
     null,
     mapDispatchToProps
-  )(DragAndDropEvents)
+  )(
+    // @ts-ignore
+    DragAndDropEvents
+  )
 }

@@ -119,5 +119,8 @@ export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
   return connect(
     mapStateToProps,
     mapDispatchToProps
-  )(KeyboardNav)
+  )(
+    // @ts-ignore
+    KeyboardNav
+  )
 }
