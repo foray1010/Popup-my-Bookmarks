@@ -69,7 +69,7 @@
     "@types/node": "11.10.4",
     "@types/postcss-url": "8.0.1",
     "@types/ramda": "0.25.51",
-    "@types/react": "16.8.6",
+    "@types/react": "16.8.7",
     "@types/react-dom": "16.8.2",
     "@types/react-event-listener": "0.4.9",
     "@types/react-measure": "2.0.5",
