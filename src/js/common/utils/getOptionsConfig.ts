@@ -28,27 +28,27 @@ const getOptionsConfig = async (): Promise<OptionsConfig> => {
 
   return {
     [OPTIONS.CLICK_BY_LEFT]: {
-      type: 'integer',
+      type: 'select',
       default: 0,
       choices: openBookmarkChoices
     },
     [OPTIONS.CLICK_BY_LEFT_CTRL]: {
-      type: 'integer',
+      type: 'select',
       default: 4,
       choices: openBookmarkChoices
     },
     [OPTIONS.CLICK_BY_LEFT_SHIFT]: {
-      type: 'integer',
+      type: 'select',
       default: 5,
       choices: openBookmarkChoices
     },
     [OPTIONS.CLICK_BY_MIDDLE]: {
-      type: 'integer',
+      type: 'select',
       default: 2,
       choices: openBookmarkChoices
     },
     [OPTIONS.DEF_EXPAND]: {
-      type: 'integer',
+      type: 'select',
       default: 1,
       choices: rootFolderChoices
     },
@@ -95,7 +95,7 @@ const getOptionsConfig = async (): Promise<OptionsConfig> => {
       default: false
     },
     [OPTIONS.SEARCH_TARGET]: {
-      type: 'integer',
+      type: 'select',
       default: 0,
       choices: getMessages(['searchTargetOption1', 'searchTargetOption2'])
     },

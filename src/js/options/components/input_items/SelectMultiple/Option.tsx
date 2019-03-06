@@ -4,8 +4,8 @@ interface Props {
   optionChoice: string
   optionChoiceIndex: number
   optionName: string
-  optionValue: Array<number>
-  updatePartialOptions: (options: {[key: string]: Array<number>}) => void
+  optionValue: Array<number | void>
+  updatePartialOptions: (options: {[key: string]: Array<number | void>}) => void
 }
 class Option extends React.PureComponent<Props> {
   private inputId = Math.random()

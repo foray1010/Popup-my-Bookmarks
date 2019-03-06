@@ -9,46 +9,73 @@ import SelectButton from '../input_items/SelectButton'
 import SelectMultiple from '../input_items/SelectMultiple'
 import SelectString from '../input_items/SelectString'
 
-const getInputItem = (optionConfig: OptionConfig) => {
-  switch (optionConfig.type) {
-    case 'array':
-      return SelectMultiple
-    case 'boolean':
-      return SelectButton
-    case 'integer':
-      if (optionConfig.choices) return SelectString
-      return InputNumber
-    case 'string':
-      return InputSelect
-    default:
-  }
-  return null
-}
-
 interface Props {
   optionConfig: OptionConfig
-  optionName: string
+  optionName: keyof Options
   optionValue: Options[keyof Options]
   updatePartialOptions: (options: Partial<Options>) => void
 }
-const OptionItem = (props: Props) => {
-  const InputItem = getInputItem(props.optionConfig)
 
-  return (
-    <tr>
-      <td className={classes.desc}>{webExtension.i18n.getMessage(props.optionName)}</td>
-      <td className={classes.input}>
-        {InputItem && (
-          <InputItem
-            {...props.optionConfig}
-            optionName={props.optionName}
-            optionValue={props.optionValue}
-            updatePartialOptions={props.updatePartialOptions}
-          />
-        )}
-      </td>
-    </tr>
-  )
+const InputItem = ({optionConfig, optionValue, ...restProps}: Props) => {
+  switch (optionConfig.type) {
+    case 'array':
+      return (
+        <SelectMultiple
+          {...optionConfig}
+          {...restProps}
+          optionValue={Array.isArray(optionValue) ? optionValue : optionConfig.default}
+        />
+      )
+
+    case 'boolean':
+      return (
+        <SelectButton
+          {...optionConfig}
+          {...restProps}
+          optionValue={typeof optionValue === 'boolean' ? optionValue : optionConfig.default}
+        />
+      )
+
+    case 'integer':
+      return (
+        <InputNumber
+          {...optionConfig}
+          {...restProps}
+          optionValue={typeof optionValue === 'number' ? optionValue : optionConfig.default}
+        />
+      )
+
+    case 'select':
+      return (
+        <SelectString
+          {...optionConfig}
+          {...restProps}
+          optionValue={typeof optionValue === 'number' ? optionValue : optionConfig.default}
+        />
+      )
+
+    case 'string':
+      return (
+        <InputSelect
+          {...optionConfig}
+          {...restProps}
+          optionValue={typeof optionValue === 'string' ? optionValue : optionConfig.default}
+        />
+      )
+
+    default:
+  }
+
+  return null
 }
+
+const OptionItem = (props: Props) => (
+  <tr>
+    <td className={classes.desc}>{webExtension.i18n.getMessage(props.optionName)}</td>
+    <td className={classes.input}>
+      <InputItem {...props} />
+    </td>
+  </tr>
+)
 
 export default OptionItem

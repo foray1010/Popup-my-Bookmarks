@@ -18,11 +18,35 @@ export interface Options {
   [OPTIONS.WARN_OPEN_MANY]: boolean
 }
 
-export interface OptionConfig {
-  choices?: Array<string>
-  default?: Options[keyof Options]
-  maximum?: number
-  minimum?: number
-  type: string
+interface ArrayOptionConfig {
+  type: 'array'
+  default: Array<number | void>
+  choices: Array<string | void>
 }
+interface BooleanOptionConfig {
+  type: 'boolean'
+  default: boolean
+}
+interface IntegerOptionConfig {
+  type: 'integer'
+  default: number
+  minimum: number
+  maximum: number
+}
+interface SelectOptionConfig {
+  type: 'select'
+  default: number
+  choices: Array<string>
+}
+interface StringOptionConfig {
+  type: 'string'
+  default: string
+  choices: Array<string>
+}
+export type OptionConfig =
+  | ArrayOptionConfig
+  | BooleanOptionConfig
+  | IntegerOptionConfig
+  | SelectOptionConfig
+  | StringOptionConfig
 export type OptionsConfig = {[K in keyof Options]: OptionConfig}

@@ -6,8 +6,8 @@ import Option from './Option'
 interface Props {
   choices: Array<string | void>
   optionName: string
-  optionValue: Array<number>
-  updatePartialOptions: (options: {[key: string]: Array<number>}) => void
+  optionValue: Array<number | void>
+  updatePartialOptions: (options: {[key: string]: Array<number | void>}) => void
 }
 const SelectMultiple = (props: Props) => (
   <span className={classes.main}>
