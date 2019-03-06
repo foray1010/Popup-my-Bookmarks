@@ -1,30 +1,28 @@
-import {$Values} from 'utility-types'
+import {OPTIONS} from '../constants'
 
 export interface Options {
-  clickByLeft: number
-  clickByLeftCtrl: number
-  clickByLeftShift: number
-  clickByMiddle: number
-  defExpand: number
-  fontFamily: string
-  fontSize: number
-  hideRootFolder: Array<number>
-  maxResults: number
-  opFolderBy: boolean
-  rememberPos: boolean
-  searchTarget: number
-  setWidth: number
-  tooltip: boolean
-  warnOpenMany: boolean
+  [OPTIONS.CLICK_BY_LEFT]: number
+  [OPTIONS.CLICK_BY_LEFT_CTRL]: number
+  [OPTIONS.CLICK_BY_LEFT_SHIFT]: number
+  [OPTIONS.CLICK_BY_MIDDLE]: number
+  [OPTIONS.DEF_EXPAND]: number
+  [OPTIONS.FONT_FAMILY]: string
+  [OPTIONS.FONT_SIZE]: number
+  [OPTIONS.HIDE_ROOT_FOLDER]: Array<number>
+  [OPTIONS.MAX_RESULTS]: number
+  [OPTIONS.OP_FOLDER_BY]: boolean
+  [OPTIONS.REMEMBER_POS]: boolean
+  [OPTIONS.SEARCH_TARGET]: number
+  [OPTIONS.SET_WIDTH]: number
+  [OPTIONS.TOOLTIP]: boolean
+  [OPTIONS.WARN_OPEN_MANY]: boolean
 }
 
 export interface OptionConfig {
   choices?: Array<string>
-  default?: $Values<Options>
+  default?: Options[keyof Options]
   maximum?: number
   minimum?: number
   type: string
 }
-export interface OptionsConfig {
-  [key: string]: OptionConfig
-}
+export type OptionsConfig = {[K in keyof Options]: OptionConfig}

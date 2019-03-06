@@ -2,6 +2,7 @@ import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import classes from '../../../../css/options/option-form.css'
+import {OPTIONS} from '../../../common/constants'
 import {Options, OptionsConfig} from '../../../common/types/options'
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
@@ -11,7 +12,7 @@ interface Props {
   optionsConfig: OptionsConfig
   resetToDefaultOptions: () => void
   saveOptions: () => void
-  selectedOptionFormMap: Array<string>
+  selectedOptionFormMap: Array<OPTIONS>
   updatePartialOptions: (options: Partial<Options>) => void
 }
 const OptionForm = (props: Props) => (

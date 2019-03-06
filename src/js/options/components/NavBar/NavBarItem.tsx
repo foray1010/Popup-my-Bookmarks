@@ -2,11 +2,12 @@ import classNames from 'classnames'
 import * as React from 'react'
 
 import classes from '../../../../css/options/nav-bar-item.css'
+import {NAV_MODULE} from '../../constants'
 
 interface Props {
   isActive: boolean
-  navModule: string
-  switchNavModule: (navModule: string) => void
+  navModule: NAV_MODULE
+  switchNavModule: (navModule: NAV_MODULE) => void
   title: string
 }
 class NavBarItem extends React.PureComponent<Props> {

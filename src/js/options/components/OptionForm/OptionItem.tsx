@@ -1,5 +1,4 @@
 import * as React from 'react'
-import {$Values} from 'utility-types'
 import webExtension from 'webextension-polyfill'
 
 import classes from '../../../../css/options/option-item.css'
@@ -29,7 +28,7 @@ const getInputItem = (optionConfig: OptionConfig) => {
 interface Props {
   optionConfig: OptionConfig
   optionName: string
-  optionValue: $Values<Options>
+  optionValue: Options[keyof Options]
   updatePartialOptions: (options: Partial<Options>) => void
 }
 const OptionItem = (props: Props) => {

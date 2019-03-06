@@ -1,24 +1,7 @@
 import * as R from 'ramda'
 import webExtension from 'webextension-polyfill'
 
-import {
-  OPTIONS_CLICK_BY_LEFT,
-  OPTIONS_CLICK_BY_LEFT_CTRL,
-  OPTIONS_CLICK_BY_LEFT_SHIFT,
-  OPTIONS_CLICK_BY_MIDDLE,
-  OPTIONS_DEF_EXPAND,
-  OPTIONS_FONT_FAMILY,
-  OPTIONS_FONT_SIZE,
-  OPTIONS_HIDE_ROOT_FOLDER,
-  OPTIONS_MAX_RESULTS,
-  OPTIONS_OP_FOLDER_BY,
-  OPTIONS_REMEMBER_POS,
-  OPTIONS_SEARCH_TARGET,
-  OPTIONS_SET_WIDTH,
-  OPTIONS_TOOLTIP,
-  OPTIONS_WARN_OPEN_MANY,
-  ROOT_ID
-} from '../constants'
+import {OPTIONS, ROOT_ID} from '../constants'
 import {OptionsConfig} from '../types/options'
 
 const getOptionsConfig = async (): Promise<OptionsConfig> => {
@@ -44,32 +27,32 @@ const getOptionsConfig = async (): Promise<OptionsConfig> => {
   }
 
   return {
-    [OPTIONS_CLICK_BY_LEFT]: {
+    [OPTIONS.CLICK_BY_LEFT]: {
       type: 'integer',
       default: 0,
       choices: openBookmarkChoices
     },
-    [OPTIONS_CLICK_BY_LEFT_CTRL]: {
+    [OPTIONS.CLICK_BY_LEFT_CTRL]: {
       type: 'integer',
       default: 4,
       choices: openBookmarkChoices
     },
-    [OPTIONS_CLICK_BY_LEFT_SHIFT]: {
+    [OPTIONS.CLICK_BY_LEFT_SHIFT]: {
       type: 'integer',
       default: 5,
       choices: openBookmarkChoices
     },
-    [OPTIONS_CLICK_BY_MIDDLE]: {
+    [OPTIONS.CLICK_BY_MIDDLE]: {
       type: 'integer',
       default: 2,
       choices: openBookmarkChoices
     },
-    [OPTIONS_DEF_EXPAND]: {
+    [OPTIONS.DEF_EXPAND]: {
       type: 'integer',
       default: 1,
       choices: rootFolderChoices
     },
-    [OPTIONS_FONT_FAMILY]: {
+    [OPTIONS.FONT_FAMILY]: {
       type: 'string',
       default: 'sans-serif',
       choices: [
@@ -86,47 +69,47 @@ const getOptionsConfig = async (): Promise<OptionsConfig> => {
         'Verdana'
       ]
     },
-    [OPTIONS_FONT_SIZE]: {
+    [OPTIONS.FONT_SIZE]: {
       type: 'integer',
       default: 12,
       minimum: 10,
       maximum: 30
     },
-    [OPTIONS_HIDE_ROOT_FOLDER]: {
+    [OPTIONS.HIDE_ROOT_FOLDER]: {
       type: 'array',
       default: [],
       choices: rootFolderChoices
     },
-    [OPTIONS_MAX_RESULTS]: {
+    [OPTIONS.MAX_RESULTS]: {
       type: 'integer',
       default: 50,
       minimum: 10,
       maximum: 200
     },
-    [OPTIONS_OP_FOLDER_BY]: {
+    [OPTIONS.OP_FOLDER_BY]: {
       type: 'boolean',
       default: false
     },
-    [OPTIONS_REMEMBER_POS]: {
+    [OPTIONS.REMEMBER_POS]: {
       type: 'boolean',
       default: false
     },
-    [OPTIONS_SEARCH_TARGET]: {
+    [OPTIONS.SEARCH_TARGET]: {
       type: 'integer',
       default: 0,
       choices: getMessages(['searchTargetOption1', 'searchTargetOption2'])
     },
-    [OPTIONS_SET_WIDTH]: {
+    [OPTIONS.SET_WIDTH]: {
       type: 'integer',
       default: 280,
       minimum: 100,
       maximum: 399
     },
-    [OPTIONS_TOOLTIP]: {
+    [OPTIONS.TOOLTIP]: {
       type: 'boolean',
       default: false
     },
-    [OPTIONS_WARN_OPEN_MANY]: {
+    [OPTIONS.WARN_OPEN_MANY]: {
       type: 'boolean',
       default: true
     }

@@ -1,13 +1,13 @@
 import {ActionType, getType} from 'typesafe-actions'
 
-import {NAV_MODULE_GENERAL} from '../../constants'
+import {NAV_MODULE} from '../../constants'
 import * as navigationCreators from './actions'
 
 interface NavigationState {
-  selectedNavModule: string
+  selectedNavModule: NAV_MODULE
 }
 const INITIAL_STATE: NavigationState = {
-  selectedNavModule: NAV_MODULE_GENERAL
+  selectedNavModule: NAV_MODULE.GENERAL
 }
 
 export const navigationReducer = (

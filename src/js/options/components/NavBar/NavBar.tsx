@@ -2,36 +2,31 @@ import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import classes from '../../../../css/options/nav-bar.css'
-import {
-  NAV_MODULE_CONTRIBUTORS,
-  NAV_MODULE_CONTROL,
-  NAV_MODULE_GENERAL,
-  NAV_MODULE_USER_INTERFACE
-} from '../../constants'
+import {NAV_MODULE} from '../../constants'
 import NavBarItem from './NavBarItem'
 
 const navBarItemInfos = [
   {
-    navModule: NAV_MODULE_GENERAL,
+    navModule: NAV_MODULE.GENERAL,
     title: webExtension.i18n.getMessage('general')
   },
   {
-    navModule: NAV_MODULE_USER_INTERFACE,
+    navModule: NAV_MODULE.USER_INTERFACE,
     title: webExtension.i18n.getMessage('userInterface')
   },
   {
-    navModule: NAV_MODULE_CONTROL,
+    navModule: NAV_MODULE.CONTROL,
     title: webExtension.i18n.getMessage('control')
   },
   {
-    navModule: NAV_MODULE_CONTRIBUTORS,
+    navModule: NAV_MODULE.CONTRIBUTORS,
     title: webExtension.i18n.getMessage('contributors')
   }
 ]
 
 interface Props {
-  selectedNavModule: string
-  switchNavModule: (navModule: string) => void
+  selectedNavModule: NAV_MODULE
+  switchNavModule: (navModule: NAV_MODULE) => void
 }
 const NavBar = (props: Props) => (
   <nav className={classes.main}>
