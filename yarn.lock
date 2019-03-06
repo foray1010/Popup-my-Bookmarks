@@ -1098,13 +1098,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/clean-webpack-plugin@0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@types/clean-webpack-plugin/-/clean-webpack-plugin-0.1.2.tgz#f3c9d97dd397a9db86ba6b9b245ca0eedf88f3b2"
-  integrity sha512-Io2JfBqqEB+ZpIXpLpGR6udFhmv5kjkXko6RI3j/lk2mccB5Ar+VHb7vGG3aI8XrauajNpxzajZFcsvnpj/Qkw==
-  dependencies:
-    "@types/webpack" "*"
-
 "@types/copy-webpack-plugin@4.4.3":
   version "4.4.3"
   resolved "https://registry.yarnpkg.com/@types/copy-webpack-plugin/-/copy-webpack-plugin-4.4.3.tgz#cb7bd1c45b835f7c862b795d7dc577b2877abf1b"
