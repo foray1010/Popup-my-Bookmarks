@@ -1569,7 +1569,7 @@
   dependencies:
     "@types/webpack" "*"
 
-"@typescript-eslint/eslint-plugin@^1.0.0":
+"@typescript-eslint/eslint-plugin@^1.4.2":
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-1.4.2.tgz#370bc32022d1cc884a5dcf62624ef2024182769d"
   integrity sha512-6WInypy/cK4rM1dirKbD5p7iFW28DbSRKT/+PGn+DYzBWEvHq5KnZAqQ5cX25JBc0qMkFxJNxNfBbFXJyyzVcw==
@@ -1579,7 +1579,7 @@
     requireindex "^1.2.0"
     tsutils "^3.7.0"
 
-"@typescript-eslint/parser@1.4.2", "@typescript-eslint/parser@^1.0.0":
+"@typescript-eslint/parser@1.4.2", "@typescript-eslint/parser@^1.4.2":
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-1.4.2.tgz#acfdee2019958a41d308d768e53ded975ef90ce8"
   integrity sha512-OqLkY9295DXXaWToItUv3olO2//rmzh6Th6Sc7YjFFEpEuennsm5zhygLLvHZjPxPlzrQgE8UDaOPurDylaUuw==
@@ -1913,7 +1913,7 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
-app-root-path@^2.0.1:
+app-root-path@^2.0.1, app-root-path@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/app-root-path/-/app-root-path-2.1.0.tgz#98bf6599327ecea199309866e8140368fd2e646a"
   integrity sha1-mL9lmTJ+zqGZMJhm6BQDaP0uZGo=
@@ -4082,27 +4082,27 @@ eslint-config-airbnb@17.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-foray1010@7.1.2:
-  version "7.1.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-foray1010/-/eslint-config-foray1010-7.1.2.tgz#0271ed8a3f171779e3d11b0d4c463a2dc1818f09"
-  integrity sha512-y8MIQuKIdvG9Jnxd5r5JG0IZO+hOJ7npIl/Hx1P3ENzNbL0wd1YHeuvUuXIrdQ+8ZE4fpS5yxzLGOGdXaa413g==
+eslint-config-foray1010@7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-foray1010/-/eslint-config-foray1010-7.2.0.tgz#9878f4dc9e935582d4a1df43715cc9828f128f91"
+  integrity sha512-C5Szaxmx4MkngfXVZRPWncr4mMmq27MI/sjxkMEedFOl/cSfkHVpP7Z+c/Lfio05YsC4lSLjSdYTea7PZSbMLw==
   dependencies:
-    "@typescript-eslint/eslint-plugin" "^1.0.0"
-    "@typescript-eslint/parser" "^1.0.0"
-    app-root-path "^2.0.1"
+    "@typescript-eslint/eslint-plugin" "^1.4.2"
+    "@typescript-eslint/parser" "^1.4.2"
+    app-root-path "^2.1.0"
     babel-eslint "^10.0.1"
     eslint-config-airbnb "17.1.0"
-    eslint-plugin-babel "^5.0.0"
-    eslint-plugin-flowtype "^3.1.1"
+    eslint-plugin-babel "^5.3.0"
+    eslint-plugin-flowtype "^3.4.2"
     eslint-plugin-fp "^2.3.0"
     eslint-plugin-html "^5.0.3"
-    eslint-plugin-import "^2.14.0"
-    eslint-plugin-jest "^22.0.0"
-    eslint-plugin-jsx-a11y "^6.1.1"
-    eslint-plugin-node "^8.0.0"
-    eslint-plugin-ramda "^2.5.0"
-    eslint-plugin-react "^7.11.0"
-    eslint-plugin-react-hooks "^1.0.1"
+    eslint-plugin-import "^2.16.0"
+    eslint-plugin-jest "^22.3.0"
+    eslint-plugin-jsx-a11y "^6.2.1"
+    eslint-plugin-node "^8.0.1"
+    eslint-plugin-ramda "^2.5.1"
+    eslint-plugin-react "^7.12.4"
+    eslint-plugin-react-hooks "^1.5.0"
 
 eslint-import-resolver-node@^0.3.2:
   version "0.3.2"
@@ -4120,7 +4120,7 @@ eslint-module-utils@^2.3.0:
     debug "^2.6.8"
     pkg-dir "^2.0.0"
 
-eslint-plugin-babel@^5.0.0:
+eslint-plugin-babel@^5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-babel/-/eslint-plugin-babel-5.3.0.tgz#2e7f251ccc249326da760c1a4c948a91c32d0023"
   integrity sha512-HPuNzSPE75O+SnxHIafbW5QB45r2w78fxqwK3HmjqIUoPfPzVrq6rD+CINU3yzoDSzEhUkX07VUphbF73Lth/w==
@@ -4135,7 +4135,7 @@ eslint-plugin-es@^1.3.1:
     eslint-utils "^1.3.0"
     regexpp "^2.0.1"
 
-eslint-plugin-flowtype@^3.1.1:
+eslint-plugin-flowtype@^3.4.2:
   version "3.4.2"
   resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-3.4.2.tgz#55475e10b05fd714d60bceebbbed596cb8706b16"
   integrity sha512-sv6O6fiN3dIwhU4qRxfcyIpbKGVvsxwIQ6vgBLudpQKjH1rEyEFEOjGzGEUBTQP9J8LdTZm37OjiqZ0ZeFOa6g==
@@ -4159,7 +4159,7 @@ eslint-plugin-html@^5.0.3:
   dependencies:
     htmlparser2 "^3.10.0"
 
-eslint-plugin-import@^2.14.0:
+eslint-plugin-import@^2.16.0:
   version "2.16.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.16.0.tgz#97ac3e75d0791c4fac0e15ef388510217be7f66f"
   integrity sha512-z6oqWlf1x5GkHIFgrSvtmudnqM6Q60KM4KvpWi5ubonMjycLjndvd5+8VAZIsTlHC03djdgJuyKG6XO577px6A==
@@ -4175,12 +4175,12 @@ eslint-plugin-import@^2.14.0:
     read-pkg-up "^2.0.0"
     resolve "^1.9.0"
 
-eslint-plugin-jest@^22.0.0:
+eslint-plugin-jest@^22.3.0:
   version "22.3.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.3.0.tgz#a10f10dedfc92def774ec9bb5bfbd2fb8e1c96d2"
   integrity sha512-P1mYVRNlOEoO5T9yTqOfucjOYf1ktmJ26NjwjH8sxpCFQa6IhBGr5TpKl3hcAAT29hOsRJVuMWmTsHoUVo9FoA==
 
-eslint-plugin-jsx-a11y@^6.1.1:
+eslint-plugin-jsx-a11y@^6.2.1:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jsx-a11y/-/eslint-plugin-jsx-a11y-6.2.1.tgz#4ebba9f339b600ff415ae4166e3e2e008831cf0c"
   integrity sha512-cjN2ObWrRz0TTw7vEcGQrx+YltMvZoOEx4hWU8eEERDnBIU00OTq7Vr+jA7DFKxiwLNv4tTh5Pq2GUNEa8b6+w==
@@ -4194,7 +4194,7 @@ eslint-plugin-jsx-a11y@^6.1.1:
     has "^1.0.3"
     jsx-ast-utils "^2.0.1"
 
-eslint-plugin-node@^8.0.0:
+eslint-plugin-node@^8.0.1:
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-node/-/eslint-plugin-node-8.0.1.tgz#55ae3560022863d141fa7a11799532340a685964"
   integrity sha512-ZjOjbjEi6jd82rIpFSgagv4CHWzG9xsQAVp1ZPlhRnnYxcTgENUVBvhYmkQ7GvT1QFijUSo69RaiOJKhMu6i8w==
@@ -4206,7 +4206,7 @@ eslint-plugin-node@^8.0.0:
     resolve "^1.8.1"
     semver "^5.5.0"
 
-eslint-plugin-ramda@^2.5.0:
+eslint-plugin-ramda@^2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-ramda/-/eslint-plugin-ramda-2.5.1.tgz#36c2592300c383471aaac1ba26e9fca6f37a11b2"
   integrity sha512-1Uuyl5hMiyBNsn1F0Px0q8hGX95HC6CAzaEBeKngwixXwsbw+j98U7fatxDME8lUKyLPXuO5Ulon2QOcwVDrxw==
@@ -4215,12 +4215,12 @@ eslint-plugin-ramda@^2.5.0:
     ramda "0.25.0"
     req-all "^1.0.0"
 
-eslint-plugin-react-hooks@^1.0.1:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-1.4.0.tgz#ad86001e05519368e55a888b1b31004b8e2ae8f6"
-  integrity sha512-fMGlzztW/5hSQT0UBnlPwulao0uF8Kyp0Uv6PA81lzmcDz2LBtthkWQaE8Wz2F2kEe7mSRDgK8ABEFK1ipeDxw==
+eslint-plugin-react-hooks@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-1.5.0.tgz#cdd958cfff55bd5fa4f84db90d1490fb5ca4ae2b"
+  integrity sha512-iwDuWR2ReRgvJsNm8fXPtTKdg78IVQF8I4+am3ntztPf/+nPnWZfArFu6aXpaC75/iCYRrkqI8nPCYkxJstmpA==
 
-eslint-plugin-react@^7.11.0:
+eslint-plugin-react@^7.12.4:
   version "7.12.4"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.12.4.tgz#b1ecf26479d61aee650da612e425c53a99f48c8c"
   integrity sha512-1puHJkXJY+oS1t467MjbqjvX53uQ05HXwjqDgdbGBqf5j9eeydI54G3KwiJmWciQ0HTBacIKw2jgwSBSH3yfgQ==
