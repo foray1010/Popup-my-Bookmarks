@@ -48,9 +48,9 @@ const sortGroupByPriority = (groups: Array<TypeGroup>) => {
     CST.BOOKMARK_TYPES.FOLDER,
     CST.BOOKMARK_TYPES.BOOKMARK
   ]
-  return R.sort((groupA, groupB) => {
+  return Array.from(groups).sort((groupA, groupB) => {
     return priority.indexOf(groupA.type) - priority.indexOf(groupB.type)
-  }, groups)
+  })
 }
 
 const ungroup = (nestedGroups: Array<Array<TypeGroup>>): Array<BookmarkInfo> => {
@@ -64,7 +64,11 @@ const ungroup = (nestedGroups: Array<Array<TypeGroup>>): Array<BookmarkInfo> => 
 const sortBookmarks = R.compose(
   ungroup,
   R.map(sortGroupByPriority),
-  R.map((groups: Array<TypeGroup>) => R.over(R.lensProp('members'), sortByTitle, groups)),
+  R.map((groups: Array<TypeGroup>) =>
+    groups.map((group) => ({
+      ...group,
+      members: sortByTitle(group.members)
+    }))),
   R.map(groupByType),
   groupBySeparator
 )
