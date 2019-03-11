@@ -92,7 +92,7 @@
     "chance": "1.0.18",
     "chrome-manifest-loader": "0.1.2",
     "clean-webpack-plugin": "2.0.0",
-    "copy-webpack-plugin": "5.0.0",
+    "copy-webpack-plugin": "5.0.1",
     "cross-env": "5.2.0",
     "css-loader": "2.1.1",
     "cssnano": "4.1.10",
