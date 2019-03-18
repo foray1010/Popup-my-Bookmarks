@@ -37,7 +37,7 @@
     "react-event-listener": "0.6.6",
     "react-measure": "2.2.4",
     "react-redux": "6.0.1",
-    "react-window": "1.7.0",
+    "react-window": "1.7.1",
     "redux": "4.0.1",
     "redux-saga": "1.0.2",
     "store": "2.0.12",
