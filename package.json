@@ -74,7 +74,7 @@
     "@types/react-event-listener": "0.4.9",
     "@types/react-measure": "2.0.5",
     "@types/react-redux": "7.0.4",
-    "@types/react-window": "1.5.1",
+    "@types/react-window": "1.7.0",
     "@types/script-ext-html-webpack-plugin": "2.1.0",
     "@types/sharp": "0.21.3",
     "@types/store": "2.0.1",
