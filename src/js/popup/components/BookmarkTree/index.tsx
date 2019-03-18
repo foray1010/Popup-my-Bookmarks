@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 import classes from '../../../../css/popup/bookmark-tree.css'
 import * as CST from '../../constants'
-import {RootState, bookmarkCreators, menuCreators} from '../../reduxs'
+import {RootState, bookmarkCreators, localStorageCreators, menuCreators} from '../../reduxs'
 import DragAndDropContext from '../dragAndDrop/DragAndDropContext'
 import Mask from '../Mask'
 import BookmarkTree from './BookmarkTree'
@@ -26,6 +26,9 @@ const getRowHeight = (fontSize: number) =>
 
 const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   const highlightedId = state.bookmark.focusId || state.menu.targetId || state.editor.targetId
+  const lastPosition = (state.localStorage.lastPositions || []).find(
+    R.propEq('id', ownProps.treeId)
+  )
   const treeIndex = state.bookmark.trees.findIndex(R.pathEq(['parent', 'id'], ownProps.treeId))
   const treeInfo = state.bookmark.trees[treeIndex]
   return {
@@ -36,6 +39,7 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
     // cover the folder if it is not the top two folder
     isShowCover: state.bookmark.trees.length - treeIndex > 2,
     isShowHeader: treeIndex !== 0,
+    lastScrollTop: lastPosition ? lastPosition.scrollTop : undefined,
     listItemWidth: state.options.setWidth,
     rowHeight: getRowHeight(state.options.fontSize || 0),
     treeInfo
@@ -51,7 +55,8 @@ const mapDispatchToProps = {
   removeFocusId: bookmarkCreators.removeFocusId,
   removeNextBookmarkTrees: bookmarkCreators.removeNextBookmarkTrees,
   setDragIndicator: bookmarkCreators.setDragIndicator,
-  setFocusId: bookmarkCreators.setFocusId
+  setFocusId: bookmarkCreators.setFocusId,
+  updateLocalStorage: localStorageCreators.updateLocalStorage
 }
 
 type Props = OwnProps & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
@@ -85,6 +90,7 @@ const BookmarkTreeContainer = (props: Props) => {
         highlightedId={props.highlightedId}
         iconSize={props.iconSize}
         isDisableDragAndDrop={props.isSearching}
+        lastScrollTop={props.lastScrollTop}
         listItemWidth={props.listItemWidth || 0}
         noRowsRenderer={noRowsRenderer}
         onRowAuxClick={handleRowAuxClick}

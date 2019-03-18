@@ -13,6 +13,7 @@ interface Props {
   highlightedId: string
   iconSize: number
   isDisableDragAndDrop: boolean
+  lastScrollTop?: number
   listItemWidth: number
   noRowsRenderer: () => React.ReactElement | null
   onRowAuxClick: (bookmarkId: string) => (evt: MouseEvent) => void
@@ -57,9 +58,10 @@ const BookmarkTree = (props: Props) => {
     // force recalculate all row heights as it doesn't recalculate
     listRef.current.resetAfterIndex(0, true)
 
-    const maxListHeight =
-      // @ts-ignore: hacky way to access _outerRef
-      CST.MAX_HEIGHT - listRef.current._outerRef.getBoundingClientRect().top
+    // @ts-ignore: hacky way to access _outerRef
+    const listEl: HTMLElement = listRef.current._outerRef
+
+    const maxListHeight = CST.MAX_HEIGHT - listEl.getBoundingClientRect().top
     const minListHeight = props.rowHeight
 
     const totalRowHeight = props.treeInfo.children.reduce(
@@ -69,6 +71,12 @@ const BookmarkTree = (props: Props) => {
 
     setListHeight(R.clamp(minListHeight, maxListHeight, totalRowHeight))
   }, [getRowHeight, props.rowHeight, props.treeInfo.children])
+
+  React.useEffect(() => {
+    if (props.lastScrollTop) {
+      if (listRef.current) listRef.current.scrollTo(props.lastScrollTop)
+    }
+  }, [props.lastScrollTop])
 
   React.useEffect(() => {
     if (props.scrollToIndex >= 0) {

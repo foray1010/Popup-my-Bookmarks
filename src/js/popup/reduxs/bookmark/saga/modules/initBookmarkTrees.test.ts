@@ -1,65 +1,85 @@
 import * as R from 'ramda'
 import {call, put, select} from 'redux-saga/effects'
-import store from 'store'
 
 import optionsFixture from '../../../../../common/__fixtures__/options.json'
 import * as bookmarkCreators from '../../actions'
 import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import {getBookmarkTrees} from '../utils/getters'
-import {initBookmarkTrees} from './initBookmarkTrees'
+import {getRememberedTreeIds, initBookmarkTrees} from './initBookmarkTrees'
+
+describe('getRememberedTreeIds', () => {
+  test('return ids if options.rememberPos is true', () => {
+    const localStorage = {
+      lastPositions: [
+        {
+          id: 'a',
+          scrollTop: 0
+        }
+      ]
+    }
+    const options = {
+      ...optionsFixture,
+      rememberPos: true
+    }
+
+    expect(getRememberedTreeIds({localStorage, options})).toStrictEqual(['a'])
+  })
+
+  test('empty array if localStorage.lastPositions is not defined', () => {
+    const localStorage = {}
+    const options = {
+      ...optionsFixture,
+      rememberPos: true
+    }
+
+    expect(getRememberedTreeIds({localStorage, options})).toStrictEqual([])
+  })
+
+  test('empty array if options.rememberPos is false', () => {
+    const localStorage = {
+      lastPositions: [
+        {
+          id: 'a',
+          scrollTop: 0
+        }
+      ]
+    }
+    const options = {
+      ...optionsFixture,
+      rememberPos: false
+    }
+
+    expect(getRememberedTreeIds({localStorage, options})).toStrictEqual([])
+  })
+})
 
 describe('initBookmarkTrees', () => {
   test('get extra trees if rememberPos is `true`', () => {
     const generator = initBookmarkTrees()
 
-    expect(generator.next().value).toEqual(select(R.identity))
+    expect(generator.next().value).toStrictEqual(select(R.identity))
 
+    const localStorage = {
+      lastPositions: [
+        {
+          id: 'a',
+          scrollTop: 0
+        },
+        {
+          id: 'b',
+          scrollTop: 0
+        }
+      ]
+    }
     const options = {
       ...optionsFixture,
       rememberPos: true
     }
-    expect(generator.next({options}).value).toEqual(call([store, store.get], 'lastBoxPID'))
-
-    const treeIds = ['1', '2', '3']
-    expect(generator.next(treeIds).value).toEqual(call(getBookmarkTrees, treeIds, options))
-
-    expect(generator.next(bookmarkTrees).value).toEqual(
-      put(bookmarkCreators.setBookmarkTrees(bookmarkTrees))
+    expect(generator.next({localStorage, options}).value).toStrictEqual(
+      call(getBookmarkTrees, ['b'], options)
     )
 
-    expect(generator.next().done).toBe(true)
-  })
-  test('empty array if store.get return falsy result', () => {
-    const generator = initBookmarkTrees()
-
-    expect(generator.next().value).toEqual(select(R.identity))
-
-    const options = {
-      ...optionsFixture,
-      rememberPos: true
-    }
-    expect(generator.next({options}).value).toEqual(call([store, store.get], 'lastBoxPID'))
-
-    expect(generator.next().value).toEqual(call(getBookmarkTrees, [], options))
-
-    expect(generator.next(bookmarkTrees).value).toEqual(
-      put(bookmarkCreators.setBookmarkTrees(bookmarkTrees))
-    )
-
-    expect(generator.next().done).toBe(true)
-  })
-  test('do not get extra trees if rememberPos is `false`', () => {
-    const generator = initBookmarkTrees()
-
-    expect(generator.next().value).toEqual(select(R.identity))
-
-    const options = {
-      ...optionsFixture,
-      rememberPos: false
-    }
-    expect(generator.next({options}).value).toEqual(call(getBookmarkTrees, [], options))
-
-    expect(generator.next(bookmarkTrees).value).toEqual(
+    expect(generator.next(bookmarkTrees).value).toStrictEqual(
       put(bookmarkCreators.setBookmarkTrees(bookmarkTrees))
     )
 
