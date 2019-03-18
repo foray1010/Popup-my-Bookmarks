@@ -141,7 +141,9 @@ class BookmarkTreeContainer extends React.PureComponent<Props> {
     this.props.removeFocusId()
   }
 
-  private noRowsRenderer = () => <NoSearchResult />
+  private noRowsRenderer = () => {
+    return this.props.isSearching ? <NoSearchResult /> : null
+  }
 
   private _toggleBookmarkTree = (bookmarkInfo: BookmarkInfo) => {
     if (
@@ -164,7 +166,7 @@ class BookmarkTreeContainer extends React.PureComponent<Props> {
       isShowCover={this.props.isShowCover}
       isShowHeader={this.props.isShowHeader}
       listItemWidth={this.props.listItemWidth || 0}
-      noRowsRenderer={this.props.isSearching ? this.noRowsRenderer : undefined}
+      noRowsRenderer={this.noRowsRenderer}
       onCloseButtonClick={this.closeCurrentTree}
       onCoverClick={this.closeNextTrees}
       onRowAuxClick={this.handleRowAuxClick}

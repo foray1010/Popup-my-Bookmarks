@@ -39,10 +39,6 @@
   border: 0;
 }
 
-:global(.ReactVirtualized__Grid) {
-  outline: 0;
-}
-
 :global([hidden]) {
   display: none !important;
 }

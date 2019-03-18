@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import * as React from 'react'
-import List from 'react-virtualized/dist/es/List'
+import {VariableSizeList as List} from 'react-window'
 
 import classes from '../../../../css/popup/bookmark-tree.css'
 import * as CST from '../../constants'
@@ -18,7 +18,7 @@ interface Props {
   isShowCover: boolean
   isShowHeader: boolean
   listItemWidth: number
-  noRowsRenderer?: () => React.ReactElement
+  noRowsRenderer: () => React.ReactElement | null
   onCloseButtonClick: () => void
   onCoverClick: () => void
   onRowAuxClick: (bookmarkId: string) => (evt: MouseEvent) => void
@@ -48,25 +48,27 @@ class BookmarkTree extends React.PureComponent<Props, State> {
   public componentDidUpdate(prevProps: Props) {
     if (prevProps.treeInfo !== this.props.treeInfo) {
       // force recalculate all row heights as it doesn't recalculate
-      this.props.treeInfo.children.forEach((x, index) => {
-        if (this.list) this.list.recomputeRowHeights(index)
-      })
+      if (this.listRef.current) this.listRef.current.resetAfterIndex(0, true)
       this.setHeight()
+    }
+
+    if (prevProps.scrollToIndex !== this.props.scrollToIndex && this.props.scrollToIndex >= 0) {
+      if (this.listRef.current) this.listRef.current.scrollToItem(this.props.scrollToIndex)
     }
   }
 
-  private list: List | null = null
+  private listRef = React.createRef<List>()
 
-  private getRowHeight = (payload: {index: number}) => {
+  private getRowHeight = (index: number) => {
     let rowHeight = this.props.rowHeight
 
-    const bookmarkInfo = this.props.treeInfo.children[payload.index]
+    const bookmarkInfo = this.props.treeInfo.children[index]
     if (bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR) {
       rowHeight /= 2
     }
 
     // for the indicator show the end of folder
-    if (payload.index === this.props.treeInfo.children.length - 1) {
+    if (index === this.props.treeInfo.children.length - 1) {
       rowHeight += CST.GOLDEN_GAP * 2
     }
 
@@ -74,15 +76,15 @@ class BookmarkTree extends React.PureComponent<Props, State> {
   }
 
   private setHeight = () => {
-    if (!this.list) return
+    if (!this.listRef.current) return
 
     const maxListHeight =
-      // @ts-ignore: hacky way to access _scrollingContainer
-      CST.MAX_HEIGHT - this.list.Grid._scrollingContainer.getBoundingClientRect().top
+      // @ts-ignore: hacky way to access _outerRef
+      CST.MAX_HEIGHT - this.listRef.current._outerRef.getBoundingClientRect().top
     const minListHeight = this.props.rowHeight
 
     const totalRowHeight = this.props.treeInfo.children.reduce(
-      (acc, x, index) => acc + this.getRowHeight({index}),
+      (acc, x, index) => acc + this.getRowHeight(index),
       0
     )
 
@@ -91,56 +93,56 @@ class BookmarkTree extends React.PureComponent<Props, State> {
     })
   }
 
-  public render = () => (
-    <section className={classes.main}>
-      {this.props.isShowHeader && (
-        <TreeHeader
-          title={this.props.treeInfo.parent.title}
-          onClose={this.props.onCloseButtonClick}
-        />
-      )}
+  public render = () => {
+    const itemCount = this.props.treeInfo.children.length
 
-      <List
-        ref={(ref) => {
-          this.list = ref
-        }}
-        height={this.state.listHeight}
-        noRowsRenderer={this.props.noRowsRenderer}
-        // onScroll={this.props.onScroll}
-        rowCount={this.props.treeInfo.children.length}
-        rowHeight={this.getRowHeight}
-        rowRenderer={(rendererProps: {index: number, style: React.CSSProperties}) => {
-          const bookmarkInfo = this.props.treeInfo.children[rendererProps.index]
-          const isBeingDragged = this.props.draggingId === bookmarkInfo.id
-          return (
-            <div key={bookmarkInfo.id} className={classes['list-item']} style={rendererProps.style}>
-              <BookmarkRow
-                bookmarkInfo={bookmarkInfo}
-                iconSize={this.props.iconSize}
-                isDisableDragAndDrop={this.props.isDisableDragAndDrop}
-                isHighlighted={this.props.highlightedId === bookmarkInfo.id || isBeingDragged}
-                isUnclickable={isBeingDragged}
-                onAuxClick={this.props.onRowAuxClick}
-                onClick={this.props.onRowClick}
-                onDragOver={this.props.onRowDragOver}
-                onDragStart={this.props.onRowDragStart}
-                onMouseEnter={this.props.onRowMouseEnter}
-                onMouseLeave={this.props.onRowMouseLeave}
-              />
-            </div>
-          )
-        }}
-        scrollToIndex={this.props.scrollToIndex >= 0 ? this.props.scrollToIndex : undefined}
-        // scrollTop={this.props.lastScrollTop}
-        tabIndex={-1}
-        width={this.props.listItemWidth}
-      />
+    const rowRenderer = ({index, style}: {index: number, style: React.CSSProperties}) => {
+      const bookmarkInfo = this.props.treeInfo.children[index]
+      const isBeingDragged = this.props.draggingId === bookmarkInfo.id
+      return (
+        <div key={bookmarkInfo.id} className={classes['list-item']} style={style}>
+          <BookmarkRow
+            bookmarkInfo={bookmarkInfo}
+            iconSize={this.props.iconSize}
+            isDisableDragAndDrop={this.props.isDisableDragAndDrop}
+            isHighlighted={this.props.highlightedId === bookmarkInfo.id || isBeingDragged}
+            isUnclickable={isBeingDragged}
+            onAuxClick={this.props.onRowAuxClick}
+            onClick={this.props.onRowClick}
+            onDragOver={this.props.onRowDragOver}
+            onDragStart={this.props.onRowDragStart}
+            onMouseEnter={this.props.onRowMouseEnter}
+            onMouseLeave={this.props.onRowMouseLeave}
+          />
+        </div>
+      )
+    }
 
-      {this.props.isShowCover && (
-        <Mask backgroundColor='#000' opacity={0.16} onClick={this.props.onCoverClick} />
-      )}
-    </section>
-  )
+    return (
+      <section className={classes.main}>
+        {this.props.isShowHeader && (
+          <TreeHeader
+            title={this.props.treeInfo.parent.title}
+            onClose={this.props.onCloseButtonClick}
+          />
+        )}
+
+        <List
+          ref={this.listRef}
+          height={this.state.listHeight}
+          itemCount={itemCount}
+          itemSize={this.getRowHeight}
+          width={this.props.listItemWidth}
+        >
+          {itemCount > 0 ? rowRenderer : this.props.noRowsRenderer}
+        </List>
+
+        {this.props.isShowCover && (
+          <Mask backgroundColor='#000' opacity={0.16} onClick={this.props.onCoverClick} />
+        )}
+      </section>
+    )
+  }
 }
 
 export default BookmarkTree
