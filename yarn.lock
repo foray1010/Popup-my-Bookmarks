@@ -1429,10 +1429,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-redux@7.0.3":
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.0.3.tgz#b8dc3faa954b7f28e4b0209bcf9209b45251ed6b"
-  integrity sha512-6qsIHHNwF41viooUgR2lXHL81v3uyeJsugq9YCMYE4g2bDyG710G/I/w5nbn7AQ9XfuOLUwrWfm3edV7gDJ9AQ==
+"@types/react-redux@7.0.4":
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.0.4.tgz#80f4059de0e0f29689aa828f9b0dd5e0a3dd8fa7"
+  integrity sha512-1UMlegvHhhhJkLf0em51fKQzQTSNwAPixI+kMSo2tgJxeqi86BY67bdAgRpST4kkndZ9ir5Bnu57vmocRgU6lw==
   dependencies:
     "@types/hoist-non-react-statics" "*"
     "@types/react" "*"
