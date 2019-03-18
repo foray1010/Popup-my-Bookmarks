@@ -1438,10 +1438,10 @@
     "@types/react" "*"
     redux "^4.0.0"
 
-"@types/react-window@1.5.1":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@types/react-window/-/react-window-1.5.1.tgz#10bcb70962ddaa9abce0687776aeeb6c0cf32622"
-  integrity sha512-irw+yNZfBVMByth0FnE9nCVHQdi5ny6ixpv5ykqPAWfAw8+Y2oV5aBzftQdisxZ+hd60TD9MLWkyVgRDPRL+5Q==
+"@types/react-window@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@types/react-window/-/react-window-1.7.0.tgz#8dd99822c54380c9c05df213b7b4400c24c9877e"
+  integrity sha512-HyxhB3TFL/2WKRi69paA1Ch7kowomhR2eSZe7sJz8OtKuNhzRrlYSteSID7GIUpV95k246iVOlxEXmG2bjZQFA==
   dependencies:
     "@types/react" "*"
 
