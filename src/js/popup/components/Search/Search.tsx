@@ -21,20 +21,18 @@ class Search extends React.PureComponent<Props> {
     }
   }
 
-  private inputEl: HTMLInputElement | null = null
+  private inputRef = React.createRef<HTMLInputElement>()
 
   private focusToInputEl = () => {
-    if (this.inputEl && this.inputEl !== document.activeElement) {
-      this.inputEl.focus()
+    if (this.inputRef.current && this.inputRef.current !== document.activeElement) {
+      this.inputRef.current.focus()
     }
   }
 
   public render = () => (
     <div className={classes.main}>
       <input
-        ref={(ref) => {
-          this.inputEl = ref
-        }}
+        ref={this.inputRef}
         type='search'
         placeholder={webExtension.i18n.getMessage('search')}
         value={this.props.inputValue}

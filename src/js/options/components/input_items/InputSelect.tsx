@@ -10,8 +10,8 @@ interface Props {
   updatePartialOptions: (options: {[key: string]: string}) => void
 }
 class InputSelect extends React.PureComponent<Props> {
-  private inputEl: HTMLInputElement | null = null
-  private selectEl: HTMLSelectElement | null = null
+  private inputRef = React.createRef<HTMLInputElement>()
+  private selectRef = React.createRef<HTMLSelectElement>()
 
   private handleBlur = (evt: React.FocusEvent<HTMLInputElement>) => {
     const normalize = R.compose(
@@ -26,8 +26,8 @@ class InputSelect extends React.PureComponent<Props> {
   }
 
   private handleChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    if (evt.currentTarget === this.selectEl) {
-      if (this.inputEl) this.inputEl.focus()
+    if (evt.currentTarget === this.selectRef.current) {
+      if (this.inputRef.current) this.inputRef.current.focus()
     }
 
     this.props.updatePartialOptions({
@@ -45,9 +45,7 @@ class InputSelect extends React.PureComponent<Props> {
   public render = () => (
     <div className={classes.main}>
       <input
-        ref={(ref) => {
-          this.inputEl = ref
-        }}
+        ref={this.inputRef}
         className={classes.input}
         name={this.props.optionName}
         type='text'
@@ -57,9 +55,7 @@ class InputSelect extends React.PureComponent<Props> {
         onKeyDown={this.handleKeyDown}
       />
       <select
-        ref={(ref) => {
-          this.selectEl = ref
-        }}
+        ref={this.selectRef}
         className={classes.select}
         defaultValue={this.props.optionValue}
         onChange={this.handleChange}

@@ -11,7 +11,7 @@ interface Props {
   updatePartialOptions: (options: {[key: string]: boolean}) => void
 }
 class Option extends React.PureComponent<Props> {
-  private inputEl: HTMLInputElement | null = null
+  private inputRef = React.createRef<HTMLInputElement>()
 
   private handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     this.props.updatePartialOptions({
@@ -20,7 +20,7 @@ class Option extends React.PureComponent<Props> {
   }
 
   private handleClick = () => {
-    if (this.inputEl) this.inputEl.click()
+    if (this.inputRef.current) this.inputRef.current.click()
   }
 
   public render() {
@@ -28,9 +28,7 @@ class Option extends React.PureComponent<Props> {
     return (
       <div className={classes.main}>
         <input
-          ref={(ref) => {
-            this.inputEl = ref
-          }}
+          ref={this.inputRef}
           name={this.props.optionName}
           type='radio'
           value={String(this.props.optionChoice)}

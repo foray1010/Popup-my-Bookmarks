@@ -32,16 +32,20 @@ interface Props {
 }
 class BookmarkRow extends React.PureComponent<Props> {
   public componentDidMount() {
-    // @ts-ignore: https://github.com/Microsoft/TypeScript/issues/29995
-    if (this.baseEl) this.baseEl.addEventListener('auxclick', this.handleAuxClick)
+    if (this.baseRef.current) {
+      // @ts-ignore: https://github.com/Microsoft/TypeScript/issues/29995
+      this.baseRef.current.addEventListener('auxclick', this.handleAuxClick)
+    }
   }
 
   public componentWillUnmount() {
-    // @ts-ignore: https://github.com/Microsoft/TypeScript/issues/29995
-    if (this.baseEl) this.baseEl.removeEventListener('auxclick', this.handleAuxClick)
+    if (this.baseRef.current) {
+      // @ts-ignore: https://github.com/Microsoft/TypeScript/issues/29995
+      this.baseRef.current.removeEventListener('auxclick', this.handleAuxClick)
+    }
   }
 
-  private baseEl: HTMLElement | null = null
+  private baseRef = React.createRef<HTMLDivElement>()
 
   private handleAuxClick = this.props.onAuxClick(this.props.bookmarkInfo.id)
   private handleClick = this.props.onClick(this.props.bookmarkInfo.id)
@@ -62,9 +66,7 @@ class BookmarkRow extends React.PureComponent<Props> {
       onDragStart={this.props.onDragStart}
     >
       <div
-        ref={(ref) => {
-          this.baseEl = ref
-        }}
+        ref={this.baseRef}
         className={classNames(classes.main, classes['full-height'], {
           [classes.highlighted]:
             this.props.isHighlighted &&
