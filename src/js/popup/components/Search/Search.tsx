@@ -10,36 +10,26 @@ interface Props {
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void
   onFocus: () => void
 }
-class Search extends React.PureComponent<Props> {
-  public componentDidMount() {
-    if (this.props.isFocus) this.focusToInputEl()
-  }
+const Search = ({isFocus, ...restProps}: Props) => {
+  const inputRef = React.useRef<HTMLInputElement>(null)
 
-  public componentDidUpdate(prevProps: Props) {
-    if (prevProps.isFocus !== this.props.isFocus && this.props.isFocus) {
-      this.focusToInputEl()
+  React.useEffect(() => {
+    if (isFocus && inputRef.current !== document.activeElement) {
+      if (inputRef.current) inputRef.current.focus()
     }
-  }
+  }, [isFocus])
 
-  private inputRef = React.createRef<HTMLInputElement>()
-
-  private focusToInputEl = () => {
-    if (this.inputRef.current && this.inputRef.current !== document.activeElement) {
-      this.inputRef.current.focus()
-    }
-  }
-
-  public render = () => (
+  return (
     <div className={classes.main}>
       <input
-        ref={this.inputRef}
+        ref={inputRef}
         type='search'
         placeholder={webExtension.i18n.getMessage('search')}
-        value={this.props.inputValue}
+        value={restProps.inputValue}
         tabIndex={-1}
-        onBlur={this.props.onBlur}
-        onFocus={this.props.onFocus}
-        onChange={this.props.onChange}
+        onBlur={restProps.onBlur}
+        onFocus={restProps.onFocus}
+        onChange={restProps.onChange}
       />
     </div>
   )

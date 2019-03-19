@@ -30,80 +30,69 @@ interface Props {
   positionLeft: number
   positionTop: number
 }
-interface State {
-  bodyHeight: number | null
-  bodyWidth: number | null
-  calibratedLeft: number
-  calibratedTop: number
-  mainHeight: number
-  mainWidth: number
-}
-class AbsPositionWithinBody extends React.PureComponent<Props, State> {
-  public state = {
-    bodyHeight: null,
-    bodyWidth: null,
-    calibratedLeft: 0,
-    calibratedTop: 0,
-    mainHeight: 0,
-    mainWidth: 0
-  }
+const AbsPositionWithinBody = ({positionLeft, positionTop, ...restProps}: Props) => {
+  const [bodySize, setBodySize] = React.useState<{
+    height: number | null
+    width: number | null
+  }>({
+    height: null,
+    width: null
+  })
+  const [childSize, setChildSize] = React.useState({
+    height: 0,
+    width: 0
+  })
+  const [calibratedPosition, setCalibratedPosition] = React.useState({
+    left: 0,
+    top: 0
+  })
 
-  public componentDidUpdate(prevProps: Props, prevState: State) {
-    if (
-      prevProps.positionLeft !== this.props.positionLeft ||
-      prevProps.positionTop !== this.props.positionTop ||
-      prevState.mainHeight !== this.state.mainHeight ||
-      prevState.mainWidth !== this.state.mainWidth
-    ) {
-      this.setPosition()
-    }
-  }
-
-  private setPosition = () => {
+  React.useEffect(() => {
     if (!document.body) return
 
     const currentBodyHeight = document.body.scrollHeight
     const currentBodyWidth = document.body.scrollWidth
-    const menuHeight = this.state.mainHeight
-    const menuWidth = this.state.mainWidth
 
-    const updatedBodyHeight = menuHeight > currentBodyHeight ? menuHeight : null
-    const updatedBodyWidth = menuWidth > currentBodyWidth ? menuWidth : null
+    const updatedBodyHeight = childSize.height > currentBodyHeight ? childSize.height : null
+    const updatedBodyWidth = childSize.width > currentBodyWidth ? childSize.width : null
 
-    this.setState({
-      bodyHeight: updatedBodyHeight,
-      bodyWidth: updatedBodyWidth,
-      calibratedLeft: Math.min(
-        this.props.positionLeft,
-        (updatedBodyWidth !== null ? updatedBodyWidth : currentBodyWidth) - menuWidth
+    setBodySize({
+      height: updatedBodyHeight,
+      width: updatedBodyWidth
+    })
+
+    setCalibratedPosition({
+      left: Math.min(
+        positionLeft,
+        (updatedBodyWidth !== null ? updatedBodyWidth : currentBodyWidth) - childSize.width
       ),
-      calibratedTop: Math.min(
-        this.props.positionTop,
-        (updatedBodyHeight !== null ? updatedBodyHeight : currentBodyHeight) - menuHeight
+      top: Math.min(
+        positionTop,
+        (updatedBodyHeight !== null ? updatedBodyHeight : currentBodyHeight) - childSize.height
       )
     })
-  }
+  }, [childSize, positionLeft, positionTop])
 
-  private measureOnResize = (contentRect: ContentRect) => {
+  const measureOnResize = React.useCallback((contentRect: ContentRect) => {
     if (!contentRect.offset) return
 
-    this.setState({
-      mainHeight: contentRect.offset.height,
-      mainWidth: contentRect.offset.width
+    setChildSize({
+      height: contentRect.offset.height,
+      width: contentRect.offset.width
     })
-  }
+  }, [])
 
-  public render = () => (
+  return (
     <React.Fragment>
-      <GlobalStyles bodyHeight={this.state.bodyHeight} bodyWidth={this.state.bodyWidth} />
-      <Measure offset onResize={this.measureOnResize}>
+      <GlobalStyles bodyHeight={bodySize.height} bodyWidth={bodySize.width} />
+      <Measure offset onResize={measureOnResize}>
         {({measureRef}) => (
           <Wrapper
             ref={measureRef}
-            positionLeft={this.state.calibratedLeft}
-            positionTop={this.state.calibratedTop}
+            positionLeft={calibratedPosition.left}
+            positionTop={calibratedPosition.top}
           >
-            {this.props.children}
+            {restProps.children}
           </Wrapper>
         )}
       </Measure>

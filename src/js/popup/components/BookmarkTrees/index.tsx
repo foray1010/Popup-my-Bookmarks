@@ -24,12 +24,12 @@ const mapDispatchToProps = {
 }
 
 type Props = OwnProps & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-class BookmarkTreesContainer extends React.PureComponent<Props> {
-  public componentDidMount() {
-    this.props.initBookmarkTrees()
-  }
+const BookmarkTreesContainer = ({initBookmarkTrees, ...restProps}: Props) => {
+  React.useEffect(() => {
+    initBookmarkTrees()
+  }, [initBookmarkTrees])
 
-  public render = () => <BookmarkTrees {...this.props} />
+  return <BookmarkTrees {...restProps} />
 }
 
 export default withBookmarkEvents(

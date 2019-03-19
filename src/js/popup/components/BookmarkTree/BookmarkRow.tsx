@@ -30,66 +30,74 @@ interface Props {
   onMouseEnter: (bookmarkInfo: BookmarkInfo) => () => void
   onMouseLeave: () => void
 }
-class BookmarkRow extends React.PureComponent<Props> {
-  public componentDidMount() {
-    if (this.baseRef.current) {
+const BookmarkRow = ({
+  bookmarkInfo,
+  onAuxClick,
+  onClick,
+  onDragOver,
+  onMouseEnter,
+  ...restProps
+}: Props) => {
+  const baseRef = React.useRef(null)
+
+  React.useEffect(() => {
+    const baseEl = baseRef.current
+    if (!baseEl) return undefined
+
+    const handleAuxClick = onAuxClick(bookmarkInfo.id)
+
+    // @ts-ignore: https://github.com/Microsoft/TypeScript/issues/29995
+    baseEl.addEventListener('auxclick', handleAuxClick)
+
+    return () => {
       // @ts-ignore: https://github.com/Microsoft/TypeScript/issues/29995
-      this.baseRef.current.addEventListener('auxclick', this.handleAuxClick)
+      baseEl.removeEventListener('auxclick', handleAuxClick)
     }
-  }
+  }, [bookmarkInfo.id, onAuxClick])
 
-  public componentWillUnmount() {
-    if (this.baseRef.current) {
-      // @ts-ignore: https://github.com/Microsoft/TypeScript/issues/29995
-      this.baseRef.current.removeEventListener('auxclick', this.handleAuxClick)
-    }
-  }
+  const handleClick = React.useMemo(() => onClick(bookmarkInfo.id), [bookmarkInfo.id, onClick])
+  const handleDragOver = React.useMemo(() => onDragOver(bookmarkInfo), [bookmarkInfo, onDragOver])
+  const handleMouseEnter = React.useMemo(() => onMouseEnter(bookmarkInfo), [
+    bookmarkInfo,
+    onMouseEnter
+  ])
 
-  private baseRef = React.createRef<HTMLDivElement>()
-
-  private handleAuxClick = this.props.onAuxClick(this.props.bookmarkInfo.id)
-  private handleClick = this.props.onClick(this.props.bookmarkInfo.id)
-  private handleDragOver = this.props.onDragOver(this.props.bookmarkInfo)
-  private handleMouseEnter = this.props.onMouseEnter(this.props.bookmarkInfo)
-
-  public render = () => (
+  return (
     <DragAndDropConsumer
       className={classes['full-height']}
       disableDrag={
-        this.props.isDisableDragAndDrop ||
-        this.props.bookmarkInfo.isRoot ||
-        this.props.bookmarkInfo.type === CST.BOOKMARK_TYPES.NO_BOOKMARK
+        restProps.isDisableDragAndDrop ||
+        bookmarkInfo.isRoot ||
+        bookmarkInfo.type === CST.BOOKMARK_TYPES.NO_BOOKMARK
       }
-      disableDrop={this.props.isDisableDragAndDrop}
-      itemKey={this.props.bookmarkInfo.id}
-      onDragOver={this.handleDragOver}
-      onDragStart={this.props.onDragStart}
+      disableDrop={restProps.isDisableDragAndDrop}
+      itemKey={bookmarkInfo.id}
+      onDragOver={handleDragOver}
+      onDragStart={restProps.onDragStart}
     >
       <div
-        ref={this.baseRef}
+        ref={baseRef}
         className={classNames(classes.main, classes['full-height'], {
           [classes.highlighted]:
-            this.props.isHighlighted &&
-            this.props.bookmarkInfo.type !== CST.BOOKMARK_TYPES.DRAG_INDICATOR,
-          [classes['root-folder']]: this.props.bookmarkInfo.isRoot,
-          [classes['drag-indicator']]:
-            this.props.bookmarkInfo.type === CST.BOOKMARK_TYPES.DRAG_INDICATOR,
-          [classes.separator]: this.props.bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR,
-          [classes.unclickable]: this.props.isUnclickable
+            restProps.isHighlighted && bookmarkInfo.type !== CST.BOOKMARK_TYPES.DRAG_INDICATOR,
+          [classes['root-folder']]: bookmarkInfo.isRoot,
+          [classes['drag-indicator']]: bookmarkInfo.type === CST.BOOKMARK_TYPES.DRAG_INDICATOR,
+          [classes.separator]: bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR,
+          [classes.unclickable]: restProps.isUnclickable
         })}
-        onClick={this.props.isUnclickable ? undefined : this.handleClick}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.props.onMouseLeave}
+        onClick={restProps.isUnclickable ? undefined : handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={restProps.onMouseLeave}
       >
-        {this.props.bookmarkInfo.iconUrl && (
+        {bookmarkInfo.iconUrl && (
           <IconImg
-            iconSize={this.props.iconSize}
+            iconSize={restProps.iconSize}
             className={classes.icon}
-            src={this.props.bookmarkInfo.iconUrl}
+            src={bookmarkInfo.iconUrl}
             alt=''
           />
         )}
-        <div className={classes.title}>{this.props.bookmarkInfo.title}</div>
+        <div className={classes.title}>{bookmarkInfo.title}</div>
       </div>
     </DragAndDropConsumer>
   )

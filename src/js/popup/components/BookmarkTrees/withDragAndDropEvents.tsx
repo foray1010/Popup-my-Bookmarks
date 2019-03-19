@@ -11,18 +11,23 @@ export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
   }
 
   type Props = P & typeof mapDispatchToProps
-  class DragAndDropEvents extends React.PureComponent<Props> {
-    private handleDragEnd = () => {
-      this.props.removeDragIndicator()
-    }
+  const DragAndDropEvents = (props: Props) => {
+    const {moveBookmarkToDragIndicator, removeDragIndicator} = props
 
-    private handleDrop = (evt: MouseEvent, activeKey: string) => {
-      this.props.moveBookmarkToDragIndicator(activeKey)
-    }
+    const handleDragEnd = React.useCallback(() => {
+      removeDragIndicator()
+    }, [removeDragIndicator])
 
-    public render = () => (
-      <DragAndDropProvider onDragEnd={this.handleDragEnd} onDrop={this.handleDrop}>
-        <WrappedComponent {...this.props} />
+    const handleDrop = React.useCallback(
+      (evt: MouseEvent, activeKey: string) => {
+        moveBookmarkToDragIndicator(activeKey)
+      },
+      [moveBookmarkToDragIndicator]
+    )
+
+    return (
+      <DragAndDropProvider onDragEnd={handleDragEnd} onDrop={handleDrop}>
+        <WrappedComponent {...props} />
       </DragAndDropProvider>
     )
   }

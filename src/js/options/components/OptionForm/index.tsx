@@ -19,35 +19,27 @@ const mapDispatchToProps = {
 }
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-interface State {
-  optionsConfig?: OptionsConfig
-}
-class OptionFormContainer extends React.PureComponent<Props, State> {
-  public state = {
-    optionsConfig: undefined
-  }
+const OptionFormContainer = (props: Props) => {
+  const [optionsConfig, setOptionsConfig] = React.useState<OptionsConfig | void>()
 
-  public async componentDidMount() {
-    this.setState({
-      optionsConfig: await getOptionsConfig()
-    })
-  }
+  React.useEffect(() => {
+    getOptionsConfig()
+      .then(setOptionsConfig)
+      .catch(console.error)
+  }, [])
 
-  public render() {
-    const {optionsConfig} = this.state
-    if (!optionsConfig) return null
+  if (!optionsConfig) return null
 
-    return (
-      <OptionForm
-        options={this.props.options}
-        optionsConfig={optionsConfig}
-        resetToDefaultOptions={this.props.resetToDefaultOptions}
-        saveOptions={this.props.saveOptions}
-        selectedOptionFormMap={this.props.selectedOptionFormMap}
-        updatePartialOptions={this.props.updatePartialOptions}
-      />
-    )
-  }
+  return (
+    <OptionForm
+      options={props.options}
+      optionsConfig={optionsConfig}
+      resetToDefaultOptions={props.resetToDefaultOptions}
+      saveOptions={props.saveOptions}
+      selectedOptionFormMap={props.selectedOptionFormMap}
+      updatePartialOptions={props.updatePartialOptions}
+    />
+  )
 }
 
 export default connect(

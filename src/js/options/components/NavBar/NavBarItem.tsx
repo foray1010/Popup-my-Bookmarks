@@ -10,20 +10,20 @@ interface Props {
   switchNavModule: (navModule: NAV_MODULE) => void
   title: string
 }
-class NavBarItem extends React.PureComponent<Props> {
-  private handleClick = () => {
-    this.props.switchNavModule(this.props.navModule)
-  }
+const NavBarItem = ({navModule, switchNavModule, ...restProps}: Props) => {
+  const handleClick = React.useCallback(() => {
+    switchNavModule(navModule)
+  }, [navModule, switchNavModule])
 
-  public render = () => (
+  return (
     <button
       className={classNames(classes.main, {
-        [classes['main-active']]: this.props.isActive
+        [classes['main-active']]: restProps.isActive
       })}
       type='button'
-      onClick={this.handleClick}
+      onClick={handleClick}
     >
-      {this.props.title}
+      {restProps.title}
     </button>
   )
 }

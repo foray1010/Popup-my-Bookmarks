@@ -5,25 +5,32 @@ import webExtension from 'webextension-polyfill'
 
 import {bookmarkCreators} from '../../reduxs'
 
-const REFRESH_BOOKMARKS_TIMEOUT = 100
-
 export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
   const mapDispatchToProps = {
     refreshBookmarkTrees: bookmarkCreators.refreshBookmarkTrees
   }
 
   type Props = P & typeof mapDispatchToProps
-  class BookmarkEvents extends React.PureComponent<Props> {
-    public componentDidMount() {
-      webExtension.bookmarks.onChanged.addListener(this.refreshTrees)
-      webExtension.bookmarks.onCreated.addListener(this.refreshTrees)
-      webExtension.bookmarks.onMoved.addListener(this.refreshTrees)
-      webExtension.bookmarks.onRemoved.addListener(this.refreshTrees)
-    }
+  const BookmarkEvents = (props: Props) => {
+    const {refreshBookmarkTrees} = props
 
-    private refreshTrees = debounce(this.props.refreshBookmarkTrees, REFRESH_BOOKMARKS_TIMEOUT)
+    React.useEffect(() => {
+      const refreshTrees = debounce(refreshBookmarkTrees, 100)
 
-    public render = () => <WrappedComponent {...this.props} />
+      webExtension.bookmarks.onChanged.addListener(refreshTrees)
+      webExtension.bookmarks.onCreated.addListener(refreshTrees)
+      webExtension.bookmarks.onMoved.addListener(refreshTrees)
+      webExtension.bookmarks.onRemoved.addListener(refreshTrees)
+
+      return () => {
+        webExtension.bookmarks.onChanged.removeListener(refreshTrees)
+        webExtension.bookmarks.onCreated.removeListener(refreshTrees)
+        webExtension.bookmarks.onMoved.removeListener(refreshTrees)
+        webExtension.bookmarks.onRemoved.removeListener(refreshTrees)
+      }
+    }, [refreshBookmarkTrees])
+
+    return <WrappedComponent {...props} />
   }
 
   return connect(
