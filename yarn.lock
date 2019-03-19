@@ -1304,7 +1304,7 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
-"@types/hoist-non-react-statics@*":
+"@types/hoist-non-react-statics@^3.3.0":
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz#a59c0c995cc885bef1b8ec2241b114f9b35b517b"
   integrity sha512-O2OGyW9wlO2bbDmZRH17MecArQfsIa1g//ve2IJk6BnmwEglFz5kdhP1BlgeqjVNH5IHIhsc83DWFo8StCe8+Q==
@@ -1429,12 +1429,12 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-redux@7.0.4":
-  version "7.0.4"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.0.4.tgz#80f4059de0e0f29689aa828f9b0dd5e0a3dd8fa7"
-  integrity sha512-1UMlegvHhhhJkLf0em51fKQzQTSNwAPixI+kMSo2tgJxeqi86BY67bdAgRpST4kkndZ9ir5Bnu57vmocRgU6lw==
+"@types/react-redux@7.0.5":
+  version "7.0.5"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.0.5.tgz#4d284f8565cd9f7316086cce50e87f3d201d0880"
+  integrity sha512-O0WyoSbrMofJRxtSDe8qYhnmr2SSlTnshlQdnpgpD763L8BzlhXuEseksV7LSoCUwZ7vN4YqpQThl3jp02sceQ==
   dependencies:
-    "@types/hoist-non-react-statics" "*"
+    "@types/hoist-non-react-statics" "^3.3.0"
     "@types/react" "*"
     redux "^4.0.0"
 
