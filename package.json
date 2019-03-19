@@ -27,7 +27,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@babel/polyfill": "7.2.5",
+    "@babel/polyfill": "7.4.0",
     "classnames": "2.2.6",
     "lodash.debounce": "4.0.8",
     "open-color": "1.6.3",
@@ -47,7 +47,7 @@
     "webextension-polyfill": "0.4.0"
   },
   "devDependencies": {
-    "@babel/core": "7.3.4",
+    "@babel/core": "7.4.0",
     "@commitlint/cli": "7.5.2",
     "@commitlint/config-conventional": "7.5.0",
     "@redux-saga/testing-utils": "1.0.2",
