@@ -28,34 +28,36 @@ const mapDispatchToProps = {
 }
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-class MenuContainer extends React.PureComponent<Props> {
-  private handleRowClick = (rowKey: string) => () => {
-    this.props.clickMenuRow(rowKey)
-    this.props.closeMenu()
-  }
+const MenuContainer = ({clickMenuRow, closeMenu, setFocusedRow, ...restProps}: Props) => {
+  const handleRowClick = React.useCallback(
+    (rowKey: string) => () => {
+      clickMenuRow(rowKey)
+      closeMenu()
+    },
+    [clickMenuRow, closeMenu]
+  )
 
-  private handleRowMouseEnter = (rowKey: string) => () => {
-    this.props.setFocusedRow(rowKey)
-  }
+  const handleRowMouseEnter = React.useCallback(
+    (rowKey: string) => () => {
+      setFocusedRow(rowKey)
+    },
+    [setFocusedRow]
+  )
 
-  private handleRowMouseLeave = () => {
-    this.props.removeFocusedRow()
-  }
-
-  public render = () => (
+  return (
     <React.Fragment>
-      <Mask backgroundColor='#fff' opacity={0.3} onClick={this.props.closeMenu} />
+      <Mask backgroundColor='#fff' opacity={0.3} onClick={closeMenu} />
       <AbsPositionWithinBody
-        positionLeft={this.props.positionLeft}
-        positionTop={this.props.positionTop}
+        positionLeft={restProps.positionLeft}
+        positionTop={restProps.positionTop}
       >
         <Menu
-          focusedRow={this.props.focusedRow}
-          menuPattern={this.props.menuPattern}
-          onRowClick={this.handleRowClick}
-          onRowMouseEnter={this.handleRowMouseEnter}
-          onRowMouseLeave={this.handleRowMouseLeave}
-          unclickableRows={this.props.unclickableRows}
+          focusedRow={restProps.focusedRow}
+          menuPattern={restProps.menuPattern}
+          onRowClick={handleRowClick}
+          onRowMouseEnter={handleRowMouseEnter}
+          onRowMouseLeave={restProps.removeFocusedRow}
+          unclickableRows={restProps.unclickableRows}
         />
       </AbsPositionWithinBody>
     </React.Fragment>

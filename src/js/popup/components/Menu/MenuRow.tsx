@@ -12,21 +12,21 @@ interface Props {
   onMouseLeave: () => void
   rowName: string
 }
-class MenuRow extends React.PureComponent<Props> {
-  private handleClick = this.props.onClick(this.props.rowName)
-  private handleMouseEnter = this.props.onMouseEnter(this.props.rowName)
+const MenuRow = ({onClick, onMouseEnter, rowName, ...restProps}: Props) => {
+  const handleClick = React.useMemo(() => onClick(rowName), [onClick, rowName])
+  const handleMouseEnter = React.useMemo(() => onMouseEnter(rowName), [onMouseEnter, rowName])
 
-  public render = () => (
+  return (
     <div
       className={classNames(classes.main, {
-        [classes.focused]: this.props.isFocused,
-        [classes.unclickable]: this.props.isUnclickable
+        [classes.focused]: restProps.isFocused,
+        [classes.unclickable]: restProps.isUnclickable
       })}
-      onClick={this.props.isUnclickable ? undefined : this.handleClick}
-      onMouseEnter={this.handleMouseEnter}
-      onMouseLeave={this.props.onMouseLeave}
+      onClick={restProps.isUnclickable ? undefined : handleClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={restProps.onMouseLeave}
     >
-      {webExtension.i18n.getMessage(this.props.rowName)}
+      {webExtension.i18n.getMessage(rowName)}
     </div>
   )
 }
