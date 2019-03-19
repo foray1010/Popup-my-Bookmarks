@@ -201,9 +201,6 @@ const productionConfig: webpack.Configuration = {
     new MiniCssExtractPlugin({
       filename: path.join('css', '[name].css')
     }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    }),
     new TerserPlugin({
       parallel: true,
       terserOptions: {
