@@ -79,7 +79,7 @@
     "@types/sharp": "0.21.3",
     "@types/store": "2.0.1",
     "@types/styled-components": "4.1.8",
-    "@types/stylelint": "9.4.2",
+    "@types/stylelint": "9.10.0",
     "@types/terser-webpack-plugin": "1.2.1",
     "@types/webpack": "4.4.25",
     "@types/webpack-bundle-analyzer": "2.13.1",
