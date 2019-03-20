@@ -19,6 +19,19 @@ Bugfixes:
 - cannot drop bookmark when dragging
 - input cursor moved to the end after inputting multiple whitespace
 
+## 5.3.1 (1/10/2018)
+
+Changes:
+
+- Revert "do not close window after pressing Esc"
+
+## 5.3.0 (29/9/2018)
+
+Improvements:
+
+- do not close window after pressing Esc
+- remove delay when searching (suggested by @alon91)
+
 ## 5.2.0 (22/7/2018)
 
 Improvements:
