@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 
-import {RootState, bookmarkCreators} from '../../reduxs'
+import {RootState} from '../../reduxs'
 import BookmarkTrees from './BookmarkTrees'
 import withBookmarkEvents from './withBookmarkEvents'
 import withDragAndDropEvents from './withDragAndDropEvents'
@@ -19,26 +19,6 @@ const mapStateToProps = (state: RootState) => ({
   treeIds: getTreeIds(state)
 })
 
-const mapDispatchToProps = {
-  initBookmarkTrees: bookmarkCreators.initBookmarkTrees
-}
-
-type Props = OwnProps & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-const BookmarkTreesContainer = ({initBookmarkTrees, ...restProps}: Props) => {
-  React.useEffect(() => {
-    initBookmarkTrees()
-  }, [initBookmarkTrees])
-
-  return <BookmarkTrees {...restProps} />
-}
-
 export default withBookmarkEvents(
-  withDragAndDropEvents(
-    withKeyboardNav(
-      connect(
-        mapStateToProps,
-        mapDispatchToProps
-      )(BookmarkTreesContainer)
-    )
-  )
+  withDragAndDropEvents(withKeyboardNav(connect(mapStateToProps)(BookmarkTrees)))
 )

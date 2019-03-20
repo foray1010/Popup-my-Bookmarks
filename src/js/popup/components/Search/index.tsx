@@ -2,7 +2,6 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 
 import {RootState, bookmarkCreators, uiCreators} from '../../reduxs'
-import GlobalKeyboardEventListener from '../GlobalKeyboardEventListener'
 import Search from './Search'
 
 const mapStateToProps = (state: RootState) => ({
@@ -15,54 +14,50 @@ const mapDispatchToProps = {
 }
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-interface State {
-  inputValue: string
-}
-class SearchContainer extends React.PureComponent<Props, State> {
-  public state = {
-    inputValue: ''
-  }
+const SearchContainer = ({getSearchResult, isFocusSearchInput, setIsFocusSearchInput}: Props) => {
+  const [inputValue, setInputValue] = React.useState('')
 
-  public componentDidUpdate(prevProps: Props, prevState: State) {
-    if (this.state.inputValue !== prevState.inputValue) {
-      this.props.getSearchResult(this.state.inputValue)
+  React.useEffect(() => {
+    getSearchResult(inputValue)
+  }, [getSearchResult, inputValue])
+
+  React.useEffect(() => {
+    const handleDocumentKeyDown = (evt: KeyboardEvent) => {
+      const isCharKey = evt.key.length === 1
+      const notFocusOnInputElement =
+        !document.activeElement || !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)
+      if (notFocusOnInputElement && isCharKey) {
+        setIsFocusSearchInput(true)
+      }
     }
-  }
 
-  private handleBlur = () => {
-    this.props.setIsFocusSearchInput(false)
-  }
+    document.addEventListener('keydown', handleDocumentKeyDown)
 
-  private handleDocumentKeyDown = (evt: KeyboardEvent) => {
-    const isCharKey = evt.key.length === 1
-    const notFocusOnInputElement =
-      !document.activeElement || !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)
-    if (notFocusOnInputElement && isCharKey) {
-      this.props.setIsFocusSearchInput(true)
+    return () => {
+      document.removeEventListener('keydown', handleDocumentKeyDown)
     }
-  }
+  }, [setIsFocusSearchInput])
 
-  private handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      inputValue: evt.currentTarget.value
-    })
-  }
+  const handleBlur = React.useCallback(() => {
+    setIsFocusSearchInput(false)
+  }, [setIsFocusSearchInput])
 
-  private handleFocus = () => {
-    this.props.setIsFocusSearchInput(true)
-  }
+  const handleChange = React.useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(evt.currentTarget.value)
+  }, [])
 
-  public render = () => (
-    <React.Fragment>
-      <Search
-        inputValue={this.state.inputValue}
-        isFocus={this.props.isFocusSearchInput}
-        onBlur={this.handleBlur}
-        onFocus={this.handleFocus}
-        onChange={this.handleChange}
-      />
-      <GlobalKeyboardEventListener onKeyDown={this.handleDocumentKeyDown} />
-    </React.Fragment>
+  const handleFocus = React.useCallback(() => {
+    setIsFocusSearchInput(true)
+  }, [setIsFocusSearchInput])
+
+  return (
+    <Search
+      inputValue={inputValue}
+      isFocus={isFocusSearchInput}
+      onBlur={handleBlur}
+      onFocus={handleFocus}
+      onChange={handleChange}
+    />
   )
 }
 
