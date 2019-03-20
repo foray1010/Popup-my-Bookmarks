@@ -1576,10 +1576,12 @@
     "@types/react" "*"
     csstype "^2.2.0"
 
-"@types/stylelint@9.4.2":
-  version "9.4.2"
-  resolved "https://registry.yarnpkg.com/@types/stylelint/-/stylelint-9.4.2.tgz#6c5d75d96a1ee947365697dafcae2c7b8e036107"
-  integrity sha512-GVs3wzd6zTzBO9An1rELY2QggquaK/ksn0oosr49XeTDPb4X1IgiDxhFTC/aUUxiecloOCub3bVhj/CgVEm9+A==
+"@types/stylelint@9.10.0":
+  version "9.10.0"
+  resolved "https://registry.yarnpkg.com/@types/stylelint/-/stylelint-9.10.0.tgz#843e5fbe068a9275fe3ebfbc4ad94c8fa9b1aea9"
+  integrity sha512-xnlufv0Pn+UxHpCEsobMQ/AFvGoD1YkXtHpz7S49UJcw60tzUnKQWrZs+ICYwUcw9MIaHcURUsqN7iPd59iG4g==
+  dependencies:
+    postcss "7.x.x"
 
 "@types/tapable@*":
   version "1.0.4"
