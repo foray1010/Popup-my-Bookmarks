@@ -5,8 +5,7 @@ import {createGlobalStyle} from 'styled-components'
 
 import {RootState} from '../../reduxs'
 import App from './App'
-import withKeyboardEvents from './withKeyboardEvents'
-import withMouseEvents from './withMouseEvents'
+import useGlobalEvents from './useGlobalEvents'
 
 interface GlobalStylesProps {
   fontFamily?: string
@@ -26,11 +25,15 @@ const mapStateToProps = (state: RootState) => ({
 })
 
 type Props = ReturnType<typeof mapStateToProps>
-const AppContainer = (props: Props) => (
-  <React.Fragment>
-    <GlobalStyles fontFamily={props.options.fontFamily} fontSize={props.options.fontSize} />
-    <App isShowEditor={props.isShowEditor} isShowMenu={props.isShowMenu} />
-  </React.Fragment>
-)
+const AppContainer = (props: Props) => {
+  useGlobalEvents()
 
-export default withMouseEvents(withKeyboardEvents(connect(mapStateToProps)(AppContainer)))
+  return (
+    <React.Fragment>
+      <GlobalStyles fontFamily={props.options.fontFamily} fontSize={props.options.fontSize} />
+      <App isShowEditor={props.isShowEditor} isShowMenu={props.isShowMenu} />
+    </React.Fragment>
+  )
+}
+
+export default connect(mapStateToProps)(AppContainer)
