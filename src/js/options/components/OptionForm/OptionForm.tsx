@@ -7,6 +7,10 @@ import {Options, OptionsConfig} from '../../../common/types/options'
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 
+const handleSubmit = (evt: React.FormEvent<HTMLElement>) => {
+  evt.preventDefault()
+}
+
 interface Props {
   options: Partial<Options>
   optionsConfig: OptionsConfig
@@ -16,7 +20,7 @@ interface Props {
   updatePartialOptions: (options: Partial<Options>) => void
 }
 const OptionForm = (props: Props) => (
-  <form>
+  <form onSubmit={handleSubmit}>
     <table className={classes.table}>
       <tbody>
         {props.selectedOptionFormMap.reduce((acc: Array<React.ReactElement>, optionName) => {

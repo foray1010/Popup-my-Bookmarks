@@ -35,13 +35,6 @@ class InputSelect extends React.PureComponent<Props> {
     })
   }
 
-  // prevent user try to save by pressing enter
-  private handleKeyDown = (evt: React.KeyboardEvent<HTMLInputElement>) => {
-    if (evt.keyCode === 13) {
-      evt.preventDefault()
-    }
-  }
-
   public render = () => (
     <div className={classes.main}>
       <input
@@ -52,7 +45,6 @@ class InputSelect extends React.PureComponent<Props> {
         value={this.props.optionValue}
         onBlur={this.handleBlur}
         onChange={this.handleChange}
-        onKeyDown={this.handleKeyDown}
       />
       <select
         ref={this.selectRef}
