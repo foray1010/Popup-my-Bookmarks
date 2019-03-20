@@ -7,39 +7,50 @@ interface Props {
   optionValue: Array<number | void>
   updatePartialOptions: (options: {[key: string]: Array<number | void>}) => void
 }
-class Option extends React.PureComponent<Props> {
-  private inputId = Math.random()
-    .toString(36)
-    .substring(2)
+const Option = ({
+  optionChoice,
+  optionChoiceIndex,
+  optionName,
+  optionValue,
+  updatePartialOptions
+}: Props) => {
+  const inputId = React.useMemo(() => {
+    return Math.random()
+      .toString(36)
+      .substring(2)
+  }, [])
 
-  private handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const checkboxValue = parseInt(evt.currentTarget.value, 10)
+  const handleChange = React.useCallback(
+    (evt: React.ChangeEvent<HTMLInputElement>) => {
+      const checkboxValue = parseInt(evt.currentTarget.value, 10)
 
-    const wasChecked = this.props.optionValue.includes(checkboxValue)
+      const wasChecked = optionValue.includes(checkboxValue)
 
-    let newOptionValue
-    if (wasChecked) {
-      newOptionValue = this.props.optionValue.filter((x) => x !== checkboxValue)
-    } else {
-      newOptionValue = [checkboxValue, ...this.props.optionValue].sort()
-    }
+      let newOptionValue
+      if (wasChecked) {
+        newOptionValue = optionValue.filter((x) => x !== checkboxValue)
+      } else {
+        newOptionValue = [checkboxValue, ...optionValue].sort()
+      }
 
-    this.props.updatePartialOptions({
-      [this.props.optionName]: newOptionValue
-    })
-  }
+      updatePartialOptions({
+        [optionName]: newOptionValue
+      })
+    },
+    [optionName, optionValue, updatePartialOptions]
+  )
 
-  public render = () => (
-    <label htmlFor={this.inputId}>
+  return (
+    <label htmlFor={inputId}>
       <input
-        id={this.inputId}
-        name={this.props.optionName}
+        id={inputId}
+        name={optionName}
         type='checkbox'
-        value={String(this.props.optionChoiceIndex)}
-        checked={this.props.optionValue.includes(this.props.optionChoiceIndex)}
-        onChange={this.handleChange}
+        value={String(optionChoiceIndex)}
+        checked={optionValue.includes(optionChoiceIndex)}
+        onChange={handleChange}
       />
-      {this.props.optionChoice}
+      {optionChoice}
     </label>
   )
 }

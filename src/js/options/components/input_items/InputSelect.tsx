@@ -9,50 +9,56 @@ interface Props {
   optionValue: string
   updatePartialOptions: (options: {[key: string]: string}) => void
 }
-class InputSelect extends React.PureComponent<Props> {
-  private inputRef = React.createRef<HTMLInputElement>()
-  private selectRef = React.createRef<HTMLSelectElement>()
+const InputSelect = ({choices, optionName, optionValue, updatePartialOptions}: Props) => {
+  const inputRef = React.useRef<HTMLInputElement>(null)
+  const selectRef = React.useRef<HTMLSelectElement>(null)
 
-  private handleBlur = (evt: React.FocusEvent<HTMLInputElement>) => {
-    const normalize = R.compose(
-      R.join(','),
-      R.filter(Boolean),
-      R.map(R.trim),
-      R.split(',')
-    )
-    this.props.updatePartialOptions({
-      [this.props.optionName]: normalize(evt.currentTarget.value)
-    })
-  }
+  const handleBlur = React.useCallback(
+    (evt: React.FocusEvent<HTMLInputElement>) => {
+      const normalize = R.compose(
+        R.join(','),
+        R.filter(Boolean),
+        R.map(R.trim),
+        R.split(',')
+      )
+      updatePartialOptions({
+        [optionName]: normalize(evt.currentTarget.value)
+      })
+    },
+    [optionName, updatePartialOptions]
+  )
 
-  private handleChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    if (evt.currentTarget === this.selectRef.current) {
-      if (this.inputRef.current) this.inputRef.current.focus()
-    }
+  const handleChange = React.useCallback(
+    (evt: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      if (evt.currentTarget === selectRef.current) {
+        if (inputRef.current) inputRef.current.focus()
+      }
 
-    this.props.updatePartialOptions({
-      [this.props.optionName]: evt.currentTarget.value
-    })
-  }
+      updatePartialOptions({
+        [optionName]: evt.currentTarget.value
+      })
+    },
+    [optionName, updatePartialOptions]
+  )
 
-  public render = () => (
+  return (
     <div className={classes.main}>
       <input
-        ref={this.inputRef}
+        ref={inputRef}
         className={classes.input}
-        name={this.props.optionName}
+        name={optionName}
         type='text'
-        value={this.props.optionValue}
-        onBlur={this.handleBlur}
-        onChange={this.handleChange}
+        value={optionValue}
+        onBlur={handleBlur}
+        onChange={handleChange}
       />
       <select
-        ref={this.selectRef}
+        ref={selectRef}
         className={classes.select}
-        defaultValue={this.props.optionValue}
-        onChange={this.handleChange}
+        defaultValue={optionValue}
+        onChange={handleChange}
       >
-        {this.props.choices.map((optionChoice, optionChoiceIndex) => (
+        {choices.map((optionChoice, optionChoiceIndex) => (
           <option key={String(optionChoiceIndex)}>{optionChoice}</option>
         ))}
       </select>

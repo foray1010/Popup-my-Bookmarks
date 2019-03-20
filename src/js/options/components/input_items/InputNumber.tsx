@@ -8,37 +8,43 @@ interface Props {
   optionValue: number
   updatePartialOptions: (options: {[key: string]: number}) => void
 }
-class InputNumber extends React.PureComponent<Props> {
-  private handleBlur = (evt: React.FocusEvent<HTMLInputElement>) => {
-    const parsedValue = parseInt(evt.currentTarget.value, 10)
+const InputNumber = ({maximum, minimum, optionName, optionValue, updatePartialOptions}: Props) => {
+  const handleBlur = React.useCallback(
+    (evt: React.FocusEvent<HTMLInputElement>) => {
+      const parsedValue = parseInt(evt.currentTarget.value, 10)
 
-    const newOptionValue = R.clamp(this.props.minimum, this.props.maximum, parsedValue)
+      const newOptionValue = R.clamp(minimum, maximum, parsedValue)
 
-    this.props.updatePartialOptions({
-      [this.props.optionName]: newOptionValue
-    })
-  }
+      updatePartialOptions({
+        [optionName]: newOptionValue
+      })
+    },
+    [maximum, minimum, optionName, updatePartialOptions]
+  )
 
-  private handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const parsedValue = parseInt(evt.currentTarget.value, 10)
+  const handleChange = React.useCallback(
+    (evt: React.ChangeEvent<HTMLInputElement>) => {
+      const parsedValue = parseInt(evt.currentTarget.value, 10)
 
-    // only allow input number
-    if (Number.isNaN(parsedValue)) return
+      // only allow input number
+      if (Number.isNaN(parsedValue)) return
 
-    this.props.updatePartialOptions({
-      [this.props.optionName]: parsedValue
-    })
-  }
+      updatePartialOptions({
+        [optionName]: parsedValue
+      })
+    },
+    [optionName, updatePartialOptions]
+  )
 
-  public render = () => (
+  return (
     <input
-      name={this.props.optionName}
+      name={optionName}
       type='number'
-      min={this.props.minimum}
-      max={this.props.maximum}
-      value={String(this.props.optionValue)}
-      onBlur={this.handleBlur}
-      onChange={this.handleChange}
+      min={minimum}
+      max={maximum}
+      value={String(optionValue)}
+      onBlur={handleBlur}
+      onChange={handleChange}
     />
   )
 }

@@ -10,42 +10,43 @@ interface Props {
   optionValue: boolean
   updatePartialOptions: (options: {[key: string]: boolean}) => void
 }
-class Option extends React.PureComponent<Props> {
-  private inputRef = React.createRef<HTMLInputElement>()
+const Option = ({optionChoice, optionName, optionValue, updatePartialOptions}: Props) => {
+  const inputRef = React.useRef<HTMLInputElement>(null)
 
-  private handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    this.props.updatePartialOptions({
-      [this.props.optionName]: evt.currentTarget.value === 'true'
-    })
-  }
+  const handleChange = React.useCallback(
+    (evt: React.ChangeEvent<HTMLInputElement>) => {
+      updatePartialOptions({
+        [optionName]: evt.currentTarget.value === 'true'
+      })
+    },
+    [optionName, updatePartialOptions]
+  )
 
-  private handleClick = () => {
-    if (this.inputRef.current) this.inputRef.current.click()
-  }
+  const handleClick = React.useCallback(() => {
+    if (inputRef.current) inputRef.current.click()
+  }, [])
 
-  public render() {
-    const isChecked = this.props.optionValue === this.props.optionChoice
-    return (
-      <div className={classes.main}>
-        <input
-          ref={this.inputRef}
-          name={this.props.optionName}
-          type='radio'
-          value={String(this.props.optionChoice)}
-          checked={isChecked}
-          hidden
-          onChange={this.handleChange}
-        />
-        <button
-          className={classNames(classes.item, {[classes['item-active']]: isChecked})}
-          type='button'
-          onClick={this.handleClick}
-        >
-          {webExtension.i18n.getMessage(this.props.optionChoice ? 'yes' : 'no')}
-        </button>
-      </div>
-    )
-  }
+  const isChecked = optionValue === optionChoice
+  return (
+    <div className={classes.main}>
+      <input
+        ref={inputRef}
+        name={optionName}
+        type='radio'
+        value={String(optionChoice)}
+        checked={isChecked}
+        hidden
+        onChange={handleChange}
+      />
+      <button
+        className={classNames(classes.item, {[classes['item-active']]: isChecked})}
+        type='button'
+        onClick={handleClick}
+      >
+        {webExtension.i18n.getMessage(optionChoice ? 'yes' : 'no')}
+      </button>
+    </div>
+  )
 }
 
 export default Option
