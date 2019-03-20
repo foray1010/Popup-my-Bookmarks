@@ -1,15 +1,15 @@
-import debounce from 'lodash.debounce'
 import * as R from 'ramda'
 import * as React from 'react'
 import {connect} from 'react-redux'
 
 import * as CST from '../../constants'
 import {RootState, bookmarkCreators, menuCreators} from '../../reduxs'
-import {BookmarkInfo} from '../../types'
-import {ResponseEvent} from '../dragAndDrop/DragAndDropConsumer'
-import DragAndDropContext, {ContextType} from '../dragAndDrop/DragAndDropContext'
+import DragAndDropContext from '../dragAndDrop/DragAndDropContext'
 import BookmarkTree from './BookmarkTree'
 import NoSearchResult from './NoSearchResult'
+import useRowClickEvents from './useRowClickEvents'
+import useRowDragEvents from './useRowDragEvents'
+import useRowHoverEvents from './useRowHoverEvents'
 
 interface OwnProps {
   treeId: string
@@ -52,132 +52,46 @@ const mapDispatchToProps = {
 }
 
 type Props = OwnProps & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-class BookmarkTreeContainer extends React.PureComponent<Props> {
-  public static contextType: React.Context<ContextType> = DragAndDropContext
+const BookmarkTreeContainer = (props: Props) => {
+  const {isSearching, removeBookmarkTree, removeNextBookmarkTrees, treeInfo} = props
 
-  private closeCurrentTree = () => {
-    this.props.removeBookmarkTree(this.props.treeInfo.parent.id)
-  }
-  private closeNextTrees = () => {
-    this.props.removeNextBookmarkTrees(this.props.treeInfo.parent.id)
-  }
+  const context = React.useContext(DragAndDropContext)
 
-  // to support `chrome < 55` as auxclick is not available
-  private _handleRowAllClick = (bookmarkId: string, evt: React.MouseEvent | MouseEvent) => {
-    switch (evt.button) {
-      case 0:
-        this._handleRowLeftClick(bookmarkId)
-        break
-      case 1:
-        this._handleRowMiddleClick(bookmarkId)
-        break
-      case 2:
-        this._handleRowRightClick(bookmarkId, evt)
-        break
-      default:
-    }
-  }
-  private _handleRowLeftClick = (bookmarkId: string) => {
-    this.props.openBookmarksInBrowser([bookmarkId], CST.OPEN_IN_TYPES.CURRENT_TAB, true)
-  }
-  private _handleRowMiddleClick = (bookmarkId: string) => {
-    this.props.openBookmarksInBrowser([bookmarkId], CST.OPEN_IN_TYPES.NEW_TAB, true)
-  }
-  private _handleRowRightClick = (bookmarkId: string, evt: React.MouseEvent | MouseEvent) => {
-    if (!(evt.currentTarget instanceof HTMLElement)) return
+  const closeCurrentTree = React.useCallback(() => {
+    removeBookmarkTree(treeInfo.parent.id)
+  }, [removeBookmarkTree, treeInfo.parent.id])
+  const closeNextTrees = React.useCallback(() => {
+    removeNextBookmarkTrees(treeInfo.parent.id)
+  }, [removeNextBookmarkTrees, treeInfo.parent.id])
+  const noRowsRenderer = React.useCallback(() => {
+    return isSearching ? <NoSearchResult /> : null
+  }, [isSearching])
 
-    const targetOffset = evt.currentTarget.getBoundingClientRect()
-    this.props.openMenu(bookmarkId, {
-      positionLeft: evt.clientX,
-      positionTop: evt.clientY,
-      targetLeft: targetOffset.left,
-      targetTop: targetOffset.top
-    })
-  }
-  private handleRowAuxClick = (bookmarkId: string) => (evt: MouseEvent) => {
-    this._handleRowAllClick(bookmarkId, evt)
-  }
-  private handleRowClick = (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => {
-    this._handleRowAllClick(bookmarkId, evt)
-  }
-  private handleRowDragOver = (bookmarkInfo: BookmarkInfo) => (
-    evt: React.MouseEvent<HTMLElement>,
-    responseEvent: ResponseEvent
-  ) => {
-    const targetOffset = evt.currentTarget.getBoundingClientRect()
-    const isOverBottomPart = evt.clientY - targetOffset.top > targetOffset.height / 2
+  const {handleRowAuxClick, handleRowClick} = useRowClickEvents(props)
+  const {handleRowDragOver, handleRowDragStart} = useRowDragEvents({...props, closeNextTrees})
+  const {handleRowMouseEnter, handleRowMouseLeave} = useRowHoverEvents({...props, closeNextTrees})
 
-    const childrenWithoutDragIndicator = this.props.treeInfo.children.filter(
-      (child) => child.type !== CST.BOOKMARK_TYPES.DRAG_INDICATOR
-    )
-
-    const activeIndex = childrenWithoutDragIndicator.findIndex(
-      (item) => item.id === responseEvent.activeKey
-    )
-    const currentIndex = childrenWithoutDragIndicator.findIndex(
-      (item) => item.id === responseEvent.itemKey
-    )
-    const targetIndex = currentIndex + (isOverBottomPart ? 1 : 0)
-
-    const isNearActiveItem =
-      activeIndex === -1 ? false : [activeIndex, activeIndex + 1].includes(targetIndex)
-    if (isNearActiveItem) {
-      console.debug('skip as nearby active item')
-      this.props.removeDragIndicator()
-      return
-    }
-
-    this.props.setDragIndicator(bookmarkInfo.parentId, targetIndex)
-  }
-  private handleRowDragStart = () => {
-    this.closeNextTrees()
-  }
-  private handleRowMouseEnter = (bookmarkInfo: BookmarkInfo) => () => {
-    this.toggleBookmarkTree(bookmarkInfo)
-    this.props.setFocusId(bookmarkInfo.id)
-  }
-  private handleRowMouseLeave = () => {
-    this.toggleBookmarkTree.cancel()
-    this.props.removeFocusId()
-  }
-
-  private noRowsRenderer = () => {
-    return this.props.isSearching ? <NoSearchResult /> : null
-  }
-
-  private _toggleBookmarkTree = (bookmarkInfo: BookmarkInfo) => {
-    if (
-      bookmarkInfo.type === CST.BOOKMARK_TYPES.FOLDER &&
-      bookmarkInfo.id !== this.context.activeKey
-    ) {
-      this.props.openBookmarkTree(bookmarkInfo.id, this.props.treeInfo.parent.id)
-    } else {
-      this.closeNextTrees()
-    }
-  }
-  private toggleBookmarkTree = debounce(this._toggleBookmarkTree, 300)
-
-  public render = () => (
+  return (
     <BookmarkTree
-      draggingId={this.context.activeKey}
-      highlightedId={this.props.highlightedId}
-      iconSize={this.props.iconSize}
-      isDisableDragAndDrop={this.props.isSearching}
-      isShowCover={this.props.isShowCover}
-      isShowHeader={this.props.isShowHeader}
-      listItemWidth={this.props.listItemWidth || 0}
-      noRowsRenderer={this.noRowsRenderer}
-      onCloseButtonClick={this.closeCurrentTree}
-      onCoverClick={this.closeNextTrees}
-      onRowAuxClick={this.handleRowAuxClick}
-      onRowClick={this.handleRowClick}
-      onRowDragOver={this.handleRowDragOver}
-      onRowDragStart={this.handleRowDragStart}
-      onRowMouseEnter={this.handleRowMouseEnter}
-      onRowMouseLeave={this.handleRowMouseLeave}
-      rowHeight={this.props.rowHeight}
-      scrollToIndex={this.props.highlightedIndex}
-      treeInfo={this.props.treeInfo}
+      draggingId={context.activeKey}
+      highlightedId={props.highlightedId}
+      iconSize={props.iconSize}
+      isDisableDragAndDrop={props.isSearching}
+      isShowCover={props.isShowCover}
+      isShowHeader={props.isShowHeader}
+      listItemWidth={props.listItemWidth || 0}
+      noRowsRenderer={noRowsRenderer}
+      onCloseButtonClick={closeCurrentTree}
+      onCoverClick={closeNextTrees}
+      onRowAuxClick={handleRowAuxClick}
+      onRowClick={handleRowClick}
+      onRowDragOver={handleRowDragOver}
+      onRowDragStart={handleRowDragStart}
+      onRowMouseEnter={handleRowMouseEnter}
+      onRowMouseLeave={handleRowMouseLeave}
+      rowHeight={props.rowHeight}
+      scrollToIndex={props.highlightedIndex}
+      treeInfo={props.treeInfo}
     />
   )
 }
