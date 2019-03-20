@@ -1,10 +1,71 @@
 import * as React from 'react'
 
-import DragAndDropContext, {ContextType} from './DragAndDropContext'
+import DragAndDropContext from './DragAndDropContext'
 
 export interface ResponseEvent {
   activeKey: string | null
   itemKey: string
+}
+
+const useDragEvents = ({
+  itemKey,
+  onDragOver,
+  onDragStart
+}: {
+  itemKey: string
+  onDragOver: (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
+  onDragStart: (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
+}) => {
+  const {activeKey, setActiveKey, setPendingKey} = React.useContext(DragAndDropContext)
+
+  return {
+    handleDragOver: React.useCallback(
+      (evt: React.MouseEvent<HTMLElement>) => {
+        onDragOver(evt, {
+          activeKey,
+          itemKey
+        })
+      },
+      [activeKey, itemKey, onDragOver]
+    ),
+    handleBeforeDragStart: React.useCallback(
+      (evt: React.MouseEvent<HTMLElement>) => {
+        if (evt.buttons !== 1) return
+
+        setPendingKey(itemKey)
+      },
+      [itemKey, setPendingKey]
+    ),
+    handleDragStart: React.useCallback(
+      (evt: React.MouseEvent<HTMLElement>) => {
+        setActiveKey(itemKey)
+        onDragStart(evt, {
+          activeKey,
+          itemKey
+        })
+      },
+      [activeKey, itemKey, onDragStart, setActiveKey]
+    )
+  }
+}
+
+const useMouseEvents = () => {
+  const [shouldDisableNextClick, setShouldDisableNextClick] = React.useState(false)
+
+  return {
+    handleClickCapture: React.useCallback(
+      (evt: React.MouseEvent<HTMLElement>) => {
+        if (shouldDisableNextClick) {
+          evt.stopPropagation()
+          setShouldDisableNextClick(false)
+        }
+      },
+      [shouldDisableNextClick]
+    ),
+    handleMouseUpCapture: React.useCallback(() => {
+      setShouldDisableNextClick(true)
+    }, [])
+  }
 }
 
 interface Props {
@@ -16,70 +77,39 @@ interface Props {
   onDragOver: (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
   onDragStart: (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
 }
-interface State {
-  shouldDisableNextClick: boolean
-}
-export default class DragAndDrop extends React.PureComponent<Props, State> {
-  public static contextType: React.Context<ContextType> = DragAndDropContext
+const DragAndDropConsumer = (props: Props) => {
+  const context = React.useContext(DragAndDropContext)
 
-  public state = {
-    shouldDisableNextClick: false
-  }
+  const {handleClickCapture, handleMouseUpCapture} = useMouseEvents()
 
-  private getResponseEvent = (): ResponseEvent => ({
-    activeKey: this.context.activeKey,
-    itemKey: this.props.itemKey
+  const {handleBeforeDragStart, handleDragStart, handleDragOver} = useDragEvents({
+    itemKey: props.itemKey,
+    onDragOver: props.onDragOver,
+    onDragStart: props.onDragStart
   })
 
-  private handleClickCapture = (evt: React.MouseEvent<HTMLElement>) => {
-    if (this.state.shouldDisableNextClick) {
-      evt.stopPropagation()
-      this.setState({
-        shouldDisableNextClick: false
-      })
-    }
-  }
-  private handleMouseUpCapture = () => {
-    this.setState({
-      shouldDisableNextClick: true
-    })
-  }
-
-  private handleDragOver = (evt: React.MouseEvent<HTMLElement>) => {
-    this.props.onDragOver(evt, this.getResponseEvent())
-  }
-  private handleBeforeDragStart = (evt: React.MouseEvent<HTMLElement>) => {
-    if (evt.buttons !== 1) return
-
-    this.context.setPendingKey(this.props.itemKey)
-  }
-  private handleDragStart = (evt: React.MouseEvent<HTMLElement>) => {
-    this.context.setActiveKey(this.props.itemKey)
-    this.props.onDragStart(evt, this.getResponseEvent())
-  }
-
-  public render() {
-    const isDragging = this.context.activeKey !== null
-    const isPending = this.context.pendingKey === this.props.itemKey
-    return (
-      <div
-        className={this.props.className}
-        onClickCapture={this.handleClickCapture}
-        onMouseUpCapture={isDragging ? this.handleMouseUpCapture : undefined}
-        {...(this.props.disableDrag !== true ?
-          {
-            onMouseDown: isDragging ? undefined : this.handleBeforeDragStart,
-            onMouseMove: isPending ? this.handleDragStart : undefined
-          } :
-          {})}
-        {...(this.props.disableDrop !== true ?
-          {
-            onMouseOver: isDragging ? this.handleDragOver : undefined
-          } :
-          {})}
-      >
-        {this.props.children}
-      </div>
-    )
-  }
+  const isDragging = context.activeKey !== null
+  const isPending = context.pendingKey === props.itemKey
+  return (
+    <div
+      className={props.className}
+      onClickCapture={handleClickCapture}
+      onMouseUpCapture={isDragging ? handleMouseUpCapture : undefined}
+      {...(props.disableDrag !== true ?
+        {
+          onMouseDown: isDragging ? undefined : handleBeforeDragStart,
+          onMouseMove: isPending ? handleDragStart : undefined
+        } :
+        {})}
+      {...(props.disableDrop !== true ?
+        {
+          onMouseOver: isDragging ? handleDragOver : undefined
+        } :
+        {})}
+    >
+      {props.children}
+    </div>
+  )
 }
+
+export default DragAndDropConsumer

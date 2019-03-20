@@ -1,12 +1,12 @@
 import * as React from 'react'
 
-export interface ContextType {
+export interface DragAndDropContextType {
   activeKey: string | null
   pendingKey: string | null
   setActiveKey: (activeKey: string) => void
   setPendingKey: (pendingKey: string) => void
 }
-export default React.createContext<ContextType>({
+export default React.createContext<DragAndDropContextType>({
   activeKey: null,
   pendingKey: null,
   setActiveKey: () => {},
