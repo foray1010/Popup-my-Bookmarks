@@ -12,71 +12,52 @@ const Form = styled('form')<FormProps>`
   width: ${R.prop('width')}px;
 `
 
+const handleSubmit = (evt: React.FormEvent<HTMLElement>) => {
+  evt.preventDefault()
+}
+
 interface Props {
   header: string
+  initialTitle: string
+  initialUrl: string
   isAllowEditUrl: boolean
   onCancel: () => void
   onConfirm: (title: string, url: string) => void
-  title: string
-  url: string
   width: number
 }
-interface State {
-  title: string
-  url: string
-}
-class Editor extends React.PureComponent<Props, State> {
-  public state = {
-    title: this.props.title,
-    url: this.props.url
-  }
+const Editor = (props: Props) => {
+  const {onConfirm} = props
 
-  public componentDidUpdate(prevProps: Props) {
-    if (prevProps.title !== this.props.title || prevProps.url !== this.props.url) {
-      this.setState({
-        title: this.props.title,
-        url: this.props.url
-      })
-    }
-  }
+  const [title, setTitle] = React.useState(props.initialTitle)
+  const [url, setUrl] = React.useState(props.initialUrl)
 
-  private handleConfirm = () => {
-    this.props.onConfirm(this.state.title, this.state.url)
-  }
+  const handleConfirm = React.useCallback(() => {
+    onConfirm(title, url)
+  }, [onConfirm, title, url])
 
-  private handleSubmit = (evt: React.FormEvent<HTMLElement>) => {
-    evt.preventDefault()
-  }
+  const handleTitleChange = React.useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(evt.currentTarget.value)
+  }, [])
 
-  private handleTitleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      title: evt.currentTarget.value
-    })
-  }
+  const handleUrlChange = React.useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+    setUrl(evt.currentTarget.value)
+  }, [])
 
-  private handleUrlChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      url: evt.currentTarget.value
-    })
-  }
+  return (
+    <Form className={classes.main} width={props.width} onSubmit={handleSubmit}>
+      <span className={classes.header}>{props.header}</span>
 
-  public render = () => (
-    <Form className={classes.main} width={this.props.width} onSubmit={this.handleSubmit}>
-      <span className={classes.header}>{this.props.header}</span>
-
-      <input type='text' value={this.state.title} onChange={this.handleTitleChange} autoFocus />
-      {this.props.isAllowEditUrl && (
-        <input type='text' value={this.state.url} onChange={this.handleUrlChange} />
-      )}
+      <input type='text' value={title} onChange={handleTitleChange} autoFocus />
+      {props.isAllowEditUrl && <input type='text' value={url} onChange={handleUrlChange} />}
 
       <button
         className={classes.button}
         type='submit' // support `Enter` to submit
-        onClick={this.handleConfirm}
+        onClick={handleConfirm}
       >
         {webExtension.i18n.getMessage('confirm')}
       </button>
-      <button className={classes.button} type='button' onClick={this.props.onCancel}>
+      <button className={classes.button} type='button' onClick={props.onCancel}>
         {webExtension.i18n.getMessage('cancel')}
       </button>
     </Form>

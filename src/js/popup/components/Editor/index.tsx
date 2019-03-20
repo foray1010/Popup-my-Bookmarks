@@ -25,35 +25,37 @@ const mapDispatchToProps = {
 }
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-class EditorContainer extends React.PureComponent<Props> {
-  private handleConfirm = (title: string, url: string) => {
-    if (this.props.isCreating) {
-      this.props.createBookmarkAfterId(this.props.targetId, title, url)
-    } else {
-      this.props.editBookmark(this.props.targetId, title, url)
-    }
-    this.props.closeEditor()
-  }
+const EditorContainer = (props: Props) => {
+  const {closeEditor, createBookmarkAfterId, editBookmark, isCreating, targetId} = props
 
-  public render = () => (
+  const handleConfirm = React.useCallback(
+    (title: string, url: string) => {
+      if (isCreating) {
+        createBookmarkAfterId(targetId, title, url)
+      } else {
+        editBookmark(targetId, title, url)
+      }
+      closeEditor()
+    },
+    [closeEditor, createBookmarkAfterId, editBookmark, isCreating, targetId]
+  )
+
+  return (
     <React.Fragment>
-      <Mask backgroundColor='#fff' opacity={0.3} onClick={this.props.closeEditor} />
-      <AbsPositionWithinBody
-        positionLeft={this.props.positionLeft}
-        positionTop={this.props.positionTop}
-      >
+      <Mask backgroundColor='#fff' opacity={0.3} onClick={props.closeEditor} />
+      <AbsPositionWithinBody positionLeft={props.positionLeft} positionTop={props.positionTop}>
         <Editor
-          isAllowEditUrl={this.props.isAllowEditUrl}
+          isAllowEditUrl={props.isAllowEditUrl}
           header={
-            this.props.isAllowEditUrl ?
+            props.isAllowEditUrl ?
               webExtension.i18n.getMessage('edit') :
               webExtension.i18n.getMessage('rename')
           }
-          title={this.props.title}
-          url={this.props.url}
-          width={this.props.width || 0}
-          onCancel={this.props.closeEditor}
-          onConfirm={this.handleConfirm}
+          initialTitle={props.title}
+          initialUrl={props.url}
+          width={props.width || 0}
+          onCancel={props.closeEditor}
+          onConfirm={handleConfirm}
         />
       </AbsPositionWithinBody>
     </React.Fragment>
