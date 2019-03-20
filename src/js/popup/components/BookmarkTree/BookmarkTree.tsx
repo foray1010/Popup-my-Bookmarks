@@ -6,21 +6,15 @@ import classes from '../../../../css/popup/bookmark-tree.css'
 import * as CST from '../../constants'
 import {BookmarkInfo, BookmarkTree as BookmarkTreeType} from '../../types'
 import {ResponseEvent} from '../dragAndDrop/DragAndDropConsumer'
-import Mask from '../Mask'
 import BookmarkRow from './BookmarkRow'
-import TreeHeader from './TreeHeader'
 
 interface Props {
   draggingId: string | null
   highlightedId: string
   iconSize: number
   isDisableDragAndDrop: boolean
-  isShowCover: boolean
-  isShowHeader: boolean
   listItemWidth: number
   noRowsRenderer: () => React.ReactElement | null
-  onCloseButtonClick: () => void
-  onCoverClick: () => void
   onRowAuxClick: (bookmarkId: string) => (evt: MouseEvent) => void
   onRowClick: (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => void
   onRowDragOver: (
@@ -121,25 +115,15 @@ const BookmarkTree = (props: Props) => {
 
   const itemCount = props.treeInfo.children.length
   return (
-    <section className={classes.main}>
-      {props.isShowHeader && (
-        <TreeHeader title={props.treeInfo.parent.title} onClose={props.onCloseButtonClick} />
-      )}
-
-      <List
-        ref={listRef}
-        height={listHeight}
-        itemCount={itemCount}
-        itemSize={getRowHeight}
-        width={props.listItemWidth}
-      >
-        {itemCount > 0 ? rowRenderer : props.noRowsRenderer}
-      </List>
-
-      {props.isShowCover && (
-        <Mask backgroundColor='#000' opacity={0.16} onClick={props.onCoverClick} />
-      )}
-    </section>
+    <List
+      ref={listRef}
+      height={listHeight}
+      itemCount={itemCount}
+      itemSize={getRowHeight}
+      width={props.listItemWidth}
+    >
+      {itemCount > 0 ? rowRenderer : props.noRowsRenderer}
+    </List>
   )
 }
 

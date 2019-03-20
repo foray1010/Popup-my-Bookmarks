@@ -2,11 +2,14 @@ import * as R from 'ramda'
 import * as React from 'react'
 import {connect} from 'react-redux'
 
+import classes from '../../../../css/popup/bookmark-tree.css'
 import * as CST from '../../constants'
 import {RootState, bookmarkCreators, menuCreators} from '../../reduxs'
 import DragAndDropContext from '../dragAndDrop/DragAndDropContext'
+import Mask from '../Mask'
 import BookmarkTree from './BookmarkTree'
 import NoSearchResult from './NoSearchResult'
+import TreeHeader from './TreeHeader'
 import useRowClickEvents from './useRowClickEvents'
 import useRowDragEvents from './useRowDragEvents'
 import useRowHoverEvents from './useRowHoverEvents'
@@ -72,27 +75,31 @@ const BookmarkTreeContainer = (props: Props) => {
   const {handleRowMouseEnter, handleRowMouseLeave} = useRowHoverEvents({...props, closeNextTrees})
 
   return (
-    <BookmarkTree
-      draggingId={context.activeKey}
-      highlightedId={props.highlightedId}
-      iconSize={props.iconSize}
-      isDisableDragAndDrop={props.isSearching}
-      isShowCover={props.isShowCover}
-      isShowHeader={props.isShowHeader}
-      listItemWidth={props.listItemWidth || 0}
-      noRowsRenderer={noRowsRenderer}
-      onCloseButtonClick={closeCurrentTree}
-      onCoverClick={closeNextTrees}
-      onRowAuxClick={handleRowAuxClick}
-      onRowClick={handleRowClick}
-      onRowDragOver={handleRowDragOver}
-      onRowDragStart={handleRowDragStart}
-      onRowMouseEnter={handleRowMouseEnter}
-      onRowMouseLeave={handleRowMouseLeave}
-      rowHeight={props.rowHeight}
-      scrollToIndex={props.highlightedIndex}
-      treeInfo={props.treeInfo}
-    />
+    <section className={classes.main}>
+      {props.isShowHeader && (
+        <TreeHeader title={props.treeInfo.parent.title} onClose={closeCurrentTree} />
+      )}
+
+      <BookmarkTree
+        draggingId={context.activeKey}
+        highlightedId={props.highlightedId}
+        iconSize={props.iconSize}
+        isDisableDragAndDrop={props.isSearching}
+        listItemWidth={props.listItemWidth || 0}
+        noRowsRenderer={noRowsRenderer}
+        onRowAuxClick={handleRowAuxClick}
+        onRowClick={handleRowClick}
+        onRowDragOver={handleRowDragOver}
+        onRowDragStart={handleRowDragStart}
+        onRowMouseEnter={handleRowMouseEnter}
+        onRowMouseLeave={handleRowMouseLeave}
+        rowHeight={props.rowHeight}
+        scrollToIndex={props.highlightedIndex}
+        treeInfo={props.treeInfo}
+      />
+
+      {props.isShowCover && <Mask backgroundColor='#000' opacity={0.16} onClick={closeNextTrees} />}
+    </section>
   )
 }
 
