@@ -76,7 +76,7 @@
     "@types/react-redux": "7.0.5",
     "@types/react-window": "1.7.0",
     "@types/script-ext-html-webpack-plugin": "2.1.0",
-    "@types/sharp": "0.21.3",
+    "@types/sharp": "0.22.0",
     "@types/store": "2.0.1",
     "@types/styled-components": "4.1.8",
     "@types/stylelint": "9.10.0",
