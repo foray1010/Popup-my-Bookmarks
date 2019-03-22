@@ -90,7 +90,7 @@
     "babel-preset-foray1010": "8.1.0",
     "bluebird": "3.5.3",
     "chance": "1.0.18",
-    "chrome-manifest-loader": "0.1.2",
+    "chrome-manifest-loader": "0.2.0",
     "clean-webpack-plugin": "2.0.1",
     "copy-webpack-plugin": "5.0.1",
     "cross-env": "5.2.0",
