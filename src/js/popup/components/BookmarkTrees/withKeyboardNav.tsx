@@ -55,63 +55,71 @@ export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
   }
 
   type Props = P & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-  class KeyboardNav extends React.PureComponent<Props> {
-    private handleDocumentArrowLeft = () => {
-      const {trees} = this.props
+  const KeyboardNav = (props: Props) => {
+    const {arrowRightNavigate, removeNextBookmarkTrees, setFocusId, trees} = props
 
+    // mutable ref to avoid too many rerender when focusId keeps changing
+    const focusIdRef = React.useRef('')
+    focusIdRef.current = props.focusId
+
+    const handleDocumentArrowLeft = React.useCallback(() => {
       // at least we need one tree
       if (trees.length > 1) {
         const lastTree = trees[trees.length - 1]
         const secondLastTree = trees[trees.length - 2]
 
-        this.props.removeNextBookmarkTrees(secondLastTree.parent.id)
+        removeNextBookmarkTrees(secondLastTree.parent.id)
 
         const nextFocusId = getChildId(secondLastTree, R.find(R.propEq('id', lastTree.parent.id)))
-        this.props.setFocusId(nextFocusId)
+        setFocusId(nextFocusId)
       }
-    }
+    }, [removeNextBookmarkTrees, setFocusId, trees])
 
-    private handleDocumentArrowRight = () => {
-      const focusedTree = getFocusedTree(this.props.trees, this.props.focusId)
+    const handleDocumentArrowRight = React.useCallback(() => {
+      const focusedTree = getFocusedTree(trees, focusIdRef.current)
       if (focusedTree) {
-        this.props.arrowRightNavigate(this.props.focusId, focusedTree.parent.id)
+        arrowRightNavigate(focusIdRef.current, focusedTree.parent.id)
       }
-    }
+    }, [arrowRightNavigate, trees])
 
-    private handleDocumentArrowVertical = (isDown: boolean) => {
-      const {focusId, trees} = this.props
+    const handleDocumentArrowVertical = React.useCallback(
+      (isDown: boolean) => {
+        const nextFocusId = focusIdRef.current ?
+          getNextFocusId(trees, focusIdRef.current, isDown ? 1 : -1) :
+          getChildId(trees[trees.length - 1], R.nth(isDown ? 0 : -1))
+        setFocusId(nextFocusId)
+      },
+      [setFocusId, trees]
+    )
 
-      const nextFocusId = focusId ?
-        getNextFocusId(trees, focusId, isDown ? 1 : -1) :
-        getChildId(trees[trees.length - 1], R.nth(isDown ? 0 : -1))
-      this.props.setFocusId(nextFocusId)
-    }
+    const handleDocumentKeyDown = React.useCallback(
+      (evt: KeyboardEvent) => {
+        switch (evt.key) {
+          case 'ArrowDown':
+            handleDocumentArrowVertical(true)
+            break
+          case 'ArrowLeft':
+            handleDocumentArrowLeft()
+            break
+          case 'ArrowRight':
+            handleDocumentArrowRight()
+            break
+          case 'ArrowUp':
+            handleDocumentArrowVertical(false)
+            break
+          case 'Tab':
+            handleDocumentArrowVertical(!evt.shiftKey)
+            break
+          default:
+        }
+      },
+      [handleDocumentArrowLeft, handleDocumentArrowRight, handleDocumentArrowVertical]
+    )
 
-    private handleDocumentKeyDown = (evt: KeyboardEvent) => {
-      switch (evt.key) {
-        case 'ArrowDown':
-          this.handleDocumentArrowVertical(true)
-          break
-        case 'ArrowLeft':
-          this.handleDocumentArrowLeft()
-          break
-        case 'ArrowRight':
-          this.handleDocumentArrowRight()
-          break
-        case 'ArrowUp':
-          this.handleDocumentArrowVertical(false)
-          break
-        case 'Tab':
-          this.handleDocumentArrowVertical(!evt.shiftKey)
-          break
-        default:
-      }
-    }
-
-    public render = () => (
+    return (
       <React.Fragment>
-        <WrappedComponent {...this.props} />
-        <GlobalKeyboardEventListener onKeyDown={this.handleDocumentKeyDown} />
+        <WrappedComponent {...props} />
+        <GlobalKeyboardEventListener onKeyDown={handleDocumentKeyDown} />
       </React.Fragment>
     )
   }
