@@ -6,7 +6,7 @@ import {ActionType} from 'typesafe-actions'
 import {moveBookmark} from '../../../../../common/utils'
 import * as CST from '../../../../constants'
 import {BookmarkInfo, BookmarkTree} from '../../../../types'
-import {sortByTitle} from '../../../../utils'
+import sortByTitle from '../../../../utils/sortByTitle'
 import * as bookmarkCreators from '../../actions'
 import {getBookmarkInfo, getBookmarkTree} from '../utils/getters'
 
