@@ -114,6 +114,11 @@ const BookmarkTree = (props: Props) => {
   )
 
   const itemCount = props.treeInfo.children.length
+
+  if (itemCount === 0) {
+    return props.noRowsRenderer()
+  }
+
   return (
     <List
       ref={listRef}
@@ -122,7 +127,7 @@ const BookmarkTree = (props: Props) => {
       itemSize={getRowHeight}
       width={props.listItemWidth}
     >
-      {itemCount > 0 ? rowRenderer : props.noRowsRenderer}
+      {rowRenderer}
     </List>
   )
 }
