@@ -73,6 +73,7 @@ const defaultConfig: webpack.Configuration = {
           {
             loader: 'chrome-manifest-loader',
             options: {
+              mapMinimumChromeVersion: true,
               mapVersion: true
             }
           },

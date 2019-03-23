@@ -2,7 +2,7 @@ name: 'Popup my Bookmarks'
 short_name: 'PmB'
 version: ''
 manifest_version: 2
-minimum_chrome_version: '51'
+minimum_chrome_version: ''
 offline_enabled: true
 
 default_locale: 'en'
