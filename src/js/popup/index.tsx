@@ -36,7 +36,7 @@ const main = async (): Promise<void> => {
     rootReducer,
     rootSaga,
     preloadedState: {
-      localStorage,
+      lastPositions: localStorage.lastPositions || [],
       options
     }
   })

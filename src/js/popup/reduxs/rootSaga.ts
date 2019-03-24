@@ -1,7 +1,7 @@
 import {combineSagas} from '../../common/utils'
 import {bookmarkSaga} from './bookmark/saga'
 import {editorSaga} from './editor/saga'
-import {localStorageSaga} from './localStorage/saga'
+import {lastPositionsSaga} from './lastPositions/saga'
 import {menuSaga} from './menu/saga'
 
-export const rootSaga = combineSagas([bookmarkSaga, editorSaga, localStorageSaga, menuSaga])
+export const rootSaga = combineSagas([bookmarkSaga, editorSaga, lastPositionsSaga, menuSaga])

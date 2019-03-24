@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import * as React from 'react'
-import {VariableSizeList as List} from 'react-window'
+import {VariableSizeList as List, ListOnScrollProps} from 'react-window'
 
 import classes from '../../../../css/popup/bookmark-tree.css'
 import * as CST from '../../constants'
@@ -24,6 +24,7 @@ interface Props {
   onRowDragStart: () => void
   onRowMouseEnter: (bookmarkInfo: BookmarkInfo) => () => void
   onRowMouseLeave: () => void
+  onScroll: (evt: ListOnScrollProps) => void
   rowHeight: number
   scrollToIndex: number
   treeInfo: BookmarkTreeType
@@ -133,6 +134,7 @@ const BookmarkTree = (props: Props) => {
       height={listHeight}
       itemCount={itemCount}
       itemSize={getRowHeight}
+      onScroll={props.onScroll}
       width={props.listItemWidth}
     >
       {rowRenderer}

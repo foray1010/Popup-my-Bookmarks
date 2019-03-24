@@ -1,4 +1,4 @@
-interface LastPosition {
+export interface LastPosition {
   id: string
   scrollTop: number
 }

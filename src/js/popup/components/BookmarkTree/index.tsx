@@ -1,10 +1,12 @@
+import debounce from 'lodash.debounce'
 import * as R from 'ramda'
 import * as React from 'react'
 import {connect} from 'react-redux'
+import {ListOnScrollProps} from 'react-window'
 
 import classes from '../../../../css/popup/bookmark-tree.css'
 import * as CST from '../../constants'
-import {RootState, bookmarkCreators, localStorageCreators, menuCreators} from '../../reduxs'
+import {RootState, bookmarkCreators, lastPositionsCreators, menuCreators} from '../../reduxs'
 import DragAndDropContext from '../dragAndDrop/DragAndDropContext'
 import Mask from '../Mask'
 import BookmarkTree from './BookmarkTree'
@@ -26,9 +28,7 @@ const getRowHeight = (fontSize: number) =>
 
 const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   const highlightedId = state.bookmark.focusId || state.menu.targetId || state.editor.targetId
-  const lastPosition = (state.localStorage.lastPositions || []).find(
-    R.propEq('id', ownProps.treeId)
-  )
+  const lastPosition = (state.lastPositions || []).find(R.propEq('id', ownProps.treeId))
   const treeIndex = state.bookmark.trees.findIndex(R.pathEq(['parent', 'id'], ownProps.treeId))
   const treeInfo = state.bookmark.trees[treeIndex]
   return {
@@ -42,11 +42,13 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
     lastScrollTop: lastPosition ? lastPosition.scrollTop : undefined,
     listItemWidth: state.options.setWidth,
     rowHeight: getRowHeight(state.options.fontSize || 0),
+    treeIndex,
     treeInfo
   }
 }
 
 const mapDispatchToProps = {
+  createLastPosition: lastPositionsCreators.createLastPosition,
   openBookmarksInBrowser: bookmarkCreators.openBookmarksInBrowser,
   openBookmarkTree: bookmarkCreators.openBookmarkTree,
   openMenu: menuCreators.openMenu,
@@ -56,14 +58,39 @@ const mapDispatchToProps = {
   removeNextBookmarkTrees: bookmarkCreators.removeNextBookmarkTrees,
   setDragIndicator: bookmarkCreators.setDragIndicator,
   setFocusId: bookmarkCreators.setFocusId,
-  updateLocalStorage: localStorageCreators.updateLocalStorage
+  updateLastPosition: lastPositionsCreators.updateLastPosition
 }
 
 type Props = OwnProps & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
 const BookmarkTreeContainer = (props: Props) => {
-  const {isSearching, removeBookmarkTree, removeNextBookmarkTrees, treeInfo} = props
+  const {
+    createLastPosition,
+    isSearching,
+    removeBookmarkTree,
+    removeNextBookmarkTrees,
+    updateLastPosition,
+    treeId,
+    treeIndex,
+    treeInfo
+  } = props
 
   const context = React.useContext(DragAndDropContext)
+
+  React.useEffect(() => {
+    createLastPosition(treeIndex, treeId)
+  }, [createLastPosition, treeId, treeIndex])
+
+  const handleScroll = React.useMemo(() => {
+    const debouncedUpdateLastPosition = debounce(updateLastPosition, 300)
+    return (evt: ListOnScrollProps) => {
+      if (!evt.scrollUpdateWasRequested) {
+        debouncedUpdateLastPosition({
+          id: treeId,
+          scrollTop: evt.scrollOffset
+        })
+      }
+    }
+  }, [treeId, updateLastPosition])
 
   const closeCurrentTree = React.useCallback(() => {
     removeBookmarkTree(treeInfo.parent.id)
@@ -99,6 +126,7 @@ const BookmarkTreeContainer = (props: Props) => {
         onRowDragStart={handleRowDragStart}
         onRowMouseEnter={handleRowMouseEnter}
         onRowMouseLeave={handleRowMouseLeave}
+        onScroll={handleScroll}
         rowHeight={props.rowHeight}
         scrollToIndex={props.highlightedIndex}
         treeInfo={props.treeInfo}
