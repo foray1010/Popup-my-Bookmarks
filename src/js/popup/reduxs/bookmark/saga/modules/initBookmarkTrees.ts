@@ -7,20 +7,20 @@ import * as bookmarkCreators from '../../actions'
 import {getBookmarkTrees} from '../utils/getters'
 
 export const getRememberedTreeIds = ({
-  localStorage,
+  lastPositions,
   options
 }: {
-  localStorage: RootState['localStorage']
+  lastPositions: RootState['lastPositions']
   options: RootState['options']
 }): Array<string> => {
   if (!options.rememberPos) return []
-  return (localStorage.lastPositions || []).map((x) => x.id)
+  return (lastPositions || []).map((x) => x.id)
 }
 
 export function* initBookmarkTrees(): SagaIterator {
-  const {localStorage, options}: RootState = yield select(R.identity)
+  const {lastPositions, options}: RootState = yield select(R.identity)
 
-  const rememberedTreeIds = getRememberedTreeIds({localStorage, options})
+  const rememberedTreeIds = getRememberedTreeIds({lastPositions, options})
 
   const bookmarkTrees = yield call(getBookmarkTrees, R.tail(rememberedTreeIds), options)
 

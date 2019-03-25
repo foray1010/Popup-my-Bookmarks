@@ -1,8 +1,6 @@
-import debounce from 'lodash.debounce'
 import * as R from 'ramda'
 import * as React from 'react'
 import {connect} from 'react-redux'
-import {ListOnScrollProps} from 'react-window'
 
 import classes from '../../../../css/popup/bookmark-tree.css'
 import * as CST from '../../constants'
@@ -12,6 +10,7 @@ import Mask from '../Mask'
 import BookmarkTree from './BookmarkTree'
 import NoSearchResult from './NoSearchResult'
 import TreeHeader from './TreeHeader'
+import useLastPosition from './useLastPosition'
 import useRowClickEvents from './useRowClickEvents'
 import useRowDragEvents from './useRowDragEvents'
 import useRowHoverEvents from './useRowHoverEvents'
@@ -28,13 +27,19 @@ const getRowHeight = (fontSize: number) =>
 
 const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   const highlightedId = state.bookmark.focusId || state.menu.targetId || state.editor.targetId
-  const lastPosition = (state.lastPositions || []).find(R.propEq('id', ownProps.treeId))
   const treeIndex = state.bookmark.trees.findIndex(R.pathEq(['parent', 'id'], ownProps.treeId))
   const treeInfo = state.bookmark.trees[treeIndex]
+
+  const isRememberLastPosition = Boolean(state.options[CST.OPTIONS.REMEMBER_POS])
+  const lastPosition = isRememberLastPosition ?
+    (state.lastPositions || []).find(R.propEq('id', ownProps.treeId)) :
+    undefined
+
   return {
     highlightedId,
     highlightedIndex: treeInfo.children.findIndex(R.propEq('id', highlightedId)),
     iconSize: getIconSize(state.options.fontSize || 0),
+    isRememberLastPosition,
     isSearching: Boolean(state.bookmark.searchKeyword),
     // cover the folder if it is not the top two folder
     isShowCover: state.bookmark.trees.length - treeIndex > 2,
@@ -55,6 +60,7 @@ const mapDispatchToProps = {
   removeBookmarkTree: bookmarkCreators.removeBookmarkTree,
   removeDragIndicator: bookmarkCreators.removeDragIndicator,
   removeFocusId: bookmarkCreators.removeFocusId,
+  removeLastPosition: lastPositionsCreators.removeLastPosition,
   removeNextBookmarkTrees: bookmarkCreators.removeNextBookmarkTrees,
   setDragIndicator: bookmarkCreators.setDragIndicator,
   setFocusId: bookmarkCreators.setFocusId,
@@ -63,34 +69,18 @@ const mapDispatchToProps = {
 
 type Props = OwnProps & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
 const BookmarkTreeContainer = (props: Props) => {
-  const {
-    createLastPosition,
-    isSearching,
-    removeBookmarkTree,
-    removeNextBookmarkTrees,
-    updateLastPosition,
-    treeId,
-    treeIndex,
-    treeInfo
-  } = props
+  const {isSearching, removeBookmarkTree, removeNextBookmarkTrees, treeInfo} = props
 
   const context = React.useContext(DragAndDropContext)
 
-  React.useEffect(() => {
-    createLastPosition(treeIndex, treeId)
-  }, [createLastPosition, treeId, treeIndex])
-
-  const handleScroll = React.useMemo(() => {
-    const debouncedUpdateLastPosition = debounce(updateLastPosition, 300)
-    return (evt: ListOnScrollProps) => {
-      if (!evt.scrollUpdateWasRequested) {
-        debouncedUpdateLastPosition({
-          id: treeId,
-          scrollTop: evt.scrollOffset
-        })
-      }
-    }
-  }, [treeId, updateLastPosition])
+  const {handleScroll} = useLastPosition({
+    createLastPosition: props.createLastPosition,
+    isRememberLastPosition: props.isRememberLastPosition,
+    removeLastPosition: props.removeLastPosition,
+    treeId: props.treeId,
+    treeIndex: props.treeIndex,
+    updateLastPosition: props.updateLastPosition
+  })
 
   const closeCurrentTree = React.useCallback(() => {
     removeBookmarkTree(treeInfo.parent.id)

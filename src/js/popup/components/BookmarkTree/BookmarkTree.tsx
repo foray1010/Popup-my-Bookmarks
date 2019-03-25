@@ -24,7 +24,7 @@ interface Props {
   onRowDragStart: () => void
   onRowMouseEnter: (bookmarkInfo: BookmarkInfo) => () => void
   onRowMouseLeave: () => void
-  onScroll: (evt: ListOnScrollProps) => void
+  onScroll?: (evt: ListOnScrollProps) => void
   rowHeight: number
   scrollToIndex: number
   treeInfo: BookmarkTreeType
