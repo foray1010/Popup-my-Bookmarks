@@ -1,5 +1,4 @@
 import * as React from 'react'
-import EventListener from 'react-event-listener'
 import {connect} from 'react-redux'
 
 import {RootState} from '../reduxs'
@@ -14,9 +13,17 @@ const mapStateToProps = (state: RootState) => ({
 
 type Props = OwnProps & ReturnType<typeof mapStateToProps>
 const GlobalKeyboardEventListener = (props: Props) => {
-  if (props.isDisableGlobalKeyboardEvent) return null
+  React.useEffect(() => {
+    if (props.isDisableGlobalKeyboardEvent) return undefined
 
-  return <EventListener target={document} onKeyDown={props.onKeyDown} />
+    if (props.onKeyDown) document.addEventListener('keydown', props.onKeyDown)
+
+    return () => {
+      if (props.onKeyDown) document.removeEventListener('keydown', props.onKeyDown)
+    }
+  }, [props.isDisableGlobalKeyboardEvent, props.onKeyDown])
+
+  return null
 }
 
 export default connect(mapStateToProps)(GlobalKeyboardEventListener)

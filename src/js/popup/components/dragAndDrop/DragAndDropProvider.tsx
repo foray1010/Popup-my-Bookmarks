@@ -1,5 +1,4 @@
 import * as React from 'react'
-import EventListener from 'react-event-listener'
 
 import DragAndDropContext, {DragAndDropContextType} from './DragAndDropContext'
 
@@ -44,18 +43,17 @@ const DragAndDropProvider = ({children, onDragEnd, onDrop}: Props) => {
 
   const {activeKey, unsetAllKeys} = contextState
 
-  const handleDrop = React.useCallback(
-    (evt: MouseEvent) => {
+  React.useEffect(() => {
+    if (activeKey === null) return undefined
+
+    const handleDrop = (evt: MouseEvent) => {
       unsetAllKeys()
       if (activeKey !== null) onDrop(evt, activeKey)
       onDragEnd(evt)
-    },
-    [activeKey, onDragEnd, onDrop, unsetAllKeys]
-  )
+    }
 
-  // may not be needed, just in case
-  const handleMouseEnterWindow = React.useCallback(
-    (evt: MouseEvent) => {
+    // may not be needed, just in case
+    const handleMouseEnter = (evt: MouseEvent) => {
       // if user mouse up outside of the window, `mouseup` event may not be fired
       // this hack let us know if user mouse up outside of the window and go back to window
       // onDrop() should not be called because we are not sure that means user wanna drop
@@ -63,22 +61,18 @@ const DragAndDropProvider = ({children, onDragEnd, onDrop}: Props) => {
         unsetAllKeys()
         onDragEnd(evt)
       }
-    },
-    [onDragEnd, unsetAllKeys]
-  )
+    }
 
-  return (
-    <React.Fragment>
-      <DragAndDropContext.Provider value={contextState}>{children}</DragAndDropContext.Provider>
-      {activeKey !== null && (
-        <EventListener
-          target={window}
-          onMouseEnter={handleMouseEnterWindow}
-          onMouseUp={handleDrop}
-        />
-      )}
-    </React.Fragment>
-  )
+    window.addEventListener('mouseenter', handleMouseEnter)
+    window.addEventListener('mouseup', handleDrop)
+
+    return () => {
+      window.removeEventListener('mouseenter', handleMouseEnter)
+      window.removeEventListener('mouseup', handleDrop)
+    }
+  }, [activeKey, onDragEnd, onDrop, unsetAllKeys])
+
+  return <DragAndDropContext.Provider value={contextState}>{children}</DragAndDropContext.Provider>
 }
 
 export default DragAndDropProvider
