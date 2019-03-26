@@ -6,30 +6,30 @@ import {lastPositionsCreators} from '../../reduxs'
 
 export default ({
   createLastPosition,
-  isRememberLastPosition,
+  isRememberLastPositions,
   removeLastPosition,
   treeId,
   treeIndex,
   updateLastPosition
 }: {
   createLastPosition: typeof lastPositionsCreators.createLastPosition
-  isRememberLastPosition: boolean
+  isRememberLastPositions: boolean
   removeLastPosition: typeof lastPositionsCreators.removeLastPosition
   treeId: string
   treeIndex: number
   updateLastPosition: typeof lastPositionsCreators.updateLastPosition
 }) => {
   React.useEffect(() => {
-    if (isRememberLastPosition) createLastPosition(treeIndex, treeId)
+    if (isRememberLastPositions) createLastPosition(treeIndex, treeId)
 
     return () => {
-      if (isRememberLastPosition) removeLastPosition(treeIndex)
+      if (isRememberLastPositions) removeLastPosition(treeIndex)
     }
-  }, [createLastPosition, isRememberLastPosition, removeLastPosition, treeId, treeIndex])
+  }, [createLastPosition, isRememberLastPositions, removeLastPosition, treeId, treeIndex])
 
   return {
     handleScroll: React.useMemo(() => {
-      if (!isRememberLastPosition) return undefined
+      if (!isRememberLastPositions) return undefined
 
       const debouncedUpdateLastPosition = debounce(updateLastPosition, 100)
       return (evt: ListOnScrollProps) => {
@@ -38,6 +38,6 @@ export default ({
           scrollTop: evt.scrollOffset
         })
       }
-    }, [isRememberLastPosition, treeId, updateLastPosition])
+    }, [isRememberLastPositions, treeId, updateLastPosition])
   }
 }

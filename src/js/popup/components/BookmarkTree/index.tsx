@@ -10,7 +10,7 @@ import Mask from '../Mask'
 import BookmarkTree from './BookmarkTree'
 import NoSearchResult from './NoSearchResult'
 import TreeHeader from './TreeHeader'
-import useLastPosition from './useLastPosition'
+import useRememberLastPositions from './useRememberLastPositions'
 import useRowClickEvents from './useRowClickEvents'
 import useRowDragEvents from './useRowDragEvents'
 import useRowHoverEvents from './useRowHoverEvents'
@@ -30,8 +30,8 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   const treeIndex = state.bookmark.trees.findIndex(R.pathEq(['parent', 'id'], ownProps.treeId))
   const treeInfo = state.bookmark.trees[treeIndex]
 
-  const isRememberLastPosition = Boolean(state.options[CST.OPTIONS.REMEMBER_POS])
-  const lastPosition = isRememberLastPosition ?
+  const isRememberLastPositions = Boolean(state.options[CST.OPTIONS.REMEMBER_POS])
+  const lastPosition = isRememberLastPositions ?
     (state.lastPositions || []).find(R.propEq('id', ownProps.treeId)) :
     undefined
 
@@ -39,7 +39,7 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
     highlightedId,
     highlightedIndex: treeInfo.children.findIndex(R.propEq('id', highlightedId)),
     iconSize: getIconSize(state.options.fontSize || 0),
-    isRememberLastPosition,
+    isRememberLastPositions,
     isSearching: Boolean(state.bookmark.searchKeyword),
     // cover the folder if it is not the top two folder
     isShowCover: state.bookmark.trees.length - treeIndex > 2,
@@ -73,9 +73,9 @@ const BookmarkTreeContainer = (props: Props) => {
 
   const context = React.useContext(DragAndDropContext)
 
-  const {handleScroll} = useLastPosition({
+  const {handleScroll} = useRememberLastPositions({
     createLastPosition: props.createLastPosition,
-    isRememberLastPosition: props.isRememberLastPosition,
+    isRememberLastPositions: props.isRememberLastPositions,
     removeLastPosition: props.removeLastPosition,
     treeId: props.treeId,
     treeIndex: props.treeIndex,
