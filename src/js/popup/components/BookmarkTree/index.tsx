@@ -4,12 +4,13 @@ import {connect} from 'react-redux'
 
 import classes from '../../../../css/popup/bookmark-tree.css'
 import * as CST from '../../constants'
-import {RootState, bookmarkCreators, menuCreators} from '../../reduxs'
+import {RootState, bookmarkCreators, lastPositionsCreators, menuCreators} from '../../reduxs'
 import DragAndDropContext from '../dragAndDrop/DragAndDropContext'
 import Mask from '../Mask'
 import BookmarkTree from './BookmarkTree'
 import NoSearchResult from './NoSearchResult'
 import TreeHeader from './TreeHeader'
+import useRememberLastPositions from './useRememberLastPositions'
 import useRowClickEvents from './useRowClickEvents'
 import useRowDragEvents from './useRowDragEvents'
 import useRowHoverEvents from './useRowHoverEvents'
@@ -28,30 +29,42 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   const highlightedId = state.bookmark.focusId || state.menu.targetId || state.editor.targetId
   const treeIndex = state.bookmark.trees.findIndex(R.pathEq(['parent', 'id'], ownProps.treeId))
   const treeInfo = state.bookmark.trees[treeIndex]
+
+  const isRememberLastPositions = Boolean(state.options[CST.OPTIONS.REMEMBER_POS])
+  const lastPosition = isRememberLastPositions ?
+    (state.lastPositions || []).find(R.propEq('id', ownProps.treeId)) :
+    undefined
+
   return {
     highlightedId,
     highlightedIndex: treeInfo.children.findIndex(R.propEq('id', highlightedId)),
     iconSize: getIconSize(state.options.fontSize || 0),
+    isRememberLastPositions,
     isSearching: Boolean(state.bookmark.searchKeyword),
     // cover the folder if it is not the top two folder
     isShowCover: state.bookmark.trees.length - treeIndex > 2,
     isShowHeader: treeIndex !== 0,
+    lastScrollTop: lastPosition ? lastPosition.scrollTop : undefined,
     listItemWidth: state.options.setWidth,
     rowHeight: getRowHeight(state.options.fontSize || 0),
+    treeIndex,
     treeInfo
   }
 }
 
 const mapDispatchToProps = {
+  createLastPosition: lastPositionsCreators.createLastPosition,
   openBookmarksInBrowser: bookmarkCreators.openBookmarksInBrowser,
   openBookmarkTree: bookmarkCreators.openBookmarkTree,
   openMenu: menuCreators.openMenu,
   removeBookmarkTree: bookmarkCreators.removeBookmarkTree,
   removeDragIndicator: bookmarkCreators.removeDragIndicator,
   removeFocusId: bookmarkCreators.removeFocusId,
+  removeLastPosition: lastPositionsCreators.removeLastPosition,
   removeNextBookmarkTrees: bookmarkCreators.removeNextBookmarkTrees,
   setDragIndicator: bookmarkCreators.setDragIndicator,
-  setFocusId: bookmarkCreators.setFocusId
+  setFocusId: bookmarkCreators.setFocusId,
+  updateLastPosition: lastPositionsCreators.updateLastPosition
 }
 
 type Props = OwnProps & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
@@ -59,6 +72,15 @@ const BookmarkTreeContainer = (props: Props) => {
   const {isSearching, removeBookmarkTree, removeNextBookmarkTrees, treeInfo} = props
 
   const context = React.useContext(DragAndDropContext)
+
+  const {handleScroll} = useRememberLastPositions({
+    createLastPosition: props.createLastPosition,
+    isRememberLastPositions: props.isRememberLastPositions,
+    removeLastPosition: props.removeLastPosition,
+    treeId: props.treeId,
+    treeIndex: props.treeIndex,
+    updateLastPosition: props.updateLastPosition
+  })
 
   const closeCurrentTree = React.useCallback(() => {
     removeBookmarkTree(treeInfo.parent.id)
@@ -85,6 +107,7 @@ const BookmarkTreeContainer = (props: Props) => {
         highlightedId={props.highlightedId}
         iconSize={props.iconSize}
         isDisableDragAndDrop={props.isSearching}
+        lastScrollTop={props.lastScrollTop}
         listItemWidth={props.listItemWidth || 0}
         noRowsRenderer={noRowsRenderer}
         onRowAuxClick={handleRowAuxClick}
@@ -93,6 +116,7 @@ const BookmarkTreeContainer = (props: Props) => {
         onRowDragStart={handleRowDragStart}
         onRowMouseEnter={handleRowMouseEnter}
         onRowMouseLeave={handleRowMouseLeave}
+        onScroll={handleScroll}
         rowHeight={props.rowHeight}
         scrollToIndex={props.highlightedIndex}
         treeInfo={props.treeInfo}

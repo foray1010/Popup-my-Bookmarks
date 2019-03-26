@@ -4,12 +4,12 @@ import {all, call, put, select, takeLatest} from 'redux-saga/effects'
 import {getType} from 'typesafe-actions'
 
 import {Options} from '../../../common/types/options'
-import {clearStorage, getStorage, setStorage, silenceSaga} from '../../../common/utils'
+import {clearStorage, getSyncStorage, setSyncStorage, silenceSaga} from '../../../common/utils'
 import {initOptions} from '../../utils'
 import * as optionsCreators from './actions'
 
 function* reloadOptions(): SagaIterator {
-  const options: Options = yield call(getStorage)
+  const options: Options = yield call(getSyncStorage)
 
   yield put(optionsCreators.updateOptions(options))
 }
@@ -25,7 +25,7 @@ function* resetToDefaultOptions(): SagaIterator {
 function* saveOptions(): SagaIterator {
   const {options}: {options: Options} = yield select(R.identity)
 
-  yield call(setStorage, options)
+  yield call(setSyncStorage, options)
 
   yield put(optionsCreators.updateOptions(options))
 }

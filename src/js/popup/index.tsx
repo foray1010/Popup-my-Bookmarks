@@ -12,9 +12,15 @@ import {Options, OptionsConfig} from '../common/types/options'
 import {getOptionsConfig, renderToBody} from '../common/utils'
 import App from './components/App'
 import {rootReducer, rootSaga} from './reduxs'
+import {LocalStorage} from './types/localStorage'
 
 const main = async (): Promise<void> => {
-  const [options, optionsConfig]: [Partial<Options>, OptionsConfig] = await Promise.all([
+  const [localStorage, options, optionsConfig]: [
+    LocalStorage,
+    Partial<Options>,
+    OptionsConfig
+  ] = await Promise.all([
+    webExtension.storage.local.get(),
     webExtension.storage.sync.get(),
     getOptionsConfig()
   ])
@@ -29,7 +35,10 @@ const main = async (): Promise<void> => {
   const store = configureStore({
     rootReducer,
     rootSaga,
-    preloadedState: {options}
+    preloadedState: {
+      lastPositions: localStorage.lastPositions || [],
+      options
+    }
   })
 
   renderToBody(
