@@ -59,8 +59,6 @@ function* watchCreateAndRemoveLastPosition(): SagaIterator {
       ReturnType<typeof lastPositionsCreator.removeLastPosition> | void
     ] = yield race([take(createLastPositionChan), take(removeLastPositionChan)])
 
-    console.log([createLastPositionAction, removeLastPositionAction])
-
     if (createLastPositionAction) {
       yield call(createLastPosition, createLastPositionAction)
     }
