@@ -1543,10 +1543,10 @@
   dependencies:
     "@types/webpack" "*"
 
-"@types/sharp@0.22.0":
-  version "0.22.0"
-  resolved "https://registry.yarnpkg.com/@types/sharp/-/sharp-0.22.0.tgz#d28f8a0cca4deaedaacb4e7101a30dfc54aa6087"
-  integrity sha512-aArqMOewA97tClqOaZPQhSqH8OZkhtwbmijAuxWOznrVma43UPQmNqzfBFmc+khIXwXefc7Sr77qv00MOcbKXA==
+"@types/sharp@0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@types/sharp/-/sharp-0.22.1.tgz#4fccaa9cc580d859916bee693aa7ae7447d0e0ba"
+  integrity sha512-Reri4hhX77JBx6HWt2a2CLO0xjHMFHDaeBYMslUsTSHGRFQnk+VpoH25g7/L6QzyyNNmxTekK+j+lFFjK3OkqA==
   dependencies:
     "@types/node" "*"
 
