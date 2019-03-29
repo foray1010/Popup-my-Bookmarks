@@ -26,10 +26,13 @@ const outputDir = path.join('build', nodeEnv)
 const sourceDir = 'src'
 
 const defaultConfig: webpack.Configuration = {
-  entry: appNames.reduce((acc, appName) => ({
-    ...acc,
-    [appName]: `./${sourceDir}/js/${appName}`
-  }), {}),
+  entry: appNames.reduce(
+    (acc, appName) => ({
+      ...acc,
+      [appName]: `./${sourceDir}/js/${appName}`
+    }),
+    {}
+  ),
   mode: nodeEnv === 'production' ? 'production' : 'development',
   module: {
     rules: [
@@ -107,27 +110,25 @@ const defaultConfig: webpack.Configuration = {
       emitError: true,
       strict: true
     }),
-    ...R.map(
-      (appName) =>
-        new HtmlWebpackPlugin({
-          chunks: [commonChunkName, appName],
-          filename: `${appName}.html`,
-          inject: 'head',
-          minify: {
-            collapseWhitespace: true,
-            keepClosingSlash: true,
-            minifyCSS: true,
-            minifyJS: true,
-            removeAttributeQuotes: true,
-            removeComments: true,
-            removeScriptTypeAttributes: true,
-            removeStyleLinkTypeAttributes: true,
-            useShortDoctype: true
-          },
-          title: pkg.name
-        }),
-      appNames
-    ),
+    ...appNames.map((appName) => {
+      return new HtmlWebpackPlugin({
+        chunks: [commonChunkName, appName],
+        filename: `${appName}.html`,
+        inject: 'head',
+        minify: {
+          collapseWhitespace: true,
+          keepClosingSlash: true,
+          minifyCSS: true,
+          minifyJS: true,
+          removeAttributeQuotes: true,
+          removeComments: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          useShortDoctype: true
+        },
+        title: pkg.name
+      })
+    }),
     new HtmlWebpackPlugin({
       filename: 'background.html',
       inject: false,
@@ -194,6 +195,35 @@ const productionConfig: webpack.Configuration = {
       }
     ]
   },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        terserOptions: {
+          compress: {
+            drop_console: true,
+            passes: 2,
+            pure_getters: true,
+            // not sure why it breaks `yarn build`
+            // unsafe: true,
+            unsafe_arrows: true,
+            unsafe_comps: true,
+            unsafe_Function: true,
+            unsafe_math: true,
+            unsafe_methods: true,
+            unsafe_proto: true,
+            unsafe_regexp: true,
+            unsafe_undefined: true
+          },
+          ecma: 6,
+          output: {
+            wrap_iife: true
+          }
+        }
+      })
+    ]
+  },
   plugins: [
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
@@ -202,35 +232,11 @@ const productionConfig: webpack.Configuration = {
     new MiniCssExtractPlugin({
       filename: path.join('css', '[name].css')
     }),
-    new TerserPlugin({
-      parallel: true,
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          pure_getters: true,
-          // not sure why it breaks `yarn build`
-          // unsafe: true,
-          unsafe_arrows: true,
-          unsafe_comps: true,
-          unsafe_Function: true,
-          unsafe_math: true,
-          unsafe_methods: true,
-          unsafe_proto: true,
-          unsafe_regexp: true,
-          unsafe_undefined: true
-        },
-        ecma: 6,
-        output: {
-          wrap_iife: true
-        }
-      }
-    }),
     new ZipPlugin({
       filename: `${pkg.version}.zip`
     })
   ]
 }
-
 
 const getMergedConfigByEnv = R.converge(R.mergeDeepWith(R.concat), [
   R.prop('default'),
