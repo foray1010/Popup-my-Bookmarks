@@ -10,10 +10,6 @@
   "description": "A more efficient way to view and manage your bookmarks menu.",
   "private": true,
   "license": "MIT",
-  "author": "foray1010",
-  "homepage": "https://github.com/foray1010/Popup-my-Bookmarks",
-  "repository": "foray1010/Popup-my-Bookmarks",
-  "bugs": "https://github.com/foray1010/Popup-my-Bookmarks/issues",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "ci": "npm-run-all -p lint:* test typecheck && yarn build",
