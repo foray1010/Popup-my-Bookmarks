@@ -72,18 +72,6 @@
     "@babel/traverse" "^7.4.0"
     "@babel/types" "^7.4.0"
 
-"@babel/helper-create-class-features-plugin@^7.4.0":
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/@babel/helper-create-class-features-plugin/-/helper-create-class-features-plugin-7.4.0.tgz#30fd090e059d021995c1762a5b76798fa0b51d82"
-  integrity sha512-2K8NohdOT7P6Vyp23QH4w2IleP8yG3UJsbRKwA4YP6H8fErcLkFuuEEqbF2/BYBKSNci/FWJiqm6R3VhM/QHgw==
-  dependencies:
-    "@babel/helper-function-name" "^7.1.0"
-    "@babel/helper-member-expression-to-functions" "^7.0.0"
-    "@babel/helper-optimise-call-expression" "^7.0.0"
-    "@babel/helper-plugin-utils" "^7.0.0"
-    "@babel/helper-replace-supers" "^7.4.0"
-    "@babel/helper-split-export-declaration" "^7.4.0"
-
 "@babel/helper-define-map@^7.4.0":
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/@babel/helper-define-map/-/helper-define-map-7.4.0.tgz#cbfd8c1b2f12708e262c26f600cd16ed6a3bc6c9"
@@ -246,14 +234,6 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/helper-remap-async-to-generator" "^7.1.0"
     "@babel/plugin-syntax-async-generators" "^7.2.0"
-
-"@babel/plugin-proposal-class-properties@^7.4.0":
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-class-properties/-/plugin-proposal-class-properties-7.4.0.tgz#d70db61a2f1fd79de927eea91f6411c964e084b8"
-  integrity sha512-t2ECPNOXsIeK1JxJNKmgbzQtoG27KIlVE61vTqX0DKR9E9sZlVVxWUtEW9D5FlZ8b8j7SBNCHY47GgPKCKlpPg==
-  dependencies:
-    "@babel/helper-create-class-features-plugin" "^7.4.0"
-    "@babel/helper-plugin-utils" "^7.0.0"
 
 "@babel/plugin-proposal-json-strings@^7.2.0":
   version "7.2.0"
@@ -622,14 +602,6 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/helper-regex" "^7.0.0"
     regexpu-core "^4.1.3"
-
-"@babel/polyfill@7.4.0":
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/@babel/polyfill/-/polyfill-7.4.0.tgz#90f9d68ae34ac42ab4b4aa03151848f536960218"
-  integrity sha512-bVsjsrtsDflIHp5I6caaAa2V25Kzn50HKPL6g3X0P0ni1ks+58cPB8Mz6AOKVuRPgaVdq/OwEUc/1vKqX+Mo4A==
-  dependencies:
-    core-js "^2.6.5"
-    regenerator-runtime "^0.13.2"
 
 "@babel/preset-env@^7.4.2":
   version "7.4.2"
@@ -2185,12 +2157,11 @@ babel-polyfill@6.26.0:
     core-js "^2.5.0"
     regenerator-runtime "^0.10.5"
 
-babel-preset-foray1010@8.2.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/babel-preset-foray1010/-/babel-preset-foray1010-8.2.0.tgz#2beadcc0ef46d31c8bbf19485f210171d5b70bb3"
-  integrity sha512-BK2Y2n09IoS9A7GuFj3Og1ymlNua/CyyKXNmc46YUnCx8YBmzOl86upznjFrm0V59ox2xnfQii6J8HL3m5zqYw==
+babel-preset-foray1010@9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/babel-preset-foray1010/-/babel-preset-foray1010-9.0.0.tgz#37876da81214e954cff5d23ea9e5cff1d95c46b5"
+  integrity sha512-LV6BlRBfQiw2GnUW6uy10M54X+nAaA5jPZef+8efATNmvcym5GIpiUHmg/x26BR2pnQrEnTpcaTOEkVK9EYW5g==
   dependencies:
-    "@babel/plugin-proposal-class-properties" "^7.4.0"
     "@babel/plugin-transform-react-constant-elements" "^7.2.0"
     "@babel/plugin-transform-react-inline-elements" "^7.2.0"
     "@babel/preset-env" "^7.4.2"
@@ -2199,7 +2170,6 @@ babel-preset-foray1010@8.2.0:
     "@babel/preset-typescript" "^7.3.3"
     app-root-path "^2.2.1"
     babel-plugin-transform-react-remove-prop-types "^0.4.24"
-    ramda "^0.26.1"
 
 babel-preset-jest@^24.3.0:
   version "24.3.0"
@@ -3133,7 +3103,7 @@ core-js@3.0.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.0.0.tgz#a8dbfa978d29bfc263bfb66c556d0ca924c28957"
   integrity sha512-WBmxlgH2122EzEJ6GH8o9L/FeoUKxxxZ6q6VUxoTlsE4EvbTWKJb447eyVxTEuq0LpXjlq/kCB2qgBvsYRkLvQ==
 
-core-js@^2.4.0, core-js@^2.5.0, core-js@^2.6.5:
+core-js@^2.4.0, core-js@^2.5.0:
   version "2.6.5"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.5.tgz#44bc8d249e7fb2ff5d00e0341a7ffb94fbf67895"
   integrity sha512-klh/kDpwX8hryYL14M9w/xei6vrv6sE8gTHDG7/T/+SEovB/G4ejwcfE/CBzO6Edsu+OETZMZ3wcX/EjUkrl5A==

@@ -23,8 +23,8 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@babel/polyfill": "7.4.0",
     "classnames": "2.2.6",
+    "core-js": "3.0.0",
     "lodash.debounce": "4.0.8",
     "open-color": "1.6.3",
     "ramda": "0.26.1",
@@ -77,7 +77,7 @@
     "@types/zip-webpack-plugin": "3.0.0",
     "babel-loader": "8.0.5",
     "babel-plugin-styled-components": "1.10.0",
-    "babel-preset-foray1010": "8.2.0",
+    "babel-preset-foray1010": "9.0.0",
     "bluebird": "3.5.3",
     "chance": "1.0.18",
     "chrome-manifest-loader": "0.2.0",
