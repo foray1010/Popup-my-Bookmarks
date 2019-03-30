@@ -17,7 +17,7 @@ export default ({
     const handleRowMiddleClick = (bookmarkId: string) => {
       openBookmarksInBrowser([bookmarkId], CST.OPEN_IN_TYPES.NEW_TAB, true)
     }
-    const handleRowRightClick = (bookmarkId: string, evt: React.MouseEvent | MouseEvent) => {
+    const handleRowRightClick = (bookmarkId: string, evt: MouseEvent) => {
       if (!(evt.currentTarget instanceof HTMLElement)) return
 
       const targetOffset = evt.currentTarget.getBoundingClientRect()
@@ -29,28 +29,18 @@ export default ({
       })
     }
 
-    // to support `chrome < 55` as auxclick is not available
-    const handleRowAllClick = (bookmarkId: string, evt: React.MouseEvent | MouseEvent) => {
-      switch (evt.button) {
-        case 0:
-          handleRowLeftClick(bookmarkId)
-          break
-        case 1:
-          handleRowMiddleClick(bookmarkId)
-          break
-        case 2:
-          handleRowRightClick(bookmarkId, evt)
-          break
-        default:
-      }
-    }
-
     return {
       handleRowAuxClick: (bookmarkId: string) => (evt: MouseEvent) => {
-        handleRowAllClick(bookmarkId, evt)
+        if (evt.button === 1) {
+          handleRowMiddleClick(bookmarkId)
+        }
+
+        if (evt.button === 2) {
+          handleRowRightClick(bookmarkId, evt)
+        }
       },
-      handleRowClick: (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => {
-        handleRowAllClick(bookmarkId, evt)
+      handleRowClick: (bookmarkId: string) => () => {
+        handleRowLeftClick(bookmarkId)
       }
     }
   }, [openBookmarksInBrowser, openMenu])

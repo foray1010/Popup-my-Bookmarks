@@ -10,7 +10,7 @@ Improvements:
 
 Changes:
 
-- Increase minimum Chrome version from 34 to 51
+- Increase minimum Chrome version from 34 to 55
 
 Bugfixes:
 
