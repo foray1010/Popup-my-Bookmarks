@@ -1,3 +1,9 @@
+## 5.3.2 (30/03/2019)
+
+Bugfixes:
+
+- keep resizing in options page with long option description (reported by @silou)
+
 ## 5.3.1 (1/10/2018)
 
 Changes:

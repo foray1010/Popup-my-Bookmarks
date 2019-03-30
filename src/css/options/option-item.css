@@ -1,7 +1,8 @@
 @import '../common/variables.css';
 
 .desc {
-  white-space: pre-wrap;
+  overflow: hidden;
+  white-space: no-wrap;
 }
 
 .input {
