@@ -51,10 +51,7 @@ describe('refreshBookmarkTrees', () => {
 
     expect(generator.next().value).toEqual(select(R.identity))
 
-    const options = {
-      ...optionsFixture,
-      fakeKey: chance.word()
-    }
+    const options = optionsFixture
     const searchKeyword = ''
     expect(
       generator.next({

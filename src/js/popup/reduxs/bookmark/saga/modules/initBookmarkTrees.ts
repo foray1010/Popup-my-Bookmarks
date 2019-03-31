@@ -2,6 +2,7 @@ import * as R from 'ramda'
 import {SagaIterator} from 'redux-saga'
 import {call, put, select} from 'redux-saga/effects'
 
+import {OPTIONS} from '../../../../constants'
 import {RootState} from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 import {getBookmarkTrees} from '../utils/getters'
@@ -13,7 +14,7 @@ export const getRememberedTreeIds = ({
   lastPositions: RootState['lastPositions']
   options: RootState['options']
 }): Array<string> => {
-  if (!options.rememberPos) return []
+  if (!options[OPTIONS.REMEMBER_POS]) return []
   return (lastPositions || []).map((x) => x.id)
 }
 

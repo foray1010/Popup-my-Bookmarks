@@ -38,15 +38,15 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   return {
     highlightedId,
     highlightedIndex: treeInfo.children.findIndex(R.propEq('id', highlightedId)),
-    iconSize: getIconSize(state.options.fontSize || 0),
+    iconSize: getIconSize(state.options[CST.OPTIONS.FONT_SIZE] || 0),
     isRememberLastPositions,
     isSearching: Boolean(state.bookmark.searchKeyword),
     // cover the folder if it is not the top two folder
     isShowCover: state.bookmark.trees.length - treeIndex > 2,
     isShowHeader: treeIndex !== 0,
     lastScrollTop: lastPosition ? lastPosition.scrollTop : undefined,
-    listItemWidth: state.options.setWidth,
-    rowHeight: getRowHeight(state.options.fontSize || 0),
+    listItemWidth: state.options[CST.OPTIONS.SET_WIDTH],
+    rowHeight: getRowHeight(state.options[CST.OPTIONS.FONT_SIZE] || 0),
     treeIndex,
     treeInfo
   }

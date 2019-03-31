@@ -3,6 +3,7 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 import {createGlobalStyle} from 'styled-components'
 
+import {OPTIONS} from '../../constants'
 import {RootState} from '../../reduxs'
 import App from './App'
 import useGlobalEvents from './useGlobalEvents'
@@ -30,7 +31,10 @@ const AppContainer = (props: Props) => {
 
   return (
     <React.Fragment>
-      <GlobalStyles fontFamily={props.options.fontFamily} fontSize={props.options.fontSize} />
+      <GlobalStyles
+        fontFamily={props.options[OPTIONS.FONT_FAMILY]}
+        fontSize={props.options[OPTIONS.FONT_SIZE]}
+      />
       <App isShowEditor={props.isShowEditor} isShowMenu={props.isShowMenu} />
     </React.Fragment>
   )

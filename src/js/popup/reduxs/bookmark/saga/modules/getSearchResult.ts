@@ -6,6 +6,7 @@ import {ActionType} from 'typesafe-actions'
 import * as CST from '../../../../constants'
 import {BookmarkInfo} from '../../../../types'
 import sortByTitle from '../../../../utils/sortByTitle'
+import {RootState} from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 import {simulateBookmark} from '../../utils/converters'
 import {searchBookmarks} from '../utils/getters'
@@ -28,16 +29,16 @@ export function* getSearchResult({
     return
   }
 
-  const {options} = yield select(R.identity)
+  const {options}: RootState = yield select(R.identity)
 
   const searchResult: Array<BookmarkInfo> = yield call(searchBookmarks, {
     query: payload.searchKeyword
   })
 
-  const isSearchTitleOnly = options.searchTarget === 1
+  const isSearchTitleOnly = options[CST.OPTIONS.SEARCH_TARGET] === 1
   const sortedPartialResult = R.compose(
     sortByTitle,
-    R.slice(0, options.maxResults),
+    R.slice(0, options[CST.OPTIONS.MAX_RESULTS] || 0),
     (result: Array<BookmarkInfo>) => {
       const filteredResult = result.filter(R.propEq('type', CST.BOOKMARK_TYPES.BOOKMARK))
       if (isSearchTitleOnly) {

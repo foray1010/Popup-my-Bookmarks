@@ -2,6 +2,7 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 import webExtension from 'webextension-polyfill'
 
+import {OPTIONS} from '../../constants'
 import {RootState, bookmarkCreators, editorCreators} from '../../reduxs'
 import AbsPositionWithinBody from '../AbsPositionWithinBody'
 import Mask from '../Mask'
@@ -15,7 +16,7 @@ const mapStateToProps = (state: RootState) => ({
   targetId: state.editor.targetId,
   title: state.editor.title,
   url: state.editor.url,
-  width: state.options.setWidth
+  width: state.options[OPTIONS.SET_WIDTH]
 })
 
 const mapDispatchToProps = {

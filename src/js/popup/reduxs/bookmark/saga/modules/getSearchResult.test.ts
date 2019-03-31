@@ -4,6 +4,7 @@ import {call, put, select} from 'redux-saga/effects'
 import {getType} from 'typesafe-actions'
 
 import optionsFixture from '../../../../../common/__fixtures__/options.json'
+import {OPTIONS} from '../../../../constants'
 import * as bookmarkCreators from '../../actions'
 import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import searchResult from '../__fixtures__/searchResult'
@@ -49,7 +50,7 @@ describe('getSearchResult', () => {
     expect(generator.next().done).toBe(true)
   })
   test('get search result with limited and sorted result if `searchKeyword` is not empty', () => {
-    const options = {...optionsFixture, maxResults: 10, searchTarget: 0}
+    const options = {...optionsFixture, [OPTIONS.MAX_RESULTS]: 10, [OPTIONS.SEARCH_TARGET]: 0}
     const searchKeyword = chance.word()
 
     const generator = getSearchResult({
@@ -71,8 +72,8 @@ describe('getSearchResult', () => {
 
     expect(generator.next().done).toBe(true)
   })
-  test('get search result by title only if `searchTarget` is `1`', () => {
-    const options = {...optionsFixture, maxResults: 10, searchTarget: 1}
+  test('get search result by title only if `[OPTIONS.SEARCH_TARGET]` is `1`', () => {
+    const options = {...optionsFixture, [OPTIONS.MAX_RESULTS]: 10, [OPTIONS.SEARCH_TARGET]: 1}
     const searchKeyword = 'a'
 
     const generator = getSearchResult({

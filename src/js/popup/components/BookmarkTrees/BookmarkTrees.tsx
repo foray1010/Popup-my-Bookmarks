@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import classes from '../../../../css/popup/bookmark-trees.css'
 import {Options} from '../../../common/types/options'
+import {OPTIONS} from '../../constants'
 import BookmarkTree from '../BookmarkTree'
 
 interface MainProps {
@@ -11,7 +12,7 @@ interface MainProps {
 }
 const Main = styled('main')<MainProps>`
   & > section {
-    width: ${R.pathOr(0, ['options', 'setWidth'])}px;
+    width: ${R.pathOr(0, ['options', OPTIONS.SET_WIDTH])}px;
   }
 `
 

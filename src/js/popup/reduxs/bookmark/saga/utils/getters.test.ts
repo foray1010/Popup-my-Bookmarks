@@ -118,15 +118,15 @@ describe('getFirstBookmarkTree', () => {
     const hiddenFolderId = '99999'
     const options = {
       ...optionsFixture,
-      defExpand: Number(bookmarkTrees[0].parent.id),
-      hideRootFolder: [Number(hiddenFolderId)]
+      [CST.OPTIONS.DEF_EXPAND]: Number(bookmarkTrees[0].parent.id),
+      [CST.OPTIONS.HIDE_ROOT_FOLDER]: [Number(hiddenFolderId)]
     }
 
     const generator = getters.getFirstBookmarkTree(options)
 
     expect(generator.next().value).toEqual(
       all([
-        call(getters.getBookmarkTree, String(options.defExpand)),
+        call(getters.getBookmarkTree, String(options[CST.OPTIONS.DEF_EXPAND])),
         call(getters.getBookmarkChildren, CST.ROOT_ID)
       ])
     )
