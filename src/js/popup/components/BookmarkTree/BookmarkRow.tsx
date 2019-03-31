@@ -21,7 +21,7 @@ interface Props {
   isDisableDragAndDrop: boolean
   isHighlighted: boolean
   isUnclickable: boolean
-  onAuxClick: (bookmarkId: string) => (evt: MouseEvent) => void
+  onAuxClick: (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => void
   onClick: (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => void
   onDragOver: (
     bookmarkInfo: BookmarkInfo
@@ -38,23 +38,10 @@ const BookmarkRow = ({
   onMouseEnter,
   ...restProps
 }: Props) => {
-  const baseRef = React.useRef(null)
-
-  React.useEffect(() => {
-    const baseEl = baseRef.current
-    if (!baseEl) return undefined
-
-    const handleAuxClick = onAuxClick(bookmarkInfo.id)
-
-    // @ts-ignore: https://github.com/Microsoft/TypeScript/issues/29995
-    baseEl.addEventListener('auxclick', handleAuxClick)
-
-    return () => {
-      // @ts-ignore: https://github.com/Microsoft/TypeScript/issues/29995
-      baseEl.removeEventListener('auxclick', handleAuxClick)
-    }
-  }, [bookmarkInfo.id, onAuxClick])
-
+  const handleAuxClick = React.useMemo(() => onAuxClick(bookmarkInfo.id), [
+    bookmarkInfo.id,
+    onAuxClick
+  ])
   const handleClick = React.useMemo(() => onClick(bookmarkInfo.id), [bookmarkInfo.id, onClick])
   const handleDragOver = React.useMemo(() => onDragOver(bookmarkInfo), [bookmarkInfo, onDragOver])
   const handleMouseEnter = React.useMemo(() => onMouseEnter(bookmarkInfo), [
@@ -76,7 +63,6 @@ const BookmarkRow = ({
       onDragStart={restProps.onDragStart}
     >
       <div
-        ref={baseRef}
         className={classNames(classes.main, classes['full-height'], {
           [classes.highlighted]:
             restProps.isHighlighted && bookmarkInfo.type !== CST.BOOKMARK_TYPES.DRAG_INDICATOR,
@@ -85,6 +71,8 @@ const BookmarkRow = ({
           [classes.separator]: bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR,
           [classes.unclickable]: restProps.isUnclickable
         })}
+        // workaround until @types/react support `onAuxClick`
+        {...{onAuxClick: restProps.isUnclickable ? undefined : handleAuxClick}}
         onClick={restProps.isUnclickable ? undefined : handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={restProps.onMouseLeave}

@@ -16,7 +16,7 @@ interface Props {
   lastScrollTop?: number
   listItemWidth: number
   noRowsRenderer: () => React.ReactElement | null
-  onRowAuxClick: (bookmarkId: string) => (evt: MouseEvent) => void
+  onRowAuxClick: (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => void
   onRowClick: (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => void
   onRowDragOver: (
     bookmarkInfo: BookmarkInfo
