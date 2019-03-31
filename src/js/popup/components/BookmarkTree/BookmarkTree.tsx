@@ -13,6 +13,8 @@ interface Props {
   highlightedId: string
   iconSize: number
   isDisableDragAndDrop: boolean
+  isSearching: boolean
+  isShowTooltip: boolean
   lastScrollTop?: number
   listItemWidth: number
   noRowsRenderer: () => React.ReactElement | null
@@ -96,6 +98,8 @@ const BookmarkTree = (props: Props) => {
             iconSize={props.iconSize}
             isDisableDragAndDrop={props.isDisableDragAndDrop}
             isHighlighted={props.highlightedId === bookmarkInfo.id || isBeingDragged}
+            isSearching={props.isSearching}
+            isShowTooltip={props.isShowTooltip}
             isUnclickable={isBeingDragged}
             onAuxClick={props.onRowAuxClick}
             onClick={props.onRowClick}
@@ -112,6 +116,8 @@ const BookmarkTree = (props: Props) => {
       props.highlightedId,
       props.iconSize,
       props.isDisableDragAndDrop,
+      props.isSearching,
+      props.isShowTooltip,
       props.onRowAuxClick,
       props.onRowClick,
       props.onRowDragOver,

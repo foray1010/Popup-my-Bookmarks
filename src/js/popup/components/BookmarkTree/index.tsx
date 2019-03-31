@@ -44,6 +44,7 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
     // cover the folder if it is not the top two folder
     isShowCover: state.bookmark.trees.length - treeIndex > 2,
     isShowHeader: treeIndex !== 0,
+    isShowTooltip: Boolean(state.options[CST.OPTIONS.TOOLTIP]),
     lastScrollTop: lastPosition ? lastPosition.scrollTop : undefined,
     listItemWidth: state.options[CST.OPTIONS.SET_WIDTH],
     rowHeight: getRowHeight(state.options[CST.OPTIONS.FONT_SIZE] || 0),
@@ -107,6 +108,8 @@ const BookmarkTreeContainer = (props: Props) => {
         highlightedId={props.highlightedId}
         iconSize={props.iconSize}
         isDisableDragAndDrop={props.isSearching}
+        isSearching={props.isSearching}
+        isShowTooltip={props.isShowTooltip}
         lastScrollTop={props.lastScrollTop}
         listItemWidth={props.listItemWidth || 0}
         noRowsRenderer={noRowsRenderer}

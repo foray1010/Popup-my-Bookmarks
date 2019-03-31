@@ -1,25 +1,20 @@
 import classNames from 'classnames'
-import * as R from 'ramda'
 import * as React from 'react'
-import styled from 'styled-components'
 
-import classes from '../../../../css/popup/bookmark-row.css'
-import * as CST from '../../constants'
-import {BookmarkInfo} from '../../types'
-import DragAndDropConsumer, {ResponseEvent} from '../dragAndDrop/DragAndDropConsumer'
-
-interface IconImgProps {
-  iconSize: number
-}
-const IconImg = styled('img')<IconImgProps>`
-  width: ${R.prop('iconSize')}px;
-`
+import classes from '../../../../../css/popup/bookmark-row.css'
+import * as CST from '../../../constants'
+import {BookmarkInfo} from '../../../types'
+import DragAndDropConsumer, {ResponseEvent} from '../../dragAndDrop/DragAndDropConsumer'
+import BookmarkRow from './BookmarkRow'
+import useTooltip from './useTooltip'
 
 interface Props {
   bookmarkInfo: BookmarkInfo
   iconSize: number
   isDisableDragAndDrop: boolean
   isHighlighted: boolean
+  isSearching: boolean
+  isShowTooltip: boolean
   isUnclickable: boolean
   onAuxClick: (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => void
   onClick: (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => void
@@ -30,7 +25,7 @@ interface Props {
   onMouseEnter: (bookmarkInfo: BookmarkInfo) => () => void
   onMouseLeave: () => void
 }
-const BookmarkRow = ({
+const BookmarkRowContainer = ({
   bookmarkInfo,
   onAuxClick,
   onClick,
@@ -38,6 +33,12 @@ const BookmarkRow = ({
   onMouseEnter,
   ...restProps
 }: Props) => {
+  const tooltip = useTooltip({
+    isSearching: restProps.isSearching,
+    isShowTooltip: restProps.isShowTooltip,
+    bookmarkInfo
+  })
+
   const handleAuxClick = React.useMemo(() => onAuxClick(bookmarkInfo.id), [
     bookmarkInfo.id,
     onAuxClick
@@ -62,33 +63,27 @@ const BookmarkRow = ({
       onDragOver={handleDragOver}
       onDragStart={restProps.onDragStart}
     >
-      <div
-        className={classNames(classes.main, classes['full-height'], {
-          [classes.highlighted]:
-            restProps.isHighlighted && bookmarkInfo.type !== CST.BOOKMARK_TYPES.DRAG_INDICATOR,
+      <BookmarkRow
+        className={classNames(classes['full-height'], {
           [classes['root-folder']]: bookmarkInfo.isRoot,
           [classes['drag-indicator']]: bookmarkInfo.type === CST.BOOKMARK_TYPES.DRAG_INDICATOR,
-          [classes.separator]: bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR,
-          [classes.unclickable]: restProps.isUnclickable
+          [classes.separator]: bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR
         })}
-        // workaround until @types/react support `onAuxClick`
-        {...{onAuxClick: restProps.isUnclickable ? undefined : handleAuxClick}}
-        onClick={restProps.isUnclickable ? undefined : handleClick}
+        iconSize={restProps.iconSize}
+        iconUrl={bookmarkInfo.iconUrl}
+        isHighlighted={
+          restProps.isHighlighted && bookmarkInfo.type !== CST.BOOKMARK_TYPES.DRAG_INDICATOR
+        }
+        isUnclickable={restProps.isUnclickable}
+        onAuxClick={handleAuxClick}
+        onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={restProps.onMouseLeave}
-      >
-        {bookmarkInfo.iconUrl && (
-          <IconImg
-            iconSize={restProps.iconSize}
-            className={classes.icon}
-            src={bookmarkInfo.iconUrl}
-            alt=''
-          />
-        )}
-        <div className={classes.title}>{bookmarkInfo.title}</div>
-      </div>
+        title={bookmarkInfo.title}
+        tooltip={tooltip}
+      />
     </DragAndDropConsumer>
   )
 }
 
-export default BookmarkRow
+export default BookmarkRowContainer
