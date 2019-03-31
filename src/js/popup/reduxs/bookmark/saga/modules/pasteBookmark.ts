@@ -5,7 +5,7 @@ import {ActionType} from 'typesafe-actions'
 
 import {createBookmark, moveBookmark} from '../../../../../common/utils'
 import * as CST from '../../../../constants'
-import {BookmarkInfo, BookmarkNode, BookmarkTree} from '../../../../types'
+import {BookmarkInfo, BookmarkTree} from '../../../../types'
 import * as bookmarkCreators from '../../actions'
 import {getBookmarkInfo, getBookmarkTree} from '../utils/getters'
 
@@ -17,7 +17,7 @@ interface RecursiveCopyPayload {
 function* recursiveCopy({fromId, toIndex, toParentId}: RecursiveCopyPayload): SagaIterator {
   const bookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, fromId)
 
-  const createdBookmarkNode: BookmarkNode = yield call(createBookmark, {
+  const createdBookmarkNode: browser.bookmarks.BookmarkTreeNode = yield call(createBookmark, {
     index: toIndex,
     parentId: toParentId,
     title: bookmarkInfo.title,

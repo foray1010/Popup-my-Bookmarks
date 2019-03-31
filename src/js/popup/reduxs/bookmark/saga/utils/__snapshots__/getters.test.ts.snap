@@ -342,16 +342,16 @@ Array [
     "url": "",
   },
   Object {
-    "iconUrl": "chrome://favicon/http://selke.jo/co",
-    "id": "9645",
+    "iconUrl": "chrome://favicon/http://imasipa.ga/ji",
+    "id": "3290",
     "isRoot": false,
     "isSimulated": false,
-    "isUnmodifiable": true,
+    "isUnmodifiable": false,
     "parentId": "",
     "storageIndex": -1,
-    "title": "mevobo",
+    "title": "agi",
     "type": 0,
-    "url": "http://selke.jo/co",
+    "url": "http://imasipa.ga/ji",
   },
 ]
 `;

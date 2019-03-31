@@ -13,17 +13,6 @@ export interface BookmarkInfo {
   url: string
 }
 
-export interface BookmarkNode {
-  dateAdded?: number
-  dateGroupModified?: number
-  id: string
-  index?: number
-  parentId?: string
-  title: string
-  unmodifiable?: string
-  url?: string
-}
-
 export interface BookmarkTree {
   children: Array<BookmarkInfo>
   parent: BookmarkInfo

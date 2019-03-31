@@ -3,7 +3,7 @@ import * as R from 'ramda'
 
 const chance = Chance('bookmarkNodes')
 
-const generateBookmarkNode = () => ({
+const generateBookmarkNode = (): browser.bookmarks.BookmarkTreeNode => ({
   id: String(chance.integer({min: 1000, max: 9999})),
   ...(chance.bool() ? {parentId: String(chance.integer({min: 1000, max: 9999}))} : null),
   ...(chance.bool() ? {index: chance.integer({min: 1000, max: 9999})} : null),
@@ -15,7 +15,7 @@ const generateBookmarkNode = () => ({
       dateGroupModified: chance.integer({min: 1500000000000, max: 2000000000000})
     } :
     null),
-  ...(chance.bool() ? {unmodifiable: chance.word()} : null)
+  ...(chance.bool() ? {unmodifiable: 'managed'} : null)
 })
 
 export default R.times(generateBookmarkNode, 100)

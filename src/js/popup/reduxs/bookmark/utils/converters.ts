@@ -2,7 +2,7 @@ import * as R from 'ramda'
 
 import folderIcon from '../../../../../img/folder.svg'
 import * as CST from '../../../constants'
-import {BookmarkInfo, BookmarkNode} from '../../../types'
+import {BookmarkInfo} from '../../../types'
 
 export const getIconUrl = (bookmarkInfo: BookmarkInfo): string => {
   if (bookmarkInfo.type === CST.BOOKMARK_TYPES.BOOKMARK) return `chrome://favicon/${bookmarkInfo.url}`
@@ -10,13 +10,13 @@ export const getIconUrl = (bookmarkInfo: BookmarkInfo): string => {
   return ''
 }
 
-export const getType = (bookmarkNode: BookmarkNode): CST.BOOKMARK_TYPES => {
+export const getType = (bookmarkNode: browser.bookmarks.BookmarkTreeNode): CST.BOOKMARK_TYPES => {
   if (bookmarkNode.url == null) return CST.BOOKMARK_TYPES.FOLDER
   if (bookmarkNode.url.startsWith(CST.SEPARATE_THIS_URL)) return CST.BOOKMARK_TYPES.SEPARATOR
   return CST.BOOKMARK_TYPES.BOOKMARK
 }
 
-export const isRoot = (bookmarkNode: BookmarkNode): boolean =>
+export const isRoot = (bookmarkNode: browser.bookmarks.BookmarkTreeNode): boolean =>
   bookmarkNode.id === CST.ROOT_ID || bookmarkNode.parentId === CST.ROOT_ID
 
 export const simulateBookmark = (partialBookmarkInfo: Partial<BookmarkInfo>): BookmarkInfo => ({
@@ -38,7 +38,7 @@ export const toBookmarkInfo = R.compose(
     ...bookmarkInfo,
     iconUrl: getIconUrl(bookmarkInfo)
   }),
-  (bookmarkNode: BookmarkNode): BookmarkInfo => ({
+  (bookmarkNode: browser.bookmarks.BookmarkTreeNode): BookmarkInfo => ({
     iconUrl: '',
     id: bookmarkNode.id,
     isRoot: isRoot(bookmarkNode),
