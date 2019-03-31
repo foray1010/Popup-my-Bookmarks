@@ -139,10 +139,6 @@ const defaultConfig: webpack.Configuration = {
     })
   ],
   resolve: {
-    alias: {
-      '@babel/runtime': path.resolve(__dirname, 'node_modules/@babel/runtime'),
-      store: 'store/dist/store.modern'
-    },
     extensions: ['.tsx', '.ts', '.js']
   }
 }
