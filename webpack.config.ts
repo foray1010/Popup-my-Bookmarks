@@ -52,7 +52,7 @@ const defaultConfig: webpack.Configuration = {
         }
       },
       {
-        test: /\.png$/,
+        test: /\.(png|svg)$/,
         loader: 'file-loader',
         options: {
           name: 'images/[name].[ext]'
@@ -159,7 +159,7 @@ const developmentConfig: webpack.Configuration = {
         ]
       },
       {
-        test: /\/icon.+\.png$/,
+        test: /\/icon.+\.(png|svg)$/,
         loader: 'image-process-loader',
         options: {
           greyscale: true

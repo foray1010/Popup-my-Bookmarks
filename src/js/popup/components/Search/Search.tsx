@@ -2,6 +2,7 @@ import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import classes from '../../../../css/popup/search.css'
+import searchIcon from '../../../../img/search.svg'
 
 interface Props {
   inputValue: string
@@ -21,6 +22,7 @@ const Search = ({isFocus, ...restProps}: Props) => {
 
   return (
     <div className={classes.main}>
+      <img className={classes['search-icon']} src={searchIcon} alt='' />
       <input
         ref={inputRef}
         type='search'

@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 
-import folderIcon from '../../../../../img/folder.png'
+import folderIcon from '../../../../../img/folder.svg'
 import * as CST from '../../../constants'
 import {BookmarkInfo, BookmarkNode} from '../../../types'
 

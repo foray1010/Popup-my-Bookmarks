@@ -11,6 +11,7 @@ Improvements:
 Changes:
 
 - Increase minimum Chrome version from 34 to 55
+- new folder, search and cancel icons
 
 Bugfixes:
 
