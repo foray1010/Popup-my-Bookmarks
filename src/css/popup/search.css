@@ -12,6 +12,7 @@
     border: 0;
     color: var(--main-font-color);
     font-size: 12px;
+    margin-right: var(--golden-gap);
     outline: 0;
     padding: 0 var(--golden-gap);
     width: 100%;

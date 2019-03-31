@@ -23,9 +23,3 @@
     background-color: var(--highlight-level5);
   }
 }
-
-:global(::-webkit-search-cancel-button) {
-  content: url('../../img/cancel.png');
-  height: 10px;
-  width: 14px;
-}
