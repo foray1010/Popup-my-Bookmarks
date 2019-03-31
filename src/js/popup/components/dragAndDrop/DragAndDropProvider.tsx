@@ -47,27 +47,18 @@ const DragAndDropProvider = ({children, onDragEnd, onDrop}: Props) => {
     if (activeKey === null) return undefined
 
     const handleDrop = (evt: MouseEvent) => {
-      unsetAllKeys()
-      if (activeKey !== null) onDrop(evt, activeKey)
-      onDragEnd(evt)
-    }
-
-    // may not be needed, just in case
-    const handleMouseEnter = (evt: MouseEvent) => {
-      // if user mouse up outside of the window, `mouseup` event may not be fired
-      // this hack let us know if user mouse up outside of the window and go back to window
-      // onDrop() should not be called because we are not sure that means user wanna drop
       if (evt.buttons !== 1) {
         unsetAllKeys()
+        if (activeKey !== null) onDrop(evt, activeKey)
         onDragEnd(evt)
       }
     }
 
-    window.addEventListener('mouseenter', handleMouseEnter)
+    document.body.addEventListener('mouseenter', handleDrop)
     window.addEventListener('mouseup', handleDrop)
 
     return () => {
-      window.removeEventListener('mouseenter', handleMouseEnter)
+      document.body.removeEventListener('mouseenter', handleDrop)
       window.removeEventListener('mouseup', handleDrop)
     }
   }, [activeKey, onDragEnd, onDrop, unsetAllKeys])
