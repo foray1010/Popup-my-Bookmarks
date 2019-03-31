@@ -4,13 +4,13 @@
 
 Improvements:
 
-- Rewrite the whole extension with better structure, very likely with fewer bugs
-- Reduce file size and improve startup speed by removing unnecessary polyfills such as `promise` and `regenerator`
-- Reduce file size by using `woff2` instead of `woff`
+- rewrite the whole extension with better structure, very likely with fewer bugs
+- reduce file size and improve startup speed by removing unnecessary polyfills such as `promise` and `regenerator`
+- reduce file size by using `woff2` instead of `woff`
 
 Changes:
 
-- Increase minimum Chrome version from 34 to 55
+- increase minimum Chrome version from 34 to 55
 - new folder, search and cancel icons
 
 Bugfixes:
