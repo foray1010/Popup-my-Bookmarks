@@ -18,13 +18,4 @@ export interface BookmarkTree {
   parent: BookmarkInfo
 }
 
-export interface Bookmark {
-  copyId: string
-  cutId: string
-  dragId: string
-  focusId: string
-  searchKeyword: string
-  trees: Array<BookmarkTree>
-}
-
 export type MenuPattern = Array<Array<string>>
