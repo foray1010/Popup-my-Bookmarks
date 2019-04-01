@@ -1212,10 +1212,10 @@
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
   integrity sha512-EaObqwIvayI5a8dCzhFrjKzVwKLxjoG9T6Ppd5CEo07LRKfQ8Yokw54r5+Wq7FaBQ+yXRvQAYPrHwya1/UFt9g==
 
-"@types/firefox-webext-browser@65.0.2":
-  version "65.0.2"
-  resolved "https://registry.yarnpkg.com/@types/firefox-webext-browser/-/firefox-webext-browser-65.0.2.tgz#9e4cafaaa1e16d3d0bc3f0d96319d8d5f107ca5d"
-  integrity sha512-pP8dInqFHvhI6X8UCWb12RHuHTukADWSF+INWt7VFkfYaFdy3ZJXAxujbFb063mh70O/F7R8rC14a7Giw8xo7Q==
+"@types/firefox-webext-browser@65.0.3":
+  version "65.0.3"
+  resolved "https://registry.yarnpkg.com/@types/firefox-webext-browser/-/firefox-webext-browser-65.0.3.tgz#e9b79daccd565fe21cef525da0188ee7cd940eab"
+  integrity sha512-eydUmkhhp1DBuI6jAIyLN38AkJg4avSJ9xf49PsTXvU4J2+rs9+s3OfnUBXNIvszTs4Q2FHKRd3DBZt72U97bg==
 
 "@types/fs-extra@5.0.5":
   version "5.0.5"
