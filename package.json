@@ -78,7 +78,7 @@
     "babel-loader": "8.0.5",
     "babel-plugin-styled-components": "1.10.0",
     "babel-preset-foray1010": "9.0.0",
-    "bluebird": "3.5.3",
+    "bluebird": "3.5.4",
     "chance": "1.0.18",
     "chrome-manifest-loader": "0.2.0",
     "clean-webpack-plugin": "2.0.1",
