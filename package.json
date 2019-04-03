@@ -66,7 +66,7 @@
     "@types/react-dom": "16.8.3",
     "@types/react-measure": "2.0.5",
     "@types/react-redux": "7.0.6",
-    "@types/react-window": "1.7.0",
+    "@types/react-window": "1.7.1",
     "@types/script-ext-html-webpack-plugin": "2.1.0",
     "@types/sharp": "0.22.1",
     "@types/styled-components": "4.1.8",
