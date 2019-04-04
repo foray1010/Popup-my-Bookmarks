@@ -36,8 +36,7 @@ const BookmarkRow = (props: Props) => {
         },
         props.className
       )}
-      // workaround until @types/react support `onAuxClick`
-      {...{onAuxClick: props.isUnclickable ? undefined : props.onAuxClick}}
+      onAuxClick={props.isUnclickable ? undefined : props.onAuxClick}
       onClick={props.isUnclickable ? undefined : props.onClick}
       onMouseEnter={props.onMouseEnter}
       onMouseLeave={props.onMouseLeave}
