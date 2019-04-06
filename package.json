@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "classnames": "2.2.6",
-    "core-js": "3.0.0",
+    "core-js": "3.0.1",
     "lodash.debounce": "4.0.8",
     "open-color": "1.6.3",
     "ramda": "0.26.1",
