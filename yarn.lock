@@ -5515,10 +5515,10 @@ ignore@^5.0.2, ignore@^5.0.4:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.0.6.tgz#562dacc7ec27d672dde433aa683c543b24c17694"
   integrity sha512-/+hp3kUf/Csa32ktIaj0OlRqQxrgs30n62M90UBpNd9k+ENEch5S+hmbW3DtcJGz3sYFTh4F3A6fQ0q7KWsp4w==
 
-image-process-loader@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/image-process-loader/-/image-process-loader-1.1.0.tgz#b04b5ba62009e57f37cc171da772666e976d786a"
-  integrity sha512-faC6ZWdi5z7ivMJ5eqV9kGKuKUu1iU4ZA3ZCQAYFE8chcA5rvFv/ULvtR0ixXJhkAWR40jOQLEIiAaXmwY308g==
+image-process-loader@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/image-process-loader/-/image-process-loader-1.1.1.tgz#4c14558c65a939382f73496fa4b47461c6b28251"
+  integrity sha512-9sIu7vWIbLBtsdVqkO3GSsjeXsLJcPZZegRACuCxXtCbzWUtnQXLEFZMMtLo+3c9CZlc5/HD+SuvyIKZ/xxoCA==
   dependencies:
     loader-utils "^1.1.0"
 
