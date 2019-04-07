@@ -23,7 +23,7 @@ interface Props {
   ) => (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
   onDragStart: () => void
   onMouseEnter: (bookmarkInfo: BookmarkInfo) => () => void
-  onMouseLeave: () => void
+  onMouseLeave: (bookmarkInfo: BookmarkInfo) => () => void
 }
 const BookmarkRowContainer = ({
   bookmarkInfo,
@@ -31,6 +31,7 @@ const BookmarkRowContainer = ({
   onClick,
   onDragOver,
   onMouseEnter,
+  onMouseLeave,
   ...restProps
 }: Props) => {
   const tooltip = useTooltip({
@@ -48,6 +49,10 @@ const BookmarkRowContainer = ({
   const handleMouseEnter = React.useMemo(() => onMouseEnter(bookmarkInfo), [
     bookmarkInfo,
     onMouseEnter
+  ])
+  const handleMouseLeave = React.useMemo(() => onMouseLeave(bookmarkInfo), [
+    bookmarkInfo,
+    onMouseLeave
   ])
 
   return (
@@ -78,7 +83,7 @@ const BookmarkRowContainer = ({
         onAuxClick={handleAuxClick}
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={restProps.onMouseLeave}
+        onMouseLeave={handleMouseLeave}
         title={bookmarkInfo.title}
         tooltip={tooltip}
       />

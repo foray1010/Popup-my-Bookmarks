@@ -10,7 +10,7 @@ import BookmarkRow from './BookmarkRow'
 
 interface Props {
   draggingId: string | null
-  highlightedId: string
+  highlightedId?: string
   iconSize: number
   isDisableDragAndDrop: boolean
   isSearching: boolean
@@ -25,10 +25,10 @@ interface Props {
   ) => (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
   onRowDragStart: () => void
   onRowMouseEnter: (bookmarkInfo: BookmarkInfo) => () => void
-  onRowMouseLeave: () => void
+  onRowMouseLeave: (bookmarkInfo: BookmarkInfo) => () => void
   onScroll?: (evt: ListOnScrollProps) => void
   rowHeight: number
-  scrollToIndex: number
+  scrollToIndex?: number
   treeInfo: BookmarkTreeType
 }
 const BookmarkTree = (props: Props) => {
@@ -82,9 +82,12 @@ const BookmarkTree = (props: Props) => {
   }, [props.lastScrollTop])
 
   React.useEffect(() => {
-    if (props.scrollToIndex >= 0) {
-      if (listRef.current) listRef.current.scrollToItem(props.scrollToIndex)
-    }
+    // hack for unknown bug which scroll to the next item when the list first rendered
+    setTimeout(() => {
+      if (props.scrollToIndex !== undefined) {
+        if (listRef.current) listRef.current.scrollToItem(props.scrollToIndex)
+      }
+    })
   }, [props.scrollToIndex])
 
   const rowRenderer = React.useCallback(

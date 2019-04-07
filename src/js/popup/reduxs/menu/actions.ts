@@ -20,13 +20,6 @@ export const openMenu = createAction(
   ) => action({targetId, coordinates})
 )
 
-export const removeFocusedRow = createAction('REMOVE_FOCUSED_ROW')
-
-export const setFocusedRow = createAction('SET_FOCUSED_ROW', (action) => (focusedRow: string) =>
-  action({
-    focusedRow
-  }))
-
 export const setMenuPattern = createAction(
   'SET_MENU_PATTERN',
   (action) => (menuPattern: MenuPattern) =>

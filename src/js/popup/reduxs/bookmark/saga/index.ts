@@ -6,7 +6,6 @@ import {silenceSaga} from '../../../../common/utils'
 import * as bookmarkCreators from '../actions'
 import {addCurrentPage} from './modules/addCurrentPage'
 import {addSeparator} from './modules/addSeparator'
-import {arrowRightNavigate} from './modules/arrowRightNavigate'
 import {createBookmark} from './modules/createBookmark'
 import {createBookmarkAfterId} from './modules/createBookmarkAfterId'
 import {deleteBookmark} from './modules/deleteBookmark'
@@ -24,7 +23,6 @@ export function* bookmarkSaga(): SagaIterator {
   yield all([
     takeLatest(getType(bookmarkCreators.addCurrentPage), silenceSaga(addCurrentPage)),
     takeLatest(getType(bookmarkCreators.addSeparator), silenceSaga(addSeparator)),
-    takeLatest(getType(bookmarkCreators.arrowRightNavigate), silenceSaga(arrowRightNavigate)),
     takeEvery(getType(bookmarkCreators.createBookmark), silenceSaga(createBookmark)),
     takeLatest(getType(bookmarkCreators.createBookmarkAfterId), silenceSaga(createBookmarkAfterId)),
     takeEvery(getType(bookmarkCreators.deleteBookmark), silenceSaga(deleteBookmark)),

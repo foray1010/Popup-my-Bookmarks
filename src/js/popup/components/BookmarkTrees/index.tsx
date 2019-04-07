@@ -2,6 +2,7 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 
 import {RootState} from '../../reduxs'
+import KeyBindingsLevelWrapper from '../keyBindings/KeyBindingsLevelWrapper'
 import BookmarkTrees from './BookmarkTrees'
 import withBookmarkEvents from './withBookmarkEvents'
 import withDragAndDropEvents from './withDragAndDropEvents'
@@ -19,6 +20,15 @@ const mapStateToProps = (state: RootState) => ({
   treeIds: getTreeIds(state)
 })
 
+type Props = ReturnType<typeof mapStateToProps> & OwnProps
+const BookmarkTreesContainer = (props: Props) => {
+  return (
+    <KeyBindingsLevelWrapper level={0}>
+      <BookmarkTrees {...props} />
+    </KeyBindingsLevelWrapper>
+  )
+}
+
 export default withBookmarkEvents(
-  withDragAndDropEvents(withKeyboardNav(connect(mapStateToProps)(BookmarkTrees)))
+  withDragAndDropEvents(withKeyboardNav(connect(mapStateToProps)(BookmarkTreesContainer)))
 )

@@ -7,14 +7,15 @@ import classes from '../../../../css/popup/menu-item.css'
 interface Props {
   isFocused: boolean
   isUnclickable: boolean
-  onClick: (rowName: string) => () => void
-  onMouseEnter: (rowName: string) => () => void
-  onMouseLeave: () => void
+  onClick: () => void
+  onMouseEnter: (index: number) => () => void
+  onMouseLeave: (index: number) => () => void
+  rowIndex: number
   rowName: string
 }
-const MenuRow = ({onClick, onMouseEnter, rowName, ...restProps}: Props) => {
-  const handleClick = React.useMemo(() => onClick(rowName), [onClick, rowName])
-  const handleMouseEnter = React.useMemo(() => onMouseEnter(rowName), [onMouseEnter, rowName])
+const MenuRow = ({onMouseEnter, onMouseLeave, rowIndex, rowName, ...restProps}: Props) => {
+  const handleMouseEnter = React.useMemo(() => onMouseEnter(rowIndex), [onMouseEnter, rowIndex])
+  const handleMouseLeave = React.useMemo(() => onMouseLeave(rowIndex), [onMouseLeave, rowIndex])
 
   return (
     <div
@@ -22,9 +23,9 @@ const MenuRow = ({onClick, onMouseEnter, rowName, ...restProps}: Props) => {
         [classes.focused]: restProps.isFocused,
         [classes.unclickable]: restProps.isUnclickable
       })}
-      onClick={restProps.isUnclickable ? undefined : handleClick}
+      onClick={restProps.isUnclickable ? undefined : restProps.onClick}
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={restProps.onMouseLeave}
+      onMouseLeave={handleMouseLeave}
     >
       {webExtension.i18n.getMessage(rowName)}
     </div>

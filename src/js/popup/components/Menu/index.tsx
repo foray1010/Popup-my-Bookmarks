@@ -1,9 +1,15 @@
+import * as R from 'ramda'
 import * as React from 'react'
 import {connect} from 'react-redux'
 
 import * as CST from '../../constants'
 import {RootState, menuCreators} from '../../reduxs'
 import AbsPositionWithinBody from '../AbsPositionWithinBody'
+import KeyBindingsLevelWrapper from '../keyBindings/KeyBindingsLevelWrapper'
+import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
+import ListNavigationContext from '../listNavigation/ListNavigationContext'
+import ListNavigationProvider from '../listNavigation/ListNavigationProvider'
+import useKeyboardNav from '../listNavigation/useKeyboardNav'
 import Mask from '../Mask'
 import Menu from './Menu'
 
@@ -13,7 +19,6 @@ const unclickableRowsSelector = (state: RootState) => {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  focusedRow: state.menu.focusedRow,
   menuPattern: state.menu.menuPattern,
   positionLeft: state.menu.positionLeft,
   positionTop: state.menu.positionTop,
@@ -22,26 +27,48 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = {
   clickMenuRow: menuCreators.clickMenuRow,
-  closeMenu: menuCreators.closeMenu,
-  removeFocusedRow: menuCreators.removeFocusedRow,
-  setFocusedRow: menuCreators.setFocusedRow
+  closeMenu: menuCreators.closeMenu
 }
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-const MenuContainer = ({clickMenuRow, closeMenu, setFocusedRow, ...restProps}: Props) => {
-  const handleRowClick = React.useCallback(
-    (rowKey: string) => () => {
-      clickMenuRow(rowKey)
-      closeMenu()
-    },
-    [clickMenuRow, closeMenu]
+const MenuContainer = ({clickMenuRow, closeMenu, menuPattern, ...restProps}: Props) => {
+  const {lists, setHighlightedIndex, unsetHighlightedIndex, setItemCount} = React.useContext(
+    ListNavigationContext
   )
 
+  const allRowNames = React.useMemo(() => menuPattern.reduce(R.concat, []), [menuPattern])
+  const highlightedIndex = lists.highlightedIndices.get(0)
+
+  React.useEffect(() => {
+    setItemCount(0, allRowNames.length)
+  }, [allRowNames.length, setItemCount])
+
+  useKeyboardNav({level: 1})
+
+  const handleRowClick = React.useCallback(() => {
+    if (highlightedIndex === undefined) return
+
+    const rowKey = allRowNames[highlightedIndex]
+    if (!rowKey) return
+
+    clickMenuRow(rowKey)
+    closeMenu()
+  }, [allRowNames, clickMenuRow, closeMenu, highlightedIndex])
+
+  useKeyBindingsEvent({key: 'Enter', level: 1}, handleRowClick)
+
   const handleRowMouseEnter = React.useCallback(
-    (rowKey: string) => () => {
-      setFocusedRow(rowKey)
+    (index: number) => () => {
+      setHighlightedIndex(0, index)
     },
-    [setFocusedRow]
+    [setHighlightedIndex]
+  )
+
+  const handleRowMouseLeave = React.useCallback(
+    (index: number) => () => {
+      unsetHighlightedIndex(0, index)
+    },
+    [unsetHighlightedIndex]
   )
 
   return (
@@ -51,14 +78,16 @@ const MenuContainer = ({clickMenuRow, closeMenu, setFocusedRow, ...restProps}: P
         positionLeft={restProps.positionLeft}
         positionTop={restProps.positionTop}
       >
-        <Menu
-          focusedRow={restProps.focusedRow}
-          menuPattern={restProps.menuPattern}
-          onRowClick={handleRowClick}
-          onRowMouseEnter={handleRowMouseEnter}
-          onRowMouseLeave={restProps.removeFocusedRow}
-          unclickableRows={restProps.unclickableRows}
-        />
+        <KeyBindingsLevelWrapper level={1}>
+          <Menu
+            highlightedIndex={highlightedIndex}
+            menuPattern={menuPattern}
+            onRowClick={handleRowClick}
+            onRowMouseEnter={handleRowMouseEnter}
+            onRowMouseLeave={handleRowMouseLeave}
+            unclickableRows={restProps.unclickableRows}
+          />
+        </KeyBindingsLevelWrapper>
       </AbsPositionWithinBody>
     </React.Fragment>
   )
@@ -67,4 +96,8 @@ const MenuContainer = ({clickMenuRow, closeMenu, setFocusedRow, ...restProps}: P
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MenuContainer)
+)((props: Props) => (
+  <ListNavigationProvider>
+    <MenuContainer {...props} />
+  </ListNavigationProvider>
+))

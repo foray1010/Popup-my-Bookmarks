@@ -1,134 +1,94 @@
-import * as R from 'ramda'
 import * as React from 'react'
 import {connect} from 'react-redux'
 
+import {BOOKMARK_TYPES, OPEN_IN_TYPES} from '../../constants'
 import {RootState, bookmarkCreators} from '../../reduxs'
-import {BookmarkInfo, BookmarkTree} from '../../types'
-import GlobalKeyboardEventListener from '../GlobalKeyboardEventListener'
-
-const cycle = (start: number, end: number, value: number) => {
-  if (value < start) return end
-  if (value > end) return start
-  return value
-}
-
-const getChildId = (
-  tree: BookmarkTree,
-  childSelector: (children: Array<BookmarkInfo>) => BookmarkInfo | void
-) => {
-  const children = tree.children || []
-  const child = childSelector(children)
-  return child !== undefined ? child.id : ''
-}
-
-const getFocusedTree = (trees: Array<BookmarkTree>, focusId: string) =>
-  trees.find(
-    R.compose(
-      R.any(R.propEq('id', focusId)),
-      R.prop('children')
-    )
-  )
-
-const getNextFocusId = (trees: Array<BookmarkTree>, focusId: string, indexOffset: number) => {
-  const focusedTree = getFocusedTree(trees, focusId)
-  if (focusedTree) {
-    const focusedChildIndex = focusedTree.children.findIndex(R.propEq('id', focusId))
-    if (focusedChildIndex >= 0) {
-      const nextIndex = cycle(0, focusedTree.children.length - 1, focusedChildIndex + indexOffset)
-      return focusedTree.children[nextIndex].id
-    }
-  }
-
-  return ''
-}
+import getLastMapKey from '../../utils/getLastMapKey'
+import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
+import ListNavigationContext from '../listNavigation/ListNavigationContext'
+import ListNavigationProvider from '../listNavigation/ListNavigationProvider'
+import useKeyboardNav from '../listNavigation/useKeyboardNav'
 
 export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
   const mapStateToProps = (state: RootState) => ({
-    focusId: state.bookmark.focusId,
     trees: state.bookmark.trees
   })
 
   const mapDispatchToProps = {
-    arrowRightNavigate: bookmarkCreators.arrowRightNavigate,
-    removeNextBookmarkTrees: bookmarkCreators.removeNextBookmarkTrees,
-    setFocusId: bookmarkCreators.setFocusId
+    openBookmarksInBrowser: bookmarkCreators.openBookmarksInBrowser,
+    openBookmarkTree: bookmarkCreators.openBookmarkTree,
+    removeNextBookmarkTrees: bookmarkCreators.removeNextBookmarkTrees
   }
 
   type Props = P & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
   const KeyboardNav = (props: Props) => {
-    const {arrowRightNavigate, removeNextBookmarkTrees, setFocusId, trees} = props
+    const {openBookmarksInBrowser, openBookmarkTree, removeNextBookmarkTrees, trees} = props
 
-    // mutable ref to avoid too many rerender when focusId keeps changing
-    const focusIdRef = React.useRef('')
-    focusIdRef.current = props.focusId
+    const {lists} = React.useContext(ListNavigationContext)
+    const listsRef = React.useRef(lists)
+    listsRef.current = lists
 
-    const handleDocumentArrowLeft = React.useCallback(() => {
+    const handlePressArrowLeft = React.useCallback(() => {
       // at least we need one tree
       if (trees.length > 1) {
-        const lastTree = trees[trees.length - 1]
         const secondLastTree = trees[trees.length - 2]
 
         removeNextBookmarkTrees(secondLastTree.parent.id)
-
-        const nextFocusId = getChildId(secondLastTree, R.find(R.propEq('id', lastTree.parent.id)))
-        setFocusId(nextFocusId)
       }
-    }, [removeNextBookmarkTrees, setFocusId, trees])
+    }, [removeNextBookmarkTrees, trees])
 
-    const handleDocumentArrowRight = React.useCallback(() => {
-      const focusedTree = getFocusedTree(trees, focusIdRef.current)
-      if (focusedTree) {
-        arrowRightNavigate(focusIdRef.current, focusedTree.parent.id)
+    const handlePressArrowRight = React.useCallback(() => {
+      const {highlightedIndices, itemCounts} = listsRef.current
+
+      const lastListIndex = getLastMapKey(itemCounts)
+      if (lastListIndex === undefined) return
+      const treeInfo = trees[lastListIndex]
+      if (!treeInfo) return
+
+      const highlightedIndex = highlightedIndices.get(lastListIndex)
+      if (highlightedIndex === undefined) return
+      const bookmarkInfo = treeInfo.children[highlightedIndex]
+      if (!bookmarkInfo) return
+
+      if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
+        openBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
       }
-    }, [arrowRightNavigate, trees])
+    }, [openBookmarkTree, trees])
 
-    const handleDocumentArrowVertical = React.useCallback(
-      (isDown: boolean) => {
-        const nextFocusId = focusIdRef.current ?
-          getNextFocusId(trees, focusIdRef.current, isDown ? 1 : -1) :
-          getChildId(trees[trees.length - 1], R.nth(isDown ? 0 : -1))
-        setFocusId(nextFocusId)
-      },
-      [setFocusId, trees]
-    )
+    useKeyboardNav({
+      level: 0,
+      onPressArrowLeft: handlePressArrowLeft,
+      onPressArrowRight: handlePressArrowRight
+    })
 
-    const handleDocumentKeyDown = React.useCallback(
-      (evt: KeyboardEvent) => {
-        switch (evt.key) {
-          case 'ArrowDown':
-            handleDocumentArrowVertical(true)
-            break
-          case 'ArrowLeft':
-            handleDocumentArrowLeft()
-            break
-          case 'ArrowRight':
-            handleDocumentArrowRight()
-            break
-          case 'ArrowUp':
-            handleDocumentArrowVertical(false)
-            break
-          case 'Tab':
-            handleDocumentArrowVertical(!evt.shiftKey)
-            break
-          default:
-        }
-      },
-      [handleDocumentArrowLeft, handleDocumentArrowRight, handleDocumentArrowVertical]
-    )
+    const handlePressEnter = React.useCallback(() => {
+      const {highlightedIndices, itemCounts} = listsRef.current
 
-    return (
-      <React.Fragment>
-        <WrappedComponent {...props} />
-        <GlobalKeyboardEventListener onKeyDown={handleDocumentKeyDown} />
-      </React.Fragment>
-    )
+      const lastListIndex = getLastMapKey(itemCounts)
+      if (lastListIndex === undefined) return
+      const treeInfo = trees[lastListIndex]
+      if (!treeInfo) return
+
+      // default open first bookmark in last tree
+      const highlightedIndex = highlightedIndices.get(lastListIndex) || 0
+      const bookmarkInfo = treeInfo.children[highlightedIndex]
+      if (!bookmarkInfo) return
+
+      openBookmarksInBrowser([bookmarkInfo.id], OPEN_IN_TYPES.CURRENT_TAB, true)
+    }, [openBookmarksInBrowser, trees])
+
+    useKeyBindingsEvent({key: 'Enter', level: 0}, handlePressEnter)
+
+    return <WrappedComponent {...props} />
   }
 
   return connect(
     mapStateToProps,
     mapDispatchToProps
-  )(
     // @ts-ignore
-    KeyboardNav
-  )
+  )((props: Props) => (
+    <ListNavigationProvider>
+      <KeyboardNav {...props} />
+    </ListNavigationProvider>
+  ))
 }

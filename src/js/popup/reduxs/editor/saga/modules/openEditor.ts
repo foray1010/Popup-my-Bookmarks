@@ -3,7 +3,6 @@ import {call, put} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
 import {getBookmarkInfo} from '../../../bookmark/saga/utils/getters'
-import * as uiCreators from '../../../ui/actions'
 import * as editorCreators from '../../actions'
 
 export function* openEditor({payload}: ActionType<typeof editorCreators.openEditor>): SagaIterator {
@@ -18,5 +17,4 @@ export function* openEditor({payload}: ActionType<typeof editorCreators.openEdit
       url: bookmarkInfo.url
     })
   )
-  yield put(uiCreators.setIsDisableGlobalKeyboardEvent(true))
 }

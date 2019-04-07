@@ -13,11 +13,6 @@ export const addSeparator = createAction(
   (action) => (parentId: string, index: number) => action({parentId, index})
 )
 
-export const arrowRightNavigate = createAction(
-  'ARROW_RIGHT_NAVIGATE',
-  (action) => (id: string, parentId: string) => action({id, parentId})
-)
-
 export const copyBookmark = createAction('COPY_BOOKMARK', (action) => (id: string) => action({id}))
 
 export const createBookmark = createAction(
@@ -103,8 +98,6 @@ export const removeBookmarkTree = createAction('REMOVE_BOOKMARK_TREE', (action) 
 
 export const removeDragIndicator = createAction('REMOVE_DRAG_INDICATOR')
 
-export const removeFocusId = createAction('REMOVE_FOCUS_ID')
-
 export const removeNextBookmarkTrees = createAction(
   'REMOVE_NEXT_BOOKMARK_TREES',
   (action) => (removeAfterId: string) => action({removeAfterId})
@@ -121,9 +114,6 @@ export const setDragIndicator = createAction(
   'SET_DRAG_INDICATOR',
   (action) => (parentId: string, index: number) => action({parentId, index})
 )
-
-export const setFocusId = createAction('SET_FOCUS_ID', (action) => (focusId: string) =>
-  action({focusId}))
 
 export const sortBookmarksByName = createAction(
   'SORT_BOOKMARKS_BY_NAME',
