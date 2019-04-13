@@ -9444,10 +9444,10 @@ react-redux@7.0.2:
     prop-types "^15.7.2"
     react-is "^16.8.6"
 
-react-window@1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/react-window/-/react-window-1.8.0.tgz#08196d1e0749fe60d0b29bb94ae682d37666e620"
-  integrity sha512-impIDEhm3+9/Y8ctiFaUI07a8Y/1jG0U4ONRUmYe7IsU+UQ2B0Ayyfbr+3R3nwAJpVGHx5pfI5SoDBt1o07YFw==
+react-window@1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/react-window/-/react-window-1.8.1.tgz#12f1db71d91552ed2263790e57cc77d950803db1"
+  integrity sha512-iNzekymggL9zAnil3QbmRG74RDMfIbO+plE/soP3M/zskicA1DwoLthC6/QA6xu9dr+A5UoawCTsEYcva2mfeA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     memoize-one ">=3.1.1 <6"
