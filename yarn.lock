@@ -1214,12 +1214,13 @@
   dependencies:
     "@types/node" "*"
 
-"@types/copy-webpack-plugin@4.4.3":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@types/copy-webpack-plugin/-/copy-webpack-plugin-4.4.3.tgz#cb7bd1c45b835f7c862b795d7dc577b2877abf1b"
-  integrity sha512-Xp/8c/IgjWr5wNklQuIQSSS+mUbr9TYWQmjUqBm5mB/njfnzFqUuCkIrP1tRZN5Ap9jXdud16HbOMH/2VXqmKQ==
+"@types/copy-webpack-plugin@4.4.4":
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/@types/copy-webpack-plugin/-/copy-webpack-plugin-4.4.4.tgz#fefc44f0c3526a4852a0b708dadfed9fc4ad22b0"
+  integrity sha512-D8NyCMfHFWi638Cn5gi88mELGrISQdzDAcmOk4j70bzm0kLey99Zp5xsFsL44qPi+a22tcB39U5jiJiV2XMd9A==
   dependencies:
     "@types/minimatch" "*"
+    "@types/node" "*"
     "@types/webpack" "*"
 
 "@types/cssnano@4.0.0":
