@@ -59,7 +59,7 @@
     "@types/jest": "24.0.11",
     "@types/lodash.debounce": "4.0.6",
     "@types/mini-css-extract-plugin": "0.2.0",
-    "@types/node": "11.13.4",
+    "@types/node": "11.13.5",
     "@types/postcss-url": "8.0.1",
     "@types/ramda": "0.26.6",
     "@types/react": "16.8.13",
