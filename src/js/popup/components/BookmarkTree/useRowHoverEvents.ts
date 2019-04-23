@@ -5,28 +5,25 @@ import * as CST from '../../constants'
 import {bookmarkCreators} from '../../reduxs'
 import {BookmarkInfo, BookmarkTree} from '../../types'
 import DragAndDropContext from '../dragAndDrop/DragAndDropContext'
+import ListNavigationContext from '../listNavigation/ListNavigationContext'
 
 export default ({
   closeNextTrees,
   openBookmarkTree,
-  removeFocusId,
-  setFocusId,
+  treeIndex,
   treeInfo
 }: {
   closeNextTrees: () => void
   openBookmarkTree: typeof bookmarkCreators.openBookmarkTree
-  removeFocusId: typeof bookmarkCreators.removeFocusId
-  setFocusId: typeof bookmarkCreators.setFocusId
+  treeIndex: number
   treeInfo: BookmarkTree
 }) => {
-  const context = React.useContext(DragAndDropContext)
+  const {activeKey} = React.useContext(DragAndDropContext)
+  const {setHighlightedIndex, unsetHighlightedIndex} = React.useContext(ListNavigationContext)
 
   return React.useMemo(() => {
     const _toggleBookmarkTree = (bookmarkInfo: BookmarkInfo) => {
-      if (
-        bookmarkInfo.type === CST.BOOKMARK_TYPES.FOLDER &&
-        bookmarkInfo.id !== context.activeKey
-      ) {
+      if (bookmarkInfo.type === CST.BOOKMARK_TYPES.FOLDER && bookmarkInfo.id !== activeKey) {
         openBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
       } else {
         closeNextTrees()
@@ -37,19 +34,25 @@ export default ({
     return {
       handleRowMouseEnter: (bookmarkInfo: BookmarkInfo) => () => {
         toggleBookmarkTree(bookmarkInfo)
-        setFocusId(bookmarkInfo.id)
+
+        const index = treeInfo.children.findIndex((x) => x.id === bookmarkInfo.id)
+        setHighlightedIndex(treeIndex, index)
       },
-      handleRowMouseLeave: () => {
+      handleRowMouseLeave: (bookmarkInfo: BookmarkInfo) => () => {
         toggleBookmarkTree.cancel()
-        removeFocusId()
+
+        const index = treeInfo.children.findIndex((x) => x.id === bookmarkInfo.id)
+        unsetHighlightedIndex(treeIndex, index)
       }
     }
   }, [
+    activeKey,
     closeNextTrees,
-    context.activeKey,
     openBookmarkTree,
-    removeFocusId,
-    setFocusId,
-    treeInfo.parent.id
+    setHighlightedIndex,
+    treeIndex,
+    treeInfo.children,
+    treeInfo.parent.id,
+    unsetHighlightedIndex
   ])
 }

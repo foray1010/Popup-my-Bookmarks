@@ -1,7 +1,9 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 
+import {BASE_WINDOW} from '../../constants/windows'
 import {RootState, bookmarkCreators, uiCreators} from '../../reduxs'
+import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
 import Search from './Search'
 
 const mapStateToProps = (state: RootState) => ({
@@ -21,22 +23,14 @@ const SearchContainer = ({getSearchResult, isFocusSearchInput, setIsFocusSearchI
     getSearchResult(inputValue)
   }, [getSearchResult, inputValue])
 
-  React.useEffect(() => {
-    const handleDocumentKeyDown = (evt: KeyboardEvent) => {
-      const isCharKey = evt.key.length === 1
-      const notFocusOnInputElement =
-        !document.activeElement || !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)
-      if (notFocusOnInputElement && isCharKey) {
-        setIsFocusSearchInput(true)
-      }
-    }
-
-    document.addEventListener('keydown', handleDocumentKeyDown)
-
-    return () => {
-      document.removeEventListener('keydown', handleDocumentKeyDown)
+  const handleSingleKeyPress = React.useCallback(() => {
+    const notFocusOnInputElement =
+      !document.activeElement || !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)
+    if (notFocusOnInputElement) {
+      setIsFocusSearchInput(true)
     }
   }, [setIsFocusSearchInput])
+  useKeyBindingsEvent({key: /^.$/, windowId: BASE_WINDOW}, handleSingleKeyPress)
 
   const handleBlur = React.useCallback(() => {
     setIsFocusSearchInput(false)

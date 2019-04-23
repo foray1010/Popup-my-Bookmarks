@@ -3,8 +3,10 @@ import {connect} from 'react-redux'
 import webExtension from 'webextension-polyfill'
 
 import {OPTIONS} from '../../constants'
+import {EDITOR_WINDOW} from '../../constants/windows'
 import {RootState, bookmarkCreators, editorCreators} from '../../reduxs'
 import AbsPositionWithinBody from '../AbsPositionWithinBody'
+import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
 import Mask from '../Mask'
 import Editor from './Editor'
 
@@ -45,19 +47,21 @@ const EditorContainer = (props: Props) => {
     <React.Fragment>
       <Mask backgroundColor='#fff' opacity={0.3} onClick={props.closeEditor} />
       <AbsPositionWithinBody positionLeft={props.positionLeft} positionTop={props.positionTop}>
-        <Editor
-          isAllowEditUrl={props.isAllowEditUrl}
-          header={
-            props.isAllowEditUrl ?
-              webExtension.i18n.getMessage('edit') :
-              webExtension.i18n.getMessage('rename')
-          }
-          initialTitle={props.title}
-          initialUrl={props.url}
-          width={props.width || 0}
-          onCancel={props.closeEditor}
-          onConfirm={handleConfirm}
-        />
+        <KeyBindingsWindow windowId={EDITOR_WINDOW}>
+          <Editor
+            isAllowEditUrl={props.isAllowEditUrl}
+            header={
+              props.isAllowEditUrl ?
+                webExtension.i18n.getMessage('edit') :
+                webExtension.i18n.getMessage('rename')
+            }
+            initialTitle={props.title}
+            initialUrl={props.url}
+            width={props.width || 0}
+            onCancel={props.closeEditor}
+            onConfirm={handleConfirm}
+          />
+        </KeyBindingsWindow>
       </AbsPositionWithinBody>
     </React.Fragment>
   )

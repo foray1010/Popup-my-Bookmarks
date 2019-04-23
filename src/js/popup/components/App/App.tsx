@@ -4,6 +4,7 @@ import * as React from 'react'
 
 import BookmarkTrees from '../BookmarkTrees'
 import Editor from '../Editor'
+import KeyBindingsProvider from '../keyBindings/KeyBindingsProvider'
 import Menu from '../Menu'
 import Search from '../Search'
 
@@ -12,11 +13,11 @@ interface Props {
   isShowMenu: boolean
 }
 const App = (props: Props) => (
-  <React.Fragment>
+  <KeyBindingsProvider>
     <BookmarkTrees mainTreeHeader={<Search />} />
     {props.isShowEditor && <Editor />}
     {props.isShowMenu && <Menu />}
-  </React.Fragment>
+  </KeyBindingsProvider>
 )
 
 export default App

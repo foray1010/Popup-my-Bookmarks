@@ -8,16 +8,13 @@ import {BookmarkInfo, BookmarkTree as BookmarkTreeType} from '../../types'
 import {ResponseEvent} from '../dragAndDrop/DragAndDropConsumer'
 import BookmarkRow from './BookmarkRow'
 
-interface Props {
+interface ItemData {
   draggingId: string | null
-  highlightedId: string
+  highlightedId?: string
   iconSize: number
   isDisableDragAndDrop: boolean
   isSearching: boolean
   isShowTooltip: boolean
-  lastScrollTop?: number
-  listItemWidth: number
-  noRowsRenderer: () => React.ReactElement | null
   onRowAuxClick: (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => void
   onRowClick: (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => void
   onRowDragOver: (
@@ -25,11 +22,40 @@ interface Props {
   ) => (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
   onRowDragStart: () => void
   onRowMouseEnter: (bookmarkInfo: BookmarkInfo) => () => void
-  onRowMouseLeave: () => void
+  onRowMouseLeave: (bookmarkInfo: BookmarkInfo) => () => void
+  treeInfo: BookmarkTreeType
+}
+const Row = ({data, index, style}: {data: ItemData, index: number, style: React.CSSProperties}) => {
+  const bookmarkInfo = data.treeInfo.children[index]
+  const isBeingDragged = data.draggingId === bookmarkInfo.id
+  return (
+    <div key={bookmarkInfo.id} className={classes['list-item']} style={style}>
+      <BookmarkRow
+        bookmarkInfo={bookmarkInfo}
+        iconSize={data.iconSize}
+        isDisableDragAndDrop={data.isDisableDragAndDrop}
+        isHighlighted={data.highlightedId === bookmarkInfo.id || isBeingDragged}
+        isSearching={data.isSearching}
+        isShowTooltip={data.isShowTooltip}
+        isUnclickable={isBeingDragged}
+        onAuxClick={data.onRowAuxClick}
+        onClick={data.onRowClick}
+        onDragOver={data.onRowDragOver}
+        onDragStart={data.onRowDragStart}
+        onMouseEnter={data.onRowMouseEnter}
+        onMouseLeave={data.onRowMouseLeave}
+      />
+    </div>
+  )
+}
+
+type Props = ItemData & {
+  lastScrollTop?: number
+  listItemWidth: number
+  noRowsRenderer: () => React.ReactElement | null
   onScroll?: (evt: ListOnScrollProps) => void
   rowHeight: number
-  scrollToIndex: number
-  treeInfo: BookmarkTreeType
+  scrollToIndex?: number
 }
 const BookmarkTree = (props: Props) => {
   const listRef = React.useRef<List>(null)
@@ -82,54 +108,47 @@ const BookmarkTree = (props: Props) => {
   }, [props.lastScrollTop])
 
   React.useEffect(() => {
-    if (props.scrollToIndex >= 0) {
-      if (listRef.current) listRef.current.scrollToItem(props.scrollToIndex)
-    }
+    // hack for unknown bug which scroll to the next item when the list first rendered
+    setTimeout(() => {
+      if (props.scrollToIndex !== undefined) {
+        if (listRef.current) listRef.current.scrollToItem(props.scrollToIndex)
+      }
+    })
   }, [props.scrollToIndex])
 
-  const rowRenderer = React.useCallback(
-    ({index, style}: {index: number, style: React.CSSProperties}) => {
-      const bookmarkInfo = props.treeInfo.children[index]
-      const isBeingDragged = props.draggingId === bookmarkInfo.id
-      return (
-        <div key={bookmarkInfo.id} className={classes['list-item']} style={style}>
-          <BookmarkRow
-            bookmarkInfo={bookmarkInfo}
-            iconSize={props.iconSize}
-            isDisableDragAndDrop={props.isDisableDragAndDrop}
-            isHighlighted={props.highlightedId === bookmarkInfo.id || isBeingDragged}
-            isSearching={props.isSearching}
-            isShowTooltip={props.isShowTooltip}
-            isUnclickable={isBeingDragged}
-            onAuxClick={props.onRowAuxClick}
-            onClick={props.onRowClick}
-            onDragOver={props.onRowDragOver}
-            onDragStart={props.onRowDragStart}
-            onMouseEnter={props.onRowMouseEnter}
-            onMouseLeave={props.onRowMouseLeave}
-          />
-        </div>
-      )
-    },
-    [
-      props.draggingId,
-      props.highlightedId,
-      props.iconSize,
-      props.isDisableDragAndDrop,
-      props.isSearching,
-      props.isShowTooltip,
-      props.onRowAuxClick,
-      props.onRowClick,
-      props.onRowDragOver,
-      props.onRowDragStart,
-      props.onRowMouseEnter,
-      props.onRowMouseLeave,
-      props.treeInfo.children
-    ]
-  )
+  const itemData = React.useMemo(() => {
+    return {
+      draggingId: props.draggingId,
+      highlightedId: props.highlightedId,
+      iconSize: props.iconSize,
+      isDisableDragAndDrop: props.isDisableDragAndDrop,
+      isSearching: props.isSearching,
+      isShowTooltip: props.isShowTooltip,
+      onRowAuxClick: props.onRowAuxClick,
+      onRowClick: props.onRowClick,
+      onRowDragOver: props.onRowDragOver,
+      onRowDragStart: props.onRowDragStart,
+      onRowMouseEnter: props.onRowMouseEnter,
+      onRowMouseLeave: props.onRowMouseLeave,
+      treeInfo: props.treeInfo
+    }
+  }, [
+    props.draggingId,
+    props.highlightedId,
+    props.iconSize,
+    props.isDisableDragAndDrop,
+    props.isSearching,
+    props.isShowTooltip,
+    props.onRowAuxClick,
+    props.onRowClick,
+    props.onRowDragOver,
+    props.onRowDragStart,
+    props.onRowMouseEnter,
+    props.onRowMouseLeave,
+    props.treeInfo
+  ])
 
   const itemCount = props.treeInfo.children.length
-
   if (itemCount === 0) {
     return props.noRowsRenderer()
   }
@@ -139,11 +158,12 @@ const BookmarkTree = (props: Props) => {
       ref={listRef}
       height={listHeight}
       itemCount={itemCount}
+      itemData={itemData}
       itemSize={getRowHeight}
       onScroll={props.onScroll}
       width={props.listItemWidth}
     >
-      {rowRenderer}
+      {Row}
     </List>
   )
 }

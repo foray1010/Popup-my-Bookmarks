@@ -3,11 +3,9 @@ import {ActionType, getType} from 'typesafe-actions'
 import * as uiCreators from './actions'
 
 interface UiState {
-  isDisableGlobalKeyboardEvent: boolean
   isFocusSearchInput: boolean
 }
 const INITIAL_STATE: UiState = {
-  isDisableGlobalKeyboardEvent: false,
   isFocusSearchInput: false
 }
 
@@ -16,12 +14,6 @@ export const uiReducer = (
   action: ActionType<typeof uiCreators>
 ): UiState => {
   switch (action.type) {
-    case getType(uiCreators.setIsDisableGlobalKeyboardEvent):
-      return {
-        ...state,
-        isDisableGlobalKeyboardEvent: action.payload.isDisableGlobalKeyboardEvent
-      }
-
     case getType(uiCreators.setIsFocusSearchInput):
       return {
         ...state,

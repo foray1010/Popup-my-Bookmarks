@@ -6,6 +6,7 @@ import classes from '../../../../css/popup/bookmark-tree.css'
 import * as CST from '../../constants'
 import {RootState, bookmarkCreators, lastPositionsCreators, menuCreators} from '../../reduxs'
 import DragAndDropContext from '../dragAndDrop/DragAndDropContext'
+import ListNavigationContext from '../listNavigation/ListNavigationContext'
 import Mask from '../Mask'
 import BookmarkTree from './BookmarkTree'
 import NoSearchResult from './NoSearchResult'
@@ -26,7 +27,6 @@ const getRowHeight = (fontSize: number) =>
   (1 + CST.GOLDEN_GAP) * 2
 
 const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
-  const highlightedId = state.bookmark.focusId || state.menu.targetId || state.editor.targetId
   const treeIndex = state.bookmark.trees.findIndex(R.pathEq(['parent', 'id'], ownProps.treeId))
   const treeInfo = state.bookmark.trees[treeIndex]
 
@@ -36,8 +36,6 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
     undefined
 
   return {
-    highlightedId,
-    highlightedIndex: treeInfo.children.findIndex(R.propEq('id', highlightedId)),
     iconSize: getIconSize(state.options[CST.OPTIONS.FONT_SIZE] || 0),
     isRememberLastPositions,
     isSearching: Boolean(state.bookmark.searchKeyword),
@@ -60,26 +58,42 @@ const mapDispatchToProps = {
   openMenu: menuCreators.openMenu,
   removeBookmarkTree: bookmarkCreators.removeBookmarkTree,
   removeDragIndicator: bookmarkCreators.removeDragIndicator,
-  removeFocusId: bookmarkCreators.removeFocusId,
   removeLastPosition: lastPositionsCreators.removeLastPosition,
   removeNextBookmarkTrees: bookmarkCreators.removeNextBookmarkTrees,
   setDragIndicator: bookmarkCreators.setDragIndicator,
-  setFocusId: bookmarkCreators.setFocusId,
   updateLastPosition: lastPositionsCreators.updateLastPosition
 }
 
 type Props = OwnProps & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-const BookmarkTreeContainer = (props: Props) => {
-  const {isSearching, removeBookmarkTree, removeNextBookmarkTrees, treeInfo} = props
+const BookmarkTreeContainer = ({
+  isSearching,
+  removeBookmarkTree,
+  removeNextBookmarkTrees,
+  treeIndex,
+  treeInfo,
+  ...props
+}: Props) => {
+  const {activeKey} = React.useContext(DragAndDropContext)
+  const {lists, setItemCount, removeList} = React.useContext(ListNavigationContext)
 
-  const context = React.useContext(DragAndDropContext)
+  React.useEffect(() => {
+    setItemCount(treeIndex, treeInfo.children.length)
+
+    return () => {
+      removeList(treeIndex)
+    }
+  }, [treeIndex, treeInfo.children.length, setItemCount, removeList])
+
+  const highlightedIndex = lists.highlightedIndices.get(treeIndex)
+  const highlightedId =
+    highlightedIndex !== undefined ? R.prop('id', treeInfo.children[highlightedIndex]) : undefined
 
   const {handleScroll} = useRememberLastPositions({
     createLastPosition: props.createLastPosition,
     isRememberLastPositions: props.isRememberLastPositions,
     removeLastPosition: props.removeLastPosition,
     treeId: props.treeId,
-    treeIndex: props.treeIndex,
+    treeIndex,
     updateLastPosition: props.updateLastPosition
   })
 
@@ -94,21 +108,30 @@ const BookmarkTreeContainer = (props: Props) => {
   }, [isSearching])
 
   const {handleRowAuxClick, handleRowClick} = useRowClickEvents(props)
-  const {handleRowDragOver, handleRowDragStart} = useRowDragEvents({...props, closeNextTrees})
-  const {handleRowMouseEnter, handleRowMouseLeave} = useRowHoverEvents({...props, closeNextTrees})
+  const {handleRowDragOver, handleRowDragStart} = useRowDragEvents({
+    ...props,
+    closeNextTrees,
+    treeInfo
+  })
+  const {handleRowMouseEnter, handleRowMouseLeave} = useRowHoverEvents({
+    ...props,
+    closeNextTrees,
+    treeIndex,
+    treeInfo
+  })
 
   return (
     <section className={classes.main}>
       {props.isShowHeader && (
-        <TreeHeader title={props.treeInfo.parent.title} onClose={closeCurrentTree} />
+        <TreeHeader title={treeInfo.parent.title} onClose={closeCurrentTree} />
       )}
 
       <BookmarkTree
-        draggingId={context.activeKey}
-        highlightedId={props.highlightedId}
+        draggingId={activeKey}
+        highlightedId={highlightedId}
         iconSize={props.iconSize}
-        isDisableDragAndDrop={props.isSearching}
-        isSearching={props.isSearching}
+        isDisableDragAndDrop={isSearching}
+        isSearching={isSearching}
         isShowTooltip={props.isShowTooltip}
         lastScrollTop={props.lastScrollTop}
         listItemWidth={props.listItemWidth || 0}
@@ -121,8 +144,8 @@ const BookmarkTreeContainer = (props: Props) => {
         onRowMouseLeave={handleRowMouseLeave}
         onScroll={handleScroll}
         rowHeight={props.rowHeight}
-        scrollToIndex={props.highlightedIndex}
-        treeInfo={props.treeInfo}
+        scrollToIndex={highlightedIndex}
+        treeInfo={treeInfo}
       />
 
       {props.isShowCover && <Mask backgroundColor='#000' opacity={0.16} onClick={closeNextTrees} />}

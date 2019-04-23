@@ -3,7 +3,6 @@ import {call, put} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
 import {getI18n} from '../../../../../common/utils'
-import * as uiCreators from '../../../ui/actions'
 import * as editorCreators from '../../actions'
 
 export function* createFolderInEditor({
@@ -18,5 +17,4 @@ export function* createFolderInEditor({
       title: yield call(getI18n, 'newFolder')
     })
   )
-  yield put(uiCreators.setIsDisableGlobalKeyboardEvent(true))
 }

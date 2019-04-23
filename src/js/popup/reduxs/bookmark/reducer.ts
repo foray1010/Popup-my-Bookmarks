@@ -11,7 +11,6 @@ interface BookmarkState {
     id: string
     isRemoveAfterPaste: boolean
   }
-  focusId: string
   searchKeyword: string
   trees: Array<BookmarkTree>
 }
@@ -20,7 +19,6 @@ const INITIAL_STATE: BookmarkState = {
     id: '',
     isRemoveAfterPaste: false
   },
-  focusId: '',
   searchKeyword: '',
   trees: []
 }
@@ -75,12 +73,6 @@ export const bookmarkReducer = (
     case getType(bookmarkCreators.removeDragIndicator):
       return removeDragIndicator(state)
 
-    case getType(bookmarkCreators.removeFocusId):
-      return {
-        ...state,
-        focusId: ''
-      }
-
     case getType(bookmarkCreators.removeNextBookmarkTrees): {
       const removeAfterIndex = state.trees.findIndex(
         R.pathEq(['parent', 'id'], action.payload.removeAfterId)
@@ -117,12 +109,6 @@ export const bookmarkReducer = (
         removeDragIndicator(state)
       )
     }
-
-    case getType(bookmarkCreators.setFocusId):
-      return {
-        ...state,
-        focusId: action.payload.focusId
-      }
 
     default:
       return state

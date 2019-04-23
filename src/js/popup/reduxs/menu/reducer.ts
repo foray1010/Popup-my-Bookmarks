@@ -4,7 +4,6 @@ import {MenuPattern} from '../../types'
 import * as menuCreators from './actions'
 
 interface MenuState {
-  focusedRow: string
   menuPattern: MenuPattern
   positionLeft: number
   positionTop: number
@@ -13,7 +12,6 @@ interface MenuState {
   targetTop: number
 }
 const INITIAL_STATE: MenuState = {
-  focusedRow: '',
   menuPattern: [],
   positionLeft: 0,
   positionTop: 0,
@@ -35,18 +33,6 @@ export const menuReducer = (
         ...state,
         ...action.payload.coordinates,
         targetId: action.payload.targetId
-      }
-
-    case getType(menuCreators.removeFocusedRow):
-      return {
-        ...state,
-        focusedRow: ''
-      }
-
-    case getType(menuCreators.setFocusedRow):
-      return {
-        ...state,
-        focusedRow: action.payload.focusedRow
       }
 
     case getType(menuCreators.setMenuPattern):
