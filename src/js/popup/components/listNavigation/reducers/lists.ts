@@ -1,7 +1,16 @@
-import {ActionType, createAction, getType} from 'typesafe-actions'
+import {ActionType, createAction, createReducer, getType} from 'typesafe-actions'
 
 import deleteFromMap from '../../../utils/deleteFromMap'
-import {ListNavigationContextType, initialLists} from '../ListNavigationContext'
+
+export interface ListsState {
+  highlightedIndices: Map<number, number>
+  itemCounts: Map<number, number>
+}
+
+export const listsInitialState: ListsState = {
+  highlightedIndices: new Map(),
+  itemCounts: new Map()
+}
 
 export const listsCreators = {
   removeList: createAction('REMOVE_LIST', (action) => (listIndex: number) => action({listIndex})),
@@ -10,51 +19,54 @@ export const listsCreators = {
     'SET_HIGHLIGHTED_INDEX',
     (action) => (listIndex: number, itemIndex: number) => action({listIndex, itemIndex})
   ),
-  setItemCount: createAction(
-    'SET_LIST_ITEM_COUNT',
-    (action) => (listIndex: number, itemCount: number) => action({listIndex, itemCount})
-  ),
+  setItemCount: createAction('SET_ITEM_COUNT', (action) => (listIndex: number, itemCount: number) =>
+    action({listIndex, itemCount})),
   unsetHighlightedIndex: createAction(
     'UNSET_HIGHLIGHTED_INDEX',
     (action) => (listIndex: number, itemIndex: number) => action({listIndex, itemIndex})
   )
 }
 
-export const listsReducer = (
-  state: ListNavigationContextType['lists'],
-  action: ActionType<typeof listsCreators>
-): ListNavigationContextType['lists'] => {
-  switch (action.type) {
-    case getType(listsCreators.removeList): {
-      const {listIndex} = action.payload
+export const listsReducer = createReducer<ListsState, ActionType<typeof listsCreators>>(
+  listsInitialState,
+  {
+    [getType(listsCreators.removeList)]: (
+      state: ListsState,
+      {payload}: ReturnType<typeof listsCreators.removeList>
+    ) => {
+      const {listIndex} = payload
 
       return {
         ...state,
         highlightedIndices: deleteFromMap(state.highlightedIndices, listIndex),
         itemCounts: deleteFromMap(state.itemCounts, listIndex)
       }
-    }
-
-    case getType(listsCreators.resetLists):
-      return initialLists
-
-    case getType(listsCreators.setHighlightedIndex): {
-      const {listIndex, itemIndex} = action.payload
+    },
+    [getType(listsCreators.resetLists)]: () => listsInitialState,
+    [getType(listsCreators.setHighlightedIndex)]: (
+      state: ListsState,
+      {payload}: ReturnType<typeof listsCreators.setHighlightedIndex>
+    ) => {
+      const {listIndex, itemIndex} = payload
 
       return {
         ...state,
         highlightedIndices: new Map(state.highlightedIndices).set(listIndex, itemIndex)
       }
-    }
-
-    case getType(listsCreators.setItemCount): {
-      const {listIndex, itemCount} = action.payload
+    },
+    [getType(listsCreators.setItemCount)]: (
+      state: ListsState,
+      {payload}: ReturnType<typeof listsCreators.setItemCount>
+    ) => {
+      const {listIndex, itemCount} = payload
 
       return {...state, itemCounts: new Map(state.itemCounts).set(listIndex, itemCount)}
-    }
-
-    case getType(listsCreators.unsetHighlightedIndex): {
-      const {listIndex, itemIndex} = action.payload
+    },
+    [getType(listsCreators.unsetHighlightedIndex)]: (
+      state: ListsState,
+      {payload}: ReturnType<typeof listsCreators.unsetHighlightedIndex>
+    ) => {
+      const {listIndex, itemIndex} = payload
 
       if (state.highlightedIndices.get(listIndex) !== itemIndex) {
         return state
@@ -65,8 +77,5 @@ export const listsReducer = (
         highlightedIndices: deleteFromMap(state.highlightedIndices, listIndex)
       }
     }
-
-    default:
-      return state
   }
-}
+)

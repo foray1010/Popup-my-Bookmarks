@@ -1,10 +1,20 @@
 import {ActionType, createAction, createReducer} from 'typesafe-actions'
 
-import {
-  KeyBindingEventCallback,
-  KeyBindingMeta,
-  KeyBindingsContextType
-} from '../KeyBindingsContext'
+export type KeyDefinition = string | RegExp
+export type KeyBindingMeta = Readonly<{
+  key: KeyDefinition
+  priority?: number
+  windowId: string
+}>
+export type KeyBindingEventCallback = (evt: KeyboardEvent) => void
+export type KeyBinding = Readonly<{
+  priority: number
+  key: KeyDefinition
+  callback: KeyBindingEventCallback
+}>
+export type KeyBindingsPerWindowState = Map<string, ReadonlyArray<KeyBinding>>
+
+export const keyBindingsPerWindowInitialState = new Map()
 
 export const keyBindingsPerWindowCreators = {
   addEventListener: createAction(
@@ -20,9 +30,9 @@ export const keyBindingsPerWindowCreators = {
 }
 
 export const keyBindingsPerWindowReducer = createReducer<
-KeyBindingsContextType['keyBindingsPerWindow'],
+KeyBindingsPerWindowState,
 ActionType<typeof keyBindingsPerWindowCreators>
->(new Map())
+>(keyBindingsPerWindowInitialState)
   .handleAction(keyBindingsPerWindowCreators.addEventListener, (state, {payload}) => {
     const {callback, key, priority, windowId} = payload
 

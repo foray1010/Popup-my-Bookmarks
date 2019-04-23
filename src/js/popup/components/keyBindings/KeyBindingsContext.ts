@@ -1,24 +1,17 @@
 import * as React from 'react'
 
-export type KeyDefinition = string | RegExp
+import {
+  KeyBindingEventCallback,
+  KeyBindingMeta,
+  KeyBindingsPerWindowState
+} from './reducers/keyBindingsPerWindow'
+import {WindowsState} from './reducers/windows'
 
-export type KeyBindingMeta = Readonly<{
-  key: KeyDefinition
-  priority?: number
-  windowId: string
-}>
-
-export type KeyBindingEventCallback = (evt: KeyboardEvent) => void
-
-export type KeyBinding = Readonly<{
-  priority: number
-  key: KeyDefinition
-  callback: KeyBindingEventCallback
-}>
+export {KeyBindingEventCallback, KeyBindingMeta}
 
 export interface KeyBindingsContextType {
-  activeWindowId?: string
-  keyBindingsPerWindow: Map<string, ReadonlyArray<KeyBinding>>
+  activeWindowId: WindowsState['activeWindowId']
+  keyBindingsPerWindow: KeyBindingsPerWindowState
   addEventListener: (meta: KeyBindingMeta, callback: KeyBindingEventCallback) => void
   removeEventListener: (meta: KeyBindingMeta, callback: KeyBindingEventCallback) => void
   setActiveWindowId: (windowId: string) => void

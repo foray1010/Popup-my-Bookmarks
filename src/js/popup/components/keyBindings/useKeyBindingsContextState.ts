@@ -4,6 +4,7 @@ import useMapDispatchToCallback from '../../hooks/useMapDispatchToCallback'
 import {KeyBindingsContextType} from './KeyBindingsContext'
 import {
   keyBindingsPerWindowCreators,
+  keyBindingsPerWindowInitialState,
   keyBindingsPerWindowReducer
 } from './reducers/keyBindingsPerWindow'
 import {windowsCreators, windowsInitialState, windowsReducer} from './reducers/windows'
@@ -12,7 +13,7 @@ const useKeyBindingsContextState = (): KeyBindingsContextType => {
   const [{activeWindowId}, dispatchWindows] = React.useReducer(windowsReducer, windowsInitialState)
   const [keyBindingsPerWindow, dispatchKeyBindingsPerWindow] = React.useReducer(
     keyBindingsPerWindowReducer,
-    new Map()
+    keyBindingsPerWindowInitialState
   )
 
   const addEventListener = useMapDispatchToCallback(

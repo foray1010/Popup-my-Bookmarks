@@ -1,11 +1,11 @@
 import * as React from 'react'
 
 import useMapDispatchToCallback from '../../hooks/useMapDispatchToCallback'
-import {ListNavigationContextType, initialLists} from './ListNavigationContext'
-import {listsCreators, listsReducer} from './reducers/lists'
+import {ListNavigationContextType} from './ListNavigationContext'
+import {listsCreators, listsInitialState, listsReducer} from './reducers/lists'
 
 const useListNavigationContextState = (): ListNavigationContextType => {
-  const [lists, dispatch] = React.useReducer(listsReducer, initialLists)
+  const [lists, dispatch] = React.useReducer(listsReducer, listsInitialState)
 
   const removeList = useMapDispatchToCallback(dispatch, listsCreators.removeList)
   const resetLists = useMapDispatchToCallback(dispatch, listsCreators.resetLists)
