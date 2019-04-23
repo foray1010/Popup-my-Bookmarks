@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 
+import {BASE_WINDOW} from '../../constants/windows'
 import {RootState, bookmarkCreators, uiCreators} from '../../reduxs'
 import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
 import Search from './Search'
@@ -29,7 +30,7 @@ const SearchContainer = ({getSearchResult, isFocusSearchInput, setIsFocusSearchI
       setIsFocusSearchInput(true)
     }
   }, [setIsFocusSearchInput])
-  useKeyBindingsEvent({key: /^.$/, level: 0}, handleSingleKeyPress)
+  useKeyBindingsEvent({key: /^.$/, windowId: BASE_WINDOW}, handleSingleKeyPress)
 
   const handleBlur = React.useCallback(() => {
     setIsFocusSearchInput(false)

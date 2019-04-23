@@ -14,9 +14,11 @@ const KeyBindingsProvider = (props: Props) => {
 
   React.useEffect(() => {
     const handleKeyDown: KeyBindingEventCallback = (evt) => {
-      const {keyBindingsPerLevel, currentLayerLevel} = contextStateRef.current
+      const {keyBindingsPerWindow, activeWindowId} = contextStateRef.current
 
-      const keyBindings = keyBindingsPerLevel.get(currentLayerLevel)
+      if (!activeWindowId) return
+
+      const keyBindings = keyBindingsPerWindow.get(activeWindowId)
       if (!keyBindings) return
 
       interface MatchResult {

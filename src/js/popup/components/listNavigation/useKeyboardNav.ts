@@ -6,13 +6,13 @@ import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
 import ListNavigationContext from './ListNavigationContext'
 
 export default ({
-  level,
+  windowId,
   onPressArrowDown,
   onPressArrowLeft,
   onPressArrowRight,
   onPressArrowUp
 }: {
-  level?: number
+  windowId: string
   onPressArrowDown?: (evt: KeyboardEvent) => void
   onPressArrowLeft?: (evt: KeyboardEvent) => void
   onPressArrowRight?: (evt: KeyboardEvent) => void
@@ -52,7 +52,7 @@ export default ({
     },
     [handlePressArrowVertical, onPressArrowDown]
   )
-  useKeyBindingsEvent({key: 'ArrowDown', level}, handlePressArrowDown)
+  useKeyBindingsEvent({key: 'ArrowDown', windowId}, handlePressArrowDown)
 
   const handlePressArrowUp = React.useCallback(
     (evt: KeyboardEvent) => {
@@ -62,7 +62,7 @@ export default ({
     },
     [handlePressArrowVertical, onPressArrowUp]
   )
-  useKeyBindingsEvent({key: 'ArrowUp', level}, handlePressArrowUp)
+  useKeyBindingsEvent({key: 'ArrowUp', windowId}, handlePressArrowUp)
 
   const handlePressTab = React.useCallback(
     (evt: KeyboardEvent) => {
@@ -74,7 +74,7 @@ export default ({
     },
     [handlePressArrowDown, handlePressArrowUp]
   )
-  useKeyBindingsEvent({key: 'Tab', level}, handlePressTab)
+  useKeyBindingsEvent({key: 'Tab', windowId}, handlePressTab)
 
   const handlePressArrowLeft = React.useCallback(
     (evt: KeyboardEvent) => {
@@ -91,7 +91,7 @@ export default ({
     },
     [onPressArrowLeft, removeList]
   )
-  useKeyBindingsEvent({key: 'ArrowLeft', level}, handlePressArrowLeft)
+  useKeyBindingsEvent({key: 'ArrowLeft', windowId}, handlePressArrowLeft)
 
   const handlePressArrowRight = React.useCallback(
     (evt: KeyboardEvent) => {
@@ -106,5 +106,5 @@ export default ({
     },
     [onPressArrowRight, setHighlightedIndex]
   )
-  useKeyBindingsEvent({key: 'ArrowRight', level}, handlePressArrowRight)
+  useKeyBindingsEvent({key: 'ArrowRight', windowId}, handlePressArrowRight)
 }

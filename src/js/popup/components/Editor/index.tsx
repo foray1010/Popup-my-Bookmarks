@@ -3,9 +3,10 @@ import {connect} from 'react-redux'
 import webExtension from 'webextension-polyfill'
 
 import {OPTIONS} from '../../constants'
+import {EDITOR_WINDOW} from '../../constants/windows'
 import {RootState, bookmarkCreators, editorCreators} from '../../reduxs'
 import AbsPositionWithinBody from '../AbsPositionWithinBody'
-import KeyBindingsLevelWrapper from '../keyBindings/KeyBindingsLevelWrapper'
+import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
 import Mask from '../Mask'
 import Editor from './Editor'
 
@@ -46,7 +47,7 @@ const EditorContainer = (props: Props) => {
     <React.Fragment>
       <Mask backgroundColor='#fff' opacity={0.3} onClick={props.closeEditor} />
       <AbsPositionWithinBody positionLeft={props.positionLeft} positionTop={props.positionTop}>
-        <KeyBindingsLevelWrapper level={1}>
+        <KeyBindingsWindow windowId={EDITOR_WINDOW}>
           <Editor
             isAllowEditUrl={props.isAllowEditUrl}
             header={
@@ -60,7 +61,7 @@ const EditorContainer = (props: Props) => {
             onCancel={props.closeEditor}
             onConfirm={handleConfirm}
           />
-        </KeyBindingsLevelWrapper>
+        </KeyBindingsWindow>
       </AbsPositionWithinBody>
     </React.Fragment>
   )

@@ -4,8 +4,8 @@ export type KeyDefinition = string | RegExp
 
 export type KeyBindingMeta = Readonly<{
   key: KeyDefinition
-  level?: number
   priority?: number
+  windowId: string
 }>
 
 export type KeyBindingEventCallback = (evt: KeyboardEvent) => void
@@ -17,17 +17,19 @@ export type KeyBinding = Readonly<{
 }>
 
 export interface KeyBindingsContextType {
-  currentLayerLevel: number
-  keyBindingsPerLevel: Map<number, ReadonlyArray<KeyBinding>>
+  activeWindowId?: string
+  keyBindingsPerWindow: Map<string, ReadonlyArray<KeyBinding>>
   addEventListener: (meta: KeyBindingMeta, callback: KeyBindingEventCallback) => void
   removeEventListener: (meta: KeyBindingMeta, callback: KeyBindingEventCallback) => void
-  setLayerLevel: (level: number) => void
+  setActiveWindowId: (windowId: string) => void
+  unsetActiveWindowId: (windowId: string) => void
 }
 
 export default React.createContext<KeyBindingsContextType>({
-  currentLayerLevel: 0,
-  keyBindingsPerLevel: new Map(),
+  activeWindowId: undefined,
+  keyBindingsPerWindow: new Map(),
   addEventListener: () => {},
   removeEventListener: () => {},
-  setLayerLevel: () => {}
+  setActiveWindowId: () => {},
+  unsetActiveWindowId: () => {}
 })

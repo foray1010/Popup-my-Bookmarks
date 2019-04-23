@@ -3,9 +3,10 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 
 import * as CST from '../../constants'
+import {MENU_WINDOW} from '../../constants/windows'
 import {RootState, menuCreators} from '../../reduxs'
 import AbsPositionWithinBody from '../AbsPositionWithinBody'
-import KeyBindingsLevelWrapper from '../keyBindings/KeyBindingsLevelWrapper'
+import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
 import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
 import ListNavigationContext from '../listNavigation/ListNavigationContext'
 import ListNavigationProvider from '../listNavigation/ListNavigationProvider'
@@ -43,7 +44,7 @@ const MenuContainer = ({clickMenuRow, closeMenu, menuPattern, ...restProps}: Pro
     setItemCount(0, allRowNames.length)
   }, [allRowNames.length, setItemCount])
 
-  useKeyboardNav({level: 1})
+  useKeyboardNav({windowId: MENU_WINDOW})
 
   const handleRowClick = React.useCallback(() => {
     if (highlightedIndex === undefined) return
@@ -55,7 +56,7 @@ const MenuContainer = ({clickMenuRow, closeMenu, menuPattern, ...restProps}: Pro
     closeMenu()
   }, [allRowNames, clickMenuRow, closeMenu, highlightedIndex])
 
-  useKeyBindingsEvent({key: 'Enter', level: 1}, handleRowClick)
+  useKeyBindingsEvent({key: 'Enter', windowId: MENU_WINDOW}, handleRowClick)
 
   const handleRowMouseEnter = React.useCallback(
     (index: number) => () => {
@@ -78,7 +79,7 @@ const MenuContainer = ({clickMenuRow, closeMenu, menuPattern, ...restProps}: Pro
         positionLeft={restProps.positionLeft}
         positionTop={restProps.positionTop}
       >
-        <KeyBindingsLevelWrapper level={1}>
+        <KeyBindingsWindow windowId={MENU_WINDOW}>
           <Menu
             highlightedIndex={highlightedIndex}
             menuPattern={menuPattern}
@@ -87,7 +88,7 @@ const MenuContainer = ({clickMenuRow, closeMenu, menuPattern, ...restProps}: Pro
             onRowMouseLeave={handleRowMouseLeave}
             unclickableRows={restProps.unclickableRows}
           />
-        </KeyBindingsLevelWrapper>
+        </KeyBindingsWindow>
       </AbsPositionWithinBody>
     </React.Fragment>
   )

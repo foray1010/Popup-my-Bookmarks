@@ -3,7 +3,7 @@ import * as React from 'react'
 import KeyBindingsContext, {KeyBindingMeta} from './KeyBindingsContext'
 
 const useKeyBindingsEvent = (
-  {key, level, priority}: KeyBindingMeta,
+  {key, priority, windowId}: KeyBindingMeta,
   callback?: (evt: KeyboardEvent) => void
 ) => {
   const {addEventListener, removeEventListener} = React.useContext(KeyBindingsContext)
@@ -14,14 +14,14 @@ const useKeyBindingsEvent = (
   keyRef.current = key
 
   React.useEffect(() => {
-    const meta = {key: keyRef.current, level, priority}
+    const meta = {key: keyRef.current, priority, windowId}
 
     if (callback) addEventListener(meta, callback)
 
     return () => {
       if (callback) removeEventListener(meta, callback)
     }
-  }, [addEventListener, callback, level, priority, removeEventListener])
+  }, [addEventListener, callback, priority, removeEventListener, windowId])
 }
 
 export default useKeyBindingsEvent

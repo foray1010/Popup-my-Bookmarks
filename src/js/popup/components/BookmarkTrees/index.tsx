@@ -1,8 +1,9 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 
+import {BASE_WINDOW} from '../../constants/windows'
 import {RootState} from '../../reduxs'
-import KeyBindingsLevelWrapper from '../keyBindings/KeyBindingsLevelWrapper'
+import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
 import BookmarkTrees from './BookmarkTrees'
 import withBookmarkEvents from './withBookmarkEvents'
 import withDragAndDropEvents from './withDragAndDropEvents'
@@ -23,9 +24,9 @@ const mapStateToProps = (state: RootState) => ({
 type Props = ReturnType<typeof mapStateToProps> & OwnProps
 const BookmarkTreesContainer = (props: Props) => {
   return (
-    <KeyBindingsLevelWrapper level={0}>
+    <KeyBindingsWindow windowId={BASE_WINDOW}>
       <BookmarkTrees {...props} />
-    </KeyBindingsLevelWrapper>
+    </KeyBindingsWindow>
   )
 }
 

@@ -2,6 +2,7 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 
 import {BOOKMARK_TYPES, OPEN_IN_TYPES} from '../../constants'
+import {BASE_WINDOW} from '../../constants/windows'
 import {RootState, bookmarkCreators} from '../../reduxs'
 import getLastMapKey from '../../utils/getLastMapKey'
 import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
@@ -56,7 +57,7 @@ export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
     }, [openBookmarkTree, trees])
 
     useKeyboardNav({
-      level: 0,
+      windowId: BASE_WINDOW,
       onPressArrowLeft: handlePressArrowLeft,
       onPressArrowRight: handlePressArrowRight
     })
@@ -77,7 +78,7 @@ export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
       openBookmarksInBrowser([bookmarkInfo.id], OPEN_IN_TYPES.CURRENT_TAB, true)
     }, [openBookmarksInBrowser, trees])
 
-    useKeyBindingsEvent({key: 'Enter', level: 0}, handlePressEnter)
+    useKeyBindingsEvent({key: 'Enter', windowId: BASE_WINDOW}, handlePressEnter)
 
     return <WrappedComponent {...props} />
   }
