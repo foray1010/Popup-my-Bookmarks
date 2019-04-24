@@ -1,4 +1,4 @@
-import {ActionType, getType} from 'typesafe-actions'
+import {ActionType, createReducer, getType} from 'typesafe-actions'
 
 import {MenuPattern} from '../../types'
 import * as menuCreators from './actions'
@@ -20,28 +20,28 @@ const INITIAL_STATE: MenuState = {
   targetTop: 0
 }
 
-export const menuReducer = (
-  state: MenuState = INITIAL_STATE,
-  action: ActionType<typeof menuCreators>
-): MenuState => {
-  switch (action.type) {
-    case getType(menuCreators.closeMenu):
-      return INITIAL_STATE
-
-    case getType(menuCreators.openMenu):
+export const menuReducer = createReducer<MenuState, ActionType<typeof menuCreators>>(
+  INITIAL_STATE,
+  {
+    [getType(menuCreators.closeMenu)]: () => INITIAL_STATE,
+    [getType(menuCreators.openMenu)]: (
+      state: MenuState,
+      {payload}: ReturnType<typeof menuCreators.openMenu>
+    ) => {
       return {
         ...state,
-        ...action.payload.coordinates,
-        targetId: action.payload.targetId
+        ...payload.coordinates,
+        targetId: payload.targetId
       }
-
-    case getType(menuCreators.setMenuPattern):
+    },
+    [getType(menuCreators.setMenuPattern)]: (
+      state: MenuState,
+      {payload}: ReturnType<typeof menuCreators.setMenuPattern>
+    ) => {
       return {
         ...state,
-        menuPattern: action.payload.menuPattern
+        menuPattern: payload.menuPattern
       }
-
-    default:
-      return state
+    }
   }
-}
+)

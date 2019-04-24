@@ -1,4 +1,4 @@
-import {ActionType, getType} from 'typesafe-actions'
+import {ActionType, createReducer} from 'typesafe-actions'
 
 import * as editorCreators from './actions'
 import {EditorState} from './types'
@@ -13,21 +13,13 @@ const INITIAL_STATE: EditorState = {
   url: ''
 }
 
-export const editorReducer = (
-  state: EditorState = INITIAL_STATE,
-  action: ActionType<typeof editorCreators>
-): EditorState => {
-  switch (action.type) {
-    case getType(editorCreators.closeEditor):
-      return INITIAL_STATE
-
-    case getType(editorCreators.setEditor):
-      return {
-        ...state,
-        ...action.payload.partialState
-      }
-
-    default:
-      return state
-  }
-}
+export const editorReducer = createReducer<EditorState, ActionType<typeof editorCreators>>(
+  INITIAL_STATE
+)
+  .handleAction(editorCreators.closeEditor, () => INITIAL_STATE)
+  .handleAction(editorCreators.setEditor, (state, {payload}) => {
+    return {
+      ...state,
+      ...payload.partialState
+    }
+  })

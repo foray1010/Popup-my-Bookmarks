@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import {ActionType, getType} from 'typesafe-actions'
+import {ActionType, createReducer, getType} from 'typesafe-actions'
 
 import * as CST from '../../constants'
 import {BookmarkTree} from '../../types'
@@ -31,51 +31,61 @@ const removeDragIndicator = (state: BookmarkState): BookmarkState => ({
   }))
 })
 
-export const bookmarkReducer = (
-  state: BookmarkState = INITIAL_STATE,
-  action: ActionType<typeof bookmarkCreators>
-): BookmarkState => {
-  switch (action.type) {
-    case getType(bookmarkCreators.copyBookmark):
+export const bookmarkReducer = createReducer<BookmarkState, ActionType<typeof bookmarkCreators>>(
+  INITIAL_STATE,
+  {
+    [getType(bookmarkCreators.copyBookmark)]: (
+      state: BookmarkState,
+      {payload}: ReturnType<typeof bookmarkCreators.copyBookmark>
+    ) => {
       return {
         ...state,
         clipboard: {
-          id: action.payload.id,
+          id: payload.id,
           isRemoveAfterPaste: false
         }
       }
-
-    case getType(bookmarkCreators.cutBookmark):
+    },
+    [getType(bookmarkCreators.cutBookmark)]: (
+      state: BookmarkState,
+      {payload}: ReturnType<typeof bookmarkCreators.cutBookmark>
+    ) => {
       return {
         ...state,
         clipboard: {
-          id: action.payload.id,
+          id: payload.id,
           isRemoveAfterPaste: true
         }
       }
-
-    case getType(bookmarkCreators.getSearchResult):
+    },
+    [getType(bookmarkCreators.getSearchResult)]: (
+      state: BookmarkState,
+      {payload}: ReturnType<typeof bookmarkCreators.getSearchResult>
+    ) => {
       return {
         ...state,
-        searchKeyword: action.payload.searchKeyword
+        searchKeyword: payload.searchKeyword
       }
-
-    case getType(bookmarkCreators.removeBookmarkTree): {
-      const removeFromIndex = state.trees.findIndex(R.pathEq(['parent', 'id'], action.payload.id))
+    },
+    [getType(bookmarkCreators.removeBookmarkTree)]: (
+      state: BookmarkState,
+      {payload}: ReturnType<typeof bookmarkCreators.removeBookmarkTree>
+    ) => {
+      const removeFromIndex = state.trees.findIndex(R.pathEq(['parent', 'id'], payload.id))
       if (removeFromIndex < 0) return state
 
       return {
         ...state,
         trees: state.trees.slice(0, removeFromIndex)
       }
-    }
-
-    case getType(bookmarkCreators.removeDragIndicator):
-      return removeDragIndicator(state)
-
-    case getType(bookmarkCreators.removeNextBookmarkTrees): {
+    },
+    [getType(bookmarkCreators.removeDragIndicator)]: removeDragIndicator,
+    [getType(bookmarkCreators.removeNextBookmarkTrees)]: (
+      state: BookmarkState,
+      {payload}: ReturnType<typeof bookmarkCreators.removeNextBookmarkTrees>
+    ) => {
       const removeAfterIndex = state.trees.findIndex(
-        R.pathEq(['parent', 'id'], action.payload.removeAfterId)
+        R.pathEq(['parent', 'id'], payload.removeAfterId)
       )
       if (removeAfterIndex < 0) return state
 
@@ -83,34 +93,34 @@ export const bookmarkReducer = (
         ...state,
         trees: state.trees.slice(0, removeAfterIndex + 1)
       }
-    }
-
-    case getType(bookmarkCreators.resetClipboard):
+    },
+    [getType(bookmarkCreators.resetClipboard)]: (state: BookmarkState) => {
       return {
         ...state,
         clipboard: INITIAL_STATE.clipboard
       }
-
-    case getType(bookmarkCreators.setBookmarkTrees):
+    },
+    [getType(bookmarkCreators.setBookmarkTrees)]: (
+      state: BookmarkState,
+      {payload}: ReturnType<typeof bookmarkCreators.setBookmarkTrees>
+    ) => {
       return {
         ...state,
-        trees: action.payload.bookmarkTrees
+        trees: payload.bookmarkTrees
       }
-
-    case getType(bookmarkCreators.setDragIndicator): {
-      const parentIndex = state.trees.findIndex(
-        (tree) => tree.parent.id === action.payload.parentId
-      )
+    },
+    [getType(bookmarkCreators.setDragIndicator)]: (
+      state: BookmarkState,
+      {payload}: ReturnType<typeof bookmarkCreators.setDragIndicator>
+    ) => {
+      const parentIndex = state.trees.findIndex((tree) => tree.parent.id === payload.parentId)
       if (parentIndex === -1) return state
 
       return R.over(
         R.lensPath(['trees', parentIndex, 'children']),
-        R.insert(action.payload.index, simulateBookmark({type: CST.BOOKMARK_TYPES.DRAG_INDICATOR})),
+        R.insert(payload.index, simulateBookmark({type: CST.BOOKMARK_TYPES.DRAG_INDICATOR})),
         removeDragIndicator(state)
       )
     }
-
-    default:
-      return state
   }
-}
+)

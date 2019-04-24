@@ -1,4 +1,4 @@
-import {ActionType, getType} from 'typesafe-actions'
+import {ActionType, createReducer} from 'typesafe-actions'
 
 import * as uiCreators from './actions'
 
@@ -9,18 +9,11 @@ const INITIAL_STATE: UiState = {
   isFocusSearchInput: false
 }
 
-export const uiReducer = (
-  state: UiState = INITIAL_STATE,
-  action: ActionType<typeof uiCreators>
-): UiState => {
-  switch (action.type) {
-    case getType(uiCreators.setIsFocusSearchInput):
-      return {
-        ...state,
-        isFocusSearchInput: action.payload.isFocusSearchInput
-      }
-
-    default:
-      return state
+export const uiReducer = createReducer<UiState, ActionType<typeof uiCreators>>(
+  INITIAL_STATE
+).handleAction(uiCreators.setIsFocusSearchInput, (state, {payload}) => {
+  return {
+    ...state,
+    isFocusSearchInput: payload.isFocusSearchInput
   }
-}
+})
