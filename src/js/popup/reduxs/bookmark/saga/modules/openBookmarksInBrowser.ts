@@ -3,7 +3,13 @@ import {SagaIterator} from 'redux-saga'
 import {all, call} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
-import {createTab, createWindow, getI18n, updateTab} from '../../../../../common/utils'
+import {
+  createTab,
+  createWindow,
+  executeScript,
+  getI18n,
+  updateTab
+} from '../../../../../common/utils'
 import * as CST from '../../../../constants'
 import {BookmarkInfo} from '../../../../types'
 import * as bookmarkCreators from '../../actions'
@@ -25,39 +31,53 @@ function* getUrls(ids: Array<string>): SagaIterator {
 export function* openBookmarksInBrowser({
   payload
 }: ActionType<typeof bookmarkCreators.openBookmarksInBrowser>): SagaIterator {
-  const urls: Array<string> = yield call(getUrls, payload.ids)
-  if (!urls.length) return
+  const {ids, openBookmarkProps} = payload
 
-  if (urls.length > 5) {
-    const msgAskOpenAllTemplate = yield call(getI18n, 'askOpenAll')
-    const msgAskOpenAll = msgAskOpenAllTemplate.replace('%bkmarkCount%', urls.length)
-    // `window.confirm()` doesn't work as chrome will force close popup
-    // but worked again at least since chrome 73
-    if (!window.confirm(msgAskOpenAll)) return
+  const allUrls: Array<string> = yield call(getUrls, ids)
+  if (!allUrls.length) return
+
+  const bookmarkletUrls = allUrls.filter((x) => x.startsWith('javascript:'))
+  const urls = allUrls.filter((x) => !x.startsWith('javascript:'))
+
+  if (openBookmarkProps.isAllowBookmarklet && bookmarkletUrls.length > 0) {
+    // @ts-ignore: seems type is wrong, tabId is nullable
+    yield call(executeScript, null, {
+      code: bookmarkletUrls[0]
+    })
   }
 
-  switch (payload.openIn) {
-    case CST.OPEN_IN_TYPES.BACKGROUND_TAB:
-      yield all(urls.map(createBackgroundTab))
-      break
-    case CST.OPEN_IN_TYPES.CURRENT_TAB:
-      // @ts-ignore: doesn't work with overloaded function
-      yield call(updateTab, {url: urls[0]})
-      break
-    case CST.OPEN_IN_TYPES.INCOGNITO_WINDOW:
-      yield call(createWindow, {
-        url: urls,
-        incognito: true
-      })
-      break
-    case CST.OPEN_IN_TYPES.NEW_TAB:
-      yield all(urls.map(createActiveTab))
-      break
-    case CST.OPEN_IN_TYPES.NEW_WINDOW:
-      yield call(createWindow, {url: urls})
-      break
-    default:
+  if (urls.length > 0) {
+    if (urls.length > 5) {
+      const msgAskOpenAllTemplate = yield call(getI18n, 'askOpenAll')
+      const msgAskOpenAll = msgAskOpenAllTemplate.replace('%bkmarkCount%', urls.length)
+      // `window.confirm()` doesn't work as chrome will force close popup
+      // but worked again at least since chrome 73
+      if (!window.confirm(msgAskOpenAll)) return
+    }
+
+    switch (openBookmarkProps.openIn) {
+      case CST.OPEN_IN_TYPES.BACKGROUND_TAB:
+        yield all(urls.map(createBackgroundTab))
+        break
+      case CST.OPEN_IN_TYPES.CURRENT_TAB:
+        // @ts-ignore: doesn't work with overloaded function
+        yield call(updateTab, {url: urls[0]})
+        break
+      case CST.OPEN_IN_TYPES.INCOGNITO_WINDOW:
+        yield call(createWindow, {
+          url: urls,
+          incognito: true
+        })
+        break
+      case CST.OPEN_IN_TYPES.NEW_TAB:
+        yield all(urls.map(createActiveTab))
+        break
+      case CST.OPEN_IN_TYPES.NEW_WINDOW:
+        yield call(createWindow, {url: urls})
+        break
+      default:
+    }
   }
 
-  if (payload.isCloseThisExtension) yield call(window.close)
+  if (openBookmarkProps.isCloseThisExtension) yield call(window.close)
 }

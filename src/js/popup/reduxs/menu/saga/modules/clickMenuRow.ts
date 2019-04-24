@@ -78,7 +78,13 @@ export function* clickMenuRow({
         [CST.MENU_OPEN_ALL_IN_I]: CST.OPEN_IN_TYPES.INCOGNITO_WINDOW,
         [CST.MENU_OPEN_ALL_IN_N]: CST.OPEN_IN_TYPES.NEW_WINDOW
       }
-      yield put(bookmarkCreators.openBookmarksInBrowser(ids, mapping[payload.rowName], true))
+      yield put(
+        bookmarkCreators.openBookmarksInBrowser(ids, {
+          openIn: mapping[payload.rowName],
+          isAllowBookmarklet: false,
+          isCloseThisExtension: true
+        })
+      )
       break
     }
 
@@ -91,11 +97,11 @@ export function* clickMenuRow({
         [CST.MENU_OPEN_IN_N]: CST.OPEN_IN_TYPES.NEW_WINDOW
       }
       yield put(
-        bookmarkCreators.openBookmarksInBrowser(
-          [targetBookmarkInfo.id],
-          mapping[payload.rowName],
-          true
-        )
+        bookmarkCreators.openBookmarksInBrowser([targetBookmarkInfo.id], {
+          openIn: mapping[payload.rowName],
+          isAllowBookmarklet: true,
+          isCloseThisExtension: true
+        })
       )
       break
     }

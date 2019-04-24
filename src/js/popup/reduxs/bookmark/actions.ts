@@ -71,11 +71,17 @@ export const moveBookmarkToDragIndicator = createAction(
 
 export const openBookmarksInBrowser = createAction(
   'OPEN_BOOKMARKS_IN_BROWSER',
-  (action) => (ids: Array<string>, openIn: CST.OPEN_IN_TYPES, isCloseThisExtension: boolean) =>
+  (action) => (
+    ids: Array<string>,
+    openBookmarkProps: {
+      openIn: CST.OPEN_IN_TYPES
+      isAllowBookmarklet: boolean
+      isCloseThisExtension: boolean
+    }
+  ) =>
     action({
       ids,
-      openIn,
-      isCloseThisExtension
+      openBookmarkProps
     })
 )
 
@@ -86,11 +92,17 @@ export const openBookmarkTree = createAction(
 
 export const openFolderInBrowser = createAction(
   'OPEN_FOLDER_IN_BROWSER',
-  (action) => (id: string, openIn: CST.OPEN_IN_TYPES, isCloseThisExtension: boolean) =>
+  (action) => (
+    id: string,
+    openBookmarkProps: {
+      openIn: CST.OPEN_IN_TYPES
+      isAllowBookmarklet: boolean
+      isCloseThisExtension: boolean
+    }
+  ) =>
     action({
       id,
-      openIn,
-      isCloseThisExtension
+      openBookmarkProps
     })
 )
 

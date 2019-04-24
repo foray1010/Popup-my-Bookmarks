@@ -13,11 +13,5 @@ export function* openFolderInBrowser({
 
   const bookmarkIds = bookmarkTree.children.map((x) => x.id)
 
-  yield put(
-    bookmarkCreators.openBookmarksInBrowser(
-      bookmarkIds,
-      payload.openIn,
-      payload.isCloseThisExtension
-    )
-  )
+  yield put(bookmarkCreators.openBookmarksInBrowser(bookmarkIds, payload.openBookmarkProps))
 }

@@ -60,22 +60,24 @@ export default ({
   return React.useMemo(() => {
     const handleRowLeftClick = (bookmarkInfo: BookmarkInfo) => {
       const openBookmarkProps = mapOptionToOpenBookmarkProps(options[OPTIONS.CLICK_BY_LEFT])
-      openBookmarksInBrowser(
-        [bookmarkInfo.id],
-        openBookmarkProps.openIn,
-        openBookmarkProps.isCloseThisExtension
-      )
+      openBookmarksInBrowser([bookmarkInfo.id], {
+        ...openBookmarkProps,
+        isAllowBookmarklet: true
+      })
     }
     const handleRowMiddleClick = (bookmarkInfo: BookmarkInfo) => {
       if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
-        openFolderInBrowser(bookmarkInfo.id, OPEN_IN_TYPES.NEW_TAB, true)
+        openFolderInBrowser(bookmarkInfo.id, {
+          openIn: OPEN_IN_TYPES.NEW_TAB,
+          isAllowBookmarklet: false,
+          isCloseThisExtension: true
+        })
       } else {
         const openBookmarkProps = mapOptionToOpenBookmarkProps(options[OPTIONS.CLICK_BY_MIDDLE])
-        openBookmarksInBrowser(
-          [bookmarkInfo.id],
-          openBookmarkProps.openIn,
-          openBookmarkProps.isCloseThisExtension
-        )
+        openBookmarksInBrowser([bookmarkInfo.id], {
+          ...openBookmarkProps,
+          isAllowBookmarklet: true
+        })
       }
     }
     const handleRowRightClick = (

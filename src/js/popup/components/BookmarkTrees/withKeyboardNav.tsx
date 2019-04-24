@@ -75,7 +75,11 @@ export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
       const bookmarkInfo = treeInfo.children[highlightedIndex]
       if (!bookmarkInfo) return
 
-      openBookmarksInBrowser([bookmarkInfo.id], OPEN_IN_TYPES.CURRENT_TAB, true)
+      openBookmarksInBrowser([bookmarkInfo.id], {
+        openIn: OPEN_IN_TYPES.CURRENT_TAB,
+        isAllowBookmarklet: true,
+        isCloseThisExtension: true
+      })
     }, [openBookmarksInBrowser, trees])
 
     useKeyBindingsEvent({key: 'Enter', windowId: BASE_WINDOW}, handlePressEnter)
