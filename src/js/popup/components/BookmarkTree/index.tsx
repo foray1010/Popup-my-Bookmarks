@@ -45,6 +45,7 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
     isShowTooltip: Boolean(state.options[CST.OPTIONS.TOOLTIP]),
     lastScrollTop: lastPosition ? lastPosition.scrollTop : undefined,
     listItemWidth: state.options[CST.OPTIONS.SET_WIDTH],
+    options: state.options,
     rowHeight: getRowHeight(state.options[CST.OPTIONS.FONT_SIZE] || 0),
     treeIndex,
     treeInfo

@@ -1,27 +1,81 @@
 import * as React from 'react'
 
-import * as CST from '../../constants'
-import {bookmarkCreators, menuCreators} from '../../reduxs'
+import {BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS} from '../../constants'
+import {RootState, bookmarkCreators, menuCreators} from '../../reduxs'
 import {BookmarkInfo} from '../../types'
+
+const mapOptionToOpenBookmarkProps = (
+  option?: number
+): {
+  openIn: OPEN_IN_TYPES
+  isCloseThisExtension: boolean
+} => {
+  switch (option) {
+    case 0: // current tab
+    case 1: // current tab (without closing PmB)
+      return {
+        openIn: OPEN_IN_TYPES.CURRENT_TAB,
+        isCloseThisExtension: option === 0
+      }
+
+    default:
+    case 2: // new tab
+      return {
+        openIn: OPEN_IN_TYPES.NEW_TAB,
+        isCloseThisExtension: true
+      }
+
+    case 3: // background tab
+    case 4: // background tab (without closing PmB)
+      return {
+        openIn: OPEN_IN_TYPES.BACKGROUND_TAB,
+        isCloseThisExtension: option === 3
+      }
+
+    case 5: // new window
+      return {
+        openIn: OPEN_IN_TYPES.NEW_WINDOW,
+        isCloseThisExtension: true
+      }
+
+    case 6: // incognito window
+      return {
+        openIn: OPEN_IN_TYPES.INCOGNITO_WINDOW,
+        isCloseThisExtension: true
+      }
+  }
+}
 
 export default ({
   openBookmarksInBrowser,
   openFolderInBrowser,
-  openMenu
+  openMenu,
+  options
 }: {
   openBookmarksInBrowser: typeof bookmarkCreators.openBookmarksInBrowser
   openFolderInBrowser: typeof bookmarkCreators.openFolderInBrowser
   openMenu: typeof menuCreators.openMenu
+  options: RootState['options']
 }) => {
   return React.useMemo(() => {
     const handleRowLeftClick = (bookmarkInfo: BookmarkInfo) => {
-      openBookmarksInBrowser([bookmarkInfo.id], CST.OPEN_IN_TYPES.CURRENT_TAB, true)
+      const openBookmarkProps = mapOptionToOpenBookmarkProps(options[OPTIONS.CLICK_BY_LEFT])
+      openBookmarksInBrowser(
+        [bookmarkInfo.id],
+        openBookmarkProps.openIn,
+        openBookmarkProps.isCloseThisExtension
+      )
     }
     const handleRowMiddleClick = (bookmarkInfo: BookmarkInfo) => {
-      if (bookmarkInfo.type === CST.BOOKMARK_TYPES.FOLDER) {
-        openFolderInBrowser(bookmarkInfo.id, CST.OPEN_IN_TYPES.NEW_TAB, true)
+      if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
+        openFolderInBrowser(bookmarkInfo.id, OPEN_IN_TYPES.NEW_TAB, true)
       } else {
-        openBookmarksInBrowser([bookmarkInfo.id], CST.OPEN_IN_TYPES.NEW_TAB, true)
+        const openBookmarkProps = mapOptionToOpenBookmarkProps(options[OPTIONS.CLICK_BY_MIDDLE])
+        openBookmarksInBrowser(
+          [bookmarkInfo.id],
+          openBookmarkProps.openIn,
+          openBookmarkProps.isCloseThisExtension
+        )
       }
     }
     const handleRowRightClick = (
@@ -53,5 +107,5 @@ export default ({
         handleRowLeftClick(bookmarkInfo)
       }
     }
-  }, [openBookmarksInBrowser, openFolderInBrowser, openMenu])
+  }, [openBookmarksInBrowser, openFolderInBrowser, openMenu, options])
 }

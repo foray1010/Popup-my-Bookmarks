@@ -54,10 +54,7 @@ export function* openBookmarksInBrowser({
       yield all(urls.map(createActiveTab))
       break
     case CST.OPEN_IN_TYPES.NEW_WINDOW:
-      yield call(createWindow, {
-        url: urls,
-        incognito: false
-      })
+      yield call(createWindow, {url: urls})
       break
     default:
   }
