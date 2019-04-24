@@ -2,26 +2,36 @@ import * as React from 'react'
 
 import * as CST from '../../constants'
 import {bookmarkCreators, menuCreators} from '../../reduxs'
+import {BookmarkInfo} from '../../types'
 
 export default ({
   openBookmarksInBrowser,
+  openFolderInBrowser,
   openMenu
 }: {
   openBookmarksInBrowser: typeof bookmarkCreators.openBookmarksInBrowser
+  openFolderInBrowser: typeof bookmarkCreators.openFolderInBrowser
   openMenu: typeof menuCreators.openMenu
 }) => {
   return React.useMemo(() => {
-    const handleRowLeftClick = (bookmarkId: string) => {
-      openBookmarksInBrowser([bookmarkId], CST.OPEN_IN_TYPES.CURRENT_TAB, true)
+    const handleRowLeftClick = (bookmarkInfo: BookmarkInfo) => {
+      openBookmarksInBrowser([bookmarkInfo.id], CST.OPEN_IN_TYPES.CURRENT_TAB, true)
     }
-    const handleRowMiddleClick = (bookmarkId: string) => {
-      openBookmarksInBrowser([bookmarkId], CST.OPEN_IN_TYPES.NEW_TAB, true)
+    const handleRowMiddleClick = (bookmarkInfo: BookmarkInfo) => {
+      if (bookmarkInfo.type === CST.BOOKMARK_TYPES.FOLDER) {
+        openFolderInBrowser(bookmarkInfo.id, CST.OPEN_IN_TYPES.NEW_TAB, true)
+      } else {
+        openBookmarksInBrowser([bookmarkInfo.id], CST.OPEN_IN_TYPES.NEW_TAB, true)
+      }
     }
-    const handleRowRightClick = (bookmarkId: string, evt: React.MouseEvent<HTMLElement>) => {
+    const handleRowRightClick = (
+      bookmarkInfo: BookmarkInfo,
+      evt: React.MouseEvent<HTMLElement>
+    ) => {
       if (!(evt.currentTarget instanceof HTMLElement)) return
 
       const targetOffset = evt.currentTarget.getBoundingClientRect()
-      openMenu(bookmarkId, {
+      openMenu(bookmarkInfo.id, {
         positionLeft: evt.clientX,
         positionTop: evt.clientY,
         targetLeft: targetOffset.left,
@@ -30,18 +40,18 @@ export default ({
     }
 
     return {
-      handleRowAuxClick: (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => {
+      handleRowAuxClick: (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent<HTMLElement>) => {
         if (evt.button === 1) {
-          handleRowMiddleClick(bookmarkId)
+          handleRowMiddleClick(bookmarkInfo)
         }
 
         if (evt.button === 2) {
-          handleRowRightClick(bookmarkId, evt)
+          handleRowRightClick(bookmarkInfo, evt)
         }
       },
-      handleRowClick: (bookmarkId: string) => () => {
-        handleRowLeftClick(bookmarkId)
+      handleRowClick: (bookmarkInfo: BookmarkInfo) => () => {
+        handleRowLeftClick(bookmarkInfo)
       }
     }
-  }, [openBookmarksInBrowser, openMenu])
+  }, [openBookmarksInBrowser, openFolderInBrowser, openMenu])
 }

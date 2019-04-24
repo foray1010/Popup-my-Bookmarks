@@ -15,6 +15,7 @@ import {initBookmarkTrees} from './modules/initBookmarkTrees'
 import {moveBookmarkToDragIndicator} from './modules/moveBookmarkToDragIndicator'
 import {openBookmarksInBrowser} from './modules/openBookmarksInBrowser'
 import {openBookmarkTree} from './modules/openBookmarkTree'
+import {openFolderInBrowser} from './modules/openFolderInBrowser'
 import {pasteBookmark} from './modules/pasteBookmark'
 import {refreshBookmarkTrees} from './modules/refreshBookmarkTrees'
 import {sortBookmarksByName} from './modules/sortBookmarksByName'
@@ -38,6 +39,7 @@ export function* bookmarkSaga(): SagaIterator {
       getType(bookmarkCreators.openBookmarksInBrowser),
       silenceSaga(openBookmarksInBrowser)
     ),
+    takeLatest(getType(bookmarkCreators.openFolderInBrowser), silenceSaga(openFolderInBrowser)),
     takeLatest(getType(bookmarkCreators.pasteBookmark), silenceSaga(pasteBookmark)),
     takeLatest(getType(bookmarkCreators.refreshBookmarkTrees), silenceSaga(refreshBookmarkTrees)),
     takeLatest(getType(bookmarkCreators.sortBookmarksByName), silenceSaga(sortBookmarksByName))

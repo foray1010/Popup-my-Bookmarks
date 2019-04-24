@@ -3,7 +3,7 @@ import {SagaIterator} from 'redux-saga'
 import {all, call} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
-import {createTab, createWindow, updateTab} from '../../../../../common/utils'
+import {createTab, createWindow, getI18n, updateTab} from '../../../../../common/utils'
 import * as CST from '../../../../constants'
 import {BookmarkInfo} from '../../../../types'
 import * as bookmarkCreators from '../../actions'
@@ -28,14 +28,13 @@ export function* openBookmarksInBrowser({
   const urls: Array<string> = yield call(getUrls, payload.ids)
   if (!urls.length) return
 
-  /*
   if (urls.length > 5) {
     const msgAskOpenAllTemplate = yield call(getI18n, 'askOpenAll')
     const msgAskOpenAll = msgAskOpenAllTemplate.replace('%bkmarkCount%', urls.length)
     // `window.confirm()` doesn't work as chrome will force close popup
-    // should use ui redux to handle and use loop to wait for user confirm/cancel
+    // but worked again at least since chrome 73
+    if (!window.confirm(msgAskOpenAll)) return
   }
-  */
 
   switch (payload.openIn) {
     case CST.OPEN_IN_TYPES.BACKGROUND_TAB:
@@ -63,5 +62,5 @@ export function* openBookmarksInBrowser({
     default:
   }
 
-  if (payload.isCloseBrowser) yield call(window.close)
+  if (payload.isCloseThisExtension) yield call(window.close)
 }

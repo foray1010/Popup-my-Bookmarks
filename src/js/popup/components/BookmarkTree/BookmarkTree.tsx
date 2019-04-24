@@ -15,8 +15,8 @@ interface ItemData {
   isDisableDragAndDrop: boolean
   isSearching: boolean
   isShowTooltip: boolean
-  onRowAuxClick: (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => void
-  onRowClick: (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => void
+  onRowAuxClick: (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent<HTMLElement>) => void
+  onRowClick: (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent<HTMLElement>) => void
   onRowDragOver: (
     bookmarkInfo: BookmarkInfo
   ) => (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void

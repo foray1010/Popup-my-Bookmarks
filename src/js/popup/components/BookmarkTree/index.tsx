@@ -55,6 +55,7 @@ const mapDispatchToProps = {
   createLastPosition: lastPositionsCreators.createLastPosition,
   openBookmarksInBrowser: bookmarkCreators.openBookmarksInBrowser,
   openBookmarkTree: bookmarkCreators.openBookmarkTree,
+  openFolderInBrowser: bookmarkCreators.openFolderInBrowser,
   openMenu: menuCreators.openMenu,
   removeBookmarkTree: bookmarkCreators.removeBookmarkTree,
   removeDragIndicator: bookmarkCreators.removeDragIndicator,

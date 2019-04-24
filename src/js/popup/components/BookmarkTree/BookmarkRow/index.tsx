@@ -16,8 +16,8 @@ interface Props {
   isSearching: boolean
   isShowTooltip: boolean
   isUnclickable: boolean
-  onAuxClick: (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => void
-  onClick: (bookmarkId: string) => (evt: React.MouseEvent<HTMLElement>) => void
+  onAuxClick: (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent<HTMLElement>) => void
+  onClick: (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent<HTMLElement>) => void
   onDragOver: (
     bookmarkInfo: BookmarkInfo
   ) => (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
@@ -40,11 +40,8 @@ const BookmarkRowContainer = ({
     bookmarkInfo
   })
 
-  const handleAuxClick = React.useMemo(() => onAuxClick(bookmarkInfo.id), [
-    bookmarkInfo.id,
-    onAuxClick
-  ])
-  const handleClick = React.useMemo(() => onClick(bookmarkInfo.id), [bookmarkInfo.id, onClick])
+  const handleAuxClick = React.useMemo(() => onAuxClick(bookmarkInfo), [bookmarkInfo, onAuxClick])
+  const handleClick = React.useMemo(() => onClick(bookmarkInfo), [bookmarkInfo, onClick])
   const handleDragOver = React.useMemo(() => onDragOver(bookmarkInfo), [bookmarkInfo, onDragOver])
   const handleMouseEnter = React.useMemo(() => onMouseEnter(bookmarkInfo), [
     bookmarkInfo,
