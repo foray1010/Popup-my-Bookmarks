@@ -30,7 +30,7 @@ const getTooltip = async ({isSearching, isShowTooltip, bookmarkInfo}: Arg) => {
     tooltipArr.unshift(`[${breadcrumbs.join(' > ')}]`)
   }
 
-  return tooltipArr.join('\n')
+  return tooltipArr.filter(Boolean).join('\n')
 }
 
 const useTooltip = ({isSearching, isShowTooltip, bookmarkInfo}: Arg) => {
