@@ -58,13 +58,6 @@ export default ({
   options: RootState['options']
 }) => {
   return React.useMemo(() => {
-    const handleRowLeftClick = (bookmarkInfo: BookmarkInfo) => {
-      const openBookmarkProps = mapOptionToOpenBookmarkProps(options[OPTIONS.CLICK_BY_LEFT])
-      openBookmarksInBrowser([bookmarkInfo.id], {
-        ...openBookmarkProps,
-        isAllowBookmarklet: true
-      })
-    }
     const handleRowMiddleClick = (bookmarkInfo: BookmarkInfo) => {
       if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
         openFolderInBrowser(bookmarkInfo.id, {
@@ -105,8 +98,24 @@ export default ({
           handleRowRightClick(bookmarkInfo, evt)
         }
       },
-      handleRowClick: (bookmarkInfo: BookmarkInfo) => () => {
-        handleRowLeftClick(bookmarkInfo)
+      handleRowClick: (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent<HTMLElement>) => {
+        const option = (() => {
+          if (evt.ctrlKey || evt.metaKey) {
+            return options[OPTIONS.CLICK_BY_LEFT_CTRL]
+          }
+
+          if (evt.shiftKey) {
+            return options[OPTIONS.CLICK_BY_LEFT_SHIFT]
+          }
+
+          return options[OPTIONS.CLICK_BY_LEFT]
+        })()
+
+        const openBookmarkProps = mapOptionToOpenBookmarkProps(option)
+        openBookmarksInBrowser([bookmarkInfo.id], {
+          ...openBookmarkProps,
+          isAllowBookmarklet: true
+        })
       }
     }
   }, [openBookmarksInBrowser, openFolderInBrowser, openMenu, options])
