@@ -42,7 +42,7 @@
     "webextension-polyfill": "0.4.0"
   },
   "devDependencies": {
-    "@babel/core": "7.4.3",
+    "@babel/core": "7.4.4",
     "@commitlint/cli": "7.5.2",
     "@commitlint/config-conventional": "7.5.0",
     "@redux-saga/testing-utils": "1.0.2",
