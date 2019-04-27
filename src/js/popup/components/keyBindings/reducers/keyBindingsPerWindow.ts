@@ -14,7 +14,7 @@ export type KeyBinding = Readonly<{
 }>
 export type KeyBindingsPerWindowState = Map<string, ReadonlyArray<KeyBinding>>
 
-export const keyBindingsPerWindowInitialState = new Map()
+export const keyBindingsPerWindowInitialState: KeyBindingsPerWindowState = new Map()
 
 export const keyBindingsPerWindowCreators = {
   addEventListener: createAction(

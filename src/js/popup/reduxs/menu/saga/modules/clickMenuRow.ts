@@ -4,18 +4,19 @@ import {call, put, select} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
 import * as CST from '../../../../constants'
-import {BookmarkTree} from '../../../../types'
+import {BookmarkInfo, BookmarkTree} from '../../../../types'
 import * as bookmarkCreators from '../../../bookmark/actions'
 import {getBookmarkInfo, getBookmarkTree} from '../../../bookmark/saga/utils/getters'
 import * as editorCreators from '../../../editor/actions'
+import {RootState} from '../../../rootReducer'
 import * as menuCreators from '../../actions'
 
 export function* clickMenuRow({
   payload
 }: ActionType<typeof menuCreators.clickMenuRow>): SagaIterator {
-  const {menu} = yield select(R.pick(['menu']))
+  const {menu}: RootState = yield select(R.identity)
 
-  const targetBookmarkInfo = yield call(getBookmarkInfo, menu.targetId)
+  const targetBookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, menu.targetId)
 
   switch (payload.rowName) {
     case CST.MENU_ADD_FOLDER:

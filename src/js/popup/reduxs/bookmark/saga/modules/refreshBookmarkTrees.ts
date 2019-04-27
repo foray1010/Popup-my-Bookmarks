@@ -17,7 +17,11 @@ export function* refreshBookmarkTrees(): SagaIterator {
   if (searchKeyword) {
     yield put(bookmarkCreators.getSearchResult(searchKeyword))
   } else {
-    const bookmarkTrees = yield call(getBookmarkTrees, getRestTreeIds(trees), options)
+    const bookmarkTrees: Array<BookmarkTree> = yield call(
+      getBookmarkTrees,
+      getRestTreeIds(trees),
+      options
+    )
     yield put(bookmarkCreators.setBookmarkTrees(bookmarkTrees))
   }
 }

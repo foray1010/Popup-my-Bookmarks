@@ -26,7 +26,7 @@ const Option = ({
 
       const wasChecked = optionValue.includes(checkboxValue)
 
-      let newOptionValue
+      let newOptionValue: Array<number | void> = []
       if (wasChecked) {
         newOptionValue = optionValue.filter((x) => x !== checkboxValue)
       } else {

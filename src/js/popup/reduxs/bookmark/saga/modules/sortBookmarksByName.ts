@@ -82,7 +82,7 @@ export function* sortBookmarksByName({
 
   // Moving bookmarks to sorted index
   for (const [index, bookmarkInfo] of sortedBookmarkInfos.entries()) {
-    const currentBookmarkInfo = yield call(getBookmarkInfo, bookmarkInfo.id)
+    const currentBookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, bookmarkInfo.id)
     const currentIndex = currentBookmarkInfo.storageIndex
     if (currentIndex !== index) {
       yield call(moveBookmark, bookmarkInfo.id, {

@@ -16,7 +16,7 @@ const getOptionsConfig = async (): Promise<OptionsConfig> => {
     'clickOption6',
     'clickOption7'
   ])
-  const rootFolderChoices = []
+  const rootFolderChoices: Array<string> = []
 
   // get the root folders' title and set as the choices of 'defExpand'
   const rootFolders = await webExtension.bookmarks.getChildren(ROOT_ID)

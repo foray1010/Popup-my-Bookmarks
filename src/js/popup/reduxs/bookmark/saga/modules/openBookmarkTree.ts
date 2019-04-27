@@ -3,16 +3,18 @@ import {SagaIterator} from 'redux-saga'
 import {all, call, put, select} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
+import {BookmarkTree} from '../../../../types'
+import {RootState} from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 import {getBookmarkTree} from '../utils/getters'
 
-export const bookmarkTreesSelector = R.path(['bookmark', 'trees'])
+export const bookmarkTreesSelector = (state: RootState) => state.bookmark.trees
 const treeIdEquals = R.pathEq(['parent', 'id'])
 
 export function* openBookmarkTree({
   payload
 }: ActionType<typeof bookmarkCreators.openBookmarkTree>): SagaIterator {
-  const [trees, bookmarkTree] = yield all([
+  const [trees, bookmarkTree]: [Array<BookmarkTree>, BookmarkTree] = yield all([
     select(bookmarkTreesSelector),
     call(getBookmarkTree, payload.id)
   ])

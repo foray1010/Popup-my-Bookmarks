@@ -1,6 +1,7 @@
 import * as R from 'ramda'
 import {SagaIterator} from 'redux-saga'
 import {all, call} from 'redux-saga/effects'
+import webExtension from 'webextension-polyfill'
 
 import {Options} from '../../../../../common/types/options'
 import {
@@ -15,32 +16,39 @@ import {simulateBookmark, toBookmarkInfo} from '../../utils/converters'
 
 export function* getBookmarkInfo(id: string): SagaIterator {
   if (id.startsWith(CST.NO_BOOKMARK_ID_PREFIX)) {
+    const title: string = yield call(getI18n, 'noBkmark')
     return simulateBookmark({
       id,
       parentId: id.replace(CST.NO_BOOKMARK_ID_PREFIX, ''),
-      title: yield call(getI18n, 'noBkmark'),
+      title,
       type: CST.BOOKMARK_TYPES.NO_BOOKMARK
     })
   }
 
-  const bookmarkNodes = yield call(getBookmarkNodes, id)
+  const bookmarkNodes: Array<webExtension.bookmarks.BookmarkTreeNode> = yield call(
+    getBookmarkNodes,
+    id
+  )
   return toBookmarkInfo(bookmarkNodes[0])
 }
 
 export function* getBookmarkChildren(id: string): SagaIterator {
-  const bookmarkChildNodes = yield call(getBookmarkChildNodes, id)
+  const bookmarkChildNodes: Array<webExtension.bookmarks.BookmarkTreeNode> = yield call(
+    getBookmarkChildNodes,
+    id
+  )
   return R.map(toBookmarkInfo, bookmarkChildNodes)
 }
 
 export function* getBookmarkTree(id: string): SagaIterator {
-  const [bookmarkInfo, bookmarkChildren] = yield all([
+  const [bookmarkInfo, bookmarkChildren]: [BookmarkInfo, Array<BookmarkInfo>] = yield all([
     call(getBookmarkInfo, id),
     call(getBookmarkChildren, id)
   ])
   return {
     children: bookmarkChildren.length ?
       bookmarkChildren :
-      [yield call(getBookmarkInfo, CST.NO_BOOKMARK_ID_PREFIX + id)],
+      ([yield call(getBookmarkInfo, CST.NO_BOOKMARK_ID_PREFIX + id)]) as Array<BookmarkInfo>,
     parent: bookmarkInfo
   }
 }
@@ -93,7 +101,10 @@ interface SearchQuery {
   query: string
 }
 export function* searchBookmarks(searchQuery: SearchQuery): SagaIterator {
-  const searchResultNodes = yield call(searchBookmarkNodes, searchQuery)
+  const searchResultNodes: Array<webExtension.bookmarks.BookmarkTreeNode> = yield call(
+    searchBookmarkNodes,
+    searchQuery
+  )
   return R.map(toBookmarkInfo, searchResultNodes)
 }
 

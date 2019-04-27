@@ -19,7 +19,7 @@ const getBreadcrumbs = async (id?: string): Promise<Array<string>> => {
 }
 
 const getTooltip = async ({isSearching, isShowTooltip, bookmarkInfo}: Arg) => {
-  const tooltipArr = []
+  const tooltipArr: Array<string> = []
 
   if (isShowTooltip) {
     tooltipArr.push(bookmarkInfo.title, bookmarkInfo.url)

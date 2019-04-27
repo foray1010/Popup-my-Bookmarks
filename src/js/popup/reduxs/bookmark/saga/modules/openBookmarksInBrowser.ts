@@ -48,8 +48,8 @@ export function* openBookmarksInBrowser({
 
   if (urls.length > 0) {
     if (urls.length > 5) {
-      const msgAskOpenAllTemplate = yield call(getI18n, 'askOpenAll')
-      const msgAskOpenAll = msgAskOpenAllTemplate.replace('%bkmarkCount%', urls.length)
+      const msgAskOpenAllTemplate: string = yield call(getI18n, 'askOpenAll')
+      const msgAskOpenAll = msgAskOpenAllTemplate.replace('%bkmarkCount%', String(urls.length))
       // `window.confirm()` doesn't work as chrome will force close popup
       // but worked again at least since chrome 73
       if (!window.confirm(msgAskOpenAll)) return

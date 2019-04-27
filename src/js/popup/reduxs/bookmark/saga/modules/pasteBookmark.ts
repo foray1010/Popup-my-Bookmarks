@@ -6,6 +6,7 @@ import {ActionType} from 'typesafe-actions'
 import {createBookmark, moveBookmark} from '../../../../../common/utils'
 import * as CST from '../../../../constants'
 import {BookmarkInfo, BookmarkTree} from '../../../../types'
+import {RootState} from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 import {getBookmarkInfo, getBookmarkTree} from '../utils/getters'
 
@@ -39,7 +40,7 @@ function* recursiveCopy({fromId, toIndex, toParentId}: RecursiveCopyPayload): Sa
 export function* pasteBookmark({
   payload
 }: ActionType<typeof bookmarkCreators.pasteBookmark>): SagaIterator {
-  const {bookmark} = yield select(R.identity)
+  const {bookmark}: RootState = yield select(R.identity)
   const {clipboard} = bookmark
 
   if (clipboard.isRemoveAfterPaste) {
