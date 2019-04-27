@@ -50,6 +50,6 @@ const main = async (): Promise<void> => {
   )
 }
 
-main().catch((err) => {
+main().catch((err: Error) => {
   console.error(err)
 })
