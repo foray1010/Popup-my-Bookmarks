@@ -20,15 +20,19 @@ export const getRememberedTreeIds = ({
 }
 
 export function* initBookmarkTrees(): SagaIterator {
-  const {lastPositions, options}: RootState = yield select(R.identity)
+  try {
+    const {lastPositions, options}: RootState = yield select(R.identity)
 
-  const rememberedTreeIds = getRememberedTreeIds({lastPositions, options})
+    const rememberedTreeIds = getRememberedTreeIds({lastPositions, options})
 
-  const bookmarkTrees: Array<BookmarkTree> = yield call(
-    getBookmarkTrees,
-    R.tail(rememberedTreeIds),
-    options
-  )
+    const bookmarkTrees: Array<BookmarkTree> = yield call(
+      getBookmarkTrees,
+      R.tail(rememberedTreeIds),
+      options
+    )
 
-  yield put(bookmarkCreators.setBookmarkTrees(bookmarkTrees))
+    yield put(bookmarkCreators.setBookmarkTrees(bookmarkTrees))
+  } catch (err) {
+    console.error(err)
+  }
 }

@@ -1,3 +1,5 @@
+/* eslint redux-saga/no-unhandled-errors: 'off' */
+
 import {cloneableGenerator} from '@redux-saga/testing-utils'
 import Chance from 'chance'
 import {call} from 'redux-saga/effects'

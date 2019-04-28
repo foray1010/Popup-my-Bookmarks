@@ -8,12 +8,16 @@ import * as bookmarkCreators from '../../actions'
 export function* createBookmark({
   payload
 }: ActionType<typeof bookmarkCreators.createBookmark>): SagaIterator {
-  const trimmedUrl = payload.url.trim()
+  try {
+    const trimmedUrl = payload.url.trim()
 
-  yield call(createBookmarkWrapper, {
-    index: payload.index,
-    parentId: payload.parentId,
-    title: payload.title.trim(),
-    ...(trimmedUrl ? {url: trimmedUrl} : null)
-  })
+    yield call(createBookmarkWrapper, {
+      index: payload.index,
+      parentId: payload.parentId,
+      title: payload.title.trim(),
+      ...(trimmedUrl ? {url: trimmedUrl} : null)
+    })
+  } catch (err) {
+    console.error(err)
+  }
 }

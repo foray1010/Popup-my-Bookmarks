@@ -9,11 +9,15 @@ import * as menuCreators from '../../actions'
 import {getMenuPattern} from '../utils/getMenuPattern'
 
 export function* openMenu({payload}: ActionType<typeof menuCreators.openMenu>): SagaIterator {
-  const [isSearching, bookmarkInfo]: [boolean, BookmarkInfo] = yield all([
-    select((state: RootState) => Boolean(state.bookmark.searchKeyword)),
-    call(getBookmarkInfo, payload.targetId)
-  ])
+  try {
+    const [isSearching, bookmarkInfo]: [boolean, BookmarkInfo] = yield all([
+      select((state: RootState) => Boolean(state.bookmark.searchKeyword)),
+      call(getBookmarkInfo, payload.targetId)
+    ])
 
-  const menuPattern = getMenuPattern(bookmarkInfo, isSearching)
-  yield put(menuCreators.setMenuPattern(menuPattern))
+    const menuPattern = getMenuPattern(bookmarkInfo, isSearching)
+    yield put(menuCreators.setMenuPattern(menuPattern))
+  } catch (err) {
+    console.error(err)
+  }
 }

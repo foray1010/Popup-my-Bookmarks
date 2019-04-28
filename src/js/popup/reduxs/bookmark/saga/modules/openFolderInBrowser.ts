@@ -9,9 +9,13 @@ import {getBookmarkTree} from '../utils/getters'
 export function* openFolderInBrowser({
   payload
 }: ActionType<typeof bookmarkCreators.openFolderInBrowser>): SagaIterator {
-  const bookmarkTree: BookmarkTree = yield call(getBookmarkTree, payload.id)
+  try {
+    const bookmarkTree: BookmarkTree = yield call(getBookmarkTree, payload.id)
 
-  const bookmarkIds = bookmarkTree.children.map((x) => x.id)
+    const bookmarkIds = bookmarkTree.children.map((x) => x.id)
 
-  yield put(bookmarkCreators.openBookmarksInBrowser(bookmarkIds, payload.openBookmarkProps))
+    yield put(bookmarkCreators.openBookmarksInBrowser(bookmarkIds, payload.openBookmarkProps))
+  } catch (err) {
+    console.error(err)
+  }
 }

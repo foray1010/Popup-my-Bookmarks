@@ -1,3 +1,5 @@
+/* eslint redux-saga/no-unhandled-errors: 'off' */
+
 import Chance from 'chance'
 import {put} from 'redux-saga/effects'
 import {getType} from 'typesafe-actions'

@@ -1,3 +1,5 @@
+/* eslint redux-saga/no-unhandled-errors: 'off' */
+
 import Chance from 'chance'
 import * as R from 'ramda'
 import {call, put, select} from 'redux-saga/effects'

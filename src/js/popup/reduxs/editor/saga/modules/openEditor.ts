@@ -7,15 +7,19 @@ import {getBookmarkInfo} from '../../../bookmark/saga/utils/getters'
 import * as editorCreators from '../../actions'
 
 export function* openEditor({payload}: ActionType<typeof editorCreators.openEditor>): SagaIterator {
-  const bookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, payload.targetId)
+  try {
+    const bookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, payload.targetId)
 
-  yield put(
-    editorCreators.setEditor({
-      ...payload.coordinates,
-      isAllowEditUrl: Boolean(bookmarkInfo.url),
-      targetId: payload.targetId,
-      title: bookmarkInfo.title,
-      url: bookmarkInfo.url
-    })
-  )
+    yield put(
+      editorCreators.setEditor({
+        ...payload.coordinates,
+        isAllowEditUrl: Boolean(bookmarkInfo.url),
+        targetId: payload.targetId,
+        title: bookmarkInfo.title,
+        url: bookmarkInfo.url
+      })
+    )
+  } catch (err) {
+    console.error(err)
+  }
 }

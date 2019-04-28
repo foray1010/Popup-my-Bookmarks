@@ -9,14 +9,18 @@ import {getBookmarkInfo} from '../utils/getters'
 export function* createBookmarkAfterId({
   payload
 }: ActionType<typeof bookmarkCreators.createBookmarkAfterId>): SagaIterator {
-  const bookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, payload.id)
+  try {
+    const bookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, payload.id)
 
-  yield put(
-    bookmarkCreators.createBookmark(
-      bookmarkInfo.parentId,
-      bookmarkInfo.storageIndex + 1,
-      payload.title,
-      payload.url
+    yield put(
+      bookmarkCreators.createBookmark(
+        bookmarkInfo.parentId,
+        bookmarkInfo.storageIndex + 1,
+        payload.title,
+        payload.url
+      )
     )
-  )
+  } catch (err) {
+    console.error(err)
+  }
 }

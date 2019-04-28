@@ -9,17 +9,21 @@ import * as bookmarkCreators from '../../actions'
 export function* addCurrentPage({
   payload
 }: ActionType<typeof bookmarkCreators.addCurrentPage>): SagaIterator {
-  const [currentTab]: Array<webExtension.tabs.Tab> = yield call(queryTabs, {
-    currentWindow: true,
-    active: true
-  })
+  try {
+    const [currentTab]: Array<webExtension.tabs.Tab> = yield call(queryTabs, {
+      currentWindow: true,
+      active: true
+    })
 
-  yield put(
-    bookmarkCreators.createBookmark(
-      payload.parentId,
-      payload.index,
-      currentTab.title || '',
-      currentTab.url || ''
+    yield put(
+      bookmarkCreators.createBookmark(
+        payload.parentId,
+        payload.index,
+        currentTab.title || '',
+        currentTab.url || ''
+      )
     )
-  )
+  } catch (err) {
+    console.error(err)
+  }
 }

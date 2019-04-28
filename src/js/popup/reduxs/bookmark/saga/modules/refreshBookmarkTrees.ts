@@ -11,17 +11,21 @@ export const getRestTreeIds = (trees: Array<BookmarkTree>) =>
   R.tail(trees).map((tree) => tree.parent.id)
 
 export function* refreshBookmarkTrees(): SagaIterator {
-  const {bookmark, options}: RootState = yield select(R.identity)
-  const {searchKeyword, trees} = bookmark
+  try {
+    const {bookmark, options}: RootState = yield select(R.identity)
+    const {searchKeyword, trees} = bookmark
 
-  if (searchKeyword) {
-    yield put(bookmarkCreators.getSearchResult(searchKeyword))
-  } else {
-    const bookmarkTrees: Array<BookmarkTree> = yield call(
-      getBookmarkTrees,
-      getRestTreeIds(trees),
-      options
-    )
-    yield put(bookmarkCreators.setBookmarkTrees(bookmarkTrees))
+    if (searchKeyword) {
+      yield put(bookmarkCreators.getSearchResult(searchKeyword))
+    } else {
+      const bookmarkTrees: Array<BookmarkTree> = yield call(
+        getBookmarkTrees,
+        getRestTreeIds(trees),
+        options
+      )
+      yield put(bookmarkCreators.setBookmarkTrees(bookmarkTrees))
+    }
+  } catch (err) {
+    console.error(err)
   }
 }

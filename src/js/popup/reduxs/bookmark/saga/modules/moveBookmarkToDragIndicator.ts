@@ -15,46 +15,50 @@ const isDragIndicator = (bookmarkInfo: BookmarkInfo) =>
 export function* moveBookmarkToDragIndicator({
   payload
 }: ActionType<typeof bookmarkCreators.moveBookmarkToDragIndicator>): SagaIterator {
-  const {bookmark}: RootState = yield select(R.identity)
+  try {
+    const {bookmark}: RootState = yield select(R.identity)
 
-  const treeInfo: BookmarkTree | void = bookmark.trees.find((tree: BookmarkTree) =>
-    tree.children.some(isDragIndicator))
-  if (!treeInfo) return
+    const treeInfo: BookmarkTree | void = bookmark.trees.find((tree: BookmarkTree) =>
+      tree.children.some(isDragIndicator))
+    if (!treeInfo) return
 
-  const {storageIndex} = treeInfo.children.reduceRight(
-    (acc, bookmarkInfo) => {
-      if (acc.isReduced) return acc
+    const {storageIndex} = treeInfo.children.reduceRight(
+      (acc, bookmarkInfo) => {
+        if (acc.isReduced) return acc
 
-      if (isDragIndicator(bookmarkInfo)) {
-        return {
-          ...acc,
-          isCapture: true
-        }
-      }
-
-      if (acc.isCapture) {
-        if (!bookmarkInfo.isRoot && !bookmarkInfo.isSimulated) {
+        if (isDragIndicator(bookmarkInfo)) {
           return {
-            isCapture: false,
-            isReduced: true,
-            storageIndex: bookmarkInfo.storageIndex + 1
+            ...acc,
+            isCapture: true
           }
         }
+
+        if (acc.isCapture) {
+          if (!bookmarkInfo.isRoot && !bookmarkInfo.isSimulated) {
+            return {
+              isCapture: false,
+              isReduced: true,
+              storageIndex: bookmarkInfo.storageIndex + 1
+            }
+          }
+        }
+
+        return acc
+      },
+      {
+        isCapture: false,
+        isReduced: false,
+        storageIndex: 0
       }
+    )
 
-      return acc
-    },
-    {
-      isCapture: false,
-      isReduced: false,
-      storageIndex: 0
-    }
-  )
+    yield call(moveBookmark, payload.bookmarkId, {
+      parentId: treeInfo.parent.id,
+      index: storageIndex
+    })
 
-  yield call(moveBookmark, payload.bookmarkId, {
-    parentId: treeInfo.parent.id,
-    index: storageIndex
-  })
-
-  yield put(bookmarkCreators.removeDragIndicator())
+    yield put(bookmarkCreators.removeDragIndicator())
+  } catch (err) {
+    console.error(err)
+  }
 }

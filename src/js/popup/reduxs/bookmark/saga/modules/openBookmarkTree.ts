@@ -14,17 +14,21 @@ const treeIdEquals = R.pathEq(['parent', 'id'])
 export function* openBookmarkTree({
   payload
 }: ActionType<typeof bookmarkCreators.openBookmarkTree>): SagaIterator {
-  const [trees, bookmarkTree]: [Array<BookmarkTree>, BookmarkTree] = yield all([
-    select(bookmarkTreesSelector),
-    call(getBookmarkTree, payload.id)
-  ])
+  try {
+    const [trees, bookmarkTree]: [Array<BookmarkTree>, BookmarkTree] = yield all([
+      select(bookmarkTreesSelector),
+      call(getBookmarkTree, payload.id)
+    ])
 
-  // if tree is already in view, no need to re-render
-  if (trees.some(treeIdEquals(payload.id))) return
+    // if tree is already in view, no need to re-render
+    if (trees.some(treeIdEquals(payload.id))) return
 
-  const parentIndex = trees.findIndex(treeIdEquals(payload.parentId))
-  // if parent doesn't exist, do not show this tree in the view
-  if (parentIndex < 0) return
+    const parentIndex = trees.findIndex(treeIdEquals(payload.parentId))
+    // if parent doesn't exist, do not show this tree in the view
+    if (parentIndex < 0) return
 
-  yield put(bookmarkCreators.setBookmarkTrees([...trees.slice(0, parentIndex + 1), bookmarkTree]))
+    yield put(bookmarkCreators.setBookmarkTrees([...trees.slice(0, parentIndex + 1), bookmarkTree]))
+  } catch (err) {
+    console.error(err)
+  }
 }

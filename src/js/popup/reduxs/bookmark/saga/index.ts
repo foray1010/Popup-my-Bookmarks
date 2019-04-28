@@ -1,8 +1,7 @@
 import {SagaIterator} from 'redux-saga'
-import {all, takeEvery, takeLatest} from 'redux-saga/effects'
+import {takeEvery, takeLatest} from 'redux-saga/effects'
 import {getType} from 'typesafe-actions'
 
-import {silenceSaga} from '../../../../common/utils'
 import * as bookmarkCreators from '../actions'
 import {addCurrentPage} from './modules/addCurrentPage'
 import {addSeparator} from './modules/addSeparator'
@@ -21,27 +20,22 @@ import {refreshBookmarkTrees} from './modules/refreshBookmarkTrees'
 import {sortBookmarksByName} from './modules/sortBookmarksByName'
 
 export function* bookmarkSaga(): SagaIterator {
-  yield all([
-    takeLatest(getType(bookmarkCreators.addCurrentPage), silenceSaga(addCurrentPage)),
-    takeLatest(getType(bookmarkCreators.addSeparator), silenceSaga(addSeparator)),
-    takeEvery(getType(bookmarkCreators.createBookmark), silenceSaga(createBookmark)),
-    takeLatest(getType(bookmarkCreators.createBookmarkAfterId), silenceSaga(createBookmarkAfterId)),
-    takeEvery(getType(bookmarkCreators.deleteBookmark), silenceSaga(deleteBookmark)),
-    takeLatest(getType(bookmarkCreators.editBookmark), silenceSaga(editBookmark)),
-    takeLatest(getType(bookmarkCreators.getSearchResult), silenceSaga(getSearchResult)),
-    takeLatest(getType(bookmarkCreators.initBookmarkTrees), silenceSaga(initBookmarkTrees)),
-    takeLatest(
-      getType(bookmarkCreators.moveBookmarkToDragIndicator),
-      silenceSaga(moveBookmarkToDragIndicator)
-    ),
-    takeLatest(getType(bookmarkCreators.openBookmarkTree), silenceSaga(openBookmarkTree)),
-    takeLatest(
-      getType(bookmarkCreators.openBookmarksInBrowser),
-      silenceSaga(openBookmarksInBrowser)
-    ),
-    takeLatest(getType(bookmarkCreators.openFolderInBrowser), silenceSaga(openFolderInBrowser)),
-    takeLatest(getType(bookmarkCreators.pasteBookmark), silenceSaga(pasteBookmark)),
-    takeLatest(getType(bookmarkCreators.refreshBookmarkTrees), silenceSaga(refreshBookmarkTrees)),
-    takeLatest(getType(bookmarkCreators.sortBookmarksByName), silenceSaga(sortBookmarksByName))
-  ])
+  yield takeLatest(getType(bookmarkCreators.addCurrentPage), addCurrentPage)
+  yield takeLatest(getType(bookmarkCreators.addSeparator), addSeparator)
+  yield takeEvery(getType(bookmarkCreators.createBookmark), createBookmark)
+  yield takeLatest(getType(bookmarkCreators.createBookmarkAfterId), createBookmarkAfterId)
+  yield takeEvery(getType(bookmarkCreators.deleteBookmark), deleteBookmark)
+  yield takeLatest(getType(bookmarkCreators.editBookmark), editBookmark)
+  yield takeLatest(getType(bookmarkCreators.getSearchResult), getSearchResult)
+  yield takeLatest(getType(bookmarkCreators.initBookmarkTrees), initBookmarkTrees)
+  yield takeLatest(
+    getType(bookmarkCreators.moveBookmarkToDragIndicator),
+    moveBookmarkToDragIndicator
+  )
+  yield takeLatest(getType(bookmarkCreators.openBookmarkTree), openBookmarkTree)
+  yield takeLatest(getType(bookmarkCreators.openBookmarksInBrowser), openBookmarksInBrowser)
+  yield takeLatest(getType(bookmarkCreators.openFolderInBrowser), openFolderInBrowser)
+  yield takeLatest(getType(bookmarkCreators.pasteBookmark), pasteBookmark)
+  yield takeLatest(getType(bookmarkCreators.refreshBookmarkTrees), refreshBookmarkTrees)
+  yield takeLatest(getType(bookmarkCreators.sortBookmarksByName), sortBookmarksByName)
 }

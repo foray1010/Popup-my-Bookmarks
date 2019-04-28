@@ -16,42 +16,50 @@ interface RecursiveCopyPayload {
   toParentId: string
 }
 function* recursiveCopy({fromId, toIndex, toParentId}: RecursiveCopyPayload): SagaIterator {
-  const bookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, fromId)
+  try {
+    const bookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, fromId)
 
-  const createdBookmarkNode: browser.bookmarks.BookmarkTreeNode = yield call(createBookmark, {
-    index: toIndex,
-    parentId: toParentId,
-    title: bookmarkInfo.title,
-    ...(bookmarkInfo.type !== CST.BOOKMARK_TYPES.FOLDER ? {url: bookmarkInfo.url} : null)
-  })
+    const createdBookmarkNode: browser.bookmarks.BookmarkTreeNode = yield call(createBookmark, {
+      index: toIndex,
+      parentId: toParentId,
+      title: bookmarkInfo.title,
+      ...(bookmarkInfo.type !== CST.BOOKMARK_TYPES.FOLDER ? {url: bookmarkInfo.url} : null)
+    })
 
-  if (bookmarkInfo.type === CST.BOOKMARK_TYPES.FOLDER) {
-    const bookmarkTree: BookmarkTree = yield call(getBookmarkTree, fromId)
-    for (const [index, child] of bookmarkTree.children.entries()) {
-      yield call(recursiveCopy, {
-        fromId: child.id,
-        toIndex: index,
-        toParentId: createdBookmarkNode.id
-      })
+    if (bookmarkInfo.type === CST.BOOKMARK_TYPES.FOLDER) {
+      const bookmarkTree: BookmarkTree = yield call(getBookmarkTree, fromId)
+      for (const [index, child] of bookmarkTree.children.entries()) {
+        yield call(recursiveCopy, {
+          fromId: child.id,
+          toIndex: index,
+          toParentId: createdBookmarkNode.id
+        })
+      }
     }
+  } catch (err) {
+    console.error(err)
   }
 }
 
 export function* pasteBookmark({
   payload
 }: ActionType<typeof bookmarkCreators.pasteBookmark>): SagaIterator {
-  const {bookmark}: RootState = yield select(R.identity)
-  const {clipboard} = bookmark
+  try {
+    const {bookmark}: RootState = yield select(R.identity)
+    const {clipboard} = bookmark
 
-  if (clipboard.isRemoveAfterPaste) {
-    yield call(moveBookmark, clipboard.id, {parentId: payload.parentId, index: payload.index})
-  } else {
-    yield call(recursiveCopy, {
-      fromId: clipboard.id,
-      toIndex: payload.index,
-      toParentId: payload.parentId
-    })
+    if (clipboard.isRemoveAfterPaste) {
+      yield call(moveBookmark, clipboard.id, {parentId: payload.parentId, index: payload.index})
+    } else {
+      yield call(recursiveCopy, {
+        fromId: clipboard.id,
+        toIndex: payload.index,
+        toParentId: payload.parentId
+      })
+    }
+
+    yield put(bookmarkCreators.resetClipboard())
+  } catch (err) {
+    console.error(err)
   }
-
-  yield put(bookmarkCreators.resetClipboard())
 }

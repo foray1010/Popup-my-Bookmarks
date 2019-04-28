@@ -8,13 +8,17 @@ import * as editorCreators from '../../actions'
 export function* createFolderInEditor({
   payload
 }: ActionType<typeof editorCreators.createFolderInEditor>): SagaIterator {
-  yield put(
-    editorCreators.setEditor({
-      ...payload.coordinates,
-      isAllowEditUrl: false,
-      isCreating: true,
-      targetId: payload.targetId,
-      title: yield call(getI18n, 'newFolder')
-    })
-  )
+  try {
+    yield put(
+      editorCreators.setEditor({
+        ...payload.coordinates,
+        isAllowEditUrl: false,
+        isCreating: true,
+        targetId: payload.targetId,
+        title: yield call(getI18n, 'newFolder')
+      })
+    )
+  } catch (err) {
+    console.error(err)
+  }
 }

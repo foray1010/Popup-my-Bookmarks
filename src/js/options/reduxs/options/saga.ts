@@ -1,39 +1,49 @@
 import * as R from 'ramda'
 import {SagaIterator} from 'redux-saga'
-import {all, call, put, select, takeLatest} from 'redux-saga/effects'
+import {call, put, select, takeLatest} from 'redux-saga/effects'
 import {getType} from 'typesafe-actions'
 
 import {Options} from '../../../common/types/options'
-import {clearStorage, getSyncStorage, setSyncStorage, silenceSaga} from '../../../common/utils'
+import {clearStorage, getSyncStorage, setSyncStorage} from '../../../common/utils'
 import {initOptions} from '../../utils'
 import * as optionsCreators from './actions'
 
 function* reloadOptions(): SagaIterator {
-  const options: Options = yield call(getSyncStorage)
+  try {
+    const options: Options = yield call(getSyncStorage)
 
-  yield put(optionsCreators.updateOptions(options))
+    yield put(optionsCreators.updateOptions(options))
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 function* resetToDefaultOptions(): SagaIterator {
-  yield call(clearStorage)
+  try {
+    yield call(clearStorage)
 
-  const options: Options = yield call(initOptions)
+    const options: Options = yield call(initOptions)
 
-  yield put(optionsCreators.updateOptions(options))
+    yield put(optionsCreators.updateOptions(options))
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 function* saveOptions(): SagaIterator {
-  const {options}: {options: Options} = yield select(R.identity)
+  try {
+    const {options}: {options: Options} = yield select(R.identity)
 
-  yield call(setSyncStorage, options)
+    yield call(setSyncStorage, options)
 
-  yield put(optionsCreators.updateOptions(options))
+    yield put(optionsCreators.updateOptions(options))
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 export function* optionsSaga(): SagaIterator {
-  yield all([
-    takeLatest(getType(optionsCreators.reloadOptions), silenceSaga(reloadOptions)),
-    takeLatest(getType(optionsCreators.resetToDefaultOptions), silenceSaga(resetToDefaultOptions)),
-    takeLatest(getType(optionsCreators.saveOptions), silenceSaga(saveOptions))
-  ])
+  yield takeLatest(getType(optionsCreators.reloadOptions), reloadOptions)
+  yield takeLatest(getType(optionsCreators.resetToDefaultOptions), resetToDefaultOptions)
+  yield takeLatest(getType(optionsCreators.saveOptions), saveOptions)
 }

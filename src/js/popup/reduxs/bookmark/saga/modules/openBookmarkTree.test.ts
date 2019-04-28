@@ -1,3 +1,5 @@
+/* eslint redux-saga/no-unhandled-errors: 'off' */
+
 import {all, call, put, select} from 'redux-saga/effects'
 import {getType} from 'typesafe-actions'
 
