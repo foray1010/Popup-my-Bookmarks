@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import * as CST from '../../constants'
 import {MENU_WINDOW} from '../../constants/windows'
 import {RootState, menuCreators} from '../../reduxs'
+import isMac from '../../utils/isMac'
 import AbsPositionWithinBody from '../AbsPositionWithinBody'
 import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
 import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
@@ -57,6 +58,7 @@ const MenuContainer = ({clickMenuRow, closeMenu, menuPattern, ...restProps}: Pro
   }, [allRowNames, clickMenuRow, closeMenu, highlightedIndex])
 
   useKeyBindingsEvent({key: 'Enter', windowId: MENU_WINDOW}, handleRowClick)
+  useKeyBindingsEvent({key: isMac() ? 'Control' : 'ContextMenu', windowId: MENU_WINDOW}, closeMenu)
 
   const handleRowMouseEnter = React.useCallback(
     (index: number) => () => {
