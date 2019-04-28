@@ -27,6 +27,7 @@ interface ItemData {
 }
 const Row = ({data, index, style}: {data: ItemData, index: number, style: React.CSSProperties}) => {
   const bookmarkInfo = data.treeInfo.children[index]
+  const isDragging = data.draggingId !== null
   const isBeingDragged = data.draggingId === bookmarkInfo.id
   return (
     <div key={bookmarkInfo.id} className={classes['list-item']} style={style}>
@@ -34,7 +35,7 @@ const Row = ({data, index, style}: {data: ItemData, index: number, style: React.
         bookmarkInfo={bookmarkInfo}
         iconSize={data.iconSize}
         isDisableDragAndDrop={data.isDisableDragAndDrop}
-        isHighlighted={data.highlightedId === bookmarkInfo.id || isBeingDragged}
+        isHighlighted={isDragging ? isBeingDragged : data.highlightedId === bookmarkInfo.id}
         isSearching={data.isSearching}
         isShowTooltip={data.isShowTooltip}
         isUnclickable={isBeingDragged}

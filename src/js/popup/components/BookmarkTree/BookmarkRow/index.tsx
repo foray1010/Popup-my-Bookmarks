@@ -73,9 +73,7 @@ const BookmarkRowContainer = ({
         })}
         iconSize={restProps.iconSize}
         iconUrl={bookmarkInfo.iconUrl}
-        isHighlighted={
-          restProps.isHighlighted && bookmarkInfo.type !== CST.BOOKMARK_TYPES.DRAG_INDICATOR
-        }
+        isHighlighted={restProps.isHighlighted}
         isUnclickable={restProps.isUnclickable}
         onAuxClick={handleAuxClick}
         onClick={handleClick}
