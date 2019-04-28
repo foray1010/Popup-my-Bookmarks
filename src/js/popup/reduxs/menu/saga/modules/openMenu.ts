@@ -1,5 +1,6 @@
+import * as R from 'ramda'
 import {SagaIterator} from 'redux-saga'
-import {all, call, put, select} from 'redux-saga/effects'
+import {call, put, select} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
 import {BookmarkInfo} from '../../../../types'
@@ -10,10 +11,10 @@ import {getMenuPattern} from '../utils/getMenuPattern'
 
 export function* openMenu({payload}: ActionType<typeof menuCreators.openMenu>): SagaIterator {
   try {
-    const [isSearching, bookmarkInfo]: [boolean, BookmarkInfo] = yield all([
-      select((state: RootState) => Boolean(state.bookmark.searchKeyword)),
-      call(getBookmarkInfo, payload.targetId)
-    ])
+    const {bookmark}: RootState = yield select(R.identity)
+
+    const bookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, payload.targetId)
+    const isSearching = Boolean(bookmark.searchKeyword)
 
     const menuPattern = getMenuPattern(bookmarkInfo, isSearching)
     yield put(menuCreators.setMenuPattern(menuPattern))

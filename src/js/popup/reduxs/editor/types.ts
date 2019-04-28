@@ -3,7 +3,7 @@ export interface EditorState {
   isCreating: boolean
   positionLeft: number
   positionTop: number
-  targetId: string
+  targetId?: string
   title: string
   url: string
 }

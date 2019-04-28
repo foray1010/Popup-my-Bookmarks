@@ -15,18 +15,15 @@ export function* clickMenuRow({
   payload
 }: ActionType<typeof menuCreators.clickMenuRow>): SagaIterator {
   try {
-    const {menu}: RootState = yield select(R.identity)
+    const {menu, ui}: RootState = yield select(R.identity)
+
+    if (!menu.targetId) return
 
     const targetBookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, menu.targetId)
 
     switch (payload.rowName) {
       case CST.MENU_ADD_FOLDER:
-        yield put(
-          editorCreators.createFolderInEditor(menu.targetId, {
-            positionLeft: menu.targetLeft,
-            positionTop: menu.targetTop
-          })
-        )
+        yield put(editorCreators.createFolderInEditor(menu.targetId, ui.highlightedItemCoordinates))
         break
 
       case CST.MENU_ADD_PAGE:
@@ -61,12 +58,7 @@ export function* clickMenuRow({
 
       case CST.MENU_EDIT:
       case CST.MENU_RENAME:
-        yield put(
-          editorCreators.openEditor(menu.targetId, {
-            positionLeft: menu.targetLeft,
-            positionTop: menu.targetTop
-          })
-        )
+        yield put(editorCreators.openEditor(menu.targetId, ui.highlightedItemCoordinates))
         break
 
       case CST.MENU_OPEN_ALL:

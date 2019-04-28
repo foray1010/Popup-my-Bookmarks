@@ -7,17 +7,13 @@ interface MenuState {
   menuPattern: MenuPattern
   positionLeft: number
   positionTop: number
-  targetId: string
-  targetLeft: number
-  targetTop: number
+  targetId?: string
 }
 const INITIAL_STATE: MenuState = {
   menuPattern: [],
   positionLeft: 0,
   positionTop: 0,
-  targetId: '',
-  targetLeft: 0,
-  targetTop: 0
+  targetId: undefined
 }
 
 export const menuReducer = createReducer<MenuState, ActionType<typeof menuCreators>>(

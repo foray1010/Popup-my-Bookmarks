@@ -14,8 +14,6 @@ export const openMenu = createAction(
     coordinates: {
       positionLeft: number
       positionTop: number
-      targetLeft: number
-      targetTop: number
     }
   ) => action({targetId, coordinates})
 )

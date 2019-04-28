@@ -25,9 +25,10 @@ interface Props {
   title: string
   tooltip?: string
 }
-const BookmarkRow = (props: Props) => {
+const BookmarkRow = React.forwardRef((props: Props, setRef: React.Ref<HTMLDivElement>) => {
   return (
     <div
+      ref={setRef}
       className={classNames(
         classes.main,
         {
@@ -48,6 +49,6 @@ const BookmarkRow = (props: Props) => {
       <div className={classes.title}>{props.title}</div>
     </div>
   )
-}
+})
 
 export default BookmarkRow

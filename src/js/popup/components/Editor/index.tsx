@@ -34,9 +34,9 @@ const EditorContainer = (props: Props) => {
   const handleConfirm = React.useCallback(
     (title: string, url: string) => {
       if (isCreating) {
-        createBookmarkAfterId(targetId, title, url)
+        if (targetId) createBookmarkAfterId(targetId, title, url)
       } else {
-        editBookmark(targetId, title, url)
+        if (targetId) editBookmark(targetId, title, url)
       }
       closeEditor()
     },

@@ -77,14 +77,9 @@ export default ({
       bookmarkInfo: BookmarkInfo,
       evt: React.MouseEvent<HTMLElement>
     ) => {
-      if (!(evt.currentTarget instanceof HTMLElement)) return
-
-      const targetOffset = evt.currentTarget.getBoundingClientRect()
       openMenu(bookmarkInfo.id, {
         positionLeft: evt.clientX,
-        positionTop: evt.clientY,
-        targetLeft: targetOffset.left,
-        targetTop: targetOffset.top
+        positionTop: evt.clientY
       })
     }
 

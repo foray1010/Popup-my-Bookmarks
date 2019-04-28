@@ -13,6 +13,7 @@ import useKeyboardNav from '../listNavigation/useKeyboardNav'
 
 export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
   const mapStateToProps = (state: RootState) => ({
+    highlightedItemCoordinates: state.ui.highlightedItemCoordinates,
     trees: state.bookmark.trees
   })
 
@@ -26,6 +27,7 @@ export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
   type Props = P & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
   const KeyboardNav = (props: Props) => {
     const {
+      highlightedItemCoordinates,
       openBookmarksInBrowser,
       openBookmarkTree,
       openMenu,
@@ -105,13 +107,8 @@ export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
       const bookmarkInfo = treeInfo.children[highlightedIndex]
       if (!bookmarkInfo) return
 
-      openMenu(bookmarkInfo.id, {
-        positionLeft: 0,
-        positionTop: 0,
-        targetLeft: 0,
-        targetTop: 0
-      })
-    }, [openMenu, trees])
+      openMenu(bookmarkInfo.id, highlightedItemCoordinates)
+    }, [highlightedItemCoordinates, openMenu, trees])
 
     useKeyBindingsEvent(
       {

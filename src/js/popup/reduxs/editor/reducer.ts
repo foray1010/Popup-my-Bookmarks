@@ -8,7 +8,7 @@ const INITIAL_STATE: EditorState = {
   isCreating: false,
   positionLeft: 0,
   positionTop: 0,
-  targetId: '',
+  targetId: undefined,
   title: '',
   url: ''
 }

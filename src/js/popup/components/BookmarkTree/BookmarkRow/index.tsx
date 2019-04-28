@@ -1,14 +1,16 @@
 import classNames from 'classnames'
 import * as React from 'react'
+import {connect} from 'react-redux'
 
 import classes from '../../../../../css/popup/bookmark-row.css'
 import * as CST from '../../../constants'
+import {uiCreators} from '../../../reduxs'
 import {BookmarkInfo} from '../../../types'
 import DragAndDropConsumer, {ResponseEvent} from '../../dragAndDrop/DragAndDropConsumer'
 import BookmarkRow from './BookmarkRow'
 import useTooltip from './useTooltip'
 
-interface Props {
+interface OwnProps {
   bookmarkInfo: BookmarkInfo
   iconSize: number
   isDisableDragAndDrop: boolean
@@ -25,15 +27,34 @@ interface Props {
   onMouseEnter: (bookmarkInfo: BookmarkInfo) => () => void
   onMouseLeave: (bookmarkInfo: BookmarkInfo) => () => void
 }
+
+const mapDispatchToProps = {
+  setHighlightedItemCoordinates: uiCreators.setHighlightedItemCoordinates
+}
+
+type Props = OwnProps & typeof mapDispatchToProps
 const BookmarkRowContainer = ({
   bookmarkInfo,
+  isHighlighted,
   onAuxClick,
   onClick,
   onDragOver,
   onMouseEnter,
   onMouseLeave,
+  setHighlightedItemCoordinates,
   ...restProps
 }: Props) => {
+  const bookmarkRowRef = React.useRef<HTMLDivElement>(null)
+  React.useEffect(() => {
+    if (isHighlighted && bookmarkRowRef.current) {
+      const offset = bookmarkRowRef.current.getBoundingClientRect()
+      setHighlightedItemCoordinates({
+        positionLeft: offset.left,
+        positionTop: offset.top
+      })
+    }
+  }, [isHighlighted, setHighlightedItemCoordinates])
+
   const tooltip = useTooltip({
     isSearching: restProps.isSearching,
     isShowTooltip: restProps.isShowTooltip,
@@ -66,6 +87,7 @@ const BookmarkRowContainer = ({
       onDragStart={restProps.onDragStart}
     >
       <BookmarkRow
+        ref={bookmarkRowRef}
         className={classNames(classes['full-height'], {
           [classes['root-folder']]: bookmarkInfo.isRoot,
           [classes['drag-indicator']]: bookmarkInfo.type === CST.BOOKMARK_TYPES.DRAG_INDICATOR,
@@ -73,7 +95,7 @@ const BookmarkRowContainer = ({
         })}
         iconSize={restProps.iconSize}
         iconUrl={bookmarkInfo.iconUrl}
-        isHighlighted={restProps.isHighlighted}
+        isHighlighted={isHighlighted}
         isUnclickable={restProps.isUnclickable}
         onAuxClick={handleAuxClick}
         onClick={handleClick}
@@ -86,4 +108,7 @@ const BookmarkRowContainer = ({
   )
 }
 
-export default BookmarkRowContainer
+export default connect(
+  null,
+  mapDispatchToProps
+)(BookmarkRowContainer)
