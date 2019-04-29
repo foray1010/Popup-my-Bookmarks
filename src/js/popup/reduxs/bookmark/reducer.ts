@@ -8,7 +8,7 @@ import {simulateBookmark} from './utils/converters'
 
 interface BookmarkState {
   clipboard: {
-    id: string
+    id?: string
     isRemoveAfterPaste: boolean
   }
   searchKeyword: string
@@ -16,7 +16,7 @@ interface BookmarkState {
 }
 const INITIAL_STATE: BookmarkState = {
   clipboard: {
-    id: '',
+    id: undefined,
     isRemoveAfterPaste: false
   },
   searchKeyword: '',

@@ -48,6 +48,8 @@ export function* pasteBookmark({
     const {bookmark}: RootState = yield select(R.identity)
     const {clipboard} = bookmark
 
+    if (!clipboard.id) return
+
     if (clipboard.isRemoveAfterPaste) {
       yield call(moveBookmark, clipboard.id, {parentId: payload.parentId, index: payload.index})
     } else {
