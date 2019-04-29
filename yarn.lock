@@ -11370,16 +11370,22 @@ type-check@~0.3.2:
   dependencies:
     prelude-ls "~1.1.2"
 
-type-coverage@1.14.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/type-coverage/-/type-coverage-1.14.0.tgz#3cf20898f6eba7d1a0f77178131079b5143a3984"
-  integrity sha512-FbeXSyTsTNccxg3U+AdcpOakCRDivWWeBH30/2UDyMXsGH2cGowv9uYxii+d5r2wq68PzGJTtrOeUmNWcpxppA==
+type-coverage-core@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/type-coverage-core/-/type-coverage-core-2.0.0.tgz#922db6989df5640ba7a9fd752ba9096cefb70902"
+  integrity sha512-va+KXCuugNaWIWEwJpW1QVOJt2pCp+f0qTA/q6UeOt3xLRqko6zK+496whPfo1iw9J7TZHymj4OspTb5OzEu0g==
   dependencies:
     glob "7.1.3"
-    minimist "1.2.0"
     tslib "1"
     tsutils "3"
-    typescript "2 || 3"
+
+type-coverage@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/type-coverage/-/type-coverage-2.0.0.tgz#312f85ec925c82cefd42f88a121f3a977286cf34"
+  integrity sha512-1ONjW3rxXsrIDBc/HWi3Ux2DPm1kOTZnKQTV9E4Wrk9uTqrrP/55MkvbEjiYoqixHvtezJvJG4FIILOcM1XyTQ==
+  dependencies:
+    minimist "1.2.0"
+    type-coverage-core "^2.0.0"
 
 type-fest@^0.4.1:
   version "0.4.1"
@@ -11436,7 +11442,7 @@ typescript-tuple@^2.1.0:
   dependencies:
     typescript-compare "^0.0.2"
 
-"typescript@2 || 3", typescript@3.4.5:
+typescript@3.4.5:
   version "3.4.5"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.4.5.tgz#2d2618d10bb566572b8d7aad5180d84257d70a99"
   integrity sha512-YycBxUb49UUhdNMU5aJ7z5Ej2XGmaIBL0x34vZ82fn3hGvD+bgrMrVDpatgz2f7YxUMJxMkbWxJZeAvDxVe7Vw==
