@@ -9,13 +9,15 @@ export function* createFolderInEditor({
   payload
 }: ActionType<typeof editorCreators.createFolderInEditor>): SagaIterator {
   try {
+    const title: string = yield call(getI18n, 'newFolder')
+
     yield put(
       editorCreators.setEditor({
         ...payload.coordinates,
         isAllowEditUrl: false,
         isCreating: true,
         targetId: payload.targetId,
-        title: yield call(getI18n, 'newFolder')
+        title
       })
     )
   } catch (err) {
