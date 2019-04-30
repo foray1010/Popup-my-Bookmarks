@@ -76,6 +76,7 @@ interface Props {
   itemKey: string
   onDragOver: (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
   onDragStart: (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
+  style?: React.CSSProperties
 }
 const DragAndDropConsumer = (props: Props) => {
   const context = React.useContext(DragAndDropContext)
@@ -93,6 +94,7 @@ const DragAndDropConsumer = (props: Props) => {
   return (
     <div
       className={props.className}
+      style={props.style}
       onClickCapture={handleClickCapture}
       onMouseUpCapture={isDragging ? handleMouseUpCapture : undefined}
       {...(props.disableDrag !== true ?

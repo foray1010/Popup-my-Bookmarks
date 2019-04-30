@@ -30,23 +30,24 @@ const Row = ({data, index, style}: {data: ItemData, index: number, style: React.
   const isDragging = data.draggingId !== null
   const isBeingDragged = data.draggingId === bookmarkInfo.id
   return (
-    <div key={bookmarkInfo.id} className={classes['list-item']} style={style}>
-      <BookmarkRow
-        bookmarkInfo={bookmarkInfo}
-        iconSize={data.iconSize}
-        isDisableDragAndDrop={data.isDisableDragAndDrop}
-        isHighlighted={isDragging ? isBeingDragged : data.highlightedId === bookmarkInfo.id}
-        isSearching={data.isSearching}
-        isShowTooltip={data.isShowTooltip}
-        isUnclickable={isBeingDragged}
-        onAuxClick={data.onRowAuxClick}
-        onClick={data.onRowClick}
-        onDragOver={data.onRowDragOver}
-        onDragStart={data.onRowDragStart}
-        onMouseEnter={data.onRowMouseEnter}
-        onMouseLeave={data.onRowMouseLeave}
-      />
-    </div>
+    <BookmarkRow
+      key={bookmarkInfo.id}
+      bookmarkInfo={bookmarkInfo}
+      className={classes['list-item']}
+      iconSize={data.iconSize}
+      isDisableDragAndDrop={data.isDisableDragAndDrop}
+      isHighlighted={isDragging ? isBeingDragged : data.highlightedId === bookmarkInfo.id}
+      isSearching={data.isSearching}
+      isShowTooltip={data.isShowTooltip}
+      isUnclickable={isBeingDragged}
+      onAuxClick={data.onRowAuxClick}
+      onClick={data.onRowClick}
+      onDragOver={data.onRowDragOver}
+      onDragStart={data.onRowDragStart}
+      onMouseEnter={data.onRowMouseEnter}
+      onMouseLeave={data.onRowMouseLeave}
+      style={style}
+    />
   )
 }
 

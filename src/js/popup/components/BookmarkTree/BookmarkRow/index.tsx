@@ -12,6 +12,7 @@ import useTooltip from './useTooltip'
 
 interface OwnProps {
   bookmarkInfo: BookmarkInfo
+  className?: string
   iconSize: number
   isDisableDragAndDrop: boolean
   isHighlighted: boolean
@@ -26,6 +27,7 @@ interface OwnProps {
   onDragStart: () => void
   onMouseEnter: (bookmarkInfo: BookmarkInfo) => () => void
   onMouseLeave: (bookmarkInfo: BookmarkInfo) => () => void
+  style?: React.CSSProperties
 }
 
 const mapDispatchToProps = {
@@ -75,7 +77,7 @@ const BookmarkRowContainer = ({
 
   return (
     <DragAndDropConsumer
-      className={classes['full-height']}
+      className={restProps.className}
       disableDrag={
         restProps.isDisableDragAndDrop ||
         bookmarkInfo.isRoot ||
@@ -85,6 +87,7 @@ const BookmarkRowContainer = ({
       itemKey={bookmarkInfo.id}
       onDragOver={handleDragOver}
       onDragStart={restProps.onDragStart}
+      style={restProps.style}
     >
       <BookmarkRow
         ref={bookmarkRowRef}
