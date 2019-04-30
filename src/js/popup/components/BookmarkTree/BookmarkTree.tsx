@@ -110,7 +110,7 @@ const BookmarkTree = (props: Props) => {
 
   React.useEffect(() => {
     // hack for unknown bug which scroll to the next item when the list first rendered
-    setTimeout(() => {
+    setImmediate(() => {
       if (props.scrollToIndex !== undefined) {
         if (listRef.current) listRef.current.scrollToItem(props.scrollToIndex)
       }
