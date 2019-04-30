@@ -20,6 +20,10 @@ Bugfixes:
 - cannot drop bookmark when dragging
 - input cursor moved to the end after inputting multiple whitespace
 
+Translations:
+
+- Locales update: Norwegian Bokmål(Bjorn Tore Asheim)
+
 ## 5.3.2 (30/03/2019)
 
 Bugfixes:

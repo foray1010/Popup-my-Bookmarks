@@ -8,7 +8,7 @@
     "description": "2013.01.23"
   },
   "addSeparator": {
-    "message": "Legg til separator",
+    "message": "Legg til skillelinje",
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
   "askOpenAll": {
@@ -64,8 +64,16 @@
     "description": "2017.03.29"
   },
   "confirm": {
-    "message": "Bekrefte",
+    "message": "Bekreft",
     "description": "2013.01.30"
+  },
+  "contributors": {
+    "message": "Bidragsytere",
+    "description": "2015.08.22"
+  },
+  "control": {
+    "message": "Kontroll",
+    "description": "2015.08.22"
   },
   "copy": {
     "message": "Kopier",
@@ -92,7 +100,7 @@
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
   },
   "extDesc": {
-    "message": "En mer effektiv måte å vise og vedlikeholde bokmerke-menyen din.",
+    "message": "En mer effektiv måte for å vise og vedlikeholde bokmerke-menyen din.",
     "description": "2013.01.21"
   },
   "fontFamily": {
@@ -102,6 +110,10 @@
   "fontSize": {
     "message": "Font-størrelse",
     "description": "2013.07.26"
+  },
+  "general": {
+    "message": "Generell",
+    "description": "2015.08.22"
   },
   "hideRootFolder": {
     "message": "Skjul rot-mappe",
@@ -156,7 +168,7 @@
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
   },
   "options": {
-    "message": "Opsjoner",
+    "message": "Alternativer",
     "description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
   },
   "paste": {
@@ -206,6 +218,10 @@
   "tooltip": {
     "message": "Vis ballongtips med detaljert informasjon om bokmerker",
     "description": "2013.03.24"
+  },
+  "userInterface": {
+    "message": "Brukergrensesnitt",
+    "description": "2015.08.22"
   },
   "warnOpenMany": {
     "message": "Advar meg ved åpning så mange faner at Chrome kan bli tregt",
