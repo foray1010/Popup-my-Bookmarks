@@ -5,7 +5,7 @@ import webExtension from 'webextension-polyfill'
 
 import {bookmarkCreators} from '../../reduxs'
 
-export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
+export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
   const mapDispatchToProps = {
     refreshBookmarkTrees: bookmarkCreators.refreshBookmarkTrees
   }

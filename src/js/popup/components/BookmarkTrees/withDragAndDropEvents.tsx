@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {bookmarkCreators} from '../../reduxs'
 import DragAndDropProvider from '../dragAndDrop/DragAndDropProvider'
 
-export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
+export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
   const mapDispatchToProps = {
     moveBookmarkToDragIndicator: bookmarkCreators.moveBookmarkToDragIndicator,
     removeDragIndicator: bookmarkCreators.removeDragIndicator

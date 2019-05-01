@@ -11,7 +11,7 @@ import ListNavigationContext from '../listNavigation/ListNavigationContext'
 import ListNavigationProvider from '../listNavigation/ListNavigationProvider'
 import useKeyboardNav from '../listNavigation/useKeyboardNav'
 
-export default <P extends object>(WrappedComponent: React.ComponentType<P>) => {
+export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
   const mapStateToProps = (state: RootState) => ({
     highlightedItemCoordinates: state.ui.highlightedItemCoordinates,
     trees: state.bookmark.trees

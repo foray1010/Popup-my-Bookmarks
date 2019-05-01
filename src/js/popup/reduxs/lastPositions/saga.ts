@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import {SagaIterator} from 'redux-saga'
+import {SagaIterator, TakeableChannel} from 'redux-saga'
 import {actionChannel, call, fork, race, take, takeLatest} from 'redux-saga/effects'
 import {ActionType, getType} from 'typesafe-actions'
 
@@ -56,10 +56,10 @@ function* removeLastPosition({
 // use channel to make sure every create/remove run one by one
 function* watchCreateAndRemoveLastPosition(): SagaIterator {
   try {
-    const createLastPositionChan = yield actionChannel(
+    const createLastPositionChan: TakeableChannel<{}> = yield actionChannel(
       getType(lastPositionsCreator.createLastPosition)
     )
-    const removeLastPositionChan = yield actionChannel(
+    const removeLastPositionChan: TakeableChannel<{}> = yield actionChannel(
       getType(lastPositionsCreator.removeLastPosition)
     )
     while (true) {

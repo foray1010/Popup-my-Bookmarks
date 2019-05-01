@@ -1,10 +1,10 @@
 import * as React from 'react'
-import {render} from 'react-dom'
+import * as ReactDom from 'react-dom'
 
-export default (app: React.ReactElement) => {
+export default (app: React.ReactElement<{}>) => {
   const rootEl = document.createElement('div')
 
-  render(app, rootEl)
+  ReactDom.render(app, rootEl)
 
   if (document.body) document.body.appendChild(rootEl)
 }

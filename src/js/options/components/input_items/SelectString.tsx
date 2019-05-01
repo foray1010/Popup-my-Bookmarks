@@ -18,7 +18,7 @@ const SelectString = ({choices, optionName, optionValue, updatePartialOptions}: 
 
   return (
     <select name={optionName} value={optionValue} onChange={handleChange}>
-      {choices.reduce((acc: Array<React.ReactElement>, optionChoice, optionChoiceIndex) => {
+      {choices.reduce((acc: Array<React.ReactElement<{}>>, optionChoice, optionChoiceIndex) => {
         if (optionChoice !== undefined) {
           return [
             ...acc,

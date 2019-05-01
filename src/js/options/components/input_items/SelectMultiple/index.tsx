@@ -11,7 +11,7 @@ interface Props {
 }
 const SelectMultiple = (props: Props) => (
   <span className={classes.main}>
-    {props.choices.reduce((acc: Array<React.ReactElement>, optionChoice, optionChoiceIndex) => {
+    {props.choices.reduce((acc: Array<React.ReactElement<{}>>, optionChoice, optionChoiceIndex) => {
       if (optionChoice !== undefined) {
         return [
           ...acc,
