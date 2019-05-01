@@ -6,19 +6,19 @@ import prompts from 'prompts'
 import R from 'ramda'
 import Transifex from 'transifex'
 
-const questions: Array<prompts.PromptObject<string>> = [
+const questions = [
   {
     type: 'text',
-    name: 'transifex_username',
-    message: 'transifex_username (you can register one for free)',
+    name: 'transifexUsername',
+    message: 'transifex username (you can register one for free)',
     validate: Boolean
-  },
+  } as const,
   {
     type: 'password',
-    name: 'transifex_password',
+    name: 'transifexPassword',
     message: 'password',
     validate: Boolean
-  }
+  } as const
 ]
 
 const projectSlug = 'popup-my-bookmarks'
@@ -34,10 +34,15 @@ interface Messages {
 }
 
 const main = async () => {
-  const response = await prompts(questions, {onCancel: () => process.exit(130)})
+  const {transifexPassword, transifexUsername}: {
+    transifexPassword: string
+    transifexUsername: string
+  } = await prompts(questions, {
+    onCancel: () => process.exit(130)
+  })
 
   const transifex = new Transifex({
-    credential: `${response.transifex_username}:${response.transifex_password}`
+    credential: `${transifexUsername}:${transifexPassword}`
   })
   bluebird.promisifyAll(transifex)
 
