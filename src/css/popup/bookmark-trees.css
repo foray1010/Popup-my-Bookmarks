@@ -15,10 +15,12 @@
 
 .master {
   color: var(--main-color2);
+  width: var(--width);
   composes: _panel;
 }
 
 .slave {
   color: var(--main-color1);
+  width: var(--width);
   composes: _panel;
 }

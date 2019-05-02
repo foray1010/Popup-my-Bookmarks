@@ -1,16 +1,7 @@
-import * as R from 'ramda'
 import * as React from 'react'
-import styled from 'styled-components'
 import webExtension from 'webextension-polyfill'
 
 import classes from '../../../../css/popup/editor.css'
-
-interface FormProps {
-  width: number
-}
-const Form = styled('form')<FormProps>`
-  width: ${R.prop('width')}px;
-`
 
 const handleSubmit = (evt: React.FormEvent<HTMLElement>) => {
   evt.preventDefault()
@@ -43,8 +34,15 @@ const Editor = (props: Props) => {
     setUrl(evt.currentTarget.value)
   }, [])
 
+  const formStyles = React.useMemo(
+    (): object => ({
+      '--width': `${props.width}px`
+    }),
+    [props.width]
+  )
+
   return (
-    <Form className={classes.main} width={props.width} onSubmit={handleSubmit}>
+    <form className={classes.main} style={formStyles} onSubmit={handleSubmit}>
       <span className={classes.header}>{props.header}</span>
 
       <input type='text' value={title} onChange={handleTitleChange} autoFocus />
@@ -60,7 +58,7 @@ const Editor = (props: Props) => {
       <button className={classes.button} type='button' onClick={props.onCancel}>
         {webExtension.i18n.getMessage('cancel')}
       </button>
-    </Form>
+    </form>
   )
 }
 

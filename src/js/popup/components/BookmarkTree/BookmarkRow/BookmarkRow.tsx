@@ -1,16 +1,7 @@
 import classNames from 'classnames'
-import * as R from 'ramda'
 import * as React from 'react'
-import styled from 'styled-components'
 
 import classes from '../../../../../css/popup/bookmark-row.css'
-
-interface IconImgProps {
-  iconSize: number
-}
-const IconImg = styled('img')<IconImgProps>`
-  width: ${R.prop('iconSize')}px;
-`
 
 interface Props {
   className?: string
@@ -26,6 +17,13 @@ interface Props {
   tooltip?: string
 }
 const BookmarkRow = React.forwardRef((props: Props, setRef: React.Ref<HTMLDivElement>) => {
+  const iconStyles = React.useMemo(
+    (): object => ({
+      '--iconSize': `${props.iconSize}px`
+    }),
+    [props.iconSize]
+  )
+
   return (
     <div
       ref={setRef}
@@ -44,7 +42,7 @@ const BookmarkRow = React.forwardRef((props: Props, setRef: React.Ref<HTMLDivEle
       title={props.tooltip}
     >
       {props.iconUrl && (
-        <IconImg iconSize={props.iconSize} className={classes.icon} src={props.iconUrl} alt='' />
+        <img className={classes.icon} src={props.iconUrl} style={iconStyles} alt='' />
       )}
       <div className={classes.title}>{props.title}</div>
     </div>

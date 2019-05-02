@@ -1,39 +1,42 @@
 import * as R from 'ramda'
 import * as React from 'react'
-import styled from 'styled-components'
 
 import classes from '../../../../css/popup/bookmark-trees.css'
 import {Options} from '../../../common/types/options'
 import {OPTIONS} from '../../constants'
 import BookmarkTree from '../BookmarkTree'
 
-interface MainProps {
-  options: Partial<Options>
-}
-const Main = styled('main')<MainProps>`
-  & > section {
-    width: ${R.pathOr(0, ['options', OPTIONS.SET_WIDTH])}px;
-  }
-`
-
-type Props = MainProps & {
+interface Props {
   mainTreeHeader: React.ReactNode
+  options: Partial<Options>
   treeIds: Array<string>
 }
 const BookmarkTrees = (props: Props) => {
   const trees = props.treeIds.map((treeId) => <BookmarkTree key={treeId} treeId={treeId} />)
 
-  const mainTree = trees.filter((x, index) => index % 2 === 0)
-  const subTree = trees.filter((x, index) => index % 2 !== 0)
+  const mainTree = trees.filter((_, index) => index % 2 === 0)
+  const subTree = trees.filter((_, index) => index % 2 !== 0)
+
+  const sectionWidth: number = R.pathOr(0, ['options', OPTIONS.SET_WIDTH], props)
+  const styles = React.useMemo(
+    (): object => ({
+      '--width': `${sectionWidth}px`
+    }),
+    [sectionWidth]
+  )
 
   return (
-    <Main className={classes.main} options={props.options}>
-      <section className={classes.master}>
+    <main className={classes.main}>
+      <section className={classes.master} style={styles}>
         {props.mainTreeHeader}
         {mainTree}
       </section>
-      {Boolean(subTree.length) && <section className={classes.slave}>{subTree}</section>}
-    </Main>
+      {Boolean(subTree.length) && (
+        <section className={classes.slave} style={styles}>
+          {subTree}
+        </section>
+      )}
+    </main>
   )
 }
 

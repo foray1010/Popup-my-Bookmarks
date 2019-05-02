@@ -1,7 +1,8 @@
-import * as R from 'ramda'
 import * as React from 'react'
 import Measure, {ContentRect} from 'react-measure'
-import styled, {createGlobalStyle} from 'styled-components'
+import {createGlobalStyle} from 'styled-components'
+
+import classes from './index.css'
 
 interface GlobalStylesProps {
   bodyHeight: number | null
@@ -12,17 +13,6 @@ const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
     height: ${(props) => (props.bodyHeight != null ? `${props.bodyHeight}px` : 'auto')};
     width: ${(props) => (props.bodyWidth != null ? `${props.bodyWidth}px` : 'auto')};
   }
-`
-
-interface WrapperProps {
-  children: React.ReactNode
-  positionLeft: number
-  positionTop: number
-}
-const Wrapper = styled('div')<WrapperProps>`
-  left: ${R.prop('positionLeft')}px;
-  position: absolute;
-  top: ${R.prop('positionTop')}px;
 `
 
 interface Props {
@@ -82,18 +72,22 @@ const AbsPositionWithinBody = ({positionLeft, positionTop, ...restProps}: Props)
     })
   }, [])
 
+  const wrapperStyles = React.useMemo(
+    (): object => ({
+      '--positionLeft': `${calibratedPosition.left}px`,
+      '--positionTop': `${calibratedPosition.top}px`
+    }),
+    [calibratedPosition.left, calibratedPosition.top]
+  )
+
   return (
     <React.Fragment>
       <GlobalStyles bodyHeight={bodySize.height} bodyWidth={bodySize.width} />
       <Measure offset onResize={measureOnResize}>
         {({measureRef}) => (
-          <Wrapper
-            ref={measureRef}
-            positionLeft={calibratedPosition.left}
-            positionTop={calibratedPosition.top}
-          >
+          <div ref={measureRef} className={classes.wrapper} style={wrapperStyles}>
             {restProps.children}
-          </Wrapper>
+          </div>
         )}
       </Measure>
     </React.Fragment>

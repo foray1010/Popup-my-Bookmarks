@@ -1,5 +1,7 @@
 .main {
+  background-color: var(--backgroundColor);
   bottom: 0;
+  opacity: var(--opacity);
   position: absolute;
   top: 0;
   width: 100%;

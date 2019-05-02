@@ -40,6 +40,7 @@
 .icon {
   flex-shrink: 0;
   margin-right: var(--golden-gap-2x);
+  width: var(--iconSize);
 }
 
 .title {

@@ -19,6 +19,7 @@
   box-sizing: border-box;
   padding: var(--golden-gap-2x) var(--golden-gap);
   text-align: right;
+  width: var(--width);
 
   & > *:not(:first-child) {
     margin-top: var(--golden-gap-2x);

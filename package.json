@@ -119,7 +119,6 @@
     "style-loader": "0.23.1",
     "stylelint": "10.0.1",
     "stylelint-config-foray1010": "4.0.1",
-    "stylelint-processor-styled-components": "1.6.0",
     "terser-webpack-plugin": "1.2.3",
     "transifex": "1.6.6",
     "ts-node": "8.1.0",
