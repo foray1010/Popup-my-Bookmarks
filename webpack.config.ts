@@ -19,7 +19,7 @@ const commonChunkName = 'common'
 const cssLoaderOptions = {
   modules: true,
   importLoaders: 1,
-  localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
+  localIdentName: '[local]_[hash:base64:5]'
 }
 const nodeEnv = process.env.NODE_ENV || 'development'
 const outputDir = path.join('build', nodeEnv)

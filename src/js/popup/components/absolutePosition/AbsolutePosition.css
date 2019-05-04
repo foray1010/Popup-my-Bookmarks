@@ -1,0 +1,5 @@
+.wrapper {
+  left: var(--positionLeft);
+  position: absolute;
+  top: var(--positionTop);
+}

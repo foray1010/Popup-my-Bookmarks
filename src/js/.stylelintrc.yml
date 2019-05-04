@@ -1,3 +1,0 @@
-extends: 'stylelint-config-foray1010'
-processors:
-  - 'stylelint-processor-styled-components'
