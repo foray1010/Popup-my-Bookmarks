@@ -6,7 +6,7 @@ import * as CST from '../../constants'
 import {MENU_WINDOW} from '../../constants/windows'
 import {RootState, menuCreators} from '../../reduxs'
 import isMac from '../../utils/isMac'
-import AbsPositionWithinBody from '../AbsPositionWithinBody'
+import AbsolutePosition from '../absolutePosition/AbsolutePosition'
 import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
 import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
 import ListNavigationContext from '../listNavigation/ListNavigationContext'
@@ -77,10 +77,7 @@ const MenuContainer = ({clickMenuRow, closeMenu, menuPattern, ...restProps}: Pro
   return (
     <React.Fragment>
       <Mask backgroundColor='#fff' opacity={0.3} onClick={closeMenu} />
-      <AbsPositionWithinBody
-        positionLeft={restProps.positionLeft}
-        positionTop={restProps.positionTop}
-      >
+      <AbsolutePosition positionLeft={restProps.positionLeft} positionTop={restProps.positionTop}>
         <KeyBindingsWindow windowId={MENU_WINDOW}>
           <Menu
             highlightedIndex={highlightedIndex}
@@ -91,7 +88,7 @@ const MenuContainer = ({clickMenuRow, closeMenu, menuPattern, ...restProps}: Pro
             unclickableRows={restProps.unclickableRows}
           />
         </KeyBindingsWindow>
-      </AbsPositionWithinBody>
+      </AbsolutePosition>
     </React.Fragment>
   )
 }

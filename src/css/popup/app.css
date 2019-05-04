@@ -4,4 +4,6 @@
 .main {
   font-family: var(--fontFamily);
   font-size: var(--fontSize);
+  height: var(--height);
+  width: var(--width);
 }

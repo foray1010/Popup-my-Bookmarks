@@ -1,4 +1,3 @@
 {
-  "presets": ["babel-preset-foray1010/typescript-react"],
-  "plugins": ["babel-plugin-styled-components"]
+  "presets": ["babel-preset-foray1010/typescript-react"]
 }

@@ -5,7 +5,7 @@ import webExtension from 'webextension-polyfill'
 import {OPTIONS} from '../../constants'
 import {EDITOR_WINDOW} from '../../constants/windows'
 import {RootState, bookmarkCreators, editorCreators} from '../../reduxs'
-import AbsPositionWithinBody from '../AbsPositionWithinBody'
+import AbsolutePosition from '../absolutePosition/AbsolutePosition'
 import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
 import Mask from '../Mask'
 import Editor from './Editor'
@@ -46,7 +46,7 @@ const EditorContainer = (props: Props) => {
   return (
     <React.Fragment>
       <Mask backgroundColor='#fff' opacity={0.3} onClick={props.closeEditor} />
-      <AbsPositionWithinBody positionLeft={props.positionLeft} positionTop={props.positionTop}>
+      <AbsolutePosition positionLeft={props.positionLeft} positionTop={props.positionTop}>
         <KeyBindingsWindow windowId={EDITOR_WINDOW}>
           <Editor
             isAllowEditUrl={props.isAllowEditUrl}
@@ -62,7 +62,7 @@ const EditorContainer = (props: Props) => {
             onConfirm={handleConfirm}
           />
         </KeyBindingsWindow>
-      </AbsPositionWithinBody>
+      </AbsolutePosition>
     </React.Fragment>
   )
 }
