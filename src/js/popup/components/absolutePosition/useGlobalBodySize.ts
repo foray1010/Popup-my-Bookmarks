@@ -9,6 +9,21 @@ const useBodySizeStack = (): {
 } => {
   const {bodySizeStack, setBodySizeStack} = React.useContext(AbsolutePositionContext)
 
+  const globalBodySize = React.useMemo(() => {
+    return bodySizeStack.reduce(
+      (acc, bodySize) => {
+        return {
+          height: bodySize.height ? Math.max(bodySize.height, acc.height || 0) : acc.height,
+          width: bodySize.width ? Math.max(bodySize.width, acc.width || 0) : acc.width
+        }
+      },
+      {
+        height: undefined,
+        width: undefined
+      }
+    )
+  }, [bodySizeStack])
+
   const appendBodySize = React.useCallback(
     (newBodySize: BodySize) => {
       setBodySizeStack((prevBodySize) => [...prevBodySize, newBodySize])
@@ -26,18 +41,7 @@ const useBodySizeStack = (): {
   )
 
   return {
-    globalBodySize: bodySizeStack.reduce(
-      (acc, bodySize) => {
-        return {
-          height: bodySize.height ? Math.max(bodySize.height, acc.height || 0) : acc.height,
-          width: bodySize.width ? Math.max(bodySize.width, acc.width || 0) : acc.width
-        }
-      },
-      {
-        height: undefined,
-        width: undefined
-      }
-    ),
+    globalBodySize,
     appendBodySize,
     removeBodySize
   }
