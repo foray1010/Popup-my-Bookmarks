@@ -16,7 +16,7 @@ const Mask = (props: Props) => {
     [props.backgroundColor, props.opacity]
   )
 
-  return <main className={classes.main} style={styles} onClick={props.onClick} />
+  return <div className={classes.main} style={styles} onClick={props.onClick} />
 }
 
 export default Mask

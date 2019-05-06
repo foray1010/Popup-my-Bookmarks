@@ -12,11 +12,11 @@ interface Props {
   style: React.CSSProperties
 }
 const App = (props: Props) => (
-  <main className={classes.main} style={props.style}>
+  <div className={classes.main} style={props.style}>
     <BookmarkTrees mainTreeHeader={<Search />} />
     {props.isShowEditor && <Editor />}
     {props.isShowMenu && <Menu />}
-  </main>
+  </div>
 )
 
 export default App
