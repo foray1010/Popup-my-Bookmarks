@@ -22,7 +22,8 @@ Bugfixes:
 
 Translations:
 
-- Locales update: Norwegian Bokmål(Bjorn Tore Asheim)
+- support Swedish locale (thanks Bosse Johansson)
+- locales update: Norwegian Bokmål(Bjorn Tore Asheim)
 
 ## 5.3.2 (30/03/2019)
 

@@ -1,0 +1,234 @@
+{
+  "addFolder": {
+    "message": "Lägg till mapp",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "addPage": {
+    "message": "Lägg till nuvarande sida",
+    "description": "2013.01.23"
+  },
+  "addSeparator": {
+    "message": "Lägg till avdelare",
+    "description": "2013.07.26 | Refer to Firefox Bookmark menu"
+  },
+  "askOpenAll": {
+    "message": "Du är på väg att öppna %bkmarkCount% bokmärken.\nVill du fortsätta?",
+    "description": "2013.01.29 | Refer to Firefox Bookmark menu"
+  },
+  "cancel": {
+    "message": "Avbryt",
+    "description": "2013.01.30"
+  },
+  "clickByLeft": {
+    "message": "Vänsterklick för att öppna bokmärken i",
+    "description": "2013.06.01"
+  },
+  "clickByLeftCtrl": {
+    "message": "Ctrl / CMD + vänsterklick för att öppna bokmärken i",
+    "description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
+  },
+  "clickByLeftShift": {
+    "message": "Shift + vänsterklick för att öppna bokmärken i",
+    "description": "2013.06.01"
+  },
+  "clickByMiddle": {
+    "message": "Mittenklick för att öppna bokmärken i",
+    "description": "2013.06.01"
+  },
+  "clickOption1": {
+    "message": "nuvarande flik",
+    "description": "2017.03.29"
+  },
+  "clickOption2": {
+    "message": "nuvarande flik (utan att stänga PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption3": {
+    "message": "ny flik",
+    "description": "2017.03.29"
+  },
+  "clickOption4": {
+    "message": "bakgrundsflik",
+    "description": "2017.03.29"
+  },
+  "clickOption5": {
+    "message": "bakgrundsflik (utan att stänga PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption6": {
+    "message": "nytt fönster",
+    "description": "2017.03.29"
+  },
+  "clickOption7": {
+    "message": "privat fönster",
+    "description": "2017.03.29"
+  },
+  "confirm": {
+    "message": "Bekräfta",
+    "description": "2013.01.30"
+  },
+  "contributors": {
+    "message": "Bidragsgivare",
+    "description": "2015.08.22"
+  },
+  "control": {
+    "message": "Kontroll",
+    "description": "2015.08.22"
+  },
+  "copy": {
+    "message": "Kopiera",
+    "description": "2013.07.07 | Refer to Chrome Bookmark manager"
+  },
+  "cut": {
+    "message": "Klipp ut",
+    "description": "2013.07.07 | Refer to Chrome Bookmark manager"
+  },
+  "defExpand": {
+    "message": "Standard utökad mapp",
+    "description": "2013.07.30"
+  },
+  "default": {
+    "message": "Standard",
+    "description": "2013.03.26"
+  },
+  "del": {
+    "message": "Radera",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "edit": {
+    "message": "Redigera",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "extDesc": {
+    "message": "Ett effektivare sätt att överblicka och hantera dina bokmärken.",
+    "description": "2013.01.21"
+  },
+  "fontFamily": {
+    "message": "Teckensnitt",
+    "description": "2015.01.11"
+  },
+  "fontSize": {
+    "message": "Teckenstorlek",
+    "description": "2013.07.26"
+  },
+  "general": {
+    "message": "Generellt",
+    "description": "2015.08.22"
+  },
+  "hideRootFolder": {
+    "message": "Göm rotmappen",
+    "description": "2015.02.18 | Root folder means the top level folder"
+  },
+  "maxResults": {
+    "message": "Max antal sökresultat",
+    "description": "2013.03.24"
+  },
+  "newFolder": {
+    "message": "Ny mapp",
+    "description": "2013.01.28 | Refer to Chrome Bookmark manager"
+  },
+  "no": {
+    "message": "Nej",
+    "description": "2013.03.27"
+  },
+  "noBkmark": {
+    "message": "Högerklick för att lägga till bokmärke",
+    "description": "2013.01.22"
+  },
+  "noResult": {
+    "message": "Inga matchande bokmärken",
+    "description": "2013.01.27"
+  },
+  "opFolderBy": {
+    "message": "Öppna mappar med vänsterklick",
+    "description": "2013.06.29"
+  },
+  "openAll": {
+    "message": "Öppna alla bokmärken",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openAllInI": {
+    "message": "Öppna alla bokmärken i privat fönster",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openAllInN": {
+    "message": "Öppna alla bokmärken i nytt fönster",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openInB": {
+    "message": "Öppna i bakgrundsflik",
+    "description": "2013.01.23"
+  },
+  "openInI": {
+    "message": "Öppna i privat fönster",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openInN": {
+    "message": "Öppna i nytt fönster",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "options": {
+    "message": "Alternativ",
+    "description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
+  },
+  "paste": {
+    "message": "Klistra in",
+    "description": "2013.07.7 | Refer to Chrome Bookmark manager"
+  },
+  "rememberPos": {
+    "message": "Kom ihåg sista positionen",
+    "description": "2014.02.24"
+  },
+  "rename": {
+    "message": "Döp om",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "saved": {
+    "message": "Sparad",
+    "description": "2013.03.27"
+  },
+  "search": {
+    "message": "Sök",
+    "description": "2013.01.10"
+  },
+  "searchTarget": {
+    "message": "Tillåtna sökförfrågningar",
+    "description": "2013.09.11"
+  },
+  "searchTargetOption1": {
+    "message": "både titel och URL",
+    "description": "2013.09.11"
+  },
+  "searchTargetOption2": {
+    "message": "endast titel",
+    "description": "2013.09.11"
+  },
+  "setWidth": {
+    "message": "Panelbredd",
+    "description": "2013.03.24"
+  },
+  "showInFolder": {
+    "message": "Visa i mapp",
+    "description": "2014.03.21 | Refer to Chrome Bookmark manager"
+  },
+  "sortByName": {
+    "message": "Sortera efter namn",
+    "description": "2013.09.17 | Refer to Firefox Bookmark menu"
+  },
+  "tooltip": {
+    "message": "Visa tips med detaljerad information av bokmärken",
+    "description": "2013.03.24"
+  },
+  "userInterface": {
+    "message": "UI",
+    "description": "2015.08.22"
+  },
+  "warnOpenMany": {
+    "message": "Varna mig för att öppna flera flikar, att det kan slöa ner Chrome",
+    "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
+  },
+  "yes": {
+    "message": "Ja",
+    "description": "2013.03.27"
+  }
+}
