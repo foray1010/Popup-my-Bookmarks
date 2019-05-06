@@ -12,8 +12,7 @@
     "description": "2013.07.26 | Refer to Firefox Bookmark menu"
   },
   "askOpenAll": {
-    "message":
-      "Hiermit werden %bkmarkCount% Lesezeichen gleichzeitig geöffnet.\nMöchten Sie diesen Vorgang fortsetzen?",
+    "message": "Hiermit werden %bkmarkCount% Lesezeichen gleichzeitig geöffnet.\nMöchten Sie diesen Vorgang fortsetzen?",
     "description": "2013.01.29 | Refer to Firefox Bookmark menu"
   },
   "cancel": {
@@ -177,8 +176,7 @@
     "description": "2013.03.24"
   },
   "warnOpenMany": {
-    "message":
-      "Hinweis anzeigen, falls Chrome durch gleichzeitiges Öffnen mehrerer Tabs langsamer wird",
+    "message": "Hinweis anzeigen, falls Chrome durch gleichzeitiges Öffnen mehrerer Tabs langsamer wird",
     "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
   },
   "yes": {
