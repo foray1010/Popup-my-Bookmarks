@@ -25,13 +25,15 @@ interface ItemData {
   onRowMouseLeave: (bookmarkInfo: BookmarkInfo) => () => void
   treeInfo: BookmarkTreeType
 }
+
+const getItemKey = (index: number, data: ItemData) => data.treeInfo.children[index].id
+
 const Row = ({data, index, style}: {data: ItemData, index: number, style: React.CSSProperties}) => {
   const bookmarkInfo = data.treeInfo.children[index]
   const isDragging = data.draggingId !== null
   const isBeingDragged = data.draggingId === bookmarkInfo.id
   return (
     <BookmarkRow
-      key={bookmarkInfo.id}
       bookmarkInfo={bookmarkInfo}
       className={classes['list-item']}
       iconSize={data.iconSize}
@@ -161,6 +163,7 @@ const BookmarkTree = (props: Props) => {
       height={listHeight}
       itemCount={itemCount}
       itemData={itemData}
+      itemKey={getItemKey}
       itemSize={getRowHeight}
       onScroll={props.onScroll}
       width={props.listItemWidth}
