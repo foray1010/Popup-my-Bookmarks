@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import {SagaIterator} from 'redux-saga'
-import {all, call} from 'redux-saga/effects'
+import {all, call, select} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
 import {
@@ -10,8 +10,9 @@ import {
   getI18n,
   updateTab
 } from '../../../../../common/utils'
-import * as CST from '../../../../constants'
+import {BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS} from '../../../../constants'
 import {BookmarkInfo} from '../../../../types'
+import {RootState} from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 import {getBookmarkInfo} from '../utils/getters'
 
@@ -20,7 +21,7 @@ function* getUrls(ids: Array<string>): SagaIterator {
     const bookmarkInfos: Array<BookmarkInfo> = yield all(ids.map((id) => call(getBookmarkInfo, id)))
 
     const filteredBookmarkInfos = bookmarkInfos.filter(
-      R.both(R.propEq('isSimulated', false), R.propEq('type', CST.BOOKMARK_TYPES.BOOKMARK))
+      R.both(R.propEq('isSimulated', false), R.propEq('type', BOOKMARK_TYPES.BOOKMARK))
     )
     return R.pluck('url', filteredBookmarkInfos)
   } catch (err) {
@@ -35,6 +36,8 @@ export function* openBookmarksInBrowser({
 }: ActionType<typeof bookmarkCreators.openBookmarksInBrowser>): SagaIterator {
   try {
     const {ids, openBookmarkProps} = payload
+
+    const {options}: RootState = yield select(R.identity)
 
     const allUrls: Array<string> = yield call(getUrls, ids)
     if (!allUrls.length) return
@@ -56,27 +59,27 @@ export function* openBookmarksInBrowser({
         // `window.confirm()` doesn't work as chrome will force close popup
         // but worked again at least since chrome 73
         // eslint-disable-next-line max-depth
-        if (!window.confirm(msgAskOpenAll)) return
+        if (options[OPTIONS.WARN_OPEN_MANY] && !window.confirm(msgAskOpenAll)) return
       }
 
       switch (openBookmarkProps.openIn) {
-        case CST.OPEN_IN_TYPES.BACKGROUND_TAB:
+        case OPEN_IN_TYPES.BACKGROUND_TAB:
           yield all(urls.map((url) => call(createTab, {url, active: false})))
           break
-        case CST.OPEN_IN_TYPES.CURRENT_TAB:
+        case OPEN_IN_TYPES.CURRENT_TAB:
           // @ts-ignore: doesn't work with overloaded function
           yield call(updateTab, {url: urls[0]})
           break
-        case CST.OPEN_IN_TYPES.INCOGNITO_WINDOW:
+        case OPEN_IN_TYPES.INCOGNITO_WINDOW:
           yield call(createWindow, {
             url: urls,
             incognito: true
           })
           break
-        case CST.OPEN_IN_TYPES.NEW_TAB:
+        case OPEN_IN_TYPES.NEW_TAB:
           yield all(urls.map((url) => call(createTab, {url, active: true})))
           break
-        case CST.OPEN_IN_TYPES.NEW_WINDOW:
+        case OPEN_IN_TYPES.NEW_WINDOW:
           yield call(createWindow, {url: urls})
           break
         default:
