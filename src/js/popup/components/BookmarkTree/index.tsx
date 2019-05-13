@@ -109,7 +109,11 @@ const BookmarkTreeContainer = ({
     return isSearching ? <NoSearchResult /> : null
   }, [isSearching])
 
-  const {handleRowAuxClick, handleRowClick} = useRowClickEvents(props)
+  const {handleRowAuxClick, handleRowClick} = useRowClickEvents({
+    ...props,
+    closeNextTrees,
+    treeInfo
+  })
   const {handleRowDragOver, handleRowDragStart} = useRowDragEvents({
     ...props,
     closeNextTrees,

@@ -1,20 +1,22 @@
 import debounce from 'lodash.debounce'
 import * as React from 'react'
 
-import * as CST from '../../constants'
-import {bookmarkCreators} from '../../reduxs'
+import {OPTIONS, RootState, bookmarkCreators} from '../../reduxs'
 import {BookmarkInfo, BookmarkTree} from '../../types'
 import DragAndDropContext from '../dragAndDrop/DragAndDropContext'
 import ListNavigationContext from '../listNavigation/ListNavigationContext'
+import {BOOKMARK_TYPES} from '../../constants'
 
 export default ({
   closeNextTrees,
   openBookmarkTree,
+  options,
   treeIndex,
   treeInfo
 }: {
   closeNextTrees: () => void
   openBookmarkTree: typeof bookmarkCreators.openBookmarkTree
+  options: RootState['options']
   treeIndex: number
   treeInfo: BookmarkTree
 }) => {
@@ -23,7 +25,7 @@ export default ({
 
   return React.useMemo(() => {
     const _toggleBookmarkTree = (bookmarkInfo: BookmarkInfo) => {
-      if (bookmarkInfo.type === CST.BOOKMARK_TYPES.FOLDER && bookmarkInfo.id !== activeKey) {
+      if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER && bookmarkInfo.id !== activeKey) {
         openBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
       } else {
         closeNextTrees()
@@ -33,7 +35,7 @@ export default ({
 
     return {
       handleRowMouseEnter: (bookmarkInfo: BookmarkInfo) => () => {
-        toggleBookmarkTree(bookmarkInfo)
+        if (!options[OPTIONS.OP_FOLDER_BY]) toggleBookmarkTree(bookmarkInfo)
 
         const index = treeInfo.children.findIndex((x) => x.id === bookmarkInfo.id)
         setHighlightedIndex(treeIndex, index)
@@ -49,6 +51,7 @@ export default ({
     activeKey,
     closeNextTrees,
     openBookmarkTree,
+    options,
     setHighlightedIndex,
     treeIndex,
     treeInfo.children,

@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import {BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS} from '../../constants'
 import {RootState, bookmarkCreators, menuCreators} from '../../reduxs'
-import {BookmarkInfo} from '../../types'
+import {BookmarkInfo, BookmarkTree} from '../../types'
 
 const mapOptionToOpenBookmarkProps = (
   option?: number
@@ -47,15 +47,21 @@ const mapOptionToOpenBookmarkProps = (
 }
 
 export default ({
+  closeNextTrees,
   openBookmarksInBrowser,
+  openBookmarkTree,
   openFolderInBrowser,
   openMenu,
-  options
+  options,
+  treeInfo
 }: {
+  closeNextTrees: () => void
   openBookmarksInBrowser: typeof bookmarkCreators.openBookmarksInBrowser
+  openBookmarkTree: typeof bookmarkCreators.openBookmarkTree
   openFolderInBrowser: typeof bookmarkCreators.openFolderInBrowser
   openMenu: typeof menuCreators.openMenu
   options: RootState['options']
+  treeInfo: BookmarkTree
 }) => {
   return React.useMemo(() => {
     const handleRowMiddleClick = (bookmarkInfo: BookmarkInfo) => {
@@ -94,24 +100,37 @@ export default ({
         }
       },
       handleRowClick: (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent<HTMLElement>) => {
-        const option = (() => {
-          if (evt.ctrlKey || evt.metaKey) {
-            return options[OPTIONS.CLICK_BY_LEFT_CTRL]
-          }
+        if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
+          // const isFolderOpened =
+          openBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
+          // closeNextTrees()
+        } else {
+          const option = (() => {
+            if (evt.ctrlKey || evt.metaKey) {
+              return options[OPTIONS.CLICK_BY_LEFT_CTRL]
+            }
 
-          if (evt.shiftKey) {
-            return options[OPTIONS.CLICK_BY_LEFT_SHIFT]
-          }
+            if (evt.shiftKey) {
+              return options[OPTIONS.CLICK_BY_LEFT_SHIFT]
+            }
 
-          return options[OPTIONS.CLICK_BY_LEFT]
-        })()
+            return options[OPTIONS.CLICK_BY_LEFT]
+          })()
 
-        const openBookmarkProps = mapOptionToOpenBookmarkProps(option)
-        openBookmarksInBrowser([bookmarkInfo.id], {
-          ...openBookmarkProps,
-          isAllowBookmarklet: true
-        })
+          const openBookmarkProps = mapOptionToOpenBookmarkProps(option)
+          openBookmarksInBrowser([bookmarkInfo.id], {
+            ...openBookmarkProps,
+            isAllowBookmarklet: true
+          })
+        }
       }
     }
-  }, [openBookmarksInBrowser, openFolderInBrowser, openMenu, options])
+  }, [
+    openBookmarkTree,
+    openBookmarksInBrowser,
+    openFolderInBrowser,
+    openMenu,
+    options,
+    treeInfo.parent.id
+  ])
 }
