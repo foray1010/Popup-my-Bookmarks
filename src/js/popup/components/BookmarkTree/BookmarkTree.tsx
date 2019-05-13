@@ -4,8 +4,10 @@ import {VariableSizeList as List, ListOnScrollProps} from 'react-window'
 
 import classes from '../../../../css/popup/bookmark-tree.css'
 import * as CST from '../../constants'
+import useEventListener from '../../hooks/useEventListener'
 import {BookmarkInfo, BookmarkTree as BookmarkTreeType} from '../../types'
 import {ResponseEvent} from '../dragAndDrop/DragAndDropConsumer'
+import useDragContainerEvents from '../dragAndDrop/useDragAndDropContainerEvents'
 import BookmarkRow from './BookmarkRow'
 
 interface ItemData {
@@ -152,6 +154,10 @@ const BookmarkTree = (props: Props) => {
     props.treeInfo
   ])
 
+  const outerRef = React.useRef<HTMLDivElement>()
+  const {onMouseMove} = useDragContainerEvents()
+  useEventListener(outerRef.current, 'mousemove', onMouseMove)
+
   const itemCount = props.treeInfo.children.length
   if (itemCount === 0) {
     return props.noRowsRenderer()
@@ -160,6 +166,7 @@ const BookmarkTree = (props: Props) => {
   return (
     <List
       ref={listRef}
+      outerRef={outerRef}
       height={listHeight}
       itemCount={itemCount}
       itemData={itemData}
