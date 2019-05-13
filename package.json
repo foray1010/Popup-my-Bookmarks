@@ -37,7 +37,7 @@
     "redux": "4.0.1",
     "redux-saga": "1.0.2",
     "typeface-archivo-narrow": "0.0.72",
-    "typesafe-actions": "4.2.1",
+    "typesafe-actions": "4.3.0",
     "webextension-polyfill": "0.4.0"
   },
   "devDependencies": {
