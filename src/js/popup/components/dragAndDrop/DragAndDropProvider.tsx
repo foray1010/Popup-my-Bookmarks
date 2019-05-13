@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import useEventListener from '../../hooks/useEventListener'
 import DragAndDropContext, {DragAndDropContextType} from './DragAndDropContext'
 
 const useDragAndDropContextState = () => {
@@ -42,26 +43,22 @@ const DragAndDropProvider = ({children, onDragEnd, onDrop}: Props) => {
   const contextState = useDragAndDropContextState()
 
   const {activeKey, unsetAllKeys} = contextState
+  const isDragging = activeKey !== null
 
-  React.useEffect(() => {
-    if (activeKey === null) return undefined
+  const handleDrop = React.useCallback(
+    (evt: MouseEvent) => {
+      if (!isDragging) return
 
-    const handleDrop = (evt: MouseEvent) => {
       if (evt.buttons !== 1) {
         unsetAllKeys()
         if (activeKey !== null) onDrop(evt, activeKey)
         onDragEnd(evt)
       }
-    }
-
-    document.body.addEventListener('mouseenter', handleDrop)
-    window.addEventListener('mouseup', handleDrop)
-
-    return () => {
-      document.body.removeEventListener('mouseenter', handleDrop)
-      window.removeEventListener('mouseup', handleDrop)
-    }
-  }, [activeKey, onDragEnd, onDrop, unsetAllKeys])
+    },
+    [activeKey, isDragging, onDragEnd, onDrop, unsetAllKeys]
+  )
+  useEventListener(document.body, 'mouseenter', handleDrop)
+  useEventListener(window, 'mouseup', handleDrop)
 
   return <DragAndDropContext.Provider value={contextState}>{children}</DragAndDropContext.Provider>
 }
