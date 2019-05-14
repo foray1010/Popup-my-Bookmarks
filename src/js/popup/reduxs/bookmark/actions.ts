@@ -141,3 +141,8 @@ export const sortBookmarksByName = createAction(
   'SORT_BOOKMARKS_BY_NAME',
   (action) => (parentId: string) => action({parentId})
 )
+
+export const toggleBookmarkTree = createAction(
+  'TOGGLE_BOOKMARK_TREE',
+  (action) => (id: string, parentId: string) => action({id, parentId})
+)
