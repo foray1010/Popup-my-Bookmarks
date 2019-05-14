@@ -47,20 +47,18 @@ const mapOptionToOpenBookmarkProps = (
 }
 
 export default ({
-  closeNextTrees,
   openBookmarksInBrowser,
-  openBookmarkTree,
   openFolderInBrowser,
   openMenu,
   options,
+  toggleBookmarkTree,
   treeInfo
 }: {
-  closeNextTrees: () => void
   openBookmarksInBrowser: typeof bookmarkCreators.openBookmarksInBrowser
-  openBookmarkTree: typeof bookmarkCreators.openBookmarkTree
   openFolderInBrowser: typeof bookmarkCreators.openFolderInBrowser
   openMenu: typeof menuCreators.openMenu
   options: RootState['options']
+  toggleBookmarkTree: typeof bookmarkCreators.toggleBookmarkTree
   treeInfo: BookmarkTree
 }) => {
   return React.useMemo(() => {
@@ -101,9 +99,9 @@ export default ({
       },
       handleRowClick: (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent<HTMLElement>) => {
         if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
-          // const isFolderOpened =
-          openBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
-          // closeNextTrees()
+          if (options[OPTIONS.OP_FOLDER_BY]) {
+            toggleBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
+          }
         } else {
           const option = (() => {
             if (evt.ctrlKey || evt.metaKey) {
@@ -126,11 +124,11 @@ export default ({
       }
     }
   }, [
-    openBookmarkTree,
     openBookmarksInBrowser,
     openFolderInBrowser,
     openMenu,
     options,
+    toggleBookmarkTree,
     treeInfo.parent.id
   ])
 }

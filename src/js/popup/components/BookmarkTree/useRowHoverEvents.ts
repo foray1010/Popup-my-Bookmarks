@@ -1,11 +1,11 @@
 import debounce from 'lodash.debounce'
 import * as React from 'react'
 
-import {OPTIONS, RootState, bookmarkCreators} from '../../reduxs'
+import {BOOKMARK_TYPES, OPTIONS} from '../../constants'
+import {RootState, bookmarkCreators} from '../../reduxs'
 import {BookmarkInfo, BookmarkTree} from '../../types'
 import DragAndDropContext from '../dragAndDrop/DragAndDropContext'
 import ListNavigationContext from '../listNavigation/ListNavigationContext'
-import {BOOKMARK_TYPES} from '../../constants'
 
 export default ({
   closeNextTrees,

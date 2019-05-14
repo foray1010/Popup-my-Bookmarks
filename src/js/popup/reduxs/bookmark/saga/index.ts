@@ -18,6 +18,7 @@ import {openFolderInBrowser} from './modules/openFolderInBrowser'
 import {pasteBookmark} from './modules/pasteBookmark'
 import {refreshBookmarkTrees} from './modules/refreshBookmarkTrees'
 import {sortBookmarksByName} from './modules/sortBookmarksByName'
+import {toggleBookmarkTree} from './modules/toggleBookmarkTree'
 
 export function* bookmarkSaga(): SagaIterator {
   yield takeLatest(getType(bookmarkCreators.addCurrentPage), addCurrentPage)
@@ -38,4 +39,5 @@ export function* bookmarkSaga(): SagaIterator {
   yield takeLatest(getType(bookmarkCreators.pasteBookmark), pasteBookmark)
   yield takeLatest(getType(bookmarkCreators.refreshBookmarkTrees), refreshBookmarkTrees)
   yield takeLatest(getType(bookmarkCreators.sortBookmarksByName), sortBookmarksByName)
+  yield takeLatest(getType(bookmarkCreators.toggleBookmarkTree), toggleBookmarkTree)
 }

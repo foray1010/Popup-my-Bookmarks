@@ -63,6 +63,7 @@ const mapDispatchToProps = {
   removeLastPosition: lastPositionsCreators.removeLastPosition,
   removeNextBookmarkTrees: bookmarkCreators.removeNextBookmarkTrees,
   setDragIndicator: bookmarkCreators.setDragIndicator,
+  toggleBookmarkTree: bookmarkCreators.toggleBookmarkTree,
   updateLastPosition: lastPositionsCreators.updateLastPosition
 }
 
@@ -111,7 +112,6 @@ const BookmarkTreeContainer = ({
 
   const {handleRowAuxClick, handleRowClick} = useRowClickEvents({
     ...props,
-    closeNextTrees,
     treeInfo
   })
   const {handleRowDragOver, handleRowDragStart} = useRowDragEvents({
