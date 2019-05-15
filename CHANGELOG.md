@@ -1,6 +1,6 @@
 # Change Log
 
-## 6.0.0 (not yet released)
+## 6.0.0 (15/05/2019)
 
 Improvements:
 
