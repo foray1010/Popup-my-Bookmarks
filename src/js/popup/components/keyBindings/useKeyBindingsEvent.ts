@@ -8,6 +8,9 @@ const useKeyBindingsEvent = (
 ) => {
   const {addEventListener, removeEventListener} = React.useContext(KeyBindingsContext)
 
+  const callbackRef = React.useRef(callback)
+  callbackRef.current = callback
+
   // use ref as `key` may be a RegExp instance and passing new reference every time
   // it made a trade-off, updating key now doesn't rerun addEventListener/removeEventListener
   const keyRef = React.useRef(key)
@@ -16,12 +19,18 @@ const useKeyBindingsEvent = (
   React.useEffect(() => {
     const meta = {key: keyRef.current, priority, windowId}
 
-    if (callback) addEventListener(meta, callback)
+    const wrappedCallback = (evt: KeyboardEvent) => {
+      if (callbackRef.current) {
+        callbackRef.current(evt)
+      }
+    }
+
+    addEventListener(meta, wrappedCallback)
 
     return () => {
-      if (callback) removeEventListener(meta, callback)
+      removeEventListener(meta, wrappedCallback)
     }
-  }, [addEventListener, callback, priority, removeEventListener, windowId])
+  }, [addEventListener, priority, removeEventListener, windowId])
 }
 
 export default useKeyBindingsEvent
