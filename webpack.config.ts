@@ -96,7 +96,9 @@ const defaultConfig: webpack.Configuration = {
     filename: path.join('js', '[name].js')
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanStaleWebpackAssets: false
+    }),
     new CopyWebpackPlugin([
       {
         context: sourceDir,
