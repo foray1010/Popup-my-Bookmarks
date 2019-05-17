@@ -23,13 +23,17 @@ const SearchContainer = ({getSearchResult, isFocusSearchInput, setIsFocusSearchI
     getSearchResult(inputValue)
   }, [getSearchResult, inputValue])
 
-  const handleSingleKeyPress = React.useCallback(() => {
-    const notFocusOnInputElement =
-      !document.activeElement || !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)
-    if (notFocusOnInputElement) {
-      setIsFocusSearchInput(true)
-    }
-  }, [setIsFocusSearchInput])
+  const handleSingleKeyPress = React.useCallback(
+    (evt: KeyboardEvent) => {
+      const notFocusOnInputElement =
+        !document.activeElement || !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)
+      if (notFocusOnInputElement) {
+        setInputValue(evt.key)
+        setIsFocusSearchInput(true)
+      }
+    },
+    [setIsFocusSearchInput]
+  )
   useKeyBindingsEvent({key: /^.$/, windowId: BASE_WINDOW}, handleSingleKeyPress)
 
   const handleBlur = React.useCallback(() => {
