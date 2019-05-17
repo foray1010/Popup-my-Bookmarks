@@ -5,3 +5,5 @@ extends:
 globals:
   browser: false
   HTMLElement: false
+  HTMLInputElement: false
+  HTMLTextAreaElement: false
