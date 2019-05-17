@@ -16,7 +16,7 @@ const useDragEvents = ({
   onDragOver: (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
   onDragStart: (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
 }) => {
-  const {activeKey, setActiveKey, setPendingKey, unsetAllKeys} = React.useContext(
+  const {activeKey, pendingKey, setActiveKey, setPendingKey, unsetAllKeys} = React.useContext(
     DragAndDropContext
   )
 
@@ -32,13 +32,15 @@ const useDragEvents = ({
     ),
     handleDragStart: React.useCallback(
       (evt: React.MouseEvent<HTMLElement>) => {
-        setActiveKey(itemKey)
+        if (pendingKey === null) return
+
+        setActiveKey(pendingKey)
         onDragStart(evt, {
-          activeKey,
+          activeKey: pendingKey,
           itemKey
         })
       },
-      [activeKey, itemKey, onDragStart, setActiveKey]
+      [itemKey, onDragStart, pendingKey, setActiveKey]
     ),
     handleMouseDown: React.useCallback(
       (evt: React.MouseEvent<HTMLElement>) => {
