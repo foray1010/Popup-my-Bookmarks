@@ -1,6 +1,7 @@
 ignore:
   - 'flow-typed/**'
   - 'markdown/**'
+  - 'CHANGELOG.md'
 linters:
   '.babelrc':
     - 'prettier-eslint --parser json --write'
