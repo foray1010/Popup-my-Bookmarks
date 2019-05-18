@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.0.2](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.0.1...v6.0.2) (2019-05-18)
+
+### Bug Fixes
+
+- should not trigger dragging when clicking bookmark with a shaking hand (reported by [@dlbryant](https://github.com/dlbryant)) ([e2e8265](https://github.com/foray1010/Popup-my-Bookmarks/commit/e2e8265))
+
 ## [6.0.1](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.0.0...v6.0.1) (2019-05-17)
 
 ### Bug Fixes
