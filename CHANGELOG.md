@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.0.3](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.0.2...v6.0.3) (2019-05-18)
+
+### Bug Fixes
+
+- cannot drag on the edge of the bookmark ([1ad980e](https://github.com/foray1010/Popup-my-Bookmarks/commit/1ad980e))
+
 ### [6.0.2](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.0.1...v6.0.2) (2019-05-18)
 
 ### Bug Fixes
