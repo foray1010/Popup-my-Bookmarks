@@ -1,27 +1,23 @@
-ignore:
-  - 'flow-typed/**'
-  - 'markdown/**'
-linters:
-  '.babelrc':
-    - 'prettier-eslint --parser json --write'
-    - 'git add'
-  '*.css':
-    - 'prettier-eslint --write'
-    - 'stylelint --fix'
-    - 'git add'
-  '*.{js,ts,tsx}':
-    - 'import-sort --write'
-    - 'prettier-eslint --write'
-    - 'eslint --fix'
-    - 'jest --bail --findRelatedTests --config .jestrc.json'
-    - 'git add'
-  '*.{json,yaml,yml}':
-    - 'prettier-eslint --write'
-    - 'git add'
-  '*.md':
-    - 'prettier-eslint --write'
-    - 'markdownlint'
-    - 'git add'
-  '*ignore-sync':
-    - 'ignore-sync'
-    - 'git add'
+'.babelrc':
+  - 'prettier-eslint --parser json --write'
+  - 'git add'
+'*.css':
+  - 'prettier-eslint --write'
+  - 'stylelint --fix'
+  - 'git add'
+'*.{js,ts,tsx}':
+  - 'import-sort --write'
+  - 'prettier-eslint --write'
+  - 'eslint --fix'
+  - 'jest --bail --findRelatedTests --config .jestrc.json'
+  - 'git add'
+'*.{json,yaml,yml}':
+  - 'prettier-eslint --write'
+  - 'git add'
+'*.md':
+  - 'prettier-eslint --write'
+  - 'markdownlint'
+  - 'git add'
+'*ignore-sync':
+  - 'ignore-sync'
+  - 'git add'

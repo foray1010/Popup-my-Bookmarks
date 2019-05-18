@@ -16,7 +16,7 @@
     "dev": "cross-env NODE_ENV=development webpack",
     "lint:css": "stylelint 'src/**/*.{css,ts,tsx}'",
     "lint:js": "eslint --ext ts,tsx .",
-    "lint:md": "markdownlint README.md",
+    "lint:md": "markdownlint *.md",
     "locales": "ts-node --transpile-only scripts/generateLocalesFromTransifex.ts",
     "md": "ts-node --transpile-only scripts/generateMarkdown.ts",
     "test": "cross-env NODE_ENV=test jest --config .jestrc.json",
