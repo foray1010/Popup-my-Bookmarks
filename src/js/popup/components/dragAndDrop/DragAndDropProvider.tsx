@@ -3,8 +3,14 @@ import * as React from 'react'
 import useEventListener from '../../hooks/useEventListener'
 import DragAndDropContext, {DragAndDropContextType} from './DragAndDropContext'
 
-const useDragAndDropContextState = () => {
+const useDragAndDropContextState = (): DragAndDropContextType => {
   const [activeKey, setActiveKeyState] = React.useState<DragAndDropContextType['activeKey']>(null)
+  const [mouseCoordinate, setMouseCoordinate] = React.useState<
+  DragAndDropContextType['mouseCoordinate']
+  >({
+    x: 0,
+    y: 0
+  })
   const [pendingKey, setPendingKeyState] = React.useState<DragAndDropContextType['pendingKey']>(
     null
   )
@@ -25,12 +31,14 @@ const useDragAndDropContextState = () => {
   return React.useMemo(
     () => ({
       activeKey,
+      mouseCoordinate,
       pendingKey,
       setActiveKey,
+      setMouseCoordinate,
       setPendingKey,
       unsetAllKeys
     }),
-    [activeKey, pendingKey, setActiveKey, setPendingKey, unsetAllKeys]
+    [activeKey, mouseCoordinate, pendingKey, setActiveKey, setPendingKey, unsetAllKeys]
   )
 }
 

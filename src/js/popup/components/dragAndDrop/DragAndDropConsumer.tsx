@@ -16,14 +16,15 @@ const useDragEvents = ({
   onDragOver: (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
   onDragStart: (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
 }) => {
-  const {activeKey, pendingKey, setActiveKey, setPendingKey, unsetAllKeys} = React.useContext(
-    DragAndDropContext
-  )
-
-  const [mouseCoordinate, setMouseCoordinate] = React.useState({
-    x: 0,
-    y: 0
-  })
+  const {
+    activeKey,
+    mouseCoordinate,
+    pendingKey,
+    setActiveKey,
+    setMouseCoordinate,
+    setPendingKey,
+    unsetAllKeys
+  } = React.useContext(DragAndDropContext)
 
   return {
     handleDragOver: React.useCallback(
@@ -65,7 +66,7 @@ const useDragEvents = ({
           y: evt.clientY
         })
       },
-      [itemKey, setPendingKey]
+      [itemKey, setMouseCoordinate, setPendingKey]
     ),
     handleMouseUp: React.useCallback(() => {
       unsetAllKeys()
@@ -114,7 +115,7 @@ const DragAndDropConsumer = (props: Props) => {
   })
 
   const isDragging = context.activeKey !== null
-  const isPending = context.pendingKey === props.itemKey
+  const isPending = context.pendingKey !== null
   return (
     <div
       className={props.className}
