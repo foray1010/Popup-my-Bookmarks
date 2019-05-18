@@ -4,13 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [6.0.1](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.0.0...v6.0.1) (2019-05-17)
 
-
 ### Bug Fixes
 
-* close PmB by pressing Esc on input w/o value (reported by [@alon91](https://github.com/alon91)) ([0472fe0](https://github.com/foray1010/Popup-my-Bookmarks/commit/0472fe0))
-* should search immediately by pressing any key (reported by [@alon91](https://github.com/alon91)) ([f0fb879](https://github.com/foray1010/Popup-my-Bookmarks/commit/f0fb879))
-
-
+- close PmB by pressing Esc on input w/o value (reported by [@alon91](https://github.com/alon91)) ([0472fe0](https://github.com/foray1010/Popup-my-Bookmarks/commit/0472fe0))
+- should search immediately by pressing any key (reported by [@alon91](https://github.com/alon91)) ([f0fb879](https://github.com/foray1010/Popup-my-Bookmarks/commit/f0fb879))
 
 ## 6.0.0 (15/05/2019)
 
