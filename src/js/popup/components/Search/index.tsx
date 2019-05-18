@@ -25,9 +25,8 @@ const SearchContainer = ({getSearchResult, isFocusSearchInput, setIsFocusSearchI
 
   const handleSingleKeyPress = React.useCallback(
     (evt: KeyboardEvent) => {
-      const notFocusOnInputElement =
-        !document.activeElement || !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)
-      if (notFocusOnInputElement) {
+      const isFocusedOnInput = document.activeElement instanceof HTMLInputElement
+      if (!isFocusedOnInput) {
         setInputValue(evt.key)
         setIsFocusSearchInput(true)
       }

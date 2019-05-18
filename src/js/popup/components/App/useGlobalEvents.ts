@@ -5,7 +5,7 @@ import useEventListener from '../../hooks/useEventListener'
 export default () => {
   const handleContextMenu = React.useCallback((evt: MouseEvent) => {
     // allow native context menu if it is an input element
-    if (evt.target instanceof HTMLElement && evt.target.tagName === 'INPUT') {
+    if (evt.target instanceof HTMLInputElement) {
       return
     }
 
@@ -16,10 +16,7 @@ export default () => {
 
   const handleKeyDown = React.useCallback((evt: KeyboardEvent) => {
     const isFocusedOnInputWithoutValue =
-      document.activeElement !== null &&
-      (document.activeElement instanceof HTMLInputElement ||
-        document.activeElement instanceof HTMLTextAreaElement) &&
-      document.activeElement.value === ''
+      document.activeElement instanceof HTMLInputElement && document.activeElement.value === ''
     if (evt.key === 'Escape' && isFocusedOnInputWithoutValue) {
       window.close()
     }
