@@ -20,6 +20,11 @@ const useDragEvents = ({
     DragAndDropContext
   )
 
+  const [mouseCoordinate, setMouseCoordinate] = React.useState({
+    x: 0,
+    y: 0
+  })
+
   return {
     handleDragOver: React.useCallback(
       (evt: React.MouseEvent<HTMLElement>) => {
@@ -34,19 +39,31 @@ const useDragEvents = ({
       (evt: React.MouseEvent<HTMLElement>) => {
         if (pendingKey === null) return
 
+        const threshold = 5
+        const xDisplacement = Math.abs(mouseCoordinate.x - evt.clientX)
+        const yDisplacement = Math.abs(mouseCoordinate.y - evt.clientY)
+        // prevent triggering drag instead of click due to hand shaking
+        if (xDisplacement <= threshold && yDisplacement <= threshold) return
+
         setActiveKey(pendingKey)
+
         onDragStart(evt, {
           activeKey: pendingKey,
           itemKey
         })
       },
-      [itemKey, onDragStart, pendingKey, setActiveKey]
+      [itemKey, mouseCoordinate.x, mouseCoordinate.y, onDragStart, pendingKey, setActiveKey]
     ),
     handleMouseDown: React.useCallback(
       (evt: React.MouseEvent<HTMLElement>) => {
         if (evt.buttons !== 1) return
 
         setPendingKey(itemKey)
+
+        setMouseCoordinate({
+          x: evt.clientX,
+          y: evt.clientY
+        })
       },
       [itemKey, setPendingKey]
     ),
