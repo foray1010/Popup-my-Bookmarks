@@ -1,6 +1,8 @@
 import * as R from 'ramda'
 import * as React from 'react'
 
+import classes from '../../../../css/options/input-number.css'
+
 interface Props {
   maximum: number
   minimum: number
@@ -38,6 +40,7 @@ const InputNumber = ({maximum, minimum, optionName, optionValue, updatePartialOp
 
   return (
     <input
+      className={classes.main}
       name={optionName}
       type='number'
       min={minimum}

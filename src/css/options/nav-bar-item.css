@@ -21,7 +21,9 @@
 }
 
 .main {
+  composes: focus from '../common/composes.css';
   background-color: transparent;
+  border: 0;
   border-bottom: var(--golden-gap-2x) solid transparent;
   color: var(--oc-white);
   cursor: default;

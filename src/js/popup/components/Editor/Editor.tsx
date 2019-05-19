@@ -45,8 +45,16 @@ const Editor = (props: Props) => {
     <form className={classes.main} style={formStyles} onSubmit={handleSubmit}>
       <span className={classes.header}>{props.header}</span>
 
-      <input type='text' value={title} onChange={handleTitleChange} autoFocus />
-      {props.isAllowEditUrl && <input type='text' value={url} onChange={handleUrlChange} />}
+      <input
+        className={classes.input}
+        type='text'
+        value={title}
+        onChange={handleTitleChange}
+        autoFocus
+      />
+      {props.isAllowEditUrl && (
+        <input className={classes.input} type='text' value={url} onChange={handleUrlChange} />
+      )}
 
       <button
         className={classes.button}

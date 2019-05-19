@@ -1,6 +1,7 @@
 @import '../common/variables.css';
 
 .item {
+  composes: focus from '../common/composes.css';
   align-items: center;
   background-color: transparent;
   border: 0;

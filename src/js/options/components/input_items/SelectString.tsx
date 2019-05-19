@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+import classes from '../../../../css/options/select-string.css'
+
 interface Props {
   choices: Array<string | void>
   optionName: string
@@ -17,7 +19,7 @@ const SelectString = ({choices, optionName, optionValue, updatePartialOptions}: 
   )
 
   return (
-    <select name={optionName} value={optionValue} onChange={handleChange}>
+    <select className={classes.main} name={optionName} value={optionValue} onChange={handleChange}>
       {choices.reduce((acc: Array<React.ReactElement<{}>>, optionChoice, optionChoiceIndex) => {
         if (optionChoice !== undefined) {
           return [

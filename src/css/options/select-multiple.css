@@ -1,5 +1,10 @@
 @import '../common/variables.css';
 
+.input {
+  composes: focus from '../common/composes.css';
+  composes: input from '../common/composes.css';
+}
+
 .main {
   border: 1px solid var(--main-color1);
   display: inline-block;

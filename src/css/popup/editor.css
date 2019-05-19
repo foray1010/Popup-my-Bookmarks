@@ -1,6 +1,7 @@
 @import '../common/variables.css';
 
 .button {
+  composes: focus from '../common/composes.css';
   composes: button from '../common/composes.css';
 }
 
@@ -10,6 +11,15 @@
   cursor: default;
   float: left;
   padding: var(--golden-gap) var(--golden-gap-4x);
+}
+
+.input {
+  composes: focus from '../common/composes.css';
+  composes: input from '../common/composes.css';
+  border-color: var(--highlight-level3);
+  box-sizing: border-box;
+  padding: var(--golden-gap-2x);
+  width: 100%;
 }
 
 .main {
@@ -27,12 +37,5 @@
 
   & > button + button {
     margin-left: var(--golden-gap-2x);
-  }
-
-  & > input[type='text'] {
-    border-color: var(--highlight-level3);
-    box-sizing: border-box;
-    padding: var(--golden-gap-2x);
-    width: 100%;
   }
 }

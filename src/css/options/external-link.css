@@ -1,6 +1,7 @@
 @import '../common/variables.css';
 
 .main {
+  composes: focus from '../common/composes.css';
   color: var(--main-color1);
   text-decoration: none;
 

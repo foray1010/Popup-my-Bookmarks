@@ -12,34 +12,6 @@
   margin: 0;
 }
 
-:global(a),
-:global(button),
-:global(input[type='checkbox']),
-:global(input[type='number']),
-:global(input[type='search']),
-:global(input[type='text']),
-:global(select) {
-  outline-color: var(--highlight-level5);
-  outline-width: 1px;
-
-  &:focus {
-    outline-style: solid;
-  }
-}
-
-:global(input[type='number']),
-:global(input[type='search']),
-:global(input[type='text']),
-:global(select) {
-  background-color: var(--oc-white);
-  border-style: solid;
-  border-width: 1px;
-}
-
-:global(button) {
-  border: 0;
-}
-
 :global([hidden]) {
   display: none !important;
 }

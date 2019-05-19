@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+import classes from '../../../../../css/options/select-multiple.css'
+
 interface Props {
   optionChoice: string
   optionChoiceIndex: number
@@ -44,6 +46,7 @@ const Option = ({
     <label htmlFor={inputId}>
       <input
         id={inputId}
+        className={classes.input}
         name={optionName}
         type='checkbox'
         value={String(optionChoiceIndex)}

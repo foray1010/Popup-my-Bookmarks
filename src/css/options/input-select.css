@@ -15,10 +15,16 @@
 }
 
 .input {
+  composes: focus from '../common/composes.css';
   box-sizing: border-box;
   left: 0;
   position: absolute;
   text-align: left;
   top: 0;
   width: calc(100% - var(--input-height));
+}
+
+.select {
+  background: transparent;
+  outline: 0;
 }

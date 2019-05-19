@@ -2,11 +2,27 @@
 
 .button {
   background-color: var(--highlight-level1);
+  border: 0;
   padding: var(--golden-gap-2x) var(--golden-gap-4x);
 
   &:hover {
     color: var(--main-color1);
   }
+}
+
+.focus {
+  outline-color: var(--highlight-level5);
+  outline-width: 1px;
+
+  &:focus {
+    outline-style: solid;
+  }
+}
+
+.input {
+  background-color: transparent;
+  border-style: solid;
+  border-width: 1px;
 }
 
 .list-item {
