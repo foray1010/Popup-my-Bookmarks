@@ -10,13 +10,13 @@ All notable changes to this project will be documented in this file. See [standa
 - avoid duplicated separator URL (suggested by [@dlbryant](https://github.com/dlbryant)) ([e7f605c](https://github.com/foray1010/Popup-my-Bookmarks/commit/e7f605c))
 - increase separator width to fit the largest popup width ([c114f94](https://github.com/foray1010/Popup-my-Bookmarks/commit/c114f94))
 
-### [6.0.3](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.0.2...v6.0.3) (2019-05-18)
+## [6.0.3](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.0.2...v6.0.3) (2019-05-18)
 
 ### Bug Fixes
 
 - cannot drag on the edge of the bookmark ([1ad980e](https://github.com/foray1010/Popup-my-Bookmarks/commit/1ad980e))
 
-### [6.0.2](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.0.1...v6.0.2) (2019-05-18)
+## [6.0.2](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.0.1...v6.0.2) (2019-05-18)
 
 ### Bug Fixes
 
