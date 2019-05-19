@@ -13,7 +13,7 @@ export function* addSeparator({
       bookmarkCreators.createBookmark(
         payload.parentId,
         payload.index,
-        '- '.repeat(42),
+        '- '.repeat(54).trim(),
         CST.SEPARATE_THIS_URL
       )
     )

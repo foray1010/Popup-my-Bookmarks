@@ -21,7 +21,14 @@ describe('addSeparator', () => {
     })
 
     expect(generator.next().value).toEqual(
-      put(bookmarkCreators.createBookmark(parentId, index, '- '.repeat(42), CST.SEPARATE_THIS_URL))
+      put(
+        bookmarkCreators.createBookmark(
+          parentId,
+          index,
+          '- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -',
+          CST.SEPARATE_THIS_URL
+        )
+      )
     )
 
     expect(generator.next().done).toBe(true)
