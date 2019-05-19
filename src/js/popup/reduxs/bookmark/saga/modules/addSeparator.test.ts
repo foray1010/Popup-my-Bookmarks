@@ -8,6 +8,8 @@ import * as CST from '../../../../constants'
 import * as bookmarkCreators from '../../actions'
 import {addSeparator} from './addSeparator'
 
+jest.mock('nanoid', () => () => 'mocked-id')
+
 const chance = Chance('addSeparator')
 
 describe('addSeparator', () => {
@@ -26,7 +28,7 @@ describe('addSeparator', () => {
           parentId,
           index,
           '- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -',
-          CST.SEPARATE_THIS_URL
+          CST.SEPARATE_THIS_URL + '#mocked-id'
         )
       )
     )
