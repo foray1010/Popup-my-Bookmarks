@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.1.0](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.0.3...v6.1.0) (2019-05-19)
+
+### Features
+
+- always show cancel search button even not focusing on search (reported by [@dlbryant](https://github.com/dlbryant)) ([fe0a0c4](https://github.com/foray1010/Popup-my-Bookmarks/commit/fe0a0c4))
+- avoid duplicated separator URL (suggested by [@dlbryant](https://github.com/dlbryant)) ([e7f605c](https://github.com/foray1010/Popup-my-Bookmarks/commit/e7f605c))
+- increase separator width to fit the largest popup width ([c114f94](https://github.com/foray1010/Popup-my-Bookmarks/commit/c114f94))
+
 ### [6.0.3](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.0.2...v6.0.3) (2019-05-18)
 
 ### Bug Fixes
