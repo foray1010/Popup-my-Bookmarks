@@ -54,6 +54,7 @@ const SearchContainer = ({getSearchResult, isFocusSearchInput, setIsFocusSearchI
       onBlur={handleBlur}
       onFocus={handleFocus}
       onChange={handleChange}
+      setInputValue={setInputValue}
     />
   )
 }

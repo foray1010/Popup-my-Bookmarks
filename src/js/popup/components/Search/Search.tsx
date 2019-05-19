@@ -2,6 +2,7 @@ import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import classes from '../../../../css/popup/search.css'
+import cancelIcon from '../../../../img/cancel.svg'
 import searchIcon from '../../../../img/search.svg'
 
 interface Props {
@@ -10,8 +11,9 @@ interface Props {
   onBlur: () => void
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void
   onFocus: () => void
+  setInputValue: (inputValue: string) => void
 }
-const Search = ({isFocus, ...restProps}: Props) => {
+const Search = ({inputValue, isFocus, setInputValue, ...restProps}: Props) => {
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   React.useEffect(() => {
@@ -20,19 +22,27 @@ const Search = ({isFocus, ...restProps}: Props) => {
     }
   }, [isFocus])
 
+  const resetInputValue = React.useCallback(() => {
+    setInputValue('')
+  }, [setInputValue])
+
   return (
     <div className={classes.main}>
       <img className={classes['search-icon']} src={searchIcon} alt='' />
       <input
         ref={inputRef}
-        type='search'
+        className={classes['search-input']}
+        type='text'
         placeholder={webExtension.i18n.getMessage('search')}
-        value={restProps.inputValue}
+        value={inputValue}
         tabIndex={-1}
         onBlur={restProps.onBlur}
         onFocus={restProps.onFocus}
         onChange={restProps.onChange}
       />
+      {inputValue ? (
+        <img className={classes['cancel-icon']} src={cancelIcon} alt='' onClick={resetInputValue} />
+      ) : null}
     </div>
   )
 }
