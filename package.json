@@ -79,7 +79,7 @@
     "@types/zip-webpack-plugin": "3.0.0",
     "babel-loader": "8.0.6",
     "babel-preset-foray1010": "9.0.0",
-    "bluebird": "3.5.4",
+    "bluebird": "3.5.5",
     "chance": "1.0.18",
     "chrome-manifest-loader": "0.2.0",
     "clean-webpack-plugin": "2.0.2",
