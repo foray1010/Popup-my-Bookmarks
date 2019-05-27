@@ -4,7 +4,7 @@ import classes from '../../../css/popup/mask.css'
 
 interface Props {
   backgroundColor: string
-  onClick: () => void
+  onClick: React.MouseEventHandler<HTMLElement>
   opacity: number
 }
 const Mask = (props: Props) => {

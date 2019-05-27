@@ -8,9 +8,9 @@ import MenuRow from './MenuRow'
 interface Props {
   highlightedIndex?: number
   menuPattern: MenuPattern
-  onRowClick: () => void
-  onRowMouseEnter: (index: number) => () => void
-  onRowMouseLeave: (index: number) => () => void
+  onRowClick: React.MouseEventHandler<HTMLElement>
+  onRowMouseEnter: (index: number) => React.MouseEventHandler<HTMLElement>
+  onRowMouseLeave: (index: number) => React.MouseEventHandler<HTMLElement>
   unclickableRows: Array<string>
 }
 const Menu = (props: Props) => {

@@ -8,9 +8,9 @@ import searchIcon from '../../../../img/search.svg'
 interface Props {
   inputValue: string
   isFocus: boolean
-  onBlur: () => void
-  onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void
-  onFocus: () => void
+  onBlur: React.FocusEventHandler<HTMLInputElement>
+  onChange: React.ChangeEventHandler<HTMLInputElement>
+  onFocus: React.FocusEventHandler<HTMLInputElement>
   setInputValue: (inputValue: string) => void
 }
 const Search = ({inputValue, isFocus, setInputValue, ...restProps}: Props) => {
