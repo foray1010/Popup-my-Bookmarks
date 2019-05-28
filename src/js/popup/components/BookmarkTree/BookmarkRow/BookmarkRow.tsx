@@ -9,10 +9,10 @@ interface Props {
   iconUrl?: string
   isHighlighted: boolean
   isUnclickable: boolean
-  onAuxClick?: React.MouseEventHandler<HTMLElement>
-  onClick?: React.MouseEventHandler<HTMLElement>
-  onMouseEnter?: React.MouseEventHandler<HTMLElement>
-  onMouseLeave?: React.MouseEventHandler<HTMLElement>
+  onAuxClick?: React.MouseEventHandler
+  onClick?: React.MouseEventHandler
+  onMouseEnter?: React.MouseEventHandler
+  onMouseLeave?: React.MouseEventHandler
   title: string
   tooltip?: string
 }

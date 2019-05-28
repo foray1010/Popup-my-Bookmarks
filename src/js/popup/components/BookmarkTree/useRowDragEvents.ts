@@ -19,7 +19,7 @@ export default ({
   return React.useMemo(() => {
     return {
       handleRowDragOver: (bookmarkInfo: BookmarkInfo) => (
-        evt: React.MouseEvent<HTMLElement>,
+        evt: React.MouseEvent,
         responseEvent: ResponseEvent
       ) => {
         const targetOffset = evt.currentTarget.getBoundingClientRect()

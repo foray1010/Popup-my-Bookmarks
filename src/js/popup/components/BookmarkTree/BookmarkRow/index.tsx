@@ -19,14 +19,14 @@ interface OwnProps {
   isSearching: boolean
   isShowTooltip: boolean
   isUnclickable: boolean
-  onAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler<HTMLElement>
-  onClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler<HTMLElement>
+  onAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   onDragOver: (
     bookmarkInfo: BookmarkInfo
-  ) => (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
-  onDragStart: React.MouseEventHandler<HTMLElement>
-  onMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler<HTMLElement>
-  onMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler<HTMLElement>
+  ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
+  onDragStart: React.MouseEventHandler
+  onMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   style?: React.CSSProperties
 }
 

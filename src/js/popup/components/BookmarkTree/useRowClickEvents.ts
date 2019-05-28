@@ -77,10 +77,7 @@ export default ({
         })
       }
     }
-    const handleRowRightClick = (
-      bookmarkInfo: BookmarkInfo,
-      evt: React.MouseEvent<HTMLElement>
-    ) => {
+    const handleRowRightClick = (bookmarkInfo: BookmarkInfo, evt: React.MouseEvent) => {
       openMenu(bookmarkInfo.id, {
         positionLeft: evt.clientX,
         positionTop: evt.clientY
@@ -88,7 +85,7 @@ export default ({
     }
 
     return {
-      handleRowAuxClick: (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent<HTMLElement>) => {
+      handleRowAuxClick: (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent) => {
         if (evt.button === 1) {
           handleRowMiddleClick(bookmarkInfo)
         }
@@ -97,7 +94,7 @@ export default ({
           handleRowRightClick(bookmarkInfo, evt)
         }
       },
-      handleRowClick: (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent<HTMLElement>) => {
+      handleRowClick: (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent) => {
         if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
           if (options[OPTIONS.OP_FOLDER_BY]) {
             toggleBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)

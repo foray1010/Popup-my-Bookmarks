@@ -17,14 +17,14 @@ interface ItemData {
   isDisableDragAndDrop: boolean
   isSearching: boolean
   isShowTooltip: boolean
-  onRowAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler<HTMLElement>
-  onRowClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler<HTMLElement>
+  onRowAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onRowClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   onRowDragOver: (
     bookmarkInfo: BookmarkInfo
-  ) => (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
-  onRowDragStart: React.MouseEventHandler<HTMLElement>
-  onRowMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler<HTMLElement>
-  onRowMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler<HTMLElement>
+  ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
+  onRowDragStart: React.MouseEventHandler
+  onRowMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onRowMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   treeInfo: BookmarkTreeType
 }
 

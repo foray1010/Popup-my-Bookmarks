@@ -4,7 +4,7 @@ import classes from '../../../../css/options/option-button.css'
 
 interface Props {
   msg: string
-  onClick: React.MouseEventHandler<HTMLElement>
+  onClick: React.MouseEventHandler
 }
 const OptionButton = (props: Props) => (
   <button className={classes.main} type='button' onClick={props.onClick}>

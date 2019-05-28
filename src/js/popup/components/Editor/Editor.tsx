@@ -3,7 +3,7 @@ import webExtension from 'webextension-polyfill'
 
 import classes from '../../../../css/popup/editor.css'
 
-const handleSubmit = (evt: React.FormEvent<HTMLElement>) => {
+const handleSubmit = (evt: React.FormEvent) => {
   evt.preventDefault()
 }
 

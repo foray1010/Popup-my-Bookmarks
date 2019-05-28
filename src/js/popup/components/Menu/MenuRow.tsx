@@ -7,9 +7,9 @@ import classes from '../../../../css/popup/menu-item.css'
 interface Props {
   isFocused: boolean
   isUnclickable: boolean
-  onClick: React.MouseEventHandler<HTMLElement>
-  onMouseEnter: (index: number) => React.MouseEventHandler<HTMLElement>
-  onMouseLeave: (index: number) => React.MouseEventHandler<HTMLElement>
+  onClick: React.MouseEventHandler
+  onMouseEnter: (index: number) => React.MouseEventHandler
+  onMouseLeave: (index: number) => React.MouseEventHandler
   rowIndex: number
   rowName: string
 }

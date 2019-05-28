@@ -32,7 +32,7 @@ const useDragAndDropContainerEvents = ({margin = 20}: {margin?: number} = {}) =>
       }, 50)
     }
 
-    const onMouseMove = (evt: MouseEvent | React.MouseEvent<HTMLElement>) => {
+    const onMouseMove = (evt: MouseEvent | React.MouseEvent) => {
       if (!isDragging) return
 
       if (evt.currentTarget instanceof HTMLElement) {

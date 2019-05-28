@@ -7,7 +7,7 @@ import {Options, OptionsConfig} from '../../../common/types/options'
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 
-const handleSubmit = (evt: React.FormEvent<HTMLElement>) => {
+const handleSubmit = (evt: React.FormEvent) => {
   evt.preventDefault()
 }
 

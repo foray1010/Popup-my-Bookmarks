@@ -13,8 +13,8 @@ const useDragEvents = ({
   onDragStart
 }: {
   itemKey: string
-  onDragOver: (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
-  onDragStart: (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
+  onDragOver: (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
+  onDragStart: (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
 }) => {
   const {
     activeKey,
@@ -28,7 +28,7 @@ const useDragEvents = ({
 
   return {
     handleDragOver: React.useCallback(
-      (evt: React.MouseEvent<HTMLElement>) => {
+      (evt: React.MouseEvent) => {
         onDragOver(evt, {
           activeKey,
           itemKey
@@ -37,7 +37,7 @@ const useDragEvents = ({
       [activeKey, itemKey, onDragOver]
     ),
     handleDragStart: React.useCallback(
-      (evt: React.MouseEvent<HTMLElement>) => {
+      (evt: React.MouseEvent) => {
         if (pendingKey === null) return
 
         const threshold = 5
@@ -56,7 +56,7 @@ const useDragEvents = ({
       [itemKey, mouseCoordinate.x, mouseCoordinate.y, onDragStart, pendingKey, setActiveKey]
     ),
     handleMouseDown: React.useCallback(
-      (evt: React.MouseEvent<HTMLElement>) => {
+      (evt: React.MouseEvent) => {
         if (evt.buttons !== 1) return
 
         setPendingKey(itemKey)
@@ -79,7 +79,7 @@ const useMouseEvents = () => {
 
   return {
     handleClickCapture: React.useCallback(
-      (evt: React.MouseEvent<HTMLElement>) => {
+      (evt: React.MouseEvent) => {
         if (shouldDisableNextClick) {
           evt.stopPropagation()
           setShouldDisableNextClick(false)
@@ -99,8 +99,8 @@ interface Props {
   disableDrag?: boolean
   disableDrop?: boolean
   itemKey: string
-  onDragOver: (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
-  onDragStart: (evt: React.MouseEvent<HTMLElement>, responseEvent: ResponseEvent) => void
+  onDragOver: (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
+  onDragStart: (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
   style?: React.CSSProperties
 }
 const DragAndDropConsumer = (props: Props) => {
