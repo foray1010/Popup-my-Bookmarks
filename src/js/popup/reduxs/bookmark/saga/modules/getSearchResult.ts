@@ -13,12 +13,11 @@ import {searchBookmarks} from '../utils/getters'
 
 export const searchKeywordMatcher = (searchKeyword: string, title: string) => {
   const lowerCaseTitle = title.toLowerCase()
-  return R.compose(
-    R.all((x: string) => lowerCaseTitle.includes(x)),
-    R.filter(Boolean),
-    R.split(' '),
-    R.toLower
-  )(searchKeyword)
+  return searchKeyword
+    .toLowerCase()
+    .split(' ')
+    .filter(Boolean)
+    .every((x) => lowerCaseTitle.includes(x))
 }
 
 export function* getSearchResult({

@@ -1,7 +1,14 @@
-import * as R from 'ramda'
 import * as React from 'react'
 
 import classes from '../../../../css/options/input-select.css'
+
+const normalize = (value: string) => {
+  return value
+    .split(',')
+    .map((x) => x.trim())
+    .filter(Boolean)
+    .join(',')
+}
 
 interface Props {
   choices: Array<string>
@@ -15,12 +22,6 @@ const InputSelect = ({choices, optionName, optionValue, updatePartialOptions}: P
 
   const handleBlur = React.useCallback(
     (evt: React.FocusEvent<HTMLInputElement>) => {
-      const normalize = R.compose(
-        R.join(','),
-        R.filter(Boolean),
-        R.map(R.trim),
-        R.split(',')
-      )
       updatePartialOptions({
         [optionName]: normalize(evt.currentTarget.value)
       })
