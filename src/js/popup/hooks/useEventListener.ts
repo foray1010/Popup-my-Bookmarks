@@ -21,7 +21,7 @@ function useEventListener<
   KH extends keyof HTMLElementEventMap,
   KW extends keyof WindowEventMap
 >(
-  element: HTMLElement | Document | Window | void,
+  element: Document | HTMLElement | Window | void,
   eventType: KD | KH | KW | string,
   listener: (
     evt: DocumentEventMap[KD] | HTMLElementEventMap[KH] | WindowEventMap[KW] | Event
