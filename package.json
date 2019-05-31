@@ -39,6 +39,7 @@
     "redux-saga": "1.0.2",
     "typeface-archivo-narrow": "0.0.72",
     "typesafe-actions": "4.4.0",
+    "use-typed-event-listener": "1.0.0",
     "webextension-polyfill": "0.4.0"
   },
   "devDependencies": {

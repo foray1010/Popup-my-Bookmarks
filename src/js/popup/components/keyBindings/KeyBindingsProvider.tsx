@@ -1,6 +1,6 @@
 import * as React from 'react'
+import useEventListener from 'use-typed-event-listener'
 
-import useEventListener from '../../hooks/useEventListener'
 import KeyBindingsContext, {KeyBindingEventCallback} from './KeyBindingsContext'
 import useKeyBindingsContextState from './useKeyBindingsContextState'
 
@@ -13,7 +13,7 @@ const KeyBindingsProvider = (props: Props) => {
   const contextStateRef = React.useRef(contextState)
   contextStateRef.current = contextState
 
-  const handleKeyDown: KeyBindingEventCallback = React.useCallback((evt) => {
+  useEventListener(window, 'keydown', (evt) => {
     const {keyBindingsPerWindow, activeWindowId} = contextStateRef.current
 
     if (!activeWindowId) return
@@ -49,8 +49,7 @@ const KeyBindingsProvider = (props: Props) => {
     if (matchResult.isMatched && matchResult.callback) {
       matchResult.callback(evt)
     }
-  }, [])
-  useEventListener(window, 'keydown', handleKeyDown)
+  })
 
   return (
     <KeyBindingsContext.Provider value={contextState}>{props.children}</KeyBindingsContext.Provider>

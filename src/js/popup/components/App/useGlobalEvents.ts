@@ -1,9 +1,7 @@
-import * as React from 'react'
-
-import useEventListener from '../../hooks/useEventListener'
+import useEventListener from 'use-typed-event-listener'
 
 export default () => {
-  const handleContextMenu = React.useCallback((evt: MouseEvent) => {
+  useEventListener(document, 'contextmenu', (evt) => {
     // allow native context menu if it is an input element
     if (evt.target instanceof HTMLInputElement) {
       return
@@ -11,21 +9,18 @@ export default () => {
 
     // disable native context menu
     evt.preventDefault()
-  }, [])
-  useEventListener(document, 'contextmenu', handleContextMenu)
+  })
 
-  const handleKeyDown = React.useCallback((evt: KeyboardEvent) => {
+  useEventListener(document, 'keydown', (evt) => {
     const isFocusedOnInputWithoutValue =
       document.activeElement instanceof HTMLInputElement && document.activeElement.value === ''
     if (evt.key === 'Escape' && isFocusedOnInputWithoutValue) {
       window.close()
     }
-  }, [])
-  useEventListener(document, 'keydown', handleKeyDown)
+  })
 
-  const handleMouseDown = React.useCallback((evt: MouseEvent) => {
+  useEventListener(document, 'mousedown', (evt) => {
     // disable the scrolling arrows after middle click
     if (evt.button === 1) evt.preventDefault()
-  }, [])
-  useEventListener(document, 'mousedown', handleMouseDown)
+  })
 }

@@ -1,10 +1,10 @@
 import * as R from 'ramda'
 import * as React from 'react'
 import {VariableSizeList as List, ListOnScrollProps} from 'react-window'
+import useEventListener from 'use-typed-event-listener'
 
 import classes from '../../../../css/popup/bookmark-tree.css'
 import * as CST from '../../constants'
-import useEventListener from '../../hooks/useEventListener'
 import {BookmarkInfo, BookmarkTree as BookmarkTreeType} from '../../types'
 import {ResponseEvent} from '../dragAndDrop/DragAndDropConsumer'
 import useDragContainerEvents from '../dragAndDrop/useDragAndDropContainerEvents'
