@@ -11377,10 +11377,10 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-use-typed-event-listener@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/use-typed-event-listener/-/use-typed-event-listener-1.0.0.tgz#447d86fab4531256c84e4100f6abace5ec5b35db"
-  integrity sha512-UFjevQ0L5vd0JJT6HxMaY3EaFdWmOtfNIHAzQCI8/t7VagKPXMmD/Bm4P5zwiRJxSzXxBbIMGa/uczwLbtmGiQ==
+use-typed-event-listener@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/use-typed-event-listener/-/use-typed-event-listener-1.1.1.tgz#c900c065deb717d64ba996faa2a4e3a60c88b998"
+  integrity sha512-1hIB1+X+Rg28tZNUb5iP8OCyYlc9Qognm2slLUuom6XyH8y62G+oUShytKuw5Ep943g/YtoHm6iPx6bTJSaEaA==
 
 use@^3.1.0:
   version "3.1.1"
