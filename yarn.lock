@@ -12686,10 +12686,10 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-use-typed-event-listener@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/use-typed-event-listener/-/use-typed-event-listener-1.3.0.tgz#00a354a1eda8b64d3ba7ef09ec7d14e21f15b3e1"
-  integrity sha512-BrQbK73Kk9fmQ4Tru6sdwrPsAwIvMw4Xfx2HUJpD76O+Oz3SbXy/ZUCC95BhQPmtQqknABV4M38PJypMF2hS5A==
+use-typed-event-listener@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/use-typed-event-listener/-/use-typed-event-listener-1.3.1.tgz#84a4a9bff82ded0d5d95655fd360ade771c31de5"
+  integrity sha512-pDfOTZWZ0f2bqxqONo7cFzerN7q2vu9g6LUSv9gtdiDxWVwiRpTEmStQz9vEjwS1L7jkQPF+KAeDKA77vkRvBg==
   dependencies:
     fast-equals "^2.0.0"
 
