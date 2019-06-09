@@ -4064,9 +4064,9 @@ ejs@^2.6.1:
   integrity sha512-0xy4A/twfrRCnkhfk8ErDi5DqdAsAqeGxht4xkCUrsvhhbQNs7E+4jV0CN7+NKIY0aHE72+XvqtBIXzD31ZbXQ==
 
 electron-to-chromium@^1.3.150:
-  version "1.3.154"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.154.tgz#e5b73beecd4db9f024d807ba1faad93fe1fb98aa"
-  integrity sha512-r3jVJRWvQIKDdjAbtmvJ7NihBFNUpU4VJKsslAzruv9dnYde3v8U2T7J62Vap3c6l6Ku4J56kxlciIO/E93cQg==
+  version "1.3.155"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.155.tgz#ebf0cc8eeaffd6151d1efad60fd9e021fb45fd3a"
+  integrity sha512-/ci/XgZG8jkLYOgOe3mpJY1onxPPTDY17y7scldhnSjjZqV6VvREG/LvwhRuV7BJbnENFfuDWZkSqlTh4x9ZjQ==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
