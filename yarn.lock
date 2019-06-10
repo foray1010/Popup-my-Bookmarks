@@ -1100,10 +1100,10 @@
   resolved "https://registry.yarnpkg.com/@redux-saga/symbols/-/symbols-1.0.1.tgz#46512ae1275f88df061c42168d0f600ddb170c1e"
   integrity sha512-akKkzcVnb1RzJaZV2LQFbi51abvdICMuAKwwLoCjjxLbLAGIw9EJxk5ucNnWSSCEsoEQMeol5tkAcK+Xzuv1Bg==
 
-"@redux-saga/testing-utils@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@redux-saga/testing-utils/-/testing-utils-1.0.2.tgz#e1f6dcbae728e45f7c8d7c03cf763b03abb9c32e"
-  integrity sha512-pywf97heIqtapX/Uk4vVFXnpfars1Yh5xJu3mYffZfyMupziAmNe5DW/2HNZiWFnWLyWI9/3ykTo3+cfEGoNcg==
+"@redux-saga/testing-utils@1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@redux-saga/testing-utils/-/testing-utils-1.0.3.tgz#1d4bd316efd23aebfd7f0f02d1bee952de70fc15"
+  integrity sha512-iSrmigzmWqHSFUbSlHPBCEI/jteLDU3yO4NyQkPuBq29Iy7qgAz+4kJVX2N/KoQJtdsEHPzJaejU9aOcmgsAfA==
   dependencies:
     "@redux-saga/symbols" "^1.0.1"
     "@redux-saga/types" "^1.0.2"
