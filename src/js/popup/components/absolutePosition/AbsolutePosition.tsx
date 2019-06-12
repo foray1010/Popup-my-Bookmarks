@@ -1,5 +1,5 @@
+import useComponentSize from '@rehooks/component-size'
 import * as React from 'react'
-import Measure, {ContentRect} from 'react-measure'
 
 import classes from './AbsolutePosition.css'
 import useGlobalBodySize from './useGlobalBodySize'
@@ -12,10 +12,9 @@ interface Props {
 const AbsolutePosition = ({positionLeft, positionTop, ...restProps}: Props) => {
   const {appendBodySize, removeBodySize} = useGlobalBodySize()
 
-  const [childSize, setChildSize] = React.useState({
-    height: 0,
-    width: 0
-  })
+  const measureRef = React.useRef<HTMLDivElement>(null)
+  const childSize = useComponentSize(measureRef)
+
   const [calibratedPosition, setCalibratedPosition] = React.useState({
     left: 0,
     top: 0
@@ -51,15 +50,6 @@ const AbsolutePosition = ({positionLeft, positionTop, ...restProps}: Props) => {
     }
   }, [appendBodySize, childSize.height, childSize.width, positionLeft, positionTop, removeBodySize])
 
-  const measureOnResize = React.useCallback((contentRect: ContentRect) => {
-    if (!contentRect.offset) return
-
-    setChildSize({
-      height: contentRect.offset.height,
-      width: contentRect.offset.width
-    })
-  }, [])
-
   const wrapperStyles = React.useMemo(
     (): object => ({
       '--positionLeft': `${calibratedPosition.left}px`,
@@ -69,13 +59,9 @@ const AbsolutePosition = ({positionLeft, positionTop, ...restProps}: Props) => {
   )
 
   return (
-    <Measure offset onResize={measureOnResize}>
-      {({measureRef}) => (
-        <div ref={measureRef} className={classes.wrapper} style={wrapperStyles}>
-          {restProps.children}
-        </div>
-      )}
-    </Measure>
+    <div ref={measureRef} className={classes.wrapper} style={wrapperStyles}>
+      {restProps.children}
+    </div>
   )
 }
 
