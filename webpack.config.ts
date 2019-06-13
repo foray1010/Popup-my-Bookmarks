@@ -17,9 +17,10 @@ import pkg from './package.json'
 const appNames = ['options', 'popup']
 const commonChunkName = 'common'
 const cssLoaderOptions = {
-  modules: true,
-  importLoaders: 1,
-  localIdentName: '[local]_[hash:base64:5]'
+  modules: {
+    localIdentName: '[local]_[hash:base64:5]'
+  },
+  importLoaders: 1
 }
 const nodeEnv = process.env.NODE_ENV || 'development'
 const outputDir = path.join('build', nodeEnv)
