@@ -1,5 +1,7 @@
 import * as React from 'react'
+import {useSelector} from 'react-redux'
 
+import useAction from '../../../common/hooks/useAction'
 import {BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS} from '../../constants'
 import {RootState, bookmarkCreators, menuCreators} from '../../reduxs'
 import {BookmarkInfo, BookmarkTree} from '../../types'
@@ -46,21 +48,14 @@ const mapOptionToOpenBookmarkProps = (
   }
 }
 
-export default ({
-  openBookmarksInBrowser,
-  openFolderInBrowser,
-  openMenu,
-  options,
-  toggleBookmarkTree,
-  treeInfo
-}: {
-  openBookmarksInBrowser: typeof bookmarkCreators.openBookmarksInBrowser
-  openFolderInBrowser: typeof bookmarkCreators.openFolderInBrowser
-  openMenu: typeof menuCreators.openMenu
-  options: RootState['options']
-  toggleBookmarkTree: typeof bookmarkCreators.toggleBookmarkTree
-  treeInfo: BookmarkTree
-}) => {
+export default ({treeInfo}: {treeInfo: BookmarkTree}) => {
+  const options = useSelector((state: RootState) => state.options)
+
+  const openBookmarksInBrowser = useAction(bookmarkCreators.openBookmarksInBrowser)
+  const openFolderInBrowser = useAction(bookmarkCreators.openFolderInBrowser)
+  const openMenu = useAction(menuCreators.openMenu)
+  const toggleBookmarkTree = useAction(bookmarkCreators.toggleBookmarkTree)
+
   return React.useMemo(() => {
     const handleRowMiddleClick = (bookmarkInfo: BookmarkInfo) => {
       if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {

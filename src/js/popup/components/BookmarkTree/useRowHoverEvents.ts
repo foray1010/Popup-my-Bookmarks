@@ -1,6 +1,8 @@
 import debounce from 'lodash.debounce'
 import * as React from 'react'
+import {useSelector} from 'react-redux'
 
+import useAction from '../../../common/hooks/useAction'
 import {BOOKMARK_TYPES, OPTIONS} from '../../constants'
 import {RootState, bookmarkCreators} from '../../reduxs'
 import {BookmarkInfo, BookmarkTree} from '../../types'
@@ -9,17 +11,17 @@ import ListNavigationContext from '../listNavigation/ListNavigationContext'
 
 export default ({
   closeNextTrees,
-  openBookmarkTree,
-  options,
   treeIndex,
   treeInfo
 }: {
   closeNextTrees: () => void
-  openBookmarkTree: typeof bookmarkCreators.openBookmarkTree
-  options: RootState['options']
   treeIndex: number
   treeInfo: BookmarkTree
 }) => {
+  const options = useSelector((state: RootState) => state.options)
+
+  const openBookmarkTree = useAction(bookmarkCreators.openBookmarkTree)
+
   const {activeKey} = React.useContext(DragAndDropContext)
   const {setHighlightedIndex, unsetHighlightedIndex} = React.useContext(ListNavigationContext)
 

@@ -1,18 +1,15 @@
 import * as React from 'react'
-import {connect} from 'react-redux'
+import {useSelector} from 'react-redux'
 
 import {NAV_MODULE} from '../constants'
 import {RootState} from '../reduxs'
 import Contributors from './Contributors'
 import OptionForm from './OptionForm'
 
-const mapStateToProps = (state: RootState) => ({
-  selectedNavModule: state.navigation.selectedNavModule
-})
+const NavModuleMapper = () => {
+  const selectedNavModule = useSelector((state: RootState) => state.navigation.selectedNavModule)
 
-type Props = ReturnType<typeof mapStateToProps>
-const NavModuleMapper = (props: Props) => {
-  switch (props.selectedNavModule) {
+  switch (selectedNavModule) {
     case NAV_MODULE.CONTRIBUTORS:
       return <Contributors />
 
@@ -26,4 +23,4 @@ const NavModuleMapper = (props: Props) => {
   }
 }
 
-export default connect(mapStateToProps)(NavModuleMapper)
+export default NavModuleMapper

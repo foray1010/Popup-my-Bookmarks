@@ -1,35 +1,30 @@
 import * as React from 'react'
-import {connect} from 'react-redux'
+import {useSelector} from 'react-redux'
 
 import {BASE_WINDOW} from '../../constants/windows'
 import {RootState} from '../../reduxs'
 import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
 import BookmarkTrees from './BookmarkTrees'
-import withBookmarkEvents from './withBookmarkEvents'
+import useBookmarkEvents from './useBookmarkEvents'
 import withDragAndDropEvents from './withDragAndDropEvents'
 import withKeyboardNav from './withKeyboardNav'
 
-interface OwnProps {
+const getTreeIds = (state: RootState) => state.bookmark.trees.map((tree) => tree.parent.id)
+
+interface Props {
   mainTreeHeader: React.ReactNode
 }
-
-const getTreeIds = (state: RootState): Array<string> =>
-  state.bookmark.trees.map((tree) => tree.parent.id)
-
-const mapStateToProps = (state: RootState) => ({
-  options: state.options,
-  treeIds: getTreeIds(state)
-})
-
-type Props = ReturnType<typeof mapStateToProps> & OwnProps
 const BookmarkTreesContainer = (props: Props) => {
+  useBookmarkEvents()
+
+  const options = useSelector((state: RootState) => state.options)
+  const treeIds = useSelector(getTreeIds)
+
   return (
     <KeyBindingsWindow windowId={BASE_WINDOW}>
-      <BookmarkTrees {...props} />
+      <BookmarkTrees mainTreeHeader={props.mainTreeHeader} options={options} treeIds={treeIds} />
     </KeyBindingsWindow>
   )
 }
 
-export default withBookmarkEvents(
-  withDragAndDropEvents(withKeyboardNav(connect(mapStateToProps)(BookmarkTreesContainer)))
-)
+export default withDragAndDropEvents(withKeyboardNav(BookmarkTreesContainer))

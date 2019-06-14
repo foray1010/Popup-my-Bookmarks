@@ -1,22 +1,18 @@
 import * as React from 'react'
-import {connect} from 'react-redux'
+import {useSelector} from 'react-redux'
 
+import useAction from '../../../common/hooks/useAction'
 import {BASE_WINDOW} from '../../constants/windows'
 import {RootState, bookmarkCreators, uiCreators} from '../../reduxs'
 import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
 import Search from './Search'
 
-const mapStateToProps = (state: RootState) => ({
-  isFocusSearchInput: state.ui.isFocusSearchInput
-})
+const SearchContainer = () => {
+  const isFocusSearchInput = useSelector((state: RootState) => state.ui.isFocusSearchInput)
 
-const mapDispatchToProps = {
-  getSearchResult: bookmarkCreators.getSearchResult,
-  setIsFocusSearchInput: uiCreators.setIsFocusSearchInput
-}
+  const getSearchResult = useAction(bookmarkCreators.getSearchResult)
+  const setIsFocusSearchInput = useAction(uiCreators.setIsFocusSearchInput)
 
-type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-const SearchContainer = ({getSearchResult, isFocusSearchInput, setIsFocusSearchInput}: Props) => {
   const [inputValue, setInputValue] = React.useState('')
 
   React.useEffect(() => {
@@ -59,7 +55,4 @@ const SearchContainer = ({getSearchResult, isFocusSearchInput, setIsFocusSearchI
   )
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SearchContainer)
+export default SearchContainer

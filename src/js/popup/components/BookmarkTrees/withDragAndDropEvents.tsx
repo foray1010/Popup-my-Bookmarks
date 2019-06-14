@@ -1,18 +1,13 @@
 import * as React from 'react'
-import {connect} from 'react-redux'
 
+import useAction from '../../../common/hooks/useAction'
 import {bookmarkCreators} from '../../reduxs'
 import DragAndDropProvider from '../dragAndDrop/DragAndDropProvider'
 
 export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
-  const mapDispatchToProps = {
-    moveBookmarkToDragIndicator: bookmarkCreators.moveBookmarkToDragIndicator,
-    removeDragIndicator: bookmarkCreators.removeDragIndicator
-  }
-
-  type Props = P & typeof mapDispatchToProps
-  const DragAndDropEvents = (props: Props) => {
-    const {moveBookmarkToDragIndicator, removeDragIndicator} = props
+  const DragAndDropEvents = (props: P) => {
+    const moveBookmarkToDragIndicator = useAction(bookmarkCreators.moveBookmarkToDragIndicator)
+    const removeDragIndicator = useAction(bookmarkCreators.removeDragIndicator)
 
     const handleDragEnd = React.useCallback(() => {
       removeDragIndicator()
@@ -32,11 +27,5 @@ export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
     )
   }
 
-  return connect(
-    null,
-    mapDispatchToProps
-  )(
-    // @ts-ignore
-    DragAndDropEvents
-  )
+  return DragAndDropEvents
 }

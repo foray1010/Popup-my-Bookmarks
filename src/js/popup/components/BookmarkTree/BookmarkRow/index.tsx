@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import * as React from 'react'
-import {connect} from 'react-redux'
 
 import classes from '../../../../../css/popup/bookmark-row.css'
+import useAction from '../../../../common/hooks/useAction'
 import * as CST from '../../../constants'
 import {uiCreators} from '../../../reduxs'
 import {BookmarkInfo} from '../../../types'
@@ -10,7 +10,7 @@ import DragAndDropConsumer, {ResponseEvent} from '../../dragAndDrop/DragAndDropC
 import BookmarkRow from './BookmarkRow'
 import useTooltip from './useTooltip'
 
-interface OwnProps {
+interface Props {
   bookmarkInfo: BookmarkInfo
   className?: string
   iconSize: number
@@ -29,12 +29,6 @@ interface OwnProps {
   onMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   style?: React.CSSProperties
 }
-
-const mapDispatchToProps = {
-  setHighlightedItemCoordinates: uiCreators.setHighlightedItemCoordinates
-}
-
-type Props = OwnProps & typeof mapDispatchToProps
 const BookmarkRowContainer = ({
   bookmarkInfo,
   isHighlighted,
@@ -43,9 +37,10 @@ const BookmarkRowContainer = ({
   onDragOver,
   onMouseEnter,
   onMouseLeave,
-  setHighlightedItemCoordinates,
   ...restProps
 }: Props) => {
+  const setHighlightedItemCoordinates = useAction(uiCreators.setHighlightedItemCoordinates)
+
   const bookmarkRowRef = React.useRef<HTMLDivElement>(null)
   React.useEffect(() => {
     if (isHighlighted && bookmarkRowRef.current) {
@@ -111,7 +106,4 @@ const BookmarkRowContainer = ({
   )
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(BookmarkRowContainer)
+export default BookmarkRowContainer

@@ -2,23 +2,22 @@ import debounce from 'lodash.debounce'
 import * as React from 'react'
 import {ListOnScrollProps} from 'react-window'
 
+import useAction from '../../../common/hooks/useAction'
 import {lastPositionsCreators} from '../../reduxs'
 
 export default ({
-  createLastPosition,
   isRememberLastPositions,
-  removeLastPosition,
   treeId,
-  treeIndex,
-  updateLastPosition
+  treeIndex
 }: {
-  createLastPosition: typeof lastPositionsCreators.createLastPosition
   isRememberLastPositions: boolean
-  removeLastPosition: typeof lastPositionsCreators.removeLastPosition
   treeId: string
   treeIndex: number
-  updateLastPosition: typeof lastPositionsCreators.updateLastPosition
 }) => {
+  const createLastPosition = useAction(lastPositionsCreators.createLastPosition)
+  const removeLastPosition = useAction(lastPositionsCreators.removeLastPosition)
+  const updateLastPosition = useAction(lastPositionsCreators.updateLastPosition)
+
   React.useEffect(() => {
     if (isRememberLastPositions) createLastPosition(treeIndex, treeId)
 

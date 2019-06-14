@@ -1,7 +1,8 @@
 import * as React from 'react'
-import {connect} from 'react-redux'
+import {useSelector} from 'react-redux'
 import webExtension from 'webextension-polyfill'
 
+import useAction from '../../../common/hooks/useAction'
 import {OPTIONS} from '../../constants'
 import {EDITOR_WINDOW} from '../../constants/windows'
 import {RootState, bookmarkCreators, editorCreators} from '../../reduxs'
@@ -10,26 +11,19 @@ import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
 import Mask from '../Mask'
 import Editor from './Editor'
 
-const mapStateToProps = (state: RootState) => ({
-  isAllowEditUrl: state.editor.isAllowEditUrl,
-  isCreating: state.editor.isCreating,
-  positionLeft: state.editor.positionLeft,
-  positionTop: state.editor.positionTop,
-  targetId: state.editor.targetId,
-  title: state.editor.title,
-  url: state.editor.url,
-  width: state.options[OPTIONS.SET_WIDTH]
-})
+const EditorContainer = () => {
+  const initialTitle = useSelector((state: RootState) => state.editor.title)
+  const initialUrl = useSelector((state: RootState) => state.editor.url)
+  const isAllowEditUrl = useSelector((state: RootState) => state.editor.isAllowEditUrl)
+  const isCreating = useSelector((state: RootState) => state.editor.isCreating)
+  const positionLeft = useSelector((state: RootState) => state.editor.positionLeft)
+  const positionTop = useSelector((state: RootState) => state.editor.positionTop)
+  const targetId = useSelector((state: RootState) => state.editor.targetId)
+  const width = useSelector((state: RootState) => state.options[OPTIONS.SET_WIDTH])
 
-const mapDispatchToProps = {
-  closeEditor: editorCreators.closeEditor,
-  createBookmarkAfterId: bookmarkCreators.createBookmarkAfterId,
-  editBookmark: bookmarkCreators.editBookmark
-}
-
-type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-const EditorContainer = (props: Props) => {
-  const {closeEditor, createBookmarkAfterId, editBookmark, isCreating, targetId} = props
+  const closeEditor = useAction(editorCreators.closeEditor)
+  const createBookmarkAfterId = useAction(bookmarkCreators.createBookmarkAfterId)
+  const editBookmark = useAction(bookmarkCreators.editBookmark)
 
   const handleConfirm = React.useCallback(
     (title: string, url: string) => {
@@ -45,20 +39,20 @@ const EditorContainer = (props: Props) => {
 
   return (
     <React.Fragment>
-      <Mask backgroundColor='#fff' opacity={0.3} onClick={props.closeEditor} />
-      <AbsolutePosition positionLeft={props.positionLeft} positionTop={props.positionTop}>
+      <Mask backgroundColor='#fff' opacity={0.3} onClick={closeEditor} />
+      <AbsolutePosition positionLeft={positionLeft} positionTop={positionTop}>
         <KeyBindingsWindow windowId={EDITOR_WINDOW}>
           <Editor
-            isAllowEditUrl={props.isAllowEditUrl}
+            isAllowEditUrl={isAllowEditUrl}
             header={
-              props.isAllowEditUrl ?
+              isAllowEditUrl ?
                 webExtension.i18n.getMessage('edit') :
                 webExtension.i18n.getMessage('rename')
             }
-            initialTitle={props.title}
-            initialUrl={props.url}
-            width={props.width || 0}
-            onCancel={props.closeEditor}
+            initialTitle={initialTitle}
+            initialUrl={initialUrl}
+            width={width || 0}
+            onCancel={closeEditor}
             onConfirm={handleConfirm}
           />
         </KeyBindingsWindow>
@@ -67,7 +61,4 @@ const EditorContainer = (props: Props) => {
   )
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditorContainer)
+export default EditorContainer

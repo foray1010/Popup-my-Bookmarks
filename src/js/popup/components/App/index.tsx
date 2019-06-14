@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {connect} from 'react-redux'
+import {useSelector} from 'react-redux'
 
 import {OPTIONS} from '../../constants'
 import {RootState} from '../../reduxs'
@@ -9,22 +9,19 @@ import KeyBindingsProvider from '../keyBindings/KeyBindingsProvider'
 import App from './App'
 import useGlobalEvents from './useGlobalEvents'
 
-const mapStateToProps = (state: RootState) => ({
-  isShowEditor: Boolean(state.editor.targetId),
-  isShowMenu: Boolean(state.menu.targetId),
-  options: state.options
-})
-
-type Props = ReturnType<typeof mapStateToProps>
-const AppContainer = (props: Props) => {
+const AppContainer = () => {
   useGlobalEvents()
+
+  const isShowEditor = useSelector((state: RootState) => Boolean(state.editor.targetId))
+  const isShowMenu = useSelector((state: RootState) => Boolean(state.menu.targetId))
+  const options = useSelector((state: RootState) => state.options)
 
   const {globalBodySize} = useGlobalBodySize()
 
   const styles = React.useMemo(
     (): object => ({
-      '--fontFamily': [props.options[OPTIONS.FONT_FAMILY], 'sans-serif'].filter(Boolean).join(','),
-      '--fontSize': `${props.options[OPTIONS.FONT_SIZE] || 12}px`,
+      '--fontFamily': [options[OPTIONS.FONT_FAMILY], 'sans-serif'].filter(Boolean).join(','),
+      '--fontSize': `${options[OPTIONS.FONT_SIZE] || 12}px`,
       '--height':
         globalBodySize && globalBodySize.height !== undefined ?
           `${globalBodySize.height}px` :
@@ -32,18 +29,18 @@ const AppContainer = (props: Props) => {
       '--width':
         globalBodySize && globalBodySize.width !== undefined ? `${globalBodySize.width}px` : 'auto'
     }),
-    [globalBodySize, props.options]
+    [globalBodySize, options]
   )
 
-  return <App isShowEditor={props.isShowEditor} isShowMenu={props.isShowMenu} style={styles} />
+  return <App isShowEditor={isShowEditor} isShowMenu={isShowMenu} style={styles} />
 }
 
-export default connect(mapStateToProps)((props: Props) => {
+export default () => {
   return (
     <AbsolutePositionProvider>
       <KeyBindingsProvider>
-        <AppContainer {...props} />
+        <AppContainer />
       </KeyBindingsProvider>
     </AbsolutePositionProvider>
   )
-})
+}

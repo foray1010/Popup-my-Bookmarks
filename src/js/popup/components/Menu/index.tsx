@@ -1,7 +1,8 @@
 import * as R from 'ramda'
 import * as React from 'react'
-import {connect} from 'react-redux'
+import {useSelector} from 'react-redux'
 
+import useAction from '../../../common/hooks/useAction'
 import * as CST from '../../constants'
 import {MENU_WINDOW} from '../../constants/windows'
 import {RootState, menuCreators} from '../../reduxs'
@@ -20,20 +21,15 @@ const unclickableRowsSelector = (state: RootState) => {
   return []
 }
 
-const mapStateToProps = (state: RootState) => ({
-  menuPattern: state.menu.menuPattern,
-  positionLeft: state.menu.positionLeft,
-  positionTop: state.menu.positionTop,
-  unclickableRows: unclickableRowsSelector(state)
-})
+const MenuContainer = () => {
+  const menuPattern = useSelector((state: RootState) => state.menu.menuPattern)
+  const positionLeft = useSelector((state: RootState) => state.menu.positionLeft)
+  const positionTop = useSelector((state: RootState) => state.menu.positionTop)
+  const unclickableRows = useSelector(unclickableRowsSelector)
 
-const mapDispatchToProps = {
-  clickMenuRow: menuCreators.clickMenuRow,
-  closeMenu: menuCreators.closeMenu
-}
+  const clickMenuRow = useAction(menuCreators.clickMenuRow)
+  const closeMenu = useAction(menuCreators.closeMenu)
 
-type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-const MenuContainer = ({clickMenuRow, closeMenu, menuPattern, ...restProps}: Props) => {
   const {lists, setHighlightedIndex, unsetHighlightedIndex, setItemCount} = React.useContext(
     ListNavigationContext
   )
@@ -77,7 +73,7 @@ const MenuContainer = ({clickMenuRow, closeMenu, menuPattern, ...restProps}: Pro
   return (
     <React.Fragment>
       <Mask backgroundColor='#fff' opacity={0.3} onClick={closeMenu} />
-      <AbsolutePosition positionLeft={restProps.positionLeft} positionTop={restProps.positionTop}>
+      <AbsolutePosition positionLeft={positionLeft} positionTop={positionTop}>
         <KeyBindingsWindow windowId={MENU_WINDOW}>
           <Menu
             highlightedIndex={highlightedIndex}
@@ -85,7 +81,7 @@ const MenuContainer = ({clickMenuRow, closeMenu, menuPattern, ...restProps}: Pro
             onRowClick={handleRowClick}
             onRowMouseEnter={handleRowMouseEnter}
             onRowMouseLeave={handleRowMouseLeave}
-            unclickableRows={restProps.unclickableRows}
+            unclickableRows={unclickableRows}
           />
         </KeyBindingsWindow>
       </AbsolutePosition>
@@ -93,11 +89,8 @@ const MenuContainer = ({clickMenuRow, closeMenu, menuPattern, ...restProps}: Pro
   )
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)((props: Props) => (
+export default () => (
   <ListNavigationProvider>
-    <MenuContainer {...props} />
+    <MenuContainer />
   </ListNavigationProvider>
-))
+)

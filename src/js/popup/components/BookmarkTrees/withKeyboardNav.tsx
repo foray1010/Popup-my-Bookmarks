@@ -1,6 +1,7 @@
 import * as React from 'react'
-import {connect} from 'react-redux'
+import {useSelector} from 'react-redux'
 
+import useAction from '../../../common/hooks/useAction'
 import {BOOKMARK_TYPES, OPEN_IN_TYPES} from '../../constants'
 import {BASE_WINDOW} from '../../constants/windows'
 import {RootState, bookmarkCreators, menuCreators} from '../../reduxs'
@@ -12,28 +13,16 @@ import ListNavigationProvider from '../listNavigation/ListNavigationProvider'
 import useKeyboardNav from '../listNavigation/useKeyboardNav'
 
 export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
-  const mapStateToProps = (state: RootState) => ({
-    highlightedItemCoordinates: state.ui.highlightedItemCoordinates,
-    trees: state.bookmark.trees
-  })
+  const KeyboardNav = (props: P) => {
+    const highlightedItemCoordinates = useSelector(
+      (state: RootState) => state.ui.highlightedItemCoordinates
+    )
+    const trees = useSelector((state: RootState) => state.bookmark.trees)
 
-  const mapDispatchToProps = {
-    openBookmarksInBrowser: bookmarkCreators.openBookmarksInBrowser,
-    openBookmarkTree: bookmarkCreators.openBookmarkTree,
-    openMenu: menuCreators.openMenu,
-    removeNextBookmarkTrees: bookmarkCreators.removeNextBookmarkTrees
-  }
-
-  type Props = P & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-  const KeyboardNav = (props: Props) => {
-    const {
-      highlightedItemCoordinates,
-      openBookmarksInBrowser,
-      openBookmarkTree,
-      openMenu,
-      removeNextBookmarkTrees,
-      trees
-    } = props
+    const openBookmarksInBrowser = useAction(bookmarkCreators.openBookmarksInBrowser)
+    const openBookmarkTree = useAction(bookmarkCreators.openBookmarkTree)
+    const openMenu = useAction(menuCreators.openMenu)
+    const removeNextBookmarkTrees = useAction(bookmarkCreators.removeNextBookmarkTrees)
 
     const {lists} = React.useContext(ListNavigationContext)
     const listsRef = React.useRef(lists)
@@ -121,13 +110,9 @@ export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
     return <WrappedComponent {...props} />
   }
 
-  return connect(
-    mapStateToProps,
-    mapDispatchToProps
-    // @ts-ignore
-  )((props: Props) => (
+  return (props: P) => (
     <ListNavigationProvider>
       <KeyboardNav {...props} />
     </ListNavigationProvider>
-  ))
+  )
 }

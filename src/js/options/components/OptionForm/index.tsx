@@ -1,26 +1,24 @@
 import * as React from 'react'
-import {connect} from 'react-redux'
+import {useSelector} from 'react-redux'
 
+import useAction from '../../../common/hooks/useAction'
 import {OptionsConfig} from '../../../common/types/options'
 import {getOptionsConfig} from '../../../common/utils'
 import {OPTION_TABLE_MAP} from '../../constants'
 import {RootState, optionsCreators} from '../../reduxs'
 import OptionForm from './OptionForm'
 
-const mapStateToProps = (state: RootState) => ({
-  options: state.options,
-  selectedOptionFormMap: OPTION_TABLE_MAP[state.navigation.selectedNavModule]
-})
-
-const mapDispatchToProps = {
-  saveOptions: optionsCreators.saveOptions,
-  resetToDefaultOptions: optionsCreators.resetToDefaultOptions,
-  updatePartialOptions: optionsCreators.updatePartialOptions
-}
-
-type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-const OptionFormContainer = (props: Props) => {
+const OptionFormContainer = () => {
   const [optionsConfig, setOptionsConfig] = React.useState<OptionsConfig | void>()
+
+  const options = useSelector((state: RootState) => state.options)
+  const selectedOptionFormMap = useSelector(
+    (state: RootState) => OPTION_TABLE_MAP[state.navigation.selectedNavModule]
+  )
+
+  const resetToDefaultOptions = useAction(optionsCreators.resetToDefaultOptions)
+  const saveOptions = useAction(optionsCreators.saveOptions)
+  const updatePartialOptions = useAction(optionsCreators.updatePartialOptions)
 
   React.useEffect(() => {
     getOptionsConfig()
@@ -32,17 +30,14 @@ const OptionFormContainer = (props: Props) => {
 
   return (
     <OptionForm
-      options={props.options}
+      options={options}
       optionsConfig={optionsConfig}
-      resetToDefaultOptions={props.resetToDefaultOptions}
-      saveOptions={props.saveOptions}
-      selectedOptionFormMap={props.selectedOptionFormMap}
-      updatePartialOptions={props.updatePartialOptions}
+      resetToDefaultOptions={resetToDefaultOptions}
+      saveOptions={saveOptions}
+      selectedOptionFormMap={selectedOptionFormMap}
+      updatePartialOptions={updatePartialOptions}
     />
   )
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(OptionFormContainer)
+export default OptionFormContainer
