@@ -1,0 +1,11 @@
+@import '../../core/styles/variables.css';
+
+.main {
+  composes: focus from '../../core/styles/composes.css';
+  color: var(--main-color1);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--main-color2);
+  }
+}

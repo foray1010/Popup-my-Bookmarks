@@ -1,0 +1,16 @@
+@import '../../../core/styles/mixins.css';
+@import '../../../core/styles/variables.css';
+
+.main {
+  composes: list-item from '../../../core/styles/composes.css';
+  padding: var(--golden-gap) var(--golden-gap-4x);
+  white-space: nowrap;
+
+  &.unclickable {
+    @apply --grey-list-item;
+  }
+
+  &.focused:not(.unclickable) {
+    @apply --highlight-list-item;
+  }
+}

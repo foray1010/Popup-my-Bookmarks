@@ -1,0 +1,42 @@
+@import '../../../core/styles/variables.css';
+
+:root {
+  --colorizing: {
+    &:nth-of-type(1) {
+      border-bottom-color: var(--main-color1);
+    }
+
+    &:nth-of-type(2) {
+      border-bottom-color: var(--main-color2);
+    }
+
+    &:nth-of-type(3) {
+      border-bottom-color: var(--main-color3);
+    }
+
+    &:nth-of-type(4) {
+      border-bottom-color: var(--main-color4);
+    }
+  }
+}
+
+.main {
+  composes: focus from '../../../core/styles/composes.css';
+  background-color: transparent;
+  border: 0;
+  border-bottom: var(--golden-gap-2x) solid transparent;
+  color: var(--oc-white);
+  cursor: default;
+  flex: 1 0 0;
+  font: 16px 'Archivo Narrow', sans-serif;
+  padding-top: var(--golden-gap-2x);
+  text-align: center;
+
+  &:hover {
+    @apply --colorizing;
+  }
+}
+
+.main-active {
+  @apply --colorizing;
+}

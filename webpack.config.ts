@@ -15,7 +15,7 @@ import ZipPlugin from 'zip-webpack-plugin'
 import pkg from './package.json'
 
 const appNames = ['options', 'popup']
-const commonChunkName = 'common'
+const commonChunkName = 'core'
 const cssLoaderOptions = {
   modules: {
     localIdentName: '[local]_[hash:base64:5]'
@@ -30,7 +30,7 @@ const defaultConfig: webpack.Configuration = {
   entry: appNames.reduce(
     (acc, appName) => ({
       ...acc,
-      [appName]: `./${sourceDir}/js/${appName}`
+      [appName]: `./${sourceDir}/${appName}`
     }),
     {}
   ),
@@ -103,7 +103,7 @@ const defaultConfig: webpack.Configuration = {
     new CopyWebpackPlugin([
       {
         context: sourceDir,
-        from: path.join('_locales', '*', '*.json')
+        from: path.join('core', '_locales', '*', '*.json')
       },
       {
         from: 'LICENSE'

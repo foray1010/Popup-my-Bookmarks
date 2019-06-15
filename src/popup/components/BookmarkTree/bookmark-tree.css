@@ -1,0 +1,16 @@
+@import '../../../core/styles/variables.css';
+
+.list-item {
+  box-sizing: border-box;
+
+  &:last-child {
+    border-bottom: currentcolor solid var(--golden-gap);
+    padding-bottom: var(--golden-gap);
+  }
+}
+
+.main {
+  background-color: var(--oc-white);
+  position: absolute;
+  width: 100%;
+}

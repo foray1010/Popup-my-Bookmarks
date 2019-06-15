@@ -1,7 +1,0 @@
-@import '../common/variables.css';
-
-.main {
-  border: 1px dashed var(--highlight-level5);
-  box-sizing: border-box;
-  height: 100%;
-}

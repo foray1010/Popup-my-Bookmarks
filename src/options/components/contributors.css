@@ -1,0 +1,14 @@
+@import '../../core/styles/variables.css';
+
+.main {
+  line-height: 2;
+
+  &,
+  & > dd {
+    margin: 0 2rem;
+  }
+
+  & > dt {
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,4 @@
+.main {
+  composes: focus from '../../../core/styles/composes.css';
+  composes: input from '../../../core/styles/composes.css';
+}

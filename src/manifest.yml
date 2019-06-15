@@ -9,12 +9,12 @@ default_locale: 'en'
 description: '__MSG_extDesc__'
 
 icons:
-  16: 'require(./img/icon16.png)'
-  48: 'require(./img/icon48.png)'
-  128: 'require(./img/icon128.png)'
+  16: 'require(./core/images/icon16.png)'
+  48: 'require(./core/images/icon48.png)'
+  128: 'require(./core/images/icon128.png)'
 
 browser_action:
-  default_icon: 'require(./img/icon38.png)'
+  default_icon: 'require(./core/images/icon38.png)'
   default_popup: './popup.html'
 options_page: './options.html'
 options_ui:

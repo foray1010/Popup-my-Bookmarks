@@ -1,0 +1,9 @@
+@import '../../../core/styles/globals.css';
+@import './globals.css';
+
+.main {
+  font-family: var(--fontFamily);
+  font-size: var(--fontSize);
+  height: var(--height);
+  width: var(--width);
+}

@@ -1,0 +1,25 @@
+@import '../../../core/styles/variables.css';
+
+:global(body) {
+  user-select: none;
+}
+
+:global(::-webkit-scrollbar) {
+  background-color: transparent;
+  height: 5px;
+  width: calc(5px + var(--golden-gap));
+}
+
+:global(::-webkit-scrollbar-thumb) {
+  background-color: var(--highlight-level3);
+  border-left: var(--golden-gap) solid var(--oc-white);
+
+  &:hover {
+    background-color: var(--highlight-level4);
+    border: 0;
+  }
+
+  &:active {
+    background-color: var(--highlight-level5);
+  }
+}

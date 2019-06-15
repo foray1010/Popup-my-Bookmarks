@@ -1,4 +1,0 @@
-.main {
-  composes: focus from '../common/composes.css';
-  composes: input from '../common/composes.css';
-}

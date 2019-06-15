@@ -1,8 +1,0 @@
-@import '../common/variables.css';
-
-.main {
-  background-color: var(--main-color5);
-  display: flex;
-  margin-bottom: var(--golden-gap-2x);
-  min-width: 820px;
-}
