@@ -14,7 +14,7 @@
     "build": "cross-env NODE_ENV=production webpack",
     "ci": "npm-run-all -p lint:* test type:* && yarn build",
     "dev": "cross-env NODE_ENV=development webpack",
-    "lint:css": "stylelint 'src/**/*.{css,ts,tsx}'",
+    "lint:css": "stylelint 'src/**/*.css'",
     "lint:js": "eslint --ext ts,tsx .",
     "lint:md": "markdownlint *.md",
     "locales": "ts-node --transpile-only scripts/generateLocalesFromTransifex.ts",
