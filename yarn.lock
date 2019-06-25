@@ -7878,7 +7878,7 @@ minimalistic-crypto-utils@^1.0.0, minimalistic-crypto-utils@^1.0.1:
   resolved "https://registry.yarnpkg.com/minimalistic-crypto-utils/-/minimalistic-crypto-utils-1.0.1.tgz#f6c00c1c0b082246e5c4d99dfb8c7c083b2b582a"
   integrity sha1-9sAMHAsIIkblxNmd+4x8CDsrWCo=
 
-minimatch@^3.0.4, minimatch@~3.0.4:
+minimatch@3.0.4, minimatch@^3.0.4, minimatch@~3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
   integrity sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
@@ -12156,22 +12156,23 @@ type-check@~0.3.2:
   dependencies:
     prelude-ls "~1.1.2"
 
-type-coverage-core@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/type-coverage-core/-/type-coverage-core-2.0.2.tgz#59eb26761b09c305472b4e1e04c3be7e0b64f1c4"
-  integrity sha512-C7MCQMcjNX/kQZ4BhdBIL9SpEjqpYp8gTaR1qk5d78h8CA0cmtZxsCThK5GH6Zx9hYMvWTVN/hu0FMPCIiTrfw==
+type-coverage-core@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/type-coverage-core/-/type-coverage-core-2.0.4.tgz#ef7b7b2486fed85dab8fa302aa84044a48eb6f95"
+  integrity sha512-7hzlbd/+zMfjFHX313/7ThqODHioDltZe3ztaZtx18Ro/BjX1x7cpDQx4ZJppnYZ92B677fvLHcjLMIW4vepdg==
   dependencies:
     glob "7.1.4"
+    minimatch "3.0.4"
     tslib "1"
     tsutils "3"
 
-type-coverage@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/type-coverage/-/type-coverage-2.0.2.tgz#ed5c39fe887de6346b70fa9086b996524cf80c4b"
-  integrity sha512-MORDwE6t66oWoG/Y/yOwoo1HKv1P+EYiz5ZFg0GaoJCGUUp8TjVAoObuiRYk0VZwETOf91zKkeuQRiEn5EOtrQ==
+type-coverage@2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/type-coverage/-/type-coverage-2.0.4.tgz#e1dbbb6ac1ca2b94045c7714834f3eee938aa406"
+  integrity sha512-L7z5WWn9LF4Ah++XVYISd+pw5skainc6DImGKn4QlEbJB60roHIqh0DsM3HY6dK9YHBriwPldvnePDXgPJJezw==
   dependencies:
     minimist "1.2.0"
-    type-coverage-core "^2.0.2"
+    type-coverage-core "^2.0.4"
 
 type-fest@^0.4.1:
   version "0.4.1"
