@@ -47,7 +47,7 @@
     "@babel/core": "7.4.5",
     "@commitlint/cli": "8.0.0",
     "@commitlint/config-conventional": "8.0.0",
-    "@redux-saga/testing-utils": "1.0.3",
+    "@redux-saga/testing-utils": "1.0.4",
     "@types/babel__core": "7.1.2",
     "@types/bluebird": "3.5.27",
     "@types/chance": "1.0.4",
