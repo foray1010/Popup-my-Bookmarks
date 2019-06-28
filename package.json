@@ -36,7 +36,7 @@
     "react-redux": "7.1.0",
     "react-window": "1.8.3",
     "redux": "4.0.1",
-    "redux-saga": "1.0.3",
+    "redux-saga": "1.0.4",
     "resize-observer-polyfill": "1.5.1",
     "typeface-archivo-narrow": "0.0.72",
     "typesafe-actions": "4.4.2",
