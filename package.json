@@ -50,7 +50,7 @@
     "@redux-saga/testing-utils": "1.0.4",
     "@types/babel__core": "7.1.2",
     "@types/bluebird": "3.5.27",
-    "@types/chance": "1.0.4",
+    "@types/chance": "1.0.5",
     "@types/classnames": "2.2.8",
     "@types/copy-webpack-plugin": "5.0.0",
     "@types/cssnano": "4.0.0",
