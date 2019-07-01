@@ -1384,10 +1384,10 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
-"@types/ramda@0.26.12":
-  version "0.26.12"
-  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.26.12.tgz#593017c90a57c3e27a319ff0b67ee0a3ebb33f1f"
-  integrity sha512-1cIbhPNoG8VGgmwk/Izoq8iImXdM0RWuY8MFHHxSuFqxww1v+WI1kl7a0IeTUDcDjON+lqXMF1Bw+OZUss0Bqg==
+"@types/ramda@0.26.14":
+  version "0.26.14"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.26.14.tgz#3a6fb82b225ee0b2c8a9b3a657c9942445037d79"
+  integrity sha512-OKSReh+kGIPiLzYnQIdAtrdE0w1lW1dnTsdFtbVYEj8kWdYKpolF+bZAvHaNCiTq2C91iwGJ/7q81DOjRQOHrw==
 
 "@types/react-dom@16.8.4":
   version "16.8.4"
