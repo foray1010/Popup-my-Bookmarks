@@ -5,48 +5,10 @@ import useAction from '../../../core/hooks/useAction'
 import {BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS} from '../../constants'
 import {RootState, bookmarkCreators, menuCreators} from '../../reduxs'
 import {BookmarkInfo, BookmarkTree} from '../../types'
-
-const mapOptionToOpenBookmarkProps = (
-  option?: number
-): {
-  openIn: OPEN_IN_TYPES
-  isCloseThisExtension: boolean
-} => {
-  switch (option) {
-    case 0: // current tab
-    case 1: // current tab (without closing PmB)
-      return {
-        openIn: OPEN_IN_TYPES.CURRENT_TAB,
-        isCloseThisExtension: option === 0
-      }
-
-    default:
-    case 2: // new tab
-      return {
-        openIn: OPEN_IN_TYPES.NEW_TAB,
-        isCloseThisExtension: true
-      }
-
-    case 3: // background tab
-    case 4: // background tab (without closing PmB)
-      return {
-        openIn: OPEN_IN_TYPES.BACKGROUND_TAB,
-        isCloseThisExtension: option === 3
-      }
-
-    case 5: // new window
-      return {
-        openIn: OPEN_IN_TYPES.NEW_WINDOW,
-        isCloseThisExtension: true
-      }
-
-    case 6: // incognito window
-      return {
-        openIn: OPEN_IN_TYPES.INCOGNITO_WINDOW,
-        isCloseThisExtension: true
-      }
-  }
-}
+import {
+  getClickOptionNameByEvent,
+  mapOptionToOpenBookmarkProps
+} from '../../utils/clickBookmarkUtils'
 
 export default ({treeInfo}: {treeInfo: BookmarkTree}) => {
   const options = useSelector((state: RootState) => state.options)
@@ -95,18 +57,7 @@ export default ({treeInfo}: {treeInfo: BookmarkTree}) => {
             toggleBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
           }
         } else {
-          const option = (() => {
-            if (evt.ctrlKey || evt.metaKey) {
-              return options[OPTIONS.CLICK_BY_LEFT_CTRL]
-            }
-
-            if (evt.shiftKey) {
-              return options[OPTIONS.CLICK_BY_LEFT_SHIFT]
-            }
-
-            return options[OPTIONS.CLICK_BY_LEFT]
-          })()
-
+          const option = options[getClickOptionNameByEvent(evt)]
           const openBookmarkProps = mapOptionToOpenBookmarkProps(option)
           openBookmarksInBrowser([bookmarkInfo.id], {
             ...openBookmarkProps,

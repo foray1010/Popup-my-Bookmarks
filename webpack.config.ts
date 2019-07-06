@@ -102,8 +102,8 @@ const defaultConfig: webpack.Configuration = {
     }),
     new CopyWebpackPlugin([
       {
-        context: sourceDir,
-        from: path.join('core', '_locales', '*', '*.json')
+        context: path.join(sourceDir, 'core'),
+        from: path.join('_locales', '*', '*.json')
       },
       {
         from: 'LICENSE'

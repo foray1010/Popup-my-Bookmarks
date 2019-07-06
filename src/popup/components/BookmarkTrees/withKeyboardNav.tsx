@@ -2,9 +2,13 @@ import * as React from 'react'
 import {useSelector} from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
-import {BOOKMARK_TYPES, OPEN_IN_TYPES} from '../../constants'
+import {BOOKMARK_TYPES} from '../../constants'
 import {BASE_WINDOW} from '../../constants/windows'
 import {RootState, bookmarkCreators, menuCreators} from '../../reduxs'
+import {
+  getClickOptionNameByEvent,
+  mapOptionToOpenBookmarkProps
+} from '../../utils/clickBookmarkUtils'
 import getLastMapKey from '../../utils/getLastMapKey'
 import isMac from '../../utils/isMac'
 import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
@@ -17,6 +21,7 @@ export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
     const highlightedItemCoordinates = useSelector(
       (state: RootState) => state.ui.highlightedItemCoordinates
     )
+    const options = useSelector((state: RootState) => state.options)
     const trees = useSelector((state: RootState) => state.bookmark.trees)
 
     const openBookmarksInBrowser = useAction(bookmarkCreators.openBookmarksInBrowser)
@@ -61,7 +66,7 @@ export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
       onPressArrowRight: handlePressArrowRight
     })
 
-    const handlePressEnter = React.useCallback(() => {
+    useKeyBindingsEvent({key: 'Enter', windowId: BASE_WINDOW}, (evt) => {
       const {highlightedIndices, itemCounts} = listsRef.current
 
       const lastListIndex = getLastMapKey(itemCounts)
@@ -74,14 +79,13 @@ export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
       const bookmarkInfo = treeInfo.children[highlightedIndex]
       if (!bookmarkInfo) return
 
+      const option = options[getClickOptionNameByEvent(evt)]
+      const openBookmarkProps = mapOptionToOpenBookmarkProps(option)
       openBookmarksInBrowser([bookmarkInfo.id], {
-        openIn: OPEN_IN_TYPES.CURRENT_TAB,
-        isAllowBookmarklet: true,
-        isCloseThisExtension: true
+        ...openBookmarkProps,
+        isAllowBookmarklet: true
       })
-    }, [openBookmarksInBrowser, trees])
-
-    useKeyBindingsEvent({key: 'Enter', windowId: BASE_WINDOW}, handlePressEnter)
+    })
 
     const handlePressContextMenu = React.useCallback(() => {
       const {highlightedIndices, itemCounts} = listsRef.current
