@@ -4,29 +4,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [6.2.0](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.1.0...v6.2.0) (2019-07-06)
 
-### Bug Fixes
-
-- **deps:** update dependency core-js to v3.1.0 ([241cb66](https://github.com/foray1010/Popup-my-Bookmarks/commit/241cb66))
-- **deps:** update dependency core-js to v3.1.1 ([a423583](https://github.com/foray1010/Popup-my-Bookmarks/commit/a423583))
-- **deps:** update dependency core-js to v3.1.2 ([3190c21](https://github.com/foray1010/Popup-my-Bookmarks/commit/3190c21))
-- **deps:** update dependency core-js to v3.1.3 ([3a7a4c7](https://github.com/foray1010/Popup-my-Bookmarks/commit/3a7a4c7))
-- **deps:** update dependency core-js to v3.1.4 ([5ab1e4f](https://github.com/foray1010/Popup-my-Bookmarks/commit/5ab1e4f))
-- **deps:** update dependency nanoid to v2.0.3 ([8da24fa](https://github.com/foray1010/Popup-my-Bookmarks/commit/8da24fa))
-- **deps:** update dependency open-color to v1.7.0 ([4ba56c9](https://github.com/foray1010/Popup-my-Bookmarks/commit/4ba56c9))
-- **deps:** update dependency react-redux to v7.1.0 ([b41433f](https://github.com/foray1010/Popup-my-Bookmarks/commit/b41433f))
-- **deps:** update dependency react-window to v1.8.2 ([c80bca2](https://github.com/foray1010/Popup-my-Bookmarks/commit/c80bca2))
-- **deps:** update dependency react-window to v1.8.3 ([ed1e17a](https://github.com/foray1010/Popup-my-Bookmarks/commit/ed1e17a))
-- **deps:** update dependency react-window to v1.8.4 ([7e4c794](https://github.com/foray1010/Popup-my-Bookmarks/commit/7e4c794))
-- **deps:** update dependency redux-saga to v1.0.3 ([7ea5801](https://github.com/foray1010/Popup-my-Bookmarks/commit/7ea5801))
-- **deps:** update dependency redux-saga to v1.0.4 ([7f30dbe](https://github.com/foray1010/Popup-my-Bookmarks/commit/7f30dbe))
-- **deps:** update dependency redux-saga to v1.0.5 ([df0fd87](https://github.com/foray1010/Popup-my-Bookmarks/commit/df0fd87))
-- **deps:** update dependency typesafe-actions to v4.4.0 ([0a7de99](https://github.com/foray1010/Popup-my-Bookmarks/commit/0a7de99))
-- **deps:** update dependency typesafe-actions to v4.4.1 ([3cb67f2](https://github.com/foray1010/Popup-my-Bookmarks/commit/3cb67f2))
-- **deps:** update dependency typesafe-actions to v4.4.2 ([dfc1a55](https://github.com/foray1010/Popup-my-Bookmarks/commit/dfc1a55))
-- **deps:** update dependency use-typed-event-listener to v1.1.1 ([8577aa7](https://github.com/foray1010/Popup-my-Bookmarks/commit/8577aa7))
-- **deps:** update dependency use-typed-event-listener to v1.3.0 ([11273e7](https://github.com/foray1010/Popup-my-Bookmarks/commit/11273e7))
-- **deps:** update dependency use-typed-event-listener to v1.3.1 ([360bcb7](https://github.com/foray1010/Popup-my-Bookmarks/commit/360bcb7))
-
 ### Features
 
 - support ctrl/cmd/shift modifier when opening bookmark via keyboard ([2d92927](https://github.com/foray1010/Popup-my-Bookmarks/commit/2d92927))
