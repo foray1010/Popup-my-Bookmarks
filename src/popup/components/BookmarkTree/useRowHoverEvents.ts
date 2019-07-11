@@ -26,14 +26,13 @@ export default ({
   const {setHighlightedIndex, unsetHighlightedIndex} = React.useContext(ListNavigationContext)
 
   return React.useMemo(() => {
-    const _toggleBookmarkTree = (bookmarkInfo: BookmarkInfo) => {
+    const toggleBookmarkTree = debounce((bookmarkInfo: BookmarkInfo) => {
       if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER && bookmarkInfo.id !== activeKey) {
         openBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
       } else {
         closeNextTrees()
       }
-    }
-    const toggleBookmarkTree = debounce(_toggleBookmarkTree, 300)
+    }, 300)
 
     return {
       handleRowMouseEnter: (bookmarkInfo: BookmarkInfo) => () => {

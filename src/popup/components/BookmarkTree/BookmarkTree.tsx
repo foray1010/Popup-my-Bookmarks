@@ -94,6 +94,7 @@ const BookmarkTree = (props: Props) => {
     listRef.current.resetAfterIndex(0, true)
 
     // @ts-ignore: hacky way to access _outerRef
+    // eslint-disable-next-line no-underscore-dangle
     const listEl: HTMLElement = listRef.current._outerRef
 
     const maxListHeight = CST.MAX_HEIGHT - listEl.getBoundingClientRect().top
