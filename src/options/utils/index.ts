@@ -22,6 +22,6 @@ export const initOptions = async (): Promise<Options> => {
     await webExtension.storage.sync.set(missingOptions)
   }
 
-  const updatedOptions: Options = await webExtension.storage.sync.get()
+  const updatedOptions = (await webExtension.storage.sync.get()) as Options
   return updatedOptions
 }
