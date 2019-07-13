@@ -1454,10 +1454,10 @@
   resolved "https://registry.yarnpkg.com/@types/relateurl/-/relateurl-0.2.28.tgz#6bda7db8653fa62643f5ee69e9f69c11a392e3a6"
   integrity sha1-a9p9uGU/piZD9e5p6facEaOS46Y=
 
-"@types/script-ext-html-webpack-plugin@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@types/script-ext-html-webpack-plugin/-/script-ext-html-webpack-plugin-2.1.0.tgz#c63bfd4c971deec5ddefb7aacbaf81d85a4cc0de"
-  integrity sha512-g0LeDovKXBrgTF8vgHF92DE9XLPSxob3D2Sov8SgSqWYrtT5sxMIgVXynLHNH85QJfsd44Al3x+R5ZNYlG3nbw==
+"@types/script-ext-html-webpack-plugin@2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@types/script-ext-html-webpack-plugin/-/script-ext-html-webpack-plugin-2.1.1.tgz#dd2cf4dd342195a73fabafd4f194c3ab31d38d23"
+  integrity sha512-5zH1v99r68/d4Tq4xm9UGYKzb0CoEuPJUouTpZc3mEF7RwABfFZqhxRVAUaE9nXIgEce48GPBOMOu+peBLFfpw==
   dependencies:
     "@types/webpack" "*"
 
