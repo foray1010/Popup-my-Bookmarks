@@ -6,8 +6,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- **deps:** update dependency react-window to v1.8.5 ([73ba06e](https://github.com/foray1010/Popup-my-Bookmarks/commit/73ba06e))
-- **deps:** update dependency redux to v4.0.3 ([#576](https://github.com/foray1010/Popup-my-Bookmarks/issues/576)) ([70ae0de](https://github.com/foray1010/Popup-my-Bookmarks/commit/70ae0de))
 - properly polyfill ResizeObserver on chrome < 64 ([dd4dd5a](https://github.com/foray1010/Popup-my-Bookmarks/commit/dd4dd5a))
 
 ## [6.2.0](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.1.0...v6.2.0) (2019-07-06)
