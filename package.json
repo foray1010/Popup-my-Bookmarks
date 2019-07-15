@@ -45,8 +45,8 @@
   },
   "devDependencies": {
     "@babel/core": "7.5.4",
-    "@commitlint/cli": "8.0.0",
-    "@commitlint/config-conventional": "8.0.0",
+    "@commitlint/cli": "8.1.0",
+    "@commitlint/config-conventional": "8.1.0",
     "@redux-saga/testing-utils": "1.0.5",
     "@types/babel__core": "7.1.2",
     "@types/bluebird": "3.5.27",
