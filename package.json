@@ -124,7 +124,7 @@
     "ts-node": "8.3.0",
     "type-coverage": "2.0.4",
     "typescript": "3.5.3",
-    "webpack": "4.35.3",
+    "webpack": "4.36.1",
     "webpack-bundle-analyzer": "3.3.2",
     "webpack-cli": "3.3.6",
     "yaml-loader": "0.5.0",
