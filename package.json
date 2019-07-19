@@ -24,7 +24,7 @@
     "type:coverage": "type-coverage --strict --at-least 99.9 --detail --ignore-catch"
   },
   "dependencies": {
-    "@rehooks/component-size": "1.0.2",
+    "@rehooks/component-size": "1.0.3",
     "classnames": "2.2.6",
     "core-js": "3.1.4",
     "lodash.debounce": "4.0.8",
