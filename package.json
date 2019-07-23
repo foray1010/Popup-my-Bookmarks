@@ -68,7 +68,7 @@
     "@types/prompts": "2.4.0",
     "@types/ramda": "0.26.18",
     "@types/react": "16.8.23",
-    "@types/react-dom": "16.8.4",
+    "@types/react-dom": "16.8.5",
     "@types/react-redux": "7.1.1",
     "@types/react-window": "1.8.0",
     "@types/script-ext-html-webpack-plugin": "2.1.1",
