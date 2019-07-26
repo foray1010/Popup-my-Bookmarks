@@ -139,7 +139,8 @@ const defaultConfig: webpack.Configuration = {
     }),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'async'
-    })
+    }),
+    new webpack.ProgressPlugin()
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
