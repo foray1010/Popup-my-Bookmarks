@@ -73,7 +73,7 @@
     "@types/react-window": "1.8.0",
     "@types/script-ext-html-webpack-plugin": "2.1.1",
     "@types/sharp": "0.22.2",
-    "@types/stylelint": "9.10.0",
+    "@types/stylelint": "9.10.1",
     "@types/terser-webpack-plugin": "1.2.1",
     "@types/webpack": "4.32.1",
     "@types/webpack-bundle-analyzer": "2.13.2",
