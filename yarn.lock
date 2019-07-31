@@ -12275,10 +12275,10 @@ tryer@^1.0.1:
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
   integrity sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==
 
-ts-lib-utils@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/ts-lib-utils/-/ts-lib-utils-2.1.0.tgz#458e3b23d38ed4b4db7430c3bf7ccba9b8ce51a6"
-  integrity sha512-tjXgC/3JCVq8L2iTqA4EzOQmLz+qhWA7lRWBMW/PNsO8oFdDV2AE6BmQnTYkd3fktaS3IoLVHKVKINkrTLhQJg==
+ts-lib-utils@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/ts-lib-utils/-/ts-lib-utils-2.2.0.tgz#dbf198ba67e2fee027f36bd2f9c0cbd638ed1731"
+  integrity sha512-yfZWuQs5bfQA2RLJdHUOSL2+Iw4NcZ8eKglVVW25aXi3sdLEoJxHB3tC2CN+x4MY4X39tcFCGlE5V7IF8O3m8w==
   dependencies:
     glob "7"
     tslib "1"
@@ -12330,23 +12330,23 @@ type-check@~0.3.2:
   dependencies:
     prelude-ls "~1.1.2"
 
-type-coverage-core@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/type-coverage-core/-/type-coverage-core-2.1.0.tgz#449cd977f9d595a1a5dda87eb28d20b82bbd2af0"
-  integrity sha512-5tvqsbrdM6RzA/dCow5k++BcPnBhxI9jl1pbTmb3H1PmhxH2De2LXQU16QCiIohJ5KWqajp9EFed4ii02ZplzQ==
+type-coverage-core@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/type-coverage-core/-/type-coverage-core-2.2.0.tgz#436ebe4f1b7bfd36ab019c840147fbcbb4bd4f1f"
+  integrity sha512-b7NTFy8HSo57C0zvJK5Vy8K+KWmQEyCFvXE7E8I6VXtt6clHuDg8z4L+CfnSGtt1ZovDu2C6+qjmBgdTZHeJyw==
   dependencies:
     minimatch "3"
-    ts-lib-utils "^2.1.0"
+    ts-lib-utils "^2.2.0"
     tslib "1"
     tsutils "3"
 
-type-coverage@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/type-coverage/-/type-coverage-2.1.0.tgz#130da32fdf8c540c3c4b3ddacc8d6e6c1b042df1"
-  integrity sha512-mcE0P14UK+vMN9OzNJzBb/tDWGCDYmlRbc8B0bYcDCH1wsqv9gTDbj/qezHZDiMWKnvnunDs5i9qo4wzAdlQ+A==
+type-coverage@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/type-coverage/-/type-coverage-2.2.0.tgz#b588fd88d322b3b81a1b85bb6a9431c092d6dbb4"
+  integrity sha512-nU0aRXcSmpkg+T9XZrdpMY967O9YY9VUvE5siyvoHf+4B0oVRpCZACKfKC4AjLFSe4pIwvBqAlo6xKbk9+rDMw==
   dependencies:
     minimist "1.2.0"
-    type-coverage-core "^2.1.0"
+    type-coverage-core "^2.2.0"
 
 type-fest@^0.6.0:
   version "0.6.0"
