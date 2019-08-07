@@ -1438,10 +1438,12 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
-"@types/ramda@0.26.18":
-  version "0.26.18"
-  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.26.18.tgz#a80f02b046edd5ff777e863732591bd50c53236e"
-  integrity sha512-wK3NLaAkL/ht7Nw4IZsOagJuYqzZgoboFvILolOPtmoKyy25gTdz/uvB/bXsv6vdWENYv+ml5ph873P2d/+9HA==
+"@types/ramda@0.26.19":
+  version "0.26.19"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.26.19.tgz#400580597566c016e9743f17c1c48bf4671cda81"
+  integrity sha512-lJuMZDXqZ8W2hl0Gz+wEPUhXcf/tZRuaO5vrxFD3Dv2XMqgTZVw+bvfS6iQAsio9XQV+uhkggtT4eLhDmUpI5g==
+  dependencies:
+    ts-toolbelt "^3.2.22"
 
 "@types/react-dom@16.8.5":
   version "16.8.5"
@@ -12269,6 +12271,11 @@ ts-node@8.3.0:
     make-error "^1.1.1"
     source-map-support "^0.5.6"
     yn "^3.0.0"
+
+ts-toolbelt@^3.2.22:
+  version "3.2.23"
+  resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-3.2.23.tgz#7b3ea621a7a58e0e4c1884b100695ca87189df38"
+  integrity sha512-WA0jP0SFchHWM+NrC2TaVC6AArt1/e01M7RddkiVyOpBtGvDVE7ZIZkUZ8Tpu2tB+zhAphToFdJhOry0p1lXbA==
 
 tslib@1, tslib@^1.8.1, tslib@^1.9.0:
   version "1.10.0"
