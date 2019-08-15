@@ -64,7 +64,7 @@
     "@types/lodash.debounce": "4.0.6",
     "@types/mini-css-extract-plugin": "0.8.0",
     "@types/nanoid": "2.0.0",
-    "@types/node": "12.7.1",
+    "@types/node": "12.7.2",
     "@types/postcss-url": "8.0.1",
     "@types/prompts": "2.4.0",
     "@types/ramda": "0.26.19",
