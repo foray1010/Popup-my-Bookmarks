@@ -1,7 +1,5 @@
 extends:
-  - 'eslint-config-foray1010/typescript'
-  - 'eslint-config-foray1010/rules/frontend'
-  - 'eslint-config-foray1010/rules/react'
+  - 'eslint-config-foray1010/typescript-react'
 globals:
   browser: false
   HTMLElement: false
