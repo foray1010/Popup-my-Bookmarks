@@ -38,7 +38,7 @@ const EditorContainer = () => {
   )
 
   return (
-    <React.Fragment>
+    <>
       <Mask backgroundColor='#fff' opacity={0.3} onClick={closeEditor} />
       <AbsolutePosition positionLeft={positionLeft} positionTop={positionTop}>
         <KeyBindingsWindow windowId={EDITOR_WINDOW}>
@@ -57,7 +57,7 @@ const EditorContainer = () => {
           />
         </KeyBindingsWindow>
       </AbsolutePosition>
-    </React.Fragment>
+    </>
   )
 }
 

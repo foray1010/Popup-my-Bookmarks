@@ -71,7 +71,7 @@ const MenuContainer = () => {
   )
 
   return (
-    <React.Fragment>
+    <>
       <Mask backgroundColor='#fff' opacity={0.3} onClick={closeMenu} />
       <AbsolutePosition positionLeft={positionLeft} positionTop={positionTop}>
         <KeyBindingsWindow windowId={MENU_WINDOW}>
@@ -85,7 +85,7 @@ const MenuContainer = () => {
           />
         </KeyBindingsWindow>
       </AbsolutePosition>
-    </React.Fragment>
+    </>
   )
 }
 
