@@ -56,7 +56,7 @@
     "@types/core-js": "2.5.2",
     "@types/cssnano": "4.0.0",
     "@types/duplicate-package-checker-webpack-plugin": "2.1.0",
-    "@types/eslint": "6.1.0",
+    "@types/eslint": "6.1.1",
     "@types/firefox-webext-browser": "67.0.2",
     "@types/fs-extra": "8.0.0",
     "@types/html-webpack-plugin": "3.2.1",
