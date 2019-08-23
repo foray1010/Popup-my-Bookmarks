@@ -67,7 +67,7 @@
     "@types/node": "12.7.2",
     "@types/postcss-url": "8.0.1",
     "@types/prompts": "2.4.0",
-    "@types/ramda": "0.26.19",
+    "@types/ramda": "0.26.21",
     "@types/react": "16.9.0",
     "@types/react-dom": "16.9.0",
     "@types/react-redux": "7.1.2",
