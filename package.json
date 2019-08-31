@@ -28,7 +28,7 @@
     "classnames": "2.2.6",
     "core-js": "3.2.1",
     "lodash.debounce": "4.0.8",
-    "nanoid": "2.0.4",
+    "nanoid": "2.1.0",
     "open-color": "1.7.0",
     "ramda": "0.26.1",
     "react": "16.9.0",
