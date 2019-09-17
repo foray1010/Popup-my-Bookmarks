@@ -1,5 +1,4 @@
 import * as R from 'ramda'
-import {SagaIterator} from 'redux-saga'
 import {put, select} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
@@ -8,7 +7,7 @@ import * as bookmarkCreators from '../../actions'
 
 export function* toggleBookmarkTree({
   payload
-}: ActionType<typeof bookmarkCreators.toggleBookmarkTree>): SagaIterator {
+}: ActionType<typeof bookmarkCreators.toggleBookmarkTree>) {
   try {
     const {bookmark}: RootState = yield select(R.identity)
 

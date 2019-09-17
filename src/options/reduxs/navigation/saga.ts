@@ -1,11 +1,10 @@
-import {SagaIterator} from 'redux-saga'
 import {put, takeLatest} from 'redux-saga/effects'
 import {getType} from 'typesafe-actions'
 
 import * as optionsCreators from '../options/actions'
 import * as navigationCreators from './actions'
 
-function* switchNavModule(): SagaIterator {
+function* switchNavModule() {
   try {
     yield put(optionsCreators.reloadOptions())
   } catch (err) {
@@ -13,6 +12,6 @@ function* switchNavModule(): SagaIterator {
   }
 }
 
-export function* navigationSaga(): SagaIterator {
+export function* navigationSaga() {
   yield takeLatest(getType(navigationCreators.switchNavModule), switchNavModule)
 }

@@ -1,4 +1,3 @@
-import {SagaIterator} from 'redux-saga'
 import {call, put} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
@@ -7,7 +6,7 @@ import * as editorCreators from '../../actions'
 
 export function* createFolderInEditor({
   payload
-}: ActionType<typeof editorCreators.createFolderInEditor>): SagaIterator {
+}: ActionType<typeof editorCreators.createFolderInEditor>) {
   try {
     const title: string = yield call(getI18n, 'newFolder')
 

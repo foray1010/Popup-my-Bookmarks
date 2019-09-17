@@ -1,4 +1,3 @@
-import {SagaIterator} from 'redux-saga'
 import {takeEvery, takeLatest} from 'redux-saga/effects'
 import {getType} from 'typesafe-actions'
 
@@ -20,7 +19,7 @@ import {refreshBookmarkTrees} from './modules/refreshBookmarkTrees'
 import {sortBookmarksByName} from './modules/sortBookmarksByName'
 import {toggleBookmarkTree} from './modules/toggleBookmarkTree'
 
-export function* bookmarkSaga(): SagaIterator {
+export function* bookmarkSaga() {
   yield takeLatest(getType(bookmarkCreators.addCurrentPage), addCurrentPage)
   yield takeLatest(getType(bookmarkCreators.addSeparator), addSeparator)
   yield takeEvery(getType(bookmarkCreators.createBookmark), createBookmark)
