@@ -1534,12 +1534,12 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
-"@types/ramda@0.26.21":
-  version "0.26.21"
-  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.26.21.tgz#cfd552c679453d153a9e2fd89ffc5dd5aa93d2c9"
-  integrity sha512-zMYtIZMceA6BvH+or6LmewLBgojbXg5+FGCwjO8K+Z+d/ZWxILmhhASXkehW0PqJL+V0QbyDeeAHix0dvEKXfQ==
+"@types/ramda@0.26.22":
+  version "0.26.22"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.26.22.tgz#4506cf76b53191d17fce473bc3de529ece6f4886"
+  integrity sha512-TfX4BwgjMSXFuyb1QZsY2D8KEsJfiWolzJHYzFWyB/0UGiyX6BFvWX05IzzrMAsZpB4uN0GXAL5QcJHTKnBxoQ==
   dependencies:
-    ts-toolbelt "^3.8.4"
+    ts-toolbelt "^3.8.75"
 
 "@types/react-dom@16.9.0":
   version "16.9.0"
@@ -12449,10 +12449,10 @@ ts-node@8.4.1:
     source-map-support "^0.5.6"
     yn "^3.0.0"
 
-ts-toolbelt@^3.8.4:
-  version "3.8.63"
-  resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-3.8.63.tgz#ee5a94a5d870f437bc6811f7428ea24c78821f6a"
-  integrity sha512-OlsFC8uF1mpN2O7DlvSkgnXzOvubO790eFhTvZBFI+WLge2BYzkQk73Q3yF0R8usxhkqbemLomqRhCGWasoIKw==
+ts-toolbelt@^3.8.75:
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-3.14.0.tgz#f4c4984cf4e988915a0175fd6a8ded00bd1d23b0"
+  integrity sha512-DYjD8tL7M1kBogRd9UKg3bUP5yh69WWcMSaA3By8ATiJU9fgYudSYIe8tWD5cpPkrGCdGGnKXQHG+5IrjJ5uhQ==
 
 tslib@1, tslib@^1.8.1, tslib@^1.9.0:
   version "1.10.0"
