@@ -11986,25 +11986,25 @@ stylelint-config-css-modules@^1.1.0:
   resolved "https://registry.yarnpkg.com/stylelint-config-css-modules/-/stylelint-config-css-modules-1.4.0.tgz#15f52900104960cb40a91101886950d73f159c42"
   integrity sha512-MIEtUL+cnaycbHhjq8V3FT7kNdp0LdYpkjLziIb8NA/Z9MblPITuBtU1Y2nJbGrjfdm1qT/AeckDX7OyuG1TSA==
 
-stylelint-config-foray1010@4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/stylelint-config-foray1010/-/stylelint-config-foray1010-4.0.1.tgz#f40217e03c981802e302cfc2e7a83c4181f3b22b"
-  integrity sha512-9A6e02kPKy+cNn9B9yFCFHrkeUYokBpywQlCEG75uDSXytHbj592uIzmG7k+j/LvKCi3dPObOigUHuujcaRp7Q==
+stylelint-config-foray1010@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/stylelint-config-foray1010/-/stylelint-config-foray1010-4.0.2.tgz#b805af51488fd7fc04aa6fbb97594d5f474b6170"
+  integrity sha512-agoXWr89/0yuDaFAbO/fIv0HtrjRUR1/UedyOW0gn7d+NbcZlj8IHoeMvrBkb54WdcF0Yx2p8PcRX9SQNHQNaQ==
   dependencies:
     stylelint-config-css-modules "^1.1.0"
-    stylelint-config-standard "^18.1.0"
+    stylelint-config-standard "^19.0.0"
 
-stylelint-config-recommended@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-2.2.0.tgz#46ab139db4a0e7151fd5f94af155512886c96d3f"
-  integrity sha512-bZ+d4RiNEfmoR74KZtCKmsABdBJr4iXRiCso+6LtMJPw5rd/KnxUWTxht7TbafrTJK1YRjNgnN0iVZaJfc3xJA==
+stylelint-config-recommended@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-3.0.0.tgz#e0e547434016c5539fe2650afd58049a2fd1d657"
+  integrity sha512-F6yTRuc06xr1h5Qw/ykb2LuFynJ2IxkKfCMf+1xqPffkxh0S09Zc902XCffcsw/XMFq/OzQ1w54fLIDtmRNHnQ==
 
-stylelint-config-standard@^18.1.0:
-  version "18.3.0"
-  resolved "https://registry.yarnpkg.com/stylelint-config-standard/-/stylelint-config-standard-18.3.0.tgz#a2a1b788d2cf876c013feaff8ae276117a1befa7"
-  integrity sha512-Tdc/TFeddjjy64LvjPau9SsfVRexmTFqUhnMBrzz07J4p2dVQtmpncRF/o8yZn8ugA3Ut43E6o1GtjX80TFytw==
+stylelint-config-standard@^19.0.0:
+  version "19.0.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-standard/-/stylelint-config-standard-19.0.0.tgz#66f0cf13f33b8a9e34965881493b38fc1313693a"
+  integrity sha512-VvcODsL1PryzpYteWZo2YaA5vU/pWfjqBpOvmeA8iB2MteZ/ZhI1O4hnrWMidsS4vmEJpKtjdhLdfGJmmZm6Cg==
   dependencies:
-    stylelint-config-recommended "^2.2.0"
+    stylelint-config-recommended "^3.0.0"
 
 stylelint@11.0.0:
   version "11.0.0"
