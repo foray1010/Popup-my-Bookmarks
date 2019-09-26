@@ -73,10 +73,12 @@ describe('initBookmarkTrees', () => {
       ...optionsFixture,
       [OPTIONS.REMEMBER_POS]: true
     }
+    // @ts-ignore
     expect(generator.next({lastPositions, options}).value).toStrictEqual(
       call(getBookmarkTrees, ['b'], options)
     )
 
+    // @ts-ignore
     expect(generator.next(bookmarkTrees).value).toStrictEqual(
       put(bookmarkCreators.setBookmarkTrees(bookmarkTrees))
     )

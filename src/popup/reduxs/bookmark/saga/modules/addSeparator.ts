@@ -1,14 +1,11 @@
 import nanoId from 'nanoid'
-import {SagaIterator} from 'redux-saga'
 import {put} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
 import * as CST from '../../../../constants'
 import * as bookmarkCreators from '../../actions'
 
-export function* addSeparator({
-  payload
-}: ActionType<typeof bookmarkCreators.addSeparator>): SagaIterator {
+export function* addSeparator({payload}: ActionType<typeof bookmarkCreators.addSeparator>) {
   try {
     yield put(
       bookmarkCreators.createBookmark(

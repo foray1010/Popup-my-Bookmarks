@@ -62,12 +62,14 @@ describe('getSearchResult', () => {
 
     expect(generator.next().value).toEqual(select(R.identity))
 
+    // @ts-ignore
     expect(generator.next({options}).value).toEqual(
       call(searchBookmarks, {
         query: searchKeyword
       })
     )
 
+    // @ts-ignore
     expect(generator.next(bookmarkTrees[0].children).value).toEqual(
       put(bookmarkCreators.setBookmarkTrees(searchResult))
     )
@@ -85,12 +87,14 @@ describe('getSearchResult', () => {
 
     expect(generator.next().value).toEqual(select(R.identity))
 
+    // @ts-ignore
     expect(generator.next({options}).value).toEqual(
       call(searchBookmarks, {
         query: searchKeyword
       })
     )
 
+    // @ts-ignore
     expect(generator.next(bookmarkTrees[0].children).value).toEqual(
       put(bookmarkCreators.setBookmarkTrees(searchTitleOnlyResult))
     )

@@ -15,7 +15,7 @@ interface RecursiveCopyPayload {
   toIndex: number
   toParentId: string
 }
-function* recursiveCopy({fromId, toIndex, toParentId}: RecursiveCopyPayload): SagaIterator {
+function* recursiveCopy({fromId, toIndex, toParentId}: RecursiveCopyPayload): SagaIterator<void> {
   try {
     const bookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, fromId)
 
@@ -41,9 +41,7 @@ function* recursiveCopy({fromId, toIndex, toParentId}: RecursiveCopyPayload): Sa
   }
 }
 
-export function* pasteBookmark({
-  payload
-}: ActionType<typeof bookmarkCreators.pasteBookmark>): SagaIterator {
+export function* pasteBookmark({payload}: ActionType<typeof bookmarkCreators.pasteBookmark>) {
   try {
     const {bookmark}: RootState = yield select(R.identity)
     const {clipboard} = bookmark

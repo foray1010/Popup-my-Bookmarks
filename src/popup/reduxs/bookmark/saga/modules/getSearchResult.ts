@@ -1,5 +1,4 @@
 import * as R from 'ramda'
-import {SagaIterator} from 'redux-saga'
 import {call, put, select} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
@@ -20,9 +19,7 @@ export const searchKeywordMatcher = (searchKeyword: string, title: string) => {
     .every((x) => lowerCaseTitle.includes(x))
 }
 
-export function* getSearchResult({
-  payload
-}: ActionType<typeof bookmarkCreators.getSearchResult>): SagaIterator {
+export function* getSearchResult({payload}: ActionType<typeof bookmarkCreators.getSearchResult>) {
   try {
     if (!payload.searchKeyword) {
       yield put(bookmarkCreators.initBookmarkTrees())

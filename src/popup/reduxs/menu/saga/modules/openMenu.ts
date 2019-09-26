@@ -1,5 +1,4 @@
 import * as R from 'ramda'
-import {SagaIterator} from 'redux-saga'
 import {call, put, select} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
@@ -9,7 +8,7 @@ import {RootState} from '../../../rootReducer'
 import * as menuCreators from '../../actions'
 import {getMenuPattern} from '../utils/getMenuPattern'
 
-export function* openMenu({payload}: ActionType<typeof menuCreators.openMenu>): SagaIterator {
+export function* openMenu({payload}: ActionType<typeof menuCreators.openMenu>) {
   try {
     const {bookmark}: RootState = yield select(R.identity)
 

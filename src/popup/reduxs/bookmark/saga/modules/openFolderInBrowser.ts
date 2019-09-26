@@ -1,4 +1,3 @@
-import {SagaIterator} from 'redux-saga'
 import {call, put} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
@@ -8,7 +7,7 @@ import {getBookmarkTree} from '../utils/getters'
 
 export function* openFolderInBrowser({
   payload
-}: ActionType<typeof bookmarkCreators.openFolderInBrowser>): SagaIterator {
+}: ActionType<typeof bookmarkCreators.openFolderInBrowser>) {
   try {
     const bookmarkTree: BookmarkTree = yield call(getBookmarkTree, payload.id)
 

@@ -1,5 +1,4 @@
 import * as R from 'ramda'
-import {SagaIterator} from 'redux-saga'
 import {call} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
@@ -75,7 +74,7 @@ const sortBookmarks = R.compose(
 
 export function* sortBookmarksByName({
   payload
-}: ActionType<typeof bookmarkCreators.sortBookmarksByName>): SagaIterator {
+}: ActionType<typeof bookmarkCreators.sortBookmarksByName>) {
   try {
     const bookmarkTree: BookmarkTree = yield call(getBookmarkTree, payload.parentId)
 

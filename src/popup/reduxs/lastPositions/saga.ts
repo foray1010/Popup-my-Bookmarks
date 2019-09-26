@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import {SagaIterator, TakeableChannel} from 'redux-saga'
+import {TakeableChannel} from 'redux-saga'
 import {actionChannel, call, fork, race, take, takeLatest} from 'redux-saga/effects'
 import {ActionType, getType} from 'typesafe-actions'
 
@@ -9,7 +9,7 @@ import * as lastPositionsCreator from './actions'
 
 function* createLastPosition({
   payload
-}: ActionType<typeof lastPositionsCreator.createLastPosition>): SagaIterator {
+}: ActionType<typeof lastPositionsCreator.createLastPosition>) {
   try {
     const {lastPositions = []}: LocalStorage = yield call(getLocalStorage)
 
@@ -37,7 +37,7 @@ function* createLastPosition({
 
 function* removeLastPosition({
   payload
-}: ActionType<typeof lastPositionsCreator.removeLastPosition>): SagaIterator {
+}: ActionType<typeof lastPositionsCreator.removeLastPosition>) {
   try {
     const {lastPositions = []}: LocalStorage = yield call(getLocalStorage)
 
@@ -54,7 +54,7 @@ function* removeLastPosition({
 }
 
 // use channel to make sure every create/remove run one by one
-function* watchCreateAndRemoveLastPosition(): SagaIterator {
+function* watchCreateAndRemoveLastPosition() {
   try {
     const createLastPositionChan: TakeableChannel<{}> = yield actionChannel(
       getType(lastPositionsCreator.createLastPosition)
@@ -83,7 +83,7 @@ function* watchCreateAndRemoveLastPosition(): SagaIterator {
 
 function* updateLastPosition({
   payload
-}: ActionType<typeof lastPositionsCreator.updateLastPosition>): SagaIterator {
+}: ActionType<typeof lastPositionsCreator.updateLastPosition>) {
   try {
     const {lastPositions = []}: LocalStorage = yield call(getLocalStorage)
 
@@ -100,7 +100,7 @@ function* updateLastPosition({
   }
 }
 
-export function* lastPositionsSaga(): SagaIterator {
+export function* lastPositionsSaga() {
   try {
     yield fork(watchCreateAndRemoveLastPosition)
 

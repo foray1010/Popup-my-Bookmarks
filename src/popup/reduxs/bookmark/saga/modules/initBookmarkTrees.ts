@@ -1,5 +1,4 @@
 import * as R from 'ramda'
-import {SagaIterator} from 'redux-saga'
 import {call, put, select} from 'redux-saga/effects'
 
 import {OPTIONS} from '../../../../constants'
@@ -19,7 +18,7 @@ export const getRememberedTreeIds = ({
   return (lastPositions || []).map((x) => x.id)
 }
 
-export function* initBookmarkTrees(): SagaIterator {
+export function* initBookmarkTrees() {
   try {
     const {lastPositions, options}: RootState = yield select(R.identity)
 

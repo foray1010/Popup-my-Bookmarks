@@ -1,5 +1,4 @@
 import * as R from 'ramda'
-import {SagaIterator} from 'redux-saga'
 import {all, call, select} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
@@ -10,7 +9,7 @@ import {RootState} from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 import {getBookmarkInfo} from '../utils/getters'
 
-function* getUrls(ids: Array<string>): SagaIterator {
+function* getUrls(ids: Array<string>) {
   try {
     const bookmarkInfos: Array<BookmarkInfo> = yield all(ids.map((id) => call(getBookmarkInfo, id)))
 
@@ -27,7 +26,7 @@ function* getUrls(ids: Array<string>): SagaIterator {
 
 export function* openBookmarksInBrowser({
   payload
-}: ActionType<typeof bookmarkCreators.openBookmarksInBrowser>): SagaIterator {
+}: ActionType<typeof bookmarkCreators.openBookmarksInBrowser>) {
   try {
     const {ids, openBookmarkProps} = payload
 
