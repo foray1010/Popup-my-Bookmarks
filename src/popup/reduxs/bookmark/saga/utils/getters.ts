@@ -2,6 +2,7 @@
 /* eslint redux-saga/no-unhandled-errors: 'off' */
 
 import * as R from 'ramda'
+import {SagaIterator} from 'redux-saga'
 import {all, call} from 'redux-saga/effects'
 import webExtension from 'webextension-polyfill'
 
@@ -16,7 +17,7 @@ import * as CST from '../../../../constants'
 import {BookmarkInfo, BookmarkTree} from '../../../../types'
 import {simulateBookmark, toBookmarkInfo} from '../../utils/converters'
 
-export function* getBookmarkInfo(id: string) {
+export function* getBookmarkInfo(id: string): SagaIterator<BookmarkInfo> {
   if (id.startsWith(CST.NO_BOOKMARK_ID_PREFIX)) {
     const title: string = yield call(getI18n, 'noBkmark')
     return simulateBookmark({
@@ -34,7 +35,7 @@ export function* getBookmarkInfo(id: string) {
   return toBookmarkInfo(bookmarkNodes[0])
 }
 
-export function* getBookmarkChildren(id: string) {
+export function* getBookmarkChildren(id: string): SagaIterator<Array<BookmarkInfo>> {
   const bookmarkChildNodes: Array<webExtension.bookmarks.BookmarkTreeNode> = yield call(
     getBookmarkChildNodes,
     id
@@ -42,7 +43,7 @@ export function* getBookmarkChildren(id: string) {
   return R.map(toBookmarkInfo, bookmarkChildNodes)
 }
 
-export function* getBookmarkTree(id: string) {
+export function* getBookmarkTree(id: string): SagaIterator<BookmarkTree> {
   const [bookmarkInfo, bookmarkChildren]: [BookmarkInfo, Array<BookmarkInfo>] = yield all([
     call(getBookmarkInfo, id),
     call(getBookmarkChildren, id)
@@ -55,7 +56,10 @@ export function* getBookmarkTree(id: string) {
   }
 }
 
-export function* getBookmarkTrees(restTreeIds: Array<string>, options: Partial<Options>) {
+export function* getBookmarkTrees(
+  restTreeIds: Array<string>,
+  options: Partial<Options>
+): SagaIterator<Array<BookmarkTree>> {
   const [firstTree, ...restTrees]: Array<BookmarkTree> = yield all([
     call(getFirstBookmarkTree, options),
     ...restTreeIds.map((id) => call(tryGetBookmarkTree, id))
@@ -76,7 +80,7 @@ export function* getBookmarkTrees(restTreeIds: Array<string>, options: Partial<O
   return acc
 }
 
-export function* getFirstBookmarkTree(options: Partial<Options>) {
+export function* getFirstBookmarkTree(options: Partial<Options>): SagaIterator<BookmarkTree> {
   const [firstTreeInfo, rootFolders]: [BookmarkTree, Array<BookmarkInfo>] = yield all([
     call(getBookmarkTree, String(options[CST.OPTIONS.DEF_EXPAND])),
     call(getBookmarkChildren, CST.ROOT_ID)
@@ -99,7 +103,7 @@ export function* getFirstBookmarkTree(options: Partial<Options>) {
 interface SearchQuery {
   query: string
 }
-export function* searchBookmarks(searchQuery: SearchQuery) {
+export function* searchBookmarks(searchQuery: SearchQuery): SagaIterator<Array<BookmarkInfo>> {
   const searchResultNodes: Array<webExtension.bookmarks.BookmarkTreeNode> = yield call(
     searchBookmarkNodes,
     searchQuery
@@ -107,7 +111,7 @@ export function* searchBookmarks(searchQuery: SearchQuery) {
   return R.map(toBookmarkInfo, searchResultNodes)
 }
 
-export function* tryGetBookmarkTree(id: string) {
+export function* tryGetBookmarkTree(id: string): SagaIterator<BookmarkTree | null> {
   try {
     return yield call(getBookmarkTree, id)
   } catch (err) {
