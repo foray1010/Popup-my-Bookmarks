@@ -41,6 +41,7 @@ describe('refreshBookmarkTrees', () => {
 
     const searchKeyword = chance.word()
     expect(
+      // @ts-ignore
       generator.next({
         bookmark: {searchKeyword}
       }).value
@@ -56,6 +57,7 @@ describe('refreshBookmarkTrees', () => {
     const options = optionsFixture
     const searchKeyword = ''
     expect(
+      // @ts-ignore
       generator.next({
         bookmark: {
           searchKeyword,
@@ -66,6 +68,7 @@ describe('refreshBookmarkTrees', () => {
     ).toEqual(call(getBookmarkTrees, getRestTreeIdsResult, options))
 
     const updatedBookmarkTrees = [bookmarkTrees[1], bookmarkTrees[0]]
+    // @ts-ignore
     expect(generator.next(updatedBookmarkTrees).value).toEqual(
       put(bookmarkCreators.setBookmarkTrees(updatedBookmarkTrees))
     )

@@ -1,4 +1,5 @@
 import * as R from 'ramda'
+import {SagaIterator} from 'redux-saga'
 import {call, put, select} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 
@@ -14,7 +15,7 @@ interface RecursiveCopyPayload {
   toIndex: number
   toParentId: string
 }
-function* recursiveCopy({fromId, toIndex, toParentId}: RecursiveCopyPayload) {
+function* recursiveCopy({fromId, toIndex, toParentId}: RecursiveCopyPayload): SagaIterator<void> {
   try {
     const bookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, fromId)
 
