@@ -5,7 +5,8 @@ import folderIcon from '../../../images/folder.svg'
 import {BookmarkInfo} from '../../../types'
 
 export const getIconUrl = (bookmarkInfo: BookmarkInfo): string => {
-  if (bookmarkInfo.type === CST.BOOKMARK_TYPES.BOOKMARK) return `chrome://favicon/${bookmarkInfo.url}`
+  if (bookmarkInfo.type === CST.BOOKMARK_TYPES.BOOKMARK)
+    return `chrome://favicon/${bookmarkInfo.url}`
   if (bookmarkInfo.type === CST.BOOKMARK_TYPES.FOLDER) return folderIcon
   return ''
 }

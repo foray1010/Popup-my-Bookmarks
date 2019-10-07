@@ -122,18 +122,18 @@ const DragAndDropConsumer = (props: Props) => {
       style={props.style}
       onClickCapture={handleClickCapture}
       onMouseUpCapture={isDragging ? handleMouseUpCapture : undefined}
-      {...(props.disableDrag !== true ?
-        {
-          onMouseDown: isDragging ? undefined : handleMouseDown,
-          onMouseUp: isPending ? handleMouseUp : undefined,
-          onMouseMove: isPending ? handleDragStart : undefined
-        } :
-        {})}
-      {...(props.disableDrop !== true ?
-        {
-          onMouseOver: isDragging ? handleDragOver : undefined
-        } :
-        {})}
+      {...(props.disableDrag !== true
+        ? {
+            onMouseDown: isDragging ? undefined : handleMouseDown,
+            onMouseUp: isPending ? handleMouseUp : undefined,
+            onMouseMove: isPending ? handleDragStart : undefined
+          }
+        : {})}
+      {...(props.disableDrop !== true
+        ? {
+            onMouseOver: isDragging ? handleDragOver : undefined
+          }
+        : {})}
     >
       {props.children}
     </div>

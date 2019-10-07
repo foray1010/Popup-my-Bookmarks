@@ -64,10 +64,11 @@ const sortBookmarks = R.compose(
   ungroup,
   R.map(sortGroupByPriority),
   R.map((groups: Array<TypeGroup>) =>
-    groups.map((group) => ({
+    groups.map(group => ({
       ...group,
       members: sortByTitle(group.members)
-    }))),
+    }))
+  ),
   R.map(groupByType),
   groupBySeparator
 )

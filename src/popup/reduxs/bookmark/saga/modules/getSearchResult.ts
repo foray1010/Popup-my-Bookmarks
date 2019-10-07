@@ -16,7 +16,7 @@ export const searchKeywordMatcher = (searchKeyword: string, title: string) => {
     .toLowerCase()
     .split(' ')
     .filter(Boolean)
-    .every((x) => lowerCaseTitle.includes(x))
+    .every(x => lowerCaseTitle.includes(x))
 }
 
 export function* getSearchResult({payload}: ActionType<typeof bookmarkCreators.getSearchResult>) {

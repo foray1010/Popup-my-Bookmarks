@@ -1,3 +1,3 @@
-const isMac = () => /^Mac/.test(window.navigator.platform)
+const isMac = () => window.navigator.platform.startsWith('Mac')
 
 export default isMac

@@ -18,7 +18,8 @@ export function* moveBookmarkToDragIndicator({
     const {bookmark}: RootState = yield select(R.identity)
 
     const treeInfo: BookmarkTree | void = bookmark.trees.find((tree: BookmarkTree) =>
-      tree.children.some(isDragIndicator))
+      tree.children.some(isDragIndicator)
+    )
     if (!treeInfo) return
 
     const {storageIndex} = treeInfo.children.reduceRight(

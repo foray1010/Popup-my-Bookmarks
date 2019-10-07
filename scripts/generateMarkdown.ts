@@ -5,7 +5,7 @@ import fs from 'fs-extra'
 // markdown handler
 const getMarkdownData = async (titleList: Array<string>) => {
   const dataList = await Promise.all(
-    titleList.map((title) => {
+    titleList.map(title => {
       return fs.readFile(path.join('markdown', `${title}.md`), 'utf-8')
     })
   )

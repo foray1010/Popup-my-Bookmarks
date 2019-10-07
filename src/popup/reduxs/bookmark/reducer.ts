@@ -25,9 +25,9 @@ const INITIAL_STATE: BookmarkState = {
 
 const removeDragIndicator = (state: BookmarkState): BookmarkState => ({
   ...state,
-  trees: state.trees.map((tree) => ({
+  trees: state.trees.map(tree => ({
     ...tree,
-    children: tree.children.filter((child) => child.type !== CST.BOOKMARK_TYPES.DRAG_INDICATOR)
+    children: tree.children.filter(child => child.type !== CST.BOOKMARK_TYPES.DRAG_INDICATOR)
   }))
 })
 
@@ -113,7 +113,7 @@ export const bookmarkReducer = createReducer<BookmarkState, ActionType<typeof bo
       state: BookmarkState,
       {payload}: ReturnType<typeof bookmarkCreators.setDragIndicator>
     ) => {
-      const parentIndex = state.trees.findIndex((tree) => tree.parent.id === payload.parentId)
+      const parentIndex = state.trees.findIndex(tree => tree.parent.id === payload.parentId)
       if (parentIndex === -1) return state
 
       return R.over(

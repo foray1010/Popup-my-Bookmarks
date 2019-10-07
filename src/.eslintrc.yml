@@ -1,6 +1,2 @@
 extends:
-  - 'eslint-config-foray1010/typescript-react'
-globals:
-  browser: false
-  HTMLElement: false
-  HTMLInputElement: false
+  - '@foray1010/eslint-config/react'

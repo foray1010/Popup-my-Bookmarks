@@ -45,9 +45,9 @@ const EditorContainer = () => {
           <Editor
             isAllowEditUrl={isAllowEditUrl}
             header={
-              isAllowEditUrl ?
-                webExtension.i18n.getMessage('edit') :
-                webExtension.i18n.getMessage('rename')
+              isAllowEditUrl
+                ? webExtension.i18n.getMessage('edit')
+                : webExtension.i18n.getMessage('rename')
             }
             initialTitle={initialTitle}
             initialUrl={initialUrl}

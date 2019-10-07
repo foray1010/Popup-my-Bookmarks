@@ -11,7 +11,7 @@ export function* toggleBookmarkTree({
   try {
     const {bookmark}: RootState = yield select(R.identity)
 
-    const isFolderOpened = bookmark.trees.some((treeInfo) => treeInfo.parent.id === payload.id)
+    const isFolderOpened = bookmark.trees.some(treeInfo => treeInfo.parent.id === payload.id)
 
     if (isFolderOpened) {
       yield put(bookmarkCreators.removeNextBookmarkTrees(payload.parentId))

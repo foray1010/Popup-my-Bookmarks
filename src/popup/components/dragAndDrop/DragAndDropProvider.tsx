@@ -6,7 +6,7 @@ import DragAndDropContext, {DragAndDropContextType} from './DragAndDropContext'
 const useDragAndDropContextState = (): DragAndDropContextType => {
   const [activeKey, setActiveKeyState] = React.useState<DragAndDropContextType['activeKey']>(null)
   const [mouseCoordinate, setMouseCoordinate] = React.useState<
-  DragAndDropContextType['mouseCoordinate']
+    DragAndDropContextType['mouseCoordinate']
   >({
     x: 0,
     y: 0

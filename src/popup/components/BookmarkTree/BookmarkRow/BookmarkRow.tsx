@@ -16,7 +16,10 @@ interface Props {
   title: string
   tooltip?: string
 }
-const BookmarkRow = React.forwardRef((props: Props, setRef: React.Ref<HTMLDivElement>) => {
+const BookmarkRowWithRef = React.forwardRef(function BookmarkRow(
+  props: Props,
+  setRef: React.Ref<HTMLDivElement>
+) {
   const iconStyles = React.useMemo(
     (): object => ({
       '--iconSize': `${props.iconSize}px`
@@ -49,4 +52,4 @@ const BookmarkRow = React.forwardRef((props: Props, setRef: React.Ref<HTMLDivEle
   )
 })
 
-export default BookmarkRow
+export default BookmarkRowWithRef

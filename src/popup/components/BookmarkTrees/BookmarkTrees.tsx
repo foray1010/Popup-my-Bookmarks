@@ -12,7 +12,7 @@ interface Props {
   treeIds: Array<string>
 }
 const BookmarkTrees = (props: Props) => {
-  const trees = props.treeIds.map((treeId) => <BookmarkTree key={treeId} treeId={treeId} />)
+  const trees = props.treeIds.map(treeId => <BookmarkTree key={treeId} treeId={treeId} />)
 
   const mainTree = trees.filter((_, index) => index % 2 === 0)
   const subTree = trees.filter((_, index) => index % 2 !== 0)

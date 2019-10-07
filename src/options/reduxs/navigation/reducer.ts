@@ -11,8 +11,8 @@ const INITIAL_STATE: NavigationState = {
 }
 
 export const navigationReducer = createReducer<
-NavigationState,
-ActionType<typeof navigationCreators>
+  NavigationState,
+  ActionType<typeof navigationCreators>
 >(INITIAL_STATE).handleAction(navigationCreators.switchNavModule, (state, {payload}) => {
   return {
     ...state,

@@ -6,7 +6,7 @@ export const closeEditor = createAction('CLOSE_EDITOR')
 
 export const createFolderInEditor = createAction(
   'CREATE_FOLDER_IN_EDITOR',
-  (action) => (
+  action => (
     targetId: string,
     coordinates: {
       positionLeft: number
@@ -17,7 +17,7 @@ export const createFolderInEditor = createAction(
 
 export const openEditor = createAction(
   'OPEN_EDITOR',
-  (action) => (
+  action => (
     targetId: string,
     coordinates: {
       positionLeft: number
@@ -28,7 +28,7 @@ export const openEditor = createAction(
 
 export const setEditor = createAction(
   'SET_EDITOR',
-  (action) => (partialState: Partial<EditorState>) =>
+  action => (partialState: Partial<EditorState>) =>
     action({
       partialState
     })

@@ -13,17 +13,18 @@ export const listsInitialState: ListsState = {
 }
 
 export const listsCreators = {
-  removeList: createAction('REMOVE_LIST', (action) => (listIndex: number) => action({listIndex})),
+  removeList: createAction('REMOVE_LIST', action => (listIndex: number) => action({listIndex})),
   resetLists: createAction('RESET_LISTS'),
   setHighlightedIndex: createAction(
     'SET_HIGHLIGHTED_INDEX',
-    (action) => (listIndex: number, itemIndex: number) => action({listIndex, itemIndex})
+    action => (listIndex: number, itemIndex: number) => action({listIndex, itemIndex})
   ),
-  setItemCount: createAction('SET_ITEM_COUNT', (action) => (listIndex: number, itemCount: number) =>
-    action({listIndex, itemCount})),
+  setItemCount: createAction('SET_ITEM_COUNT', action => (listIndex: number, itemCount: number) =>
+    action({listIndex, itemCount})
+  ),
   unsetHighlightedIndex: createAction(
     'UNSET_HIGHLIGHTED_INDEX',
-    (action) => (listIndex: number, itemIndex: number) => action({listIndex, itemIndex})
+    action => (listIndex: number, itemIndex: number) => action({listIndex, itemIndex})
   )
 }
 

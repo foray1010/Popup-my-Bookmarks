@@ -20,7 +20,7 @@ const SelectButton = (props: Props) => (
         left: `${getLeftPercentage(props.optionChoices, props.optionValue)}%`
       }}
     />
-    {props.optionChoices.map((optionChoice) => (
+    {props.optionChoices.map(optionChoice => (
       <Option
         key={String(optionChoice)}
         optionChoice={optionChoice}

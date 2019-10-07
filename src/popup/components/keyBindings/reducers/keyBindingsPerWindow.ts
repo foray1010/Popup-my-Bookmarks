@@ -19,19 +19,19 @@ export const keyBindingsPerWindowInitialState: KeyBindingsPerWindowState = new M
 export const keyBindingsPerWindowCreators = {
   addEventListener: createAction(
     'ADD_EVENT_LISTENER',
-    (action) => ({priority = 0, ...meta}: KeyBindingMeta, callback: KeyBindingEventCallback) =>
+    action => ({priority = 0, ...meta}: KeyBindingMeta, callback: KeyBindingEventCallback) =>
       action({...meta, priority, callback})
   ),
   removeEventListener: createAction(
     'REMOVE_EVENT_LISTENER',
-    (action) => ({priority = 0, ...meta}: KeyBindingMeta, callback: KeyBindingEventCallback) =>
+    action => ({priority = 0, ...meta}: KeyBindingMeta, callback: KeyBindingEventCallback) =>
       action({...meta, priority, callback})
   )
 }
 
 export const keyBindingsPerWindowReducer = createReducer<
-KeyBindingsPerWindowState,
-ActionType<typeof keyBindingsPerWindowCreators>
+  KeyBindingsPerWindowState,
+  ActionType<typeof keyBindingsPerWindowCreators>
 >(keyBindingsPerWindowInitialState)
   .handleAction(keyBindingsPerWindowCreators.addEventListener, (state, {payload}) => {
     const {callback, key, priority, windowId} = payload
@@ -49,7 +49,7 @@ ActionType<typeof keyBindingsPerWindowCreators>
     const keyBindings = state.get(windowId)
     if (!keyBindings) return state
 
-    const updatedKeyBindings = keyBindings.filter((keyBinding) => {
+    const updatedKeyBindings = keyBindings.filter(keyBinding => {
       return (
         keyBinding.callback !== callback ||
         keyBinding.key.toString() !== key.toString() ||

@@ -33,7 +33,7 @@ const Contributors = () => (
     {Object.entries(contributors).map(([contributeType, contributorsOfType]) => (
       <React.Fragment key={contributeType}>
         <dt>{contributeType}</dt>
-        {contributorsOfType.map((contributor) => (
+        {contributorsOfType.map(contributor => (
           <dd key={contributor}>{contributor}</dd>
         ))}
       </React.Fragment>

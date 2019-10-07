@@ -1,4 +1,4 @@
-const webExtension = new Proxy(
+const webExtension: object = new Proxy(
   {},
   {
     get: () => webExtension

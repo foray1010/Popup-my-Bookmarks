@@ -113,7 +113,7 @@ const defaultConfig: webpack.Configuration = {
       emitError: true,
       strict: true
     }),
-    ...appNames.map((appName) => {
+    ...appNames.map(appName => {
       return new HtmlWebpackPlugin({
         chunks: [commonChunkName, appName],
         filename: `${appName}.html`,
@@ -181,7 +181,7 @@ const productionConfig: webpack.Configuration = {
         test: /\.css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader as string,
+            loader: MiniCssExtractPlugin.loader,
             options: {
               publicPath: '../'
             }

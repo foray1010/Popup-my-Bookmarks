@@ -30,7 +30,7 @@ const Option = ({
 
       let newOptionValue: Array<number | void> = []
       if (wasChecked) {
-        newOptionValue = optionValue.filter((x) => x !== checkboxValue)
+        newOptionValue = optionValue.filter(x => x !== checkboxValue)
       } else {
         newOptionValue = [checkboxValue, ...optionValue].sort()
       }

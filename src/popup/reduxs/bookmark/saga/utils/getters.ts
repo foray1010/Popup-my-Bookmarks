@@ -49,9 +49,9 @@ export function* getBookmarkTree(id: string): SagaIterator<BookmarkTree> {
     call(getBookmarkChildren, id)
   ])
   return {
-    children: bookmarkChildren.length ?
-      bookmarkChildren :
-      ([yield call(getBookmarkInfo, CST.NO_BOOKMARK_ID_PREFIX + id)] as Array<BookmarkInfo>),
+    children: bookmarkChildren.length
+      ? bookmarkChildren
+      : ([yield call(getBookmarkInfo, CST.NO_BOOKMARK_ID_PREFIX + id)] as Array<BookmarkInfo>),
     parent: bookmarkInfo
   }
 }
@@ -62,7 +62,7 @@ export function* getBookmarkTrees(
 ): SagaIterator<Array<BookmarkTree>> {
   const [firstTree, ...restTrees]: Array<BookmarkTree> = yield all([
     call(getFirstBookmarkTree, options),
-    ...restTreeIds.map((id) => call(tryGetBookmarkTree, id))
+    ...restTreeIds.map(id => call(tryGetBookmarkTree, id))
   ])
 
   let acc = [firstTree]
@@ -88,7 +88,7 @@ export function* getFirstBookmarkTree(options: Partial<Options>): SagaIterator<B
   return {
     ...firstTreeInfo,
     children: [
-      ...R.reject((bookmarkInfo) => {
+      ...R.reject(bookmarkInfo => {
         const idNumber = Number(bookmarkInfo.id)
         return (
           idNumber === options[CST.OPTIONS.DEF_EXPAND] ||

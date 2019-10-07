@@ -30,9 +30,9 @@ const useReduxState = ({treeId}: {treeId: string}) => {
       const treeInfo = state.bookmark.trees[treeIndex]
 
       const isRememberLastPositions = Boolean(state.options[CST.OPTIONS.REMEMBER_POS])
-      const lastPosition = isRememberLastPositions ?
-        (state.lastPositions || []).find(R.propEq('id', treeId)) :
-        undefined
+      const lastPosition = isRememberLastPositions
+        ? (state.lastPositions || []).find(R.propEq('id', treeId))
+        : undefined
 
       return {
         iconSize: getIconSize(state.options[CST.OPTIONS.FONT_SIZE] || 0),

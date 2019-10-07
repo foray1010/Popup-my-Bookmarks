@@ -66,7 +66,7 @@ export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
       onPressArrowRight: handlePressArrowRight
     })
 
-    useKeyBindingsEvent({key: 'Enter', windowId: BASE_WINDOW}, (evt) => {
+    useKeyBindingsEvent({key: 'Enter', windowId: BASE_WINDOW}, evt => {
       const {highlightedIndices, itemCounts} = listsRef.current
 
       const lastListIndex = getLastMapKey(itemCounts)
@@ -114,9 +114,10 @@ export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
     return <WrappedComponent {...props} />
   }
 
-  return (props: P) => (
+  const KeyboardNavWithProviders = (props: P) => (
     <ListNavigationProvider>
       <KeyboardNav {...props} />
     </ListNavigationProvider>
   )
+  return KeyboardNavWithProviders
 }

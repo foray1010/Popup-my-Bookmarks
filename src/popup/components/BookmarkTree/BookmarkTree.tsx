@@ -30,7 +30,7 @@ interface ItemData {
 
 const getItemKey = (index: number, data: ItemData) => data.treeInfo.children[index].id
 
-const Row = ({data, index, style}: {data: ItemData, index: number, style: React.CSSProperties}) => {
+const Row = ({data, index, style}: {data: ItemData; index: number; style: React.CSSProperties}) => {
   const bookmarkInfo = data.treeInfo.children[index]
   const isDragging = data.draggingId !== null
   const isBeingDragged = data.draggingId === bookmarkInfo.id

@@ -1,1 +1,5 @@
-extends: 'eslint-config-foray1010/typescript'
+extends:
+  - '@foray1010/eslint-config'
+  - 'plugin:redux-saga/recommended'
+plugins:
+  - 'eslint-plugin-redux-saga'

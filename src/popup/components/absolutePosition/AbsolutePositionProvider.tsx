@@ -7,7 +7,7 @@ interface Props {
 }
 const AbsolutePositionProvider = (props: Props) => {
   const [bodySizeStack, setBodySizeStack] = React.useState<
-  AbsolutePositionContextType['bodySizeStack']
+    AbsolutePositionContextType['bodySizeStack']
   >([])
 
   const contextValue = React.useMemo(

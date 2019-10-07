@@ -10,11 +10,11 @@ const generateBookmarkNode = (): browser.bookmarks.BookmarkTreeNode => ({
   ...(chance.bool() ? {url: chance.url()} : null),
   title: chance.word(),
   ...(chance.bool() ? {dateAdded: chance.integer({min: 1500000000000, max: 2000000000000})} : null),
-  ...(chance.bool() ?
-    {
-      dateGroupModified: chance.integer({min: 1500000000000, max: 2000000000000})
-    } :
-    null),
+  ...(chance.bool()
+    ? {
+        dateGroupModified: chance.integer({min: 1500000000000, max: 2000000000000})
+      }
+    : null),
   ...(chance.bool() ? {unmodifiable: 'managed'} : null)
 })
 

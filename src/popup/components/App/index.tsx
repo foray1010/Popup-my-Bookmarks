@@ -23,9 +23,9 @@ const AppContainer = () => {
       '--fontFamily': [options[OPTIONS.FONT_FAMILY], 'sans-serif'].filter(Boolean).join(','),
       '--fontSize': `${options[OPTIONS.FONT_SIZE] || 12}px`,
       '--height':
-        globalBodySize && globalBodySize.height !== undefined ?
-          `${globalBodySize.height}px` :
-          'auto',
+        globalBodySize && globalBodySize.height !== undefined
+          ? `${globalBodySize.height}px`
+          : 'auto',
       '--width':
         globalBodySize && globalBodySize.width !== undefined ? `${globalBodySize.width}px` : 'auto'
     }),
@@ -35,7 +35,7 @@ const AppContainer = () => {
   return <App isShowEditor={isShowEditor} isShowMenu={isShowMenu} style={styles} />
 }
 
-export default () => {
+const AppContainerWithProviders = () => {
   return (
     <AbsolutePositionProvider>
       <KeyBindingsProvider>
@@ -44,3 +44,5 @@ export default () => {
     </AbsolutePositionProvider>
   )
 }
+
+export default AppContainerWithProviders

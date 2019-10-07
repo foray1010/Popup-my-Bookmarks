@@ -34,7 +34,10 @@ interface Messages {
 }
 
 const main = async () => {
-  const {transifexPassword, transifexUsername}: {
+  const {
+    transifexPassword,
+    transifexUsername
+  }: {
     transifexPassword: string
     transifexUsername: string
   } = await prompts(questions, {
@@ -48,7 +51,7 @@ const main = async () => {
 
   const availableLanguages = await transifex.statisticsMethodsAsync(projectSlug, resourceSlug)
   await Promise.all(
-    Object.keys(availableLanguages).map(async (availableLanguage) => {
+    Object.keys(availableLanguages).map(async availableLanguage => {
       const messagesJsonStr = await transifex.translationInstanceMethodAsync(
         projectSlug,
         resourceSlug,
@@ -58,7 +61,7 @@ const main = async () => {
       const messagesJson: Messages = JSON.parse(messagesJsonStr)
 
       const sortedMessagesJson = Object.keys(messagesJson)
-        .filter((key) => Boolean(R.path([key, 'message'], messagesJson)))
+        .filter(key => Boolean(R.path([key, 'message'], messagesJson)))
         .sort()
         .reduce((obj: Messages, key) => {
           // trim message

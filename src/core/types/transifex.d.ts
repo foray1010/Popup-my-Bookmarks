@@ -1,7 +1,7 @@
 declare module 'transifex' {
   interface Transifex {
     // eslint-disable-next-line @typescript-eslint/no-misused-new
-    new (options: {credential: string, project_slug?: string}): Transifex
+    new (options: {credential: string; project_slug?: string}): Transifex
 
     statisticsMethodsAsync(
       projectSlug: string,

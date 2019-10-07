@@ -9,7 +9,7 @@ import useBookmarkEvents from './useBookmarkEvents'
 import withDragAndDropEvents from './withDragAndDropEvents'
 import withKeyboardNav from './withKeyboardNav'
 
-const getTreeIds = (state: RootState) => state.bookmark.trees.map((tree) => tree.parent.id)
+const getTreeIds = (state: RootState) => state.bookmark.trees.map(tree => tree.parent.id)
 
 interface Props {
   mainTreeHeader: React.ReactNode

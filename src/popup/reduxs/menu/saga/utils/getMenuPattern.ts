@@ -15,7 +15,7 @@ const getBookmarkManagePattern = (
     [CST.MENU_ADD_PAGE, CST.MENU_ADD_FOLDER, CST.MENU_ADD_SEPARATOR],
     // it will be useless if no bookmark to sort
     bookmarkInfo.type === CST.BOOKMARK_TYPES.NO_BOOKMARK ? [] : [CST.MENU_SORT_BY_NAME]
-  ].filter((x) => x.length)
+  ].filter(x => x.length)
 }
 
 const getMutatePattern = (bookmarkInfo: BookmarkInfo): MenuPattern => {

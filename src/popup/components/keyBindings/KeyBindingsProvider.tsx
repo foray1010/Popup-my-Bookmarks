@@ -13,7 +13,7 @@ const KeyBindingsProvider = (props: Props) => {
   const contextStateRef = React.useRef(contextState)
   contextStateRef.current = contextState
 
-  useEventListener(window, 'keydown', (evt) => {
+  useEventListener(window, 'keydown', evt => {
     const {keyBindingsPerWindow, activeWindowId} = contextStateRef.current
 
     if (!activeWindowId) return
@@ -30,9 +30,9 @@ const KeyBindingsProvider = (props: Props) => {
         if (acc.isMatched) return acc
 
         const isMatched =
-          keyBinding.key instanceof RegExp ?
-            keyBinding.key.test(evt.key) :
-            keyBinding.key === evt.key
+          keyBinding.key instanceof RegExp
+            ? keyBinding.key.test(evt.key)
+            : keyBinding.key === evt.key
         if (!isMatched) return acc
 
         return {

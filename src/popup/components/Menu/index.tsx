@@ -89,8 +89,10 @@ const MenuContainer = () => {
   )
 }
 
-export default () => (
+const MenuContainerWithProviders = () => (
   <ListNavigationProvider>
     <MenuContainer />
   </ListNavigationProvider>
 )
+
+export default MenuContainerWithProviders

@@ -11,7 +11,7 @@ export function* openFolderInBrowser({
   try {
     const bookmarkTree: BookmarkTree = yield call(getBookmarkTree, payload.id)
 
-    const bookmarkIds = bookmarkTree.children.map((x) => x.id)
+    const bookmarkIds = bookmarkTree.children.map(x => x.id)
 
     yield put(bookmarkCreators.openBookmarksInBrowser(bookmarkIds, payload.openBookmarkProps))
   } catch (err) {

@@ -15,7 +15,7 @@ export const getRememberedTreeIds = ({
   options: RootState['options']
 }): Array<string> => {
   if (!options[OPTIONS.REMEMBER_POS]) return []
-  return (lastPositions || []).map((x) => x.id)
+  return (lastPositions || []).map(x => x.id)
 }
 
 export function* initBookmarkTrees() {
