@@ -1,18 +1,23 @@
 import * as R from 'ramda'
-import {call, put, select} from 'redux-saga/effects'
-import {ActionType} from 'typesafe-actions'
+import { call, put, select } from 'redux-saga/effects'
+import { ActionType } from 'typesafe-actions'
 
-import {BookmarkInfo} from '../../../../types'
-import {getBookmarkInfo} from '../../../bookmark/saga/utils/getters'
-import {RootState} from '../../../rootReducer'
+import { BookmarkInfo } from '../../../../types'
+import { getBookmarkInfo } from '../../../bookmark/saga/utils/getters'
+import { RootState } from '../../../rootReducer'
 import * as menuCreators from '../../actions'
-import {getMenuPattern} from '../utils/getMenuPattern'
+import { getMenuPattern } from '../utils/getMenuPattern'
 
-export function* openMenu({payload}: ActionType<typeof menuCreators.openMenu>) {
+export function* openMenu({
+  payload,
+}: ActionType<typeof menuCreators.openMenu>) {
   try {
-    const {bookmark}: RootState = yield select(R.identity)
+    const { bookmark }: RootState = yield select(R.identity)
 
-    const bookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, payload.targetId)
+    const bookmarkInfo: BookmarkInfo = yield call(
+      getBookmarkInfo,
+      payload.targetId,
+    )
     const isSearching = Boolean(bookmark.searchKeyword)
 
     const menuPattern = getMenuPattern(bookmarkInfo, isSearching)

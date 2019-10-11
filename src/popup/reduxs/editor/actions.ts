@@ -1,6 +1,6 @@
-import {createAction} from 'typesafe-actions'
+import { createAction } from 'typesafe-actions'
 
-import {EditorState} from './types'
+import { EditorState } from './types'
 
 export const closeEditor = createAction('CLOSE_EDITOR')
 
@@ -11,8 +11,8 @@ export const createFolderInEditor = createAction(
     coordinates: {
       positionLeft: number
       positionTop: number
-    }
-  ) => action({targetId, coordinates})
+    },
+  ) => action({ targetId, coordinates }),
 )
 
 export const openEditor = createAction(
@@ -22,14 +22,14 @@ export const openEditor = createAction(
     coordinates: {
       positionLeft: number
       positionTop: number
-    }
-  ) => action({targetId, coordinates})
+    },
+  ) => action({ targetId, coordinates }),
 )
 
 export const setEditor = createAction(
   'SET_EDITOR',
   action => (partialState: Partial<EditorState>) =>
     action({
-      partialState
-    })
+      partialState,
+    }),
 )

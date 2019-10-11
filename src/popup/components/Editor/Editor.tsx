@@ -17,7 +17,7 @@ interface Props {
   width: number
 }
 const Editor = (props: Props) => {
-  const {onConfirm} = props
+  const { onConfirm } = props
 
   const [title, setTitle] = React.useState(props.initialTitle)
   const [url, setUrl] = React.useState(props.initialUrl)
@@ -26,19 +26,25 @@ const Editor = (props: Props) => {
     onConfirm(title, url)
   }, [onConfirm, title, url])
 
-  const handleTitleChange = React.useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(evt.currentTarget.value)
-  }, [])
+  const handleTitleChange = React.useCallback(
+    (evt: React.ChangeEvent<HTMLInputElement>) => {
+      setTitle(evt.currentTarget.value)
+    },
+    [],
+  )
 
-  const handleUrlChange = React.useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
-    setUrl(evt.currentTarget.value)
-  }, [])
+  const handleUrlChange = React.useCallback(
+    (evt: React.ChangeEvent<HTMLInputElement>) => {
+      setUrl(evt.currentTarget.value)
+    },
+    [],
+  )
 
   const formStyles = React.useMemo(
     (): object => ({
-      '--width': `${props.width}px`
+      '--width': `${props.width}px`,
     }),
-    [props.width]
+    [props.width],
   )
 
   return (
@@ -53,7 +59,12 @@ const Editor = (props: Props) => {
         autoFocus
       />
       {props.isAllowEditUrl && (
-        <input className={classes.input} type='text' value={url} onChange={handleUrlChange} />
+        <input
+          className={classes.input}
+          type='text'
+          value={url}
+          onChange={handleUrlChange}
+        />
       )}
 
       <button

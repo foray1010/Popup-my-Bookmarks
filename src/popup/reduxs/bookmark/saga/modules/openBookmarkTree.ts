@@ -1,20 +1,25 @@
 import * as R from 'ramda'
-import {all, call, put, select} from 'redux-saga/effects'
-import {ActionType} from 'typesafe-actions'
+import { all, call, put, select } from 'redux-saga/effects'
+import { ActionType } from 'typesafe-actions'
 
-import {BookmarkTree} from '../../../../types'
-import {RootState} from '../../../rootReducer'
+import { BookmarkTree } from '../../../../types'
+import { RootState } from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
-import {getBookmarkTree} from '../utils/getters'
+import { getBookmarkTree } from '../utils/getters'
 
 export const bookmarkTreesSelector = (state: RootState) => state.bookmark.trees
 const treeIdEquals = R.pathEq(['parent', 'id'])
 
-export function* openBookmarkTree({payload}: ActionType<typeof bookmarkCreators.openBookmarkTree>) {
+export function* openBookmarkTree({
+  payload,
+}: ActionType<typeof bookmarkCreators.openBookmarkTree>) {
   try {
-    const [trees, bookmarkTree]: [Array<BookmarkTree>, BookmarkTree] = yield all([
+    const [trees, bookmarkTree]: [
+      Array<BookmarkTree>,
+      BookmarkTree,
+    ] = yield all([
       select(bookmarkTreesSelector),
-      call(getBookmarkTree, payload.id)
+      call(getBookmarkTree, payload.id),
     ])
 
     // if tree is already in view, no need to re-render
@@ -24,7 +29,12 @@ export function* openBookmarkTree({payload}: ActionType<typeof bookmarkCreators.
     // if parent doesn't exist, do not show this tree in the view
     if (parentIndex < 0) return
 
-    yield put(bookmarkCreators.setBookmarkTrees([...trees.slice(0, parentIndex + 1), bookmarkTree]))
+    yield put(
+      bookmarkCreators.setBookmarkTrees([
+        ...trees.slice(0, parentIndex + 1),
+        bookmarkTree,
+      ]),
+    )
   } catch (err) {
     console.error(err)
   }

@@ -7,7 +7,12 @@ interface Props {
   href: string
 }
 const ExternalLink = (props: Props) => (
-  <a className={classes.main} href={props.href} target='_blank' rel='noopener noreferrer'>
+  <a
+    className={classes.main}
+    href={props.href}
+    target='_blank'
+    rel='noopener noreferrer'
+  >
     {props.children}
   </a>
 )

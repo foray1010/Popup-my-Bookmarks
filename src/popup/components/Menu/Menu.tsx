@@ -1,7 +1,7 @@
 import * as R from 'ramda'
 import * as React from 'react'
 
-import {MenuPattern} from '../../types'
+import { MenuPattern } from '../../types'
 import classes from './menu.css'
 import MenuRow from './MenuRow'
 

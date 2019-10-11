@@ -1,19 +1,19 @@
 /* eslint max-lines: 'off' */
 /* eslint redux-saga/no-unhandled-errors: 'off' */
 
-import {cloneableGenerator} from '@redux-saga/testing-utils'
+import { cloneableGenerator } from '@redux-saga/testing-utils'
 import Chance from 'chance'
 import * as R from 'ramda'
-import {all, call} from 'redux-saga/effects'
+import { all, call } from 'redux-saga/effects'
 
 import optionsFixture from '../../../../../core/__fixtures__/options.json'
 import {
   getBookmarkChildNodes,
   getBookmarkNodes,
-  searchBookmarkNodes
+  searchBookmarkNodes,
 } from '../../../../../core/utils'
 import * as CST from '../../../../constants'
-import {BookmarkTree} from '../../../../types'
+import { BookmarkTree } from '../../../../types'
 import bookmarkNodes from '../__fixtures__/bookmarkNodes'
 import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import * as getters from './getters'
@@ -24,7 +24,9 @@ describe('getBookmarkInfo', () => {
   test('should get the first bookmark node by id and convert it to bookmarkInfo', () => {
     const generator = getters.getBookmarkInfo(bookmarkNodes[0].id)
 
-    expect(generator.next().value).toEqual(call(getBookmarkNodes, bookmarkNodes[0].id))
+    expect(generator.next().value).toEqual(
+      call(getBookmarkNodes, bookmarkNodes[0].id),
+    )
 
     expect(generator.next(bookmarkNodes).value).toMatchSnapshot()
 
@@ -36,9 +38,13 @@ describe('getBookmarkChildren', () => {
   test('should get all its children by id and convert all children to bookmarkInfo', () => {
     const generator = getters.getBookmarkChildren(bookmarkNodes[0].id)
 
-    expect(generator.next().value).toEqual(call(getBookmarkChildNodes, bookmarkNodes[0].id))
+    expect(generator.next().value).toEqual(
+      call(getBookmarkChildNodes, bookmarkNodes[0].id),
+    )
 
-    expect(generator.next([bookmarkNodes[1], bookmarkNodes[2]]).value).toMatchSnapshot()
+    expect(
+      generator.next([bookmarkNodes[1], bookmarkNodes[2]]).value,
+    ).toMatchSnapshot()
 
     expect(generator.next().done).toBe(true)
   })
@@ -51,13 +57,14 @@ describe('getBookmarkTree', () => {
     expect(generator.next().value).toEqual(
       all([
         call(getters.getBookmarkInfo, bookmarkNodes[0].id),
-        call(getters.getBookmarkChildren, bookmarkNodes[0].id)
-      ])
+        call(getters.getBookmarkChildren, bookmarkNodes[0].id),
+      ]),
     )
 
-    expect(generator.next([bookmarkTrees[0].parent, bookmarkTrees[0].children]).value).toEqual(
-      bookmarkTrees[0]
-    )
+    expect(
+      generator.next([bookmarkTrees[0].parent, bookmarkTrees[0].children])
+        .value,
+    ).toEqual(bookmarkTrees[0])
 
     expect(generator.next().done).toBe(true)
   })
@@ -74,30 +81,36 @@ describe('getBookmarkTrees', () => {
       const updatedBookmarkTree = R.set(
         R.lensPath(['parent', 'parentId']),
         prevBookmarkTree.parent.id,
-        bookmarkTree
+        bookmarkTree,
       )
       return [...acc, updatedBookmarkTree]
     },
-    []
+    [],
   )
-  const getRestTreeIds = (trees: Array<BookmarkTree>) => R.tail(trees).map(tree => tree.parent.id)
+  const getRestTreeIds = (trees: Array<BookmarkTree>) =>
+    R.tail(trees).map(tree => tree.parent.id)
 
   const options = optionsFixture
   const restTreeIds = getRestTreeIds(correlatedBookmarkTrees)
 
-  const generator = cloneableGenerator(getters.getBookmarkTrees)(restTreeIds, options)
+  const generator = cloneableGenerator(getters.getBookmarkTrees)(
+    restTreeIds,
+    options,
+  )
 
   expect(generator.next().value).toEqual(
     all([
       call(getters.getFirstBookmarkTree, options),
-      ...R.map(id => call(getters.tryGetBookmarkTree, id), restTreeIds)
-    ])
+      ...R.map(id => call(getters.tryGetBookmarkTree, id), restTreeIds),
+    ]),
   )
 
   test('should get all trees', () => {
     const clonedGenerator = generator.clone()
 
-    expect(clonedGenerator.next(correlatedBookmarkTrees).value).toEqual(correlatedBookmarkTrees)
+    expect(clonedGenerator.next(correlatedBookmarkTrees).value).toEqual(
+      correlatedBookmarkTrees,
+    )
 
     expect(clonedGenerator.next().done).toBe(true)
   })
@@ -105,10 +118,14 @@ describe('getBookmarkTrees', () => {
     for (let i = 1; i < correlatedBookmarkTrees.length; i += 1) {
       const clonedGenerator = generator.clone()
 
-      const partiallyUnrelatedBookmarkTrees = R.set(R.lensIndex(i), null, correlatedBookmarkTrees)
-      expect(clonedGenerator.next(partiallyUnrelatedBookmarkTrees).value).toEqual(
-        R.take(i, partiallyUnrelatedBookmarkTrees)
+      const partiallyUnrelatedBookmarkTrees = R.set(
+        R.lensIndex(i),
+        null,
+        correlatedBookmarkTrees,
       )
+      expect(
+        clonedGenerator.next(partiallyUnrelatedBookmarkTrees).value,
+      ).toEqual(R.take(i, partiallyUnrelatedBookmarkTrees))
 
       expect(clonedGenerator.next().done).toBe(true)
     }
@@ -120,7 +137,7 @@ describe('getFirstBookmarkTree', () => {
     const options = {
       ...optionsFixture,
       [CST.OPTIONS.DEF_EXPAND]: Number(bookmarkTrees[0].parent.id),
-      [CST.OPTIONS.HIDE_ROOT_FOLDER]: [Number(hiddenFolderId)]
+      [CST.OPTIONS.HIDE_ROOT_FOLDER]: [Number(hiddenFolderId)],
     }
 
     const generator = getters.getFirstBookmarkTree(options)
@@ -128,49 +145,55 @@ describe('getFirstBookmarkTree', () => {
     expect(generator.next().value).toEqual(
       all([
         call(getters.getBookmarkTree, String(options[CST.OPTIONS.DEF_EXPAND])),
-        call(getters.getBookmarkChildren, CST.ROOT_ID)
-      ])
+        call(getters.getBookmarkChildren, CST.ROOT_ID),
+      ]),
     )
 
     const rootFolders = [
       {
         ...bookmarkTrees[0].children[0],
         type: CST.BOOKMARK_TYPES.BOOKMARK,
-        id: String(chance.integer({min: 2})),
-        isRoot: true
+        id: String(chance.integer({ min: 2 })),
+        isRoot: true,
       },
       {
         ...bookmarkTrees[0].children[0],
         type: CST.BOOKMARK_TYPES.FOLDER,
-        id: String(chance.integer({min: 2})),
-        isRoot: true
+        id: String(chance.integer({ min: 2 })),
+        isRoot: true,
       },
       {
         ...bookmarkTrees[0].children[0],
         type: CST.BOOKMARK_TYPES.FOLDER,
         id: bookmarkTrees[0].parent.id,
-        isRoot: true
+        isRoot: true,
       },
       {
         ...bookmarkTrees[0].children[0],
         type: CST.BOOKMARK_TYPES.FOLDER,
         id: hiddenFolderId,
-        isRoot: true
-      }
+        isRoot: true,
+      },
     ]
-    expect(generator.next([bookmarkTrees[0], rootFolders]).value).toMatchSnapshot()
+    expect(
+      generator.next([bookmarkTrees[0], rootFolders]).value,
+    ).toMatchSnapshot()
     expect(generator.next().done).toBe(true)
   })
 })
 
 describe('searchBookmarks', () => {
   test('search bookmarks and convert to bookmarkInfo', () => {
-    const searchQuery = {query: chance.word()}
+    const searchQuery = { query: chance.word() }
     const generator = getters.searchBookmarks(searchQuery)
 
-    expect(generator.next().value).toEqual(call(searchBookmarkNodes, searchQuery))
+    expect(generator.next().value).toEqual(
+      call(searchBookmarkNodes, searchQuery),
+    )
 
-    expect(generator.next([bookmarkNodes[3], bookmarkNodes[4]]).value).toMatchSnapshot()
+    expect(
+      generator.next([bookmarkNodes[3], bookmarkNodes[4]]).value,
+    ).toMatchSnapshot()
 
     expect(generator.next().done).toBe(true)
   })
@@ -180,7 +203,9 @@ describe('tryGetBookmarkTree', () => {
   test('run getBookmarkTree', () => {
     const generator = getters.tryGetBookmarkTree(bookmarkNodes[0].id)
 
-    expect(generator.next().value).toEqual(call(getters.getBookmarkTree, bookmarkNodes[0].id))
+    expect(generator.next().value).toEqual(
+      call(getters.getBookmarkTree, bookmarkNodes[0].id),
+    )
 
     expect(generator.next([bookmarkTrees[5]]).value).toEqual([bookmarkTrees[5]])
 
@@ -189,7 +214,9 @@ describe('tryGetBookmarkTree', () => {
   test('return null if failed to get bookmark tree', () => {
     const generator = getters.tryGetBookmarkTree(bookmarkNodes[0].id)
 
-    expect(generator.next().value).toEqual(call(getters.getBookmarkTree, bookmarkNodes[0].id))
+    expect(generator.next().value).toEqual(
+      call(getters.getBookmarkTree, bookmarkNodes[0].id),
+    )
 
     // generator.throw should always exists in real world
     if (generator.throw) {

@@ -1,12 +1,12 @@
-import {call, put} from 'redux-saga/effects'
-import {ActionType} from 'typesafe-actions'
+import { call, put } from 'redux-saga/effects'
+import { ActionType } from 'typesafe-actions'
 
-import {BookmarkInfo} from '../../../../types'
+import { BookmarkInfo } from '../../../../types'
 import * as bookmarkCreators from '../../actions'
-import {getBookmarkInfo} from '../utils/getters'
+import { getBookmarkInfo } from '../utils/getters'
 
 export function* createBookmarkAfterId({
-  payload
+  payload,
 }: ActionType<typeof bookmarkCreators.createBookmarkAfterId>) {
   try {
     const bookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, payload.id)
@@ -16,8 +16,8 @@ export function* createBookmarkAfterId({
         bookmarkInfo.parentId,
         bookmarkInfo.storageIndex + 1,
         payload.title,
-        payload.url
-      )
+        payload.url,
+      ),
     )
   } catch (err) {
     console.error(err)

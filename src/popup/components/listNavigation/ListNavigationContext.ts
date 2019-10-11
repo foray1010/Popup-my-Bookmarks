@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import {ListsState, listsInitialState} from './reducers/lists'
+import { ListsState, listsInitialState } from './reducers/lists'
 
 export interface ListNavigationContextType {
   lists: ListsState
@@ -19,5 +19,5 @@ export default React.createContext<ListNavigationContextType>({
   resetLists: () => {},
   setHighlightedIndex: () => {},
   setItemCount: () => {},
-  unsetHighlightedIndex: () => {}
+  unsetHighlightedIndex: () => {},
 })

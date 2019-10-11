@@ -12,5 +12,5 @@ export interface AbsolutePositionContextType {
 }
 export default React.createContext<AbsolutePositionContextType>({
   bodySizeStack: [],
-  setBodySizeStack: () => {}
+  setBodySizeStack: () => {},
 })

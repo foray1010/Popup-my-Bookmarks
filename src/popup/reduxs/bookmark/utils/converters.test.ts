@@ -16,24 +16,24 @@ describe('getIconUrl', () => {
       converters.getIconUrl({
         ...templateBookmarkInfo,
         type: CST.BOOKMARK_TYPES.BOOKMARK,
-        url
-      })
+        url,
+      }),
     ).toBe(`chrome://favicon/${url}`)
   })
   test('return folder icon if it is folder', () => {
     expect(
       converters.getIconUrl({
         ...templateBookmarkInfo,
-        type: CST.BOOKMARK_TYPES.FOLDER
-      })
+        type: CST.BOOKMARK_TYPES.FOLDER,
+      }),
     ).toBe('test-file-stub')
   })
   test('return empty string if it is neither bookmark nor folder', () => {
     expect(
       converters.getIconUrl({
         ...templateBookmarkInfo,
-        type: CST.BOOKMARK_TYPES.SEPARATOR
-      })
+        type: CST.BOOKMARK_TYPES.SEPARATOR,
+      }),
     ).toBe('')
   })
 })
@@ -43,31 +43,31 @@ describe('getType', () => {
     expect(
       converters.getType({
         ...bookmarkNodes[0],
-        url: undefined
-      })
+        url: undefined,
+      }),
     ).toBe(CST.BOOKMARK_TYPES.FOLDER)
   })
   test('return separate type if domain is separatethis.com', () => {
     expect(
       converters.getType({
         ...bookmarkNodes[0],
-        url: 'http://separatethis.com/'
-      })
+        url: 'http://separatethis.com/',
+      }),
     ).toBe(CST.BOOKMARK_TYPES.SEPARATOR)
 
     expect(
       converters.getType({
         ...bookmarkNodes[0],
-        url: 'http://separatethis.com/solid.html'
-      })
+        url: 'http://separatethis.com/solid.html',
+      }),
     ).toBe(CST.BOOKMARK_TYPES.SEPARATOR)
   })
   test('return bookmark type if url is set and it is not from separatethis.com', () => {
     expect(
       converters.getType({
         ...bookmarkNodes[0],
-        url: 'http://google.com/'
-      })
+        url: 'http://google.com/',
+      }),
     ).toBe(CST.BOOKMARK_TYPES.BOOKMARK)
   })
 })
@@ -77,30 +77,30 @@ describe('isRoot', () => {
     expect(
       converters.isRoot({
         ...bookmarkNodes[0],
-        id: CST.ROOT_ID
-      })
+        id: CST.ROOT_ID,
+      }),
     ).toBe(true)
 
     expect(
       converters.isRoot({
         ...bookmarkNodes[0],
-        id: CST.ROOT_ID + String(chance.integer())
-      })
+        id: CST.ROOT_ID + String(chance.integer()),
+      }),
     ).toBe(false)
   })
   test("is root if it's parentId equal to ROOT_ID", () => {
     expect(
       converters.isRoot({
         ...bookmarkNodes[0],
-        parentId: CST.ROOT_ID
-      })
+        parentId: CST.ROOT_ID,
+      }),
     ).toBe(true)
 
     expect(
       converters.isRoot({
         ...bookmarkNodes[0],
-        parentId: CST.ROOT_ID + String(chance.integer())
-      })
+        parentId: CST.ROOT_ID + String(chance.integer()),
+      }),
     ).toBe(false)
   })
 })
@@ -113,7 +113,7 @@ describe('simulateBookmark', () => {
     const type = chance.pickone([
       CST.BOOKMARK_TYPES.BOOKMARK,
       CST.BOOKMARK_TYPES.FOLDER,
-      CST.BOOKMARK_TYPES.SEPARATOR
+      CST.BOOKMARK_TYPES.SEPARATOR,
     ])
     expect(
       converters.simulateBookmark({
@@ -123,11 +123,11 @@ describe('simulateBookmark', () => {
         isSimulated: false,
         isUnmodifiable: false,
         parentId,
-        storageIndex: chance.integer({min: 0}),
+        storageIndex: chance.integer({ min: 0 }),
         title,
         type,
-        url: chance.url()
-      })
+        url: chance.url(),
+      }),
     ).toEqual({
       iconUrl: '',
       id,
@@ -138,7 +138,7 @@ describe('simulateBookmark', () => {
       storageIndex: -1,
       title,
       type,
-      url: ''
+      url: '',
     })
   })
 })
@@ -152,8 +152,8 @@ describe('toBookmarkInfo', () => {
         parentId: '234',
         title: 'fake-title',
         unmodifiable: 'managed',
-        url: 'http://google.com'
-      })
+        url: 'http://google.com',
+      }),
     ).toEqual({
       iconUrl: 'chrome://favicon/http://google.com',
       id: '123',
@@ -164,15 +164,15 @@ describe('toBookmarkInfo', () => {
       storageIndex: 1,
       title: 'fake-title',
       type: CST.BOOKMARK_TYPES.BOOKMARK,
-      url: 'http://google.com'
+      url: 'http://google.com',
     })
   })
   test('should fill default value', () => {
     expect(
       converters.toBookmarkInfo({
         id: '123',
-        title: 'fake-title'
-      })
+        title: 'fake-title',
+      }),
     ).toEqual({
       iconUrl: 'test-file-stub',
       id: '123',
@@ -183,7 +183,7 @@ describe('toBookmarkInfo', () => {
       storageIndex: -1,
       title: 'fake-title',
       type: CST.BOOKMARK_TYPES.FOLDER,
-      url: ''
+      url: '',
     })
   })
   test('if it is root, it must be unmodifiable', () => {
@@ -191,8 +191,8 @@ describe('toBookmarkInfo', () => {
       converters.toBookmarkInfo({
         id: '123',
         parentId: CST.ROOT_ID,
-        title: 'fake-title'
-      })
+        title: 'fake-title',
+      }),
     ).toEqual({
       iconUrl: 'test-file-stub',
       id: '123',
@@ -203,7 +203,7 @@ describe('toBookmarkInfo', () => {
       storageIndex: -1,
       title: 'fake-title',
       type: CST.BOOKMARK_TYPES.FOLDER,
-      url: ''
+      url: '',
     })
   })
 })

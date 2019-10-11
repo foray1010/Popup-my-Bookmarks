@@ -1,13 +1,15 @@
-import {call} from 'redux-saga/effects'
-import {ActionType} from 'typesafe-actions'
+import { call } from 'redux-saga/effects'
+import { ActionType } from 'typesafe-actions'
 
-import {removeBookmark, removeBookmarkTree} from '../../../../../core/utils'
+import { removeBookmark, removeBookmarkTree } from '../../../../../core/utils'
 import * as CST from '../../../../constants'
-import {BookmarkInfo} from '../../../../types'
+import { BookmarkInfo } from '../../../../types'
 import * as bookmarkCreators from '../../actions'
-import {getBookmarkInfo} from '../utils/getters'
+import { getBookmarkInfo } from '../utils/getters'
 
-export function* deleteBookmark({payload}: ActionType<typeof bookmarkCreators.deleteBookmark>) {
+export function* deleteBookmark({
+  payload,
+}: ActionType<typeof bookmarkCreators.deleteBookmark>) {
   try {
     const bookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, payload.id)
 

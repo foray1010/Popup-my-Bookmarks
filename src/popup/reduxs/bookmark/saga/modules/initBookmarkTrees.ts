@@ -1,15 +1,15 @@
 import * as R from 'ramda'
-import {call, put, select} from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 
-import {OPTIONS} from '../../../../constants'
-import {BookmarkTree} from '../../../../types'
-import {RootState} from '../../../rootReducer'
+import { OPTIONS } from '../../../../constants'
+import { BookmarkTree } from '../../../../types'
+import { RootState } from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
-import {getBookmarkTrees} from '../utils/getters'
+import { getBookmarkTrees } from '../utils/getters'
 
 export const getRememberedTreeIds = ({
   lastPositions,
-  options
+  options,
 }: {
   lastPositions: RootState['lastPositions']
   options: RootState['options']
@@ -20,14 +20,14 @@ export const getRememberedTreeIds = ({
 
 export function* initBookmarkTrees() {
   try {
-    const {lastPositions, options}: RootState = yield select(R.identity)
+    const { lastPositions, options }: RootState = yield select(R.identity)
 
-    const rememberedTreeIds = getRememberedTreeIds({lastPositions, options})
+    const rememberedTreeIds = getRememberedTreeIds({ lastPositions, options })
 
     const bookmarkTrees: Array<BookmarkTree> = yield call(
       getBookmarkTrees,
       R.tail(rememberedTreeIds),
-      options
+      options,
     )
 
     yield put(bookmarkCreators.setBookmarkTrees(bookmarkTrees))

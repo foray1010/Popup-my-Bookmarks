@@ -1,12 +1,14 @@
 import * as React from 'react'
 
 import useAction from '../../../core/hooks/useAction'
-import {bookmarkCreators} from '../../reduxs'
+import { bookmarkCreators } from '../../reduxs'
 import DragAndDropProvider from '../dragAndDrop/DragAndDropProvider'
 
 export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
   const DragAndDropEvents = (props: P) => {
-    const moveBookmarkToDragIndicator = useAction(bookmarkCreators.moveBookmarkToDragIndicator)
+    const moveBookmarkToDragIndicator = useAction(
+      bookmarkCreators.moveBookmarkToDragIndicator,
+    )
     const removeDragIndicator = useAction(bookmarkCreators.removeDragIndicator)
 
     const handleDragEnd = React.useCallback(() => {
@@ -17,7 +19,7 @@ export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
       (evt: MouseEvent, activeKey: string) => {
         moveBookmarkToDragIndicator(activeKey)
       },
-      [moveBookmarkToDragIndicator]
+      [moveBookmarkToDragIndicator],
     )
 
     return (

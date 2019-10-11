@@ -1,8 +1,8 @@
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import {OPTIONS} from '../../../core/constants'
-import {Options, OptionsConfig} from '../../../core/types/options'
+import { OPTIONS } from '../../../core/constants'
+import { Options, OptionsConfig } from '../../../core/types/options'
 import classes from './option-form.css'
 import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
@@ -23,23 +23,26 @@ const OptionForm = (props: Props) => (
   <form onSubmit={handleSubmit}>
     <table className={classes.table}>
       <tbody>
-        {props.selectedOptionFormMap.reduce((acc: Array<React.ReactElement<{}>>, optionName) => {
-          const optionValue = props.options[optionName]
-          if (optionValue !== undefined) {
-            return [
-              ...acc,
-              <OptionItem
-                key={optionName}
-                optionConfig={props.optionsConfig[optionName]}
-                optionName={optionName}
-                optionValue={optionValue}
-                updatePartialOptions={props.updatePartialOptions}
-              />
-            ]
-          }
+        {props.selectedOptionFormMap.reduce(
+          (acc: Array<React.ReactElement<{}>>, optionName) => {
+            const optionValue = props.options[optionName]
+            if (optionValue !== undefined) {
+              return [
+                ...acc,
+                <OptionItem
+                  key={optionName}
+                  optionConfig={props.optionsConfig[optionName]}
+                  optionName={optionName}
+                  optionValue={optionValue}
+                  updatePartialOptions={props.updatePartialOptions}
+                />,
+              ]
+            }
 
-          return acc
-        }, [])}
+            return acc
+          },
+          [],
+        )}
       </tbody>
       <tfoot>
         <tr>

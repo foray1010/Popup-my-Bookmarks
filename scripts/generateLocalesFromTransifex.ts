@@ -11,14 +11,14 @@ const questions = [
     type: 'text',
     name: 'transifexUsername',
     message: 'transifex username (you can register one for free)',
-    validate: Boolean
+    validate: Boolean,
   } as const,
   {
     type: 'password',
     name: 'transifexPassword',
     message: 'password',
-    validate: Boolean
-  } as const
+    validate: Boolean,
+  } as const,
 ]
 
 const projectSlug = 'popup-my-bookmarks'
@@ -36,27 +36,30 @@ interface Messages {
 const main = async () => {
   const {
     transifexPassword,
-    transifexUsername
+    transifexUsername,
   }: {
     transifexPassword: string
     transifexUsername: string
   } = await prompts(questions, {
-    onCancel: () => process.exit(130)
+    onCancel: () => process.exit(130),
   })
 
   const transifex = new Transifex({
-    credential: `${transifexUsername}:${transifexPassword}`
+    credential: `${transifexUsername}:${transifexPassword}`,
   })
   bluebird.promisifyAll(transifex)
 
-  const availableLanguages = await transifex.statisticsMethodsAsync(projectSlug, resourceSlug)
+  const availableLanguages = await transifex.statisticsMethodsAsync(
+    projectSlug,
+    resourceSlug,
+  )
   await Promise.all(
     Object.keys(availableLanguages).map(async availableLanguage => {
       const messagesJsonStr = await transifex.translationInstanceMethodAsync(
         projectSlug,
         resourceSlug,
         availableLanguage,
-        {mode: 'onlytranslated'}
+        { mode: 'onlytranslated' },
       )
       const messagesJson: Messages = JSON.parse(messagesJsonStr)
 
@@ -71,7 +74,7 @@ const main = async () => {
 
           return {
             ...obj,
-            [key]: messagesJson[key]
+            [key]: messagesJson[key],
           }
         }, {})
 
@@ -90,11 +93,11 @@ const main = async () => {
       await fs.outputJson(
         path.join(localesPath, mappedLanguage, 'messages.json'),
         sortedMessagesJson,
-        {spaces: 2}
+        { spaces: 2 },
       )
 
       console.log(`"${mappedLanguage}" is generated`)
-    })
+    }),
   )
 }
 

@@ -13,7 +13,7 @@ export enum OPTIONS {
   SEARCH_TARGET = 'searchTarget',
   SET_WIDTH = 'setWidth',
   TOOLTIP = 'tooltip',
-  WARN_OPEN_MANY = 'warnOpenMany'
+  WARN_OPEN_MANY = 'warnOpenMany',
 }
 
 export const ROOT_ID = '0'

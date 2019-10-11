@@ -1,19 +1,22 @@
 import * as React from 'react'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
-import {OptionsConfig} from '../../../core/types/options'
-import {getOptionsConfig} from '../../../core/utils'
-import {OPTION_TABLE_MAP} from '../../constants'
-import {RootState, optionsCreators} from '../../reduxs'
+import { OptionsConfig } from '../../../core/types/options'
+import { getOptionsConfig } from '../../../core/utils'
+import { OPTION_TABLE_MAP } from '../../constants'
+import { RootState, optionsCreators } from '../../reduxs'
 import OptionForm from './OptionForm'
 
 const OptionFormContainer = () => {
-  const [optionsConfig, setOptionsConfig] = React.useState<OptionsConfig | void>()
+  const [
+    optionsConfig,
+    setOptionsConfig,
+  ] = React.useState<OptionsConfig | void>()
 
   const options = useSelector((state: RootState) => state.options)
   const selectedOptionFormMap = useSelector(
-    (state: RootState) => OPTION_TABLE_MAP[state.navigation.selectedNavModule]
+    (state: RootState) => OPTION_TABLE_MAP[state.navigation.selectedNavModule],
   )
 
   const resetToDefaultOptions = useAction(optionsCreators.resetToDefaultOptions)

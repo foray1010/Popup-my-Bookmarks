@@ -1,11 +1,11 @@
 import * as R from 'ramda'
 import * as React from 'react'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
 import * as CST from '../../constants'
-import {MENU_WINDOW} from '../../constants/windows'
-import {RootState, menuCreators} from '../../reduxs'
+import { MENU_WINDOW } from '../../constants/windows'
+import { RootState, menuCreators } from '../../reduxs'
 import isMac from '../../utils/isMac'
 import AbsolutePosition from '../absolutePosition/AbsolutePosition'
 import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
@@ -23,25 +23,32 @@ const unclickableRowsSelector = (state: RootState) => {
 
 const MenuContainer = () => {
   const menuPattern = useSelector((state: RootState) => state.menu.menuPattern)
-  const positionLeft = useSelector((state: RootState) => state.menu.positionLeft)
+  const positionLeft = useSelector(
+    (state: RootState) => state.menu.positionLeft,
+  )
   const positionTop = useSelector((state: RootState) => state.menu.positionTop)
   const unclickableRows = useSelector(unclickableRowsSelector)
 
   const clickMenuRow = useAction(menuCreators.clickMenuRow)
   const closeMenu = useAction(menuCreators.closeMenu)
 
-  const {lists, setHighlightedIndex, unsetHighlightedIndex, setItemCount} = React.useContext(
-    ListNavigationContext
-  )
+  const {
+    lists,
+    setHighlightedIndex,
+    unsetHighlightedIndex,
+    setItemCount,
+  } = React.useContext(ListNavigationContext)
 
-  const allRowNames = React.useMemo(() => menuPattern.reduce(R.concat, []), [menuPattern])
+  const allRowNames = React.useMemo(() => menuPattern.reduce(R.concat, []), [
+    menuPattern,
+  ])
   const highlightedIndex = lists.highlightedIndices.get(0)
 
   React.useEffect(() => {
     setItemCount(0, allRowNames.length)
   }, [allRowNames.length, setItemCount])
 
-  useKeyboardNav({windowId: MENU_WINDOW})
+  useKeyboardNav({ windowId: MENU_WINDOW })
 
   const handleRowClick = React.useCallback(() => {
     if (highlightedIndex === undefined) return
@@ -53,21 +60,24 @@ const MenuContainer = () => {
     closeMenu()
   }, [allRowNames, clickMenuRow, closeMenu, highlightedIndex])
 
-  useKeyBindingsEvent({key: 'Enter', windowId: MENU_WINDOW}, handleRowClick)
-  useKeyBindingsEvent({key: isMac() ? 'Control' : 'ContextMenu', windowId: MENU_WINDOW}, closeMenu)
+  useKeyBindingsEvent({ key: 'Enter', windowId: MENU_WINDOW }, handleRowClick)
+  useKeyBindingsEvent(
+    { key: isMac() ? 'Control' : 'ContextMenu', windowId: MENU_WINDOW },
+    closeMenu,
+  )
 
   const handleRowMouseEnter = React.useCallback(
     (index: number) => () => {
       setHighlightedIndex(0, index)
     },
-    [setHighlightedIndex]
+    [setHighlightedIndex],
   )
 
   const handleRowMouseLeave = React.useCallback(
     (index: number) => () => {
       unsetHighlightedIndex(0, index)
     },
-    [unsetHighlightedIndex]
+    [unsetHighlightedIndex],
   )
 
   return (

@@ -2,7 +2,7 @@ import * as R from 'ramda'
 
 import * as CST from '../../../constants'
 import folderIcon from '../../../images/folder.svg'
-import {BookmarkInfo} from '../../../types'
+import { BookmarkInfo } from '../../../types'
 
 export const getIconUrl = (bookmarkInfo: BookmarkInfo): string => {
   if (bookmarkInfo.type === CST.BOOKMARK_TYPES.BOOKMARK)
@@ -11,16 +11,23 @@ export const getIconUrl = (bookmarkInfo: BookmarkInfo): string => {
   return ''
 }
 
-export const getType = (bookmarkNode: browser.bookmarks.BookmarkTreeNode): CST.BOOKMARK_TYPES => {
+export const getType = (
+  bookmarkNode: browser.bookmarks.BookmarkTreeNode,
+): CST.BOOKMARK_TYPES => {
   if (bookmarkNode.url == null) return CST.BOOKMARK_TYPES.FOLDER
-  if (bookmarkNode.url.startsWith(CST.SEPARATE_THIS_URL)) return CST.BOOKMARK_TYPES.SEPARATOR
+  if (bookmarkNode.url.startsWith(CST.SEPARATE_THIS_URL))
+    return CST.BOOKMARK_TYPES.SEPARATOR
   return CST.BOOKMARK_TYPES.BOOKMARK
 }
 
-export const isRoot = (bookmarkNode: browser.bookmarks.BookmarkTreeNode): boolean =>
+export const isRoot = (
+  bookmarkNode: browser.bookmarks.BookmarkTreeNode,
+): boolean =>
   bookmarkNode.id === CST.ROOT_ID || bookmarkNode.parentId === CST.ROOT_ID
 
-export const simulateBookmark = (partialBookmarkInfo: Partial<BookmarkInfo>): BookmarkInfo => ({
+export const simulateBookmark = (
+  partialBookmarkInfo: Partial<BookmarkInfo>,
+): BookmarkInfo => ({
   id: '',
   parentId: '',
   title: '',
@@ -31,13 +38,13 @@ export const simulateBookmark = (partialBookmarkInfo: Partial<BookmarkInfo>): Bo
   isSimulated: true,
   isUnmodifiable: true,
   storageIndex: -1,
-  url: ''
+  url: '',
 })
 
 export const toBookmarkInfo = R.compose(
   (bookmarkInfo: BookmarkInfo): BookmarkInfo => ({
     ...bookmarkInfo,
-    iconUrl: getIconUrl(bookmarkInfo)
+    iconUrl: getIconUrl(bookmarkInfo),
   }),
   (bookmarkNode: browser.bookmarks.BookmarkTreeNode): BookmarkInfo => ({
     iconUrl: '',
@@ -46,9 +53,10 @@ export const toBookmarkInfo = R.compose(
     isSimulated: false,
     isUnmodifiable: isRoot(bookmarkNode) || Boolean(bookmarkNode.unmodifiable),
     parentId: bookmarkNode.parentId || '',
-    storageIndex: typeof bookmarkNode.index === 'number' ? bookmarkNode.index : -1,
+    storageIndex:
+      typeof bookmarkNode.index === 'number' ? bookmarkNode.index : -1,
     title: bookmarkNode.title,
     type: getType(bookmarkNode),
-    url: bookmarkNode.url || ''
-  })
+    url: bookmarkNode.url || '',
+  }),
 )

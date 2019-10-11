@@ -3,7 +3,7 @@ import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import useAction from '../../../core/hooks/useAction'
-import {bookmarkCreators} from '../../reduxs'
+import { bookmarkCreators } from '../../reduxs'
 
 const useBookmarkEvents = () => {
   const refreshBookmarkTrees = useAction(bookmarkCreators.refreshBookmarkTrees)

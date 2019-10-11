@@ -18,13 +18,13 @@ interface Props {
 }
 const BookmarkRowWithRef = React.forwardRef(function BookmarkRow(
   props: Props,
-  setRef: React.Ref<HTMLDivElement>
+  setRef: React.Ref<HTMLDivElement>,
 ) {
   const iconStyles = React.useMemo(
     (): object => ({
-      '--iconSize': `${props.iconSize}px`
+      '--iconSize': `${props.iconSize}px`,
     }),
-    [props.iconSize]
+    [props.iconSize],
   )
 
   return (
@@ -34,9 +34,9 @@ const BookmarkRowWithRef = React.forwardRef(function BookmarkRow(
         classes.main,
         {
           [classes.highlighted]: props.isHighlighted,
-          [classes.unclickable]: props.isUnclickable
+          [classes.unclickable]: props.isUnclickable,
         },
-        props.className
+        props.className,
       )}
       onAuxClick={props.isUnclickable ? undefined : props.onAuxClick}
       onClick={props.isUnclickable ? undefined : props.onClick}
@@ -45,7 +45,12 @@ const BookmarkRowWithRef = React.forwardRef(function BookmarkRow(
       title={props.tooltip}
     >
       {props.iconUrl && (
-        <img className={classes.icon} src={props.iconUrl} style={iconStyles} alt='' />
+        <img
+          className={classes.icon}
+          src={props.iconUrl}
+          style={iconStyles}
+          alt=''
+        />
       )}
       <div className={classes.title}>{props.title}</div>
     </div>

@@ -1,9 +1,9 @@
-import {takeLatest} from 'redux-saga/effects'
-import {getType} from 'typesafe-actions'
+import { takeLatest } from 'redux-saga/effects'
+import { getType } from 'typesafe-actions'
 
 import * as menuCreators from '../actions'
-import {clickMenuRow} from './modules/clickMenuRow'
-import {openMenu} from './modules/openMenu'
+import { clickMenuRow } from './modules/clickMenuRow'
+import { openMenu } from './modules/openMenu'
 
 export function* menuSaga() {
   yield takeLatest(getType(menuCreators.clickMenuRow), clickMenuRow)

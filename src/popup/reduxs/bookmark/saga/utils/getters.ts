@@ -2,20 +2,20 @@
 /* eslint redux-saga/no-unhandled-errors: 'off' */
 
 import * as R from 'ramda'
-import {SagaIterator} from 'redux-saga'
-import {all, call} from 'redux-saga/effects'
+import { SagaIterator } from 'redux-saga'
+import { all, call } from 'redux-saga/effects'
 import webExtension from 'webextension-polyfill'
 
-import {Options} from '../../../../../core/types/options'
+import { Options } from '../../../../../core/types/options'
 import {
   getBookmarkChildNodes,
   getBookmarkNodes,
   getI18n,
-  searchBookmarkNodes
+  searchBookmarkNodes,
 } from '../../../../../core/utils'
 import * as CST from '../../../../constants'
-import {BookmarkInfo, BookmarkTree} from '../../../../types'
-import {simulateBookmark, toBookmarkInfo} from '../../utils/converters'
+import { BookmarkInfo, BookmarkTree } from '../../../../types'
+import { simulateBookmark, toBookmarkInfo } from '../../utils/converters'
 
 export function* getBookmarkInfo(id: string): SagaIterator<BookmarkInfo> {
   if (id.startsWith(CST.NO_BOOKMARK_ID_PREFIX)) {
@@ -24,45 +24,47 @@ export function* getBookmarkInfo(id: string): SagaIterator<BookmarkInfo> {
       id,
       parentId: id.replace(CST.NO_BOOKMARK_ID_PREFIX, ''),
       title,
-      type: CST.BOOKMARK_TYPES.NO_BOOKMARK
+      type: CST.BOOKMARK_TYPES.NO_BOOKMARK,
     })
   }
 
-  const bookmarkNodes: Array<webExtension.bookmarks.BookmarkTreeNode> = yield call(
-    getBookmarkNodes,
-    id
-  )
+  const bookmarkNodes: Array<
+    webExtension.bookmarks.BookmarkTreeNode
+  > = yield call(getBookmarkNodes, id)
   return toBookmarkInfo(bookmarkNodes[0])
 }
 
-export function* getBookmarkChildren(id: string): SagaIterator<Array<BookmarkInfo>> {
-  const bookmarkChildNodes: Array<webExtension.bookmarks.BookmarkTreeNode> = yield call(
-    getBookmarkChildNodes,
-    id
-  )
+export function* getBookmarkChildren(
+  id: string,
+): SagaIterator<Array<BookmarkInfo>> {
+  const bookmarkChildNodes: Array<
+    webExtension.bookmarks.BookmarkTreeNode
+  > = yield call(getBookmarkChildNodes, id)
   return R.map(toBookmarkInfo, bookmarkChildNodes)
 }
 
 export function* getBookmarkTree(id: string): SagaIterator<BookmarkTree> {
-  const [bookmarkInfo, bookmarkChildren]: [BookmarkInfo, Array<BookmarkInfo>] = yield all([
-    call(getBookmarkInfo, id),
-    call(getBookmarkChildren, id)
-  ])
+  const [bookmarkInfo, bookmarkChildren]: [
+    BookmarkInfo,
+    Array<BookmarkInfo>,
+  ] = yield all([call(getBookmarkInfo, id), call(getBookmarkChildren, id)])
   return {
     children: bookmarkChildren.length
       ? bookmarkChildren
-      : ([yield call(getBookmarkInfo, CST.NO_BOOKMARK_ID_PREFIX + id)] as Array<BookmarkInfo>),
-    parent: bookmarkInfo
+      : ([yield call(getBookmarkInfo, CST.NO_BOOKMARK_ID_PREFIX + id)] as Array<
+          BookmarkInfo
+        >),
+    parent: bookmarkInfo,
   }
 }
 
 export function* getBookmarkTrees(
   restTreeIds: Array<string>,
-  options: Partial<Options>
+  options: Partial<Options>,
 ): SagaIterator<Array<BookmarkTree>> {
   const [firstTree, ...restTrees]: Array<BookmarkTree> = yield all([
     call(getFirstBookmarkTree, options),
-    ...restTreeIds.map(id => call(tryGetBookmarkTree, id))
+    ...restTreeIds.map(id => call(tryGetBookmarkTree, id)),
   ])
 
   let acc = [firstTree]
@@ -72,7 +74,8 @@ export function* getBookmarkTrees(
     const isBreak =
       tree === null ||
       // in case it is root folder that open from root
-      (!tree.parent.isRoot && acc[acc.length - 1].parent.id !== tree.parent.parentId)
+      (!tree.parent.isRoot &&
+        acc[acc.length - 1].parent.id !== tree.parent.parentId)
     if (isBreak) break
 
     acc = [...acc, tree]
@@ -80,10 +83,15 @@ export function* getBookmarkTrees(
   return acc
 }
 
-export function* getFirstBookmarkTree(options: Partial<Options>): SagaIterator<BookmarkTree> {
-  const [firstTreeInfo, rootFolders]: [BookmarkTree, Array<BookmarkInfo>] = yield all([
+export function* getFirstBookmarkTree(
+  options: Partial<Options>,
+): SagaIterator<BookmarkTree> {
+  const [firstTreeInfo, rootFolders]: [
+    BookmarkTree,
+    Array<BookmarkInfo>,
+  ] = yield all([
     call(getBookmarkTree, String(options[CST.OPTIONS.DEF_EXPAND])),
-    call(getBookmarkChildren, CST.ROOT_ID)
+    call(getBookmarkChildren, CST.ROOT_ID),
   ])
   return {
     ...firstTreeInfo,
@@ -95,23 +103,26 @@ export function* getFirstBookmarkTree(options: Partial<Options>): SagaIterator<B
           (options[CST.OPTIONS.HIDE_ROOT_FOLDER] || []).includes(idNumber)
         )
       }, rootFolders),
-      ...firstTreeInfo.children
-    ]
+      ...firstTreeInfo.children,
+    ],
   }
 }
 
 interface SearchQuery {
   query: string
 }
-export function* searchBookmarks(searchQuery: SearchQuery): SagaIterator<Array<BookmarkInfo>> {
-  const searchResultNodes: Array<webExtension.bookmarks.BookmarkTreeNode> = yield call(
-    searchBookmarkNodes,
-    searchQuery
-  )
+export function* searchBookmarks(
+  searchQuery: SearchQuery,
+): SagaIterator<Array<BookmarkInfo>> {
+  const searchResultNodes: Array<
+    webExtension.bookmarks.BookmarkTreeNode
+  > = yield call(searchBookmarkNodes, searchQuery)
   return R.map(toBookmarkInfo, searchResultNodes)
 }
 
-export function* tryGetBookmarkTree(id: string): SagaIterator<BookmarkTree | null> {
+export function* tryGetBookmarkTree(
+  id: string,
+): SagaIterator<BookmarkTree | null> {
   try {
     return yield call(getBookmarkTree, id)
   } catch (err) {

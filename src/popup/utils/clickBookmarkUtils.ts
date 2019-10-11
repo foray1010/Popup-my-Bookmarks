@@ -1,9 +1,9 @@
 import * as React from 'react'
 
-import {OPEN_IN_TYPES, OPTIONS} from '../constants'
+import { OPEN_IN_TYPES, OPTIONS } from '../constants'
 
 export const getClickOptionNameByEvent = (
-  evt: KeyboardEvent | MouseEvent | React.KeyboardEvent | React.MouseEvent
+  evt: KeyboardEvent | MouseEvent | React.KeyboardEvent | React.MouseEvent,
 ) => {
   if (evt.ctrlKey || evt.metaKey) {
     return OPTIONS.CLICK_BY_LEFT_CTRL
@@ -17,7 +17,7 @@ export const getClickOptionNameByEvent = (
 }
 
 export const mapOptionToOpenBookmarkProps = (
-  option?: number
+  option?: number,
 ): {
   openIn: OPEN_IN_TYPES
   isCloseThisExtension: boolean
@@ -27,33 +27,33 @@ export const mapOptionToOpenBookmarkProps = (
     case 1: // current tab (without closing PmB)
       return {
         openIn: OPEN_IN_TYPES.CURRENT_TAB,
-        isCloseThisExtension: option === 0
+        isCloseThisExtension: option === 0,
       }
 
     default:
     case 2: // new tab
       return {
         openIn: OPEN_IN_TYPES.NEW_TAB,
-        isCloseThisExtension: true
+        isCloseThisExtension: true,
       }
 
     case 3: // background tab
     case 4: // background tab (without closing PmB)
       return {
         openIn: OPEN_IN_TYPES.BACKGROUND_TAB,
-        isCloseThisExtension: option === 3
+        isCloseThisExtension: option === 3,
       }
 
     case 5: // new window
       return {
         openIn: OPEN_IN_TYPES.NEW_WINDOW,
-        isCloseThisExtension: true
+        isCloseThisExtension: true,
       }
 
     case 6: // incognito window
       return {
         openIn: OPEN_IN_TYPES.INCOGNITO_WINDOW,
-        isCloseThisExtension: true
+        isCloseThisExtension: true,
       }
   }
 }

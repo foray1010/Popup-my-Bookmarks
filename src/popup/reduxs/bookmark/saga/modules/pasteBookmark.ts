@@ -1,30 +1,39 @@
 import * as R from 'ramda'
-import {SagaIterator} from 'redux-saga'
-import {call, put, select} from 'redux-saga/effects'
-import {ActionType} from 'typesafe-actions'
+import { SagaIterator } from 'redux-saga'
+import { call, put, select } from 'redux-saga/effects'
+import { ActionType } from 'typesafe-actions'
 
-import {createBookmark, moveBookmark} from '../../../../../core/utils'
+import { createBookmark, moveBookmark } from '../../../../../core/utils'
 import * as CST from '../../../../constants'
-import {BookmarkInfo, BookmarkTree} from '../../../../types'
-import {RootState} from '../../../rootReducer'
+import { BookmarkInfo, BookmarkTree } from '../../../../types'
+import { RootState } from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
-import {getBookmarkInfo, getBookmarkTree} from '../utils/getters'
+import { getBookmarkInfo, getBookmarkTree } from '../utils/getters'
 
 interface RecursiveCopyPayload {
   fromId: string
   toIndex: number
   toParentId: string
 }
-function* recursiveCopy({fromId, toIndex, toParentId}: RecursiveCopyPayload): SagaIterator<void> {
+function* recursiveCopy({
+  fromId,
+  toIndex,
+  toParentId,
+}: RecursiveCopyPayload): SagaIterator<void> {
   try {
     const bookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, fromId)
 
-    const createdBookmarkNode: browser.bookmarks.BookmarkTreeNode = yield call(createBookmark, {
-      index: toIndex,
-      parentId: toParentId,
-      title: bookmarkInfo.title,
-      ...(bookmarkInfo.type !== CST.BOOKMARK_TYPES.FOLDER ? {url: bookmarkInfo.url} : null)
-    })
+    const createdBookmarkNode: browser.bookmarks.BookmarkTreeNode = yield call(
+      createBookmark,
+      {
+        index: toIndex,
+        parentId: toParentId,
+        title: bookmarkInfo.title,
+        ...(bookmarkInfo.type !== CST.BOOKMARK_TYPES.FOLDER
+          ? { url: bookmarkInfo.url }
+          : null),
+      },
+    )
 
     if (bookmarkInfo.type === CST.BOOKMARK_TYPES.FOLDER) {
       const bookmarkTree: BookmarkTree = yield call(getBookmarkTree, fromId)
@@ -32,7 +41,7 @@ function* recursiveCopy({fromId, toIndex, toParentId}: RecursiveCopyPayload): Sa
         yield call(recursiveCopy, {
           fromId: child.id,
           toIndex: index,
-          toParentId: createdBookmarkNode.id
+          toParentId: createdBookmarkNode.id,
         })
       }
     }
@@ -41,20 +50,25 @@ function* recursiveCopy({fromId, toIndex, toParentId}: RecursiveCopyPayload): Sa
   }
 }
 
-export function* pasteBookmark({payload}: ActionType<typeof bookmarkCreators.pasteBookmark>) {
+export function* pasteBookmark({
+  payload,
+}: ActionType<typeof bookmarkCreators.pasteBookmark>) {
   try {
-    const {bookmark}: RootState = yield select(R.identity)
-    const {clipboard} = bookmark
+    const { bookmark }: RootState = yield select(R.identity)
+    const { clipboard } = bookmark
 
     if (!clipboard.id) return
 
     if (clipboard.isRemoveAfterPaste) {
-      yield call(moveBookmark, clipboard.id, {parentId: payload.parentId, index: payload.index})
+      yield call(moveBookmark, clipboard.id, {
+        parentId: payload.parentId,
+        index: payload.index,
+      })
     } else {
       yield call(recursiveCopy, {
         fromId: clipboard.id,
         toIndex: payload.index,
-        toParentId: payload.parentId
+        toParentId: payload.parentId,
       })
     }
 

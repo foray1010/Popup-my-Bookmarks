@@ -13,7 +13,8 @@ export default () => {
 
   useEventListener(document, 'keydown', evt => {
     const isFocusedOnInputWithoutValue =
-      document.activeElement instanceof HTMLInputElement && document.activeElement.value === ''
+      document.activeElement instanceof HTMLInputElement &&
+      document.activeElement.value === ''
     if (evt.key === 'Escape' && isFocusedOnInputWithoutValue) {
       window.close()
     }

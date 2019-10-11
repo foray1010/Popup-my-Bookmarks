@@ -13,7 +13,7 @@ export default [
         storageIndex: 7839,
         title: 'ahobaom',
         type: CST.BOOKMARK_TYPES.BOOKMARK,
-        url: 'http://bigeha.pa/bejozkal'
+        url: 'http://bigeha.pa/bejozkal',
       },
       {
         iconUrl: 'http://va.mx/aso',
@@ -25,7 +25,7 @@ export default [
         storageIndex: 2338,
         title: 'gu',
         type: CST.BOOKMARK_TYPES.BOOKMARK,
-        url: 'http://iza.gr/ge'
+        url: 'http://iza.gr/ge',
       },
       {
         iconUrl: 'http://remahfur.do/wek',
@@ -37,7 +37,7 @@ export default [
         storageIndex: 5021,
         title: 'ilo',
         type: CST.BOOKMARK_TYPES.BOOKMARK,
-        url: 'http://jabo.vu/mabheku'
+        url: 'http://jabo.vu/mabheku',
       },
       {
         iconUrl: 'http://buk.ax/kusa',
@@ -49,7 +49,7 @@ export default [
         storageIndex: 8077,
         title: 'ji',
         type: CST.BOOKMARK_TYPES.BOOKMARK,
-        url: 'http://gepfim.md/udojigu'
+        url: 'http://gepfim.md/udojigu',
       },
       {
         iconUrl: 'http://sumjueja.nz/ewnobti',
@@ -61,7 +61,7 @@ export default [
         storageIndex: 8012,
         title: 'juetpoh',
         type: CST.BOOKMARK_TYPES.BOOKMARK,
-        url: 'http://keil.ye/oku'
+        url: 'http://keil.ye/oku',
       },
       {
         iconUrl: 'http://uworodim.sz/dud',
@@ -73,7 +73,7 @@ export default [
         storageIndex: 8972,
         title: 'mipfo',
         type: CST.BOOKMARK_TYPES.BOOKMARK,
-        url: 'http://ra.mx/jozureb'
+        url: 'http://ra.mx/jozureb',
       },
       {
         iconUrl: 'http://pedet.se/vibjuwdik',
@@ -85,8 +85,8 @@ export default [
         storageIndex: 620,
         title: 'mombukfes',
         type: CST.BOOKMARK_TYPES.BOOKMARK,
-        url: 'http://keil.gi/wokuj'
-      }
+        url: 'http://keil.gi/wokuj',
+      },
     ],
     parent: {
       iconUrl: '',
@@ -98,7 +98,7 @@ export default [
       storageIndex: -1,
       title: '',
       type: CST.BOOKMARK_TYPES.FOLDER,
-      url: ''
-    }
-  }
+      url: '',
+    },
+  },
 ]

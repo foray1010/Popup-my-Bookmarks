@@ -1,35 +1,35 @@
 import * as R from 'ramda'
-import {call, put, select} from 'redux-saga/effects'
-import {ActionType} from 'typesafe-actions'
+import { call, put, select } from 'redux-saga/effects'
+import { ActionType } from 'typesafe-actions'
 
-import {moveBookmark} from '../../../../../core/utils'
+import { moveBookmark } from '../../../../../core/utils'
 import * as CST from '../../../../constants'
-import {BookmarkInfo, BookmarkTree} from '../../../../types'
-import {RootState} from '../../../rootReducer'
+import { BookmarkInfo, BookmarkTree } from '../../../../types'
+import { RootState } from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 
 const isDragIndicator = (bookmarkInfo: BookmarkInfo) =>
   bookmarkInfo.type === CST.BOOKMARK_TYPES.DRAG_INDICATOR
 
 export function* moveBookmarkToDragIndicator({
-  payload
+  payload,
 }: ActionType<typeof bookmarkCreators.moveBookmarkToDragIndicator>) {
   try {
-    const {bookmark}: RootState = yield select(R.identity)
+    const { bookmark }: RootState = yield select(R.identity)
 
-    const treeInfo: BookmarkTree | void = bookmark.trees.find((tree: BookmarkTree) =>
-      tree.children.some(isDragIndicator)
+    const treeInfo: BookmarkTree | void = bookmark.trees.find(
+      (tree: BookmarkTree) => tree.children.some(isDragIndicator),
     )
     if (!treeInfo) return
 
-    const {storageIndex} = treeInfo.children.reduceRight(
+    const { storageIndex } = treeInfo.children.reduceRight(
       (acc, bookmarkInfo) => {
         if (acc.isReduced) return acc
 
         if (isDragIndicator(bookmarkInfo)) {
           return {
             ...acc,
-            isCapture: true
+            isCapture: true,
           }
         }
 
@@ -38,7 +38,7 @@ export function* moveBookmarkToDragIndicator({
             return {
               isCapture: false,
               isReduced: true,
-              storageIndex: bookmarkInfo.storageIndex + 1
+              storageIndex: bookmarkInfo.storageIndex + 1,
             }
           }
         }
@@ -48,13 +48,13 @@ export function* moveBookmarkToDragIndicator({
       {
         isCapture: false,
         isReduced: false,
-        storageIndex: 0
-      }
+        storageIndex: 0,
+      },
     )
 
     yield call(moveBookmark, payload.bookmarkId, {
       parentId: treeInfo.parent.id,
-      index: storageIndex
+      index: storageIndex,
     })
 
     yield put(bookmarkCreators.removeDragIndicator())

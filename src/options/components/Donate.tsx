@@ -19,17 +19,23 @@ const Donate = () => (
       <ol>
         <li>
           rate it on&nbsp;
-          <ExternalLink href='https://goo.gl/x9Wlq'>Chrome Web Store</ExternalLink>
+          <ExternalLink href='https://goo.gl/x9Wlq'>
+            Chrome Web Store
+          </ExternalLink>
         </li>
         <li>
           fork me on&nbsp;
-          <ExternalLink href='https://github.com/foray1010/Popup-my-Bookmarks'>GitHub</ExternalLink>
+          <ExternalLink href='https://github.com/foray1010/Popup-my-Bookmarks'>
+            GitHub
+          </ExternalLink>
         </li>
         <li>
           buy me a drink via&nbsp;
           <ExternalLink href={paypalUrl}>PayPal</ExternalLink>
           &nbsp;or&nbsp;
-          <ExternalLink href='bitcoin:3G8ZSQPeLWNvyo8AQJzMjVHvyzCSMFwhfA'>Bitcoin</ExternalLink>
+          <ExternalLink href='bitcoin:3G8ZSQPeLWNvyo8AQJzMjVHvyzCSMFwhfA'>
+            Bitcoin
+          </ExternalLink>
           &nbsp;:)
         </li>
       </ol>

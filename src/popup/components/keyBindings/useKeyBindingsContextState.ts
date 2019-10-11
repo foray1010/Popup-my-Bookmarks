@@ -1,39 +1,46 @@
 import * as React from 'react'
 
 import useMapDispatchToCallback from '../../hooks/useMapDispatchToCallback'
-import {KeyBindingsContextType} from './KeyBindingsContext'
+import { KeyBindingsContextType } from './KeyBindingsContext'
 import {
   keyBindingsPerWindowCreators,
   keyBindingsPerWindowInitialState,
-  keyBindingsPerWindowReducer
+  keyBindingsPerWindowReducer,
 } from './reducers/keyBindingsPerWindow'
-import {windowsCreators, windowsInitialState, windowsReducer} from './reducers/windows'
+import {
+  windowsCreators,
+  windowsInitialState,
+  windowsReducer,
+} from './reducers/windows'
 
 const useKeyBindingsContextState = (): KeyBindingsContextType => {
-  const [{activeWindowId}, dispatchWindows] = React.useReducer(windowsReducer, windowsInitialState)
+  const [{ activeWindowId }, dispatchWindows] = React.useReducer(
+    windowsReducer,
+    windowsInitialState,
+  )
   const [keyBindingsPerWindow, dispatchKeyBindingsPerWindow] = React.useReducer(
     keyBindingsPerWindowReducer,
-    keyBindingsPerWindowInitialState
+    keyBindingsPerWindowInitialState,
   )
 
   const addEventListener = useMapDispatchToCallback(
     dispatchKeyBindingsPerWindow,
-    keyBindingsPerWindowCreators.addEventListener
+    keyBindingsPerWindowCreators.addEventListener,
   )
 
   const removeEventListener = useMapDispatchToCallback(
     dispatchKeyBindingsPerWindow,
-    keyBindingsPerWindowCreators.removeEventListener
+    keyBindingsPerWindowCreators.removeEventListener,
   )
 
   const setActiveWindowId = useMapDispatchToCallback(
     dispatchWindows,
-    windowsCreators.setActiveWindowId
+    windowsCreators.setActiveWindowId,
   )
 
   const unsetActiveWindowId = useMapDispatchToCallback(
     dispatchWindows,
-    windowsCreators.unsetActiveWindowId
+    windowsCreators.unsetActiveWindowId,
   )
 
   return React.useMemo(
@@ -43,7 +50,7 @@ const useKeyBindingsContextState = (): KeyBindingsContextType => {
       addEventListener,
       removeEventListener,
       setActiveWindowId,
-      unsetActiveWindowId
+      unsetActiveWindowId,
     }),
     [
       activeWindowId,
@@ -51,8 +58,8 @@ const useKeyBindingsContextState = (): KeyBindingsContextType => {
       keyBindingsPerWindow,
       removeEventListener,
       setActiveWindowId,
-      unsetActiveWindowId
-    ]
+      unsetActiveWindowId,
+    ],
   )
 }
 

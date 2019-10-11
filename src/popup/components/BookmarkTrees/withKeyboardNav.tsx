@@ -1,13 +1,13 @@
 import * as React from 'react'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
-import {BOOKMARK_TYPES} from '../../constants'
-import {BASE_WINDOW} from '../../constants/windows'
-import {RootState, bookmarkCreators, menuCreators} from '../../reduxs'
+import { BOOKMARK_TYPES } from '../../constants'
+import { BASE_WINDOW } from '../../constants/windows'
+import { RootState, bookmarkCreators, menuCreators } from '../../reduxs'
 import {
   getClickOptionNameByEvent,
-  mapOptionToOpenBookmarkProps
+  mapOptionToOpenBookmarkProps,
 } from '../../utils/clickBookmarkUtils'
 import getLastMapKey from '../../utils/getLastMapKey'
 import isMac from '../../utils/isMac'
@@ -19,17 +19,21 @@ import useKeyboardNav from '../listNavigation/useKeyboardNav'
 export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
   const KeyboardNav = (props: P) => {
     const highlightedItemCoordinates = useSelector(
-      (state: RootState) => state.ui.highlightedItemCoordinates
+      (state: RootState) => state.ui.highlightedItemCoordinates,
     )
     const options = useSelector((state: RootState) => state.options)
     const trees = useSelector((state: RootState) => state.bookmark.trees)
 
-    const openBookmarksInBrowser = useAction(bookmarkCreators.openBookmarksInBrowser)
+    const openBookmarksInBrowser = useAction(
+      bookmarkCreators.openBookmarksInBrowser,
+    )
     const openBookmarkTree = useAction(bookmarkCreators.openBookmarkTree)
     const openMenu = useAction(menuCreators.openMenu)
-    const removeNextBookmarkTrees = useAction(bookmarkCreators.removeNextBookmarkTrees)
+    const removeNextBookmarkTrees = useAction(
+      bookmarkCreators.removeNextBookmarkTrees,
+    )
 
-    const {lists} = React.useContext(ListNavigationContext)
+    const { lists } = React.useContext(ListNavigationContext)
     const listsRef = React.useRef(lists)
     listsRef.current = lists
 
@@ -43,7 +47,7 @@ export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
     }, [removeNextBookmarkTrees, trees])
 
     const handlePressArrowRight = React.useCallback(() => {
-      const {highlightedIndices, itemCounts} = listsRef.current
+      const { highlightedIndices, itemCounts } = listsRef.current
 
       const lastListIndex = getLastMapKey(itemCounts)
       if (lastListIndex === undefined) return
@@ -63,11 +67,11 @@ export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
     useKeyboardNav({
       windowId: BASE_WINDOW,
       onPressArrowLeft: handlePressArrowLeft,
-      onPressArrowRight: handlePressArrowRight
+      onPressArrowRight: handlePressArrowRight,
     })
 
-    useKeyBindingsEvent({key: 'Enter', windowId: BASE_WINDOW}, evt => {
-      const {highlightedIndices, itemCounts} = listsRef.current
+    useKeyBindingsEvent({ key: 'Enter', windowId: BASE_WINDOW }, evt => {
+      const { highlightedIndices, itemCounts } = listsRef.current
 
       const lastListIndex = getLastMapKey(itemCounts)
       if (lastListIndex === undefined) return
@@ -83,12 +87,12 @@ export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
       const openBookmarkProps = mapOptionToOpenBookmarkProps(option)
       openBookmarksInBrowser([bookmarkInfo.id], {
         ...openBookmarkProps,
-        isAllowBookmarklet: true
+        isAllowBookmarklet: true,
       })
     })
 
     const handlePressContextMenu = React.useCallback(() => {
-      const {highlightedIndices, itemCounts} = listsRef.current
+      const { highlightedIndices, itemCounts } = listsRef.current
 
       const lastListIndex = getLastMapKey(itemCounts)
       if (lastListIndex === undefined) return
@@ -106,9 +110,9 @@ export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
     useKeyBindingsEvent(
       {
         key: isMac() ? 'Control' : 'ContextMenu',
-        windowId: BASE_WINDOW
+        windowId: BASE_WINDOW,
       },
-      handlePressContextMenu
+      handlePressContextMenu,
     )
 
     return <WrappedComponent {...props} />

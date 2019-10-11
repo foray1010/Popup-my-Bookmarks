@@ -1,10 +1,10 @@
 import * as R from 'ramda'
 import * as React from 'react'
-import {shallowEqual, useSelector} from 'react-redux'
+import { shallowEqual, useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
 import * as CST from '../../constants'
-import {RootState, bookmarkCreators} from '../../reduxs'
+import { RootState, bookmarkCreators } from '../../reduxs'
 import DragAndDropContext from '../dragAndDrop/DragAndDropContext'
 import ListNavigationContext from '../listNavigation/ListNavigationContext'
 import Mask from '../Mask'
@@ -17,19 +17,24 @@ import useRowClickEvents from './useRowClickEvents'
 import useRowDragEvents from './useRowDragEvents'
 import useRowHoverEvents from './useRowHoverEvents'
 
-const getIconSize = (iconSize: number) => Math.max(iconSize, CST.MIN_BOOKMARK_ICON_SIZE)
+const getIconSize = (iconSize: number) =>
+  Math.max(iconSize, CST.MIN_BOOKMARK_ICON_SIZE)
 const getRowHeight = (fontSize: number) =>
   getIconSize(fontSize) +
   // +1 for border width, GOLDEN_GAP for padding
   (1 + CST.GOLDEN_GAP) * 2
 
-const useReduxState = ({treeId}: {treeId: string}) => {
+const useReduxState = ({ treeId }: { treeId: string }) => {
   const reduxSelector = React.useCallback(
     (state: RootState) => {
-      const treeIndex = state.bookmark.trees.findIndex(R.pathEq(['parent', 'id'], treeId))
+      const treeIndex = state.bookmark.trees.findIndex(
+        R.pathEq(['parent', 'id'], treeId),
+      )
       const treeInfo = state.bookmark.trees[treeIndex]
 
-      const isRememberLastPositions = Boolean(state.options[CST.OPTIONS.REMEMBER_POS])
+      const isRememberLastPositions = Boolean(
+        state.options[CST.OPTIONS.REMEMBER_POS],
+      )
       const lastPosition = isRememberLastPositions
         ? (state.lastPositions || []).find(R.propEq('id', treeId))
         : undefined
@@ -46,10 +51,10 @@ const useReduxState = ({treeId}: {treeId: string}) => {
         listItemWidth: state.options[CST.OPTIONS.SET_WIDTH] || 0,
         rowHeight: getRowHeight(state.options[CST.OPTIONS.FONT_SIZE] || 0),
         treeIndex,
-        treeInfo
+        treeInfo,
       }
     },
-    [treeId]
+    [treeId],
   )
 
   return useSelector(reduxSelector, shallowEqual)
@@ -58,16 +63,26 @@ const useReduxState = ({treeId}: {treeId: string}) => {
 interface Props {
   treeId: string
 }
-const BookmarkTreeContainer = ({treeId}: Props) => {
-  const {isRememberLastPositions, isSearching, treeIndex, treeInfo, ...props} = useReduxState({
-    treeId
+const BookmarkTreeContainer = ({ treeId }: Props) => {
+  const {
+    isRememberLastPositions,
+    isSearching,
+    treeIndex,
+    treeInfo,
+    ...props
+  } = useReduxState({
+    treeId,
   })
 
   const removeBookmarkTree = useAction(bookmarkCreators.removeBookmarkTree)
-  const removeNextBookmarkTrees = useAction(bookmarkCreators.removeNextBookmarkTrees)
+  const removeNextBookmarkTrees = useAction(
+    bookmarkCreators.removeNextBookmarkTrees,
+  )
 
-  const {activeKey} = React.useContext(DragAndDropContext)
-  const {lists, setItemCount, removeList} = React.useContext(ListNavigationContext)
+  const { activeKey } = React.useContext(DragAndDropContext)
+  const { lists, setItemCount, removeList } = React.useContext(
+    ListNavigationContext,
+  )
 
   React.useEffect(() => {
     setItemCount(treeIndex, treeInfo.children.length)
@@ -79,7 +94,9 @@ const BookmarkTreeContainer = ({treeId}: Props) => {
 
   const highlightedIndex = lists.highlightedIndices.get(treeIndex)
   const highlightedId =
-    highlightedIndex !== undefined ? R.prop('id', treeInfo.children[highlightedIndex]) : undefined
+    highlightedIndex !== undefined
+      ? R.prop('id', treeInfo.children[highlightedIndex])
+      : undefined
 
   const closeCurrentTree = React.useCallback(() => {
     removeBookmarkTree(treeInfo.parent.id)
@@ -91,22 +108,22 @@ const BookmarkTreeContainer = ({treeId}: Props) => {
     return isSearching ? <NoSearchResult /> : null
   }, [isSearching])
 
-  const {handleScroll} = useRememberLastPositions({
+  const { handleScroll } = useRememberLastPositions({
     isRememberLastPositions,
     treeId,
-    treeIndex
+    treeIndex,
   })
-  const {handleRowAuxClick, handleRowClick} = useRowClickEvents({
-    treeInfo
+  const { handleRowAuxClick, handleRowClick } = useRowClickEvents({
+    treeInfo,
   })
-  const {handleRowDragOver, handleRowDragStart} = useRowDragEvents({
+  const { handleRowDragOver, handleRowDragStart } = useRowDragEvents({
     closeNextTrees,
-    treeInfo
+    treeInfo,
   })
-  const {handleRowMouseEnter, handleRowMouseLeave} = useRowHoverEvents({
+  const { handleRowMouseEnter, handleRowMouseLeave } = useRowHoverEvents({
     closeNextTrees,
     treeIndex,
-    treeInfo
+    treeInfo,
   })
 
   return (
@@ -137,7 +154,9 @@ const BookmarkTreeContainer = ({treeId}: Props) => {
         treeInfo={treeInfo}
       />
 
-      {props.isShowCover && <Mask backgroundColor='#000' opacity={0.16} onClick={closeNextTrees} />}
+      {props.isShowCover && (
+        <Mask backgroundColor='#000' opacity={0.16} onClick={closeNextTrees} />
+      )}
     </section>
   )
 }

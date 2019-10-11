@@ -8,18 +8,23 @@ interface Props {
   optionChoice: boolean
   optionName: string
   optionValue: boolean
-  updatePartialOptions: (options: {[key: string]: boolean}) => void
+  updatePartialOptions: (options: { [key: string]: boolean }) => void
 }
-const Option = ({optionChoice, optionName, optionValue, updatePartialOptions}: Props) => {
+const Option = ({
+  optionChoice,
+  optionName,
+  optionValue,
+  updatePartialOptions,
+}: Props) => {
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   const handleChange = React.useCallback(
     (evt: React.ChangeEvent<HTMLInputElement>) => {
       updatePartialOptions({
-        [optionName]: evt.currentTarget.value === 'true'
+        [optionName]: evt.currentTarget.value === 'true',
       })
     },
-    [optionName, updatePartialOptions]
+    [optionName, updatePartialOptions],
   )
 
   const handleClick = React.useCallback(() => {
@@ -39,7 +44,9 @@ const Option = ({optionChoice, optionName, optionValue, updatePartialOptions}: P
         onChange={handleChange}
       />
       <button
-        className={classNames(classes.item, {[classes['item-active']]: isChecked})}
+        className={classNames(classes.item, {
+          [classes['item-active']]: isChecked,
+        })}
         type='button'
         onClick={handleClick}
       >

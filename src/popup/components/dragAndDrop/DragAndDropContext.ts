@@ -18,11 +18,11 @@ export default React.createContext<DragAndDropContextType>({
   activeKey: null,
   mouseCoordinate: {
     x: 0,
-    y: 0
+    y: 0,
   },
   pendingKey: null,
   setActiveKey: () => {},
   setMouseCoordinate: () => {},
   setPendingKey: () => {},
-  unsetAllKeys: () => {}
+  unsetAllKeys: () => {},
 })

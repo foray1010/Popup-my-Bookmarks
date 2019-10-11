@@ -1,20 +1,30 @@
 import * as R from 'ramda'
-import {TakeableChannel} from 'redux-saga'
-import {actionChannel, call, fork, race, take, takeLatest} from 'redux-saga/effects'
-import {ActionType, getType} from 'typesafe-actions'
+import { TakeableChannel } from 'redux-saga'
+import {
+  actionChannel,
+  call,
+  fork,
+  race,
+  take,
+  takeLatest,
+} from 'redux-saga/effects'
+import { ActionType, getType } from 'typesafe-actions'
 
-import {getLocalStorage, setLocalStorage} from '../../../core/utils'
-import {LocalStorage} from '../../types/localStorage'
+import { getLocalStorage, setLocalStorage } from '../../../core/utils'
+import { LocalStorage } from '../../types/localStorage'
 import * as lastPositionsCreator from './actions'
 
 function* createLastPosition({
-  payload
+  payload,
 }: ActionType<typeof lastPositionsCreator.createLastPosition>) {
   try {
-    const {lastPositions = []}: LocalStorage = yield call(getLocalStorage)
+    const { lastPositions = [] }: LocalStorage = yield call(getLocalStorage)
 
     if (payload.index <= lastPositions.length) {
-      if (lastPositions[payload.index] && lastPositions[payload.index].id === payload.id) {
+      if (
+        lastPositions[payload.index] &&
+        lastPositions[payload.index].id === payload.id
+      ) {
         return
       }
 
@@ -22,12 +32,12 @@ function* createLastPosition({
         ...R.take(payload.index, lastPositions),
         {
           id: payload.id,
-          scrollTop: 0
-        }
+          scrollTop: 0,
+        },
       ]
 
       yield call(setLocalStorage, {
-        lastPositions: updatedLastPositions
+        lastPositions: updatedLastPositions,
       })
     }
   } catch (err) {
@@ -36,16 +46,16 @@ function* createLastPosition({
 }
 
 function* removeLastPosition({
-  payload
+  payload,
 }: ActionType<typeof lastPositionsCreator.removeLastPosition>) {
   try {
-    const {lastPositions = []}: LocalStorage = yield call(getLocalStorage)
+    const { lastPositions = [] }: LocalStorage = yield call(getLocalStorage)
 
     if (payload.index <= lastPositions.length - 1) {
       const updatedLastPositions = R.take(payload.index, lastPositions)
 
       yield call(setLocalStorage, {
-        lastPositions: updatedLastPositions
+        lastPositions: updatedLastPositions,
       })
     }
   } catch (err) {
@@ -57,16 +67,19 @@ function* removeLastPosition({
 function* watchCreateAndRemoveLastPosition() {
   try {
     const createLastPositionChan: TakeableChannel<{}> = yield actionChannel(
-      getType(lastPositionsCreator.createLastPosition)
+      getType(lastPositionsCreator.createLastPosition),
     )
     const removeLastPositionChan: TakeableChannel<{}> = yield actionChannel(
-      getType(lastPositionsCreator.removeLastPosition)
+      getType(lastPositionsCreator.removeLastPosition),
     )
     while (true) {
       const [createLastPositionAction, removeLastPositionAction]: [
         ReturnType<typeof lastPositionsCreator.createLastPosition> | void,
-        ReturnType<typeof lastPositionsCreator.removeLastPosition> | void
-      ] = yield race([take(createLastPositionChan), take(removeLastPositionChan)])
+        ReturnType<typeof lastPositionsCreator.removeLastPosition> | void,
+      ] = yield race([
+        take(createLastPositionChan),
+        take(removeLastPositionChan),
+      ])
 
       if (createLastPositionAction) {
         yield call(createLastPosition, createLastPositionAction)
@@ -82,17 +95,17 @@ function* watchCreateAndRemoveLastPosition() {
 }
 
 function* updateLastPosition({
-  payload
+  payload,
 }: ActionType<typeof lastPositionsCreator.updateLastPosition>) {
   try {
-    const {lastPositions = []}: LocalStorage = yield call(getLocalStorage)
+    const { lastPositions = [] }: LocalStorage = yield call(getLocalStorage)
 
     const index = lastPositions.findIndex(R.propEq('id', payload.id))
     if (index >= 0) {
       const updatedLastPositions = R.update(index, payload, lastPositions)
 
       yield call(setLocalStorage, {
-        lastPositions: updatedLastPositions
+        lastPositions: updatedLastPositions,
       })
     }
   } catch (err) {
@@ -104,7 +117,10 @@ export function* lastPositionsSaga() {
   try {
     yield fork(watchCreateAndRemoveLastPosition)
 
-    yield takeLatest(getType(lastPositionsCreator.updateLastPosition), updateLastPosition)
+    yield takeLatest(
+      getType(lastPositionsCreator.updateLastPosition),
+      updateLastPosition,
+    )
   } catch (err) {
     console.error(err)
   }

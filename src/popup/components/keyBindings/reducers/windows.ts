@@ -1,4 +1,4 @@
-import {ActionType, createAction, createReducer} from 'typesafe-actions'
+import { ActionType, createAction, createReducer } from 'typesafe-actions'
 
 export interface WindowsState {
   activeWindowId?: string
@@ -6,32 +6,46 @@ export interface WindowsState {
 }
 
 export const windowsInitialState: WindowsState = {
-  activeWindowIdQueue: []
+  activeWindowIdQueue: [],
 }
 
 export const windowsCreators = {
-  setActiveWindowId: createAction('SET_ACTIVE_WINDOW_ID', action => (windowId: string) =>
-    action(windowId)
+  setActiveWindowId: createAction(
+    'SET_ACTIVE_WINDOW_ID',
+    action => (windowId: string) => action(windowId),
   ),
-  unsetActiveWindowId: createAction('UNSET_ACTIVE_WINDOW_ID', action => (windowId: string) =>
-    action(windowId)
-  )
+  unsetActiveWindowId: createAction(
+    'UNSET_ACTIVE_WINDOW_ID',
+    action => (windowId: string) => action(windowId),
+  ),
 }
 
-export const windowsReducer = createReducer<WindowsState, ActionType<typeof windowsCreators>>(
-  windowsInitialState
-)
-  .handleAction(windowsCreators.setActiveWindowId, (state, {payload: windowId}) => {
-    const activeWindowIdQueue = [...state.activeWindowIdQueue.filter(x => x !== windowId), windowId]
-    return {
-      activeWindowId: activeWindowIdQueue[activeWindowIdQueue.length - 1],
-      activeWindowIdQueue
-    }
-  })
-  .handleAction(windowsCreators.unsetActiveWindowId, (state, {payload: windowId}) => {
-    const activeWindowIdQueue = state.activeWindowIdQueue.filter(x => x !== windowId)
-    return {
-      activeWindowId: activeWindowIdQueue[activeWindowIdQueue.length - 1],
-      activeWindowIdQueue
-    }
-  })
+export const windowsReducer = createReducer<
+  WindowsState,
+  ActionType<typeof windowsCreators>
+>(windowsInitialState)
+  .handleAction(
+    windowsCreators.setActiveWindowId,
+    (state, { payload: windowId }) => {
+      const activeWindowIdQueue = [
+        ...state.activeWindowIdQueue.filter(x => x !== windowId),
+        windowId,
+      ]
+      return {
+        activeWindowId: activeWindowIdQueue[activeWindowIdQueue.length - 1],
+        activeWindowIdQueue,
+      }
+    },
+  )
+  .handleAction(
+    windowsCreators.unsetActiveWindowId,
+    (state, { payload: windowId }) => {
+      const activeWindowIdQueue = state.activeWindowIdQueue.filter(
+        x => x !== windowId,
+      )
+      return {
+        activeWindowId: activeWindowIdQueue[activeWindowIdQueue.length - 1],
+        activeWindowIdQueue,
+      }
+    },
+  )

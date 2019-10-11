@@ -1,14 +1,14 @@
 import debounce from 'lodash.debounce'
 import * as React from 'react'
-import {ListOnScrollProps} from 'react-window'
+import { ListOnScrollProps } from 'react-window'
 
 import useAction from '../../../core/hooks/useAction'
-import {lastPositionsCreators} from '../../reduxs'
+import { lastPositionsCreators } from '../../reduxs'
 
 export default ({
   isRememberLastPositions,
   treeId,
-  treeIndex
+  treeIndex,
 }: {
   isRememberLastPositions: boolean
   treeId: string
@@ -24,7 +24,13 @@ export default ({
     return () => {
       if (isRememberLastPositions) removeLastPosition(treeIndex)
     }
-  }, [createLastPosition, isRememberLastPositions, removeLastPosition, treeId, treeIndex])
+  }, [
+    createLastPosition,
+    isRememberLastPositions,
+    removeLastPosition,
+    treeId,
+    treeIndex,
+  ])
 
   return {
     handleScroll: React.useMemo(() => {
@@ -34,9 +40,9 @@ export default ({
       return (evt: ListOnScrollProps) => {
         debouncedUpdateLastPosition({
           id: treeId,
-          scrollTop: evt.scrollOffset
+          scrollTop: evt.scrollOffset,
         })
       }
-    }, [isRememberLastPositions, treeId, updateLastPosition])
+    }, [isRememberLastPositions, treeId, updateLastPosition]),
   }
 }

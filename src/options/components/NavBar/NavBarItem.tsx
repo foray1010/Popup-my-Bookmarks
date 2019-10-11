@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import * as React from 'react'
 
-import {NAV_MODULE} from '../../constants'
+import { NAV_MODULE } from '../../constants'
 import classes from './nav-bar-item.css'
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
   switchNavModule: (navModule: NAV_MODULE) => void
   title: string
 }
-const NavBarItem = ({navModule, switchNavModule, ...restProps}: Props) => {
+const NavBarItem = ({ navModule, switchNavModule, ...restProps }: Props) => {
   const handleClick = React.useCallback(() => {
     switchNavModule(navModule)
   }, [navModule, switchNavModule])
@@ -18,7 +18,7 @@ const NavBarItem = ({navModule, switchNavModule, ...restProps}: Props) => {
   return (
     <button
       className={classNames(classes.main, {
-        [classes['main-active']]: restProps.isActive
+        [classes['main-active']]: restProps.isActive,
       })}
       type='button'
       onClick={handleClick}

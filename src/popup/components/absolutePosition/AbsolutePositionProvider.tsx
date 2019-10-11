@@ -1,6 +1,8 @@
 import * as React from 'react'
 
-import AbsolutePositionContext, {AbsolutePositionContextType} from './AbsolutePositionContext'
+import AbsolutePositionContext, {
+  AbsolutePositionContextType,
+} from './AbsolutePositionContext'
 
 interface Props {
   children: React.ReactNode
@@ -13,9 +15,9 @@ const AbsolutePositionProvider = (props: Props) => {
   const contextValue = React.useMemo(
     (): AbsolutePositionContextType => ({
       bodySizeStack,
-      setBodySizeStack
+      setBodySizeStack,
     }),
-    [bodySizeStack, setBodySizeStack]
+    [bodySizeStack, setBodySizeStack],
   )
 
   return (

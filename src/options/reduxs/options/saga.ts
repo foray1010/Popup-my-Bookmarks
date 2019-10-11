@@ -1,10 +1,14 @@
 import * as R from 'ramda'
-import {call, put, select, takeLatest} from 'redux-saga/effects'
-import {getType} from 'typesafe-actions'
+import { call, put, select, takeLatest } from 'redux-saga/effects'
+import { getType } from 'typesafe-actions'
 
-import {Options} from '../../../core/types/options'
-import {clearStorage, getSyncStorage, setSyncStorage} from '../../../core/utils'
-import {initOptions} from '../../utils'
+import { Options } from '../../../core/types/options'
+import {
+  clearStorage,
+  getSyncStorage,
+  setSyncStorage,
+} from '../../../core/utils'
+import { initOptions } from '../../utils'
 import * as optionsCreators from './actions'
 
 function* reloadOptions() {
@@ -31,7 +35,7 @@ function* resetToDefaultOptions() {
 
 function* saveOptions() {
   try {
-    const {options}: {options: Options} = yield select(R.identity)
+    const { options }: { options: Options } = yield select(R.identity)
 
     yield call(setSyncStorage, options)
 
@@ -43,6 +47,9 @@ function* saveOptions() {
 
 export function* optionsSaga() {
   yield takeLatest(getType(optionsCreators.reloadOptions), reloadOptions)
-  yield takeLatest(getType(optionsCreators.resetToDefaultOptions), resetToDefaultOptions)
+  yield takeLatest(
+    getType(optionsCreators.resetToDefaultOptions),
+    resetToDefaultOptions,
+  )
   yield takeLatest(getType(optionsCreators.saveOptions), saveOptions)
 }

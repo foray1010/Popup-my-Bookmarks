@@ -3,13 +3,13 @@ import 'core-js/es'
 import '../manifest.yml'
 
 import * as React from 'react'
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 
 import configureStore from '../core/store/configureStore'
-import {renderToBody} from '../core/utils'
+import { renderToBody } from '../core/utils'
 import App from './components/App'
-import {rootReducer, rootSaga} from './reduxs'
-import {initOptions} from './utils'
+import { rootReducer, rootSaga } from './reduxs'
+import { initOptions } from './utils'
 
 const main = async (): Promise<void> => {
   const options = await initOptions()
@@ -17,7 +17,7 @@ const main = async (): Promise<void> => {
   const store = configureStore({
     rootReducer,
     rootSaga,
-    preloadedState: {options}
+    preloadedState: { options },
   })
 
   renderToBody(
@@ -25,7 +25,7 @@ const main = async (): Promise<void> => {
       <Provider store={store}>
         <App />
       </Provider>
-    </React.StrictMode>
+    </React.StrictMode>,
   )
 }
 

@@ -13,15 +13,27 @@ interface Props {
   rowIndex: number
   rowName: string
 }
-const MenuRow = ({onMouseEnter, onMouseLeave, rowIndex, rowName, ...restProps}: Props) => {
-  const handleMouseEnter = React.useMemo(() => onMouseEnter(rowIndex), [onMouseEnter, rowIndex])
-  const handleMouseLeave = React.useMemo(() => onMouseLeave(rowIndex), [onMouseLeave, rowIndex])
+const MenuRow = ({
+  onMouseEnter,
+  onMouseLeave,
+  rowIndex,
+  rowName,
+  ...restProps
+}: Props) => {
+  const handleMouseEnter = React.useMemo(() => onMouseEnter(rowIndex), [
+    onMouseEnter,
+    rowIndex,
+  ])
+  const handleMouseLeave = React.useMemo(() => onMouseLeave(rowIndex), [
+    onMouseLeave,
+    rowIndex,
+  ])
 
   return (
     <div
       className={classNames(classes.main, {
         [classes.focused]: restProps.isFocused,
-        [classes.unclickable]: restProps.isUnclickable
+        [classes.unclickable]: restProps.isUnclickable,
       })}
       onClick={restProps.isUnclickable ? undefined : restProps.onClick}
       onMouseEnter={handleMouseEnter}

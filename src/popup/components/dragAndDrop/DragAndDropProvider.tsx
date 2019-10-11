@@ -1,19 +1,23 @@
 import * as React from 'react'
 import useEventListener from 'use-typed-event-listener'
 
-import DragAndDropContext, {DragAndDropContextType} from './DragAndDropContext'
+import DragAndDropContext, {
+  DragAndDropContextType,
+} from './DragAndDropContext'
 
 const useDragAndDropContextState = (): DragAndDropContextType => {
-  const [activeKey, setActiveKeyState] = React.useState<DragAndDropContextType['activeKey']>(null)
+  const [activeKey, setActiveKeyState] = React.useState<
+    DragAndDropContextType['activeKey']
+  >(null)
   const [mouseCoordinate, setMouseCoordinate] = React.useState<
     DragAndDropContextType['mouseCoordinate']
   >({
     x: 0,
-    y: 0
+    y: 0,
   })
-  const [pendingKey, setPendingKeyState] = React.useState<DragAndDropContextType['pendingKey']>(
-    null
-  )
+  const [pendingKey, setPendingKeyState] = React.useState<
+    DragAndDropContextType['pendingKey']
+  >(null)
 
   const setActiveKey = React.useCallback((key: string) => {
     setActiveKeyState(key)
@@ -36,9 +40,16 @@ const useDragAndDropContextState = (): DragAndDropContextType => {
       setActiveKey,
       setMouseCoordinate,
       setPendingKey,
-      unsetAllKeys
+      unsetAllKeys,
     }),
-    [activeKey, mouseCoordinate, pendingKey, setActiveKey, setPendingKey, unsetAllKeys]
+    [
+      activeKey,
+      mouseCoordinate,
+      pendingKey,
+      setActiveKey,
+      setPendingKey,
+      unsetAllKeys,
+    ],
   )
 }
 
@@ -47,10 +58,10 @@ interface Props {
   onDragEnd: (evt: MouseEvent) => void
   onDrop: (evt: MouseEvent, activeKey: string) => void
 }
-const DragAndDropProvider = ({children, onDragEnd, onDrop}: Props) => {
+const DragAndDropProvider = ({ children, onDragEnd, onDrop }: Props) => {
   const contextState = useDragAndDropContextState()
 
-  const {activeKey, unsetAllKeys} = contextState
+  const { activeKey, unsetAllKeys } = contextState
   const isDragging = activeKey !== null
 
   const handleDrop = (evt: MouseEvent) => {
@@ -65,7 +76,11 @@ const DragAndDropProvider = ({children, onDragEnd, onDrop}: Props) => {
   useEventListener(document.body, 'mouseenter', handleDrop)
   useEventListener(window, 'mouseup', handleDrop)
 
-  return <DragAndDropContext.Provider value={contextState}>{children}</DragAndDropContext.Provider>
+  return (
+    <DragAndDropContext.Provider value={contextState}>
+      {children}
+    </DragAndDropContext.Provider>
+  )
 }
 
 export default DragAndDropProvider

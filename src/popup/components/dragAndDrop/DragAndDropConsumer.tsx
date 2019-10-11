@@ -10,7 +10,7 @@ export interface ResponseEvent {
 const useDragEvents = ({
   itemKey,
   onDragOver,
-  onDragStart
+  onDragStart,
 }: {
   itemKey: string
   onDragOver: (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
@@ -23,7 +23,7 @@ const useDragEvents = ({
     setActiveKey,
     setMouseCoordinate,
     setPendingKey,
-    unsetAllKeys
+    unsetAllKeys,
   } = React.useContext(DragAndDropContext)
 
   return {
@@ -31,10 +31,10 @@ const useDragEvents = ({
       (evt: React.MouseEvent) => {
         onDragOver(evt, {
           activeKey,
-          itemKey
+          itemKey,
         })
       },
-      [activeKey, itemKey, onDragOver]
+      [activeKey, itemKey, onDragOver],
     ),
     handleDragStart: React.useCallback(
       (evt: React.MouseEvent) => {
@@ -50,10 +50,17 @@ const useDragEvents = ({
 
         onDragStart(evt, {
           activeKey: pendingKey,
-          itemKey
+          itemKey,
         })
       },
-      [itemKey, mouseCoordinate.x, mouseCoordinate.y, onDragStart, pendingKey, setActiveKey]
+      [
+        itemKey,
+        mouseCoordinate.x,
+        mouseCoordinate.y,
+        onDragStart,
+        pendingKey,
+        setActiveKey,
+      ],
     ),
     handleMouseDown: React.useCallback(
       (evt: React.MouseEvent) => {
@@ -63,19 +70,21 @@ const useDragEvents = ({
 
         setMouseCoordinate({
           x: evt.clientX,
-          y: evt.clientY
+          y: evt.clientY,
         })
       },
-      [itemKey, setMouseCoordinate, setPendingKey]
+      [itemKey, setMouseCoordinate, setPendingKey],
     ),
     handleMouseUp: React.useCallback(() => {
       unsetAllKeys()
-    }, [unsetAllKeys])
+    }, [unsetAllKeys]),
   }
 }
 
 const useMouseEvents = () => {
-  const [shouldDisableNextClick, setShouldDisableNextClick] = React.useState(false)
+  const [shouldDisableNextClick, setShouldDisableNextClick] = React.useState(
+    false,
+  )
 
   return {
     handleClickCapture: React.useCallback(
@@ -85,11 +94,11 @@ const useMouseEvents = () => {
           setShouldDisableNextClick(false)
         }
       },
-      [shouldDisableNextClick]
+      [shouldDisableNextClick],
     ),
     handleMouseUpCapture: React.useCallback(() => {
       setShouldDisableNextClick(true)
-    }, [])
+    }, []),
   }
 }
 
@@ -106,12 +115,17 @@ interface Props {
 const DragAndDropConsumer = (props: Props) => {
   const context = React.useContext(DragAndDropContext)
 
-  const {handleClickCapture, handleMouseUpCapture} = useMouseEvents()
+  const { handleClickCapture, handleMouseUpCapture } = useMouseEvents()
 
-  const {handleDragStart, handleDragOver, handleMouseDown, handleMouseUp} = useDragEvents({
+  const {
+    handleDragStart,
+    handleDragOver,
+    handleMouseDown,
+    handleMouseUp,
+  } = useDragEvents({
     itemKey: props.itemKey,
     onDragOver: props.onDragOver,
-    onDragStart: props.onDragStart
+    onDragStart: props.onDragStart,
   })
 
   const isDragging = context.activeKey !== null
@@ -126,12 +140,12 @@ const DragAndDropConsumer = (props: Props) => {
         ? {
             onMouseDown: isDragging ? undefined : handleMouseDown,
             onMouseUp: isPending ? handleMouseUp : undefined,
-            onMouseMove: isPending ? handleDragStart : undefined
+            onMouseMove: isPending ? handleDragStart : undefined,
           }
         : {})}
       {...(props.disableDrop !== true
         ? {
-            onMouseOver: isDragging ? handleDragOver : undefined
+            onMouseOver: isDragging ? handleDragOver : undefined,
           }
         : {})}
     >

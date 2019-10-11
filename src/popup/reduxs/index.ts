@@ -4,8 +4,14 @@ import * as lastPositionsCreators from './lastPositions/actions'
 import * as menuCreators from './menu/actions'
 import * as uiCreators from './ui/actions'
 
-export {bookmarkCreators, editorCreators, lastPositionsCreators, menuCreators, uiCreators}
+export {
+  bookmarkCreators,
+  editorCreators,
+  lastPositionsCreators,
+  menuCreators,
+  uiCreators,
+}
 
-export {RootState} from './rootReducer'
-export {rootReducer} from './rootReducer'
-export {rootSaga} from './rootSaga'
+export { RootState } from './rootReducer'
+export { rootReducer } from './rootReducer'
+export { rootSaga } from './rootSaga'

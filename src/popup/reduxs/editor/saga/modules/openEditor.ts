@@ -1,13 +1,18 @@
-import {call, put} from 'redux-saga/effects'
-import {ActionType} from 'typesafe-actions'
+import { call, put } from 'redux-saga/effects'
+import { ActionType } from 'typesafe-actions'
 
-import {BookmarkInfo} from '../../../../types'
-import {getBookmarkInfo} from '../../../bookmark/saga/utils/getters'
+import { BookmarkInfo } from '../../../../types'
+import { getBookmarkInfo } from '../../../bookmark/saga/utils/getters'
 import * as editorCreators from '../../actions'
 
-export function* openEditor({payload}: ActionType<typeof editorCreators.openEditor>) {
+export function* openEditor({
+  payload,
+}: ActionType<typeof editorCreators.openEditor>) {
   try {
-    const bookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, payload.targetId)
+    const bookmarkInfo: BookmarkInfo = yield call(
+      getBookmarkInfo,
+      payload.targetId,
+    )
 
     yield put(
       editorCreators.setEditor({
@@ -15,8 +20,8 @@ export function* openEditor({payload}: ActionType<typeof editorCreators.openEdit
         isAllowEditUrl: Boolean(bookmarkInfo.url),
         targetId: payload.targetId,
         title: bookmarkInfo.title,
-        url: bookmarkInfo.url
-      })
+        url: bookmarkInfo.url,
+      }),
     )
   } catch (err) {
     console.error(err)

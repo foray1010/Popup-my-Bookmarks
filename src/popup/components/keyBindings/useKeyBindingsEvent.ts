@@ -1,12 +1,14 @@
 import * as React from 'react'
 
-import KeyBindingsContext, {KeyBindingMeta} from './KeyBindingsContext'
+import KeyBindingsContext, { KeyBindingMeta } from './KeyBindingsContext'
 
 const useKeyBindingsEvent = (
-  {key, priority, windowId}: KeyBindingMeta,
-  callback?: (evt: KeyboardEvent) => void
+  { key, priority, windowId }: KeyBindingMeta,
+  callback?: (evt: KeyboardEvent) => void,
 ) => {
-  const {addEventListener, removeEventListener} = React.useContext(KeyBindingsContext)
+  const { addEventListener, removeEventListener } = React.useContext(
+    KeyBindingsContext,
+  )
 
   const callbackRef = React.useRef(callback)
   callbackRef.current = callback
@@ -17,7 +19,7 @@ const useKeyBindingsEvent = (
   keyRef.current = key
 
   React.useEffect(() => {
-    const meta = {key: keyRef.current, priority, windowId}
+    const meta = { key: keyRef.current, priority, windowId }
 
     const wrappedCallback = (evt: KeyboardEvent) => {
       if (callbackRef.current) {

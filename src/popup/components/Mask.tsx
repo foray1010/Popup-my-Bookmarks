@@ -11,9 +11,9 @@ const Mask = (props: Props) => {
   const styles = React.useMemo(
     (): object => ({
       '--backgroundColor': props.backgroundColor,
-      '--opacity': props.opacity
+      '--opacity': props.opacity,
     }),
-    [props.backgroundColor, props.opacity]
+    [props.backgroundColor, props.opacity],
   )
 
   return <div className={classes.main} style={styles} onClick={props.onClick} />

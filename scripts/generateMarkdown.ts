@@ -7,7 +7,7 @@ const getMarkdownData = async (titleList: Array<string>) => {
   const dataList = await Promise.all(
     titleList.map(title => {
       return fs.readFile(path.join('markdown', `${title}.md`), 'utf-8')
-    })
+    }),
   )
 
   return dataList.join('\n')
@@ -23,7 +23,7 @@ const generateReadme = async () => {
     'legacy_version',
     'developer_guide',
     'todo',
-    'contributing'
+    'contributing',
   ])
 
   // enlarge first header

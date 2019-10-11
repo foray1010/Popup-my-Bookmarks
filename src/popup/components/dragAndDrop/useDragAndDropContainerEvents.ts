@@ -2,8 +2,10 @@ import * as React from 'react'
 
 import DragAndDropContext from './DragAndDropContext'
 
-const useDragAndDropContainerEvents = ({margin = 20}: {margin?: number} = {}) => {
-  const {activeKey} = React.useContext(DragAndDropContext)
+const useDragAndDropContainerEvents = ({
+  margin = 20,
+}: { margin?: number } = {}) => {
+  const { activeKey } = React.useContext(DragAndDropContext)
   const isDragging = activeKey !== null
 
   const scrollingTimeoutRef = React.useRef<NodeJS.Timeout>()
@@ -22,12 +24,15 @@ const useDragAndDropContainerEvents = ({margin = 20}: {margin?: number} = {}) =>
   }, [clearScroll, isDragging])
 
   return React.useMemo(() => {
-    const scroll = (containerElement: HTMLElement, {isUpward}: {isUpward: boolean}) => {
+    const scroll = (
+      containerElement: HTMLElement,
+      { isUpward }: { isUpward: boolean },
+    ) => {
       clearScroll()
 
       scrollingTimeoutRef.current = setInterval(() => {
         containerElement.scrollTo({
-          top: containerElement.scrollTop + (isUpward ? -1 : 1) * 20
+          top: containerElement.scrollTop + (isUpward ? -1 : 1) * 20,
         })
       }, 50)
     }
@@ -43,11 +48,11 @@ const useDragAndDropContainerEvents = ({margin = 20}: {margin?: number} = {}) =>
 
         if (displacementTop <= margin) {
           scroll(evt.currentTarget, {
-            isUpward: true
+            isUpward: true,
           })
         } else if (displacementBottom <= margin) {
           scroll(evt.currentTarget, {
-            isUpward: false
+            isUpward: false,
           })
         } else {
           clearScroll()
@@ -56,7 +61,7 @@ const useDragAndDropContainerEvents = ({margin = 20}: {margin?: number} = {}) =>
     }
 
     return {
-      onMouseMove
+      onMouseMove,
     }
   }, [clearScroll, isDragging, margin])
 }

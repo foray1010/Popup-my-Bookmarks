@@ -48,6 +48,7 @@
     "@commitlint/cli": "8.2.0",
     "@commitlint/config-conventional": "8.2.0",
     "@foray1010/eslint-config": "1.2.3",
+    "@foray1010/prettierrc": "1.0.1",
     "@foray1010/stylelint-config": "1.1.1",
     "@redux-saga/testing-utils": "1.1.1",
     "@types/babel__core": "7.1.3",

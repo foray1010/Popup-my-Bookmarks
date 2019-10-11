@@ -1,11 +1,11 @@
 import * as R from 'ramda'
 import * as React from 'react'
-import {VariableSizeList as List, ListOnScrollProps} from 'react-window'
+import { VariableSizeList as List, ListOnScrollProps } from 'react-window'
 import useEventListener from 'use-typed-event-listener'
 
 import * as CST from '../../constants'
-import {BookmarkInfo, BookmarkTree as BookmarkTreeType} from '../../types'
-import {ResponseEvent} from '../dragAndDrop/DragAndDropConsumer'
+import { BookmarkInfo, BookmarkTree as BookmarkTreeType } from '../../types'
+import { ResponseEvent } from '../dragAndDrop/DragAndDropConsumer'
 import useDragContainerEvents from '../dragAndDrop/useDragAndDropContainerEvents'
 import classes from './bookmark-tree.css'
 import BookmarkRow from './BookmarkRow'
@@ -20,7 +20,7 @@ interface ItemData {
   onRowAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   onRowClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   onRowDragOver: (
-    bookmarkInfo: BookmarkInfo
+    bookmarkInfo: BookmarkInfo,
   ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
   onRowDragStart: React.MouseEventHandler
   onRowMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
@@ -28,9 +28,18 @@ interface ItemData {
   treeInfo: BookmarkTreeType
 }
 
-const getItemKey = (index: number, data: ItemData) => data.treeInfo.children[index].id
+const getItemKey = (index: number, data: ItemData) =>
+  data.treeInfo.children[index].id
 
-const Row = ({data, index, style}: {data: ItemData; index: number; style: React.CSSProperties}) => {
+const Row = ({
+  data,
+  index,
+  style,
+}: {
+  data: ItemData
+  index: number
+  style: React.CSSProperties
+}) => {
   const bookmarkInfo = data.treeInfo.children[index]
   const isDragging = data.draggingId !== null
   const isBeingDragged = data.draggingId === bookmarkInfo.id
@@ -40,7 +49,9 @@ const Row = ({data, index, style}: {data: ItemData; index: number; style: React.
       className={classes['list-item']}
       iconSize={data.iconSize}
       isDisableDragAndDrop={data.isDisableDragAndDrop}
-      isHighlighted={isDragging ? isBeingDragged : data.highlightedId === bookmarkInfo.id}
+      isHighlighted={
+        isDragging ? isBeingDragged : data.highlightedId === bookmarkInfo.id
+      }
       isSearching={data.isSearching}
       isShowTooltip={data.isShowTooltip}
       isUnclickable={isBeingDragged}
@@ -84,7 +95,7 @@ const BookmarkTree = (props: Props) => {
 
       return rowHeight
     },
-    [props.rowHeight, props.treeInfo.children]
+    [props.rowHeight, props.treeInfo.children],
   )
 
   React.useEffect(() => {
@@ -102,7 +113,7 @@ const BookmarkTree = (props: Props) => {
 
     const totalRowHeight = props.treeInfo.children.reduce(
       (acc, x, index) => acc + getRowHeight(index),
-      0
+      0,
     )
 
     setListHeight(R.clamp(minListHeight, maxListHeight, totalRowHeight))
@@ -137,7 +148,7 @@ const BookmarkTree = (props: Props) => {
       onRowDragStart: props.onRowDragStart,
       onRowMouseEnter: props.onRowMouseEnter,
       onRowMouseLeave: props.onRowMouseLeave,
-      treeInfo: props.treeInfo
+      treeInfo: props.treeInfo,
     }
   }, [
     props.draggingId,
@@ -152,11 +163,11 @@ const BookmarkTree = (props: Props) => {
     props.onRowDragStart,
     props.onRowMouseEnter,
     props.onRowMouseLeave,
-    props.treeInfo
+    props.treeInfo,
   ])
 
   const outerRef = React.useRef<HTMLDivElement>()
-  const {onMouseMove} = useDragContainerEvents()
+  const { onMouseMove } = useDragContainerEvents()
   useEventListener(outerRef.current, 'mousemove', onMouseMove)
 
   const itemCount = props.treeInfo.children.length

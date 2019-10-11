@@ -1,15 +1,16 @@
 import * as React from 'react'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
-import {BASE_WINDOW} from '../../constants/windows'
-import {RootState} from '../../reduxs'
+import { BASE_WINDOW } from '../../constants/windows'
+import { RootState } from '../../reduxs'
 import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
 import BookmarkTrees from './BookmarkTrees'
 import useBookmarkEvents from './useBookmarkEvents'
 import withDragAndDropEvents from './withDragAndDropEvents'
 import withKeyboardNav from './withKeyboardNav'
 
-const getTreeIds = (state: RootState) => state.bookmark.trees.map(tree => tree.parent.id)
+const getTreeIds = (state: RootState) =>
+  state.bookmark.trees.map(tree => tree.parent.id)
 
 interface Props {
   mainTreeHeader: React.ReactNode
@@ -22,7 +23,11 @@ const BookmarkTreesContainer = (props: Props) => {
 
   return (
     <KeyBindingsWindow windowId={BASE_WINDOW}>
-      <BookmarkTrees mainTreeHeader={props.mainTreeHeader} options={options} treeIds={treeIds} />
+      <BookmarkTrees
+        mainTreeHeader={props.mainTreeHeader}
+        options={options}
+        treeIds={treeIds}
+      />
     </KeyBindingsWindow>
   )
 }

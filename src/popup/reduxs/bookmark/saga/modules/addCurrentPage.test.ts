@@ -1,13 +1,13 @@
 /* eslint redux-saga/no-unhandled-errors: 'off' */
 
 import Chance from 'chance'
-import {call, put} from 'redux-saga/effects'
-import {getType} from 'typesafe-actions'
+import { call, put } from 'redux-saga/effects'
+import { getType } from 'typesafe-actions'
 import webExtension from 'webextension-polyfill'
 
-import {queryTabs} from '../../../../../core/utils'
+import { queryTabs } from '../../../../../core/utils'
 import * as bookmarkCreators from '../../actions'
-import {addCurrentPage} from './addCurrentPage'
+import { addCurrentPage } from './addCurrentPage'
 
 const chance = Chance('addCurrentPage')
 
@@ -19,7 +19,7 @@ const currentTabs: Array<webExtension.tabs.Tab> = [
     highlighted: false,
     active: false,
     pinned: false,
-    incognito: false
+    incognito: false,
   },
   {
     title: chance.word(),
@@ -28,8 +28,8 @@ const currentTabs: Array<webExtension.tabs.Tab> = [
     highlighted: false,
     active: false,
     pinned: false,
-    incognito: false
-  }
+    incognito: false,
+  },
 ]
 
 describe('addCurrentPage', () => {
@@ -39,18 +39,25 @@ describe('addCurrentPage', () => {
 
     const generator = addCurrentPage({
       type: getType(bookmarkCreators.addCurrentPage),
-      payload: {parentId, index}
+      payload: { parentId, index },
     })
 
     expect(generator.next().value).toEqual(
       call(queryTabs, {
         currentWindow: true,
-        active: true
-      })
+        active: true,
+      }),
     )
 
     expect(generator.next(currentTabs).value).toEqual(
-      put(bookmarkCreators.createBookmark(parentId, index, '  title  ', '  https://google.com/  '))
+      put(
+        bookmarkCreators.createBookmark(
+          parentId,
+          index,
+          '  title  ',
+          '  https://google.com/  ',
+        ),
+      ),
     )
 
     expect(generator.next().done).toBe(true)

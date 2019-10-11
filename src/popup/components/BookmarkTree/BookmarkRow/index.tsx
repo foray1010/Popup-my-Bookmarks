@@ -3,9 +3,11 @@ import * as React from 'react'
 
 import useAction from '../../../../core/hooks/useAction'
 import * as CST from '../../../constants'
-import {uiCreators} from '../../../reduxs'
-import {BookmarkInfo} from '../../../types'
-import DragAndDropConsumer, {ResponseEvent} from '../../dragAndDrop/DragAndDropConsumer'
+import { uiCreators } from '../../../reduxs'
+import { BookmarkInfo } from '../../../types'
+import DragAndDropConsumer, {
+  ResponseEvent,
+} from '../../dragAndDrop/DragAndDropConsumer'
 import classes from './bookmark-row.css'
 import BookmarkRow from './BookmarkRow'
 import useTooltip from './useTooltip'
@@ -22,7 +24,7 @@ interface Props {
   onAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   onClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   onDragOver: (
-    bookmarkInfo: BookmarkInfo
+    bookmarkInfo: BookmarkInfo,
   ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
   onDragStart: React.MouseEventHandler
   onMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
@@ -39,7 +41,9 @@ const BookmarkRowContainer = ({
   onMouseLeave,
   ...restProps
 }: Props) => {
-  const setHighlightedItemCoordinates = useAction(uiCreators.setHighlightedItemCoordinates)
+  const setHighlightedItemCoordinates = useAction(
+    uiCreators.setHighlightedItemCoordinates,
+  )
 
   const bookmarkRowRef = React.useRef<HTMLDivElement>(null)
   React.useEffect(() => {
@@ -47,7 +51,7 @@ const BookmarkRowContainer = ({
       const offset = bookmarkRowRef.current.getBoundingClientRect()
       setHighlightedItemCoordinates({
         positionLeft: offset.left,
-        positionTop: offset.top
+        positionTop: offset.top,
       })
     }
   }, [isHighlighted, setHighlightedItemCoordinates])
@@ -55,19 +59,28 @@ const BookmarkRowContainer = ({
   const tooltip = useTooltip({
     isSearching: restProps.isSearching,
     isShowTooltip: restProps.isShowTooltip,
-    bookmarkInfo
+    bookmarkInfo,
   })
 
-  const handleAuxClick = React.useMemo(() => onAuxClick(bookmarkInfo), [bookmarkInfo, onAuxClick])
-  const handleClick = React.useMemo(() => onClick(bookmarkInfo), [bookmarkInfo, onClick])
-  const handleDragOver = React.useMemo(() => onDragOver(bookmarkInfo), [bookmarkInfo, onDragOver])
+  const handleAuxClick = React.useMemo(() => onAuxClick(bookmarkInfo), [
+    bookmarkInfo,
+    onAuxClick,
+  ])
+  const handleClick = React.useMemo(() => onClick(bookmarkInfo), [
+    bookmarkInfo,
+    onClick,
+  ])
+  const handleDragOver = React.useMemo(() => onDragOver(bookmarkInfo), [
+    bookmarkInfo,
+    onDragOver,
+  ])
   const handleMouseEnter = React.useMemo(() => onMouseEnter(bookmarkInfo), [
     bookmarkInfo,
-    onMouseEnter
+    onMouseEnter,
   ])
   const handleMouseLeave = React.useMemo(() => onMouseLeave(bookmarkInfo), [
     bookmarkInfo,
-    onMouseLeave
+    onMouseLeave,
   ])
 
   return (
@@ -88,8 +101,10 @@ const BookmarkRowContainer = ({
         ref={bookmarkRowRef}
         className={classNames(classes['full-height'], {
           [classes['root-folder']]: bookmarkInfo.isRoot,
-          [classes['drag-indicator']]: bookmarkInfo.type === CST.BOOKMARK_TYPES.DRAG_INDICATOR,
-          [classes.separator]: bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR
+          [classes['drag-indicator']]:
+            bookmarkInfo.type === CST.BOOKMARK_TYPES.DRAG_INDICATOR,
+          [classes.separator]:
+            bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR,
         })}
         iconSize={restProps.iconSize}
         iconUrl={bookmarkInfo.iconUrl}

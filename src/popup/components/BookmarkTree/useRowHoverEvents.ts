@@ -1,18 +1,18 @@
 import debounce from 'lodash.debounce'
 import * as React from 'react'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
-import {BOOKMARK_TYPES, OPTIONS} from '../../constants'
-import {RootState, bookmarkCreators} from '../../reduxs'
-import {BookmarkInfo, BookmarkTree} from '../../types'
+import { BOOKMARK_TYPES, OPTIONS } from '../../constants'
+import { RootState, bookmarkCreators } from '../../reduxs'
+import { BookmarkInfo, BookmarkTree } from '../../types'
 import DragAndDropContext from '../dragAndDrop/DragAndDropContext'
 import ListNavigationContext from '../listNavigation/ListNavigationContext'
 
 export default ({
   closeNextTrees,
   treeIndex,
-  treeInfo
+  treeInfo,
 }: {
   closeNextTrees: () => void
   treeIndex: number
@@ -22,12 +22,17 @@ export default ({
 
   const openBookmarkTree = useAction(bookmarkCreators.openBookmarkTree)
 
-  const {activeKey} = React.useContext(DragAndDropContext)
-  const {setHighlightedIndex, unsetHighlightedIndex} = React.useContext(ListNavigationContext)
+  const { activeKey } = React.useContext(DragAndDropContext)
+  const { setHighlightedIndex, unsetHighlightedIndex } = React.useContext(
+    ListNavigationContext,
+  )
 
   return React.useMemo(() => {
     const toggleBookmarkTree = debounce((bookmarkInfo: BookmarkInfo) => {
-      if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER && bookmarkInfo.id !== activeKey) {
+      if (
+        bookmarkInfo.type === BOOKMARK_TYPES.FOLDER &&
+        bookmarkInfo.id !== activeKey
+      ) {
         openBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
       } else {
         closeNextTrees()
@@ -46,7 +51,7 @@ export default ({
 
         const index = treeInfo.children.findIndex(x => x.id === bookmarkInfo.id)
         unsetHighlightedIndex(treeIndex, index)
-      }
+      },
     }
   }, [
     activeKey,
@@ -57,6 +62,6 @@ export default ({
     treeIndex,
     treeInfo.children,
     treeInfo.parent.id,
-    unsetHighlightedIndex
+    unsetHighlightedIndex,
   ])
 }

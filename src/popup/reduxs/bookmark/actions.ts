@@ -1,19 +1,22 @@
-import {createAction} from 'typesafe-actions'
+import { createAction } from 'typesafe-actions'
 
 import * as CST from '../../constants'
-import {BookmarkTree} from '../../types'
+import { BookmarkTree } from '../../types'
 
 export const addCurrentPage = createAction(
   'ADD_CURRENT_PAGE',
-  action => (parentId: string, index: number) => action({parentId, index})
+  action => (parentId: string, index: number) => action({ parentId, index }),
 )
 
 export const addSeparator = createAction(
   'ADD_SEPARATOR',
-  action => (parentId: string, index: number) => action({parentId, index})
+  action => (parentId: string, index: number) => action({ parentId, index }),
 )
 
-export const copyBookmark = createAction('COPY_BOOKMARK', action => (id: string) => action({id}))
+export const copyBookmark = createAction(
+  'COPY_BOOKMARK',
+  action => (id: string) => action({ id }),
+)
 
 export const createBookmark = createAction(
   'CREATE_BOOKMARK',
@@ -22,8 +25,8 @@ export const createBookmark = createAction(
       parentId,
       index,
       title,
-      url
-    })
+      url,
+    }),
 )
 
 export const createBookmarkAfterId = createAction(
@@ -32,14 +35,18 @@ export const createBookmarkAfterId = createAction(
     action({
       id,
       title,
-      url
-    })
+      url,
+    }),
 )
 
-export const cutBookmark = createAction('CUT_BOOKMARK', action => (id: string) => action({id}))
+export const cutBookmark = createAction(
+  'CUT_BOOKMARK',
+  action => (id: string) => action({ id }),
+)
 
-export const deleteBookmark = createAction('DELETE_BOOKMARK', action => (id: string) =>
-  action({id})
+export const deleteBookmark = createAction(
+  'DELETE_BOOKMARK',
+  action => (id: string) => action({ id }),
 )
 
 export const editBookmark = createAction(
@@ -48,16 +55,16 @@ export const editBookmark = createAction(
     action({
       id,
       title,
-      url
-    })
+      url,
+    }),
 )
 
 export const getSearchResult = createAction(
   'GET_SEARCH_RESULT',
   action => (searchKeyword: string) =>
     action({
-      searchKeyword
-    })
+      searchKeyword,
+    }),
 )
 
 export const initBookmarkTrees = createAction('INIT_BOOKMARK_TREES')
@@ -66,8 +73,8 @@ export const moveBookmarkToDragIndicator = createAction(
   'MOVE_BOOKMARK_TO_DRAG_INDICATOR',
   action => (bookmarkId: string) =>
     action({
-      bookmarkId
-    })
+      bookmarkId,
+    }),
 )
 
 export const openBookmarksInBrowser = createAction(
@@ -78,17 +85,17 @@ export const openBookmarksInBrowser = createAction(
       openIn: CST.OPEN_IN_TYPES
       isAllowBookmarklet: boolean
       isCloseThisExtension: boolean
-    }
+    },
   ) =>
     action({
       ids,
-      openBookmarkProps
-    })
+      openBookmarkProps,
+    }),
 )
 
 export const openBookmarkTree = createAction(
   'OPEN_BOOKMARK_TREE',
-  action => (id: string, parentId: string) => action({id, parentId})
+  action => (id: string, parentId: string) => action({ id, parentId }),
 )
 
 export const openFolderInBrowser = createAction(
@@ -99,52 +106,54 @@ export const openFolderInBrowser = createAction(
       openIn: CST.OPEN_IN_TYPES
       isAllowBookmarklet: boolean
       isCloseThisExtension: boolean
-    }
+    },
   ) =>
     action({
       id,
-      openBookmarkProps
-    })
+      openBookmarkProps,
+    }),
 )
 
 export const pasteBookmark = createAction(
   'PASTE_BOOKMARK',
-  action => (parentId: string, index: number) => action({parentId, index})
+  action => (parentId: string, index: number) => action({ parentId, index }),
 )
 
 export const refreshBookmarkTrees = createAction('REFRESH_BOOKMARK_TREES')
 
-export const removeBookmarkTree = createAction('REMOVE_BOOKMARK_TREE', action => (id: string) =>
-  action({
-    id
-  })
+export const removeBookmarkTree = createAction(
+  'REMOVE_BOOKMARK_TREE',
+  action => (id: string) =>
+    action({
+      id,
+    }),
 )
 
 export const removeDragIndicator = createAction('REMOVE_DRAG_INDICATOR')
 
 export const removeNextBookmarkTrees = createAction(
   'REMOVE_NEXT_BOOKMARK_TREES',
-  action => (removeAfterId: string) => action({removeAfterId})
+  action => (removeAfterId: string) => action({ removeAfterId }),
 )
 
 export const resetClipboard = createAction('RESET_CLIPBOARD')
 
 export const setBookmarkTrees = createAction(
   'SET_BOOKMARK_TREES',
-  action => (bookmarkTrees: Array<BookmarkTree>) => action({bookmarkTrees})
+  action => (bookmarkTrees: Array<BookmarkTree>) => action({ bookmarkTrees }),
 )
 
 export const setDragIndicator = createAction(
   'SET_DRAG_INDICATOR',
-  action => (parentId: string, index: number) => action({parentId, index})
+  action => (parentId: string, index: number) => action({ parentId, index }),
 )
 
 export const sortBookmarksByName = createAction(
   'SORT_BOOKMARKS_BY_NAME',
-  action => (parentId: string) => action({parentId})
+  action => (parentId: string) => action({ parentId }),
 )
 
 export const toggleBookmarkTree = createAction(
   'TOGGLE_BOOKMARK_TREE',
-  action => (id: string, parentId: string) => action({id, parentId})
+  action => (id: string, parentId: string) => action({ id, parentId }),
 )

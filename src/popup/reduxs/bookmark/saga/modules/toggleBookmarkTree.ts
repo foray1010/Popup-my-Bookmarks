@@ -1,17 +1,19 @@
 import * as R from 'ramda'
-import {put, select} from 'redux-saga/effects'
-import {ActionType} from 'typesafe-actions'
+import { put, select } from 'redux-saga/effects'
+import { ActionType } from 'typesafe-actions'
 
-import {RootState} from '../../../rootReducer'
+import { RootState } from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 
 export function* toggleBookmarkTree({
-  payload
+  payload,
 }: ActionType<typeof bookmarkCreators.toggleBookmarkTree>) {
   try {
-    const {bookmark}: RootState = yield select(R.identity)
+    const { bookmark }: RootState = yield select(R.identity)
 
-    const isFolderOpened = bookmark.trees.some(treeInfo => treeInfo.parent.id === payload.id)
+    const isFolderOpened = bookmark.trees.some(
+      treeInfo => treeInfo.parent.id === payload.id,
+    )
 
     if (isFolderOpened) {
       yield put(bookmarkCreators.removeNextBookmarkTrees(payload.parentId))

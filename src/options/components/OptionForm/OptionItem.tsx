@@ -1,7 +1,7 @@
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import {OptionConfig, Options} from '../../../core/types/options'
+import { OptionConfig, Options } from '../../../core/types/options'
 import InputNumber from '../input_items/InputNumber'
 import InputSelect from '../input_items/InputSelect'
 import SelectButton from '../input_items/SelectButton'
@@ -16,14 +16,16 @@ interface Props {
   updatePartialOptions: (options: Partial<Options>) => void
 }
 
-const InputItem = ({optionConfig, optionValue, ...restProps}: Props) => {
+const InputItem = ({ optionConfig, optionValue, ...restProps }: Props) => {
   switch (optionConfig.type) {
     case 'array':
       return (
         <SelectMultiple
           {...optionConfig}
           {...restProps}
-          optionValue={Array.isArray(optionValue) ? optionValue : optionConfig.default}
+          optionValue={
+            Array.isArray(optionValue) ? optionValue : optionConfig.default
+          }
         />
       )
 
@@ -32,7 +34,11 @@ const InputItem = ({optionConfig, optionValue, ...restProps}: Props) => {
         <SelectButton
           {...optionConfig}
           {...restProps}
-          optionValue={typeof optionValue === 'boolean' ? optionValue : optionConfig.default}
+          optionValue={
+            typeof optionValue === 'boolean'
+              ? optionValue
+              : optionConfig.default
+          }
         />
       )
 
@@ -41,7 +47,9 @@ const InputItem = ({optionConfig, optionValue, ...restProps}: Props) => {
         <InputNumber
           {...optionConfig}
           {...restProps}
-          optionValue={typeof optionValue === 'number' ? optionValue : optionConfig.default}
+          optionValue={
+            typeof optionValue === 'number' ? optionValue : optionConfig.default
+          }
         />
       )
 
@@ -50,7 +58,9 @@ const InputItem = ({optionConfig, optionValue, ...restProps}: Props) => {
         <SelectString
           {...optionConfig}
           {...restProps}
-          optionValue={typeof optionValue === 'number' ? optionValue : optionConfig.default}
+          optionValue={
+            typeof optionValue === 'number' ? optionValue : optionConfig.default
+          }
         />
       )
 
@@ -59,7 +69,9 @@ const InputItem = ({optionConfig, optionValue, ...restProps}: Props) => {
         <InputSelect
           {...optionConfig}
           {...restProps}
-          optionValue={typeof optionValue === 'string' ? optionValue : optionConfig.default}
+          optionValue={
+            typeof optionValue === 'string' ? optionValue : optionConfig.default
+          }
         />
       )
 
@@ -71,7 +83,9 @@ const InputItem = ({optionConfig, optionValue, ...restProps}: Props) => {
 
 const OptionItem = (props: Props) => (
   <tr>
-    <td className={classes.desc}>{webExtension.i18n.getMessage(props.optionName)}</td>
+    <td className={classes.desc}>
+      {webExtension.i18n.getMessage(props.optionName)}
+    </td>
     <td className={classes.input}>
       <InputItem {...props} />
     </td>

@@ -1,7 +1,7 @@
-import {all, fork} from 'redux-saga/effects'
+import { all, fork } from 'redux-saga/effects'
 
-import {navigationSaga} from './navigation/saga'
-import {optionsSaga} from './options/saga'
+import { navigationSaga } from './navigation/saga'
+import { optionsSaga } from './options/saga'
 
 export function* rootSaga() {
   try {

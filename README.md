@@ -6,21 +6,21 @@
 
 [Popup my Bookmarks](https://chrome.google.com/webstore/detail/popup-my-bookmarks/mppflflkbbafeopeoeigkbbdjdbeifni) is a Chrome extension aims at providing a more efficient way to view and manage your bookmarks menu:
 
-- Firefox / IE-like bookmarks menu
+-   Firefox / IE-like bookmarks menu
 
-- Place mouse over folders to open it
+-   Place mouse over folders to open it
 
-- Search bookmarks when you type
+-   Search bookmarks when you type
 
-- Do what Bookmark manager can do and more (e.g., Sort bookmarks by name, Add separator)
+-   Do what Bookmark manager can do and more (e.g., Sort bookmarks by name, Add separator)
 
-- Highly configurable
+-   Highly configurable
 
-- Save 24px of your vertical workspace (Rock on Chromebook!)
+-   Save 24px of your vertical workspace (Rock on Chromebook!)
 
-- Take as few permissions as possible, we never put your privacy at risk
+-   Take as few permissions as possible, we never put your privacy at risk
 
-- No background running application, save computer memory and your privacy!
+-   No background running application, save computer memory and your privacy!
 
 Changelog: <https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELOG.md>
 
@@ -28,9 +28,9 @@ Changelog: <https://github.com/foray1010/Popup-my-Bookmarks/blob/master/CHANGELO
 
 Please visit following branches for the legacy versions that support older version of Chrome
 
-- [>= Chrome 34](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum_chrome_version_34)
-- [>= Chrome 26](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum_chrome_version_26)
-- [>= Chrome 20](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum_chrome_version_20)
+-   [>= Chrome 34](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum_chrome_version_34)
+-   [>= Chrome 26](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum_chrome_version_26)
+-   [>= Chrome 20](https://github.com/foray1010/Popup-my-Bookmarks/tree/minimum_chrome_version_20)
 
 ## Developer guide
 
@@ -38,49 +38,49 @@ Please visit following branches for the legacy versions that support older versi
 
 1. Install [Node.js](https://github.com/nodejs/node) (version >= 8.9) via:
 
-   - [nvm](https://github.com/creationix/nvm) (Linux / Mac)
-   - [Node.js official website](https://nodejs.org/en/download/) (Windows)
+    - [nvm](https://github.com/creationix/nvm) (Linux / Mac)
+    - [Node.js official website](https://nodejs.org/en/download/) (Windows)
 
 1. Install [yarn](https://github.com/yarnpkg/yarn)
 
-   ```sh
-   npm install -g yarn
-   ```
+    ```sh
+    npm install -g yarn
+    ```
 
 1. `cd` to your workspace and install all dependencies
 
-   ```sh
-   yarn install
-   ```
+    ```sh
+    yarn install
+    ```
 
 ### Commands
 
 1. build
 
-   ```sh
-   yarn build
-   ```
+    ```sh
+    yarn build
+    ```
 
-   To build the whole extension and output a zip file (./build/production/[version_in_package.json].zip) for uploading to Chrome Web Store
+    To build the whole extension and output a zip file (./build/production/[version_in_package.json].zip) for uploading to Chrome Web Store
 
 1. dev
 
-   ```sh
-   yarn dev
-   ```
+    ```sh
+    yarn dev
+    ```
 
-   To build a temporary folder `build/development` for loading unpacked extension
+    To build a temporary folder `build/development` for loading unpacked extension
 
 1. md
 
-   ```sh
-   yarn md
-   ```
+    ```sh
+    yarn md
+    ```
 
-   To generate markdown files
+    To generate markdown files
 
-   - `build/store.md` - Description for Chrome Web Store
-   - `README.md` - Description for GitHub
+    - `build/store.md` - Description for Chrome Web Store
+    - `README.md` - Description for GitHub
 
 ## Todo & Working Progress
 
@@ -88,10 +88,10 @@ See <https://trello.com/b/bREPCfDk/popup-my-bookmarks>
 
 ## Contributing
 
-- Translate to other languages. It's all depended on volunteers as I am not a linguist. ;-)
+-   Translate to other languages. It's all depended on volunteers as I am not a linguist. ;-)
 
-  Please join our translation team on <https://goo.gl/ZET77>
+    Please join our translation team on <https://goo.gl/ZET77>
 
-- Fork me on GitHub, join our development!
+-   Fork me on GitHub, join our development!
 
-  Repo: <https://github.com/foray1010/Popup-my-Bookmarks>
+    Repo: <https://github.com/foray1010/Popup-my-Bookmarks>

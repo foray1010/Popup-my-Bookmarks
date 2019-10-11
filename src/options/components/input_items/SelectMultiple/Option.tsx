@@ -7,14 +7,16 @@ interface Props {
   optionChoiceIndex: number
   optionName: string
   optionValue: Array<number | void>
-  updatePartialOptions: (options: {[key: string]: Array<number | void>}) => void
+  updatePartialOptions: (options: {
+    [key: string]: Array<number | void>
+  }) => void
 }
 const Option = ({
   optionChoice,
   optionChoiceIndex,
   optionName,
   optionValue,
-  updatePartialOptions
+  updatePartialOptions,
 }: Props) => {
   const inputId = React.useMemo(() => {
     return Math.random()
@@ -36,10 +38,10 @@ const Option = ({
       }
 
       updatePartialOptions({
-        [optionName]: newOptionValue
+        [optionName]: newOptionValue,
       })
     },
-    [optionName, optionValue, updatePartialOptions]
+    [optionName, optionValue, updatePartialOptions],
   )
 
   return (

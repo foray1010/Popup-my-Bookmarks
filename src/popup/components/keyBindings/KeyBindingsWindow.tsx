@@ -8,8 +8,16 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
   children: React.ReactNode
   windowId: string
 }
-const KeyBindingsWindow = ({children, className, onFocus, windowId, ...attributes}: Props) => {
-  const {setActiveWindowId, unsetActiveWindowId} = React.useContext(KeyBindingsContext)
+const KeyBindingsWindow = ({
+  children,
+  className,
+  onFocus,
+  windowId,
+  ...attributes
+}: Props) => {
+  const { setActiveWindowId, unsetActiveWindowId } = React.useContext(
+    KeyBindingsContext,
+  )
 
   React.useEffect(() => {
     setActiveWindowId(windowId)
@@ -27,7 +35,7 @@ const KeyBindingsWindow = ({children, className, onFocus, windowId, ...attribute
 
       setActiveWindowId(windowId)
     },
-    [onFocus, setActiveWindowId, windowId]
+    [onFocus, setActiveWindowId, windowId],
   )
 
   const divRef = React.useRef<HTMLDivElement>(null)

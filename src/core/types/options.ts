@@ -1,4 +1,4 @@
-import {OPTIONS} from '../constants'
+import { OPTIONS } from '../constants'
 
 export interface Options {
   [OPTIONS.CLICK_BY_LEFT]: number
@@ -49,4 +49,4 @@ export type OptionConfig =
   | IntegerOptionConfig
   | SelectOptionConfig
   | StringOptionConfig
-export type OptionsConfig = {[K in keyof Options]: OptionConfig}
+export type OptionsConfig = { [K in keyof Options]: OptionConfig }

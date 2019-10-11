@@ -9,15 +9,19 @@ interface Props {
   positionLeft: number
   positionTop: number
 }
-const AbsolutePosition = ({positionLeft, positionTop, ...restProps}: Props) => {
-  const {appendBodySize, removeBodySize} = useGlobalBodySize()
+const AbsolutePosition = ({
+  positionLeft,
+  positionTop,
+  ...restProps
+}: Props) => {
+  const { appendBodySize, removeBodySize } = useGlobalBodySize()
 
   const measureRef = React.useRef<HTMLDivElement>(null)
   const childSize = useComponentSize(measureRef)
 
   const [calibratedPosition, setCalibratedPosition] = React.useState({
     left: 0,
-    top: 0
+    top: 0,
   })
 
   React.useEffect(() => {
@@ -26,36 +30,48 @@ const AbsolutePosition = ({positionLeft, positionTop, ...restProps}: Props) => {
     const currentBodyHeight = document.body.scrollHeight
     const currentBodyWidth = document.body.offsetWidth
 
-    const updatedBodyHeight = childSize.height > currentBodyHeight ? childSize.height : undefined
-    const updatedBodyWidth = childSize.width > currentBodyWidth ? childSize.width : undefined
+    const updatedBodyHeight =
+      childSize.height > currentBodyHeight ? childSize.height : undefined
+    const updatedBodyWidth =
+      childSize.width > currentBodyWidth ? childSize.width : undefined
 
     setCalibratedPosition({
       left: Math.min(
         positionLeft,
-        (updatedBodyWidth !== undefined ? updatedBodyWidth : currentBodyWidth) - childSize.width
+        (updatedBodyWidth !== undefined ? updatedBodyWidth : currentBodyWidth) -
+          childSize.width,
       ),
       top: Math.min(
         positionTop,
-        (updatedBodyHeight !== undefined ? updatedBodyHeight : currentBodyHeight) - childSize.height
-      )
+        (updatedBodyHeight !== undefined
+          ? updatedBodyHeight
+          : currentBodyHeight) - childSize.height,
+      ),
     })
 
     const bodySize = {
       height: updatedBodyHeight,
-      width: updatedBodyWidth
+      width: updatedBodyWidth,
     }
     appendBodySize(bodySize)
     return () => {
       removeBodySize(bodySize)
     }
-  }, [appendBodySize, childSize.height, childSize.width, positionLeft, positionTop, removeBodySize])
+  }, [
+    appendBodySize,
+    childSize.height,
+    childSize.width,
+    positionLeft,
+    positionTop,
+    removeBodySize,
+  ])
 
   const wrapperStyles = React.useMemo(
     (): object => ({
       '--positionLeft': `${calibratedPosition.left}px`,
-      '--positionTop': `${calibratedPosition.top}px`
+      '--positionTop': `${calibratedPosition.top}px`,
     }),
-    [calibratedPosition.left, calibratedPosition.top]
+    [calibratedPosition.left, calibratedPosition.top],
   )
 
   return (

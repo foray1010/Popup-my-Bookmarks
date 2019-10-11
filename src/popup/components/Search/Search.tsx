@@ -13,7 +13,12 @@ interface Props {
   onFocus: React.FocusEventHandler<HTMLInputElement>
   setInputValue: (inputValue: string) => void
 }
-const Search = ({inputValue, isFocus, setInputValue, ...restProps}: Props) => {
+const Search = ({
+  inputValue,
+  isFocus,
+  setInputValue,
+  ...restProps
+}: Props) => {
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   React.useEffect(() => {
@@ -41,7 +46,12 @@ const Search = ({inputValue, isFocus, setInputValue, ...restProps}: Props) => {
         onChange={restProps.onChange}
       />
       {inputValue ? (
-        <img className={classes['cancel-icon']} src={cancelIcon} alt='' onClick={resetInputValue} />
+        <img
+          className={classes['cancel-icon']}
+          src={cancelIcon}
+          alt=''
+          onClick={resetInputValue}
+        />
       ) : null}
     </div>
   )

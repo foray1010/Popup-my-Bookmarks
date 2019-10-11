@@ -1,4 +1,4 @@
-import {ActionType, createReducer} from 'typesafe-actions'
+import { ActionType, createReducer } from 'typesafe-actions'
 
 import * as uiCreators from './actions'
 
@@ -12,21 +12,26 @@ interface UiState {
 const INITIAL_STATE: UiState = {
   highlightedItemCoordinates: {
     positionLeft: 0,
-    positionTop: 0
+    positionTop: 0,
   },
-  isFocusSearchInput: false
+  isFocusSearchInput: false,
 }
 
-export const uiReducer = createReducer<UiState, ActionType<typeof uiCreators>>(INITIAL_STATE)
-  .handleAction(uiCreators.setHighlightedItemCoordinates, (state, {payload}) => {
+export const uiReducer = createReducer<UiState, ActionType<typeof uiCreators>>(
+  INITIAL_STATE,
+)
+  .handleAction(
+    uiCreators.setHighlightedItemCoordinates,
+    (state, { payload }) => {
+      return {
+        ...state,
+        highlightedItemCoordinates: payload.highlightedItemCoordinates,
+      }
+    },
+  )
+  .handleAction(uiCreators.setIsFocusSearchInput, (state, { payload }) => {
     return {
       ...state,
-      highlightedItemCoordinates: payload.highlightedItemCoordinates
-    }
-  })
-  .handleAction(uiCreators.setIsFocusSearchInput, (state, {payload}) => {
-    return {
-      ...state,
-      isFocusSearchInput: payload.isFocusSearchInput
+      isFocusSearchInput: payload.isFocusSearchInput,
     }
   })

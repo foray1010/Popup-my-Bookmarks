@@ -1,19 +1,21 @@
 import * as React from 'react'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
-import {BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS} from '../../constants'
-import {RootState, bookmarkCreators, menuCreators} from '../../reduxs'
-import {BookmarkInfo, BookmarkTree} from '../../types'
+import { BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS } from '../../constants'
+import { RootState, bookmarkCreators, menuCreators } from '../../reduxs'
+import { BookmarkInfo, BookmarkTree } from '../../types'
 import {
   getClickOptionNameByEvent,
-  mapOptionToOpenBookmarkProps
+  mapOptionToOpenBookmarkProps,
 } from '../../utils/clickBookmarkUtils'
 
-export default ({treeInfo}: {treeInfo: BookmarkTree}) => {
+export default ({ treeInfo }: { treeInfo: BookmarkTree }) => {
   const options = useSelector((state: RootState) => state.options)
 
-  const openBookmarksInBrowser = useAction(bookmarkCreators.openBookmarksInBrowser)
+  const openBookmarksInBrowser = useAction(
+    bookmarkCreators.openBookmarksInBrowser,
+  )
   const openFolderInBrowser = useAction(bookmarkCreators.openFolderInBrowser)
   const openMenu = useAction(menuCreators.openMenu)
   const toggleBookmarkTree = useAction(bookmarkCreators.toggleBookmarkTree)
@@ -24,25 +26,32 @@ export default ({treeInfo}: {treeInfo: BookmarkTree}) => {
         openFolderInBrowser(bookmarkInfo.id, {
           openIn: OPEN_IN_TYPES.NEW_TAB,
           isAllowBookmarklet: false,
-          isCloseThisExtension: true
+          isCloseThisExtension: true,
         })
       } else {
-        const openBookmarkProps = mapOptionToOpenBookmarkProps(options[OPTIONS.CLICK_BY_MIDDLE])
+        const openBookmarkProps = mapOptionToOpenBookmarkProps(
+          options[OPTIONS.CLICK_BY_MIDDLE],
+        )
         openBookmarksInBrowser([bookmarkInfo.id], {
           ...openBookmarkProps,
-          isAllowBookmarklet: true
+          isAllowBookmarklet: true,
         })
       }
     }
-    const handleRowRightClick = (bookmarkInfo: BookmarkInfo, evt: React.MouseEvent) => {
+    const handleRowRightClick = (
+      bookmarkInfo: BookmarkInfo,
+      evt: React.MouseEvent,
+    ) => {
       openMenu(bookmarkInfo.id, {
         positionLeft: evt.clientX,
-        positionTop: evt.clientY
+        positionTop: evt.clientY,
       })
     }
 
     return {
-      handleRowAuxClick: (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent) => {
+      handleRowAuxClick: (bookmarkInfo: BookmarkInfo) => (
+        evt: React.MouseEvent,
+      ) => {
         if (evt.button === 1) {
           handleRowMiddleClick(bookmarkInfo)
         }
@@ -51,7 +60,9 @@ export default ({treeInfo}: {treeInfo: BookmarkTree}) => {
           handleRowRightClick(bookmarkInfo, evt)
         }
       },
-      handleRowClick: (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent) => {
+      handleRowClick: (bookmarkInfo: BookmarkInfo) => (
+        evt: React.MouseEvent,
+      ) => {
         if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
           if (options[OPTIONS.OP_FOLDER_BY]) {
             toggleBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
@@ -61,10 +72,10 @@ export default ({treeInfo}: {treeInfo: BookmarkTree}) => {
           const openBookmarkProps = mapOptionToOpenBookmarkProps(option)
           openBookmarksInBrowser([bookmarkInfo.id], {
             ...openBookmarkProps,
-            isAllowBookmarklet: true
+            isAllowBookmarklet: true,
           })
         }
-      }
+      },
     }
   }, [
     openBookmarksInBrowser,
@@ -72,6 +83,6 @@ export default ({treeInfo}: {treeInfo: BookmarkTree}) => {
     openMenu,
     options,
     toggleBookmarkTree,
-    treeInfo.parent.id
+    treeInfo.parent.id,
   ])
 }

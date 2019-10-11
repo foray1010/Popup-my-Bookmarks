@@ -1,10 +1,10 @@
-import {Action, Reducer, Store, applyMiddleware, createStore} from 'redux'
-import createSagaMiddleware, {SagaIterator} from 'redux-saga'
+import { Action, Reducer, Store, applyMiddleware, createStore } from 'redux'
+import createSagaMiddleware, { SagaIterator } from 'redux-saga'
 
 export default <S extends {}, A extends Action<string>>({
   preloadedState,
   rootReducer,
-  rootSaga
+  rootSaga,
 }: {
   preloadedState?: object
   rootReducer: Reducer<S, A>
@@ -12,7 +12,11 @@ export default <S extends {}, A extends Action<string>>({
 }): Store<S, A> => {
   const sagaMiddleware = createSagaMiddleware()
 
-  const store = createStore(rootReducer, preloadedState, applyMiddleware(sagaMiddleware))
+  const store = createStore(
+    rootReducer,
+    preloadedState,
+    applyMiddleware(sagaMiddleware),
+  )
 
   sagaMiddleware.run(rootSaga)
 

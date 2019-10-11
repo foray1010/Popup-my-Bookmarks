@@ -5,29 +5,32 @@ import '../manifest.yml'
 
 import * as R from 'ramda'
 import * as React from 'react'
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import webExtension from 'webextension-polyfill'
 
 import configureStore from '../core/store/configureStore'
-import {Options, OptionsConfig} from '../core/types/options'
-import {getOptionsConfig, renderToBody} from '../core/utils'
+import { Options, OptionsConfig } from '../core/types/options'
+import { getOptionsConfig, renderToBody } from '../core/utils'
 import App from './components/App'
-import {rootReducer, rootSaga} from './reduxs'
-import {LocalStorage} from './types/localStorage'
+import { rootReducer, rootSaga } from './reduxs'
+import { LocalStorage } from './types/localStorage'
 
 const main = async (): Promise<void> => {
   const [localStorage, options, optionsConfig]: [
     LocalStorage,
     Partial<Options>,
-    OptionsConfig
+    OptionsConfig,
   ] = await Promise.all([
     webExtension.storage.local.get(),
     webExtension.storage.sync.get(),
-    getOptionsConfig()
+    getOptionsConfig(),
   ])
 
   // if missing option, open options page to init options
-  const missingOptionKeys = R.difference(Object.keys(optionsConfig), Object.keys(options))
+  const missingOptionKeys = R.difference(
+    Object.keys(optionsConfig),
+    Object.keys(options),
+  )
   if (missingOptionKeys.length !== 0) {
     await webExtension.runtime.openOptionsPage()
     return
@@ -38,8 +41,8 @@ const main = async (): Promise<void> => {
     rootSaga,
     preloadedState: {
       lastPositions: localStorage.lastPositions || [],
-      options
-    }
+      options,
+    },
   })
 
   renderToBody(
@@ -47,7 +50,7 @@ const main = async (): Promise<void> => {
       <Provider store={store}>
         <App />
       </Provider>
-    </React.StrictMode>
+    </React.StrictMode>,
   )
 }
 

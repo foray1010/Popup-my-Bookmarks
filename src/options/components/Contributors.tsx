@@ -24,20 +24,22 @@ const contributors = {
     'a******s@v********.ca',
     'L. Smith',
     'j*********e@g****.com',
-    'J*****y@c*.com'
-  ]
+    'J*****y@c*.com',
+  ],
 }
 
 const Contributors = () => (
   <dl className={classes.main}>
-    {Object.entries(contributors).map(([contributeType, contributorsOfType]) => (
-      <React.Fragment key={contributeType}>
-        <dt>{contributeType}</dt>
-        {contributorsOfType.map(contributor => (
-          <dd key={contributor}>{contributor}</dd>
-        ))}
-      </React.Fragment>
-    ))}
+    {Object.entries(contributors).map(
+      ([contributeType, contributorsOfType]) => (
+        <React.Fragment key={contributeType}>
+          <dt>{contributeType}</dt>
+          {contributorsOfType.map(contributor => (
+            <dd key={contributor}>{contributor}</dd>
+          ))}
+        </React.Fragment>
+      ),
+    )}
   </dl>
 )
 

@@ -13,8 +13,8 @@ export default [
         storageIndex: 7839,
         title: 'ahobaom',
         type: CST.BOOKMARK_TYPES.BOOKMARK,
-        url: 'http://bigeha.pa/bejozkal'
-      }
+        url: 'http://bigeha.pa/bejozkal',
+      },
     ],
     parent: {
       iconUrl: '',
@@ -26,7 +26,7 @@ export default [
       storageIndex: -1,
       title: '',
       type: CST.BOOKMARK_TYPES.FOLDER,
-      url: ''
-    }
-  }
+      url: '',
+    },
+  },
 ]

@@ -1,14 +1,16 @@
 import * as React from 'react'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
-import {BASE_WINDOW} from '../../constants/windows'
-import {RootState, bookmarkCreators, uiCreators} from '../../reduxs'
+import { BASE_WINDOW } from '../../constants/windows'
+import { RootState, bookmarkCreators, uiCreators } from '../../reduxs'
 import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
 import Search from './Search'
 
 const SearchContainer = () => {
-  const isFocusSearchInput = useSelector((state: RootState) => state.ui.isFocusSearchInput)
+  const isFocusSearchInput = useSelector(
+    (state: RootState) => state.ui.isFocusSearchInput,
+  )
 
   const getSearchResult = useAction(bookmarkCreators.getSearchResult)
   const setIsFocusSearchInput = useAction(uiCreators.setIsFocusSearchInput)
@@ -21,23 +23,30 @@ const SearchContainer = () => {
 
   const handleSingleKeyPress = React.useCallback(
     (evt: KeyboardEvent) => {
-      const isFocusedOnInput = document.activeElement instanceof HTMLInputElement
+      const isFocusedOnInput =
+        document.activeElement instanceof HTMLInputElement
       if (!isFocusedOnInput) {
         setInputValue(evt.key)
         setIsFocusSearchInput(true)
       }
     },
-    [setIsFocusSearchInput]
+    [setIsFocusSearchInput],
   )
-  useKeyBindingsEvent({key: /^.$/, windowId: BASE_WINDOW}, handleSingleKeyPress)
+  useKeyBindingsEvent(
+    { key: /^.$/, windowId: BASE_WINDOW },
+    handleSingleKeyPress,
+  )
 
   const handleBlur = React.useCallback(() => {
     setIsFocusSearchInput(false)
   }, [setIsFocusSearchInput])
 
-  const handleChange = React.useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(evt.currentTarget.value)
-  }, [])
+  const handleChange = React.useCallback(
+    (evt: React.ChangeEvent<HTMLInputElement>) => {
+      setInputValue(evt.currentTarget.value)
+    },
+    [],
+  )
 
   const handleFocus = React.useCallback(() => {
     setIsFocusSearchInput(true)

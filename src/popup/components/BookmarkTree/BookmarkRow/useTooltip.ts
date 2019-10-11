@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import {getBookmarkNodes} from '../../../../core/utils'
-import {ROOT_ID} from '../../../constants'
-import {BookmarkInfo} from '../../../types'
+import { getBookmarkNodes } from '../../../../core/utils'
+import { ROOT_ID } from '../../../constants'
+import { BookmarkInfo } from '../../../types'
 
 interface Arg {
   isSearching: boolean
@@ -18,7 +18,11 @@ const getBreadcrumbs = async (id?: string): Promise<Array<string>> => {
   return [...(await getBreadcrumbs(bookmarkNode.parentId)), bookmarkNode.title]
 }
 
-const getTooltip = async ({isSearching, isShowTooltip, bookmarkInfo}: Arg) => {
+const getTooltip = async ({
+  isSearching,
+  isShowTooltip,
+  bookmarkInfo,
+}: Arg) => {
   const tooltipArr: Array<string> = []
 
   if (isShowTooltip) {
@@ -33,11 +37,11 @@ const getTooltip = async ({isSearching, isShowTooltip, bookmarkInfo}: Arg) => {
   return tooltipArr.filter(Boolean).join('\n')
 }
 
-const useTooltip = ({isSearching, isShowTooltip, bookmarkInfo}: Arg) => {
+const useTooltip = ({ isSearching, isShowTooltip, bookmarkInfo }: Arg) => {
   const [tooltip, setTooltip] = React.useState<string>()
 
   React.useEffect(() => {
-    getTooltip({isSearching, isShowTooltip, bookmarkInfo})
+    getTooltip({ isSearching, isShowTooltip, bookmarkInfo })
       .then(setTooltip)
       .catch(console.error)
   }, [bookmarkInfo, isSearching, isShowTooltip])

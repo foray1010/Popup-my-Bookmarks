@@ -1,20 +1,20 @@
 import * as R from 'ramda'
-import {call} from 'redux-saga/effects'
-import {ActionType} from 'typesafe-actions'
+import { call } from 'redux-saga/effects'
+import { ActionType } from 'typesafe-actions'
 
-import {moveBookmark} from '../../../../../core/utils'
+import { moveBookmark } from '../../../../../core/utils'
 import * as CST from '../../../../constants'
-import {BookmarkInfo, BookmarkTree} from '../../../../types'
+import { BookmarkInfo, BookmarkTree } from '../../../../types'
 import sortByTitle from '../../../../utils/sortByTitle'
 import * as bookmarkCreators from '../../actions'
-import {getBookmarkInfo, getBookmarkTree} from '../utils/getters'
+import { getBookmarkInfo, getBookmarkTree } from '../utils/getters'
 
 const groupBySeparator = R.groupWith<BookmarkInfo>(
   R.compose(
     R.not,
     R.propEq('type', CST.BOOKMARK_TYPES.SEPARATOR),
-    R.nthArg(1)
-  )
+    R.nthArg(1),
+  ),
 )
 
 interface TypeGroup {
@@ -28,7 +28,7 @@ const groupByType = (bookmarkInfos: Array<BookmarkInfo>): Array<TypeGroup> => {
     if (!acc.some(matchType)) {
       acc.push({
         type: bookmarkInfo.type,
-        members: []
+        members: [],
       })
     }
 
@@ -45,17 +45,22 @@ const sortGroupByPriority = (groups: Array<TypeGroup>) => {
   const priority = [
     CST.BOOKMARK_TYPES.SEPARATOR,
     CST.BOOKMARK_TYPES.FOLDER,
-    CST.BOOKMARK_TYPES.BOOKMARK
+    CST.BOOKMARK_TYPES.BOOKMARK,
   ]
   return Array.from(groups).sort((groupA, groupB) => {
     return priority.indexOf(groupA.type) - priority.indexOf(groupB.type)
   })
 }
 
-const ungroup = (nestedGroups: Array<Array<TypeGroup>>): Array<BookmarkInfo> => {
+const ungroup = (
+  nestedGroups: Array<Array<TypeGroup>>,
+): Array<BookmarkInfo> => {
   return nestedGroups.reduce((acc: Array<BookmarkInfo>, nestedGroup) => {
     return acc.concat(
-      nestedGroup.reduce((acc2: Array<BookmarkInfo>, group) => acc2.concat(group.members), [])
+      nestedGroup.reduce(
+        (acc2: Array<BookmarkInfo>, group) => acc2.concat(group.members),
+        [],
+      ),
     )
   }, [])
 }
@@ -66,31 +71,37 @@ const sortBookmarks = R.compose(
   R.map((groups: Array<TypeGroup>) =>
     groups.map(group => ({
       ...group,
-      members: sortByTitle(group.members)
-    }))
+      members: sortByTitle(group.members),
+    })),
   ),
   R.map(groupByType),
-  groupBySeparator
+  groupBySeparator,
 )
 
 export function* sortBookmarksByName({
-  payload
+  payload,
 }: ActionType<typeof bookmarkCreators.sortBookmarksByName>) {
   try {
-    const bookmarkTree: BookmarkTree = yield call(getBookmarkTree, payload.parentId)
+    const bookmarkTree: BookmarkTree = yield call(
+      getBookmarkTree,
+      payload.parentId,
+    )
 
     const sortedBookmarkInfos = sortBookmarks(bookmarkTree.children)
 
     // Moving bookmarks to sorted index
     for (const [index, bookmarkInfo] of sortedBookmarkInfos.entries()) {
-      const currentBookmarkInfo: BookmarkInfo = yield call(getBookmarkInfo, bookmarkInfo.id)
+      const currentBookmarkInfo: BookmarkInfo = yield call(
+        getBookmarkInfo,
+        bookmarkInfo.id,
+      )
       const currentIndex = currentBookmarkInfo.storageIndex
       if (currentIndex !== index) {
         yield call(moveBookmark, bookmarkInfo.id, {
           // if new index is after current index, need to add 1,
           // because index means the position in current array,
           // which also count the current position
-          index: index + (index > currentIndex ? 1 : 0)
+          index: index + (index > currentIndex ? 1 : 0),
         })
       }
     }

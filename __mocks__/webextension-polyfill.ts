@@ -1,8 +1,8 @@
 const webExtension: object = new Proxy(
   {},
   {
-    get: () => webExtension
-  }
+    get: () => webExtension,
+  },
 )
 
 export default webExtension

@@ -1,13 +1,15 @@
 import * as React from 'react'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
-import {NAV_MODULE} from '../constants'
-import {RootState} from '../reduxs'
+import { NAV_MODULE } from '../constants'
+import { RootState } from '../reduxs'
 import Contributors from './Contributors'
 import OptionForm from './OptionForm'
 
 const NavModuleMapper = () => {
-  const selectedNavModule = useSelector((state: RootState) => state.navigation.selectedNavModule)
+  const selectedNavModule = useSelector(
+    (state: RootState) => state.navigation.selectedNavModule,
+  )
 
   switch (selectedNavModule) {
     case NAV_MODULE.CONTRIBUTORS:

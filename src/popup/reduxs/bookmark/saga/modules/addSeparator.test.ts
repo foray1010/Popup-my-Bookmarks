@@ -1,12 +1,12 @@
 /* eslint redux-saga/no-unhandled-errors: 'off' */
 
 import Chance from 'chance'
-import {put} from 'redux-saga/effects'
-import {getType} from 'typesafe-actions'
+import { put } from 'redux-saga/effects'
+import { getType } from 'typesafe-actions'
 
 import * as CST from '../../../../constants'
 import * as bookmarkCreators from '../../actions'
-import {addSeparator} from './addSeparator'
+import { addSeparator } from './addSeparator'
 
 jest.mock('nanoid', () => () => 'mocked-id')
 
@@ -19,7 +19,7 @@ describe('addSeparator', () => {
 
     const generator = addSeparator({
       type: getType(bookmarkCreators.addSeparator),
-      payload: {parentId, index}
+      payload: { parentId, index },
     })
 
     expect(generator.next().value).toEqual(
@@ -28,9 +28,9 @@ describe('addSeparator', () => {
           parentId,
           index,
           '- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -',
-          CST.SEPARATE_THIS_URL + '#mocked-id'
-        )
-      )
+          CST.SEPARATE_THIS_URL + '#mocked-id',
+        ),
+      ),
     )
 
     expect(generator.next().done).toBe(true)

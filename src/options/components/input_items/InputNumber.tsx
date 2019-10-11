@@ -8,9 +8,15 @@ interface Props {
   minimum: number
   optionName: string
   optionValue: number
-  updatePartialOptions: (options: {[key: string]: number}) => void
+  updatePartialOptions: (options: { [key: string]: number }) => void
 }
-const InputNumber = ({maximum, minimum, optionName, optionValue, updatePartialOptions}: Props) => {
+const InputNumber = ({
+  maximum,
+  minimum,
+  optionName,
+  optionValue,
+  updatePartialOptions,
+}: Props) => {
   const handleBlur = React.useCallback(
     (evt: React.FocusEvent<HTMLInputElement>) => {
       const parsedValue = parseInt(evt.currentTarget.value, 10)
@@ -18,10 +24,10 @@ const InputNumber = ({maximum, minimum, optionName, optionValue, updatePartialOp
       const newOptionValue = R.clamp(minimum, maximum, parsedValue)
 
       updatePartialOptions({
-        [optionName]: newOptionValue
+        [optionName]: newOptionValue,
       })
     },
-    [maximum, minimum, optionName, updatePartialOptions]
+    [maximum, minimum, optionName, updatePartialOptions],
   )
 
   const handleChange = React.useCallback(
@@ -32,10 +38,10 @@ const InputNumber = ({maximum, minimum, optionName, optionValue, updatePartialOp
       if (Number.isNaN(parsedValue)) return
 
       updatePartialOptions({
-        [optionName]: parsedValue
+        [optionName]: parsedValue,
       })
     },
-    [optionName, updatePartialOptions]
+    [optionName, updatePartialOptions],
   )
 
   return (

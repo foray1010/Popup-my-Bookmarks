@@ -14,19 +14,24 @@ interface Props {
   choices: Array<string>
   optionName: string
   optionValue: string
-  updatePartialOptions: (options: {[key: string]: string}) => void
+  updatePartialOptions: (options: { [key: string]: string }) => void
 }
-const InputSelect = ({choices, optionName, optionValue, updatePartialOptions}: Props) => {
+const InputSelect = ({
+  choices,
+  optionName,
+  optionValue,
+  updatePartialOptions,
+}: Props) => {
   const inputRef = React.useRef<HTMLInputElement>(null)
   const selectRef = React.useRef<HTMLSelectElement>(null)
 
   const handleBlur = React.useCallback(
     (evt: React.FocusEvent<HTMLInputElement>) => {
       updatePartialOptions({
-        [optionName]: normalize(evt.currentTarget.value)
+        [optionName]: normalize(evt.currentTarget.value),
       })
     },
-    [optionName, updatePartialOptions]
+    [optionName, updatePartialOptions],
   )
 
   const handleChange = React.useCallback(
@@ -36,10 +41,10 @@ const InputSelect = ({choices, optionName, optionValue, updatePartialOptions}: P
       }
 
       updatePartialOptions({
-        [optionName]: evt.currentTarget.value
+        [optionName]: evt.currentTarget.value,
       })
     },
-    [optionName, updatePartialOptions]
+    [optionName, updatePartialOptions],
   )
 
   return (
