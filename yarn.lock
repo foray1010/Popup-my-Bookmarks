@@ -925,10 +925,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@foray1010/eslint-config@1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-1.2.3.tgz#2a9f73236de46fb4981946118d35213b21cd9ef5"
-  integrity sha512-mwA0YaoiwUb+9N2oCBKNqloGG9GTyPnij+9MRMRDvUv+EVsL56yvNeY7q2i6wb7JRr9loOVII3pdqSEWg9dfqQ==
+"@foray1010/eslint-config@1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-1.3.0.tgz#72ec8acaad933bfa4d50e383a4ec05952294312d"
+  integrity sha512-04ELFtCYej9TzkLmHi82URNWQZDNaMNokKtHCBZEJ0+/6Q4d9yFhtIMiPrXi7tJP0XDyz+P8aQkPISfQ0fOv5Q==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^2.3.2"
     "@typescript-eslint/parser" "^2.3.2"
@@ -941,15 +941,15 @@
     eslint-plugin-react-hooks "^2.1.2"
     typescript "^3.6.3"
 
-"@foray1010/prettierrc@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/prettierrc/-/prettierrc-1.0.1.tgz#0ea59f69e576cdb6f527040c8604e4c39f99ad13"
-  integrity sha512-w1xS53XpL/PlIHKbEy2J2Ym2qYYNf8zjAhozptLMoIZlCyRwwP5i+fNyfGZL2yQlBy1XSdXjq0Rk1wuUAXddSg==
+"@foray1010/prettierrc@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/prettierrc/-/prettierrc-1.1.0.tgz#ede7ee39c6c5c5b79c8b812051b6f3a968776cf4"
+  integrity sha512-feGfnWAkHJyc6GRtqqFdtOfeVlQZ3cHcqERaGeZFU0AeX9nw/vxbBmZ8Jd13ojREU3LnSx6ysVjynErDvOYegQ==
 
-"@foray1010/stylelint-config@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-1.1.1.tgz#99365d884fee19ad2471695b32b27607da556f36"
-  integrity sha512-ufgNIXeCZIWRUW5Xwyq7RLGwFuWzaTMi16pDkCeaL2W58kOw25HYmWETRBS2VqfJSETeMHrN+TvNw08N1lLw1A==
+"@foray1010/stylelint-config@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-1.2.0.tgz#45375092bba870200e17dba960f39df61fcdecf5"
+  integrity sha512-hnTd5P0u8Vnj2UnEtk/lu/1bZfXCNEGbwtqPg+o4qCGww8OzE0ifVJ2xwmMsj3nNpNoEftatXxiEcnv6E+H+Cw==
   dependencies:
     stylelint-config-css-modules "^1.5.0"
     stylelint-config-prettier "^6.0.0"
