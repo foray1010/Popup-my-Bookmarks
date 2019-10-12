@@ -941,6 +941,15 @@
     eslint-plugin-react-hooks "^2.1.2"
     typescript "^3.6.3"
 
+"@foray1010/import-sort-config@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/import-sort-config/-/import-sort-config-1.1.0.tgz#4d77489c0053fa90e6e3690546f676b98085bbbc"
+  integrity sha512-LcD7JQcegYJLykOf6xJ4zN/cgs5eUV/YmLBImMU+X8Nynt+/0bBKqEKlFmn9vzpL8snX78Wpq1zgRDO743U6Fg==
+  dependencies:
+    import-sort-parser-babylon "^6.0.0"
+    import-sort-parser-typescript "^6.0.0"
+    import-sort-style-module "^6.0.0"
+
 "@foray1010/prettierrc@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@foray1010/prettierrc/-/prettierrc-1.1.0.tgz#ede7ee39c6c5c5b79c8b812051b6f3a968776cf4"
@@ -5857,7 +5866,7 @@ import-sort-parser-babylon@^6.0.0:
     "@babel/types" "^7.0.0-beta.54"
     find-line-column "^0.5.2"
 
-import-sort-parser-typescript@6.0.0:
+import-sort-parser-typescript@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/import-sort-parser-typescript/-/import-sort-parser-typescript-6.0.0.tgz#98e73cef9e077d073e798722ed59e215b51c17e2"
   integrity sha512-pgxnr3I156DonupQriNsgDb2zJN9TxrqCCIN1rwT/6SDO1rkJb+a0fjqshCjlgacTSA92oPAp1eAwmQUeZi3dw==
@@ -5877,7 +5886,7 @@ import-sort-style-eslint@^6.0.0:
     eslint "^5.0.0"
     lodash "^4.17.10"
 
-import-sort-style-module@6.0.0:
+import-sort-style-module@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/import-sort-style-module/-/import-sort-style-module-6.0.0.tgz#3149df4785bae804ed32630634ed49e405fa7cad"
   integrity sha512-Oxd256EVt6TAgawhIDuKnNHWumzHMHFWhVncBBvlHVnx69B4GP/Gu4Xo+gjxtqSEKEvam5ajUkNvnsXLDMDjKg==
@@ -12190,10 +12199,15 @@ typescript-tuple@^2.2.1:
   dependencies:
     typescript-compare "^0.0.2"
 
-typescript@3.6.3, typescript@^3.2.4, typescript@^3.6.3:
+typescript@3.6.3, typescript@^3.6.3:
   version "3.6.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.3.tgz#fea942fabb20f7e1ca7164ff626f1a9f3f70b4da"
   integrity sha512-N7bceJL1CtRQ2RiG0AQME13ksR7DiuQh/QehubYcghzv20tnh+MQnQIuJddTmsbqYj+dztchykemz0zFzlvdQw==
+
+typescript@^3.2.4:
+  version "3.6.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.4.tgz#b18752bb3792bc1a0281335f7f6ebf1bbfc5b91d"
+  integrity sha512-unoCll1+l+YK4i4F8f22TaNVPRHcD9PA3yCuZ8g5e0qGqlVlJ/8FSateOLLSagn+Yg5+ZwuPkL8LFUc0Jcvksg==
 
 uc.micro@^1.0.1, uc.micro@^1.0.5:
   version "1.0.6"
