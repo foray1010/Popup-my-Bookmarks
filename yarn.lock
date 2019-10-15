@@ -950,10 +950,10 @@
     import-sort-parser-typescript "^6.0.0"
     import-sort-style-module "^6.0.0"
 
-"@foray1010/prettierrc@1.1.0":
+"@foray1010/prettier-config@1.1.0":
   version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/prettierrc/-/prettierrc-1.1.0.tgz#ede7ee39c6c5c5b79c8b812051b6f3a968776cf4"
-  integrity sha512-feGfnWAkHJyc6GRtqqFdtOfeVlQZ3cHcqERaGeZFU0AeX9nw/vxbBmZ8Jd13ojREU3LnSx6ysVjynErDvOYegQ==
+  resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-1.1.0.tgz#0cfdec28b6b8dbd3acd3705bc9068c8896e65647"
+  integrity sha512-+BFqS9gpEYuBER9R1F3Z8ITTZCE0QnDjffb1/LOTOlnmkmkrS68zlJxPOKm8/msEwn/iOtgBfFQz51UmbDx/NA==
 
 "@foray1010/stylelint-config@1.2.0":
   version "1.2.0"

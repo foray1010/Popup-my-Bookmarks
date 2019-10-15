@@ -1,3 +1,3 @@
 'use strict'
 
-module.exports = require('@foray1010/prettierrc')
+module.exports = require('@foray1010/prettier-config')
