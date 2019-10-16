@@ -24,7 +24,7 @@ const questions = [
 const projectSlug = 'popup-my-bookmarks'
 const resourceSlug = 'messagesjson-1'
 
-const localesPath = path.join('src', '_locales')
+const localesPath = path.join('src', 'core', '_locales')
 
 interface Messages {
   [key: string]: {
