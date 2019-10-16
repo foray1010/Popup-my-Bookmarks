@@ -925,10 +925,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@foray1010/eslint-config@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-1.3.0.tgz#72ec8acaad933bfa4d50e383a4ec05952294312d"
-  integrity sha512-04ELFtCYej9TzkLmHi82URNWQZDNaMNokKtHCBZEJ0+/6Q4d9yFhtIMiPrXi7tJP0XDyz+P8aQkPISfQ0fOv5Q==
+"@foray1010/eslint-config@1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-1.6.0.tgz#234bbd37a34f39320c87e068e1a1075a07be4de1"
+  integrity sha512-Qw39qoVcP5VYTm86kOjGVtcW5T9ICp4bFzqZn6XnW3QQgWKLiNt1zONmsx5R69gTBpB3+WBJ8t5l0MItdd5NBA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^2.3.2"
     "@typescript-eslint/parser" "^2.3.2"
@@ -941,24 +941,24 @@
     eslint-plugin-react-hooks "^2.1.2"
     typescript "^3.6.3"
 
-"@foray1010/import-sort-config@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/import-sort-config/-/import-sort-config-1.1.0.tgz#4d77489c0053fa90e6e3690546f676b98085bbbc"
-  integrity sha512-LcD7JQcegYJLykOf6xJ4zN/cgs5eUV/YmLBImMU+X8Nynt+/0bBKqEKlFmn9vzpL8snX78Wpq1zgRDO743U6Fg==
+"@foray1010/import-sort-config@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/import-sort-config/-/import-sort-config-1.2.0.tgz#275f067a63ac3589144cb621ac56a70ee52a0e5f"
+  integrity sha512-ACihkb8A2WKjOcIJXuHzPNLjfq9E8fetrQkk79tHXt8X9bE6UsXtru1fFx22DImnF9yXUjgFFtttZyfIsAmViQ==
   dependencies:
     import-sort-parser-babylon "^6.0.0"
     import-sort-parser-typescript "^6.0.0"
     import-sort-style-module "^6.0.0"
 
-"@foray1010/prettier-config@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-1.1.0.tgz#0cfdec28b6b8dbd3acd3705bc9068c8896e65647"
-  integrity sha512-+BFqS9gpEYuBER9R1F3Z8ITTZCE0QnDjffb1/LOTOlnmkmkrS68zlJxPOKm8/msEwn/iOtgBfFQz51UmbDx/NA==
+"@foray1010/prettier-config@1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-1.5.0.tgz#5e5b5f6a8e13b0d270bf750949791e86bf6e87db"
+  integrity sha512-4AnfxvraUk0aIMY6+ZuTUfKdCWJ+CNzrg1jkdCEbxt4gGyioTBNcZ/lw6zM/EViNfb9XPFAlY0iQKWN4SuPjTA==
 
-"@foray1010/stylelint-config@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-1.2.0.tgz#45375092bba870200e17dba960f39df61fcdecf5"
-  integrity sha512-hnTd5P0u8Vnj2UnEtk/lu/1bZfXCNEGbwtqPg+o4qCGww8OzE0ifVJ2xwmMsj3nNpNoEftatXxiEcnv6E+H+Cw==
+"@foray1010/stylelint-config@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-1.4.0.tgz#605b3a18d3d202fcc99261a703a5e9455da82e1a"
+  integrity sha512-gsUsYJV0bIppNnsHV71XtPYqroqjgM9cXeiiBx0fGfyQak1pRWWyGIgDp+l+E1dcUz9CSj/3xGSL7tk2PqFPYg==
   dependencies:
     stylelint-config-css-modules "^1.5.0"
     stylelint-config-prettier "^6.0.0"
