@@ -198,8 +198,7 @@ const productionConfig: webpack.Configuration = {
   optimization: {
     minimizer: [
       new TerserPlugin({
-        cache: true,
-        parallel: true,
+        extractComments: false,
         terserOptions: {
           compress: {
             drop_console: true,
