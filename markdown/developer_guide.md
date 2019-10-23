@@ -27,7 +27,7 @@
     yarn build
     ```
 
-    To build the whole extension and output a zip file (./build/production/[version_in_package.json].zip) for uploading to Chrome Web Store
+    To build the whole extension and output a zip file (./build/production/{version_in_package.json}.zip) for uploading to Chrome Web Store
 
 1. dev
 

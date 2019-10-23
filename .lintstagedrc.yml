@@ -16,7 +16,7 @@
   - 'git add'
 '*.md':
   - 'yarn prettier --write'
-  - 'markdownlint'
+  - 'yarn remark'
   - 'git add'
 '*ignore-sync':
   - 'ignore-sync'
