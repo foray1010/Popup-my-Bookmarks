@@ -925,10 +925,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@foray1010/eslint-config@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-1.6.0.tgz#234bbd37a34f39320c87e068e1a1075a07be4de1"
-  integrity sha512-Qw39qoVcP5VYTm86kOjGVtcW5T9ICp4bFzqZn6XnW3QQgWKLiNt1zONmsx5R69gTBpB3+WBJ8t5l0MItdd5NBA==
+"@foray1010/eslint-config@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-1.7.0.tgz#93afcd434020187aed1ec40ffe2f395d9fd00de0"
+  integrity sha512-SpIwzuV7YJM6JlsnDEblIojbrWnwFb/qZZ2flL0hs2+g6ZMznfNoB/+4+0PRjE+MCFQDAoYVOCHJ4SF4Pgz5AQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^2.3.2"
     "@typescript-eslint/parser" "^2.3.2"
@@ -939,6 +939,7 @@
     eslint-plugin-prettier "^3.1.1"
     eslint-plugin-react "^7.16.0"
     eslint-plugin-react-hooks "^2.1.2"
+    read-pkg-up "^7.0.0"
     typescript "^3.6.3"
 
 "@foray1010/import-sort-config@1.2.0":
@@ -965,10 +966,10 @@
     remark-preset-lint-recommended "^3.0.3"
     remark-preset-prettier "^0.2.2"
 
-"@foray1010/stylelint-config@1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-1.4.0.tgz#605b3a18d3d202fcc99261a703a5e9455da82e1a"
-  integrity sha512-gsUsYJV0bIppNnsHV71XtPYqroqjgM9cXeiiBx0fGfyQak1pRWWyGIgDp+l+E1dcUz9CSj/3xGSL7tk2PqFPYg==
+"@foray1010/stylelint-config@1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-1.4.1.tgz#1015a6c8ce5580262c8040c2782075bf4ec955a9"
+  integrity sha512-YcEwIEk4SWC/rDPu7KzQC0nzM5KctKBkBZcpHhcnU/t86nwx60ne7BWzxQMceAtXNbm3p6jNPsDdm8Qk/L/VjA==
   dependencies:
     stylelint-config-css-modules "^1.5.0"
     stylelint-config-prettier "^6.0.0"
@@ -4992,7 +4993,7 @@ find-up@^3.0.0:
   dependencies:
     locate-path "^3.0.0"
 
-find-up@^4.0.0:
+find-up@^4.0.0, find-up@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/find-up/-/find-up-4.1.0.tgz#97afe7d6cdc0bc5928584b7c8d7b16e8a9aa5d19"
   integrity sha512-PpOwAdQ/YlXQ2vj8a3h8IipDuYRi3wceVQQGYWxNINccq40Anw7BlsEXCMbt1Zt+OLA6Fq9suIpIWD0OsnISlw==
@@ -10403,6 +10404,15 @@ read-pkg-up@^4.0.0:
     find-up "^3.0.0"
     read-pkg "^3.0.0"
 
+read-pkg-up@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/read-pkg-up/-/read-pkg-up-7.0.0.tgz#3f3e53858ec5ae5e6fe14bc479da0a7c98f85ff3"
+  integrity sha512-t2ODkS/vTTcRlKwZiZsaLGb5iwfx9Urp924aGzVyboU6+7Z2i6eGr/G1Z4mjvwLLQV3uFOBKobNRGM3ux2PD/w==
+  dependencies:
+    find-up "^4.1.0"
+    read-pkg "^5.2.0"
+    type-fest "^0.8.1"
+
 read-pkg@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/read-pkg/-/read-pkg-2.0.0.tgz#8ef1c0623c6a6db0dc6713c4bfac46332b2368f8"
@@ -12962,6 +12972,11 @@ type-fest@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.6.0.tgz#8d2a2370d3df886eb5c90ada1c5bf6188acf838b"
   integrity sha512-q+MB8nYR1KDLrgr4G5yemftpMC7/QLqVndBmEEdqzmNj5dcFOO4Oo8qlwZE3ULT3+Zim1F8Kq4cBnikNhlCMlg==
+
+type-fest@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
+  integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
 type-is@~1.6.17, type-is@~1.6.18:
   version "1.6.18"
