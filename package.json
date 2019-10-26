@@ -14,7 +14,7 @@
     "build": "cross-env NODE_ENV=production webpack",
     "ci": "npm-run-all -p lint:* test type:* && yarn build",
     "dev": "cross-env NODE_ENV=development webpack",
-    "eslint": "eslint --ext=js,mjs,ts,tsx --ignore-path=node_modules/@foray1010/eslint-config/eslintignore",
+    "eslint": "eslint --ext=cjs,js,mjs,ts,tsx --ignore-path=node_modules/@foray1010/eslint-config/eslintignore",
     "lint:css": "yarn stylelint '**/*.css'",
     "lint:js": "yarn eslint .",
     "lint:md": "yarn remark .",
