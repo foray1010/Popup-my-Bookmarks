@@ -19,7 +19,7 @@
   - 'ignore-sync'
   - 'git add'
 '.babelrc':
-  - 'yarn prettier --parser'
+  - 'yarn prettier --write'
   - 'git add'
 'package.json':
   - 'sort-package-json'
