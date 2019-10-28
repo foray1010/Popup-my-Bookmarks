@@ -1,14 +1,8 @@
 {
   "name": "Popup-my-Bookmarks",
   "version": "6.2.1",
-  "engines": {
-    "node": ">=8.9"
-  },
-  "browserslist": [
-    "chrome >= 55"
-  ],
-  "description": "A more efficient way to view and manage your bookmarks menu.",
   "private": true,
+  "description": "A more efficient way to view and manage your bookmarks menu.",
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
@@ -27,6 +21,9 @@
     "type:check": "tsc",
     "type:coverage": "type-coverage --strict --at-least 99.6 --detail --ignore-catch"
   },
+  "browserslist": [
+    "chrome >= 55"
+  ],
   "dependencies": {
     "@rehooks/component-size": "1.0.3",
     "classnames": "2.2.6",
@@ -126,6 +123,7 @@
     "remark-cli": "7.0.0",
     "script-ext-html-webpack-plugin": "2.1.4",
     "sharp": "0.23.1",
+    "sort-package-json": "1.22.1",
     "style-loader": "1.0.0",
     "stylelint": "11.1.1",
     "terser-webpack-plugin": "2.2.1",
@@ -138,5 +136,8 @@
     "webpack-cli": "3.3.9",
     "yaml-loader": "0.5.0",
     "zip-webpack-plugin": "3.0.0"
+  },
+  "engines": {
+    "node": ">=8.9"
   }
 }
