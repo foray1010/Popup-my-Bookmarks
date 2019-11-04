@@ -49,7 +49,7 @@
     "@commitlint/cli": "8.2.0",
     "@commitlint/config-conventional": "8.2.0",
     "@foray1010/babel-preset": "1.1.2",
-    "@foray1010/eslint-config": "1.8.2",
+    "@foray1010/eslint-config": "1.8.3",
     "@foray1010/import-sort-config": "1.2.1",
     "@foray1010/prettier-config": "1.5.1",
     "@foray1010/remark-preset": "1.1.2",
