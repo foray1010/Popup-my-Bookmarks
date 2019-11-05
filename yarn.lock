@@ -1197,14 +1197,6 @@
   resolved "https://registry.yarnpkg.com/@redux-saga/symbols/-/symbols-1.1.0.tgz#676b277cb5deb48ce723b2b394cbae97f82e8319"
   integrity sha512-Fzw1wV3j4hbac3MYmgNE18Z53URmQZeilTHZLF7Lm4SQ1jG4fcU47v2kElsEbQXUSaFqj+uJqdRzmDGNb6pRwQ==
 
-"@redux-saga/testing-utils@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@redux-saga/testing-utils/-/testing-utils-1.1.1.tgz#83adee74e32faf83bca4ba3b48e9eca0bbb8a710"
-  integrity sha512-Mg7cXXCRWMkJ5nsp0gPSFHVdsPJeTbizWnlNBc9oG+775eC7PTU9YVdpfZsWkikGwTS0s9jEGi3B+X6FIzYtEA==
-  dependencies:
-    "@redux-saga/symbols" "^1.1.0"
-    "@redux-saga/types" "^1.1.0"
-
 "@redux-saga/types@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@redux-saga/types/-/types-1.1.0.tgz#0e81ce56b4883b4b2a3001ebe1ab298b84237204"
@@ -8578,7 +8570,6 @@ npm@^6.9.0:
     cmd-shim "^3.0.3"
     columnify "~1.5.4"
     config-chain "^1.1.12"
-    debuglog "*"
     detect-indent "~5.0.0"
     detect-newline "^2.1.0"
     dezalgo "~1.0.3"
@@ -8593,7 +8584,6 @@ npm@^6.9.0:
     has-unicode "~2.0.1"
     hosted-git-info "^2.8.5"
     iferr "^1.0.2"
-    imurmurhash "*"
     infer-owner "^1.0.4"
     inflight "~1.0.6"
     inherits "^2.0.4"
@@ -8612,14 +8602,8 @@ npm@^6.9.0:
     libnpx "^10.2.0"
     lock-verify "^2.1.0"
     lockfile "^1.0.4"
-    lodash._baseindexof "*"
     lodash._baseuniq "~4.6.0"
-    lodash._bindcallback "*"
-    lodash._cacheindexof "*"
-    lodash._createcache "*"
-    lodash._getnative "*"
     lodash.clonedeep "~4.5.0"
-    lodash.restparam "*"
     lodash.union "~4.6.0"
     lodash.uniq "~4.5.0"
     lodash.without "~4.4.0"

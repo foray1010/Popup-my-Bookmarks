@@ -1,7 +1,6 @@
 /* eslint max-lines: 'off' */
 /* eslint redux-saga/no-unhandled-errors: 'off' */
 
-import { cloneableGenerator } from '@redux-saga/testing-utils'
 import Chance from 'chance'
 import * as R from 'ramda'
 import { all, call } from 'redux-saga/effects'
@@ -93,41 +92,44 @@ describe('getBookmarkTrees', () => {
   const options = optionsFixture
   const restTreeIds = getRestTreeIds(correlatedBookmarkTrees)
 
-  const generator = cloneableGenerator(getters.getBookmarkTrees)(
-    restTreeIds,
-    options,
-  )
-
-  expect(generator.next().value).toEqual(
-    all([
-      call(getters.getFirstBookmarkTree, options),
-      ...R.map(id => call(getters.tryGetBookmarkTree, id), restTreeIds),
-    ]),
-  )
-
   test('should get all trees', () => {
-    const clonedGenerator = generator.clone()
+    const generator = getters.getBookmarkTrees(restTreeIds, options)
 
-    expect(clonedGenerator.next(correlatedBookmarkTrees).value).toEqual(
+    expect(generator.next().value).toEqual(
+      all([
+        call(getters.getFirstBookmarkTree, options),
+        ...R.map(id => call(getters.tryGetBookmarkTree, id), restTreeIds),
+      ]),
+    )
+
+    expect(generator.next(correlatedBookmarkTrees).value).toEqual(
       correlatedBookmarkTrees,
     )
 
-    expect(clonedGenerator.next().done).toBe(true)
+    expect(generator.next().done).toBe(true)
   })
+
   test('should remove tree and its child trees if cannot get that tree', () => {
     for (let i = 1; i < correlatedBookmarkTrees.length; i += 1) {
-      const clonedGenerator = generator.clone()
+      const generator = getters.getBookmarkTrees(restTreeIds, options)
+
+      expect(generator.next().value).toEqual(
+        all([
+          call(getters.getFirstBookmarkTree, options),
+          ...R.map(id => call(getters.tryGetBookmarkTree, id), restTreeIds),
+        ]),
+      )
 
       const partiallyUnrelatedBookmarkTrees = R.set(
         R.lensIndex(i),
         null,
         correlatedBookmarkTrees,
       )
-      expect(
-        clonedGenerator.next(partiallyUnrelatedBookmarkTrees).value,
-      ).toEqual(R.take(i, partiallyUnrelatedBookmarkTrees))
+      expect(generator.next(partiallyUnrelatedBookmarkTrees).value).toEqual(
+        R.take(i, partiallyUnrelatedBookmarkTrees),
+      )
 
-      expect(clonedGenerator.next().done).toBe(true)
+      expect(generator.next().done).toBe(true)
     }
   })
 })
