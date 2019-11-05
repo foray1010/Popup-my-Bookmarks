@@ -13043,10 +13043,10 @@ typeface-archivo-narrow@0.0.72:
   resolved "https://registry.yarnpkg.com/typeface-archivo-narrow/-/typeface-archivo-narrow-0.0.72.tgz#3515626191b3fa80872d0672c7c20d281ab8e521"
   integrity sha512-BHA/EgBhQTLAO1gCGYc4hNyCSxXqCEzLARtXblm/uF3eTfKWuu5IgVwC8VReWt1AABySVulH0XCrIa4T4A7N1A==
 
-typesafe-actions@4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/typesafe-actions/-/typesafe-actions-4.4.2.tgz#8f817c479d12130b5ebb442032968b2a18929e1a"
-  integrity sha512-QW61P4cOX8dCNmrfpcUMjvU/MF/sFTC8/PlG9215W1gKDzZUBjRGdyYSO6ZcEUNsn491S2VpryJOHSIVSDqJrg==
+typesafe-actions@5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/typesafe-actions/-/typesafe-actions-5.1.0.tgz#9afe8b1e6a323af1fd59e6a57b11b7dd6623d2f1"
+  integrity sha512-bna6Yi1pRznoo6Bz1cE6btB/Yy8Xywytyfrzu/wc+NFW3ZF0I+2iCGImhBsoYYCOWuICtRO4yHcnDlzgo1AdNg==
 
 typescript-compare@^0.0.2:
   version "0.0.2"
