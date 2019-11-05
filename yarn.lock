@@ -902,24 +902,32 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@foray1010/babel-preset@1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-1.1.2.tgz#09982ca49b486da93fc32040912179a2c849aba5"
-  integrity sha512-BI0SePMSGSfCo2UoElJ7YXehAoGLqQShemHgQrl4+k6VVtetB2AHsLngNy5TGN4aRJQfAMrndBZAv+8NE0GI4g==
+"@foray1010/babel-preset@1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-1.1.4.tgz#8386152ca928649f9f94ecf585cf40df6051c932"
+  integrity sha512-0/Zdmwc1tpOXk/6DHAaGmpEIHrJd31OqanrcvS9nTDebgdaepsT0hBrm0KEKhIbVsyaK1qwa8LUSOzdLwXvHng==
   dependencies:
     "@babel/plugin-transform-react-constant-elements" "^7.6.3"
     "@babel/plugin-transform-react-inline-elements" "^7.2.0"
     "@babel/preset-env" "^7.6.3"
     "@babel/preset-react" "^7.6.3"
     "@babel/preset-typescript" "^7.6.0"
+    "@foray1010/common-presets-utils" "^1.1.0"
     babel-plugin-transform-react-remove-prop-types "^0.4.24"
+
+"@foray1010/common-presets-utils@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/common-presets-utils/-/common-presets-utils-1.1.0.tgz#9f599bb73a359395acc67dc90cc11af9e872a069"
+  integrity sha512-SICTZzN0HcorHmo9dySpOEn3cDIhfjU8p/xQEoX2IF7EbQNQosvu2T1hUyHk171RxU1h2dobrszR09iTO0NoDQ==
+  dependencies:
     read-pkg-up "^7.0.0"
 
-"@foray1010/eslint-config@1.8.3":
-  version "1.8.3"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-1.8.3.tgz#781f8b83d7353cb5db15f0e07ad14cd1b87e833a"
-  integrity sha512-fHi46UrhqhIv2povyvbA2lH1A3DmeZZWtzSJ3etCpBHUFueIMjFsW6Hlyefbx07kcFVS2dqq7VJL441GxwjC5g==
+"@foray1010/eslint-config@1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-1.9.0.tgz#5ae6c495179e53ba670fdae5552e50dd1c2086a5"
+  integrity sha512-iotsBoL410LfkwA2kjSOgCxjAorkyoN3AqQVgpfT8xvNMcmVlwwugcaL+Dkxh7lZYcd8qdUiRP9F9ZI4NhaBww==
   dependencies:
+    "@foray1010/common-presets-utils" "^1.1.0"
     "@typescript-eslint/eslint-plugin" "^2.3.2"
     "@typescript-eslint/parser" "^2.3.2"
     confusing-browser-globals "^1.0.9"
@@ -930,8 +938,6 @@
     eslint-plugin-prettier "^3.1.1"
     eslint-plugin-react "^7.16.0"
     eslint-plugin-react-hooks "^2.1.2"
-    read-pkg-up "^7.0.0"
-    typescript "^3.6.3"
 
 "@foray1010/import-sort-config@1.2.1":
   version "1.2.1"
@@ -3782,7 +3788,7 @@ debug@^4.0.0, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
   dependencies:
     ms "^2.1.1"
 
-debuglog@*, debuglog@^1.0.1:
+debuglog@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/debuglog/-/debuglog-1.0.1.tgz#aa24ffb9ac3df9a2351837cfb2d279360cd78492"
   integrity sha1-qiT/uaw9+aI1GDfPstJ5NgzXhJI=
@@ -5965,7 +5971,7 @@ import-sort@^6.0.0:
     is-builtin-module "^3.0.0"
     resolve "^1.8.1"
 
-imurmurhash@*, imurmurhash@^0.1.4:
+imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
@@ -7455,11 +7461,6 @@ lockfile@^1.0.4:
   dependencies:
     signal-exit "^3.0.2"
 
-lodash._baseindexof@*:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/lodash._baseindexof/-/lodash._baseindexof-3.1.0.tgz#fe52b53a1c6761e42618d654e4a25789ed61822c"
-  integrity sha1-/lK1OhxnYeQmGNZU5KJXie1hgiw=
-
 lodash._baseuniq@~4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash._baseuniq/-/lodash._baseuniq-4.6.0.tgz#0ebb44e456814af7905c6212fa2c9b2d51b841e8"
@@ -7468,32 +7469,10 @@ lodash._baseuniq@~4.6.0:
     lodash._createset "~4.0.0"
     lodash._root "~3.0.0"
 
-lodash._bindcallback@*:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/lodash._bindcallback/-/lodash._bindcallback-3.0.1.tgz#e531c27644cf8b57a99e17ed95b35c748789392e"
-  integrity sha1-5THCdkTPi1epnhftlbNcdIeJOS4=
-
-lodash._cacheindexof@*:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/lodash._cacheindexof/-/lodash._cacheindexof-3.0.2.tgz#3dc69ac82498d2ee5e3ce56091bafd2adc7bde92"
-  integrity sha1-PcaayCSY0u5ePOVgkbr9Ktx73pI=
-
-lodash._createcache@*:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/lodash._createcache/-/lodash._createcache-3.1.2.tgz#56d6a064017625e79ebca6b8018e17440bdcf093"
-  integrity sha1-VtagZAF2JeeevKa4AY4XRAvc8JM=
-  dependencies:
-    lodash._getnative "^3.0.0"
-
 lodash._createset@~4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/lodash._createset/-/lodash._createset-4.0.3.tgz#0f4659fbb09d75194fa9e2b88a6644d363c9fe26"
   integrity sha1-D0ZZ+7CddRlPqeK4imZE02PJ/iY=
-
-lodash._getnative@*, lodash._getnative@^3.0.0:
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/lodash._getnative/-/lodash._getnative-3.9.1.tgz#570bc7dede46d61cdcde687d65d3eecbaa3aaff5"
-  integrity sha1-VwvH3t5G1hzc3mh9ZdPuy6o6r/U=
 
 lodash._reinterpolate@^3.0.0:
   version "3.0.0"
@@ -7519,11 +7498,6 @@ lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
-
-lodash.restparam@*:
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
-  integrity sha1-k2pOMJ7zMKdkXtQUWYbIWuWyCAU=
 
 lodash.sortby@^4.7.0:
   version "4.7.0"
@@ -13099,7 +13073,7 @@ typescript-tuple@^2.2.1:
   dependencies:
     typescript-compare "^0.0.2"
 
-typescript@3.6.4, typescript@^3.2.4, typescript@^3.6.3:
+typescript@3.6.4, typescript@^3.2.4:
   version "3.6.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.4.tgz#b18752bb3792bc1a0281335f7f6ebf1bbfc5b91d"
   integrity sha512-unoCll1+l+YK4i4F8f22TaNVPRHcD9PA3yCuZ8g5e0qGqlVlJ/8FSateOLLSagn+Yg5+ZwuPkL8LFUc0Jcvksg==
