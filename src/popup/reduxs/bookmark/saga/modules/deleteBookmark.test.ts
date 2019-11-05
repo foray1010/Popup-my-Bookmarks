@@ -25,10 +25,11 @@ describe('deleteBookmark', () => {
       type: getType(bookmarkCreators.deleteBookmark),
       payload: { id },
     })
-
-    expect(generator.next().value).toEqual(call(getBookmarkInfo, id))
   })
+
   test('should delete bookmark', () => {
+    expect(generator.next().value).toEqual(call(getBookmarkInfo, id))
+
     const bookmarkInfo = {
       ...bookmarkTrees[0].children[0],
       type: CST.BOOKMARK_TYPES.BOOKMARK,
@@ -37,7 +38,10 @@ describe('deleteBookmark', () => {
 
     expect(generator.next().done).toBe(true)
   })
+
   test('should delete folder recursively', () => {
+    expect(generator.next().value).toEqual(call(getBookmarkInfo, id))
+
     const bookmarkInfo = {
       ...bookmarkTrees[0].children[0],
       type: CST.BOOKMARK_TYPES.FOLDER,
