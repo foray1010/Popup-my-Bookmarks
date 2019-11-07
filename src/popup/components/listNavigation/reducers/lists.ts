@@ -18,25 +18,22 @@ export const listsInitialState: ListsState = {
 }
 
 export const listsCreators = {
-  removeList: createAction('REMOVE_LIST', action => (listIndex: number) =>
-    action({ listIndex }),
-  ),
-  resetLists: createAction('RESET_LISTS'),
+  removeList: createAction('REMOVE_LIST', (listIndex: number) => ({
+    listIndex,
+  }))(),
+  resetLists: createAction('RESET_LISTS')(),
   setHighlightedIndex: createAction(
     'SET_HIGHLIGHTED_INDEX',
-    action => (listIndex: number, itemIndex: number) =>
-      action({ listIndex, itemIndex }),
-  ),
+    (listIndex: number, itemIndex: number) => ({ listIndex, itemIndex }),
+  )(),
   setItemCount: createAction(
     'SET_ITEM_COUNT',
-    action => (listIndex: number, itemCount: number) =>
-      action({ listIndex, itemCount }),
-  ),
+    (listIndex: number, itemCount: number) => ({ listIndex, itemCount }),
+  )(),
   unsetHighlightedIndex: createAction(
     'UNSET_HIGHLIGHTED_INDEX',
-    action => (listIndex: number, itemIndex: number) =>
-      action({ listIndex, itemIndex }),
-  ),
+    (listIndex: number, itemIndex: number) => ({ listIndex, itemIndex }),
+  )(),
 }
 
 export const listsReducer = createReducer<

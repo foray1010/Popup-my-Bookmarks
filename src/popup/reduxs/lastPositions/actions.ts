@@ -4,15 +4,15 @@ import { LastPosition } from '../../types/localStorage'
 
 export const createLastPosition = createAction(
   'CREATE_LAST_POSITION',
-  action => (index: number, id: string) => action({ index, id }),
-)
+  (index: number, id: string) => ({ index, id }),
+)()
 
 export const removeLastPosition = createAction(
   'REMOVE_LAST_POSITION',
-  action => (index: number) => action({ index }),
-)
+  (index: number) => ({ index }),
+)()
 
 export const updateLastPosition = createAction(
   'UPDATE_LAST_POSITION',
-  action => (lastPosition: LastPosition) => action(lastPosition),
-)
+  (lastPosition: LastPosition) => lastPosition,
+)()
