@@ -19,18 +19,18 @@ export const keyBindingsPerWindowInitialState: KeyBindingsPerWindowState = new M
 export const keyBindingsPerWindowCreators = {
   addEventListener: createAction(
     'ADD_EVENT_LISTENER',
-    action => (
+    (
       { priority = 0, ...meta }: KeyBindingMeta,
       callback: KeyBindingEventCallback,
-    ) => action({ ...meta, priority, callback }),
-  ),
+    ) => ({ ...meta, priority, callback }),
+  )(),
   removeEventListener: createAction(
     'REMOVE_EVENT_LISTENER',
-    action => (
+    (
       { priority = 0, ...meta }: KeyBindingMeta,
       callback: KeyBindingEventCallback,
-    ) => action({ ...meta, priority, callback }),
-  ),
+    ) => ({ ...meta, priority, callback }),
+  )(),
 }
 
 export const keyBindingsPerWindowReducer = createReducer<

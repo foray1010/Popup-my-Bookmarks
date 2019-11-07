@@ -12,12 +12,12 @@ export const windowsInitialState: WindowsState = {
 export const windowsCreators = {
   setActiveWindowId: createAction(
     'SET_ACTIVE_WINDOW_ID',
-    action => (windowId: string) => action(windowId),
-  ),
+    (windowId: string) => windowId,
+  )(),
   unsetActiveWindowId: createAction(
     'UNSET_ACTIVE_WINDOW_ID',
-    action => (windowId: string) => action(windowId),
-  ),
+    (windowId: string) => windowId,
+  )(),
 }
 
 export const windowsReducer = createReducer<

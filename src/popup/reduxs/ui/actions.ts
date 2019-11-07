@@ -2,13 +2,13 @@ import { createAction } from 'typesafe-actions'
 
 export const setHighlightedItemCoordinates = createAction(
   'SET_HIGHLIGHTED_ITEM_COORDINATES',
-  action => (highlightedItemCoordinates: {
+  (highlightedItemCoordinates: {
     positionLeft: number
     positionTop: number
-  }) => action({ highlightedItemCoordinates }),
-)
+  }) => ({ highlightedItemCoordinates }),
+)()
 
 export const setIsFocusSearchInput = createAction(
   'SET_IS_FOCUS_SEARCH_INPUT',
-  action => (isFocusSearchInput: boolean) => action({ isFocusSearchInput }),
-)
+  (isFocusSearchInput: boolean) => ({ isFocusSearchInput }),
+)()
