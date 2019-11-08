@@ -963,12 +963,12 @@
     remark-preset-lint-recommended "^3.0.3"
     remark-preset-prettier "^0.2.2"
 
-"@foray1010/stylelint-config@1.4.2":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-1.4.2.tgz#18d58eb79539a10b2e927a51c1e49a6ac3b4f668"
-  integrity sha512-WYkUsnr99UrpGIkSMVR/i3nTSdZedhhg0k6FRDy7o+S8tuJDjq+RC123/kNoPP9m41T/jyNCtPMmvCn+5hSNPw==
+"@foray1010/stylelint-config@1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-1.4.3.tgz#918f8a136934359d09858e0f44d7b995529bc949"
+  integrity sha512-AoVef7I/lbDdWkspI3HD4O9ZTUrWGUr0FtledO8oujqpUtM0e2hJA8IXfoHBuFG/aOXidjqPBTYGSfmjdxUz2A==
   dependencies:
-    stylelint-config-css-modules "^1.5.0"
+    stylelint-config-css-modules "^2.0.0"
     stylelint-config-prettier "^6.0.0"
     stylelint-config-standard "^19.0.0"
     stylelint-prettier "^1.1.1"
@@ -12476,10 +12476,10 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
-stylelint-config-css-modules@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/stylelint-config-css-modules/-/stylelint-config-css-modules-1.5.0.tgz#c7d901db052f5a2ee3135dde51490d34c281add3"
-  integrity sha512-Zz0Q8VLpUcgOXIuXWz7Iq5FkyF6e3eYAZoA6NpJpzux+lL99z11j5tTdcEHoPwB2YDXxbB50QypCuaQp80YuXQ==
+stylelint-config-css-modules@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-css-modules/-/stylelint-config-css-modules-2.0.0.tgz#e239240796eb6b2b826f25100adb21830349cf3b"
+  integrity sha512-+jn5XNQfJ/i5iUIBit/1ys4sh0+pM9B/Krzak3wKuvFXYJk5eNU+iSkbD5aZZG/sY+Hr12YUiP2vqQiglqP5zg==
 
 stylelint-config-prettier@^6.0.0:
   version "6.0.0"
