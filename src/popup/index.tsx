@@ -1,5 +1,4 @@
 import 'core-js/es'
-import 'resize-observer-polyfill/dist/ResizeObserver.global'
 
 import '../manifest.yml'
 
