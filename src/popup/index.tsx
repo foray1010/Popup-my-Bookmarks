@@ -16,11 +16,11 @@ import { rootReducer, rootSaga } from './reduxs'
 import { LocalStorage } from './types/localStorage'
 
 const main = async (): Promise<void> => {
-  const [localStorage, options, optionsConfig]: [
+  const [localStorage, options, optionsConfig] = await Promise.all<
     LocalStorage,
     Partial<Options>,
-    OptionsConfig,
-  ] = await Promise.all([
+    OptionsConfig
+  >([
     webExtension.storage.local.get(),
     webExtension.storage.sync.get(),
     getOptionsConfig(),

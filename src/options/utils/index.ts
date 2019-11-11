@@ -5,10 +5,10 @@ import { Options, OptionsConfig } from '../../core/types/options'
 import { getOptionsConfig } from '../../core/utils'
 
 export const initOptions = async (): Promise<Options> => {
-  const [options, optionsConfig]: [
+  const [options, optionsConfig] = await Promise.all<
     Partial<Options>,
-    OptionsConfig,
-  ] = await Promise.all([webExtension.storage.sync.get(), getOptionsConfig()])
+    OptionsConfig
+  >([webExtension.storage.sync.get(), getOptionsConfig()])
 
   const missingOptionKeys = R.difference(
     Object.keys(optionsConfig),
