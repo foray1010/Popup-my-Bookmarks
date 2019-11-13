@@ -28,18 +28,20 @@ export function* getBookmarkInfo(id: string): SagaIterator<BookmarkInfo> {
     })
   }
 
-  const bookmarkNodes: Array<
-    webExtension.bookmarks.BookmarkTreeNode
-  > = yield call(getBookmarkNodes, id)
+  const bookmarkNodes: Array<webExtension.bookmarks.BookmarkTreeNode> = yield call(
+    getBookmarkNodes,
+    id,
+  )
   return toBookmarkInfo(bookmarkNodes[0])
 }
 
 export function* getBookmarkChildren(
   id: string,
 ): SagaIterator<Array<BookmarkInfo>> {
-  const bookmarkChildNodes: Array<
-    webExtension.bookmarks.BookmarkTreeNode
-  > = yield call(getBookmarkChildNodes, id)
+  const bookmarkChildNodes: Array<webExtension.bookmarks.BookmarkTreeNode> = yield call(
+    getBookmarkChildNodes,
+    id,
+  )
   return R.map(toBookmarkInfo, bookmarkChildNodes)
 }
 
@@ -114,9 +116,10 @@ interface SearchQuery {
 export function* searchBookmarks(
   searchQuery: SearchQuery,
 ): SagaIterator<Array<BookmarkInfo>> {
-  const searchResultNodes: Array<
-    webExtension.bookmarks.BookmarkTreeNode
-  > = yield call(searchBookmarkNodes, searchQuery)
+  const searchResultNodes: Array<webExtension.bookmarks.BookmarkTreeNode> = yield call(
+    searchBookmarkNodes,
+    searchQuery,
+  )
   return R.map(toBookmarkInfo, searchResultNodes)
 }
 
