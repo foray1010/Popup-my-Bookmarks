@@ -202,10 +202,10 @@ const productionConfig: webpack.Configuration = {
         terserOptions: {
           compress: {
             drop_console: true,
+            module: true,
             passes: 2,
             pure_getters: true,
-            // not sure why it breaks `yarn build`
-            // unsafe: true,
+            unsafe: true,
             unsafe_arrows: true,
             unsafe_comps: true,
             unsafe_Function: true,
@@ -215,10 +215,7 @@ const productionConfig: webpack.Configuration = {
             unsafe_regexp: true,
             unsafe_undefined: true,
           },
-          ecma: 6,
-          output: {
-            wrap_iife: true,
-          },
+          ecma: 8,
         },
       }),
     ],
