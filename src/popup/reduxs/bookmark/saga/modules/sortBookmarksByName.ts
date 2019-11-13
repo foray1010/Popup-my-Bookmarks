@@ -10,11 +10,7 @@ import * as bookmarkCreators from '../../actions'
 import { getBookmarkInfo, getBookmarkTree } from '../utils/getters'
 
 const groupBySeparator = R.groupWith<BookmarkInfo>(
-  R.compose(
-    R.not,
-    R.propEq('type', CST.BOOKMARK_TYPES.SEPARATOR),
-    R.nthArg(1),
-  ),
+  R.compose(R.not, R.propEq('type', CST.BOOKMARK_TYPES.SEPARATOR), R.nthArg(1)),
 )
 
 interface TypeGroup {
