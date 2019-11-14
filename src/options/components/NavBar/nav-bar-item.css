@@ -22,14 +22,14 @@
 
 .main {
   composes: focus from '../../../core/styles/composes.css';
-  background-color: transparent;
+  flex: 1 0 0;
+  padding-top: var(--golden-gap-2x);
   border: 0;
   border-bottom: var(--golden-gap-2x) solid transparent;
+  background-color: transparent;
   color: var(--oc-white);
   cursor: default;
-  flex: 1 0 0;
   font: 16px 'Archivo Narrow', sans-serif;
-  padding-top: var(--golden-gap-2x);
   text-align: center;
 
   &:hover {

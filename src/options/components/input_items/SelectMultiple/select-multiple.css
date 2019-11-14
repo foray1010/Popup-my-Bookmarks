@@ -6,13 +6,13 @@
 }
 
 .main {
-  border: 1px solid var(--main-color1);
   display: inline-block;
   padding: var(--golden-gap-2x);
+  border: 1px solid var(--main-color1);
 
   & > label {
-    align-items: center;
     display: flex;
+    align-items: center;
 
     & > input {
       margin-right: var(--golden-gap-2x);

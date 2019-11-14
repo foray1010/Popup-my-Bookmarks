@@ -6,30 +6,30 @@
 }
 
 .header {
+  padding: var(--golden-gap) var(--golden-gap-4x);
   background-color: var(--main-color2);
   color: var(--oc-white);
   cursor: default;
   float: left;
-  padding: var(--golden-gap) var(--golden-gap-4x);
 }
 
 .input {
   composes: focus from '../../../core/styles/composes.css';
   composes: input from '../../../core/styles/composes.css';
-  border-color: var(--highlight-level3);
+  width: 100%;
   box-sizing: border-box;
   padding: var(--golden-gap-2x);
-  width: 100%;
+  border-color: var(--highlight-level3);
 }
 
 .main {
-  background-color: var(--oc-white);
-  border: solid var(--highlight-level4);
-  border-width: 1px 0;
+  width: var(--width);
   box-sizing: border-box;
   padding: var(--golden-gap-2x) var(--golden-gap);
+  border: solid var(--highlight-level4);
+  border-width: 1px 0;
+  background-color: var(--oc-white);
   text-align: right;
-  width: var(--width);
 
   & > *:not(:first-child) {
     margin-top: var(--golden-gap-2x);

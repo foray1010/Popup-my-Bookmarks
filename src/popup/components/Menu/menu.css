@@ -1,15 +1,15 @@
 @import '../../../core/styles/variables.css';
 
 .main {
-  background-color: var(--oc-white);
-  border: 1px solid var(--highlight-level4);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   padding: var(--golden-gap-2x);
+  border: 1px solid var(--highlight-level4);
+  background-color: var(--oc-white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
   /* separator between menu fields */
   & > * + * {
+    padding-top: var(--golden-gap-2x);
     border-top: 1px solid var(--highlight-level2);
     margin-top: var(--golden-gap-2x);
-    padding-top: var(--golden-gap-2x);
   }
 }

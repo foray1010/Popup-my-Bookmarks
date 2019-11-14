@@ -1,5 +1,5 @@
 .wrapper {
-  left: var(--positionLeft);
   position: absolute;
   top: var(--positionTop);
+  left: var(--positionLeft);
 }

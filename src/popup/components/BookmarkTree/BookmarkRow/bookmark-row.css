@@ -6,10 +6,10 @@
 }
 
 .main {
-  align-items: center;
-  box-sizing: border-box;
   composes: list-item from '../../../../core/styles/composes.css';
   display: flex;
+  box-sizing: border-box;
+  align-items: center;
   padding: var(--golden-gap) 0 var(--golden-gap) var(--golden-gap);
 
   &.drag-indicator {
@@ -38,9 +38,9 @@
 }
 
 .icon {
+  width: var(--iconSize);
   flex-shrink: 0;
   margin-right: var(--golden-gap-2x);
-  width: var(--iconSize);
 }
 
 .title {

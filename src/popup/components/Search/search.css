@@ -1,35 +1,35 @@
 @import '../../../core/styles/variables.css';
 
 .cancel-icon {
-  flex-shrink: 0;
-  height: 14px;
-  padding: 5px;
   width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  padding: 5px;
 }
 
 .main {
-  border: solid var(--highlight-level3);
-  border-width: 0 0 1px;
   display: flex;
   height: var(--input-height);
+  border: solid var(--highlight-level3);
+  border-width: 0 0 1px;
   margin-bottom: var(--golden-gap);
 }
 
 .search-icon {
-  flex-shrink: 0;
+  width: 14px;
   height: 14px;
+  flex-shrink: 0;
   padding: 4px;
   padding-right: 3px;
-  width: 14px;
 }
 
 .search-input {
-  background-color: transparent;
-  border: 0;
-  color: var(--main-font-color);
   flex-grow: 1;
-  font-size: 12px;
-  margin-right: var(--golden-gap);
-  outline: 0;
   padding: 0 var(--golden-gap);
+  border: 0;
+  margin-right: var(--golden-gap);
+  background-color: transparent;
+  color: var(--main-font-color);
+  font-size: 12px;
+  outline: 0;
 }

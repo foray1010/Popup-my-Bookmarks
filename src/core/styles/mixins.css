@@ -10,8 +10,8 @@
   }
 
   --highlight-list-item: {
-    background-color: var(--highlight-level1);
     border-color: var(--highlight-level2);
+    background-color: var(--highlight-level1);
     outline: 0;
   }
 }

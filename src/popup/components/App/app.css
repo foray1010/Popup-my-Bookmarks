@@ -2,8 +2,8 @@
 @import './globals.css';
 
 .main {
+  width: var(--width);
+  height: var(--height);
   font-family: var(--fontFamily);
   font-size: var(--fontSize);
-  height: var(--height);
-  width: var(--width);
 }

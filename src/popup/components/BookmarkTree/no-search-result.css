@@ -1,11 +1,11 @@
 @import '../../../core/styles/variables.css';
 
 .main {
-  box-sizing: border-box;
-  color: var(--main-font-color);
   composes: no-text-overflow from '../../../core/styles/composes.css';
-  cursor: default;
-  margin: var(--golden-gap-2x);
+  box-sizing: border-box;
   padding: var(--golden-gap 0);
+  margin: var(--golden-gap-2x);
+  color: var(--main-font-color);
+  cursor: default;
   text-align: center;
 }

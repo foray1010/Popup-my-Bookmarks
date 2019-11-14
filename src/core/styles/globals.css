@@ -7,9 +7,9 @@
 }
 
 :global(body) {
+  margin: 0;
   background-color: var(--oc-white);
   color: var(--main-font-color);
-  margin: 0;
 }
 
 :global([hidden]) {

@@ -14,13 +14,13 @@
 }
 
 .master {
-  color: var(--main-color2);
-  width: var(--width);
   composes: _panel;
+  width: var(--width);
+  color: var(--main-color2);
 }
 
 .slave {
-  color: var(--main-color1);
-  width: var(--width);
   composes: _panel;
+  width: var(--width);
+  color: var(--main-color1);
 }

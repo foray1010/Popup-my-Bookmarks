@@ -1,8 +1,8 @@
 .main {
-  background-color: var(--backgroundColor);
-  bottom: 0;
-  opacity: var(--opacity);
   position: absolute;
   top: 0;
+  bottom: 0;
   width: 100%;
+  background-color: var(--backgroundColor);
+  opacity: var(--opacity);
 }

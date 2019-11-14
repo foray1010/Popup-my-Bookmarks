@@ -5,18 +5,18 @@
 }
 
 :global(::-webkit-scrollbar) {
-  background-color: transparent;
-  height: 5px;
   width: calc(5px + var(--golden-gap));
+  height: 5px;
+  background-color: transparent;
 }
 
 :global(::-webkit-scrollbar-thumb) {
-  background-color: var(--highlight-level3);
   border-left: var(--golden-gap) solid var(--oc-white);
+  background-color: var(--highlight-level3);
 
   &:hover {
-    background-color: var(--highlight-level4);
     border: 0;
+    background-color: var(--highlight-level4);
   }
 
   &:active {

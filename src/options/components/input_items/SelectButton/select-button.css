@@ -1,24 +1,24 @@
 @import '../../../../core/styles/variables.css';
 
 .cover {
-  background-color: currentcolor;
-  height: 100%;
   position: absolute;
+  width: 50%;
+  height: 100%;
+  background-color: currentcolor;
   transition-duration: inherit;
   transition-property: left;
-  width: 50%;
 }
 
 .main {
-  align-items: center;
-  background-color: var(--oc-white);
-  border: 1px solid currentcolor;
-  box-sizing: border-box;
-  color: var(--main-color1);
-  display: flex;
-  height: var(--input-height);
   position: relative;
+  display: flex;
+  width: 80px;
+  height: var(--input-height);
+  box-sizing: border-box;
+  align-items: center;
+  border: 1px solid currentcolor;
+  background-color: var(--oc-white);
+  color: var(--main-color1);
   text-align: center;
   transition-duration: 0.4s;
-  width: 80px;
 }

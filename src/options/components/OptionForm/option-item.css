@@ -9,14 +9,14 @@
   & > input[type='number'],
   & > input[type='text'],
   & > select {
-    border-color: var(--main-color1);
-    box-sizing: border-box;
     height: var(--input-height);
+    box-sizing: border-box;
     padding: 0 var(--golden-gap-2x);
+    border-color: var(--main-color1);
   }
 
   & > input[type='number'] {
-    text-align: right;
     width: 50px;
+    text-align: right;
   }
 }

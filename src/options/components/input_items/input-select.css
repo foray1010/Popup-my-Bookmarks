@@ -1,27 +1,27 @@
 @import '../../../core/styles/variables.css';
 
 .main {
-  border: 1px solid var(--main-color1);
+  position: relative;
   display: inline-block;
   height: var(--input-height);
-  position: relative;
+  border: 1px solid var(--main-color1);
 }
 
 .input,
 .select {
-  border: 0 !important;
   height: 100%;
   padding: 0 var(--golden-gap-2x);
+  border: 0 !important;
 }
 
 .input {
   composes: focus from '../../../core/styles/composes.css';
-  box-sizing: border-box;
-  left: 0;
   position: absolute;
-  text-align: left;
   top: 0;
+  left: 0;
   width: calc(100% - var(--input-height));
+  box-sizing: border-box;
+  text-align: left;
 }
 
 .select {

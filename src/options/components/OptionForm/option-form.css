@@ -1,9 +1,9 @@
 @import '../../../core/styles/variables.css';
 
 .table {
+  width: 100%;
   border-spacing: var(--golden-gap-4x);
   table-layout: fixed;
-  width: 100%;
 
   & > tbody,
   & > tfoot {

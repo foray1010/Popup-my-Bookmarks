@@ -5,12 +5,12 @@
 }
 
 .close {
-  background-color: transparent;
-  border: 0;
-  flex-shrink: 0; /* don't push me out of view when title is too long */
-  height: var(--tree-header-height);
   position: relative;
   width: var(--tree-header-height);
+  height: var(--tree-header-height);
+  flex-shrink: 0; /* don't push me out of view when title is too long */
+  border: 0;
+  background-color: transparent;
 
   &:hover {
     background-color: var(--main-color4);
@@ -18,41 +18,41 @@
 
   &::before,
   &::after {
+    position: absolute;
     background-color: var(--oc-white);
     content: '';
-    position: absolute;
     transform: rotate(45deg);
   }
 
   &::before {
-    height: 12px;
-    left: 14px;
     top: 9px;
+    left: 14px;
     width: 2px;
+    height: 12px;
   }
 
   &::after {
-    height: 2px;
-    left: 9px;
     top: 14px;
+    left: 9px;
     width: 12px;
+    height: 2px;
   }
 }
 
 .main {
-  background-color: currentcolor;
   display: flex;
   height: var(--tree-header-height);
   margin-bottom: var(--golden-gap);
+  background-color: currentcolor;
 }
 
 .title {
-  color: var(--oc-white);
   composes: no-text-overflow from '../../../core/styles/composes.css';
+  padding: 0 var(--golden-gap-2x);
+  margin: 0;
+  margin-right: auto;
+  color: var(--oc-white);
   cursor: default;
   font: 22px 'Archivo Narrow', simhei, sans-serif;
   line-height: calc(var(--tree-header-height) + 1px);
-  margin: 0;
-  margin-right: auto;
-  padding: 0 var(--golden-gap-2x);
 }
