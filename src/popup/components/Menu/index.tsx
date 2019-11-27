@@ -38,10 +38,7 @@ const MenuContainer = () => {
     setItemCount,
   } = React.useContext(ListNavigationContext)
 
-  const allRowNames = React.useMemo(
-    () => menuPattern.reduce((acc, val) => acc.concat(val), []),
-    [menuPattern],
-  )
+  const allRowNames = React.useMemo(() => menuPattern.flat(), [menuPattern])
   const highlightedIndex = lists.highlightedIndices.get(0)
 
   React.useEffect(() => {

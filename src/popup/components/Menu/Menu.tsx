@@ -13,10 +13,7 @@ interface Props {
   unclickableRows: Array<string>
 }
 const Menu = (props: Props) => {
-  const allRowNames = props.menuPattern.reduce(
-    (acc, val) => acc.concat(val),
-    [],
-  )
+  const allRowNames = props.menuPattern.flat()
 
   return (
     <div className={classes.main}>

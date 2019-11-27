@@ -4,7 +4,7 @@
     "esModuleInterop": true,
     "isolatedModules": false,
     "jsx": "react",
-    "lib": ["es2017", "dom"],
+    "lib": ["es2019", "dom"],
     "noEmit": true,
     "resolveJsonModule": true,
     "sourceMap": false,

@@ -51,14 +51,9 @@ const sortGroupByPriority = (groups: Array<TypeGroup>) => {
 const ungroup = (
   nestedGroups: Array<Array<TypeGroup>>,
 ): Array<BookmarkInfo> => {
-  return nestedGroups.reduce((acc: Array<BookmarkInfo>, nestedGroup) => {
-    return acc.concat(
-      nestedGroup.reduce(
-        (acc2: Array<BookmarkInfo>, group) => acc2.concat(group.members),
-        [],
-      ),
-    )
-  }, [])
+  return nestedGroups
+    .map(nestedGroup => nestedGroup.map(group => group.members).flat())
+    .flat()
 }
 
 const sortBookmarks = R.compose(
