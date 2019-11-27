@@ -61,7 +61,7 @@ const EditorContainer = () => {
             }
             initialTitle={initialTitle}
             initialUrl={initialUrl}
-            width={width || 0}
+            width={width ?? 0}
             onCancel={closeEditor}
             onConfirm={handleConfirm}
           />

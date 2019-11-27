@@ -1,7 +1,6 @@
 // disable redux-saga/no-unhandled-errors as these are utility functions
 /* eslint redux-saga/no-unhandled-errors: 'off' */
 
-import * as R from 'ramda'
 import { SagaIterator } from 'redux-saga'
 import { all, call } from 'redux-saga/effects'
 import webExtension from 'webextension-polyfill'
@@ -42,7 +41,7 @@ export function* getBookmarkChildren(
     getBookmarkChildNodes,
     id,
   )
-  return R.map(toBookmarkInfo, bookmarkChildNodes)
+  return bookmarkChildNodes.map(toBookmarkInfo)
 }
 
 export function* getBookmarkTree(id: string): SagaIterator<BookmarkTree> {
@@ -98,13 +97,13 @@ export function* getFirstBookmarkTree(
   return {
     ...firstTreeInfo,
     children: [
-      ...R.reject(bookmarkInfo => {
+      ...rootFolders.filter(bookmarkInfo => {
         const idNumber = Number(bookmarkInfo.id)
-        return (
+        return !(
           idNumber === options[CST.OPTIONS.DEF_EXPAND] ||
-          (options[CST.OPTIONS.HIDE_ROOT_FOLDER] || []).includes(idNumber)
+          (options[CST.OPTIONS.HIDE_ROOT_FOLDER] ?? []).includes(idNumber)
         )
-      }, rootFolders),
+      }),
       ...firstTreeInfo.children,
     ],
   }
@@ -120,7 +119,7 @@ export function* searchBookmarks(
     searchBookmarkNodes,
     searchQuery,
   )
-  return R.map(toBookmarkInfo, searchResultNodes)
+  return searchResultNodes.map(toBookmarkInfo)
 }
 
 export function* tryGetBookmarkTree(

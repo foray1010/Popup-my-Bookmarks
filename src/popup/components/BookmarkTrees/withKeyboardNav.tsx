@@ -79,7 +79,7 @@ export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
       if (!treeInfo) return
 
       // default open first bookmark in last tree
-      const highlightedIndex = highlightedIndices.get(lastListIndex) || 0
+      const highlightedIndex = highlightedIndices.get(lastListIndex) ?? 0
       const bookmarkInfo = treeInfo.children[highlightedIndex]
       if (!bookmarkInfo) return
 

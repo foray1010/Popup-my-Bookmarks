@@ -1,4 +1,3 @@
-import * as R from 'ramda'
 import * as React from 'react'
 
 import { Options } from '../../../core/types/options'
@@ -19,11 +18,7 @@ const BookmarkTrees = (props: Props) => {
   const mainTree = trees.filter((_, index) => index % 2 === 0)
   const subTree = trees.filter((_, index) => index % 2 !== 0)
 
-  const sectionWidth: number = R.pathOr(
-    0,
-    ['options', OPTIONS.SET_WIDTH],
-    props,
-  )
+  const sectionWidth = props.options[OPTIONS.SET_WIDTH] ?? 0
   const styles = React.useMemo(
     (): object => ({
       '--width': `${sectionWidth}px`,

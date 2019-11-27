@@ -1,4 +1,3 @@
-import * as R from 'ramda'
 import * as React from 'react'
 
 import { MenuPattern } from '../../types'
@@ -14,7 +13,10 @@ interface Props {
   unclickableRows: Array<string>
 }
 const Menu = (props: Props) => {
-  const allRowNames = props.menuPattern.reduce(R.concat, [])
+  const allRowNames = props.menuPattern.reduce(
+    (acc, val) => acc.concat(val),
+    [],
+  )
 
   return (
     <div className={classes.main}>

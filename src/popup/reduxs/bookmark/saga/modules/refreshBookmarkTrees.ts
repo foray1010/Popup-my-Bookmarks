@@ -6,8 +6,8 @@ import { RootState } from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 import { getBookmarkTrees } from '../utils/getters'
 
-export const getRestTreeIds = (trees: Array<BookmarkTree>) =>
-  R.tail(trees).map(tree => tree.parent.id)
+export const getRestTreeIds = ([, ...restTrees]: Array<BookmarkTree>) =>
+  restTrees.map(tree => tree.parent.id)
 
 export function* refreshBookmarkTrees() {
   try {

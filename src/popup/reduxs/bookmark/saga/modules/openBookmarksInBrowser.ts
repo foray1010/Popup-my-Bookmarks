@@ -22,12 +22,11 @@ function* getUrls(ids: Array<string>) {
     )
 
     const filteredBookmarkInfos = bookmarkInfos.filter(
-      R.both(
-        R.propEq('isSimulated', false),
-        R.propEq('type', BOOKMARK_TYPES.BOOKMARK),
-      ),
+      bookmarkInfo =>
+        bookmarkInfo.isSimulated === false &&
+        bookmarkInfo.type === BOOKMARK_TYPES.BOOKMARK,
     )
-    return R.pluck('url', filteredBookmarkInfos)
+    return filteredBookmarkInfos.map(bookmarkInfo => bookmarkInfo.url)
   } catch (err) {
     console.error(err)
 

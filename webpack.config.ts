@@ -22,7 +22,7 @@ const cssLoaderOptions = {
   },
   importLoaders: 1,
 }
-const nodeEnv = process.env.NODE_ENV || 'development'
+const nodeEnv = process.env.NODE_ENV ?? 'development'
 const outputDir = path.join('build', nodeEnv)
 const sourceDir = 'src'
 

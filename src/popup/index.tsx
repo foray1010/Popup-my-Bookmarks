@@ -7,6 +7,7 @@ import * as React from 'react'
 import { Provider } from 'react-redux'
 import webExtension from 'webextension-polyfill'
 
+import { OPTIONS } from '../core/constants'
 import configureStore from '../core/store/configureStore'
 import { Options, OptionsConfig } from '../core/types/options'
 import { getOptionsConfig, renderToBody } from '../core/utils'
@@ -27,8 +28,8 @@ const main = async (): Promise<void> => {
 
   // if missing option, open options page to init options
   const missingOptionKeys = R.difference(
-    Object.keys(optionsConfig),
-    Object.keys(options),
+    Object.keys(optionsConfig) as OPTIONS[],
+    Object.keys(options) as OPTIONS[],
   )
   if (missingOptionKeys.length !== 0) {
     await webExtension.runtime.openOptionsPage()
@@ -39,7 +40,7 @@ const main = async (): Promise<void> => {
     rootReducer,
     rootSaga,
     preloadedState: {
-      lastPositions: localStorage.lastPositions || [],
+      lastPositions: localStorage.lastPositions ?? [],
       options,
     },
   })

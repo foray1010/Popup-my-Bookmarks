@@ -83,7 +83,7 @@ export function* clickMenuRow({
           getBookmarkTree,
           targetBookmarkInfo.id,
         )
-        const ids = R.pluck('id', targetBookmarkTree.children)
+        const ids = targetBookmarkTree.children.map(childInfo => childInfo.id)
 
         const mapping = {
           [CST.MENU_OPEN_ALL]: CST.OPEN_IN_TYPES.BACKGROUND_TAB,

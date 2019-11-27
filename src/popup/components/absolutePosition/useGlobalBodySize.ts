@@ -16,10 +16,10 @@ const useBodySizeStack = (): {
       (acc, bodySize) => {
         return {
           height: bodySize.height
-            ? Math.max(bodySize.height, acc.height || 0)
+            ? Math.max(bodySize.height, acc.height ?? 0)
             : acc.height,
           width: bodySize.width
-            ? Math.max(bodySize.width, acc.width || 0)
+            ? Math.max(bodySize.width, acc.width ?? 0)
             : acc.width,
         }
       },

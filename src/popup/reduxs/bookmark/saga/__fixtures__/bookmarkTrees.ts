@@ -19,7 +19,7 @@ const generateBookmarkInfo = (type?: CST.BOOKMARK_TYPES) => ({
   url: chance.url(),
   iconUrl: chance.url(),
   storageIndex: chance.integer({ min: -1, max: 9999 }),
-  type: type || generateType(),
+  type: type ?? generateType(),
   isRoot: chance.bool(),
   isSimulated: false,
   isUnmodifiable: chance.bool(),

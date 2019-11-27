@@ -27,7 +27,7 @@ const AppContainer = () => {
       '--fontFamily': [options[OPTIONS.FONT_FAMILY], 'sans-serif']
         .filter(Boolean)
         .join(','),
-      '--fontSize': `${options[OPTIONS.FONT_SIZE] || 12}px`,
+      '--fontSize': `${options[OPTIONS.FONT_SIZE] ?? 12}px`,
       '--height':
         globalBodySize && globalBodySize.height !== undefined
           ? `${globalBodySize.height}px`

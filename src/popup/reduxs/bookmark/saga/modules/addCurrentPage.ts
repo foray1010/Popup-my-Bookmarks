@@ -18,8 +18,8 @@ export function* addCurrentPage({
       bookmarkCreators.createBookmark(
         payload.parentId,
         payload.index,
-        currentTab.title || '',
-        currentTab.url || '',
+        currentTab.title ?? '',
+        currentTab.url ?? '',
       ),
     )
   } catch (err) {

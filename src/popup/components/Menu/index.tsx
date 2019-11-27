@@ -1,4 +1,3 @@
-import * as R from 'ramda'
 import * as React from 'react'
 import { useSelector } from 'react-redux'
 
@@ -39,9 +38,10 @@ const MenuContainer = () => {
     setItemCount,
   } = React.useContext(ListNavigationContext)
 
-  const allRowNames = React.useMemo(() => menuPattern.reduce(R.concat, []), [
-    menuPattern,
-  ])
+  const allRowNames = React.useMemo(
+    () => menuPattern.reduce((acc, val) => acc.concat(val), []),
+    [menuPattern],
+  )
   const highlightedIndex = lists.highlightedIndices.get(0)
 
   React.useEffect(() => {

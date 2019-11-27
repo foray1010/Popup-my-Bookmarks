@@ -42,7 +42,7 @@ export const keyBindingsPerWindowReducer = createReducer<
     (state, { payload }) => {
       const { callback, key, priority, windowId } = payload
 
-      const keyBindings = state.get(windowId) || []
+      const keyBindings = state.get(windowId) ?? []
       const updatedKeyBindings = [
         ...keyBindings,
         { callback, key, priority },

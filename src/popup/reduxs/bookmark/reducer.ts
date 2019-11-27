@@ -75,7 +75,7 @@ export const bookmarkReducer = createReducer<
     { payload }: ReturnType<typeof bookmarkCreators.removeBookmarkTree>,
   ) => {
     const removeFromIndex = state.trees.findIndex(
-      R.pathEq(['parent', 'id'], payload.id),
+      tree => tree.parent.id === payload.id,
     )
     if (removeFromIndex < 0) return state
 
@@ -90,7 +90,7 @@ export const bookmarkReducer = createReducer<
     { payload }: ReturnType<typeof bookmarkCreators.removeNextBookmarkTrees>,
   ) => {
     const removeAfterIndex = state.trees.findIndex(
-      R.pathEq(['parent', 'id'], payload.removeAfterId),
+      tree => tree.parent.id === payload.removeAfterId,
     )
     if (removeAfterIndex < 0) return state
 

@@ -52,11 +52,11 @@ export const toBookmarkInfo = R.compose(
     isRoot: isRoot(bookmarkNode),
     isSimulated: false,
     isUnmodifiable: isRoot(bookmarkNode) || Boolean(bookmarkNode.unmodifiable),
-    parentId: bookmarkNode.parentId || '',
+    parentId: bookmarkNode.parentId ?? '',
     storageIndex:
       typeof bookmarkNode.index === 'number' ? bookmarkNode.index : -1,
     title: bookmarkNode.title,
     type: getType(bookmarkNode),
-    url: bookmarkNode.url || '',
+    url: bookmarkNode.url ?? '',
   }),
 )

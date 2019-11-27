@@ -3,7 +3,6 @@ import path from 'path'
 import bluebird from 'bluebird'
 import fs from 'fs-extra'
 import prompts from 'prompts'
-import R from 'ramda'
 import Transifex from 'transifex'
 
 const questions = [
@@ -64,7 +63,7 @@ const main = async () => {
       const messagesJson: Messages = JSON.parse(messagesJsonStr)
 
       const sortedMessagesJson = Object.keys(messagesJson)
-        .filter(key => Boolean(R.path([key, 'message'], messagesJson)))
+        .filter(key => Boolean(messagesJson[key].message))
         .sort()
         .reduce((obj: Messages, key) => {
           // trim message

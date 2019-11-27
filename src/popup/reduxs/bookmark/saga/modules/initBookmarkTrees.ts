@@ -15,18 +15,21 @@ export const getRememberedTreeIds = ({
   options: RootState['options']
 }): Array<string> => {
   if (!options[OPTIONS.REMEMBER_POS]) return []
-  return (lastPositions || []).map(x => x.id)
+  return (lastPositions ?? []).map(x => x.id)
 }
 
 export function* initBookmarkTrees() {
   try {
     const { lastPositions, options }: RootState = yield select(R.identity)
 
-    const rememberedTreeIds = getRememberedTreeIds({ lastPositions, options })
+    const [, ...openedTreeIds] = getRememberedTreeIds({
+      lastPositions,
+      options,
+    })
 
     const bookmarkTrees: Array<BookmarkTree> = yield call(
       getBookmarkTrees,
-      R.tail(rememberedTreeIds),
+      openedTreeIds,
       options,
     )
 

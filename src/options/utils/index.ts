@@ -1,6 +1,7 @@
 import * as R from 'ramda'
 import webExtension from 'webextension-polyfill'
 
+import { OPTIONS } from '../../core/constants'
 import { Options, OptionsConfig } from '../../core/types/options'
 import { getOptionsConfig } from '../../core/utils'
 
@@ -11,13 +12,13 @@ export const initOptions = async (): Promise<Options> => {
   >([webExtension.storage.sync.get(), getOptionsConfig()])
 
   const missingOptionKeys = R.difference(
-    Object.keys(optionsConfig),
-    Object.keys(options),
+    Object.keys(optionsConfig) as OPTIONS[],
+    Object.keys(options) as OPTIONS[],
   )
   const missingOptions = missingOptionKeys.reduce(
     (acc: Partial<Options>, optionName) => ({
       ...acc,
-      [optionName]: R.path([optionName, 'default'], optionsConfig),
+      [optionName]: optionsConfig[optionName].default,
     }),
     {},
   )

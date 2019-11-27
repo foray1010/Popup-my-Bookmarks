@@ -1,4 +1,3 @@
-import * as R from 'ramda'
 import * as React from 'react'
 import { shallowEqual, useSelector } from 'react-redux'
 
@@ -28,7 +27,7 @@ const useReduxState = ({ treeId }: { treeId: string }) => {
   const reduxSelector = React.useCallback(
     (state: RootState) => {
       const treeIndex = state.bookmark.trees.findIndex(
-        R.pathEq(['parent', 'id'], treeId),
+        tree => tree.parent.id === treeId,
       )
       const treeInfo = state.bookmark.trees[treeIndex]
 
@@ -36,11 +35,11 @@ const useReduxState = ({ treeId }: { treeId: string }) => {
         state.options[CST.OPTIONS.REMEMBER_POS],
       )
       const lastPosition = isRememberLastPositions
-        ? (state.lastPositions || []).find(R.propEq('id', treeId))
+        ? (state.lastPositions ?? []).find(tree => tree.id === treeId)
         : undefined
 
       return {
-        iconSize: getIconSize(state.options[CST.OPTIONS.FONT_SIZE] || 0),
+        iconSize: getIconSize(state.options[CST.OPTIONS.FONT_SIZE] ?? 0),
         isRememberLastPositions,
         isSearching: Boolean(state.bookmark.searchKeyword),
         // cover the folder if it is not the top two folder
@@ -48,8 +47,8 @@ const useReduxState = ({ treeId }: { treeId: string }) => {
         isShowHeader: treeIndex !== 0,
         isShowTooltip: Boolean(state.options[CST.OPTIONS.TOOLTIP]),
         lastScrollTop: lastPosition ? lastPosition.scrollTop : undefined,
-        listItemWidth: state.options[CST.OPTIONS.SET_WIDTH] || 0,
-        rowHeight: getRowHeight(state.options[CST.OPTIONS.FONT_SIZE] || 0),
+        listItemWidth: state.options[CST.OPTIONS.SET_WIDTH] ?? 0,
+        rowHeight: getRowHeight(state.options[CST.OPTIONS.FONT_SIZE] ?? 0),
         treeIndex,
         treeInfo,
       }
@@ -95,7 +94,7 @@ const BookmarkTreeContainer = ({ treeId }: Props) => {
   const highlightedIndex = lists.highlightedIndices.get(treeIndex)
   const highlightedId =
     highlightedIndex !== undefined
-      ? R.prop('id', treeInfo.children[highlightedIndex])
+      ? treeInfo.children[highlightedIndex]?.id
       : undefined
 
   const closeCurrentTree = React.useCallback(() => {

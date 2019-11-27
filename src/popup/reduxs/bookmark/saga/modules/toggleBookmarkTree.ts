@@ -12,7 +12,7 @@ export function* toggleBookmarkTree({
     const { bookmark }: RootState = yield select(R.identity)
 
     const isFolderOpened = bookmark.trees.some(
-      treeInfo => treeInfo.parent.id === payload.id,
+      tree => tree.parent.id === payload.id,
     )
 
     if (isFolderOpened) {

@@ -1,12 +1,13 @@
-import * as R from 'ramda'
 import webExtension from 'webextension-polyfill'
 
 import { OPTIONS, ROOT_ID } from '../constants'
 import { OptionsConfig } from '../types/options'
 
-const getOptionsConfig = async (): Promise<OptionsConfig> => {
-  const getMessages = R.map(webExtension.i18n.getMessage)
+const getMessages = (messageKeys: string[]) => {
+  return messageKeys.map(k => webExtension.i18n.getMessage(k))
+}
 
+const getOptionsConfig = async (): Promise<OptionsConfig> => {
   const openBookmarkChoices = getMessages([
     'clickOption1',
     'clickOption2',
@@ -16,13 +17,12 @@ const getOptionsConfig = async (): Promise<OptionsConfig> => {
     'clickOption6',
     'clickOption7',
   ])
-  const rootFolderChoices: Array<string> = []
 
+  const rootFolderChoices: Array<string> = []
   // get the root folders' title and set as the choices of 'defExpand'
   const rootFolders = await webExtension.bookmarks.getChildren(ROOT_ID)
   for (const rootFolder of rootFolders) {
     const rootFolderIdNum = Number(rootFolder.id)
-
     rootFolderChoices[rootFolderIdNum] = rootFolder.title
   }
 
