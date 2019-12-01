@@ -27,7 +27,7 @@
   "dependencies": {
     "@rehooks/component-size": "1.0.3",
     "classnames": "2.2.6",
-    "core-js": "3.4.4",
+    "core-js": "3.4.5",
     "lodash.debounce": "4.0.8",
     "nanoid": "2.1.7",
     "open-color": "1.7.0",
