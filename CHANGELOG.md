@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.0.0](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.2.1...v7.0.0) (2019-12-02)
+
+### ⚠ BREAKING CHANGES
+
+- require chrome version >= 64
+
+### Features
+
+- support dark mode ([9100419](https://github.com/foray1010/Popup-my-Bookmarks/commit/910041934c6c976e77dce9fdb6434174adc9a593))
+
+### Bug Fixes
+
+- **deps:** update dependency @rehooks/component-size to v1.0.3 ([16ffd0e](https://github.com/foray1010/Popup-my-Bookmarks/commit/16ffd0e6c27f90685b4b0d43a366084e8fd09af1))
+- **deps:** update dependency core-js to v3.2.1 ([e90aaaa](https://github.com/foray1010/Popup-my-Bookmarks/commit/e90aaaa649a9aee52080797d9143d772455cc2ca))
+- **deps:** update dependency core-js to v3.3.2 ([274e40c](https://github.com/foray1010/Popup-my-Bookmarks/commit/274e40c728f0b7aa38c81a6c751c88db170405fa))
+- **deps:** update dependency core-js to v3.3.4 ([#745](https://github.com/foray1010/Popup-my-Bookmarks/issues/745)) ([30de0f2](https://github.com/foray1010/Popup-my-Bookmarks/commit/30de0f243dce465c4c0f6372fc9e7313ad5cd532))
+- **deps:** update dependency core-js to v3.3.6 ([91dc7d8](https://github.com/foray1010/Popup-my-Bookmarks/commit/91dc7d8cd4ca52ce5a3b886020a678f3669ff22c))
+- **deps:** update dependency core-js to v3.4.0 ([80119cb](https://github.com/foray1010/Popup-my-Bookmarks/commit/80119cb0c51c58b65f74722dfadb04909dc53488))
+- **deps:** update dependency core-js to v3.4.5 ([0a6278f](https://github.com/foray1010/Popup-my-Bookmarks/commit/0a6278fd0eacd6bc93e799864c2d0362e17bbc59))
+- **deps:** update dependency nanoid to v2.0.4 ([e529a5a](https://github.com/foray1010/Popup-my-Bookmarks/commit/e529a5a104ae976f1e7b7d45fb205aa4c70eac0f))
+- **deps:** update dependency nanoid to v2.1.0 ([0d3d087](https://github.com/foray1010/Popup-my-Bookmarks/commit/0d3d0876f1f452712dfa68d6c0274034a82f453f))
+- **deps:** update dependency nanoid to v2.1.1 ([041633b](https://github.com/foray1010/Popup-my-Bookmarks/commit/041633bfffd42ee110e21e0c6b573d456772575c))
+- **deps:** update dependency nanoid to v2.1.3 ([1f0f249](https://github.com/foray1010/Popup-my-Bookmarks/commit/1f0f2497b2f86cbcbf5e2ce84c5422a6e414c1c3))
+- **deps:** update dependency nanoid to v2.1.4 ([5812159](https://github.com/foray1010/Popup-my-Bookmarks/commit/5812159f69267d3e07f0fc5ae1bf6fcf9cfa0fbc))
+- **deps:** update dependency nanoid to v2.1.6 ([26f6b6e](https://github.com/foray1010/Popup-my-Bookmarks/commit/26f6b6e4186e32c933a1abf899cca5e1b0a8d7ce))
+- **deps:** update dependency react-redux to v7.1.3 ([70f8477](https://github.com/foray1010/Popup-my-Bookmarks/commit/70f8477970af79acb4c72e77a592a3fa802308e2))
+- **deps:** update dependency redux-saga to v1.1.1 ([#689](https://github.com/foray1010/Popup-my-Bookmarks/issues/689)) ([8915c11](https://github.com/foray1010/Popup-my-Bookmarks/commit/8915c1194da0f47679e8acb68b6510ae52a46b23))
+- **deps:** update dependency redux-saga to v1.1.3 ([7fd8888](https://github.com/foray1010/Popup-my-Bookmarks/commit/7fd888870e0cf65b83697d798bea607d67c7abf6))
+- **deps:** update dependency typesafe-actions to v5 ([#761](https://github.com/foray1010/Popup-my-Bookmarks/issues/761)) ([77bb6f9](https://github.com/foray1010/Popup-my-Bookmarks/commit/77bb6f9617f89dbae7db5c9fa8a3d159a2e7b975))
+- **deps:** update dependency webextension-polyfill to v0.5.0 ([c5f53f8](https://github.com/foray1010/Popup-my-Bookmarks/commit/c5f53f8131d41c0be5249ef5bb7cc63fbe8ea0e1))
+- **deps:** update react monorepo to v16.10.1 ([93d7a75](https://github.com/foray1010/Popup-my-Bookmarks/commit/93d7a750f4842f60defdcf7403c259d3caba38b2))
+- **deps:** update react monorepo to v16.11.0 ([6055d4c](https://github.com/foray1010/Popup-my-Bookmarks/commit/6055d4c28351ce5a494b7a28c40e0e645c80fe63))
+
+* drop ResizeObserver polyfill ([abd13d7](https://github.com/foray1010/Popup-my-Bookmarks/commit/abd13d738902bf573dee2fa636a52d3363ccf972))
+
 ### [6.2.1](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.2.0...v6.2.1) (2019-07-15)
 
 ### Bug Fixes
