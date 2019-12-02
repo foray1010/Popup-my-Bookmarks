@@ -22,12 +22,17 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --main-background-color: var(--oc-gray-9);
     --highlight-level1: var(--oc-gray-8);
     --highlight-level2: var(--oc-gray-7);
     --highlight-level3: var(--oc-gray-6);
     --highlight-level4: var(--oc-gray-5);
     --highlight-level5: var(--oc-gray-4);
+    --main-background-color: var(--oc-gray-9);
+    --main-color1: var(--oc-blue-4);
+    --main-color2: var(--oc-orange-4);
+    --main-color3: var(--oc-teal-4);
+    --main-color4: var(--oc-red-6);
+    --main-color5: #a1887f; /* same as material color palette brown 300 */
     --main-font-color: var(--oc-white);
   }
 }
