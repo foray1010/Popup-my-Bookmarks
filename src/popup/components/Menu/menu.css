@@ -1,5 +1,3 @@
-@import '../../../core/styles/variables.css';
-
 .main {
   padding: var(--golden-gap-2x);
   border: 1px solid var(--highlight-level3);

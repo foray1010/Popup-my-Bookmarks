@@ -1,5 +1,3 @@
-@import './variables.css';
-
 :root {
   --grey-list-item: {
     color: var(--highlight-level4) !important;

@@ -1,5 +1,3 @@
-@import '../../../core/styles/variables.css';
-
 .main {
   display: flex;
   min-width: 820px;

@@ -1,5 +1,4 @@
 @import '../../../core/styles/mixins.css';
-@import '../../../core/styles/variables.css';
 
 .main {
   composes: list-item from '../../../core/styles/composes.css';

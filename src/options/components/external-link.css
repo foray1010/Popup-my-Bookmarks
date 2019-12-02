@@ -1,5 +1,3 @@
-@import '../../core/styles/variables.css';
-
 .main {
   composes: focus from '../../core/styles/composes.css';
   color: var(--main-color1);

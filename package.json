@@ -52,7 +52,7 @@
     "@foray1010/import-sort-config": "1.2.1",
     "@foray1010/prettier-config": "2.0.0",
     "@foray1010/remark-preset": "1.1.2",
-    "@foray1010/stylelint-config": "1.5.1",
+    "@foray1010/stylelint-config": "1.5.2",
     "@types/bluebird": "3.5.29",
     "@types/chance": "1.0.7",
     "@types/classnames": "2.2.9",
