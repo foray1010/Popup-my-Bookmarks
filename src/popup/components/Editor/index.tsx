@@ -49,7 +49,7 @@ const EditorContainer = () => {
 
   return (
     <>
-      <Mask backgroundColor='#fff' opacity={0.3} onClick={closeEditor} />
+      <Mask opacity={0.3} onClick={closeEditor} />
       <AbsolutePosition positionLeft={positionLeft} positionTop={positionTop}>
         <KeyBindingsWindow windowId={EDITOR_WINDOW}>
           <Editor

@@ -79,7 +79,7 @@ const MenuContainer = () => {
 
   return (
     <>
-      <Mask backgroundColor='#fff' opacity={0.3} onClick={closeMenu} />
+      <Mask opacity={0.3} onClick={closeMenu} />
       <AbsolutePosition positionLeft={positionLeft} positionTop={positionTop}>
         <KeyBindingsWindow windowId={MENU_WINDOW}>
           <Menu

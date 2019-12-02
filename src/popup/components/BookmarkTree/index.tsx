@@ -153,9 +153,7 @@ const BookmarkTreeContainer = ({ treeId }: Props) => {
         treeInfo={treeInfo}
       />
 
-      {props.isShowCover && (
-        <Mask backgroundColor='#000' opacity={0.16} onClick={closeNextTrees} />
-      )}
+      {props.isShowCover && <Mask opacity={0.7} onClick={closeNextTrees} />}
     </section>
   )
 }

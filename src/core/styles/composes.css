@@ -4,6 +4,7 @@
   padding: var(--golden-gap-2x) var(--golden-gap-4x);
   border: 0;
   background-color: var(--highlight-level1);
+  color: var(--main-font-color);
 
   &:hover {
     color: var(--main-color1);
@@ -23,6 +24,7 @@
   border-width: 1px;
   border-style: solid;
   background-color: transparent;
+  color: var(--main-font-color);
 }
 
 .list-item {

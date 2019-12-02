@@ -11,7 +11,7 @@
 }
 
 :global(::-webkit-scrollbar-thumb) {
-  border-left: var(--golden-gap) solid var(--oc-white);
+  border-left: var(--golden-gap) solid var(--main-background-color);
   background-color: var(--highlight-level3);
 
   &:hover {

@@ -27,5 +27,5 @@
   align-items: center;
   padding: var(--golden-gap-4x);
   margin: var(--golden-gap-4x) auto;
-  background-color: var(--oc-gray-0);
+  background-color: var(--highlight-level1);
 }

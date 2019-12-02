@@ -12,5 +12,5 @@
 .main {
   position: absolute;
   width: 100%;
-  background-color: var(--oc-white);
+  background-color: var(--main-background-color);
 }

@@ -19,7 +19,7 @@
   &::before,
   &::after {
     position: absolute;
-    background-color: var(--oc-white);
+    background-color: var(--main-background-color);
     content: '';
     transform: rotate(45deg);
   }
@@ -51,7 +51,7 @@
   padding: 0 var(--golden-gap-2x);
   margin: 0;
   margin-right: auto;
-  color: var(--oc-white);
+  color: var(--main-background-color);
   cursor: default;
   font: 22px 'Archivo Narrow', simhei, sans-serif;
   line-height: calc(var(--tree-header-height) + 1px);

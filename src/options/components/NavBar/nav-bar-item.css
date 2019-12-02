@@ -27,7 +27,7 @@
   border: 0;
   border-bottom: var(--golden-gap-2x) solid transparent;
   background-color: transparent;
-  color: var(--oc-white);
+  color: var(--main-background-color);
   cursor: default;
   font: 16px 'Archivo Narrow', sans-serif;
   text-align: center;

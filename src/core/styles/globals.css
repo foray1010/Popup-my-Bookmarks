@@ -8,7 +8,7 @@
 
 :global(body) {
   margin: 0;
-  background-color: var(--oc-white);
+  background-color: var(--main-background-color);
   color: var(--main-font-color);
 }
 

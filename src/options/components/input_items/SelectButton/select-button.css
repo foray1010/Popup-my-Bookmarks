@@ -17,7 +17,7 @@
   box-sizing: border-box;
   align-items: center;
   border: 1px solid currentcolor;
-  background-color: var(--oc-white);
+  background-color: var(--main-background-color);
   color: var(--main-color1);
   text-align: center;
   transition-duration: 0.4s;

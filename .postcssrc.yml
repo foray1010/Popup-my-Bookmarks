@@ -4,8 +4,6 @@ plugins:
   postcss-normalize:
     forceImport: true
   postcss-apply: {}
-  postcss-custom-properties:
-    preserve: false
   postcss-preset-env:
     stage: 0
   cssnano:
