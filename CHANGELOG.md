@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.0.1](https://github.com/foray1010/Popup-my-Bookmarks/compare/v7.0.0...v7.0.1) (2019-12-03)
+
+### Bug Fixes
+
+- chrome 78 cannot open options page ([470bd25](https://github.com/foray1010/Popup-my-Bookmarks/commit/470bd25fb58e465ded1092e3d0f78c8bd4e117da))
+
 ## [7.0.0](https://github.com/foray1010/Popup-my-Bookmarks/compare/v6.2.1...v7.0.0) (2019-12-02)
 
 ### ⚠ BREAKING CHANGES
