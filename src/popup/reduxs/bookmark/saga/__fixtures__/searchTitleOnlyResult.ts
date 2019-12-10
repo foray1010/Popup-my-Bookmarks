@@ -4,7 +4,7 @@ export default [
   {
     children: [
       {
-        iconUrl: 'http://ma.ky/vawujij',
+        iconUrl: 'http://ma.kz/vawujij',
         id: '3284',
         isRoot: true,
         isSimulated: false,

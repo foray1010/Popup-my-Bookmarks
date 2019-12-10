@@ -4,7 +4,7 @@ export default [
   {
     children: [
       {
-        iconUrl: 'http://ma.ky/vawujij',
+        iconUrl: 'http://ma.kz/vawujij',
         id: '3284',
         isRoot: true,
         isSimulated: false,
@@ -16,7 +16,7 @@ export default [
         url: 'http://bigeha.pa/bejozkal',
       },
       {
-        iconUrl: 'http://va.mx/aso',
+        iconUrl: 'http://va.my/aso',
         id: '9551',
         isRoot: true,
         isSimulated: false,
@@ -25,10 +25,10 @@ export default [
         storageIndex: 2338,
         title: 'gu',
         type: CST.BOOKMARK_TYPES.BOOKMARK,
-        url: 'http://iza.gr/ge',
+        url: 'http://iza.gs/ge',
       },
       {
-        iconUrl: 'http://remahfur.do/wek',
+        iconUrl: 'http://remahfur.ec/wek',
         id: '8165',
         isRoot: false,
         isSimulated: false,
@@ -40,7 +40,7 @@ export default [
         url: 'http://jabo.vu/mabheku',
       },
       {
-        iconUrl: 'http://buk.ax/kusa',
+        iconUrl: 'http://buk.az/kusa',
         id: '9557',
         isRoot: true,
         isSimulated: false,
@@ -52,7 +52,7 @@ export default [
         url: 'http://gepfim.md/udojigu',
       },
       {
-        iconUrl: 'http://sumjueja.nz/ewnobti',
+        iconUrl: 'http://sumjueja.om/ewnobti',
         id: '9548',
         isRoot: true,
         isSimulated: false,
@@ -64,7 +64,7 @@ export default [
         url: 'http://keil.ye/oku',
       },
       {
-        iconUrl: 'http://uworodim.sz/dud',
+        iconUrl: 'http://uworodim.tc/dud',
         id: '2298',
         isRoot: false,
         isSimulated: false,
@@ -73,7 +73,7 @@ export default [
         storageIndex: 8972,
         title: 'mipfo',
         type: CST.BOOKMARK_TYPES.BOOKMARK,
-        url: 'http://ra.mx/jozureb',
+        url: 'http://ra.my/jozureb',
       },
       {
         iconUrl: 'http://pedet.se/vibjuwdik',
@@ -85,7 +85,7 @@ export default [
         storageIndex: 620,
         title: 'mombukfes',
         type: CST.BOOKMARK_TYPES.BOOKMARK,
-        url: 'http://keil.gi/wokuj',
+        url: 'http://keil.gm/wokuj',
       },
     ],
     parent: {
