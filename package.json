@@ -44,7 +44,7 @@
     "webextension-polyfill": "0.5.0"
   },
   "devDependencies": {
-    "@babel/core": "7.7.5",
+    "@babel/core": "7.7.7",
     "@commitlint/cli": "8.2.0",
     "@commitlint/config-conventional": "8.2.0",
     "@foray1010/babel-preset": "2.0.0",
