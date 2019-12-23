@@ -57,6 +57,7 @@ const defaultConfig: webpack.Configuration = {
         test: /\.(png|svg)$/,
         loader: 'file-loader',
         options: {
+          esModule: false,
           name: 'images/[name].[ext]',
         },
       },
