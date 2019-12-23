@@ -17,6 +17,7 @@ import pkg from './package.json'
 const appNames = ['options', 'popup']
 const commonChunkName = 'core'
 const cssLoaderOptions = {
+  esModule: true,
   modules: {
     localIdentName: '[local]_[hash:base64:5]',
   },
@@ -154,7 +155,12 @@ const developmentConfig: webpack.Configuration = {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          {
+            loader: 'style-loader',
+            options: {
+              esModule: true,
+            },
+          },
           {
             loader: 'css-loader',
             options: cssLoaderOptions,
@@ -183,6 +189,7 @@ const productionConfig: webpack.Configuration = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
+              esModule: true,
               publicPath: '../',
             },
           },
