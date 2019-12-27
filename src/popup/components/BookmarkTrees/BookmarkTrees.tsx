@@ -19,8 +19,8 @@ const BookmarkTrees = (props: Props) => {
   const subTree = trees.filter((_, index) => index % 2 !== 0)
 
   const sectionWidth = props.options[OPTIONS.SET_WIDTH] ?? 0
-  const styles = React.useMemo(
-    (): object => ({
+  const styles: object = React.useMemo(
+    () => ({
       '--width': `${sectionWidth}px`,
     }),
     [sectionWidth],

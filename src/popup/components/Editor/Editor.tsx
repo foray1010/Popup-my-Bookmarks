@@ -40,8 +40,8 @@ const Editor = (props: Props) => {
     [],
   )
 
-  const formStyles = React.useMemo(
-    (): object => ({
+  const formStyles: object = React.useMemo(
+    () => ({
       '--width': `${props.width}px`,
     }),
     [props.width],

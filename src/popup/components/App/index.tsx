@@ -22,8 +22,8 @@ const AppContainer = () => {
 
   const { globalBodySize } = useGlobalBodySize()
 
-  const styles = React.useMemo(
-    (): object => ({
+  const styles: object = React.useMemo(
+    () => ({
       '--fontFamily': [options[OPTIONS.FONT_FAMILY], 'sans-serif']
         .filter(Boolean)
         .join(','),

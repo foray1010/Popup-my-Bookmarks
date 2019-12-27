@@ -66,8 +66,8 @@ const AbsolutePosition = ({
     removeBodySize,
   ])
 
-  const wrapperStyles = React.useMemo(
-    (): object => ({
+  const wrapperStyles: object = React.useMemo(
+    () => ({
       '--positionLeft': `${calibratedPosition.left}px`,
       '--positionTop': `${calibratedPosition.top}px`,
     }),

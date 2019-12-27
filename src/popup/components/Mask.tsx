@@ -7,8 +7,8 @@ interface Props {
   opacity: number
 }
 const Mask = (props: Props) => {
-  const styles = React.useMemo(
-    (): object => ({
+  const styles: object = React.useMemo(
+    () => ({
       '--opacity': props.opacity,
     }),
     [props.opacity],

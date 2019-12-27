@@ -20,8 +20,8 @@ const BookmarkRowWithRef = React.forwardRef(function BookmarkRow(
   props: Props,
   setRef: React.Ref<HTMLDivElement>,
 ) {
-  const iconStyles = React.useMemo(
-    (): object => ({
+  const iconStyles: object = React.useMemo(
+    () => ({
       '--iconSize': `${props.iconSize}px`,
     }),
     [props.iconSize],
