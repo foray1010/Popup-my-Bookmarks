@@ -1,4 +1,3 @@
-import * as R from 'ramda'
 import { call } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
 
@@ -9,17 +8,31 @@ import sortByTitle from '../../../../utils/sortByTitle'
 import * as bookmarkCreators from '../../actions'
 import { getBookmarkInfo, getBookmarkTree } from '../utils/getters'
 
-const groupBySeparator = R.groupWith<BookmarkInfo>(
-  R.compose(R.not, R.propEq('type', CST.BOOKMARK_TYPES.SEPARATOR), R.nthArg(1)),
-)
+const splitBySeparator = (bookmarkInfos: BookmarkInfo[]): BookmarkInfo[][] => {
+  return bookmarkInfos.reduce(
+    (acc: BookmarkInfo[][], bookmarkInfo) => {
+      if (
+        acc.length === 0 ||
+        bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR
+      ) {
+        acc.push([])
+      }
 
-interface TypeGroup {
-  type: CST.BOOKMARK_TYPES
-  members: Array<BookmarkInfo>
+      acc[acc.length - 1].push(bookmarkInfo)
+
+      return acc
+    },
+    [[]],
+  )
 }
-const groupByType = (bookmarkInfos: Array<BookmarkInfo>): Array<TypeGroup> => {
-  return bookmarkInfos.reduce((acc: Array<TypeGroup>, bookmarkInfo) => {
-    const matchType = (group: TypeGroup) => group.type === bookmarkInfo.type
+
+interface BookmarkGroup {
+  type: CST.BOOKMARK_TYPES
+  members: BookmarkInfo[]
+}
+const groupByType = (bookmarkInfos: BookmarkInfo[]): BookmarkGroup[] => {
+  return bookmarkInfos.reduce((acc: BookmarkGroup[], bookmarkInfo) => {
+    const matchType = (group: BookmarkGroup) => group.type === bookmarkInfo.type
 
     if (!acc.some(matchType)) {
       acc.push({
@@ -37,7 +50,7 @@ const groupByType = (bookmarkInfos: Array<BookmarkInfo>): Array<TypeGroup> => {
   }, [])
 }
 
-const sortGroupByPriority = (groups: Array<TypeGroup>) => {
+const sortGroupByPriority = (groups: BookmarkGroup[]): BookmarkGroup[] => {
   const priority = [
     CST.BOOKMARK_TYPES.SEPARATOR,
     CST.BOOKMARK_TYPES.FOLDER,
@@ -48,26 +61,24 @@ const sortGroupByPriority = (groups: Array<TypeGroup>) => {
   })
 }
 
-const ungroup = (
-  nestedGroups: Array<Array<TypeGroup>>,
-): Array<BookmarkInfo> => {
+const mergeGroups = (nestedGroups: BookmarkGroup[][]): BookmarkInfo[] => {
   return nestedGroups
     .map(nestedGroup => nestedGroup.map(group => group.members).flat())
     .flat()
 }
 
-const sortBookmarks = R.compose(
-  ungroup,
-  R.map(sortGroupByPriority),
-  R.map((groups: Array<TypeGroup>) =>
-    groups.map(group => ({
-      ...group,
-      members: sortByTitle(group.members),
-    })),
-  ),
-  R.map(groupByType),
-  groupBySeparator,
-)
+const sortBookmarks = (bookmarkInfos: BookmarkInfo[]): BookmarkInfo[] => {
+  const nestedGroups = splitBySeparator(bookmarkInfos)
+    .map(groupByType)
+    .map(groups => {
+      return groups.map(group => ({
+        ...group,
+        members: sortByTitle(group.members),
+      }))
+    })
+    .map(sortGroupByPriority)
+  return mergeGroups(nestedGroups)
+}
 
 export function* sortBookmarksByName({
   payload,
