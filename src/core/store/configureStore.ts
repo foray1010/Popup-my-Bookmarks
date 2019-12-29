@@ -1,6 +1,6 @@
 import {
   Action,
-  DeepPartial,
+  PreloadedState,
   Reducer,
   Store,
   applyMiddleware,
@@ -13,7 +13,7 @@ export default <S extends {}, A extends Action<string>>({
   rootReducer,
   rootSaga,
 }: {
-  preloadedState?: DeepPartial<S>
+  preloadedState?: PreloadedState<S>
   rootReducer: Reducer<S, A>
   rootSaga: () => SagaIterator
 }): Store<S, A> => {
