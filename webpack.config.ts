@@ -66,7 +66,6 @@ const webpackConfig: webpack.Configuration = {
       },
       {
         test: /\.tsx?$/,
-        exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
           cacheDirectory: true,

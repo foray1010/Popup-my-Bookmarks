@@ -945,10 +945,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@foray1010/babel-preset@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-2.0.0.tgz#8b1a75de803c7bb8fb36f5cd8f9b96847b91ad05"
-  integrity sha512-ktTqHy9ith+1+sMNu9zsF9lLAoFKgrESnO4dAk12i7ZYemg+NJaI9JO0u/jF/kYL76gEOp1c4sYRhNNsNvIOdw==
+"@foray1010/babel-preset@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-3.0.0.tgz#98955fb72505d5360e540719d19e52ef67a0158b"
+  integrity sha512-x5ZSR8iCIbTL6N5A0jIHnMUX4QZrbYi0PsW+4RihoetE4zZxh/qQ/t5/O1P6ei15egbtb5orfxyOx/OZhFH+UQ==
   dependencies:
     "@babel/plugin-proposal-nullish-coalescing-operator" "^7.7.4"
     "@babel/plugin-proposal-optional-chaining" "^7.7.4"
@@ -5212,7 +5212,6 @@ fsevents@^1.2.7:
   dependencies:
     bindings "^1.5.0"
     nan "^2.12.1"
-    node-pre-gyp "*"
 
 fsevents@~2.1.2:
   version "2.1.2"
@@ -8631,7 +8630,6 @@ npm@^6.9.0:
     cmd-shim "^3.0.3"
     columnify "~1.5.4"
     config-chain "^1.1.12"
-    debuglog "*"
     detect-indent "~5.0.0"
     detect-newline "^2.1.0"
     dezalgo "~1.0.3"
@@ -8646,7 +8644,6 @@ npm@^6.9.0:
     has-unicode "~2.0.1"
     hosted-git-info "^2.8.5"
     iferr "^1.0.2"
-    imurmurhash "*"
     infer-owner "^1.0.4"
     inflight "~1.0.6"
     inherits "^2.0.4"
@@ -8665,14 +8662,8 @@ npm@^6.9.0:
     libnpx "^10.2.0"
     lock-verify "^2.1.0"
     lockfile "^1.0.4"
-    lodash._baseindexof "*"
     lodash._baseuniq "~4.6.0"
-    lodash._bindcallback "*"
-    lodash._cacheindexof "*"
-    lodash._createcache "*"
-    lodash._getnative "*"
     lodash.clonedeep "~4.5.0"
-    lodash.restparam "*"
     lodash.union "~4.6.0"
     lodash.uniq "~4.5.0"
     lodash.without "~4.4.0"

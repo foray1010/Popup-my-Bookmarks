@@ -1,5 +1,3 @@
-import 'core-js/es'
-
 import '../manifest.yml'
 
 import * as React from 'react'
