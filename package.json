@@ -113,7 +113,7 @@
     "remark-cli": "7.0.1",
     "script-ext-html-webpack-plugin": "2.1.4",
     "sharp": "0.23.4",
-    "sort-package-json": "1.31.0",
+    "sort-package-json": "1.35.0",
     "style-loader": "1.1.2",
     "stylelint": "12.0.1",
     "terser-webpack-plugin": "2.3.1",
