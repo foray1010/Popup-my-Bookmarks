@@ -5,7 +5,6 @@ import CopyWebpackPlugin from 'copy-webpack-plugin'
 import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import R from 'ramda'
 import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
@@ -14,20 +13,17 @@ import ZipPlugin from 'zip-webpack-plugin'
 
 import pkg from './package.json'
 
+const isCI = process.env.CI === 'true'
+const isProductionBuild = process.env.NODE_ENV === 'production'
+const isDevelopmentBuild = !isProductionBuild
+
 const appNames = ['options', 'popup']
-const commonChunkName = 'core'
-const cssLoaderOptions = {
-  esModule: true,
-  modules: {
-    localIdentName: '[local]_[hash:base64:5]',
-  },
-  importLoaders: 1,
-}
-const nodeEnv = process.env.NODE_ENV ?? 'development'
-const outputDir = path.join('build', nodeEnv)
+const commonChunkName = 'common'
+const outputDir = path.join('build', process.env.NODE_ENV || 'development')
 const sourceDir = 'src'
 
-const defaultConfig: webpack.Configuration = {
+const webpackConfig: webpack.Configuration = {
+  devtool: isDevelopmentBuild ? 'source-map' : undefined,
   entry: appNames.reduce(
     (acc, appName) => ({
       ...acc,
@@ -35,9 +31,39 @@ const defaultConfig: webpack.Configuration = {
     }),
     {},
   ),
-  mode: nodeEnv === 'production' ? 'production' : 'development',
+  mode: isDevelopmentBuild ? 'development' : 'production',
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        use: [
+          isDevelopmentBuild
+            ? {
+                loader: 'style-loader',
+                options: {
+                  esModule: true,
+                },
+              }
+            : {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                  esModule: true,
+                  publicPath: '../',
+                },
+              },
+          {
+            loader: 'css-loader',
+            options: {
+              esModule: true,
+              modules: {
+                localIdentName: '[local]_[hash:base64:5]',
+              },
+              importLoaders: 1,
+            },
+          },
+          'postcss-loader',
+        ],
+      },
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
@@ -61,6 +87,17 @@ const defaultConfig: webpack.Configuration = {
           name: 'images/[name].[ext]',
         },
       },
+      ...(isDevelopmentBuild
+        ? [
+            {
+              test: /\/core\/.+\.(png|svg)$/,
+              loader: 'image-process-loader',
+              options: {
+                greyscale: true,
+              },
+            },
+          ]
+        : []),
       {
         test: /\/manifest\.yml$/,
         use: [
@@ -89,6 +126,31 @@ const defaultConfig: webpack.Configuration = {
     ],
   },
   optimization: {
+    ...(isProductionBuild && {
+      minimizer: [
+        new TerserPlugin({
+          extractComments: false,
+          terserOptions: {
+            compress: {
+              drop_console: true,
+              module: true,
+              passes: 2,
+              pure_getters: true,
+              unsafe: true,
+              unsafe_arrows: true,
+              unsafe_comps: true,
+              unsafe_Function: true,
+              unsafe_math: true,
+              unsafe_methods: true,
+              unsafe_proto: true,
+              unsafe_regexp: true,
+              unsafe_undefined: true,
+            },
+            ecma: 8,
+          },
+        }),
+      ],
+    }),
     splitChunks: {
       chunks: 'all',
       name: commonChunkName,
@@ -99,6 +161,7 @@ const defaultConfig: webpack.Configuration = {
     filename: path.join('js', '[name].js'),
   },
   plugins: [
+    ...(!isCI ? [new webpack.ProgressPlugin()] : []),
     new CleanWebpackPlugin({
       cleanStaleWebpackAssets: false,
     }),
@@ -142,112 +205,29 @@ const defaultConfig: webpack.Configuration = {
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'async',
     }),
-    new webpack.ProgressPlugin(),
+    ...(isProductionBuild && !isCI
+      ? [
+          new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            reportFilename: path.join('..', 'report.html'),
+          }),
+        ]
+      : []),
+    ...(isProductionBuild
+      ? [
+          new MiniCssExtractPlugin({
+            filename: path.join('css', '[name].css'),
+          }),
+          new ZipPlugin({
+            filename: `${pkg.version}.zip`,
+          }),
+        ]
+      : []),
   ],
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.wasm', '.tsx', '.ts', '.mjs', '.js', '.json'],
   },
+  watch: isDevelopmentBuild,
 }
 
-const developmentConfig: webpack.Configuration = {
-  devtool: 'source-map',
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader',
-            options: {
-              esModule: true,
-            },
-          },
-          {
-            loader: 'css-loader',
-            options: cssLoaderOptions,
-          },
-          'postcss-loader',
-        ],
-      },
-      {
-        test: /\/icon.+\.(png|svg)$/,
-        loader: 'image-process-loader',
-        options: {
-          greyscale: true,
-        },
-      },
-    ],
-  },
-  watch: true,
-}
-
-const productionConfig: webpack.Configuration = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              esModule: true,
-              publicPath: '../',
-            },
-          },
-          {
-            loader: 'css-loader',
-            options: cssLoaderOptions,
-          },
-          'postcss-loader',
-        ],
-      },
-    ],
-  },
-  optimization: {
-    minimizer: [
-      new TerserPlugin({
-        extractComments: false,
-        terserOptions: {
-          compress: {
-            drop_console: true,
-            module: true,
-            passes: 2,
-            pure_getters: true,
-            unsafe: true,
-            unsafe_arrows: true,
-            unsafe_comps: true,
-            unsafe_Function: true,
-            unsafe_math: true,
-            unsafe_methods: true,
-            unsafe_proto: true,
-            unsafe_regexp: true,
-            unsafe_undefined: true,
-          },
-          ecma: 8,
-        },
-      }),
-    ],
-  },
-  plugins: [
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      reportFilename: path.join('..', 'report.html'),
-    }),
-    new MiniCssExtractPlugin({
-      filename: path.join('css', '[name].css'),
-    }),
-    new ZipPlugin({
-      filename: `${pkg.version}.zip`,
-    }),
-  ],
-}
-
-const getMergedConfigByEnv = R.converge(R.mergeDeepWith(R.concat), [
-  R.prop('default'),
-  R.propOr({}, nodeEnv),
-])
-export default getMergedConfigByEnv({
-  default: defaultConfig,
-  development: developmentConfig,
-  production: productionConfig,
-})
+export default webpackConfig
