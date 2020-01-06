@@ -5,7 +5,7 @@ import useAction from '../../../core/hooks/useAction'
 import { OptionsConfig } from '../../../core/types/options'
 import { getOptionsConfig } from '../../../core/utils'
 import { OPTION_TABLE_MAP } from '../../constants'
-import { RootState, optionsCreators } from '../../reduxs'
+import { optionsCreators, RootState } from '../../reduxs'
 import OptionForm from './OptionForm'
 
 const OptionFormContainer = () => {

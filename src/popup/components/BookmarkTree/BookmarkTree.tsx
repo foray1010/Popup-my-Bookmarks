@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import * as React from 'react'
-import { VariableSizeList as List, ListOnScrollProps } from 'react-window'
+import { ListOnScrollProps, VariableSizeList as List } from 'react-window'
 import useEventListener from 'use-typed-event-listener'
 
 import * as CST from '../../constants'

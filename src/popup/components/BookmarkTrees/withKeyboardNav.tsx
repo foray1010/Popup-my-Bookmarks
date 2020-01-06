@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import useAction from '../../../core/hooks/useAction'
 import { BOOKMARK_TYPES } from '../../constants'
 import { BASE_WINDOW } from '../../constants/windows'
-import { RootState, bookmarkCreators, menuCreators } from '../../reduxs'
+import { bookmarkCreators, menuCreators, RootState } from '../../reduxs'
 import {
   getClickOptionNameByEvent,
   mapOptionToOpenBookmarkProps,

@@ -1,10 +1,10 @@
 import {
   Action,
+  applyMiddleware,
+  createStore,
   PreloadedState,
   Reducer,
   Store,
-  applyMiddleware,
-  createStore,
 } from 'redux'
 import createSagaMiddleware, { SagaIterator } from 'redux-saga'
 

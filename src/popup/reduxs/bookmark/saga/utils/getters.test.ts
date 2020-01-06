@@ -5,6 +5,8 @@ import Chance from 'chance'
 import * as R from 'ramda'
 import { all, call } from 'redux-saga/effects'
 
+import bookmarkNodes from '../__fixtures__/bookmarkNodes'
+import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import optionsFixture from '../../../../../core/__fixtures__/options.json'
 import {
   getBookmarkChildNodes,
@@ -13,8 +15,6 @@ import {
 } from '../../../../../core/utils'
 import * as CST from '../../../../constants'
 import { BookmarkTree } from '../../../../types'
-import bookmarkNodes from '../__fixtures__/bookmarkNodes'
-import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import * as getters from './getters'
 
 const chance = Chance('getters')

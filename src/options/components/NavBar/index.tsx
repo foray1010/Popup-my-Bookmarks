@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
-import { RootState, navigationCreators } from '../../reduxs'
+import { navigationCreators, RootState } from '../../reduxs'
 import NavBar from './NavBar'
 
 const NavBarContainer = <T extends {}>(props: T) => {

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { ListsState, listsInitialState } from './reducers/lists'
+import { listsInitialState, ListsState } from './reducers/lists'
 
 export interface ListNavigationContextType {
   lists: ListsState

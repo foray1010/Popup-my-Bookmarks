@@ -3,10 +3,10 @@
 import { all, call, put, select } from 'redux-saga/effects'
 import { getType } from 'typesafe-actions'
 
-import * as bookmarkCreators from '../../actions'
 import bookmarkTrees, {
   generateBookmarkTree,
 } from '../__fixtures__/bookmarkTrees'
+import * as bookmarkCreators from '../../actions'
 import { getBookmarkTree } from '../utils/getters'
 import { bookmarkTreesSelector, openBookmarkTree } from './openBookmarkTree'
 

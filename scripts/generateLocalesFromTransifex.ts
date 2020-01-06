@@ -1,7 +1,6 @@
-import path from 'path'
-
 import bluebird from 'bluebird'
 import fs from 'fs-extra'
+import path from 'path'
 import prompts from 'prompts'
 import Transifex from 'transifex'
 

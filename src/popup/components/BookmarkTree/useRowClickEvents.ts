@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
 import { BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS } from '../../constants'
-import { RootState, bookmarkCreators, menuCreators } from '../../reduxs'
+import { bookmarkCreators, menuCreators, RootState } from '../../reduxs'
 import { BookmarkInfo, BookmarkTree } from '../../types'
 import {
   getClickOptionNameByEvent,

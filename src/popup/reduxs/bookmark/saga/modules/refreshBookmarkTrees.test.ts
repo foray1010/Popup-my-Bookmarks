@@ -4,9 +4,9 @@ import Chance from 'chance'
 import * as R from 'ramda'
 import { call, put, select } from 'redux-saga/effects'
 
+import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import optionsFixture from '../../../../../core/__fixtures__/options.json'
 import * as bookmarkCreators from '../../actions'
-import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import { getBookmarkTrees } from '../utils/getters'
 import { getRestTreeIds, refreshBookmarkTrees } from './refreshBookmarkTrees'
 

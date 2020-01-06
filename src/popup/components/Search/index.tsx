@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
 import { BASE_WINDOW } from '../../constants/windows'
-import { RootState, bookmarkCreators, uiCreators } from '../../reduxs'
+import { bookmarkCreators, RootState, uiCreators } from '../../reduxs'
 import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
 import Search from './Search'
 

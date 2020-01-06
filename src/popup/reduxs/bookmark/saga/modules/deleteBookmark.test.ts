@@ -4,10 +4,10 @@ import Chance from 'chance'
 import { call } from 'redux-saga/effects'
 import { getType } from 'typesafe-actions'
 
+import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import { removeBookmark, removeBookmarkTree } from '../../../../../core/utils'
 import * as CST from '../../../../constants'
 import * as bookmarkCreators from '../../actions'
-import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import { getBookmarkInfo } from '../utils/getters'
 import { deleteBookmark } from './deleteBookmark'
 

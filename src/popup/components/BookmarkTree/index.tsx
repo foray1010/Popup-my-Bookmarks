@@ -3,7 +3,7 @@ import { shallowEqual, useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
 import * as CST from '../../constants'
-import { RootState, bookmarkCreators } from '../../reduxs'
+import { bookmarkCreators, RootState } from '../../reduxs'
 import DragAndDropContext from '../dragAndDrop/DragAndDropContext'
 import ListNavigationContext from '../listNavigation/ListNavigationContext'
 import Mask from '../Mask'
