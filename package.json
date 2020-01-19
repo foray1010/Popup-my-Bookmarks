@@ -70,7 +70,7 @@
     "@types/ramda": "0.26.39",
     "@types/react": "16.9.17",
     "@types/react-dom": "16.9.4",
-    "@types/react-redux": "7.1.5",
+    "@types/react-redux": "7.1.6",
     "@types/react-window": "1.8.1",
     "@types/script-ext-html-webpack-plugin": "2.1.1",
     "@types/terser-webpack-plugin": "2.2.0",
