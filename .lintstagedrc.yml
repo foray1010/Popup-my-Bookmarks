@@ -1,23 +1,17 @@
 '*.css':
   - 'yarn prettier --write'
   - 'yarn stylelint --fix'
-  - 'git add'
 '*.{js,ts,tsx}':
   - 'yarn prettier --write'
   - 'yarn eslint --fix'
   - 'jest --bail --findRelatedTests --config .jestrc.json'
-  - 'git add'
 '*.{json,yaml,yml}':
   - 'yarn prettier --write'
-  - 'git add'
 '*.md':
   - 'yarn prettier --write'
   - 'yarn remark'
-  - 'git add'
 '*ignore-sync':
   - 'ignore-sync'
-  - 'git add'
 'package.json':
   - 'sort-package-json'
   - 'yarn prettier --write'
-  - 'git add'
