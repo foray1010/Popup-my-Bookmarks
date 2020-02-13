@@ -1030,25 +1030,25 @@
   resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-3.0.0.tgz#ed71bf696a87737e2d10acf599c8c18f5a420b97"
   integrity sha512-Ii7n37kTslhvX3rHStcXqknOS7bwPlObERfSmbsCqizEraN6znJA99zE88uqoaTTbuom61gLjWpj1z0+JgU+9Q==
 
-"@foray1010/remark-preset@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/remark-preset/-/remark-preset-2.0.0.tgz#ea1b781c3e915ae4417733648faed9afe09b85ca"
-  integrity sha512-If3EGrMOYethoT5qTHDBRE5sAs9H7DRLz9CJFLIsDKpCpo0eMxXc+PwZTe00vTdRGQ2wlQ6QSP6hqVWkfLUQ4A==
+"@foray1010/remark-preset@2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@foray1010/remark-preset/-/remark-preset-2.0.1.tgz#644cd3bb01bf595487e28a8ac00facaf0bdc5756"
+  integrity sha512-/gTuO/h57ETxFu56c1Gcuv5e0xdTnPNRRcVAjdrtSauBPk5FGfESKkFCT2ngFMErbEwsAtY4zRVqcl+TApuR2g==
   dependencies:
     remark-preset-lint-consistent "^2.0.3"
     remark-preset-lint-markdown-style-guide "^2.1.3"
     remark-preset-lint-recommended "^3.0.3"
-    remark-preset-prettier "^0.2.2"
+    remark-preset-prettier "^0.4.0"
 
-"@foray1010/stylelint-config@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-2.1.0.tgz#d49e5cbcd8f5d94b4659d6d07f8ff4e066132033"
-  integrity sha512-lAah29nqZ8dCt735cQL6ySA8ALhEwrUQx/ltgORvEUQ/MdNuBWXWJdm7f4A5oG4FhuajuijObWi+AIL4xS1MXg==
+"@foray1010/stylelint-config@2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-2.1.1.tgz#6e635bf1d23109828fc1532966d7760a5a7a1221"
+  integrity sha512-0UVP8A0OfWh29SC1VfiRvROODQpiGNu0Ikm8QaFJEc+jPM7abMLCImcGyQkNvLP5F0tfgipeZktyu5W9sOiSjQ==
   dependencies:
     stylelint-config-css-modules "^2.0.0"
     stylelint-config-idiomatic-order "^8.0.0"
     stylelint-config-prettier "^8.0.0"
-    stylelint-config-standard "^19.0.0"
+    stylelint-config-standard "^20.0.0"
     stylelint-prettier "^1.1.1"
 
 "@iarna/cli@^1.2.0":
@@ -11323,10 +11323,10 @@ remark-preset-lint-recommended@^3.0.3:
     remark-lint-no-unused-definitions "^1.0.0"
     remark-lint-ordered-list-marker-style "^1.0.0"
 
-remark-preset-prettier@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/remark-preset-prettier/-/remark-preset-prettier-0.2.2.tgz#a46e31b0e1ab14f05e85f6ad0cb6bae636afa8d2"
-  integrity sha512-a2SwwAhO1H3d4GYdP8i6JLssrrGwIusV+3z7jxj6ZLl0e4o0hVRgke9xbdDFjnAImGQE72rJGjsuRvCFwqxHiQ==
+remark-preset-prettier@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/remark-preset-prettier/-/remark-preset-prettier-0.4.0.tgz#b0edae6b46286c255ca897d44901145867585ab3"
+  integrity sha512-Y0lwBg/xRyE8/yF4IYJVJxrUHSVE8WThbsnKS5/fE4lSAoX/s0yuiEl7gv/+OWA1G7r5o0xKLZPW3rJjhvfvpw==
 
 remark-stringify@^6.0.0:
   version "6.0.4"
@@ -12560,10 +12560,10 @@ stylelint-config-recommended@^3.0.0:
   resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-3.0.0.tgz#e0e547434016c5539fe2650afd58049a2fd1d657"
   integrity sha512-F6yTRuc06xr1h5Qw/ykb2LuFynJ2IxkKfCMf+1xqPffkxh0S09Zc902XCffcsw/XMFq/OzQ1w54fLIDtmRNHnQ==
 
-stylelint-config-standard@^19.0.0:
-  version "19.0.0"
-  resolved "https://registry.yarnpkg.com/stylelint-config-standard/-/stylelint-config-standard-19.0.0.tgz#66f0cf13f33b8a9e34965881493b38fc1313693a"
-  integrity sha512-VvcODsL1PryzpYteWZo2YaA5vU/pWfjqBpOvmeA8iB2MteZ/ZhI1O4hnrWMidsS4vmEJpKtjdhLdfGJmmZm6Cg==
+stylelint-config-standard@^20.0.0:
+  version "20.0.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-standard/-/stylelint-config-standard-20.0.0.tgz#06135090c9e064befee3d594289f50e295b5e20d"
+  integrity sha512-IB2iFdzOTA/zS4jSVav6z+wGtin08qfj+YyExHB3LF9lnouQht//YyB0KZq9gGz5HNPkddHOzcY8HsUey6ZUlA==
   dependencies:
     stylelint-config-recommended "^3.0.0"
 
