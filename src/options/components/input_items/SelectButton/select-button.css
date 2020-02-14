@@ -2,7 +2,7 @@
   position: absolute;
   width: 50%;
   height: 100%;
-  background-color: currentcolor;
+  background-color: currentColor;
   transition-duration: inherit;
   transition-property: left;
 }
@@ -14,7 +14,7 @@
   height: var(--input-height);
   box-sizing: border-box;
   align-items: center;
-  border: 1px solid currentcolor;
+  border: 1px solid currentColor;
   background-color: var(--main-background-color);
   color: var(--main-color1);
   text-align: center;
