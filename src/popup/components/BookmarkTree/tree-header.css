@@ -41,7 +41,7 @@
   display: flex;
   height: var(--tree-header-height);
   margin-bottom: var(--golden-gap);
-  background-color: currentcolor;
+  background-color: currentColor;
 }
 
 .title {
