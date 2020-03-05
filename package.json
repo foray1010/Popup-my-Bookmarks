@@ -52,7 +52,7 @@
     "@foray1010/prettier-config": "3.0.0",
     "@foray1010/remark-preset": "2.0.1",
     "@foray1010/stylelint-config": "2.1.1",
-    "@types/bluebird": "3.5.29",
+    "@types/bluebird": "3.5.30",
     "@types/chance": "1.0.8",
     "@types/classnames": "2.2.9",
     "@types/copy-webpack-plugin": "5.0.0",
