@@ -1372,10 +1372,10 @@
   resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.30.tgz#ee034a0eeea8b84ed868b1aa60d690b08a6cfbc5"
   integrity sha512-8LhzvcjIoqoi1TghEkRMkbbmM+jhHnBokPGkJWjclMK+Ks0MxEBow3/p2/iFTZ+OIbJHQDSfpgdZEb+af3gfVw==
 
-"@types/chance@1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@types/chance/-/chance-1.0.8.tgz#48e0a5648f54487a9128915fe090154fb1a2f348"
-  integrity sha512-S1VWROFGexiUYyBFsP0NRjp6PkJ4rKECQ3HQJ0cJKW/2BcNyas9lXATRdnTNnN4CsICjEXTltAalAo8dJQQLKg==
+"@types/chance@1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@types/chance/-/chance-1.0.9.tgz#2074530976d53cfec84cbea0037923be31320e20"
+  integrity sha512-QEWzf4BICJwa9rr43hSRCAWDhxyakGl2iIXj5PsfGPuOBaJhv50tGX/P5flU8hStatLudPEhlJrZC2qwScD5nQ==
 
 "@types/classnames@2.2.9":
   version "2.2.9"
