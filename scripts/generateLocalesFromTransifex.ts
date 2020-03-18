@@ -1,5 +1,5 @@
 import bluebird from 'bluebird'
-import fs from 'fs-extra'
+import { promises as fsPromises } from 'fs'
 import path from 'path'
 import prompts from 'prompts'
 import Transifex from 'transifex'
@@ -86,12 +86,13 @@ const main = async () => {
           mappedLanguage = availableLanguage
       }
 
-      await fs.mkdirs(path.join(localesPath, mappedLanguage))
+      await fsPromises.mkdir(path.join(localesPath, mappedLanguage), {
+        recursive: true,
+      })
 
-      await fs.outputJson(
+      await fsPromises.writeFile(
         path.join(localesPath, mappedLanguage, 'messages.json'),
-        sortedMessagesJson,
-        { spaces: 2 },
+        JSON.stringify(sortedMessagesJson, null, 2) + '\n',
       )
 
       console.log(`"${mappedLanguage}" is generated`)

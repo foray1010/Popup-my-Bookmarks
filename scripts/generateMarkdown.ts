@@ -1,11 +1,11 @@
-import fs from 'fs-extra'
+import { promises as fsPromises } from 'fs'
 import path from 'path'
 
 // markdown handler
 const getMarkdownData = async (titleList: Array<string>) => {
   const dataList = await Promise.all(
     titleList.map(title => {
-      return fs.readFile(path.join('markdown', `${title}.md`), 'utf-8')
+      return fsPromises.readFile(path.join('markdown', `${title}.md`), 'utf-8')
     }),
   )
 
@@ -28,7 +28,7 @@ const generateReadme = async () => {
   // enlarge first header
   fileData = fileData.replace(/^##/, '#')
 
-  await fs.writeFile(fileName, fileData)
+  await fsPromises.writeFile(fileName, fileData)
 }
 
 const generateStoreDescription = async () => {
@@ -41,7 +41,7 @@ const generateStoreDescription = async () => {
     .replace(/##### /g, '')
     .trim()
 
-  await fs.writeFile(fileName, fileData)
+  await fsPromises.writeFile(fileName, fileData)
 }
 ;(async () => {
   try {
