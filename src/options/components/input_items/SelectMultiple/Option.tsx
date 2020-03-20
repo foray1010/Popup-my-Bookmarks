@@ -1,3 +1,4 @@
+import nanoId from 'nanoid'
 import * as React from 'react'
 
 import classes from './select-multiple.css'
@@ -18,11 +19,8 @@ const Option = ({
   optionValue,
   updatePartialOptions,
 }: Props) => {
-  const inputId = React.useMemo(() => {
-    return Math.random()
-      .toString(36)
-      .substring(2)
-  }, [])
+  // Nano ID could be started from number. HTML ID can’t be started from the number.
+  const [inputId] = React.useState(() => `id-${nanoId()}`)
 
   const handleChange = React.useCallback(
     (evt: React.ChangeEvent<HTMLInputElement>) => {
