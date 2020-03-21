@@ -62,18 +62,12 @@ const main = async () => {
       const messagesJson: Messages = JSON.parse(messagesJsonStr)
 
       const sortedMessagesJson = Object.keys(messagesJson)
-        .filter(key => Boolean(messagesJson[key].message))
         .sort()
-        .reduce((obj: Messages, key) => {
-          // trim message
-          if (messagesJson[key].message) {
-            messagesJson[key].message = messagesJson[key].message.trim()
-          }
+        .reduce((messages: Messages, key) => {
+          messagesJson[key].message = messagesJson[key].message.trim()
+          if (!messagesJson[key].message) return messages
 
-          return {
-            ...obj,
-            [key]: messagesJson[key],
-          }
+          return { ...messages, [key]: messagesJson[key] }
         }, {})
 
       let mappedLanguage = ''

@@ -29,7 +29,7 @@ const main = async (): Promise<void> => {
     Object.keys(optionsConfig) as OPTIONS[],
     Object.keys(options) as OPTIONS[],
   )
-  if (missingOptionKeys.length !== 0) {
+  if (missingOptionKeys.length > 0) {
     await webExtension.runtime.openOptionsPage()
     return
   }
