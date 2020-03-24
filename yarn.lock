@@ -7633,7 +7633,7 @@ js-tokens@^3.0.2:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
   integrity sha1-mGbfOVECEw449/mWvOtlRDIJwls=
 
-js-yaml@^3.13.1, js-yaml@^3.5.2, js-yaml@^3.6.1:
+js-yaml@^3.13.1, js-yaml@^3.6.1:
   version "3.13.1"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
   integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
@@ -14840,17 +14840,25 @@ yallist@^4.0.0:
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
 
-yaml-loader@0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/yaml-loader/-/yaml-loader-0.5.0.tgz#86b1982d84a8e429e6647d93de9a0169e1c15827"
-  integrity sha512-p9QIzcFSNm4mCw/m5NdyMfN4RE4aFZJWRRb01ERVNGCym8VNbKtw3OYZXnvUIkim6U/EjqE/2yIh9F/msShH9A==
+yaml-loader@0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/yaml-loader/-/yaml-loader-0.6.0.tgz#fe1c48b9f4803dace55a59a1474e790ba6ab1b48"
+  integrity sha512-1bNiLelumURyj+zvVHOv8Y3dpCri0F2S+DCcmps0pA1zWRLjS+FhZQg4o3aUUDYESh73+pKZNI18bj7stpReow==
   dependencies:
-    js-yaml "^3.5.2"
+    loader-utils "^1.4.0"
+    yaml "^1.8.3"
 
 yaml@^1.7.2:
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.8.2.tgz#a29c03f578faafd57dcb27055f9a5d569cb0c3d9"
   integrity sha512-omakb0d7FjMo3R1D2EbTKVIk6dAVLRxFXdLZMEUToeAvuqgG/YuHMuQOZ5fgk+vQ8cx+cnGKwyg+8g8PNT0xQg==
+  dependencies:
+    "@babel/runtime" "^7.8.7"
+
+yaml@^1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.8.3.tgz#2f420fca58b68ce3a332d0ca64be1d191dd3f87a"
+  integrity sha512-X/v7VDnK+sxbQ2Imq4Jt2PRUsRsP7UcpSl3Llg6+NRRqWLIvxkMFYtH1FmvwNGYRKKPa+EPA4qDBlI9WVG1UKw==
   dependencies:
     "@babel/runtime" "^7.8.7"
 
