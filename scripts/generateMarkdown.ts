@@ -4,7 +4,7 @@ import path from 'path'
 // markdown handler
 const getMarkdownData = async (titleList: Array<string>) => {
   const dataList = await Promise.all(
-    titleList.map(title => {
+    titleList.map((title) => {
       return fsPromises.readFile(path.join('markdown', `${title}.md`), 'utf-8')
     }),
   )

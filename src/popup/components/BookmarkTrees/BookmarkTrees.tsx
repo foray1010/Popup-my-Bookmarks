@@ -11,7 +11,7 @@ interface Props {
   treeIds: Array<string>
 }
 const BookmarkTrees = (props: Props) => {
-  const trees = props.treeIds.map(treeId => (
+  const trees = props.treeIds.map((treeId) => (
     <BookmarkTree key={treeId} treeId={treeId} />
   ))
 

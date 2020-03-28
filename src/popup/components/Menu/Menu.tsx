@@ -17,9 +17,9 @@ const Menu = (props: Props) => {
 
   return (
     <div className={classes.main}>
-      {props.menuPattern.map(rowNames => (
+      {props.menuPattern.map((rowNames) => (
         <div key={rowNames.join()}>
-          {rowNames.map(rowName => {
+          {rowNames.map((rowName) => {
             const rowIndex = allRowNames.indexOf(rowName)
             return (
               <MenuRow

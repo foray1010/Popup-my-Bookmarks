@@ -52,7 +52,7 @@ const main = async () => {
     resourceSlug,
   )
   await Promise.all(
-    Object.keys(availableLanguages).map(async availableLanguage => {
+    Object.keys(availableLanguages).map(async (availableLanguage) => {
       const messagesJsonStr = await transifex.translationInstanceMethodAsync(
         projectSlug,
         resourceSlug,

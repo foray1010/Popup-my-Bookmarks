@@ -63,15 +63,15 @@ const sortGroupByPriority = (groups: BookmarkGroup[]): BookmarkGroup[] => {
 
 const mergeGroups = (nestedGroups: BookmarkGroup[][]): BookmarkInfo[] => {
   return nestedGroups
-    .map(nestedGroup => nestedGroup.map(group => group.members).flat())
+    .map((nestedGroup) => nestedGroup.map((group) => group.members).flat())
     .flat()
 }
 
 const sortBookmarks = (bookmarkInfos: BookmarkInfo[]): BookmarkInfo[] => {
   const nestedGroups = splitBySeparator(bookmarkInfos)
     .map(groupByType)
-    .map(groups => {
-      return groups.map(group => ({
+    .map((groups) => {
+      return groups.map((group) => ({
         ...group,
         members: sortByTitle(group.members),
       }))

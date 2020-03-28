@@ -16,7 +16,7 @@ export const searchKeywordMatcher = (searchKeyword: string, title: string) => {
     .toLowerCase()
     .split(' ')
     .filter(Boolean)
-    .every(x => lowerCaseTitle.includes(x))
+    .every((x) => lowerCaseTitle.includes(x))
 }
 
 export function* getSearchResult({
@@ -40,7 +40,7 @@ export function* getSearchResult({
       R.slice(0, options[CST.OPTIONS.MAX_RESULTS] ?? 0),
       (result: Array<BookmarkInfo>) => {
         const filteredResult = result.filter(
-          bookmarkInfo => bookmarkInfo.type === CST.BOOKMARK_TYPES.BOOKMARK,
+          (bookmarkInfo) => bookmarkInfo.type === CST.BOOKMARK_TYPES.BOOKMARK,
         )
         if (isSearchTitleOnly) {
           return filteredResult.filter((bookmarkInfo: BookmarkInfo) => {

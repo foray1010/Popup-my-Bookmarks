@@ -32,15 +32,15 @@ const useBodySizeStack = (): {
 
   const appendBodySize = React.useCallback(
     (newBodySize: BodySize) => {
-      setBodySizeStack(prevBodySize => [...prevBodySize, newBodySize])
+      setBodySizeStack((prevBodySize) => [...prevBodySize, newBodySize])
     },
     [setBodySizeStack],
   )
 
   const removeBodySize = React.useCallback(
     (oldBodySize: BodySize) => {
-      setBodySizeStack(prevBodySize => {
-        return prevBodySize.filter(state => state !== oldBodySize)
+      setBodySizeStack((prevBodySize) => {
+        return prevBodySize.filter((state) => state !== oldBodySize)
       })
     },
     [setBodySizeStack],

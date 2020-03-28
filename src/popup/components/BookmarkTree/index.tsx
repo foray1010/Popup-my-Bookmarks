@@ -27,7 +27,7 @@ const useReduxState = ({ treeId }: { treeId: string }) => {
   const reduxSelector = React.useCallback(
     (state: RootState) => {
       const treeIndex = state.bookmark.trees.findIndex(
-        tree => tree.parent.id === treeId,
+        (tree) => tree.parent.id === treeId,
       )
       const treeInfo = state.bookmark.trees[treeIndex]
 
@@ -35,7 +35,7 @@ const useReduxState = ({ treeId }: { treeId: string }) => {
         state.options[CST.OPTIONS.REMEMBER_POS],
       )
       const lastPosition = isRememberLastPositions
-        ? (state.lastPositions ?? []).find(tree => tree.id === treeId)
+        ? (state.lastPositions ?? []).find((tree) => tree.id === treeId)
         : undefined
 
       return {

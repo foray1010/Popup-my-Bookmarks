@@ -7,7 +7,7 @@ import * as bookmarkCreators from '../../actions'
 import { getBookmarkTrees } from '../utils/getters'
 
 export const getRestTreeIds = ([, ...restTrees]: Array<BookmarkTree>) =>
-  restTrees.map(tree => tree.parent.id)
+  restTrees.map((tree) => tree.parent.id)
 
 export function* refreshBookmarkTrees() {
   try {

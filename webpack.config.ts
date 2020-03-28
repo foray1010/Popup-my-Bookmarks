@@ -176,7 +176,7 @@ const webpackConfig: webpack.Configuration = {
       emitError: true,
       strict: true,
     }),
-    ...appNames.map(appName => {
+    ...appNames.map((appName) => {
       return new HtmlWebpackPlugin({
         chunks: [commonChunkName, appName],
         filename: `${appName}.html`,

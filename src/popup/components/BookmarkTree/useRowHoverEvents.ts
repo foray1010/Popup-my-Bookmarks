@@ -43,13 +43,17 @@ export default ({
       handleRowMouseEnter: (bookmarkInfo: BookmarkInfo) => () => {
         if (!options[OPTIONS.OP_FOLDER_BY]) toggleBookmarkTree(bookmarkInfo)
 
-        const index = treeInfo.children.findIndex(x => x.id === bookmarkInfo.id)
+        const index = treeInfo.children.findIndex(
+          (x) => x.id === bookmarkInfo.id,
+        )
         setHighlightedIndex(treeIndex, index)
       },
       handleRowMouseLeave: (bookmarkInfo: BookmarkInfo) => () => {
         toggleBookmarkTree.cancel()
 
-        const index = treeInfo.children.findIndex(x => x.id === bookmarkInfo.id)
+        const index = treeInfo.children.findIndex(
+          (x) => x.id === bookmarkInfo.id,
+        )
         unsetHighlightedIndex(treeIndex, index)
       },
     }

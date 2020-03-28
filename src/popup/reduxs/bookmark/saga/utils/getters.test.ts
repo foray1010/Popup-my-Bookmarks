@@ -87,7 +87,7 @@ describe('getBookmarkTrees', () => {
     [],
   )
   const getRestTreeIds = ([, ...restTrees]: Array<BookmarkTree>) =>
-    restTrees.map(tree => tree.parent.id)
+    restTrees.map((tree) => tree.parent.id)
 
   const options = optionsFixture
   const restTreeIds = getRestTreeIds(correlatedBookmarkTrees)
@@ -98,7 +98,7 @@ describe('getBookmarkTrees', () => {
     expect(generator.next().value).toEqual(
       all([
         call(getters.getFirstBookmarkTree, options),
-        ...restTreeIds.map(id => call(getters.tryGetBookmarkTree, id)),
+        ...restTreeIds.map((id) => call(getters.tryGetBookmarkTree, id)),
       ]),
     )
 
@@ -116,7 +116,7 @@ describe('getBookmarkTrees', () => {
       expect(generator.next().value).toEqual(
         all([
           call(getters.getFirstBookmarkTree, options),
-          ...restTreeIds.map(id => call(getters.tryGetBookmarkTree, id)),
+          ...restTreeIds.map((id) => call(getters.tryGetBookmarkTree, id)),
         ]),
       )
 

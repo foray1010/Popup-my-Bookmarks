@@ -65,7 +65,7 @@ export function* getBookmarkTrees(
 ): SagaIterator<Array<BookmarkTree>> {
   const [firstTree, ...restTrees]: Array<BookmarkTree> = yield all([
     call(getFirstBookmarkTree, options),
-    ...restTreeIds.map(id => call(tryGetBookmarkTree, id)),
+    ...restTreeIds.map((id) => call(tryGetBookmarkTree, id)),
   ])
 
   let acc = [firstTree]
@@ -97,7 +97,7 @@ export function* getFirstBookmarkTree(
   return {
     ...firstTreeInfo,
     children: [
-      ...rootFolders.filter(bookmarkInfo => {
+      ...rootFolders.filter((bookmarkInfo) => {
         const idNumber = Number(bookmarkInfo.id)
         return !(
           idNumber === options[CST.OPTIONS.DEF_EXPAND] ||

@@ -59,7 +59,7 @@ export const keyBindingsPerWindowReducer = createReducer<
       const keyBindings = state.get(windowId)
       if (!keyBindings) return state
 
-      const updatedKeyBindings = keyBindings.filter(keyBinding => {
+      const updatedKeyBindings = keyBindings.filter((keyBinding) => {
         return (
           keyBinding.callback !== callback ||
           keyBinding.key.toString() !== key.toString() ||

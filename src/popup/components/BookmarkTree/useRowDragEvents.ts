@@ -27,14 +27,14 @@ export default ({
           evt.clientY - targetOffset.top > targetOffset.height / 2
 
         const childrenWithoutDragIndicator = treeInfo.children.filter(
-          child => child.type !== CST.BOOKMARK_TYPES.DRAG_INDICATOR,
+          (child) => child.type !== CST.BOOKMARK_TYPES.DRAG_INDICATOR,
         )
 
         const activeIndex = childrenWithoutDragIndicator.findIndex(
-          item => item.id === responseEvent.activeKey,
+          (item) => item.id === responseEvent.activeKey,
         )
         const currentIndex = childrenWithoutDragIndicator.findIndex(
-          item => item.id === responseEvent.itemKey,
+          (item) => item.id === responseEvent.itemKey,
         )
         const targetIndex = currentIndex + (isOverBottomPart ? 1 : 0)
 
