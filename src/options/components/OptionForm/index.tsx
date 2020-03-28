@@ -24,9 +24,7 @@ const OptionFormContainer = () => {
   const updatePartialOptions = useAction(optionsCreators.updatePartialOptions)
 
   React.useEffect(() => {
-    getOptionsConfig()
-      .then(setOptionsConfig)
-      .catch(console.error)
+    getOptionsConfig().then(setOptionsConfig).catch(console.error)
   }, [])
 
   if (!optionsConfig) return null
