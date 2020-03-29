@@ -8,7 +8,7 @@ import * as CST from '../../../../constants'
 import * as bookmarkCreators from '../../actions'
 import { addSeparator } from './addSeparator'
 
-jest.mock('nanoid', () => () => 'mocked-id')
+jest.mock('nanoid', () => ({ nanoid: () => 'mocked-id' }))
 
 const chance = Chance('addSeparator')
 

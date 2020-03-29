@@ -1,4 +1,4 @@
-import nanoId from 'nanoid'
+import { nanoid } from 'nanoid'
 import { put } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
 
@@ -15,7 +15,7 @@ export function* addSeparator({
         payload.index,
         '- '.repeat(54).trim(),
         // avoid duplicated URL which may be cleaned up by third-party tools
-        CST.SEPARATE_THIS_URL + '#' + nanoId(),
+        CST.SEPARATE_THIS_URL + '#' + nanoid(),
       ),
     )
   } catch (err) {
