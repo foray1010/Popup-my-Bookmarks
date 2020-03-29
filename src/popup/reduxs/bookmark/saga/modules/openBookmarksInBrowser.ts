@@ -18,15 +18,15 @@ import { getBookmarkInfo } from '../utils/getters'
 function* getUrls(ids: Array<string>) {
   try {
     const bookmarkInfos: Array<BookmarkInfo> = yield all(
-      ids.map(id => call(getBookmarkInfo, id)),
+      ids.map((id) => call(getBookmarkInfo, id)),
     )
 
     const filteredBookmarkInfos = bookmarkInfos.filter(
-      bookmarkInfo =>
+      (bookmarkInfo) =>
         bookmarkInfo.isSimulated === false &&
         bookmarkInfo.type === BOOKMARK_TYPES.BOOKMARK,
     )
-    return filteredBookmarkInfos.map(bookmarkInfo => bookmarkInfo.url)
+    return filteredBookmarkInfos.map((bookmarkInfo) => bookmarkInfo.url)
   } catch (err) {
     console.error(err)
 
@@ -45,8 +45,8 @@ export function* openBookmarksInBrowser({
     const allUrls: Array<string> = yield call(getUrls, ids)
     if (!allUrls.length) return
 
-    const bookmarkletUrls = allUrls.filter(x => x.startsWith('javascript:'))
-    const urls = allUrls.filter(x => !x.startsWith('javascript:'))
+    const bookmarkletUrls = allUrls.filter((x) => x.startsWith('javascript:'))
+    const urls = allUrls.filter((x) => !x.startsWith('javascript:'))
 
     if (openBookmarkProps.isAllowBookmarklet && bookmarkletUrls.length > 0) {
       // @ts-ignore: seems type is wrong, tabId is nullable
@@ -71,7 +71,7 @@ export function* openBookmarksInBrowser({
 
       switch (openBookmarkProps.openIn) {
         case OPEN_IN_TYPES.BACKGROUND_TAB:
-          yield all(urls.map(url => call(createTab, { url, active: false })))
+          yield all(urls.map((url) => call(createTab, { url, active: false })))
           break
         case OPEN_IN_TYPES.CURRENT_TAB:
           // @ts-ignore: doesn't work with overloaded function
@@ -84,7 +84,7 @@ export function* openBookmarksInBrowser({
           })
           break
         case OPEN_IN_TYPES.NEW_TAB:
-          yield all(urls.map(url => call(createTab, { url, active: true })))
+          yield all(urls.map((url) => call(createTab, { url, active: true })))
           break
         case OPEN_IN_TYPES.NEW_WINDOW:
           yield call(createWindow, { url: urls })

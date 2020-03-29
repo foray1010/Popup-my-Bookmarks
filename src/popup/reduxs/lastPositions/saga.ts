@@ -101,7 +101,7 @@ function* updateLastPosition({
     const { lastPositions = [] }: LocalStorage = yield call(getLocalStorage)
 
     const index = lastPositions.findIndex(
-      lastPosition => lastPosition.id === payload.id,
+      (lastPosition) => lastPosition.id === payload.id,
     )
     if (index >= 0) {
       const updatedLastPositions = R.update(index, payload, lastPositions)

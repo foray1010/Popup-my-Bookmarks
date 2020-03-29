@@ -19,7 +19,7 @@ const getBookmarkManagePattern = (
     bookmarkInfo.type === CST.BOOKMARK_TYPES.NO_BOOKMARK
       ? []
       : [CST.MENU_SORT_BY_NAME],
-  ].filter(x => x.length)
+  ].filter((x) => x.length)
 }
 
 const getMutatePattern = (bookmarkInfo: BookmarkInfo): MenuPattern => {

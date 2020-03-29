@@ -5,7 +5,7 @@ import classes from './input-select.css'
 const normalize = (value: string) => {
   return value
     .split(',')
-    .map(x => x.trim())
+    .map((x) => x.trim())
     .filter(Boolean)
     .join(',')
 }

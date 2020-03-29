@@ -70,7 +70,7 @@ export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
       onPressArrowRight: handlePressArrowRight,
     })
 
-    useKeyBindingsEvent({ key: 'Enter', windowId: BASE_WINDOW }, evt => {
+    useKeyBindingsEvent({ key: 'Enter', windowId: BASE_WINDOW }, (evt) => {
       const { highlightedIndices, itemCounts } = listsRef.current
 
       const lastListIndex = getLastMapKey(itemCounts)

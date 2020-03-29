@@ -28,7 +28,7 @@ export const windowsReducer = createReducer<
     windowsCreators.setActiveWindowId,
     (state, { payload: windowId }) => {
       const activeWindowIdQueue = [
-        ...state.activeWindowIdQueue.filter(x => x !== windowId),
+        ...state.activeWindowIdQueue.filter((x) => x !== windowId),
         windowId,
       ]
       return {
@@ -41,7 +41,7 @@ export const windowsReducer = createReducer<
     windowsCreators.unsetActiveWindowId,
     (state, { payload: windowId }) => {
       const activeWindowIdQueue = state.activeWindowIdQueue.filter(
-        x => x !== windowId,
+        (x) => x !== windowId,
       )
       return {
         activeWindowId: activeWindowIdQueue[activeWindowIdQueue.length - 1],

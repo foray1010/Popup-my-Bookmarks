@@ -1083,10 +1083,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@foray1010/babel-preset@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-3.0.0.tgz#98955fb72505d5360e540719d19e52ef67a0158b"
-  integrity sha512-x5ZSR8iCIbTL6N5A0jIHnMUX4QZrbYi0PsW+4RihoetE4zZxh/qQ/t5/O1P6ei15egbtb5orfxyOx/OZhFH+UQ==
+"@foray1010/babel-preset@3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-3.0.1.tgz#7e0d7a38617af3946fa3816c39c7f29adff64572"
+  integrity sha512-fRp1gSVV4Hf0kPSJP6kmn3IW9O8ih5av149thuKXktEWe4nqkyMkaZ1g0DVnMCuipzTXked7A2DSQzaZw2n7nA==
   dependencies:
     "@babel/plugin-proposal-nullish-coalescing-operator" "^7.7.4"
     "@babel/plugin-proposal-optional-chaining" "^7.7.4"
@@ -1095,22 +1095,22 @@
     "@babel/preset-env" "^7.6.3"
     "@babel/preset-react" "^7.6.3"
     "@babel/preset-typescript" "^7.6.0"
-    "@foray1010/common-presets-utils" "^2.0.0"
+    "@foray1010/common-presets-utils" "^2.0.1"
     babel-plugin-transform-react-remove-prop-types "^0.4.24"
 
-"@foray1010/common-presets-utils@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/common-presets-utils/-/common-presets-utils-2.0.0.tgz#4def5bb3bf95cd21296dddfb2b4625e93dda8f25"
-  integrity sha512-vLBDVf8z+hEfQU81Yp/5L8Pr4hAILl32OSD7JJ1elzLmLyTvWgDm0oha0ccI39grzvZK1dvGS4XYjbzwgtc2KQ==
+"@foray1010/common-presets-utils@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@foray1010/common-presets-utils/-/common-presets-utils-2.0.1.tgz#7d04ca401eb8cdc83fd8bc153b90adb2b31d07ce"
+  integrity sha512-pTAi0bv/rh8eGZUHd8de7+W+/uIbYY/mus1iaDbQCnxMzU3sll9Z5SJlHiRF2Pdouxx9ksDSu99KvsdzFiohWQ==
   dependencies:
     read-pkg-up "^7.0.0"
 
-"@foray1010/eslint-config@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-2.1.0.tgz#3d1eb90b21e3892b0ea62c10fbdfe95e4ee7aaf7"
-  integrity sha512-Ae+wNMhlXijDMVMV8SV9Tb7BTBt4OEF+86aueQyyAezVmoqdc/uYJWjbdvn4SeTokuF3LKpwR1+yhHYRCjUWWw==
+"@foray1010/eslint-config@2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-2.2.0.tgz#aa9ab1520fa4794bdc3e92b0b6d6d2092f35e03b"
+  integrity sha512-khTa2tN87vbyCtF5yuWv7glFvpG9FgtbVvwOxOAVOC0EzXH49KngpdCWe5d4Mv7ynqfPn9Krun7JvohsOD1afA==
   dependencies:
-    "@foray1010/common-presets-utils" "^2.0.0"
+    "@foray1010/common-presets-utils" "^2.0.1"
     "@typescript-eslint/eslint-plugin" "^2.3.2"
     "@typescript-eslint/parser" "^2.3.2"
     confusing-browser-globals "^1.0.9"
@@ -1123,10 +1123,10 @@
     eslint-plugin-react-hooks "^2.1.2"
     eslint-plugin-simple-import-sort "^5.0.0"
 
-"@foray1010/prettier-config@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-3.0.0.tgz#ed71bf696a87737e2d10acf599c8c18f5a420b97"
-  integrity sha512-Ii7n37kTslhvX3rHStcXqknOS7bwPlObERfSmbsCqizEraN6znJA99zE88uqoaTTbuom61gLjWpj1z0+JgU+9Q==
+"@foray1010/prettier-config@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-4.0.0.tgz#c5e4475e0c00f4a1994958699cecb8dcc1becc1b"
+  integrity sha512-yfsfVLfo1fxF9AXS3D5UzSxFpXeKZQLIVRJNs8GiXRfPaGycgYriJ+rAB0LXZfYhasqnehFKAGs2i9on1tkFww==
 
 "@foray1010/remark-preset@2.0.1":
   version "2.0.1"
@@ -1138,10 +1138,10 @@
     remark-preset-lint-recommended "^3.0.3"
     remark-preset-prettier "^0.4.0"
 
-"@foray1010/stylelint-config@2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-2.1.1.tgz#6e635bf1d23109828fc1532966d7760a5a7a1221"
-  integrity sha512-0UVP8A0OfWh29SC1VfiRvROODQpiGNu0Ikm8QaFJEc+jPM7abMLCImcGyQkNvLP5F0tfgipeZktyu5W9sOiSjQ==
+"@foray1010/stylelint-config@2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-2.2.0.tgz#2c5e049293b5185731c05ec5137ade404b7d71c1"
+  integrity sha512-bIiLvrGm38d/y/4UjMaquJ1y6QMLRifj4c4r3U4D00RPnEPkteTmPBluj0slecrxFdnklDhLA/d0fMxKmT1DDA==
   dependencies:
     stylelint-config-css-modules "^2.0.0"
     stylelint-config-idiomatic-order "^8.0.0"
@@ -10752,10 +10752,10 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier@1.19.1:
-  version "1.19.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
-  integrity sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
+prettier@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.0.2.tgz#1ba8f3eb92231e769b7fcd7cb73ae1b6b74ade08"
+  integrity sha512-5xJQIPT8BraI7ZnaDwSbu5zLrB6vvi8hVV58yHQ+QK64qrY40dULy0HSRlQ2/2IdzeBpjhDkqdcFBnFeDEMVdg==
 
 pretty-error@^2.0.2:
   version "2.1.1"
