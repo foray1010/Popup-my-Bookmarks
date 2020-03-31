@@ -50,7 +50,7 @@
     "@foray1010/babel-preset": "3.0.1",
     "@foray1010/eslint-config": "2.2.0",
     "@foray1010/prettier-config": "4.0.0",
-    "@foray1010/remark-preset": "2.0.1",
+    "@foray1010/remark-preset": "3.0.0",
     "@foray1010/stylelint-config": "2.2.0",
     "@types/bluebird": "3.5.30",
     "@types/chance": "1.0.9",
