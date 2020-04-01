@@ -10,7 +10,7 @@ module.exports = {
     const commands = []
 
     filenames
-      .filter((name) => /\/package\.json$/.test(name))
+      .filter((name) => name.endsWith('/package.json'))
       .forEach((name) => {
         commands.push(`sort-package-json ${name}`)
       })
