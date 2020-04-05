@@ -186,6 +186,7 @@ const webpackConfig: webpack.Configuration = {
           keepClosingSlash: true,
           minifyCSS: true,
           minifyJS: true,
+          minifyURLs: true,
           removeAttributeQuotes: true,
           removeComments: true,
           removeScriptTypeAttributes: true,
