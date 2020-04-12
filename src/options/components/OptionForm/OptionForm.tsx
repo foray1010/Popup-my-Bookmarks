@@ -23,8 +23,8 @@ const OptionForm = (props: Props) => (
   <form onSubmit={handleSubmit}>
     <table className={classes.table}>
       <tbody>
-        {props.selectedOptionFormMap.reduce(
-          (acc: Array<React.ReactElement<{}>>, optionName) => {
+        {props.selectedOptionFormMap.reduce<Array<React.ReactElement<{}>>>(
+          (acc, optionName) => {
             const optionValue = props.options[optionName]
             if (optionValue !== undefined) {
               return [

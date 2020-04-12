@@ -71,21 +71,20 @@ describe('getBookmarkTree', () => {
 
 describe('getBookmarkTrees', () => {
   // limit to 4 trees, and set parentId to previous tree id
-  const correlatedBookmarkTrees = R.take(4, bookmarkTrees).reduce(
-    (acc: Array<BookmarkTree>, bookmarkTree) => {
-      if (!acc.length) return [bookmarkTree]
+  const correlatedBookmarkTrees = R.take(4, bookmarkTrees).reduce<
+    Array<BookmarkTree>
+  >((acc, bookmarkTree) => {
+    if (!acc.length) return [bookmarkTree]
 
-      const prevBookmarkTree = R.last(acc)
-      if (!prevBookmarkTree) throw new Error('prevBookmarkTree must exist')
-      const updatedBookmarkTree = R.set(
-        R.lensPath(['parent', 'parentId']),
-        prevBookmarkTree.parent.id,
-        bookmarkTree,
-      )
-      return [...acc, updatedBookmarkTree]
-    },
-    [],
-  )
+    const prevBookmarkTree = R.last(acc)
+    if (!prevBookmarkTree) throw new Error('prevBookmarkTree must exist')
+    const updatedBookmarkTree = R.set(
+      R.lensPath(['parent', 'parentId']),
+      prevBookmarkTree.parent.id,
+      bookmarkTree,
+    )
+    return [...acc, updatedBookmarkTree]
+  }, [])
   const getRestTreeIds = ([, ...restTrees]: Array<BookmarkTree>) =>
     restTrees.map((tree) => tree.parent.id)
 

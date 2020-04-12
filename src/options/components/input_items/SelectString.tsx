@@ -30,12 +30,8 @@ const SelectString = ({
       value={optionValue}
       onChange={handleChange}
     >
-      {choices.reduce(
-        (
-          acc: Array<React.ReactElement<{}>>,
-          optionChoice,
-          optionChoiceIndex,
-        ) => {
+      {choices.reduce<Array<React.ReactElement<{}>>>(
+        (acc, optionChoice, optionChoiceIndex) => {
           if (optionChoice !== undefined) {
             return [
               ...acc,

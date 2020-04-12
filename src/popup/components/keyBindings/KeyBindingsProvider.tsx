@@ -26,8 +26,8 @@ const KeyBindingsProvider = (props: Props) => {
       isMatched: boolean
       callback?: KeyBindingEventCallback
     }
-    const matchResult = keyBindings.reduceRight(
-      (acc: MatchResult, keyBinding) => {
+    const matchResult = keyBindings.reduceRight<MatchResult>(
+      (acc, keyBinding) => {
         if (acc.isMatched) return acc
 
         const isMatched =

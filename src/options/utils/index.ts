@@ -15,8 +15,8 @@ export const initOptions = async (): Promise<Options> => {
     Object.keys(optionsConfig) as OPTIONS[],
     Object.keys(options) as OPTIONS[],
   )
-  const missingOptions = missingOptionKeys.reduce(
-    (acc: Partial<Options>, optionName) => ({
+  const missingOptions = missingOptionKeys.reduce<Partial<Options>>(
+    (acc, optionName) => ({
       ...acc,
       [optionName]: optionsConfig[optionName].default,
     }),

@@ -63,7 +63,7 @@ const main = async () => {
 
       const sortedMessagesJson = Object.keys(messagesJson)
         .sort()
-        .reduce((messages: Messages, key) => {
+        .reduce<Messages>((messages, key) => {
           messagesJson[key].message = messagesJson[key].message.trim()
           if (!messagesJson[key].message) return messages
 

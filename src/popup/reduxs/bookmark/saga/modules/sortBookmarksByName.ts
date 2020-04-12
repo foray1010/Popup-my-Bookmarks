@@ -9,8 +9,8 @@ import * as bookmarkCreators from '../../actions'
 import { getBookmarkInfo, getBookmarkTree } from '../utils/getters'
 
 const splitBySeparator = (bookmarkInfos: BookmarkInfo[]): BookmarkInfo[][] => {
-  return bookmarkInfos.reduce(
-    (acc: BookmarkInfo[][], bookmarkInfo) => {
+  return bookmarkInfos.reduce<BookmarkInfo[][]>(
+    (acc, bookmarkInfo) => {
       if (
         acc.length === 0 ||
         bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR
@@ -31,7 +31,7 @@ interface BookmarkGroup {
   members: BookmarkInfo[]
 }
 const groupByType = (bookmarkInfos: BookmarkInfo[]): BookmarkGroup[] => {
-  return bookmarkInfos.reduce((acc: BookmarkGroup[], bookmarkInfo) => {
+  return bookmarkInfos.reduce<BookmarkGroup[]>((acc, bookmarkInfo) => {
     const matchType = (group: BookmarkGroup) => group.type === bookmarkInfo.type
 
     if (!acc.some(matchType)) {
