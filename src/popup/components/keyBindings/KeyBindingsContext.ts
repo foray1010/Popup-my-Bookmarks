@@ -1,13 +1,13 @@
 import * as React from 'react'
 
-import {
+import type {
   KeyBindingEventCallback,
   KeyBindingMeta,
   KeyBindingsPerWindowState,
 } from './reducers/keyBindingsPerWindow'
 import { WindowsState } from './reducers/windows'
 
-export { KeyBindingEventCallback, KeyBindingMeta }
+export type { KeyBindingEventCallback, KeyBindingMeta }
 
 export interface KeyBindingsContextType {
   activeWindowId: WindowsState['activeWindowId']

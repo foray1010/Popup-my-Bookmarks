@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 
 import { NAV_MODULE } from '../constants'
-import { RootState } from '../reduxs'
+import type { RootState } from '../reduxs'
 import Contributors from './Contributors'
 import OptionForm from './OptionForm'
 

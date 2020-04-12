@@ -1,9 +1,8 @@
 import * as React from 'react'
 import useEventListener from 'use-typed-event-listener'
 
-import KeyBindingsContext, {
-  KeyBindingEventCallback,
-} from './KeyBindingsContext'
+import type { KeyBindingEventCallback } from './KeyBindingsContext'
+import KeyBindingsContext from './KeyBindingsContext'
 import useKeyBindingsContextState from './useKeyBindingsContextState'
 
 interface Props {

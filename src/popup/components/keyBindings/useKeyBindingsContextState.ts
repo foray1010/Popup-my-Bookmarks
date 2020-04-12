@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import useMapDispatchToCallback from '../../hooks/useMapDispatchToCallback'
-import { KeyBindingsContextType } from './KeyBindingsContext'
+import type { KeyBindingsContextType } from './KeyBindingsContext'
 import {
   keyBindingsPerWindowCreators,
   keyBindingsPerWindowInitialState,

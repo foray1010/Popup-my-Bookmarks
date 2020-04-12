@@ -2,7 +2,7 @@ import * as R from 'ramda'
 import { put, select } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
 
-import { RootState } from '../../../rootReducer'
+import type { RootState } from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 
 export function* toggleBookmarkTree({

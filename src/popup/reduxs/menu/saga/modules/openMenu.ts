@@ -4,7 +4,7 @@ import { ActionType } from 'typesafe-actions'
 
 import { BookmarkInfo } from '../../../../types'
 import { getBookmarkInfo } from '../../../bookmark/saga/utils/getters'
-import { RootState } from '../../../rootReducer'
+import type { RootState } from '../../../rootReducer'
 import * as menuCreators from '../../actions'
 import { getMenuPattern } from '../utils/getMenuPattern'
 

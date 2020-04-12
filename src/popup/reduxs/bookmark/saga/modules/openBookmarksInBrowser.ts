@@ -11,7 +11,7 @@ import {
 } from '../../../../../core/utils'
 import { BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS } from '../../../../constants'
 import { BookmarkInfo } from '../../../../types'
-import { RootState } from '../../../rootReducer'
+import type { RootState } from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 import { getBookmarkInfo } from '../utils/getters'
 

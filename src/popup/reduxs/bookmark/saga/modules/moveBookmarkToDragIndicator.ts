@@ -5,7 +5,7 @@ import { ActionType } from 'typesafe-actions'
 import { moveBookmark } from '../../../../../core/utils'
 import * as CST from '../../../../constants'
 import { BookmarkInfo, BookmarkTree } from '../../../../types'
-import { RootState } from '../../../rootReducer'
+import type { RootState } from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 
 const isDragIndicator = (bookmarkInfo: BookmarkInfo) =>

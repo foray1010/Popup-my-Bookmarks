@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 
 import { OPTIONS } from '../../constants'
-import { RootState } from '../../reduxs'
+import type { RootState } from '../../reduxs'
 import AbsolutePositionProvider from '../absolutePosition/AbsolutePositionProvider'
 import useGlobalBodySize from '../absolutePosition/useGlobalBodySize'
 import KeyBindingsProvider from '../keyBindings/KeyBindingsProvider'

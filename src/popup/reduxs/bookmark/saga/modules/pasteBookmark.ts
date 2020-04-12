@@ -6,7 +6,7 @@ import { ActionType } from 'typesafe-actions'
 import { createBookmark, moveBookmark } from '../../../../../core/utils'
 import * as CST from '../../../../constants'
 import { BookmarkInfo, BookmarkTree } from '../../../../types'
-import { RootState } from '../../../rootReducer'
+import type { RootState } from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 import { getBookmarkInfo, getBookmarkTree } from '../utils/getters'
 

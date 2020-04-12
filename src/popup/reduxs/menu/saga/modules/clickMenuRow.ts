@@ -10,7 +10,7 @@ import {
   getBookmarkTree,
 } from '../../../bookmark/saga/utils/getters'
 import * as editorCreators from '../../../editor/actions'
-import { RootState } from '../../../rootReducer'
+import type { RootState } from '../../../rootReducer'
 import * as menuCreators from '../../actions'
 
 export function* clickMenuRow({

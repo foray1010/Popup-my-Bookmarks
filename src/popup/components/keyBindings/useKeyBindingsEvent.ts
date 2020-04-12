@@ -1,6 +1,7 @@
 import * as React from 'react'
 
-import KeyBindingsContext, { KeyBindingMeta } from './KeyBindingsContext'
+import type { KeyBindingMeta } from './KeyBindingsContext'
+import KeyBindingsContext from './KeyBindingsContext'
 
 const useKeyBindingsEvent = (
   { key, priority, windowId }: KeyBindingMeta,

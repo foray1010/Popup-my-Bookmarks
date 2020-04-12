@@ -12,6 +12,6 @@ export {
   uiCreators,
 }
 
-export { RootState } from './rootReducer'
+export type { RootState } from './rootReducer'
 export { rootReducer } from './rootReducer'
 export { rootSaga } from './rootSaga'

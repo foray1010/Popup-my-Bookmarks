@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 
 import { BASE_WINDOW } from '../../constants/windows'
-import { RootState } from '../../reduxs'
+import type { RootState } from '../../reduxs'
 import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
 import BookmarkTrees from './BookmarkTrees'
 import useBookmarkEvents from './useBookmarkEvents'
