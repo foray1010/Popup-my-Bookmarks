@@ -14129,10 +14129,10 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-use-typed-event-listener@1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/use-typed-event-listener/-/use-typed-event-listener-1.3.1.tgz#84a4a9bff82ded0d5d95655fd360ade771c31de5"
-  integrity sha512-pDfOTZWZ0f2bqxqONo7cFzerN7q2vu9g6LUSv9gtdiDxWVwiRpTEmStQz9vEjwS1L7jkQPF+KAeDKA77vkRvBg==
+use-typed-event-listener@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/use-typed-event-listener/-/use-typed-event-listener-2.0.0.tgz#817d5f74f7f3c5c1b643041b09f461fb9045ea65"
+  integrity sha512-WY2KXNocyA+QluT0tUEy8w8zkqZPnbIc90ZukwYJSLsRFBlF4Ri9R7h/NKc8Vi4ApWGQNRqibBjUKvtT4Mn8HQ==
   dependencies:
     fast-equals "^2.0.0"
 
