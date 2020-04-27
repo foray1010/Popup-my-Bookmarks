@@ -81,7 +81,7 @@
     "clean-webpack-plugin": "3.0.0",
     "copy-webpack-plugin": "5.1.1",
     "cross-env": "7.0.2",
-    "css-loader": "3.5.2",
+    "css-loader": "3.5.3",
     "cssnano": "4.1.10",
     "duplicate-package-checker-webpack-plugin": "3.0.0",
     "eslint": "6.8.0",
