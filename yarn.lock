@@ -13903,10 +13903,10 @@ type-coverage-core@^2.4.1:
     tslib "1"
     tsutils "3"
 
-type-coverage@2.4.3:
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/type-coverage/-/type-coverage-2.4.3.tgz#13e90fde02329fe739ce37d327d990aaa7573e7e"
-  integrity sha512-XNctZ1I6wCj2KefYtXHYR420hYFhpSgEZhVMChYE4QuyG8kXw7meY9ZMnCq7bo4HofJmkVGB6+0eDD1lycV+Ew==
+type-coverage@2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/type-coverage/-/type-coverage-2.5.0.tgz#309dea36c83776f9bf01b59775d4db693886a411"
+  integrity sha512-KpA1FIret99wpQW5YoB1iHJJorRm2AAKG15WqiHCEM9mDTRupryRquwu2E9zGN96Q2uuM0ftxsocr14RpLyNmw==
   dependencies:
     minimist "1"
     type-coverage-core "^2.4.1"
