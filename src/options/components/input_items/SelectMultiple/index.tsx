@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import FieldSet from '../../form_items/FieldSet'
 import Option from './Option'
 import classes from './select-multiple.css'
 
@@ -12,7 +13,7 @@ interface Props {
   }) => void
 }
 const SelectMultiple = (props: Props) => (
-  <span className={classes.main}>
+  <FieldSet className={classes.main}>
     {props.choices.reduce<Array<React.ReactElement<{}>>>(
       (acc, optionChoice, optionChoiceIndex) => {
         if (optionChoice !== undefined) {
@@ -33,7 +34,7 @@ const SelectMultiple = (props: Props) => (
       },
       [],
     )}
-  </span>
+  </FieldSet>
 )
 
 export default SelectMultiple

@@ -10,10 +10,12 @@
 .main {
   position: relative;
   display: flex;
+  overflow: hidden;
   width: 80px;
   height: var(--input-height);
   box-sizing: border-box;
-  align-items: center;
+  align-content: stretch;
+  align-items: stretch;
   border: 1px solid currentColor;
   background-color: var(--main-background-color);
   color: var(--main-color1);

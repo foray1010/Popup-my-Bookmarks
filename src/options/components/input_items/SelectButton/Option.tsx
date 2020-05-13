@@ -18,14 +18,11 @@ const Option = ({
 }: Props) => {
   const inputRef = React.useRef<HTMLInputElement>(null)
 
-  const handleChange = React.useCallback(
-    (evt: React.ChangeEvent<HTMLInputElement>) => {
-      updatePartialOptions({
-        [optionName]: evt.currentTarget.value === 'true',
-      })
-    },
-    [optionName, updatePartialOptions],
-  )
+  const handleChange = React.useCallback(() => {
+    updatePartialOptions({
+      [optionName]: optionChoice,
+    })
+  }, [optionChoice, optionName, updatePartialOptions])
 
   const handleClick = React.useCallback(() => {
     if (inputRef.current) inputRef.current.click()
@@ -33,7 +30,7 @@ const Option = ({
 
   const isChecked = optionValue === optionChoice
   return (
-    <div className={classes.main}>
+    <label className={classes.main}>
       <input
         ref={inputRef}
         name={optionName}
@@ -52,7 +49,7 @@ const Option = ({
       >
         {webExtension.i18n.getMessage(optionChoice ? 'yes' : 'no')}
       </button>
-    </div>
+    </label>
   )
 }
 

@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid'
 import * as React from 'react'
 
 import classes from './select-multiple.css'
@@ -19,9 +18,6 @@ const Option = ({
   optionValue,
   updatePartialOptions,
 }: Props) => {
-  // Nano ID could be started from number. HTML ID can’t be started from the number.
-  const [inputId] = React.useState(() => `id-${nanoid()}`)
-
   const handleChange = React.useCallback(
     (evt: React.ChangeEvent<HTMLInputElement>) => {
       const checkboxValue = parseInt(evt.currentTarget.value, 10)
@@ -43,9 +39,8 @@ const Option = ({
   )
 
   return (
-    <label htmlFor={inputId}>
+    <label>
       <input
-        id={inputId}
         className={classes.input}
         name={optionName}
         type='checkbox'
