@@ -87,21 +87,22 @@ export function* getBookmarkTrees(
 export function* getFirstBookmarkTree(
   options: Partial<Options>,
 ): SagaIterator<BookmarkTree> {
+  const defaultExpandFolderId = options[CST.OPTIONS.DEF_EXPAND] ?? ''
+
   const [firstTreeInfo, rootFolders]: [
     BookmarkTree,
     Array<BookmarkInfo>,
   ] = yield all([
-    call(getBookmarkTree, String(options[CST.OPTIONS.DEF_EXPAND])),
+    call(getBookmarkTree, defaultExpandFolderId),
     call(getBookmarkChildren, CST.ROOT_ID),
   ])
   return {
     ...firstTreeInfo,
     children: [
-      ...rootFolders.filter((bookmarkInfo) => {
-        const idNumber = Number(bookmarkInfo.id)
+      ...rootFolders.filter(({ id }) => {
         return !(
-          idNumber === options[CST.OPTIONS.DEF_EXPAND] ||
-          (options[CST.OPTIONS.HIDE_ROOT_FOLDER] ?? []).includes(idNumber)
+          id === defaultExpandFolderId ||
+          (options[CST.OPTIONS.HIDE_ROOT_FOLDER] ?? []).includes(id)
         )
       }),
       ...firstTreeInfo.children,

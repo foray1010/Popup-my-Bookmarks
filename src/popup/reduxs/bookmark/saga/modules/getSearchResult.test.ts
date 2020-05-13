@@ -9,7 +9,7 @@ import bookmarkTrees from '../__fixtures__/bookmarkTrees'
 import searchResult from '../__fixtures__/searchResult'
 import searchTitleOnlyResult from '../__fixtures__/searchTitleOnlyResult'
 import optionsFixture from '../../../../../core/__fixtures__/options.json'
-import { OPTIONS } from '../../../../constants'
+import { OPTIONS, SEARCH_TARGET_OPTIONS } from '../../../../constants'
 import * as bookmarkCreators from '../../actions'
 import { searchBookmarks } from '../utils/getters'
 import { getSearchResult, searchKeywordMatcher } from './getSearchResult'
@@ -57,7 +57,7 @@ describe('getSearchResult', () => {
     const options = {
       ...optionsFixture,
       [OPTIONS.MAX_RESULTS]: 10,
-      [OPTIONS.SEARCH_TARGET]: 0,
+      [OPTIONS.SEARCH_TARGET]: SEARCH_TARGET_OPTIONS.TITLE_AND_URL,
     }
     const searchKeyword = chance.word()
 
@@ -82,11 +82,11 @@ describe('getSearchResult', () => {
 
     expect(generator.next().done).toBe(true)
   })
-  test('get search result by title only if `[OPTIONS.SEARCH_TARGET]` is `1`', () => {
+  test('get search result by title only if `[OPTIONS.SEARCH_TARGET]` is `SEARCH_TARGET_OPTIONS.TITLE`', () => {
     const options = {
       ...optionsFixture,
       [OPTIONS.MAX_RESULTS]: 10,
-      [OPTIONS.SEARCH_TARGET]: 1,
+      [OPTIONS.SEARCH_TARGET]: SEARCH_TARGET_OPTIONS.TITLE,
     }
     const searchKeyword = 'a'
 

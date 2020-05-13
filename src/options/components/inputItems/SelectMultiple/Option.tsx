@@ -1,35 +1,30 @@
 import * as React from 'react'
 
 import Input from '../../../../core/components/baseItems/Input'
+import { OPTIONS } from '../../../../core/constants'
+import { Options } from '../../../../core/types/options'
 
-interface Props {
-  optionChoice: string
-  optionChoiceIndex: number
-  optionName: string
-  optionValue: Array<number | void>
-  updatePartialOptions: (options: {
-    [key: string]: Array<number | void>
-  }) => void
+interface Props<T = string> {
+  description: string
+  optionChoice: T
+  optionName: OPTIONS
+  optionValue: Array<T>
+  updatePartialOptions: (options: Partial<Options>) => void
 }
 const Option = ({
+  description,
   optionChoice,
-  optionChoiceIndex,
   optionName,
   optionValue,
   updatePartialOptions,
 }: Props) => {
   const handleChange = React.useCallback(
     (evt: React.ChangeEvent<HTMLInputElement>) => {
-      const checkboxValue = parseInt(evt.currentTarget.value, 10)
+      const checkboxValue = evt.currentTarget.value
 
-      const wasChecked = optionValue.includes(checkboxValue)
-
-      let newOptionValue: Array<number | void> = []
-      if (wasChecked) {
-        newOptionValue = optionValue.filter((x) => x !== checkboxValue)
-      } else {
-        newOptionValue = [checkboxValue, ...optionValue].sort()
-      }
+      const newOptionValue = optionValue.includes(checkboxValue)
+        ? optionValue.filter((x) => x !== checkboxValue)
+        : [checkboxValue, ...optionValue].sort()
 
       updatePartialOptions({
         [optionName]: newOptionValue,
@@ -43,11 +38,11 @@ const Option = ({
       <Input
         name={optionName}
         type='checkbox'
-        value={String(optionChoiceIndex)}
-        checked={optionValue.includes(optionChoiceIndex)}
+        value={optionChoice}
+        checked={optionValue.includes(optionChoice)}
         onChange={handleChange}
       />
-      {optionChoice}
+      {description}
     </label>
   )
 }

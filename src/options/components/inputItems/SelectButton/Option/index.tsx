@@ -3,13 +3,15 @@ import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import Button from '../../../../../core/components/baseItems/Button'
+import { OPTIONS } from '../../../../../core/constants'
+import { Options } from '../../../../../core/types/options'
 import classes from './styles.css'
 
-interface Props {
-  optionChoice: boolean
-  optionName: string
-  optionValue: boolean
-  updatePartialOptions: (options: { [key: string]: boolean }) => void
+interface Props<T = boolean> {
+  optionChoice: T
+  optionName: OPTIONS
+  optionValue: T
+  updatePartialOptions: (options: Partial<Options>) => void
 }
 const Option = ({
   optionChoice,

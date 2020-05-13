@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { OPEN_IN_TYPES, OPTIONS } from '../constants'
+import { CLICK_OPTIONS, OPEN_IN_TYPES, OPTIONS } from '../constants'
 
 export const getClickOptionNameByEvent = (
   evt: KeyboardEvent | MouseEvent | React.KeyboardEvent | React.MouseEvent,
@@ -17,40 +17,42 @@ export const getClickOptionNameByEvent = (
 }
 
 export const mapOptionToOpenBookmarkProps = (
-  option?: number,
+  option?: string,
 ): {
   openIn: OPEN_IN_TYPES
   isCloseThisExtension: boolean
 } => {
   switch (option) {
-    case 0: // current tab
-    case 1: // current tab (without closing PmB)
+    default:
+    case CLICK_OPTIONS.CURRENT_TAB:
+    case CLICK_OPTIONS.CURRENT_TAB_WITHOUT_CLOSING_PMB:
       return {
         openIn: OPEN_IN_TYPES.CURRENT_TAB,
-        isCloseThisExtension: option === 0,
+        isCloseThisExtension:
+          option !== CLICK_OPTIONS.CURRENT_TAB_WITHOUT_CLOSING_PMB,
       }
 
-    default:
-    case 2: // new tab
+    case CLICK_OPTIONS.NEW_TAB:
       return {
         openIn: OPEN_IN_TYPES.NEW_TAB,
         isCloseThisExtension: true,
       }
 
-    case 3: // background tab
-    case 4: // background tab (without closing PmB)
+    case CLICK_OPTIONS.BACKGROUND_TAB:
+    case CLICK_OPTIONS.BACKGROUND_TAB_WITHOUT_CLOSING_PMB:
       return {
         openIn: OPEN_IN_TYPES.BACKGROUND_TAB,
-        isCloseThisExtension: option === 3,
+        isCloseThisExtension:
+          option !== CLICK_OPTIONS.BACKGROUND_TAB_WITHOUT_CLOSING_PMB,
       }
 
-    case 5: // new window
+    case CLICK_OPTIONS.NEW_WINDOW:
       return {
         openIn: OPEN_IN_TYPES.NEW_WINDOW,
         isCloseThisExtension: true,
       }
 
-    case 6: // incognito window
+    case CLICK_OPTIONS.INCOGNITO_WINDOW:
       return {
         openIn: OPEN_IN_TYPES.INCOGNITO_WINDOW,
         isCloseThisExtension: true,

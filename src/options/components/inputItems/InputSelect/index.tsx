@@ -2,6 +2,8 @@ import * as React from 'react'
 
 import Input from '../../../../core/components/baseItems/Input'
 import Select from '../../../../core/components/baseItems/Select'
+import { OPTIONS } from '../../../../core/constants'
+import { Options } from '../../../../core/types/options'
 import classes from './styles.css'
 
 const normalize = (value: string) => {
@@ -12,11 +14,11 @@ const normalize = (value: string) => {
     .join(',')
 }
 
-interface Props {
-  choices: Array<string>
-  optionName: string
-  optionValue: string
-  updatePartialOptions: (options: { [key: string]: string }) => void
+interface Props<T = string> {
+  choices: Array<T>
+  optionName: OPTIONS
+  optionValue: T
+  updatePartialOptions: (options: Partial<Options>) => void
 }
 const InputSelect = ({
   choices,

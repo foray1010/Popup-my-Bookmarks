@@ -2,13 +2,15 @@ import * as R from 'ramda'
 import * as React from 'react'
 
 import Input from '../../../core/components/baseItems/Input'
+import { OPTIONS } from '../../../core/constants'
+import { Options } from '../../../core/types/options'
 
-interface Props {
-  maximum: number
-  minimum: number
-  optionName: string
-  optionValue: number
-  updatePartialOptions: (options: { [key: string]: number }) => void
+interface Props<T = number> {
+  maximum: T
+  minimum: T
+  optionName: OPTIONS
+  optionValue: T
+  updatePartialOptions: (options: Partial<Options>) => void
 }
 const InputNumber = ({
   maximum,
@@ -20,6 +22,7 @@ const InputNumber = ({
   const handleBlur = React.useCallback(
     (evt: React.FocusEvent<HTMLInputElement>) => {
       const parsedValue = parseInt(evt.currentTarget.value, 10)
+      if (Number.isNaN(parsedValue)) return
 
       const newOptionValue = R.clamp(minimum, maximum, parsedValue)
 
@@ -33,8 +36,6 @@ const InputNumber = ({
   const handleChange = React.useCallback(
     (evt: React.ChangeEvent<HTMLInputElement>) => {
       const parsedValue = parseInt(evt.currentTarget.value, 10)
-
-      // only allow input number
       if (Number.isNaN(parsedValue)) return
 
       updatePartialOptions({

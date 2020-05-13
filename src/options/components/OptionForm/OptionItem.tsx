@@ -12,7 +12,7 @@ import classes from './option-item.css'
 interface Props {
   optionConfig: OptionConfig
   optionName: keyof Options
-  optionValue: Options[keyof Options]
+  optionValue?: Options[keyof Options]
   updatePartialOptions: (options: Partial<Options>) => void
 }
 
@@ -59,7 +59,7 @@ const InputItem = ({ optionConfig, optionValue, ...restProps }: Props) => {
           {...optionConfig}
           {...restProps}
           optionValue={
-            typeof optionValue === 'number' ? optionValue : optionConfig.default
+            typeof optionValue === 'string' ? optionValue : optionConfig.default
           }
         />
       )

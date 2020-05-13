@@ -3,10 +3,14 @@ short_name: 'PmB'
 version: ''
 manifest_version: 2
 minimum_chrome_version: ''
-offline_enabled: true
 
 default_locale: 'en'
 description: '__MSG_extDesc__'
+
+'browser_specific_settings':
+  'gecko':
+    'id': '@web-containers'
+    'strict_min_version': '57.0'
 
 icons:
   16: 'require(./core/images/icon16.png)'
@@ -16,13 +20,12 @@ icons:
 browser_action:
   default_icon: 'require(./core/images/icon38.png)'
   default_popup: './popup.html'
-options_page: './options.html'
 options_ui:
   page: './options.html'
   chrome_style: false
 # hack to improve startup time
-background:
-  page: './background.html'
+# background:
+#   page: './background.html'
 
 commands:
   _execute_browser_action:
@@ -33,7 +36,6 @@ permissions:
   # this grant permission to run bookmarklet on current page
   - 'activeTab'
   - 'bookmarks'
-  - 'chrome://favicon/'
   - 'storage'
   # this is a fix for we cannot save current page as bookmark,
   # if we open the popup before the current page finished loading

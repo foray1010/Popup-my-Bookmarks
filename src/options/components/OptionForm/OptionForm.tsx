@@ -20,26 +20,15 @@ const OptionForm = (props: Props) => (
   <ActionlessForm>
     <table className={classes.table}>
       <tbody>
-        {props.selectedOptionFormMap.reduce<Array<React.ReactElement<{}>>>(
-          (acc, optionName) => {
-            const optionValue = props.options[optionName]
-            if (optionValue !== undefined) {
-              return [
-                ...acc,
-                <OptionItem
-                  key={optionName}
-                  optionConfig={props.optionsConfig[optionName]}
-                  optionName={optionName}
-                  optionValue={optionValue}
-                  updatePartialOptions={props.updatePartialOptions}
-                />,
-              ]
-            }
-
-            return acc
-          },
-          [],
-        )}
+        {props.selectedOptionFormMap.map((optionName) => (
+          <OptionItem
+            key={optionName}
+            optionConfig={props.optionsConfig[optionName]}
+            optionName={optionName}
+            optionValue={props.options[optionName]}
+            updatePartialOptions={props.updatePartialOptions}
+          />
+        ))}
       </tbody>
       <tfoot>
         <tr>

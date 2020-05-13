@@ -1,13 +1,15 @@
 import * as React from 'react'
 
+import { OPTIONS } from '../../../../core/constants'
+import { Options } from '../../../../core/types/options'
 import Option from './Option'
 import classes from './styles.css'
 
-interface Props {
-  optionChoices: Array<boolean>
-  optionName: string
-  optionValue: boolean
-  updatePartialOptions: (options: { [key: string]: boolean }) => void
+interface Props<T = boolean> {
+  optionChoices: Array<T>
+  optionName: OPTIONS
+  optionValue: T
+  updatePartialOptions: (options: Partial<Options>) => void
 }
 const SelectButton = ({
   optionChoices,

@@ -3,6 +3,7 @@ import { call, put, select } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
 
 import * as CST from '../../../../constants'
+import { SEARCH_TARGET_OPTIONS } from '../../../../constants'
 import { BookmarkInfo } from '../../../../types'
 import sortByTitle from '../../../../utils/sortByTitle'
 import type { RootState } from '../../../rootReducer'
@@ -34,7 +35,8 @@ export function* getSearchResult({
       query: payload.searchKeyword,
     })
 
-    const isSearchTitleOnly = options[CST.OPTIONS.SEARCH_TARGET] === 1
+    const isSearchTitleOnly =
+      options[CST.OPTIONS.SEARCH_TARGET] === SEARCH_TARGET_OPTIONS.TITLE
     const sortedPartialResult = R.compose(
       sortByTitle,
       R.slice(0, options[CST.OPTIONS.MAX_RESULTS] ?? 0),

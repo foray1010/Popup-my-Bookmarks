@@ -1,55 +1,69 @@
 import webExtension from 'webextension-polyfill'
 
-import { OPTIONS, ROOT_ID } from '../constants'
+import {
+  CLICK_OPTIONS,
+  IS_FIREFOX,
+  OPTIONS,
+  ROOT_ID,
+  SEARCH_TARGET_OPTIONS,
+} from '../constants'
 import { OptionsConfig } from '../types/options'
 
-const getMessages = (messageKeys: string[]) => {
-  return messageKeys.map((k) => webExtension.i18n.getMessage(k))
+const genOptionsByMsgKey = (messageKeys: string[]): Map<string, string> => {
+  const options = new Map<string, string>()
+  for (const messageKey of messageKeys) {
+    options.set(messageKey, webExtension.i18n.getMessage(messageKey))
+  }
+  return options
 }
 
 const getOptionsConfig = async (): Promise<OptionsConfig> => {
-  const openBookmarkChoices = getMessages([
-    'clickOption1',
-    'clickOption2',
-    'clickOption3',
-    'clickOption4',
-    'clickOption5',
-    'clickOption6',
-    'clickOption7',
+  const openBookmarkChoices = genOptionsByMsgKey([
+    CLICK_OPTIONS.CURRENT_TAB,
+    CLICK_OPTIONS.CURRENT_TAB_WITHOUT_CLOSING_PMB,
+    CLICK_OPTIONS.NEW_TAB,
+    CLICK_OPTIONS.BACKGROUND_TAB,
+    CLICK_OPTIONS.BACKGROUND_TAB_WITHOUT_CLOSING_PMB,
+    CLICK_OPTIONS.NEW_WINDOW,
+    CLICK_OPTIONS.INCOGNITO_WINDOW,
   ])
 
-  const rootFolderChoices: Array<string> = []
+  const rootFolderChoices = new Map<string, string>()
   // get the root folders' title and set as the choices of 'defExpand'
   const rootFolders = await webExtension.bookmarks.getChildren(ROOT_ID)
   for (const rootFolder of rootFolders) {
-    const rootFolderIdNum = Number(rootFolder.id)
-    rootFolderChoices[rootFolderIdNum] = rootFolder.title
+    rootFolderChoices.set(rootFolder.id, rootFolder.title)
   }
 
   return {
     [OPTIONS.CLICK_BY_LEFT]: {
       type: 'select',
-      default: 0,
+      default: CLICK_OPTIONS.CURRENT_TAB,
       choices: openBookmarkChoices,
     },
     [OPTIONS.CLICK_BY_LEFT_CTRL]: {
       type: 'select',
-      default: 4,
+      default: CLICK_OPTIONS.BACKGROUND_TAB_WITHOUT_CLOSING_PMB,
       choices: openBookmarkChoices,
     },
     [OPTIONS.CLICK_BY_LEFT_SHIFT]: {
       type: 'select',
-      default: 5,
+      default: CLICK_OPTIONS.NEW_WINDOW,
       choices: openBookmarkChoices,
     },
     [OPTIONS.CLICK_BY_MIDDLE]: {
       type: 'select',
-      default: 2,
+      default: CLICK_OPTIONS.NEW_TAB,
       choices: openBookmarkChoices,
     },
     [OPTIONS.DEF_EXPAND]: {
       type: 'select',
-      default: 1,
+      // `1` is 'Bookmarks Bar' in Chrome
+      default: IS_FIREFOX
+        ? 'menu________'
+        : rootFolderChoices.has('1')
+        ? '1'
+        : ROOT_ID,
       choices: rootFolderChoices,
     },
     [OPTIONS.FONT_FAMILY]: {
@@ -96,8 +110,11 @@ const getOptionsConfig = async (): Promise<OptionsConfig> => {
     },
     [OPTIONS.SEARCH_TARGET]: {
       type: 'select',
-      default: 0,
-      choices: getMessages(['searchTargetOption1', 'searchTargetOption2']),
+      default: SEARCH_TARGET_OPTIONS.TITLE_AND_URL,
+      choices: genOptionsByMsgKey([
+        SEARCH_TARGET_OPTIONS.TITLE_AND_URL,
+        SEARCH_TARGET_OPTIONS.TITLE,
+      ]),
     },
     [OPTIONS.SET_WIDTH]: {
       type: 'integer',

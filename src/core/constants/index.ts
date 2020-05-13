@@ -1,3 +1,5 @@
+export const IS_FIREFOX = /firefox/i.test(window.navigator.userAgent)
+
 export enum OPTIONS {
   CLICK_BY_LEFT = 'clickByLeft',
   CLICK_BY_LEFT_CTRL = 'clickByLeftCtrl',
@@ -16,4 +18,19 @@ export enum OPTIONS {
   WARN_OPEN_MANY = 'warnOpenMany',
 }
 
-export const ROOT_ID = '0'
+export enum CLICK_OPTIONS {
+  CURRENT_TAB = 'clickOption1',
+  CURRENT_TAB_WITHOUT_CLOSING_PMB = 'clickOption2',
+  NEW_TAB = 'clickOption3',
+  BACKGROUND_TAB = 'clickOption4',
+  BACKGROUND_TAB_WITHOUT_CLOSING_PMB = 'clickOption5',
+  NEW_WINDOW = 'clickOption6',
+  INCOGNITO_WINDOW = 'clickOption7',
+}
+
+export enum SEARCH_TARGET_OPTIONS {
+  TITLE_AND_URL = 'searchTargetOption1',
+  TITLE = 'searchTargetOption2',
+}
+
+export const ROOT_ID = IS_FIREFOX ? 'root________' : '0'
