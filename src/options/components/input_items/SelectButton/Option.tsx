@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
+import Button from '../../../../core/components/base_items/Button'
 import classes from './select-button-option.css'
 
 interface Props {
@@ -40,15 +41,15 @@ const Option = ({
         hidden
         onChange={handleChange}
       />
-      <button
+      <Button
         className={classNames(classes.item, {
           [classes['item-active']]: isChecked,
         })}
-        type='button'
+        disabled={isChecked}
         onClick={handleClick}
       >
         {webExtension.i18n.getMessage(optionChoice ? 'yes' : 'no')}
-      </button>
+      </Button>
     </label>
   )
 }

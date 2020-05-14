@@ -1,14 +1,3 @@
-.button {
-  padding: var(--golden-gap-2x) var(--golden-gap-4x);
-  border: 0;
-  background-color: var(--highlight-level1);
-  color: var(--main-font-color);
-
-  &:hover {
-    color: var(--main-color1);
-  }
-}
-
 .focus {
   outline-color: var(--highlight-level5);
   outline-width: 1px;

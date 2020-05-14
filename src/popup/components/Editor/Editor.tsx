@@ -1,6 +1,7 @@
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
+import Button from '../../../core/components/base_items/Button'
 import classes from './editor.css'
 
 const handleSubmit = (evt: React.FormEvent) => {
@@ -67,16 +68,15 @@ const Editor = (props: Props) => {
         />
       )}
 
-      <button
-        className={classes.button}
+      <Button
         type='submit' // support `Enter` to submit
         onClick={handleConfirm}
       >
         {webExtension.i18n.getMessage('confirm')}
-      </button>
-      <button className={classes.button} type='button' onClick={props.onCancel}>
+      </Button>
+      <Button onClick={props.onCancel}>
         {webExtension.i18n.getMessage('cancel')}
-      </button>
+      </Button>
     </form>
   )
 }

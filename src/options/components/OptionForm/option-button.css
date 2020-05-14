@@ -1,4 +1,0 @@
-.main {
-  composes: focus from '../../../core/styles/composes.css';
-  composes: button from '../../../core/styles/composes.css';
-}

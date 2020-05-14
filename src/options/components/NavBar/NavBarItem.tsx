@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import * as React from 'react'
 
+import Button from '../../../core/components/base_items/Button'
 import { NAV_MODULE } from '../../constants'
 import classes from './nav-bar-item.css'
 
@@ -16,15 +17,14 @@ const NavBarItem = ({ navModule, switchNavModule, ...restProps }: Props) => {
   }, [navModule, switchNavModule])
 
   return (
-    <button
+    <Button
       className={classNames(classes.main, {
         [classes['main-active']]: restProps.isActive,
       })}
-      type='button'
       onClick={handleClick}
     >
       {restProps.title}
-    </button>
+    </Button>
   )
 }
 

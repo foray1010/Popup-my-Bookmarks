@@ -1,10 +1,10 @@
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
+import Button from '../../../core/components/base_items/Button'
 import { OPTIONS } from '../../../core/constants'
 import { Options, OptionsConfig } from '../../../core/types/options'
 import classes from './option-form.css'
-import OptionButton from './OptionButton'
 import OptionItem from './OptionItem'
 
 const handleSubmit = (evt: React.FormEvent) => {
@@ -47,16 +47,14 @@ const OptionForm = (props: Props) => (
       <tfoot>
         <tr>
           <td>
-            <OptionButton
-              msg={webExtension.i18n.getMessage('confirm')}
-              onClick={props.saveOptions}
-            />
+            <Button onClick={props.saveOptions}>
+              {webExtension.i18n.getMessage('confirm')}
+            </Button>
           </td>
           <td>
-            <OptionButton
-              msg={webExtension.i18n.getMessage('default')}
-              onClick={props.resetToDefaultOptions}
-            />
+            <Button onClick={props.resetToDefaultOptions}>
+              {webExtension.i18n.getMessage('default')}
+            </Button>
           </td>
         </tr>
       </tfoot>

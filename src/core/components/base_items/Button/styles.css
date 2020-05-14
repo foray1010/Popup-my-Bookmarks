@@ -1,0 +1,7 @@
+.main {
+  composes: focus from '../../../styles/composes.css';
+  padding: var(--golden-gap-2x) var(--golden-gap-4x);
+  border: 0;
+  background-color: var(--highlight-level1);
+  color: var(--main-font-color);
+}
