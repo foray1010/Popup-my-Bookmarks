@@ -22,7 +22,7 @@
     "type:coverage": "type-coverage --strict --at-least 99.5 --detail --ignore-catch"
   },
   "browserslist": [
-    "chrome >= 65"
+    "chrome >= 73"
   ],
   "dependencies": {
     "@rehooks/component-size": "1.0.3",
