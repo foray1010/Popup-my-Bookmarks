@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import StylelessElement from '../../../core/components/base_items/StylelessElement'
 import DragAndDropContext from './DragAndDropContext'
 
 export interface ResponseEvent {
@@ -104,13 +105,11 @@ const useMouseEvents = () => {
 
 interface Props {
   children: React.ReactNode
-  className?: string
   disableDrag?: boolean
   disableDrop?: boolean
   itemKey: string
   onDragOver: (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
   onDragStart: (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
-  style?: React.CSSProperties
 }
 const DragAndDropConsumer = (props: Props) => {
   const context = React.useContext(DragAndDropContext)
@@ -131,9 +130,7 @@ const DragAndDropConsumer = (props: Props) => {
   const isDragging = context.activeKey !== null
   const isPending = context.pendingKey !== null
   return (
-    <div
-      className={props.className}
-      style={props.style}
+    <StylelessElement
       onClickCapture={handleClickCapture}
       onMouseUpCapture={isDragging ? handleMouseUpCapture : undefined}
       {...(props.disableDrag !== true
@@ -150,7 +147,7 @@ const DragAndDropConsumer = (props: Props) => {
         : {})}
     >
       {props.children}
-    </div>
+    </StylelessElement>
   )
 }
 

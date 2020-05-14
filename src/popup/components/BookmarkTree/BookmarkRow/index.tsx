@@ -84,40 +84,40 @@ const BookmarkRowContainer = ({
   ])
 
   return (
-    <DragAndDropConsumer
-      className={restProps.className}
-      disableDrag={
-        restProps.isDisableDragAndDrop ||
-        bookmarkInfo.isRoot ||
-        bookmarkInfo.type === CST.BOOKMARK_TYPES.NO_BOOKMARK
-      }
-      disableDrop={restProps.isDisableDragAndDrop}
-      itemKey={bookmarkInfo.id}
-      onDragOver={handleDragOver}
-      onDragStart={restProps.onDragStart}
-      style={restProps.style}
-    >
-      <BookmarkRow
-        ref={bookmarkRowRef}
-        className={classNames(classes['full-height'], {
-          [classes['root-folder']]: bookmarkInfo.isRoot,
-          [classes['drag-indicator']]:
-            bookmarkInfo.type === CST.BOOKMARK_TYPES.DRAG_INDICATOR,
-          [classes.separator]:
-            bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR,
-        })}
-        iconSize={restProps.iconSize}
-        iconUrl={bookmarkInfo.iconUrl}
-        isHighlighted={isHighlighted}
-        isUnclickable={restProps.isUnclickable}
-        onAuxClick={handleAuxClick}
-        onClick={handleClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        title={bookmarkInfo.title}
-        tooltip={tooltip}
-      />
-    </DragAndDropConsumer>
+    <li className={restProps.className} style={restProps.style}>
+      <DragAndDropConsumer
+        disableDrag={
+          restProps.isDisableDragAndDrop ||
+          bookmarkInfo.isRoot ||
+          bookmarkInfo.type === CST.BOOKMARK_TYPES.NO_BOOKMARK
+        }
+        disableDrop={restProps.isDisableDragAndDrop}
+        itemKey={bookmarkInfo.id}
+        onDragOver={handleDragOver}
+        onDragStart={restProps.onDragStart}
+      >
+        <BookmarkRow
+          ref={bookmarkRowRef}
+          className={classNames(classes['full-height'], {
+            [classes['root-folder']]: bookmarkInfo.isRoot,
+            [classes['drag-indicator']]:
+              bookmarkInfo.type === CST.BOOKMARK_TYPES.DRAG_INDICATOR,
+            [classes.separator]:
+              bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR,
+          })}
+          iconSize={restProps.iconSize}
+          iconUrl={bookmarkInfo.iconUrl}
+          isHighlighted={isHighlighted}
+          isUnclickable={restProps.isUnclickable}
+          onAuxClick={handleAuxClick}
+          onClick={handleClick}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          title={bookmarkInfo.title}
+          tooltip={tooltip}
+        />
+      </DragAndDropConsumer>
+    </li>
   )
 }
 

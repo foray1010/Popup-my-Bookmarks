@@ -5,7 +5,6 @@ import KeyBindingsContext from './KeyBindingsContext'
 import classes from './KeyBindingsWindow.css'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
-  children: React.ReactNode
   windowId: string
 }
 const KeyBindingsWindow = ({
@@ -13,7 +12,7 @@ const KeyBindingsWindow = ({
   className,
   onFocus,
   windowId,
-  ...attributes
+  ...props
 }: Props) => {
   const { setActiveWindowId, unsetActiveWindowId } = React.useContext(
     KeyBindingsContext,
@@ -48,7 +47,7 @@ const KeyBindingsWindow = ({
     <div
       ref={divRef}
       tabIndex={-1}
-      {...attributes}
+      {...props}
       className={classNames(classes.wrapper, className)}
       onFocus={handleFocus}
     >

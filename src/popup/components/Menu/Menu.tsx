@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import PlainList from '../../../core/components/base_items/PlainList'
 import { MenuPattern } from '../../types'
 import classes from './menu.css'
 import MenuRow from './MenuRow'
@@ -16,27 +17,29 @@ const Menu = (props: Props) => {
   const allRowNames = props.menuPattern.flat()
 
   return (
-    <div className={classes.main}>
+    <PlainList className={classes.main}>
       {props.menuPattern.map((rowNames) => (
-        <div key={rowNames.join()}>
-          {rowNames.map((rowName) => {
-            const rowIndex = allRowNames.indexOf(rowName)
-            return (
-              <MenuRow
-                key={rowName}
-                isFocused={rowIndex === props.highlightedIndex}
-                isUnclickable={props.unclickableRows.includes(rowName)}
-                rowIndex={rowIndex}
-                rowName={rowName}
-                onClick={props.onRowClick}
-                onMouseEnter={props.onRowMouseEnter}
-                onMouseLeave={props.onRowMouseLeave}
-              />
-            )
-          })}
-        </div>
+        <li key={rowNames.join()}>
+          <PlainList>
+            {rowNames.map((rowName) => {
+              const rowIndex = allRowNames.indexOf(rowName)
+              return (
+                <MenuRow
+                  key={rowName}
+                  isFocused={rowIndex === props.highlightedIndex}
+                  isUnclickable={props.unclickableRows.includes(rowName)}
+                  rowIndex={rowIndex}
+                  rowName={rowName}
+                  onClick={props.onRowClick}
+                  onMouseEnter={props.onRowMouseEnter}
+                  onMouseLeave={props.onRowMouseLeave}
+                />
+              )
+            })}
+          </PlainList>
+        </li>
       ))}
-    </div>
+    </PlainList>
   )
 }
 

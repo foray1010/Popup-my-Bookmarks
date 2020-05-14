@@ -5,12 +5,17 @@ import styles from './styles.css'
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement>
 
-const Button = ({ className, type = 'button', ...props }: Props) => (
-  <button
-    {...props}
-    className={classNames(styles.main, className)}
-    type={type}
-  />
+const ButtonWithForwardRef = React.forwardRef<HTMLButtonElement, Props>(
+  function Button({ className, type = 'button', ...props }: Props, ref) {
+    return (
+      <button
+        {...props}
+        ref={ref}
+        className={classNames(styles.main, className)}
+        type={type}
+      />
+    )
+  },
 )
 
-export default Button
+export default ButtonWithForwardRef

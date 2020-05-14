@@ -3,6 +3,7 @@ import * as React from 'react'
 import { ListOnScrollProps, VariableSizeList as List } from 'react-window'
 import useEventListener from 'use-typed-event-listener'
 
+import PlainList from '../../../core/components/base_items/PlainList'
 import * as CST from '../../constants'
 import { BookmarkInfo, BookmarkTree as BookmarkTreeType } from '../../types'
 import { ResponseEvent } from '../dragAndDrop/DragAndDropConsumer'
@@ -180,6 +181,7 @@ const BookmarkTree = (props: Props) => {
       ref={listRef}
       outerRef={outerRef}
       height={listHeight}
+      innerElementType={PlainList}
       itemCount={itemCount}
       itemData={itemData}
       itemKey={getItemKey}

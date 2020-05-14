@@ -30,7 +30,7 @@ const MenuRow = ({
   ])
 
   return (
-    <div
+    <li
       className={classNames(classes.main, {
         [classes.focused]: restProps.isFocused,
         [classes.unclickable]: restProps.isUnclickable,
@@ -40,7 +40,7 @@ const MenuRow = ({
       onMouseLeave={handleMouseLeave}
     >
       {webExtension.i18n.getMessage(rowName)}
-    </div>
+    </li>
   )
 }
 
