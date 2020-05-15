@@ -12,9 +12,4 @@
     padding: 0 var(--golden-gap-2x);
     border-color: var(--main-color1);
   }
-
-  & > input[type='number'] {
-    width: 50px;
-    text-align: right;
-  }
 }

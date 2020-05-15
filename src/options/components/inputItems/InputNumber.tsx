@@ -51,6 +51,7 @@ const InputNumber = ({
       type='number'
       min={minimum}
       max={maximum}
+      size={Math.floor(Math.log10(maximum)) + 1}
       value={String(optionValue)}
       onBlur={handleBlur}
       onChange={handleChange}
