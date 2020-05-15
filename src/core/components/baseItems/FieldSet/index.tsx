@@ -5,8 +5,16 @@ import styles from './styles.css'
 
 type Props = React.FieldsetHTMLAttributes<HTMLFieldSetElement>
 
-const FieldSet = ({ className, ...props }: Props) => (
-  <fieldset {...props} className={classNames(styles.main, className)} />
+const FieldSetWithForwardRef = React.forwardRef<HTMLFieldSetElement, Props>(
+  function FieldSet({ className, ...props }: Props, ref) {
+    return (
+      <fieldset
+        {...props}
+        ref={ref}
+        className={classNames(styles.main, className)}
+      />
+    )
+  },
 )
 
-export default FieldSet
+export default FieldSetWithForwardRef
