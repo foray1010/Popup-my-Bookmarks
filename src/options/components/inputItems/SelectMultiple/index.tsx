@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import FieldSet from '../../../../core/components/baseItems/FieldSet'
 import Option from './Option'
-import classes from './select-multiple.css'
+import classes from './styles.css'
 
 interface Props {
   choices: Array<string | void>

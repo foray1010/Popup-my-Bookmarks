@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import Option from './Option'
-import classes from './select-button.css'
+import classes from './styles.css'
 
 interface Props {
   optionChoices: Array<boolean>

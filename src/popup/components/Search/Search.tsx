@@ -1,6 +1,7 @@
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
+import Input from '../../../core/components/baseItems/Input'
 import cancelIcon from '../../images/cancel.svg'
 import searchIcon from '../../images/search.svg'
 import classes from './search.css'
@@ -34,12 +35,12 @@ const Search = ({
   return (
     <div className={classes.main}>
       <img className={classes['search-icon']} src={searchIcon} alt='' />
-      <input
+      <Input
         ref={inputRef}
         className={classes['search-input']}
-        type='text'
         placeholder={webExtension.i18n.getMessage('search')}
         value={inputValue}
+        inputMode='search'
         tabIndex={-1}
         onBlur={restProps.onBlur}
         onFocus={restProps.onFocus}

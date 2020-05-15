@@ -8,20 +8,16 @@
 .input,
 .select {
   height: 100%;
-  padding: 0 var(--golden-gap-2x);
   border: 0 !important;
 }
 
 .input {
-  composes: focus from '../../../core/styles/composes.css';
   position: absolute;
   top: 0;
   left: 0;
   width: calc(100% - var(--input-height));
   box-sizing: border-box;
   background-color: var(--main-background-color);
-  color: var(--main-font-color);
-  text-align: left;
 }
 
 .select {

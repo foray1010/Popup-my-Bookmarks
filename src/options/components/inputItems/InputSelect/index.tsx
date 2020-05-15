@@ -1,6 +1,8 @@
 import * as React from 'react'
 
-import classes from './input-select.css'
+import Input from '../../../../core/components/baseItems/Input'
+import Select from '../../../../core/components/baseItems/Select'
+import classes from './styles.css'
 
 const normalize = (value: string) => {
   return value
@@ -49,16 +51,15 @@ const InputSelect = ({
 
   return (
     <div className={classes.main}>
-      <input
+      <Input
         ref={inputRef}
         className={classes.input}
         name={optionName}
-        type='text'
         value={optionValue}
         onBlur={handleBlur}
         onChange={handleChange}
       />
-      <select
+      <Select
         ref={selectRef}
         className={classes.select}
         defaultValue={optionValue}
@@ -67,7 +68,7 @@ const InputSelect = ({
         {choices.map((optionChoice, optionChoiceIndex) => (
           <option key={String(optionChoiceIndex)}>{optionChoice}</option>
         ))}
-      </select>
+      </Select>
     </div>
   )
 }

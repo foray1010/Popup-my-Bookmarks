@@ -27,7 +27,6 @@
   border: 0;
   margin-right: var(--golden-gap);
   background-color: transparent;
-  color: var(--main-font-color);
   font-size: 12px;
   outline: 0;
 }

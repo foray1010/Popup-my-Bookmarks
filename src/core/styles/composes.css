@@ -7,13 +7,6 @@
   }
 }
 
-.input {
-  border-width: 1px;
-  border-style: solid;
-  background-color: transparent;
-  color: var(--main-font-color);
-}
-
 .list-item {
   border: 1px solid transparent;
   color: var(--main-font-color);

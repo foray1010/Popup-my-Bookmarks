@@ -2,8 +2,8 @@ import classNames from 'classnames'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import Button from '../../../../core/components/baseItems/Button'
-import classes from './select-button-option.css'
+import Button from '../../../../../core/components/baseItems/Button'
+import classes from './styles.css'
 
 interface Props {
   optionChoice: boolean

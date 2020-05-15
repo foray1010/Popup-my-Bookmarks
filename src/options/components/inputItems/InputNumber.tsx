@@ -1,7 +1,7 @@
 import * as R from 'ramda'
 import * as React from 'react'
 
-import classes from './input-number.css'
+import Input from '../../../core/components/baseItems/Input'
 
 interface Props {
   maximum: number
@@ -45,8 +45,7 @@ const InputNumber = ({
   )
 
   return (
-    <input
-      className={classes.main}
+    <Input
       name={optionName}
       type='number'
       min={minimum}

@@ -9,7 +9,7 @@
   & > select {
     height: var(--input-height);
     box-sizing: border-box;
-    padding: 0 var(--golden-gap-2x);
+    padding: var(--golden-gap-2x) var(--golden-gap-4x);
     border-color: var(--main-color1);
   }
 }

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import classes from './select-string.css'
+import Select from '../../../core/components/baseItems/Select'
 
 interface Props {
   choices: Array<string | void>
@@ -24,12 +24,7 @@ const SelectString = ({
   )
 
   return (
-    <select
-      className={classes.main}
-      name={optionName}
-      value={optionValue}
-      onChange={handleChange}
-    >
+    <Select name={optionName} value={optionValue} onChange={handleChange}>
       {choices.reduce<Array<React.ReactElement<{}>>>(
         (acc, optionChoice, optionChoiceIndex) => {
           if (optionChoice !== undefined) {
@@ -48,7 +43,7 @@ const SelectString = ({
         },
         [],
       )}
-    </select>
+    </Select>
   )
 }
 

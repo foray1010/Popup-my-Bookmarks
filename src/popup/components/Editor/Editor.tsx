@@ -3,6 +3,7 @@ import webExtension from 'webextension-polyfill'
 
 import ActionlessForm from '../../../core/components/baseItems/ActionlessForm'
 import Button from '../../../core/components/baseItems/Button'
+import Input from '../../../core/components/baseItems/Input'
 import classes from './editor.css'
 
 interface Props {
@@ -49,17 +50,15 @@ const Editor = (props: Props) => {
     <ActionlessForm className={classes.main} style={formStyles}>
       <span className={classes.header}>{props.header}</span>
 
-      <input
+      <Input
         className={classes.input}
-        type='text'
         value={title}
         onChange={handleTitleChange}
         autoFocus
       />
       {props.isAllowEditUrl && (
-        <input
+        <Input
           className={classes.input}
-          type='text'
           value={url}
           onChange={handleUrlChange}
         />
