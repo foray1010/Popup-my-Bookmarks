@@ -1,15 +1,12 @@
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
+import ActionlessForm from '../../../core/components/baseItems/ActionlessForm'
 import Button from '../../../core/components/baseItems/Button'
 import { OPTIONS } from '../../../core/constants'
 import { Options, OptionsConfig } from '../../../core/types/options'
 import classes from './option-form.css'
 import OptionItem from './OptionItem'
-
-const handleSubmit = (evt: React.FormEvent) => {
-  evt.preventDefault()
-}
 
 interface Props {
   options: Partial<Options>
@@ -20,7 +17,7 @@ interface Props {
   updatePartialOptions: (options: Partial<Options>) => void
 }
 const OptionForm = (props: Props) => (
-  <form onSubmit={handleSubmit}>
+  <ActionlessForm>
     <table className={classes.table}>
       <tbody>
         {props.selectedOptionFormMap.reduce<Array<React.ReactElement<{}>>>(
@@ -59,7 +56,7 @@ const OptionForm = (props: Props) => (
         </tr>
       </tfoot>
     </table>
-  </form>
+  </ActionlessForm>
 )
 
 export default OptionForm

@@ -1,12 +1,9 @@
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
+import ActionlessForm from '../../../core/components/baseItems/ActionlessForm'
 import Button from '../../../core/components/baseItems/Button'
 import classes from './editor.css'
-
-const handleSubmit = (evt: React.FormEvent) => {
-  evt.preventDefault()
-}
 
 interface Props {
   header: string
@@ -49,7 +46,7 @@ const Editor = (props: Props) => {
   )
 
   return (
-    <form className={classes.main} style={formStyles} onSubmit={handleSubmit}>
+    <ActionlessForm className={classes.main} style={formStyles}>
       <span className={classes.header}>{props.header}</span>
 
       <input
@@ -68,16 +65,13 @@ const Editor = (props: Props) => {
         />
       )}
 
-      <Button
-        type='submit' // support `Enter` to submit
-        onClick={handleConfirm}
-      >
+      <Button type='submit' onClick={handleConfirm}>
         {webExtension.i18n.getMessage('confirm')}
       </Button>
       <Button onClick={props.onCancel}>
         {webExtension.i18n.getMessage('cancel')}
       </Button>
-    </form>
+    </ActionlessForm>
   )
 }
 
