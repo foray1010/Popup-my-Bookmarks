@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import StylelessElement from '../../../core/components/base_items/StylelessElement'
+import StylelessElement from '../../../core/components/baseItems/StylelessElement'
 import DragAndDropContext from './DragAndDropContext'
 
 export interface ResponseEvent {

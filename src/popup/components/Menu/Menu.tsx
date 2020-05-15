@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import PlainList from '../../../core/components/base_items/PlainList'
+import PlainList from '../../../core/components/baseItems/PlainList'
 import { MenuPattern } from '../../types'
 import classes from './menu.css'
 import MenuRow from './MenuRow'

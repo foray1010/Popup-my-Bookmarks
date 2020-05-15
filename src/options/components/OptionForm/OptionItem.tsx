@@ -2,11 +2,11 @@ import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import { OptionConfig, Options } from '../../../core/types/options'
-import InputNumber from '../input_items/InputNumber'
-import InputSelect from '../input_items/InputSelect'
-import SelectButton from '../input_items/SelectButton'
-import SelectMultiple from '../input_items/SelectMultiple'
-import SelectString from '../input_items/SelectString'
+import InputNumber from '../inputItems/InputNumber'
+import InputSelect from '../inputItems/InputSelect'
+import SelectButton from '../inputItems/SelectButton'
+import SelectMultiple from '../inputItems/SelectMultiple'
+import SelectString from '../inputItems/SelectString'
 import classes from './option-item.css'
 
 interface Props {

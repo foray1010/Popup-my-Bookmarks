@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import Button from '../../../core/components/base_items/Button'
+import Button from '../../../core/components/baseItems/Button'
 import classes from './tree-header.css'
 
 interface Props {

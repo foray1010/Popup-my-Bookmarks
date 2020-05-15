@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import FieldSet from '../../form_items/FieldSet'
+import FieldSet from '../../../../core/components/baseItems/FieldSet'
 import Option from './Option'
 import classes from './select-multiple.css'
 

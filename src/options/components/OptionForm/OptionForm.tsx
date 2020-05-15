@@ -1,7 +1,7 @@
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import Button from '../../../core/components/base_items/Button'
+import Button from '../../../core/components/baseItems/Button'
 import { OPTIONS } from '../../../core/constants'
 import { Options, OptionsConfig } from '../../../core/types/options'
 import classes from './option-form.css'
