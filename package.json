@@ -55,7 +55,7 @@
     "@types/bluebird": "3.5.30",
     "@types/chance": "1.1.0",
     "@types/classnames": "2.2.10",
-    "@types/copy-webpack-plugin": "5.0.0",
+    "@types/copy-webpack-plugin": "5.0.1",
     "@types/core-js": "2.5.3",
     "@types/duplicate-package-checker-webpack-plugin": "2.1.0",
     "@types/firefox-webext-browser": "70.0.1",
