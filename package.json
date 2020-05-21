@@ -25,6 +25,7 @@
     "chrome >= 73"
   ],
   "dependencies": {
+    "@babel/runtime": "7.9.6",
     "@rehooks/component-size": "1.0.3",
     "classnames": "2.2.6",
     "core-js": "3.6.5",
@@ -40,15 +41,15 @@
     "redux-saga": "1.1.3",
     "typeface-archivo-narrow": "1.1.3",
     "typesafe-actions": "5.1.0",
-    "use-typed-event-listener": "2.0.0",
+    "use-typed-event-listener": "2.0.1",
     "webextension-polyfill": "0.6.0"
   },
   "devDependencies": {
     "@babel/core": "7.9.6",
     "@commitlint/cli": "8.3.5",
     "@commitlint/config-conventional": "8.3.4",
-    "@foray1010/babel-preset": "3.0.2",
-    "@foray1010/eslint-config": "2.3.1",
+    "@foray1010/babel-preset": "4.0.0",
+    "@foray1010/eslint-config": "2.3.2",
     "@foray1010/prettier-config": "4.0.1",
     "@foray1010/remark-preset": "3.0.2",
     "@foray1010/stylelint-config": "2.2.1",

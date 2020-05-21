@@ -702,6 +702,16 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
 
+"@babel/plugin-transform-runtime@^7.9.6":
+  version "7.9.6"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-runtime/-/plugin-transform-runtime-7.9.6.tgz#3ba804438ad0d880a17bca5eaa0cdf1edeedb2fd"
+  integrity sha512-qcmiECD0mYOjOIt8YHNsAP1SxPooC/rDmfmiSK9BNY72EitdSc7l44WTEklaWuFtbOEBjNhWWyph/kOImbNJ4w==
+  dependencies:
+    "@babel/helper-module-imports" "^7.8.3"
+    "@babel/helper-plugin-utils" "^7.8.3"
+    resolve "^1.8.1"
+    semver "^5.5.1"
+
 "@babel/plugin-transform-shorthand-properties@^7.8.3":
   version "7.8.3"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-shorthand-properties/-/plugin-transform-shorthand-properties-7.8.3.tgz#28545216e023a832d4d3a1185ed492bcfeac08c8"
@@ -861,7 +871,7 @@
     core-js-pure "^3.0.0"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
+"@babel/runtime@7.9.6", "@babel/runtime@^7.0.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2", "@babel/runtime@^7.9.6":
   version "7.9.6"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.6.tgz#a9102eb5cadedf3f31d08a9ecf294af7827ea29f"
   integrity sha512-64AF1xY3OAkFHqOb9s4jpgk1Mm5vDZ4L3acHvAml+53nO1XbXLuDodsVpO4OIUsmemlUHMxNdYMNJmsvOwLrvQ==
@@ -1054,15 +1064,16 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@foray1010/babel-preset@3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-3.0.2.tgz#8f581a9f93df038c9d8e7d7f9871f45ee61aa717"
-  integrity sha512-CO/R4+L7976SudvVoX2zoYPnBRHWVycowkhewNQjoLAoloUpz7RLut0cYRnfDV6XX09ySgUkpffNA8Y7mF2IHA==
+"@foray1010/babel-preset@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-4.0.0.tgz#ab505e9a85582929c2eb6f17c09aea201764c426"
+  integrity sha512-z+fsfE5SaNnHqXJGIKl5BX4+381kJQaPlt89TJt3q3CLvKwptSOKZpZ6y9Kzbf1lU7bYe+8JGJKBY4A2bGwYCw==
   dependencies:
     "@babel/plugin-proposal-nullish-coalescing-operator" "^7.7.4"
     "@babel/plugin-proposal-optional-chaining" "^7.7.4"
     "@babel/plugin-transform-react-constant-elements" "^7.6.3"
     "@babel/plugin-transform-react-inline-elements" "^7.2.0"
+    "@babel/plugin-transform-runtime" "^7.9.6"
     "@babel/preset-env" "^7.6.3"
     "@babel/preset-react" "^7.6.3"
     "@babel/preset-typescript" "^7.6.0"
@@ -1076,10 +1087,10 @@
   dependencies:
     read-pkg-up "^7.0.0"
 
-"@foray1010/eslint-config@2.3.1":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-2.3.1.tgz#3eb1f842084d845a93922c86a711e26fc3a44e41"
-  integrity sha512-D7SX7i4sGSiKncQA2iLI0CFsOVZ5TreCTgmp96bWziFTQpI1UJohGl9JWAKCZ0kYzd2PgE1CxbbNJfvrl8Lq3g==
+"@foray1010/eslint-config@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-2.3.2.tgz#713a1b7d72f633c59239c04352cf99f9961a19e3"
+  integrity sha512-q3o6aNClO24a24lSwVleF5WA21Oev0atSK6qCfoaNL2IfU9xHfBriSItrE3z7sYIyRlXuIKL2kekEioQCZJPgQ==
   dependencies:
     "@foray1010/common-presets-utils" "^2.0.2"
     "@typescript-eslint/eslint-plugin" "^2.3.2"
@@ -14247,11 +14258,12 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-use-typed-event-listener@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/use-typed-event-listener/-/use-typed-event-listener-2.0.0.tgz#817d5f74f7f3c5c1b643041b09f461fb9045ea65"
-  integrity sha512-WY2KXNocyA+QluT0tUEy8w8zkqZPnbIc90ZukwYJSLsRFBlF4Ri9R7h/NKc8Vi4ApWGQNRqibBjUKvtT4Mn8HQ==
+use-typed-event-listener@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/use-typed-event-listener/-/use-typed-event-listener-2.0.1.tgz#9cb8f4437daea587295b16c9f5191d5cb8eb1ac2"
+  integrity sha512-ogKoBPcUVFQzds6hKEGCiRCvWPsHt8M8TQ1iFG5/ndCsgnFadFn61fVtgzwSH1MxogG//6kpE6CcOfK9AroY9A==
   dependencies:
+    "@babel/runtime" "^7.9.6"
     fast-equals "^2.0.0"
 
 use@^3.1.0:
