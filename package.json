@@ -30,7 +30,7 @@
     "classnames": "2.2.6",
     "core-js": "3.6.5",
     "lodash.debounce": "4.0.8",
-    "nanoid": "3.1.7",
+    "nanoid": "3.1.9",
     "open-color": "1.7.0",
     "ramda": "0.27.0",
     "react": "16.13.1",
