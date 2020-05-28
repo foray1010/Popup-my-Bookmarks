@@ -163,15 +163,17 @@ const webpackConfig: webpack.Configuration = {
     new CleanWebpackPlugin({
       cleanStaleWebpackAssets: false,
     }),
-    new CopyWebpackPlugin([
-      {
-        context: path.join(sourceDir, 'core'),
-        from: path.join('_locales', '*', '*.json'),
-      },
-      {
-        from: 'LICENSE',
-      },
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          context: path.join(sourceDir, 'core'),
+          from: path.join('_locales', '**', 'messages.json'),
+        },
+        {
+          from: 'LICENSE',
+        },
+      ],
+    }),
     new DuplicatePackageCheckerPlugin({
       emitError: true,
       strict: true,
