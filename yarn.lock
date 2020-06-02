@@ -1350,10 +1350,10 @@
     remark-preset-lint-recommended "^4.0.0"
     remark-preset-prettier "^0.4.0"
 
-"@foray1010/stylelint-config@2.2.1":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-2.2.1.tgz#63f27173e51aac94e6cb261e0fcfceebde525321"
-  integrity sha512-LYcKCeQK2tSrf14rtNr7Etv1tPrXBKUf8ngxkthK9+GoOzUibw7KbMtYP41FNCK8JBhhE9Lq/hoN6D/dPbAoJw==
+"@foray1010/stylelint-config@2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-2.2.2.tgz#2bee6af55b5298b19493e26e64e1e51eaeb3c688"
+  integrity sha512-QO4cRBnEasA9L6BJzyRAeLSHxrkxdoaUbLVxiz08VnCkGHJyUPXXDwCMgzXEyrAjplTpYE0vFE6HIOaHSwa4sw==
   dependencies:
     stylelint-config-css-modules "^2.0.0"
     stylelint-config-idiomatic-order "^8.0.0"
