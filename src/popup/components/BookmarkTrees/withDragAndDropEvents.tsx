@@ -4,7 +4,7 @@ import useAction from '../../../core/hooks/useAction'
 import { bookmarkCreators } from '../../reduxs'
 import DragAndDropProvider from '../dragAndDrop/DragAndDropProvider'
 
-export default <P extends {}>(WrappedComponent: React.ComponentType<P>) => {
+export default <P,>(WrappedComponent: React.ComponentType<P>) => {
   const DragAndDropEvents = (props: P) => {
     const moveBookmarkToDragIndicator = useAction(
       bookmarkCreators.moveBookmarkToDragIndicator,

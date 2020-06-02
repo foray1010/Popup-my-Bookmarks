@@ -66,7 +66,7 @@ const AbsolutePosition = ({
     removeBodySize,
   ])
 
-  const wrapperStyles: object = React.useMemo(
+  const wrapperStyles: Record<string, string> = React.useMemo(
     () => ({
       '--positionLeft': `${calibratedPosition.left}px`,
       '--positionTop': `${calibratedPosition.top}px`,

@@ -66,10 +66,10 @@ function* removeLastPosition({
 // use channel to make sure every create/remove run one by one
 function* watchCreateAndRemoveLastPosition() {
   try {
-    const createLastPositionChan: TakeableChannel<{}> = yield actionChannel(
+    const createLastPositionChan: TakeableChannel<unknown> = yield actionChannel(
       getType(lastPositionsCreator.createLastPosition),
     )
-    const removeLastPositionChan: TakeableChannel<{}> = yield actionChannel(
+    const removeLastPositionChan: TakeableChannel<unknown> = yield actionChannel(
       getType(lastPositionsCreator.removeLastPosition),
     )
     while (true) {

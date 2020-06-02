@@ -6,7 +6,12 @@ import type { RootState } from '../../reduxs'
 import { navigationCreators } from '../../reduxs'
 import NavBar from './NavBar'
 
-const NavBarContainer = <T extends {}>(props: T) => {
+type Props = Omit<
+  React.ComponentProps<typeof NavBar>,
+  'selectedNavModule' | 'switchNavModule'
+>
+
+const NavBarContainer = (props: Props) => {
   const selectedNavModule = useSelector(
     (state: RootState) => state.navigation.selectedNavModule,
   )

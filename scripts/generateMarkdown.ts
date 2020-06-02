@@ -43,10 +43,9 @@ const generateStoreDescription = async () => {
 
   await fsPromises.writeFile(fileName, fileData)
 }
-;(async () => {
-  try {
-    await Promise.all([generateReadme(), generateStoreDescription()])
-  } catch (err) {
-    console.error(err.stack)
-  }
-})()
+
+const main = async () => {
+  await Promise.all([generateReadme(), generateStoreDescription()])
+}
+
+main().catch(console.error)

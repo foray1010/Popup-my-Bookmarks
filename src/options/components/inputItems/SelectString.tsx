@@ -25,7 +25,7 @@ const SelectString = ({
 
   return (
     <Select name={optionName} value={optionValue} onChange={handleChange}>
-      {choices.reduce<Array<React.ReactElement<{}>>>(
+      {choices.reduce<Array<React.ReactNode>>(
         (acc, optionChoice, optionChoiceIndex) => {
           if (optionChoice !== undefined) {
             return [

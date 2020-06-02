@@ -20,7 +20,7 @@ const OptionForm = (props: Props) => (
   <ActionlessForm>
     <table className={classes.table}>
       <tbody>
-        {props.selectedOptionFormMap.reduce<Array<React.ReactElement<{}>>>(
+        {props.selectedOptionFormMap.reduce<Array<React.ReactNode>>(
           (acc, optionName) => {
             const optionValue = props.options[optionName]
             if (optionValue !== undefined) {

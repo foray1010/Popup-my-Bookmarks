@@ -81,7 +81,7 @@ const InputItem = ({ optionConfig, optionValue, ...restProps }: Props) => {
   return null
 }
 
-const OptionItem = (props: Props) => (
+const OptionItem = (props: React.ComponentProps<typeof InputItem>) => (
   <tr>
     <td className={classes.desc}>
       {webExtension.i18n.getMessage(props.optionName)}
