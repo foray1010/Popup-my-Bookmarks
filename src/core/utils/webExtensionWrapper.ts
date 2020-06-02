@@ -2,7 +2,7 @@ import webExtension from 'webextension-polyfill'
 
 // workaround as following functions cannot pass redux-saga
 // and throw error: `TypeError: Function.prototype.toString requires that 'this' be a Function`
-const wrap = <T extends Array<any>, U>(fn: (...args: T) => U) => {
+const wrap = <T extends Array<unknown>, U>(fn: (...args: T) => U) => {
   return (...args: T): U => fn(...args)
 }
 

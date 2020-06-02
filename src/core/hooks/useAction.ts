@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useDispatch } from 'react-redux'
 import { Action, Dispatch } from 'redux'
 
-const useAction = <T extends Array<any>, U extends Action<string>>(
+const useAction = <T extends Array<unknown>, U extends Action<string>>(
   action: (...args: T) => U,
 ) => {
   const dispatch = useDispatch<Dispatch<U>>()

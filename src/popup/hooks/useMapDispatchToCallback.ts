@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-const useMapDispatchToCallback = <T, U extends Array<any>>(
+const useMapDispatchToCallback = <T, U extends Array<unknown>>(
   dispatch: React.Dispatch<T>,
   creator: (...args: U) => T,
 ) => {

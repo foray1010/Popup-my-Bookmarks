@@ -1,14 +1,9 @@
-import {
-  Action,
-  applyMiddleware,
-  createStore,
-  PreloadedState,
-  Reducer,
-  Store,
-} from 'redux'
-import createSagaMiddleware, { SagaIterator } from 'redux-saga'
+import type { Action, PreloadedState, Reducer, Store } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
+import type { SagaIterator } from 'redux-saga'
+import createSagaMiddleware from 'redux-saga'
 
-export default <S extends {}, A extends Action<string>>({
+export default <S extends Record<string, unknown>, A extends Action<string>>({
   preloadedState,
   rootReducer,
   rootSaga,

@@ -1,4 +1,4 @@
-const webExtension: object = new Proxy(
+const webExtension: Record<string, unknown> = new Proxy(
   {},
   {
     get: () => webExtension,

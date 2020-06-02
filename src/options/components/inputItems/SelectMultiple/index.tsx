@@ -14,7 +14,7 @@ interface Props {
 }
 const SelectMultiple = (props: Props) => (
   <FieldSet className={classes.main}>
-    {props.choices.reduce<Array<React.ReactElement<{}>>>(
+    {props.choices.reduce<Array<React.ReactNode>>(
       (acc, optionChoice, optionChoiceIndex) => {
         if (optionChoice !== undefined) {
           return [
