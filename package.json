@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
-    "ci": "npm-run-all -p 'lint:*' test 'type:*' && yarn build",
+    "ci": "npm-run-all -p 'lint:*' 'type:*' && yarn test && yarn build",
     "dev": "cross-env NODE_ENV=development webpack",
     "eslint": "eslint --ext=cjs,js,mjs,ts,tsx --ignore-path=node_modules/@foray1010/eslint-config/eslintignore",
     "lint:css": "yarn stylelint '**/*.css'",
