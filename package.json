@@ -25,7 +25,7 @@
     "chrome >= 73"
   ],
   "dependencies": {
-    "@babel/runtime": "7.9.6",
+    "@babel/runtime": "7.10.2",
     "@rehooks/component-size": "1.0.3",
     "classnames": "2.2.6",
     "core-js": "3.6.5",
@@ -45,7 +45,7 @@
     "webextension-polyfill": "0.6.0"
   },
   "devDependencies": {
-    "@babel/core": "7.9.6",
+    "@babel/core": "7.10.2",
     "@commitlint/cli": "8.3.5",
     "@commitlint/config-conventional": "8.3.4",
     "@foray1010/babel-preset": "5.0.1",
