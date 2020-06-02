@@ -1,4 +1,5 @@
-import { ActionType, createReducer } from 'typesafe-actions'
+import type { ActionType } from 'typesafe-actions'
+import { createReducer } from 'typesafe-actions'
 
 import * as uiCreators from './actions'
 

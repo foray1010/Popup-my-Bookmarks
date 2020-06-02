@@ -1,6 +1,6 @@
 import { createAction } from 'typesafe-actions'
 
-import { Options } from '../../../core/types/options'
+import type { Options } from '../../../core/types/options'
 
 export const reloadOptions = createAction('RELOAD_OPTIONS')()
 

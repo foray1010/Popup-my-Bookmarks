@@ -6,7 +6,7 @@ import useAction from '../../../core/hooks/useAction'
 import { BOOKMARK_TYPES, OPTIONS } from '../../constants'
 import type { RootState } from '../../reduxs'
 import { bookmarkCreators } from '../../reduxs'
-import { BookmarkInfo, BookmarkTree } from '../../types'
+import type { BookmarkInfo, BookmarkTree } from '../../types'
 import DragAndDropContext from '../dragAndDrop/DragAndDropContext'
 import ListNavigationContext from '../listNavigation/ListNavigationContext'
 

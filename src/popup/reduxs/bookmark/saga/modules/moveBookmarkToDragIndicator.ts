@@ -1,10 +1,10 @@
 import * as R from 'ramda'
 import { call, put, select } from 'redux-saga/effects'
-import { ActionType } from 'typesafe-actions'
+import type { ActionType } from 'typesafe-actions'
 
 import { moveBookmark } from '../../../../../core/utils'
 import * as CST from '../../../../constants'
-import { BookmarkInfo, BookmarkTree } from '../../../../types'
+import type { BookmarkInfo, BookmarkTree } from '../../../../types'
 import type { RootState } from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 

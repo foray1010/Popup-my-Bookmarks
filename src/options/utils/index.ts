@@ -1,8 +1,8 @@
 import * as R from 'ramda'
 import webExtension from 'webextension-polyfill'
 
-import { OPTIONS } from '../../core/constants'
-import { Options, OptionsConfig } from '../../core/types/options'
+import type { OPTIONS } from '../../core/constants'
+import type { Options, OptionsConfig } from '../../core/types/options'
 import { getOptionsConfig } from '../../core/utils'
 
 export const initOptions = async (): Promise<Options> => {

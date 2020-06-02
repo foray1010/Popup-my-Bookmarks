@@ -1,11 +1,11 @@
 import { call } from 'redux-saga/effects'
-import { ActionType } from 'typesafe-actions'
+import type { ActionType } from 'typesafe-actions'
 
 import { moveBookmark } from '../../../../../core/utils'
 import * as CST from '../../../../constants'
-import { BookmarkInfo, BookmarkTree } from '../../../../types'
+import type { BookmarkInfo, BookmarkTree } from '../../../../types'
 import sortByTitle from '../../../../utils/sortByTitle'
-import * as bookmarkCreators from '../../actions'
+import type * as bookmarkCreators from '../../actions'
 import { getBookmarkInfo, getBookmarkTree } from '../utils/getters'
 
 const splitBySeparator = (bookmarkInfos: BookmarkInfo[]): BookmarkInfo[][] => {

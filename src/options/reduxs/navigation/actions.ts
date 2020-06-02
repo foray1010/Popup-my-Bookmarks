@@ -1,6 +1,6 @@
 import { createAction } from 'typesafe-actions'
 
-import { NAV_MODULE } from '../../constants'
+import type { NAV_MODULE } from '../../constants'
 
 export const switchNavModule = createAction(
   'SWITCH_NAV_MODULE',

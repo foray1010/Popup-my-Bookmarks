@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
-import { OptionsConfig } from '../../../core/types/options'
+import type { OptionsConfig } from '../../../core/types/options'
 import { getOptionsConfig } from '../../../core/utils'
 import { OPTION_TABLE_MAP } from '../../constants'
 import type { RootState } from '../../reduxs'

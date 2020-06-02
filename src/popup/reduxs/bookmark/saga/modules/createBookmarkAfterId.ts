@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects'
-import { ActionType } from 'typesafe-actions'
+import type { ActionType } from 'typesafe-actions'
 
-import { BookmarkInfo } from '../../../../types'
+import type { BookmarkInfo } from '../../../../types'
 import * as bookmarkCreators from '../../actions'
 import { getBookmarkInfo } from '../utils/getters'
 

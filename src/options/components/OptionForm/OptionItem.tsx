@@ -1,7 +1,7 @@
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import { OptionConfig, Options } from '../../../core/types/options'
+import type { OptionConfig, Options } from '../../../core/types/options'
 import InputNumber from '../inputItems/InputNumber'
 import InputSelect from '../inputItems/InputSelect'
 import SelectButton from '../inputItems/SelectButton'

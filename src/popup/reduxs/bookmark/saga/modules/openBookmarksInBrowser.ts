@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import { all, call, select } from 'redux-saga/effects'
-import { ActionType } from 'typesafe-actions'
+import type { ActionType } from 'typesafe-actions'
 
 import {
   createTab,
@@ -10,9 +10,9 @@ import {
   updateTab,
 } from '../../../../../core/utils'
 import { BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS } from '../../../../constants'
-import { BookmarkInfo } from '../../../../types'
+import type { BookmarkInfo } from '../../../../types'
 import type { RootState } from '../../../rootReducer'
-import * as bookmarkCreators from '../../actions'
+import type * as bookmarkCreators from '../../actions'
 import { getBookmarkInfo } from '../utils/getters'
 
 function* getUrls(ids: Array<string>) {

@@ -1,11 +1,11 @@
 // disable redux-saga/no-unhandled-errors as these are utility functions
 /* eslint redux-saga/no-unhandled-errors: 'off' */
 
-import { SagaIterator } from 'redux-saga'
+import type { SagaIterator } from 'redux-saga'
 import { all, call } from 'redux-saga/effects'
-import webExtension from 'webextension-polyfill'
+import type webExtension from 'webextension-polyfill'
 
-import { Options } from '../../../../../core/types/options'
+import type { Options } from '../../../../../core/types/options'
 import {
   getBookmarkChildNodes,
   getBookmarkNodes,
@@ -13,7 +13,7 @@ import {
   searchBookmarkNodes,
 } from '../../../../../core/utils'
 import * as CST from '../../../../constants'
-import { BookmarkInfo, BookmarkTree } from '../../../../types'
+import type { BookmarkInfo, BookmarkTree } from '../../../../types'
 import { simulateBookmark, toBookmarkInfo } from '../../utils/converters'
 
 export function* getBookmarkInfo(id: string): SagaIterator<BookmarkInfo> {

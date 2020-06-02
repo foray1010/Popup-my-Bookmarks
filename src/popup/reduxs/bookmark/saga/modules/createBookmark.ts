@@ -1,8 +1,8 @@
 import { call } from 'redux-saga/effects'
-import { ActionType } from 'typesafe-actions'
+import type { ActionType } from 'typesafe-actions'
 
 import { createBookmark as createBookmarkWrapper } from '../../../../../core/utils'
-import * as bookmarkCreators from '../../actions'
+import type * as bookmarkCreators from '../../actions'
 
 export function* createBookmark({
   payload,

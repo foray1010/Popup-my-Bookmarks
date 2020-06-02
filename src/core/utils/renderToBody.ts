@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type * as React from 'react'
 import * as ReactDom from 'react-dom'
 
 export default <P>(app: React.ReactElement<P>) => {

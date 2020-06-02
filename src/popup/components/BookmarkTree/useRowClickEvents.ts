@@ -5,7 +5,7 @@ import useAction from '../../../core/hooks/useAction'
 import { BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS } from '../../constants'
 import type { RootState } from '../../reduxs'
 import { bookmarkCreators, menuCreators } from '../../reduxs'
-import { BookmarkInfo, BookmarkTree } from '../../types'
+import type { BookmarkInfo, BookmarkTree } from '../../types'
 import {
   getClickOptionNameByEvent,
   mapOptionToOpenBookmarkProps,

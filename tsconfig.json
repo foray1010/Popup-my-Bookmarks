@@ -2,6 +2,7 @@
   "compilerOptions": {
     "downlevelIteration": true,
     "esModuleInterop": true,
+    "importsNotUsedAsValues": "error",
     "isolatedModules": false,
     "jsx": "react",
     "lib": ["es2019", "dom"],

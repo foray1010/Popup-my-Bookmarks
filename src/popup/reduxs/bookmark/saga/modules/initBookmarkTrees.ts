@@ -2,7 +2,7 @@ import * as R from 'ramda'
 import { call, put, select } from 'redux-saga/effects'
 
 import { OPTIONS } from '../../../../constants'
-import { BookmarkTree } from '../../../../types'
+import type { BookmarkTree } from '../../../../types'
 import type { RootState } from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 import { getBookmarkTrees } from '../utils/getters'

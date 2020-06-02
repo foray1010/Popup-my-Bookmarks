@@ -3,8 +3,8 @@ import * as React from 'react'
 import useAction from '../../../core/hooks/useAction'
 import * as CST from '../../constants'
 import { bookmarkCreators } from '../../reduxs'
-import { BookmarkInfo, BookmarkTree } from '../../types'
-import { ResponseEvent } from '../dragAndDrop/DragAndDropConsumer'
+import type { BookmarkInfo, BookmarkTree } from '../../types'
+import type { ResponseEvent } from '../dragAndDrop/DragAndDropConsumer'
 
 export default ({
   closeNextTrees,

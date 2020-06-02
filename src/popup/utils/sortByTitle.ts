@@ -1,4 +1,4 @@
-import { BookmarkInfo } from '../types'
+import type { BookmarkInfo } from '../types'
 
 export default (bookmarkInfos: Array<BookmarkInfo>) => {
   const collator = new Intl.Collator()

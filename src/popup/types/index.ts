@@ -1,4 +1,4 @@
-import * as CST from '../constants'
+import type * as CST from '../constants'
 
 export interface BookmarkInfo {
   iconUrl: string

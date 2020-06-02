@@ -1,4 +1,4 @@
-import { Options } from '../../../core/types/options'
+import type { Options } from '../../../core/types/options'
 
 type OptionsState = Partial<Options>
 const INITIAL_STATE: OptionsState = {}

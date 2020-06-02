@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type * as React from 'react'
 
 import { OPEN_IN_TYPES, OPTIONS } from '../constants'
 

@@ -1,8 +1,8 @@
 import * as R from 'ramda'
 import { all, call, put, select } from 'redux-saga/effects'
-import { ActionType } from 'typesafe-actions'
+import type { ActionType } from 'typesafe-actions'
 
-import { BookmarkTree } from '../../../../types'
+import type { BookmarkTree } from '../../../../types'
 import type { RootState } from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'
 import { getBookmarkTree } from '../utils/getters'

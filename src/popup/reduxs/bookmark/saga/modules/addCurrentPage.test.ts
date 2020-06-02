@@ -3,7 +3,7 @@
 import Chance from 'chance'
 import { call, put } from 'redux-saga/effects'
 import { getType } from 'typesafe-actions'
-import webExtension from 'webextension-polyfill'
+import type webExtension from 'webextension-polyfill'
 
 import { queryTabs } from '../../../../../core/utils'
 import * as bookmarkCreators from '../../actions'

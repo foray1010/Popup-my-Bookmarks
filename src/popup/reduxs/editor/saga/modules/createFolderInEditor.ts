@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects'
-import { ActionType } from 'typesafe-actions'
+import type { ActionType } from 'typesafe-actions'
 
 import { getI18n } from '../../../../../core/utils'
 import * as editorCreators from '../../actions'

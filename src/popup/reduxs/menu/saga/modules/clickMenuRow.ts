@@ -1,9 +1,9 @@
 import * as R from 'ramda'
 import { call, put, select } from 'redux-saga/effects'
-import { ActionType } from 'typesafe-actions'
+import type { ActionType } from 'typesafe-actions'
 
 import * as CST from '../../../../constants'
-import { BookmarkInfo, BookmarkTree } from '../../../../types'
+import type { BookmarkInfo, BookmarkTree } from '../../../../types'
 import * as bookmarkCreators from '../../../bookmark/actions'
 import {
   getBookmarkInfo,
@@ -11,7 +11,7 @@ import {
 } from '../../../bookmark/saga/utils/getters'
 import * as editorCreators from '../../../editor/actions'
 import type { RootState } from '../../../rootReducer'
-import * as menuCreators from '../../actions'
+import type * as menuCreators from '../../actions'
 
 export function* clickMenuRow({
   payload,

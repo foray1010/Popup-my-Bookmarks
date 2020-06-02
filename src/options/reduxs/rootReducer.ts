@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { StateType } from 'typesafe-actions'
+import type { StateType } from 'typesafe-actions'
 
 import { navigationReducer } from './navigation/reducer'
 import { optionsReducer } from './options/reducer'

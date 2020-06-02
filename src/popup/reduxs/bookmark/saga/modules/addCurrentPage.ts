@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects'
-import { ActionType } from 'typesafe-actions'
-import webExtension from 'webextension-polyfill'
+import type { ActionType } from 'typesafe-actions'
+import type webExtension from 'webextension-polyfill'
 
 import { queryTabs } from '../../../../../core/utils'
 import * as bookmarkCreators from '../../actions'

@@ -2,7 +2,7 @@ import * as R from 'ramda'
 
 import * as CST from '../../../constants'
 import folderIcon from '../../../images/folder.svg'
-import { BookmarkInfo } from '../../../types'
+import type { BookmarkInfo } from '../../../types'
 
 export const getIconUrl = (bookmarkInfo: BookmarkInfo): string => {
   if (bookmarkInfo.type === CST.BOOKMARK_TYPES.BOOKMARK)

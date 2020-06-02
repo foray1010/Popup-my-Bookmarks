@@ -3,8 +3,8 @@ import webExtension from 'webextension-polyfill'
 
 import ActionlessForm from '../../../core/components/baseItems/ActionlessForm'
 import Button from '../../../core/components/baseItems/Button'
-import { OPTIONS } from '../../../core/constants'
-import { Options, OptionsConfig } from '../../../core/types/options'
+import type { OPTIONS } from '../../../core/constants'
+import type { Options, OptionsConfig } from '../../../core/types/options'
 import classes from './option-form.css'
 import OptionItem from './OptionItem'
 

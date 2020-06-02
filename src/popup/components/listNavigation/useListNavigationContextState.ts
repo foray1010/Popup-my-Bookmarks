@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import useMapDispatchToCallback from '../../hooks/useMapDispatchToCallback'
-import { ListNavigationContextType } from './ListNavigationContext'
+import type { ListNavigationContextType } from './ListNavigationContext'
 import {
   listsCreators,
   listsInitialState,

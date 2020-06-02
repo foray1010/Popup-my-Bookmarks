@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid'
 import { put } from 'redux-saga/effects'
-import { ActionType } from 'typesafe-actions'
+import type { ActionType } from 'typesafe-actions'
 
 import * as CST from '../../../../constants'
 import * as bookmarkCreators from '../../actions'

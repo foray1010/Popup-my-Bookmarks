@@ -1,6 +1,6 @@
 import debounce from 'lodash.debounce'
 import * as React from 'react'
-import { ListOnScrollProps } from 'react-window'
+import type { ListOnScrollProps } from 'react-window'
 
 import useAction from '../../../core/hooks/useAction'
 import { lastPositionsCreators } from '../../reduxs'

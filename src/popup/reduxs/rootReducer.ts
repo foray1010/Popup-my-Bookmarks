@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { StateType } from 'typesafe-actions'
+import type { StateType } from 'typesafe-actions'
 
 import { bookmarkReducer } from './bookmark/reducer'
 import { editorReducer } from './editor/reducer'

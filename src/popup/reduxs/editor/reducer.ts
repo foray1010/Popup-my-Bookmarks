@@ -1,7 +1,8 @@
-import { ActionType, createReducer } from 'typesafe-actions'
+import type { ActionType } from 'typesafe-actions'
+import { createReducer } from 'typesafe-actions'
 
 import * as editorCreators from './actions'
-import { EditorState } from './types'
+import type { EditorState } from './types'
 
 const INITIAL_STATE: EditorState = {
   isAllowEditUrl: false,

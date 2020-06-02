@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { TakeableChannel } from 'redux-saga'
+import type { TakeableChannel } from 'redux-saga'
 import {
   actionChannel,
   call,
@@ -11,7 +11,7 @@ import {
 import { ActionType, getType } from 'typesafe-actions'
 
 import { getLocalStorage, setLocalStorage } from '../../../core/utils'
-import { LocalStorage } from '../../types/localStorage'
+import type { LocalStorage } from '../../types/localStorage'
 import * as lastPositionsCreator from './actions'
 
 function* createLastPosition({

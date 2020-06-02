@@ -1,6 +1,6 @@
 import { ActionType, createReducer, getType } from 'typesafe-actions'
 
-import { MenuPattern } from '../../types'
+import type { MenuPattern } from '../../types'
 import * as menuCreators from './actions'
 
 interface MenuState {

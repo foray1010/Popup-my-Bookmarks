@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import * as React from 'react'
 
 import Button from '../../../core/components/baseItems/Button'
-import { NAV_MODULE } from '../../constants'
+import type { NAV_MODULE } from '../../constants'
 import classes from './nav-bar-item.css'
 
 interface Props {

@@ -2,7 +2,7 @@ import * as R from 'ramda'
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import { getType } from 'typesafe-actions'
 
-import { Options } from '../../../core/types/options'
+import type { Options } from '../../../core/types/options'
 import {
   clearStorage,
   getSyncStorage,

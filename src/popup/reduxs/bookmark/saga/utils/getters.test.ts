@@ -14,7 +14,7 @@ import {
   searchBookmarkNodes,
 } from '../../../../../core/utils'
 import * as CST from '../../../../constants'
-import { BookmarkTree } from '../../../../types'
+import type { BookmarkTree } from '../../../../types'
 import * as getters from './getters'
 
 const chance = Chance('getters')

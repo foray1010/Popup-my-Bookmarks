@@ -1,6 +1,6 @@
 import { createAction } from 'typesafe-actions'
 
-import { EditorState } from './types'
+import type { EditorState } from './types'
 
 export const closeEditor = createAction('CLOSE_EDITOR')()
 

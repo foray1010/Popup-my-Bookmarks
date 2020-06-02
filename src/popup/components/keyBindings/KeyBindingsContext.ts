@@ -5,7 +5,7 @@ import type {
   KeyBindingMeta,
   KeyBindingsPerWindowState,
 } from './reducers/keyBindingsPerWindow'
-import { WindowsState } from './reducers/windows'
+import type { WindowsState } from './reducers/windows'
 
 export type { KeyBindingEventCallback, KeyBindingMeta }
 

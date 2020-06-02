@@ -1,10 +1,10 @@
 import { call } from 'redux-saga/effects'
-import { ActionType } from 'typesafe-actions'
+import type { ActionType } from 'typesafe-actions'
 
 import { removeBookmark, removeBookmarkTree } from '../../../../../core/utils'
 import * as CST from '../../../../constants'
-import { BookmarkInfo } from '../../../../types'
-import * as bookmarkCreators from '../../actions'
+import type { BookmarkInfo } from '../../../../types'
+import type * as bookmarkCreators from '../../actions'
 import { getBookmarkInfo } from '../utils/getters'
 
 export function* deleteBookmark({

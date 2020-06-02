@@ -1,4 +1,4 @@
-import { LastPosition } from '../../types/localStorage'
+import type { LastPosition } from '../../types/localStorage'
 
 type lastPositionsState = Array<LastPosition>
 const INITIAL_STATE: lastPositionsState = []

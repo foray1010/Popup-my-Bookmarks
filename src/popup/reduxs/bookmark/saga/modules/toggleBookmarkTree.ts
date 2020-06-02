@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import { put, select } from 'redux-saga/effects'
-import { ActionType } from 'typesafe-actions'
+import type { ActionType } from 'typesafe-actions'
 
 import type { RootState } from '../../../rootReducer'
 import * as bookmarkCreators from '../../actions'

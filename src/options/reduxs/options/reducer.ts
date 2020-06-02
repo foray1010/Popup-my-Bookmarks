@@ -1,6 +1,7 @@
-import { ActionType, createReducer } from 'typesafe-actions'
+import type { ActionType } from 'typesafe-actions'
+import { createReducer } from 'typesafe-actions'
 
-import { Options } from '../../../core/types/options'
+import type { Options } from '../../../core/types/options'
 import * as optionsCreators from './actions'
 
 type OptionsState = Partial<Options>

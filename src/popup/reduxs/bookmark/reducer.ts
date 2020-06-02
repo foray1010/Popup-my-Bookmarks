@@ -2,7 +2,7 @@ import * as R from 'ramda'
 import { ActionType, createReducer, getType } from 'typesafe-actions'
 
 import * as CST from '../../constants'
-import { BookmarkTree } from '../../types'
+import type { BookmarkTree } from '../../types'
 import * as bookmarkCreators from './actions'
 import { simulateBookmark } from './utils/converters'
 

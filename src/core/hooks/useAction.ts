@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useDispatch } from 'react-redux'
-import { Action, Dispatch } from 'redux'
+import type { Action, Dispatch } from 'redux'
 
 const useAction = <T extends Array<unknown>, U extends Action<string>>(
   action: (...args: T) => U,

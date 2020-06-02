@@ -4,7 +4,7 @@ import * as React from 'react'
 import useAction from '../../../../core/hooks/useAction'
 import * as CST from '../../../constants'
 import { uiCreators } from '../../../reduxs'
-import { BookmarkInfo } from '../../../types'
+import type { BookmarkInfo } from '../../../types'
 import DragAndDropConsumer, {
   ResponseEvent,
 } from '../../dragAndDrop/DragAndDropConsumer'

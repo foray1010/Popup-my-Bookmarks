@@ -1,6 +1,6 @@
 import { createAction } from 'typesafe-actions'
 
-import { MenuPattern } from '../../types'
+import type { MenuPattern } from '../../types'
 
 export const clickMenuRow = createAction(
   'CLICK_MENU_ROW',

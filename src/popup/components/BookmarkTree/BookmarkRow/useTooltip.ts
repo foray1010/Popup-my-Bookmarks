@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { getBookmarkNodes } from '../../../../core/utils'
 import { ROOT_ID } from '../../../constants'
-import { BookmarkInfo } from '../../../types'
+import type { BookmarkInfo } from '../../../types'
 
 interface Arg {
   isSearching: boolean

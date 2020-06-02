@@ -5,13 +5,13 @@ import * as React from 'react'
 import { Provider } from 'react-redux'
 import webExtension from 'webextension-polyfill'
 
-import { OPTIONS } from '../core/constants'
+import type { OPTIONS } from '../core/constants'
 import configureStore from '../core/store/configureStore'
-import { Options, OptionsConfig } from '../core/types/options'
+import type { Options, OptionsConfig } from '../core/types/options'
 import { getOptionsConfig, renderToBody } from '../core/utils'
 import App from './components/App'
 import { rootReducer, rootSaga } from './reduxs'
-import { LocalStorage } from './types/localStorage'
+import type { LocalStorage } from './types/localStorage'
 
 const main = async (): Promise<void> => {
   const [localStorage, options, optionsConfig] = await Promise.all<

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Options } from '../../../core/types/options'
+import type { Options } from '../../../core/types/options'
 import { OPTIONS } from '../../constants'
 import BookmarkTree from '../BookmarkTree'
 import classes from './bookmark-trees.css'

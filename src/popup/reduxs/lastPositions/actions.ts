@@ -1,6 +1,6 @@
 import { createAction } from 'typesafe-actions'
 
-import { LastPosition } from '../../types/localStorage'
+import type { LastPosition } from '../../types/localStorage'
 
 export const createLastPosition = createAction(
   'CREATE_LAST_POSITION',

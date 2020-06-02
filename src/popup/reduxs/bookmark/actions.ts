@@ -1,7 +1,7 @@
 import { createAction } from 'typesafe-actions'
 
-import * as CST from '../../constants'
-import { BookmarkTree } from '../../types'
+import type * as CST from '../../constants'
+import type { BookmarkTree } from '../../types'
 
 export const addCurrentPage = createAction(
   'ADD_CURRENT_PAGE',

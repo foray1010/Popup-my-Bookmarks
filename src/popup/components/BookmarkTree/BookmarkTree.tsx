@@ -5,8 +5,11 @@ import useEventListener from 'use-typed-event-listener'
 
 import PlainList from '../../../core/components/baseItems/PlainList'
 import * as CST from '../../constants'
-import { BookmarkInfo, BookmarkTree as BookmarkTreeType } from '../../types'
-import { ResponseEvent } from '../dragAndDrop/DragAndDropConsumer'
+import type {
+  BookmarkInfo,
+  BookmarkTree as BookmarkTreeType,
+} from '../../types'
+import type { ResponseEvent } from '../dragAndDrop/DragAndDropConsumer'
 import useDragContainerEvents from '../dragAndDrop/useDragAndDropContainerEvents'
 import classes from './bookmark-tree.css'
 import BookmarkRow from './BookmarkRow'
