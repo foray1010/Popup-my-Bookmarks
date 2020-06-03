@@ -1293,10 +1293,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@foray1010/babel-preset@5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-5.0.1.tgz#6cd669ca26b992c06c23bacfd3f5abba004a2c14"
-  integrity sha512-KZLbYmE7m9iyM3jHGlniq8Om0qMvlt99q9/sQ8Joj+mhWuOlEdvkOqX+20Sanp4FF0P5MULOKye86CbjDW6vMQ==
+"@foray1010/babel-preset@5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-5.1.0.tgz#f1df617ee6b3c0fb8132851f2baaef74c2528daf"
+  integrity sha512-y/EFGaPUvC6r6UEAnHSU4HWJ8INRRVBqdoYxYmHOZjSqml5+qT8ba+YRawgOFzRhj+VrfJiM6gtP+8W8z/cJVA==
   dependencies:
     "@babel/plugin-transform-react-constant-elements" "^7.6.3"
     "@babel/plugin-transform-react-inline-elements" "^7.2.0"
