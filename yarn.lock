@@ -1361,6 +1361,11 @@
     stylelint-config-standard "^20.0.0"
     stylelint-prettier "^1.1.1"
 
+"@foray1010/tsconfig@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/tsconfig/-/tsconfig-1.1.0.tgz#ae7a32d23598ee54968de48dc5c8662a030782e5"
+  integrity sha512-6gLLCnHUKyvOJQdFSvzqPvdV26uviizyXGDLXWMb8ryLJ90n8v216c/acaRNr0OFxfMljRDXmwWEqA2CSbQQhQ==
+
 "@iarna/cli@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@iarna/cli/-/cli-1.2.0.tgz#0f7af5e851afe895104583c4ca07377a8094d641"
@@ -14033,10 +14038,10 @@ tryer@^1.0.1:
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
   integrity sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==
 
-ts-lib-utils@^2.6.1:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/ts-lib-utils/-/ts-lib-utils-2.6.1.tgz#2b75f75742642afbb84987cf228ec53f6688c12c"
-  integrity sha512-370VtR3BMf5urHirZ7rRaUdlMqERjz0BjK50qqNlc6QLur4yUr/rC6oq2XdbGUU86kNsg+gtHude+kzDijlFYA==
+ts-lib-utils@^2.7.1:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/ts-lib-utils/-/ts-lib-utils-2.7.1.tgz#c95ac1cde845a0a5ba1fe30460d93ed5ed6a54f9"
+  integrity sha512-d4e3En3ksgXYLdhCMu40tVRGUVED/oRygbfo7i5MTooTzdO3KM0cCcbaAqFwXmsxLEF5BKnCptW8DWDiJhK1DQ==
   dependencies:
     glob "7"
     tslib "1 || 2"
@@ -14105,23 +14110,23 @@ type-check@~0.3.2:
   dependencies:
     prelude-ls "~1.1.2"
 
-type-coverage-core@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/type-coverage-core/-/type-coverage-core-2.7.0.tgz#fbf1508d35e91cf0646d35e1ad2453093a159fde"
-  integrity sha512-6W9VePAByBjIPGERibVciaKkhIT4hwF1RVbpOkaLlfV7BkwgLy+TxPrAEyrMg6LjfOtzxJY5QnskMl9z2H0vJg==
+type-coverage-core@^2.7.1:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/type-coverage-core/-/type-coverage-core-2.7.1.tgz#1512fc4bd2c0e432eaa466cd09d551592262d15f"
+  integrity sha512-Ki2EUe1+U8ds2TBGmBpZ9RARZa+AbHT8UOemmse3HIZky6n8eScaPiXP7HlaD8dMMf+nv0cU+JiKzQC1o4DoMw==
   dependencies:
     minimatch "3"
-    ts-lib-utils "^2.6.1"
+    ts-lib-utils "^2.7.1"
     tslib "1 || 2"
     tsutils "3"
 
-type-coverage@2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/type-coverage/-/type-coverage-2.7.0.tgz#02af2d8a603c9640a27e3459b8f09822784fa1ed"
-  integrity sha512-jQX650/QTmxOAlQCnu4fDuD3XuzGJsFdQQREE3Vu458LtnKHkWxm7+z5MMon0Jm4Mrq9/bUJF+nq1jVxgtXOFA==
+type-coverage@2.7.1:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/type-coverage/-/type-coverage-2.7.1.tgz#10e0d6d0c532b3637dd3d46bed3e29a06c0daa55"
+  integrity sha512-gYgCbFnm048Sy3VxD/3yI5mQDsrL1sFu3eXAju70Y+hm7K8/YiFPuL6F7nDTLvxVjXPTxr20CaY1HBT3TcOdgw==
   dependencies:
     minimist "1"
-    type-coverage-core "^2.7.0"
+    type-coverage-core "^2.7.1"
 
 type-detect@4.0.8:
   version "4.0.8"

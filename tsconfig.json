@@ -1,15 +1,8 @@
 {
+  "extends": "@foray1010/tsconfig",
   "compilerOptions": {
-    "downlevelIteration": true,
-    "esModuleInterop": true,
-    "importsNotUsedAsValues": "error",
-    "isolatedModules": false,
-    "jsx": "react",
-    "lib": ["es2019", "dom"],
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "sourceMap": false,
-    "strict": true
+    "emitDeclarationOnly": false,
+    "noEmit": true
   },
   "include": [
     "__mocks__/**/*.ts",
