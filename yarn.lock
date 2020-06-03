@@ -1361,10 +1361,10 @@
     stylelint-config-standard "^20.0.0"
     stylelint-prettier "^1.1.1"
 
-"@foray1010/tsconfig@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/tsconfig/-/tsconfig-1.1.0.tgz#ae7a32d23598ee54968de48dc5c8662a030782e5"
-  integrity sha512-6gLLCnHUKyvOJQdFSvzqPvdV26uviizyXGDLXWMb8ryLJ90n8v216c/acaRNr0OFxfMljRDXmwWEqA2CSbQQhQ==
+"@foray1010/tsconfig@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/tsconfig/-/tsconfig-2.0.0.tgz#9ceb4d6582e4c68d95b46d0b2dc33d60886538e1"
+  integrity sha512-GCAt0+jbsJXKg1YuVsz583vgtIAT1y4ToYR5+m3K1Yh+KKIIbZRhq05Bz8ZKXd0oz/rcHw/fJl1XXI4XX5NHKA==
 
 "@iarna/cli@^1.2.0":
   version "1.2.0"
