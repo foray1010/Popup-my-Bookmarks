@@ -20,8 +20,8 @@ export interface Options {
 
 interface ArrayOptionConfig {
   type: 'array'
-  default: Array<number | void>
-  choices: Array<string | void>
+  default: Array<number | undefined>
+  choices: Array<string | undefined>
 }
 interface BooleanOptionConfig {
   type: 'boolean'

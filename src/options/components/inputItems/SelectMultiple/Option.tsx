@@ -6,9 +6,9 @@ interface Props {
   optionChoice: string
   optionChoiceIndex: number
   optionName: string
-  optionValue: Array<number | void>
+  optionValue: Array<number | undefined>
   updatePartialOptions: (options: {
-    [key: string]: Array<number | void>
+    [key: string]: Array<number | undefined>
   }) => void
 }
 const Option = ({
@@ -24,7 +24,7 @@ const Option = ({
 
       const wasChecked = optionValue.includes(checkboxValue)
 
-      let newOptionValue: Array<number | void> = []
+      let newOptionValue: Array<number | undefined> = []
       if (wasChecked) {
         newOptionValue = optionValue.filter((x) => x !== checkboxValue)
       } else {

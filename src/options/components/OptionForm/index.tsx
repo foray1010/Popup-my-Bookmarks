@@ -10,10 +10,9 @@ import { optionsCreators } from '../../reduxs'
 import OptionForm from './OptionForm'
 
 const OptionFormContainer = () => {
-  const [
-    optionsConfig,
-    setOptionsConfig,
-  ] = React.useState<OptionsConfig | void>()
+  const [optionsConfig, setOptionsConfig] = React.useState<
+    OptionsConfig | undefined
+  >()
 
   const options = useSelector((state: RootState) => state.options)
   const selectedOptionFormMap = useSelector(

@@ -3,7 +3,7 @@ import * as React from 'react'
 import Select from '../../../core/components/baseItems/Select'
 
 interface Props {
-  choices: Array<string | void>
+  choices: Array<string | undefined>
   optionName: string
   optionValue: number
   updatePartialOptions: (options: { [key: string]: number }) => void
