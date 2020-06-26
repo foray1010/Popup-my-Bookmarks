@@ -5,11 +5,11 @@ import Option from './Option'
 import classes from './styles.css'
 
 interface Props {
-  choices: Array<string | void>
+  choices: Array<string | undefined>
   optionName: string
-  optionValue: Array<number | void>
+  optionValue: Array<number | undefined>
   updatePartialOptions: (options: {
-    [key: string]: Array<number | void>
+    [key: string]: Array<number | undefined>
   }) => void
 }
 const SelectMultiple = (props: Props) => (

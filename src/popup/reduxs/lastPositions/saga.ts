@@ -74,8 +74,8 @@ function* watchCreateAndRemoveLastPosition() {
     )
     while (true) {
       const [createLastPositionAction, removeLastPositionAction]: [
-        ReturnType<typeof lastPositionsCreator.createLastPosition> | void,
-        ReturnType<typeof lastPositionsCreator.removeLastPosition> | void,
+        ReturnType<typeof lastPositionsCreator.createLastPosition> | undefined,
+        ReturnType<typeof lastPositionsCreator.removeLastPosition> | undefined,
       ] = yield race([
         take(createLastPositionChan),
         take(removeLastPositionChan),
