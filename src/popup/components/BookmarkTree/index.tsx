@@ -24,7 +24,7 @@ const getRowHeight = (fontSize: number) =>
   // +1 for border width, GOLDEN_GAP for padding
   (1 + CST.GOLDEN_GAP) * 2
 
-const useReduxState = ({ treeId }: { treeId: string }) => {
+const useReduxProps = ({ treeId }: { treeId: string }) => {
   const reduxSelector = React.useCallback(
     (state: RootState) => {
       const treeIndex = state.bookmark.trees.findIndex(
@@ -69,8 +69,8 @@ const BookmarkTreeContainer = ({ treeId }: Props) => {
     isSearching,
     treeIndex,
     treeInfo,
-    ...props
-  } = useReduxState({
+    ...reduxProps
+  } = useReduxProps({
     treeId,
   })
 
@@ -128,19 +128,19 @@ const BookmarkTreeContainer = ({ treeId }: Props) => {
 
   return (
     <section className={classes.main}>
-      {props.isShowHeader && (
+      {reduxProps.isShowHeader && (
         <TreeHeader title={treeInfo.parent.title} onClose={closeCurrentTree} />
       )}
 
       <BookmarkTree
         draggingId={activeKey}
         highlightedId={highlightedId}
-        iconSize={props.iconSize}
+        iconSize={reduxProps.iconSize}
         isDisableDragAndDrop={isSearching}
         isSearching={isSearching}
-        isShowTooltip={props.isShowTooltip}
-        lastScrollTop={props.lastScrollTop}
-        listItemWidth={props.listItemWidth}
+        isShowTooltip={reduxProps.isShowTooltip}
+        lastScrollTop={reduxProps.lastScrollTop}
+        listItemWidth={reduxProps.listItemWidth}
         noRowsRenderer={noRowsRenderer}
         onRowAuxClick={handleRowAuxClick}
         onRowClick={handleRowClick}
@@ -149,12 +149,14 @@ const BookmarkTreeContainer = ({ treeId }: Props) => {
         onRowMouseEnter={handleRowMouseEnter}
         onRowMouseLeave={handleRowMouseLeave}
         onScroll={handleScroll}
-        rowHeight={props.rowHeight}
+        rowHeight={reduxProps.rowHeight}
         scrollToIndex={highlightedIndex}
         treeInfo={treeInfo}
       />
 
-      {props.isShowCover && <Mask opacity={0.7} onClick={closeNextTrees} />}
+      {reduxProps.isShowCover && (
+        <Mask opacity={0.7} onClick={closeNextTrees} />
+      )}
     </section>
   )
 }

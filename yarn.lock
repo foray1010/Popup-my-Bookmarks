@@ -906,7 +906,7 @@
     "@babel/helper-plugin-utils" "^7.10.1"
     "@babel/plugin-transform-typescript" "^7.10.1"
 
-"@babel/runtime@7.10.3", "@babel/runtime@^7.0.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.6":
+"@babel/runtime@7.10.3", "@babel/runtime@^7.0.0", "@babel/runtime@^7.10.2", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.6":
   version "7.10.3"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.3.tgz#670d002655a7c366540c67f6fd3342cd09500364"
   integrity sha512-RzGO0RLSdokm9Ipe/YD+7ww8X2Ro79qiXZF3HU9ljrM+qnJmH1Vqth+hbiQZy761LnMJTMitHDuKVYTk3k4dLw==
@@ -1735,18 +1735,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*":
+"@types/react@*", "@types/react@16.9.41":
   version "16.9.41"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.41.tgz#925137ee4d2ff406a0ecf29e8e9237390844002e"
   integrity sha512-6cFei7F7L4wwuM+IND/Q2cV1koQUvJ8iSV+Gwn0c3kvABZ691g7sp3hfEQHOUBJtccl1gPi+EyNjMIl9nGA0ug==
-  dependencies:
-    "@types/prop-types" "*"
-    csstype "^2.2.0"
-
-"@types/react@16.9.38":
-  version "16.9.38"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.38.tgz#868405dace93a4095d3e054f4c4a1de7a1ac0680"
-  integrity sha512-pHAeZbjjNRa/hxyNuLrvbxhhnKyKNiLC6I5fRF2Zr/t/S6zS41MiyzH4+c+1I9vVfvuRt1VS2Lodjr4ZWnxrdA==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -9275,7 +9267,6 @@ npm@^6.9.0:
     cmd-shim "^3.0.3"
     columnify "~1.5.4"
     config-chain "^1.1.12"
-    debuglog "*"
     detect-indent "~5.0.0"
     detect-newline "^2.1.0"
     dezalgo "~1.0.3"
@@ -9290,7 +9281,6 @@ npm@^6.9.0:
     has-unicode "~2.0.1"
     hosted-git-info "^2.8.8"
     iferr "^1.0.2"
-    imurmurhash "*"
     infer-owner "^1.0.4"
     inflight "~1.0.6"
     inherits "^2.0.4"
@@ -9309,14 +9299,8 @@ npm@^6.9.0:
     libnpx "^10.2.2"
     lock-verify "^2.1.0"
     lockfile "^1.0.4"
-    lodash._baseindexof "*"
     lodash._baseuniq "~4.6.0"
-    lodash._bindcallback "*"
-    lodash._cacheindexof "*"
-    lodash._createcache "*"
-    lodash._getnative "*"
     lodash.clonedeep "~4.5.0"
-    lodash.restparam "*"
     lodash.union "~4.6.0"
     lodash.uniq "~4.5.0"
     lodash.without "~4.4.0"
@@ -13881,7 +13865,7 @@ type-check@~0.3.2:
   dependencies:
     prelude-ls "~1.1.2"
 
-type-coverage-core@^2.8.2:
+type-coverage-core@^2.8.3:
   version "2.8.3"
   resolved "https://registry.yarnpkg.com/type-coverage-core/-/type-coverage-core-2.8.3.tgz#c57eb0b99c96879ddc3e328fddc991ba91b8ebe4"
   integrity sha512-Go4QSExs0kGcW9yxvIAv4XSAuIC89cAbdb9Qqj/XdqcYoT2X3fB6x+2jwYwE/opbgrAHijh23TT/C6w9VEj6rw==
@@ -13891,13 +13875,13 @@ type-coverage-core@^2.8.2:
     tslib "1 || 2"
     tsutils "3"
 
-type-coverage@2.8.2:
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/type-coverage/-/type-coverage-2.8.2.tgz#bec082acef87e6245834889928bcee9075bfdaad"
-  integrity sha512-MZMR49i0+uDqZOpzPFK41yTjVoH3bigjgK6HnjuTFfnfyYuOgNsDP9rXQK0y2zwQ7VfeaU5Qhecq0XquUGo8lA==
+type-coverage@2.8.3:
+  version "2.8.3"
+  resolved "https://registry.yarnpkg.com/type-coverage/-/type-coverage-2.8.3.tgz#05b85a954a07c353dc9d2bd180c6fd1e64dae12d"
+  integrity sha512-HXls1Wix1n6HEe/rX+DjE5ENLKtZnveLp4miYIB1ijJbYf9WyXs77c4w9OjOhw3cPgczzUVjnfucvdy++kEDPA==
   dependencies:
     minimist "1"
-    type-coverage-core "^2.8.2"
+    type-coverage-core "^2.8.3"
 
 type-detect@4.0.8:
   version "4.0.8"
@@ -14260,12 +14244,12 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-use-typed-event-listener@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/use-typed-event-listener/-/use-typed-event-listener-2.0.1.tgz#9cb8f4437daea587295b16c9f5191d5cb8eb1ac2"
-  integrity sha512-ogKoBPcUVFQzds6hKEGCiRCvWPsHt8M8TQ1iFG5/ndCsgnFadFn61fVtgzwSH1MxogG//6kpE6CcOfK9AroY9A==
+use-typed-event-listener@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/use-typed-event-listener/-/use-typed-event-listener-2.0.2.tgz#7f2c7e655d278e3abf5ce42b733e8aef3ff635ba"
+  integrity sha512-hxsdSQ19yXJiU2UatV+gjXdXMaSOeY86q1T+qpHxbWQbDStShRsJ6VisDeLma4n4iFltnVSGcIe03SMzCJXoRg==
   dependencies:
-    "@babel/runtime" "^7.9.6"
+    "@babel/runtime" "^7.10.2"
     fast-equals "^2.0.0"
 
 use@^3.1.0:
