@@ -41,7 +41,7 @@
     "redux-saga": "1.1.3",
     "typeface-archivo-narrow": "1.1.3",
     "typesafe-actions": "5.1.0",
-    "use-typed-event-listener": "2.0.1",
+    "use-typed-event-listener": "2.0.2",
     "webextension-polyfill": "0.6.0"
   },
   "devDependencies": {
@@ -67,7 +67,7 @@
     "@types/node": "14.0.14",
     "@types/prompts": "2.4.0",
     "@types/ramda": "0.27.6",
-    "@types/react": "16.9.38",
+    "@types/react": "16.9.41",
     "@types/react-dom": "16.9.8",
     "@types/react-redux": "7.1.9",
     "@types/react-window": "1.8.2",
@@ -115,7 +115,7 @@
     "terser-webpack-plugin": "3.0.6",
     "transifex": "1.6.6",
     "ts-node": "8.10.2",
-    "type-coverage": "2.8.2",
+    "type-coverage": "2.8.3",
     "typescript": "3.9.5",
     "webpack": "4.43.0",
     "webpack-bundle-analyzer": "3.8.0",
