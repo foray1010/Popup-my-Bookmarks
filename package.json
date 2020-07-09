@@ -48,7 +48,7 @@
     "@babel/core": "7.10.4",
     "@commitlint/cli": "9.0.1",
     "@commitlint/config-conventional": "9.0.1",
-    "@foray1010/babel-preset": "5.1.5",
+    "@foray1010/babel-preset": "5.2.0",
     "@foray1010/eslint-config": "3.4.0",
     "@foray1010/prettier-config": "4.0.2",
     "@foray1010/remark-preset": "3.1.0",
