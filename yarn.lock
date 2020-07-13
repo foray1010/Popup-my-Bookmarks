@@ -1169,10 +1169,12 @@
     eslint-plugin-simple-import-sort "^5.0.0"
     eslint-plugin-testing-library "^3.1.0"
 
-"@foray1010/prettier-config@4.0.2":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-4.0.2.tgz#e1219928de07dbbd42fab265e3d84f19d685db4d"
-  integrity sha512-euJdlyXaYY6FNWy8pbRUByG0x7+zDCPKM5v2K/45SADdt73PBz+vPz89auSPIWU2GIOmLW5ZPq5YWzXk9x9+OQ==
+"@foray1010/prettier-config@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-4.1.0.tgz#87eca1e0f526642898b4830117372b57d36fc92b"
+  integrity sha512-rFaEl6DHK4jwKXNGJEL96Sbcz0Yyea//wS3yxZMVgzIl7o0hfuz7tv33PgC5F1dn2BOxjTsWAiwl1LFC2Mu6Fg==
+  dependencies:
+    prettier-plugin-packagejson "^2.2.5"
 
 "@foray1010/remark-preset@3.1.0":
   version "3.1.0"
@@ -10991,6 +10993,13 @@ prettier-linter-helpers@^1.0.0:
   integrity sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==
   dependencies:
     fast-diff "^1.1.2"
+
+prettier-plugin-packagejson@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-packagejson/-/prettier-plugin-packagejson-2.2.5.tgz#ebec75e4670b795fced35a2312f86e5678784ed6"
+  integrity sha512-fdLXD6sA4ZKihPMSi4hhGWMbJuQNmCjbTAP7YKwSzQuLLNXc73kC8DRfomWbDxJqbNy7+/6a8qfKsClzGiqI4g==
+  dependencies:
+    sort-package-json "1.44.0"
 
 prettier@2.0.5:
   version "2.0.5"
