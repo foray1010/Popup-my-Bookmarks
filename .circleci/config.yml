@@ -13,4 +13,3 @@ jobs:
           paths:
             - '~/.cache/yarn'
       - run: 'yarn ci'
-      - run: 'bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN'
