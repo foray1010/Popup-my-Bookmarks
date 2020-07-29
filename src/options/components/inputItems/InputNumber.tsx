@@ -20,6 +20,7 @@ const InputNumber = ({
   const handleBlur = React.useCallback(
     (evt: React.FocusEvent<HTMLInputElement>) => {
       const parsedValue = parseInt(evt.currentTarget.value, 10)
+      if (Number.isNaN(parsedValue)) return
 
       const newOptionValue = R.clamp(minimum, maximum, parsedValue)
 
@@ -33,8 +34,6 @@ const InputNumber = ({
   const handleChange = React.useCallback(
     (evt: React.ChangeEvent<HTMLInputElement>) => {
       const parsedValue = parseInt(evt.currentTarget.value, 10)
-
-      // only allow input number
       if (Number.isNaN(parsedValue)) return
 
       updatePartialOptions({

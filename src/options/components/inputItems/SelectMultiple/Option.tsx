@@ -22,14 +22,9 @@ const Option = ({
     (evt: React.ChangeEvent<HTMLInputElement>) => {
       const checkboxValue = parseInt(evt.currentTarget.value, 10)
 
-      const wasChecked = optionValue.includes(checkboxValue)
-
-      let newOptionValue: Array<number | undefined> = []
-      if (wasChecked) {
-        newOptionValue = optionValue.filter((x) => x !== checkboxValue)
-      } else {
-        newOptionValue = [checkboxValue, ...optionValue].sort()
-      }
+      const newOptionValue = evt.currentTarget.checked
+        ? [checkboxValue, ...optionValue].sort()
+        : optionValue.filter((x) => x !== checkboxValue)
 
       updatePartialOptions({
         [optionName]: newOptionValue,
