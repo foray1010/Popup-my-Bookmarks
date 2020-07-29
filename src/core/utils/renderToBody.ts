@@ -3,8 +3,7 @@ import * as ReactDom from 'react-dom'
 
 export default <P>(app: React.ReactElement<P>) => {
   const rootEl = document.createElement('div')
+  document.body.appendChild(rootEl)
 
   ReactDom.render(app, rootEl)
-
-  if (document.body) document.body.appendChild(rootEl)
 }
