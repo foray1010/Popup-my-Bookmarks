@@ -1,77 +1,89 @@
 import type * as React from 'react'
-import webExtension from 'webextension-polyfill'
 
-import type { OptionConfig, Options } from '../../../core/types/options'
-import InputNumber from '../inputItems/InputNumber'
-import InputSelect from '../inputItems/InputSelect'
-import SelectButton from '../inputItems/SelectButton'
-import SelectMultiple from '../inputItems/SelectMultiple'
-import SelectString from '../inputItems/SelectString'
-import classes from './option-item.css'
+import type { OptionConfig } from '../../../core/types/options'
+import InputNumber from './inputItems/InputNumber'
+import InputSelect from './inputItems/InputSelect'
+import SelectButton from './inputItems/SelectButton'
+import SelectMultiple from './inputItems/SelectMultiple'
+import SelectString from './inputItems/SelectString'
 
-interface Props {
+interface Props<T = any> {
   optionConfig: OptionConfig
-  optionName: keyof Options
-  optionValue: Options[keyof Options]
-  updatePartialOptions: (options: Partial<Options>) => void
+  onBlur: (event?: React.FocusEvent) => void
+  onChange: (eventOrValue: React.ChangeEvent | T) => void
+  value: T
 }
 
-const InputItem = ({ optionConfig, optionValue, ...restProps }: Props) => {
+export default function OptionItem({ optionConfig, ...inputProps }: Props) {
+  const { onBlur, onChange, value } = inputProps
+
   switch (optionConfig.type) {
     case 'array':
       return (
         <SelectMultiple
-          {...optionConfig}
-          {...restProps}
-          optionValue={
-            Array.isArray(optionValue) ? optionValue : optionConfig.default
-          }
+          {...inputProps}
+          choices={optionConfig.choices}
+          onChange={(evt) => {
+            const checkboxValue = parseInt(evt.currentTarget.value, 10)
+
+            const newValue = evt.currentTarget.checked
+              ? [checkboxValue, ...value].sort()
+              : value.filter((x: number) => x !== checkboxValue)
+            onChange(newValue)
+          }}
         />
       )
 
     case 'boolean':
       return (
         <SelectButton
-          {...optionConfig}
-          {...restProps}
-          optionValue={
-            typeof optionValue === 'boolean'
-              ? optionValue
-              : optionConfig.default
-          }
+          {...inputProps}
+          onChange={(evt) => {
+            onChange(evt.currentTarget.value === 'true')
+          }}
         />
       )
 
     case 'integer':
       return (
         <InputNumber
-          {...optionConfig}
-          {...restProps}
-          optionValue={
-            typeof optionValue === 'number' ? optionValue : optionConfig.default
-          }
+          {...inputProps}
+          maximum={optionConfig.maximum}
+          minimum={optionConfig.minimum}
+          onChange={(evt) => {
+            const newValue = parseInt(evt.currentTarget.value, 10)
+            onChange(!Number.isNaN(newValue) ? newValue : '')
+          }}
         />
       )
 
     case 'select':
       return (
         <SelectString
-          {...optionConfig}
-          {...restProps}
-          optionValue={
-            typeof optionValue === 'number' ? optionValue : optionConfig.default
-          }
+          {...inputProps}
+          choices={optionConfig.choices}
+          onChange={(evt) => {
+            onChange(parseInt(evt.currentTarget.value, 10))
+          }}
         />
       )
 
     case 'string':
       return (
         <InputSelect
-          {...optionConfig}
-          {...restProps}
-          optionValue={
-            typeof optionValue === 'string' ? optionValue : optionConfig.default
-          }
+          {...inputProps}
+          choices={optionConfig.choices}
+          onBlur={(evt) => {
+            onChange(
+              evt.currentTarget.value
+                .split(',')
+                .map((x) => x.trim())
+                .filter(Boolean)
+                .join(','),
+            )
+            onBlur()
+          }}
+          onChange={onChange}
         />
       )
 
@@ -80,16 +92,3 @@ const InputItem = ({ optionConfig, optionValue, ...restProps }: Props) => {
 
   return null
 }
-
-const OptionItem = (props: React.ComponentProps<typeof InputItem>) => (
-  <tr>
-    <td className={classes.desc}>
-      {webExtension.i18n.getMessage(props.optionName)}
-    </td>
-    <td>
-      <InputItem {...props} />
-    </td>
-  </tr>
-)
-
-export default OptionItem

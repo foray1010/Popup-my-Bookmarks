@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useForm } from 'react-hook-form'
 import webExtension from 'webextension-polyfill'
 
 import ActionlessForm from '../../../core/components/baseItems/ActionlessForm'
@@ -15,58 +16,45 @@ interface Props {
   onConfirm: (title: string, url: string) => void
   width: number
 }
-const Editor = (props: Props) => {
-  const { onConfirm } = props
-
-  const [title, setTitle] = React.useState(props.initialTitle)
-  const [url, setUrl] = React.useState(props.initialUrl)
-
-  const handleConfirm = React.useCallback(() => {
-    onConfirm(title, url)
-  }, [onConfirm, title, url])
-
-  const handleTitleChange = React.useCallback(
-    (evt: React.ChangeEvent<HTMLInputElement>) => {
-      setTitle(evt.currentTarget.value)
-    },
-    [],
-  )
-
-  const handleUrlChange = React.useCallback(
-    (evt: React.ChangeEvent<HTMLInputElement>) => {
-      setUrl(evt.currentTarget.value)
-    },
-    [],
-  )
-
-  const formStyles: Record<string, string> = React.useMemo(
-    () => ({
-      '--width': `${props.width}px`,
-    }),
-    [props.width],
-  )
+const Editor = ({ onConfirm, ...props }: Props) => {
+  const { register, handleSubmit } = useForm<{
+    title: string
+    url: string
+  }>()
 
   return (
-    <ActionlessForm className={classes.main} style={formStyles}>
+    <ActionlessForm
+      className={classes.main}
+      style={React.useMemo(
+        (): Record<string, string> => ({
+          '--width': `${props.width}px`,
+        }),
+        [props.width],
+      )}
+      onSubmit={React.useMemo(() => {
+        return handleSubmit((variables) => {
+          onConfirm(variables.title, variables.url)
+        })
+      }, [handleSubmit, onConfirm])}
+    >
       <span className={classes.header}>{props.header}</span>
 
       <Input
+        ref={register}
         autoFocus
         className={classes.input}
-        value={title}
-        onChange={handleTitleChange}
+        defaultValue={props.initialTitle}
+        name='title'
       />
-      {props.isAllowEditUrl && (
-        <Input
-          className={classes.input}
-          value={url}
-          onChange={handleUrlChange}
-        />
-      )}
+      <Input
+        ref={register}
+        className={classes.input}
+        defaultValue={props.initialUrl}
+        hidden={!props.isAllowEditUrl}
+        name='url'
+      />
 
-      <Button type='submit' onClick={handleConfirm}>
-        {webExtension.i18n.getMessage('confirm')}
-      </Button>
+      <Button type='submit'>{webExtension.i18n.getMessage('confirm')}</Button>
       <Button onClick={props.onCancel}>
         {webExtension.i18n.getMessage('cancel')}
       </Button>

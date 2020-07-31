@@ -1,6 +1,5 @@
 import '../manifest.yml'
 
-import * as R from 'ramda'
 import * as React from 'react'
 import { Provider } from 'react-redux'
 import webExtension from 'webextension-polyfill'
@@ -25,11 +24,10 @@ const main = async (): Promise<void> => {
   ])
 
   // if missing option, open options page to init options
-  const missingOptionKeys = R.difference(
-    Object.keys(optionsConfig) as OPTIONS[],
-    Object.keys(options) as OPTIONS[],
+  const missingOptionNames = (Object.keys(optionsConfig) as OPTIONS[]).filter(
+    (optionName) => options[optionName] === undefined,
   )
-  if (missingOptionKeys.length > 0) {
+  if (missingOptionNames.length > 0) {
     await webExtension.runtime.openOptionsPage()
     return
   }

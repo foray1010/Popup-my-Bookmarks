@@ -1,32 +1,14 @@
 import '../manifest.yml'
 
 import * as React from 'react'
-import { Provider } from 'react-redux'
+import { ReactQueryDevtools } from 'react-query-devtools'
 
-import configureStore from '../core/store/configureStore'
 import { renderToBody } from '../core/utils'
 import App from './components/App'
-import { rootReducer, rootSaga } from './reduxs'
-import { initOptions } from './utils'
 
-const main = async (): Promise<void> => {
-  const options = await initOptions()
-
-  const store = configureStore({
-    rootReducer,
-    rootSaga,
-    preloadedState: { options },
-  })
-
-  renderToBody(
-    <React.StrictMode>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </React.StrictMode>,
-  )
-}
-
-main().catch((err: Error) => {
-  console.error(err)
-})
+renderToBody(
+  <React.StrictMode>
+    <App />
+    {process.env.NODE_ENV === 'development' ? <ReactQueryDevtools /> : null}
+  </React.StrictMode>,
+)
