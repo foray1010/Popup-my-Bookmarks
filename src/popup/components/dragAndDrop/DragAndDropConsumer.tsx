@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import StylelessElement from '../../../core/components/baseItems/StylelessElement'
-import DragAndDropContext from './DragAndDropContext'
+import { useDragAndDropContext } from './DragAndDropContext'
 
 export interface ResponseEvent {
   activeKey: string | null
@@ -25,7 +25,7 @@ const useDragEvents = ({
     setMouseCoordinate,
     setPendingKey,
     unsetAllKeys,
-  } = React.useContext(DragAndDropContext)
+  } = useDragAndDropContext()
 
   return {
     handleDragOver: React.useCallback(
@@ -112,7 +112,7 @@ interface Props {
   onDragStart: (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
 }
 const DragAndDropConsumer = (props: Props) => {
-  const context = React.useContext(DragAndDropContext)
+  const context = useDragAndDropContext()
 
   const { handleClickCapture, handleMouseUpCapture } = useMouseEvents()
 

@@ -7,8 +7,8 @@ import { BOOKMARK_TYPES, OPTIONS } from '../../constants'
 import type { RootState } from '../../reduxs'
 import { bookmarkCreators } from '../../reduxs'
 import type { BookmarkInfo, BookmarkTree } from '../../types'
-import DragAndDropContext from '../dragAndDrop/DragAndDropContext'
-import ListNavigationContext from '../listNavigation/ListNavigationContext'
+import { useDragAndDropContext } from '../dragAndDrop/DragAndDropContext'
+import { useListNavigationContext } from '../listNavigation/ListNavigationContext'
 
 export default ({
   closeNextTrees,
@@ -23,10 +23,11 @@ export default ({
 
   const openBookmarkTree = useAction(bookmarkCreators.openBookmarkTree)
 
-  const { activeKey } = React.useContext(DragAndDropContext)
-  const { setHighlightedIndex, unsetHighlightedIndex } = React.useContext(
-    ListNavigationContext,
-  )
+  const { activeKey } = useDragAndDropContext()
+  const {
+    setHighlightedIndex,
+    unsetHighlightedIndex,
+  } = useListNavigationContext()
 
   return React.useMemo(() => {
     const toggleBookmarkTree = debounce((bookmarkInfo: BookmarkInfo) => {

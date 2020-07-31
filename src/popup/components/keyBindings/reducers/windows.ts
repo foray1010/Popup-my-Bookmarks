@@ -1,6 +1,6 @@
 import { ActionType, createAction, createReducer } from 'typesafe-actions'
 
-export interface WindowsState {
+interface WindowsState {
   activeWindowId?: string
   activeWindowIdQueue: ReadonlyArray<string>
 }

@@ -13,8 +13,10 @@ import {
 import getLastMapKey from '../../utils/getLastMapKey'
 import isMac from '../../utils/isMac'
 import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
-import ListNavigationContext from '../listNavigation/ListNavigationContext'
-import ListNavigationProvider from '../listNavigation/ListNavigationProvider'
+import {
+  ListNavigationProvider,
+  useListNavigationContext,
+} from '../listNavigation/ListNavigationContext'
 import useKeyboardNav from '../listNavigation/useKeyboardNav'
 
 export default <P,>(WrappedComponent: React.ComponentType<P>) => {
@@ -34,7 +36,7 @@ export default <P,>(WrappedComponent: React.ComponentType<P>) => {
       bookmarkCreators.removeNextBookmarkTrees,
     )
 
-    const { lists } = React.useContext(ListNavigationContext)
+    const { lists } = useListNavigationContext()
     const listsRef = React.useRef(lists)
     listsRef.current = lists
 

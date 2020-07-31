@@ -10,8 +10,10 @@ import isMac from '../../utils/isMac'
 import AbsolutePosition from '../absolutePosition/AbsolutePosition'
 import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
 import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
-import ListNavigationContext from '../listNavigation/ListNavigationContext'
-import ListNavigationProvider from '../listNavigation/ListNavigationProvider'
+import {
+  ListNavigationProvider,
+  useListNavigationContext,
+} from '../listNavigation/ListNavigationContext'
 import useKeyboardNav from '../listNavigation/useKeyboardNav'
 import Mask from '../Mask'
 import Menu from './Menu'
@@ -37,7 +39,7 @@ const MenuContainer = () => {
     setHighlightedIndex,
     unsetHighlightedIndex,
     setItemCount,
-  } = React.useContext(ListNavigationContext)
+  } = useListNavigationContext()
 
   const allRowNames = React.useMemo(() => menuPattern.flat(), [menuPattern])
   const highlightedIndex = lists.highlightedIndices.get(0)

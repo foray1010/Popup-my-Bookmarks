@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import * as React from 'react'
 
-import KeyBindingsContext from './KeyBindingsContext'
+import { useKeyBindingsContext } from './KeyBindingsContext'
 import classes from './KeyBindingsWindow.css'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
@@ -14,9 +14,7 @@ const KeyBindingsWindow = ({
   windowId,
   ...props
 }: Props) => {
-  const { setActiveWindowId, unsetActiveWindowId } = React.useContext(
-    KeyBindingsContext,
-  )
+  const { setActiveWindowId, unsetActiveWindowId } = useKeyBindingsContext()
 
   React.useEffect(() => {
     setActiveWindowId(windowId)

@@ -1,11 +1,11 @@
 import * as React from 'react'
 
-import DragAndDropContext from './DragAndDropContext'
+import { useDragAndDropContext } from './DragAndDropContext'
 
 const useDragAndDropContainerEvents = ({
   margin = 20,
 }: { margin?: number } = {}) => {
-  const { activeKey } = React.useContext(DragAndDropContext)
+  const { activeKey } = useDragAndDropContext()
   const isDragging = activeKey !== null
 
   const scrollingTimeoutRef = React.useRef<NodeJS.Timeout>()

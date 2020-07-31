@@ -1,15 +1,13 @@
 import * as React from 'react'
 
 import type { KeyBindingMeta } from './KeyBindingsContext'
-import KeyBindingsContext from './KeyBindingsContext'
+import { useKeyBindingsContext } from './KeyBindingsContext'
 
 const useKeyBindingsEvent = (
   { key, priority, windowId }: KeyBindingMeta,
   callback?: (evt: KeyboardEvent) => void,
 ) => {
-  const { addEventListener, removeEventListener } = React.useContext(
-    KeyBindingsContext,
-  )
+  const { addEventListener, removeEventListener } = useKeyBindingsContext()
 
   const callbackRef = React.useRef(callback)
   callbackRef.current = callback

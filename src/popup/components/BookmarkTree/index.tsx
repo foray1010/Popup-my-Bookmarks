@@ -5,8 +5,8 @@ import useAction from '../../../core/hooks/useAction'
 import * as CST from '../../constants'
 import type { RootState } from '../../reduxs'
 import { bookmarkCreators } from '../../reduxs'
-import DragAndDropContext from '../dragAndDrop/DragAndDropContext'
-import ListNavigationContext from '../listNavigation/ListNavigationContext'
+import { useDragAndDropContext } from '../dragAndDrop/DragAndDropContext'
+import { useListNavigationContext } from '../listNavigation/ListNavigationContext'
 import Mask from '../Mask'
 import classes from './bookmark-tree.css'
 import BookmarkTree from './BookmarkTree'
@@ -79,10 +79,8 @@ const BookmarkTreeContainer = ({ treeId }: Props) => {
     bookmarkCreators.removeNextBookmarkTrees,
   )
 
-  const { activeKey } = React.useContext(DragAndDropContext)
-  const { lists, setItemCount, removeList } = React.useContext(
-    ListNavigationContext,
-  )
+  const { activeKey } = useDragAndDropContext()
+  const { lists, setItemCount, removeList } = useListNavigationContext()
 
   React.useEffect(() => {
     setItemCount(treeIndex, treeInfo.children.length)

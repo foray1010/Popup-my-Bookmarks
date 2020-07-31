@@ -1,23 +1,57 @@
+import constate from 'constate'
 import * as React from 'react'
 
-import { listsInitialState, ListsState } from './reducers/lists'
+import useMapDispatchToCallback from '../../hooks/useMapDispatchToCallback'
+import {
+  listsCreators,
+  listsInitialState,
+  listsReducer,
+} from './reducers/lists'
 
-export interface ListNavigationContextType {
-  lists: ListsState
+const useListNavigation = () => {
+  const [lists, dispatch] = React.useReducer(listsReducer, listsInitialState)
 
-  removeList: (listIndex: number) => void
-  resetLists: () => void
-  setHighlightedIndex: (listIndex: number, itemIndex: number) => void
-  setItemCount: (listIndex: number, itemCount: number) => void
-  unsetHighlightedIndex: (listIndex: number, itemIndex: number) => void
+  const removeList = useMapDispatchToCallback(
+    dispatch,
+    listsCreators.removeList,
+  )
+  const resetLists = useMapDispatchToCallback(
+    dispatch,
+    listsCreators.resetLists,
+  )
+  const setHighlightedIndex = useMapDispatchToCallback(
+    dispatch,
+    listsCreators.setHighlightedIndex,
+  )
+  const setItemCount = useMapDispatchToCallback(
+    dispatch,
+    listsCreators.setItemCount,
+  )
+  const unsetHighlightedIndex = useMapDispatchToCallback(
+    dispatch,
+    listsCreators.unsetHighlightedIndex,
+  )
+
+  return React.useMemo(
+    () => ({
+      lists,
+      removeList,
+      resetLists,
+      setHighlightedIndex,
+      setItemCount,
+      unsetHighlightedIndex,
+    }),
+    [
+      lists,
+      removeList,
+      resetLists,
+      setHighlightedIndex,
+      setItemCount,
+      unsetHighlightedIndex,
+    ],
+  )
 }
 
-export default React.createContext<ListNavigationContextType>({
-  lists: listsInitialState,
-
-  removeList: () => {},
-  resetLists: () => {},
-  setHighlightedIndex: () => {},
-  setItemCount: () => {},
-  unsetHighlightedIndex: () => {},
-})
+export const [ListNavigationProvider, useListNavigationContext] = constate(
+  useListNavigation,
+)

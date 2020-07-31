@@ -3,7 +3,7 @@ import * as React from 'react'
 import cycle from '../../utils/cycle'
 import getLastMapKey from '../../utils/getLastMapKey'
 import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
-import ListNavigationContext from './ListNavigationContext'
+import { useListNavigationContext } from './ListNavigationContext'
 
 export default ({
   windowId,
@@ -18,9 +18,7 @@ export default ({
   onPressArrowRight?: (evt: KeyboardEvent) => void
   onPressArrowUp?: (evt: KeyboardEvent) => void
 }) => {
-  const { lists, removeList, setHighlightedIndex } = React.useContext(
-    ListNavigationContext,
-  )
+  const { lists, removeList, setHighlightedIndex } = useListNavigationContext()
 
   const listsRef = React.useRef(lists)
   listsRef.current = lists

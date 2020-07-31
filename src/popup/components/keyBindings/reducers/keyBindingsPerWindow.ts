@@ -1,18 +1,18 @@
 import { ActionType, createAction, createReducer } from 'typesafe-actions'
 
-export type KeyDefinition = string | RegExp
+type KeyDefinition = string | RegExp
 export type KeyBindingMeta = Readonly<{
   key: KeyDefinition
   priority?: number
   windowId: string
 }>
 export type KeyBindingEventCallback = (evt: KeyboardEvent) => void
-export type KeyBinding = Readonly<{
+type KeyBinding = Readonly<{
   priority: number
   key: KeyDefinition
   callback: KeyBindingEventCallback
 }>
-export type KeyBindingsPerWindowState = Map<string, ReadonlyArray<KeyBinding>>
+type KeyBindingsPerWindowState = Map<string, ReadonlyArray<KeyBinding>>
 
 export const keyBindingsPerWindowInitialState: KeyBindingsPerWindowState = new Map()
 

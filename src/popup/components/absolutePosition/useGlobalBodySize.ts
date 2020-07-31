@@ -1,15 +1,13 @@
 import * as React from 'react'
 
-import AbsolutePositionContext, { BodySize } from './AbsolutePositionContext'
+import { BodySize, useAbsolutePositionContext } from './AbsolutePositionContext'
 
 const useBodySizeStack = (): {
   globalBodySize?: BodySize
   appendBodySize: (state: BodySize) => void
   removeBodySize: (state: BodySize) => void
 } => {
-  const { bodySizeStack, setBodySizeStack } = React.useContext(
-    AbsolutePositionContext,
-  )
+  const { bodySizeStack, setBodySizeStack } = useAbsolutePositionContext()
 
   const globalBodySize = React.useMemo(() => {
     return bodySizeStack.reduce(

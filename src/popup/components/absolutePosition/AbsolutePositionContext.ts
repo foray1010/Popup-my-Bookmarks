@@ -1,3 +1,4 @@
+import constate from 'constate'
 import * as React from 'react'
 
 export interface BodySize {
@@ -6,11 +7,18 @@ export interface BodySize {
 }
 type BodySizeStack = ReadonlyArray<BodySize>
 
-export interface AbsolutePositionContextType {
-  bodySizeStack: BodySizeStack
-  setBodySizeStack: React.Dispatch<React.SetStateAction<BodySizeStack>>
+const useAbsolutePosition = () => {
+  const [bodySizeStack, setBodySizeStack] = React.useState<BodySizeStack>([])
+
+  return React.useMemo(
+    () => ({
+      bodySizeStack,
+      setBodySizeStack,
+    }),
+    [bodySizeStack, setBodySizeStack],
+  )
 }
-export default React.createContext<AbsolutePositionContextType>({
-  bodySizeStack: [],
-  setBodySizeStack: () => {},
-})
+
+export const [AbsolutePositionProvider, useAbsolutePositionContext] = constate(
+  useAbsolutePosition,
+)

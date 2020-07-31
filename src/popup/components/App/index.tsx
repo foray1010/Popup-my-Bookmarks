@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 
 import { OPTIONS } from '../../constants'
 import type { RootState } from '../../reduxs'
-import AbsolutePositionProvider from '../absolutePosition/AbsolutePositionProvider'
+import { AbsolutePositionProvider } from '../absolutePosition/AbsolutePositionContext'
 import useGlobalBodySize from '../absolutePosition/useGlobalBodySize'
-import KeyBindingsProvider from '../keyBindings/KeyBindingsProvider'
+import { KeyBindingsProvider } from '../keyBindings/KeyBindingsContext'
 import App from './App'
 import useGlobalEvents from './useGlobalEvents'
 

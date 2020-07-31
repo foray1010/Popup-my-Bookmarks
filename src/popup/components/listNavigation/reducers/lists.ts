@@ -7,7 +7,7 @@ import {
 
 import deleteFromMap from '../../../utils/deleteFromMap'
 
-export interface ListsState {
+interface ListsState {
   highlightedIndices: Map<number, number>
   itemCounts: Map<number, number>
 }
