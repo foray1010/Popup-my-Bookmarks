@@ -107,7 +107,7 @@ See <https://trello.com/b/bREPCfDk/popup-my-bookmarks>
 
 - Translate to other languages. It's all depended on volunteers as I am not a linguist. ;-)
 
-  Please join our translation team on <https://goo.gl/ZET77>
+  Please join our translation team on <https://www.transifex.com/foray1010/popup-my-bookmarks/>
 
 - Fork me on GitHub, join our development!
 

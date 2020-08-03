@@ -19,7 +19,7 @@ const Donate = () => (
       <ol>
         <li>
           rate it on&nbsp;
-          <ExternalLink href='https://goo.gl/x9Wlq'>
+          <ExternalLink href='https://chrome.google.com/webstore/detail/popup-my-bookmarks/mppflflkbbafeopeoeigkbbdjdbeifni/reviews'>
             Chrome Web Store
           </ExternalLink>
         </li>
