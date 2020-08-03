@@ -834,7 +834,7 @@
     "@babel/helper-create-regexp-features-plugin" "^7.10.4"
     "@babel/helper-plugin-utils" "^7.10.4"
 
-"@babel/preset-env@^7.10.2":
+"@babel/preset-env@^7.11.0":
   version "7.11.0"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.11.0.tgz#860ee38f2ce17ad60480c2021ba9689393efb796"
   integrity sha512-2u1/k7rG/gTh02dylX2kL3S0IJNF+J6bfDSp4DI2Ma8QN6Y9x9pmAax59fsCk6QUQG0yqH47yJWA+u1I1LccAg==
@@ -1147,16 +1147,15 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@foray1010/babel-preset@5.2.0":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-5.2.0.tgz#2cb5b0b24689a1345180e7cd32783f28cc189bb2"
-  integrity sha512-iDGq74sgIJjOUAP3zF3NArxowX7Auqwx84peak+ZjbDewff43Qr1cy95qLqzTTLvuJ+t9mWXu18p3UlP8h/naA==
+"@foray1010/babel-preset@5.2.1":
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-5.2.1.tgz#3010ecfc4835805a5f5717b25f9f5a8790db3fd9"
+  integrity sha512-rdeZAXsE9g5XnWIrw6/yuqkQPx3C5i5ggyW6XH1NZTFCrQ2WSjecQH2+Pk8IY2J0kxa+OTNN1UrBkafGnzm/sA==
   dependencies:
-    "@babel/plugin-proposal-export-namespace-from" "^7.10.4"
     "@babel/plugin-transform-react-constant-elements" "^7.6.3"
     "@babel/plugin-transform-react-inline-elements" "^7.2.0"
     "@babel/plugin-transform-runtime" "^7.9.6"
-    "@babel/preset-env" "^7.10.2"
+    "@babel/preset-env" "^7.11.0"
     "@babel/preset-react" "^7.6.3"
     "@babel/preset-typescript" "^7.10.1"
     "@foray1010/common-presets-utils" "^2.1.1"
@@ -1198,10 +1197,10 @@
   dependencies:
     prettier-plugin-packagejson "^2.2.5"
 
-"@foray1010/remark-preset@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/remark-preset/-/remark-preset-3.1.0.tgz#cbac34ffea32a5f82f3367f001e99836a2de7089"
-  integrity sha512-HbEULGphOoVuxMTpuSy3u4UcGb9yo+GWf810VqLPWu/0cAqPwTSGW3Ni45CiJ16sLz3mNuZMntxmFoHHHj/fuw==
+"@foray1010/remark-preset@3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/remark-preset/-/remark-preset-3.2.0.tgz#86fe7ce3d4f72ad554603107ca3e9c8f67d6f50b"
+  integrity sha512-0B9bTURdFjp0TTN51GglCh6xmbQGYHZvAymFc3ZwdXwsDBM8gaJWUau0hyM8bj2AmhEkbPPOefnGmGcrM7anag==
   dependencies:
     remark-lint-no-dead-urls "^1.0.2"
     remark-preset-lint-consistent "^3.0.0"
@@ -4728,7 +4727,7 @@ debug@^4.0.0, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
   dependencies:
     ms "^2.1.1"
 
-debuglog@*, debuglog@^1.0.1:
+debuglog@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/debuglog/-/debuglog-1.0.1.tgz#aa24ffb9ac3df9a2351837cfb2d279360cd78492"
   integrity sha1-qiT/uaw9+aI1GDfPstJ5NgzXhJI=
@@ -6926,7 +6925,7 @@ import-local@^3.0.2:
     pkg-dir "^4.2.0"
     resolve-cwd "^3.0.0"
 
-imurmurhash@*, imurmurhash@^0.1.4:
+imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
@@ -8439,11 +8438,6 @@ lockfile@^1.0.4:
   dependencies:
     signal-exit "^3.0.2"
 
-lodash._baseindexof@*:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/lodash._baseindexof/-/lodash._baseindexof-3.1.0.tgz#fe52b53a1c6761e42618d654e4a25789ed61822c"
-  integrity sha1-/lK1OhxnYeQmGNZU5KJXie1hgiw=
-
 lodash._baseuniq@~4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash._baseuniq/-/lodash._baseuniq-4.6.0.tgz#0ebb44e456814af7905c6212fa2c9b2d51b841e8"
@@ -8452,32 +8446,10 @@ lodash._baseuniq@~4.6.0:
     lodash._createset "~4.0.0"
     lodash._root "~3.0.0"
 
-lodash._bindcallback@*:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/lodash._bindcallback/-/lodash._bindcallback-3.0.1.tgz#e531c27644cf8b57a99e17ed95b35c748789392e"
-  integrity sha1-5THCdkTPi1epnhftlbNcdIeJOS4=
-
-lodash._cacheindexof@*:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/lodash._cacheindexof/-/lodash._cacheindexof-3.0.2.tgz#3dc69ac82498d2ee5e3ce56091bafd2adc7bde92"
-  integrity sha1-PcaayCSY0u5ePOVgkbr9Ktx73pI=
-
-lodash._createcache@*:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/lodash._createcache/-/lodash._createcache-3.1.2.tgz#56d6a064017625e79ebca6b8018e17440bdcf093"
-  integrity sha1-VtagZAF2JeeevKa4AY4XRAvc8JM=
-  dependencies:
-    lodash._getnative "^3.0.0"
-
 lodash._createset@~4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/lodash._createset/-/lodash._createset-4.0.3.tgz#0f4659fbb09d75194fa9e2b88a6644d363c9fe26"
   integrity sha1-D0ZZ+7CddRlPqeK4imZE02PJ/iY=
-
-lodash._getnative@*, lodash._getnative@^3.0.0:
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/lodash._getnative/-/lodash._getnative-3.9.1.tgz#570bc7dede46d61cdcde687d65d3eecbaa3aaff5"
-  integrity sha1-VwvH3t5G1hzc3mh9ZdPuy6o6r/U=
 
 lodash._reinterpolate@^3.0.0:
   version "3.0.0"
@@ -8503,11 +8475,6 @@ lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
-
-lodash.restparam@*:
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
-  integrity sha1-k2pOMJ7zMKdkXtQUWYbIWuWyCAU=
 
 lodash.sortby@^4.7.0:
   version "4.7.0"
