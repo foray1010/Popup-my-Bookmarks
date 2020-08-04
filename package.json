@@ -42,6 +42,7 @@
     "redux-saga": "1.1.3",
     "typeface-archivo-narrow": "1.1.3",
     "typesafe-actions": "5.1.0",
+    "use-deep-compare": "1.1.0",
     "use-typed-event-listener": "3.0.0",
     "webextension-polyfill": "0.6.0"
   },
