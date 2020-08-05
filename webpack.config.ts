@@ -142,6 +142,7 @@ const webpackConfig: webpack.Configuration = {
               unsafe_methods: true,
               unsafe_proto: true,
               unsafe_regexp: true,
+              unsafe_symbols: true,
               unsafe_undefined: true,
             },
             ecma: 8,
