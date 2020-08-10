@@ -25,7 +25,7 @@
     "chrome >= 73"
   ],
   "dependencies": {
-    "@babel/runtime": "7.11.0",
+    "@babel/runtime": "7.11.2",
     "@rehooks/component-size": "1.0.3",
     "classnames": "2.2.6",
     "constate": "2.0.0",
@@ -47,7 +47,7 @@
     "webextension-polyfill": "0.6.0"
   },
   "devDependencies": {
-    "@babel/core": "7.11.0",
+    "@babel/core": "7.11.1",
     "@commitlint/cli": "9.1.1",
     "@commitlint/config-conventional": "9.1.1",
     "@foray1010/babel-preset": "5.2.2",
@@ -57,7 +57,7 @@
     "@foray1010/stylelint-config": "2.2.4",
     "@foray1010/tsconfig": "2.1.0",
     "@testing-library/react": "10.4.8",
-    "@testing-library/user-event": "12.1.0",
+    "@testing-library/user-event": "12.1.1",
     "@types/bluebird": "3.5.32",
     "@types/classnames": "2.2.10",
     "@types/copy-webpack-plugin": "6.0.0",
@@ -70,7 +70,7 @@
     "@types/node": "14.0.27",
     "@types/prompts": "2.4.0",
     "@types/ramda": "0.27.14",
-    "@types/react": "16.9.44",
+    "@types/react": "16.9.45",
     "@types/react-dom": "16.9.8",
     "@types/react-redux": "7.1.9",
     "@types/react-window": "1.8.2",
