@@ -7,8 +7,3 @@ export const setHighlightedItemCoordinates = createAction(
     positionTop: number
   }) => ({ highlightedItemCoordinates }),
 )()
-
-export const setIsFocusSearchInput = createAction(
-  'SET_IS_FOCUS_SEARCH_INPUT',
-  (isFocusSearchInput: boolean) => ({ isFocusSearchInput }),
-)()
