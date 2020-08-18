@@ -2,12 +2,7 @@ import * as React from 'react'
 
 import { useDragAndDropContext } from './DragAndDropContext'
 
-const useDragAndDropContainerEvents = ({
-  margin = 20,
-}: { margin?: number } = {}) => {
-  const { activeKey } = useDragAndDropContext()
-  const isDragging = activeKey !== null
-
+const useScroll = () => {
   const scrollingTimeoutRef = React.useRef<NodeJS.Timeout>()
 
   const clearScroll = React.useCallback(() => {
@@ -17,17 +12,8 @@ const useDragAndDropContainerEvents = ({
     }
   }, [])
 
-  React.useEffect(() => {
-    if (!isDragging) {
-      clearScroll()
-    }
-  }, [clearScroll, isDragging])
-
-  return React.useMemo(() => {
-    const scroll = (
-      containerElement: HTMLElement,
-      { isUpward }: { isUpward: boolean },
-    ) => {
+  const scroll = React.useCallback(
+    (containerElement: Element, { isUpward }: { isUpward: boolean }) => {
       clearScroll()
 
       scrollingTimeoutRef.current = setInterval(() => {
@@ -35,35 +21,54 @@ const useDragAndDropContainerEvents = ({
           top: containerElement.scrollTop + (isUpward ? -1 : 1) * 20,
         })
       }, 50)
-    }
+    },
+    [clearScroll],
+  )
 
-    const onMouseMove = (evt: MouseEvent | React.MouseEvent) => {
+  return { clearScroll, scroll }
+}
+
+const useDragAndDropContainerEvents = ({
+  margin = 20,
+}: { margin?: number } = {}) => {
+  const { activeKey } = useDragAndDropContext()
+  const isDragging = activeKey !== null
+
+  const { clearScroll, scroll } = useScroll()
+
+  React.useEffect(() => {
+    if (!isDragging) {
+      clearScroll()
+    }
+  }, [clearScroll, isDragging])
+
+  const onMouseMove = React.useCallback(
+    (evt: MouseEvent | React.MouseEvent) => {
+      if (!(evt.currentTarget instanceof Element)) return
+
       if (!isDragging) return
 
-      if (evt.currentTarget instanceof HTMLElement) {
-        const rect = evt.currentTarget.getBoundingClientRect()
+      const rect = evt.currentTarget.getBoundingClientRect()
 
-        const displacementTop = Math.abs(rect.top - evt.clientY)
-        const displacementBottom = Math.abs(rect.bottom - evt.clientY)
+      const displacementTop = Math.abs(rect.top - evt.clientY)
+      const displacementBottom = Math.abs(rect.bottom - evt.clientY)
 
-        if (displacementTop <= margin) {
-          scroll(evt.currentTarget, {
-            isUpward: true,
-          })
-        } else if (displacementBottom <= margin) {
-          scroll(evt.currentTarget, {
-            isUpward: false,
-          })
-        } else {
-          clearScroll()
-        }
+      if (displacementTop <= margin) {
+        scroll(evt.currentTarget, {
+          isUpward: true,
+        })
+      } else if (displacementBottom <= margin) {
+        scroll(evt.currentTarget, {
+          isUpward: false,
+        })
+      } else {
+        clearScroll()
       }
-    }
+    },
+    [clearScroll, isDragging, margin, scroll],
+  )
 
-    return {
-      onMouseMove,
-    }
-  }, [clearScroll, isDragging, margin])
+  return { onMouseMove }
 }
 
 export default useDragAndDropContainerEvents

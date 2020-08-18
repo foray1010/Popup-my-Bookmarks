@@ -78,7 +78,6 @@ const useKeyBindings = () => {
 
   useEventListener(window, 'keydown', (evt) => {
     const { keyBindingsPerWindow, activeWindowId } = stateRef.current
-
     if (!activeWindowId) return
 
     const keyBindings = keyBindingsPerWindow.get(activeWindowId)

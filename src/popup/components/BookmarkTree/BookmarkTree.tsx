@@ -10,7 +10,7 @@ import type {
   BookmarkTree as BookmarkTreeType,
 } from '../../types'
 import type { ResponseEvent } from '../dragAndDrop/DragAndDropConsumer'
-import useDragContainerEvents from '../dragAndDrop/useDragAndDropContainerEvents'
+import useDragAndDropContainerEvents from '../dragAndDrop/useDragAndDropContainerEvents'
 import classes from './bookmark-tree.css'
 import BookmarkRow from './BookmarkRow'
 
@@ -171,7 +171,7 @@ const BookmarkTree = (props: Props) => {
   ])
 
   const outerRef = React.useRef<HTMLDivElement>()
-  const { onMouseMove } = useDragContainerEvents()
+  const { onMouseMove } = useDragAndDropContainerEvents()
   useEventListener(outerRef.current, 'mousemove', onMouseMove)
 
   const itemCount = props.treeInfo.children.length

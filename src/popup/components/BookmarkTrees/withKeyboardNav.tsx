@@ -94,28 +94,26 @@ export default <P,>(WrappedComponent: React.ComponentType<P>) => {
       })
     })
 
-    const handlePressContextMenu = React.useCallback(() => {
-      const { highlightedIndices, itemCounts } = listsRef.current
-
-      const lastListIndex = getLastMapKey(itemCounts)
-      if (lastListIndex === undefined) return
-      const treeInfo = trees[lastListIndex]
-      if (!treeInfo) return
-
-      const highlightedIndex = highlightedIndices.get(lastListIndex)
-      if (highlightedIndex === undefined) return
-      const bookmarkInfo = treeInfo.children[highlightedIndex]
-      if (!bookmarkInfo) return
-
-      openMenu(bookmarkInfo.id, highlightedItemCoordinates)
-    }, [highlightedItemCoordinates, openMenu, trees])
-
     useKeyBindingsEvent(
       {
         key: isMac() ? 'Control' : 'ContextMenu',
         windowId: BASE_WINDOW,
       },
-      handlePressContextMenu,
+      () => {
+        const { highlightedIndices, itemCounts } = listsRef.current
+
+        const lastListIndex = getLastMapKey(itemCounts)
+        if (lastListIndex === undefined) return
+        const treeInfo = trees[lastListIndex]
+        if (!treeInfo) return
+
+        const highlightedIndex = highlightedIndices.get(lastListIndex)
+        if (highlightedIndex === undefined) return
+        const bookmarkInfo = treeInfo.children[highlightedIndex]
+        if (!bookmarkInfo) return
+
+        openMenu(bookmarkInfo.id, highlightedItemCoordinates)
+      },
     )
 
     return <WrappedComponent {...props} />

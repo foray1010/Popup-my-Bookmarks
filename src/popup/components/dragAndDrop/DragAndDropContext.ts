@@ -17,37 +17,27 @@ const useDragAndDropState = () => {
   )
   const [pendingKey, setPendingKeyState] = React.useState<string | null>(null)
 
-  const setActiveKey = React.useCallback((key: string) => {
-    setActiveKeyState(key)
-    setPendingKeyState(null)
-  }, [])
-  const setPendingKey = React.useCallback((key: string) => {
-    setPendingKeyState(key)
-    setActiveKeyState(null)
-  }, [])
-  const unsetAllKeys = React.useCallback(() => {
-    setPendingKeyState(null)
-    setActiveKeyState(null)
-  }, [])
-
   return React.useMemo(
     () => ({
       activeKey,
-      mouseCoordinate,
       pendingKey,
-      setActiveKey,
+      setActiveKey(key: string) {
+        setActiveKeyState(key)
+        setPendingKeyState(null)
+      },
+      setPendingKey(key: string) {
+        setPendingKeyState(key)
+        setActiveKeyState(null)
+      },
+      unsetAllKeys() {
+        setPendingKeyState(null)
+        setActiveKeyState(null)
+      },
+
+      mouseCoordinate,
       setMouseCoordinate,
-      setPendingKey,
-      unsetAllKeys,
     }),
-    [
-      activeKey,
-      mouseCoordinate,
-      pendingKey,
-      setActiveKey,
-      setPendingKey,
-      unsetAllKeys,
-    ],
+    [activeKey, mouseCoordinate, pendingKey],
   )
 }
 

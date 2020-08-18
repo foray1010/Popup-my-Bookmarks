@@ -25,8 +25,6 @@ const AbsolutePosition = ({
   })
 
   React.useEffect(() => {
-    if (!document.body) return undefined
-
     const currentBodyHeight = document.body.scrollHeight
     const currentBodyWidth = document.body.offsetWidth
 

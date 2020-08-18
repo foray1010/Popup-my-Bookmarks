@@ -24,7 +24,7 @@ export default ({
   listsRef.current = lists
 
   const handlePressArrowVertical = React.useCallback(
-    (offset: number) => () => {
+    (offset: number) => {
       const { highlightedIndices, itemCounts } = listsRef.current
 
       const lastListIndex = getLastMapKey(itemCounts)
@@ -48,7 +48,7 @@ export default ({
     (evt: KeyboardEvent) => {
       if (onPressArrowDown) onPressArrowDown(evt)
 
-      handlePressArrowVertical(1)()
+      handlePressArrowVertical(1)
     },
     [handlePressArrowVertical, onPressArrowDown],
   )
@@ -58,53 +58,40 @@ export default ({
     (evt: KeyboardEvent) => {
       if (onPressArrowUp) onPressArrowUp(evt)
 
-      handlePressArrowVertical(-1)()
+      handlePressArrowVertical(-1)
     },
     [handlePressArrowVertical, onPressArrowUp],
   )
   useKeyBindingsEvent({ key: 'ArrowUp', windowId }, handlePressArrowUp)
 
-  const handlePressTab = React.useCallback(
-    (evt: KeyboardEvent) => {
-      if (evt.shiftKey) {
-        handlePressArrowUp(evt)
-      } else {
-        handlePressArrowDown(evt)
-      }
-    },
-    [handlePressArrowDown, handlePressArrowUp],
-  )
-  useKeyBindingsEvent({ key: 'Tab', windowId }, handlePressTab)
+  useKeyBindingsEvent({ key: 'Tab', windowId }, (evt) => {
+    if (evt.shiftKey) {
+      handlePressArrowUp(evt)
+    } else {
+      handlePressArrowDown(evt)
+    }
+  })
 
-  const handlePressArrowLeft = React.useCallback(
-    (evt: KeyboardEvent) => {
-      if (onPressArrowLeft) onPressArrowLeft(evt)
+  useKeyBindingsEvent({ key: 'ArrowLeft', windowId }, (evt) => {
+    if (onPressArrowLeft) onPressArrowLeft(evt)
 
-      const { itemCounts } = listsRef.current
+    const { itemCounts } = listsRef.current
+    if (itemCounts.size <= 1) return
 
-      if (itemCounts.size <= 1) return
+    const lastListIndex = getLastMapKey(itemCounts)
+    if (lastListIndex === undefined) return
 
-      const lastListIndex = getLastMapKey(itemCounts)
-      if (lastListIndex === undefined) return
+    removeList(lastListIndex)
+  })
 
-      removeList(lastListIndex)
-    },
-    [onPressArrowLeft, removeList],
-  )
-  useKeyBindingsEvent({ key: 'ArrowLeft', windowId }, handlePressArrowLeft)
+  useKeyBindingsEvent({ key: 'ArrowRight', windowId }, (evt) => {
+    if (onPressArrowRight) onPressArrowRight(evt)
 
-  const handlePressArrowRight = React.useCallback(
-    (evt: KeyboardEvent) => {
-      if (onPressArrowRight) onPressArrowRight(evt)
+    const { itemCounts } = listsRef.current
 
-      const { itemCounts } = listsRef.current
+    const lastListIndex = getLastMapKey(itemCounts)
+    if (lastListIndex === undefined) return
 
-      const lastListIndex = getLastMapKey(itemCounts)
-      if (lastListIndex === undefined) return
-
-      setHighlightedIndex(lastListIndex + 1, 0)
-    },
-    [onPressArrowRight, setHighlightedIndex],
-  )
-  useKeyBindingsEvent({ key: 'ArrowRight', windowId }, handlePressArrowRight)
+    setHighlightedIndex(lastListIndex + 1, 0)
+  })
 }

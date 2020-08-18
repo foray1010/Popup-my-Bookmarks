@@ -15,7 +15,7 @@ const useAbsolutePosition = () => {
       bodySizeStack,
       setBodySizeStack,
     }),
-    [bodySizeStack, setBodySizeStack],
+    [bodySizeStack],
   )
 }
 

@@ -4,7 +4,7 @@ import * as React from 'react'
 import { useKeyBindingsContext } from './KeyBindingsContext'
 import classes from './KeyBindingsWindow.css'
 
-type Props = React.HTMLAttributes<HTMLDivElement> & {
+type Props = React.HTMLAttributes<Element> & {
   windowId: string
 }
 const KeyBindingsWindow = ({
@@ -24,8 +24,8 @@ const KeyBindingsWindow = ({
     }
   }, [setActiveWindowId, unsetActiveWindowId, windowId])
 
-  const handleFocus = React.useCallback(
-    (evt: React.FocusEvent<HTMLDivElement>) => {
+  const handleFocus = React.useCallback<React.FocusEventHandler>(
+    (evt) => {
       evt.stopPropagation()
 
       if (onFocus) onFocus(evt)
@@ -35,15 +35,14 @@ const KeyBindingsWindow = ({
     [onFocus, setActiveWindowId, windowId],
   )
 
-  const divRef = React.useRef<HTMLDivElement>(null)
-
+  const windowRef = React.useRef<HTMLDivElement>(null)
   React.useEffect(() => {
-    if (divRef.current) divRef.current.focus()
+    if (windowRef.current) windowRef.current.focus()
   }, [])
 
   return (
     <div
-      ref={divRef}
+      ref={windowRef}
       tabIndex={-1}
       {...props}
       className={classNames(classes.wrapper, className)}
