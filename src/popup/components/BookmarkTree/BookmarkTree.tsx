@@ -79,6 +79,7 @@ type Props = ItemData & {
   scrollToIndex?: number
 }
 const BookmarkTree = (props: Props) => {
+  const outerRef = React.useRef<HTMLDivElement>()
   const listRef = React.useRef<List>(null)
 
   const [listHeight, setListHeight] = React.useState(0)
@@ -103,16 +104,13 @@ const BookmarkTree = (props: Props) => {
   )
 
   React.useEffect(() => {
-    if (!listRef.current) return
+    if (!outerRef.current || !listRef.current) return
 
     // force recalculate all row heights as it doesn't recalculate
     listRef.current.resetAfterIndex(0, true)
 
-    // @ts-ignore: hacky way to access _outerRef
-    // eslint-disable-next-line no-underscore-dangle
-    const listEl: HTMLElement = listRef.current._outerRef
-
-    const maxListHeight = CST.MAX_HEIGHT - listEl.getBoundingClientRect().top
+    const maxListHeight =
+      CST.MAX_HEIGHT - outerRef.current.getBoundingClientRect().top
     const minListHeight = props.rowHeight
 
     const totalRowHeight = props.treeInfo.children.reduce(
@@ -170,7 +168,6 @@ const BookmarkTree = (props: Props) => {
     props.treeInfo,
   ])
 
-  const outerRef = React.useRef<HTMLDivElement>()
   const { onMouseMove } = useDragAndDropContainerEvents()
   useEventListener(outerRef.current, 'mousemove', onMouseMove)
 
