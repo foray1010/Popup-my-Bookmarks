@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import * as React from 'react'
-import { ListOnScrollProps, VariableSizeList as List } from 'react-window'
+import { useVirtual } from 'react-virtual'
 import useEventListener from 'use-typed-event-listener'
 
 import PlainList from '../../../core/components/baseItems/PlainList'
@@ -32,57 +32,16 @@ interface ItemData {
   treeInfo: BookmarkTreeType
 }
 
-const getItemKey = (index: number, data: ItemData) =>
-  data.treeInfo.children[index].id
-
-const Row = ({
-  data,
-  index,
-  style,
-}: {
-  data: ItemData
-  index: number
-  style: React.CSSProperties
-}) => {
-  const bookmarkInfo = data.treeInfo.children[index]
-  const isDragging = data.draggingId !== null
-  const isBeingDragged = data.draggingId === bookmarkInfo.id
-  return (
-    <BookmarkRow
-      bookmarkInfo={bookmarkInfo}
-      className={classes['list-item']}
-      iconSize={data.iconSize}
-      isDisableDragAndDrop={data.isDisableDragAndDrop}
-      isHighlighted={
-        isDragging ? isBeingDragged : data.highlightedId === bookmarkInfo.id
-      }
-      isSearching={data.isSearching}
-      isShowTooltip={data.isShowTooltip}
-      isUnclickable={isBeingDragged}
-      style={style}
-      onAuxClick={data.onRowAuxClick}
-      onClick={data.onRowClick}
-      onDragOver={data.onRowDragOver}
-      onDragStart={data.onRowDragStart}
-      onMouseEnter={data.onRowMouseEnter}
-      onMouseLeave={data.onRowMouseLeave}
-    />
-  )
-}
-
 type Props = ItemData & {
   lastScrollTop?: number
   listItemWidth: number
   noRowsRenderer: () => React.ReactElement | null
-  onScroll?: (evt: ListOnScrollProps) => void
+  onScroll?: React.UIEventHandler
   rowHeight: number
   scrollToIndex?: number
 }
 const BookmarkTree = (props: Props) => {
-  const outerRef = React.useRef<HTMLDivElement>()
-  const listRef = React.useRef<List>(null)
-
-  const [listHeight, setListHeight] = React.useState(0)
+  const parentRef = React.useRef<HTMLDivElement>(null)
 
   const getRowHeight = React.useCallback(
     (index: number) => {
@@ -103,73 +62,42 @@ const BookmarkTree = (props: Props) => {
     [props.rowHeight, props.treeInfo.children],
   )
 
-  React.useEffect(() => {
-    if (!outerRef.current || !listRef.current) return
+  const rowVirtualizer = useVirtual({
+    size: props.treeInfo.children.length,
+    parentRef,
+    estimateSize: getRowHeight,
+  })
 
-    // force recalculate all row heights as it doesn't recalculate
-    listRef.current.resetAfterIndex(0, true)
+  const [listHeight, setListHeight] = React.useState(0)
+  React.useEffect(() => {
+    if (!parentRef.current) return
 
     const maxListHeight =
-      CST.MAX_HEIGHT - outerRef.current.getBoundingClientRect().top
+      CST.MAX_HEIGHT - parentRef.current.getBoundingClientRect().top
     const minListHeight = props.rowHeight
 
     const totalRowHeight = props.treeInfo.children.reduce(
-      (acc, x, index) => acc + getRowHeight(index),
+      (acc, _, index) => acc + getRowHeight(index),
       0,
     )
 
     setListHeight(R.clamp(minListHeight, maxListHeight, totalRowHeight))
   }, [getRowHeight, props.rowHeight, props.treeInfo.children])
 
+  const { scrollToIndex, scrollToOffset } = rowVirtualizer
   React.useEffect(() => {
     if (props.lastScrollTop) {
-      if (listRef.current) listRef.current.scrollTo(props.lastScrollTop)
+      scrollToOffset(props.lastScrollTop)
     }
-  }, [props.lastScrollTop])
-
+  }, [props.lastScrollTop, scrollToOffset])
   React.useEffect(() => {
-    // hack for unknown bug which scroll to the next item when the list first rendered
-    setImmediate(() => {
-      if (props.scrollToIndex !== undefined) {
-        if (listRef.current) listRef.current.scrollToItem(props.scrollToIndex)
-      }
-    })
-  }, [props.scrollToIndex])
-
-  const itemData = React.useMemo(() => {
-    return {
-      draggingId: props.draggingId,
-      highlightedId: props.highlightedId,
-      iconSize: props.iconSize,
-      isDisableDragAndDrop: props.isDisableDragAndDrop,
-      isSearching: props.isSearching,
-      isShowTooltip: props.isShowTooltip,
-      onRowAuxClick: props.onRowAuxClick,
-      onRowClick: props.onRowClick,
-      onRowDragOver: props.onRowDragOver,
-      onRowDragStart: props.onRowDragStart,
-      onRowMouseEnter: props.onRowMouseEnter,
-      onRowMouseLeave: props.onRowMouseLeave,
-      treeInfo: props.treeInfo,
+    if (props.scrollToIndex !== undefined) {
+      scrollToIndex(props.scrollToIndex)
     }
-  }, [
-    props.draggingId,
-    props.highlightedId,
-    props.iconSize,
-    props.isDisableDragAndDrop,
-    props.isSearching,
-    props.isShowTooltip,
-    props.onRowAuxClick,
-    props.onRowClick,
-    props.onRowDragOver,
-    props.onRowDragStart,
-    props.onRowMouseEnter,
-    props.onRowMouseLeave,
-    props.treeInfo,
-  ])
+  }, [props.scrollToIndex, scrollToIndex])
 
   const { onMouseMove } = useDragAndDropContainerEvents()
-  useEventListener(outerRef.current, 'mousemove', onMouseMove)
+  useEventListener(parentRef.current, 'mousemove', onMouseMove)
 
   const itemCount = props.treeInfo.children.length
   if (itemCount === 0) {
@@ -177,20 +105,58 @@ const BookmarkTree = (props: Props) => {
   }
 
   return (
-    <List
-      ref={listRef}
-      height={listHeight}
-      innerElementType={PlainList}
-      itemCount={itemCount}
-      itemData={itemData}
-      itemKey={getItemKey}
-      itemSize={getRowHeight}
-      outerRef={outerRef}
-      width={props.listItemWidth}
-      onScroll={props.onScroll}
+    <div
+      ref={parentRef}
+      style={{
+        height: `${listHeight}px`,
+        width: `${props.listItemWidth}px`,
+        overflow: 'auto',
+      }}
     >
-      {Row}
-    </List>
+      <PlainList
+        style={{
+          height: `${rowVirtualizer.totalSize}px`,
+          position: 'relative',
+        }}
+      >
+        {rowVirtualizer.virtualItems.map((virtualItem) => {
+          const bookmarkInfo = props.treeInfo.children[virtualItem.index]
+          const isDragging = props.draggingId !== null
+          const isBeingDragged = props.draggingId === bookmarkInfo.id
+          return (
+            <BookmarkRow
+              key={virtualItem.index}
+              bookmarkInfo={bookmarkInfo}
+              className={classes['list-item']}
+              iconSize={props.iconSize}
+              isDisableDragAndDrop={props.isDisableDragAndDrop}
+              isHighlighted={
+                isDragging
+                  ? isBeingDragged
+                  : props.highlightedId === bookmarkInfo.id
+              }
+              isSearching={props.isSearching}
+              isShowTooltip={props.isShowTooltip}
+              isUnclickable={isBeingDragged}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: `${virtualItem.size}px`,
+                transform: `translateY(${virtualItem.start}px)`,
+              }}
+              onAuxClick={props.onRowAuxClick}
+              onClick={props.onRowClick}
+              onDragOver={props.onRowDragOver}
+              onDragStart={props.onRowDragStart}
+              onMouseEnter={props.onRowMouseEnter}
+              onMouseLeave={props.onRowMouseLeave}
+            />
+          )
+        })}
+      </PlainList>
+    </div>
   )
 }
 
