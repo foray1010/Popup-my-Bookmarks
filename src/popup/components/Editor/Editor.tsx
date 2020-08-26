@@ -51,10 +51,10 @@ const Editor = (props: Props) => {
       <span className={classes.header}>{props.header}</span>
 
       <Input
+        autoFocus
         className={classes.input}
         value={title}
         onChange={handleTitleChange}
-        autoFocus
       />
       {props.isAllowEditUrl && (
         <Input

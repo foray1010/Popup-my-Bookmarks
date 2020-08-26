@@ -36,10 +36,10 @@ const Option = ({
   return (
     <label>
       <Input
+        checked={optionValue.includes(optionChoiceIndex)}
         name={optionName}
         type='checkbox'
         value={String(optionChoiceIndex)}
-        checked={optionValue.includes(optionChoiceIndex)}
         onChange={handleChange}
       />
       {optionChoice}

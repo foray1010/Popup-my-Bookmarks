@@ -10,8 +10,8 @@ const ExternalLink = (props: Props) => (
   <a
     className={classes.main}
     href={props.href}
-    target='_blank'
     rel='noopener noreferrer'
+    target='_blank'
   >
     {props.children}
   </a>

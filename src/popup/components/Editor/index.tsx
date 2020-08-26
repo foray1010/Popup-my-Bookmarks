@@ -54,7 +54,6 @@ const EditorContainer = () => {
       <AbsolutePosition positionLeft={positionLeft} positionTop={positionTop}>
         <KeyBindingsWindow windowId={EDITOR_WINDOW}>
           <Editor
-            isAllowEditUrl={isAllowEditUrl}
             header={
               isAllowEditUrl
                 ? webExtension.i18n.getMessage('edit')
@@ -62,6 +61,7 @@ const EditorContainer = () => {
             }
             initialTitle={initialTitle}
             initialUrl={initialUrl}
+            isAllowEditUrl={isAllowEditUrl}
             width={width ?? 0}
             onCancel={closeEditor}
             onConfirm={handleConfirm}

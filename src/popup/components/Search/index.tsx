@@ -25,8 +25,8 @@ const SearchContainer = () => {
   return (
     <SearchInput
       ref={inputRef}
-      value={inputValue}
       tabIndex={-1}
+      value={inputValue}
       onCancel={React.useCallback(() => setInputValue(''), [])}
       onChange={React.useCallback<React.ChangeEventHandler<HTMLInputElement>>(
         (evt) => setInputValue(evt.currentTarget.value),

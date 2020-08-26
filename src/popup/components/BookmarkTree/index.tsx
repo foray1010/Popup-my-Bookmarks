@@ -140,6 +140,9 @@ const BookmarkTreeContainer = ({ treeId }: Props) => {
         lastScrollTop={reduxProps.lastScrollTop}
         listItemWidth={reduxProps.listItemWidth}
         noRowsRenderer={noRowsRenderer}
+        rowHeight={reduxProps.rowHeight}
+        scrollToIndex={highlightedIndex}
+        treeInfo={treeInfo}
         onRowAuxClick={handleRowAuxClick}
         onRowClick={handleRowClick}
         onRowDragOver={handleRowDragOver}
@@ -147,9 +150,6 @@ const BookmarkTreeContainer = ({ treeId }: Props) => {
         onRowMouseEnter={handleRowMouseEnter}
         onRowMouseLeave={handleRowMouseLeave}
         onScroll={handleScroll}
-        rowHeight={reduxProps.rowHeight}
-        scrollToIndex={highlightedIndex}
-        treeInfo={treeInfo}
       />
 
       {reduxProps.isShowCover && (

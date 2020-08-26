@@ -109,12 +109,12 @@ const BookmarkRowContainer = ({
           iconUrl={bookmarkInfo.iconUrl}
           isHighlighted={isHighlighted}
           isUnclickable={restProps.isUnclickable}
+          title={bookmarkInfo.title}
+          tooltip={tooltip}
           onAuxClick={handleAuxClick}
           onClick={handleClick}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          title={bookmarkInfo.title}
-          tooltip={tooltip}
         />
       </DragAndDropConsumer>
     </li>

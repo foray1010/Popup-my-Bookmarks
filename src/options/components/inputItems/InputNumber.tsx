@@ -45,11 +45,11 @@ const InputNumber = ({
 
   return (
     <Input
-      name={optionName}
-      type='number'
-      min={minimum}
       max={maximum}
+      min={minimum}
+      name={optionName}
       size={Math.floor(Math.log10(maximum)) + 1}
+      type='number'
       value={String(optionValue)}
       onBlur={handleBlur}
       onChange={handleChange}

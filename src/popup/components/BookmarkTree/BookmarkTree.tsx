@@ -59,13 +59,13 @@ const Row = ({
       isSearching={data.isSearching}
       isShowTooltip={data.isShowTooltip}
       isUnclickable={isBeingDragged}
+      style={style}
       onAuxClick={data.onRowAuxClick}
       onClick={data.onRowClick}
       onDragOver={data.onRowDragOver}
       onDragStart={data.onRowDragStart}
       onMouseEnter={data.onRowMouseEnter}
       onMouseLeave={data.onRowMouseLeave}
-      style={style}
     />
   )
 }
@@ -179,15 +179,15 @@ const BookmarkTree = (props: Props) => {
   return (
     <List
       ref={listRef}
-      outerRef={outerRef}
       height={listHeight}
       innerElementType={PlainList}
       itemCount={itemCount}
       itemData={itemData}
       itemKey={getItemKey}
       itemSize={getRowHeight}
-      onScroll={props.onScroll}
+      outerRef={outerRef}
       width={props.listItemWidth}
+      onScroll={props.onScroll}
     >
       {Row}
     </List>

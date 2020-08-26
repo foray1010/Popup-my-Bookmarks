@@ -88,10 +88,10 @@ const MenuContainer = () => {
           <Menu
             highlightedIndex={highlightedIndex}
             menuPattern={menuPattern}
+            unclickableRows={unclickableRows}
             onRowClick={handleRowClick}
             onRowMouseEnter={handleRowMouseEnter}
             onRowMouseLeave={handleRowMouseLeave}
-            unclickableRows={unclickableRows}
           />
         </KeyBindingsWindow>
       </AbsolutePosition>

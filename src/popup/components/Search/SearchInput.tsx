@@ -14,7 +14,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, Props>(
   function InnerSearchInput({ onCancel, ...inputProps }: Props, ref) {
     return (
       <div className={classes.main}>
-        <img className={classes['search-icon']} src={searchIcon} alt='' />
+        <img alt='' className={classes['search-icon']} src={searchIcon} />
         <Input
           ref={ref}
           inputMode='search'
@@ -24,9 +24,9 @@ const SearchInput = React.forwardRef<HTMLInputElement, Props>(
         />
         {inputProps.value ? (
           <img
+            alt=''
             className={classes['cancel-icon']}
             src={cancelIcon}
-            alt=''
             onClick={onCancel}
           />
         ) : null}

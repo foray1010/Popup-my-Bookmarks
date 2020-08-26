@@ -34,11 +34,11 @@ const Option = ({
     <label className={classes.main}>
       <input
         ref={inputRef}
+        checked={isChecked}
+        hidden
         name={optionName}
         type='radio'
         value={String(optionChoice)}
-        checked={isChecked}
-        hidden
         onChange={handleChange}
       />
       <Button

@@ -38,18 +38,18 @@ const BookmarkRowWithRef = React.forwardRef(function BookmarkRow(
         },
         props.className,
       )}
+      title={props.tooltip}
       onAuxClick={props.isUnclickable ? undefined : props.onAuxClick}
       onClick={props.isUnclickable ? undefined : props.onClick}
       onMouseEnter={props.onMouseEnter}
       onMouseLeave={props.onMouseLeave}
-      title={props.tooltip}
     >
       {props.iconUrl && (
         <img
+          alt=''
           className={classes.icon}
           src={props.iconUrl}
           style={iconStyles}
-          alt=''
         />
       )}
       <div className={classes.title}>{props.title}</div>

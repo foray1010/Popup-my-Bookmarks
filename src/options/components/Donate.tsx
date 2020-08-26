@@ -11,7 +11,7 @@ const Donate = () => (
   <footer className={classes.main}>
     <section className={classes.img}>
       <ExternalLink href={paypalUrl}>
-        <img src={donateIcon} alt='' />
+        <img alt='' src={donateIcon} />
       </ExternalLink>
     </section>
     <section className={classes.desc}>
