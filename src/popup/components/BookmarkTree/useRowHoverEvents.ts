@@ -10,7 +10,7 @@ import type { BookmarkInfo, BookmarkTree } from '../../types'
 import { useDragAndDropContext } from '../dragAndDrop/DragAndDropContext'
 import { useListNavigationContext } from '../listNavigation/ListNavigationContext'
 
-export default ({
+export default function useRowHoverEvents({
   closeNextTrees,
   treeIndex,
   treeInfo,
@@ -18,7 +18,7 @@ export default ({
   closeNextTrees: () => void
   treeIndex: number
   treeInfo: BookmarkTree
-}) => {
+}) {
   const options = useSelector((state: RootState) => state.options)
 
   const openBookmarkTree = useAction(bookmarkCreators.openBookmarkTree)

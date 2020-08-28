@@ -1168,10 +1168,10 @@
   dependencies:
     read-pkg-up "^7.0.0"
 
-"@foray1010/eslint-config@3.8.1":
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-3.8.1.tgz#fac1cf9a45052a1430be55280ae7c859ce5e628c"
-  integrity sha512-84ongjAmMtBhZDEcch0sMyanSBaa8YOtaOMwo4GdD42bLcQG8+ptp5zFO5cd242mmWQJSRMmKqXVPmawAw5paA==
+"@foray1010/eslint-config@3.9.0":
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-3.9.0.tgz#602ed2afed75d51837e08482a86feb8684a9f08c"
+  integrity sha512-3tQhMuCuoDxyv7Hiom2yoHScv0zhrtYVNyjiZStxs2WxsnW+LRhIcwsTBLTVKaNUSOU329IOT+f506klSd59DQ==
   dependencies:
     "@foray1010/common-presets-utils" "^2.1.1"
     "@typescript-eslint/eslint-plugin" "^3.0.0"

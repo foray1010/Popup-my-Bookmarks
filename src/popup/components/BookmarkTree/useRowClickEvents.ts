@@ -11,7 +11,11 @@ import {
   mapOptionToOpenBookmarkProps,
 } from '../../utils/clickBookmarkUtils'
 
-export default ({ treeInfo }: { treeInfo: BookmarkTree }) => {
+export default function useRowClickEvents({
+  treeInfo,
+}: {
+  treeInfo: BookmarkTree
+}) {
   const options = useSelector((state: RootState) => state.options)
 
   const openBookmarksInBrowser = useAction(

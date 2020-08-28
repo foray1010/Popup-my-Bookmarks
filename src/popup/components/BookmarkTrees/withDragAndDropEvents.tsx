@@ -4,8 +4,10 @@ import useAction from '../../../core/hooks/useAction'
 import { bookmarkCreators } from '../../reduxs'
 import { DragAndDropProvider } from '../dragAndDrop/DragAndDropContext'
 
-export default <P,>(WrappedComponent: React.ComponentType<P>) => {
-  const DragAndDropEvents = (props: P) => {
+export default function withDragAndDropEvents<P>(
+  WrappedComponent: React.ComponentType<P>,
+) {
+  return function ComponentWithDragAndDropEvents(props: P) {
     const moveBookmarkToDragIndicator = useAction(
       bookmarkCreators.moveBookmarkToDragIndicator,
     )
@@ -28,6 +30,4 @@ export default <P,>(WrappedComponent: React.ComponentType<P>) => {
       </DragAndDropProvider>
     )
   }
-
-  return DragAndDropEvents
 }

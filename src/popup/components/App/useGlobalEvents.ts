@@ -1,6 +1,6 @@
 import useEventListener from 'use-typed-event-listener'
 
-export default () => {
+export default function useGlobalEvents(): void {
   useEventListener(document, 'contextmenu', (evt) => {
     // allow native context menu if it is an input element
     if (evt.target instanceof HTMLInputElement) {
