@@ -19,7 +19,9 @@ import {
 } from '../listNavigation/ListNavigationContext'
 import useKeyboardNav from '../listNavigation/useKeyboardNav'
 
-export default <P,>(WrappedComponent: React.ComponentType<P>) => {
+export default function withKeyboardNav<P>(
+  WrappedComponent: React.ComponentType<P>,
+) {
   const KeyboardNav = (props: P) => {
     const highlightedItemCoordinates = useSelector(
       (state: RootState) => state.ui.highlightedItemCoordinates,

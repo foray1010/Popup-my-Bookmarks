@@ -5,7 +5,7 @@ import type { ListOnScrollProps } from 'react-window'
 import useAction from '../../../core/hooks/useAction'
 import { lastPositionsCreators } from '../../reduxs'
 
-export default ({
+export default function useRememberLastPositions({
   isRememberLastPositions,
   treeId,
   treeIndex,
@@ -13,7 +13,7 @@ export default ({
   isRememberLastPositions: boolean
   treeId: string
   treeIndex: number
-}) => {
+}) {
   const createLastPosition = useAction(lastPositionsCreators.createLastPosition)
   const removeLastPosition = useAction(lastPositionsCreators.removeLastPosition)
   const updateLastPosition = useAction(lastPositionsCreators.updateLastPosition)

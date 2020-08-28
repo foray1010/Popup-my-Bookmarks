@@ -6,13 +6,13 @@ import { bookmarkCreators } from '../../reduxs'
 import type { BookmarkInfo, BookmarkTree } from '../../types'
 import type { ResponseEvent } from '../dragAndDrop/DragAndDropConsumer'
 
-export default ({
+export default function useRowDragEvents({
   closeNextTrees,
   treeInfo,
 }: {
   closeNextTrees: () => void
   treeInfo: BookmarkTree
-}) => {
+}) {
   const removeDragIndicator = useAction(bookmarkCreators.removeDragIndicator)
   const setDragIndicator = useAction(bookmarkCreators.setDragIndicator)
 

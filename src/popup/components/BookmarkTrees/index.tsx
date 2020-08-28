@@ -32,4 +32,7 @@ const BookmarkTreesContainer = (props: Props) => {
   )
 }
 
-export default withDragAndDropEvents(withKeyboardNav(BookmarkTreesContainer))
+const BookmarkTreesWithHOC = withDragAndDropEvents(
+  withKeyboardNav(BookmarkTreesContainer),
+)
+export default BookmarkTreesWithHOC

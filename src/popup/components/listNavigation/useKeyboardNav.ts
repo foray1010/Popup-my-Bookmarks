@@ -5,7 +5,7 @@ import getLastMapKey from '../../utils/getLastMapKey'
 import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
 import { useListNavigationContext } from './ListNavigationContext'
 
-export default ({
+export default function useKeyboardNav({
   windowId,
   onPressArrowDown,
   onPressArrowLeft,
@@ -17,7 +17,7 @@ export default ({
   onPressArrowLeft?: (evt: KeyboardEvent) => void
   onPressArrowRight?: (evt: KeyboardEvent) => void
   onPressArrowUp?: (evt: KeyboardEvent) => void
-}) => {
+}): void {
   const { lists, removeList, setHighlightedIndex } = useListNavigationContext()
 
   const listsRef = React.useRef(lists)
