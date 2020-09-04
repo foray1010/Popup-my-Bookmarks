@@ -22,7 +22,7 @@ const outputDir = path.join('build', process.env.NODE_ENV || 'development')
 const sourceDir = 'src'
 
 const webpackConfig: webpack.Configuration = {
-  devtool: isDevelopmentBuild ? 'source-map' : undefined,
+  devtool: isDevelopmentBuild ? 'inline-source-map' : false,
   entry: appNames.reduce(
     (acc, appName) => ({
       ...acc,
