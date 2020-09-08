@@ -1,39 +1,38 @@
 @import '@csstools/normalize.css';
-@import 'open-color/open-color.css';
 
 :root {
   --golden-gap: 2px;
   --golden-gap-2x: calc(var(--golden-gap) * 2);
   --golden-gap-4x: calc(var(--golden-gap) * 4);
-  --highlight-level1: var(--oc-gray-2);
-  --highlight-level2: var(--oc-gray-3);
-  --highlight-level3: var(--oc-gray-4);
-  --highlight-level4: var(--oc-gray-5);
-  --highlight-level5: var(--oc-gray-6);
+  --highlight-level1: #e9ecef;
+  --highlight-level2: #dee2e6;
+  --highlight-level3: #ced4da;
+  --highlight-level4: #adb5bd;
+  --highlight-level5: #868e96;
   --input-height: 22px;
-  --main-background-color: var(--oc-white);
-  --main-color1: var(--oc-blue-5);
-  --main-color2: var(--oc-orange-5);
-  --main-color3: var(--oc-teal-5);
-  --main-color4: var(--oc-red-7);
-  --main-color5: #8d6e63; /* same as material color palette brown 400 */
-  --main-font-color: var(--oc-gray-9);
+  --main-background-color: #fff;
+  --main-color1: #339af0;
+  --main-color2: #ff922b;
+  --main-color3: #20c997;
+  --main-color4: #f03e3e;
+  --main-color5: #8d6e63;
+  --main-font-color: #212529;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --highlight-level1: var(--oc-gray-8);
-    --highlight-level2: var(--oc-gray-7);
-    --highlight-level3: var(--oc-gray-6);
-    --highlight-level4: var(--oc-gray-5);
-    --highlight-level5: var(--oc-gray-4);
-    --main-background-color: var(--oc-gray-9);
-    --main-color1: var(--oc-blue-4);
-    --main-color2: var(--oc-orange-4);
-    --main-color3: var(--oc-teal-4);
-    --main-color4: var(--oc-red-6);
-    --main-color5: #a1887f; /* same as material color palette brown 300 */
-    --main-font-color: var(--oc-white);
+    --highlight-level1: #343a40;
+    --highlight-level2: #495057;
+    --highlight-level3: #868e96;
+    --highlight-level4: #adb5bd;
+    --highlight-level5: #ced4da;
+    --main-background-color: #212529;
+    --main-color1: #4dabf7;
+    --main-color2: #ffa94d;
+    --main-color3: #38d9a9;
+    --main-color4: #fa5252;
+    --main-color5: #a1887f;
+    --main-font-color: #fff;
   }
 }
 
