@@ -60,7 +60,7 @@
     "@types/bluebird": "3.5.32",
     "@types/classnames": "2.2.10",
     "@types/copy-webpack-plugin": "6.0.0",
-    "@types/core-js": "2.5.3",
+    "@types/core-js": "2.5.4",
     "@types/duplicate-package-checker-webpack-plugin": "2.1.0",
     "@types/firefox-webext-browser": "78.0.1",
     "@types/jest": "26.0.13",
