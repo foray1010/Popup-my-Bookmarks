@@ -28,7 +28,7 @@
     "@babel/runtime": "7.11.2",
     "@rehooks/component-size": "1.0.3",
     "classnames": "2.2.6",
-    "constate": "2.0.0",
+    "constate": "3.0.1",
     "core-js": "3.6.5",
     "lodash.debounce": "4.0.8",
     "nanoid": "3.1.12",
