@@ -5140,10 +5140,10 @@ eslint-plugin-react@^7.16.0:
     resolve "^1.17.0"
     string.prototype.matchall "^4.0.2"
 
-eslint-plugin-redux-saga@1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-redux-saga/-/eslint-plugin-redux-saga-1.1.3.tgz#56e530f109b7f1c7ad8b9ad2e419b83eca63fcc6"
-  integrity sha512-fWvibCMWi7xPAgtAk3gaTgC9/x+tEEKAyNPpJkXPyvNqyGZSNGf+1h2HqA1zYXDWUBxvt7hDnz3ljLbQV3WVwA==
+eslint-plugin-redux-saga@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-redux-saga/-/eslint-plugin-redux-saga-1.2.0.tgz#e0b0108fd3fab56ffac04d0bbe44f77a19bc9d6c"
+  integrity sha512-s4Ms1ExUGMxrrSi6QMH/YVJJMaPkelz7lkG1WocoDTOkKQ9pP5+p2PTxhGNL+EPKxp90/uhQuHBJ+T/SMBotpQ==
 
 eslint-plugin-simple-import-sort@^5.0.0:
   version "5.0.3"
