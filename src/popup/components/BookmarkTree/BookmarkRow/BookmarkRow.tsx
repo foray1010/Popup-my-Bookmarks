@@ -29,7 +29,7 @@ const BookmarkRowWithRef = React.forwardRef(function BookmarkRow(
   )
 
   return (
-    <div
+    <figure
       ref={setRef}
       className={classNames(
         classes.main,
@@ -53,8 +53,8 @@ const BookmarkRowWithRef = React.forwardRef(function BookmarkRow(
           style={iconStyles}
         />
       )}
-      <div className={classes.title}>{props.title}</div>
-    </div>
+      <figcaption className={classes.title}>{props.title}</figcaption>
+    </figure>
   )
 })
 

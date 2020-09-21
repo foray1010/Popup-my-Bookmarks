@@ -10,6 +10,10 @@
   box-sizing: border-box;
   align-items: center;
   padding: var(--golden-gap) 0 var(--golden-gap) var(--golden-gap);
+  margin-block-end: 0;
+  margin-block-start: 0;
+  margin-inline-end: 0;
+  margin-inline-start: 0;
 
   &.drag-indicator {
     border: 1px dashed var(--highlight-level5);
