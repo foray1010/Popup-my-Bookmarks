@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import * as React from 'react'
 
+import LazyImage from '../../../../core/components/baseItems/LazyImage'
 import classes from './bookmark-row.css'
 
 interface Props {
@@ -45,8 +46,8 @@ const BookmarkRowWithRef = React.forwardRef(function BookmarkRow(
       onMouseLeave={props.onMouseLeave}
     >
       {props.iconUrl && (
-        <img
-          alt=''
+        <LazyImage
+          alt={props.title}
           className={classes.icon}
           src={props.iconUrl}
           style={iconStyles}

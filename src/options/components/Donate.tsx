@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import LazyImage from '../../core/components/baseItems/LazyImage'
 import donateIcon from '../images/btn_donateCC_LG.png'
 import classes from './donate.css'
 import ExternalLink from './ExternalLink'
@@ -11,7 +12,7 @@ const Donate = () => (
   <footer className={classes.main}>
     <section className={classes.img}>
       <ExternalLink href={paypalUrl}>
-        <img alt='' src={donateIcon} />
+        <LazyImage alt='donate' src={donateIcon} />
       </ExternalLink>
     </section>
     <section className={classes.desc}>
