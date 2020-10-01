@@ -1,5 +1,16 @@
-:root {
-  --colorizing: {
+.main {
+  composes: focus from '../../../core/styles/composes.css';
+  flex: 1 0 0;
+  padding-top: var(--golden-gap-2x);
+  border: 0;
+  border-bottom: var(--golden-gap-2x) solid transparent;
+  background-color: transparent;
+  color: var(--main-background-color);
+  cursor: default;
+  font: 16px 'Archivo Narrow', sans-serif;
+  text-align: center;
+
+  &:matches(:hover, .main-active) {
     &:nth-of-type(1) {
       border-bottom-color: var(--main-color1);
     }
@@ -16,25 +27,4 @@
       border-bottom-color: var(--main-color4);
     }
   }
-}
-
-.main {
-  composes: focus from '../../../core/styles/composes.css';
-  flex: 1 0 0;
-  padding-top: var(--golden-gap-2x);
-  border: 0;
-  border-bottom: var(--golden-gap-2x) solid transparent;
-  background-color: transparent;
-  color: var(--main-background-color);
-  cursor: default;
-  font: 16px 'Archivo Narrow', sans-serif;
-  text-align: center;
-
-  &:hover {
-    @apply --colorizing;
-  }
-}
-
-.main-active {
-  @apply --colorizing;
 }
