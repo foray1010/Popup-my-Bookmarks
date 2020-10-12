@@ -39,21 +39,16 @@ const webpackConfig: webpack.Configuration = {
           isDevelopmentBuild
             ? {
                 loader: 'style-loader',
-                options: {
-                  esModule: true,
-                },
               }
             : {
                 loader: MiniCssExtractPlugin.loader,
                 options: {
-                  esModule: true,
                   publicPath: '../',
                 },
               },
           {
             loader: 'css-loader',
             options: {
-              esModule: true,
               modules: {
                 localIdentName: '[local]_[hash:base64:5]',
               },
@@ -81,7 +76,6 @@ const webpackConfig: webpack.Configuration = {
         test: /\.(png|svg)$/,
         loader: 'file-loader',
         options: {
-          esModule: false,
           name: 'images/[name].[ext]',
         },
       },
