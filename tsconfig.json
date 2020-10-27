@@ -1,3 +1,6 @@
 {
-  "extends": "@foray1010/tsconfig"
+  "extends": "@foray1010/tsconfig",
+  "compilerOptions": {
+    "skipLibCheck": true
+  }
 }
