@@ -163,7 +163,7 @@ const webpackConfig: webpack.Configuration = {
               unsafe_symbols: true,
               unsafe_undefined: true,
             },
-            ecma: 8,
+            ecma: 2017,
           },
         }),
       ],
@@ -178,7 +178,7 @@ const webpackConfig: webpack.Configuration = {
     filename: path.join('js', '[name].js'),
   },
   plugins: [
-    ...(!isCI ? [new webpack.ProgressPlugin()] : []),
+    ...(!isCI ? [new webpack.ProgressPlugin({})] : []),
     new CleanWebpackPlugin({
       cleanStaleWebpackAssets: false,
     }),
@@ -196,7 +196,7 @@ const webpackConfig: webpack.Configuration = {
     new DuplicatePackageCheckerPlugin({
       emitError: true,
       strict: true,
-    }),
+    }) as any,
     ...appNames.map((appName) => {
       return new HtmlWebpackPlugin({
         chunks: [commonChunkName, appName],
