@@ -1155,10 +1155,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@foray1010/babel-preset@5.2.5":
-  version "5.2.5"
-  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-5.2.5.tgz#68455ecaa9369833909b607618150eab7c1cf181"
-  integrity sha512-MWmp/vOZctTXXDSE2U8XumGlOH8Q8BcixY6EeAfS8r3YvNpItLsjBgL8ZvC5wGPb00qldeFAgZaYjcm4wvSa8Q==
+"@foray1010/babel-preset@5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-5.2.6.tgz#a05b08bd7e9ee03524ef79f124a726fa738c1f44"
+  integrity sha512-rXMiqLIOfPnDMo8hnaGNZ57+soRFBSOPKlj5uk0r5mmU7dN/TO6EJA2T1zivNPzvvaHB0LNxAUrKiLO808D5eQ==
   dependencies:
     "@babel/plugin-transform-react-constant-elements" "^7.6.3"
     "@babel/plugin-transform-react-inline-elements" "^7.2.0"
@@ -1178,10 +1178,10 @@
   dependencies:
     read-pkg-up "^7.0.0"
 
-"@foray1010/eslint-config@4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-4.0.1.tgz#93f8686b8572779a7fe51ba40d2bd276e030e5c9"
-  integrity sha512-zpkk9PKX5xhJ1HD0CBbA7cVJZCn5YEYN12y64r0ZG19OlQfqghTLYmxYpZIpfqwjY4LfgcEkY7M9/wpHbADOIg==
+"@foray1010/eslint-config@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-4.1.0.tgz#2bfe7258f00222bae78adb2aa5cebd7fc27f9fa0"
+  integrity sha512-ZXRKJzBjuAYT08bq3QLLf2jWEV1cT79JkTSzsyNvULqXWpkOf8NaMJme9jJVpaHtB/B6qpx4Qm58h1GMNgjROA==
   dependencies:
     "@foray1010/common-presets-utils" "^2.1.1"
     "@typescript-eslint/eslint-plugin" "^4.0.1"
@@ -1205,11 +1205,12 @@
   dependencies:
     prettier-plugin-packagejson "^2.2.5"
 
-"@foray1010/remark-preset@3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/remark-preset/-/remark-preset-3.3.0.tgz#b4d90239a2ca30263aa93481efa8af06dea68ad0"
-  integrity sha512-S8pUzcL6tXBPCVlLgir6qcCsCpL/7S9gbg++sEf234HcCrrtBQhDuka9qiMVFmTT/rQ6gLw+dzRB8bvvxavAdg==
+"@foray1010/remark-preset@3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/remark-preset/-/remark-preset-3.4.0.tgz#fd6d9dc225bb02288dbd0ddc9e3c2ad2c0bcc5a5"
+  integrity sha512-KJQ9JvXJghDfZ9yrcE1d15OmD6IZ38WJBwPIv4x63+Cxq0CUdIE1jp5es9OsUrzt99qea+4MRG34yEaVyoDVJw==
   dependencies:
+    remark-frontmatter "^3.0.0"
     remark-lint-no-dead-urls "^1.0.2"
     remark-preset-lint-consistent "^4.0.0"
     remark-preset-lint-markdown-style-guide "^4.0.0"
@@ -7973,6 +7974,13 @@ mdast-util-from-markdown@^0.8.0:
     micromark "~2.10.0"
     parse-entities "^2.0.0"
 
+mdast-util-frontmatter@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/mdast-util-frontmatter/-/mdast-util-frontmatter-0.2.0.tgz#8bd5cd55e236c03e204a036f7372ebe9e6748240"
+  integrity sha512-FHKL4w4S5fdt1KjJCwB0178WJ0evnyyQr5kXTM3wrOVpytD0hrkvd+AOOjU9Td8onOejCkmZ+HQRT3CZ3coHHQ==
+  dependencies:
+    micromark-extension-frontmatter "^0.2.0"
+
 mdast-util-heading-style@^1.0.2:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/mdast-util-heading-style/-/mdast-util-heading-style-1.0.6.tgz#6410418926fd5673d40f519406b35d17da10e3c5"
@@ -8081,6 +8089,13 @@ methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
   integrity sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
+
+micromark-extension-frontmatter@^0.2.0:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/micromark-extension-frontmatter/-/micromark-extension-frontmatter-0.2.2.tgz#61b8e92e9213e1d3c13f5a59e7862f5ca98dfa53"
+  integrity sha512-q6nPLFCMTLtfsctAuS0Xh4vaolxSFUWUWR6PZSrXXiRy+SANGllpcqdXFv2z07l0Xz/6Hl40hK0ffNCJPH2n1A==
+  dependencies:
+    fault "^1.0.0"
 
 micromark@~2.10.0:
   version "2.10.1"
@@ -10445,6 +10460,14 @@ remark-cli@9.0.0:
     markdown-extensions "^1.1.0"
     remark "^13.0.0"
     unified-args "^8.0.0"
+
+remark-frontmatter@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/remark-frontmatter/-/remark-frontmatter-3.0.0.tgz#ca5d996361765c859bd944505f377d6b186a6ec6"
+  integrity sha512-mSuDd3svCHs+2PyO29h7iijIZx4plX0fheacJcAoYAASfgzgVIcXGYSq9GFyYocFLftQs8IOmmkgtOovs6d4oA==
+  dependencies:
+    mdast-util-frontmatter "^0.2.0"
+    micromark-extension-frontmatter "^0.2.0"
 
 remark-lint-blockquote-indentation@^2.0.0:
   version "2.0.1"
