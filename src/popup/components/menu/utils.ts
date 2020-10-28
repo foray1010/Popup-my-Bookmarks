@@ -1,5 +1,5 @@
-import * as CST from '../../../../constants'
-import type { BookmarkInfo, MenuPattern } from '../../../../types'
+import * as CST from '../../constants'
+import type { BookmarkInfo, MenuPattern } from '../../types'
 
 const getBookmarkManagePattern = (
   bookmarkInfo: BookmarkInfo,

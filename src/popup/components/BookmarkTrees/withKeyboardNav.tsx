@@ -5,7 +5,7 @@ import useAction from '../../../core/hooks/useAction'
 import { BOOKMARK_TYPES } from '../../constants'
 import { BASE_WINDOW } from '../../constants/windows'
 import type { RootState } from '../../reduxs'
-import { bookmarkCreators, menuCreators } from '../../reduxs'
+import { bookmarkCreators } from '../../reduxs'
 import {
   getClickOptionNameByEvent,
   mapOptionToOpenBookmarkProps,
@@ -18,14 +18,12 @@ import {
   useListNavigationContext,
 } from '../listNavigation/ListNavigationContext'
 import useKeyboardNav from '../listNavigation/useKeyboardNav'
+import { useMenuContext } from '../menu'
 
 export default function withKeyboardNav<P>(
   WrappedComponent: React.ComponentType<P>,
 ) {
   const KeyboardNav = (props: P) => {
-    const highlightedItemCoordinates = useSelector(
-      (state: RootState) => state.ui.highlightedItemCoordinates,
-    )
     const options = useSelector((state: RootState) => state.options)
     const trees = useSelector((state: RootState) => state.bookmark.trees)
 
@@ -33,10 +31,11 @@ export default function withKeyboardNav<P>(
       bookmarkCreators.openBookmarksInBrowser,
     )
     const openBookmarkTree = useAction(bookmarkCreators.openBookmarkTree)
-    const openMenu = useAction(menuCreators.openMenu)
     const removeNextBookmarkTrees = useAction(
       bookmarkCreators.removeNextBookmarkTrees,
     )
+
+    const { open: openMenu } = useMenuContext()
 
     const { lists } = useListNavigationContext()
     const listsRef = React.useRef(lists)
@@ -114,7 +113,16 @@ export default function withKeyboardNav<P>(
         const bookmarkInfo = treeInfo.children[highlightedIndex]
         if (!bookmarkInfo) return
 
-        openMenu(bookmarkInfo.id, highlightedItemCoordinates)
+        const offset = document
+          .querySelector(`[data-bookmarkid="${bookmarkInfo.id}"`)
+          ?.getBoundingClientRect()
+        openMenu({
+          targetId: bookmarkInfo.id,
+          positions: {
+            top: offset?.top ?? 0,
+            left: offset?.left ?? 0,
+          },
+        })
       },
     )
 

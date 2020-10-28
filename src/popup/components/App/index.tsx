@@ -5,19 +5,17 @@ import { OPTIONS } from '../../constants'
 import type { RootState } from '../../reduxs'
 import { AbsolutePositionProvider } from '../absolutePosition/AbsolutePositionContext'
 import useGlobalBodySize from '../absolutePosition/useGlobalBodySize'
+import BookmarkTrees from '../BookmarkTrees'
+import { Editor, EditorProvider } from '../editor'
 import { KeyBindingsProvider } from '../keyBindings/KeyBindingsContext'
-import App from './App'
+import { Menu, MenuProvider } from '../menu'
+import Search from '../Search'
+import classes from './app.css'
 import useGlobalEvents from './useGlobalEvents'
 
 const AppContainer = () => {
   useGlobalEvents()
 
-  const isShowEditor = useSelector((state: RootState) =>
-    Boolean(state.editor.targetId),
-  )
-  const isShowMenu = useSelector((state: RootState) =>
-    Boolean(state.menu.targetId),
-  )
   const options = useSelector((state: RootState) => state.options)
 
   const { globalBodySize } = useGlobalBodySize()
@@ -41,17 +39,25 @@ const AppContainer = () => {
   )
 
   return (
-    <App isShowEditor={isShowEditor} isShowMenu={isShowMenu} style={styles} />
+    <div className={classes.main} style={styles}>
+      <BookmarkTrees mainTreeHeader={<Search />} />
+      <Menu />
+      <Editor />
+    </div>
   )
 }
 
 const AppContainerWithProviders = () => {
   return (
-    <AbsolutePositionProvider>
-      <KeyBindingsProvider>
-        <AppContainer />
-      </KeyBindingsProvider>
-    </AbsolutePositionProvider>
+    <KeyBindingsProvider>
+      <AbsolutePositionProvider>
+        <EditorProvider>
+          <MenuProvider>
+            <AppContainer />
+          </MenuProvider>
+        </EditorProvider>
+      </AbsolutePositionProvider>
+    </KeyBindingsProvider>
   )
 }
 

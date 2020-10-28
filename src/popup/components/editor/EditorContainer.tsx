@@ -5,32 +5,34 @@ import webExtension from 'webextension-polyfill'
 import useAction from '../../../core/hooks/useAction'
 import { OPTIONS } from '../../constants'
 import { EDITOR_WINDOW } from '../../constants/windows'
+import { useGetBookmarkInfo } from '../../hooks/bookmarks'
 import type { RootState } from '../../reduxs'
-import { bookmarkCreators, editorCreators } from '../../reduxs'
+import { bookmarkCreators } from '../../reduxs'
 import AbsolutePosition from '../absolutePosition/AbsolutePosition'
 import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
 import Mask from '../Mask'
 import Editor from './Editor'
+import { useEditorContext } from './useEditor'
 
 const EditorContainer = () => {
-  const initialTitle = useSelector((state: RootState) => state.editor.title)
-  const initialUrl = useSelector((state: RootState) => state.editor.url)
-  const isAllowEditUrl = useSelector(
-    (state: RootState) => state.editor.isAllowEditUrl,
+  const { close, state } = useEditorContext()
+
+  const { data: bookmarkInfo, isLoading } = useGetBookmarkInfo(
+    state.isOpen && !state.isCreating ? state.editTargetId : undefined,
   )
-  const isCreating = useSelector((state: RootState) => state.editor.isCreating)
-  const positionLeft = useSelector(
-    (state: RootState) => state.editor.positionLeft,
-  )
-  const positionTop = useSelector(
-    (state: RootState) => state.editor.positionTop,
-  )
-  const targetId = useSelector((state: RootState) => state.editor.targetId)
+  const [initialTitle, setInitialTitle] = React.useState('')
+  const [initialUrl, setInitialUrl] = React.useState('')
+  React.useEffect(() => {
+    if (bookmarkInfo) {
+      setInitialTitle(bookmarkInfo.title)
+      setInitialUrl(bookmarkInfo.url ?? '')
+    }
+  }, [bookmarkInfo])
+
   const width = useSelector(
     (state: RootState) => state.options[OPTIONS.SET_WIDTH],
   )
 
-  const closeEditor = useAction(editorCreators.closeEditor)
   const createBookmarkAfterId = useAction(
     bookmarkCreators.createBookmarkAfterId,
   )
@@ -38,34 +40,40 @@ const EditorContainer = () => {
 
   const handleConfirm = React.useCallback(
     (title: string, url: string) => {
-      if (targetId) {
-        if (isCreating) {
-          createBookmarkAfterId(targetId, title, url)
-        } else {
-          editBookmark(targetId, title, url)
-        }
+      if (!state.isOpen) return
+
+      if (state.isCreating) {
+        createBookmarkAfterId(state.createAfterId, title, url)
+      } else {
+        editBookmark(state.editTargetId, title, url)
       }
-      closeEditor()
+
+      close()
     },
-    [closeEditor, createBookmarkAfterId, editBookmark, isCreating, targetId],
+    [close, createBookmarkAfterId, editBookmark, state],
   )
+
+  if (!state.isOpen || isLoading) return null
 
   return (
     <>
-      <Mask opacity={0.3} onClick={closeEditor} />
-      <AbsolutePosition positionLeft={positionLeft} positionTop={positionTop}>
+      <Mask opacity={0.3} onClick={close} />
+      <AbsolutePosition
+        positionLeft={state.positions.left}
+        positionTop={state.positions.top}
+      >
         <KeyBindingsWindow windowId={EDITOR_WINDOW}>
           <Editor
             header={
-              isAllowEditUrl
+              state.isAllowedToEditUrl
                 ? webExtension.i18n.getMessage('edit')
                 : webExtension.i18n.getMessage('rename')
             }
             initialTitle={initialTitle}
             initialUrl={initialUrl}
-            isAllowEditUrl={isAllowEditUrl}
+            isAllowedToEditUrl={state.isAllowedToEditUrl}
             width={width ?? 0}
-            onCancel={closeEditor}
+            onCancel={close}
             onConfirm={handleConfirm}
           />
         </KeyBindingsWindow>

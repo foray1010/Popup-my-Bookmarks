@@ -10,18 +10,12 @@ import type { Options, OptionsConfig } from '../core/types/options'
 import { getOptionsConfig, renderToBody } from '../core/utils'
 import App from './components/App'
 import { rootReducer, rootSaga } from './reduxs'
-import type { LocalStorage } from './types/localStorage'
 
 const main = async (): Promise<void> => {
-  const [localStorage, options, optionsConfig] = await Promise.all<
-    LocalStorage,
+  const [options, optionsConfig] = await Promise.all<
     Partial<Options>,
     OptionsConfig
-  >([
-    webExtension.storage.local.get(),
-    webExtension.storage.sync.get(),
-    getOptionsConfig(),
-  ])
+  >([webExtension.storage.sync.get(), getOptionsConfig()])
 
   // if missing option, open options page to init options
   const missingOptionNames = (Object.keys(optionsConfig) as OPTIONS[]).filter(
@@ -36,7 +30,6 @@ const main = async (): Promise<void> => {
     rootReducer,
     rootSaga,
     preloadedState: {
-      lastPositions: localStorage.lastPositions ?? [],
       options,
     },
   })

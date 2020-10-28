@@ -11,7 +11,7 @@ interface Props {
   header: string
   initialTitle: string
   initialUrl: string
-  isAllowEditUrl: boolean
+  isAllowedToEditUrl: boolean
   onCancel: () => void
   onConfirm: (title: string, url: string) => void
   width: number
@@ -50,7 +50,7 @@ const Editor = ({ onConfirm, ...props }: Props) => {
         ref={register}
         className={classes.input}
         defaultValue={props.initialUrl}
-        hidden={!props.isAllowEditUrl}
+        hidden={!props.isAllowedToEditUrl}
         name='url'
       />
 
