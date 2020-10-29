@@ -21,13 +21,6 @@ const BookmarkRowWithRef = React.forwardRef(function BookmarkRow(
   props: Props,
   setRef: React.Ref<HTMLDivElement>,
 ) {
-  const iconStyles: Record<string, string> = React.useMemo(
-    () => ({
-      '--iconSize': `${props.iconSize}px`,
-    }),
-    [props.iconSize],
-  )
-
   return (
     <div
       ref={setRef}
@@ -49,8 +42,9 @@ const BookmarkRowWithRef = React.forwardRef(function BookmarkRow(
         <LazyImage
           alt={props.title}
           className={classes.icon}
+          height={props.iconSize}
           src={props.iconUrl}
-          style={iconStyles}
+          width={props.iconSize}
         />
       )}
       <div className={classes.title}>{props.title}</div>

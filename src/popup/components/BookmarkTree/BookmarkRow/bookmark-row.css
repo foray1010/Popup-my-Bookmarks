@@ -41,7 +41,6 @@
 }
 
 .icon {
-  width: var(--iconSize);
   flex-shrink: 0;
   margin-right: var(--golden-gap-2x);
 }
