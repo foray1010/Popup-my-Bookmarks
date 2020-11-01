@@ -36,7 +36,7 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-redux": "7.2.2",
-    "react-window": "1.8.5",
+    "react-window": "1.8.6",
     "redux": "4.0.5",
     "redux-saga": "1.1.3",
     "typeface-archivo-narrow": "1.1.13",
