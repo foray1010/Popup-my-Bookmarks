@@ -1,5 +1,6 @@
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
@@ -119,7 +120,18 @@ const webpackConfig: webpack.Configuration = {
   },
   optimization: {
     ...(isProductionBuild && {
+      minimize: true,
       minimizer: [
+        new CssMinimizerPlugin({
+          minimizerOptions: {
+            preset: [
+              'cssnano-preset-default',
+              {
+                discardComments: { removeAll: true },
+              },
+            ],
+          },
+        }),
         new TerserPlugin({
           extractComments: false,
           terserOptions: {

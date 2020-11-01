@@ -4,8 +4,3 @@ plugins:
   postcss-normalize: {}
   postcss-preset-env:
     stage: 0
-  cssnano:
-    preset:
-      - 'cssnano-preset-default'
-      - discardComments:
-          removeAll: true
