@@ -1,7 +1,7 @@
 .main {
   composes: no-text-overflow from '../../../core/styles/composes.css';
   box-sizing: border-box;
-  padding: var(--golden-gap 0);
+  padding: var(--golden-gap);
   margin: var(--golden-gap-2x);
   color: var(--main-font-color);
   cursor: default;
