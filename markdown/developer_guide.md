@@ -37,9 +37,6 @@
 
    To build a temporary folder `build/development` for loading unpacked extension
 
-   - ES2015-2017 JavaScript to ES5 JavaScript by [Babel](https://github.com/babel/babel)
-   - CSS4 to CSS3 by [postcss-cssnext](https://github.com/MoOx/postcss-cssnext)
-
 1. lint
 
    ```sh
@@ -47,10 +44,6 @@
    ```
 
    To lint if all files follow our linter config
-
-   - ES2015-2017 JavaScript code by [ESLint](https://github.com/eslint/eslint)
-   - flowtype by [flow](https://github.com/facebook/flow)
-   - CSS4 code by [Stylelint](https://github.com/stylelint/stylelint)
 
 1. md
 
