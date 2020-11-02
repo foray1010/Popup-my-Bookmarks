@@ -125,6 +125,6 @@
     "zip-webpack-plugin": "3.0.0"
   },
   "engines": {
-    "node": ">=12.13"
+    "node": ">=14.15"
   }
 }
