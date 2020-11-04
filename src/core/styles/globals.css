@@ -17,6 +17,9 @@
   --main-color4: #f03e3e;
   --main-color5: #8d6e63;
   --main-font-color: #212529;
+
+  background-color: var(--main-background-color);
+  color: var(--main-font-color);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -44,10 +47,4 @@
 
 :global(body) {
   margin: 0;
-  background-color: var(--main-background-color);
-  color: var(--main-font-color);
-}
-
-:global([hidden]) {
-  display: none !important;
 }
