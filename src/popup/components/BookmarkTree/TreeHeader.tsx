@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import Button from '../../../core/components/baseItems/Button'
+import { ReactComponent as Cross } from '../../images/cross.svg'
 import classes from './tree-header.css'
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 const TreeHeader = (props: Props) => (
   <header className={classes.main}>
     <h1 className={classes.title}>{props.title}</h1>
-    <Button className={classes.close} tabIndex={-1} onClick={props.onClose} />
+    <Cross className={classes.close} onClick={props.onClose} />
   </header>
 )
 

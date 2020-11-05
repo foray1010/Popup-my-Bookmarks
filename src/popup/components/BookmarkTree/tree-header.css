@@ -3,43 +3,21 @@
 }
 
 .close {
-  position: relative;
-  width: var(--tree-header-height);
-  height: var(--tree-header-height);
+  height: 100%;
+  box-sizing: border-box;
   flex-shrink: 0; /* don't push me out of view when title is too long */
-  border: 0;
-  background-color: transparent;
+  padding: 6px;
+  color: var(--main-background-color);
 
   &:hover {
     background-color: var(--main-color4);
-  }
-
-  &::before,
-  &::after {
-    position: absolute;
-    background-color: var(--main-background-color);
-    content: '';
-    transform: rotate(45deg);
-  }
-
-  &::before {
-    top: 9px;
-    left: 14px;
-    width: 2px;
-    height: 12px;
-  }
-
-  &::after {
-    top: 14px;
-    left: 9px;
-    width: 12px;
-    height: 2px;
   }
 }
 
 .main {
   display: flex;
   height: var(--tree-header-height);
+  justify-content: space-between;
   margin-bottom: var(--golden-gap);
   background-color: currentColor;
 }
@@ -48,7 +26,6 @@
   composes: no-text-overflow from '../../../core/styles/composes.css';
   padding: 0 var(--golden-gap-2x);
   margin: 0;
-  margin-right: auto;
   color: var(--main-background-color);
   cursor: default;
   font: 22px 'Archivo Narrow', simhei, sans-serif;
