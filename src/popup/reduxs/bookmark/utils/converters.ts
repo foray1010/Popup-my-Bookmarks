@@ -1,13 +1,13 @@
 import * as R from 'ramda'
 
 import * as CST from '../../../constants'
-import folderIcon from '../../../images/folder.svg'
+import folderIconUrl from '../../../images/folder.svg'
 import type { BookmarkInfo } from '../../../types'
 
 export const getIconUrl = (bookmarkInfo: BookmarkInfo): string => {
   if (bookmarkInfo.type === CST.BOOKMARK_TYPES.BOOKMARK)
     return `chrome://favicon/${bookmarkInfo.url}`
-  if (bookmarkInfo.type === CST.BOOKMARK_TYPES.FOLDER) return folderIcon
+  if (bookmarkInfo.type === CST.BOOKMARK_TYPES.FOLDER) return folderIconUrl
   return ''
 }
 

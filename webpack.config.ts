@@ -74,7 +74,7 @@ const webpackConfig: webpack.Configuration = {
         },
       },
       {
-        test: /\.(png|svg)$/,
+        test: /\.png$/,
         loader: 'file-loader',
         options: {
           name: 'images/[name].[ext]',
@@ -83,7 +83,7 @@ const webpackConfig: webpack.Configuration = {
       ...(isDevelopmentBuild
         ? [
             {
-              test: /\/core\/.+\.(png|svg)$/,
+              test: /\/core\/.+\.png$/,
               loader: 'image-process-loader',
               options: {
                 greyscale: true,
@@ -91,6 +91,18 @@ const webpackConfig: webpack.Configuration = {
             },
           ]
         : []),
+      {
+        test: /\.svg$/,
+        use: [
+          '@svgr/webpack',
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'images/[name].[ext]',
+            },
+          },
+        ],
+      },
       {
         test: /\/manifest\.yml$/,
         use: [

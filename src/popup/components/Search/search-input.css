@@ -1,8 +1,9 @@
 .cancel-icon {
-  width: 14px;
-  height: 14px;
+  height: 100%;
+  box-sizing: border-box;
   flex-shrink: 0;
-  padding: 5px;
+  padding: var(--golden-gap-2x);
+  color: var(--highlight-level4);
 }
 
 .main {
@@ -14,11 +15,12 @@
 }
 
 .search-icon {
-  width: 14px;
-  height: 14px;
+  height: 100%;
+  box-sizing: border-box;
   flex-shrink: 0;
-  padding: 4px;
+  padding: var(--golden-gap-2x);
   padding-right: 3px;
+  color: var(--highlight-level4);
 }
 
 .search-input {
