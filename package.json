@@ -17,7 +17,7 @@
     "prettier": "prettier --ignore-path=node_modules/@foray1010/prettier-config/prettierignore",
     "remark": "remark --frail --ignore-path=node_modules/@foray1010/remark-preset/remarkignore --ignore-path-resolve-from=cwd",
     "stylelint": "stylelint --ignore-path=node_modules/@foray1010/stylelint-config/stylelintignore",
-    "test": "cross-env NODE_ENV=test jest --config .jestrc.json",
+    "test": "cross-env NODE_ENV=test jest",
     "type:check": "tsc",
     "type:coverage": "type-coverage --strict --at-least 99 --detail --ignore-catch"
   },
