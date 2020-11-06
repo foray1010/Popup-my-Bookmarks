@@ -1,14 +1,15 @@
-:root {
-  --desc-width: 280px;
-  --img-width: 170px;
-  --main-width: calc(var(--desc-width) + var(--img-width));
+.container {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--golden-gap-4x);
+  background-color: var(--highlight-level1);
 }
 
 .desc {
-  width: var(--desc-width);
   line-height: 1.5;
 
   & > ol {
+    display: inline;
     padding: 0;
     margin: 0;
     list-style-position: inside;
@@ -16,14 +17,10 @@
 }
 
 .img {
-  width: var(--img-width);
+  padding-right: 20px;
 }
 
 .main {
   display: flex;
-  width: var(--main-width);
-  align-items: center;
-  padding: var(--golden-gap-4x);
-  margin: var(--golden-gap-4x) auto;
-  background-color: var(--highlight-level1);
+  justify-content: center;
 }
