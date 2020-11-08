@@ -10,7 +10,7 @@ const paypalUrl =
 
 const Donate = () => (
   <footer className={classes.main}>
-    <p className={classes.container}>
+    <span className={classes.container}>
       <span className={classes.img}>
         <ExternalLink href={paypalUrl}>
           <LazyImage alt='donate' src={donateIcon} />
@@ -42,7 +42,7 @@ const Donate = () => (
           </li>
         </ol>
       </span>
-    </p>
+    </span>
   </footer>
 )
 
