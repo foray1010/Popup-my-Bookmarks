@@ -1,7 +1,6 @@
 .main {
   position: relative;
   display: inline-block;
-  height: var(--input-height);
   border: 1px solid var(--main-color1);
 }
 
@@ -15,7 +14,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(100% - var(--input-height));
+  width: 85%;
   box-sizing: border-box;
   background-color: var(--main-background-color);
 }

@@ -4,12 +4,11 @@
 }
 
 .input {
-  & > input[type='number'],
-  & > input[type='text'],
-  & > select {
-    height: var(--input-height);
-    box-sizing: border-box;
+  & input[type='number'],
+  & input[type='text'],
+  & select {
     padding: var(--golden-gap-2x) var(--golden-gap-4x);
     border-color: var(--main-color1);
+    font-size: 1em;
   }
 }
