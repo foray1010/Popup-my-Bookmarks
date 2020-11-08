@@ -7,7 +7,7 @@
   background-color: transparent;
   color: var(--main-background-color);
   cursor: default;
-  font: 16px 'Archivo Narrow', sans-serif;
+  font: 1.5em 'Archivo Narrow', sans-serif;
   text-align: center;
 
   &:matches(:hover, .main-active) {
