@@ -101,7 +101,7 @@
     "lint-staged": "10.5.1",
     "mini-css-extract-plugin": "1.2.1",
     "npm-run-all": "4.1.5",
-    "postcss": "8.1.4",
+    "postcss": "8.1.6",
     "postcss-import": "13.0.0",
     "postcss-loader": "4.0.4",
     "postcss-normalize": "9.0.0",
