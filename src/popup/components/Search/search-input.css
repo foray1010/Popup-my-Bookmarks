@@ -1,4 +1,4 @@
-.cancel-icon {
+.icon {
   height: 100%;
   box-sizing: border-box;
   flex-shrink: 0;
@@ -7,28 +7,20 @@
 }
 
 .main {
+  --input-font-size: 1em;
+  --input-vertical-padding: var(--golden-gap-2x);
+
   display: flex;
-  height: var(--input-height);
+  height: calc(var(--input-font-size) + var(--input-vertical-padding) * 2);
   border: solid var(--highlight-level3);
   border-width: 0 0 1px;
   margin-bottom: var(--golden-gap);
 }
 
-.search-icon {
-  height: 100%;
-  box-sizing: border-box;
-  flex-shrink: 0;
-  padding: var(--golden-gap-2x);
-  padding-right: 3px;
-  color: var(--highlight-level4);
-}
-
 .search-input {
   flex-grow: 1;
-  padding: 0 var(--golden-gap);
+  padding: var(--input-vertical-padding) var(--golden-gap);
   border: 0;
-  margin-right: var(--golden-gap);
-  background-color: transparent;
-  font-size: 12px;
+  font-size: var(--input-font-size);
   outline: 0;
 }

@@ -14,7 +14,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, Props>(
   function InnerSearchInput({ onCancel, ...inputProps }: Props, ref) {
     return (
       <div className={classes.main}>
-        <Search className={classes['search-icon']} />
+        <Search className={classes.icon} />
         <Input
           ref={ref}
           inputMode='search'
@@ -23,7 +23,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, Props>(
           className={classNames(classes['search-input'], inputProps.className)}
         />
         {inputProps.value ? (
-          <Cross className={classes['cancel-icon']} onClick={onCancel} />
+          <Cross className={classes.icon} onClick={onCancel} />
         ) : null}
       </div>
     )
