@@ -86,7 +86,7 @@ const OptionItem = (props: React.ComponentProps<typeof InputItem>) => (
     <td className={classes.desc}>
       {webExtension.i18n.getMessage(props.optionName)}
     </td>
-    <td className={classes.input}>
+    <td>
       <InputItem {...props} />
     </td>
   </tr>

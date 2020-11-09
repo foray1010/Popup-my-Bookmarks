@@ -1,6 +1,7 @@
 import * as React from 'react'
 
-import Select from '../../../core/components/baseItems/Select'
+import Select from '../../../../core/components/baseItems/Select'
+import classes from './styles.css'
 
 interface Props {
   choices: Array<string | undefined>
@@ -24,7 +25,12 @@ const SelectString = ({
   )
 
   return (
-    <Select name={optionName} value={optionValue} onChange={handleChange}>
+    <Select
+      className={classes.main}
+      name={optionName}
+      value={optionValue}
+      onChange={handleChange}
+    >
       {choices.reduce<Array<React.ReactNode>>(
         (acc, optionChoice, optionChoiceIndex) => {
           if (optionChoice !== undefined) {
