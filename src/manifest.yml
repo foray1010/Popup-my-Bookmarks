@@ -7,6 +7,7 @@ offline_enabled: true
 
 default_locale: 'en'
 description: '__MSG_extDesc__'
+homepage_url: 'https://github.com/foray1010/Popup-my-Bookmarks'
 
 icons:
   16: 'require(./core/images/icon16.png)'
