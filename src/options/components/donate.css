@@ -23,4 +23,5 @@
 .main {
   display: flex;
   justify-content: center;
+  margin: var(--golden-gap-4x);
 }
