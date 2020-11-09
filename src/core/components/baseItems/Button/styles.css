@@ -4,5 +4,6 @@
   border: 0;
   background-color: var(--highlight-level1);
   color: inherit;
+  font-family: inherit;
   font-size: inherit;
 }

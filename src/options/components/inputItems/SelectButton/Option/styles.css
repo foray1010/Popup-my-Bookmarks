@@ -4,8 +4,7 @@
   border: 0;
   background-color: transparent;
   color: var(--frontground-color);
-  transition-duration: var(--transition-duration);
-  transition-property: color;
+  transition: color var(--transition-duration);
 }
 
 .item-active {
