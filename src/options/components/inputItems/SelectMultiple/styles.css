@@ -2,13 +2,10 @@
   display: inline-block;
   padding: var(--golden-gap-2x) var(--golden-gap-4x);
   border: 1px solid var(--main-color1);
+  line-height: 1.5;
+}
 
-  & > label {
-    display: flex;
-    align-items: center;
-
-    & > input {
-      margin-right: var(--golden-gap-2x);
-    }
-  }
+.checkbox {
+  margin-right: var(--golden-gap-2x);
+  vertical-align: middle;
 }

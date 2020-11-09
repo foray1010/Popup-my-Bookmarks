@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import Input from '../../../../core/components/baseItems/Input'
+import classes from './styles.css'
 
 interface Props {
   optionChoice: string
@@ -37,6 +38,7 @@ const Option = ({
     <label>
       <Input
         checked={optionValue.includes(optionChoiceIndex)}
+        className={classes.checkbox}
         name={optionName}
         type='checkbox'
         value={String(optionChoiceIndex)}
