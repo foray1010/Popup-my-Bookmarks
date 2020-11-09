@@ -4,4 +4,5 @@
   border: 1px solid var(--highlight-level2);
   background-color: transparent;
   color: var(--main-font-color);
+  font-size: 1em;
 }

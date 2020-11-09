@@ -4,7 +4,6 @@
   border: 0;
   background-color: transparent;
   color: var(--frontground-color);
-  font-size: 1em;
   transition-duration: var(--transition-duration);
   transition-property: color;
 }
