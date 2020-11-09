@@ -8,6 +8,7 @@
   box-sizing: border-box;
   align-items: center;
   padding: var(--golden-gap);
+  color: var(--main-font-color);
 
   &.drag-indicator {
     border: 1px dashed var(--highlight-level5);

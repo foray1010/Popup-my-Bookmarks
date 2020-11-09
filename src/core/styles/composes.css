@@ -9,7 +9,6 @@
 
 .list-item {
   border: 1px solid transparent;
-  color: var(--main-font-color);
   cursor: default;
 }
 

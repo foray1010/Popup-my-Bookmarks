@@ -21,6 +21,7 @@
   flex-grow: 1;
   padding: var(--input-vertical-padding) var(--golden-gap);
   border: 0;
+  color: var(--main-font-color);
   font-size: var(--input-font-size);
   outline: 0;
 }
