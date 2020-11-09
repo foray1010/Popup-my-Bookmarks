@@ -19,23 +19,25 @@ const SelectButton = ({
     optionChoices.indexOf(optionValue) * (100 / optionChoices.length)
 
   return (
-    <div className={classes.main}>
-      <div
+    <span className={classes.main}>
+      <span
         className={classes.cover}
         style={{
           left: `${leftPercentage}%`,
         }}
       />
-      {optionChoices.map((optionChoice) => (
-        <Option
-          key={String(optionChoice)}
-          optionChoice={optionChoice}
-          optionName={optionName}
-          optionValue={optionValue}
-          updatePartialOptions={updatePartialOptions}
-        />
-      ))}
-    </div>
+      <span className={classes.options}>
+        {optionChoices.map((optionChoice) => (
+          <Option
+            key={String(optionChoice)}
+            optionChoice={optionChoice}
+            optionName={optionName}
+            optionValue={optionValue}
+            updatePartialOptions={updatePartialOptions}
+          />
+        ))}
+      </span>
+    </span>
   )
 }
 

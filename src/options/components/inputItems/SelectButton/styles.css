@@ -2,21 +2,25 @@
   position: absolute;
   width: 50%;
   height: 100%;
-  background-color: currentColor;
-  transition-duration: inherit;
+  background-color: var(--frontground-color);
+  transition-duration: var(--transition-duration);
   transition-property: left;
 }
 
 .main {
+  --frontground-color: var(--main-color1);
+  --background-color: var(--main-background-color);
+  --transition-duration: 0.4s;
+
   position: relative;
-  display: flex;
-  width: 80px;
-  box-sizing: border-box;
-  align-content: stretch;
-  align-items: stretch;
-  border: 1px solid currentColor;
-  background-color: var(--main-background-color);
-  color: var(--main-color1);
+  display: inline-block;
+  border: 1px solid var(--frontground-color);
+  background-color: var(--background-color);
   text-align: center;
-  transition-duration: 0.4s;
+}
+
+.options {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
 }

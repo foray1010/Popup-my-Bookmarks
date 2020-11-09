@@ -31,7 +31,7 @@ const Option = ({
 
   const isChecked = optionValue === optionChoice
   return (
-    <label className={classes.main}>
+    <label>
       <input
         ref={inputRef}
         checked={isChecked}

@@ -1,21 +1,15 @@
 .item {
   width: 100%;
-  padding: var(--golden-gap-2x);
+  padding: var(--golden-gap-2x) var(--golden-gap-4x);
   border: 0;
   background-color: transparent;
-  color: inherit;
+  color: var(--frontground-color);
   font-size: 1em;
-  transition-duration: inherit;
+  transition-duration: var(--transition-duration);
   transition-property: color;
 }
 
 .item-active {
-  color: var(--main-background-color);
+  color: var(--background-color);
   cursor: default;
-}
-
-.main {
-  position: relative;
-  flex: 1 0 0;
-  transition-duration: inherit;
 }
