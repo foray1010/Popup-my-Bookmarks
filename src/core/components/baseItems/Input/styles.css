@@ -1,5 +1,8 @@
 .main {
   composes: focus from '../../../styles/composes.css';
+}
+
+.text-input {
   padding: var(--golden-gap-2x) var(--golden-gap-4x);
   border: 1px solid var(--highlight-level2);
   background-color: transparent;

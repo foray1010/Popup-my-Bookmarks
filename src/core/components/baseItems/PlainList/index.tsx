@@ -1,16 +1,20 @@
 import classNames from 'classnames'
 import * as React from 'react'
 
-import styles from './styles.css'
+import classes from './styles.css'
 
 type Props = React.HTMLAttributes<HTMLUListElement>
 
-const PlainListWithForwardRef = React.forwardRef<HTMLUListElement, Props>(
-  function PlainList({ className, ...props }: Props, ref) {
+const PlainList = React.forwardRef<HTMLUListElement, Props>(
+  function InnerPlainList({ className, ...props }: Props, ref) {
     return (
-      <ul {...props} ref={ref} className={classNames(styles.main, className)} />
+      <ul
+        {...props}
+        ref={ref}
+        className={classNames(classes.main, className)}
+      />
     )
   },
 )
 
-export default PlainListWithForwardRef
+export default PlainList

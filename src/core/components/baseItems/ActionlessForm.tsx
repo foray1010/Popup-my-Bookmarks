@@ -5,8 +5,8 @@ type Props = Omit<
   'action' | 'enctype' | 'method' | 'target'
 >
 
-const ActionlessFormWithForwardRef = React.forwardRef<HTMLFormElement, Props>(
-  function ActionlessForm({ onSubmit, ...props }: Props, ref) {
+const ActionlessForm = React.forwardRef<HTMLFormElement, Props>(
+  function InnerActionlessForm({ onSubmit, ...props }: Props, ref) {
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = React.useCallback(
       (evt) => {
         evt.preventDefault()
@@ -20,4 +20,4 @@ const ActionlessFormWithForwardRef = React.forwardRef<HTMLFormElement, Props>(
   },
 )
 
-export default ActionlessFormWithForwardRef
+export default ActionlessForm
