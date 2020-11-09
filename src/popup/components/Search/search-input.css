@@ -2,7 +2,7 @@
   height: 100%;
   box-sizing: border-box;
   flex-shrink: 0;
-  padding: var(--golden-gap-2x);
+  padding: var(--golden-gap);
   color: var(--highlight-level4);
 }
 
