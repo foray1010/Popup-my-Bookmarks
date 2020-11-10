@@ -50,7 +50,7 @@
     "@commitlint/cli": "11.0.0",
     "@commitlint/config-conventional": "11.0.0",
     "@foray1010/babel-preset": "5.2.6",
-    "@foray1010/eslint-config": "4.1.0",
+    "@foray1010/eslint-config": "4.1.1",
     "@foray1010/prettier-config": "4.1.1",
     "@foray1010/remark-preset": "3.4.0",
     "@foray1010/stylelint-config": "2.2.5",
