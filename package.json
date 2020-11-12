@@ -64,7 +64,7 @@
     "@types/core-js": "2.5.4",
     "@types/css-minimizer-webpack-plugin": "1.1.1",
     "@types/duplicate-package-checker-webpack-plugin": "2.1.0",
-    "@types/firefox-webext-browser": "78.0.1",
+    "@types/firefox-webext-browser": "82.0.0",
     "@types/jest": "26.0.15",
     "@types/lodash.debounce": "4.0.6",
     "@types/mini-css-extract-plugin": "1.2.1",
