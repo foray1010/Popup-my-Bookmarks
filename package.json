@@ -76,7 +76,7 @@
     "@types/react-redux": "7.1.11",
     "@types/script-ext-html-webpack-plugin": "2.1.1",
     "@types/terser-webpack-plugin": "4.2.0",
-    "@types/webpack": "4.41.24",
+    "@types/webpack": "4.41.25",
     "@types/webpack-bundle-analyzer": "3.9.0",
     "@types/zip-webpack-plugin": "3.0.1",
     "babel-loader": "8.2.1",
