@@ -1,5 +1,11 @@
 @import '@csstools/normalize.css';
 
+@font-face {
+  font-display: fallback;
+  font-family: 'Archivo Narrow';
+  src: url('~typeface-archivo-narrow/files/archivo-narrow-latin-400.woff2');
+}
+
 :root {
   --golden-gap: 2px;
   --golden-gap-2x: calc(var(--golden-gap) * 2);
@@ -31,12 +37,6 @@
     --main-background-color: #212121;
     --main-font-color: #fff;
   }
-}
-
-@font-face {
-  font-display: fallback;
-  font-family: 'Archivo Narrow';
-  src: url('~typeface-archivo-narrow/files/archivo-narrow-latin-400.woff2');
 }
 
 :global(body) {
