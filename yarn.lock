@@ -6270,10 +6270,10 @@ ieee754@^1.1.13:
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
   integrity sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
 
-ignore-sync@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/ignore-sync/-/ignore-sync-3.0.0.tgz#04b38355b1adc2a9301d096f61002284c845bbef"
-  integrity sha512-Tnwp1Rv4wLYvDoQ+OwaXWktl/xNhqgq75Ejp5THTfpusstPdbakXLma8zp2PeRa0bIvzC81nNFSg2ttsBSBI+g==
+ignore-sync@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/ignore-sync/-/ignore-sync-3.0.1.tgz#c6eb51f58fdc63f6e61d9183b5ebf36d03c87d91"
+  integrity sha512-MGRyFQX7PYAG9oGpgY4j1TCZ2ITTQ6qqNZg36PrcQCSZZvT63yL7kcXrUJLBCcWFYvncAJk9V5DXwjARmmXCCA==
   dependencies:
     axios "0.21.0"
     ignore "5.1.8"
