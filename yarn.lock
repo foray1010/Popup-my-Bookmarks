@@ -1178,10 +1178,10 @@
   dependencies:
     read-pkg-up "^7.0.0"
 
-"@foray1010/eslint-config@4.3.1":
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-4.3.1.tgz#c41b8aaa18466f965ed54a9df3a2438c7622a43c"
-  integrity sha512-YHixQrrv34QDyKFhrJWR23AKhGX9laaYI5AT2yBTU4hPiC/PiWQwUhgJBDWB0kaQOUQsAR4LLJzQY2jdnGQdDA==
+"@foray1010/eslint-config@4.4.0":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-4.4.0.tgz#cf7bf33d1fa31adb7d82957cb0b97794f7695c21"
+  integrity sha512-pz6jssdLg4QdwUYA+xf/7kNKKNINZZHboSBaEzbP+9kHQMmeP3Hqwos6BLGZpNPZCuvjY1jUQ2ZELaA94twnTQ==
   dependencies:
     "@foray1010/common-presets-utils" "^2.1.1"
     "@typescript-eslint/eslint-plugin" "^4.0.1"
@@ -1197,7 +1197,7 @@
     eslint-plugin-prettier "^3.1.1"
     eslint-plugin-react "^7.16.0"
     eslint-plugin-react-hooks "^4.1.1"
-    eslint-plugin-simple-import-sort "^5.0.0"
+    eslint-plugin-simple-import-sort "^6.0.0"
     eslint-plugin-testing-library "^3.1.0"
 
 "@foray1010/prettier-config@4.1.1":
@@ -5117,10 +5117,10 @@ eslint-plugin-redux-saga@1.2.1:
   resolved "https://registry.yarnpkg.com/eslint-plugin-redux-saga/-/eslint-plugin-redux-saga-1.2.1.tgz#fbfe7ca6bd3771a0e11639d9b7474b7b25ed5375"
   integrity sha512-3ZifHQ3N07bopp7MlpID4JxnDwCazcaPMHFP9l2TDEfSUtvr0U41xtb/e0wWlgxPgrs5cmztHWhLXn8HEPkb5Q==
 
-eslint-plugin-simple-import-sort@^5.0.0:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-simple-import-sort/-/eslint-plugin-simple-import-sort-5.0.3.tgz#9ae258ddada6efffc55e47a134afbd279eb31fc6"
-  integrity sha512-1rf3AWiHeWNCQdAq0iXNnlccnH1UDnelGgrPbjBBHE8d2hXVtOudcmy0vTF4hri3iJ0MKz8jBhmH6lJ0ZWZLHQ==
+eslint-plugin-simple-import-sort@^6.0.0:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-simple-import-sort/-/eslint-plugin-simple-import-sort-6.0.1.tgz#24a3af3b745dcd389c060db28e22d0f5e3edf86e"
+  integrity sha512-RfFnoi7fQtv7z9sZNJidIcZgWc0ZJe8uOPC3ldmatai4Igr5iDpzTmSUDEZKYm4TnrR01N0X32kfKvax7bivHQ==
 
 eslint-plugin-testing-library@^3.1.0:
   version "3.10.1"
