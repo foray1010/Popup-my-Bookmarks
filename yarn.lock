@@ -680,7 +680,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.10.4"
 
-"@babel/plugin-transform-react-constant-elements@^7.12.1", "@babel/plugin-transform-react-constant-elements@^7.6.3":
+"@babel/plugin-transform-react-constant-elements@^7.12.1":
   version "7.12.1"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-constant-elements/-/plugin-transform-react-constant-elements-7.12.1.tgz#4471f0851feec3231cc9aaa0dccde39947c1ac1e"
   integrity sha512-KOHd0tIRLoER+J+8f9DblZDa1fLGPwaaN1DI1TVHuQFOpjHV22C3CUB3obeC4fexHY9nx+fH0hQNvLFFfA1mxA==
@@ -694,7 +694,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.10.4"
 
-"@babel/plugin-transform-react-inline-elements@^7.2.0":
+"@babel/plugin-transform-react-inline-elements@^7.12.1":
   version "7.12.1"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-inline-elements/-/plugin-transform-react-inline-elements-7.12.1.tgz#f7d507200923adbbdacb107feec7ad09cefae631"
   integrity sha512-9ZuH22V68nUyLkhSJYKBqQr10d/gqmyAEeffpGXh3cRkETDUVDaY5PgX/dg8id419KoyWc5VCwsCgJVmxxAk3g==
@@ -911,7 +911,7 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/preset-react@^7.12.5", "@babel/preset-react@^7.6.3":
+"@babel/preset-react@^7.12.5":
   version "7.12.5"
   resolved "https://registry.yarnpkg.com/@babel/preset-react/-/preset-react-7.12.5.tgz#d45625f65d53612078a43867c5c6750e78772c56"
   integrity sha512-jcs++VPrgyFehkMezHtezS2BpnUlR7tQFAyesJn1vGTO9aTFZrgIQrA5YydlTwxbcjMwkFY6i04flCigRRr3GA==
@@ -1155,16 +1155,16 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@foray1010/babel-preset@5.2.6":
-  version "5.2.6"
-  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-5.2.6.tgz#a05b08bd7e9ee03524ef79f124a726fa738c1f44"
-  integrity sha512-rXMiqLIOfPnDMo8hnaGNZ57+soRFBSOPKlj5uk0r5mmU7dN/TO6EJA2T1zivNPzvvaHB0LNxAUrKiLO808D5eQ==
+"@foray1010/babel-preset@6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-6.0.1.tgz#daca8ce32e7a7119240a8a911f6778d89a0dbca5"
+  integrity sha512-65tuntq9LzXTfzJHX/1n/JSLdfsW3DcUV8Hs0Ln4d/zHjVsQfDkSbcytifmvV0B34UOa9v5zvG8OpOOP2LaGng==
   dependencies:
-    "@babel/plugin-transform-react-constant-elements" "^7.6.3"
-    "@babel/plugin-transform-react-inline-elements" "^7.2.0"
+    "@babel/plugin-transform-react-constant-elements" "^7.12.1"
+    "@babel/plugin-transform-react-inline-elements" "^7.12.1"
     "@babel/plugin-transform-runtime" "^7.9.6"
     "@babel/preset-env" "^7.11.0"
-    "@babel/preset-react" "^7.6.3"
+    "@babel/preset-react" "^7.12.5"
     "@babel/preset-typescript" "^7.10.1"
     "@foray1010/common-presets-utils" "^2.1.1"
     babel-plugin-transform-react-remove-prop-types "^0.4.24"
@@ -1233,10 +1233,10 @@
     stylelint-no-unsupported-browser-features "^4.1.4"
     stylelint-prettier "^1.1.1"
 
-"@foray1010/tsconfig@3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/tsconfig/-/tsconfig-3.0.1.tgz#ad38d893bb1d3431d4470fc097dd7efdb00c39da"
-  integrity sha512-c/RfpAyzVZQslJiY0LhDVS5GE9e6PEZVrkw0Zh8zV3BanCNMqQ0osU2+XbKvWszhAPGz/QYhElFhB0MmzQHElg==
+"@foray1010/tsconfig@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/tsconfig/-/tsconfig-4.0.0.tgz#43f21a94bf90c0de202273348af0466e57fa983e"
+  integrity sha512-LNJ0rnb61PXs0sHgen0+hh5b9G9pdt6rkDt9teaMbMgqHGUAVq5DXVRnAvP5LODrpjY/yOhPcehDjXXfLN1Djw==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
