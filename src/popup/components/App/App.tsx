@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type * as React from 'react'
 
 import BookmarkTrees from '../BookmarkTrees'
 import Editor from '../Editor'

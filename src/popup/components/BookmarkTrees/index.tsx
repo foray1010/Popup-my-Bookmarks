@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type * as React from 'react'
 import { useSelector } from 'react-redux'
 
 import { BASE_WINDOW } from '../../constants/windows'

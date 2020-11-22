@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import classes from './app.css'
 import Donate from './Donate'
 import NavBar from './NavBar'

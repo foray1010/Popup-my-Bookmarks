@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import { ReactComponent as Cross } from '../../images/cross.svg'
 import classes from './tree-header.css'
 

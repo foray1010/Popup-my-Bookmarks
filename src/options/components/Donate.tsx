@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import LazyImage from '../../core/components/baseItems/LazyImage'
 import donateIcon from '../images/btn_donateCC_LG.png'
 import classes from './donate.css'

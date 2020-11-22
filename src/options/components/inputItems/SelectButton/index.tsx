@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import Option from './Option'
 import classes from './styles.css'
 

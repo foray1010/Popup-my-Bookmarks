@@ -1,4 +1,3 @@
-import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import classes from './no-search-result.css'

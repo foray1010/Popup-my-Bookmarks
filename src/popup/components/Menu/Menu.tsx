@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type * as React from 'react'
 
 import PlainList from '../../../core/components/baseItems/PlainList'
 import type { MenuPattern } from '../../types'

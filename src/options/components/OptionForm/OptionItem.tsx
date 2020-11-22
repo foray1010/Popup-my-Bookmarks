@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import type { OptionConfig, Options } from '../../../core/types/options'

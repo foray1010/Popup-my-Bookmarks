@@ -1,4 +1,3 @@
-import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import ActionlessForm from '../../../core/components/baseItems/ActionlessForm'
