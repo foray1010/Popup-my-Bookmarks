@@ -52,9 +52,9 @@ export function* getBookmarkTree(id: string): SagaIterator<BookmarkTree> {
   return {
     children: bookmarkChildren.length
       ? bookmarkChildren
-      : ([yield call(getBookmarkInfo, CST.NO_BOOKMARK_ID_PREFIX + id)] as Array<
-          BookmarkInfo
-        >),
+      : ([
+          yield call(getBookmarkInfo, CST.NO_BOOKMARK_ID_PREFIX + id),
+        ] as Array<BookmarkInfo>),
     parent: bookmarkInfo,
   }
 }
