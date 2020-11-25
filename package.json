@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/package",
   "name": "Popup-my-Bookmarks",
   "version": "7.0.1",
   "private": true,
