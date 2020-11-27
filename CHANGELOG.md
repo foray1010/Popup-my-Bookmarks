@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.1.0](https://github.com/foray1010/Popup-my-Bookmarks/compare/v7.0.1...v7.1.0) (2020-11-27)
+
+### Features
+
+- support Spanish locale (thanks cyanine) ([e4c8f01](https://github.com/foray1010/Popup-my-Bookmarks/commit/e4c8f010b68006f3adf35ea444e4b6b15580e082))
+
+### Bug Fixes
+
+- **deps:** update dependency core-js to v3.4.7 ([004c54e](https://github.com/foray1010/Popup-my-Bookmarks/commit/004c54e34bb326ed33060b647ac8613200e675f9))
+- **deps:** update dependency core-js to v3.5.0 ([491c150](https://github.com/foray1010/Popup-my-Bookmarks/commit/491c150b5b858a02e79d43c332cc5935ed89e020))
+- **deps:** update dependency core-js to v3.6.0 ([5623985](https://github.com/foray1010/Popup-my-Bookmarks/commit/56239850edfd20c8a1580093ffe1b62e3ea7f295))
+- **deps:** update dependency core-js to v3.6.1 ([0ef3338](https://github.com/foray1010/Popup-my-Bookmarks/commit/0ef333863554b698a4f25d46098a5a4db2313f67))
+- **deps:** update dependency core-js to v3.6.2 ([c1c34b6](https://github.com/foray1010/Popup-my-Bookmarks/commit/c1c34b691488d1747c4bc33513b7077cfa388f93))
+- **deps:** update dependency core-js to v3.6.4 ([ba9ecab](https://github.com/foray1010/Popup-my-Bookmarks/commit/ba9ecabedbe6bc9a5c86b121fba348297dfff478))
+- **deps:** update dependency core-js to v3.6.5 ([38b36a2](https://github.com/foray1010/Popup-my-Bookmarks/commit/38b36a228209aaade77db1f6100e0154533fc2aa))
+- **deps:** update dependency nanoid to v2.1.10 ([061841b](https://github.com/foray1010/Popup-my-Bookmarks/commit/061841b0972a501e0cd441cc088baac29ea726ae))
+- **deps:** update dependency nanoid to v2.1.11 ([e5e3a96](https://github.com/foray1010/Popup-my-Bookmarks/commit/e5e3a96d3490b55461f37d288f3d54737a5b3a0e))
+- **deps:** update dependency nanoid to v2.1.9 ([81c7ff5](https://github.com/foray1010/Popup-my-Bookmarks/commit/81c7ff52bb14c3948ce76ad8ab343ddb00db291d))
+- **deps:** update dependency ramda to v0.27.0 ([#879](https://github.com/foray1010/Popup-my-Bookmarks/issues/879)) ([9d58ac7](https://github.com/foray1010/Popup-my-Bookmarks/commit/9d58ac7a01c8590e4fd418a7e184dd8fe5be0b35))
+- **deps:** update dependency react-redux to v7.2.0 ([ec97a94](https://github.com/foray1010/Popup-my-Bookmarks/commit/ec97a94257dcc66d0cc46689a47e57c2aac17568))
+- **deps:** update dependency redux to v4.0.5 ([#824](https://github.com/foray1010/Popup-my-Bookmarks/issues/824)) ([8e65165](https://github.com/foray1010/Popup-my-Bookmarks/commit/8e651656f4d78caafbc6260d785aa3e0117276ea))
+- **deps:** update dependency typeface-archivo-narrow to v1 ([#833](https://github.com/foray1010/Popup-my-Bookmarks/issues/833)) ([1de2204](https://github.com/foray1010/Popup-my-Bookmarks/commit/1de2204eb5218210e72068739d1b6d87992b57ef))
+- **deps:** update dependency use-typed-event-listener to v2 ([408b4fd](https://github.com/foray1010/Popup-my-Bookmarks/commit/408b4fd1e5e885cf0a403e5628d13a1ca4a68890))
+- **deps:** update dependency webextension-polyfill to v0.6.0 ([0c3c290](https://github.com/foray1010/Popup-my-Bookmarks/commit/0c3c290342fe2fdc6c00ac7f7f1d962e76dee165))
+- **deps:** update react monorepo to v16.13.0 ([e72c127](https://github.com/foray1010/Popup-my-Bookmarks/commit/e72c12781acdb251976896db1aaa0c2c12ee468a))
+- **deps:** update react monorepo to v16.13.1 ([7480159](https://github.com/foray1010/Popup-my-Bookmarks/commit/7480159573b0fcd686cf41771e88e155a2fed3ef))
+
 ### [7.0.1](https://github.com/foray1010/Popup-my-Bookmarks/compare/v7.0.0...v7.0.1) (2019-12-03)
 
 ### Bug Fixes
