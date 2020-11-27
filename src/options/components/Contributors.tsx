@@ -6,15 +6,15 @@ const contributors = {
   Developer: ['foray1010'],
   Tester: ['David Bryant'],
   'Dutch Translator': ['Marzas'],
-  'French Translator': ['foXaCe', 'Alexis Schapman'],
+  'French Translators': ['foXaCe', 'Alexis Schapman'],
   'German Translator': ['Gürkan ZENGIN'],
   'Italian Translator': ['Giacomo Fabio Leone'],
   'Korean Translator': ['zenyr'],
   'Norwegian Bokmål Translator': ['Bjorn Tore Asheim'],
-  'Russian Translator': ['kameo', 'Oleg K,'],
+  'Russian Translators': ['kameo', 'Oleg K,'],
   'Spanish Translator': ['cyanine'],
   'Vietnamese Translator': ['Anh Phan'],
-  Donor: [
+  Sponsors: [
     'Abtin Samadi',
     'Drake Roman',
     'j**************r@u******.nl',
