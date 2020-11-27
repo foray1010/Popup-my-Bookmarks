@@ -12,6 +12,7 @@ const contributors = {
   'Korean Translator': ['zenyr'],
   'Norwegian Bokmål Translator': ['Bjorn Tore Asheim'],
   'Russian Translator': ['kameo', 'Oleg K,'],
+  'Spanish Translator': ['cyanine'],
   'Vietnamese Translator': ['Anh Phan'],
   Donor: [
     'Abtin Samadi',
