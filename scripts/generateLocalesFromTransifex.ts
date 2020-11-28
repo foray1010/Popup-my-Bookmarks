@@ -76,6 +76,10 @@ const main = async () => {
           mappedLanguage = 'nb'
           break
 
+        case 'es_ES':
+          mappedLanguage = 'es'
+          break
+
         default:
           mappedLanguage = availableLanguage
       }

@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.1.1](https://github.com/foray1010/Popup-my-Bookmarks/compare/v7.1.0...v7.1.1) (2020-11-27)
+
+### Bug Fixes
+
+- chrome does not show spanish translation ([123710b](https://github.com/foray1010/Popup-my-Bookmarks/commit/123710b271e1f61950cb76681df9edafa329723e))
+
+## [7.1.0](https://github.com/foray1010/Popup-my-Bookmarks/compare/v7.0.1...v7.1.0) (2020-11-27)
+
+### Features
+
+- support Spanish locale (thanks cyanine) ([e4c8f01](https://github.com/foray1010/Popup-my-Bookmarks/commit/e4c8f010b68006f3adf35ea444e4b6b15580e082))
+
 ### [7.0.1](https://github.com/foray1010/Popup-my-Bookmarks/compare/v7.0.0...v7.0.1) (2019-12-03)
 
 ### Bug Fixes
