@@ -144,7 +144,7 @@ const webpackConfig: webpack.Configuration = {
             ],
           },
         }),
-        new TerserPlugin({
+        (new TerserPlugin({
           extractComments: false,
           terserOptions: {
             compress: {
@@ -165,7 +165,7 @@ const webpackConfig: webpack.Configuration = {
             },
             ecma: 2017,
           },
-        }),
+        }) as unknown) as webpack.WebpackPluginInstance,
       ],
     }),
     splitChunks: {
@@ -196,7 +196,7 @@ const webpackConfig: webpack.Configuration = {
     new DuplicatePackageCheckerPlugin({
       emitError: true,
       strict: true,
-    }) as any,
+    }) as webpack.WebpackPluginInstance,
     ...appNames.map((appName) => {
       return new HtmlWebpackPlugin({
         chunks: [commonChunkName, appName],
