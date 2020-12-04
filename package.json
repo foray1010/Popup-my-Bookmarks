@@ -82,7 +82,7 @@
     "chrome-manifest-loader": "0.3.0",
     "clean-webpack-plugin": "3.0.0",
     "copy-webpack-plugin": "6.3.2",
-    "cross-env": "7.0.2",
+    "cross-env": "7.0.3",
     "css-loader": "5.0.1",
     "css-minimizer-webpack-plugin": "1.1.5",
     "duplicate-package-checker-webpack-plugin": "3.0.0",
