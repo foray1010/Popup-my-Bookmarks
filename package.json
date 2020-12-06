@@ -31,7 +31,7 @@
     "classnames": "2.2.6",
     "constate": "3.1.0",
     "lodash.debounce": "4.0.8",
-    "nanoid": "3.1.18",
+    "nanoid": "3.1.20",
     "ramda": "0.27.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
