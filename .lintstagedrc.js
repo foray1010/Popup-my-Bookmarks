@@ -4,7 +4,7 @@ module.exports = {
   '*.{cjs,js,mjs,ts,tsx}': [
     'yarn prettier --write',
     'yarn eslint --fix',
-    'jest --bail --findRelatedTests',
+    'yarn test --findRelatedTests',
   ],
   '*.css': ['yarn prettier --write', 'yarn stylelint --fix'],
   '*.{json,yaml,yml}': 'yarn prettier --write',
