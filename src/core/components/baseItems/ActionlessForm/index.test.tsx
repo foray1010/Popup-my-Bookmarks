@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import ActionlessForm from '../ActionlessForm'
+import ActionlessForm from '.'
 
 describe('ActionlessForm', () => {
   it('should prevent default form submit action', () => {
@@ -13,11 +13,11 @@ describe('ActionlessForm', () => {
 
     render(
       <ActionlessForm onSubmit={handleSubmit}>
-        <button type='submit' />
+        <button type='submit'>submit</button>
       </ActionlessForm>,
     )
 
-    userEvent.click(screen.getByRole('button'))
+    userEvent.click(screen.getByRole('button', { name: 'submit' }))
 
     expect(handleSubmit).toBeCalledWith(
       expect.objectContaining({
