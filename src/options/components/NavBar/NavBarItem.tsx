@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import classNames from 'clsx'
 import * as React from 'react'
 
 import Button from '../../../core/components/baseItems/Button'
