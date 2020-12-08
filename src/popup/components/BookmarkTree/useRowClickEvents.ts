@@ -4,12 +4,13 @@ import { useSelector } from 'react-redux'
 import useAction from '../../../core/hooks/useAction'
 import { BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS } from '../../constants'
 import type { RootState } from '../../reduxs'
-import { bookmarkCreators, menuCreators } from '../../reduxs'
+import { bookmarkCreators } from '../../reduxs'
 import type { BookmarkInfo, BookmarkTree } from '../../types'
 import {
   getClickOptionNameByEvent,
   mapOptionToOpenBookmarkProps,
 } from '../../utils/clickBookmarkUtils'
+import { useMenuContext } from '../menu'
 
 export default function useRowClickEvents({
   treeInfo,
@@ -22,8 +23,9 @@ export default function useRowClickEvents({
     bookmarkCreators.openBookmarksInBrowser,
   )
   const openFolderInBrowser = useAction(bookmarkCreators.openFolderInBrowser)
-  const openMenu = useAction(menuCreators.openMenu)
   const toggleBookmarkTree = useAction(bookmarkCreators.toggleBookmarkTree)
+
+  const { open: openMenu } = useMenuContext()
 
   return React.useMemo(() => {
     const handleRowMiddleClick = (bookmarkInfo: BookmarkInfo) => {
@@ -47,9 +49,12 @@ export default function useRowClickEvents({
       bookmarkInfo: BookmarkInfo,
       evt: React.MouseEvent,
     ) => {
-      openMenu(bookmarkInfo.id, {
-        positionLeft: evt.clientX,
-        positionTop: evt.clientY,
+      openMenu({
+        targetId: bookmarkInfo.id,
+        positions: {
+          top: evt.clientY,
+          left: evt.clientX,
+        },
       })
     }
 

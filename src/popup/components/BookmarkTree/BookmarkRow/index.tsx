@@ -1,9 +1,7 @@
 import classNames from 'clsx'
 import * as React from 'react'
 
-import useAction from '../../../../core/hooks/useAction'
 import * as CST from '../../../constants'
-import { uiCreators } from '../../../reduxs'
 import type { BookmarkInfo } from '../../../types'
 import DragAndDropConsumer, {
   ResponseEvent,
@@ -41,21 +39,6 @@ const BookmarkRowContainer = ({
   onMouseLeave,
   ...restProps
 }: Props) => {
-  const setHighlightedItemCoordinates = useAction(
-    uiCreators.setHighlightedItemCoordinates,
-  )
-
-  const bookmarkRowRef = React.useRef<HTMLDivElement>(null)
-  React.useEffect(() => {
-    if (isHighlighted && bookmarkRowRef.current) {
-      const offset = bookmarkRowRef.current.getBoundingClientRect()
-      setHighlightedItemCoordinates({
-        positionLeft: offset.left,
-        positionTop: offset.top,
-      })
-    }
-  }, [isHighlighted, setHighlightedItemCoordinates])
-
   const tooltip = useTooltip({
     isSearching: restProps.isSearching,
     isShowTooltip: restProps.isShowTooltip,
@@ -84,7 +67,11 @@ const BookmarkRowContainer = ({
   ])
 
   return (
-    <li className={restProps.className} style={restProps.style}>
+    <li
+      className={restProps.className}
+      data-bookmarkid={bookmarkInfo.id}
+      style={restProps.style}
+    >
       <DragAndDropConsumer
         disableDrag={
           restProps.isDisableDragAndDrop ||
@@ -97,7 +84,6 @@ const BookmarkRowContainer = ({
         onDragStart={restProps.onDragStart}
       >
         <BookmarkRow
-          ref={bookmarkRowRef}
           className={classNames(classes['full-height'], {
             [classes['root-folder']]: bookmarkInfo.isRoot,
             [classes['drag-indicator']]:

@@ -1,30 +1,46 @@
 import type * as React from 'react'
-import { useSelector } from 'react-redux'
+import webExtension from 'webextension-polyfill'
 
-import useAction from '../../../core/hooks/useAction'
-import type { RootState } from '../../reduxs'
-import { navigationCreators } from '../../reduxs'
-import NavBar from './NavBar'
+import { NAV_MODULE } from '../../constants'
+import { useNavigationContext } from '../navigationContext'
+import classes from './nav-bar.css'
+import NavBarItem from './NavBarItem'
 
-type Props = Omit<
-  React.ComponentProps<typeof NavBar>,
-  'selectedNavModule' | 'switchNavModule'
->
+const navBarItemInfos = [
+  {
+    navModule: NAV_MODULE.GENERAL,
+    title: webExtension.i18n.getMessage('general'),
+  },
+  {
+    navModule: NAV_MODULE.USER_INTERFACE,
+    title: webExtension.i18n.getMessage('userInterface'),
+  },
+  {
+    navModule: NAV_MODULE.CONTROL,
+    title: webExtension.i18n.getMessage('control'),
+  },
+  {
+    navModule: NAV_MODULE.CONTRIBUTORS,
+    title: webExtension.i18n.getMessage('contributors'),
+  },
+]
 
-const NavBarContainer = (props: Props) => {
-  const selectedNavModule = useSelector(
-    (state: RootState) => state.navigation.selectedNavModule,
-  )
-
-  const switchNavModule = useAction(navigationCreators.switchNavModule)
+const NavBar = () => {
+  const { selectedNavModule, switchNavModule } = useNavigationContext()
 
   return (
-    <NavBar
-      {...props}
-      selectedNavModule={selectedNavModule}
-      switchNavModule={switchNavModule}
-    />
+    <nav className={classes.main}>
+      {navBarItemInfos.map(({ navModule, title }) => (
+        <NavBarItem
+          key={navModule}
+          isActive={navModule === selectedNavModule}
+          navModule={navModule}
+          switchNavModule={switchNavModule}
+          title={title}
+        />
+      ))}
+    </nav>
   )
 }
 
-export default NavBarContainer
+export default NavBar

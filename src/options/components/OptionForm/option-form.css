@@ -10,3 +10,19 @@
     }
   }
 }
+
+.item-desc {
+  overflow: hidden;
+  white-space: no-wrap;
+}
+
+.item-input {
+  & > input[type='number'],
+  & > input[type='text'],
+  & > select {
+    height: var(--input-height);
+    box-sizing: border-box;
+    padding: var(--golden-gap-2x) var(--golden-gap-4x);
+    border-color: var(--main-color1);
+  }
+}

@@ -6,7 +6,7 @@ import { useKeyBindingsContext } from './KeyBindingsContext'
 
 const useKeyBindingsEvent = (
   meta: KeyBindingMeta,
-  callback: (evt: KeyboardEvent) => void,
+  callback: (evt: KeyboardEvent) => void | Promise<void>,
 ) => {
   const { addEventListener, removeEventListener } = useKeyBindingsContext()
 
@@ -15,7 +15,10 @@ const useKeyBindingsEvent = (
 
   useDeepCompareEffect(() => {
     const wrappedCallback = (evt: KeyboardEvent) => {
-      callbackRef.current(evt)
+      const maybePromise = callbackRef.current(evt)
+      if (maybePromise !== undefined) {
+        maybePromise.catch(console.error)
+      }
     }
 
     addEventListener(meta, wrappedCallback)

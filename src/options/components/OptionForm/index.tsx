@@ -1,42 +1,35 @@
 import * as React from 'react'
-import { useSelector } from 'react-redux'
 
-import useAction from '../../../core/hooks/useAction'
+import { useDeleteOptions, useUpdateOptions } from '../../../core/hooks/options'
 import type { OptionsConfig } from '../../../core/types/options'
 import { getOptionsConfig } from '../../../core/utils'
 import { OPTION_TABLE_MAP } from '../../constants'
-import type { RootState } from '../../reduxs'
-import { optionsCreators } from '../../reduxs'
+import useOptionsWithDefaultValues from '../../hooks/useOptionsWithDefaultValues'
+import { useNavigationContext } from '../navigationContext'
 import OptionForm from './OptionForm'
 
 const OptionFormContainer = () => {
-  const [optionsConfig, setOptionsConfig] = React.useState<
-    OptionsConfig | undefined
-  >()
+  const { selectedNavModule } = useNavigationContext()
 
-  const options = useSelector((state: RootState) => state.options)
-  const selectedOptionFormMap = useSelector(
-    (state: RootState) => OPTION_TABLE_MAP[state.navigation.selectedNavModule],
-  )
+  const options = useOptionsWithDefaultValues()
 
-  const resetToDefaultOptions = useAction(optionsCreators.resetToDefaultOptions)
-  const saveOptions = useAction(optionsCreators.saveOptions)
-  const updatePartialOptions = useAction(optionsCreators.updatePartialOptions)
+  const [deleteOptions] = useDeleteOptions()
+  const [updateOptions] = useUpdateOptions()
 
+  const [optionsConfig, setOptionsConfig] = React.useState<OptionsConfig>()
   React.useEffect(() => {
     getOptionsConfig().then(setOptionsConfig).catch(console.error)
   }, [])
 
-  if (!optionsConfig) return null
+  if (!options || !optionsConfig) return null
 
   return (
     <OptionForm
-      options={options}
+      defaultValues={options}
       optionsConfig={optionsConfig}
-      resetToDefaultOptions={resetToDefaultOptions}
-      saveOptions={saveOptions}
-      selectedOptionFormMap={selectedOptionFormMap}
-      updatePartialOptions={updatePartialOptions}
+      selectedOptionFormMap={OPTION_TABLE_MAP[selectedNavModule]}
+      onReset={deleteOptions}
+      onSubmit={updateOptions}
     />
   )
 }

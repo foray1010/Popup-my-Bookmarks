@@ -1,8 +1,1 @@
-const webExtension: Record<string, unknown> = new Proxy(
-  {},
-  {
-    get: () => webExtension,
-  },
-)
-
-export default webExtension
+export { default } from './browserExtension'

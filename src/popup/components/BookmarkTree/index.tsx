@@ -12,7 +12,6 @@ import classes from './bookmark-tree.css'
 import BookmarkTree from './BookmarkTree'
 import NoSearchResult from './NoSearchResult'
 import TreeHeader from './TreeHeader'
-import useRememberLastPositions from './useRememberLastPositions'
 import useRowClickEvents from './useRowClickEvents'
 import useRowDragEvents from './useRowDragEvents'
 import useRowHoverEvents from './useRowHoverEvents'
@@ -32,22 +31,13 @@ const useReduxProps = ({ treeId }: { treeId: string }) => {
       )
       const treeInfo = state.bookmark.trees[treeIndex]
 
-      const isRememberLastPositions = Boolean(
-        state.options[CST.OPTIONS.REMEMBER_POS],
-      )
-      const lastPosition = isRememberLastPositions
-        ? (state.lastPositions ?? []).find((tree) => tree.id === treeId)
-        : undefined
-
       return {
         iconSize: getIconSize(state.options[CST.OPTIONS.FONT_SIZE] ?? 0),
-        isRememberLastPositions,
         isSearching: Boolean(state.bookmark.searchKeyword),
         // cover the folder if it is not the top two folder
         isShowCover: state.bookmark.trees.length - treeIndex > 2,
         isShowHeader: treeIndex !== 0,
         isShowTooltip: Boolean(state.options[CST.OPTIONS.TOOLTIP]),
-        lastScrollTop: lastPosition ? lastPosition.scrollTop : undefined,
         listItemWidth: state.options[CST.OPTIONS.SET_WIDTH] ?? 0,
         rowHeight: getRowHeight(state.options[CST.OPTIONS.FONT_SIZE] ?? 0),
         treeIndex,
@@ -62,14 +52,25 @@ const useReduxProps = ({ treeId }: { treeId: string }) => {
 
 interface Props {
   treeId: string
+  scrollTop?: number
+  registerLastPosition: (index: number, id: string) => void
+  unregisterLastPosition: (id: string) => void
+  updateLastPosition: (id: string, scrollTop: number) => void
 }
-const BookmarkTreeContainer = ({ treeId }: Props) => {
+const BookmarkTreeContainer = ({
+  treeId,
+  scrollTop,
+  registerLastPosition,
+  unregisterLastPosition,
+  updateLastPosition,
+}: Props) => {
   const {
-    isRememberLastPositions,
     isSearching,
+    isShowCover,
+    isShowHeader,
     treeIndex,
     treeInfo,
-    ...reduxProps
+    ...bookmarkTreeProps
   } = useReduxProps({
     treeId,
   })
@@ -90,6 +91,14 @@ const BookmarkTreeContainer = ({ treeId }: Props) => {
     }
   }, [treeIndex, treeInfo.children.length, setItemCount, removeList])
 
+  React.useEffect(() => {
+    registerLastPosition(treeIndex, treeId)
+
+    return () => {
+      unregisterLastPosition(treeId)
+    }
+  }, [registerLastPosition, treeId, treeIndex, unregisterLastPosition])
+
   const highlightedIndex = lists.highlightedIndices.get(treeIndex)
   const highlightedId =
     highlightedIndex !== undefined
@@ -102,15 +111,7 @@ const BookmarkTreeContainer = ({ treeId }: Props) => {
   const closeNextTrees = React.useCallback(() => {
     removeNextBookmarkTrees(treeInfo.parent.id)
   }, [removeNextBookmarkTrees, treeInfo.parent.id])
-  const noRowsRenderer = React.useCallback(() => {
-    return isSearching ? <NoSearchResult /> : null
-  }, [isSearching])
 
-  const { handleScroll } = useRememberLastPositions({
-    isRememberLastPositions,
-    treeId,
-    treeIndex,
-  })
   const { handleRowAuxClick, handleRowClick } = useRowClickEvents({
     treeInfo,
   })
@@ -126,21 +127,21 @@ const BookmarkTreeContainer = ({ treeId }: Props) => {
 
   return (
     <section className={classes.main}>
-      {reduxProps.isShowHeader && (
+      {isShowHeader && (
         <TreeHeader title={treeInfo.parent.title} onClose={closeCurrentTree} />
       )}
 
       <BookmarkTree
+        {...bookmarkTreeProps}
         draggingId={activeKey}
         highlightedId={highlightedId}
-        iconSize={reduxProps.iconSize}
         isDisableDragAndDrop={isSearching}
         isSearching={isSearching}
-        isShowTooltip={reduxProps.isShowTooltip}
-        lastScrollTop={reduxProps.lastScrollTop}
-        listItemWidth={reduxProps.listItemWidth}
-        noRowsRenderer={noRowsRenderer}
-        rowHeight={reduxProps.rowHeight}
+        lastScrollTop={scrollTop}
+        noRowsRenderer={React.useCallback(
+          () => (isSearching ? <NoSearchResult /> : null),
+          [isSearching],
+        )}
         scrollToIndex={highlightedIndex}
         treeInfo={treeInfo}
         onRowAuxClick={handleRowAuxClick}
@@ -149,12 +150,15 @@ const BookmarkTreeContainer = ({ treeId }: Props) => {
         onRowDragStart={handleRowDragStart}
         onRowMouseEnter={handleRowMouseEnter}
         onRowMouseLeave={handleRowMouseLeave}
-        onScroll={handleScroll}
+        onScroll={React.useCallback<React.UIEventHandler>(
+          (evt) => {
+            updateLastPosition(treeId, evt.currentTarget.scrollTop)
+          },
+          [updateLastPosition, treeId],
+        )}
       />
 
-      {reduxProps.isShowCover && (
-        <Mask opacity={0.7} onClick={closeNextTrees} />
-      )}
+      {isShowCover && <Mask opacity={0.7} onClick={closeNextTrees} />}
     </section>
   )
 }
