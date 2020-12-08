@@ -1,15 +1,13 @@
 import constate from 'constate'
 import * as React from 'react'
 
-import { NAV_MODULE } from '../constants'
+import { RoutePath } from '../constants'
 
 function useNavigation() {
-  const [selectedNavModule, switchNavModule] = React.useState(
-    NAV_MODULE.GENERAL,
-  )
+  const [currentPath, setCurrentPath] = React.useState(RoutePath.General)
   return {
-    selectedNavModule,
-    switchNavModule,
+    currentPath,
+    setCurrentPath,
   }
 }
 

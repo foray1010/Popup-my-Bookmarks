@@ -1,22 +1,22 @@
 import * as CST from '../../core/constants'
 
-export enum NAV_MODULE {
-  CONTRIBUTORS,
-  CONTROL,
-  GENERAL,
-  USER_INTERFACE,
+export enum RoutePath {
+  Contributors,
+  Control,
+  General,
+  UserInterface,
 }
 
 export const OPTION_TABLE_MAP = {
-  [NAV_MODULE.CONTRIBUTORS]: [] as Array<CST.OPTIONS>,
-  [NAV_MODULE.CONTROL]: [
+  [RoutePath.Contributors]: [] as Array<CST.OPTIONS>,
+  [RoutePath.Control]: [
     CST.OPTIONS.CLICK_BY_LEFT,
     CST.OPTIONS.CLICK_BY_LEFT_CTRL,
     CST.OPTIONS.CLICK_BY_LEFT_SHIFT,
     CST.OPTIONS.CLICK_BY_MIDDLE,
     CST.OPTIONS.OP_FOLDER_BY,
   ],
-  [NAV_MODULE.GENERAL]: [
+  [RoutePath.General]: [
     CST.OPTIONS.DEF_EXPAND,
     CST.OPTIONS.HIDE_ROOT_FOLDER,
     CST.OPTIONS.SEARCH_TARGET,
@@ -25,7 +25,7 @@ export const OPTION_TABLE_MAP = {
     CST.OPTIONS.WARN_OPEN_MANY,
     CST.OPTIONS.REMEMBER_POS,
   ],
-  [NAV_MODULE.USER_INTERFACE]: [
+  [RoutePath.UserInterface]: [
     CST.OPTIONS.SET_WIDTH,
     CST.OPTIONS.FONT_SIZE,
     CST.OPTIONS.FONT_FAMILY,

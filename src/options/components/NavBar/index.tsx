@@ -1,46 +1,47 @@
+import classNames from 'clsx'
 import type * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import { NAV_MODULE } from '../../constants'
+import Button from '../../../core/components/baseItems/Button'
+import { RoutePath } from '../../constants'
 import { useNavigationContext } from '../navigationContext'
-import classes from './nav-bar.css'
-import NavBarItem from './NavBarItem'
+import classes from './styles.css'
 
 const navBarItemInfos = [
   {
-    navModule: NAV_MODULE.GENERAL,
+    path: RoutePath.General,
     title: webExtension.i18n.getMessage('general'),
   },
   {
-    navModule: NAV_MODULE.USER_INTERFACE,
+    path: RoutePath.UserInterface,
     title: webExtension.i18n.getMessage('userInterface'),
   },
   {
-    navModule: NAV_MODULE.CONTROL,
+    path: RoutePath.Control,
     title: webExtension.i18n.getMessage('control'),
   },
   {
-    navModule: NAV_MODULE.CONTRIBUTORS,
+    path: RoutePath.Contributors,
     title: webExtension.i18n.getMessage('contributors'),
   },
 ]
 
-const NavBar = () => {
-  const { selectedNavModule, switchNavModule } = useNavigationContext()
+export default function NavBar() {
+  const { currentPath, setCurrentPath } = useNavigationContext()
 
   return (
     <nav className={classes.main}>
-      {navBarItemInfos.map(({ navModule, title }) => (
-        <NavBarItem
-          key={navModule}
-          isActive={navModule === selectedNavModule}
-          navModule={navModule}
-          switchNavModule={switchNavModule}
-          title={title}
-        />
+      {navBarItemInfos.map(({ path, title }) => (
+        <Button
+          key={path}
+          className={classNames(classes.button, {
+            [classes.active]: path === currentPath,
+          })}
+          onClick={() => setCurrentPath(path)}
+        >
+          {title}
+        </Button>
       ))}
     </nav>
   )
 }
-
-export default NavBar

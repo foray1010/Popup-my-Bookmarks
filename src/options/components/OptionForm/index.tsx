@@ -9,7 +9,7 @@ import { useNavigationContext } from '../navigationContext'
 import OptionForm from './OptionForm'
 
 const OptionFormContainer = () => {
-  const { selectedNavModule } = useNavigationContext()
+  const { currentPath } = useNavigationContext()
 
   const options = useOptionsWithDefaultValues()
 
@@ -27,7 +27,7 @@ const OptionFormContainer = () => {
     <OptionForm
       defaultValues={options}
       optionsConfig={optionsConfig}
-      selectedOptionFormMap={OPTION_TABLE_MAP[selectedNavModule]}
+      selectedOptionFormMap={OPTION_TABLE_MAP[currentPath]}
       onReset={deleteOptions}
       onSubmit={updateOptions}
     />

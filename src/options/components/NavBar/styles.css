@@ -1,4 +1,11 @@
 .main {
+  display: flex;
+  min-width: 820px;
+  margin-bottom: var(--golden-gap-2x);
+  background-color: var(--main-color5);
+}
+
+.button {
   composes: focus from '../../../core/styles/composes.css';
   flex: 1 0 0;
   padding-top: var(--golden-gap-2x);
@@ -10,7 +17,7 @@
   font: 1.5em 'Archivo Narrow', sans-serif;
   text-align: center;
 
-  &:matches(:hover, .main-active) {
+  &:matches(:hover, .active) {
     &:nth-of-type(1) {
       border-bottom-color: var(--main-color1);
     }

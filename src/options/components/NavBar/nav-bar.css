@@ -1,6 +1,0 @@
-.main {
-  display: flex;
-  min-width: 820px;
-  margin-bottom: var(--golden-gap-2x);
-  background-color: var(--main-color5);
-}
