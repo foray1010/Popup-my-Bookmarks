@@ -35,10 +35,13 @@ export default function OptionForm(props: Props) {
                   control={control}
                   defaultValue={props.defaultValues[optionName]}
                   name={optionName}
-                  render={(inputProps) => (
+                  render={({ name, onBlur, onChange, value }) => (
                     <OptionItem
-                      {...inputProps}
+                      name={name}
                       optionConfig={props.optionsConfig[optionName]}
+                      value={value}
+                      onBlur={onBlur}
+                      onChange={onChange}
                     />
                   )}
                 />
