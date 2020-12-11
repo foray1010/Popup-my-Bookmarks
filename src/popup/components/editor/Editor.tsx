@@ -8,15 +8,15 @@ import Input from '../../../core/components/baseItems/Input'
 import classes from './editor.css'
 
 interface Props {
+  defaultTitle?: string
+  defaultUrl?: string
   header: string
-  initialTitle: string
-  initialUrl: string
   isAllowedToEditUrl: boolean
   onCancel: () => void
   onConfirm: (title: string, url: string) => void
   width: number
 }
-const Editor = ({ onConfirm, ...props }: Props) => {
+export default function Editor({ onConfirm, ...props }: Props) {
   const { register, handleSubmit } = useForm<{
     title: string
     url: string
@@ -43,13 +43,13 @@ const Editor = ({ onConfirm, ...props }: Props) => {
         ref={register}
         autoFocus
         className={classes.input}
-        defaultValue={props.initialTitle}
+        defaultValue={props.defaultTitle}
         name='title'
       />
       <Input
         ref={register}
         className={classes.input}
-        defaultValue={props.initialUrl}
+        defaultValue={props.defaultUrl}
         hidden={!props.isAllowedToEditUrl}
         name='url'
       />
@@ -61,5 +61,3 @@ const Editor = ({ onConfirm, ...props }: Props) => {
     </ActionlessForm>
   )
 }
-
-export default Editor

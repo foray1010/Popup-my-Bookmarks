@@ -48,7 +48,7 @@ const useClickMenuRow = (rowName?: string) => {
       case CST.MENU_ADD_FOLDER:
         openEditor({
           createAfterId: bookmarkInfo.id,
-          isAllowedToEditUrl: bookmarkInfo.type !== CST.BOOKMARK_TYPES.FOLDER,
+          isAllowedToEditUrl: false,
           isCreating: true,
           positions: state.positions,
         })
