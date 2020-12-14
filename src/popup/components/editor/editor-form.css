@@ -12,7 +12,6 @@
 }
 
 .main {
-  width: var(--width);
   box-sizing: border-box;
   padding: var(--golden-gap-2x) var(--golden-gap);
   border: solid var(--highlight-level3);

@@ -5,7 +5,7 @@ import webExtension from 'webextension-polyfill'
 import ActionlessForm from '../../../core/components/baseItems/ActionlessForm'
 import Button from '../../../core/components/baseItems/Button'
 import Input from '../../../core/components/baseItems/Input'
-import classes from './editor.css'
+import classes from './editor-form.css'
 
 interface Props {
   defaultTitle?: string
@@ -14,7 +14,7 @@ interface Props {
   isAllowedToEditUrl: boolean
   onCancel: () => void
   onConfirm: (title: string, url: string) => void
-  width: number
+  style: React.CSSProperties
 }
 export default function Editor({ onConfirm, ...props }: Props) {
   const { register, handleSubmit } = useForm<{
@@ -25,12 +25,7 @@ export default function Editor({ onConfirm, ...props }: Props) {
   return (
     <ActionlessForm
       className={classes.main}
-      style={React.useMemo(
-        (): Record<string, string> => ({
-          '--width': `${props.width}px`,
-        }),
-        [props.width],
-      )}
+      style={props.style}
       onSubmit={React.useMemo(() => {
         return handleSubmit((variables) => {
           onConfirm(variables.title, variables.url)

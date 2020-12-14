@@ -11,19 +11,19 @@ import { bookmarkCreators } from '../../reduxs'
 import AbsolutePosition from '../absolutePosition/AbsolutePosition'
 import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
 import Mask from '../Mask'
-import Editor from './Editor'
 import { useEditorContext } from './EditorContext'
+import EditorForm from './EditorForm'
 
-type EditorProps = React.ComponentProps<typeof Editor>
+type EditorFormProps = React.ComponentProps<typeof EditorForm>
 
-interface CreateEditorProps extends EditorProps {
+interface CreateEditorFormProps extends EditorFormProps {
   createAfterId: string
 }
-const CreateEditor = ({
+const CreateEditorForm = ({
   createAfterId,
   onConfirm,
-  ...editorProps
-}: CreateEditorProps) => {
+  ...editorFormProps
+}: CreateEditorFormProps) => {
   const createBookmarkAfterId = useAction(
     bookmarkCreators.createBookmarkAfterId,
   )
@@ -38,22 +38,22 @@ const CreateEditor = ({
   )
 
   return (
-    <Editor
-      {...editorProps}
+    <EditorForm
+      {...editorFormProps}
       defaultTitle={webExtension.i18n.getMessage('newFolder')}
       onConfirm={handleConfirm}
     />
   )
 }
 
-interface UpdateEditorProps extends EditorProps {
+interface UpdateEditorFormProps extends EditorFormProps {
   editTargetId: string
 }
-const UpdateEditor = ({
+const UpdateEditorForm = ({
   editTargetId,
   onConfirm,
-  ...editorProps
-}: UpdateEditorProps) => {
+  ...editorFormProps
+}: UpdateEditorFormProps) => {
   const { data: bookmarkInfo } = useGetBookmarkInfo(editTargetId)
 
   const editBookmark = useAction(bookmarkCreators.editBookmark)
@@ -70,8 +70,8 @@ const UpdateEditor = ({
   if (!bookmarkInfo) return null
 
   return (
-    <Editor
-      {...editorProps}
+    <EditorForm
+      {...editorFormProps}
       defaultTitle={bookmarkInfo.title}
       defaultUrl={bookmarkInfo.url}
       onConfirm={handleConfirm}
@@ -79,21 +79,27 @@ const UpdateEditor = ({
   )
 }
 
-export default function EditorContainer() {
+export default function Editor() {
   const { close, state } = useEditorContext()
 
   const width = useSelector(
     (state: RootState) => state.options[OPTIONS.SET_WIDTH],
   )
+  const style = React.useMemo(
+    () => ({
+      width: `${width ?? 0}px`,
+    }),
+    [width],
+  )
 
   if (!state.isOpen) return null
 
-  const commonProps: EditorProps = {
+  const commonProps: EditorFormProps = {
     header: state.isAllowedToEditUrl
       ? webExtension.i18n.getMessage('edit')
       : webExtension.i18n.getMessage('rename'),
     isAllowedToEditUrl: state.isAllowedToEditUrl,
-    width: width ?? 0,
+    style,
     onCancel: close,
     onConfirm: close,
   }
@@ -106,12 +112,15 @@ export default function EditorContainer() {
       >
         <KeyBindingsWindow windowId={EDITOR_WINDOW}>
           {state.isCreating ? (
-            <CreateEditor
+            <CreateEditorForm
               {...commonProps}
               createAfterId={state.createAfterId}
             />
           ) : (
-            <UpdateEditor {...commonProps} editTargetId={state.editTargetId} />
+            <UpdateEditorForm
+              {...commonProps}
+              editTargetId={state.editTargetId}
+            />
           )}
         </KeyBindingsWindow>
       </AbsolutePosition>
