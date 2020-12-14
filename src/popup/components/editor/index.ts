@@ -1,2 +1,2 @@
-export { default as Editor } from './EditorContainer'
+export { default as Editor } from './Editor'
 export * from './EditorContext'
