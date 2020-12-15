@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useSelector } from 'react-redux'
 
+import { ReactQueryClientProvider } from '../../../core/utils/queryClient'
 import { OPTIONS } from '../../constants'
 import type { RootState } from '../../reduxs'
 import { AbsolutePositionProvider } from '../absolutePosition/AbsolutePositionContext'
@@ -49,15 +50,17 @@ const AppContainer = () => {
 
 const AppContainerWithProviders = () => {
   return (
-    <KeyBindingsProvider>
-      <AbsolutePositionProvider>
-        <EditorProvider>
-          <MenuProvider>
-            <AppContainer />
-          </MenuProvider>
-        </EditorProvider>
-      </AbsolutePositionProvider>
-    </KeyBindingsProvider>
+    <ReactQueryClientProvider>
+      <KeyBindingsProvider>
+        <AbsolutePositionProvider>
+          <EditorProvider>
+            <MenuProvider>
+              <AppContainer />
+            </MenuProvider>
+          </EditorProvider>
+        </AbsolutePositionProvider>
+      </KeyBindingsProvider>
+    </ReactQueryClientProvider>
   )
 }
 

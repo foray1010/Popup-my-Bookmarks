@@ -22,7 +22,7 @@ function useGetOptionsWithDefaultValues({
   )
 
   const { data: options } = useGetOptions()
-  const [setOptions] = useUpdateOptions()
+  const { mutateAsync: setOptions } = useUpdateOptions()
 
   React.useEffect(() => {
     if (!options || !optionsConfig) return
@@ -61,8 +61,8 @@ const OptionFormContainer = () => {
 
   const options = useGetOptionsWithDefaultValues({ optionsConfig })
 
-  const [deleteOptions] = useDeleteOptions()
-  const [updateOptions] = useUpdateOptions()
+  const { mutateAsync: deleteOptions } = useDeleteOptions()
+  const { mutateAsync: updateOptions } = useUpdateOptions()
 
   if (!options || !optionsConfig) return null
 

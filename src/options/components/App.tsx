@@ -1,4 +1,6 @@
-import ReactQueryDefaultConfigProvider from '../../core/utils/ReactQueryDefaultConfigProvider'
+import { ReactQueryDevtools } from 'react-query/devtools'
+
+import { ReactQueryClientProvider } from '../../core/utils/queryClient'
 import classes from './app.css'
 import Donate from './Donate'
 import NavBar from './NavBar'
@@ -6,7 +8,7 @@ import { NavigationProvider } from './navigationContext'
 import Router from './Router'
 
 const App = () => (
-  <ReactQueryDefaultConfigProvider>
+  <ReactQueryClientProvider>
     <NavigationProvider>
       <div className={classes.main}>
         <NavBar />
@@ -14,7 +16,11 @@ const App = () => (
         <Donate />
       </div>
     </NavigationProvider>
-  </ReactQueryDefaultConfigProvider>
+
+    {process.env.NODE_ENV === 'development' ? (
+      <ReactQueryDevtools initialIsOpen={false} />
+    ) : null}
+  </ReactQueryClientProvider>
 )
 
 export default App

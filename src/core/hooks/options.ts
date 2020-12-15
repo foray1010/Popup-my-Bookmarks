@@ -1,7 +1,8 @@
-import { queryCache, useMutation, useQuery } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 import webExtension from 'webextension-polyfill'
 
 import type { Options } from '../types/options'
+import { queryClient } from '../utils/queryClient'
 
 const queryKey = 'options'
 
@@ -15,7 +16,7 @@ export function useGetOptions() {
 export function useDeleteOptions() {
   return useMutation(() => webExtension.storage.sync.clear(), {
     async onSuccess() {
-      await queryCache.invalidateQueries(queryKey)
+      await queryClient.invalidateQueries(queryKey)
     },
   })
 }
@@ -25,7 +26,7 @@ export function useUpdateOptions() {
     (options: Partial<Options>) => webExtension.storage.sync.set(options),
     {
       async onSuccess() {
-        await queryCache.invalidateQueries(queryKey)
+        await queryClient.invalidateQueries(queryKey)
       },
     },
   )
