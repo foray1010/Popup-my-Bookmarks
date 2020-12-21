@@ -1129,39 +1129,40 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@foray1010/babel-preset@6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-6.0.1.tgz#daca8ce32e7a7119240a8a911f6778d89a0dbca5"
-  integrity sha512-65tuntq9LzXTfzJHX/1n/JSLdfsW3DcUV8Hs0Ln4d/zHjVsQfDkSbcytifmvV0B34UOa9v5zvG8OpOOP2LaGng==
+"@foray1010/babel-preset@6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-6.1.0.tgz#bf86bf939c1764b11d03ae0443008712e7363422"
+  integrity sha512-exFCP0EJ72k4omQISQBPdGdoFUKUXG9qUENbKKp//BTmrgCh1cPJW4cvWb+Tzq/hNaupwuspse9whAhGS0CUXg==
   dependencies:
+    "@babel/helper-plugin-utils" "^7.10.4"
     "@babel/plugin-transform-react-constant-elements" "^7.12.1"
     "@babel/plugin-transform-react-inline-elements" "^7.12.1"
     "@babel/plugin-transform-runtime" "^7.9.6"
     "@babel/preset-env" "^7.11.0"
     "@babel/preset-react" "^7.12.5"
     "@babel/preset-typescript" "^7.10.1"
-    "@foray1010/common-presets-utils" "^2.1.1"
+    "@foray1010/common-presets-utils" "^2.1.2"
     babel-plugin-transform-react-remove-prop-types "^0.4.24"
     browserslist "^4.12.0"
     semver "^7.3.2"
 
-"@foray1010/common-presets-utils@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/common-presets-utils/-/common-presets-utils-2.1.1.tgz#e1664e5f2eab75fe1ac0656047037dba8abe79b8"
-  integrity sha512-y4r+/JlYyxEsZoxhjIMdZ9/IUSxShPl6qn7Ce0v8DgMKQG+s/uAVKd8NtH6qKIjWbS5Bxo+73YSUaP9+dX1BPA==
+"@foray1010/common-presets-utils@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@foray1010/common-presets-utils/-/common-presets-utils-2.1.2.tgz#687333ef4d6d98c6e23396bf49f75722724a101e"
+  integrity sha512-kbUhkfybHLM4t1O7ANE3atbqabzuS+NCLoELYHuAZ/kfsFAJb+tbfXjtTk0lZFLGzmQ4bfBk3H2unodthYBo0Q==
   dependencies:
     read-pkg-up "^7.0.0"
 
-"@foray1010/eslint-config@4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-4.4.0.tgz#cf7bf33d1fa31adb7d82957cb0b97794f7695c21"
-  integrity sha512-pz6jssdLg4QdwUYA+xf/7kNKKNINZZHboSBaEzbP+9kHQMmeP3Hqwos6BLGZpNPZCuvjY1jUQ2ZELaA94twnTQ==
+"@foray1010/eslint-config@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-4.4.1.tgz#fc678fed0aefb3b3c27f0543a366e1a2d930702d"
+  integrity sha512-rVTqpM0NH5rnLz+nhvxxWUsz8WkEQ2Y1gf16ABKxnkeceVVYE6Vir5e2DbXgTTujKK7ZpKCfc774Bx92SWlkkQ==
   dependencies:
-    "@foray1010/common-presets-utils" "^2.1.1"
+    "@foray1010/common-presets-utils" "^2.1.2"
     "@typescript-eslint/eslint-plugin" "^4.0.1"
     "@typescript-eslint/parser" "^4.0.1"
     confusing-browser-globals "^1.0.9"
-    eslint-config-prettier "^6.3.0"
+    eslint-config-prettier "^7.0.0"
     eslint-plugin-compat "^3.8.0"
     eslint-plugin-import "^2.18.2"
     eslint-plugin-jest "^24.0.0"
@@ -1171,20 +1172,20 @@
     eslint-plugin-prettier "^3.1.1"
     eslint-plugin-react "^7.16.0"
     eslint-plugin-react-hooks "^4.1.1"
-    eslint-plugin-simple-import-sort "^6.0.0"
+    eslint-plugin-simple-import-sort "^7.0.0"
     eslint-plugin-testing-library "^3.1.0"
 
-"@foray1010/prettier-config@4.1.1":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-4.1.1.tgz#1f3e21d4f249cb5bfe0482449bbff82102cc7ffa"
-  integrity sha512-XMhwa4cjyRcatu5GW0V61ID8q87WquSsMxoVIO7cCfnTeL2NYQbeZU+d73VY3SLc23ZbdqsyA3JbvYhoys9tTg==
+"@foray1010/prettier-config@4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-4.1.2.tgz#30c7ba4d590f61639beaf3e4e8f802e9cf34ea73"
+  integrity sha512-E81h1bnNh7aeNgH1G2OVg0bFVUv30WxAqxsONJoOyfPR/+wCZBS6FF6DI9IPZFYSvjiodhM8ENgUEm6T5AUkdg==
   dependencies:
     prettier-plugin-packagejson "^2.2.5"
 
-"@foray1010/remark-preset@3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/remark-preset/-/remark-preset-3.4.0.tgz#fd6d9dc225bb02288dbd0ddc9e3c2ad2c0bcc5a5"
-  integrity sha512-KJQ9JvXJghDfZ9yrcE1d15OmD6IZ38WJBwPIv4x63+Cxq0CUdIE1jp5es9OsUrzt99qea+4MRG34yEaVyoDVJw==
+"@foray1010/remark-preset@3.4.1":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@foray1010/remark-preset/-/remark-preset-3.4.1.tgz#eb9ac9d23ae65a68b3632431fed83aab291c993e"
+  integrity sha512-4Bs033v9ZE+MkQOdfD7YN4cn1o7S6UYv+Kgb5fqzZ1JKXMamSkCNbhCkoafqwZLG1n5uloVoMZFIZngAinaz6w==
   dependencies:
     remark-frontmatter "^3.0.0"
     remark-lint-no-dead-urls "^1.0.2"
@@ -1194,10 +1195,10 @@
     remark-preset-prettier "^0.4.0"
     remark-validate-links "^10.0.2"
 
-"@foray1010/stylelint-config@2.3.1":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-2.3.1.tgz#8f07dc6282da924fe065dd6fdf877136f228a859"
-  integrity sha512-88mZ0LPtsccdLppvbzREGWG0wieEd7muo66NeljXL+GwBd56C3dPdraC09RS1r3QAAilCRr3ZW9FRrwMDui+dA==
+"@foray1010/stylelint-config@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-2.3.2.tgz#b0fa61306c75ec0364450aa141b713b7de9bd492"
+  integrity sha512-Fg3n0mV8MQNPM2C1gcreHTIwj8TJ567voJpUOTDFr06WpIziSASYQAr765yv7qmsFFZF5ErQnOYescDZ1IU3Jw==
   dependencies:
     stylelint-config-css-modules "^2.0.0"
     stylelint-config-idiomatic-order "^8.0.0"
@@ -1207,10 +1208,10 @@
     stylelint-no-unsupported-browser-features "^4.1.4"
     stylelint-prettier "^1.1.1"
 
-"@foray1010/tsconfig@4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/tsconfig/-/tsconfig-4.1.0.tgz#809d8df845f0aba5b1614e5d7a5b62022d40cade"
-  integrity sha512-tdRUMtZxzUnX7CKt1qiAXyW9DA8pUsPJ507TUjdZpISeRk9IOUYqGDOg9C7eD0I98Lrdj8yWIBrPerfUXXyUig==
+"@foray1010/tsconfig@4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@foray1010/tsconfig/-/tsconfig-4.1.1.tgz#409cfb900dfe28d34f9d951ef8c778173809fbce"
+  integrity sha512-kXdtQzQeGB0sb31ukdbb5o+Bcqz9+pTjIUdRBCNPBXBhKTkpMf/L5276jTfqGssMkZhDIT/nkXJw/qO7f3Q3ng==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
@@ -4927,12 +4928,10 @@ escodegen@^1.14.1:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-prettier@^6.3.0:
-  version "6.15.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-6.15.0.tgz#7f93f6cb7d45a92f1537a70ecc06366e1ac6fed9"
-  integrity sha512-a1+kOYLR8wMGustcgAjdydMsQ2A/2ipRPwRKUmfYaSxc9ZPcrku080Ctl6zrZzZNs/U82MjSv+qKREkoq3bJaw==
-  dependencies:
-    get-stdin "^6.0.0"
+eslint-config-prettier@^7.0.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-7.1.0.tgz#5402eb559aa94b894effd6bddfa0b1ca051c858f"
+  integrity sha512-9sm5/PxaFG7qNJvJzTROMM1Bk1ozXVTKI0buKOyb0Bsr1hrwi0H/TzxF/COtf1uxikIK8SwhX7K6zg78jAzbeA==
 
 eslint-import-resolver-node@^0.3.4:
   version "0.3.4"
@@ -5066,10 +5065,10 @@ eslint-plugin-redux-saga@1.2.1:
   resolved "https://registry.yarnpkg.com/eslint-plugin-redux-saga/-/eslint-plugin-redux-saga-1.2.1.tgz#fbfe7ca6bd3771a0e11639d9b7474b7b25ed5375"
   integrity sha512-3ZifHQ3N07bopp7MlpID4JxnDwCazcaPMHFP9l2TDEfSUtvr0U41xtb/e0wWlgxPgrs5cmztHWhLXn8HEPkb5Q==
 
-eslint-plugin-simple-import-sort@^6.0.0:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-simple-import-sort/-/eslint-plugin-simple-import-sort-6.0.1.tgz#24a3af3b745dcd389c060db28e22d0f5e3edf86e"
-  integrity sha512-RfFnoi7fQtv7z9sZNJidIcZgWc0ZJe8uOPC3ldmatai4Igr5iDpzTmSUDEZKYm4TnrR01N0X32kfKvax7bivHQ==
+eslint-plugin-simple-import-sort@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-simple-import-sort/-/eslint-plugin-simple-import-sort-7.0.0.tgz#a1dad262f46d2184a90095a60c66fef74727f0f8"
+  integrity sha512-U3vEDB5zhYPNfxT5TYR7u01dboFZp+HNpnGhkDB2g/2E4wZ/g1Q9Ton8UwCLfRV9yAKyYqDh62oHOamvkFxsvw==
 
 eslint-plugin-testing-library@^3.1.0:
   version "3.10.1"
@@ -5627,11 +5626,6 @@ get-stdin@8.0.0, get-stdin@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-8.0.0.tgz#cbad6a73feb75f6eeb22ba9e01f89aa28aa97a53"
   integrity sha512-sY22aA6xchAzprjyqmSEQv4UbAAzRN0L2dQB0NlN5acTTK9Don6nhoc3eAbUnpZiCANAMfd/+40kVdKfFygohg==
-
-get-stdin@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-6.0.0.tgz#9e09bf712b360ab9225e812048f71fde9c89657b"
-  integrity sha512-jp4tHawyV7+fkkSKyvjuLZswblUtz+SQKzSWnBbii16BuZksJlU1wuBYXY75r+duh/llF1ur6oNwi+2ZzjKZ7g==
 
 get-stream@^4.0.0, get-stream@^4.1.0:
   version "4.1.0"
