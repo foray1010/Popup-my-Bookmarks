@@ -12888,7 +12888,7 @@ yargs@^16.1.0:
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
 
-yazl@^2.4.3:
+yazl@^2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/yazl/-/yazl-2.5.1.tgz#a3d65d3dd659a5b0937850e8609f22fffa2b5c35"
   integrity sha512-phENi2PLiHnHb6QBVot+dJnaAZ0xosj7p3fWl+znIjBDlnMI2PsZCJZ306BPTFOaHf5qdDEI8x5qFrSOBN5vrw==
@@ -12905,13 +12905,12 @@ yocto-queue@^0.1.0:
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
-zip-webpack-plugin@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/zip-webpack-plugin/-/zip-webpack-plugin-3.0.0.tgz#63b3c173f1a87a006915cd7328a3c40b44dc8e32"
-  integrity sha512-5kNvPv+TUP3JqKWQUXj0vTgXHIRQpYw5YyBUVXQ0pumTAK+a4OZ+eXDHnh44nyr9B1XJQZq9WtSSm5j6NQhjWQ==
+zip-webpack-plugin@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/zip-webpack-plugin/-/zip-webpack-plugin-4.0.1.tgz#95f09716ecf73e53d949443017cfb03afe597dd3"
+  integrity sha512-G041Q4qUaog44Ynit6gs4o+o3JIv0WWfOLvc8Q3IxvPfuqd2KBHhpJWAXUB9Cm1JcWHTIOp9vS3oGMWa1p1Ehw==
   dependencies:
-    webpack-sources "^1.1.0"
-    yazl "^2.4.3"
+    yazl "^2.5.1"
 
 zwitch@^1.0.0:
   version "1.0.5"
