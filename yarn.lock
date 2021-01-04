@@ -1732,10 +1732,10 @@
   resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.33.tgz#d79c020f283bd50bd76101d7d300313c107325fc"
   integrity sha512-ndEo1xvnYeHxm7I/5sF6tBvnsA4Tdi3zj1keRKRs12SP+2ye2A27NDJ1B6PqkfMbGAcT+mqQVqbZRIrhfOp5PQ==
 
-"@types/copy-webpack-plugin@6.3.0":
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/@types/copy-webpack-plugin/-/copy-webpack-plugin-6.3.0.tgz#bb7fe72fccf75d9096fda2610ec01e9e8b19336f"
-  integrity sha512-b5FXqKbP3e3tKtC6520w9q7nkxBw+5TxQotiFx0M+VMpLlJNfgWINjHPPJSZEhMzb/iIGrkTDBhqotmzV9f5uQ==
+"@types/copy-webpack-plugin@6.4.0":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@types/copy-webpack-plugin/-/copy-webpack-plugin-6.4.0.tgz#225f86bc60a62052df39a110f7cbf7bc5156a0c1"
+  integrity sha512-f5mQG5c7xH3zLGrEmKgzLLFSGNB7Y4+4a+a1X4DvjgfbTEWEZUNNXUqGs5tBVCtb5qKPzm2z+6ixX3xirWmOCg==
   dependencies:
     "@types/webpack" "*"
 
