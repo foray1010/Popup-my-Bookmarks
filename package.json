@@ -60,7 +60,7 @@
     "@svgr/webpack": "5.5.0",
     "@testing-library/jest-dom": "5.11.8",
     "@testing-library/react": "11.2.3",
-    "@testing-library/react-hooks": "4.0.0",
+    "@testing-library/react-hooks": "4.0.1",
     "@testing-library/user-event": "12.6.0",
     "@types/bluebird": "3.5.33",
     "@types/copy-webpack-plugin": "6.4.0",
