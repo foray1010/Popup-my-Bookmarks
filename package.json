@@ -38,7 +38,7 @@
     "react-hook-form": "6.14.2",
     "react-query": "3.6.0",
     "react-redux": "7.2.2",
-    "react-virtual": "2.3.2",
+    "react-virtual": "2.4.0",
     "redux": "4.0.5",
     "redux-saga": "1.1.3",
     "typeface-archivo-narrow": "1.1.13",
