@@ -6,9 +6,9 @@
   "description": "A more efficient way to view and manage your bookmarks menu.",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack",
+    "build": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack",
     "ci": "npm-run-all -p 'lint:*' 'type:*' && yarn test && yarn build",
-    "dev": "cross-env NODE_ENV=development webpack",
+    "dev": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack",
     "eslint": "eslint --ext=cjs,js,mjs,ts,tsx --ignore-path=node_modules/@foray1010/eslint-config/eslintignore",
     "lint:css": "yarn stylelint '**/*.css'",
     "lint:js": "yarn eslint .",
