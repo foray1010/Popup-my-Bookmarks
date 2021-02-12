@@ -64,7 +64,6 @@ export function* openBookmarksInBrowser({
         )
         // `window.confirm()` doesn't work as chrome will force close popup
         // but worked again at least since chrome 73
-        // eslint-disable-next-line max-depth
         if (options[OPTIONS.WARN_OPEN_MANY] && !window.confirm(msgAskOpenAll))
           return
       }
