@@ -1114,6 +1114,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/archivo-narrow@4.2.1":
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@fontsource/archivo-narrow/-/archivo-narrow-4.2.1.tgz#dc6e4d1b232055f3d1154ce5edf9bc4d186535bd"
+  integrity sha512-SPvc+Nm381ugvvwDSc1f8FDDn5Bgi1vq4eh2UvJbX2ceXDgi6Tn9Lew+BdYleWXGAk+027S9JcwalA6qazLoQA==
+
 "@foray1010/babel-preset@6.1.1":
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-6.1.1.tgz#5c8b34b757ac43b7fa9091ebdfb4c3d22a554a17"
@@ -12110,11 +12115,6 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
-
-typeface-archivo-narrow@1.1.13:
-  version "1.1.13"
-  resolved "https://registry.yarnpkg.com/typeface-archivo-narrow/-/typeface-archivo-narrow-1.1.13.tgz#ceb5e7b43b444edacff889dda402e02cd2ca5445"
-  integrity sha512-0FkYcIu3zXhRfmGDdTTMt5CAyFZVA9PkKYk0QHADlTgQGTklJ5MSrgoduloAN7ocF1Zrk99Ab3BgyUitkm3UZw==
 
 typesafe-actions@5.1.0:
   version "5.1.0"

@@ -28,6 +28,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.12.13",
+    "@fontsource/archivo-narrow": "4.2.1",
     "@rehooks/component-size": "1.0.3",
     "clsx": "1.1.1",
     "constate": "3.1.0",
@@ -42,7 +43,6 @@
     "react-virtual": "2.4.0",
     "redux": "4.0.5",
     "redux-saga": "1.1.3",
-    "typeface-archivo-narrow": "1.1.13",
     "typesafe-actions": "5.1.0",
     "use-deep-compare": "1.1.0",
     "use-typed-event-listener": "3.0.0",
