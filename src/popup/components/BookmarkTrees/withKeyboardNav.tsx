@@ -116,12 +116,14 @@ export default function withKeyboardNav<P>(
         const offset = document
           .querySelector(`[data-bookmarkid="${bookmarkInfo.id}"`)
           ?.getBoundingClientRect()
+        const targetPositions = {
+          top: offset?.top ?? 0,
+          left: offset?.left ?? 0,
+        }
         openMenu({
           targetId: bookmarkInfo.id,
-          positions: {
-            top: offset?.top ?? 0,
-            left: offset?.left ?? 0,
-          },
+          displayPositions: targetPositions,
+          targetPositions,
         })
       },
     )

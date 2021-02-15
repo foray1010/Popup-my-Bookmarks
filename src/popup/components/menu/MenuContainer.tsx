@@ -50,7 +50,7 @@ const useClickMenuRow = (rowName?: string) => {
           createAfterId: bookmarkInfo.id,
           isAllowedToEditUrl: false,
           isCreating: true,
-          positions: state.positions,
+          positions: state.targetPositions,
         })
         break
 
@@ -80,7 +80,7 @@ const useClickMenuRow = (rowName?: string) => {
           editTargetId: bookmarkInfo.id,
           isAllowedToEditUrl: bookmarkInfo.type !== CST.BOOKMARK_TYPES.FOLDER,
           isCreating: false,
-          positions: state.positions,
+          positions: state.targetPositions,
         })
         break
 
@@ -213,8 +213,8 @@ const MenuContainer = () => {
     <>
       <Mask opacity={0.3} onClick={close} />
       <AbsolutePosition
-        positionLeft={state.positions.left}
-        positionTop={state.positions.top}
+        positionLeft={state.displayPositions.left}
+        positionTop={state.displayPositions.top}
       >
         <KeyBindingsWindow windowId={MENU_WINDOW}>
           <Menu

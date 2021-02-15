@@ -3,7 +3,8 @@ import * as React from 'react'
 
 type OpenParams = {
   targetId: string
-  positions?: { top: number; left: number }
+  displayPositions: { top: number; left: number }
+  targetPositions: { top: number; left: number }
 }
 
 type State =
@@ -23,7 +24,6 @@ const useMenu = () => {
 
   const open = React.useCallback((openParams: OpenParams) => {
     setState({
-      positions: { top: 0, left: 0 },
       ...openParams,
       isOpen: true,
     })

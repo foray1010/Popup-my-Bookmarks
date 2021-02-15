@@ -49,11 +49,18 @@ export default function useRowClickEvents({
       bookmarkInfo: BookmarkInfo,
       evt: React.MouseEvent,
     ) => {
+      const offset = document
+        .querySelector(`[data-bookmarkid="${bookmarkInfo.id}"`)
+        ?.getBoundingClientRect()
       openMenu({
         targetId: bookmarkInfo.id,
-        positions: {
+        displayPositions: {
           top: evt.clientY,
           left: evt.clientX,
+        },
+        targetPositions: {
+          top: offset?.top ?? 0,
+          left: offset?.left ?? 0,
         },
       })
     }
