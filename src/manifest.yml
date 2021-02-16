@@ -14,7 +14,7 @@ icons:
   48: 'require(./core/images/icon48.png)'
   128: 'require(./core/images/icon128.png)'
 
-content_security_policy: "base-uri 'none'; default-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self' chrome:; require-trusted-types-for 'script'; script-src 'self'; style-src 'unsafe-inline';"
+content_security_policy: "base-uri 'none'; default-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self' chrome: data:; script-src 'self'; style-src 'unsafe-inline';"
 
 browser_action:
   default_icon: 'require(./core/images/icon38.png)'
