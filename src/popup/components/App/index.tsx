@@ -1,3 +1,5 @@
+import './globals.css'
+
 import * as React from 'react'
 import { useSelector } from 'react-redux'
 
@@ -11,7 +13,6 @@ import { Editor, EditorProvider } from '../editor'
 import { KeyBindingsProvider } from '../keyBindings/KeyBindingsContext'
 import { Menu, MenuProvider } from '../menu'
 import Search from '../Search'
-import classes from './app.css'
 import useGlobalEvents from './useGlobalEvents'
 
 const AppContainer = () => {
@@ -21,26 +22,26 @@ const AppContainer = () => {
 
   const { globalBodySize } = useGlobalBodySize()
 
-  const styles: Record<string, string> = React.useMemo(
-    () => ({
-      '--fontFamily': [options[OPTIONS.FONT_FAMILY], 'sans-serif']
-        .filter(Boolean)
-        .join(','),
-      '--fontSize': `${options[OPTIONS.FONT_SIZE] ?? 12}px`,
-      '--height':
-        globalBodySize && globalBodySize.height !== undefined
-          ? `${globalBodySize.height}px`
-          : 'auto',
-      '--width':
-        globalBodySize && globalBodySize.width !== undefined
-          ? `${globalBodySize.width}px`
-          : 'auto',
-    }),
-    [globalBodySize, options],
-  )
-
   return (
-    <div className={classes.main} style={styles}>
+    <div
+      style={React.useMemo(
+        () => ({
+          fontFamily: [options[OPTIONS.FONT_FAMILY], 'sans-serif']
+            .filter(Boolean)
+            .join(','),
+          fontSize: `${options[OPTIONS.FONT_SIZE] ?? 12}px`,
+          height:
+            globalBodySize?.height !== undefined
+              ? `${globalBodySize.height}px`
+              : 'auto',
+          width:
+            globalBodySize?.width !== undefined
+              ? `${globalBodySize.width}px`
+              : 'auto',
+        }),
+        [globalBodySize, options],
+      )}
+    >
       <BookmarkTrees mainTreeHeader={<Search />} />
       <Menu />
       <Editor />

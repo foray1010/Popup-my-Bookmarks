@@ -1,11 +1,13 @@
+import './globals.css'
+
 import { ReactQueryDevtools } from 'react-query/devtools'
 
-import { ReactQueryClientProvider } from '../../core/utils/queryClient'
-import classes from './app.css'
-import Donate from './Donate'
-import NavBar from './NavBar'
-import { NavigationProvider } from './navigationContext'
-import Router from './Router'
+import { ReactQueryClientProvider } from '../../../core/utils/queryClient'
+import Donate from '../Donate'
+import NavBar from '../NavBar'
+import { NavigationProvider } from '../navigationContext'
+import Router from '../Router'
+import classes from './styles.css'
 
 const App = () => (
   <ReactQueryClientProvider>

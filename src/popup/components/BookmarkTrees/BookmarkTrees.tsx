@@ -35,22 +35,23 @@ const BookmarkTrees = (props: Props) => {
   const mainTree = trees.filter((_, index) => index % 2 === 0)
   const subTree = trees.filter((_, index) => index % 2 !== 0)
 
+  const widthStyle = React.useMemo(
+    () => ({
+      width: `${props.options[OPTIONS.SET_WIDTH] ?? 0}px`,
+    }),
+    [props.options],
+  )
+
   return (
-    <main
-      className={classes.main}
-      style={React.useMemo(
-        (): Record<string, string> => ({
-          '--width': `${props.options[OPTIONS.SET_WIDTH] ?? 0}px`,
-        }),
-        [props.options],
-      )}
-    >
-      <section className={classes.master}>
+    <main className={classes.main}>
+      <section className={classes.master} style={widthStyle}>
         {props.mainTreeHeader}
         {mainTree}
       </section>
       {subTree.length > 0 && (
-        <section className={classes.slave}>{subTree}</section>
+        <section className={classes.slave} style={widthStyle}>
+          {subTree}
+        </section>
       )}
     </main>
   )

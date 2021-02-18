@@ -4,8 +4,8 @@ import * as React from 'react'
 import classes from './AbsolutePosition.css'
 import useGlobalBodySize from './useGlobalBodySize'
 
-interface Props {
-  children: React.ReactNode
+interface Props
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'className' | 'style'> {
   positionLeft: number
   positionTop: number
 }
@@ -14,7 +14,7 @@ const AbsolutePosition = ({
   positionTop,
   ...restProps
 }: Props) => {
-  const { appendBodySize, removeBodySize } = useGlobalBodySize()
+  const { insertBodySize } = useGlobalBodySize()
 
   const measureRef = React.useRef<HTMLDivElement>(null)
   const childSize = useComponentSize(measureRef)
@@ -47,35 +47,34 @@ const AbsolutePosition = ({
       ),
     })
 
-    const bodySize = {
+    const { removeBodySize } = insertBodySize({
       height: updatedBodyHeight,
       width: updatedBodyWidth,
-    }
-    appendBodySize(bodySize)
+    })
     return () => {
-      removeBodySize(bodySize)
+      removeBodySize()
     }
   }, [
-    appendBodySize,
     childSize.height,
     childSize.width,
+    insertBodySize,
     positionLeft,
     positionTop,
-    removeBodySize,
   ])
 
-  const wrapperStyles: Record<string, string> = React.useMemo(
-    () => ({
-      '--positionLeft': `${calibratedPosition.left}px`,
-      '--positionTop': `${calibratedPosition.top}px`,
-    }),
-    [calibratedPosition.left, calibratedPosition.top],
-  )
-
   return (
-    <div ref={measureRef} className={classes.wrapper} style={wrapperStyles}>
-      {restProps.children}
-    </div>
+    <div
+      ref={measureRef}
+      className={classes.wrapper}
+      style={React.useMemo(
+        () => ({
+          left: `${calibratedPosition.left}px`,
+          top: `${calibratedPosition.top}px`,
+        }),
+        [calibratedPosition.left, calibratedPosition.top],
+      )}
+      {...restProps}
+    />
   )
 }
 

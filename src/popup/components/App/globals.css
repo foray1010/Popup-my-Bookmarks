@@ -1,3 +1,5 @@
+@import '../../../core/styles/globals.css';
+
 :root {
   user-select: none;
 }
