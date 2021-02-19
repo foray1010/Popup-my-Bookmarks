@@ -1,116 +1,122 @@
 import constate from 'constate'
 import * as React from 'react'
+import { useDeepCompareMemo } from 'use-deep-compare'
 import useEventListener from 'use-typed-event-listener'
 
-import useMapDispatchToCallback from '../../hooks/useMapDispatchToCallback'
-import type {
-  KeyBindingEventCallback,
-  KeyBindingMeta,
-} from './reducers/keyBindingsPerWindow'
-import {
-  keyBindingsPerWindowCreators,
-  keyBindingsPerWindowInitialState,
-  keyBindingsPerWindowReducer,
-} from './reducers/keyBindingsPerWindow'
-import {
-  windowsCreators,
-  windowsInitialState,
-  windowsReducer,
-} from './reducers/windows'
+import type { KeyBindingEventCallback, KeyDefinition } from './types'
 
-export type { KeyBindingEventCallback, KeyBindingMeta }
+const useActiveWindowState = () => {
+  const [activeWindowQueue, setActiveWindowQueue] = React.useState<string[]>([])
+
+  const appendActiveWindowId = React.useCallback((windowId: string) => {
+    setActiveWindowQueue((prevState) => [
+      ...prevState.filter((x) => x !== windowId),
+      windowId,
+    ])
+  }, [])
+
+  const removeActiveWindowId = React.useCallback((windowId: string) => {
+    setActiveWindowQueue((prevState) => prevState.filter((x) => x !== windowId))
+  }, [])
+
+  return {
+    activeWindowId: activeWindowQueue[activeWindowQueue.length - 1] as
+      | string
+      | undefined,
+    appendActiveWindowId,
+    removeActiveWindowId,
+  }
+}
+
+const useKeyBindingsPerWindowState = () => {
+  const [keyBindingsPerWindow, setKeyBindingsPerWindow] = React.useState<
+    Map<
+      string,
+      ReadonlyArray<{
+        key: KeyDefinition
+        callback: KeyBindingEventCallback
+      }>
+    >
+  >(new Map())
+
+  type AddOrRemoveEventListener = (
+    meta: { key: KeyDefinition; windowId: string },
+    callback: KeyBindingEventCallback,
+  ) => void
+
+  const addEventListener: AddOrRemoveEventListener = React.useCallback(
+    ({ key, windowId }, callback) => {
+      setKeyBindingsPerWindow((prevState) => {
+        const keyBindings = prevState.get(windowId)
+
+        const updatedKeyBindings = [...(keyBindings ?? []), { callback, key }]
+
+        return new Map(prevState).set(windowId, updatedKeyBindings)
+      })
+    },
+    [],
+  )
+
+  const removeEventListener: AddOrRemoveEventListener = React.useCallback(
+    ({ key, windowId }, callback) => {
+      setKeyBindingsPerWindow((prevState) => {
+        const keyBindings = prevState.get(windowId)
+        if (!keyBindings) return prevState
+
+        const updatedKeyBindings = keyBindings.filter((keyBinding) => {
+          return (
+            keyBinding.callback !== callback ||
+            keyBinding.key.toString() !== key.toString()
+          )
+        })
+
+        return new Map(prevState).set(windowId, updatedKeyBindings)
+      })
+    },
+    [],
+  )
+
+  return {
+    keyBindingsPerWindow,
+    addEventListener,
+    removeEventListener,
+  }
+}
 
 const useKeyBindingsState = () => {
-  const [{ activeWindowId }, dispatchWindows] = React.useReducer(
-    windowsReducer,
-    windowsInitialState,
-  )
-  const [keyBindingsPerWindow, dispatchKeyBindingsPerWindow] = React.useReducer(
-    keyBindingsPerWindowReducer,
-    keyBindingsPerWindowInitialState,
-  )
+  const activeWindowState = useActiveWindowState()
 
-  const addEventListener = useMapDispatchToCallback(
-    dispatchKeyBindingsPerWindow,
-    keyBindingsPerWindowCreators.addEventListener,
-  )
+  const keyBindingsPerWindowState = useKeyBindingsPerWindowState()
 
-  const removeEventListener = useMapDispatchToCallback(
-    dispatchKeyBindingsPerWindow,
-    keyBindingsPerWindowCreators.removeEventListener,
-  )
-
-  const setActiveWindowId = useMapDispatchToCallback(
-    dispatchWindows,
-    windowsCreators.setActiveWindowId,
-  )
-
-  const unsetActiveWindowId = useMapDispatchToCallback(
-    dispatchWindows,
-    windowsCreators.unsetActiveWindowId,
-  )
-
-  return React.useMemo(
-    () => ({
-      activeWindowId,
-      keyBindingsPerWindow,
-      addEventListener,
-      removeEventListener,
-      setActiveWindowId,
-      unsetActiveWindowId,
-    }),
-    [
-      activeWindowId,
-      addEventListener,
-      keyBindingsPerWindow,
-      removeEventListener,
-      setActiveWindowId,
-      unsetActiveWindowId,
-    ],
-  )
+  return useDeepCompareMemo(() => {
+    return {
+      ...activeWindowState,
+      ...keyBindingsPerWindowState,
+    }
+  }, [activeWindowState, keyBindingsPerWindowState])
 }
 
 const useKeyBindings = () => {
   const state = useKeyBindingsState()
 
-  const stateRef = React.useRef(state)
-  stateRef.current = state
-
   useEventListener(window, 'keydown', (evt) => {
-    const { keyBindingsPerWindow, activeWindowId } = stateRef.current
+    const { keyBindingsPerWindow, activeWindowId } = state
     if (!activeWindowId) return
 
     const keyBindings = keyBindingsPerWindow.get(activeWindowId)
     if (!keyBindings) return
 
-    interface MatchResult {
-      isMatched: boolean
-      callback?: KeyBindingEventCallback
-    }
-    const matchResult = keyBindings.reduceRight<MatchResult>(
-      (acc, keyBinding) => {
-        if (acc.isMatched) return acc
+    const matchedKeyBindings = Array.from(keyBindings)
+      .reverse()
+      .filter((keyBinding) => {
+        return keyBinding.key instanceof RegExp
+          ? keyBinding.key.test(evt.key)
+          : keyBinding.key === evt.key
+      })
 
-        const isMatched =
-          keyBinding.key instanceof RegExp
-            ? keyBinding.key.test(evt.key)
-            : keyBinding.key === evt.key
-        if (!isMatched) return acc
-
-        return {
-          isMatched: true,
-          callback: keyBinding.callback,
-        }
-      },
-      {
-        isMatched: false,
-        callback: undefined,
-      },
-    )
-
-    if (matchResult.isMatched && matchResult.callback) {
-      matchResult.callback(evt)
-    }
+    matchedKeyBindings.forEach((keyBinding) => {
+      keyBinding.callback(evt)
+    })
   })
 
   return state

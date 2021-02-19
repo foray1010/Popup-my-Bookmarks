@@ -12,7 +12,7 @@ import {
 } from '../../utils/clickBookmarkUtils'
 import getLastMapKey from '../../utils/getLastMapKey'
 import isMac from '../../utils/isMac'
-import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
+import { useKeyBindingsEvent } from '../keyBindings'
 import {
   ListNavigationProvider,
   useListNavigationContext,

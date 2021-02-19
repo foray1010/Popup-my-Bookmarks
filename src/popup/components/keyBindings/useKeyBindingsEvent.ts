@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useDeepCompareEffect } from 'use-deep-compare'
 
-import type { KeyBindingMeta } from './KeyBindingsContext'
 import { useKeyBindingsContext } from './KeyBindingsContext'
+import type { KeyBindingMeta } from './types'
 
 const useKeyBindingsEvent = (
   meta: KeyBindingMeta,

@@ -14,15 +14,15 @@ const KeyBindingsWindow = ({
   windowId,
   ...props
 }: Props) => {
-  const { setActiveWindowId, unsetActiveWindowId } = useKeyBindingsContext()
+  const { appendActiveWindowId, removeActiveWindowId } = useKeyBindingsContext()
 
   React.useEffect(() => {
-    setActiveWindowId(windowId)
+    appendActiveWindowId(windowId)
 
     return () => {
-      unsetActiveWindowId(windowId)
+      removeActiveWindowId(windowId)
     }
-  }, [setActiveWindowId, unsetActiveWindowId, windowId])
+  }, [appendActiveWindowId, removeActiveWindowId, windowId])
 
   const handleFocus = React.useCallback<React.FocusEventHandler>(
     (evt) => {
@@ -30,9 +30,9 @@ const KeyBindingsWindow = ({
 
       if (onFocus) onFocus(evt)
 
-      setActiveWindowId(windowId)
+      appendActiveWindowId(windowId)
     },
-    [onFocus, setActiveWindowId, windowId],
+    [onFocus, appendActiveWindowId, windowId],
   )
 
   const windowRef = React.useRef<HTMLDivElement>(null)

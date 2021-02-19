@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import cycle from '../../utils/cycle'
 import getLastMapKey from '../../utils/getLastMapKey'
-import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
+import { useKeyBindingsEvent } from '../keyBindings'
 import { useListNavigationContext } from './ListNavigationContext'
 
 export default function useKeyboardNav({

@@ -10,8 +10,7 @@ import { bookmarkCreators, RootState } from '../../reduxs'
 import isMac from '../../utils/isMac'
 import AbsolutePosition from '../absolutePosition/AbsolutePosition'
 import { useEditorContext } from '../editor'
-import KeyBindingsWindow from '../keyBindings/KeyBindingsWindow'
-import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
+import { KeyBindingsWindow, useKeyBindingsEvent } from '../keyBindings'
 import {
   ListNavigationProvider,
   useListNavigationContext,

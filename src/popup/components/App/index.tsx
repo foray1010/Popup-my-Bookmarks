@@ -10,7 +10,7 @@ import { AbsolutePositionProvider } from '../absolutePosition/AbsolutePositionCo
 import useGlobalBodySize from '../absolutePosition/useGlobalBodySize'
 import BookmarkTrees from '../BookmarkTrees'
 import { Editor, EditorProvider } from '../editor'
-import { KeyBindingsProvider } from '../keyBindings/KeyBindingsContext'
+import { KeyBindingsProvider } from '../keyBindings'
 import { Menu, MenuProvider } from '../menu'
 import Search from '../Search'
 import useGlobalEvents from './useGlobalEvents'

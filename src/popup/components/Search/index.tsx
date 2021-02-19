@@ -3,7 +3,7 @@ import * as React from 'react'
 import useAction from '../../../core/hooks/useAction'
 import { BASE_WINDOW } from '../../constants/windows'
 import { bookmarkCreators } from '../../reduxs'
-import useKeyBindingsEvent from '../keyBindings/useKeyBindingsEvent'
+import { useKeyBindingsEvent } from '../keyBindings'
 import SearchInput from './SearchInput'
 
 const SearchContainer = () => {
