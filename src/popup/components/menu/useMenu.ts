@@ -1,7 +1,7 @@
 import constate from 'constate'
 import * as React from 'react'
 
-type OpenParams = {
+type OpenState = {
   targetId: string
   displayPositions: { top: number; left: number }
   targetPositions: { top: number; left: number }
@@ -13,7 +13,7 @@ type State =
     }
   | ({
       isOpen: true
-    } & Required<OpenParams>)
+    } & OpenState)
 
 const initialState: State = {
   isOpen: false,
@@ -22,9 +22,9 @@ const initialState: State = {
 const useMenu = () => {
   const [state, setState] = React.useState<State>(initialState)
 
-  const open = React.useCallback((openParams: OpenParams) => {
+  const open = React.useCallback((openState: OpenState) => {
     setState({
-      ...openParams,
+      ...openState,
       isOpen: true,
     })
   }, [])
