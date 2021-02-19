@@ -184,7 +184,7 @@ const MenuContainer = () => {
   useKeyboardNav({ windowId: MENU_WINDOW })
 
   const handleRowClick = useClickMenuRow(
-    highlightedIndex ? allRowNames[highlightedIndex] : undefined,
+    highlightedIndex !== undefined ? allRowNames[highlightedIndex] : undefined,
   )
 
   useKeyBindingsEvent({ key: 'Enter', windowId: MENU_WINDOW }, handleRowClick)
