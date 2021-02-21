@@ -7,16 +7,20 @@ type Props = Omit<
 
 const ActionlessForm = React.forwardRef<HTMLFormElement, Props>(
   function InnerActionlessForm({ onSubmit, ...props }: Props, ref) {
-    const handleSubmit: React.FormEventHandler<HTMLFormElement> = React.useCallback(
-      (evt) => {
-        evt.preventDefault()
+    return (
+      <form
+        {...props}
+        ref={ref}
+        onSubmit={React.useCallback(
+          (evt) => {
+            evt.preventDefault()
 
-        if (onSubmit) onSubmit(evt)
-      },
-      [onSubmit],
+            if (onSubmit) onSubmit(evt)
+          },
+          [onSubmit],
+        )}
+      />
     )
-
-    return <form {...props} ref={ref} onSubmit={handleSubmit} />
   },
 )
 

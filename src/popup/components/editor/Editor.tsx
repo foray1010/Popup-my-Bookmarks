@@ -28,20 +28,18 @@ const CreateEditorForm = ({
     bookmarkCreators.createBookmarkAfterId,
   )
 
-  const handleConfirm = React.useCallback(
-    (title: string, url: string) => {
-      createBookmarkAfterId(createAfterId, title, url)
-
-      onConfirm(title, url)
-    },
-    [createAfterId, createBookmarkAfterId, onConfirm],
-  )
-
   return (
     <EditorForm
       {...editorFormProps}
       defaultTitle={webExtension.i18n.getMessage('newFolder')}
-      onConfirm={handleConfirm}
+      onConfirm={React.useCallback(
+        (title: string, url: string) => {
+          createBookmarkAfterId(createAfterId, title, url)
+
+          onConfirm(title, url)
+        },
+        [createAfterId, createBookmarkAfterId, onConfirm],
+      )}
     />
   )
 }

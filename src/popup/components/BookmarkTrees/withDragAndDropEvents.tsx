@@ -13,19 +13,16 @@ export default function withDragAndDropEvents<P>(
     )
     const removeDragIndicator = useAction(bookmarkCreators.removeDragIndicator)
 
-    const handleDragEnd = React.useCallback(() => {
-      removeDragIndicator()
-    }, [removeDragIndicator])
-
-    const handleDrop = React.useCallback(
-      (evt: MouseEvent, activeKey: string) => {
-        moveBookmarkToDragIndicator(activeKey)
-      },
-      [moveBookmarkToDragIndicator],
-    )
-
     return (
-      <DragAndDropProvider onDragEnd={handleDragEnd} onDrop={handleDrop}>
+      <DragAndDropProvider
+        onDragEnd={removeDragIndicator}
+        onDrop={React.useCallback(
+          (evt: MouseEvent, activeKey: string) => {
+            moveBookmarkToDragIndicator(activeKey)
+          },
+          [moveBookmarkToDragIndicator],
+        )}
+      >
         <WrappedComponent {...props} />
       </DragAndDropProvider>
     )

@@ -12,10 +12,6 @@ type Props = Omit<
 const Option = ({ children, ...props }: Props) => {
   const inputRef = React.useRef<HTMLInputElement>(null)
 
-  const handleClick = React.useCallback(() => {
-    if (inputRef.current) inputRef.current.click()
-  }, [])
-
   return (
     <label>
       <input ref={inputRef} {...props} hidden type='radio' />
@@ -24,7 +20,9 @@ const Option = ({ children, ...props }: Props) => {
           [classes['item-active']]: props.checked,
         })}
         disabled={props.checked}
-        onClick={handleClick}
+        onClick={React.useCallback(() => {
+          if (inputRef.current) inputRef.current.click()
+        }, [])}
       >
         {children}
       </Button>
