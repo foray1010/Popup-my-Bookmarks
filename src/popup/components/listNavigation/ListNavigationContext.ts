@@ -1,50 +1,59 @@
 import constate from 'constate'
 import * as React from 'react'
 
-import useMapDispatchToCallback from '../../hooks/useMapDispatchToCallback'
-import {
-  listsCreators,
-  listsInitialState,
-  listsReducer,
-} from './reducers/lists'
+import deleteFromMap from '../../utils/deleteFromMap'
 
 const useListNavigation = () => {
-  const [lists, dispatch] = React.useReducer(listsReducer, listsInitialState)
+  const [highlightedIndices, setHighlightedIndices] = React.useState(
+    new Map<number, number>(),
+  )
 
-  const removeList = useMapDispatchToCallback(
-    dispatch,
-    listsCreators.removeList,
+  const setHighlightedIndex = React.useCallback(
+    (listIndex: number, itemIndex: number) => {
+      setHighlightedIndices((prevState) =>
+        new Map(prevState).set(listIndex, itemIndex),
+      )
+    },
+    [],
   )
-  const resetLists = useMapDispatchToCallback(
-    dispatch,
-    listsCreators.resetLists,
+
+  const unsetHighlightedIndex = React.useCallback(
+    (listIndex: number, itemIndex: number) => {
+      setHighlightedIndices((prevState) => {
+        if (prevState.get(listIndex) !== itemIndex) return prevState
+
+        return deleteFromMap(prevState, listIndex)
+      })
+    },
+    [],
   )
-  const setHighlightedIndex = useMapDispatchToCallback(
-    dispatch,
-    listsCreators.setHighlightedIndex,
+
+  const [itemCounts, setItemCounts] = React.useState(new Map<number, number>())
+
+  const setItemCount = React.useCallback(
+    (listIndex: number, itemCount: number) => {
+      setItemCounts((prevState) => new Map(prevState).set(listIndex, itemCount))
+    },
+    [],
   )
-  const setItemCount = useMapDispatchToCallback(
-    dispatch,
-    listsCreators.setItemCount,
-  )
-  const unsetHighlightedIndex = useMapDispatchToCallback(
-    dispatch,
-    listsCreators.unsetHighlightedIndex,
-  )
+
+  const removeList = React.useCallback((listIndex: number) => {
+    setHighlightedIndices((prevState) => deleteFromMap(prevState, listIndex))
+    setItemCounts((prevState) => deleteFromMap(prevState, listIndex))
+  }, [])
 
   return React.useMemo(
     () => ({
-      lists,
-      removeList,
-      resetLists,
+      listNavigation: { highlightedIndices, itemCounts },
       setHighlightedIndex,
-      setItemCount,
       unsetHighlightedIndex,
+      setItemCount,
+      removeList,
     }),
     [
-      lists,
+      highlightedIndices,
+      itemCounts,
       removeList,
-      resetLists,
       setHighlightedIndex,
       setItemCount,
       unsetHighlightedIndex,

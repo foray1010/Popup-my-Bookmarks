@@ -167,14 +167,14 @@ const MenuContainer = () => {
   }, [bookmarkInfo, isSearching])
 
   const {
-    lists,
+    listNavigation,
     setHighlightedIndex,
     unsetHighlightedIndex,
     setItemCount,
   } = useListNavigationContext()
 
   const allRowNames = React.useMemo(() => menuPattern.flat(), [menuPattern])
-  const highlightedIndex = lists.highlightedIndices.get(0)
+  const highlightedIndex = listNavigation.highlightedIndices.get(0)
 
   React.useEffect(() => {
     setItemCount(0, allRowNames.length)

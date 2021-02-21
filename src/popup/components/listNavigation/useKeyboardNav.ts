@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import cycle from '../../utils/cycle'
 import getLastMapKey from '../../utils/getLastMapKey'
 import { useKeyBindingsEvent } from '../keyBindings'
@@ -18,50 +16,42 @@ export default function useKeyboardNav({
   onPressArrowRight?: (evt: KeyboardEvent) => void
   onPressArrowUp?: (evt: KeyboardEvent) => void
 }): void {
-  const { lists, removeList, setHighlightedIndex } = useListNavigationContext()
+  const {
+    listNavigation,
+    removeList,
+    setHighlightedIndex,
+  } = useListNavigationContext()
 
-  const listsRef = React.useRef(lists)
-  listsRef.current = lists
+  const handlePressArrowVertical = (offset: number) => {
+    const { highlightedIndices, itemCounts } = listNavigation
 
-  const handlePressArrowVertical = React.useCallback(
-    (offset: number) => {
-      const { highlightedIndices, itemCounts } = listsRef.current
+    const lastListIndex = getLastMapKey(itemCounts)
+    if (lastListIndex === undefined) return
 
-      const lastListIndex = getLastMapKey(itemCounts)
-      if (lastListIndex === undefined) return
+    const itemCount = itemCounts.get(lastListIndex)
+    if (itemCount === undefined) return
 
-      const itemCount = itemCounts.get(lastListIndex)
-      if (itemCount === undefined) return
+    const currentItemIndex = highlightedIndices.get(lastListIndex)
+    const nextItemIndex = cycle(
+      0,
+      itemCount - 1,
+      (currentItemIndex !== undefined ? currentItemIndex : -1) + offset,
+    )
+    setHighlightedIndex(lastListIndex, nextItemIndex)
+  }
 
-      const currentItemIndex = highlightedIndices.get(lastListIndex)
-      const nextItemIndex = cycle(
-        0,
-        itemCount - 1,
-        (currentItemIndex !== undefined ? currentItemIndex : -1) + offset,
-      )
-      setHighlightedIndex(lastListIndex, nextItemIndex)
-    },
-    [setHighlightedIndex],
-  )
+  const handlePressArrowDown = (evt: KeyboardEvent) => {
+    if (onPressArrowDown) onPressArrowDown(evt)
 
-  const handlePressArrowDown = React.useCallback(
-    (evt: KeyboardEvent) => {
-      if (onPressArrowDown) onPressArrowDown(evt)
-
-      handlePressArrowVertical(1)
-    },
-    [handlePressArrowVertical, onPressArrowDown],
-  )
+    handlePressArrowVertical(1)
+  }
   useKeyBindingsEvent({ key: 'ArrowDown', windowId }, handlePressArrowDown)
 
-  const handlePressArrowUp = React.useCallback(
-    (evt: KeyboardEvent) => {
-      if (onPressArrowUp) onPressArrowUp(evt)
+  const handlePressArrowUp = (evt: KeyboardEvent) => {
+    if (onPressArrowUp) onPressArrowUp(evt)
 
-      handlePressArrowVertical(-1)
-    },
-    [handlePressArrowVertical, onPressArrowUp],
-  )
+    handlePressArrowVertical(-1)
+  }
   useKeyBindingsEvent({ key: 'ArrowUp', windowId }, handlePressArrowUp)
 
   useKeyBindingsEvent({ key: 'Tab', windowId }, (evt) => {
@@ -75,7 +65,7 @@ export default function useKeyboardNav({
   useKeyBindingsEvent({ key: 'ArrowLeft', windowId }, (evt) => {
     if (onPressArrowLeft) onPressArrowLeft(evt)
 
-    const { itemCounts } = listsRef.current
+    const { itemCounts } = listNavigation
     if (itemCounts.size <= 1) return
 
     const lastListIndex = getLastMapKey(itemCounts)
@@ -87,7 +77,7 @@ export default function useKeyboardNav({
   useKeyBindingsEvent({ key: 'ArrowRight', windowId }, (evt) => {
     if (onPressArrowRight) onPressArrowRight(evt)
 
-    const { itemCounts } = listsRef.current
+    const { itemCounts } = listNavigation
 
     const lastListIndex = getLastMapKey(itemCounts)
     if (lastListIndex === undefined) return

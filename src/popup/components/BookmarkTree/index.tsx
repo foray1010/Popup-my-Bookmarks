@@ -81,7 +81,11 @@ const BookmarkTreeContainer = ({
   )
 
   const { activeKey } = useDragAndDropContext()
-  const { lists, setItemCount, removeList } = useListNavigationContext()
+  const {
+    listNavigation,
+    setItemCount,
+    removeList,
+  } = useListNavigationContext()
 
   React.useEffect(() => {
     setItemCount(treeIndex, treeInfo.children.length)
@@ -99,7 +103,7 @@ const BookmarkTreeContainer = ({
     }
   }, [registerLastPosition, treeId, treeIndex, unregisterLastPosition])
 
-  const highlightedIndex = lists.highlightedIndices.get(treeIndex)
+  const highlightedIndex = listNavigation.highlightedIndices.get(treeIndex)
   const highlightedId =
     highlightedIndex !== undefined
       ? treeInfo.children[highlightedIndex]?.id
