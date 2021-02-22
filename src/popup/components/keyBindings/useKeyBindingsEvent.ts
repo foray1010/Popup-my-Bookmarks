@@ -4,10 +4,10 @@ import { useDeepCompareEffect } from 'use-deep-compare'
 import { useKeyBindingsContext } from './KeyBindingsContext'
 import type { KeyBindingMeta } from './types'
 
-const useKeyBindingsEvent = (
+export default function useKeyBindingsEvent(
   meta: KeyBindingMeta,
   callback: (evt: KeyboardEvent) => void | Promise<void>,
-) => {
+) {
   const { addEventListener, removeEventListener } = useKeyBindingsContext()
 
   const callbackRef = React.useRef(callback)
@@ -28,5 +28,3 @@ const useKeyBindingsEvent = (
     }
   }, [addEventListener, meta, removeEventListener])
 }
-
-export default useKeyBindingsEvent

@@ -5,11 +5,11 @@ interface Props {
   onClose: () => void
   title: string
 }
-const TreeHeader = (props: Props) => (
-  <header className={classes.main}>
-    <h1 className={classes.title}>{props.title}</h1>
-    <Cross className={classes.close} onClick={props.onClose} />
-  </header>
-)
-
-export default TreeHeader
+export default function TreeHeader(props: Props) {
+  return (
+    <header className={classes.main}>
+      <h1 className={classes.title}>{props.title}</h1>
+      <Cross className={classes.close} onClick={props.onClose} />
+    </header>
+  )
+}

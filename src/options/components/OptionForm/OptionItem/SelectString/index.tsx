@@ -7,7 +7,11 @@ import classes from './styles.css'
 interface Props extends React.ComponentProps<typeof Select> {
   choices: Array<string>
 }
-const SelectString = ({ choices, className, ...restProps }: Props) => {
+export default function SelectString({
+  choices,
+  className,
+  ...restProps
+}: Props) {
   return (
     <Select className={classNames(classes.main, className)} {...restProps}>
       {choices.map((optionChoice, optionChoiceIndex) => {
@@ -20,5 +24,3 @@ const SelectString = ({ choices, className, ...restProps }: Props) => {
     </Select>
   )
 }
-
-export default SelectString

@@ -9,11 +9,11 @@ interface Props
   positionLeft: number
   positionTop: number
 }
-const AbsolutePosition = ({
+export default function AbsolutePosition({
   positionLeft,
   positionTop,
   ...restProps
-}: Props) => {
+}: Props) {
   const { insertBodySize } = useGlobalBodySize()
 
   const measureRef = React.useRef<HTMLDivElement>(null)
@@ -77,5 +77,3 @@ const AbsolutePosition = ({
     />
   )
 }
-
-export default AbsolutePosition

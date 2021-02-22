@@ -40,7 +40,7 @@ type Props = ItemData & {
   rowHeight: number
   scrollToIndex?: number
 }
-const BookmarkTree = (props: Props) => {
+export default function BookmarkTree(props: Props) {
   const parentRef = React.useRef<HTMLDivElement>(null)
 
   const getRowHeight = React.useCallback(
@@ -159,5 +159,3 @@ const BookmarkTree = (props: Props) => {
     </div>
   )
 }
-
-export default BookmarkTree

@@ -57,13 +57,13 @@ interface Props {
   unregisterLastPosition: (id: string) => void
   updateLastPosition: (id: string, scrollTop: number) => void
 }
-const BookmarkTreeContainer = ({
+export default function BookmarkTreeContainer({
   treeId,
   scrollTop,
   registerLastPosition,
   unregisterLastPosition,
   updateLastPosition,
-}: Props) => {
+}: Props) {
   const {
     isSearching,
     isShowCover,
@@ -166,5 +166,3 @@ const BookmarkTreeContainer = ({
     </section>
   )
 }
-
-export default BookmarkTreeContainer

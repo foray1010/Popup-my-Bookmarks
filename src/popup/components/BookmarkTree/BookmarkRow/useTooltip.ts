@@ -37,7 +37,11 @@ const getTooltip = async ({
   return tooltipArr.filter(Boolean).join('\n')
 }
 
-const useTooltip = ({ isSearching, isShowTooltip, bookmarkInfo }: Arg) => {
+export default function useTooltip({
+  isSearching,
+  isShowTooltip,
+  bookmarkInfo,
+}: Arg) {
   const [tooltip, setTooltip] = React.useState<string>()
 
   React.useEffect(() => {
@@ -48,5 +52,3 @@ const useTooltip = ({ isSearching, isShowTooltip, bookmarkInfo }: Arg) => {
 
   return tooltip
 }
-
-export default useTooltip

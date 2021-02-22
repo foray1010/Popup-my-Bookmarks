@@ -9,7 +9,7 @@ type Props = Omit<
   'className' | 'hidden' | 'type'
 >
 
-const Option = ({ children, ...props }: Props) => {
+export default function Option({ children, ...props }: Props) {
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   return (
@@ -29,5 +29,3 @@ const Option = ({ children, ...props }: Props) => {
     </label>
   )
 }
-
-export default Option

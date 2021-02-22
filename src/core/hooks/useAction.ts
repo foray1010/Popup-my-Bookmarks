@@ -2,9 +2,10 @@ import * as React from 'react'
 import { useDispatch } from 'react-redux'
 import type { Action, Dispatch } from 'redux'
 
-const useAction = <T extends Array<unknown>, U extends Action<string>>(
-  action: (...args: T) => U,
-) => {
+export default function useAction<
+  T extends Array<unknown>,
+  U extends Action<string>
+>(action: (...args: T) => U) {
   const dispatch = useDispatch<Dispatch<U>>()
 
   return React.useCallback(
@@ -14,5 +15,3 @@ const useAction = <T extends Array<unknown>, U extends Action<string>>(
     [action, dispatch],
   )
 }
-
-export default useAction

@@ -13,7 +13,7 @@ interface Props {
   onRowMouseLeave: (index: number) => React.MouseEventHandler
   unclickableRows: Array<string>
 }
-const Menu = (props: Props) => {
+export default function Menu(props: Props) {
   const allRowNames = props.menuPattern.flat()
 
   return (
@@ -42,5 +42,3 @@ const Menu = (props: Props) => {
     </PlainList>
   )
 }
-
-export default Menu

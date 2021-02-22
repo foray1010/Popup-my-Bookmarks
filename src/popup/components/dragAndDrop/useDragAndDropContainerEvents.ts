@@ -28,9 +28,9 @@ const useScroll = () => {
   return { clearScroll, scroll }
 }
 
-const useDragAndDropContainerEvents = ({
+export default function useDragAndDropContainerEvents({
   margin = 20,
-}: { margin?: number } = {}) => {
+}: { margin?: number } = {}) {
   const { activeKey } = useDragAndDropContext()
   const isDragging = activeKey !== null
 
@@ -70,5 +70,3 @@ const useDragAndDropContainerEvents = ({
 
   return { onMouseMove }
 }
-
-export default useDragAndDropContainerEvents

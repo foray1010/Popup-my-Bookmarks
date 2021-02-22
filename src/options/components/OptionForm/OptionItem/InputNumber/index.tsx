@@ -13,7 +13,12 @@ interface Props extends RestInputProps {
   maximum: number
   minimum: number
 }
-const InputNumber = ({ className, maximum, minimum, ...restProps }: Props) => {
+export default function InputNumber({
+  className,
+  maximum,
+  minimum,
+  ...restProps
+}: Props) {
   return (
     <Input
       className={classNames(classes.main, className)}
@@ -25,5 +30,3 @@ const InputNumber = ({ className, maximum, minimum, ...restProps }: Props) => {
     />
   )
 }
-
-export default InputNumber

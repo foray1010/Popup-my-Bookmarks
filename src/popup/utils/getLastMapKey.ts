@@ -1,8 +1,6 @@
-const getLastMapKey = <K extends number | string, V>(
+export default function getLastMapKey<K extends number | string, V>(
   map: Map<K, V>,
-): K | undefined => {
+): K | undefined {
   const indices = Array.from(map.keys()).sort()
   return indices[indices.length - 1]
 }
-
-export default getLastMapKey

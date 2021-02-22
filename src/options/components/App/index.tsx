@@ -9,20 +9,20 @@ import { NavigationProvider } from '../navigationContext'
 import Router from '../Router'
 import classes from './styles.css'
 
-const App = () => (
-  <ReactQueryClientProvider>
-    <NavigationProvider>
-      <div className={classes.main}>
-        <NavBar />
-        <Router />
-        <Donate />
-      </div>
-    </NavigationProvider>
+export default function App() {
+  return (
+    <ReactQueryClientProvider>
+      <NavigationProvider>
+        <div className={classes.main}>
+          <NavBar />
+          <Router />
+          <Donate />
+        </div>
+      </NavigationProvider>
 
-    {process.env.NODE_ENV === 'development' ? (
-      <ReactQueryDevtools initialIsOpen={false} />
-    ) : null}
-  </ReactQueryClientProvider>
-)
-
-export default App
+      {process.env.NODE_ENV === 'development' ? (
+        <ReactQueryDevtools initialIsOpen={false} />
+      ) : null}
+    </ReactQueryClientProvider>
+  )
+}

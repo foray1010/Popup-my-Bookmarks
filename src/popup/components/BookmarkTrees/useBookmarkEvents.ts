@@ -5,7 +5,7 @@ import webExtension from 'webextension-polyfill'
 import useAction from '../../../core/hooks/useAction'
 import { bookmarkCreators } from '../../reduxs'
 
-const useBookmarkEvents = () => {
+export default function useBookmarkEvents() {
   const refreshBookmarkTrees = useAction(bookmarkCreators.refreshBookmarkTrees)
 
   React.useEffect(() => {
@@ -24,5 +24,3 @@ const useBookmarkEvents = () => {
     }
   }, [refreshBookmarkTrees])
 }
-
-export default useBookmarkEvents

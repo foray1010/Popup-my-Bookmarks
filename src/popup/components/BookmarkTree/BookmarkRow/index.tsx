@@ -29,7 +29,7 @@ interface Props {
   onMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   style?: React.CSSProperties
 }
-const BookmarkRowContainer = ({
+export default function BookmarkRowContainer({
   bookmarkInfo,
   isHighlighted,
   onAuxClick,
@@ -38,7 +38,7 @@ const BookmarkRowContainer = ({
   onMouseEnter,
   onMouseLeave,
   ...restProps
-}: Props) => {
+}: Props) {
   const tooltip = useTooltip({
     isSearching: restProps.isSearching,
     isShowTooltip: restProps.isShowTooltip,
@@ -106,5 +106,3 @@ const BookmarkRowContainer = ({
     </li>
   )
 }
-
-export default BookmarkRowContainer

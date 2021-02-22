@@ -230,10 +230,10 @@ const MenuContainer = () => {
   )
 }
 
-const MenuContainerWithProviders = () => (
-  <ListNavigationProvider>
-    <MenuContainer />
-  </ListNavigationProvider>
-)
-
-export default MenuContainerWithProviders
+export default function MenuContainerWithProviders() {
+  return (
+    <ListNavigationProvider>
+      <MenuContainer />
+    </ListNavigationProvider>
+  )
+}

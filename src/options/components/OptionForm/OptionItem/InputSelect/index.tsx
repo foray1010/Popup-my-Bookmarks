@@ -14,7 +14,12 @@ interface Props extends RestInputProps {
   onChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>
   value: string
 }
-const InputSelect = ({ choices, value, onChange, ...restProps }: Props) => {
+export default function InputSelect({
+  choices,
+  value,
+  onChange,
+  ...restProps
+}: Props) {
   const inputRef = React.useRef<HTMLInputElement>(null)
   const selectRef = React.useRef<HTMLSelectElement>(null)
 
@@ -53,5 +58,3 @@ const InputSelect = ({ choices, value, onChange, ...restProps }: Props) => {
     </div>
   )
 }
-
-export default InputSelect

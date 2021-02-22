@@ -2,14 +2,14 @@ import * as React from 'react'
 
 import { BodySize, useAbsolutePositionContext } from './AbsolutePositionContext'
 
-const useBodySizeStack = (): {
+export default function useGlobalBodySize(): {
   globalBodySize?: BodySize
   insertBodySize: (
     state: BodySize,
   ) => {
     removeBodySize(): void
   }
-} => {
+} {
   const { bodySizeStack, setBodySizeStack } = useAbsolutePositionContext()
 
   const globalBodySize = React.useMemo(() => {
@@ -47,5 +47,3 @@ const useBodySizeStack = (): {
     insertBodySize,
   }
 }
-
-export default useBodySizeStack

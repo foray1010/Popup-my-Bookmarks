@@ -13,13 +13,13 @@ interface Props {
   rowIndex: number
   rowName: string
 }
-const MenuRow = ({
+export default function MenuRow({
   onMouseEnter,
   onMouseLeave,
   rowIndex,
   rowName,
   ...restProps
-}: Props) => {
+}: Props) {
   const handleMouseEnter = React.useMemo(() => onMouseEnter(rowIndex), [
     onMouseEnter,
     rowIndex,
@@ -43,5 +43,3 @@ const MenuRow = ({
     </li>
   )
 }
-
-export default MenuRow

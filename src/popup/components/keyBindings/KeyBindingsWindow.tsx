@@ -7,13 +7,13 @@ import classes from './KeyBindingsWindow.css'
 type Props = React.HTMLAttributes<Element> & {
   windowId: string
 }
-const KeyBindingsWindow = ({
+export default function KeyBindingsWindow({
   children,
   className,
   onFocus,
   windowId,
   ...props
-}: Props) => {
+}: Props) {
   const { appendActiveWindowId, removeActiveWindowId } = useKeyBindingsContext()
 
   React.useEffect(() => {
@@ -50,5 +50,3 @@ const KeyBindingsWindow = ({
     </div>
   )
 }
-
-export default KeyBindingsWindow

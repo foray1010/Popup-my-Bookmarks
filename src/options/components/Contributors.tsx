@@ -29,19 +29,19 @@ const contributors = {
   ],
 }
 
-const Contributors = () => (
-  <dl className={classes.main}>
-    {Object.entries(contributors).map(
-      ([contributeType, contributorsOfType]) => (
-        <React.Fragment key={contributeType}>
-          <dt>{contributeType}</dt>
-          {contributorsOfType.map((contributor) => (
-            <dd key={contributor}>{contributor}</dd>
-          ))}
-        </React.Fragment>
-      ),
-    )}
-  </dl>
-)
-
-export default Contributors
+export default function Contributors() {
+  return (
+    <dl className={classes.main}>
+      {Object.entries(contributors).map(
+        ([contributeType, contributorsOfType]) => (
+          <React.Fragment key={contributeType}>
+            <dt>{contributeType}</dt>
+            {contributorsOfType.map((contributor) => (
+              <dd key={contributor}>{contributor}</dd>
+            ))}
+          </React.Fragment>
+        ),
+      )}
+    </dl>
+  )
+}

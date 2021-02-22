@@ -6,7 +6,7 @@ import { bookmarkCreators } from '../../reduxs'
 import { useKeyBindingsEvent } from '../keyBindings'
 import SearchInput from './SearchInput'
 
-const SearchContainer = () => {
+export default function SearchContainer() {
   const [inputValue, setInputValue] = React.useState('')
 
   const getSearchResult = useAction(bookmarkCreators.getSearchResult)
@@ -35,5 +35,3 @@ const SearchContainer = () => {
     />
   )
 }
-
-export default SearchContainer

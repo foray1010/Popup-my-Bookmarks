@@ -111,7 +111,7 @@ interface Props {
   onDragOver: (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
   onDragStart: (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
 }
-const DragAndDropConsumer = (props: Props) => {
+export default function DragAndDropConsumer(props: Props) {
   const context = useDragAndDropContext()
 
   const { handleClickCapture, handleMouseUpCapture } = useMouseEvents()
@@ -150,5 +150,3 @@ const DragAndDropConsumer = (props: Props) => {
     </StylelessElement>
   )
 }
-
-export default DragAndDropConsumer

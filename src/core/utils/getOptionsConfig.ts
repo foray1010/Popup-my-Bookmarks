@@ -7,7 +7,7 @@ const getMessages = (messageKeys: string[]) => {
   return messageKeys.map((k) => webExtension.i18n.getMessage(k))
 }
 
-const getOptionsConfig = async (): Promise<OptionsConfig> => {
+export default async function getOptionsConfig(): Promise<OptionsConfig> {
   const openBookmarkChoices = getMessages([
     'clickOption1',
     'clickOption2',
@@ -115,5 +115,3 @@ const getOptionsConfig = async (): Promise<OptionsConfig> => {
     },
   }
 }
-
-export default getOptionsConfig

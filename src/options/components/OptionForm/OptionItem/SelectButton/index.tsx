@@ -13,11 +13,11 @@ interface Props extends RestOptionProps {
   choices?: Array<boolean>
   value: boolean
 }
-const SelectButton = ({
+export default function SelectButton({
   choices = [true, false],
   value,
   ...restProps
-}: Props) => {
+}: Props) {
   const leftPercentage = choices.indexOf(value) * (100 / choices.length)
 
   return (
@@ -43,5 +43,3 @@ const SelectButton = ({
     </span>
   )
 }
-
-export default SelectButton

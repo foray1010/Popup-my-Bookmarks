@@ -49,7 +49,7 @@ const AppContainer = () => {
   )
 }
 
-const AppContainerWithProviders = () => {
+export default function AppContainerWithProviders() {
   return (
     <ReactQueryClientProvider>
       <KeyBindingsProvider>
@@ -64,5 +64,3 @@ const AppContainerWithProviders = () => {
     </ReactQueryClientProvider>
   )
 }
-
-export default AppContainerWithProviders

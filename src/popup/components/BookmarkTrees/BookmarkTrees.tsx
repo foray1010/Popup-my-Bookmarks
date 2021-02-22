@@ -11,7 +11,7 @@ interface Props {
   options: Partial<Options>
   treeIds: Array<string>
 }
-const BookmarkTrees = (props: Props) => {
+export default function BookmarkTrees(props: Props) {
   const {
     lastPositions,
     registerLastPosition,
@@ -56,5 +56,3 @@ const BookmarkTrees = (props: Props) => {
     </main>
   )
 }
-
-export default BookmarkTrees

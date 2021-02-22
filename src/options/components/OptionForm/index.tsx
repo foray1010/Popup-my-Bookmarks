@@ -51,7 +51,7 @@ function useGetOptionsWithDefaultValues({
   return isFilledDefaultValues ? options : null
 }
 
-const OptionFormContainer = () => {
+export default function OptionFormContainer() {
   const { currentPath } = useNavigationContext()
 
   const [optionsConfig, setOptionsConfig] = React.useState<OptionsConfig>()
@@ -76,5 +76,3 @@ const OptionFormContainer = () => {
     />
   )
 }
-
-export default OptionFormContainer
