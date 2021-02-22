@@ -24,12 +24,8 @@ const sourceDir = 'src'
 
 const webpackConfig: webpack.Configuration = {
   devtool: isDevelopmentBuild ? 'inline-source-map' : false,
-  entry: appNames.reduce(
-    (acc, appName) => ({
-      ...acc,
-      [appName]: `./${sourceDir}/${appName}`,
-    }),
-    {},
+  entry: Object.fromEntries(
+    appNames.map((appName) => [appName, `./${sourceDir}/${appName}`]),
   ),
   mode: isDevelopmentBuild ? 'development' : 'production',
   module: {

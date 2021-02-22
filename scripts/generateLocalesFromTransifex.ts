@@ -61,14 +61,17 @@ const main = async () => {
       )
       const messagesJson: Messages = JSON.parse(messagesJsonStr)
 
-      const sortedMessagesJson = Object.keys(messagesJson)
-        .sort()
-        .reduce<Messages>((messages, key) => {
-          messagesJson[key].message = messagesJson[key].message.trim()
-          if (!messagesJson[key].message) return messages
+      const sortedMessagesJson = Object.fromEntries(
+        Object.entries(messagesJson)
+          .map(([k, v]) => {
+            const trimmedMessage = v.message.trim()
+            if (!trimmedMessage) return undefined
 
-          return { ...messages, [key]: messagesJson[key] }
-        }, {})
+            return [k, { ...v, message: trimmedMessage }] as const
+          })
+          .filter(<T>(x: T | undefined): x is T => x !== undefined)
+          .sort(([a], [b]) => a.localeCompare(b)),
+      )
 
       let mappedLanguage = ''
       switch (availableLanguage) {
