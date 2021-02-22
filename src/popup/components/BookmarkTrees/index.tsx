@@ -15,7 +15,7 @@ const getTreeIds = (state: RootState) =>
 interface Props {
   mainTreeHeader: React.ReactNode
 }
-const BookmarkTreesContainer = (props: Props) => {
+const InnerBookmarkTreesContainer = (props: Props) => {
   useBookmarkEvents()
 
   const options = useSelector((state: RootState) => state.options)
@@ -32,7 +32,7 @@ const BookmarkTreesContainer = (props: Props) => {
   )
 }
 
-const BookmarkTreesWithHOC = withDragAndDropEvents(
-  withKeyboardNav(BookmarkTreesContainer),
+const BookmarkTreesContainer = withDragAndDropEvents(
+  withKeyboardNav(InnerBookmarkTreesContainer),
 )
-export default BookmarkTreesWithHOC
+export default BookmarkTreesContainer

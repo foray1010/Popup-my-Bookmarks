@@ -136,7 +136,7 @@ const useMenuKeyNav = () => {
 export default function withKeyboardNav<P>(
   WrappedComponent: React.ComponentType<P>,
 ) {
-  const KeyboardNav = (props: P) => {
+  const InnerComponent = (props: P) => {
     useArrowKeysNav()
     useEnterKeyNav()
     useMenuKeyNav()
@@ -144,10 +144,10 @@ export default function withKeyboardNav<P>(
     return <WrappedComponent {...props} />
   }
 
-  return function KeyboardNavWithProviders(props: P) {
+  return function ComponentWithKeyboardNav(props: P) {
     return (
       <ListNavigationProvider>
-        <KeyboardNav {...props} />
+        <InnerComponent {...props} />
       </ListNavigationProvider>
     )
   }

@@ -17,7 +17,7 @@ interface Props {
   title: string
   tooltip?: string
 }
-const BookmarkRowWithRef = React.forwardRef(function BookmarkRow(
+const BookmarkRow = React.forwardRef(function InnerBookmarkRow(
   props: Props,
   setRef: React.Ref<HTMLDivElement>,
 ) {
@@ -52,4 +52,4 @@ const BookmarkRowWithRef = React.forwardRef(function BookmarkRow(
   )
 })
 
-export default BookmarkRowWithRef
+export default BookmarkRow

@@ -148,7 +148,7 @@ const useClickMenuRow = (rowName?: string) => {
   ])
 }
 
-const MenuContainer = () => {
+const InnerMenuContainer = () => {
   const isSearching = useSelector((state: RootState) =>
     Boolean(state.bookmark.searchKeyword),
   )
@@ -230,10 +230,10 @@ const MenuContainer = () => {
   )
 }
 
-export default function MenuContainerWithProviders() {
+export default function MenuContainer() {
   return (
     <ListNavigationProvider>
-      <MenuContainer />
+      <InnerMenuContainer />
     </ListNavigationProvider>
   )
 }

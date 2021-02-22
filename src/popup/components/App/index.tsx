@@ -15,7 +15,7 @@ import { Menu, MenuProvider } from '../menu'
 import Search from '../Search'
 import useGlobalEvents from './useGlobalEvents'
 
-const AppContainer = () => {
+const InnerApp = () => {
   useGlobalEvents()
 
   const options = useSelector((state: RootState) => state.options)
@@ -49,14 +49,14 @@ const AppContainer = () => {
   )
 }
 
-export default function AppContainerWithProviders() {
+export default function App() {
   return (
     <ReactQueryClientProvider>
       <KeyBindingsProvider>
         <AbsolutePositionProvider>
           <EditorProvider>
             <MenuProvider>
-              <AppContainer />
+              <InnerApp />
             </MenuProvider>
           </EditorProvider>
         </AbsolutePositionProvider>
