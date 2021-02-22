@@ -15,9 +15,9 @@ import isMac from '../../utils/isMac'
 import { useKeyBindingsEvent } from '../keyBindings'
 import {
   ListNavigationProvider,
+  useKeyboardNav,
   useListNavigationContext,
-} from '../listNavigation/ListNavigationContext'
-import useKeyboardNav from '../listNavigation/useKeyboardNav'
+} from '../listNavigation'
 import { useMenuContext } from '../menu'
 
 const useArrowKeysNav = () => {

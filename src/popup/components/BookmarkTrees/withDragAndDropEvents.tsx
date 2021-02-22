@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import useAction from '../../../core/hooks/useAction'
 import { bookmarkCreators } from '../../reduxs'
-import { DragAndDropProvider } from '../dragAndDrop/DragAndDropContext'
+import { DragAndDropProvider } from '../dragAndDrop'
 
 export default function withDragAndDropEvents<P>(
   WrappedComponent: React.ComponentType<P>,

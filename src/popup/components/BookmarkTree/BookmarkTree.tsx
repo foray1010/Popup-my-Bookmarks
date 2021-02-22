@@ -9,8 +9,7 @@ import type {
   BookmarkInfo,
   BookmarkTree as BookmarkTreeType,
 } from '../../types'
-import type { ResponseEvent } from '../dragAndDrop/DragAndDropConsumer'
-import useDragAndDropContainerEvents from '../dragAndDrop/useDragAndDropContainerEvents'
+import { ResponseEvent, useDragAndDropContainerEvents } from '../dragAndDrop'
 import classes from './bookmark-tree.css'
 import BookmarkRow from './BookmarkRow'
 

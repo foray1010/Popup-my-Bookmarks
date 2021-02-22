@@ -6,8 +6,10 @@ import { useSelector } from 'react-redux'
 import { ReactQueryClientProvider } from '../../../core/utils/queryClient'
 import { OPTIONS } from '../../constants'
 import type { RootState } from '../../reduxs'
-import { AbsolutePositionProvider } from '../absolutePosition/AbsolutePositionContext'
-import useGlobalBodySize from '../absolutePosition/useGlobalBodySize'
+import {
+  AbsolutePositionProvider,
+  useGlobalBodySize,
+} from '../absolutePosition'
 import BookmarkTrees from '../BookmarkTrees'
 import { Editor, EditorProvider } from '../editor'
 import { KeyBindingsProvider } from '../keyBindings'

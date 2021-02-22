@@ -7,8 +7,8 @@ import { BOOKMARK_TYPES, OPTIONS } from '../../constants'
 import type { RootState } from '../../reduxs'
 import { bookmarkCreators } from '../../reduxs'
 import type { BookmarkInfo, BookmarkTree } from '../../types'
-import { useDragAndDropContext } from '../dragAndDrop/DragAndDropContext'
-import { useListNavigationContext } from '../listNavigation/ListNavigationContext'
+import { useDragAndDropContext } from '../dragAndDrop'
+import { useListNavigationContext } from '../listNavigation'
 
 export default function useRowHoverEvents({
   closeNextTrees,

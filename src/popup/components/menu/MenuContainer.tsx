@@ -8,14 +8,14 @@ import { MENU_WINDOW } from '../../constants/windows'
 import { useGetBookmarkInfo } from '../../hooks/bookmarks'
 import { bookmarkCreators, RootState } from '../../reduxs'
 import isMac from '../../utils/isMac'
-import AbsolutePosition from '../absolutePosition/AbsolutePosition'
+import { AbsolutePosition } from '../absolutePosition'
 import { useEditorContext } from '../editor'
 import { KeyBindingsWindow, useKeyBindingsEvent } from '../keyBindings'
 import {
   ListNavigationProvider,
+  useKeyboardNav,
   useListNavigationContext,
-} from '../listNavigation/ListNavigationContext'
-import useKeyboardNav from '../listNavigation/useKeyboardNav'
+} from '../listNavigation'
 import Mask from '../Mask'
 import Menu from './Menu'
 import { useMenuContext } from './useMenu'

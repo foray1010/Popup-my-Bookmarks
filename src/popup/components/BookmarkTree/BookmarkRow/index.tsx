@@ -3,9 +3,7 @@ import * as React from 'react'
 
 import * as CST from '../../../constants'
 import type { BookmarkInfo } from '../../../types'
-import DragAndDropConsumer, {
-  ResponseEvent,
-} from '../../dragAndDrop/DragAndDropConsumer'
+import { DragAndDropConsumer, ResponseEvent } from '../../dragAndDrop'
 import classes from './bookmark-row.css'
 import BookmarkRow from './BookmarkRow'
 import useTooltip from './useTooltip'

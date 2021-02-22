@@ -2,11 +2,7 @@ import * as React from 'react'
 
 import StylelessElement from '../../../core/components/baseItems/StylelessElement'
 import { useDragAndDropContext } from './DragAndDropContext'
-
-export interface ResponseEvent {
-  activeKey: string | null
-  itemKey: string
-}
+import type { ResponseEvent } from './types'
 
 const useDragEvents = ({
   itemKey,

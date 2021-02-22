@@ -4,7 +4,7 @@ import useAction from '../../../core/hooks/useAction'
 import * as CST from '../../constants'
 import { bookmarkCreators } from '../../reduxs'
 import type { BookmarkInfo, BookmarkTree } from '../../types'
-import type { ResponseEvent } from '../dragAndDrop/DragAndDropConsumer'
+import type { ResponseEvent } from '../dragAndDrop'
 
 export default function useRowDragEvents({
   closeNextTrees,
