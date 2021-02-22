@@ -45,8 +45,8 @@ const useDragAndDrop = ({
   onDragEnd,
   onDrop,
 }: {
-  onDragEnd: (evt: MouseEvent) => void
-  onDrop: (evt: MouseEvent, activeKey: string) => void
+  onDragEnd(evt: MouseEvent): void
+  onDrop(evt: MouseEvent, activeKey: string): void
 }) => {
   const state = useDragAndDropState()
 

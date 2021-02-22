@@ -39,7 +39,9 @@ const main = async () => {
     transifexPassword: string
     transifexUsername: string
   } = await prompts(questions, {
-    onCancel: () => process.exit(130),
+    onCancel() {
+      process.exit(130)
+    },
   })
 
   const transifex = new Transifex({

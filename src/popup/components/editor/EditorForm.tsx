@@ -12,8 +12,8 @@ interface Props {
   defaultUrl?: string
   header: string
   isAllowedToEditUrl: boolean
-  onCancel: () => void
-  onConfirm: (title: string, url: string) => void
+  onCancel(): void
+  onConfirm(title: string, url: string): void
   style: React.CSSProperties
 }
 export default function Editor({ onConfirm, ...props }: Props) {

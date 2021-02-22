@@ -8,7 +8,7 @@ import { ReactComponent as Search } from '../../images/search.svg'
 import classes from './search-input.css'
 
 interface Props extends React.ComponentProps<typeof Input> {
-  onCancel: () => void
+  onCancel(): void
 }
 const SearchInput = React.forwardRef<HTMLInputElement, Props>(
   function InnerSearchInput({ onCancel, ...inputProps }: Props, ref) {

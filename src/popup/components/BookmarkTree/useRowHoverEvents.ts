@@ -15,7 +15,7 @@ export default function useRowHoverEvents({
   treeIndex,
   treeInfo,
 }: {
-  closeNextTrees: () => void
+  closeNextTrees(): void
   treeIndex: number
   treeInfo: BookmarkTree
 }) {

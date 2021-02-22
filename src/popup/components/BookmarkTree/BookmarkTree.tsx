@@ -20,21 +20,21 @@ interface ItemData {
   isDisableDragAndDrop: boolean
   isSearching: boolean
   isShowTooltip: boolean
-  onRowAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onRowClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onRowDragOver: (
+  onRowAuxClick(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
+  onRowClick(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
+  onRowDragOver(
     bookmarkInfo: BookmarkInfo,
-  ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
+  ): (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
   onRowDragStart: React.MouseEventHandler
-  onRowMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onRowMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onRowMouseEnter(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
+  onRowMouseLeave(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
   treeInfo: BookmarkTreeType
 }
 
 type Props = ItemData & {
   lastScrollTop?: number
   listItemWidth: number
-  noRowsRenderer: () => React.ReactElement | null
+  noRowsRenderer(): React.ReactElement | null
   onScroll?: React.UIEventHandler
   rowHeight: number
   scrollToIndex?: number

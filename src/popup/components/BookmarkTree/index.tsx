@@ -53,9 +53,9 @@ const useReduxProps = ({ treeId }: { treeId: string }) => {
 interface Props {
   treeId: string
   scrollTop?: number
-  registerLastPosition: (index: number, id: string) => void
-  unregisterLastPosition: (id: string) => void
-  updateLastPosition: (id: string, scrollTop: number) => void
+  registerLastPosition(index: number, id: string): void
+  unregisterLastPosition(id: string): void
+  updateLastPosition(id: string, scrollTop: number): void
 }
 export default function BookmarkTreeContainer({
   treeId,

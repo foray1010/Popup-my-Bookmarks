@@ -10,7 +10,7 @@ export default function useRowDragEvents({
   closeNextTrees,
   treeInfo,
 }: {
-  closeNextTrees: () => void
+  closeNextTrees(): void
   treeInfo: BookmarkTree
 }) {
   const removeDragIndicator = useAction(bookmarkCreators.removeDragIndicator)
@@ -50,7 +50,7 @@ export default function useRowDragEvents({
 
         setDragIndicator(bookmarkInfo.parentId, targetIndex)
       },
-      handleRowDragStart: () => {
+      handleRowDragStart() {
         closeNextTrees()
       },
     }

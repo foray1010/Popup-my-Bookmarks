@@ -4,9 +4,9 @@ import { BodySize, useAbsolutePositionContext } from './AbsolutePositionContext'
 
 export default function useGlobalBodySize(): {
   globalBodySize?: BodySize
-  insertBodySize: (
+  insertBodySize(
     state: BodySize,
-  ) => {
+  ): {
     removeBodySize(): void
   }
 } {

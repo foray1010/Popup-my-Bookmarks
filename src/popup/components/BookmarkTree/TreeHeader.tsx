@@ -2,7 +2,7 @@ import { ReactComponent as Cross } from '../../images/cross.svg'
 import classes from './tree-header.css'
 
 interface Props {
-  onClose: () => void
+  onClose(): void
   title: string
 }
 export default function TreeHeader(props: Props) {

@@ -13,7 +13,7 @@ export default function configureStore<
 }: {
   preloadedState?: PreloadedState<S>
   rootReducer: Reducer<S, A>
-  rootSaga: () => SagaIterator
+  rootSaga(): SagaIterator
 }): Store<S, A> {
   const sagaMiddleware = createSagaMiddleware()
 

@@ -17,14 +17,14 @@ interface Props {
   isSearching: boolean
   isShowTooltip: boolean
   isUnclickable: boolean
-  onAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onDragOver: (
+  onAuxClick(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
+  onClick(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
+  onDragOver(
     bookmarkInfo: BookmarkInfo,
-  ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
+  ): (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
   onDragStart: React.MouseEventHandler
-  onMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onMouseEnter(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
+  onMouseLeave(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
   style?: React.CSSProperties
 }
 export default function BookmarkRowContainer({
