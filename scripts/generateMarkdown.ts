@@ -48,4 +48,7 @@ const main = async () => {
   await Promise.all([generateReadme(), generateStoreDescription()])
 }
 
-main().catch(console.error)
+main().catch((err: Error) => {
+  console.error(err)
+  process.exit(1)
+})
