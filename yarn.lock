@@ -1126,10 +1126,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/archivo-narrow/-/archivo-narrow-4.2.1.tgz#dc6e4d1b232055f3d1154ce5edf9bc4d186535bd"
   integrity sha512-SPvc+Nm381ugvvwDSc1f8FDDn5Bgi1vq4eh2UvJbX2ceXDgi6Tn9Lew+BdYleWXGAk+027S9JcwalA6qazLoQA==
 
-"@foray1010/babel-preset@6.1.1":
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-6.1.1.tgz#5c8b34b757ac43b7fa9091ebdfb4c3d22a554a17"
-  integrity sha512-yetsS5JldOZuRJ5HQA/idt/McnVeq7Ft6mPEE/z01wfFPzCVlpnD58ioLlwqBKS5JNTBAzc7zeg2JUWBeM6SPw==
+"@foray1010/babel-preset@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@foray1010/babel-preset/-/babel-preset-6.1.2.tgz#3c7ce9ade3f158b829ec6ec54052c352bd27721c"
+  integrity sha512-oVZAMCwvlqi7poVv6yPEDNFzVkOM9kqUIeAdehRaZobFap3TwWfTeaGd1zu/etZiXlfFLlnvjR4Rp+wx6wVihg==
   dependencies:
     "@babel/helper-plugin-utils" "^7.10.4"
     "@babel/plugin-transform-react-constant-elements" "^7.12.1"
@@ -1150,10 +1150,10 @@
   dependencies:
     read-pkg-up "^7.0.0"
 
-"@foray1010/eslint-config@4.5.1":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-4.5.1.tgz#58e52ddc1b2938fee3afbab6bc9580e7259c2d45"
-  integrity sha512-hDvLlS+6X+DDSXMKpPLFAf59xYilQ7eyPAOKUF7FXWxDRihjBmQ5AG2bTVRcT+s9Vbam1tID+dO3yjUfXhjG2Q==
+"@foray1010/eslint-config@4.6.0":
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-4.6.0.tgz#b4694adb017e7a91ffc03b0fd69298b47a2ed6ce"
+  integrity sha512-eXTMmhTFK4BscQaRZpG8B3Q5KRfu2MhsWB9aNgT+FtUkouXrOstdPzEcBmO369iekQ8wv+gEaoISvkVVKGwSvw==
   dependencies:
     "@foray1010/common-presets-utils" "^2.1.2"
     "@typescript-eslint/eslint-plugin" "^4.0.1"
@@ -1165,7 +1165,7 @@
     eslint-plugin-import "^2.18.2"
     eslint-plugin-jest "^24.0.0"
     eslint-plugin-jest-dom "^3.0.1"
-    eslint-plugin-jsdoc "^31.0.0"
+    eslint-plugin-jsdoc "^32.0.0"
     eslint-plugin-node "^11.0.0"
     eslint-plugin-prettier "^3.1.1"
     eslint-plugin-react "^7.16.0"
@@ -1173,17 +1173,17 @@
     eslint-plugin-simple-import-sort "^7.0.0"
     eslint-plugin-testing-library "^3.1.0"
 
-"@foray1010/prettier-config@4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-4.2.0.tgz#ca9b08f725436f130c5140d7b490d2ab093c8ad0"
-  integrity sha512-LQpVogRK7GPMF75HXFOmyWwqcAu9jkE3uVnkdeHk/2Vg54l7rqyQ6sy3oIVg0DOGXfHFwNAEq8xo9b3UvaoFRw==
+"@foray1010/prettier-config@4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-4.3.0.tgz#bc56388c177a3c38aee6b9474d9bffd6c96975b6"
+  integrity sha512-2JMEb4DT58UVQ5WOX+kWoMZhHZHqBLuCkbbdTzVP78461oFuFc9TpyC4OFq/DUS4sOJk4fQefspNYEQ8hNS/Ug==
   dependencies:
     prettier-plugin-packagejson "^2.2.5"
 
-"@foray1010/remark-preset@3.4.1":
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/remark-preset/-/remark-preset-3.4.1.tgz#eb9ac9d23ae65a68b3632431fed83aab291c993e"
-  integrity sha512-4Bs033v9ZE+MkQOdfD7YN4cn1o7S6UYv+Kgb5fqzZ1JKXMamSkCNbhCkoafqwZLG1n5uloVoMZFIZngAinaz6w==
+"@foray1010/remark-preset@3.4.2":
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/@foray1010/remark-preset/-/remark-preset-3.4.2.tgz#a2cb9ee9a69d7ff85a9a5e806bd0fa1f58b64384"
+  integrity sha512-JFMtjuFTzSk/BwfbmeDhLAzME7HKeRBI4siRcNTIWzUoBS9Z1UpFrc+cd6Z4iOChrhwEBDL0PYyG/iWyTDPRPw==
   dependencies:
     remark-frontmatter "^3.0.0"
     remark-lint-no-dead-urls "^1.0.2"
@@ -4955,10 +4955,10 @@ eslint-plugin-jest@^24.0.0:
   dependencies:
     "@typescript-eslint/experimental-utils" "^4.0.1"
 
-eslint-plugin-jsdoc@^31.0.0:
-  version "31.6.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-31.6.1.tgz#98040c801500572fff71c984a097d89946f1e450"
-  integrity sha512-5hCV3u+1VSEUMyfdTl+dpWsioD7tqQr2ILQw+KbXrF42AVxCLO8gnNLR6zDCDjqGGpt79V1sgY0RRchCWuCigg==
+eslint-plugin-jsdoc@^32.0.0:
+  version "32.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-32.2.0.tgz#d848ea8475a9be63d8d261bd7fa01cf2a2bb32d5"
+  integrity sha512-ikeVeF3JVmzjcmGd04OZK0rXjgiw46TWtNX+OhyF2jQlw3w1CAU1vyAyLv8PZcIjp7WxP4N20Vg1CI9bp/52dw==
   dependencies:
     comment-parser "1.1.2"
     debug "^4.3.1"
