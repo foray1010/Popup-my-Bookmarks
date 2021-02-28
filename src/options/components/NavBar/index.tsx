@@ -1,5 +1,4 @@
 import classNames from 'clsx'
-import type * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import Button from '../../../core/components/baseItems/Button'
