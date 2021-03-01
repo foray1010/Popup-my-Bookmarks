@@ -27,7 +27,7 @@
     "chrome >= 73"
   ],
   "dependencies": {
-    "@babel/runtime": "7.12.18",
+    "@babel/runtime": "7.13.8",
     "@fontsource/archivo-narrow": "4.2.1",
     "@rehooks/component-size": "1.0.3",
     "clsx": "1.1.1",
@@ -49,7 +49,7 @@
     "webextension-polyfill": "0.7.0"
   },
   "devDependencies": {
-    "@babel/core": "7.12.17",
+    "@babel/core": "7.13.8",
     "@commitlint/cli": "12.0.1",
     "@commitlint/config-conventional": "12.0.1",
     "@foray1010/babel-preset": "6.1.3",
