@@ -11,7 +11,7 @@ const ActionlessForm = React.forwardRef<HTMLFormElement, Props>(
       <form
         {...props}
         ref={ref}
-        onSubmit={React.useCallback(
+        onSubmit={React.useCallback<React.FormEventHandler<HTMLFormElement>>(
           (evt) => {
             evt.preventDefault()
 
