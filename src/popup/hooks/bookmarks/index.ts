@@ -7,7 +7,7 @@ import type { BookmarkInfo, BookmarkTree } from '../../types'
 import { queryKey } from './constants'
 import { generateNoBookmarkPlaceholder, toBookmarkInfo } from './utils'
 
-async function getBookmarkInfo(id: string): Promise<BookmarkInfo> {
+export async function getBookmarkInfo(id: string): Promise<BookmarkInfo> {
   if (id.startsWith(CST.NO_BOOKMARK_ID_PREFIX)) {
     return generateNoBookmarkPlaceholder(
       id.replace(CST.NO_BOOKMARK_ID_PREFIX, ''),

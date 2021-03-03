@@ -6,6 +6,7 @@ import useAction from '../../../core/hooks/useAction'
 import * as CST from '../../constants'
 import { MENU_WINDOW } from '../../constants/windows'
 import { useGetBookmarkInfo } from '../../hooks/bookmarks'
+import useDeleteBookmark from '../../hooks/bookmarks/mutation/useDeleteBookmark'
 import { bookmarkCreators, RootState } from '../../reduxs'
 import isMac from '../../utils/isMac'
 import { AbsolutePosition } from '../absolutePosition'
@@ -33,7 +34,7 @@ const useClickMenuRow = (rowName?: string) => {
   const addSeparator = useAction(bookmarkCreators.addSeparator)
   const copyBookmark = useAction(bookmarkCreators.copyBookmark)
   const cutBookmark = useAction(bookmarkCreators.cutBookmark)
-  const deleteBookmark = useAction(bookmarkCreators.deleteBookmark)
+  const { mutate: deleteBookmark } = useDeleteBookmark()
   const openBookmarksInBrowser = useAction(
     bookmarkCreators.openBookmarksInBrowser,
   )
@@ -70,7 +71,7 @@ const useClickMenuRow = (rowName?: string) => {
         break
 
       case CST.MENU_DEL:
-        deleteBookmark(bookmarkInfo.id)
+        deleteBookmark({ id: bookmarkInfo.id })
         break
 
       case CST.MENU_EDIT:
