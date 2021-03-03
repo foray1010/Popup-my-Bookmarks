@@ -5,27 +5,9 @@ import type { Options } from '../../../core/types/options'
 import * as CST from '../../constants'
 import type { BookmarkInfo, BookmarkTree } from '../../types'
 import { queryKey } from './constants'
-import { generateNoBookmarkPlaceholder, toBookmarkInfo } from './utils'
-
-export async function getBookmarkInfo(id: string): Promise<BookmarkInfo> {
-  if (id.startsWith(CST.NO_BOOKMARK_ID_PREFIX)) {
-    return generateNoBookmarkPlaceholder(
-      id.replace(CST.NO_BOOKMARK_ID_PREFIX, ''),
-    )
-  }
-
-  const [bookmarkNode] = await webExtension.bookmarks.get(id)
-  return toBookmarkInfo(bookmarkNode)
-}
-export function useGetBookmarkInfo(id?: string) {
-  return useQuery(
-    [queryKey, id],
-    async (): Promise<BookmarkInfo | undefined> => {
-      if (id === undefined) return undefined
-      return await getBookmarkInfo(id)
-    },
-  )
-}
+import { getBookmarkInfo } from './query/useGetBookmarkInfo'
+import { generateNoBookmarkPlaceholder } from './utils/generators'
+import { toBookmarkInfo } from './utils/transformers'
 
 async function getBookmarkChildren(id: string): Promise<BookmarkInfo[]> {
   const bookmarkNodes = await webExtension.bookmarks.getChildren(id)

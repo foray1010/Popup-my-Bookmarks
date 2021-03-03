@@ -3,8 +3,8 @@ import webExtension from 'webextension-polyfill'
 
 import { queryClient } from '../../../../core/utils/queryClient'
 import { BOOKMARK_TYPES } from '../../../constants'
-import { getBookmarkInfo } from '..'
 import { queryKey } from '../constants'
+import { getBookmarkInfo } from '../query/useGetBookmarkInfo'
 
 export default function useDeleteBookmark() {
   return useMutation(
