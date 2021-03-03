@@ -4,9 +4,8 @@ import webExtension from 'webextension-polyfill'
 import type { Options } from '../../../core/types/options'
 import * as CST from '../../constants'
 import type { BookmarkInfo, BookmarkTree } from '../../types'
+import { queryKey } from './constants'
 import { generateNoBookmarkPlaceholder, toBookmarkInfo } from './utils'
-
-const queryKey = 'bookmarks'
 
 async function getBookmarkInfo(id: string): Promise<BookmarkInfo> {
   if (id.startsWith(CST.NO_BOOKMARK_ID_PREFIX)) {

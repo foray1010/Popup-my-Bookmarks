@@ -44,15 +44,6 @@ export const deleteBookmark = createAction('DELETE_BOOKMARK', (id: string) => ({
   id,
 }))()
 
-export const editBookmark = createAction(
-  'EDIT_BOOKMARK',
-  (id: string, title: string, url: string) => ({
-    id,
-    title,
-    url,
-  }),
-)()
-
 export const getSearchResult = createAction(
   'GET_SEARCH_RESULT',
   (searchKeyword: string) => ({

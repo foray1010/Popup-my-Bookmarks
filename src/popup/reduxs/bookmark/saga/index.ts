@@ -7,7 +7,6 @@ import { addSeparator } from './modules/addSeparator'
 import { createBookmark } from './modules/createBookmark'
 import { createBookmarkAfterId } from './modules/createBookmarkAfterId'
 import { deleteBookmark } from './modules/deleteBookmark'
-import { editBookmark } from './modules/editBookmark'
 import { getSearchResult } from './modules/getSearchResult'
 import { initBookmarkTrees } from './modules/initBookmarkTrees'
 import { moveBookmarkToDragIndicator } from './modules/moveBookmarkToDragIndicator'
@@ -28,7 +27,6 @@ export function* bookmarkSaga() {
     createBookmarkAfterId,
   )
   yield takeEvery(getType(bookmarkCreators.deleteBookmark), deleteBookmark)
-  yield takeLatest(getType(bookmarkCreators.editBookmark), editBookmark)
   yield takeLatest(getType(bookmarkCreators.getSearchResult), getSearchResult)
   yield takeLatest(
     getType(bookmarkCreators.initBookmarkTrees),

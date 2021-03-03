@@ -6,6 +6,7 @@ import useAction from '../../../core/hooks/useAction'
 import { OPTIONS } from '../../constants'
 import { EDITOR_WINDOW } from '../../constants/windows'
 import { useGetBookmarkInfo } from '../../hooks/bookmarks'
+import useEditBookmark from '../../hooks/bookmarks/mutation/useEditBookmark'
 import type { RootState } from '../../reduxs'
 import { bookmarkCreators } from '../../reduxs'
 import { AbsolutePosition } from '../absolutePosition'
@@ -54,11 +55,14 @@ const UpdateEditorForm = ({
 }: UpdateEditorFormProps) => {
   const { data: bookmarkInfo } = useGetBookmarkInfo(editTargetId)
 
-  const editBookmark = useAction(bookmarkCreators.editBookmark)
+  const { mutateAsync: editBookmark } = useEditBookmark()
 
   const handleConfirm = React.useCallback(
-    (title: string, url: string) => {
-      editBookmark(editTargetId, title, url)
+    async (title: string, url?: string) => {
+      await editBookmark({
+        id: editTargetId,
+        changes: { title, url },
+      })
 
       onConfirm(title, url)
     },
