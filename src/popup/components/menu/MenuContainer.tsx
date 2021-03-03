@@ -5,6 +5,10 @@ import webExtension from 'webextension-polyfill'
 import useAction from '../../../core/hooks/useAction'
 import * as CST from '../../constants'
 import { MENU_WINDOW } from '../../constants/windows'
+import {
+  useBookmarkCurrentPage,
+  useCreateSeparator,
+} from '../../hooks/bookmarks/mutation/createBookmark'
 import useDeleteBookmark from '../../hooks/bookmarks/mutation/useDeleteBookmark'
 import { useGetBookmarkInfo } from '../../hooks/bookmarks/query/useGetBookmarkInfo'
 import { bookmarkCreators, RootState } from '../../reduxs'
@@ -30,8 +34,8 @@ const useClickMenuRow = (rowName?: string) => {
     state.isOpen ? state.targetId : undefined,
   )
 
-  const addCurrentPage = useAction(bookmarkCreators.addCurrentPage)
-  const addSeparator = useAction(bookmarkCreators.addSeparator)
+  const { mutate: bookmarkCurrentPage } = useBookmarkCurrentPage()
+  const { mutate: createSeparator } = useCreateSeparator()
   const copyBookmark = useAction(bookmarkCreators.copyBookmark)
   const cutBookmark = useAction(bookmarkCreators.cutBookmark)
   const { mutate: deleteBookmark } = useDeleteBookmark()
@@ -55,11 +59,17 @@ const useClickMenuRow = (rowName?: string) => {
         break
 
       case CST.MENU_ADD_PAGE:
-        addCurrentPage(bookmarkInfo.parentId, bookmarkInfo.storageIndex + 1)
+        bookmarkCurrentPage({
+          parentId: bookmarkInfo.parentId,
+          index: bookmarkInfo.storageIndex + 1,
+        })
         break
 
       case CST.MENU_ADD_SEPARATOR:
-        addSeparator(bookmarkInfo.parentId, bookmarkInfo.storageIndex + 1)
+        createSeparator({
+          parentId: bookmarkInfo.parentId,
+          index: bookmarkInfo.storageIndex + 1,
+        })
         break
 
       case CST.MENU_COPY:
@@ -133,11 +143,11 @@ const useClickMenuRow = (rowName?: string) => {
 
     close()
   }, [
-    addCurrentPage,
-    addSeparator,
+    bookmarkCurrentPage,
     bookmarkInfo,
     close,
     copyBookmark,
+    createSeparator,
     cutBookmark,
     deleteBookmark,
     openBookmarksInBrowser,

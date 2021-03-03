@@ -3,44 +3,11 @@ import { createAction } from 'typesafe-actions'
 import type * as CST from '../../constants'
 import type { BookmarkTree } from '../../types'
 
-export const addCurrentPage = createAction(
-  'ADD_CURRENT_PAGE',
-  (parentId: string, index: number) => ({ parentId, index }),
-)()
-
-export const addSeparator = createAction(
-  'ADD_SEPARATOR',
-  (parentId: string, index: number) => ({ parentId, index }),
-)()
-
 export const copyBookmark = createAction('COPY_BOOKMARK', (id: string) => ({
   id,
 }))()
 
-export const createBookmark = createAction(
-  'CREATE_BOOKMARK',
-  (parentId: string, index: number, title: string, url: string) => ({
-    parentId,
-    index,
-    title,
-    url,
-  }),
-)()
-
-export const createBookmarkAfterId = createAction(
-  'CREATE_BOOKMARK_AFTER_ID',
-  (id: string, title: string, url: string) => ({
-    id,
-    title,
-    url,
-  }),
-)()
-
 export const cutBookmark = createAction('CUT_BOOKMARK', (id: string) => ({
-  id,
-}))()
-
-export const deleteBookmark = createAction('DELETE_BOOKMARK', (id: string) => ({
   id,
 }))()
 

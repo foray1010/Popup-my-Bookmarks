@@ -1,11 +1,7 @@
-import { takeEvery, takeLatest } from 'redux-saga/effects'
+import { takeLatest } from 'redux-saga/effects'
 import { getType } from 'typesafe-actions'
 
 import * as bookmarkCreators from '../actions'
-import { addCurrentPage } from './modules/addCurrentPage'
-import { addSeparator } from './modules/addSeparator'
-import { createBookmark } from './modules/createBookmark'
-import { createBookmarkAfterId } from './modules/createBookmarkAfterId'
 import { getSearchResult } from './modules/getSearchResult'
 import { initBookmarkTrees } from './modules/initBookmarkTrees'
 import { moveBookmarkToDragIndicator } from './modules/moveBookmarkToDragIndicator'
@@ -18,13 +14,6 @@ import { sortBookmarksByName } from './modules/sortBookmarksByName'
 import { toggleBookmarkTree } from './modules/toggleBookmarkTree'
 
 export function* bookmarkSaga() {
-  yield takeLatest(getType(bookmarkCreators.addCurrentPage), addCurrentPage)
-  yield takeLatest(getType(bookmarkCreators.addSeparator), addSeparator)
-  yield takeEvery(getType(bookmarkCreators.createBookmark), createBookmark)
-  yield takeLatest(
-    getType(bookmarkCreators.createBookmarkAfterId),
-    createBookmarkAfterId,
-  )
   yield takeLatest(getType(bookmarkCreators.getSearchResult), getSearchResult)
   yield takeLatest(
     getType(bookmarkCreators.initBookmarkTrees),

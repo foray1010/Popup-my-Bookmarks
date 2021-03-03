@@ -2,13 +2,12 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 import webExtension from 'webextension-polyfill'
 
-import useAction from '../../../core/hooks/useAction'
 import { OPTIONS } from '../../constants'
 import { EDITOR_WINDOW } from '../../constants/windows'
+import { useCreateBookmarkAfterId } from '../../hooks/bookmarks/mutation/createBookmark'
 import useEditBookmark from '../../hooks/bookmarks/mutation/useEditBookmark'
 import { useGetBookmarkInfo } from '../../hooks/bookmarks/query/useGetBookmarkInfo'
 import type { RootState } from '../../reduxs'
-import { bookmarkCreators } from '../../reduxs'
 import { AbsolutePosition } from '../absolutePosition'
 import { KeyBindingsWindow } from '../keyBindings'
 import Mask from '../Mask'
@@ -25,9 +24,7 @@ const CreateEditorForm = ({
   onConfirm,
   ...editorFormProps
 }: CreateEditorFormProps) => {
-  const createBookmarkAfterId = useAction(
-    bookmarkCreators.createBookmarkAfterId,
-  )
+  const { mutate: createBookmarkAfterId } = useCreateBookmarkAfterId()
 
   return (
     <EditorForm
@@ -35,7 +32,7 @@ const CreateEditorForm = ({
       defaultTitle={webExtension.i18n.getMessage('newFolder')}
       onConfirm={React.useCallback(
         (title: string, url: string) => {
-          createBookmarkAfterId(createAfterId, title, url)
+          createBookmarkAfterId({ createAfterId, title, url })
 
           onConfirm(title, url)
         },
@@ -55,11 +52,11 @@ const UpdateEditorForm = ({
 }: UpdateEditorFormProps) => {
   const { data: bookmarkInfo } = useGetBookmarkInfo(editTargetId)
 
-  const { mutateAsync: editBookmark } = useEditBookmark()
+  const { mutate: editBookmark } = useEditBookmark()
 
   const handleConfirm = React.useCallback(
-    async (title: string, url?: string) => {
-      await editBookmark({
+    (title: string, url?: string) => {
+      editBookmark({
         id: editTargetId,
         changes: { title, url },
       })
