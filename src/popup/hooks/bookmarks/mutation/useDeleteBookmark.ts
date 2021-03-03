@@ -1,10 +1,9 @@
 import { useMutation } from 'react-query'
 import webExtension from 'webextension-polyfill'
 
-import { queryClient } from '../../../../core/utils/queryClient'
 import { BOOKMARK_TYPES } from '../../../constants'
-import { queryKey } from '../constants'
 import { getBookmarkInfo } from '../query/useGetBookmarkInfo'
+import clearBookmarkCache from './utils/clearBookmarkCache'
 
 export default function useDeleteBookmark() {
   return useMutation(
@@ -16,10 +15,12 @@ export default function useDeleteBookmark() {
       } else {
         await webExtension.bookmarks.removeTree(id)
       }
+
+      return { parentId: bookmarkInfo.parentId }
     },
     {
-      async onSuccess(_, { id }) {
-        await queryClient.invalidateQueries([queryKey, id])
+      async onSuccess({ parentId }, { id }) {
+        await clearBookmarkCache({ id, parentId })
       },
     },
   )

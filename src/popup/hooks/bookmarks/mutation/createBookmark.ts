@@ -2,12 +2,10 @@ import { nanoid } from 'nanoid'
 import { useMutation } from 'react-query'
 import webExtension from 'webextension-polyfill'
 
-import { queryClient } from '../../../../core/utils/queryClient'
 import { SEPARATE_THIS_URL } from '../../../constants'
-import type { BookmarkInfo } from '../../../types'
-import { queryKey } from '../constants'
 import { getBookmarkInfo } from '../query/useGetBookmarkInfo'
 import { toBookmarkInfo } from '../utils/transformers'
+import clearBookmarkCache from './utils/clearBookmarkCache'
 
 async function createBookmark(bookmark: webExtension.bookmarks.CreateDetails) {
   const bookmarkNode = await webExtension.bookmarks.create({
@@ -16,11 +14,6 @@ async function createBookmark(bookmark: webExtension.bookmarks.CreateDetails) {
     url: bookmark.url?.trim(),
   })
   return toBookmarkInfo(bookmarkNode)
-}
-
-async function commonOnSuccess({ id, parentId }: BookmarkInfo) {
-  await queryClient.invalidateQueries([queryKey, id])
-  await queryClient.invalidateQueries([queryKey, parentId])
 }
 
 export function useCreateBookmarkAfterId() {
@@ -40,7 +33,7 @@ export function useCreateBookmarkAfterId() {
       })
     },
     {
-      onSuccess: commonOnSuccess,
+      onSuccess: clearBookmarkCache,
     },
   )
 }
@@ -62,7 +55,7 @@ export function useBookmarkCurrentPage() {
       })
     },
     {
-      onSuccess: commonOnSuccess,
+      onSuccess: clearBookmarkCache,
     },
   )
 }
@@ -80,7 +73,7 @@ export function useCreateSeparator() {
       })
     },
     {
-      onSuccess: commonOnSuccess,
+      onSuccess: clearBookmarkCache,
     },
   )
 }
