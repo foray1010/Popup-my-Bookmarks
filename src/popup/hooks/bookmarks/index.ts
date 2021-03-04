@@ -17,7 +17,7 @@ export function useGetBookmarkChildren(id: string) {
   return useQuery([queryKey, id], () => getBookmarkChildren(id))
 }
 
-async function getBookmarkTree(id: string): Promise<BookmarkTree> {
+export async function getBookmarkTree(id: string): Promise<BookmarkTree> {
   const [parent, children] = await Promise.all([
     getBookmarkInfo(id),
     getBookmarkChildren(id),

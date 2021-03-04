@@ -1,6 +1,5 @@
 import { createAction } from 'typesafe-actions'
 
-import type * as CST from '../../constants'
 import type { BookmarkTree } from '../../types'
 
 export const copyBookmark = createAction('COPY_BOOKMARK', (id: string) => ({
@@ -27,39 +26,9 @@ export const moveBookmarkToDragIndicator = createAction(
   }),
 )()
 
-export const openBookmarksInBrowser = createAction(
-  'OPEN_BOOKMARKS_IN_BROWSER',
-  (
-    ids: Array<string>,
-    openBookmarkProps: {
-      openIn: CST.OPEN_IN_TYPES
-      isAllowBookmarklet: boolean
-      isCloseThisExtension: boolean
-    },
-  ) => ({
-    ids,
-    openBookmarkProps,
-  }),
-)()
-
 export const openBookmarkTree = createAction(
   'OPEN_BOOKMARK_TREE',
   (id: string, parentId: string) => ({ id, parentId }),
-)()
-
-export const openFolderInBrowser = createAction(
-  'OPEN_FOLDER_IN_BROWSER',
-  (
-    id: string,
-    openBookmarkProps: {
-      openIn: CST.OPEN_IN_TYPES
-      isAllowBookmarklet: boolean
-      isCloseThisExtension: boolean
-    },
-  ) => ({
-    id,
-    openBookmarkProps,
-  }),
 )()
 
 export const pasteBookmark = createAction(

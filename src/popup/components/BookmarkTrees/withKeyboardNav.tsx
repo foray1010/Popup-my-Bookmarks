@@ -12,6 +12,7 @@ import {
 } from '../../utils/clickBookmarkUtils'
 import getLastMapKey from '../../utils/getLastMapKey'
 import isMac from '../../utils/isMac'
+import { openBookmarksInBrowser } from '../../utils/openBookmarkUtils'
 import { useKeyBindingsEvent } from '../keyBindings'
 import {
   ListNavigationProvider,
@@ -64,13 +65,9 @@ const useEnterKeyNav = () => {
   const options = useSelector((state: RootState) => state.options)
   const trees = useSelector((state: RootState) => state.bookmark.trees)
 
-  const openBookmarksInBrowser = useAction(
-    bookmarkCreators.openBookmarksInBrowser,
-  )
-
   const { listNavigation } = useListNavigationContext()
 
-  useKeyBindingsEvent({ key: 'Enter', windowId: BASE_WINDOW }, (evt) => {
+  useKeyBindingsEvent({ key: 'Enter', windowId: BASE_WINDOW }, async (evt) => {
     const { highlightedIndices, itemCounts } = listNavigation
 
     const lastListIndex = getLastMapKey(itemCounts)
@@ -85,7 +82,7 @@ const useEnterKeyNav = () => {
 
     const option = options[getClickOptionNameByEvent(evt)]
     const openBookmarkProps = mapOptionToOpenBookmarkProps(option)
-    openBookmarksInBrowser([bookmarkInfo.id], {
+    await openBookmarksInBrowser([bookmarkInfo.id], {
       ...openBookmarkProps,
       isAllowBookmarklet: true,
     })

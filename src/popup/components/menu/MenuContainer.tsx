@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { useSelector } from 'react-redux'
-import webExtension from 'webextension-polyfill'
 
 import useAction from '../../../core/hooks/useAction'
 import * as CST from '../../constants'
@@ -13,6 +12,10 @@ import useDeleteBookmark from '../../hooks/bookmarks/mutation/useDeleteBookmark'
 import { useGetBookmarkInfo } from '../../hooks/bookmarks/query/useGetBookmarkInfo'
 import { bookmarkCreators, RootState } from '../../reduxs'
 import isMac from '../../utils/isMac'
+import {
+  openBookmarksInBrowser,
+  openFolderInBrowser,
+} from '../../utils/openBookmarkUtils'
 import { AbsolutePosition } from '../absolutePosition'
 import { useEditorContext } from '../editor'
 import { KeyBindingsWindow, useKeyBindingsEvent } from '../keyBindings'
@@ -39,9 +42,6 @@ const useClickMenuRow = (rowName?: string) => {
   const copyBookmark = useAction(bookmarkCreators.copyBookmark)
   const cutBookmark = useAction(bookmarkCreators.cutBookmark)
   const { mutate: deleteBookmark } = useDeleteBookmark()
-  const openBookmarksInBrowser = useAction(
-    bookmarkCreators.openBookmarksInBrowser,
-  )
   const pasteBookmark = useAction(bookmarkCreators.pasteBookmark)
   const sortBookmarksByName = useAction(bookmarkCreators.sortBookmarksByName)
 
@@ -97,16 +97,12 @@ const useClickMenuRow = (rowName?: string) => {
       case CST.MENU_OPEN_ALL:
       case CST.MENU_OPEN_ALL_IN_I:
       case CST.MENU_OPEN_ALL_IN_N: {
-        const childrenIds = (
-          await webExtension.bookmarks.getChildren(bookmarkInfo.id)
-        ).map((x) => x.id)
-
         const mapping = {
           [CST.MENU_OPEN_ALL]: CST.OPEN_IN_TYPES.BACKGROUND_TAB,
           [CST.MENU_OPEN_ALL_IN_I]: CST.OPEN_IN_TYPES.INCOGNITO_WINDOW,
           [CST.MENU_OPEN_ALL_IN_N]: CST.OPEN_IN_TYPES.NEW_WINDOW,
         }
-        openBookmarksInBrowser(childrenIds, {
+        await openFolderInBrowser(bookmarkInfo.id, {
           openIn: mapping[rowName],
           isAllowBookmarklet: false,
           isCloseThisExtension: true,
@@ -122,7 +118,7 @@ const useClickMenuRow = (rowName?: string) => {
           [CST.MENU_OPEN_IN_I]: CST.OPEN_IN_TYPES.INCOGNITO_WINDOW,
           [CST.MENU_OPEN_IN_N]: CST.OPEN_IN_TYPES.NEW_WINDOW,
         }
-        openBookmarksInBrowser([bookmarkInfo.id], {
+        await openBookmarksInBrowser([bookmarkInfo.id], {
           openIn: mapping[rowName],
           isAllowBookmarklet: true,
           isCloseThisExtension: true,
@@ -150,7 +146,6 @@ const useClickMenuRow = (rowName?: string) => {
     createSeparator,
     cutBookmark,
     deleteBookmark,
-    openBookmarksInBrowser,
     openEditor,
     pasteBookmark,
     rowName,

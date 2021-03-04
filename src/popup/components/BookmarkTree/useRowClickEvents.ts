@@ -10,6 +10,10 @@ import {
   getClickOptionNameByEvent,
   mapOptionToOpenBookmarkProps,
 } from '../../utils/clickBookmarkUtils'
+import {
+  openBookmarksInBrowser,
+  openFolderInBrowser,
+} from '../../utils/openBookmarkUtils'
 import { useMenuContext } from '../menu'
 
 export default function useRowClickEvents({
@@ -19,18 +23,14 @@ export default function useRowClickEvents({
 }) {
   const options = useSelector((state: RootState) => state.options)
 
-  const openBookmarksInBrowser = useAction(
-    bookmarkCreators.openBookmarksInBrowser,
-  )
-  const openFolderInBrowser = useAction(bookmarkCreators.openFolderInBrowser)
   const toggleBookmarkTree = useAction(bookmarkCreators.toggleBookmarkTree)
 
   const { open: openMenu } = useMenuContext()
 
   return React.useMemo(() => {
-    const handleRowMiddleClick = (bookmarkInfo: BookmarkInfo) => {
+    const handleRowMiddleClick = async (bookmarkInfo: BookmarkInfo) => {
       if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
-        openFolderInBrowser(bookmarkInfo.id, {
+        await openFolderInBrowser(bookmarkInfo.id, {
           openIn: OPEN_IN_TYPES.NEW_TAB,
           isAllowBookmarklet: false,
           isCloseThisExtension: true,
@@ -39,7 +39,7 @@ export default function useRowClickEvents({
         const openBookmarkProps = mapOptionToOpenBookmarkProps(
           options[OPTIONS.CLICK_BY_MIDDLE],
         )
-        openBookmarksInBrowser([bookmarkInfo.id], {
+        await openBookmarksInBrowser([bookmarkInfo.id], {
           ...openBookmarkProps,
           isAllowBookmarklet: true,
         })
@@ -66,18 +66,18 @@ export default function useRowClickEvents({
     }
 
     return {
-      handleRowAuxClick: (bookmarkInfo: BookmarkInfo) => (
+      handleRowAuxClick: (bookmarkInfo: BookmarkInfo) => async (
         evt: React.MouseEvent,
       ) => {
         if (evt.button === 1) {
-          handleRowMiddleClick(bookmarkInfo)
+          await handleRowMiddleClick(bookmarkInfo)
         }
 
         if (evt.button === 2) {
           handleRowRightClick(bookmarkInfo, evt)
         }
       },
-      handleRowClick: (bookmarkInfo: BookmarkInfo) => (
+      handleRowClick: (bookmarkInfo: BookmarkInfo) => async (
         evt: React.MouseEvent,
       ) => {
         if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
@@ -87,19 +87,12 @@ export default function useRowClickEvents({
         } else {
           const option = options[getClickOptionNameByEvent(evt)]
           const openBookmarkProps = mapOptionToOpenBookmarkProps(option)
-          openBookmarksInBrowser([bookmarkInfo.id], {
+          await openBookmarksInBrowser([bookmarkInfo.id], {
             ...openBookmarkProps,
             isAllowBookmarklet: true,
           })
         }
       },
     }
-  }, [
-    openBookmarksInBrowser,
-    openFolderInBrowser,
-    openMenu,
-    options,
-    toggleBookmarkTree,
-    treeInfo.parent.id,
-  ])
+  }, [openMenu, options, toggleBookmarkTree, treeInfo.parent.id])
 }
