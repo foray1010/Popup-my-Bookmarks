@@ -1,7 +1,7 @@
 import webExtension from 'webextension-polyfill'
 
-import type { Options } from '../../core/types/options'
 import { BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS } from '../constants'
+import { getOptions } from '../contexts/options'
 import { getBookmarkTree } from '../hooks/bookmarks'
 import { getBookmarkInfo } from '../hooks/bookmarks/query/useGetBookmarkInfo'
 
@@ -25,7 +25,7 @@ export async function openBookmarksInBrowser(
   ids: string[],
   openBookmarkProps: OpenBookmarkProps,
 ) {
-  const options = (await webExtension.storage.sync.get()) as Options
+  const options = await getOptions()
 
   const allUrls = await getUrls(ids)
   if (!allUrls.length) return

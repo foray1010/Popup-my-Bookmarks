@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from 'react-query'
 import webExtension from 'webextension-polyfill'
 
-import type { Options } from '../types/options'
-import { queryClient } from '../utils/queryClient'
+import type { Options } from '../../core/types/options'
+import { queryClient } from '../../core/utils/queryClient'
 
 const queryKey = 'options'
 

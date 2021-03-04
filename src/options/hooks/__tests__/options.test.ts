@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react-hooks'
 
-import { ReactQueryClientProvider } from '../../utils/queryClient'
+import { ReactQueryClientProvider } from '../../../core/utils/queryClient'
 import { useDeleteOptions, useGetOptions, useUpdateOptions } from '../options'
 
 describe('options hooks', () => {

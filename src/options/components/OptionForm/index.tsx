@@ -1,14 +1,14 @@
 import * as React from 'react'
 
 import type { OPTIONS } from '../../../core/constants'
+import type { OptionsConfig } from '../../../core/types/options'
+import { getOptionsConfig } from '../../../core/utils'
+import { OPTION_TABLE_MAP } from '../../constants'
 import {
   useDeleteOptions,
   useGetOptions,
   useUpdateOptions,
-} from '../../../core/hooks/options'
-import type { OptionsConfig } from '../../../core/types/options'
-import { getOptionsConfig } from '../../../core/utils'
-import { OPTION_TABLE_MAP } from '../../constants'
+} from '../../hooks/options'
 import { useNavigationContext } from '../navigationContext'
 import OptionForm from './OptionForm'
 
