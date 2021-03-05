@@ -62,7 +62,7 @@
     "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.5",
     "@testing-library/react-hooks": "5.1.0",
-    "@testing-library/user-event": "12.7.3",
+    "@testing-library/user-event": "12.8.1",
     "@types/bluebird": "3.5.33",
     "@types/copy-webpack-plugin": "6.4.0",
     "@types/css-minimizer-webpack-plugin": "1.1.1",
