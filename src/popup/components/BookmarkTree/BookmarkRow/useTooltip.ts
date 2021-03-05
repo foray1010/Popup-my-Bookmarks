@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import { getBookmarkNodes } from '../../../../core/utils'
 import { ROOT_ID } from '../../../constants'
+import { getBookmarkInfo } from '../../../hooks/bookmarks/query/useGetBookmarkInfo'
 import type { BookmarkInfo } from '../../../types'
 
 interface Arg {
@@ -13,9 +13,9 @@ interface Arg {
 const getBreadcrumbs = async (id?: string): Promise<Array<string>> => {
   if (!id || id === ROOT_ID) return []
 
-  const [bookmarkNode] = await getBookmarkNodes(id)
+  const bookmarkInfo = await getBookmarkInfo(id)
 
-  return [...(await getBreadcrumbs(bookmarkNode.parentId)), bookmarkNode.title]
+  return [...(await getBreadcrumbs(bookmarkInfo.parentId)), bookmarkInfo.title]
 }
 
 const getTooltip = async ({
