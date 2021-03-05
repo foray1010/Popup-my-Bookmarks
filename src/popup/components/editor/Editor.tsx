@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useSelector } from 'react-redux'
 import webExtension from 'webextension-polyfill'
 
 import { OPTIONS } from '../../constants'
@@ -7,7 +6,7 @@ import { EDITOR_WINDOW } from '../../constants/windows'
 import { useCreateBookmarkAfterId } from '../../hooks/bookmarks/mutation/createBookmark'
 import useEditBookmark from '../../hooks/bookmarks/mutation/useEditBookmark'
 import { useGetBookmarkInfo } from '../../hooks/bookmarks/query/useGetBookmarkInfo'
-import type { RootState } from '../../reduxs'
+import { useOptions } from '../../modules/options'
 import { AbsolutePosition } from '../absolutePosition'
 import { KeyBindingsWindow } from '../keyBindings'
 import Mask from '../Mask'
@@ -81,9 +80,10 @@ const UpdateEditorForm = ({
 export default function Editor() {
   const { close, state } = useEditorContext()
 
-  const width = useSelector(
-    (state: RootState) => state.options[OPTIONS.SET_WIDTH],
-  )
+  const options = useOptions()
+
+  const width = options[OPTIONS.SET_WIDTH]
+
   const style = React.useMemo(
     () => ({
       width: `${width ?? 0}px`,

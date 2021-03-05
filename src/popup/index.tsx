@@ -8,7 +8,7 @@ import type { OPTIONS } from '../core/constants'
 import configureStore from '../core/store/configureStore'
 import { getOptionsConfig, renderToBody } from '../core/utils'
 import App from './components/App'
-import { getOptions } from './contexts/options'
+import { getOptions } from './modules/options'
 import { rootReducer, rootSaga } from './reduxs'
 
 const main = async (): Promise<void> => {

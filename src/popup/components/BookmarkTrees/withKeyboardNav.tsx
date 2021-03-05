@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import useAction from '../../../core/hooks/useAction'
 import { BOOKMARK_TYPES } from '../../constants'
 import { BASE_WINDOW } from '../../constants/windows'
+import { useOptions } from '../../modules/options'
 import type { RootState } from '../../reduxs'
 import { bookmarkCreators } from '../../reduxs'
 import {
@@ -62,7 +63,7 @@ const useArrowKeysNav = () => {
 }
 
 const useEnterKeyNav = () => {
-  const options = useSelector((state: RootState) => state.options)
+  const options = useOptions()
   const trees = useSelector((state: RootState) => state.bookmark.trees)
 
   const { listNavigation } = useListNavigationContext()

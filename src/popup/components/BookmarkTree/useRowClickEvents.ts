@@ -1,9 +1,8 @@
 import * as React from 'react'
-import { useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
 import { BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS } from '../../constants'
-import type { RootState } from '../../reduxs'
+import { useOptions } from '../../modules/options'
 import { bookmarkCreators } from '../../reduxs'
 import type { BookmarkInfo, BookmarkTree } from '../../types'
 import {
@@ -21,7 +20,7 @@ export default function useRowClickEvents({
 }: {
   treeInfo: BookmarkTree
 }) {
-  const options = useSelector((state: RootState) => state.options)
+  const options = useOptions()
 
   const toggleBookmarkTree = useAction(bookmarkCreators.toggleBookmarkTree)
 

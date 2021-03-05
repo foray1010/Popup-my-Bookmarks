@@ -2,6 +2,7 @@ import type * as React from 'react'
 import { useSelector } from 'react-redux'
 
 import { BASE_WINDOW } from '../../constants/windows'
+import { useOptions } from '../../modules/options'
 import type { RootState } from '../../reduxs'
 import { KeyBindingsWindow } from '../keyBindings'
 import BookmarkTrees from './BookmarkTrees'
@@ -18,7 +19,7 @@ interface Props {
 const InnerBookmarkTreesContainer = (props: Props) => {
   useBookmarkEvents()
 
-  const options = useSelector((state: RootState) => state.options)
+  const options = useOptions()
   const treeIds = useSelector(getTreeIds)
 
   return (

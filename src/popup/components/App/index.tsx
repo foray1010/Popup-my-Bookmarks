@@ -1,11 +1,10 @@
 import './globals.css'
 
 import * as React from 'react'
-import { useSelector } from 'react-redux'
 
 import { ReactQueryClientProvider } from '../../../core/utils/queryClient'
 import { OPTIONS } from '../../constants'
-import type { RootState } from '../../reduxs'
+import { useOptions, withOptions } from '../../modules/options'
 import {
   AbsolutePositionProvider,
   useGlobalBodySize,
@@ -17,10 +16,10 @@ import { Menu, MenuProvider } from '../menu'
 import Search from '../Search'
 import useGlobalEvents from './useGlobalEvents'
 
-const InnerApp = () => {
+const AppWithOptions = withOptions(function InnerApp() {
   useGlobalEvents()
 
-  const options = useSelector((state: RootState) => state.options)
+  const options = useOptions()
 
   const { globalBodySize } = useGlobalBodySize()
 
@@ -49,7 +48,7 @@ const InnerApp = () => {
       <Editor />
     </div>
   )
-}
+})
 
 export default function App() {
   return (
@@ -58,7 +57,7 @@ export default function App() {
         <AbsolutePositionProvider>
           <EditorProvider>
             <MenuProvider>
-              <InnerApp />
+              <AppWithOptions />
             </MenuProvider>
           </EditorProvider>
         </AbsolutePositionProvider>

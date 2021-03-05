@@ -1,9 +1,9 @@
 import webExtension from 'webextension-polyfill'
 
 import { BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS } from '../constants'
-import { getOptions } from '../contexts/options'
 import { getBookmarkTree } from '../hooks/bookmarks'
 import { getBookmarkInfo } from '../hooks/bookmarks/query/useGetBookmarkInfo'
+import { getOptions } from '../modules/options'
 
 async function getUrls(ids: string[]): Promise<string[]> {
   const bookmarkInfos = await Promise.all(ids.map(getBookmarkInfo))

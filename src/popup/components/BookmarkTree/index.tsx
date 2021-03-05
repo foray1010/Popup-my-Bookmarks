@@ -3,6 +3,7 @@ import { shallowEqual, useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
 import * as CST from '../../constants'
+import { useOptions } from '../../modules/options'
 import type { RootState } from '../../reduxs'
 import { bookmarkCreators } from '../../reduxs'
 import { useDragAndDropContext } from '../dragAndDrop'
@@ -24,6 +25,8 @@ const getRowHeight = (fontSize: number) =>
   (1 + CST.GOLDEN_GAP) * 2
 
 const useReduxProps = ({ treeId }: { treeId: string }) => {
+  const options = useOptions()
+
   const reduxSelector = React.useCallback(
     (state: RootState) => {
       const treeIndex = state.bookmark.trees.findIndex(
@@ -32,19 +35,19 @@ const useReduxProps = ({ treeId }: { treeId: string }) => {
       const treeInfo = state.bookmark.trees[treeIndex]
 
       return {
-        iconSize: getIconSize(state.options[CST.OPTIONS.FONT_SIZE] ?? 0),
+        iconSize: getIconSize(options[CST.OPTIONS.FONT_SIZE] ?? 0),
         isSearching: Boolean(state.bookmark.searchKeyword),
         // cover the folder if it is not the top two folder
         isShowCover: state.bookmark.trees.length - treeIndex > 2,
         isShowHeader: treeIndex !== 0,
-        isShowTooltip: Boolean(state.options[CST.OPTIONS.TOOLTIP]),
-        listItemWidth: state.options[CST.OPTIONS.SET_WIDTH] ?? 0,
-        rowHeight: getRowHeight(state.options[CST.OPTIONS.FONT_SIZE] ?? 0),
+        isShowTooltip: Boolean(options[CST.OPTIONS.TOOLTIP]),
+        listItemWidth: options[CST.OPTIONS.SET_WIDTH] ?? 0,
+        rowHeight: getRowHeight(options[CST.OPTIONS.FONT_SIZE] ?? 0),
         treeIndex,
         treeInfo,
       }
     },
-    [treeId],
+    [options, treeId],
   )
 
   return useSelector(reduxSelector, shallowEqual)
