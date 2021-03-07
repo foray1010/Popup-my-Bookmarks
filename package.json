@@ -27,7 +27,7 @@
     "chrome >= 73"
   ],
   "dependencies": {
-    "@babel/runtime": "7.13.8",
+    "@babel/runtime": "7.13.9",
     "@fontsource/archivo-narrow": "4.2.2",
     "@rehooks/component-size": "1.0.3",
     "clsx": "1.1.1",
