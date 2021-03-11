@@ -37,10 +37,10 @@ export const bookmarkReducer = createReducer<
   BookmarkState,
   ActionType<typeof bookmarkCreators>
 >(INITIAL_STATE, {
-  [getType(bookmarkCreators.copyBookmark)]: (
+  [getType(bookmarkCreators.copyBookmark)](
     state: BookmarkState,
     { payload }: ReturnType<typeof bookmarkCreators.copyBookmark>,
-  ) => {
+  ) {
     return {
       ...state,
       clipboard: {
@@ -49,10 +49,10 @@ export const bookmarkReducer = createReducer<
       },
     }
   },
-  [getType(bookmarkCreators.cutBookmark)]: (
+  [getType(bookmarkCreators.cutBookmark)](
     state: BookmarkState,
     { payload }: ReturnType<typeof bookmarkCreators.cutBookmark>,
-  ) => {
+  ) {
     return {
       ...state,
       clipboard: {
@@ -61,19 +61,19 @@ export const bookmarkReducer = createReducer<
       },
     }
   },
-  [getType(bookmarkCreators.getSearchResult)]: (
+  [getType(bookmarkCreators.getSearchResult)](
     state: BookmarkState,
     { payload }: ReturnType<typeof bookmarkCreators.getSearchResult>,
-  ) => {
+  ) {
     return {
       ...state,
       searchKeyword: payload.searchKeyword,
     }
   },
-  [getType(bookmarkCreators.removeBookmarkTree)]: (
+  [getType(bookmarkCreators.removeBookmarkTree)](
     state: BookmarkState,
     { payload }: ReturnType<typeof bookmarkCreators.removeBookmarkTree>,
-  ) => {
+  ) {
     const removeFromIndex = state.trees.findIndex(
       (tree) => tree.parent.id === payload.id,
     )
@@ -85,10 +85,10 @@ export const bookmarkReducer = createReducer<
     }
   },
   [getType(bookmarkCreators.removeDragIndicator)]: removeDragIndicator,
-  [getType(bookmarkCreators.removeNextBookmarkTrees)]: (
+  [getType(bookmarkCreators.removeNextBookmarkTrees)](
     state: BookmarkState,
     { payload }: ReturnType<typeof bookmarkCreators.removeNextBookmarkTrees>,
-  ) => {
+  ) {
     const removeAfterIndex = state.trees.findIndex(
       (tree) => tree.parent.id === payload.removeAfterId,
     )
@@ -99,25 +99,25 @@ export const bookmarkReducer = createReducer<
       trees: state.trees.slice(0, removeAfterIndex + 1),
     }
   },
-  [getType(bookmarkCreators.resetClipboard)]: (state: BookmarkState) => {
+  [getType(bookmarkCreators.resetClipboard)](state: BookmarkState) {
     return {
       ...state,
       clipboard: INITIAL_STATE.clipboard,
     }
   },
-  [getType(bookmarkCreators.setBookmarkTrees)]: (
+  [getType(bookmarkCreators.setBookmarkTrees)](
     state: BookmarkState,
     { payload }: ReturnType<typeof bookmarkCreators.setBookmarkTrees>,
-  ) => {
+  ) {
     return {
       ...state,
       trees: payload.bookmarkTrees,
     }
   },
-  [getType(bookmarkCreators.setDragIndicator)]: (
+  [getType(bookmarkCreators.setDragIndicator)](
     state: BookmarkState,
     { payload }: ReturnType<typeof bookmarkCreators.setDragIndicator>,
-  ) => {
+  ) {
     const parentIndex = state.trees.findIndex(
       (tree) => tree.parent.id === payload.parentId,
     )
