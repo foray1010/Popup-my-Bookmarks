@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
+import withProviders from '../../../core/utils/withProviders'
 import * as CST from '../../constants'
 import { MENU_WINDOW } from '../../constants/windows'
 import {
@@ -236,10 +237,7 @@ const InnerMenuContainer = () => {
   )
 }
 
-export default function MenuContainer() {
-  return (
-    <ListNavigationProvider>
-      <InnerMenuContainer />
-    </ListNavigationProvider>
-  )
-}
+const MenuContainer = withProviders(InnerMenuContainer, [
+  ListNavigationProvider,
+])
+export default MenuContainer

@@ -2,6 +2,7 @@ import type * as React from 'react'
 import { useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
+import withProviders from '../../../core/utils/withProviders'
 import { BOOKMARK_TYPES } from '../../constants'
 import { BASE_WINDOW } from '../../constants/windows'
 import { useOptions } from '../../modules/options'
@@ -142,11 +143,5 @@ export default function withKeyboardNav<P>(
     return <WrappedComponent {...props} />
   }
 
-  return function ComponentWithKeyboardNav(props: P) {
-    return (
-      <ListNavigationProvider>
-        <InnerComponent {...props} />
-      </ListNavigationProvider>
-    )
-  }
+  return withProviders<P>(InnerComponent, [ListNavigationProvider])
 }

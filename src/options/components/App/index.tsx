@@ -3,26 +3,31 @@ import './globals.css'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
 import { ReactQueryClientProvider } from '../../../core/utils/queryClient'
+import withProviders from '../../../core/utils/withProviders'
 import Donate from '../Donate'
 import NavBar from '../NavBar'
 import { NavigationProvider } from '../navigationContext'
 import Router from '../Router'
 import classes from './styles.css'
 
-export default function App() {
+function InnerApp() {
   return (
-    <ReactQueryClientProvider>
-      <NavigationProvider>
-        <div className={classes.main}>
-          <NavBar />
-          <Router />
-          <Donate />
-        </div>
-      </NavigationProvider>
+    <>
+      <div className={classes.main}>
+        <NavBar />
+        <Router />
+        <Donate />
+      </div>
 
       {process.env.NODE_ENV === 'development' ? (
         <ReactQueryDevtools initialIsOpen={false} />
       ) : null}
-    </ReactQueryClientProvider>
+    </>
   )
 }
+
+const App = withProviders(InnerApp, [
+  ReactQueryClientProvider,
+  NavigationProvider,
+])
+export default App

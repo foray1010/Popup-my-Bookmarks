@@ -4,6 +4,7 @@ import { useQuery } from 'react-query'
 import webExtension from 'webextension-polyfill'
 
 import type { Options } from '../../core/types/options'
+import withProviders from '../../core/utils/withProviders'
 
 const queryKey = 'options'
 
@@ -27,13 +28,7 @@ export function withOptions<P>(WrappedComponent: React.ComponentType<P>) {
     return <WrappedComponent {...props} />
   }
 
-  return function ComponentWithOptions(props: P) {
-    return (
-      <OptionsProvider>
-        <InnerComponent {...props} />
-      </OptionsProvider>
-    )
-  }
+  return withProviders<P>(InnerComponent, [OptionsProvider])
 }
 
 export function useOptions() {

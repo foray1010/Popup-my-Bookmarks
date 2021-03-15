@@ -3,6 +3,7 @@ import './globals.css'
 import * as React from 'react'
 
 import { ReactQueryClientProvider } from '../../../core/utils/queryClient'
+import withProviders from '../../../core/utils/withProviders'
 import { OPTIONS } from '../../constants'
 import { useOptions, withOptions } from '../../modules/options'
 import {
@@ -50,18 +51,11 @@ const AppWithOptions = withOptions(function InnerApp() {
   )
 })
 
-export default function App() {
-  return (
-    <ReactQueryClientProvider>
-      <KeyBindingsProvider>
-        <AbsolutePositionProvider>
-          <EditorProvider>
-            <MenuProvider>
-              <AppWithOptions />
-            </MenuProvider>
-          </EditorProvider>
-        </AbsolutePositionProvider>
-      </KeyBindingsProvider>
-    </ReactQueryClientProvider>
-  )
-}
+const App = withProviders(AppWithOptions, [
+  ReactQueryClientProvider,
+  KeyBindingsProvider,
+  AbsolutePositionProvider,
+  EditorProvider,
+  MenuProvider,
+])
+export default App
