@@ -46,6 +46,7 @@ class StorageAreaSync
       keys === undefined ? this.storage : R.pick([keys].flat(), this.storage)
 
     return Object.entries(storage).reduce((acc, [k, v]) => {
+      // https://github.com/mozilla/gecko-dev/blob/0db73daa4b03ce7513a7dd5f31109143dc3b149e/third_party/rust/webext-storage/src/api.rs#L184-L188
       return acc + k.length + JSON.stringify(v).length
     }, 0)
   }
