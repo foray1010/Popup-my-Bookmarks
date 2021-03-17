@@ -64,11 +64,6 @@ export const setDragIndicator = createAction(
   (parentId: string, index: number) => ({ parentId, index }),
 )()
 
-export const sortBookmarksByName = createAction(
-  'SORT_BOOKMARKS_BY_NAME',
-  (parentId: string) => ({ parentId }),
-)()
-
 export const toggleBookmarkTree = createAction(
   'TOGGLE_BOOKMARK_TREE',
   (id: string, parentId: string) => ({ id, parentId }),

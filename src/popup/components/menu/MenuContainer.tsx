@@ -15,6 +15,7 @@ import {
   openBookmarksInBrowser,
   openFolderInBrowser,
 } from '../../modules/bookmarks/methods/openBookmark'
+import sortBookmarksByName from '../../modules/bookmarks/methods/sortBookmarksByName'
 import { bookmarkCreators, RootState } from '../../reduxs'
 import isMac from '../../utils/isMac'
 import { AbsolutePosition } from '../absolutePosition'
@@ -44,7 +45,6 @@ const useClickMenuRow = (rowName?: string) => {
   const cutBookmark = useAction(bookmarkCreators.cutBookmark)
   const { mutate: deleteBookmark } = useDeleteBookmark()
   const pasteBookmark = useAction(bookmarkCreators.pasteBookmark)
-  const sortBookmarksByName = useAction(bookmarkCreators.sortBookmarksByName)
 
   return React.useCallback(async () => {
     if (!state.isOpen || !bookmarkInfo) return
@@ -132,7 +132,7 @@ const useClickMenuRow = (rowName?: string) => {
         break
 
       case CST.MENU_SORT_BY_NAME:
-        sortBookmarksByName(bookmarkInfo.parentId)
+        await sortBookmarksByName(bookmarkInfo.parentId)
         break
 
       default:
@@ -150,7 +150,6 @@ const useClickMenuRow = (rowName?: string) => {
     openEditor,
     pasteBookmark,
     rowName,
-    sortBookmarksByName,
     state,
   ])
 }

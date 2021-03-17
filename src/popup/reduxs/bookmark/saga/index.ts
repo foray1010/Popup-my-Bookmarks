@@ -8,7 +8,6 @@ import { moveBookmarkToDragIndicator } from './modules/moveBookmarkToDragIndicat
 import { openBookmarkTree } from './modules/openBookmarkTree'
 import { pasteBookmark } from './modules/pasteBookmark'
 import { refreshBookmarkTrees } from './modules/refreshBookmarkTrees'
-import { sortBookmarksByName } from './modules/sortBookmarksByName'
 import { toggleBookmarkTree } from './modules/toggleBookmarkTree'
 
 export function* bookmarkSaga() {
@@ -26,10 +25,6 @@ export function* bookmarkSaga() {
   yield takeLatest(
     getType(bookmarkCreators.refreshBookmarkTrees),
     refreshBookmarkTrees,
-  )
-  yield takeLatest(
-    getType(bookmarkCreators.sortBookmarksByName),
-    sortBookmarksByName,
   )
   yield takeLatest(
     getType(bookmarkCreators.toggleBookmarkTree),
