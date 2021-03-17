@@ -5,16 +5,16 @@ import useAction from '../../../core/hooks/useAction'
 import withProviders from '../../../core/utils/withProviders'
 import { BOOKMARK_TYPES } from '../../constants'
 import { BASE_WINDOW } from '../../constants/windows'
-import { useOptions } from '../../modules/options'
-import type { RootState } from '../../reduxs'
-import { bookmarkCreators } from '../../reduxs'
+import { openBookmarksInBrowser } from '../../modules/bookmarks/methods/openBookmark'
 import {
   getClickOptionNameByEvent,
   mapOptionToOpenBookmarkProps,
-} from '../../utils/clickBookmarkUtils'
+} from '../../modules/bookmarks/utils/clickBookmark'
+import { useOptions } from '../../modules/options'
+import type { RootState } from '../../reduxs'
+import { bookmarkCreators } from '../../reduxs'
 import getLastMapKey from '../../utils/getLastMapKey'
 import isMac from '../../utils/isMac'
-import { openBookmarksInBrowser } from '../../utils/openBookmarkUtils'
 import { useKeyBindingsEvent } from '../keyBindings'
 import {
   ListNavigationProvider,

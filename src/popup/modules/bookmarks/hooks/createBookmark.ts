@@ -3,7 +3,7 @@ import { useMutation } from 'react-query'
 import webExtension from 'webextension-polyfill'
 
 import { SEPARATE_THIS_URL } from '../../../constants'
-import { getBookmarkInfo } from '../query/useGetBookmarkInfo'
+import { getBookmarkInfo } from '../methods/getBookmark'
 import { toBookmarkInfo } from '../utils/transformers'
 import clearBookmarkCache from './utils/clearBookmarkCache'
 

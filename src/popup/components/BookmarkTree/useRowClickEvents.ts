@@ -2,17 +2,17 @@ import * as React from 'react'
 
 import useAction from '../../../core/hooks/useAction'
 import { BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS } from '../../constants'
-import { useOptions } from '../../modules/options'
-import { bookmarkCreators } from '../../reduxs'
-import type { BookmarkInfo, BookmarkTree } from '../../types'
-import {
-  getClickOptionNameByEvent,
-  mapOptionToOpenBookmarkProps,
-} from '../../utils/clickBookmarkUtils'
 import {
   openBookmarksInBrowser,
   openFolderInBrowser,
-} from '../../utils/openBookmarkUtils'
+} from '../../modules/bookmarks/methods/openBookmark'
+import {
+  getClickOptionNameByEvent,
+  mapOptionToOpenBookmarkProps,
+} from '../../modules/bookmarks/utils/clickBookmark'
+import { useOptions } from '../../modules/options'
+import { bookmarkCreators } from '../../reduxs'
+import type { BookmarkInfo, BookmarkTree } from '../../types'
 import { useMenuContext } from '../menu'
 
 export default function useRowClickEvents({

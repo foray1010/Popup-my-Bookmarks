@@ -1,5 +1,5 @@
 import { queryClient } from '../../../../../core/utils/queryClient'
-import { queryKey } from '../../constants'
+import { queryKey } from '../constants/reactQuery'
 
 export default async function clearBookmarkCache({
   id,

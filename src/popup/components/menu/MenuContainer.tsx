@@ -8,15 +8,15 @@ import { MENU_WINDOW } from '../../constants/windows'
 import {
   useBookmarkCurrentPage,
   useCreateSeparator,
-} from '../../hooks/bookmarks/mutation/createBookmark'
-import useDeleteBookmark from '../../hooks/bookmarks/mutation/useDeleteBookmark'
-import { useGetBookmarkInfo } from '../../hooks/bookmarks/query/useGetBookmarkInfo'
-import { bookmarkCreators, RootState } from '../../reduxs'
-import isMac from '../../utils/isMac'
+} from '../../modules/bookmarks/hooks/createBookmark'
+import useDeleteBookmark from '../../modules/bookmarks/hooks/useDeleteBookmark'
+import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo'
 import {
   openBookmarksInBrowser,
   openFolderInBrowser,
-} from '../../utils/openBookmarkUtils'
+} from '../../modules/bookmarks/methods/openBookmark'
+import { bookmarkCreators, RootState } from '../../reduxs'
+import isMac from '../../utils/isMac'
 import { AbsolutePosition } from '../absolutePosition'
 import { useEditorContext } from '../editor'
 import { KeyBindingsWindow, useKeyBindingsEvent } from '../keyBindings'

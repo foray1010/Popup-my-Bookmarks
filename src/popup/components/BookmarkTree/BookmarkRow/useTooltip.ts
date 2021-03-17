@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { ROOT_ID } from '../../../constants'
-import { getBookmarkInfo } from '../../../hooks/bookmarks/query/useGetBookmarkInfo'
+import { getBookmarkInfo } from '../../../modules/bookmarks/methods/getBookmark'
 import type { BookmarkInfo } from '../../../types'
 
 interface Arg {

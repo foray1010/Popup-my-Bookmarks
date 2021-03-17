@@ -2,7 +2,7 @@ import { useMutation } from 'react-query'
 import webExtension from 'webextension-polyfill'
 
 import { BOOKMARK_TYPES } from '../../../constants'
-import { getBookmarkInfo } from '../query/useGetBookmarkInfo'
+import { getBookmarkInfo } from '../methods/getBookmark'
 import clearBookmarkCache from './utils/clearBookmarkCache'
 
 export default function useDeleteBookmark() {

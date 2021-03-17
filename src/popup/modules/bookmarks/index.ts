@@ -4,35 +4,9 @@ import webExtension from 'webextension-polyfill'
 import type { Options } from '../../../core/types/options'
 import * as CST from '../../constants'
 import type { BookmarkInfo, BookmarkTree } from '../../types'
-import { queryKey } from './constants'
-import { getBookmarkInfo } from './query/useGetBookmarkInfo'
-import { generateNoBookmarkPlaceholder } from './utils/generators'
+import { queryKey } from './hooks/constants/reactQuery'
+import { getBookmarkChildren, getBookmarkTree } from './methods/getBookmark'
 import { toBookmarkInfo } from './utils/transformers'
-
-async function getBookmarkChildren(id: string): Promise<BookmarkInfo[]> {
-  const bookmarkNodes = await webExtension.bookmarks.getChildren(id)
-  return bookmarkNodes.map(toBookmarkInfo)
-}
-export function useGetBookmarkChildren(id: string) {
-  return useQuery([queryKey, id], () => getBookmarkChildren(id))
-}
-
-export async function getBookmarkTree(id: string): Promise<BookmarkTree> {
-  const [parent, children] = await Promise.all([
-    getBookmarkInfo(id),
-    getBookmarkChildren(id),
-  ])
-  return {
-    children:
-      children.length > 0
-        ? children
-        : [generateNoBookmarkPlaceholder(parent.id)],
-    parent,
-  }
-}
-export function useGetBookmarkTree(id: string) {
-  return useQuery([queryKey, id], () => getBookmarkTree(id))
-}
 
 async function getFirstBookmarkTree(
   options: Partial<Options>,

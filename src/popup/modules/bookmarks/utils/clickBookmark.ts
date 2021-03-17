@@ -1,6 +1,6 @@
 import type * as React from 'react'
 
-import { OPEN_IN_TYPES, OPTIONS } from '../constants'
+import { OPEN_IN_TYPES, OPTIONS } from '../../../constants'
 
 export const getClickOptionNameByEvent = (
   evt: KeyboardEvent | MouseEvent | React.KeyboardEvent | React.MouseEvent,
