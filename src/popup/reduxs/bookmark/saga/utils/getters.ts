@@ -1,6 +1,3 @@
-// disable redux-saga/no-unhandled-errors as these are utility functions
-/* eslint redux-saga/no-unhandled-errors: 'off' */
-
 import type { SagaIterator } from 'redux-saga'
 import { all, call } from 'redux-saga/effects'
 import type webExtension from 'webextension-polyfill'
