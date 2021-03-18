@@ -124,7 +124,7 @@ export function* tryGetBookmarkTree(
 ): SagaIterator<BookmarkTree | null> {
   try {
     return yield call(getBookmarkTree, id)
-  } catch (err) {
+  } catch (err: unknown) {
     return null
   }
 }
