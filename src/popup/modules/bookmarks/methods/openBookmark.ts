@@ -33,8 +33,7 @@ export async function openBookmarksInBrowser(
 
   const bookmarkletUrls = allUrls.filter(isJSProtocol)
   if (openBookmarkProps.isAllowBookmarklet && bookmarkletUrls.length > 0) {
-    // @ts-expect-error seems type is wrong, tabId is nullable
-    await webExtension.tabs.executeScript(null, {
+    await webExtension.tabs.executeScript({
       code: bookmarkletUrls[0],
     })
   }
