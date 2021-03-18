@@ -64,7 +64,7 @@ export function* getSearchResult({
       },
     ]
     yield put(bookmarkCreators.setBookmarkTrees(searchResultTrees))
-  } catch (err) {
+  } catch (err: unknown) {
     console.error(err)
   }
 }

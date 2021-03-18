@@ -60,7 +60,7 @@ export function* moveBookmarkToDragIndicator({
     })
 
     yield put(bookmarkCreators.removeDragIndicator())
-  } catch (err) {
+  } catch (err: unknown) {
     console.error(err)
   }
 }

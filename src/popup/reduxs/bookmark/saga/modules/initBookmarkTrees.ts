@@ -25,7 +25,7 @@ export function* initBookmarkTrees() {
     )
 
     yield put(bookmarkCreators.setBookmarkTrees(bookmarkTrees))
-  } catch (err) {
+  } catch (err: unknown) {
     console.error(err)
   }
 }

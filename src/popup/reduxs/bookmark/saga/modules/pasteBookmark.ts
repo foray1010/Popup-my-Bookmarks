@@ -45,7 +45,7 @@ function* recursiveCopy({
         })
       }
     }
-  } catch (err) {
+  } catch (err: unknown) {
     console.error(err)
   }
 }
@@ -73,7 +73,7 @@ export function* pasteBookmark({
     }
 
     yield put(bookmarkCreators.resetClipboard())
-  } catch (err) {
+  } catch (err: unknown) {
     console.error(err)
   }
 }

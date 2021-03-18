@@ -10,14 +10,14 @@ type Messages = {
 }
 
 const i18n: typeof browser.i18n = {
-  // @ts-expect-error
+  // @ts-expect-error: todo
   detectLanguage() {},
-  // @ts-expect-error
+  // @ts-expect-error: todo
   getAcceptLanguages() {},
   getMessage(messageName) {
     return (messages as Messages)[messageName]?.message ?? ''
   },
-  // @ts-expect-error
+  // @ts-expect-error: todo
   getUILanguage() {},
 }
 

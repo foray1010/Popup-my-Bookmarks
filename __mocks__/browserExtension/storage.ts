@@ -9,7 +9,7 @@ class StorageArea implements browser.storage.StorageArea {
     this.storage = {}
   }
 
-  async get(keys?: string | string[] | { [key: string]: any }) {
+  public async get(keys?: string | string[] | { [key: string]: any }) {
     if (keys === undefined) return this.storage
 
     if (typeof keys === 'string' || Array.isArray(keys)) {
@@ -22,18 +22,18 @@ class StorageArea implements browser.storage.StorageArea {
     }
   }
 
-  async set(items: { [key: string]: any }) {
+  public async set(items: { [key: string]: any }) {
     this.storage = {
       ...this.storage,
       ...items,
     }
   }
 
-  async remove(keys: string | string[]) {
+  public async remove(keys: string | string[]) {
     this.storage = R.omit([keys].flat(), this.storage)
   }
 
-  async clear() {
+  public async clear() {
     this.storage = {}
   }
 }
@@ -41,7 +41,7 @@ class StorageArea implements browser.storage.StorageArea {
 class StorageAreaSync
   extends StorageArea
   implements browser.storage.StorageAreaSync {
-  async getBytesInUse(keys?: string | string[]) {
+  public async getBytesInUse(keys?: string | string[]) {
     const storage =
       keys === undefined ? this.storage : R.pick([keys].flat(), this.storage)
 
@@ -56,8 +56,7 @@ const storage: typeof browser.storage = {
   local: new StorageArea(),
   sync: new StorageAreaSync(),
   managed: new StorageArea(),
-  // @todo
-  // @ts-expect-error
+  // @ts-expect-error: todo
   onChanged() {},
 }
 

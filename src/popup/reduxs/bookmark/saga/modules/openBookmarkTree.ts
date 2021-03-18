@@ -35,7 +35,7 @@ export function* openBookmarkTree({
         bookmarkTree,
       ]),
     )
-  } catch (err) {
+  } catch (err: unknown) {
     console.error(err)
   }
 }

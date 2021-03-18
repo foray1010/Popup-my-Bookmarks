@@ -5,7 +5,7 @@ import { bookmarkSaga } from './bookmark/saga'
 export function* rootSaga() {
   try {
     yield fork(bookmarkSaga)
-  } catch (err) {
+  } catch (err: unknown) {
     console.error(err)
   }
 }

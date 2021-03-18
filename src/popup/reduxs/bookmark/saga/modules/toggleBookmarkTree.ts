@@ -20,7 +20,7 @@ export function* toggleBookmarkTree({
     } else {
       yield put(bookmarkCreators.openBookmarkTree(payload.id, payload.parentId))
     }
-  } catch (err) {
+  } catch (err: unknown) {
     console.error(err)
   }
 }
