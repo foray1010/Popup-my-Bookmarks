@@ -2,7 +2,7 @@ import classNames from 'clsx'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import classes from './menu-item.css'
+import classes from './menu-row.css'
 
 interface Props {
   isFocused: boolean

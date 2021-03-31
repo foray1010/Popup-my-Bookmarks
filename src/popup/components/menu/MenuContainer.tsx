@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import useAction from '../../../core/hooks/useAction'
 import withProviders from '../../../core/utils/withProviders'
-import * as CST from '../../constants'
+import { BOOKMARK_TYPES, MenuItem, OPEN_IN_TYPES } from '../../constants'
 import { MENU_WINDOW } from '../../constants/windows'
 import {
   useBookmarkCurrentPage,
@@ -50,7 +50,7 @@ const useClickMenuRow = (rowName?: string) => {
     if (!state.isOpen || !bookmarkInfo) return
 
     switch (rowName) {
-      case CST.MENU_ADD_FOLDER:
+      case MenuItem.AddFolder:
         openEditor({
           createAfterId: bookmarkInfo.id,
           isAllowedToEditUrl: false,
@@ -59,49 +59,49 @@ const useClickMenuRow = (rowName?: string) => {
         })
         break
 
-      case CST.MENU_ADD_PAGE:
+      case MenuItem.AddPage:
         bookmarkCurrentPage({
           parentId: bookmarkInfo.parentId,
           index: bookmarkInfo.storageIndex + 1,
         })
         break
 
-      case CST.MENU_ADD_SEPARATOR:
+      case MenuItem.AddSeparator:
         createSeparator({
           parentId: bookmarkInfo.parentId,
           index: bookmarkInfo.storageIndex + 1,
         })
         break
 
-      case CST.MENU_COPY:
+      case MenuItem.Copy:
         copyBookmark(bookmarkInfo.id)
         break
 
-      case CST.MENU_CUT:
+      case MenuItem.Cut:
         cutBookmark(bookmarkInfo.id)
         break
 
-      case CST.MENU_DEL:
+      case MenuItem.Delete:
         deleteBookmark({ id: bookmarkInfo.id })
         break
 
-      case CST.MENU_EDIT:
-      case CST.MENU_RENAME:
+      case MenuItem.Edit:
+      case MenuItem.Rename:
         openEditor({
           editTargetId: bookmarkInfo.id,
-          isAllowedToEditUrl: bookmarkInfo.type !== CST.BOOKMARK_TYPES.FOLDER,
+          isAllowedToEditUrl: bookmarkInfo.type !== BOOKMARK_TYPES.FOLDER,
           isCreating: false,
           positions: state.targetPositions,
         })
         break
 
-      case CST.MENU_OPEN_ALL:
-      case CST.MENU_OPEN_ALL_IN_I:
-      case CST.MENU_OPEN_ALL_IN_N: {
+      case MenuItem.OpenAll:
+      case MenuItem.OpenAllInIncognitoWindow:
+      case MenuItem.OpenAllInNewWindow: {
         const mapping = {
-          [CST.MENU_OPEN_ALL]: CST.OPEN_IN_TYPES.BACKGROUND_TAB,
-          [CST.MENU_OPEN_ALL_IN_I]: CST.OPEN_IN_TYPES.INCOGNITO_WINDOW,
-          [CST.MENU_OPEN_ALL_IN_N]: CST.OPEN_IN_TYPES.NEW_WINDOW,
+          [MenuItem.OpenAll]: OPEN_IN_TYPES.BACKGROUND_TAB,
+          [MenuItem.OpenAllInIncognitoWindow]: OPEN_IN_TYPES.INCOGNITO_WINDOW,
+          [MenuItem.OpenAllInNewWindow]: OPEN_IN_TYPES.NEW_WINDOW,
         }
         await openFolderInBrowser(bookmarkInfo.id, {
           openIn: mapping[rowName],
@@ -111,13 +111,13 @@ const useClickMenuRow = (rowName?: string) => {
         break
       }
 
-      case CST.MENU_OPEN_IN_B:
-      case CST.MENU_OPEN_IN_I:
-      case CST.MENU_OPEN_IN_N: {
+      case MenuItem.OpenInBackgroundTab:
+      case MenuItem.OpenInIncognitoWindow:
+      case MenuItem.OpenInNewWindow: {
         const mapping = {
-          [CST.MENU_OPEN_IN_B]: CST.OPEN_IN_TYPES.BACKGROUND_TAB,
-          [CST.MENU_OPEN_IN_I]: CST.OPEN_IN_TYPES.INCOGNITO_WINDOW,
-          [CST.MENU_OPEN_IN_N]: CST.OPEN_IN_TYPES.NEW_WINDOW,
+          [MenuItem.OpenInBackgroundTab]: OPEN_IN_TYPES.BACKGROUND_TAB,
+          [MenuItem.OpenInIncognitoWindow]: OPEN_IN_TYPES.INCOGNITO_WINDOW,
+          [MenuItem.OpenInNewWindow]: OPEN_IN_TYPES.NEW_WINDOW,
         }
         await openBookmarksInBrowser([bookmarkInfo.id], {
           openIn: mapping[rowName],
@@ -127,11 +127,11 @@ const useClickMenuRow = (rowName?: string) => {
         break
       }
 
-      case CST.MENU_PASTE:
+      case MenuItem.Paste:
         pasteBookmark(bookmarkInfo.parentId, bookmarkInfo.storageIndex + 1)
         break
 
-      case CST.MENU_SORT_BY_NAME:
+      case MenuItem.SortByName:
         await sortBookmarksByName(bookmarkInfo.parentId)
         break
 
@@ -159,7 +159,7 @@ const InnerMenuContainer = () => {
     Boolean(state.bookmark.searchKeyword),
   )
   const unclickableRows = useSelector((state: RootState) => {
-    if (!state.bookmark.clipboard.id) return [CST.MENU_PASTE]
+    if (!state.bookmark.clipboard.id) return [MenuItem.Paste]
     return []
   })
 
