@@ -17,6 +17,7 @@ import {
 } from '../../modules/bookmarks/methods/openBookmark'
 import sortBookmarksByName from '../../modules/bookmarks/methods/sortBookmarksByName'
 import type { RootState } from '../../reduxs'
+import type { BookmarkInfo } from '../../types'
 import isMac from '../../utils/isMac'
 import { ClipboardAction, useClipboard } from '../clipboard'
 import { useEditorContext } from '../editor'
@@ -29,111 +30,168 @@ import {
 } from '../listNavigation'
 import Mask from '../Mask'
 import Menu from './Menu'
-import { useMenuContext } from './useMenu'
+import { OpenState, useMenuContext } from './useMenu'
 import { getMenuPattern } from './utils'
 
-const useClickMenuRow = (rowName?: string) => {
-  const { close, state } = useMenuContext()
-  const { open: openEditor } = useEditorContext()
+const menuConfig: Record<
+  MenuItem,
+  {
+    useOnClick(opts: {
+      bookmarkInfo: BookmarkInfo
+      state: OpenState
+    }): () => void
+  }
+> = {
+  [MenuItem.AddFolder]: {
+    useOnClick({ bookmarkInfo, state }) {
+      const { open: openEditor } = useEditorContext()
 
-  const {
-    reset: resetClipboard,
-    set: setClipboard,
-    state: clipboardState,
-  } = useClipboard()
-
-  const { data: bookmarkInfo } = useGetBookmarkInfo(
-    state.isOpen ? state.targetId : undefined,
-  )
-
-  return React.useCallback(async () => {
-    if (!state.isOpen || !bookmarkInfo) return
-
-    switch (rowName) {
-      case MenuItem.AddFolder:
+      return React.useCallback(() => {
         openEditor({
           createAfterId: bookmarkInfo.id,
           isAllowedToEditUrl: false,
           isCreating: true,
           positions: state.targetPositions,
         })
-        break
-
-      case MenuItem.AddPage:
+      }, [bookmarkInfo, openEditor, state])
+    },
+  },
+  [MenuItem.AddPage]: {
+    useOnClick({ bookmarkInfo }) {
+      return React.useCallback(async () => {
         await bookmarkCurrentPage({
           parentId: bookmarkInfo.parentId,
           index: bookmarkInfo.storageIndex + 1,
         })
-        break
-
-      case MenuItem.AddSeparator:
+      }, [bookmarkInfo])
+    },
+  },
+  [MenuItem.AddSeparator]: {
+    useOnClick({ bookmarkInfo }) {
+      return React.useCallback(async () => {
         await createSeparator({
           parentId: bookmarkInfo.parentId,
           index: bookmarkInfo.storageIndex + 1,
         })
-        break
+      }, [bookmarkInfo])
+    },
+  },
+  [MenuItem.Copy]: {
+    useOnClick({ bookmarkInfo }) {
+      const { set: setClipboard } = useClipboard()
 
-      case MenuItem.Copy:
+      return React.useCallback(() => {
         setClipboard({
           action: ClipboardAction.Copy,
           items: [{ id: bookmarkInfo.id }],
         })
-        break
+      }, [bookmarkInfo, setClipboard])
+    },
+  },
+  [MenuItem.Cut]: {
+    useOnClick({ bookmarkInfo }) {
+      const { set: setClipboard } = useClipboard()
 
-      case MenuItem.Cut:
+      return React.useCallback(() => {
         setClipboard({
           action: ClipboardAction.Cut,
           items: [{ id: bookmarkInfo.id }],
         })
-        break
-
-      case MenuItem.Delete:
+      }, [bookmarkInfo, setClipboard])
+    },
+  },
+  [MenuItem.Delete]: {
+    useOnClick({ bookmarkInfo }) {
+      return React.useCallback(async () => {
         await webExtension.bookmarks.removeTree(bookmarkInfo.id)
-        break
+      }, [bookmarkInfo])
+    },
+  },
+  [MenuItem.Edit]: {
+    useOnClick({ bookmarkInfo, state }) {
+      const { open: openEditor } = useEditorContext()
 
-      case MenuItem.Edit:
-      case MenuItem.Rename:
+      return React.useCallback(() => {
         openEditor({
           editTargetId: bookmarkInfo.id,
           isAllowedToEditUrl: bookmarkInfo.type !== BOOKMARK_TYPES.FOLDER,
           isCreating: false,
           positions: state.targetPositions,
         })
-        break
-
-      case MenuItem.OpenAll:
-      case MenuItem.OpenAllInIncognitoWindow:
-      case MenuItem.OpenAllInNewWindow: {
-        const mapping = {
-          [MenuItem.OpenAll]: OPEN_IN_TYPES.BACKGROUND_TAB,
-          [MenuItem.OpenAllInIncognitoWindow]: OPEN_IN_TYPES.INCOGNITO_WINDOW,
-          [MenuItem.OpenAllInNewWindow]: OPEN_IN_TYPES.NEW_WINDOW,
-        }
+      }, [bookmarkInfo, openEditor, state])
+    },
+  },
+  [MenuItem.OpenAll]: {
+    useOnClick({ bookmarkInfo }) {
+      return React.useCallback(async () => {
         await openFolderInBrowser(bookmarkInfo.id, {
-          openIn: mapping[rowName],
+          openIn: OPEN_IN_TYPES.BACKGROUND_TAB,
           isAllowBookmarklet: false,
           isCloseThisExtension: true,
         })
-        break
-      }
-
-      case MenuItem.OpenInBackgroundTab:
-      case MenuItem.OpenInIncognitoWindow:
-      case MenuItem.OpenInNewWindow: {
-        const mapping = {
-          [MenuItem.OpenInBackgroundTab]: OPEN_IN_TYPES.BACKGROUND_TAB,
-          [MenuItem.OpenInIncognitoWindow]: OPEN_IN_TYPES.INCOGNITO_WINDOW,
-          [MenuItem.OpenInNewWindow]: OPEN_IN_TYPES.NEW_WINDOW,
-        }
+      }, [bookmarkInfo])
+    },
+  },
+  [MenuItem.OpenAllInIncognitoWindow]: {
+    useOnClick({ bookmarkInfo }) {
+      return React.useCallback(async () => {
+        await openFolderInBrowser(bookmarkInfo.id, {
+          openIn: OPEN_IN_TYPES.INCOGNITO_WINDOW,
+          isAllowBookmarklet: false,
+          isCloseThisExtension: true,
+        })
+      }, [bookmarkInfo])
+    },
+  },
+  [MenuItem.OpenAllInNewWindow]: {
+    useOnClick({ bookmarkInfo }) {
+      return React.useCallback(async () => {
+        await openFolderInBrowser(bookmarkInfo.id, {
+          openIn: OPEN_IN_TYPES.NEW_WINDOW,
+          isAllowBookmarklet: false,
+          isCloseThisExtension: true,
+        })
+      }, [bookmarkInfo])
+    },
+  },
+  [MenuItem.OpenInBackgroundTab]: {
+    useOnClick({ bookmarkInfo }) {
+      return React.useCallback(async () => {
         await openBookmarksInBrowser([bookmarkInfo.id], {
-          openIn: mapping[rowName],
+          openIn: OPEN_IN_TYPES.BACKGROUND_TAB,
           isAllowBookmarklet: true,
           isCloseThisExtension: true,
         })
-        break
-      }
+      }, [bookmarkInfo])
+    },
+  },
+  [MenuItem.OpenInIncognitoWindow]: {
+    useOnClick({ bookmarkInfo }) {
+      return React.useCallback(async () => {
+        await openBookmarksInBrowser([bookmarkInfo.id], {
+          openIn: OPEN_IN_TYPES.INCOGNITO_WINDOW,
+          isAllowBookmarklet: true,
+          isCloseThisExtension: true,
+        })
+      }, [bookmarkInfo])
+    },
+  },
+  [MenuItem.OpenInNewWindow]: {
+    useOnClick({ bookmarkInfo }) {
+      return React.useCallback(async () => {
+        await openBookmarksInBrowser([bookmarkInfo.id], {
+          openIn: OPEN_IN_TYPES.NEW_WINDOW,
+          isAllowBookmarklet: true,
+          isCloseThisExtension: true,
+        })
+      }, [bookmarkInfo])
+    },
+  },
+  [MenuItem.Paste]: {
+    useOnClick({ bookmarkInfo }) {
+      const { reset: resetClipboard, state: clipboardState } = useClipboard()
 
-      case MenuItem.Paste:
+      return React.useCallback(async () => {
         switch (clipboardState.action) {
           case ClipboardAction.Copy:
             await recursiveCopyBookmarks(clipboardState.items[0].id, {
@@ -150,30 +208,40 @@ const useClickMenuRow = (rowName?: string) => {
           default:
         }
         resetClipboard()
-        break
+      }, [bookmarkInfo, clipboardState, resetClipboard])
+    },
+  },
+  [MenuItem.Rename]: {
+    useOnClick({ bookmarkInfo, state }) {
+      const { open: openEditor } = useEditorContext()
 
-      case MenuItem.SortByName:
+      return React.useCallback(() => {
+        openEditor({
+          editTargetId: bookmarkInfo.id,
+          isAllowedToEditUrl: bookmarkInfo.type !== BOOKMARK_TYPES.FOLDER,
+          isCreating: false,
+          positions: state.targetPositions,
+        })
+      }, [bookmarkInfo, openEditor, state])
+    },
+  },
+  [MenuItem.SortByName]: {
+    useOnClick({ bookmarkInfo }) {
+      return React.useCallback(async () => {
         await sortBookmarksByName(bookmarkInfo.parentId)
-        break
-
-      default:
-    }
-
-    close()
-  }, [
-    bookmarkInfo,
-    clipboardState,
-    close,
-    openEditor,
-    resetClipboard,
-    rowName,
-    setClipboard,
-    state,
-  ])
+      }, [bookmarkInfo])
+    },
+  },
 }
 
-const InnerMenuContainer = () => {
-  const { close, state } = useMenuContext()
+type Props = {
+  close: () => void
+  state: OpenState
+}
+function OpenMenuContainer({ close, state }: Props) {
+  const isSearching = useSelector((state: RootState) =>
+    Boolean(state.bookmark.searchKeyword),
+  )
 
   const { state: clipboardState } = useClipboard()
   const unclickableRows =
@@ -182,12 +250,7 @@ const InnerMenuContainer = () => {
       ? []
       : [MenuItem.Paste]
 
-  const isSearching = useSelector((state: RootState) =>
-    Boolean(state.bookmark.searchKeyword),
-  )
-  const { data: bookmarkInfo } = useGetBookmarkInfo(
-    state.isOpen ? state.targetId : undefined,
-  )
+  const { data: bookmarkInfo } = useGetBookmarkInfo(state.targetId)
   const menuPattern = React.useMemo(() => {
     return bookmarkInfo ? getMenuPattern(bookmarkInfo, isSearching) : []
   }, [bookmarkInfo, isSearching])
@@ -232,8 +295,6 @@ const InnerMenuContainer = () => {
     [unsetHighlightedIndex],
   )
 
-  if (!state.isOpen) return null
-
   return (
     <>
       <Mask opacity={0.3} onClick={close} />
@@ -254,6 +315,14 @@ const InnerMenuContainer = () => {
       </FloatingWindow>
     </>
   )
+}
+
+function InnerMenuContainer() {
+  const { close, state } = useMenuContext()
+
+  if (!state.isOpen) return null
+
+  return <OpenMenuContainer close={close} state={state} />
 }
 
 const MenuContainer = withProviders(InnerMenuContainer, [

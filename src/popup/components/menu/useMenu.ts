@@ -1,7 +1,7 @@
 import constate from 'constate'
 import * as React from 'react'
 
-type OpenState = {
+export type OpenState = {
   targetId: string
   displayPositions: { top: number; left: number }
   targetPositions: { top: number; left: number }
