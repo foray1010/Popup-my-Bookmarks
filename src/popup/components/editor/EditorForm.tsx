@@ -35,18 +35,16 @@ export default function Editor({ onConfirm, ...props }: Props) {
       <span className={classes.header}>{props.header}</span>
 
       <Input
-        ref={register}
+        {...register('title')}
         autoFocus
         className={classes.input}
         defaultValue={props.defaultTitle}
-        name='title'
       />
       <Input
-        ref={register}
+        {...register('url')}
         className={classes.input}
         defaultValue={props.defaultUrl}
         hidden={!props.isAllowedToEditUrl}
-        name='url'
       />
 
       <Button type='submit'>{webExtension.i18n.getMessage('confirm')}</Button>

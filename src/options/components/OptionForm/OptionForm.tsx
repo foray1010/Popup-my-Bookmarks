@@ -35,15 +35,16 @@ export default function OptionForm(props: Props) {
                   control={control}
                   defaultValue={props.defaultValues[optionName]}
                   name={optionName}
-                  render={({ name, onBlur, onChange, value }) => (
-                    <OptionItem
-                      name={name}
-                      optionConfig={props.optionsConfig[optionName]}
-                      value={value}
-                      onBlur={onBlur}
-                      onChange={onChange}
-                    />
-                  )}
+                  render={({ field }) => {
+                    // do not pass ref as not all option items forward reference
+                    const { ref, ...rest } = field
+                    return (
+                      <OptionItem
+                        {...rest}
+                        optionConfig={props.optionsConfig[optionName]}
+                      />
+                    )
+                  }}
                 />
               </td>
             </tr>
