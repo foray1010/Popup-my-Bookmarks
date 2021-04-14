@@ -133,7 +133,7 @@ const webpackConfig: webpack.Configuration = {
         new CssMinimizerPlugin({
           minimizerOptions: {
             preset: [
-              'cssnano-preset-default',
+              'default',
               {
                 discardComments: { removeAll: true },
               },
