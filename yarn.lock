@@ -2062,10 +2062,10 @@
   resolved "https://registry.yarnpkg.com/@types/unist/-/unist-2.0.3.tgz#9c088679876f374eb5983f150d4787aa6fb32d7e"
   integrity sha512-FvUupuM3rlRsRtCN+fDudtmytGO6iHJuuRKS1Ss0pG5z8oX0diNEw94UEL7hgDbpN94rgaK5R7sWm6RrSkZuAQ==
 
-"@types/webpack-bundle-analyzer@3.9.2":
-  version "3.9.2"
-  resolved "https://registry.yarnpkg.com/@types/webpack-bundle-analyzer/-/webpack-bundle-analyzer-3.9.2.tgz#a20936d3848ddbbe3a0678ba2e225f790ab0d344"
-  integrity sha512-+LirhEpWEPRMyOW0HCy/lTTGzfdEWL26ximknO+/oaAQkigJJktxMr/QE7EWVNMRv+hpwW20Mv3YfLs42q2kjA==
+"@types/webpack-bundle-analyzer@3.9.3":
+  version "3.9.3"
+  resolved "https://registry.yarnpkg.com/@types/webpack-bundle-analyzer/-/webpack-bundle-analyzer-3.9.3.tgz#3a12025eb5d86069c30b47a157e62c0aca6e39a1"
+  integrity sha512-l/vaDMWGcXiMB3CbczpyICivLTB07/JNtn1xebsRXE9tPaUDEHgX3x7YP6jfznG5TOu7I4w0Qx1tZz61znmPmg==
   dependencies:
     "@types/webpack" "^4"
 
