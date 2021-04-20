@@ -7,13 +7,16 @@ const config: Config.InitialOptions = {
   coveragePathIgnorePatterns: ['/__fixtures__/'],
   coverageReporters: ['lcov', 'text-summary'],
   moduleNameMapper: {
-    '\\.css$': '<rootDir>/__mocks__/styleMock.ts',
     '\\.png$': '<rootDir>/__mocks__/fileMock.ts',
     '\\.svg$': '<rootDir>/__mocks__/fileMock.ts',
   },
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   testEnvironment: 'jsdom',
   testMatch: ['**/*.{spec,test}.{cjs,js,mjs,ts,tsx}'],
+  transform: {
+    '\\.css$': 'jest-css-modules-transform',
+    '\\.tsx?$': 'babel-jest',
+  },
 }
 
 export default config
