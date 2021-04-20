@@ -3,13 +3,9 @@
 import * as R from 'ramda'
 
 class StorageArea implements browser.storage.StorageArea {
-  protected storage: { [key: string]: any }
+  protected storage: { [key: string]: unknown } = {}
 
-  constructor() {
-    this.storage = {}
-  }
-
-  public async get(keys?: string | string[] | { [key: string]: any }) {
+  public async get(keys?: string | string[] | { [key: string]: unknown }) {
     if (keys === undefined) return this.storage
 
     if (typeof keys === 'string' || Array.isArray(keys)) {
@@ -22,7 +18,7 @@ class StorageArea implements browser.storage.StorageArea {
     }
   }
 
-  public async set(items: { [key: string]: any }) {
+  public async set(items: { [key: string]: unknown }) {
     this.storage = {
       ...this.storage,
       ...items,
