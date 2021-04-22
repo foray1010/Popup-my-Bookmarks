@@ -4,7 +4,7 @@ import webExtension from 'webextension-polyfill'
 import Button from '../../../core/components/baseItems/Button'
 import { RoutePath } from '../../constants'
 import { useNavigationContext } from '../navigationContext'
-import classes from './styles.css'
+import classes from './styles.module.css'
 
 const navBarItemInfos = [
   {

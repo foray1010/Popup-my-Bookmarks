@@ -1,6 +1,6 @@
 import webExtension from 'webextension-polyfill'
 
-import classes from './no-search-result.css'
+import classes from './no-search-result.module.css'
 
 export default function NoSearchResult() {
   return (

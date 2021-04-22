@@ -1,4 +1,4 @@
-import './globals.css'
+import './globals.module.css'
 
 import * as React from 'react'
 

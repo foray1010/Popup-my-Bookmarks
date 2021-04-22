@@ -3,7 +3,7 @@ import * as React from 'react'
 import type { Options } from '../../../core/types/options'
 import { OPTIONS } from '../../constants'
 import BookmarkTree from '../BookmarkTree'
-import classes from './bookmark-trees.css'
+import classes from './bookmark-trees.module.css'
 import useRememberLastPositions from './useRememberLastPositions'
 
 interface Props {

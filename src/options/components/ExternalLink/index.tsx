@@ -1,7 +1,7 @@
 import classNames from 'clsx'
 import type * as React from 'react'
 
-import classes from './styles.css'
+import classes from './styles.module.css'
 
 type Props = Omit<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,

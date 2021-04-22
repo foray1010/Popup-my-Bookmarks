@@ -23,7 +23,7 @@
 
 .title {
   /* stylelint-disable-next-line value-keyword-case */
-  composes: noTextOverflow from '../../../core/styles/composes.css';
+  composes: noTextOverflow from '../../../core/styles/composes.module.css';
   padding: var(--padding);
   margin: 0;
   color: var(--main-background-color);

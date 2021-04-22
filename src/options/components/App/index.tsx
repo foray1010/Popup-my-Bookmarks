@@ -1,4 +1,4 @@
-import './globals.css'
+import './globals.module.css'
 
 import { ReactQueryDevtools } from 'react-query/devtools'
 
@@ -8,7 +8,7 @@ import Donate from '../Donate'
 import NavBar from '../NavBar'
 import { NavigationProvider } from '../navigationContext'
 import Router from '../Router'
-import classes from './styles.css'
+import classes from './styles.module.css'
 
 function InnerApp() {
   return (

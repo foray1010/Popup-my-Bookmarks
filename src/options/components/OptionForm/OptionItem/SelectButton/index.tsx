@@ -2,7 +2,7 @@ import type * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import Option from './Option'
-import classes from './styles.css'
+import classes from './styles.module.css'
 
 type RestOptionProps = Omit<
   React.ComponentProps<typeof Option>,

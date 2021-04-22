@@ -5,7 +5,7 @@ import webExtension from 'webextension-polyfill'
 import Input from '../../../core/components/baseItems/Input'
 import { ReactComponent as Cross } from '../../images/cross.svg'
 import { ReactComponent as Search } from '../../images/search.svg'
-import classes from './search-input.css'
+import classes from './search-input.module.css'
 
 interface Props extends React.ComponentProps<typeof Input> {
   onCancel(): void

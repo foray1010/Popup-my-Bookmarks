@@ -10,7 +10,7 @@ import type {
   BookmarkTree as BookmarkTreeType,
 } from '../../types'
 import { ResponseEvent, useDragAndDropContainerEvents } from '../dragAndDrop'
-import classes from './bookmark-tree.css'
+import classes from './bookmark-tree.module.css'
 import BookmarkRow from './BookmarkRow'
 
 interface ItemData {

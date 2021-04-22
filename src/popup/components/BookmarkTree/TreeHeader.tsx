@@ -1,5 +1,5 @@
 import { ReactComponent as Cross } from '../../images/cross.svg'
-import classes from './tree-header.css'
+import classes from './tree-header.module.css'
 
 interface Props {
   onClose(): void

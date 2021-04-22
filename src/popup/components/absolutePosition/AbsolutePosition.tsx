@@ -1,7 +1,7 @@
 import useComponentSize from '@rehooks/component-size'
 import * as React from 'react'
 
-import classes from './AbsolutePosition.css'
+import classes from './AbsolutePosition.module.css'
 import useGlobalBodySize from './useGlobalBodySize'
 
 interface Props

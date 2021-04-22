@@ -5,7 +5,7 @@ import webExtension from 'webextension-polyfill'
 import ActionlessForm from '../../../core/components/baseItems/ActionlessForm'
 import Button from '../../../core/components/baseItems/Button'
 import Input from '../../../core/components/baseItems/Input'
-import classes from './editor-form.css'
+import classes from './editor-form.module.css'
 
 interface Props {
   defaultTitle?: string

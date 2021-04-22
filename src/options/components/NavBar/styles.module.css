@@ -6,7 +6,7 @@
 }
 
 .button {
-  composes: focus from '../../../core/styles/composes.css';
+  composes: focus from '../../../core/styles/composes.module.css';
   flex: 1 0 0;
   padding-top: var(--golden-gap-2x);
   border: 0;

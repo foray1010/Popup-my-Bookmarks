@@ -1,6 +1,6 @@
 import LazyImage from '../../core/components/baseItems/LazyImage'
 import donateIcon from '../images/btn_donateCC_LG.png'
-import classes from './donate.css'
+import classes from './donate.module.css'
 import ExternalLink from './ExternalLink'
 
 const paypalUrl =

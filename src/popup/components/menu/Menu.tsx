@@ -2,7 +2,7 @@ import type * as React from 'react'
 
 import PlainList from '../../../core/components/baseItems/PlainList'
 import type { MenuPattern } from '../../types'
-import classes from './menu.css'
+import classes from './menu.module.css'
 import MenuRow from './MenuRow'
 
 interface Props {

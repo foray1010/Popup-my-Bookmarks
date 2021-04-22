@@ -2,7 +2,7 @@ import classNames from 'clsx'
 import * as React from 'react'
 
 import { useKeyBindingsContext } from './KeyBindingsContext'
-import classes from './KeyBindingsWindow.css'
+import classes from './KeyBindingsWindow.module.css'
 
 type Props = React.HTMLAttributes<Element> & {
   windowId: string

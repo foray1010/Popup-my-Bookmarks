@@ -1,7 +1,7 @@
 import classNames from 'clsx'
 import * as React from 'react'
 
-import classes from './mask.css'
+import classes from './mask.module.css'
 
 type Props = React.HTMLAttributes<Element> & {
   opacity: number

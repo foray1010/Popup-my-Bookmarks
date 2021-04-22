@@ -1,6 +1,6 @@
 .main {
   /* stylelint-disable-next-line value-keyword-case */
-  composes: noTextOverflow from '../../../core/styles/composes.css';
+  composes: noTextOverflow from '../../../core/styles/composes.module.css';
   box-sizing: border-box;
   padding: var(--golden-gap);
   margin: var(--golden-gap-2x);

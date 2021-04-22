@@ -2,7 +2,7 @@ import type * as React from 'react'
 
 import Input from '../../../../../core/components/baseItems/Input'
 import PlainList from '../../../../../core/components/baseItems/PlainList'
-import classes from './styles.css'
+import classes from './styles.module.css'
 
 type RestInputProps = Omit<
   React.ComponentProps<typeof Input>,

@@ -5,7 +5,7 @@ import ActionlessForm from '../../../core/components/baseItems/ActionlessForm'
 import Button from '../../../core/components/baseItems/Button'
 import type { OPTIONS } from '../../../core/constants'
 import type { Options, OptionsConfig } from '../../../core/types/options'
-import classes from './option-form.css'
+import classes from './option-form.module.css'
 import OptionItem from './OptionItem'
 
 interface Props {

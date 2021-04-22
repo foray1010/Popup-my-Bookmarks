@@ -2,7 +2,7 @@ import classNames from 'clsx'
 import * as React from 'react'
 
 import Button from '../../../../../../core/components/baseItems/Button'
-import classes from './styles.css'
+import classes from './styles.module.css'
 
 type Props = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,

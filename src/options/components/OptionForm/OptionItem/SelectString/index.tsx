@@ -2,7 +2,7 @@ import classNames from 'clsx'
 import type * as React from 'react'
 
 import Select from '../../../../../core/components/baseItems/Select'
-import classes from './styles.css'
+import classes from './styles.module.css'
 
 interface Props extends React.ComponentProps<typeof Select> {
   choices: Array<string>

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import classes from './contributors.css'
+import classes from './contributors.module.css'
 
 const contributors = {
   Developer: ['foray1010'],

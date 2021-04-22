@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import Input from '../../../../../core/components/baseItems/Input'
 import Select from '../../../../../core/components/baseItems/Select'
-import classes from './styles.css'
+import classes from './styles.module.css'
 
 type RestInputProps = Omit<
   React.ComponentProps<typeof Input>,

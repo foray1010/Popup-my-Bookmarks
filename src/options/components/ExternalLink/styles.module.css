@@ -1,5 +1,5 @@
 .main {
-  composes: focus from '../../../core/styles/composes.css';
+  composes: focus from '../../../core/styles/composes.module.css';
   color: var(--main-color1);
   text-decoration: none;
 
