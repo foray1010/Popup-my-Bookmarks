@@ -7,7 +7,7 @@
   transition: color var(--transition-duration);
 }
 
-.item-active {
+.itemActive {
   color: var(--background-color);
   cursor: default;
 }

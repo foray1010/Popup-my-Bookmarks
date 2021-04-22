@@ -1,4 +1,4 @@
-.list-item {
+.listItem {
   box-sizing: border-box;
 
   &:last-child {

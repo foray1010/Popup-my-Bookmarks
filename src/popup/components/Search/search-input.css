@@ -17,7 +17,7 @@
   margin-bottom: var(--golden-gap);
 }
 
-.search-input {
+.searchInput {
   flex-grow: 1;
   padding: var(--input-vertical-padding) var(--golden-gap);
   border: 0;

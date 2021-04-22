@@ -11,12 +11,12 @@
   }
 }
 
-.item-desc {
+.itemDesc {
   overflow: hidden;
   white-space: no-wrap;
 }
 
-.item-input {
+.itemInput {
   & > input[type='number'],
   & > input[type='text'],
   & > select {

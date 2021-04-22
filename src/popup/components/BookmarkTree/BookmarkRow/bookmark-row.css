@@ -1,20 +1,21 @@
-.full-height {
+.fullHeight {
   height: 100%;
 }
 
 .main {
-  composes: list-item from '../../../../core/styles/composes.css';
+  /* stylelint-disable-next-line value-keyword-case */
+  composes: listItem from '../../../../core/styles/composes.css';
   display: flex;
   box-sizing: border-box;
   align-items: center;
   padding: var(--golden-gap);
   color: var(--main-font-color);
 
-  &.drag-indicator {
+  &.dragIndicator {
     border: 1px dashed var(--highlight-level5);
   }
 
-  &.root-folder {
+  &.rootFolder {
     color: inherit !important;
   }
 
@@ -47,5 +48,6 @@
 }
 
 .title {
-  composes: no-text-overflow from '../../../../core/styles/composes.css';
+  /* stylelint-disable-next-line value-keyword-case */
+  composes: noTextOverflow from '../../../../core/styles/composes.css';
 }

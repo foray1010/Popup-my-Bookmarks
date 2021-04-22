@@ -126,7 +126,7 @@ export default function BookmarkTree(props: Props) {
             <BookmarkRow
               key={virtualItem.index}
               bookmarkInfo={bookmarkInfo}
-              className={classes['list-item']}
+              className={classes.listItem}
               iconSize={props.iconSize}
               isDisableDragAndDrop={props.isDisableDragAndDrop}
               isHighlighted={

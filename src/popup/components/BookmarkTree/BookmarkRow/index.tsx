@@ -82,9 +82,9 @@ export default function BookmarkRowContainer({
         onDragStart={restProps.onDragStart}
       >
         <BookmarkRow
-          className={classNames(classes['full-height'], {
-            [classes['root-folder']]: bookmarkInfo.isRoot,
-            [classes['drag-indicator']]:
+          className={classNames(classes.fullHeight, {
+            [classes.rootFolder]: bookmarkInfo.isRoot,
+            [classes.dragIndicator]:
               bookmarkInfo.type === CST.BOOKMARK_TYPES.DRAG_INDICATOR,
             [classes.separator]:
               bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR,
