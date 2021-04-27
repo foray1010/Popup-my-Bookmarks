@@ -6859,10 +6859,10 @@ jest-config@^26.6.3:
     micromatch "^4.0.2"
     pretty-format "^26.6.2"
 
-jest-css-modules-transform@4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/jest-css-modules-transform/-/jest-css-modules-transform-4.2.0.tgz#20413893634375aef29b31cd66c8d8149eb297ed"
-  integrity sha512-rprh8a4eULFVTnGzX1VRPXSlohS61nnCnkSwdfODhL4ZSDUQBW/oe0UMa9FatYjE+EDaWtKKzsp1lWdzWOT5MA==
+jest-css-modules-transform@4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/jest-css-modules-transform/-/jest-css-modules-transform-4.2.1.tgz#af4275d7757a52aa937e93a93bb4bb5b6cda873d"
+  integrity sha512-MHC6hj80F2bDjwVrPM9Bun2lI4ezPQ0OU6bHc1Tp3lLqsl+VSqs5VFAa5DTH4LgiFgYw2XyQfKlUAk1vHaPBHA==
   dependencies:
     camelcase "^6.2.0"
     postcss "^7.0.30 || ^8.0.0"
