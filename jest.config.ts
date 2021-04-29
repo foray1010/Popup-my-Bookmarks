@@ -2,7 +2,6 @@ import type { Config } from '@jest/types'
 
 const config: Config.InitialOptions = {
   bail: true,
-  collectCoverage: true,
   collectCoverageFrom: ['<rootDir>/src/**/*.{cjs,js,mjs,ts,tsx}'],
   coveragePathIgnorePatterns: ['/__fixtures__/'],
   coverageReporters: ['lcov', 'text-summary'],
