@@ -7,7 +7,7 @@ import { useCreateBookmarkAfterId } from '../../modules/bookmarks/hooks/createBo
 import useEditBookmark from '../../modules/bookmarks/hooks/useEditBookmark'
 import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo'
 import { useOptions } from '../../modules/options'
-import { AbsolutePosition } from '../absolutePosition'
+import { FloatingWindow } from '../floatingWindow'
 import { KeyBindingsWindow } from '../keyBindings'
 import Mask from '../Mask'
 import { useEditorContext } from './EditorContext'
@@ -105,7 +105,7 @@ export default function Editor() {
   return (
     <>
       <Mask opacity={0.3} onClick={close} />
-      <AbsolutePosition
+      <FloatingWindow
         positionLeft={state.positions.left}
         positionTop={state.positions.top}
       >
@@ -122,7 +122,7 @@ export default function Editor() {
             />
           )}
         </KeyBindingsWindow>
-      </AbsolutePosition>
+      </FloatingWindow>
     </>
   )
 }

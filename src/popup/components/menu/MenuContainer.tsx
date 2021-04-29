@@ -18,8 +18,8 @@ import {
 import sortBookmarksByName from '../../modules/bookmarks/methods/sortBookmarksByName'
 import { bookmarkCreators, RootState } from '../../reduxs'
 import isMac from '../../utils/isMac'
-import { AbsolutePosition } from '../absolutePosition'
 import { useEditorContext } from '../editor'
+import { FloatingWindow } from '../floatingWindow'
 import { KeyBindingsWindow, useKeyBindingsEvent } from '../keyBindings'
 import {
   ListNavigationProvider,
@@ -217,7 +217,7 @@ const InnerMenuContainer = () => {
   return (
     <>
       <Mask opacity={0.3} onClick={close} />
-      <AbsolutePosition
+      <FloatingWindow
         positionLeft={state.displayPositions.left}
         positionTop={state.displayPositions.top}
       >
@@ -231,7 +231,7 @@ const InnerMenuContainer = () => {
             onRowMouseLeave={handleRowMouseLeave}
           />
         </KeyBindingsWindow>
-      </AbsolutePosition>
+      </FloatingWindow>
     </>
   )
 }

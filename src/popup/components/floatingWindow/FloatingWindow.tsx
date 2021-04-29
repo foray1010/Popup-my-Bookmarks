@@ -1,19 +1,14 @@
 import useComponentSize from '@rehooks/component-size'
 import * as React from 'react'
 
-import classes from './AbsolutePosition.module.css'
 import useGlobalBodySize from './useGlobalBodySize'
 
-interface Props
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'className' | 'style'> {
+interface Props {
+  children: React.ReactNode
   positionLeft: number
   positionTop: number
 }
-export default function AbsolutePosition({
-  positionLeft,
-  positionTop,
-  ...restProps
-}: Props) {
+export default function FloatingWindow({ positionLeft, positionTop }: Props) {
   const { insertBodySize } = useGlobalBodySize()
 
   const measureRef = React.useRef<HTMLDivElement>(null)
@@ -65,15 +60,14 @@ export default function AbsolutePosition({
   return (
     <div
       ref={measureRef}
-      className={classes.wrapper}
       style={React.useMemo(
         () => ({
+          position: 'fixed',
           left: `${calibratedPosition.left}px`,
           top: `${calibratedPosition.top}px`,
         }),
         [calibratedPosition.left, calibratedPosition.top],
       )}
-      {...restProps}
     />
   )
 }

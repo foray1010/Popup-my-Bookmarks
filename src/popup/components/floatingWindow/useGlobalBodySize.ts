@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { BodySize, useAbsolutePositionContext } from './AbsolutePositionContext'
+import { BodySize, useFloatingWindowContext } from './FloatingWindowContext'
 
 export default function useGlobalBodySize(): {
   globalBodySize?: BodySize
@@ -10,7 +10,7 @@ export default function useGlobalBodySize(): {
     removeBodySize(): void
   }
 } {
-  const { bodySizeStack, setBodySizeStack } = useAbsolutePositionContext()
+  const { bodySizeStack, setBodySizeStack } = useFloatingWindowContext()
 
   const globalBodySize = React.useMemo(() => {
     const notUndefined = <T>(x?: T): x is T => x !== undefined

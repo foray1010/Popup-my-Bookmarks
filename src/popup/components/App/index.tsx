@@ -6,12 +6,9 @@ import { ReactQueryClientProvider } from '../../../core/utils/queryClient'
 import withProviders from '../../../core/utils/withProviders'
 import { OPTIONS } from '../../constants'
 import { useOptions, withOptions } from '../../modules/options'
-import {
-  AbsolutePositionProvider,
-  useGlobalBodySize,
-} from '../absolutePosition'
 import BookmarkTrees from '../BookmarkTrees'
 import { Editor, EditorProvider } from '../editor'
+import { FloatingWindowProvider, useGlobalBodySize } from '../floatingWindow'
 import { KeyBindingsProvider } from '../keyBindings'
 import { Menu, MenuProvider } from '../menu'
 import Search from '../Search'
@@ -54,7 +51,7 @@ const AppWithOptions = withOptions(function InnerApp() {
 const App = withProviders(AppWithOptions, [
   ReactQueryClientProvider,
   KeyBindingsProvider,
-  AbsolutePositionProvider,
+  FloatingWindowProvider,
   EditorProvider,
   MenuProvider,
 ])

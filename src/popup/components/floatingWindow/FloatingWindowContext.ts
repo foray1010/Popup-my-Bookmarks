@@ -7,7 +7,7 @@ export interface BodySize {
 }
 type BodySizeStack = ReadonlyArray<BodySize>
 
-const useAbsolutePosition = () => {
+const useFloatingWindow = () => {
   const [bodySizeStack, setBodySizeStack] = React.useState<BodySizeStack>([])
 
   return React.useMemo(
@@ -19,6 +19,6 @@ const useAbsolutePosition = () => {
   )
 }
 
-export const [AbsolutePositionProvider, useAbsolutePositionContext] = constate(
-  useAbsolutePosition,
+export const [FloatingWindowProvider, useFloatingWindowContext] = constate(
+  useFloatingWindow,
 )
