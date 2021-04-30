@@ -7,6 +7,7 @@ import withProviders from '../../../core/utils/withProviders'
 import { OPTIONS } from '../../constants'
 import { useOptions, withOptions } from '../../modules/options'
 import BookmarkTrees from '../BookmarkTrees'
+import { ClipboardProvider } from '../clipboard'
 import { Editor, EditorProvider } from '../editor'
 import { FloatingWindowProvider, useGlobalBodySize } from '../floatingWindow'
 import { KeyBindingsProvider } from '../keyBindings'
@@ -50,6 +51,7 @@ const AppWithOptions = withOptions(function InnerApp() {
 
 const App = withProviders(AppWithOptions, [
   ReactQueryClientProvider,
+  ClipboardProvider,
   KeyBindingsProvider,
   FloatingWindowProvider,
   EditorProvider,

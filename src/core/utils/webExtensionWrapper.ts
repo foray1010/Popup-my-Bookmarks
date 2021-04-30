@@ -6,7 +6,6 @@ const wrap = <T extends Array<unknown>, U>(fn: (...args: T) => U) => {
   return (...args: T): U => fn(...args)
 }
 
-export const createBookmark = wrap(webExtension.bookmarks.create)
 export const getBookmarkChildNodes = wrap(webExtension.bookmarks.getChildren)
 export const getBookmarkNodes = wrap(webExtension.bookmarks.get)
 export const getI18n = wrap(webExtension.i18n.getMessage)

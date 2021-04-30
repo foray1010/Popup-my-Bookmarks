@@ -6,7 +6,6 @@ import { getSearchResult } from './modules/getSearchResult'
 import { initBookmarkTrees } from './modules/initBookmarkTrees'
 import { moveBookmarkToDragIndicator } from './modules/moveBookmarkToDragIndicator'
 import { openBookmarkTree } from './modules/openBookmarkTree'
-import { pasteBookmark } from './modules/pasteBookmark'
 import { refreshBookmarkTrees } from './modules/refreshBookmarkTrees'
 import { toggleBookmarkTree } from './modules/toggleBookmarkTree'
 
@@ -21,7 +20,6 @@ export function* bookmarkSaga() {
     moveBookmarkToDragIndicator,
   )
   yield takeLatest(getType(bookmarkCreators.openBookmarkTree), openBookmarkTree)
-  yield takeLatest(getType(bookmarkCreators.pasteBookmark), pasteBookmark)
   yield takeLatest(
     getType(bookmarkCreators.refreshBookmarkTrees),
     refreshBookmarkTrees,

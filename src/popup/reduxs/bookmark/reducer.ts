@@ -7,18 +7,10 @@ import * as bookmarkCreators from './actions'
 import { simulateBookmark } from './utils/converters'
 
 interface BookmarkState {
-  clipboard: {
-    id?: string
-    isRemoveAfterPaste: boolean
-  }
   searchKeyword: string
   trees: Array<BookmarkTree>
 }
 const INITIAL_STATE: BookmarkState = {
-  clipboard: {
-    id: undefined,
-    isRemoveAfterPaste: false,
-  },
   searchKeyword: '',
   trees: [],
 }
@@ -37,30 +29,6 @@ export const bookmarkReducer = createReducer<
   BookmarkState,
   ActionType<typeof bookmarkCreators>
 >(INITIAL_STATE, {
-  [getType(bookmarkCreators.copyBookmark)](
-    state: BookmarkState,
-    { payload }: ReturnType<typeof bookmarkCreators.copyBookmark>,
-  ) {
-    return {
-      ...state,
-      clipboard: {
-        id: payload.id,
-        isRemoveAfterPaste: false,
-      },
-    }
-  },
-  [getType(bookmarkCreators.cutBookmark)](
-    state: BookmarkState,
-    { payload }: ReturnType<typeof bookmarkCreators.cutBookmark>,
-  ) {
-    return {
-      ...state,
-      clipboard: {
-        id: payload.id,
-        isRemoveAfterPaste: true,
-      },
-    }
-  },
   [getType(bookmarkCreators.getSearchResult)](
     state: BookmarkState,
     { payload }: ReturnType<typeof bookmarkCreators.getSearchResult>,
@@ -97,12 +65,6 @@ export const bookmarkReducer = createReducer<
     return {
       ...state,
       trees: state.trees.slice(0, removeAfterIndex + 1),
-    }
-  },
-  [getType(bookmarkCreators.resetClipboard)](state: BookmarkState) {
-    return {
-      ...state,
-      clipboard: INITIAL_STATE.clipboard,
     }
   },
   [getType(bookmarkCreators.setBookmarkTrees)](
