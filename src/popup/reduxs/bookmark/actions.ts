@@ -2,14 +2,6 @@ import { createAction } from 'typesafe-actions'
 
 import type { BookmarkTree } from '../../types'
 
-export const copyBookmark = createAction('COPY_BOOKMARK', (id: string) => ({
-  id,
-}))()
-
-export const cutBookmark = createAction('CUT_BOOKMARK', (id: string) => ({
-  id,
-}))()
-
 export const getSearchResult = createAction(
   'GET_SEARCH_RESULT',
   (searchKeyword: string) => ({
@@ -31,11 +23,6 @@ export const openBookmarkTree = createAction(
   (id: string, parentId: string) => ({ id, parentId }),
 )()
 
-export const pasteBookmark = createAction(
-  'PASTE_BOOKMARK',
-  (parentId: string, index: number) => ({ parentId, index }),
-)()
-
 export const refreshBookmarkTrees = createAction('REFRESH_BOOKMARK_TREES')()
 
 export const removeBookmarkTree = createAction(
@@ -51,8 +38,6 @@ export const removeNextBookmarkTrees = createAction(
   'REMOVE_NEXT_BOOKMARK_TREES',
   (removeAfterId: string) => ({ removeAfterId }),
 )()
-
-export const resetClipboard = createAction('RESET_CLIPBOARD')()
 
 export const setBookmarkTrees = createAction(
   'SET_BOOKMARK_TREES',

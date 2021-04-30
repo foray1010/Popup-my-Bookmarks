@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useSelector } from 'react-redux'
+import webExtension from 'webextension-polyfill'
 
-import useAction from '../../../core/hooks/useAction'
 import withProviders from '../../../core/utils/withProviders'
 import { BOOKMARK_TYPES, MenuItem, OPEN_IN_TYPES } from '../../constants'
 import { MENU_WINDOW } from '../../constants/windows'
@@ -11,13 +11,15 @@ import {
 } from '../../modules/bookmarks/hooks/createBookmark'
 import useDeleteBookmark from '../../modules/bookmarks/hooks/useDeleteBookmark'
 import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo'
+import { recursiveCopyBookmarks } from '../../modules/bookmarks/methods/copyBookmark'
 import {
   openBookmarksInBrowser,
   openFolderInBrowser,
 } from '../../modules/bookmarks/methods/openBookmark'
 import sortBookmarksByName from '../../modules/bookmarks/methods/sortBookmarksByName'
-import { bookmarkCreators, RootState } from '../../reduxs'
+import type { RootState } from '../../reduxs'
 import isMac from '../../utils/isMac'
+import { ClipboardAction, useClipboard } from '../clipboard'
 import { useEditorContext } from '../editor'
 import { FloatingWindow } from '../floatingWindow'
 import { KeyBindingsWindow, useKeyBindingsEvent } from '../keyBindings'
@@ -35,16 +37,19 @@ const useClickMenuRow = (rowName?: string) => {
   const { close, state } = useMenuContext()
   const { open: openEditor } = useEditorContext()
 
+  const {
+    reset: resetClipboard,
+    set: setClipboard,
+    state: clipboardState,
+  } = useClipboard()
+
   const { data: bookmarkInfo } = useGetBookmarkInfo(
     state.isOpen ? state.targetId : undefined,
   )
 
   const { mutate: bookmarkCurrentPage } = useBookmarkCurrentPage()
   const { mutate: createSeparator } = useCreateSeparator()
-  const copyBookmark = useAction(bookmarkCreators.copyBookmark)
-  const cutBookmark = useAction(bookmarkCreators.cutBookmark)
   const { mutate: deleteBookmark } = useDeleteBookmark()
-  const pasteBookmark = useAction(bookmarkCreators.pasteBookmark)
 
   return React.useCallback(async () => {
     if (!state.isOpen || !bookmarkInfo) return
@@ -74,11 +79,17 @@ const useClickMenuRow = (rowName?: string) => {
         break
 
       case MenuItem.Copy:
-        copyBookmark(bookmarkInfo.id)
+        setClipboard({
+          action: ClipboardAction.Copy,
+          items: [{ id: bookmarkInfo.id }],
+        })
         break
 
       case MenuItem.Cut:
-        cutBookmark(bookmarkInfo.id)
+        setClipboard({
+          action: ClipboardAction.Cut,
+          items: [{ id: bookmarkInfo.id }],
+        })
         break
 
       case MenuItem.Delete:
@@ -128,7 +139,22 @@ const useClickMenuRow = (rowName?: string) => {
       }
 
       case MenuItem.Paste:
-        pasteBookmark(bookmarkInfo.parentId, bookmarkInfo.storageIndex + 1)
+        switch (clipboardState.action) {
+          case ClipboardAction.Copy:
+            await recursiveCopyBookmarks(clipboardState.items[0].id, {
+              parentId: bookmarkInfo.parentId,
+              index: bookmarkInfo.storageIndex + 1,
+            })
+            break
+          case ClipboardAction.Cut:
+            await webExtension.bookmarks.move(clipboardState.items[0].id, {
+              parentId: bookmarkInfo.parentId,
+              index: bookmarkInfo.storageIndex + 1,
+            })
+            break
+          default:
+        }
+        resetClipboard()
         break
 
       case MenuItem.SortByName:
@@ -142,29 +168,31 @@ const useClickMenuRow = (rowName?: string) => {
   }, [
     bookmarkCurrentPage,
     bookmarkInfo,
+    clipboardState,
     close,
-    copyBookmark,
     createSeparator,
-    cutBookmark,
     deleteBookmark,
     openEditor,
-    pasteBookmark,
+    resetClipboard,
     rowName,
+    setClipboard,
     state,
   ])
 }
 
 const InnerMenuContainer = () => {
+  const { close, state } = useMenuContext()
+
+  const { state: clipboardState } = useClipboard()
+  const unclickableRows =
+    clipboardState.action !== ClipboardAction.None &&
+    clipboardState.items.length > 0
+      ? []
+      : [MenuItem.Paste]
+
   const isSearching = useSelector((state: RootState) =>
     Boolean(state.bookmark.searchKeyword),
   )
-  const unclickableRows = useSelector((state: RootState) => {
-    if (!state.bookmark.clipboard.id) return [MenuItem.Paste]
-    return []
-  })
-
-  const { close, state } = useMenuContext()
-
   const { data: bookmarkInfo } = useGetBookmarkInfo(
     state.isOpen ? state.targetId : undefined,
   )
