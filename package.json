@@ -120,7 +120,7 @@
     "terser-webpack-plugin": "5.1.1",
     "transifex": "1.6.6",
     "ts-node": "9.1.1",
-    "type-coverage": "2.17.4",
+    "type-coverage": "2.17.5",
     "typescript": "4.2.4",
     "typescript-plugin-css-modules": "3.2.0",
     "webpack": "5.36.2",
