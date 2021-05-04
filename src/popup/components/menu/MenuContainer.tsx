@@ -9,7 +9,6 @@ import {
   useBookmarkCurrentPage,
   useCreateSeparator,
 } from '../../modules/bookmarks/hooks/createBookmark'
-import useDeleteBookmark from '../../modules/bookmarks/hooks/useDeleteBookmark'
 import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo'
 import { recursiveCopyBookmarks } from '../../modules/bookmarks/methods/copyBookmark'
 import {
@@ -49,7 +48,6 @@ const useClickMenuRow = (rowName?: string) => {
 
   const { mutate: bookmarkCurrentPage } = useBookmarkCurrentPage()
   const { mutate: createSeparator } = useCreateSeparator()
-  const { mutate: deleteBookmark } = useDeleteBookmark()
 
   return React.useCallback(async () => {
     if (!state.isOpen || !bookmarkInfo) return
@@ -93,7 +91,7 @@ const useClickMenuRow = (rowName?: string) => {
         break
 
       case MenuItem.Delete:
-        deleteBookmark({ id: bookmarkInfo.id })
+        await webExtension.bookmarks.removeTree(bookmarkInfo.id)
         break
 
       case MenuItem.Edit:
@@ -171,7 +169,6 @@ const useClickMenuRow = (rowName?: string) => {
     clipboardState,
     close,
     createSeparator,
-    deleteBookmark,
     openEditor,
     resetClipboard,
     rowName,
