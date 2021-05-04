@@ -5,12 +5,12 @@ import webExtension from 'webextension-polyfill'
 import withProviders from '../../../core/utils/withProviders'
 import { BOOKMARK_TYPES, MenuItem, OPEN_IN_TYPES } from '../../constants'
 import { MENU_WINDOW } from '../../constants/windows'
-import {
-  useBookmarkCurrentPage,
-  useCreateSeparator,
-} from '../../modules/bookmarks/hooks/createBookmark'
 import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo'
 import { recursiveCopyBookmarks } from '../../modules/bookmarks/methods/copyBookmark'
+import {
+  bookmarkCurrentPage,
+  createSeparator,
+} from '../../modules/bookmarks/methods/createBookmark'
 import {
   openBookmarksInBrowser,
   openFolderInBrowser,
@@ -46,9 +46,6 @@ const useClickMenuRow = (rowName?: string) => {
     state.isOpen ? state.targetId : undefined,
   )
 
-  const { mutate: bookmarkCurrentPage } = useBookmarkCurrentPage()
-  const { mutate: createSeparator } = useCreateSeparator()
-
   return React.useCallback(async () => {
     if (!state.isOpen || !bookmarkInfo) return
 
@@ -63,14 +60,14 @@ const useClickMenuRow = (rowName?: string) => {
         break
 
       case MenuItem.AddPage:
-        bookmarkCurrentPage({
+        await bookmarkCurrentPage({
           parentId: bookmarkInfo.parentId,
           index: bookmarkInfo.storageIndex + 1,
         })
         break
 
       case MenuItem.AddSeparator:
-        createSeparator({
+        await createSeparator({
           parentId: bookmarkInfo.parentId,
           index: bookmarkInfo.storageIndex + 1,
         })
@@ -164,11 +161,9 @@ const useClickMenuRow = (rowName?: string) => {
 
     close()
   }, [
-    bookmarkCurrentPage,
     bookmarkInfo,
     clipboardState,
     close,
-    createSeparator,
     openEditor,
     resetClipboard,
     rowName,

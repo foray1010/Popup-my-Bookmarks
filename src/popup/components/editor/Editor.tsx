@@ -3,9 +3,8 @@ import webExtension from 'webextension-polyfill'
 
 import { OPTIONS } from '../../constants'
 import { EDITOR_WINDOW } from '../../constants/windows'
-import { useCreateBookmarkAfterId } from '../../modules/bookmarks/hooks/createBookmark'
-import useEditBookmark from '../../modules/bookmarks/hooks/useEditBookmark'
 import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo'
+import { createBookmarkAfterId } from '../../modules/bookmarks/methods/createBookmark'
 import { useOptions } from '../../modules/options'
 import { FloatingWindow } from '../floatingWindow'
 import { KeyBindingsWindow } from '../keyBindings'
@@ -23,19 +22,17 @@ const CreateEditorForm = ({
   onConfirm,
   ...editorFormProps
 }: CreateEditorFormProps) => {
-  const { mutate: createBookmarkAfterId } = useCreateBookmarkAfterId()
-
   return (
     <EditorForm
       {...editorFormProps}
       defaultTitle={webExtension.i18n.getMessage('newFolder')}
       onConfirm={React.useCallback(
-        (title: string, url: string) => {
-          createBookmarkAfterId({ createAfterId, title, url })
+        async (title: string, url: string) => {
+          await createBookmarkAfterId({ createAfterId, title, url })
 
           onConfirm(title, url)
         },
-        [createAfterId, createBookmarkAfterId, onConfirm],
+        [createAfterId, onConfirm],
       )}
     />
   )
@@ -51,18 +48,13 @@ const UpdateEditorForm = ({
 }: UpdateEditorFormProps) => {
   const { data: bookmarkInfo } = useGetBookmarkInfo(editTargetId)
 
-  const { mutate: editBookmark } = useEditBookmark()
-
   const handleConfirm = React.useCallback(
-    (title: string, url?: string) => {
-      editBookmark({
-        id: editTargetId,
-        changes: { title, url },
-      })
+    async (title: string, url?: string) => {
+      await webExtension.bookmarks.update(editTargetId, { title, url })
 
       onConfirm(title, url)
     },
-    [editBookmark, editTargetId, onConfirm],
+    [editTargetId, onConfirm],
   )
 
   if (!bookmarkInfo) return null
