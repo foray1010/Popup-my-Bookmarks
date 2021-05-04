@@ -8,7 +8,11 @@ interface Props {
   positionLeft: number
   positionTop: number
 }
-export default function FloatingWindow({ positionLeft, positionTop }: Props) {
+export default function FloatingWindow({
+  children,
+  positionLeft,
+  positionTop,
+}: Props) {
   const { insertBodySize } = useGlobalBodySize()
 
   const measureRef = React.useRef<HTMLDivElement>(null)
@@ -68,6 +72,8 @@ export default function FloatingWindow({ positionLeft, positionTop }: Props) {
         }),
         [calibratedPosition.left, calibratedPosition.top],
       )}
-    />
+    >
+      {children}
+    </div>
   )
 }
