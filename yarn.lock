@@ -1957,10 +1957,10 @@
   dependencies:
     "@types/unist" "*"
 
-"@types/mini-css-extract-plugin@1.4.2":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@types/mini-css-extract-plugin/-/mini-css-extract-plugin-1.4.2.tgz#79b562f6977d8d692190d81c4ba890826a0761e1"
-  integrity sha512-jAE5X6kO8+0ByUqzqUaOz9z/dilUKOBNcmNXAETJM9Ak9VopBqWZo+ISqILJnxh6/E/Ci6i2xAUydq2w6vE69g==
+"@types/mini-css-extract-plugin@1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@types/mini-css-extract-plugin/-/mini-css-extract-plugin-1.4.3.tgz#4907ee3953fecd199fab24ef056dabef51ff19a2"
+  integrity sha512-jyOSVaF4ie2jUGr1uohqeyDrp7ktRthdFxDKzTgbPZtl0QI5geEopW7UKD/DEfn0XgV1KEq/RnZlUmnrEAWbmg==
   dependencies:
     "@types/node" "*"
     tapable "^2.2.0"
