@@ -19,6 +19,5 @@ const useFloatingWindow = () => {
   )
 }
 
-export const [FloatingWindowProvider, useFloatingWindowContext] = constate(
-  useFloatingWindow,
-)
+export const [FloatingWindowProvider, useFloatingWindowContext] =
+  constate(useFloatingWindow)

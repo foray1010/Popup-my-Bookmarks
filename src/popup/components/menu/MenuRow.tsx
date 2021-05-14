@@ -20,14 +20,14 @@ export default function MenuRow({
   rowName,
   ...restProps
 }: Props) {
-  const handleMouseEnter = React.useMemo(() => onMouseEnter(rowIndex), [
-    onMouseEnter,
-    rowIndex,
-  ])
-  const handleMouseLeave = React.useMemo(() => onMouseLeave(rowIndex), [
-    onMouseLeave,
-    rowIndex,
-  ])
+  const handleMouseEnter = React.useMemo(
+    () => onMouseEnter(rowIndex),
+    [onMouseEnter, rowIndex],
+  )
+  const handleMouseLeave = React.useMemo(
+    () => onMouseLeave(rowIndex),
+    [onMouseLeave, rowIndex],
+  )
 
   return (
     <li

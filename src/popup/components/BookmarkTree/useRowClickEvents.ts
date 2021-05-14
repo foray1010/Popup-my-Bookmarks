@@ -65,33 +65,31 @@ export default function useRowClickEvents({
     }
 
     return {
-      handleRowAuxClick: (bookmarkInfo: BookmarkInfo) => async (
-        evt: React.MouseEvent,
-      ) => {
-        if (evt.button === 1) {
-          await handleRowMiddleClick(bookmarkInfo)
-        }
-
-        if (evt.button === 2) {
-          handleRowRightClick(bookmarkInfo, evt)
-        }
-      },
-      handleRowClick: (bookmarkInfo: BookmarkInfo) => async (
-        evt: React.MouseEvent,
-      ) => {
-        if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
-          if (options[OPTIONS.OP_FOLDER_BY]) {
-            toggleBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
+      handleRowAuxClick:
+        (bookmarkInfo: BookmarkInfo) => async (evt: React.MouseEvent) => {
+          if (evt.button === 1) {
+            await handleRowMiddleClick(bookmarkInfo)
           }
-        } else {
-          const option = options[getClickOptionNameByEvent(evt)]
-          const openBookmarkProps = mapOptionToOpenBookmarkProps(option)
-          await openBookmarksInBrowser([bookmarkInfo.id], {
-            ...openBookmarkProps,
-            isAllowBookmarklet: true,
-          })
-        }
-      },
+
+          if (evt.button === 2) {
+            handleRowRightClick(bookmarkInfo, evt)
+          }
+        },
+      handleRowClick:
+        (bookmarkInfo: BookmarkInfo) => async (evt: React.MouseEvent) => {
+          if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
+            if (options[OPTIONS.OP_FOLDER_BY]) {
+              toggleBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
+            }
+          } else {
+            const option = options[getClickOptionNameByEvent(evt)]
+            const openBookmarkProps = mapOptionToOpenBookmarkProps(option)
+            await openBookmarksInBrowser([bookmarkInfo.id], {
+              ...openBookmarkProps,
+              isAllowBookmarklet: true,
+            })
+          }
+        },
     }
   }, [openMenu, options, toggleBookmarkTree, treeInfo.parent.id])
 }

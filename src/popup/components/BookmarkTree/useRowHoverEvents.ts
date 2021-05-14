@@ -23,10 +23,8 @@ export default function useRowHoverEvents({
   const openBookmarkTree = useAction(bookmarkCreators.openBookmarkTree)
 
   const { activeKey } = useDragAndDropContext()
-  const {
-    setHighlightedIndex,
-    unsetHighlightedIndex,
-  } = useListNavigationContext()
+  const { setHighlightedIndex, unsetHighlightedIndex } =
+    useListNavigationContext()
 
   return React.useMemo(() => {
     const toggleBookmarkTree = debounce((bookmarkInfo: BookmarkInfo) => {

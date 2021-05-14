@@ -84,11 +84,8 @@ export default function BookmarkTreeContainer({
   )
 
   const { activeKey } = useDragAndDropContext()
-  const {
-    listNavigation,
-    setItemCount,
-    removeList,
-  } = useListNavigationContext()
+  const { listNavigation, setItemCount, removeList } =
+    useListNavigationContext()
 
   React.useEffect(() => {
     setItemCount(treeIndex, treeInfo.children.length)

@@ -11,6 +11,5 @@ function useNavigation() {
   }
 }
 
-export const [NavigationProvider, useNavigationContext] = constate(
-  useNavigation,
-)
+export const [NavigationProvider, useNavigationContext] =
+  constate(useNavigation)

@@ -36,7 +36,8 @@ class StorageArea implements browser.storage.StorageArea {
 
 class StorageAreaSync
   extends StorageArea
-  implements browser.storage.StorageAreaSync {
+  implements browser.storage.StorageAreaSync
+{
   public async getBytesInUse(keys?: string | string[]) {
     const storage =
       keys === undefined ? this.storage : R.pick([keys].flat(), this.storage)

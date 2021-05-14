@@ -61,6 +61,5 @@ const useListNavigation = () => {
   )
 }
 
-export const [ListNavigationProvider, useListNavigationContext] = constate(
-  useListNavigation,
-)
+export const [ListNavigationProvider, useListNavigationContext] =
+  constate(useListNavigation)
