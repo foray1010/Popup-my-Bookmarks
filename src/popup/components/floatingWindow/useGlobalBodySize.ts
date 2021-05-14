@@ -4,9 +4,7 @@ import { BodySize, useFloatingWindowContext } from './FloatingWindowContext'
 
 export default function useGlobalBodySize(): {
   globalBodySize?: BodySize
-  insertBodySize(
-    state: BodySize,
-  ): {
+  insertBodySize(state: BodySize): {
     removeBodySize(): void
   }
 } {

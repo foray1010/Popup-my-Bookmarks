@@ -17,10 +17,8 @@ export function* moveBookmarkToDragIndicator({
   try {
     const { bookmark }: RootState = yield select(R.identity)
 
-    const treeInfo:
-      | BookmarkTree
-      | undefined = bookmark.trees.find((tree: BookmarkTree) =>
-      tree.children.some(isDragIndicator),
+    const treeInfo: BookmarkTree | undefined = bookmark.trees.find(
+      (tree: BookmarkTree) => tree.children.some(isDragIndicator),
     )
     if (!treeInfo) return
 

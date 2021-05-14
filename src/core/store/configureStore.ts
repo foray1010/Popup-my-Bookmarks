@@ -11,7 +11,7 @@ import createSagaMiddleware from 'redux-saga'
 
 export default function configureStore<
   S extends Record<string, unknown>,
-  A extends Action<string>
+  A extends Action<string>,
 >({
   preloadedState,
   rootReducer,

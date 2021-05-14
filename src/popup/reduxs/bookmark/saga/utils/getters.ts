@@ -24,28 +24,22 @@ export function* getBookmarkInfo(id: string): SagaIterator<BookmarkInfo> {
     })
   }
 
-  const bookmarkNodes: Array<webExtension.bookmarks.BookmarkTreeNode> = yield call(
-    getBookmarkNodes,
-    id,
-  )
+  const bookmarkNodes: Array<webExtension.bookmarks.BookmarkTreeNode> =
+    yield call(getBookmarkNodes, id)
   return toBookmarkInfo(bookmarkNodes[0])
 }
 
 export function* getBookmarkChildren(
   id: string,
 ): SagaIterator<Array<BookmarkInfo>> {
-  const bookmarkChildNodes: Array<webExtension.bookmarks.BookmarkTreeNode> = yield call(
-    getBookmarkChildNodes,
-    id,
-  )
+  const bookmarkChildNodes: Array<webExtension.bookmarks.BookmarkTreeNode> =
+    yield call(getBookmarkChildNodes, id)
   return bookmarkChildNodes.map(toBookmarkInfo)
 }
 
 export function* getBookmarkTree(id: string): SagaIterator<BookmarkTree> {
-  const [bookmarkInfo, bookmarkChildren]: [
-    BookmarkInfo,
-    Array<BookmarkInfo>,
-  ] = yield all([call(getBookmarkInfo, id), call(getBookmarkChildren, id)])
+  const [bookmarkInfo, bookmarkChildren]: [BookmarkInfo, Array<BookmarkInfo>] =
+    yield all([call(getBookmarkInfo, id), call(getBookmarkChildren, id)])
   return {
     children: bookmarkChildren.length
       ? bookmarkChildren
@@ -84,13 +78,11 @@ export function* getBookmarkTrees(
 export function* getFirstBookmarkTree(
   options: Partial<Options>,
 ): SagaIterator<BookmarkTree> {
-  const [firstTreeInfo, rootFolders]: [
-    BookmarkTree,
-    Array<BookmarkInfo>,
-  ] = yield all([
-    call(getBookmarkTree, String(options[CST.OPTIONS.DEF_EXPAND])),
-    call(getBookmarkChildren, CST.ROOT_ID),
-  ])
+  const [firstTreeInfo, rootFolders]: [BookmarkTree, Array<BookmarkInfo>] =
+    yield all([
+      call(getBookmarkTree, String(options[CST.OPTIONS.DEF_EXPAND])),
+      call(getBookmarkChildren, CST.ROOT_ID),
+    ])
   return {
     ...firstTreeInfo,
     children: [
@@ -112,10 +104,8 @@ interface SearchQuery {
 export function* searchBookmarks(
   searchQuery: SearchQuery,
 ): SagaIterator<Array<BookmarkInfo>> {
-  const searchResultNodes: Array<webExtension.bookmarks.BookmarkTreeNode> = yield call(
-    searchBookmarkNodes,
-    searchQuery,
-  )
+  const searchResultNodes: Array<webExtension.bookmarks.BookmarkTreeNode> =
+    yield call(searchBookmarkNodes, searchQuery)
   return searchResultNodes.map(toBookmarkInfo)
 }
 

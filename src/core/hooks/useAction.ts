@@ -4,7 +4,7 @@ import type { Action, Dispatch } from 'redux'
 
 export default function useAction<
   T extends Array<unknown>,
-  U extends Action<string>
+  U extends Action<string>,
 >(action: (...args: T) => U) {
   const dispatch = useDispatch<Dispatch<U>>()
 

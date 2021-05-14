@@ -14,13 +14,11 @@ export function* openBookmarkTree({
   payload,
 }: ActionType<typeof bookmarkCreators.openBookmarkTree>) {
   try {
-    const [trees, bookmarkTree]: [
-      Array<BookmarkTree>,
-      BookmarkTree,
-    ] = yield all([
-      select(bookmarkTreesSelector),
-      call(getBookmarkTree, payload.id),
-    ])
+    const [trees, bookmarkTree]: [Array<BookmarkTree>, BookmarkTree] =
+      yield all([
+        select(bookmarkTreesSelector),
+        call(getBookmarkTree, payload.id),
+      ])
 
     // if tree is already in view, no need to re-render
     if (trees.some(treeIdEquals(payload.id))) return

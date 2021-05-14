@@ -122,6 +122,5 @@ const useKeyBindings = () => {
   return state
 }
 
-export const [KeyBindingsProvider, useKeyBindingsContext] = constate(
-  useKeyBindings,
-)
+export const [KeyBindingsProvider, useKeyBindingsContext] =
+  constate(useKeyBindings)

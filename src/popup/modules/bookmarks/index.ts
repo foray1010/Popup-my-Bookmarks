@@ -33,43 +33,37 @@ export function useGetBookmarkTreesState(
   restTreeIds: string[],
   options: Partial<Options>,
 ) {
-  return useQuery(
-    queryKey,
-    async (): Promise<BookmarkTree[]> => {
-      const [firstTree, restTrees] = await Promise.all([
-        getFirstBookmarkTree(options),
-        Promise.all(
-          restTreeIds.map((id) => getBookmarkTree(id).catch(() => null)),
-        ),
-      ])
+  return useQuery(queryKey, async (): Promise<BookmarkTree[]> => {
+    const [firstTree, restTrees] = await Promise.all([
+      getFirstBookmarkTree(options),
+      Promise.all(
+        restTreeIds.map((id) => getBookmarkTree(id).catch(() => null)),
+      ),
+    ])
 
-      const filteredRestTrees: BookmarkTree[] = []
-      for (const tree of restTrees) {
-        // if `tree` is deleted, ignore next trees
-        if (tree === null) break
+    const filteredRestTrees: BookmarkTree[] = []
+    for (const tree of restTrees) {
+      // if `tree` is deleted, ignore next trees
+      if (tree === null) break
 
-        // if `tree` is moved to another parent, stop here
-        if (
-          filteredRestTrees[filteredRestTrees.length - 1].parent.id !==
-          tree.parent.parentId
-        ) {
-          break
-        }
-
-        filteredRestTrees.push(tree)
+      // if `tree` is moved to another parent, stop here
+      if (
+        filteredRestTrees[filteredRestTrees.length - 1].parent.id !==
+        tree.parent.parentId
+      ) {
+        break
       }
 
-      return [firstTree, ...filteredRestTrees]
-    },
-  )
+      filteredRestTrees.push(tree)
+    }
+
+    return [firstTree, ...filteredRestTrees]
+  })
 }
 
 export function useSearchBookmarks(query: string) {
-  return useQuery(
-    [queryKey, query],
-    async (): Promise<BookmarkInfo[]> => {
-      const bookmarkNodes = await webExtension.bookmarks.search(query)
-      return bookmarkNodes.map(toBookmarkInfo)
-    },
-  )
+  return useQuery([queryKey, query], async (): Promise<BookmarkInfo[]> => {
+    const bookmarkNodes = await webExtension.bookmarks.search(query)
+    return bookmarkNodes.map(toBookmarkInfo)
+  })
 }

@@ -69,6 +69,5 @@ const useDragAndDrop = ({
   return state
 }
 
-export const [DragAndDropProvider, useDragAndDropContext] = constate(
-  useDragAndDrop,
-)
+export const [DragAndDropProvider, useDragAndDropContext] =
+  constate(useDragAndDrop)

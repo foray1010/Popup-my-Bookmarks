@@ -79,9 +79,8 @@ const useDragEvents = ({
 }
 
 const useMouseEvents = () => {
-  const [shouldDisableNextClick, setShouldDisableNextClick] = React.useState(
-    false,
-  )
+  const [shouldDisableNextClick, setShouldDisableNextClick] =
+    React.useState(false)
 
   return {
     handleClickCapture: React.useCallback(
@@ -112,16 +111,12 @@ export default function DragAndDropConsumer(props: Props) {
 
   const { handleClickCapture, handleMouseUpCapture } = useMouseEvents()
 
-  const {
-    handleDragStart,
-    handleDragOver,
-    handleMouseDown,
-    handleMouseUp,
-  } = useDragEvents({
-    itemKey: props.itemKey,
-    onDragOver: props.onDragOver,
-    onDragStart: props.onDragStart,
-  })
+  const { handleDragStart, handleDragOver, handleMouseDown, handleMouseUp } =
+    useDragEvents({
+      itemKey: props.itemKey,
+      onDragOver: props.onDragOver,
+      onDragStart: props.onDragStart,
+    })
 
   const isDragging = context.activeKey !== null
   const isPending = context.pendingKey !== null

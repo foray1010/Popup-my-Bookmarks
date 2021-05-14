@@ -9,7 +9,7 @@ import withProviders from '../../core/utils/withProviders'
 const queryKey = 'options'
 
 export async function getOptions() {
-  return ((await webExtension.storage.sync.get()) as unknown) as Options
+  return (await webExtension.storage.sync.get()) as unknown as Options
 }
 
 const [OptionsProvider, useInternalOptions] = constate(

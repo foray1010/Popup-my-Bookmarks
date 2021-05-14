@@ -16,11 +16,8 @@ export default function useKeyboardNav({
   onPressArrowRight?: (evt: KeyboardEvent) => void
   onPressArrowUp?: (evt: KeyboardEvent) => void
 }): void {
-  const {
-    listNavigation,
-    removeList,
-    setHighlightedIndex,
-  } = useListNavigationContext()
+  const { listNavigation, removeList, setHighlightedIndex } =
+    useListNavigationContext()
 
   const handlePressArrowVertical = (offset: number) => {
     const { highlightedIndices, itemCounts } = listNavigation

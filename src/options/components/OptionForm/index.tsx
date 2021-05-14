@@ -17,9 +17,8 @@ function useGetOptionsWithDefaultValues({
 }: {
   optionsConfig?: OptionsConfig
 }) {
-  const [isFilledDefaultValues, setIsFilledDefaultValues] = React.useState(
-    false,
-  )
+  const [isFilledDefaultValues, setIsFilledDefaultValues] =
+    React.useState(false)
 
   const { data: options } = useGetOptions()
   const { mutateAsync: setOptions } = useUpdateOptions()

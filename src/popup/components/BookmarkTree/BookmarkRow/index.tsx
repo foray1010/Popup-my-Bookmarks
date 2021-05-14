@@ -43,26 +43,26 @@ export default function BookmarkRowContainer({
     bookmarkInfo,
   })
 
-  const handleAuxClick = React.useMemo(() => onAuxClick(bookmarkInfo), [
-    bookmarkInfo,
-    onAuxClick,
-  ])
-  const handleClick = React.useMemo(() => onClick(bookmarkInfo), [
-    bookmarkInfo,
-    onClick,
-  ])
-  const handleDragOver = React.useMemo(() => onDragOver(bookmarkInfo), [
-    bookmarkInfo,
-    onDragOver,
-  ])
-  const handleMouseEnter = React.useMemo(() => onMouseEnter(bookmarkInfo), [
-    bookmarkInfo,
-    onMouseEnter,
-  ])
-  const handleMouseLeave = React.useMemo(() => onMouseLeave(bookmarkInfo), [
-    bookmarkInfo,
-    onMouseLeave,
-  ])
+  const handleAuxClick = React.useMemo(
+    () => onAuxClick(bookmarkInfo),
+    [bookmarkInfo, onAuxClick],
+  )
+  const handleClick = React.useMemo(
+    () => onClick(bookmarkInfo),
+    [bookmarkInfo, onClick],
+  )
+  const handleDragOver = React.useMemo(
+    () => onDragOver(bookmarkInfo),
+    [bookmarkInfo, onDragOver],
+  )
+  const handleMouseEnter = React.useMemo(
+    () => onMouseEnter(bookmarkInfo),
+    [bookmarkInfo, onMouseEnter],
+  )
+  const handleMouseLeave = React.useMemo(
+    () => onMouseLeave(bookmarkInfo),
+    [bookmarkInfo, onMouseLeave],
+  )
 
   return (
     <li
