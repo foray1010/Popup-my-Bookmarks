@@ -6217,10 +6217,10 @@ ieee754@^1.1.13:
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
   integrity sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
 
-ignore-sync@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/ignore-sync/-/ignore-sync-3.1.0.tgz#8b5e6ab6d4ea369e99dfaf34c9b02165d801673c"
-  integrity sha512-WDnxiNMSICYQxDm0KxyKstKgl6sdA3D9wbIiIyWQorKdXq78tY7htGt8anQKPSaubFf9ZqpYHynEx9dGMMyF8g==
+ignore-sync@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/ignore-sync/-/ignore-sync-4.0.0.tgz#5baee3398c1aaa5610286a350f935e18e63c6be2"
+  integrity sha512-dIXlfOFX1mEjQePLTV1xJC+Xw4H8QX6/dOMpoV+C0oC+tq9fgt7iMa6DRIXzw6uVTL1uqEkBs1KR6TIRmAqY7w==
   dependencies:
     axios "0.21.1"
     fast-glob "3.2.5"
@@ -12844,36 +12844,7 @@ webpack-sources@^2.1.1:
     source-list-map "^2.0.1"
     source-map "^0.6.1"
 
-webpack@5.36.2:
-  version "5.36.2"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.36.2.tgz#6ef1fb2453ad52faa61e78d486d353d07cca8a0f"
-  integrity sha512-XJumVnnGoH2dV+Pk1VwgY4YT6AiMKpVoudUFCNOXMIVrEKPUgEwdIfWPjIuGLESAiS8EdIHX5+TiJz/5JccmRg==
-  dependencies:
-    "@types/eslint-scope" "^3.7.0"
-    "@types/estree" "^0.0.47"
-    "@webassemblyjs/ast" "1.11.0"
-    "@webassemblyjs/wasm-edit" "1.11.0"
-    "@webassemblyjs/wasm-parser" "1.11.0"
-    acorn "^8.2.1"
-    browserslist "^4.14.5"
-    chrome-trace-event "^1.0.2"
-    enhanced-resolve "^5.8.0"
-    es-module-lexer "^0.4.0"
-    eslint-scope "^5.1.1"
-    events "^3.2.0"
-    glob-to-regexp "^0.4.1"
-    graceful-fs "^4.2.4"
-    json-parse-better-errors "^1.0.2"
-    loader-runner "^4.2.0"
-    mime-types "^2.1.27"
-    neo-async "^2.6.2"
-    schema-utils "^3.0.0"
-    tapable "^2.1.1"
-    terser-webpack-plugin "^5.1.1"
-    watchpack "^2.0.0"
-    webpack-sources "^2.1.1"
-
-webpack@^5, webpack@^5.1.0, webpack@^5.25.0:
+webpack@5.37.0, webpack@^5, webpack@^5.1.0, webpack@^5.25.0:
   version "5.37.0"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.37.0.tgz#2ab00f613faf494504eb2beef278dab7493cc39d"
   integrity sha512-yvdhgcI6QkQkDe1hINBAJ1UNevqNGTVaCkD2SSJcB8rcrNNl922RI8i2DXUAuNfANoxwsiXXEA4ZPZI9q2oGLA==
