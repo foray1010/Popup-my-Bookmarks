@@ -28,7 +28,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.14.0",
-    "@fontsource/archivo-narrow": "4.3.0",
+    "@fontsource/archivo-narrow": "4.4.2",
     "@rehooks/component-size": "1.0.3",
     "clsx": "1.1.1",
     "constate": "3.2.0",

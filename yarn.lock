@@ -1198,10 +1198,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fontsource/archivo-narrow@4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/archivo-narrow/-/archivo-narrow-4.3.0.tgz#1ed0680efb8916607e0dc4466925656b54cb9672"
-  integrity sha512-jwx2M+KQfYYvnZL/09AiFe5OoI4Fb+DGrn1o4T0/RuGKyK7/RIoqlieDXzPSFnS7wn/6Jo4nHi+HGP2PRJRQvw==
+"@fontsource/archivo-narrow@4.4.2":
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/archivo-narrow/-/archivo-narrow-4.4.2.tgz#87a487eb251bad9404fdb389cb2a6e8df451f05e"
+  integrity sha512-Y/mNsrbTvxupfejHRSapuJgf2iQTUwORWmQLCO2PCVxK2JrpXDnl4Vf2AV5Aavwgv7RX5hN46tV5Tn0cgCwYww==
 
 "@foray1010/babel-preset@7.0.0":
   version "7.0.0"
