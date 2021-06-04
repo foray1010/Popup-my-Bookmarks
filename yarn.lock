@@ -1842,15 +1842,15 @@
     tapable "^2.0.0"
     webpack "^5.1.0"
 
-"@types/css-minimizer-webpack-plugin@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@types/css-minimizer-webpack-plugin/-/css-minimizer-webpack-plugin-1.3.0.tgz#320ab8d9c6e75650888131b9426e11a9179a9e9e"
-  integrity sha512-VHwdU6KEO4kd4ylebmECuCwRTj/taqGGvXdSaKl7WFpZVhzTUpyThNvs8E2WbnN6dFBnUd8qfKpVpCmNOTNEZA==
+"@types/css-minimizer-webpack-plugin@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/css-minimizer-webpack-plugin/-/css-minimizer-webpack-plugin-3.0.0.tgz#c32c8f9cfb23183fd511610ce6fafd87df041eb6"
+  integrity sha512-7Ebz8x+D5UKtCAfE4kcpICaJ93+Rh9SJkXzxLyUda+xEgzF6FmEJQcbsMw4X7U7Uf3bHkiuVF0o4MuKYhvr15Q==
   dependencies:
     "@types/cssnano" "*"
-    postcss "^7.0.32"
+    postcss "^8.2.9"
     tapable "^2.2.0"
-    webpack "^5.25.0"
+    webpack "^5.37.0"
 
 "@types/cssnano@*":
   version "4.0.0"
@@ -4221,13 +4221,13 @@ css-loader@5.2.6:
     schema-utils "^3.0.0"
     semver "^7.3.5"
 
-css-minimizer-webpack-plugin@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/css-minimizer-webpack-plugin/-/css-minimizer-webpack-plugin-3.0.0.tgz#5b1edbffe1a3e6450d8cb53fb4f4c5013b7af313"
-  integrity sha512-yIrqG0pPphR1RoNx2wDxYmxRf2ubRChLDXxv7ccipEm5bRKsZRYp8n+2peeXehtTF5s3yNxlqsdz3WQOsAgUkw==
+css-minimizer-webpack-plugin@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/css-minimizer-webpack-plugin/-/css-minimizer-webpack-plugin-3.0.1.tgz#2f866079411d42309a485512642c0cb08b5468ae"
+  integrity sha512-RGFIv6iZWUPO2T1vE5+5pNCSs2H2xtHYRdfZPiiNH8Of6QOn9BeFnZSoHiQMkmsxOO/JkPe4BpKfs7slFIWcTA==
   dependencies:
     cssnano "^5.0.0"
-    jest-worker "^26.3.0"
+    jest-worker "^27.0.2"
     p-limit "^3.0.2"
     postcss "^8.2.9"
     schema-utils "^3.0.0"
@@ -7231,7 +7231,7 @@ jest-watcher@^26.6.2:
     jest-util "^26.6.2"
     string-length "^4.0.1"
 
-jest-worker@^26.3.0, jest-worker@^26.6.2:
+jest-worker@^26.6.2:
   version "26.6.2"
   resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-26.6.2.tgz#7f72cbc4d643c365e27b9fd775f9d0eaa9c7a8ed"
   integrity sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==
@@ -12851,7 +12851,7 @@ webpack-sources@^2.3.0:
     source-list-map "^2.0.1"
     source-map "^0.6.1"
 
-webpack@5.38.1, webpack@^5, webpack@^5.1.0, webpack@^5.25.0:
+webpack@5.38.1, webpack@^5, webpack@^5.1.0, webpack@^5.37.0:
   version "5.38.1"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.38.1.tgz#5224c7f24c18e729268d3e3bc97240d6e880258e"
   integrity sha512-OqRmYD1OJbHZph6RUMD93GcCZy4Z4wC0ele4FXyYF0J6AxO1vOSuIlU1hkS/lDlR9CDYBz64MZRmdbdnFFoT2g==
