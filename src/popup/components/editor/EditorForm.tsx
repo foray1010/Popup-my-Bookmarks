@@ -17,11 +17,10 @@ interface Props {
   style: React.CSSProperties
 }
 export default function Editor({ onConfirm, ...props }: Props) {
-  const { register, handleSubmit } =
-    useForm<{
-      title: string
-      url: string
-    }>()
+  const { register, handleSubmit } = useForm<{
+    title: string
+    url: string
+  }>()
 
   return (
     <ActionlessForm
