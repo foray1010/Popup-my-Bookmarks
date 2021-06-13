@@ -1842,10 +1842,10 @@
     tapable "^2.0.0"
     webpack "^5.1.0"
 
-"@types/css-minimizer-webpack-plugin@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@types/css-minimizer-webpack-plugin/-/css-minimizer-webpack-plugin-3.0.0.tgz#c32c8f9cfb23183fd511610ce6fafd87df041eb6"
-  integrity sha512-7Ebz8x+D5UKtCAfE4kcpICaJ93+Rh9SJkXzxLyUda+xEgzF6FmEJQcbsMw4X7U7Uf3bHkiuVF0o4MuKYhvr15Q==
+"@types/css-minimizer-webpack-plugin@3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/css-minimizer-webpack-plugin/-/css-minimizer-webpack-plugin-3.0.1.tgz#b3fcf3e5046507b363561975358d14a6ae39300c"
+  integrity sha512-t+1mZG1lQe8eblm7AqQFtFvS7foEhFXqi1OpwoyK0ZLq1DCi1rFYfiPEKsPkfnj2gu/TXDUJ6WyqSYAbNt606w==
   dependencies:
     "@types/cssnano" "*"
     postcss "^8.2.9"
