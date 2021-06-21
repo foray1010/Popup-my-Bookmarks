@@ -27,7 +27,7 @@
     "chrome >= 73"
   ],
   "dependencies": {
-    "@babel/runtime": "7.14.0",
+    "@babel/runtime": "7.14.6",
     "@fontsource/archivo-narrow": "4.4.5",
     "@rehooks/component-size": "1.0.3",
     "clsx": "1.1.1",
@@ -49,7 +49,7 @@
     "webextension-polyfill": "0.8.0"
   },
   "devDependencies": {
-    "@babel/core": "7.14.3",
+    "@babel/core": "7.14.6",
     "@commitlint/cli": "12.1.4",
     "@commitlint/config-conventional": "12.1.4",
     "@foray1010/babel-preset": "7.0.0",
@@ -71,11 +71,11 @@
     "@types/jest": "26.0.23",
     "@types/lodash.debounce": "4.0.6",
     "@types/mini-css-extract-plugin": "1.4.3",
-    "@types/node": "15.6.1",
+    "@types/node": "15.12.4",
     "@types/prompts": "2.4.0",
     "@types/ramda": "0.27.40",
     "@types/react": "17.0.11",
-    "@types/react-dom": "17.0.7",
+    "@types/react-dom": "17.0.8",
     "@types/react-redux": "7.1.16",
     "@types/script-ext-html-webpack-plugin": "2.1.2",
     "@types/terser-webpack-plugin": "5.0.3",
@@ -123,7 +123,7 @@
     "type-coverage": "2.17.5",
     "typescript": "4.3.4",
     "typescript-plugin-css-modules": "3.4.0",
-    "webpack": "5.38.1",
+    "webpack": "5.39.1",
     "webpack-bundle-analyzer": "4.4.2",
     "webpack-cli": "4.7.2",
     "yaml-loader": "0.6.0",
