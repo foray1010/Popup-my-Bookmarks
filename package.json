@@ -60,7 +60,7 @@
     "@foray1010/tsconfig": "5.0.0",
     "@svgr/webpack": "5.5.0",
     "@testing-library/jest-dom": "5.14.1",
-    "@testing-library/react": "11.2.7",
+    "@testing-library/react": "12.0.0",
     "@testing-library/react-hooks": "7.0.0",
     "@testing-library/user-event": "13.1.9",
     "@types/bluebird": "3.5.35",
