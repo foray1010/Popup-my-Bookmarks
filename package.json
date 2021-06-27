@@ -31,7 +31,7 @@
     "@fontsource/archivo-narrow": "4.4.5",
     "@rehooks/component-size": "1.0.3",
     "clsx": "1.1.1",
-    "constate": "3.2.0",
+    "constate": "3.3.0",
     "lodash.debounce": "4.0.8",
     "nanoid": "3.1.23",
     "ramda": "0.27.1",
