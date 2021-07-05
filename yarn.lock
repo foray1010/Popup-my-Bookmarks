@@ -2213,10 +2213,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@types/zip-webpack-plugin@3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@types/zip-webpack-plugin/-/zip-webpack-plugin-3.0.2.tgz#cd9ffde9dbe1a438913331ffadb78e3423828459"
-  integrity sha512-SWrNvES01l2nEOzM8nVlxgzwA5boDYnNZWRzEWr2VG6Y9o5A7qBL92EE21nolt1i/USpcrjW/0W3HV+RFTP6Fw==
+"@types/zip-webpack-plugin@3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@types/zip-webpack-plugin/-/zip-webpack-plugin-3.0.3.tgz#a24acdb542b9f72e18fc5a8d39fd029e94945e1f"
+  integrity sha512-DpsDb9ZxYW2avXIhh4zxxHuy1iqqXJT9GIsKToRkDGR4N1UhLrWiMnc9zCkdS7WIK1q6oA6TR3kO6agZVHvLEw==
   dependencies:
     "@types/webpack" "^4"
 
