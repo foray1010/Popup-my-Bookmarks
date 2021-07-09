@@ -2129,10 +2129,10 @@
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.1.tgz#18845205e86ff0038517aab7a18a62a6b9f71275"
   integrity sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA==
 
-"@types/script-ext-html-webpack-plugin@2.1.2":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@types/script-ext-html-webpack-plugin/-/script-ext-html-webpack-plugin-2.1.2.tgz#511bc8f2ec0a0e1a38b6abe219a86186d59e8c62"
-  integrity sha512-sB8xALjQwEyg/Gqeqd93ciBneeK3P6mRsgGDFbWjDsGo/cs7Ui350eNWPbzQkQAGbqyfYtff+V6aBJT7r6Nugw==
+"@types/script-ext-html-webpack-plugin@2.1.3":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@types/script-ext-html-webpack-plugin/-/script-ext-html-webpack-plugin-2.1.3.tgz#9d997e41b7d50d9d2758a83764a3f25c32157b5c"
+  integrity sha512-1iKwiXYavFnW5h6875AXUFxXG2ZW+wdK5+XwsKvA7O17gr3iRaTCnwRelKqoY4UZNvpxkHg+opbOpNcoX0Lv6g==
   dependencies:
     "@types/webpack" "^4"
 
