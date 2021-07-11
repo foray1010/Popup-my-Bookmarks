@@ -1899,10 +1899,10 @@
   dependencies:
     postcss "5 - 7"
 
-"@types/duplicate-package-checker-webpack-plugin@2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@types/duplicate-package-checker-webpack-plugin/-/duplicate-package-checker-webpack-plugin-2.1.1.tgz#b62a035848c0973005326d1974ea3a5b1f243973"
-  integrity sha512-ow/zlBIZ3Kvu0O+Us0VKhPyF8j68iz8KZ4pHKGEa30YtqZdial4Omjk0iOm0dWsSranN7dGVSQ8y3ZHry+LTMg==
+"@types/duplicate-package-checker-webpack-plugin@2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@types/duplicate-package-checker-webpack-plugin/-/duplicate-package-checker-webpack-plugin-2.1.2.tgz#935fb9f99fcb0350d1c36cbf7fe6701eb6dc4193"
+  integrity sha512-k77j1ncCNg6uiuTdsWwHOg2ezpFyxuF/H4YT2oSrTjkdm1UZfA0JJ7sQ5NrbdKEfROR2oBM9HcPjkcq9Dcx/+g==
   dependencies:
     "@types/webpack" "^4"
 
