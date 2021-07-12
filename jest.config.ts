@@ -12,7 +12,6 @@ const config: Config.InitialOptions = {
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   testEnvironment: 'jsdom',
   testMatch: ['**/*.{spec,test}.{cjs,js,mjs,ts,tsx}'],
-  testRunner: 'jest-circus/runner',
   transform: {
     '\\.css$': 'jest-css-modules-transform',
     '\\.tsx?$': 'babel-jest',
