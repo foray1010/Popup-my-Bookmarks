@@ -6527,7 +6527,7 @@ jest-changed-files@^27.0.6:
     execa "^5.0.0"
     throat "^6.0.1"
 
-jest-circus@27.0.6, jest-circus@^27.0.6:
+jest-circus@^27.0.6:
   version "27.0.6"
   resolved "https://registry.yarnpkg.com/jest-circus/-/jest-circus-27.0.6.tgz#dd4df17c4697db6a2c232aaad4e9cec666926668"
   integrity sha512-OJlsz6BBeX9qR+7O9lXefWoc2m9ZqcZ5Ohlzz0pTEAG4xMiZUJoacY8f4YDHxgk0oKYxj277AfOk9w6hZYvi1Q==
