@@ -33,16 +33,7 @@ const webpackConfig: webpack.Configuration = {
       {
         test: /\.css$/,
         use: [
-          isDevelopmentBuild
-            ? {
-                loader: 'style-loader',
-              }
-            : {
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                  publicPath: '../',
-                },
-              },
+          isDevelopmentBuild ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
