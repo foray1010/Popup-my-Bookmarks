@@ -3,7 +3,7 @@
 @font-face {
   font-display: fallback;
   font-family: 'Archivo Narrow';
-  src: url('~@fontsource/archivo-narrow/files/archivo-narrow-latin-400-normal.woff2');
+  src: url('@fontsource/archivo-narrow/files/archivo-narrow-latin-400-normal.woff2');
 }
 
 :root {
