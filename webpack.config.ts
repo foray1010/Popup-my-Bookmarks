@@ -55,9 +55,9 @@ const webpackConfig: webpack.Configuration = {
       },
       {
         test: /\.woff2$/,
-        loader: 'file-loader',
-        options: {
-          name: 'fonts/[name].[ext]',
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext]',
         },
       },
       {
