@@ -1,4 +1,4 @@
-import { ReactComponent as Cross } from '../../images/cross.svg'
+import Cross from '../../images/cross.svg?svgr'
 import classes from './tree-header.module.css'
 
 interface Props {

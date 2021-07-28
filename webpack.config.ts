@@ -80,12 +80,16 @@ const webpackConfig: webpack.Configuration = {
         : []),
       {
         test: /\.svg$/,
-        use: [
-          '@svgr/webpack',
+        // https://github.com/facebook/create-react-app/issues/11213#issuecomment-883466601
+        oneOf: [
           {
-            loader: 'file-loader',
-            options: {
-              name: 'images/[name].[ext]',
+            resourceQuery: /svgr/,
+            use: '@svgr/webpack',
+          },
+          {
+            type: 'asset',
+            generator: {
+              filename: 'images/[name][ext]',
             },
           },
         ],

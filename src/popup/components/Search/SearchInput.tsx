@@ -3,8 +3,8 @@ import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import Input from '../../../core/components/baseItems/Input'
-import { ReactComponent as Cross } from '../../images/cross.svg'
-import { ReactComponent as Search } from '../../images/search.svg'
+import Cross from '../../images/cross.svg?svgr'
+import Search from '../../images/search.svg?svgr'
 import classes from './search-input.module.css'
 
 interface Props extends React.ComponentProps<typeof Input> {
