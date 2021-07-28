@@ -1,4 +1,3 @@
-import * as R from 'ramda'
 import * as React from 'react'
 import { useVirtual } from 'react-virtual'
 import useEventListener from 'use-typed-event-listener'
@@ -80,7 +79,11 @@ export default function BookmarkTree(props: Props) {
       0,
     )
 
-    setListHeight(R.clamp(minListHeight, maxListHeight, totalRowHeight))
+    // @todo use Math.clamp in future
+    function clamp(min: number, max: number, value: number): number {
+      return Math.min(Math.max(value, min), max)
+    }
+    setListHeight(clamp(minListHeight, maxListHeight, totalRowHeight))
   }, [getRowHeight, props.rowHeight, props.treeInfo.children])
 
   const { scrollToIndex, scrollToOffset } = rowVirtualizer
