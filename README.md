@@ -38,7 +38,7 @@ Please visit following branches for the legacy versions that support older versi
 
 ### Before you start
 
-1. Install [Node.js](https://github.com/nodejs/node) (version >= 8.9) via:
+1. Install [Node.js](https://nodejs.org/) via:
 
    - [nvm](https://github.com/creationix/nvm) (Linux / Mac)
    - [Node.js official website](https://nodejs.org/en/download/) (Windows)

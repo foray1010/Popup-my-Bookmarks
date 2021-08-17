@@ -1,6 +1,11 @@
 import { promises as fsPromises } from 'fs'
 import path from 'path'
 
+async function writeFile(fileName: string, fileData: string) {
+  await fsPromises.mkdir(path.dirname(fileName), { recursive: true })
+  await fsPromises.writeFile(fileName, fileData)
+}
+
 // markdown handler
 const getMarkdownData = async (titleList: Array<string>) => {
   const dataList = await Promise.all(
@@ -28,7 +33,7 @@ const generateReadme = async () => {
   // enlarge first header
   fileData = fileData.replace(/^##/, '#')
 
-  await fsPromises.writeFile(fileName, fileData)
+  await writeFile(fileName, fileData)
 }
 
 const generateStoreDescription = async () => {
@@ -41,7 +46,7 @@ const generateStoreDescription = async () => {
     .replace(/##### /g, '')
     .trim()
 
-  await fsPromises.writeFile(fileName, fileData)
+  await writeFile(fileName, fileData)
 }
 
 const main = async () => {
