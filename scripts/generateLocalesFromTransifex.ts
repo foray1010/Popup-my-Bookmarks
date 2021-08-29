@@ -31,7 +31,7 @@ interface Messages {
   }
 }
 
-const main = async () => {
+async function main(): Promise<void> {
   const {
     transifexPassword,
     transifexUsername,

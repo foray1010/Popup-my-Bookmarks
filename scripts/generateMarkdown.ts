@@ -1,13 +1,13 @@
 import { promises as fsPromises } from 'fs'
 import path from 'path'
 
-async function writeFile(fileName: string, fileData: string) {
+async function writeFile(fileName: string, fileData: string): Promise<void> {
   await fsPromises.mkdir(path.dirname(fileName), { recursive: true })
   await fsPromises.writeFile(fileName, fileData)
 }
 
 // markdown handler
-const getMarkdownData = async (titleList: Array<string>) => {
+async function getMarkdownData(titleList: Array<string>): Promise<string> {
   const dataList = await Promise.all(
     titleList.map((title) => {
       return fsPromises.readFile(path.join('markdown', `${title}.md`), 'utf-8')
@@ -18,7 +18,7 @@ const getMarkdownData = async (titleList: Array<string>) => {
 }
 
 // generate markdown file
-const generateReadme = async () => {
+async function generateReadme(): Promise<void> {
   const fileName = 'README.md'
 
   let fileData = await getMarkdownData([
@@ -36,7 +36,7 @@ const generateReadme = async () => {
   await writeFile(fileName, fileData)
 }
 
-const generateStoreDescription = async () => {
+async function generateStoreDescription(): Promise<void> {
   const fileName = path.join('build', 'store.md')
 
   let fileData = await getMarkdownData(['description', 'todo', 'contributing'])
@@ -49,7 +49,7 @@ const generateStoreDescription = async () => {
   await writeFile(fileName, fileData)
 }
 
-const main = async () => {
+async function main(): Promise<void> {
   await Promise.all([generateReadme(), generateStoreDescription()])
 }
 

@@ -3,13 +3,13 @@ import webExtension from 'webextension-polyfill'
 import { BOOKMARK_TYPES } from '../../../constants'
 import { getBookmarkInfo, getBookmarkTree } from './getBookmark'
 
-export const recursiveCopyBookmarks = async (
+export async function recursiveCopyBookmarks(
   id: string,
   destination: {
     parentId: string
     index: number
   },
-) => {
+): Promise<void> {
   const bookmarkInfo = await getBookmarkInfo(id)
 
   const createdBookmarkNode = await webExtension.bookmarks.create({

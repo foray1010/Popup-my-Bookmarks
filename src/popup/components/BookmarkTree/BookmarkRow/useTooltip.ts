@@ -10,7 +10,7 @@ interface Arg {
   bookmarkInfo: BookmarkInfo
 }
 
-const getBreadcrumbs = async (id?: string): Promise<Array<string>> => {
+async function getBreadcrumbs(id?: string): Promise<Array<string>> {
   if (!id || id === ROOT_ID) return []
 
   const bookmarkInfo = await getBookmarkInfo(id)
@@ -18,11 +18,11 @@ const getBreadcrumbs = async (id?: string): Promise<Array<string>> => {
   return [...(await getBreadcrumbs(bookmarkInfo.parentId)), bookmarkInfo.title]
 }
 
-const getTooltip = async ({
+async function getTooltip({
   isSearching,
   isShowTooltip,
   bookmarkInfo,
-}: Arg) => {
+}: Arg): Promise<string> {
   const tooltipArr: Array<string> = []
 
   if (isShowTooltip) {
@@ -41,7 +41,7 @@ export default function useTooltip({
   isSearching,
   isShowTooltip,
   bookmarkInfo,
-}: Arg) {
+}: Arg): string | undefined {
   const [tooltip, setTooltip] = React.useState<string>()
 
   React.useEffect(() => {

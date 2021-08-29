@@ -11,7 +11,7 @@ import App from './components/App'
 import { getOptions } from './modules/options'
 import { rootReducer, rootSaga } from './reduxs'
 
-const main = async (): Promise<void> => {
+async function main(): Promise<void> {
   const [options, optionsConfig] = await Promise.all([
     getOptions(),
     getOptionsConfig(),
