@@ -120,7 +120,7 @@
     "transifex": "1.6.6",
     "ts-node": "10.2.1",
     "type-coverage": "2.18.0",
-    "typescript": "4.3.5",
+    "typescript": "4.4.2",
     "typescript-plugin-css-modules": "3.4.0",
     "webpack": "5.51.1",
     "webpack-bundle-analyzer": "4.4.2",
