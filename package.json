@@ -116,7 +116,7 @@
     "sharp": "0.29.0",
     "style-loader": "3.2.1",
     "stylelint": "13.13.1",
-    "terser-webpack-plugin": "5.1.4",
+    "terser-webpack-plugin": "5.2.3",
     "transifex": "1.6.6",
     "ts-node": "10.2.1",
     "type-coverage": "2.18.2",
