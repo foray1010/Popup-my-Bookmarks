@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = {
-  '*.{cjs,js,mjs,ts,tsx}': [
+  '*.{cjs,cts,js,mjs,mts,ts,tsx}': [
     'yarn prettier --write',
     'yarn eslint --fix',
     'yarn test --findRelatedTests',
