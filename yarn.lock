@@ -12324,10 +12324,10 @@ type-coverage-core@^2.18.3:
     tslib "1 || 2"
     tsutils "3"
 
-type-coverage@2.18.3:
-  version "2.18.3"
-  resolved "https://registry.yarnpkg.com/type-coverage/-/type-coverage-2.18.3.tgz#eeb1d932f3bdb4f5dcdfcaead9ee1a4f4e85347e"
-  integrity sha512-wO3CNAPJdnWkJwmp486tZRcH74MUyN9gHwwOPfPlFQuZXiqjE6JUYMGVFbFh6gYGlZWrODEhmKpGwdyplnQOow==
+type-coverage@2.19.0:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/type-coverage/-/type-coverage-2.19.0.tgz#3f9b85249aef2f1eedf031bba8dce48280abeb8a"
+  integrity sha512-y+ZVbaleqK+ATH80PzbBNQpXSgbJSAiTnl/2Z60lMoz1XRIPjhnxf8qQ4jE64kuTt7huEymB4ikN8+7Zosqvig==
   dependencies:
     minimist "1"
     type-coverage-core "^2.18.3"
