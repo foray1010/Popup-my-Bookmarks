@@ -2,7 +2,7 @@
   padding: var(--golden-gap-2x);
   border: 1px solid var(--highlight-level3);
   background-color: var(--main-background-color);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0 0 0 20%);
 
   /* separator between menu fields */
   & > * + * {

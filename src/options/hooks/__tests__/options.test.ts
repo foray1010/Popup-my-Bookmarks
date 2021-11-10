@@ -4,7 +4,7 @@ import { ReactQueryClientProvider } from '../../../core/utils/queryClient'
 import { useDeleteOptions, useGetOptions, useUpdateOptions } from '../options'
 
 describe('options hooks', () => {
-  beforeEach(async () => {
+  async function initTestData() {
     const { result: useDeleteOptionsResult } = renderHook(
       () => useDeleteOptions(),
       { wrapper: ReactQueryClientProvider },
@@ -22,10 +22,12 @@ describe('options hooks', () => {
     await act(async () => {
       await updateOptions({ rememberPos: true })
     })
-  })
+  }
 
   describe('useGetOptions', () => {
     it('should get options', async () => {
+      await initTestData()
+
       const { result, waitFor } = renderHook(() => useGetOptions(), {
         wrapper: ReactQueryClientProvider,
       })
@@ -38,6 +40,8 @@ describe('options hooks', () => {
 
   describe('useDeleteOptions', () => {
     it('should delete all options and refetch in useGetOptions', async () => {
+      await initTestData()
+
       const { result: useGetOptionsResult, waitFor } = renderHook(
         () => useGetOptions(),
         { wrapper: ReactQueryClientProvider },
@@ -64,6 +68,8 @@ describe('options hooks', () => {
 
   describe('useUpdateOptions', () => {
     it('should insert option and refetch in useGetOptions', async () => {
+      await initTestData()
+
       const { result: useGetOptionsResult, waitFor } = renderHook(
         () => useGetOptions(),
         { wrapper: ReactQueryClientProvider },

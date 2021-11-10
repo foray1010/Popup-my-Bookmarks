@@ -236,6 +236,10 @@ const webpackConfig: webpack.Configuration = {
       : []),
   ],
   resolve: {
+    alias: {
+      // remove this alias after removing react-redux
+      'react-is': path.resolve(__dirname, 'node_modules/react-is'),
+    },
     extensions: ['.wasm', '.tsx', '.ts', '.mjs', '.js', '.json'],
   },
   watch: isDevelopmentBuild,
