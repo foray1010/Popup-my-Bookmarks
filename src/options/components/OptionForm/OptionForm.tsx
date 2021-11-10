@@ -37,6 +37,7 @@ export default function OptionForm(props: Props) {
                   name={optionName}
                   render={({ field }) => {
                     // do not pass ref as not all option items forward reference
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
                     const { ref, ...rest } = field
                     return (
                       <OptionItem

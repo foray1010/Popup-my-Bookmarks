@@ -1245,10 +1245,10 @@
   dependencies:
     read-pkg-up "^7.0.1"
 
-"@foray1010/eslint-config@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-6.0.0.tgz#cc76dc04a0d7515bd254c8883bd56e7efe6730b1"
-  integrity sha512-QzWcglhb651YrZBnBB0SoCiZvuqp7c3IDhC5LeXoj/7JIVOk7CxpeHc0WZcP7uSvK3g/5r04qW7/z1UuKAf+sw==
+"@foray1010/eslint-config@6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-6.1.0.tgz#f55468cf99109938618fdb9fe3bd26f2f1822bdb"
+  integrity sha512-66TosXFzV4C1Sld0rOtPOMGkmtf5ayELvC9vL1d2FAt443z7w0jhRJFYtbBzYoDw1cA2A6Je4/MC9uK5MkiZLg==
   dependencies:
     "@foray1010/common-presets-utils" "^4.0.0"
     "@typescript-eslint/eslint-plugin" "^5.0.0"
@@ -1268,10 +1268,10 @@
     eslint-plugin-simple-import-sort "^7.0.0"
     eslint-plugin-testing-library "^5.0.0"
 
-"@foray1010/prettier-config@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-6.0.0.tgz#00966062467543eba7660290c2b12ed9357c819a"
-  integrity sha512-rAJ+s4MaFYQ6pc/BHA0cEdWl61sbmPLwDsfn3mLGHYx18bWF7FtLHhf5pPVzMErQUz8HC8eBJdz8I/JxeDp9VA==
+"@foray1010/prettier-config@6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-6.0.1.tgz#fbc328a2e65c45808d4d7f9cffbc514398b5077e"
+  integrity sha512-SKuOnV/YYfQhHh2cVdSluzHPKg4EoU52SmA5NaF2hEjGY114/YvbayeTrtCXugMv5mzWLNP4s5/YXTboFYzzcg==
   dependencies:
     prettier-plugin-packagejson "^2.2.5"
 
@@ -1288,10 +1288,10 @@
     remark-preset-prettier "^1.0.0"
     remark-validate-links "^11.0.0"
 
-"@foray1010/stylelint-config@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-5.0.0.tgz#e80825e4fbbdaf90b4840ac2d97d298861aff2ad"
-  integrity sha512-ILHilZSqiFeT97gvyEhGn00JXptdl9LmibBM60vYjcB/YHCkrsGdaktskfqaLJ6CPWT9HF++mpwB7Je811ewsQ==
+"@foray1010/stylelint-config@5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-5.0.1.tgz#24366b5a2c38dc748da0147b9d46ee89bc0e40cb"
+  integrity sha512-oV+pj5HtI5nXGBKzdjwMEhPqfEIQ2aw8Aumqd4oWkpAPnHFH8YX9PNTlfJabo1izggFLwKygPiUPj7puqqV/AA==
   dependencies:
     stylelint-config-css-modules "^2.2.0"
     stylelint-config-idiomatic-order "^8.1.0"
