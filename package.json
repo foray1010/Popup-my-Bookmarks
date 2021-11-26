@@ -59,7 +59,7 @@
     "@foray1010/stylelint-config": "5.0.1",
     "@foray1010/tsconfig": "6.0.0",
     "@svgr/webpack": "5.5.0",
-    "@testing-library/jest-dom": "5.15.0",
+    "@testing-library/jest-dom": "5.15.1",
     "@testing-library/react": "12.1.2",
     "@testing-library/react-hooks": "7.0.2",
     "@testing-library/user-event": "13.5.0",
