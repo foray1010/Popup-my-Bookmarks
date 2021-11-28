@@ -74,7 +74,7 @@
     "@types/node": "16.11.10",
     "@types/prompts": "2.4.0",
     "@types/ramda": "0.27.49",
-    "@types/react": "17.0.36",
+    "@types/react": "17.0.37",
     "@types/react-dom": "17.0.11",
     "@types/react-redux": "7.1.20",
     "@types/script-ext-html-webpack-plugin": "2.1.3",
