@@ -154,7 +154,7 @@ const webpackConfig: webpack.Configuration = {
               unsafe_symbols: true,
               unsafe_undefined: true,
             },
-            ecma: 2017,
+            ecma: 2017 as const,
           },
         }),
       ],
