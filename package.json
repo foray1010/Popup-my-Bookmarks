@@ -96,7 +96,7 @@
     "husky": "7.0.4",
     "ignore-sync": "4.0.0",
     "image-process-loader": "1.1.1",
-    "jest": "27.4.5",
+    "jest": "27.4.7",
     "jest-css-modules-transform": "4.3.0",
     "lint-staged": "12.1.5",
     "mini-css-extract-plugin": "2.4.5",
