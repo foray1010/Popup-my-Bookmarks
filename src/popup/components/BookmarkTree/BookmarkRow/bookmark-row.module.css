@@ -37,7 +37,7 @@
     color: var(--highlight-level4);
 
     & > img {
-      opacity: 40%;
+      opacity: 0.4;
     }
   }
 }
