@@ -37,7 +37,8 @@ export function* getSearchResult({
     const isSearchTitleOnly = options[CST.OPTIONS.SEARCH_TARGET] === 1
     const sortedPartialResult = R.compose(
       sortByTitle,
-      R.slice(0, options[CST.OPTIONS.MAX_RESULTS] ?? 0),
+      (result: Array<BookmarkInfo>) =>
+        result.slice(0, options[CST.OPTIONS.MAX_RESULTS] ?? 0),
       (result: Array<BookmarkInfo>) => {
         const filteredResult = result.filter(
           (bookmarkInfo) => bookmarkInfo.type === CST.BOOKMARK_TYPES.BOOKMARK,
