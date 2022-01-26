@@ -49,7 +49,7 @@
     "webextension-polyfill": "0.8.0"
   },
   "devDependencies": {
-    "@babel/core": "7.16.7",
+    "@babel/core": "7.16.12",
     "@commitlint/cli": "16.1.0",
     "@commitlint/config-conventional": "16.0.0",
     "@foray1010/babel-preset": "8.0.0",
