@@ -18,7 +18,7 @@
   height: calc(var(--font-size) + var(--padding) * 2);
   justify-content: space-between;
   margin-bottom: var(--golden-gap);
-  background-color: currentColor;
+  background-color: currentcolor;
 }
 
 .title {

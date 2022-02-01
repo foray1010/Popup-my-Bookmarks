@@ -3,7 +3,7 @@
 
   &:last-child {
     padding-bottom: var(--golden-gap);
-    border-bottom: currentColor solid var(--golden-gap);
+    border-bottom: currentcolor solid var(--golden-gap);
   }
 }
 
