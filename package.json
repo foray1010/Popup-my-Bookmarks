@@ -50,8 +50,8 @@
   },
   "devDependencies": {
     "@babel/core": "7.16.12",
-    "@commitlint/cli": "16.1.0",
-    "@commitlint/config-conventional": "16.0.0",
+    "@commitlint/cli": "16.2.1",
+    "@commitlint/config-conventional": "16.2.1",
     "@foray1010/babel-preset": "8.0.0",
     "@foray1010/eslint-config": "6.1.1",
     "@foray1010/prettier-config": "6.0.1",
