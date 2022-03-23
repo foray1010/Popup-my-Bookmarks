@@ -1,6 +1,6 @@
-import type { Config } from '@jest/types'
+'use strict'
 
-const config: Config.InitialOptions = {
+const config = {
   bail: true,
   collectCoverageFrom: ['<rootDir>/src/**/*.{cjs,cts,js,mjs,mts,ts,tsx}'],
   coveragePathIgnorePatterns: ['/__fixtures__/'],
@@ -14,8 +14,8 @@ const config: Config.InitialOptions = {
   testMatch: ['**/*.{spec,test}.{cjs,cts,js,mjs,mts,ts,tsx}'],
   transform: {
     '\\.css$': 'jest-css-modules-transform',
-    '\\.tsx?$': 'babel-jest',
+    '\\.tsx?$': '@swc/jest',
   },
 }
 
-export default config
+module.exports = config

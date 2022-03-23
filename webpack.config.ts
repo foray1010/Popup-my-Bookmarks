@@ -48,10 +48,7 @@ const webpackConfig: webpack.Configuration = {
       },
       {
         test: /\.tsx?$/,
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: true,
-        },
+        loader: 'swc-loader',
       },
       {
         test: /\.woff2$/,
