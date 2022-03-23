@@ -27,7 +27,7 @@
     "chrome >= 73"
   ],
   "dependencies": {
-    "@babel/runtime": "7.17.2",
+    "@babel/runtime": "7.17.8",
     "@fontsource/archivo-narrow": "4.5.4",
     "@rehooks/component-size": "1.0.3",
     "clsx": "1.1.1",
@@ -49,7 +49,7 @@
     "webextension-polyfill": "0.8.0"
   },
   "devDependencies": {
-    "@babel/core": "7.17.5",
+    "@babel/core": "7.17.8",
     "@commitlint/cli": "16.2.3",
     "@commitlint/config-conventional": "16.2.1",
     "@foray1010/babel-preset": "8.0.0",
@@ -80,7 +80,7 @@
     "@types/terser-webpack-plugin": "5.2.0",
     "@types/webpack-bundle-analyzer": "4.4.1",
     "@types/zip-webpack-plugin": "3.0.3",
-    "babel-loader": "8.2.3",
+    "babel-loader": "8.2.4",
     "bluebird": "3.7.2",
     "chrome-manifest-loader": "0.3.0",
     "clean-webpack-plugin": "4.0.0",
