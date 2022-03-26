@@ -75,22 +75,28 @@ const webpackConfig: webpack.Configuration = {
             },
           ]
         : []),
-      {
-        test: /\.svg$/,
-        // https://github.com/facebook/create-react-app/issues/11213#issuecomment-883466601
-        oneOf: [
-          {
-            resourceQuery: /svgr/,
-            use: '@svgr/webpack',
-          },
-          {
-            type: 'asset',
-            generator: {
-              filename: 'images/[name][ext]',
+      ...[
+        {
+          test: /\.svg$/,
+          resourceQuery: /svgr/,
+          issuer: /\.tsx?$/,
+          use: [
+            'swc-loader',
+            {
+              loader: '@svgr/webpack',
+              options: { babel: false },
             },
+          ],
+        },
+        {
+          test: /\.svg$/,
+          resourceQuery: { not: [/svgr/] },
+          type: 'asset',
+          generator: {
+            filename: 'images/[name][ext]',
           },
-        ],
-      },
+        },
+      ],
       {
         test: /\/manifest\.yml$/,
         use: [
