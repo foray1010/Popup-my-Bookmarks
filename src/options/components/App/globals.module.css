@@ -1,6 +1,1 @@
 @import '../../../core/styles/globals.module.css';
-
-:global(body) {
-  /* hack to fix Chrome 78 cannot open options page */
-  min-height: 10px;
-}

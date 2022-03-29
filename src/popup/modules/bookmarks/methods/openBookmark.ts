@@ -46,8 +46,6 @@ export async function openBookmarksInBrowser(
         '%bkmarkCount%',
         String(urls.length),
       )
-      // `window.confirm()` doesn't work as chrome will force close popup
-      // but worked again at least since chrome 73
       if (options[OPTIONS.WARN_OPEN_MANY] && !window.confirm(msgAskOpenAll))
         return
     }

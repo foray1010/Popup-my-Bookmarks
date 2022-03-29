@@ -14,7 +14,7 @@
   },
   "env": {
     "//": "bug - cannot get target browsers from package.json nor .browserslistrc",
-    "targets": "chrome >= 73",
+    "targets": "chrome >= 88",
     "mode": "usage",
     "coreJs": 3,
     "shippedProposals": true

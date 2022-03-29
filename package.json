@@ -25,7 +25,7 @@
     "webpack": "node -r @swc-node/register node_modules/.bin/webpack"
   },
   "browserslist": [
-    "chrome >= 73"
+    "chrome >= 88"
   ],
   "dependencies": {
     "@fontsource/archivo-narrow": "4.5.4",
