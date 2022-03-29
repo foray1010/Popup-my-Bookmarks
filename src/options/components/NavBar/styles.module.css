@@ -17,7 +17,7 @@
   font: 1.5em 'Archivo Narrow', sans-serif;
   text-align: center;
 
-  &:matches(:hover, .active) {
+  &:is(:hover, .active) {
     &:nth-of-type(1) {
       border-bottom-color: var(--main-color1);
     }
