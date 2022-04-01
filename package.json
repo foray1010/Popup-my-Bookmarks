@@ -28,7 +28,7 @@
     "chrome >= 88"
   ],
   "dependencies": {
-    "@fontsource/archivo-narrow": "4.5.4",
+    "@fontsource/archivo-narrow": "4.5.7",
     "@rehooks/component-size": "1.0.3",
     "clsx": "1.1.1",
     "constate": "3.3.0",
