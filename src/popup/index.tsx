@@ -6,7 +6,7 @@ import webExtension from 'webextension-polyfill'
 
 import type { OPTIONS } from '../core/constants'
 import configureStore from '../core/store/configureStore'
-import { getOptionsConfig, renderToBody } from '../core/utils'
+import { createAndRenderRoot, getOptionsConfig } from '../core/utils'
 import App from './components/App'
 import { getOptions } from './modules/options'
 import { rootReducer, rootSaga } from './reduxs'
@@ -34,7 +34,7 @@ async function main(): Promise<void> {
     },
   })
 
-  renderToBody(
+  createAndRenderRoot(
     <React.StrictMode>
       <Provider store={store}>
         <App />

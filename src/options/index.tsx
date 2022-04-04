@@ -2,10 +2,10 @@ import '../manifest.yml'
 
 import * as React from 'react'
 
-import { renderToBody } from '../core/utils'
+import { createAndRenderRoot } from '../core/utils'
 import App from './components/App'
 
-renderToBody(
+createAndRenderRoot(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
