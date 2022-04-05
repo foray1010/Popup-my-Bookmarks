@@ -1267,10 +1267,10 @@
   dependencies:
     read-pkg-up "^7.0.1"
 
-"@foray1010/eslint-config@6.1.3":
-  version "6.1.3"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-6.1.3.tgz#36910a92c96d6ed69a9946e5662855e3245d92a7"
-  integrity sha512-mEQzf+C0OFS7Z6ndNkbYs+IpbJLom2UJa0NZobFqKnxBdIpdfHCFpgwDcFhAUpzZS2LAMfGDm5XYwPh42OzylQ==
+"@foray1010/eslint-config@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-6.2.0.tgz#aa9974423a8074de507f49515bd8aa2f92e133f1"
+  integrity sha512-NlnYmmfT//nd4Rjrp7WxJctN3maioR5OeBYnSWfJPxULsRH5dR/HwfzAxTGYtWmTLjJQACxu3FnR/bn+i97K2w==
   dependencies:
     "@foray1010/common-presets-utils" "^4.0.0"
     "@typescript-eslint/eslint-plugin" "^5.13.0"

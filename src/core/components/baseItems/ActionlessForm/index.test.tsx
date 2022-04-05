@@ -4,20 +4,21 @@ import userEvent from '@testing-library/user-event'
 import ActionlessForm from '.'
 
 describe('ActionlessForm', () => {
-  it('should prevent default form submit action', () => {
+  it('should prevent default form submit action', async () => {
     const handleSubmit = jest.fn<void, [React.FormEvent<HTMLFormElement>]>(
       (evt) => {
         evt.persist()
       },
     )
+    const name = 'click me'
 
     render(
       <ActionlessForm onSubmit={handleSubmit}>
-        <button type='submit'>submit</button>
+        <button type='submit'>{name}</button>
       </ActionlessForm>,
     )
 
-    userEvent.click(screen.getByRole('button', { name: 'submit' }))
+    await userEvent.click(screen.getByRole('button', { name }))
 
     expect(handleSubmit).toBeCalledWith(
       expect.objectContaining({

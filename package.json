@@ -52,7 +52,7 @@
   "devDependencies": {
     "@commitlint/cli": "16.2.3",
     "@commitlint/config-conventional": "16.2.1",
-    "@foray1010/eslint-config": "6.1.3",
+    "@foray1010/eslint-config": "6.2.0",
     "@foray1010/prettier-config": "6.0.1",
     "@foray1010/remark-preset": "5.0.0",
     "@foray1010/stylelint-config": "5.0.4",
