@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import Button from '.'
 
 describe('Button', () => {
-  it('should not fire form submit when clicked in form', () => {
+  it('should not fire form submit when clicked in form', async () => {
     const handleSubmit = jest.fn<void, [React.FormEvent<HTMLFormElement>]>()
     const name = 'click me'
 
@@ -14,12 +14,12 @@ describe('Button', () => {
       </form>,
     )
 
-    userEvent.click(screen.getByRole('button', { name }))
+    await userEvent.click(screen.getByRole('button', { name }))
 
     expect(handleSubmit).not.toBeCalled()
   })
 
-  it('should fire form submit when type="submit"', () => {
+  it('should fire form submit when type="submit"', async () => {
     const handleSubmit = jest.fn<void, [React.FormEvent<HTMLFormElement>]>(
       (evt) => {
         evt.preventDefault()
@@ -33,7 +33,7 @@ describe('Button', () => {
       </form>,
     )
 
-    userEvent.click(screen.getByRole('button', { name }))
+    await userEvent.click(screen.getByRole('button', { name }))
 
     expect(handleSubmit).toBeCalled()
   })
