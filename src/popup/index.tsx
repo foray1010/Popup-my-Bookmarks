@@ -1,15 +1,12 @@
 import '../manifest.yml'
 
 import * as React from 'react'
-import { Provider } from 'react-redux'
 import webExtension from 'webextension-polyfill'
 
 import type { OPTIONS } from '../core/constants'
-import configureStore from '../core/store/configureStore'
 import { createAndRenderRoot, getOptionsConfig } from '../core/utils'
 import App from './components/App'
 import { getOptions } from './modules/options'
-import { rootReducer, rootSaga } from './reduxs'
 
 async function main(): Promise<void> {
   const [options, optionsConfig] = await Promise.all([
@@ -26,19 +23,9 @@ async function main(): Promise<void> {
     return
   }
 
-  const store = configureStore({
-    rootReducer,
-    rootSaga,
-    preloadedState: {
-      options,
-    },
-  })
-
   createAndRenderRoot(
     <React.StrictMode>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <App />
     </React.StrictMode>,
   )
 }

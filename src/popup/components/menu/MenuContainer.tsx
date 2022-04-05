@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { useSelector } from 'react-redux'
 import webExtension from 'webextension-polyfill'
 
 import withProviders from '../../../core/utils/withProviders'
 import { BOOKMARK_TYPES, MenuItem, OPEN_IN_TYPES } from '../../constants'
 import { MENU_WINDOW } from '../../constants/windows'
+import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees'
 import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo'
 import { recursiveCopyBookmarks } from '../../modules/bookmarks/methods/copyBookmark'
 import {
@@ -16,7 +16,6 @@ import {
   openFolderInBrowser,
 } from '../../modules/bookmarks/methods/openBookmark'
 import sortBookmarksByName from '../../modules/bookmarks/methods/sortBookmarksByName'
-import type { RootState } from '../../reduxs'
 import isMac from '../../utils/isMac'
 import { ClipboardAction, useClipboard } from '../clipboard'
 import { useEditorContext } from '../editor'
@@ -182,9 +181,8 @@ const InnerMenuContainer = () => {
       ? []
       : [MenuItem.Paste]
 
-  const isSearching = useSelector((state: RootState) =>
-    Boolean(state.bookmark.searchKeyword),
-  )
+  const { searchQuery } = useBookmarkTrees()
+  const isSearching = Boolean(searchQuery)
   const { data: bookmarkInfo } = useGetBookmarkInfo(
     state.isOpen ? state.targetId : undefined,
   )

@@ -1,17 +1,14 @@
 import * as React from 'react'
 
-import useAction from '../../../core/hooks/useAction'
-import { bookmarkCreators } from '../../reduxs'
+import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees'
 import { DragAndDropProvider } from '../dragAndDrop'
 
 export default function withDragAndDropEvents<P>(
   WrappedComponent: React.ComponentType<P>,
 ) {
   return function ComponentWithDragAndDropEvents(props: P) {
-    const moveBookmarkToDragIndicator = useAction(
-      bookmarkCreators.moveBookmarkToDragIndicator,
-    )
-    const removeDragIndicator = useAction(bookmarkCreators.removeDragIndicator)
+    const { moveBookmarkToDragIndicator, removeDragIndicator } =
+      useBookmarkTrees()
 
     return (
       <DragAndDropProvider

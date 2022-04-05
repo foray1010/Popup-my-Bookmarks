@@ -1,11 +1,8 @@
 import * as React from 'react'
-import { shallowEqual, useSelector } from 'react-redux'
 
-import useAction from '../../../core/hooks/useAction'
 import * as CST from '../../constants'
+import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees'
 import { useOptions } from '../../modules/options'
-import type { RootState } from '../../reduxs'
-import { bookmarkCreators } from '../../reduxs'
 import { useDragAndDropContext } from '../dragAndDrop'
 import { useListNavigationContext } from '../listNavigation'
 import Mask from '../Mask'
@@ -24,33 +21,26 @@ const getRowHeight = (fontSize: number) =>
   // +1 for border width, GOLDEN_GAP for padding
   (1 + CST.GOLDEN_GAP) * 2
 
-const useReduxProps = ({ treeId }: { treeId: string }) => {
+const useContextProps = ({ treeId }: { treeId: string }) => {
   const options = useOptions()
 
-  const reduxSelector = React.useCallback(
-    (state: RootState) => {
-      const treeIndex = state.bookmark.trees.findIndex(
-        (tree) => tree.parent.id === treeId,
-      )
-      const treeInfo = state.bookmark.trees[treeIndex]
+  const { bookmarkTrees, searchQuery } = useBookmarkTrees()
 
-      return {
-        iconSize: getIconSize(options[CST.OPTIONS.FONT_SIZE] ?? 0),
-        isSearching: Boolean(state.bookmark.searchKeyword),
-        // cover the folder if it is not the top two folder
-        isShowCover: state.bookmark.trees.length - treeIndex > 2,
-        isShowHeader: treeIndex !== 0,
-        isShowTooltip: Boolean(options[CST.OPTIONS.TOOLTIP]),
-        listItemWidth: options[CST.OPTIONS.SET_WIDTH] ?? 0,
-        rowHeight: getRowHeight(options[CST.OPTIONS.FONT_SIZE] ?? 0),
-        treeIndex,
-        treeInfo,
-      }
-    },
-    [options, treeId],
-  )
+  const treeIndex = bookmarkTrees.findIndex((tree) => tree.parent.id === treeId)
+  const treeInfo = bookmarkTrees[treeIndex]
 
-  return useSelector(reduxSelector, shallowEqual)
+  return {
+    iconSize: getIconSize(options[CST.OPTIONS.FONT_SIZE] ?? 0),
+    isSearching: Boolean(searchQuery),
+    // cover the folder if it is not the top two folder
+    isShowCover: bookmarkTrees.length - treeIndex > 2,
+    isShowHeader: treeIndex !== 0,
+    isShowTooltip: Boolean(options[CST.OPTIONS.TOOLTIP]),
+    listItemWidth: options[CST.OPTIONS.SET_WIDTH] ?? 0,
+    rowHeight: getRowHeight(options[CST.OPTIONS.FONT_SIZE] ?? 0),
+    treeIndex,
+    treeInfo,
+  }
 }
 
 interface Props {
@@ -74,14 +64,11 @@ export default function BookmarkTreeContainer({
     treeIndex,
     treeInfo,
     ...bookmarkTreeProps
-  } = useReduxProps({
+  } = useContextProps({
     treeId,
   })
 
-  const removeBookmarkTree = useAction(bookmarkCreators.removeBookmarkTree)
-  const removeNextBookmarkTrees = useAction(
-    bookmarkCreators.removeNextBookmarkTrees,
-  )
+  const { removeBookmarkTree, removeNextBookmarkTrees } = useBookmarkTrees()
 
   const { activeKey } = useDragAndDropContext()
   const { listNavigation, setItemCount, removeList } =

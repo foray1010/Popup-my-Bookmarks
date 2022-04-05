@@ -1,8 +1,7 @@
 import * as React from 'react'
 
-import useAction from '../../../core/hooks/useAction'
 import * as CST from '../../constants'
-import { bookmarkCreators } from '../../reduxs'
+import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees'
 import type { BookmarkInfo, BookmarkTree } from '../../types'
 import type { ResponseEvent } from '../dragAndDrop'
 
@@ -13,8 +12,7 @@ export default function useRowDragEvents({
   closeNextTrees(): void
   treeInfo: BookmarkTree
 }) {
-  const removeDragIndicator = useAction(bookmarkCreators.removeDragIndicator)
-  const setDragIndicator = useAction(bookmarkCreators.setDragIndicator)
+  const { removeDragIndicator, setDragIndicator } = useBookmarkTrees()
 
   return React.useMemo(() => {
     return {

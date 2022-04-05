@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import useAction from '../../../core/hooks/useAction'
 import { BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS } from '../../constants'
+import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees'
 import {
   openBookmarksInBrowser,
   openFolderInBrowser,
@@ -11,7 +11,6 @@ import {
   mapOptionToOpenBookmarkProps,
 } from '../../modules/bookmarks/utils/clickBookmark'
 import { useOptions } from '../../modules/options'
-import { bookmarkCreators } from '../../reduxs'
 import type { BookmarkInfo, BookmarkTree } from '../../types'
 import { useMenuContext } from '../menu'
 
@@ -22,7 +21,7 @@ export default function useRowClickEvents({
 }) {
   const options = useOptions()
 
-  const toggleBookmarkTree = useAction(bookmarkCreators.toggleBookmarkTree)
+  const { toggleBookmarkTree } = useBookmarkTrees()
 
   const { open: openMenu } = useMenuContext()
 
@@ -79,7 +78,7 @@ export default function useRowClickEvents({
         (bookmarkInfo: BookmarkInfo) => async (evt: React.MouseEvent) => {
           if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
             if (options[OPTIONS.OP_FOLDER_BY]) {
-              toggleBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
+              await toggleBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
             }
           } else {
             const option = options[getClickOptionNameByEvent(evt)]

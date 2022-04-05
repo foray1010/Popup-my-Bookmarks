@@ -1,18 +1,15 @@
 import type * as React from 'react'
-import { useSelector } from 'react-redux'
 
-import useAction from '../../../core/hooks/useAction'
 import withProviders from '../../../core/utils/withProviders'
 import { BOOKMARK_TYPES } from '../../constants'
 import { BASE_WINDOW } from '../../constants/windows'
+import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees'
 import { openBookmarksInBrowser } from '../../modules/bookmarks/methods/openBookmark'
 import {
   getClickOptionNameByEvent,
   mapOptionToOpenBookmarkProps,
 } from '../../modules/bookmarks/utils/clickBookmark'
 import { useOptions } from '../../modules/options'
-import type { RootState } from '../../reduxs'
-import { bookmarkCreators } from '../../reduxs'
 import getLastMapKey from '../../utils/getLastMapKey'
 import isMac from '../../utils/isMac'
 import { useKeyBindingsEvent } from '../keyBindings'
@@ -24,12 +21,11 @@ import {
 import { useMenuContext } from '../menu'
 
 const useArrowKeysNav = () => {
-  const trees = useSelector((state: RootState) => state.bookmark.trees)
-
-  const openBookmarkTree = useAction(bookmarkCreators.openBookmarkTree)
-  const removeNextBookmarkTrees = useAction(
-    bookmarkCreators.removeNextBookmarkTrees,
-  )
+  const {
+    bookmarkTrees: trees,
+    openBookmarkTree,
+    removeNextBookmarkTrees,
+  } = useBookmarkTrees()
 
   const { listNavigation } = useListNavigationContext()
 
@@ -43,7 +39,7 @@ const useArrowKeysNav = () => {
         removeNextBookmarkTrees(secondLastTree.parent.id)
       }
     },
-    onPressArrowRight() {
+    async onPressArrowRight() {
       const { highlightedIndices, itemCounts } = listNavigation
 
       const lastListIndex = getLastMapKey(itemCounts)
@@ -57,7 +53,7 @@ const useArrowKeysNav = () => {
       if (!bookmarkInfo) return
 
       if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
-        openBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
+        await openBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
       }
     },
   })
@@ -65,7 +61,8 @@ const useArrowKeysNav = () => {
 
 const useEnterKeyNav = () => {
   const options = useOptions()
-  const trees = useSelector((state: RootState) => state.bookmark.trees)
+
+  const { bookmarkTrees: trees } = useBookmarkTrees()
 
   const { listNavigation } = useListNavigationContext()
 
@@ -92,7 +89,7 @@ const useEnterKeyNav = () => {
 }
 
 const useMenuKeyNav = () => {
-  const trees = useSelector((state: RootState) => state.bookmark.trees)
+  const { bookmarkTrees: trees } = useBookmarkTrees()
 
   const { open: openMenu } = useMenuContext()
 

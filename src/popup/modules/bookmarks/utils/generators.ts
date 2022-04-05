@@ -19,6 +19,12 @@ const generateFakeBookmarkInfo = (
   url: '',
 })
 
+export const generateDragIndicator = (): BookmarkInfo => {
+  return generateFakeBookmarkInfo({
+    type: CST.BOOKMARK_TYPES.DRAG_INDICATOR,
+  })
+}
+
 export const generateNoBookmarkPlaceholder = (
   parentId: string,
 ): BookmarkInfo => {
@@ -27,5 +33,12 @@ export const generateNoBookmarkPlaceholder = (
     parentId,
     title: webExtension.i18n.getMessage('noBkmark'),
     type: CST.BOOKMARK_TYPES.NO_BOOKMARK,
+  })
+}
+
+export const generateSearchResultParent = (): BookmarkInfo => {
+  return generateFakeBookmarkInfo({
+    id: CST.SEARCH_RESULT_ID,
+    type: CST.BOOKMARK_TYPES.FOLDER,
   })
 }
