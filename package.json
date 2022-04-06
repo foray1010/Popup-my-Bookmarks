@@ -51,7 +51,7 @@
     "@foray1010/eslint-config": "6.2.0",
     "@foray1010/prettier-config": "6.0.1",
     "@foray1010/remark-preset": "5.0.0",
-    "@foray1010/stylelint-config": "5.0.4",
+    "@foray1010/stylelint-config": "5.0.5",
     "@foray1010/tsconfig": "6.0.0",
     "@svgr/webpack": "6.2.1",
     "@swc-node/register": "1.4.2",
