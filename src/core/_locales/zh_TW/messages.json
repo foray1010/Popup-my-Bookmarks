@@ -83,13 +83,13 @@
     "message": "剪下",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
   },
-  "defExpand": {
-    "message": "預設展開資料夾",
-    "description": "2013.07.30"
-  },
   "default": {
     "message": "預設",
     "description": "2013.03.26"
+  },
+  "defExpand": {
+    "message": "預設展開資料夾",
+    "description": "2013.07.30"
   },
   "del": {
     "message": "刪除",
@@ -139,10 +139,6 @@
     "message": "沒有對應的書籤",
     "description": "2013.01.27"
   },
-  "opFolderBy": {
-    "message": "通過點擊左鍵開啟資料夾",
-    "description": "2013.06.29"
-  },
   "openAll": {
     "message": "開啟所有書籤",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
@@ -166,6 +162,10 @@
   "openInN": {
     "message": "在新視窗中開啟",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "opFolderBy": {
+    "message": "通過點擊左鍵開啟資料夾",
+    "description": "2013.06.29"
   },
   "options": {
     "message": "設定",

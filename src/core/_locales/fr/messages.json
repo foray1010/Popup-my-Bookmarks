@@ -83,13 +83,13 @@
     "message": "Couper",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
   },
-  "defExpand": {
-    "message": "Dossier expansion par défaut",
-    "description": "2013.07.30"
-  },
   "default": {
     "message": "Défaut",
     "description": "2013.03.26"
+  },
+  "defExpand": {
+    "message": "Dossier expansion par défaut",
+    "description": "2013.07.30"
   },
   "del": {
     "message": "Supprimer",
@@ -139,10 +139,6 @@
     "message": "Aucun favoris en doublon",
     "description": "2013.01.27"
   },
-  "opFolderBy": {
-    "message": "Ouvrir le dossier avec clic gauche",
-    "description": "2013.06.29"
-  },
   "openAll": {
     "message": "Ouvrir tous les favoris",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
@@ -166,6 +162,10 @@
   "openInN": {
     "message": "Ouvrir dans une nouvelle fenêtre",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "opFolderBy": {
+    "message": "Ouvrir le dossier avec clic gauche",
+    "description": "2013.06.29"
   },
   "options": {
     "message": "Options",

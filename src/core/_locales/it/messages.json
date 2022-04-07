@@ -67,6 +67,14 @@
     "message": "Salva",
     "description": "2013.01.30"
   },
+  "contributors": {
+    "message": "Collaboratori",
+    "description": "2015.08.22"
+  },
+  "control": {
+    "message": "Controlli",
+    "description": "2015.08.22"
+  },
   "copy": {
     "message": "Copia",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
@@ -75,13 +83,13 @@
     "message": "Taglia",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
   },
-  "defExpand": {
-    "message": "Cartella predefinita di espansione",
-    "description": "2013.07.30"
-  },
   "default": {
     "message": "Predefinito",
     "description": "2013.03.26"
+  },
+  "defExpand": {
+    "message": "Cartella predefinita di espansione",
+    "description": "2013.07.30"
   },
   "del": {
     "message": "Elimina",
@@ -95,9 +103,21 @@
     "message": "Un modo più efficiente per visualizzare e gestire i tuoi Preferiti.",
     "description": "2013.01.21"
   },
+  "fontFamily": {
+    "message": "Stile del carattere",
+    "description": "2015.01.11"
+  },
   "fontSize": {
     "message": "Dimensione del carattere",
     "description": "2013.07.26"
+  },
+  "general": {
+    "message": "Generale",
+    "description": "2015.08.22"
+  },
+  "hideRootFolder": {
+    "message": "Nascondi cartella",
+    "description": "2015.02.18 | Root folder means the top level folder"
   },
   "maxResults": {
     "message": "Numero massimo dei risultati di ricerca",
@@ -118,10 +138,6 @@
   "noResult": {
     "message": "Preferito non trovato",
     "description": "2013.01.27"
-  },
-  "opFolderBy": {
-    "message": "Apri cartelle usando il Clic sinistro",
-    "description": "2013.06.29"
   },
   "openAll": {
     "message": "Apri tutti i Preferiti",
@@ -146,6 +162,10 @@
   "openInN": {
     "message": "Apri in un'altra finestra",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "opFolderBy": {
+    "message": "Apri cartelle usando il Clic sinistro",
+    "description": "2013.06.29"
   },
   "options": {
     "message": "Opzioni",
@@ -198,6 +218,10 @@
   "tooltip": {
     "message": "Mostra informazioni dettagliate dei Preferiti",
     "description": "2013.03.24"
+  },
+  "userInterface": {
+    "message": "Interfaccia",
+    "description": "2015.08.22"
   },
   "warnOpenMany": {
     "message": "Avvisa quando l'apertura di più schede potrebbe rallentare Chrome",

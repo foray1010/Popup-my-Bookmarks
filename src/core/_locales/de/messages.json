@@ -75,13 +75,13 @@
     "message": "Ausschneiden",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
   },
-  "defExpand": {
-    "message": "Voreinstellung für anzuzeigende Lesezeichen",
-    "description": "2013.07.30"
-  },
   "default": {
     "message": "Voreinstellung",
     "description": "2013.03.26"
+  },
+  "defExpand": {
+    "message": "Voreinstellung für anzuzeigende Lesezeichen",
+    "description": "2013.07.30"
   },
   "del": {
     "message": "Löschen",
@@ -119,10 +119,6 @@
     "message": "Keine passenden Lesezeichen gefunden!",
     "description": "2013.01.27"
   },
-  "opFolderBy": {
-    "message": "Ordner mit linker Maustaste öffnen",
-    "description": "2013.06.29"
-  },
   "openAll": {
     "message": "Alle Lesezeichen öffnen",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
@@ -146,6 +142,10 @@
   "openInN": {
     "message": "In neuem Fenster öffnen",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "opFolderBy": {
+    "message": "Ordner mit linker Maustaste öffnen",
+    "description": "2013.06.29"
   },
   "options": {
     "message": "Optionen",

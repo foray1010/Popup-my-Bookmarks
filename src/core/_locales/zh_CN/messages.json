@@ -83,13 +83,13 @@
     "message": "剪切",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
   },
-  "defExpand": {
-    "message": "默认展开资料夹",
-    "description": "2013.07.30"
-  },
   "default": {
     "message": "默认",
     "description": "2013.03.26"
+  },
+  "defExpand": {
+    "message": "默认展开资料夹",
+    "description": "2013.07.30"
   },
   "del": {
     "message": "删除",
@@ -139,10 +139,6 @@
     "message": "没有对应的书签",
     "description": "2013.01.27"
   },
-  "opFolderBy": {
-    "message": "通过点击左键打开资料夹",
-    "description": "2013.06.29"
-  },
   "openAll": {
     "message": "打开所有书签",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
@@ -166,6 +162,10 @@
   "openInN": {
     "message": "在新窗口中打开",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "opFolderBy": {
+    "message": "通过点击左键打开资料夹",
+    "description": "2013.06.29"
   },
   "options": {
     "message": "设置",

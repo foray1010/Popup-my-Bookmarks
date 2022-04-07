@@ -83,13 +83,13 @@
     "message": "Klipp ut",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
   },
-  "defExpand": {
-    "message": "Standard utökad mapp",
-    "description": "2013.07.30"
-  },
   "default": {
     "message": "Standard",
     "description": "2013.03.26"
+  },
+  "defExpand": {
+    "message": "Standard utökad mapp",
+    "description": "2013.07.30"
   },
   "del": {
     "message": "Radera",
@@ -139,10 +139,6 @@
     "message": "Inga matchande bokmärken",
     "description": "2013.01.27"
   },
-  "opFolderBy": {
-    "message": "Öppna mappar med vänsterklick",
-    "description": "2013.06.29"
-  },
   "openAll": {
     "message": "Öppna alla bokmärken",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
@@ -166,6 +162,10 @@
   "openInN": {
     "message": "Öppna i nytt fönster",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "opFolderBy": {
+    "message": "Öppna mappar med vänsterklick",
+    "description": "2013.06.29"
   },
   "options": {
     "message": "Alternativ",

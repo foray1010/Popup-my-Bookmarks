@@ -75,13 +75,13 @@
     "message": "Cắt",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
   },
-  "defExpand": {
-    "message": "Mặc định mở rộng thư mục",
-    "description": "2013.07.30"
-  },
   "default": {
     "message": "Mặc định",
     "description": "2013.03.26"
+  },
+  "defExpand": {
+    "message": "Mặc định mở rộng thư mục",
+    "description": "2013.07.30"
   },
   "del": {
     "message": "Xóa",
@@ -119,10 +119,6 @@
     "message": "Không có phần đánh dấu nào khớp nhau",
     "description": "2013.01.27"
   },
-  "opFolderBy": {
-    "message": "Mở các thư mục bằng cách click chuột trái",
-    "description": "2013.06.29"
-  },
   "openAll": {
     "message": "Mở tất cả các phần đánh dấu",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
@@ -146,6 +142,10 @@
   "openInN": {
     "message": "Mở trong một cửa sổ mới",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "opFolderBy": {
+    "message": "Mở các thư mục bằng cách click chuột trái",
+    "description": "2013.06.29"
   },
   "options": {
     "message": "Tùy chọn",

@@ -83,13 +83,13 @@
     "message": "Klipp ut",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
   },
-  "defExpand": {
-    "message": "Standard utvidet mappe",
-    "description": "2013.07.30"
-  },
   "default": {
     "message": "Standard",
     "description": "2013.03.26"
+  },
+  "defExpand": {
+    "message": "Standard utvidet mappe",
+    "description": "2013.07.30"
   },
   "del": {
     "message": "Slett",
@@ -139,10 +139,6 @@
     "message": "Ingen bokmerker matchet",
     "description": "2013.01.27"
   },
-  "opFolderBy": {
-    "message": "Åpne mapper ved å Venstre-klikke",
-    "description": "2013.06.29"
-  },
   "openAll": {
     "message": "Åpne alle bokmerker",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
@@ -166,6 +162,10 @@
   "openInN": {
     "message": "Åpne i nytt vindu",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "opFolderBy": {
+    "message": "Åpne mapper ved å Venstre-klikke",
+    "description": "2013.06.29"
   },
   "options": {
     "message": "Alternativer",

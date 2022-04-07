@@ -1,24 +1,21 @@
-import bluebird from 'bluebird'
+// @ts-expect-error no type definitions for this lib
+import { transifexApi } from '@transifex/api'
+import axios from 'axios'
 import { promises as fsPromises } from 'fs'
 import path from 'path'
 import prompts from 'prompts'
-import Transifex from 'transifex'
 
 const questions = [
   {
     type: 'text',
-    name: 'transifexUsername',
-    message: 'transifex username (you can register one for free)',
-    validate: Boolean,
-  } as const,
-  {
-    type: 'password',
-    name: 'transifexPassword',
-    message: 'password',
+    name: 'transifexApiKey',
+    message:
+      'transifex api key (get from https://www.transifex.com/user/settings/api/)',
     validate: Boolean,
   } as const,
 ]
 
+const organizationSlug = 'foray1010'
 const projectSlug = 'popup-my-bookmarks'
 const resourceSlug = 'messagesjson-1'
 
@@ -33,35 +30,57 @@ interface Messages {
 
 async function main(): Promise<void> {
   const {
-    transifexPassword,
-    transifexUsername,
+    transifexApiKey,
   }: {
-    transifexPassword: string
-    transifexUsername: string
+    transifexApiKey: string
   } = await prompts(questions, {
     onCancel() {
       process.exit(130)
     },
   })
 
-  const transifex = new Transifex({
-    credential: `${transifexUsername}:${transifexPassword}`,
-  })
-  bluebird.promisifyAll(transifex)
+  transifexApi.setup({ auth: transifexApiKey })
 
-  const availableLanguages = await transifex.statisticsMethodsAsync(
-    projectSlug,
-    resourceSlug,
-  )
+  const organization = await transifexApi.Organization.get({
+    slug: organizationSlug,
+  })
+  const projects = await organization.fetch('projects')
+  const project = await projects.get({ slug: projectSlug })
+
+  const resources = await project.fetch('resources')
+  const resource = await resources.get({ slug: resourceSlug })
+
+  const languages = await project.fetch('languages')
+  await languages.fetch()
+
   await Promise.all(
-    Object.keys(availableLanguages).map(async (availableLanguage) => {
-      const messagesJsonStr = await transifex.translationInstanceMethodAsync(
-        projectSlug,
-        resourceSlug,
-        availableLanguage,
-        { mode: 'onlytranslated' },
+    languages.data.map(async (language: any) => {
+      let mappedLanguage: string
+      switch (language.attributes.code) {
+        case 'nb_NO':
+          mappedLanguage = 'nb'
+          break
+
+        case 'es_ES':
+          mappedLanguage = 'es'
+          break
+
+        default:
+          mappedLanguage = language.attributes.code
+      }
+
+      console.log(`processing "${mappedLanguage}"...`)
+
+      const url = await transifexApi.ResourceTranslationsAsyncDownload.download(
+        {
+          resource,
+          language,
+          mode: 'onlytranslated',
+        },
       )
-      const messagesJson: Messages = JSON.parse(messagesJsonStr)
+      const response = await axios.get(url)
+
+      const messagesJson: Messages = response.data
 
       const sortedMessagesJson = Object.fromEntries(
         Object.entries(messagesJson)
@@ -74,20 +93,6 @@ async function main(): Promise<void> {
           .filter(<T>(x: T | undefined): x is T => x !== undefined)
           .sort(([a], [b]) => a.localeCompare(b)),
       )
-
-      let mappedLanguage = ''
-      switch (availableLanguage) {
-        case 'nb_NO':
-          mappedLanguage = 'nb'
-          break
-
-        case 'es_ES':
-          mappedLanguage = 'es'
-          break
-
-        default:
-          mappedLanguage = availableLanguage
-      }
 
       await fsPromises.mkdir(path.join(localesPath, mappedLanguage), {
         recursive: true,

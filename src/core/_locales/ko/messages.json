@@ -75,13 +75,13 @@
     "message": "잘라내기",
     "description": "2013.07.07 | Refer to Chrome Bookmark manager"
   },
-  "defExpand": {
-    "message": "기본으로 펼칠 폴더",
-    "description": "2013.07.30"
-  },
   "default": {
     "message": "기본값",
     "description": "2013.03.26"
+  },
+  "defExpand": {
+    "message": "기본으로 펼칠 폴더",
+    "description": "2013.07.30"
   },
   "del": {
     "message": "삭제",
@@ -119,10 +119,6 @@
     "message": "해당하는 북마크 없음",
     "description": "2013.01.27"
   },
-  "opFolderBy": {
-    "message": "클릭으로 폴더 열기",
-    "description": "2013.06.29"
-  },
   "openAll": {
     "message": "모든 북마크 열기",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
@@ -146,6 +142,10 @@
   "openInN": {
     "message": "새 창에서 열기",
     "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "opFolderBy": {
+    "message": "클릭으로 폴더 열기",
+    "description": "2013.06.29"
   },
   "options": {
     "message": "옵션",
