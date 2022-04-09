@@ -1551,6 +1551,11 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@juggle/resize-observer@^3.3.1":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@juggle/resize-observer/-/resize-observer-3.3.1.tgz#b50a781709c81e10701004214340f25475a171a0"
+  integrity sha512-zMM9Ds+SawiUkakS7y94Ymqx+S0ORzpG3frZirN3l+UlXUmSUR7hF4wxCVqW+ei94JzV5kt0uXBcoOEAuiydrw==
+
 "@leichtgewicht/ip-codec@^2.0.1":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.3.tgz#0300943770e04231041a51bd39f0439b5c7ab4f0"
@@ -1596,11 +1601,6 @@
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@reach/observe-rect/-/observe-rect-1.2.0.tgz#d7a6013b8aafcc64c778a0ccb83355a11204d3b2"
   integrity sha512-Ba7HmkFgfQxZqqaeIWWkNK0rEhpxVQHIoVyW1YDSkGsGIXzcaW4deC8B0pZrNSSyLTdIk7y+5olKt5+g0GmFIQ==
-
-"@rehooks/component-size@1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@rehooks/component-size/-/component-size-1.0.3.tgz#823eabeb42084893d46d43e3a9d1d0e34252b3cb"
-  integrity sha512-pnYld+8SSF2vXwdLOqBGUyOrv/SjzwLjIUcs/4c1JJgR0q4E9eBtBfuZMD6zUD51fvSehSsbnlQMzotSmPTXPg==
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
@@ -11814,6 +11814,13 @@ use-deep-compare@1.1.0, use-deep-compare@^1.1.0:
   integrity sha512-6yY3zmKNCJ1jjIivfZMZMReZjr8e6iC6Uqtp701jvWJ6ejC/usXD+JjmslZDPJQgX8P4B1Oi5XSLHkOLeYSJsA==
   dependencies:
     dequal "1.0.0"
+
+use-resize-observer@8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/use-resize-observer/-/use-resize-observer-8.0.0.tgz#69bd80c1ddd94f3758563fe107efb25fed85067a"
+  integrity sha512-n0iKSeiQpJCyaFh5JA0qsVLBIovsF4EIIR1G6XiBwKJN66ZrD4Oj62bjcuTAATPKiSp6an/2UZZxCf/67fk3sQ==
+  dependencies:
+    "@juggle/resize-observer" "^3.3.1"
 
 use-typed-event-listener@3.0.0:
   version "3.0.0"

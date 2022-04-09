@@ -1,5 +1,5 @@
-import useComponentSize from '@rehooks/component-size'
 import * as React from 'react'
+import useResizeObserver from 'use-resize-observer'
 
 import useGlobalBodySize from './useGlobalBodySize'
 
@@ -15,34 +15,41 @@ export default function FloatingWindow({
 }: Props) {
   const { insertBodySize } = useGlobalBodySize()
 
-  const measureRef = React.useRef<HTMLDivElement>(null)
-  const childSize = useComponentSize(measureRef)
-
-  const [calibratedPosition, setCalibratedPosition] = React.useState({
-    left: 0,
-    top: 0,
+  const [windowSize, setWindowSize] = React.useState<{
+    height?: number
+    width?: number
+  }>({})
+  const { ref } = useResizeObserver<HTMLDivElement>({
+    onResize: setWindowSize,
+    round: Math.ceil,
   })
 
+  const [calibratedPosition, setCalibratedPosition] = React.useState<{
+    left?: number
+    top?: number
+  }>({})
+
   React.useEffect(() => {
+    if (windowSize.width === undefined || windowSize.height === undefined) {
+      return
+    }
+
     const currentBodyHeight = document.body.scrollHeight
     const currentBodyWidth = document.body.offsetWidth
 
     const updatedBodyHeight =
-      childSize.height > currentBodyHeight ? childSize.height : undefined
+      windowSize.height > currentBodyHeight ? windowSize.height : undefined
     const updatedBodyWidth =
-      childSize.width > currentBodyWidth ? childSize.width : undefined
+      windowSize.width > currentBodyWidth ? windowSize.width : undefined
 
     setCalibratedPosition({
       left: Math.min(
         positionLeft,
-        (updatedBodyWidth !== undefined ? updatedBodyWidth : currentBodyWidth) -
-          childSize.width,
+        (updatedBodyWidth ?? currentBodyWidth) - windowSize.width,
       ),
       top: Math.min(
         positionTop,
-        (updatedBodyHeight !== undefined
-          ? updatedBodyHeight
-          : currentBodyHeight) - childSize.height,
+        (updatedBodyHeight ?? currentBodyHeight) - windowSize.height,
       ),
     })
 
@@ -54,21 +61,21 @@ export default function FloatingWindow({
       removeBodySize()
     }
   }, [
-    childSize.height,
-    childSize.width,
     insertBodySize,
     positionLeft,
     positionTop,
+    windowSize.height,
+    windowSize.width,
   ])
 
   return (
     <div
-      ref={measureRef}
+      ref={ref}
       style={React.useMemo(
         () => ({
           position: 'fixed',
-          left: `${calibratedPosition.left}px`,
-          top: `${calibratedPosition.top}px`,
+          left: `${calibratedPosition.left ?? 0}px`,
+          top: `${calibratedPosition.top ?? 0}px`,
         }),
         [calibratedPosition.left, calibratedPosition.top],
       )}

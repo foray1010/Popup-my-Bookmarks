@@ -29,7 +29,6 @@
   ],
   "dependencies": {
     "@fontsource/archivo-narrow": "4.5.7",
-    "@rehooks/component-size": "1.0.3",
     "@transifex/api": "3.2.1",
     "clsx": "1.1.1",
     "constate": "3.3.0",
@@ -43,6 +42,7 @@
     "react-query": "3.34.16",
     "react-virtual": "2.10.4",
     "use-deep-compare": "1.1.0",
+    "use-resize-observer": "8.0.0",
     "use-typed-event-listener": "3.0.0",
     "webextension-polyfill": "0.9.0"
   },
