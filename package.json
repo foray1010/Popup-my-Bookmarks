@@ -90,7 +90,7 @@
     "file-loader": "6.2.0",
     "html-webpack-plugin": "5.5.0",
     "husky": "7.0.4",
-    "ignore-sync": "4.0.0",
+    "ignore-sync": "5.0.1",
     "image-process-loader": "1.1.1",
     "jest": "27.5.1",
     "jest-css-modules-transform": "4.3.0",
