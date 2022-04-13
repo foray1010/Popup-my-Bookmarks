@@ -55,7 +55,7 @@
     "@foray1010/tsconfig": "6.0.0",
     "@svgr/webpack": "6.2.1",
     "@swc-node/register": "1.4.2",
-    "@swc/core": "1.2.160",
+    "@swc/core": "1.2.165",
     "@swc/jest": "0.2.20",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.0.0",
