@@ -70,7 +70,7 @@
     "@types/mini-css-extract-plugin": "2.5.1",
     "@types/node": "16.11.26",
     "@types/prompts": "2.4.0",
-    "@types/ramda": "0.28.7",
+    "@types/ramda": "0.28.8",
     "@types/react": "17.0.44",
     "@types/react-dom": "17.0.14",
     "@types/script-ext-html-webpack-plugin": "2.1.3",
