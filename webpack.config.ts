@@ -119,7 +119,10 @@ const webpackConfig: webpack.Configuration = {
               mapVersion: true,
             },
           },
-          'yaml-loader',
+          {
+            loader: 'yaml-loader',
+            options: { asJSON: true },
+          },
         ],
       },
     ],
