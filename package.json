@@ -60,7 +60,7 @@
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.0.1",
     "@testing-library/react-hooks": "8.0.0",
-    "@testing-library/user-event": "14.0.4",
+    "@testing-library/user-event": "14.1.0",
     "@transifex/api": "3.2.1",
     "@types/css-minimizer-webpack-plugin": "3.2.1",
     "@types/duplicate-package-checker-webpack-plugin": "2.1.2",
