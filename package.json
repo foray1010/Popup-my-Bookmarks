@@ -68,7 +68,7 @@
     "@types/jest": "27.4.1",
     "@types/lodash.debounce": "4.0.6",
     "@types/mini-css-extract-plugin": "2.5.1",
-    "@types/node": "16.11.26",
+    "@types/node": "16.11.27",
     "@types/prompts": "2.4.0",
     "@types/ramda": "0.28.8",
     "@types/react": "17.0.44",
