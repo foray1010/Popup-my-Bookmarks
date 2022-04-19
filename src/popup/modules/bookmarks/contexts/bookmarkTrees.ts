@@ -1,6 +1,5 @@
 import constate from 'constate'
 import { produce } from 'immer'
-import debounce from 'lodash.debounce'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
@@ -192,13 +191,12 @@ const useUtils = (
   }
 }
 
-const useRefreshOnBookmarkEvent = (refresh: () => Promise<void>) => {
+const useRefreshOnBookmarkEvent = (refresh: () => void) => {
   // use ref to save refresh, otherwise the listener will keep remounting when typing in search bar
   const refreshRef = React.useRef(refresh)
   refreshRef.current = refresh
   React.useEffect(() => {
-    // @TODO use transition instead
-    const refreshTrees = debounce(refreshRef.current, 100)
+    const refreshTrees = refreshRef.current
 
     webExtension.bookmarks.onChanged.addListener(refreshTrees)
     webExtension.bookmarks.onCreated.addListener(refreshTrees)
@@ -219,38 +217,41 @@ const useBookmarkTreesState = () => {
     [],
   )
   const [searchQuery, setSearchQuery] = React.useState('')
+  const [, startTransition] = React.useTransition()
 
   const options = useOptions()
 
-  const fetchBookmarkTrees = React.useCallback(async () => {
-    // @TODO useDeferredValue or transition
-    if (searchQuery) {
-      setBookmarkTrees(
-        await getBookmarkTreesFromSearch({
-          searchQuery,
-          isSearchTitleOnly: options[CST.OPTIONS.SEARCH_TARGET] === 1,
-          maxResults: options[CST.OPTIONS.MAX_RESULTS],
-        }),
-      )
-    } else {
-      const { lastPositions = [] } = await webExtension.storage.local.get()
-      setBookmarkTrees(
-        await getBookmarkTreesFromRoot({
-          firstTreeId: String(options[CST.OPTIONS.DEF_EXPAND]),
-          childTreeIds: options[CST.OPTIONS.REMEMBER_POS]
-            ? lastPositions.map((x: any) => x.id)
-            : [],
-          hideRootTreeIds: (options[CST.OPTIONS.HIDE_ROOT_FOLDER] ?? []).map(
-            String,
-          ),
-        }),
-      )
+  const fetchBookmarkTrees = React.useCallback(() => {
+    async function main() {
+      if (searchQuery) {
+        setBookmarkTrees(
+          await getBookmarkTreesFromSearch({
+            searchQuery,
+            isSearchTitleOnly: options[CST.OPTIONS.SEARCH_TARGET] === 1,
+            maxResults: options[CST.OPTIONS.MAX_RESULTS],
+          }),
+        )
+      } else {
+        const { lastPositions = [] } = await webExtension.storage.local.get()
+        setBookmarkTrees(
+          await getBookmarkTreesFromRoot({
+            firstTreeId: String(options[CST.OPTIONS.DEF_EXPAND]),
+            childTreeIds: options[CST.OPTIONS.REMEMBER_POS]
+              ? lastPositions.map((x: any) => x.id)
+              : [],
+            hideRootTreeIds: (options[CST.OPTIONS.HIDE_ROOT_FOLDER] ?? []).map(
+              String,
+            ),
+          }),
+        )
+      }
     }
+    startTransition(() => {
+      main().catch(console.error)
+    })
   }, [searchQuery, options])
 
-  React.useEffect(() => {
-    fetchBookmarkTrees().catch(console.error)
-  }, [fetchBookmarkTrees])
+  React.useEffect(fetchBookmarkTrees, [fetchBookmarkTrees])
 
   useRefreshOnBookmarkEvent(fetchBookmarkTrees)
 

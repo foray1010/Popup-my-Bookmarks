@@ -7,12 +7,14 @@ import SearchInput from './SearchInput'
 
 export default function SearchContainer() {
   const [inputValue, setInputValue] = React.useState('')
+  const [, startTransition] = React.useTransition()
 
   const { setSearchQuery } = useBookmarkTrees()
 
   React.useEffect(() => {
-    // @TODO transition
-    setSearchQuery(inputValue)
+    startTransition(() => {
+      setSearchQuery(inputValue)
+    })
   }, [setSearchQuery, inputValue])
 
   const inputRef = React.useRef<HTMLInputElement>(null)
