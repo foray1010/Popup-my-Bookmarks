@@ -16,7 +16,7 @@ describe('Button', () => {
 
     await userEvent.click(screen.getByRole('button', { name }))
 
-    expect(handleSubmit).not.toBeCalled()
+    expect(handleSubmit).not.toHaveBeenCalled()
   })
 
   it('should fire form submit when type="submit"', async () => {
@@ -35,6 +35,6 @@ describe('Button', () => {
 
     await userEvent.click(screen.getByRole('button', { name }))
 
-    expect(handleSubmit).toBeCalled()
+    expect(handleSubmit).toHaveBeenCalled()
   })
 })

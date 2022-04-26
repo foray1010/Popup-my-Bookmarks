@@ -20,7 +20,7 @@ describe('ActionlessForm', () => {
 
     await userEvent.click(screen.getByRole('button', { name }))
 
-    expect(handleSubmit).toBeCalledWith(
+    expect(handleSubmit).toHaveBeenCalledWith(
       expect.objectContaining({
         defaultPrevented: true,
       }),
