@@ -1247,10 +1247,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fontsource/archivo-narrow@4.5.7":
-  version "4.5.7"
-  resolved "https://registry.yarnpkg.com/@fontsource/archivo-narrow/-/archivo-narrow-4.5.7.tgz#daa352d818a1d49d36c56a43296fdaf760f7f7bb"
-  integrity sha512-1Z39XCqiymerrbhmIkB5JwCMt2pTTLzXJEzFihuc0KK6n8vDnDRHY9xynbAGlAJpBRPelLqCz8Jpy4U3m1EIFQ==
+"@fontsource/archivo-narrow@4.5.8":
+  version "4.5.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/archivo-narrow/-/archivo-narrow-4.5.8.tgz#2d786c4147963082773fb4e6f02cfa8f09c512ee"
+  integrity sha512-7nex+6fKThQ8rk04qg4TvsWi39zLKyzYU2sMSUZd2Pm9UPmrk0izZwsigqjTS1ifddTodxHrCyfAENh97v97lA==
 
 "@foray1010/common-presets-utils@^4.0.0":
   version "4.0.0"
