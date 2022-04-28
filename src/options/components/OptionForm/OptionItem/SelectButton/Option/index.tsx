@@ -13,7 +13,7 @@ export default function Option({ children, ...props }: Props) {
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   return (
-    <label>
+    <span>
       <input ref={inputRef} {...props} hidden type='radio' />
       <Button
         className={classNames(classes.item, {
@@ -26,6 +26,6 @@ export default function Option({ children, ...props }: Props) {
       >
         {children}
       </Button>
-    </label>
+    </span>
   )
 }
