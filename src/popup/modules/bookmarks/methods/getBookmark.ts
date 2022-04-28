@@ -86,7 +86,7 @@ export async function getBookmarkTreesFromRoot({
       // in case it is root folder that open from root, keep it
       !childTree.parent.isRoot &&
       // if childTree is not belong to this parent anymore, ignore all its children
-      acc[acc.length - 1].parent.id !== childTree.parent.parentId
+      acc.at(-1)?.parent.id !== childTree.parent.parentId
     ) {
       break
     }

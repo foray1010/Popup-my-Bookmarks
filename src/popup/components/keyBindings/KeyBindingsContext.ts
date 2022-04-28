@@ -20,9 +20,7 @@ const useActiveWindowState = () => {
   }, [])
 
   return {
-    activeWindowId: activeWindowQueue[activeWindowQueue.length - 1] as
-      | string
-      | undefined,
+    activeWindowId: activeWindowQueue.at(-1),
     appendActiveWindowId,
     removeActiveWindowId,
   }

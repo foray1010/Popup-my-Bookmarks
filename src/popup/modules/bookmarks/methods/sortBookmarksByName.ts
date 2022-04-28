@@ -12,7 +12,7 @@ const splitBySeparator = (bookmarkInfos: BookmarkInfo[]): BookmarkInfo[][] => {
         acc.push([])
       }
 
-      acc[acc.length - 1].push(bookmarkInfo)
+      acc.at(-1)?.push(bookmarkInfo)
 
       return acc
     },

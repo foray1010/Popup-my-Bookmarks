@@ -32,10 +32,8 @@ const useArrowKeysNav = () => {
   useKeyboardNav({
     windowId: BASE_WINDOW,
     onPressArrowLeft() {
-      // at least we need one tree
-      if (trees.length > 1) {
-        const secondLastTree = trees[trees.length - 2]
-
+      const secondLastTree = trees.at(-2)
+      if (secondLastTree) {
         removeNextBookmarkTrees(secondLastTree.parent.id)
       }
     },
