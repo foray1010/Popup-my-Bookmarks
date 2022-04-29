@@ -224,31 +224,31 @@ const useBookmarkTreesState = () => {
   const fetchBookmarkTrees = React.useCallback(() => {
     async function main() {
       if (searchQuery) {
-        setBookmarkTrees(
-          await getBookmarkTreesFromSearch({
-            searchQuery,
-            isSearchTitleOnly: options[CST.OPTIONS.SEARCH_TARGET] === 1,
-            maxResults: options[CST.OPTIONS.MAX_RESULTS],
-          }),
-        )
+        const bookmarkTrees = await getBookmarkTreesFromSearch({
+          searchQuery,
+          isSearchTitleOnly: options[CST.OPTIONS.SEARCH_TARGET] === 1,
+          maxResults: options[CST.OPTIONS.MAX_RESULTS],
+        })
+        startTransition(() => {
+          setBookmarkTrees(bookmarkTrees)
+        })
       } else {
         const { lastPositions = [] } = await webExtension.storage.local.get()
-        setBookmarkTrees(
-          await getBookmarkTreesFromRoot({
-            firstTreeId: String(options[CST.OPTIONS.DEF_EXPAND]),
-            childTreeIds: options[CST.OPTIONS.REMEMBER_POS]
-              ? lastPositions.map((x: any) => x.id)
-              : [],
-            hideRootTreeIds: (options[CST.OPTIONS.HIDE_ROOT_FOLDER] ?? []).map(
-              String,
-            ),
-          }),
-        )
+        const bookmarkTrees = await getBookmarkTreesFromRoot({
+          firstTreeId: String(options[CST.OPTIONS.DEF_EXPAND]),
+          childTreeIds: options[CST.OPTIONS.REMEMBER_POS]
+            ? lastPositions.map((x: any) => x.id)
+            : [],
+          hideRootTreeIds: (options[CST.OPTIONS.HIDE_ROOT_FOLDER] ?? []).map(
+            String,
+          ),
+        })
+        startTransition(() => {
+          setBookmarkTrees(bookmarkTrees)
+        })
       }
     }
-    startTransition(() => {
-      main().catch(console.error)
-    })
+    main().catch(console.error)
   }, [searchQuery, options])
 
   React.useEffect(fetchBookmarkTrees, [fetchBookmarkTrees])
