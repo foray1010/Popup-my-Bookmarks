@@ -38,7 +38,7 @@
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-hook-form": "7.30.0",
-    "react-query": "3.35.0",
+    "react-query": "3.38.0",
     "react-virtual": "2.10.4",
     "use-deep-compare": "1.1.0",
     "use-resize-observer": "8.0.0",
