@@ -10,7 +10,7 @@ const config = {
     '\\.svg$': '<rootDir>/__mocks__/fileMock.ts',
   },
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
-  testEnvironment: 'jsdom',
+  testEnvironment: 'jest-environment-jsdom',
   testMatch: ['**/*.{spec,test}.{cjs,cts,js,mjs,mts,ts,tsx}'],
   transform: {
     '\\.css$': 'jest-css-modules-transform',
