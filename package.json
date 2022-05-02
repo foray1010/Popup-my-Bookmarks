@@ -116,7 +116,7 @@
     "swc-loader": "0.2.0",
     "terser-webpack-plugin": "5.3.1",
     "type-coverage": "2.21.1",
-    "typescript": "4.6.3",
+    "typescript": "4.6.4",
     "typescript-plugin-css-modules": "3.4.0",
     "webpack": "5.72.0",
     "webpack-bundle-analyzer": "4.5.0",
