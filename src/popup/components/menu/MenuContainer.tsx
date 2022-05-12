@@ -1,3 +1,4 @@
+import { Portal } from '@reach/portal'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
@@ -233,7 +234,7 @@ const InnerMenuContainer = () => {
   if (!state.isOpen) return null
 
   return (
-    <>
+    <Portal>
       <Mask opacity={0.3} onClick={close} />
       <FloatingWindow
         positionLeft={state.displayPositions.left}
@@ -250,7 +251,7 @@ const InnerMenuContainer = () => {
           />
         </KeyBindingsWindow>
       </FloatingWindow>
-    </>
+    </Portal>
   )
 }
 

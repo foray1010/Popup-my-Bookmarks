@@ -29,6 +29,7 @@
   ],
   "dependencies": {
     "@fontsource/archivo-narrow": "4.5.8",
+    "@reach/portal": "0.17.0",
     "clsx": "1.1.1",
     "constate": "3.3.2",
     "core-js": "3.22.4",

@@ -1,3 +1,4 @@
+import { Portal } from '@reach/portal'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
@@ -95,7 +96,7 @@ export default function Editor() {
     onConfirm: close,
   }
   return (
-    <>
+    <Portal>
       <Mask opacity={0.3} onClick={close} />
       <FloatingWindow
         positionLeft={state.positions.left}
@@ -115,6 +116,6 @@ export default function Editor() {
           )}
         </KeyBindingsWindow>
       </FloatingWindow>
-    </>
+    </Portal>
   )
 }

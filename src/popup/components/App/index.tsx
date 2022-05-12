@@ -16,6 +16,19 @@ import { Menu, MenuProvider } from '../menu'
 import Search from '../Search'
 import useGlobalEvents from './useGlobalEvents'
 
+function useSetBodyCss(bodyCss: Record<string, string | null>) {
+  React.useEffect(() => {
+    Object.keys(bodyCss).map((key) => {
+      document.body.style.setProperty(key, bodyCss[key])
+    })
+    return () => {
+      Object.keys(bodyCss).map((key) => {
+        document.body.style.removeProperty(key)
+      })
+    }
+  }, [bodyCss])
+}
+
 const AppWithOptions = withOptions(function InnerApp() {
   useGlobalEvents()
 
@@ -23,31 +36,39 @@ const AppWithOptions = withOptions(function InnerApp() {
 
   const { globalBodySize } = useGlobalBodySize()
 
+  const bodyCss = React.useMemo(
+    () => ({
+      'font-family': Array.from(
+        new Set([
+          ...(options[OPTIONS.FONT_FAMILY]
+            ?.split(',')
+            .map((x) => x.trim())
+            .filter(Boolean) ?? []),
+          'sans-serif',
+        ]),
+      ).join(','),
+      'font-size':
+        options[OPTIONS.FONT_SIZE] !== undefined
+          ? `${options[OPTIONS.FONT_SIZE]}px`
+          : null,
+      height:
+        globalBodySize?.height !== undefined
+          ? `${globalBodySize.height}px`
+          : null,
+      width:
+        globalBodySize?.width !== undefined
+          ? `${globalBodySize.width}px`
+          : null,
+    }),
+    [globalBodySize, options],
+  )
+  useSetBodyCss(bodyCss)
+
   return (
     <BookmarkTreesProvider>
-      <div
-        style={React.useMemo(
-          () => ({
-            fontFamily: [options[OPTIONS.FONT_FAMILY], 'sans-serif']
-              .filter(Boolean)
-              .join(','),
-            fontSize: `${options[OPTIONS.FONT_SIZE] ?? 12}px`,
-            height:
-              globalBodySize?.height !== undefined
-                ? `${globalBodySize.height}px`
-                : 'auto',
-            width:
-              globalBodySize?.width !== undefined
-                ? `${globalBodySize.width}px`
-                : 'auto',
-          }),
-          [globalBodySize, options],
-        )}
-      >
-        <BookmarkTrees mainTreeHeader={<Search />} />
-        <Menu />
-        <Editor />
-      </div>
+      <BookmarkTrees mainTreeHeader={<Search />} />
+      <Menu />
+      <Editor />
     </BookmarkTreesProvider>
   )
 })
