@@ -1,17 +1,21 @@
+import { Portal } from '@reach/portal'
 import * as React from 'react'
 import useResizeObserver from 'use-resize-observer'
 
+import Mask from '../Mask'
 import useGlobalBodySize from './useGlobalBodySize'
 
 interface Props {
   children: React.ReactNode
   positionLeft: number
   positionTop: number
+  onClose: () => void
 }
 export default function FloatingWindow({
   children,
   positionLeft,
   positionTop,
+  onClose,
 }: Props) {
   const { insertBodySize } = useGlobalBodySize()
 
@@ -35,10 +39,10 @@ export default function FloatingWindow({
     }
 
     const currentBodyHeight = document.body.scrollHeight
-    const currentBodyWidth = document.body.offsetWidth
-
     const updatedBodyHeight =
       windowSize.height > currentBodyHeight ? windowSize.height : undefined
+
+    const currentBodyWidth = document.body.offsetWidth
     const updatedBodyWidth =
       windowSize.width > currentBodyWidth ? windowSize.width : undefined
 
@@ -69,18 +73,21 @@ export default function FloatingWindow({
   ])
 
   return (
-    <div
-      ref={ref}
-      style={React.useMemo(
-        () => ({
-          position: 'fixed',
-          left: `${calibratedPosition.left ?? 0}px`,
-          top: `${calibratedPosition.top ?? 0}px`,
-        }),
-        [calibratedPosition.left, calibratedPosition.top],
-      )}
-    >
-      {children}
-    </div>
+    <Portal>
+      <Mask opacity={0.3} onClick={onClose} />
+      <div
+        ref={ref}
+        style={React.useMemo(
+          () => ({
+            position: 'fixed',
+            left: `${calibratedPosition.left ?? 0}px`,
+            top: `${calibratedPosition.top ?? 0}px`,
+          }),
+          [calibratedPosition.left, calibratedPosition.top],
+        )}
+      >
+        {children}
+      </div>
+    </Portal>
   )
 }

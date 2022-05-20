@@ -1,4 +1,3 @@
-import { Portal } from '@reach/portal'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
@@ -27,7 +26,6 @@ import {
   useKeyboardNav,
   useListNavigationContext,
 } from '../listNavigation'
-import Mask from '../Mask'
 import Menu from './Menu'
 import { useMenuContext } from './useMenu'
 import { getMenuPattern } from './utils'
@@ -234,24 +232,22 @@ const InnerMenuContainer = () => {
   if (!state.isOpen) return null
 
   return (
-    <Portal>
-      <Mask opacity={0.3} onClick={close} />
-      <FloatingWindow
-        positionLeft={state.displayPositions.left}
-        positionTop={state.displayPositions.top}
-      >
-        <KeyBindingsWindow windowId={MENU_WINDOW}>
-          <Menu
-            highlightedIndex={highlightedIndex}
-            menuPattern={menuPattern}
-            unclickableRows={unclickableRows}
-            onRowClick={handleRowClick}
-            onRowMouseEnter={handleRowMouseEnter}
-            onRowMouseLeave={handleRowMouseLeave}
-          />
-        </KeyBindingsWindow>
-      </FloatingWindow>
-    </Portal>
+    <FloatingWindow
+      positionLeft={state.displayPositions.left}
+      positionTop={state.displayPositions.top}
+      onClose={close}
+    >
+      <KeyBindingsWindow windowId={MENU_WINDOW}>
+        <Menu
+          highlightedIndex={highlightedIndex}
+          menuPattern={menuPattern}
+          unclickableRows={unclickableRows}
+          onRowClick={handleRowClick}
+          onRowMouseEnter={handleRowMouseEnter}
+          onRowMouseLeave={handleRowMouseLeave}
+        />
+      </KeyBindingsWindow>
+    </FloatingWindow>
   )
 }
 

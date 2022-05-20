@@ -1,4 +1,3 @@
-import { Portal } from '@reach/portal'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
@@ -9,7 +8,6 @@ import { createBookmarkAfterId } from '../../modules/bookmarks/methods/createBoo
 import { useOptions } from '../../modules/options'
 import { FloatingWindow } from '../floatingWindow'
 import { KeyBindingsWindow } from '../keyBindings'
-import Mask from '../Mask'
 import { useEditorContext } from './EditorContext'
 import EditorForm from './EditorForm'
 
@@ -96,26 +94,24 @@ export default function Editor() {
     onConfirm: close,
   }
   return (
-    <Portal>
-      <Mask opacity={0.3} onClick={close} />
-      <FloatingWindow
-        positionLeft={state.positions.left}
-        positionTop={state.positions.top}
-      >
-        <KeyBindingsWindow windowId={EDITOR_WINDOW}>
-          {state.isCreating ? (
-            <CreateEditorForm
-              {...commonProps}
-              createAfterId={state.createAfterId}
-            />
-          ) : (
-            <UpdateEditorForm
-              {...commonProps}
-              editTargetId={state.editTargetId}
-            />
-          )}
-        </KeyBindingsWindow>
-      </FloatingWindow>
-    </Portal>
+    <FloatingWindow
+      positionLeft={state.positions.left}
+      positionTop={state.positions.top}
+      onClose={close}
+    >
+      <KeyBindingsWindow windowId={EDITOR_WINDOW}>
+        {state.isCreating ? (
+          <CreateEditorForm
+            {...commonProps}
+            createAfterId={state.createAfterId}
+          />
+        ) : (
+          <UpdateEditorForm
+            {...commonProps}
+            editTargetId={state.editTargetId}
+          />
+        )}
+      </KeyBindingsWindow>
+    </FloatingWindow>
   )
 }
