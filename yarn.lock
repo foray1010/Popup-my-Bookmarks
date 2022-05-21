@@ -1979,10 +1979,10 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
   integrity sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==
 
-"@transifex/api@4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@transifex/api/-/api-4.0.0.tgz#ddbdbea1539a903254eb595159345e9ddc9cb686"
-  integrity sha512-pcMDd8dbrox4cDQMVjOjqZdszp4u738N9hmkXp4OoiLNu1d+wXXDPFuyqo5Xebw0vZRNz7JylCFwJ5ORXh+bDQ==
+"@transifex/api@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@transifex/api/-/api-4.1.0.tgz#036a6e6dd9a6045f73057de280f3d21cc606591b"
+  integrity sha512-eBQcD/UE9HqQdtFdXwQuPbSUKi1z81v79r+qZdaLzAF5hHkAqGrCEqfCTI19U1z3fIS7e90t24AXAtpdwoXAEg==
   dependencies:
     core-js "^3.22.4"
 
