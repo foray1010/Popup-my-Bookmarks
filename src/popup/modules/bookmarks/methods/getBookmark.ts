@@ -19,7 +19,7 @@ export async function getBookmarkInfo(id: string): Promise<BookmarkInfo> {
   return toBookmarkInfo(bookmarkNode)
 }
 
-export async function getBookmarkChildren(id: string): Promise<BookmarkInfo[]> {
+async function getBookmarkChildren(id: string): Promise<BookmarkInfo[]> {
   const bookmarkNodes = await webExtension.bookmarks.getChildren(id)
   return bookmarkNodes.map(toBookmarkInfo)
 }
