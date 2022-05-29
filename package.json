@@ -47,7 +47,7 @@
     "webextension-polyfill": "0.9.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.0.0",
+    "@commitlint/cli": "17.0.1",
     "@commitlint/config-conventional": "17.0.0",
     "@foray1010/eslint-config": "6.4.0",
     "@foray1010/prettier-config": "6.0.1",
