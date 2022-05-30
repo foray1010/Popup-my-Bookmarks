@@ -11,7 +11,6 @@ import useTooltip from './useTooltip'
 interface Props {
   bookmarkInfo: BookmarkInfo
   className?: string
-  iconSize: number
   isDisableDragAndDrop: boolean
   isHighlighted: boolean
   isSearching: boolean
@@ -89,7 +88,6 @@ export default function BookmarkRowContainer({
             [classes.separator]:
               bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR,
           })}
-          iconSize={restProps.iconSize}
           iconUrl={bookmarkInfo.iconUrl}
           isHighlighted={isHighlighted}
           isUnclickable={restProps.isUnclickable}

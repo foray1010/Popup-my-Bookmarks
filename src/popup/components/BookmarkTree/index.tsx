@@ -14,10 +14,8 @@ import useRowClickEvents from './useRowClickEvents'
 import useRowDragEvents from './useRowDragEvents'
 import useRowHoverEvents from './useRowHoverEvents'
 
-const getIconSize = (iconSize: number) =>
-  Math.max(iconSize, CST.MIN_BOOKMARK_ICON_SIZE)
 const getRowHeight = (fontSize: number) =>
-  getIconSize(fontSize) +
+  Math.max(fontSize, CST.MIN_BOOKMARK_ICON_SIZE) +
   // +1 for border width, GOLDEN_GAP for padding
   (1 + CST.GOLDEN_GAP) * 2
 
@@ -30,7 +28,6 @@ const useContextProps = ({ treeId }: { treeId: string }) => {
   const treeInfo = bookmarkTrees[treeIndex]
 
   return {
-    iconSize: getIconSize(options[CST.OPTIONS.FONT_SIZE] ?? 0),
     isSearching: Boolean(searchQuery),
     // cover the folder if it is not the top two folder
     isShowCover: bookmarkTrees.length - treeIndex > 2,

@@ -15,7 +15,6 @@ import BookmarkRow from './BookmarkRow'
 interface ItemData {
   draggingId: string | null
   highlightedId?: string
-  iconSize: number
   isDisableDragAndDrop: boolean
   isSearching: boolean
   isShowTooltip: boolean
@@ -130,7 +129,6 @@ export default function BookmarkTree(props: Props) {
               key={virtualItem.index}
               bookmarkInfo={bookmarkInfo}
               className={classes.listItem}
-              iconSize={props.iconSize}
               isDisableDragAndDrop={props.isDisableDragAndDrop}
               isHighlighted={
                 isDragging

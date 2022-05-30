@@ -6,7 +6,6 @@ import classes from './bookmark-row.module.css'
 
 interface Props {
   className?: string
-  iconSize: number
   iconUrl?: string
   isHighlighted: boolean
   isUnclickable: boolean
@@ -42,9 +41,7 @@ const BookmarkRow = React.forwardRef(function InnerBookmarkRow(
         <LazyImage
           alt={props.title}
           className={classes.icon}
-          height={props.iconSize}
           src={props.iconUrl}
-          width={props.iconSize}
         />
       )}
       <div className={classes.title}>{props.title}</div>
