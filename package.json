@@ -38,7 +38,7 @@
     "nanoid": "3.3.4",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-hook-form": "7.31.2",
+    "react-hook-form": "7.31.3",
     "react-query": "3.39.0",
     "react-virtual": "2.10.4",
     "use-deep-compare": "1.1.0",
