@@ -2,7 +2,6 @@ export * from '../../core/constants'
 
 export const GOLDEN_GAP = 2
 export const MAX_HEIGHT = 598
-export const MIN_BOOKMARK_ICON_SIZE = 16
 export const NO_BOOKMARK_ID_PREFIX = 'NO_BOOKMARK_ID_'
 export const SEARCH_RESULT_ID = 'SEARCH_RESULT_ID'
 export const SEPARATE_THIS_URL = 'http://separatethis.com/'

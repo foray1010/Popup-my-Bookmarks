@@ -14,11 +14,6 @@ import useRowClickEvents from './useRowClickEvents'
 import useRowDragEvents from './useRowDragEvents'
 import useRowHoverEvents from './useRowHoverEvents'
 
-const getRowHeight = (fontSize: number) =>
-  Math.max(fontSize, CST.MIN_BOOKMARK_ICON_SIZE) +
-  // +1 for border width, GOLDEN_GAP for padding
-  (1 + CST.GOLDEN_GAP) * 2
-
 const useContextProps = ({ treeId }: { treeId: string }) => {
   const options = useOptions()
 
@@ -34,7 +29,6 @@ const useContextProps = ({ treeId }: { treeId: string }) => {
     isShowHeader: treeIndex !== 0,
     isShowTooltip: Boolean(options[CST.OPTIONS.TOOLTIP]),
     listItemWidth: options[CST.OPTIONS.SET_WIDTH] ?? 0,
-    rowHeight: getRowHeight(options[CST.OPTIONS.FONT_SIZE] ?? 0),
     treeIndex,
     treeInfo,
   }

@@ -34,56 +34,29 @@ type Props = ItemData & {
   listItemWidth: number
   noRowsRenderer(): React.ReactElement | null
   onScroll?: React.UIEventHandler
-  rowHeight: number
   scrollToIndex?: number
 }
 export default function BookmarkTree(props: Props) {
   const parentRef = React.useRef<HTMLDivElement>(null)
 
-  const getRowHeight = React.useCallback(
-    (index: number) => {
-      let rowHeight = props.rowHeight
-
-      const bookmarkInfo = props.treeInfo.children[index]
-      if (bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR) {
-        rowHeight /= 2
-      }
-
-      // for the indicator show the end of folder
-      if (index === props.treeInfo.children.length - 1) {
-        rowHeight += CST.GOLDEN_GAP * 2
-      }
-
-      return rowHeight
-    },
-    [props.rowHeight, props.treeInfo.children],
+  const keyExtractor = React.useCallback(
+    (index: number): string => props.treeInfo.children[index].id,
+    [props.treeInfo.children],
   )
-
   const rowVirtualizer = useVirtual({
     size: props.treeInfo.children.length,
     parentRef,
-    estimateSize: getRowHeight,
+    keyExtractor,
   })
 
-  const [listHeight, setListHeight] = React.useState(0)
+  const [maxListHeight, setMaxListHeight] = React.useState(0)
   React.useEffect(() => {
     if (!parentRef.current) return
 
-    const maxListHeight =
-      CST.MAX_HEIGHT - parentRef.current.getBoundingClientRect().top
-    const minListHeight = props.rowHeight
-
-    const totalRowHeight = props.treeInfo.children.reduce(
-      (acc, _, index) => acc + getRowHeight(index),
-      0,
+    setMaxListHeight(
+      CST.MAX_HEIGHT - parentRef.current.getBoundingClientRect().top,
     )
-
-    // @todo use Math.clamp in future
-    function clamp(min: number, max: number, value: number): number {
-      return Math.min(Math.max(value, min), max)
-    }
-    setListHeight(clamp(minListHeight, maxListHeight, totalRowHeight))
-  }, [getRowHeight, props.rowHeight, props.treeInfo.children])
+  }, [])
 
   const { scrollToIndex, scrollToOffset } = rowVirtualizer
   React.useEffect(() => {
@@ -109,7 +82,7 @@ export default function BookmarkTree(props: Props) {
     <div
       ref={parentRef}
       style={{
-        height: `${listHeight}px`,
+        maxHeight: `${maxListHeight}px`,
         width: `${props.listItemWidth}px`,
         overflow: 'auto',
       }}
@@ -126,7 +99,8 @@ export default function BookmarkTree(props: Props) {
           const isBeingDragged = props.draggingId === bookmarkInfo.id
           return (
             <BookmarkRow
-              key={virtualItem.index}
+              key={virtualItem.key}
+              ref={virtualItem.measureRef}
               bookmarkInfo={bookmarkInfo}
               className={classes.listItem}
               isDisableDragAndDrop={props.isDisableDragAndDrop}
@@ -143,7 +117,6 @@ export default function BookmarkTree(props: Props) {
                 top: 0,
                 left: 0,
                 width: '100%',
-                height: `${virtualItem.size}px`,
                 transform: `translateY(${virtualItem.start}px)`,
               }}
               onAuxClick={props.onRowAuxClick}
