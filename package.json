@@ -59,7 +59,7 @@
     "@swc/core": "1.2.194",
     "@swc/jest": "0.2.21",
     "@testing-library/jest-dom": "5.16.4",
-    "@testing-library/react": "13.2.0",
+    "@testing-library/react": "13.3.0",
     "@testing-library/react-hooks": "8.0.0",
     "@testing-library/user-event": "14.2.0",
     "@transifex/api": "4.1.0",
