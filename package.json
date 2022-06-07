@@ -115,7 +115,7 @@
     "style-loader": "3.3.1",
     "stylelint": "14.8.5",
     "swc-loader": "0.2.1",
-    "terser-webpack-plugin": "5.3.1",
+    "terser-webpack-plugin": "5.3.3",
     "type-coverage": "2.21.1",
     "typescript": "4.7.3",
     "typescript-plugin-css-modules": "3.4.0",
