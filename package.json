@@ -109,7 +109,7 @@
     "prompts": "2.4.2",
     "ramda": "0.28.0",
     "react-test-renderer": "18.2.0",
-    "remark-cli": "10.0.1",
+    "remark-cli": "11.0.0",
     "script-ext-html-webpack-plugin": "2.1.5",
     "sharp": "0.30.7",
     "style-loader": "3.3.1",
