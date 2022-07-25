@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query'
 import constate from 'constate'
 import type * as React from 'react'
-import { useQuery } from 'react-query'
 import webExtension from 'webextension-polyfill'
 
 import type { Options } from '../../core/types/options'
@@ -14,7 +14,7 @@ export async function getOptions() {
 
 const [OptionsProvider, useInternalOptions] = constate(
   function useOptionsState() {
-    const { data: options } = useQuery(queryKey, getOptions)
+    const { data: options } = useQuery([queryKey], getOptions)
 
     return options
   },

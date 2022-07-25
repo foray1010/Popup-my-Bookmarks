@@ -1,7 +1,7 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type * as React from 'react'
-import { QueryClient, QueryClientProvider } from 'react-query'
 
-export const queryClient = new QueryClient({
+const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
@@ -10,8 +10,11 @@ export const queryClient = new QueryClient({
   },
 })
 
-type Props = Omit<React.ComponentProps<typeof QueryClientProvider>, 'client'>
+type Props = Omit<
+  React.ComponentProps<typeof QueryClientProvider>,
+  'client' | 'context'
+>
 
 export function ReactQueryClientProvider(props: Props) {
-  return <QueryClientProvider client={queryClient} {...props} />
+  return <QueryClientProvider {...props} client={queryClient} />
 }

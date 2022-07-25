@@ -1,6 +1,6 @@
 import './globals.module.css'
 
-import { ReactQueryDevtools } from 'react-query/devtools'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import { ReactQueryClientProvider } from '../../../core/utils/queryClient'
 import withProviders from '../../../core/utils/withProviders'

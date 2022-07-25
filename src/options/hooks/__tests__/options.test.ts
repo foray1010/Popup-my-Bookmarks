@@ -62,7 +62,9 @@ describe('options hooks', () => {
         await deleteOptions()
       })
 
-      expect(useGetOptionsResult.current.data).toStrictEqual({})
+      await waitFor(() => {
+        expect(useGetOptionsResult.current.data).toStrictEqual({})
+      })
     })
   })
 
@@ -79,6 +81,7 @@ describe('options hooks', () => {
         expect(useGetOptionsResult.current.isFetching).toBe(false)
       })
 
+      expect(useGetOptionsResult.current.data).toHaveProperty('rememberPos')
       expect(useGetOptionsResult.current.data).not.toHaveProperty('tooltip')
 
       const { result: useUpdateOptionsResult } = renderHook(
@@ -90,9 +93,11 @@ describe('options hooks', () => {
         await updateOptions({ tooltip: true })
       })
 
-      expect(useGetOptionsResult.current.data).toStrictEqual({
-        rememberPos: true,
-        tooltip: true,
+      await waitFor(() => {
+        expect(useGetOptionsResult.current.data).toStrictEqual({
+          rememberPos: true,
+          tooltip: true,
+        })
       })
     })
   })
