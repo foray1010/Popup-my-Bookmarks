@@ -10,8 +10,8 @@ const useDragEvents = ({
   onDragStart,
 }: {
   itemKey: string
-  onDragOver(evt: React.MouseEvent, responseEvent: ResponseEvent): void
-  onDragStart(evt: React.MouseEvent, responseEvent: ResponseEvent): void
+  onDragOver: (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
+  onDragStart: (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
 }) => {
   const {
     activeKey,
@@ -103,8 +103,8 @@ interface Props {
   disableDrag?: boolean
   disableDrop?: boolean
   itemKey: string
-  onDragOver(evt: React.MouseEvent, responseEvent: ResponseEvent): void
-  onDragStart(evt: React.MouseEvent, responseEvent: ResponseEvent): void
+  onDragOver: (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
+  onDragStart: (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
 }
 export default function DragAndDropConsumer(props: Props) {
   const context = useDragAndDropContext()

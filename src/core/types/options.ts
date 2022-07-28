@@ -1,4 +1,4 @@
-import { OPTIONS } from '../constants'
+import type { OPTIONS } from '../constants'
 
 export interface Options {
   [OPTIONS.CLICK_BY_LEFT]: number

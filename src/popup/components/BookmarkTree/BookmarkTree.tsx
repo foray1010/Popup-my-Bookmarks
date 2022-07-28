@@ -8,7 +8,8 @@ import type {
   BookmarkInfo,
   BookmarkTree as BookmarkTreeType,
 } from '../../types'
-import { ResponseEvent, useDragAndDropContainerEvents } from '../dragAndDrop'
+import type { ResponseEvent } from '../dragAndDrop'
+import { useDragAndDropContainerEvents } from '../dragAndDrop'
 import classes from './bookmark-tree.module.css'
 import BookmarkRow from './BookmarkRow'
 
@@ -18,14 +19,14 @@ interface ItemData {
   isDisableDragAndDrop: boolean
   isSearching: boolean
   isShowTooltip: boolean
-  onRowAuxClick(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
-  onRowClick(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
-  onRowDragOver(
+  onRowAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onRowClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onRowDragOver: (
     bookmarkInfo: BookmarkInfo,
-  ): (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
+  ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
   onRowDragStart: React.MouseEventHandler
-  onRowMouseEnter(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
-  onRowMouseLeave(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
+  onRowMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onRowMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   treeInfo: BookmarkTreeType
 }
 

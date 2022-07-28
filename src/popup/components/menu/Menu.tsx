@@ -9,8 +9,8 @@ interface Props {
   highlightedIndex?: number
   menuPattern: MenuPattern
   onRowClick: React.MouseEventHandler
-  onRowMouseEnter(index: number): React.MouseEventHandler
-  onRowMouseLeave(index: number): React.MouseEventHandler
+  onRowMouseEnter: (index: number) => React.MouseEventHandler
+  onRowMouseLeave: (index: number) => React.MouseEventHandler
   unclickableRows: Array<string>
 }
 export default function Menu(props: Props) {
