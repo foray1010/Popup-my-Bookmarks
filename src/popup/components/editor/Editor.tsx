@@ -26,10 +26,10 @@ const CreateEditorForm = ({
       {...editorFormProps}
       defaultTitle={webExtension.i18n.getMessage('newFolder')}
       onConfirm={React.useCallback(
-        async (title: string, url: string) => {
+        async (title: string, url?: string) => {
           await createBookmarkAfterId({ createAfterId, title, url })
 
-          onConfirm(title, url)
+          await onConfirm(title, url)
         },
         [createAfterId, onConfirm],
       )}
@@ -51,7 +51,7 @@ const UpdateEditorForm = ({
     async (title: string, url?: string) => {
       await webExtension.bookmarks.update(editTargetId, { title, url })
 
-      onConfirm(title, url)
+      await onConfirm(title, url)
     },
     [editTargetId, onConfirm],
   )

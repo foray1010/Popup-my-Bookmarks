@@ -12,8 +12,8 @@ interface Props {
   defaultUrl?: string
   header: string
   isAllowedToEditUrl: boolean
-  onCancel(): void
-  onConfirm(title: string, url?: string): void
+  onCancel: () => void
+  onConfirm: (title: string, url?: string) => void | Promise<void>
   style: React.CSSProperties
 }
 export default function Editor({ onConfirm, ...props }: Props) {
@@ -27,8 +27,8 @@ export default function Editor({ onConfirm, ...props }: Props) {
       className={classes.main}
       style={props.style}
       onSubmit={React.useMemo(() => {
-        return handleSubmit((variables) => {
-          onConfirm(variables.title, variables.url)
+        return handleSubmit(async (variables) => {
+          await onConfirm(variables.title, variables.url)
         })
       }, [handleSubmit, onConfirm])}
     >

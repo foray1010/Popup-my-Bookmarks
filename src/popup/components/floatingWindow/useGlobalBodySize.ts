@@ -1,6 +1,7 @@
 import * as React from 'react'
 
-import { BodySize, useFloatingWindowContext } from './FloatingWindowContext'
+import type { BodySize } from './FloatingWindowContext'
+import { useFloatingWindowContext } from './FloatingWindowContext'
 
 export default function useGlobalBodySize(): {
   globalBodySize?: BodySize

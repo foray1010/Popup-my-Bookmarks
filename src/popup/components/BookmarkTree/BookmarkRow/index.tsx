@@ -4,7 +4,8 @@ import * as React from 'react'
 import * as CST from '../../../constants'
 import { useOptions } from '../../../modules/options'
 import type { BookmarkInfo } from '../../../types'
-import { DragAndDropConsumer, ResponseEvent } from '../../dragAndDrop'
+import type { ResponseEvent } from '../../dragAndDrop'
+import { DragAndDropConsumer } from '../../dragAndDrop'
 import classes from './bookmark-row.module.css'
 import BookmarkRow from './BookmarkRow'
 import useTooltip from './useTooltip'
@@ -17,14 +18,14 @@ interface Props {
   isSearching: boolean
   isShowTooltip: boolean
   isUnclickable: boolean
-  onAuxClick(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
-  onClick(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
-  onDragOver(
+  onAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onDragOver: (
     bookmarkInfo: BookmarkInfo,
-  ): (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
+  ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
   onDragStart: React.MouseEventHandler
-  onMouseEnter(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
-  onMouseLeave(bookmarkInfo: BookmarkInfo): React.MouseEventHandler
+  onMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   style?: React.CSSProperties
 }
 const BookmarkRowContainer = React.forwardRef(

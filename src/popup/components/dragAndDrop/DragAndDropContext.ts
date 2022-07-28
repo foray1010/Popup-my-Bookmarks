@@ -21,15 +21,15 @@ const useDragAndDropState = () => {
     () => ({
       activeKey,
       pendingKey,
-      setActiveKey(key: string) {
+      setActiveKey: (key: string) => {
         setActiveKeyState(key)
         setPendingKeyState(null)
       },
-      setPendingKey(key: string) {
+      setPendingKey: (key: string) => {
         setPendingKeyState(key)
         setActiveKeyState(null)
       },
-      unsetAllKeys() {
+      unsetAllKeys: () => {
         setPendingKeyState(null)
         setActiveKeyState(null)
       },
@@ -45,8 +45,8 @@ const useDragAndDrop = ({
   onDragEnd,
   onDrop,
 }: {
-  onDragEnd(evt: MouseEvent): void
-  onDrop(evt: MouseEvent, activeKey: string): void
+  onDragEnd: (evt: MouseEvent) => void
+  onDrop: (evt: MouseEvent, activeKey: string) => void
 }) => {
   const state = useDragAndDropState()
 

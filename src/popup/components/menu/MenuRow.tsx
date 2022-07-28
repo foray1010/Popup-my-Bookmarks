@@ -8,8 +8,8 @@ interface Props {
   isFocused: boolean
   isUnclickable: boolean
   onClick: React.MouseEventHandler
-  onMouseEnter(index: number): React.MouseEventHandler
-  onMouseLeave(index: number): React.MouseEventHandler
+  onMouseEnter: (index: number) => React.MouseEventHandler
+  onMouseLeave: (index: number) => React.MouseEventHandler
   rowIndex: number
   rowName: string
 }

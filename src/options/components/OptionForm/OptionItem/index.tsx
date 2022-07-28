@@ -10,8 +10,8 @@ import SelectString from './SelectString'
 interface Props<T = any> {
   name: string
   optionConfig: OptionConfig
-  onBlur(event?: React.FocusEvent): void
-  onChange(eventOrValue: React.ChangeEvent | T): void
+  onBlur: (event?: React.FocusEvent) => void
+  onChange: (eventOrValue: React.ChangeEvent | T) => void
   value: T
 }
 

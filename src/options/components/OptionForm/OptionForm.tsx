@@ -10,8 +10,8 @@ import OptionItem from './OptionItem'
 
 interface Props {
   defaultValues: Partial<Options>
-  onReset(): void
-  onSubmit(variables: Partial<Options>): void
+  onReset: () => void
+  onSubmit: (variables: Partial<Options>) => void
   optionsConfig: OptionsConfig
   selectedOptionFormMap: Array<OPTIONS>
 }

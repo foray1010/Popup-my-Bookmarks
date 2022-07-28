@@ -50,7 +50,7 @@
   "devDependencies": {
     "@commitlint/cli": "17.0.3",
     "@commitlint/config-conventional": "17.0.3",
-    "@foray1010/eslint-config": "7.1.0",
+    "@foray1010/eslint-config": "7.3.1",
     "@foray1010/prettier-config": "7.0.1",
     "@foray1010/remark-preset": "6.0.1",
     "@foray1010/stylelint-config": "6.0.1",
