@@ -23,7 +23,7 @@ const navBarItemInfos = [
     path: RoutePath.Contributors,
     title: webExtension.i18n.getMessage('contributors'),
   },
-]
+] as const
 
 export default function NavBar() {
   const { currentPath, setCurrentPath } = useNavigationContext()

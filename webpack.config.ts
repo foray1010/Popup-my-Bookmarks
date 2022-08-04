@@ -18,7 +18,7 @@ const isCI = process.env.CI === 'true'
 const isProductionBuild = process.env.NODE_ENV === 'production'
 const isDevelopmentBuild = !isProductionBuild
 
-const appNames = ['options', 'popup']
+const appNames = ['options', 'popup'] as const
 const commonChunkName = 'common'
 const outputDir = path.join('build', process.env.NODE_ENV || 'development')
 const sourceDir = 'src'

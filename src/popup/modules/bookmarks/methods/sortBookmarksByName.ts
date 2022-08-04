@@ -49,7 +49,10 @@ const sortGroupByPriority = (groups: BookmarkGroup[]): BookmarkGroup[] => {
     BOOKMARK_TYPES.SEPARATOR,
     BOOKMARK_TYPES.FOLDER,
     BOOKMARK_TYPES.BOOKMARK,
-  ]
+    // shouldn't exist
+    BOOKMARK_TYPES.DRAG_INDICATOR,
+    BOOKMARK_TYPES.NO_BOOKMARK,
+  ] as const
   return Array.from(groups).sort((groupA, groupB) => {
     return priority.indexOf(groupA.type) - priority.indexOf(groupB.type)
   })
