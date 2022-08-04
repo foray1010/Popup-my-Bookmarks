@@ -1,7 +1,4 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@foray1010/tsconfig",
-  "compilerOptions": {
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
-  }
+  "extends": "@foray1010/tsconfig"
 }
