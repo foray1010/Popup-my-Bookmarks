@@ -4,13 +4,13 @@
   user-select: none;
 }
 
-:global(::-webkit-scrollbar) {
+::-webkit-scrollbar {
   width: calc(5px + var(--golden-gap));
   height: 5px;
   background-color: transparent;
 }
 
-:global(::-webkit-scrollbar-thumb) {
+::-webkit-scrollbar-thumb {
   border-left: var(--golden-gap) solid var(--main-background-color);
   background-color: var(--highlight-level3);
 

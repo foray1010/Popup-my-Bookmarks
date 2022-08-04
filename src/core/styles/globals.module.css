@@ -1,4 +1,4 @@
-@import '@csstools/normalize.css';
+@import-normalize;
 
 @font-face {
   font-display: fallback;
@@ -39,6 +39,6 @@
   }
 }
 
-:global(body) {
+body {
   margin: 0;
 }

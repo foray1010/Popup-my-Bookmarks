@@ -1,9 +1,10 @@
+import parcelCss from '@parcel/css'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
-import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import { ParcelCssMinifyPlugin } from 'parcel-css-loader'
 import path from 'path'
 import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
@@ -40,10 +41,28 @@ const webpackConfig: webpack.Configuration = {
               modules: {
                 localIdentName: '[local]_[hash:base64:5]',
               },
-              importLoaders: 1,
+              importLoaders: 2,
             },
           },
-          'postcss-loader',
+          {
+            loader: 'parcel-css-loader',
+            options: {
+              implementation: parcelCss,
+              drafts: {
+                nesting: true,
+              },
+              // ignore css modules syntax as it is handled by css-loader
+              errorRecovery: true,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: ['postcss-normalize'],
+              },
+            },
+          },
         ],
       },
       {
@@ -131,15 +150,8 @@ const webpackConfig: webpack.Configuration = {
     ...(isProductionBuild && {
       minimize: true,
       minimizer: [
-        new CssMinimizerPlugin({
-          minimizerOptions: {
-            preset: [
-              'default',
-              {
-                discardComments: { removeAll: true },
-              },
-            ],
-          },
+        new ParcelCssMinifyPlugin({
+          implementation: parcelCss,
         }),
         new TerserPlugin({
           extractComments: false,
