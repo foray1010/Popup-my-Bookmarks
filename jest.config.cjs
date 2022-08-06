@@ -17,5 +17,4 @@ const config = {
     '\\.tsx?$': '@swc/jest',
   },
 }
-
 module.exports = config
