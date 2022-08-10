@@ -58,7 +58,7 @@
     "@parcel/css": "1.12.2",
     "@svgr/webpack": "6.3.1",
     "@swc-node/register": "1.5.1",
-    "@swc/core": "1.2.223",
+    "@swc/core": "1.2.224",
     "@swc/jest": "0.2.22",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.3.0",
