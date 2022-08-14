@@ -63,7 +63,7 @@
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.3.0",
     "@testing-library/react-hooks": "8.0.1",
-    "@testing-library/user-event": "14.4.1",
+    "@testing-library/user-event": "14.4.3",
     "@transifex/api": "4.2.1",
     "@types/duplicate-package-checker-webpack-plugin": "2.1.2",
     "@types/firefox-webext-browser": "94.0.1",
