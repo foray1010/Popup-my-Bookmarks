@@ -45,7 +45,7 @@
     "use-deep-compare": "1.1.0",
     "use-resize-observer": "9.0.2",
     "use-typed-event-listener": "3.0.0",
-    "webextension-polyfill": "0.9.0"
+    "webextension-polyfill": "0.10.0"
   },
   "devDependencies": {
     "@commitlint/cli": "17.0.3",
