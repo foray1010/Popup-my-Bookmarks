@@ -1214,19 +1214,19 @@
   resolved "https://registry.yarnpkg.com/@fontsource/archivo-narrow/-/archivo-narrow-4.5.9.tgz#4432074e17e88027dc852389b14e7f14f857de68"
   integrity sha512-B/xCY0JbbkwyqNoivKdtE3wcjrpPjEXn4Ox4tnMU20RfNuJwz0yvVAgwcEFsQ6GeVDnxbUM5CzJaqodUvBHeiQ==
 
-"@foray1010/common-presets-utils@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/common-presets-utils/-/common-presets-utils-5.0.1.tgz#234bceef0ecc7cfad6006213e2fe58af70b44e8a"
-  integrity sha512-L5A5M9pYYXurUceAj/pcozMKJF3pzaGqW5mE8y2FhoYuotk0MtysBop9v5R0xRl2dvsR1wO9vRCj3cKcI66Cig==
+"@foray1010/common-presets-utils@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@foray1010/common-presets-utils/-/common-presets-utils-5.0.2.tgz#21914e925e00adfb50b2caf422ab8b7d5221023b"
+  integrity sha512-TWgfGjg+9jAYKPWLaYwIkAwgk6QcwG3XzO5oSu9YqHIUCh/gVts5WeyBUVwiFfrrM9+yEK5zfULcPVMIylvhNw==
   dependencies:
     read-pkg-up "^7.0.1"
 
-"@foray1010/eslint-config@7.3.1":
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-7.3.1.tgz#96261f009a03e0fd10be9b0c0e42b7a3dc72b3ef"
-  integrity sha512-Hrwlm1skEULySpVoD0zEujyA6Br815PoH2Qsg7hh/Gi2JjEVBVF7YeQ0JVvUK1cbp8YU8U9Nj1tO26wAQizPqQ==
+"@foray1010/eslint-config@7.3.3":
+  version "7.3.3"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-7.3.3.tgz#4b875f5205466f749213ab9723befe08dc06973b"
+  integrity sha512-0A4LP9a0E0RBixc1MLIEjCNu/QN1wrDv6s1nLFKCckKrRhLLtZiiKvrQPMhdmFSThTWJ6cP0Na+76iu/hoVhbA==
   dependencies:
-    "@foray1010/common-presets-utils" "^5.0.1"
+    "@foray1010/common-presets-utils" "^5.0.2"
     "@typescript-eslint/eslint-plugin" "^5.13.0"
     "@typescript-eslint/parser" "^5.13.0"
     confusing-browser-globals "^1.0.10"
@@ -1249,42 +1249,42 @@
   resolved "https://registry.yarnpkg.com/@foray1010/jest-preset/-/jest-preset-1.1.1.tgz#63056a4d44e18eca17af20d5999fcb6fd45d6f71"
   integrity sha512-seWx16TMOqN4XJuFiD2409jrRHa34ilPOCIS2N2gX7YIMNqREZxtLQRuFdomFvSdyYRRaxFL5x1rzzOUpIQpnQ==
 
-"@foray1010/prettier-config@7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-7.0.1.tgz#5b9a086f6dae3eebd199b6581dfc3555d67176f2"
-  integrity sha512-ZmY/7EW6Udbw+Fg80J5xU1jediYuSfgHZ6cSl1I+sTokgfN2DSomL9UNtIzDTi2gMDcSrC4RQxoI/YsoeJR5fQ==
+"@foray1010/prettier-config@7.0.3":
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/@foray1010/prettier-config/-/prettier-config-7.0.3.tgz#e224153f6469fc697bdab6a29410efb7d34fc009"
+  integrity sha512-OK+hp8T7xEHTWiV8I3Sw3X5pip8h21uDcRFQIUIM0UIOI42A/QKpoZb7oh7kidUyG3FG8AV6JDDDtFlsc52lHw==
   dependencies:
     prettier-plugin-packagejson "^2.2.5"
 
-"@foray1010/remark-preset@7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/remark-preset/-/remark-preset-7.0.0.tgz#70810c2883638b22e8c6c0f1b8990aacd3067476"
-  integrity sha512-uYdx+b3jNvMglVgM3GbVpnxFcBu0LgjtWYIAFQua7jj/guInbi+nPgSl/V0SmoCJC6umRyP5PCULzgwxtSPSCA==
+"@foray1010/remark-preset@7.0.2":
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/@foray1010/remark-preset/-/remark-preset-7.0.2.tgz#18ad03d68fc70513b8639691337dbff75dfa5ae7"
+  integrity sha512-xJ6rn7OHWwN8eHEnABc6op40huPE78wrAMbC5yqMyjB/Utz8U9YA7VmTO8BeoXH0UfvDMlYlyVZvpOk4vu6KDQ==
   dependencies:
     remark-frontmatter "^4.0.0"
     remark-lint-no-dead-urls "^1.1.0"
     remark-preset-lint-consistent "^5.0.0"
     remark-preset-lint-markdown-style-guide "^5.0.0"
     remark-preset-lint-recommended "^6.0.0"
-    remark-preset-prettier "1.0.0"
+    remark-preset-prettier "^1.0.2"
     remark-validate-links "^12.0.0"
 
-"@foray1010/stylelint-config@6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-6.0.1.tgz#845dc43dc8c17f98adfaba3a1c0117214026a1f1"
-  integrity sha512-mTR+RNSipW4s+p+fbKEQoDICGYENrL/WAygQw0eStd6POzut/uFpZICx5v27VRu44HN9PKgVp4Dj7zjz9s3DEA==
+"@foray1010/stylelint-config@7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@foray1010/stylelint-config/-/stylelint-config-7.0.1.tgz#fe024afbc33667619d5ba8c0c03d74ebbed1147a"
+  integrity sha512-JEl53O8OLU/iT2rxwaoD8dsbR/25DGR3SKydg1hiEEtwShW7jo4cvFS2oMozLDU2eJq/W0ApHP7Wi5dLuEmaBw==
   dependencies:
     stylelint-config-css-modules "^4.0.0"
     stylelint-config-idiomatic-order "^8.1.0"
     stylelint-config-prettier "^9.0.0"
-    stylelint-config-standard "^26.0.0"
+    stylelint-config-standard "^28.0.0"
     stylelint-no-unsupported-browser-features "^5.0.0"
     stylelint-prettier "^2.0.0"
 
-"@foray1010/tsconfig@8.0.0":
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/tsconfig/-/tsconfig-8.0.0.tgz#6073d52cd8d7ddebd84cba5a86323d28fb644be9"
-  integrity sha512-zdWh8XO+2VUrDxQnJ8NIrLyBHsNXcNd+mKPZG4LowMdPKDHyKk5LspGBnPQjXtyaKZ6QQcUOvGhDnD4hDFe9/w==
+"@foray1010/tsconfig@8.0.2":
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/@foray1010/tsconfig/-/tsconfig-8.0.2.tgz#eedacff0ab79c62e5e951a6b43c9086f7aecd2e6"
+  integrity sha512-nZEfTZMO/dHC37PYWt7Ft/4gssiqmn3qmgtzX58+lrZDRXWrgKR3EnHxC8cy6q47vakPYQ1/AyPi1wYuPq/pqQ==
 
 "@humanwhocodes/config-array@^0.10.4":
   version "0.10.4"
@@ -4189,7 +4189,7 @@ color@^4.2.3:
     color-convert "^2.0.1"
     color-string "^1.9.0"
 
-colord@^2.9.2:
+colord@^2.9.3:
   version "2.9.3"
   resolved "https://registry.yarnpkg.com/colord/-/colord-2.9.3.tgz#4f8ce919de456f1d5c1c368c307fe20f3e59fb43"
   integrity sha512-jeC1axXpnb0/2nn/Y1LPuLdgXBLH7aDcHu4KEKfqw3CUhX7ZpfBSlPKyqXE6btIgEzfWtrX3/tyBCaCvXvMkOw==
@@ -9582,10 +9582,10 @@ remark-preset-lint-recommended@^6.0.0:
     remark-lint-ordered-list-marker-style "^3.0.0"
     unified "^10.0.0"
 
-remark-preset-prettier@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/remark-preset-prettier/-/remark-preset-prettier-1.0.0.tgz#e57d9c499e6a2364953285c90dc230828874381c"
-  integrity sha512-e0VvU1J7WJSl5WsejEPKgJzTE84A3NNm/S3oA75fkw9p/k/IPu1dr0vEO4FdeoaqsLlG0xZ544E+kQgmiSlG0g==
+remark-preset-prettier@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/remark-preset-prettier/-/remark-preset-prettier-1.0.2.tgz#57146d9128447840690ae25c1797c34d1883a40f"
+  integrity sha512-GiTOnOh5NyG0XesZqNLzAqXqs3Z/HFmStcPZP/ZMIQvHOPGmv6zDixItNZeVtDDDWgn0J6BuALI/mv0m4pA6vQ==
   dependencies:
     remark-lint-blank-lines-1-0-2 "*"
     remark-lint-blockquote-indentation "*"
@@ -10338,17 +10338,17 @@ stylelint-config-prettier@^9.0.0:
   resolved "https://registry.yarnpkg.com/stylelint-config-prettier/-/stylelint-config-prettier-9.0.3.tgz#0dccebeff359dcc393c9229184408b08964d561c"
   integrity sha512-5n9gUDp/n5tTMCq1GLqSpA30w2sqWITSSEiAWQlpxkKGAUbjcemQ0nbkRvRUa0B1LgD3+hCvdL7B1eTxy1QHJg==
 
-stylelint-config-recommended@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-8.0.0.tgz#7736be9984246177f017c39ec7b1cd0f19ae9117"
-  integrity sha512-IK6dWvE000+xBv9jbnHOnBq01gt6HGVB2ZTsot+QsMpe82doDQ9hvplxfv4YnpEuUwVGGd9y6nbaAnhrjcxhZQ==
+stylelint-config-recommended@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-9.0.0.tgz#1c9e07536a8cd875405f8ecef7314916d94e7e40"
+  integrity sha512-9YQSrJq4NvvRuTbzDsWX3rrFOzOlYBmZP+o513BJN/yfEmGSr0AxdvrWs0P/ilSpVV/wisamAHu5XSk8Rcf4CQ==
 
-stylelint-config-standard@^26.0.0:
-  version "26.0.0"
-  resolved "https://registry.yarnpkg.com/stylelint-config-standard/-/stylelint-config-standard-26.0.0.tgz#4701b8d582d34120eec7d260ba779e4c2d953635"
-  integrity sha512-hUuB7LaaqM8abvkOO84wh5oYSkpXgTzHu2Zza6e7mY+aOmpNTjoFBRxSLlzY0uAOMWEFx0OMKzr+reG1BUtcqQ==
+stylelint-config-standard@^28.0.0:
+  version "28.0.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-standard/-/stylelint-config-standard-28.0.0.tgz#7e1926c232631a8445eafee7b186d276d42d7b15"
+  integrity sha512-q/StuowDdDmFCravzGHAwgS9pjX0bdOQUEBBDIkIWsQuYGgYz/xsO8CM6eepmIQ1fc5bKdDVimlJZ6MoOUcJ5Q==
   dependencies:
-    stylelint-config-recommended "^8.0.0"
+    stylelint-config-recommended "^9.0.0"
 
 stylelint-no-unsupported-browser-features@^5.0.0:
   version "5.0.3"
@@ -10386,14 +10386,14 @@ stylelint-scss@^4.2.0:
     postcss-selector-parser "^6.0.6"
     postcss-value-parser "^4.1.0"
 
-stylelint@14.10.0:
-  version "14.10.0"
-  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-14.10.0.tgz#c588f5cd47cd214cf1acee5bc165961b6a3ad836"
-  integrity sha512-VAmyKrEK+wNFh9R8mNqoxEFzaa4gsHGhcT4xgkQDuOA5cjF6CaNS8loYV7gpi4tIZBPUyXesotPXzJAMN8VLOQ==
+stylelint@14.11.0:
+  version "14.11.0"
+  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-14.11.0.tgz#e2ecb28bbacab05e1fbeb84cbba23883b27499cc"
+  integrity sha512-OTLjLPxpvGtojEfpESWM8Ir64Z01E89xsisaBMUP/ngOx1+4VG2DPRcUyCCiin9Rd3kPXPsh/uwHd9eqnvhsYA==
   dependencies:
     "@csstools/selector-specificity" "^2.0.2"
     balanced-match "^2.0.0"
-    colord "^2.9.2"
+    colord "^2.9.3"
     cosmiconfig "^7.0.1"
     css-functions-list "^3.1.0"
     debug "^4.3.4"
@@ -10428,7 +10428,7 @@ stylelint@14.10.0:
     svg-tags "^1.0.0"
     table "^6.8.0"
     v8-compile-cache "^2.3.0"
-    write-file-atomic "^4.0.1"
+    write-file-atomic "^4.0.2"
 
 supports-color@^2.0.0:
   version "2.0.0"
@@ -11443,7 +11443,7 @@ wrappy@1:
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==
 
-write-file-atomic@^4.0.1:
+write-file-atomic@^4.0.1, write-file-atomic@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/write-file-atomic/-/write-file-atomic-4.0.2.tgz#a9df01ae5b77858a027fd2e80768ee433555fcfd"
   integrity sha512-7KxauUdBmSdWnmpaGFg+ppNjKF8uNLry8LyzjauQDOVONfFLNKrKvQOxZ/VuTIcS/gge/YNahf5RIIQWTSarlg==
