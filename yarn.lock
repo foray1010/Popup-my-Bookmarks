@@ -1221,10 +1221,10 @@
   dependencies:
     read-pkg-up "^7.0.1"
 
-"@foray1010/eslint-config@7.3.3":
-  version "7.3.3"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-7.3.3.tgz#4b875f5205466f749213ab9723befe08dc06973b"
-  integrity sha512-0A4LP9a0E0RBixc1MLIEjCNu/QN1wrDv6s1nLFKCckKrRhLLtZiiKvrQPMhdmFSThTWJ6cP0Na+76iu/hoVhbA==
+"@foray1010/eslint-config@7.3.4":
+  version "7.3.4"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-7.3.4.tgz#40a08d578dd7e262a1a55745620819bb3f231939"
+  integrity sha512-PO5cKnXFDYeZ9tBCdeZEnFYyJCfLKRBpvyhxzAYSUs6KLEd1EtNAYnx1FOEZoOJgQ0//a8rEOS7m97qaM3gvog==
   dependencies:
     "@foray1010/common-presets-utils" "^5.0.2"
     "@typescript-eslint/eslint-plugin" "^5.13.0"
@@ -10875,7 +10875,12 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
-typescript@4.7.4, typescript@^4.6.4:
+typescript@4.8.2:
+  version "4.8.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.2.tgz#e3b33d5ccfb5914e4eeab6699cf208adee3fd790"
+  integrity sha512-C0I1UsrrDHo2fYI5oaCGbSejwX4ch+9Y5jTQELvovfmFkK3HHSZJB8MSJcWLmCUBzQBchCrZ9rMRV6GuNrvGtw==
+
+typescript@^4.6.4:
   version "4.7.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
   integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==

@@ -20,7 +20,9 @@ const [OptionsProvider, useInternalOptions] = constate(
   },
 )
 
-export function withOptions<P>(WrappedComponent: React.ComponentType<P>) {
+export function withOptions<P extends {}>(
+  WrappedComponent: React.ComponentType<P>,
+) {
   function InnerComponent(props: P) {
     const options = useInternalOptions()
     if (!options) return null

@@ -127,7 +127,7 @@ const useMenuKeyNav = () => {
   )
 }
 
-export default function withKeyboardNav<P>(
+export default function withKeyboardNav<P extends {}>(
   WrappedComponent: React.ComponentType<P>,
 ) {
   const InnerComponent = (props: P) => {

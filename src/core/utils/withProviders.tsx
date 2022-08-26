@@ -1,6 +1,6 @@
 import type * as React from 'react'
 
-export default function withProviders<P>(
+export default function withProviders<P extends {}>(
   InnerComponent: React.ComponentType<P>,
   Providers: React.ComponentType<{ children?: React.ReactNode }>[],
 ) {
