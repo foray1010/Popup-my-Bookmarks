@@ -78,7 +78,7 @@
     "@types/react-dom": "18.0.6",
     "@types/script-ext-html-webpack-plugin": "2.1.3",
     "@types/terser-webpack-plugin": "5.2.0",
-    "@types/webpack-bundle-analyzer": "4.4.1",
+    "@types/webpack-bundle-analyzer": "4.4.2",
     "@types/zip-webpack-plugin": "3.0.3",
     "axios": "0.27.2",
     "chrome-manifest-loader": "0.3.0",
@@ -119,7 +119,7 @@
     "type-coverage": "2.22.0",
     "typescript": "4.8.2",
     "webpack": "5.74.0",
-    "webpack-bundle-analyzer": "4.5.0",
+    "webpack-bundle-analyzer": "4.6.1",
     "webpack-cli": "4.10.0",
     "yaml-loader": "0.8.0",
     "zip-webpack-plugin": "4.0.1"
