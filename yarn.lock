@@ -1710,7 +1710,7 @@
   resolved "https://registry.yarnpkg.com/@parcel/css-win32-x64-msvc/-/css-win32-x64-msvc-1.13.0.tgz#55806568f31eb7ef55d1bcd8925b4992e043a62d"
   integrity sha512-0WFdh4nS5lkjLnBr0N6O7OatbjUFZdVBSlPDdTdwEYZkl8La+SnmGGMEkrE/jiQ6NjjwgLorN7xainmPWuQdDw==
 
-"@parcel/css@1.13.0", "@parcel/css@^1.12.0":
+"@parcel/css@1.13.0", "@parcel/css@^1.13.0":
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/@parcel/css/-/css-1.13.0.tgz#90747a64e05511e813d0d46454165f60ec959e82"
   integrity sha512-S4QD4Jd+j8QzU5ZZpfg+1cdmEXeJ71wabbV6ff3DJB/05gXWj9Qf/ZZUVtwH3V255Oif6/jcEmcWY4AmFXTyLw==
@@ -8127,12 +8127,12 @@ param-case@^3.0.4:
     dot-case "^3.0.4"
     tslib "^2.0.3"
 
-parcel-css-loader@1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/parcel-css-loader/-/parcel-css-loader-1.0.8.tgz#d314945dfaaded9f210eaf7e9ff393a69dd4d6bc"
-  integrity sha512-q3mc9Nf46diB5eUZVVn2yx/goEn8GyVzIQ6fH9x1vp8U+ydXfwtKGiDB40IWKax8K+cd/jxkBQQDT9Ov3srEWQ==
+parcel-css-loader@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/parcel-css-loader/-/parcel-css-loader-1.1.0.tgz#acd4c57a148432d8790b1eff0f215e60b8d134e7"
+  integrity sha512-9x3SkuUpMCkSlYQ2Mto1j5jRv334BNNpfH/4Tkf9GGOVir5CHFkENproiBe5EdQQ8bHKpp8HkeOOb/2kyS96Fg==
   dependencies:
-    "@parcel/css" "^1.12.0"
+    "@parcel/css" "^1.13.0"
     webpack-sources "^3.2.3"
 
 parent-module@^1.0.0:
