@@ -34,7 +34,7 @@
     "@tanstack/react-query-devtools": "4.0.10",
     "clsx": "1.2.1",
     "constate": "3.3.2",
-    "core-js": "3.24.1",
+    "core-js": "3.25.0",
     "immer": "9.0.15",
     "lodash.debounce": "4.0.8",
     "nanoid": "4.0.0",
