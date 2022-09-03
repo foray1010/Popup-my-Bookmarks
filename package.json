@@ -68,7 +68,7 @@
     "@transifex/api": "4.2.1",
     "@types/duplicate-package-checker-webpack-plugin": "2.1.2",
     "@types/firefox-webext-browser": "94.0.1",
-    "@types/jest": "28.1.8",
+    "@types/jest": "29.0.0",
     "@types/lodash.debounce": "4.0.7",
     "@types/mini-css-extract-plugin": "2.5.1",
     "@types/node": "16.11.56",
