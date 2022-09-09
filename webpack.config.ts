@@ -1,10 +1,10 @@
-import parcelCss from '@parcel/css'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import lightningCss from 'lightningcss'
+import { LightningCssMinifyPlugin } from 'lightningcss-loader'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import { ParcelCssMinifyPlugin } from 'parcel-css-loader'
 import path from 'path'
 import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
@@ -45,9 +45,9 @@ const webpackConfig: webpack.Configuration = {
             },
           },
           {
-            loader: 'parcel-css-loader',
+            loader: 'lightningcss-loader',
             options: {
-              implementation: parcelCss,
+              implementation: lightningCss,
               drafts: {
                 nesting: true,
               },
@@ -150,8 +150,8 @@ const webpackConfig: webpack.Configuration = {
     ...(isProductionBuild && {
       minimize: true,
       minimizer: [
-        new ParcelCssMinifyPlugin({
-          implementation: parcelCss,
+        new LightningCssMinifyPlugin({
+          implementation: lightningCss,
         }),
         new TerserPlugin({
           minify: TerserPlugin.swcMinify,
