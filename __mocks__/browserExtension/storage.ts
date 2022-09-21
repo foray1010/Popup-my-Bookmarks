@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/require-await */
 
-import * as R from 'ramda'
+import * as R from 'remeda'
 
 class StorageArea implements browser.storage.StorageArea {
-  protected storage: { [key: string]: unknown } = {}
+  protected storage: { readonly [key: string]: unknown } = {}
 
   public async get(keys?: string | string[] | { [key: string]: unknown }) {
     if (keys === undefined) return this.storage
 
     if (typeof keys === 'string' || Array.isArray(keys)) {
-      return R.pick([keys].flat(), this.storage)
+      return R.pick(this.storage, [keys].flat())
     }
 
     return {
       ...keys,
-      ...R.pick(Object.keys(keys), this.storage),
+      ...R.pick(this.storage, Object.keys(keys)),
     }
   }
 
@@ -26,7 +26,7 @@ class StorageArea implements browser.storage.StorageArea {
   }
 
   public async remove(keys: string | string[]) {
-    this.storage = R.omit([keys].flat(), this.storage)
+    this.storage = R.omit(this.storage, [keys].flat())
   }
 
   public async clear() {
@@ -40,7 +40,7 @@ class StorageAreaSync
 {
   public async getBytesInUse(keys?: string | string[]) {
     const storage =
-      keys === undefined ? this.storage : R.pick([keys].flat(), this.storage)
+      keys === undefined ? this.storage : R.pick(this.storage, [keys].flat())
 
     return Object.entries(storage).reduce((acc, [k, v]) => {
       // https://github.com/mozilla/gecko-dev/blob/0db73daa4b03ce7513a7dd5f31109143dc3b149e/third_party/rust/webext-storage/src/api.rs#L184-L188
