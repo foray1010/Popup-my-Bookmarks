@@ -1,5 +1,5 @@
-import debounce from 'lodash.debounce'
 import * as React from 'react'
+import { useDebouncedCallback } from 'use-debounce'
 
 import { BOOKMARK_TYPES, OPTIONS } from '../../constants'
 import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees'
@@ -25,8 +25,8 @@ export default function useRowHoverEvents({
   const { setHighlightedIndex, unsetHighlightedIndex } =
     useListNavigationContext()
 
-  return React.useMemo(() => {
-    const toggleBookmarkTree = debounce(async (bookmarkInfo: BookmarkInfo) => {
+  const toggleBookmarkTree = useDebouncedCallback(
+    async (bookmarkInfo: BookmarkInfo) => {
       if (
         bookmarkInfo.type === BOOKMARK_TYPES.FOLDER &&
         bookmarkInfo.id !== activeKey
@@ -35,8 +35,11 @@ export default function useRowHoverEvents({
       } else {
         closeNextTrees()
       }
-    }, 300)
+    },
+    300,
+  )
 
+  return React.useMemo(() => {
     return {
       handleRowMouseEnter: (bookmarkInfo: BookmarkInfo) => async () => {
         const index = treeInfo.children.findIndex(
@@ -58,14 +61,11 @@ export default function useRowHoverEvents({
       },
     }
   }, [
-    activeKey,
-    closeNextTrees,
-    openBookmarkTree,
     options,
     setHighlightedIndex,
+    toggleBookmarkTree,
     treeIndex,
     treeInfo.children,
-    treeInfo.parent.id,
     unsetHighlightedIndex,
   ])
 }
