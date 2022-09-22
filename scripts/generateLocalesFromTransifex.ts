@@ -3,17 +3,15 @@ import { transifexApi } from '@transifex/api'
 import axios from 'axios'
 import { promises as fsPromises } from 'fs'
 import path from 'path'
-import prompts from 'prompts'
+import * as readline from 'readline'
+import { promisify } from 'util'
 
-const questions = [
-  {
-    type: 'text',
-    name: 'transifexApiKey',
-    message:
-      'transifex api key (get from https://www.transifex.com/user/settings/api/)',
-    validate: Boolean,
-  } as const,
-]
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+})
+// eslint-disable-next-line @typescript-eslint/unbound-method
+const question = promisify(rl.question).bind(rl)
 
 const organizationSlug = 'foray1010'
 const projectSlug = 'popup-my-bookmarks'
@@ -29,15 +27,11 @@ interface Messages {
 }
 
 async function main(): Promise<void> {
-  const {
-    transifexApiKey,
-  }: {
-    transifexApiKey: string
-  } = await prompts(questions, {
-    onCancel() {
-      process.exit(130)
-    },
-  })
+  // @ts-expect-error somehow promisify does not work correctly with readline.question
+  const transifexApiKey: string = await question(
+    'transifex api key (get from https://www.transifex.com/user/settings/api/): ',
+  )
+  if (!transifexApiKey) throw new Error('transifexApiKey is required')
 
   transifexApi.setup({ auth: transifexApiKey })
 
@@ -108,7 +102,11 @@ async function main(): Promise<void> {
   )
 }
 
-main().catch((err: Error) => {
-  console.error(err)
-  process.exit(1)
-})
+main()
+  .then(() => {
+    rl.close()
+  })
+  .catch((err: Error) => {
+    console.error(err)
+    process.exit(1)
+  })
