@@ -1,6 +1,4 @@
-'use strict'
-
-module.exports = {
+const config = {
   '*.{cjs,cts,js,mjs,mts,ts,tsx}': [
     'yarn prettier --write',
     'yarn eslint --fix',
@@ -11,3 +9,4 @@ module.exports = {
   '*.{markdown,md}': ['yarn prettier --write', 'yarn remark'],
   '*ignore-sync': 'ignore-sync',
 }
+export default config
