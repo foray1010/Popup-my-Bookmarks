@@ -9,8 +9,8 @@ export default function useRowDragEvents({
   closeNextTrees,
   treeInfo,
 }: {
-  closeNextTrees: () => void
-  treeInfo: BookmarkTree
+  readonly closeNextTrees: () => void
+  readonly treeInfo: BookmarkTree
 }) {
   const { removeDragIndicator, setDragIndicator } = useBookmarkTrees()
 

@@ -4,7 +4,7 @@ import * as React from 'react'
 import classes from './mask.module.css'
 
 type Props = React.HTMLAttributes<Element> & {
-  opacity: number
+  readonly opacity: number
 }
 export default function Mask({ opacity, ...props }: Props) {
   return (

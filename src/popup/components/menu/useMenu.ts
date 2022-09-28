@@ -2,17 +2,17 @@ import constate from 'constate'
 import * as React from 'react'
 
 type OpenState = {
-  targetId: string
-  displayPositions: { top: number; left: number }
-  targetPositions: { top: number; left: number }
+  readonly targetId: string
+  readonly displayPositions: { readonly top: number; readonly left: number }
+  readonly targetPositions: { readonly top: number; readonly left: number }
 }
 
 type State =
   | {
-      isOpen: false
+      readonly isOpen: false
     }
   | ({
-      isOpen: true
+      readonly isOpen: true
     } & OpenState)
 
 const initialState: State = {

@@ -5,7 +5,9 @@ import type { BookmarkInfo } from '../../../types'
 import sortByTitle from '../../../utils/sortByTitle'
 import { getBookmarkInfo, getBookmarkTree } from './getBookmark'
 
-const splitBySeparator = (bookmarkInfos: BookmarkInfo[]): BookmarkInfo[][] => {
+const splitBySeparator = (
+  bookmarkInfos: readonly BookmarkInfo[],
+): BookmarkInfo[][] => {
   return bookmarkInfos.reduce<BookmarkInfo[][]>(
     (acc, bookmarkInfo) => {
       if (acc.length === 0 || bookmarkInfo.type === BOOKMARK_TYPES.SEPARATOR) {
@@ -21,10 +23,13 @@ const splitBySeparator = (bookmarkInfos: BookmarkInfo[]): BookmarkInfo[][] => {
 }
 
 interface BookmarkGroup {
-  type: BOOKMARK_TYPES
-  members: BookmarkInfo[]
+  readonly type: BOOKMARK_TYPES
+  // eslint-disable-next-line functional/prefer-readonly-type
+  readonly members: BookmarkInfo[]
 }
-const groupByType = (bookmarkInfos: BookmarkInfo[]): BookmarkGroup[] => {
+const groupByType = (
+  bookmarkInfos: readonly BookmarkInfo[],
+): BookmarkGroup[] => {
   return bookmarkInfos.reduce<BookmarkGroup[]>((acc, bookmarkInfo) => {
     const matchType = (group: BookmarkGroup) => group.type === bookmarkInfo.type
 
@@ -44,7 +49,9 @@ const groupByType = (bookmarkInfos: BookmarkInfo[]): BookmarkGroup[] => {
   }, [])
 }
 
-const sortGroupByPriority = (groups: BookmarkGroup[]): BookmarkGroup[] => {
+const sortGroupByPriority = (
+  groups: readonly BookmarkGroup[],
+): BookmarkGroup[] => {
   const priority = [
     BOOKMARK_TYPES.SEPARATOR,
     BOOKMARK_TYPES.FOLDER,
@@ -58,13 +65,17 @@ const sortGroupByPriority = (groups: BookmarkGroup[]): BookmarkGroup[] => {
   })
 }
 
-const mergeGroups = (nestedGroups: BookmarkGroup[][]): BookmarkInfo[] => {
+const mergeGroups = (
+  nestedGroups: readonly (readonly BookmarkGroup[])[],
+): BookmarkInfo[] => {
   return nestedGroups
     .map((nestedGroup) => nestedGroup.map((group) => group.members).flat())
     .flat()
 }
 
-const sortBookmarks = (bookmarkInfos: BookmarkInfo[]): BookmarkInfo[] => {
+const sortBookmarks = (
+  bookmarkInfos: readonly BookmarkInfo[],
+): BookmarkInfo[] => {
   const nestedGroups = splitBySeparator(bookmarkInfos)
     .map(groupByType)
     .map((groups) => {

@@ -5,7 +5,7 @@ import Select from '../../../../../core/components/baseItems/Select'
 import classes from './styles.module.css'
 
 interface Props extends React.ComponentProps<typeof Select> {
-  choices: Array<string>
+  readonly choices: ReadonlyArray<string>
 }
 export default function SelectString({
   choices,

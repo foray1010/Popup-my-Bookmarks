@@ -3,24 +3,24 @@ import * as React from 'react'
 
 type OpenParams = (
   | {
-      isCreating: true
-      createAfterId: string
+      readonly isCreating: true
+      readonly createAfterId: string
     }
   | {
-      isCreating: false
-      editTargetId: string
+      readonly isCreating: false
+      readonly editTargetId: string
     }
 ) & {
-  isAllowedToEditUrl: boolean
-  positions?: { top: number; left: number }
+  readonly isAllowedToEditUrl: boolean
+  readonly positions?: { readonly top: number; readonly left: number }
 }
 
 type State =
   | {
-      isOpen: false
+      readonly isOpen: false
     }
   | ({
-      isOpen: true
+      readonly isOpen: true
     } & Required<OpenParams>)
 
 const initialState: State = {

@@ -5,7 +5,9 @@ import * as R from 'remeda'
 class StorageArea implements browser.storage.StorageArea {
   protected storage: { readonly [key: string]: unknown } = {}
 
-  public async get(keys?: string | string[] | { [key: string]: unknown }) {
+  public async get(
+    keys?: string | readonly string[] | { readonly [key: string]: unknown },
+  ) {
     if (keys === undefined) return this.storage
 
     if (typeof keys === 'string' || Array.isArray(keys)) {
@@ -18,14 +20,14 @@ class StorageArea implements browser.storage.StorageArea {
     }
   }
 
-  public async set(items: { [key: string]: unknown }) {
+  public async set(items: { readonly [key: string]: unknown }) {
     this.storage = {
       ...this.storage,
       ...items,
     }
   }
 
-  public async remove(keys: string | string[]) {
+  public async remove(keys: string | readonly string[]) {
     this.storage = R.omit(this.storage, [keys].flat())
   }
 
@@ -38,7 +40,7 @@ class StorageAreaSync
   extends StorageArea
   implements browser.storage.StorageAreaSync
 {
-  public async getBytesInUse(keys?: string | string[]) {
+  public async getBytesInUse(keys?: string | readonly string[]) {
     const storage =
       keys === undefined ? this.storage : R.pick(this.storage, [keys].flat())
 

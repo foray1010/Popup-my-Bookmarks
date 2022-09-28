@@ -4,7 +4,7 @@ import { BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS } from '../../../constants'
 import { getOptions } from '../../options'
 import { getBookmarkInfo, getBookmarkTree } from './getBookmark'
 
-async function getUrls(ids: string[]): Promise<string[]> {
+async function getUrls(ids: readonly string[]): Promise<string[]> {
   const bookmarkInfos = await Promise.all(ids.map(getBookmarkInfo))
 
   const filteredBookmarkInfos = bookmarkInfos.filter(
@@ -16,12 +16,12 @@ async function getUrls(ids: string[]): Promise<string[]> {
 }
 
 type OpenBookmarkProps = {
-  openIn: OPEN_IN_TYPES
-  isAllowBookmarklet: boolean
-  isCloseThisExtension: boolean
+  readonly openIn: OPEN_IN_TYPES
+  readonly isAllowBookmarklet: boolean
+  readonly isCloseThisExtension: boolean
 }
 export async function openBookmarksInBrowser(
-  ids: string[],
+  ids: readonly string[],
   openBookmarkProps: OpenBookmarkProps,
 ) {
   const options = await getOptions()

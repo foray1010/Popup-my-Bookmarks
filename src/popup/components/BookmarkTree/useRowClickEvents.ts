@@ -17,7 +17,7 @@ import { useMenuContext } from '../menu'
 export default function useRowClickEvents({
   treeInfo,
 }: {
-  treeInfo: BookmarkTree
+  readonly treeInfo: BookmarkTree
 }) {
   const options = useOptions()
 

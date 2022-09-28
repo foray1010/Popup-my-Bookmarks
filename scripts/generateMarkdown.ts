@@ -1,5 +1,6 @@
 import { promises as fsPromises } from 'fs'
 import path from 'path'
+import process from 'process'
 
 async function writeFile(fileName: string, fileData: string): Promise<void> {
   await fsPromises.mkdir(path.dirname(fileName), { recursive: true })
@@ -7,7 +8,9 @@ async function writeFile(fileName: string, fileData: string): Promise<void> {
 }
 
 // markdown handler
-async function getMarkdownData(titleList: Array<string>): Promise<string> {
+async function getMarkdownData(
+  titleList: ReadonlyArray<string>,
+): Promise<string> {
   const dataList = await Promise.all(
     titleList.map((title) => {
       return fsPromises.readFile(path.join('markdown', `${title}.md`), 'utf-8')

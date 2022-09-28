@@ -1,15 +1,12 @@
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-interface LastPosition {
-  id: string
-  scrollTop: number
-}
+import type { LastPosition } from '../../types'
 
 export default function useRememberLastPositions({
   isEnabled,
 }: {
-  isEnabled: boolean
+  readonly isEnabled: boolean
 }) {
   const [lastPositions, setLastPositions] = React.useState<LastPosition[]>([])
   const [isInitialized, setIsInitialized] = React.useState(false)

@@ -5,19 +5,17 @@ import { useDeleteOptions, useGetOptions, useUpdateOptions } from '../options'
 
 describe('options hooks', () => {
   async function initTestData() {
-    const { result: useDeleteOptionsResult } = renderHook(
-      () => useDeleteOptions(),
-      { wrapper: ReactQueryClientProvider },
-    )
+    const { result: useDeleteOptionsResult } = renderHook(useDeleteOptions, {
+      wrapper: ReactQueryClientProvider,
+    })
     const { mutateAsync: deleteOptions } = useDeleteOptionsResult.current
     await act(async () => {
       await deleteOptions()
     })
 
-    const { result: useUpdateOptionsResult } = renderHook(
-      () => useUpdateOptions(),
-      { wrapper: ReactQueryClientProvider },
-    )
+    const { result: useUpdateOptionsResult } = renderHook(useUpdateOptions, {
+      wrapper: ReactQueryClientProvider,
+    })
     const { mutateAsync: updateOptions } = useUpdateOptionsResult.current
     await act(async () => {
       await updateOptions({ rememberPos: true })
@@ -28,7 +26,7 @@ describe('options hooks', () => {
     it('should get options', async () => {
       await initTestData()
 
-      const { result, waitFor } = renderHook(() => useGetOptions(), {
+      const { result, waitFor } = renderHook(useGetOptions, {
         wrapper: ReactQueryClientProvider,
       })
 
@@ -43,7 +41,7 @@ describe('options hooks', () => {
       await initTestData()
 
       const { result: useGetOptionsResult, waitFor } = renderHook(
-        () => useGetOptions(),
+        useGetOptions,
         { wrapper: ReactQueryClientProvider },
       )
 
@@ -53,10 +51,9 @@ describe('options hooks', () => {
 
       expect(useGetOptionsResult.current.data).toHaveProperty('rememberPos')
 
-      const { result: useDeleteOptionsResult } = renderHook(
-        () => useDeleteOptions(),
-        { wrapper: ReactQueryClientProvider },
-      )
+      const { result: useDeleteOptionsResult } = renderHook(useDeleteOptions, {
+        wrapper: ReactQueryClientProvider,
+      })
       const { mutateAsync: deleteOptions } = useDeleteOptionsResult.current
       await act(async () => {
         await deleteOptions()
@@ -73,7 +70,7 @@ describe('options hooks', () => {
       await initTestData()
 
       const { result: useGetOptionsResult, waitFor } = renderHook(
-        () => useGetOptions(),
+        useGetOptions,
         { wrapper: ReactQueryClientProvider },
       )
 
@@ -84,10 +81,9 @@ describe('options hooks', () => {
       expect(useGetOptionsResult.current.data).toHaveProperty('rememberPos')
       expect(useGetOptionsResult.current.data).not.toHaveProperty('tooltip')
 
-      const { result: useUpdateOptionsResult } = renderHook(
-        () => useUpdateOptions(),
-        { wrapper: ReactQueryClientProvider },
-      )
+      const { result: useUpdateOptionsResult } = renderHook(useUpdateOptions, {
+        wrapper: ReactQueryClientProvider,
+      })
       const { mutateAsync: updateOptions } = useUpdateOptionsResult.current
       await act(async () => {
         await updateOptions({ tooltip: true })

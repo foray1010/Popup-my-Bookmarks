@@ -14,28 +14,34 @@ import classes from './bookmark-tree.module.css'
 import BookmarkRow from './BookmarkRow'
 
 interface ItemData {
-  draggingId: string | null
-  highlightedId?: string
-  isDisableDragAndDrop: boolean
-  isSearching: boolean
-  isShowTooltip: boolean
-  onRowAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onRowClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onRowDragOver: (
+  readonly draggingId: string | null
+  readonly highlightedId?: string
+  readonly isDisableDragAndDrop: boolean
+  readonly isSearching: boolean
+  readonly isShowTooltip: boolean
+  readonly onRowAuxClick: (
+    bookmarkInfo: BookmarkInfo,
+  ) => React.MouseEventHandler
+  readonly onRowClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  readonly onRowDragOver: (
     bookmarkInfo: BookmarkInfo,
   ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
-  onRowDragStart: React.MouseEventHandler
-  onRowMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onRowMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  treeInfo: BookmarkTreeType
+  readonly onRowDragStart: React.MouseEventHandler
+  readonly onRowMouseEnter: (
+    bookmarkInfo: BookmarkInfo,
+  ) => React.MouseEventHandler
+  readonly onRowMouseLeave: (
+    bookmarkInfo: BookmarkInfo,
+  ) => React.MouseEventHandler
+  readonly treeInfo: BookmarkTreeType
 }
 
 type Props = ItemData & {
-  lastScrollTop?: number
-  listItemWidth: number
+  readonly lastScrollTop?: number
+  readonly listItemWidth: number
   noRowsRenderer(): React.ReactElement | null
-  onScroll?: React.UIEventHandler
-  scrollToIndex?: number
+  readonly onScroll?: React.UIEventHandler
+  readonly scrollToIndex?: number
 }
 export default function BookmarkTree(props: Props) {
   const parentRef = React.useRef<HTMLDivElement>(null)

@@ -5,17 +5,17 @@ import LazyImage from '../../../../core/components/baseItems/LazyImage'
 import classes from './bookmark-row.module.css'
 
 interface Props {
-  className?: string
-  iconSize: number
-  iconUrl?: string
-  isHighlighted: boolean
-  isUnclickable: boolean
-  onAuxClick?: React.MouseEventHandler
-  onClick?: React.MouseEventHandler
-  onMouseEnter?: React.MouseEventHandler
-  onMouseLeave?: React.MouseEventHandler
-  title: string
-  tooltip?: string
+  readonly className?: string
+  readonly iconSize: number
+  readonly iconUrl?: string
+  readonly isHighlighted: boolean
+  readonly isUnclickable: boolean
+  readonly onAuxClick?: React.MouseEventHandler
+  readonly onClick?: React.MouseEventHandler
+  readonly onMouseEnter?: React.MouseEventHandler
+  readonly onMouseLeave?: React.MouseEventHandler
+  readonly title: string
+  readonly tooltip?: string
 }
 const BookmarkRow = React.forwardRef(function InnerBookmarkRow(
   props: Props,

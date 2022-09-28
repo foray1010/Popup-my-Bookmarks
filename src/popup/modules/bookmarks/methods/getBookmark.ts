@@ -42,8 +42,8 @@ async function getFirstBookmarkTree({
   firstTreeId,
   hideRootTreeIds = [],
 }: {
-  firstTreeId: string
-  hideRootTreeIds?: string[]
+  readonly firstTreeId: string
+  readonly hideRootTreeIds?: readonly string[]
 }): Promise<BookmarkTree> {
   const [firstTree, rootFolders] = await Promise.all([
     getBookmarkTree(firstTreeId),
@@ -67,9 +67,9 @@ export async function getBookmarkTreesFromRoot({
   childTreeIds = [],
   hideRootTreeIds = [],
 }: {
-  firstTreeId: string
-  childTreeIds?: Array<string>
-  hideRootTreeIds?: string[]
+  readonly firstTreeId: string
+  readonly childTreeIds?: ReadonlyArray<string>
+  readonly hideRootTreeIds?: readonly string[]
 }): Promise<Array<BookmarkTree>> {
   const [firstTree, childTreeResults] = await Promise.all([
     getFirstBookmarkTree({ firstTreeId, hideRootTreeIds }),
@@ -109,9 +109,9 @@ export async function getBookmarkTreesFromSearch({
   isSearchTitleOnly = false,
   maxResults = 50,
 }: {
-  searchQuery: string
-  isSearchTitleOnly?: boolean
-  maxResults?: number
+  readonly searchQuery: string
+  readonly isSearchTitleOnly?: boolean
+  readonly maxResults?: number
 }) {
   const searchResults = await searchBookmarks(searchQuery)
 

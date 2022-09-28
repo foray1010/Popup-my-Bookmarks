@@ -4,9 +4,9 @@ import type { BodySize } from './FloatingWindowContext'
 import { useFloatingWindowContext } from './FloatingWindowContext'
 
 export default function useGlobalBodySize(): {
-  globalBodySize?: BodySize
-  insertBodySize(state: BodySize): {
-    removeBodySize(): void
+  readonly globalBodySize?: BodySize
+  readonly insertBodySize: (state: BodySize) => {
+    readonly removeBodySize: () => void
   }
 } {
   const { bodySizeStack, setBodySizeStack } = useFloatingWindowContext()

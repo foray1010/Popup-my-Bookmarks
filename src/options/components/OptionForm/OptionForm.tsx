@@ -9,11 +9,11 @@ import classes from './option-form.module.css'
 import OptionItem from './OptionItem'
 
 interface Props {
-  defaultValues: Partial<Options>
-  onReset: () => void
-  onSubmit: (variables: Partial<Options>) => void
-  optionsConfig: OptionsConfig
-  selectedOptionFormMap: Array<OPTIONS>
+  readonly defaultValues: Partial<Options>
+  readonly onReset: () => void
+  readonly onSubmit: (variables: Partial<Options>) => void
+  readonly optionsConfig: OptionsConfig
+  readonly selectedOptionFormMap: ReadonlyArray<OPTIONS>
 }
 export default function OptionForm(props: Props) {
   const { control, handleSubmit } = useForm()

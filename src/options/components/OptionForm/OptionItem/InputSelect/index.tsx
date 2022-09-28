@@ -10,9 +10,11 @@ type RestInputProps = Omit<
 >
 
 interface Props extends RestInputProps {
-  choices: Array<string>
-  onChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>
-  value: string
+  readonly choices: ReadonlyArray<string>
+  readonly onChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLSelectElement
+  >
+  readonly value: string
 }
 export default function InputSelect({
   choices,

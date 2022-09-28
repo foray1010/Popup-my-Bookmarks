@@ -12,14 +12,11 @@ describe('useRememberLastPositions', () => {
   })
 
   it('should fetch lastPosition when isEnabled changes from false to true', async () => {
-    const { result, rerender, waitFor } = renderHook(
-      (props) => useRememberLastPositions(props),
-      {
-        initialProps: {
-          isEnabled: false,
-        },
+    const { result, rerender, waitFor } = renderHook(useRememberLastPositions, {
+      initialProps: {
+        isEnabled: false,
       },
-    )
+    })
 
     expect(result.current.lastPositions).toBeUndefined()
 

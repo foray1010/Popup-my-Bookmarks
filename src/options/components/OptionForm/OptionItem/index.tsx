@@ -1,3 +1,8 @@
+/* eslint-disable
+  @typescript-eslint/no-unsafe-call,
+  @typescript-eslint/no-unsafe-assignment,
+  @typescript-eslint/no-unsafe-member-access,
+*/
 import type * as React from 'react'
 
 import type { OptionConfig } from '../../../../core/types/options'
@@ -8,11 +13,11 @@ import SelectMultiple from './SelectMultiple'
 import SelectString from './SelectString'
 
 interface Props<T = any> {
-  name: string
-  optionConfig: OptionConfig
-  onBlur: (event?: React.FocusEvent) => void
-  onChange: (eventOrValue: React.ChangeEvent | T) => void
-  value: T
+  readonly name: string
+  readonly optionConfig: OptionConfig
+  readonly onBlur: (event?: React.FocusEvent) => void
+  readonly onChange: (eventOrValue: React.ChangeEvent | T) => void
+  readonly value: T
 }
 
 export default function OptionItem({ optionConfig, ...inputProps }: Props) {

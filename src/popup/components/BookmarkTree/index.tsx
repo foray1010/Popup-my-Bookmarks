@@ -14,7 +14,7 @@ import useRowClickEvents from './useRowClickEvents'
 import useRowDragEvents from './useRowDragEvents'
 import useRowHoverEvents from './useRowHoverEvents'
 
-const useContextProps = ({ treeId }: { treeId: string }) => {
+const useContextProps = ({ treeId }: { readonly treeId: string }) => {
   const options = useOptions()
 
   const { bookmarkTrees, searchQuery } = useBookmarkTrees()
@@ -35,11 +35,11 @@ const useContextProps = ({ treeId }: { treeId: string }) => {
 }
 
 interface Props {
-  treeId: string
-  scrollTop?: number
-  registerLastPosition: (index: number, id: string) => void
-  unregisterLastPosition: (id: string) => void
-  updateLastPosition: (id: string, scrollTop: number) => void
+  readonly treeId: string
+  readonly scrollTop?: number
+  readonly registerLastPosition: (index: number, id: string) => void
+  readonly unregisterLastPosition: (id: string) => void
+  readonly updateLastPosition: (id: string, scrollTop: number) => void
 }
 export default function BookmarkTreeContainer({
   treeId,

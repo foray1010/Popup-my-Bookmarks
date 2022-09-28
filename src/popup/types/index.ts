@@ -1,21 +1,26 @@
 import type * as CST from '../constants'
 
 export interface BookmarkInfo {
-  iconUrl: string
-  id: string
-  isRoot: boolean
-  isSimulated: boolean
-  isUnmodifiable: boolean
-  parentId: string
-  storageIndex: number
-  title: string
-  type: CST.BOOKMARK_TYPES
-  url: string
+  readonly iconUrl: string
+  readonly id: string
+  readonly isRoot: boolean
+  readonly isSimulated: boolean
+  readonly isUnmodifiable: boolean
+  readonly parentId: string
+  readonly storageIndex: number
+  readonly title: string
+  readonly type: CST.BOOKMARK_TYPES
+  readonly url: string
 }
 
 export interface BookmarkTree {
-  children: Array<BookmarkInfo>
-  parent: BookmarkInfo
+  readonly children: ReadonlyArray<BookmarkInfo>
+  readonly parent: BookmarkInfo
 }
 
-export type MenuPattern = Array<Array<string>>
+export interface LastPosition {
+  readonly id: string
+  readonly scrollTop: number
+}
+
+export type MenuPattern = ReadonlyArray<ReadonlyArray<string>>

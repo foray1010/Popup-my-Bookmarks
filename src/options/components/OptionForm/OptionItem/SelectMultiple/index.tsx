@@ -10,8 +10,8 @@ type RestInputProps = Omit<
 >
 
 interface Props extends RestInputProps {
-  choices: Array<string | undefined>
-  value: Array<number | undefined>
+  readonly choices: ReadonlyArray<string | undefined>
+  readonly value: ReadonlyArray<number | undefined>
 }
 export default function SelectMultiple({
   choices,

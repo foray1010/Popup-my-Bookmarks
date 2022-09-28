@@ -9,7 +9,7 @@ import withDragAndDropEvents from './withDragAndDropEvents'
 import withKeyboardNav from './withKeyboardNav'
 
 interface Props {
-  mainTreeHeader: React.ReactNode
+  readonly mainTreeHeader: React.ReactNode
 }
 const InnerBookmarkTreesContainer = (props: Props) => {
   const { bookmarkTrees } = useBookmarkTrees()

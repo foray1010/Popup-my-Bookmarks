@@ -14,7 +14,7 @@ import EditorForm from './EditorForm'
 type EditorFormProps = React.ComponentProps<typeof EditorForm>
 
 interface CreateEditorFormProps extends EditorFormProps {
-  createAfterId: string
+  readonly createAfterId: string
 }
 const CreateEditorForm = ({
   createAfterId,
@@ -38,7 +38,7 @@ const CreateEditorForm = ({
 }
 
 interface UpdateEditorFormProps extends EditorFormProps {
-  editTargetId: string
+  readonly editTargetId: string
 }
 const UpdateEditorForm = ({
   editTargetId,

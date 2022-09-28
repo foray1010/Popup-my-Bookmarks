@@ -6,12 +6,12 @@ import classes from './menu.module.css'
 import MenuRow from './MenuRow'
 
 interface Props {
-  highlightedIndex?: number
-  menuPattern: MenuPattern
-  onRowClick: React.MouseEventHandler
-  onRowMouseEnter: (index: number) => React.MouseEventHandler
-  onRowMouseLeave: (index: number) => React.MouseEventHandler
-  unclickableRows: Array<string>
+  readonly highlightedIndex?: number
+  readonly menuPattern: MenuPattern
+  readonly onRowClick: React.MouseEventHandler
+  readonly onRowMouseEnter: (index: number) => React.MouseEventHandler
+  readonly onRowMouseLeave: (index: number) => React.MouseEventHandler
+  readonly unclickableRows: ReadonlyArray<string>
 }
 export default function Menu(props: Props) {
   const allRowNames = props.menuPattern.flat()

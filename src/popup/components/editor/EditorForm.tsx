@@ -8,13 +8,13 @@ import Input from '../../../core/components/baseItems/Input'
 import classes from './editor-form.module.css'
 
 interface Props {
-  defaultTitle?: string
-  defaultUrl?: string
-  header: string
-  isAllowedToEditUrl: boolean
-  onCancel: () => void
-  onConfirm: (title: string, url?: string) => void | Promise<void>
-  style: React.CSSProperties
+  readonly defaultTitle?: string
+  readonly defaultUrl?: string
+  readonly header: string
+  readonly isAllowedToEditUrl: boolean
+  readonly onCancel: () => void
+  readonly onConfirm: (title: string, url?: string) => void | Promise<void>
+  readonly style: React.CSSProperties
 }
 export default function Editor({ onConfirm, ...props }: Props) {
   const { register, handleSubmit } = useForm<{

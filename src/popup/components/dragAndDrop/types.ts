@@ -1,4 +1,4 @@
 export interface ResponseEvent {
-  activeKey: string | null
-  itemKey: string
+  readonly activeKey: string | null
+  readonly itemKey: string
 }

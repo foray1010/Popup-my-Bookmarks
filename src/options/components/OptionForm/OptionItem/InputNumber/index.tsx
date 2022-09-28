@@ -10,8 +10,8 @@ type RestInputProps = Omit<
 >
 
 interface Props extends RestInputProps {
-  maximum: number
-  minimum: number
+  readonly maximum: number
+  readonly minimum: number
 }
 export default function InputNumber({
   className,

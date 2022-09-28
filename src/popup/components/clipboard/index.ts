@@ -9,12 +9,12 @@ export enum ClipboardAction {
 
 type ClipboardState =
   | {
-      action: ClipboardAction.None
+      readonly action: ClipboardAction.None
     }
   | {
-      action: ClipboardAction.Copy | ClipboardAction.Cut
-      items: ReadonlyArray<{
-        id: string
+      readonly action: ClipboardAction.Copy | ClipboardAction.Cut
+      readonly items: ReadonlyArray<{
+        readonly id: string
       }>
     }
 

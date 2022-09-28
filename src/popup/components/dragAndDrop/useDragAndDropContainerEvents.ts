@@ -3,7 +3,7 @@ import * as React from 'react'
 import { useDragAndDropContext } from './DragAndDropContext'
 
 const useScroll = () => {
-  const scrollingTimeoutRef = React.useRef<NodeJS.Timeout>()
+  const scrollingTimeoutRef = React.useRef<number>()
 
   const clearScroll = React.useCallback(() => {
     if (scrollingTimeoutRef.current !== undefined) {
@@ -16,7 +16,7 @@ const useScroll = () => {
     (containerElement: Element, { isUpward }: { isUpward: boolean }) => {
       clearScroll()
 
-      scrollingTimeoutRef.current = setInterval(() => {
+      scrollingTimeoutRef.current = window.setInterval(() => {
         containerElement.scrollTo({
           top: containerElement.scrollTop + (isUpward ? -1 : 1) * 20,
         })
@@ -30,7 +30,7 @@ const useScroll = () => {
 
 export default function useDragAndDropContainerEvents({
   margin = 20,
-}: { margin?: number } = {}) {
+}: { readonly margin?: number } = {}) {
   const { activeKey } = useDragAndDropContext()
   const isDragging = activeKey !== null
 

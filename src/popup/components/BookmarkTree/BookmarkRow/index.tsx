@@ -11,22 +11,22 @@ import BookmarkRow from './BookmarkRow'
 import useTooltip from './useTooltip'
 
 interface Props {
-  bookmarkInfo: BookmarkInfo
-  className?: string
-  isDisableDragAndDrop: boolean
-  isHighlighted: boolean
-  isSearching: boolean
-  isShowTooltip: boolean
-  isUnclickable: boolean
-  onAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onDragOver: (
+  readonly bookmarkInfo: BookmarkInfo
+  readonly className?: string
+  readonly isDisableDragAndDrop: boolean
+  readonly isHighlighted: boolean
+  readonly isSearching: boolean
+  readonly isShowTooltip: boolean
+  readonly isUnclickable: boolean
+  readonly onAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  readonly onClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  readonly onDragOver: (
     bookmarkInfo: BookmarkInfo,
   ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
-  onDragStart: React.MouseEventHandler
-  onMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  style?: React.CSSProperties
+  readonly onDragStart: React.MouseEventHandler
+  readonly onMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  readonly onMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  readonly style?: React.CSSProperties
 }
 const BookmarkRowContainer = React.forwardRef(
   function InnerBookmarkRowContainer(

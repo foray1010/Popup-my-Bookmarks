@@ -1,8 +1,15 @@
+/* eslint-disable
+  @typescript-eslint/no-unsafe-argument,
+  @typescript-eslint/no-unsafe-assignment,
+  @typescript-eslint/no-unsafe-call,
+  @typescript-eslint/no-unsafe-member-access,
+*/
 // @ts-expect-error no type definitions for this lib
 import { transifexApi } from '@transifex/api'
 import axios from 'axios'
 import { promises as fsPromises } from 'fs'
 import path from 'path'
+import process from 'process'
 import * as readline from 'readline'
 import { promisify } from 'util'
 
@@ -10,6 +17,7 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 })
+
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const question = promisify(rl.question).bind(rl)
 
@@ -20,9 +28,9 @@ const resourceSlug = 'messagesjson-1'
 const localesPath = path.join('src', 'core', '_locales')
 
 interface Messages {
-  [key: string]: {
-    message: string
-    description?: string
+  readonly [key: string]: {
+    readonly message: string
+    readonly description?: string
   }
 }
 

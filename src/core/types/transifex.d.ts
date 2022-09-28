@@ -1,19 +1,22 @@
 declare module 'transifex' {
   interface Transifex {
     // eslint-disable-next-line @typescript-eslint/no-misused-new
-    new (options: { credential: string; project_slug?: string }): Transifex
+    new (options: {
+      readonly credential: string
+      readonly project_slug?: string
+    }): Transifex
 
     statisticsMethodsAsync(
       projectSlug: string,
       resourceSlug: string,
       languageCode?: string,
-    ): Promise<Array<string>>
+    ): Promise<ReadonlyArray<string>>
 
     translationInstanceMethodAsync(
       projectSlug: string,
       resourceSlug: string,
       availableLanguage: string,
-      options?: { mode?: string },
+      options?: { readonly mode?: string },
     ): Promise<string>
   }
 

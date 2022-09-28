@@ -5,13 +5,13 @@ import webExtension from 'webextension-polyfill'
 import classes from './menu-row.module.css'
 
 interface Props {
-  isFocused: boolean
-  isUnclickable: boolean
-  onClick: React.MouseEventHandler
-  onMouseEnter: (index: number) => React.MouseEventHandler
-  onMouseLeave: (index: number) => React.MouseEventHandler
-  rowIndex: number
-  rowName: string
+  readonly isFocused: boolean
+  readonly isUnclickable: boolean
+  readonly onClick: React.MouseEventHandler
+  readonly onMouseEnter: (index: number) => React.MouseEventHandler
+  readonly onMouseLeave: (index: number) => React.MouseEventHandler
+  readonly rowIndex: number
+  readonly rowName: string
 }
 export default function MenuRow({
   onMouseEnter,

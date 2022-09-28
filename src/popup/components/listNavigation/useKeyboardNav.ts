@@ -10,11 +10,11 @@ export default function useKeyboardNav({
   onPressArrowRight,
   onPressArrowUp,
 }: {
-  windowId: string
-  onPressArrowDown?: (evt: KeyboardEvent) => void
-  onPressArrowLeft?: (evt: KeyboardEvent) => void
-  onPressArrowRight?: (evt: KeyboardEvent) => void
-  onPressArrowUp?: (evt: KeyboardEvent) => void
+  readonly windowId: string
+  readonly onPressArrowDown?: (evt: KeyboardEvent) => void
+  readonly onPressArrowLeft?: (evt: KeyboardEvent) => void
+  readonly onPressArrowRight?: (evt: KeyboardEvent) => void
+  readonly onPressArrowUp?: (evt: KeyboardEvent) => void
 }): void {
   const { listNavigation, removeList, setHighlightedIndex } =
     useListNavigationContext()

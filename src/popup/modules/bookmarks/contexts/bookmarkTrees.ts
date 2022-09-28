@@ -4,7 +4,7 @@ import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import * as CST from '../../../constants'
-import type { BookmarkTree } from '../../../types'
+import type { BookmarkTree, LastPosition } from '../../../types'
 import { useOptions } from '../../options'
 import {
   getBookmarkTree,
@@ -14,14 +14,16 @@ import {
 import { generateDragIndicator } from '../utils/generators'
 
 const useUtils = (
-  setBookmarkTrees: React.Dispatch<React.SetStateAction<BookmarkTree[]>>,
+  setBookmarkTrees: React.Dispatch<
+    React.SetStateAction<readonly BookmarkTree[]>
+  >,
 ) => {
   const insertBookmarkTree = React.useCallback(
     (
-      trees: BookmarkTree[],
+      trees: readonly BookmarkTree[],
       parentId: string,
       bookmarkTree: BookmarkTree,
-    ): BookmarkTree[] => {
+    ): readonly BookmarkTree[] => {
       // if tree is already in view, no need to re-render
       if (trees.some((tree) => tree.parent.id === bookmarkTree.parent.id))
         return trees
@@ -36,7 +38,7 @@ const useUtils = (
   )
 
   const withoutDragIndicator = React.useCallback(
-    (trees: BookmarkTree[]): BookmarkTree[] => {
+    (trees: readonly BookmarkTree[]): BookmarkTree[] => {
       return trees.map((tree) => ({
         ...tree,
         children: tree.children.filter(
@@ -48,7 +50,10 @@ const useUtils = (
   )
 
   const withoutNextBookmarkTrees = React.useCallback(
-    (trees: BookmarkTree[], removeAfterId: string): BookmarkTree[] => {
+    (
+      trees: readonly BookmarkTree[],
+      removeAfterId: string,
+    ): readonly BookmarkTree[] => {
       const removeAfterIndex = trees.findIndex(
         (tree) => tree.parent.id === removeAfterId,
       )
@@ -213,9 +218,9 @@ const useRefreshOnBookmarkEvent = (refresh: () => void) => {
 }
 
 const useBookmarkTreesState = () => {
-  const [bookmarkTrees, setBookmarkTrees] = React.useState<Array<BookmarkTree>>(
-    [],
-  )
+  const [bookmarkTrees, setBookmarkTrees] = React.useState<
+    readonly BookmarkTree[]
+  >([])
   const [searchQuery, setSearchQuery] = React.useState('')
   const [, startTransition] = React.useTransition()
 
@@ -233,11 +238,14 @@ const useBookmarkTreesState = () => {
           setBookmarkTrees(bookmarkTrees)
         })
       } else {
-        const { lastPositions = [] } = await webExtension.storage.local.get()
+        const { lastPositions = [] } =
+          (await webExtension.storage.local.get()) as {
+            lastPositions?: LastPosition[]
+          }
         const bookmarkTrees = await getBookmarkTreesFromRoot({
           firstTreeId: String(options[CST.OPTIONS.DEF_EXPAND]),
           childTreeIds: options[CST.OPTIONS.REMEMBER_POS]
-            ? lastPositions.map((x: any) => x.id)
+            ? lastPositions.map((x) => x.id)
             : [],
           hideRootTreeIds: (options[CST.OPTIONS.HIDE_ROOT_FOLDER] ?? []).map(
             String,

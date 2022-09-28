@@ -7,9 +7,9 @@ import classes from './bookmark-trees.module.css'
 import useRememberLastPositions from './useRememberLastPositions'
 
 interface Props {
-  mainTreeHeader: React.ReactNode
-  options: Partial<Options>
-  treeIds: Array<string>
+  readonly mainTreeHeader: React.ReactNode
+  readonly options: Partial<Options>
+  readonly treeIds: ReadonlyArray<string>
 }
 export default function BookmarkTrees(props: Props) {
   const {

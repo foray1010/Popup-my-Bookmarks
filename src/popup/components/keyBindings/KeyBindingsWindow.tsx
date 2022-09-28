@@ -5,7 +5,7 @@ import { useKeyBindingsContext } from './KeyBindingsContext'
 import classes from './KeyBindingsWindow.module.css'
 
 type Props = React.HTMLAttributes<Element> & {
-  windowId: string
+  readonly windowId: string
 }
 export default function KeyBindingsWindow({
   children,

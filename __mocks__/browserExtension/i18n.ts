@@ -1,10 +1,10 @@
 import messages from '../../src/core/_locales/en/messages.json'
 
 type Messages = {
-  [key: string]:
+  readonly [key: string]:
     | {
-        message: string
-        description: string
+        readonly message: string
+        readonly description: string
       }
     | undefined
 }

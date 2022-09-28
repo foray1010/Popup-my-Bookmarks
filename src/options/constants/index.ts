@@ -8,7 +8,7 @@ export enum RoutePath {
 }
 
 export const OPTION_TABLE_MAP = {
-  [RoutePath.Contributors]: [] as Array<CST.OPTIONS>,
+  [RoutePath.Contributors]: [] as ReadonlyArray<CST.OPTIONS>,
   [RoutePath.Control]: [
     CST.OPTIONS.CLICK_BY_LEFT,
     CST.OPTIONS.CLICK_BY_LEFT_CTRL,

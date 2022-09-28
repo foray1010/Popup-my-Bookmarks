@@ -10,8 +10,8 @@ type RestOptionProps = Omit<
 >
 
 interface Props extends RestOptionProps {
-  choices?: Array<boolean>
-  value: boolean
+  readonly choices?: ReadonlyArray<boolean>
+  readonly value: boolean
 }
 export default function SelectButton({
   choices = [true, false],

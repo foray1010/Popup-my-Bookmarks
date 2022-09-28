@@ -1,47 +1,47 @@
 import type { OPTIONS } from '../constants'
 
 export interface Options {
-  [OPTIONS.CLICK_BY_LEFT]: number
-  [OPTIONS.CLICK_BY_LEFT_CTRL]: number
-  [OPTIONS.CLICK_BY_LEFT_SHIFT]: number
-  [OPTIONS.CLICK_BY_MIDDLE]: number
-  [OPTIONS.DEF_EXPAND]: number
-  [OPTIONS.FONT_FAMILY]: string
-  [OPTIONS.FONT_SIZE]: number
-  [OPTIONS.HIDE_ROOT_FOLDER]: Array<number>
-  [OPTIONS.MAX_RESULTS]: number
-  [OPTIONS.OP_FOLDER_BY]: boolean
-  [OPTIONS.REMEMBER_POS]: boolean
-  [OPTIONS.SEARCH_TARGET]: number
-  [OPTIONS.SET_WIDTH]: number
-  [OPTIONS.TOOLTIP]: boolean
-  [OPTIONS.WARN_OPEN_MANY]: boolean
+  readonly [OPTIONS.CLICK_BY_LEFT]: number
+  readonly [OPTIONS.CLICK_BY_LEFT_CTRL]: number
+  readonly [OPTIONS.CLICK_BY_LEFT_SHIFT]: number
+  readonly [OPTIONS.CLICK_BY_MIDDLE]: number
+  readonly [OPTIONS.DEF_EXPAND]: number
+  readonly [OPTIONS.FONT_FAMILY]: string
+  readonly [OPTIONS.FONT_SIZE]: number
+  readonly [OPTIONS.HIDE_ROOT_FOLDER]: ReadonlyArray<number>
+  readonly [OPTIONS.MAX_RESULTS]: number
+  readonly [OPTIONS.OP_FOLDER_BY]: boolean
+  readonly [OPTIONS.REMEMBER_POS]: boolean
+  readonly [OPTIONS.SEARCH_TARGET]: number
+  readonly [OPTIONS.SET_WIDTH]: number
+  readonly [OPTIONS.TOOLTIP]: boolean
+  readonly [OPTIONS.WARN_OPEN_MANY]: boolean
 }
 
 interface ArrayOptionConfig {
-  type: 'array'
-  default: Array<number | undefined>
-  choices: Array<string | undefined>
+  readonly type: 'array'
+  readonly default: ReadonlyArray<number | undefined>
+  readonly choices: ReadonlyArray<string | undefined>
 }
 interface BooleanOptionConfig {
-  type: 'boolean'
-  default: boolean
+  readonly type: 'boolean'
+  readonly default: boolean
 }
 interface IntegerOptionConfig {
-  type: 'integer'
-  default: number
-  minimum: number
-  maximum: number
+  readonly type: 'integer'
+  readonly default: number
+  readonly minimum: number
+  readonly maximum: number
 }
 interface SelectOptionConfig {
-  type: 'select'
-  default: number
-  choices: Array<string>
+  readonly type: 'select'
+  readonly default: number
+  readonly choices: ReadonlyArray<string>
 }
 interface StringOptionConfig {
-  type: 'string'
-  default: string
-  choices: Array<string>
+  readonly type: 'string'
+  readonly default: string
+  readonly choices: ReadonlyArray<string>
 }
 export type OptionConfig =
   | ArrayOptionConfig
@@ -49,4 +49,4 @@ export type OptionConfig =
   | IntegerOptionConfig
   | SelectOptionConfig
   | StringOptionConfig
-export type OptionsConfig = { [K in keyof Options]: OptionConfig }
+export type OptionsConfig = { readonly [K in keyof Options]: OptionConfig }

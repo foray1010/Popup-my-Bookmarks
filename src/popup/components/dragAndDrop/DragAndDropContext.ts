@@ -2,10 +2,10 @@ import constate from 'constate'
 import * as React from 'react'
 import useEventListener from 'use-typed-event-listener'
 
-type MouseCoordinate = Readonly<{
-  x: number
-  y: number
-}>
+type MouseCoordinate = {
+  readonly x: number
+  readonly y: number
+}
 
 const useDragAndDropState = () => {
   const [activeKey, setActiveKeyState] = React.useState<string | null>(null)
@@ -45,8 +45,8 @@ const useDragAndDrop = ({
   onDragEnd,
   onDrop,
 }: {
-  onDragEnd: (evt: MouseEvent) => void
-  onDrop: (evt: MouseEvent, activeKey: string) => void
+  readonly onDragEnd: (evt: MouseEvent) => void
+  readonly onDrop: (evt: MouseEvent, activeKey: string) => void
 }) => {
   const state = useDragAndDropState()
 

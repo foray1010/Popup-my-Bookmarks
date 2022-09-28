@@ -10,6 +10,7 @@ import {
   mapOptionToOpenBookmarkProps,
 } from '../../modules/bookmarks/utils/clickBookmark'
 import { useOptions } from '../../modules/options'
+import type { BookmarkTree } from '../../types'
 import getLastMapKey from '../../utils/getLastMapKey'
 import isMac from '../../utils/isMac'
 import { useKeyBindingsEvent } from '../keyBindings'
@@ -32,7 +33,9 @@ const useArrowKeysNav = () => {
   useKeyboardNav({
     windowId: BASE_WINDOW,
     onPressArrowLeft() {
-      const secondLastTree = trees.at(-2)
+      // @ts-expect-error should be bug, Array.prototype.at should exist in readonly array
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+      const secondLastTree: BookmarkTree | undefined = trees.at(-2)
       if (secondLastTree) {
         removeNextBookmarkTrees(secondLastTree.parent.id)
       }

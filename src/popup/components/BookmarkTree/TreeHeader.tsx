@@ -2,8 +2,8 @@ import Cross from '../../images/cross.svg?svgr'
 import classes from './tree-header.module.css'
 
 interface Props {
-  onClose: () => void
-  title: string
+  readonly onClose: () => void
+  readonly title: string
 }
 export default function TreeHeader(props: Props) {
   return (

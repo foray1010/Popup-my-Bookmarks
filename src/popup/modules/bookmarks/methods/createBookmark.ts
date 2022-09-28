@@ -18,7 +18,7 @@ export async function createBookmarkAfterId({
   createAfterId,
   ...rest
 }: Omit<webExtension.bookmarks.CreateDetails, 'index' | 'parentId'> & {
-  createAfterId: string
+  readonly createAfterId: string
 }) {
   const bookmarkInfo = await getBookmarkInfo(createAfterId)
 

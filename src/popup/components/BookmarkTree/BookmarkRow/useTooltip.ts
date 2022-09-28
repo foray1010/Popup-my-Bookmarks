@@ -5,9 +5,9 @@ import { getBookmarkInfo } from '../../../modules/bookmarks/methods/getBookmark'
 import type { BookmarkInfo } from '../../../types'
 
 interface Arg {
-  isSearching: boolean
-  isShowTooltip: boolean
-  bookmarkInfo: BookmarkInfo
+  readonly isSearching: boolean
+  readonly isShowTooltip: boolean
+  readonly bookmarkInfo: BookmarkInfo
 }
 
 async function getBreadcrumbs(id?: string): Promise<Array<string>> {

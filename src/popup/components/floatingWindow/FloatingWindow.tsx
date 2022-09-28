@@ -6,10 +6,10 @@ import Mask from '../Mask'
 import useGlobalBodySize from './useGlobalBodySize'
 
 interface Props {
-  children: React.ReactNode
-  positionLeft: number
-  positionTop: number
-  onClose: () => void
+  readonly children: React.ReactNode
+  readonly positionLeft: number
+  readonly positionTop: number
+  readonly onClose: () => void
 }
 export default function FloatingWindow({
   children,

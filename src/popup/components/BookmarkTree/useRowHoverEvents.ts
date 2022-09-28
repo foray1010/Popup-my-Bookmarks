@@ -14,8 +14,8 @@ export default function useRowHoverEvents({
   treeInfo,
 }: {
   closeNextTrees(): void
-  treeIndex: number
-  treeInfo: BookmarkTree
+  readonly treeIndex: number
+  readonly treeInfo: BookmarkTree
 }) {
   const options = useOptions()
 
