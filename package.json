@@ -17,7 +17,7 @@
     "locales": "node -r @swc-node/register scripts/generateLocalesFromTransifex.ts",
     "md": "node -r @swc-node/register scripts/generateMarkdown.ts",
     "prettier": "prettier --ignore-path=node_modules/@foray1010/prettier-config/prettierignore",
-    "remark": "remark --frail --ignore-path=node_modules/@foray1010/remark-preset/remarkignore --ignore-path-resolve-from=cwd",
+    "remark": "remark --frail --ignore-path=node_modules/@foray1010/remark-preset/remarkignore --ignore-path-resolve-from=cwd --silently-ignore",
     "stylelint": "stylelint --ignore-path=node_modules/@foray1010/stylelint-config/stylelintignore",
     "test": "cross-env NODE_ENV=test jest",
     "type:check": "tsc",
