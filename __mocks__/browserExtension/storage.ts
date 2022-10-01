@@ -3,10 +3,10 @@
 import * as R from 'remeda'
 
 class StorageArea implements browser.storage.StorageArea {
-  protected storage: { readonly [key: string]: unknown } = {}
+  protected storage: Record<string, unknown> = {}
 
   public async get(
-    keys?: string | readonly string[] | { readonly [key: string]: unknown },
+    keys?: string | readonly string[] | Record<string, unknown>,
   ) {
     if (keys === undefined) return this.storage
 
@@ -20,7 +20,7 @@ class StorageArea implements browser.storage.StorageArea {
     }
   }
 
-  public async set(items: { readonly [key: string]: unknown }) {
+  public async set(items: Record<string, unknown>) {
     this.storage = {
       ...this.storage,
       ...items,
