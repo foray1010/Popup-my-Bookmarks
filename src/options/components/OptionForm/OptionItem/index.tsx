@@ -30,7 +30,7 @@ export default function OptionItem({ optionConfig, ...inputProps }: Props) {
           {...inputProps}
           choices={optionConfig.choices}
           onChange={(evt) => {
-            const checkboxValue = parseInt(evt.currentTarget.value, 10)
+            const checkboxValue = Number.parseInt(evt.currentTarget.value, 10)
 
             const newValue = evt.currentTarget.checked
               ? [checkboxValue, ...value].sort()
@@ -57,7 +57,7 @@ export default function OptionItem({ optionConfig, ...inputProps }: Props) {
           maximum={optionConfig.maximum}
           minimum={optionConfig.minimum}
           onChange={(evt) => {
-            const newValue = parseInt(evt.currentTarget.value, 10)
+            const newValue = Number.parseInt(evt.currentTarget.value, 10)
             onChange(!Number.isNaN(newValue) ? newValue : '')
           }}
         />
@@ -69,7 +69,7 @@ export default function OptionItem({ optionConfig, ...inputProps }: Props) {
           {...inputProps}
           choices={optionConfig.choices}
           onChange={(evt) => {
-            onChange(parseInt(evt.currentTarget.value, 10))
+            onChange(Number.parseInt(evt.currentTarget.value, 10))
           }}
         />
       )
