@@ -2,9 +2,8 @@
   @typescript-eslint/no-unsafe-argument,
   @typescript-eslint/no-unsafe-assignment,
   @typescript-eslint/no-unsafe-call,
-  @typescript-eslint/no-unsafe-member-access,
 */
-// @ts-expect-error no type definitions for this lib
+import type { Collection } from '@transifex/api'
 import { transifexApi } from '@transifex/api'
 import axios from 'axios'
 import { promises as fsPromises } from 'fs'
@@ -27,13 +26,6 @@ const resourceSlug = 'messagesjson-1'
 
 const localesPath = path.join('src', 'core', '_locales')
 
-interface Messages {
-  readonly [key: string]: {
-    readonly message: string
-    readonly description?: string
-  }
-}
-
 async function main(): Promise<void> {
   // @ts-expect-error somehow promisify does not work correctly with readline.question
   const transifexApiKey: string = await question(
@@ -41,22 +33,38 @@ async function main(): Promise<void> {
   )
   if (!transifexApiKey) throw new Error('transifexApiKey is required')
 
-  transifexApi.setup({ auth: transifexApiKey })
+  transifexApi.setup({
+    host: undefined, // use default host
+    auth: transifexApiKey,
+  })
 
+  /* eslint-disable @typescript-eslint/await-thenable */
   const organization = await transifexApi.Organization.get({
     slug: organizationSlug,
   })
-  const projects = await organization.fetch('projects')
-  const project = await projects.get({ slug: projectSlug })
 
-  const resources = await project.fetch('resources')
-  const resource = await resources.get({ slug: resourceSlug })
+  const project = await transifexApi.Project.get({
+    organization,
+    slug: projectSlug,
+  })
 
-  const languages = await project.fetch('languages')
+  const resource = await transifexApi.Resource.get({
+    project,
+    slug: resourceSlug,
+  })
+
+  const languages = (await project.fetch('languages', false)) as Collection & {
+    data: ReadonlyArray<{
+      readonly attributes: {
+        readonly code: string
+      }
+    }>
+  }
   await languages.fetch()
+  /* eslint-enable @typescript-eslint/await-thenable */
 
   await Promise.all(
-    languages.data.map(async (language: any) => {
+    languages.data.map(async (language) => {
       let mappedLanguage: string
       switch (language.attributes.code) {
         case 'nb_NO':
@@ -73,6 +81,7 @@ async function main(): Promise<void> {
 
       console.log(`processing "${mappedLanguage}"...`)
 
+      // @ts-expect-error missing this type
       const url = await transifexApi.ResourceTranslationsAsyncDownload.download(
         {
           resource,
@@ -80,9 +89,15 @@ async function main(): Promise<void> {
           mode: 'onlytranslated',
         },
       )
-      const response = await axios.get(url)
-
-      const messagesJson: Messages = response.data
+      const { data: messagesJson } = await axios.get<
+        Record<
+          string,
+          {
+            readonly message: string
+            readonly description?: string
+          }
+        >
+      >(url)
 
       const sortedMessagesJson = Object.fromEntries(
         Object.entries(messagesJson)
