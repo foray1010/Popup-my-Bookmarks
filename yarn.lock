@@ -2974,12 +2974,14 @@ axios@0.27.2:
     follow-redirects "^1.14.9"
     form-data "^4.0.0"
 
-axios@~0.26.1:
-  version "0.26.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.26.1.tgz#1ede41c51fcf51bbbd6fd43669caaa4f0495aaa9"
-  integrity sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==
+axios@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.1.0.tgz#94d25e6524743c7fc33954dd536687bbb957793a"
+  integrity sha512-hsJgcqz4JY7f+HZ4cWTrPZ6tZNCNFPTRx1MjRqu/hbpgpHdSCUpLVuplc+jE/h7dOvyANtw/ERA3HC2Rz/QoMg==
   dependencies:
-    follow-redirects "^1.14.8"
+    follow-redirects "^1.15.0"
+    form-data "^4.0.0"
+    proxy-from-env "^1.1.0"
 
 babel-code-frame@^6.26.0:
   version "6.26.0"
@@ -5308,7 +5310,7 @@ flatted@^3.1.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.7.tgz#609f39207cb614b89d0765b477cb2d437fbf9787"
   integrity sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==
 
-follow-redirects@^1.14.8, follow-redirects@^1.14.9:
+follow-redirects@^1.14.9, follow-redirects@^1.15.0:
   version "1.15.2"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.2.tgz#b460864144ba63f2681096f274c4e57026da2c13"
   integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
@@ -5812,15 +5814,15 @@ ieee754@^1.1.13:
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
   integrity sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
 
-ignore-sync@5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/ignore-sync/-/ignore-sync-5.0.1.tgz#d228431daa04c73728206b85d398ad1e47165dd7"
-  integrity sha512-WH1to4g7iSmwYBPTihBwMusown3rT9uOZ+OPjIQUY4GmsO9E/1jtRlyQNekrkcN9CdSb4nXRDuW+8J46+yr3UA==
+ignore-sync@6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/ignore-sync/-/ignore-sync-6.0.1.tgz#7115f97033b7d5e43417e42c5dcf3a6df5864ce8"
+  integrity sha512-VK+nlgo6alKqFuHGDW+YdzMkN/0fmNCCTPBwXPXbEywkGgPfCpFVdROCjQc9urFpt0nHnETFdIvOU5VuXiJ/HA==
   dependencies:
-    axios "~0.26.1"
-    fast-glob "^3.2.11"
+    axios "^1.1.0"
+    fast-glob "^3.2.12"
     ignore "^5.2.0"
-    ramda "~0.28.0"
+    ramda "^0.28.0"
 
 ignore@^5.0.0, ignore@^5.0.5, ignore@^5.1.1, ignore@^5.2.0:
   version "5.2.0"
@@ -8416,6 +8418,11 @@ propose@0.0.5:
   dependencies:
     levenshtein-edit-distance "^1.0.0"
 
+proxy-from-env@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.1.0.tgz#e102f16ca355424865755d2c9e8ea4f24d58c3e2"
+  integrity sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==
+
 psl@^1.1.33:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/psl/-/psl-1.9.0.tgz#d0df2a137f00794565fcaf3b2c00cd09f8d5a5a7"
@@ -8468,7 +8475,7 @@ ramda@^0.27.0:
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.27.2.tgz#84463226f7f36dc33592f6f4ed6374c48306c3f1"
   integrity sha512-SbiLPU40JuJniHexQSAgad32hfwd+DRUdwF2PlVuI5RZD0/vahUco7R8vD86J/tcEKKF9vZrUVwgtmGCqlCKyA==
 
-ramda@~0.28.0:
+ramda@^0.28.0:
   version "0.28.0"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.28.0.tgz#acd785690100337e8b063cab3470019be427cc97"
   integrity sha512-9QnLuG/kPVgWvMQ4aODhsBUFKOUmnbUnsSXACv+NCQZcHbeb+v8Lodp8OVxtRULN1/xOyYLLaL6npE6dMq5QTA==
