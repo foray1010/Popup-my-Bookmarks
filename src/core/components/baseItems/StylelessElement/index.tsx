@@ -11,7 +11,7 @@ const StylelessElement = React.forwardRef<HTMLDivElement, Props>(
       <div
         {...props}
         ref={ref}
-        className={classNames(classes.main, className)}
+        className={classNames(classes['main'], className)}
       />
     )
   },

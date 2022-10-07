@@ -19,7 +19,7 @@ export default function SelectMultiple({
   ...restProps
 }: Props) {
   return (
-    <PlainList className={classes.main}>
+    <PlainList className={classes['main']}>
       {choices.map((optionChoice, optionChoiceIndex) => {
         if (optionChoice === undefined) return null
         return (
@@ -28,7 +28,7 @@ export default function SelectMultiple({
               <Input
                 {...restProps}
                 checked={value.includes(optionChoiceIndex)}
-                className={classes.checkbox}
+                className={classes['checkbox']}
                 type='checkbox'
                 value={optionChoiceIndex}
               />

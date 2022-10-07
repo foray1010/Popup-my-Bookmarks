@@ -166,7 +166,7 @@ const useUtils = (
           if (parentIndex === -1) return trees
 
           return produce(withoutDragIndicator(trees), (newTrees) => {
-            newTrees[parentIndex].children.splice(
+            newTrees[parentIndex]?.children.splice(
               index,
               0,
               generateDragIndicator(),

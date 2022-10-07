@@ -24,7 +24,7 @@ export default function Editor({ onConfirm, ...props }: Props) {
 
   return (
     <ActionlessForm
-      className={classes.main}
+      className={classes['main']}
       style={props.style}
       onSubmit={React.useMemo(() => {
         return handleSubmit(async (variables) => {
@@ -32,17 +32,17 @@ export default function Editor({ onConfirm, ...props }: Props) {
         })
       }, [handleSubmit, onConfirm])}
     >
-      <span className={classes.header}>{props.header}</span>
+      <span className={classes['header']}>{props.header}</span>
 
       <Input
         {...register('title')}
         autoFocus
-        className={classes.input}
+        className={classes['input']}
         defaultValue={props.defaultTitle}
       />
       <Input
         {...register('url')}
-        className={classes.input}
+        className={classes['input']}
         defaultValue={props.defaultUrl}
         hidden={!props.isAllowedToEditUrl}
       />

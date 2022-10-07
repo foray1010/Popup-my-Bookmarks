@@ -36,6 +36,7 @@ export async function bookmarkCurrentPage(
     currentWindow: true,
     active: true,
   })
+  if (!currentTab) throw new Error('cannot get current tab')
 
   return await createBookmark({
     ...rest,

@@ -18,8 +18,8 @@ import useGlobalEvents from './useGlobalEvents'
 
 function useSetBodyCss(bodyCss: Record<string, string | null>) {
   React.useEffect(() => {
-    Object.keys(bodyCss).map((key) => {
-      document.body.style.setProperty(key, bodyCss[key])
+    Object.entries(bodyCss).map(([key, value]) => {
+      document.body.style.setProperty(key, value)
     })
     return () => {
       Object.keys(bodyCss).map((key) => {

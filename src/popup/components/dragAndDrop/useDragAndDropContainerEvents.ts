@@ -30,7 +30,9 @@ const useScroll = () => {
 
 export default function useDragAndDropContainerEvents({
   margin = 20,
-}: { readonly margin?: number } = {}) {
+}: {
+  readonly margin?: number
+} = {}) {
   const { activeKey } = useDragAndDropContext()
   const isDragging = activeKey !== null
 

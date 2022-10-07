@@ -13,13 +13,13 @@ import classes from './styles.module.css'
 function InnerApp() {
   return (
     <>
-      <div className={classes.main}>
+      <div className={classes['main']}>
         <NavBar />
         <Router />
         <Donate />
       </div>
 
-      {process.env.NODE_ENV === 'development' ? (
+      {process.env['NODE_ENV'] === 'development' ? (
         <ReactQueryDevtools initialIsOpen={false} />
       ) : null}
     </>

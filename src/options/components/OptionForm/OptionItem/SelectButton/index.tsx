@@ -21,14 +21,14 @@ export default function SelectButton({
   const leftPercentage = choices.indexOf(value) * (100 / choices.length)
 
   return (
-    <span className={classes.main}>
+    <span className={classes['main']}>
       <span
-        className={classes.cover}
+        className={classes['cover']}
         style={{
           left: `${leftPercentage}%`,
         }}
       />
-      <span className={classes.options}>
+      <span className={classes['options']}>
         {choices.map((choice) => (
           <Option
             key={String(choice)}

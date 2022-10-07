@@ -2,8 +2,8 @@ import constate from 'constate'
 import * as React from 'react'
 
 export interface BodySize {
-  readonly height?: number
-  readonly width?: number
+  readonly height: number | undefined
+  readonly width: number | undefined
 }
 type BodySizeStack = ReadonlyArray<BodySize>
 

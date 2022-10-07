@@ -16,8 +16,8 @@ export default function Option({ children, ...props }: Props) {
     <span>
       <input ref={inputRef} {...props} hidden type='radio' />
       <Button
-        className={classNames(classes.item, {
-          [classes.itemActive]: props.checked,
+        className={classNames(classes['item'], {
+          [classes['itemActive'] ?? '']: props.checked,
         })}
         disabled={props.checked}
         onClick={React.useCallback(() => {

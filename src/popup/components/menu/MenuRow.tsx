@@ -31,9 +31,9 @@ export default function MenuRow({
 
   return (
     <li
-      className={classNames(classes.main, {
-        [classes.focused]: restProps.isFocused,
-        [classes.unclickable]: restProps.isUnclickable,
+      className={classNames(classes['main'], {
+        [classes['focused'] ?? '']: restProps.isFocused,
+        [classes['unclickable'] ?? '']: restProps.isUnclickable,
       })}
       onClick={restProps.isUnclickable ? undefined : restProps.onClick}
       onMouseEnter={handleMouseEnter}

@@ -21,7 +21,7 @@ export default function InputNumber({
 }: Props) {
   return (
     <Input
-      className={classNames(classes.main, className)}
+      className={classNames(classes['main'], className)}
       {...restProps}
       max={maximum}
       min={minimum}

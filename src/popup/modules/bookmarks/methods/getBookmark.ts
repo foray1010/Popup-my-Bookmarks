@@ -16,6 +16,7 @@ export async function getBookmarkInfo(id: string): Promise<BookmarkInfo> {
   }
 
   const [bookmarkNode] = await webExtension.bookmarks.get(id)
+  if (!bookmarkNode) throw new Error('cannot get bookmark')
   return toBookmarkInfo(bookmarkNode)
 }
 

@@ -6,7 +6,7 @@ import classes from './menu.module.css'
 import MenuRow from './MenuRow'
 
 interface Props {
-  readonly highlightedIndex?: number
+  readonly highlightedIndex?: number | undefined
   readonly menuPattern: MenuPattern
   readonly onRowClick: React.MouseEventHandler
   readonly onRowMouseEnter: (index: number) => React.MouseEventHandler
@@ -17,7 +17,7 @@ export default function Menu(props: Props) {
   const allRowNames = props.menuPattern.flat()
 
   return (
-    <PlainList className={classes.main}>
+    <PlainList className={classes['main']}>
       {props.menuPattern.map((rowNames) => (
         <li key={rowNames.join()}>
           <PlainList>

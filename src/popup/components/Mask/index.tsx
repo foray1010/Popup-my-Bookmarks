@@ -10,7 +10,7 @@ export default function Mask({ opacity, ...props }: Props) {
   return (
     <div
       {...props}
-      className={classNames(classes.main, props.className)}
+      className={classNames(classes['main'], props.className)}
       style={React.useMemo(
         () => ({
           ...props.style,

@@ -12,7 +12,7 @@ import useTooltip from './useTooltip'
 
 interface Props {
   readonly bookmarkInfo: BookmarkInfo
-  readonly className?: string
+  readonly className?: string | undefined
   readonly isDisableDragAndDrop: boolean
   readonly isHighlighted: boolean
   readonly isSearching: boolean
@@ -91,10 +91,10 @@ const BookmarkRowContainer = React.forwardRef(
         >
           <BookmarkRow
             className={classNames({
-              [classes.rootFolder]: bookmarkInfo.isRoot,
-              [classes.dragIndicator]:
+              [classes['rootFolder'] ?? '']: bookmarkInfo.isRoot,
+              [classes['dragIndicator'] ?? '']:
                 bookmarkInfo.type === CST.BOOKMARK_TYPES.DRAG_INDICATOR,
-              [classes.separator]:
+              [classes['separator'] ?? '']:
                 bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR,
             })}
             iconSize={options.fontSize}

@@ -21,6 +21,7 @@ const useContextProps = ({ treeId }: { readonly treeId: string }) => {
 
   const treeIndex = bookmarkTrees.findIndex((tree) => tree.parent.id === treeId)
   const treeInfo = bookmarkTrees[treeIndex]
+  if (!treeInfo) throw new Error('cannot find bookmark tree')
 
   return {
     isSearching: Boolean(searchQuery),
@@ -36,7 +37,7 @@ const useContextProps = ({ treeId }: { readonly treeId: string }) => {
 
 interface Props {
   readonly treeId: string
-  readonly scrollTop?: number
+  readonly scrollTop?: number | undefined
   readonly registerLastPosition: (index: number, id: string) => void
   readonly unregisterLastPosition: (id: string) => void
   readonly updateLastPosition: (id: string, scrollTop: number) => void
@@ -108,7 +109,7 @@ export default function BookmarkTreeContainer({
   })
 
   return (
-    <section className={classes.main}>
+    <section className={classes['main']}>
       {isShowHeader && (
         <TreeHeader title={treeInfo.parent.title} onClose={closeCurrentTree} />
       )}

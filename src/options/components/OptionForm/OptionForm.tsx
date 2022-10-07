@@ -23,14 +23,14 @@ export default function OptionForm(props: Props) {
       onReset={props.onReset}
       onSubmit={handleSubmit(props.onSubmit)}
     >
-      <table className={classes.table}>
+      <table className={classes['table']}>
         <tbody>
           {props.selectedOptionFormMap.map((optionName) => (
             <tr key={optionName}>
-              <td className={classes.itemDesc}>
+              <td className={classes['itemDesc']}>
                 {webExtension.i18n.getMessage(optionName)}
               </td>
-              <td className={classes.itemInput}>
+              <td className={classes['itemInput']}>
                 <Controller
                   control={control}
                   defaultValue={props.defaultValues[optionName]}

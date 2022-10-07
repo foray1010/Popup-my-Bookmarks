@@ -133,18 +133,26 @@ const useClickMenuRow = (rowName?: string) => {
 
       case MenuItem.Paste:
         switch (clipboardState.action) {
-          case ClipboardAction.Copy:
-            await recursiveCopyBookmarks(clipboardState.items[0].id, {
+          case ClipboardAction.Copy: {
+            const clipboardItem = clipboardState.items[0]
+            if (!clipboardItem) throw new Error('no clipboard item')
+
+            await recursiveCopyBookmarks(clipboardItem.id, {
               parentId: bookmarkInfo.parentId,
               index: bookmarkInfo.storageIndex + 1,
             })
             break
-          case ClipboardAction.Cut:
-            await webExtension.bookmarks.move(clipboardState.items[0].id, {
+          }
+          case ClipboardAction.Cut: {
+            const clipboardItem = clipboardState.items[0]
+            if (!clipboardItem) throw new Error('no clipboard item')
+
+            await webExtension.bookmarks.move(clipboardItem.id, {
               parentId: bookmarkInfo.parentId,
               index: bookmarkInfo.storageIndex + 1,
             })
             break
+          }
           default:
         }
         resetClipboard()

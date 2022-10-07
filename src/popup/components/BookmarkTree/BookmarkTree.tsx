@@ -15,7 +15,7 @@ import BookmarkRow from './BookmarkRow'
 
 interface ItemData {
   readonly draggingId: string | null
-  readonly highlightedId?: string
+  readonly highlightedId?: string | undefined
   readonly isDisableDragAndDrop: boolean
   readonly isSearching: boolean
   readonly isShowTooltip: boolean
@@ -37,17 +37,17 @@ interface ItemData {
 }
 
 type Props = ItemData & {
-  readonly lastScrollTop?: number
-  readonly listItemWidth: number
+  readonly lastScrollTop?: number | undefined
+  readonly listItemWidth: number | undefined
   noRowsRenderer(): React.ReactElement | null
   readonly onScroll?: React.UIEventHandler
-  readonly scrollToIndex?: number
+  readonly scrollToIndex?: number | undefined
 }
 export default function BookmarkTree(props: Props) {
   const parentRef = React.useRef<HTMLDivElement>(null)
 
   const keyExtractor = React.useCallback(
-    (index: number): string => props.treeInfo.children[index].id,
+    (index: number): string => props.treeInfo.children[index]!.id,
     [props.treeInfo.children],
   )
   const rowVirtualizer = useVirtual({
@@ -102,6 +102,8 @@ export default function BookmarkTree(props: Props) {
       >
         {rowVirtualizer.virtualItems.map((virtualItem) => {
           const bookmarkInfo = props.treeInfo.children[virtualItem.index]
+          if (!bookmarkInfo) return null
+
           const isDragging = props.draggingId !== null
           const isBeingDragged = props.draggingId === bookmarkInfo.id
           return (
@@ -109,7 +111,7 @@ export default function BookmarkTree(props: Props) {
               key={virtualItem.key}
               ref={virtualItem.measureRef}
               bookmarkInfo={bookmarkInfo}
-              className={classes.listItem}
+              className={classes['listItem']}
               isDisableDragAndDrop={props.isDisableDragAndDrop}
               isHighlighted={
                 isDragging

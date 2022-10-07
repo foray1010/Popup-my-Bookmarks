@@ -29,12 +29,12 @@ export default function NavBar() {
   const { currentPath, setCurrentPath } = useNavigationContext()
 
   return (
-    <nav className={classes.main}>
+    <nav className={classes['main']}>
       {navBarItemInfos.map(({ path, title }) => (
         <Button
           key={path}
-          className={classNames(classes.button, {
-            [classes.active]: path === currentPath,
+          className={classNames(classes['button'], {
+            [classes['active'] ?? '']: path === currentPath,
           })}
           onClick={() => setCurrentPath(path)}
         >

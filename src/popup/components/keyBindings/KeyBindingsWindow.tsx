@@ -34,7 +34,7 @@ export default function KeyBindingsWindow({
       ref={windowRef}
       tabIndex={-1}
       {...props}
-      className={classNames(classes.wrapper, className)}
+      className={classNames(classes['wrapper'], className)}
       onFocus={React.useCallback<React.FocusEventHandler>(
         (evt) => {
           evt.stopPropagation()

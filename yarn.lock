@@ -1217,19 +1217,19 @@
   resolved "https://registry.yarnpkg.com/@fontsource/archivo-narrow/-/archivo-narrow-4.5.10.tgz#fd59e2ad9e60a8c16ac0d96001fd7ab9d21a4382"
   integrity sha512-05Q0oCfYCt6wc74/n9amHriFHiPbQFJUqiQu9eZowNs4EaNypDCvqZf0jcZ0khihjd4/QBp6eCiMVbK8e/EI0w==
 
-"@foray1010/common-presets-utils@^5.0.4":
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/@foray1010/common-presets-utils/-/common-presets-utils-5.0.4.tgz#837e3ba52cd3a30d3c2a434f3ca8299b075e48c5"
-  integrity sha512-i1Ux/x1/kAZK4/gycMBf+up0drEOpPVAW9zOYruiIn0X6IfPf/yRYP+GRF7yNecRh6ry7Z4NFwQ7USxjhMZHIA==
+"@foray1010/common-presets-utils@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/common-presets-utils/-/common-presets-utils-5.1.0.tgz#6addd123b538f0002f5b93ca8f8e71d93db254be"
+  integrity sha512-2kg+Uj0l9FprZjy5SVDSo6puHQhgNu0SKtVBSGCWdMZBXs3bUajcnMmi0S++/5e+no2vykOEhFT+1N9aWFuJjg==
   dependencies:
     read-pkg-up "^7.0.1"
 
-"@foray1010/eslint-config@7.8.0":
-  version "7.8.0"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-7.8.0.tgz#43f8cdd8d5b06a8fe0dd00ee8030afcd2d631f3f"
-  integrity sha512-aBp40zFcXSj4WRpgLXTdSpgrlQ4pxrrPnW9mUbfnbF/kbjsKTnYK/VRpKgcIb4B30oqdLt8tRY+MR3gXTZM1/g==
+"@foray1010/eslint-config@7.9.0":
+  version "7.9.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-7.9.0.tgz#694c0713f9af5ae298df219888fb4520d6a289c9"
+  integrity sha512-jjGBQ2IkxT0wCRwYUKpRu5+ZZSK1V3LSzu35zLqa9JACtMA6frwuNNzpOXi7vQjjV5FG3DeH6FcMrgQA/SN/ig==
   dependencies:
-    "@foray1010/common-presets-utils" "^5.0.4"
+    "@foray1010/common-presets-utils" "^5.1.0"
     "@typescript-eslint/eslint-plugin" "^5.38.1"
     "@typescript-eslint/parser" "^5.38.1"
     confusing-browser-globals "^1.0.10"
@@ -1286,10 +1286,10 @@
     stylelint-no-unsupported-browser-features "^6.0.1"
     stylelint-prettier "^2.0.0"
 
-"@foray1010/tsconfig@8.0.2":
-  version "8.0.2"
-  resolved "https://registry.yarnpkg.com/@foray1010/tsconfig/-/tsconfig-8.0.2.tgz#eedacff0ab79c62e5e951a6b43c9086f7aecd2e6"
-  integrity sha512-nZEfTZMO/dHC37PYWt7Ft/4gssiqmn3qmgtzX58+lrZDRXWrgKR3EnHxC8cy6q47vakPYQ1/AyPi1wYuPq/pqQ==
+"@foray1010/tsconfig@8.1.0":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@foray1010/tsconfig/-/tsconfig-8.1.0.tgz#41e4bdf6ae70156d21415d73b25aad45694ef612"
+  integrity sha512-KxelT3SnQ5Ojip3+kWpXKzwRXkc9M3ySlM5XyZT8BSoC04hEwykYrkiwO/hxSAB+CTfVb6UTzWks8k6r6RkgEg==
 
 "@humanwhocodes/config-array@^0.10.5":
   version "0.10.7"

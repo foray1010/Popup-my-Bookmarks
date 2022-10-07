@@ -5,7 +5,7 @@ import LazyImage from '../../../../core/components/baseItems/LazyImage'
 import classes from './bookmark-row.module.css'
 
 interface Props {
-  readonly className?: string
+  readonly className?: string | undefined
   readonly iconSize: number
   readonly iconUrl?: string
   readonly isHighlighted: boolean
@@ -15,7 +15,7 @@ interface Props {
   readonly onMouseEnter?: React.MouseEventHandler
   readonly onMouseLeave?: React.MouseEventHandler
   readonly title: string
-  readonly tooltip?: string
+  readonly tooltip?: string | undefined
 }
 const BookmarkRow = React.forwardRef(function InnerBookmarkRow(
   props: Props,
@@ -25,10 +25,10 @@ const BookmarkRow = React.forwardRef(function InnerBookmarkRow(
     <div
       ref={setRef}
       className={classNames(
-        classes.main,
+        classes['main'],
         {
-          [classes.highlighted]: props.isHighlighted,
-          [classes.unclickable]: props.isUnclickable,
+          [classes['highlighted'] ?? '']: props.isHighlighted,
+          [classes['unclickable'] ?? '']: props.isUnclickable,
         },
         props.className,
       )}
@@ -41,13 +41,13 @@ const BookmarkRow = React.forwardRef(function InnerBookmarkRow(
       {props.iconUrl && (
         <LazyImage
           alt={props.title}
-          className={classes.icon}
+          className={classes['icon']}
           height={props.iconSize}
           src={props.iconUrl}
           width={props.iconSize}
         />
       )}
-      <div className={classes.title}>{props.title}</div>
+      <div className={classes['title']}>{props.title}</div>
     </div>
   )
 })

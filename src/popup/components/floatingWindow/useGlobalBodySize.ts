@@ -3,12 +3,7 @@ import * as React from 'react'
 import type { BodySize } from './FloatingWindowContext'
 import { useFloatingWindowContext } from './FloatingWindowContext'
 
-export default function useGlobalBodySize(): {
-  readonly globalBodySize?: BodySize
-  readonly insertBodySize: (state: BodySize) => {
-    readonly removeBodySize: () => void
-  }
-} {
+export default function useGlobalBodySize() {
   const { bodySizeStack, setBodySizeStack } = useFloatingWindowContext()
 
   const globalBodySize = React.useMemo(() => {
@@ -31,7 +26,7 @@ export default function useGlobalBodySize(): {
       setBodySizeStack((prevBodySize) => [...prevBodySize, newBodySize])
 
       return {
-        removeBodySize() {
+        removeBodySize: () => {
           setBodySizeStack((prevBodySize) => {
             return prevBodySize.filter((state) => state !== newBodySize)
           })

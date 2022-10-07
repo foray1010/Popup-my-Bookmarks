@@ -15,7 +15,7 @@ import OptionForm from './OptionForm'
 function useGetOptionsWithDefaultValues({
   optionsConfig,
 }: {
-  readonly optionsConfig?: OptionsConfig
+  readonly optionsConfig: OptionsConfig | undefined
 }) {
   const [isFilledDefaultValues, setIsFilledDefaultValues] =
     React.useState(false)

@@ -43,13 +43,13 @@ export default function BookmarkTrees(props: Props) {
   )
 
   return (
-    <main className={classes.main}>
-      <section className={classes.master} style={widthStyle}>
+    <main className={classes['main']}>
+      <section className={classes['master']} style={widthStyle}>
         {props.mainTreeHeader}
         {mainTree}
       </section>
       {subTree.length > 0 && (
-        <section className={classes.slave} style={widthStyle}>
+        <section className={classes['slave']} style={widthStyle}>
           {subTree}
         </section>
       )}

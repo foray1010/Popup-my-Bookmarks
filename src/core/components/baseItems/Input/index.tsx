@@ -14,8 +14,8 @@ const Input = React.forwardRef<HTMLInputElement, Props>(function InnerInput(
       {...props}
       ref={ref}
       className={classNames(
-        classes.main,
-        !['checkbox', 'radio'].includes(type) ? classes.textInput : null,
+        classes['main'],
+        !['checkbox', 'radio'].includes(type) ? classes['textInput'] : null,
         className,
       )}
       type={type}

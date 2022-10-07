@@ -13,7 +13,7 @@ const Select = React.forwardRef<HTMLSelectElement, Props>(function InnerSelect(
     <select
       {...props}
       ref={ref}
-      className={classNames(classes.main, className)}
+      className={classNames(classes['main'], className)}
     />
   )
 })

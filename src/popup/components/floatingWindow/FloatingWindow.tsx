@@ -20,8 +20,8 @@ export default function FloatingWindow({
   const { insertBodySize } = useGlobalBodySize()
 
   const [windowSize, setWindowSize] = React.useState<{
-    height?: number
-    width?: number
+    height?: number | undefined
+    width?: number | undefined
   }>({})
   const { ref } = useResizeObserver<HTMLDivElement>({
     onResize: setWindowSize,
@@ -29,8 +29,8 @@ export default function FloatingWindow({
   })
 
   const [calibratedPosition, setCalibratedPosition] = React.useState<{
-    left?: number
-    top?: number
+    left?: number | undefined
+    top?: number | undefined
   }>({})
 
   React.useEffect(() => {
