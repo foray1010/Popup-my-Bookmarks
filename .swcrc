@@ -15,8 +15,9 @@
   "env": {
     // bug - cannot get target browsers from package.json nor .browserslistrc
     "targets": "chrome >= 88",
-    "mode": "usage",
-    "coreJs": 3,
+    // `usage` mode is less efficient than `entry`
+    "mode": "entry",
+    "coreJs": "3.25",
     "shippedProposals": true
   }
 }
