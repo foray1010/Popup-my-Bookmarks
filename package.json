@@ -29,7 +29,7 @@
   ],
   "dependencies": {
     "@fontsource/archivo-narrow": "4.5.10",
-    "@reach/portal": "0.17.0",
+    "@reach/portal": "0.18.0",
     "@tanstack/react-query": "4.10.3",
     "@tanstack/react-query-devtools": "4.11.0",
     "clsx": "1.2.1",
