@@ -1,4 +1,4 @@
-@import '../../../core/styles/globals.module.css';
+@import url('../../../core/styles/globals.module.css');
 
 :root {
   user-select: none;
