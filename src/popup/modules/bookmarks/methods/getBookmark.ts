@@ -1,14 +1,14 @@
 import webExtension from 'webextension-polyfill'
 
-import { NO_BOOKMARK_ID_PREFIX } from '../../../constants'
-import * as CST from '../../../constants'
-import type { BookmarkInfo, BookmarkTree } from '../../../types'
-import sortByTitle from '../../../utils/sortByTitle'
+import { NO_BOOKMARK_ID_PREFIX } from '../../../constants/index.js'
+import * as CST from '../../../constants/index.js'
+import type { BookmarkInfo, BookmarkTree } from '../../../types/index.js'
+import sortByTitle from '../../../utils/sortByTitle.js'
 import {
   generateNoBookmarkPlaceholder,
   generateSearchResultParent,
-} from '../utils/generators'
-import { toBookmarkInfo } from '../utils/transformers'
+} from '../utils/generators.js'
+import { toBookmarkInfo } from '../utils/transformers.js'
 
 export async function getBookmarkInfo(id: string): Promise<BookmarkInfo> {
   if (id.startsWith(NO_BOOKMARK_ID_PREFIX)) {

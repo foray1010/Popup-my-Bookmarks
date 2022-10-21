@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type * as React from 'react'
 
-import Button from '.'
+import Button from './index.js'
 
 describe('Button', () => {
   it('should not fire form submit when clicked in form', async () => {

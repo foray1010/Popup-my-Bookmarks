@@ -1,10 +1,10 @@
 import * as React from 'react'
 
-import type { Options } from '../../../core/types/options'
-import { OPTIONS } from '../../constants'
-import BookmarkTree from '../BookmarkTree'
+import type { Options } from '../../../core/types/options.js'
+import { OPTIONS } from '../../constants/index.js'
+import BookmarkTree from '../BookmarkTree/index.js'
 import classes from './bookmark-trees.module.css'
-import useRememberLastPositions from './useRememberLastPositions'
+import useRememberLastPositions from './useRememberLastPositions.js'
 
 interface Props {
   readonly mainTreeHeader: React.ReactNode

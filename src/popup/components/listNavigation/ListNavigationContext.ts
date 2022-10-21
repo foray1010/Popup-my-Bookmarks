@@ -1,7 +1,7 @@
 import constate from 'constate'
 import * as React from 'react'
 
-import deleteFromMap from '../../utils/deleteFromMap'
+import deleteFromMap from '../../utils/deleteFromMap.js'
 
 const useListNavigation = () => {
   const [highlightedIndices, setHighlightedIndices] = React.useState(

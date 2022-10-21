@@ -1,7 +1,7 @@
 import constate from 'constate'
 import * as React from 'react'
 
-import { RoutePath } from '../constants'
+import { RoutePath } from '../constants/index.js'
 
 function useNavigation() {
   const [currentPath, setCurrentPath] = React.useState(RoutePath.General)

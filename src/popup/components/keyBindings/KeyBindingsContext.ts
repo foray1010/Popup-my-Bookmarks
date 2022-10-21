@@ -3,7 +3,7 @@ import * as React from 'react'
 import { useDeepCompareMemo } from 'use-deep-compare'
 import useEventListener from 'use-typed-event-listener'
 
-import type { KeyBindingEventCallback, KeyDefinition } from './types'
+import type { KeyBindingEventCallback, KeyDefinition } from './types.js'
 
 const useActiveWindowState = () => {
   const [activeWindowQueue, setActiveWindowQueue] = React.useState<string[]>([])

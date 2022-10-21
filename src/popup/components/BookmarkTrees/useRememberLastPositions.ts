@@ -1,7 +1,7 @@
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import type { LastPosition } from '../../types'
+import type { LastPosition } from '../../types/index.js'
 
 export default function useRememberLastPositions({
   isEnabled,

@@ -1,4 +1,4 @@
-export * from '../../core/constants'
+export * from '../../core/constants/index.js'
 
 export const MAX_HEIGHT = 598
 export const NO_BOOKMARK_ID_PREFIX = 'NO_BOOKMARK_ID_'

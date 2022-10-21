@@ -1,14 +1,14 @@
 import classNames from 'clsx'
 import * as React from 'react'
 
-import * as CST from '../../../constants'
-import { useOptions } from '../../../modules/options'
-import type { BookmarkInfo } from '../../../types'
-import type { ResponseEvent } from '../../dragAndDrop'
-import { DragAndDropConsumer } from '../../dragAndDrop'
+import * as CST from '../../../constants/index.js'
+import { useOptions } from '../../../modules/options.js'
+import type { BookmarkInfo } from '../../../types/index.js'
+import type { ResponseEvent } from '../../dragAndDrop/index.js'
+import { DragAndDropConsumer } from '../../dragAndDrop/index.js'
 import classes from './bookmark-row.module.css'
-import BookmarkRow from './BookmarkRow'
-import useTooltip from './useTooltip'
+import BookmarkRow from './BookmarkRow.js'
+import useTooltip from './useTooltip.js'
 
 interface Props {
   readonly bookmarkInfo: BookmarkInfo

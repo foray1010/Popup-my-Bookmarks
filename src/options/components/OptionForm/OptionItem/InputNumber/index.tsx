@@ -1,7 +1,7 @@
 import classNames from 'clsx'
 import type * as React from 'react'
 
-import Input from '../../../../../core/components/baseItems/Input'
+import Input from '../../../../../core/components/baseItems/Input/index.js'
 import classes from './styles.module.css'
 
 type RestInputProps = Omit<

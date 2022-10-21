@@ -1,34 +1,38 @@
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import withProviders from '../../../core/utils/withProviders'
-import { BOOKMARK_TYPES, MenuItem, OPEN_IN_TYPES } from '../../constants'
-import { MENU_WINDOW } from '../../constants/windows'
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees'
-import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo'
-import { recursiveCopyBookmarks } from '../../modules/bookmarks/methods/copyBookmark'
+import withProviders from '../../../core/utils/withProviders.js'
+import {
+  BOOKMARK_TYPES,
+  MenuItem,
+  OPEN_IN_TYPES,
+} from '../../constants/index.js'
+import { MENU_WINDOW } from '../../constants/windows.js'
+import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo.js'
+import { recursiveCopyBookmarks } from '../../modules/bookmarks/methods/copyBookmark.js'
 import {
   bookmarkCurrentPage,
   createSeparator,
-} from '../../modules/bookmarks/methods/createBookmark'
+} from '../../modules/bookmarks/methods/createBookmark.js'
 import {
   openBookmarksInBrowser,
   openFolderInBrowser,
-} from '../../modules/bookmarks/methods/openBookmark'
-import sortBookmarksByName from '../../modules/bookmarks/methods/sortBookmarksByName'
-import isMac from '../../utils/isMac'
-import { ClipboardAction, useClipboard } from '../clipboard'
-import { useEditorContext } from '../editor'
-import { FloatingWindow } from '../floatingWindow'
-import { KeyBindingsWindow, useKeyBindingsEvent } from '../keyBindings'
+} from '../../modules/bookmarks/methods/openBookmark.js'
+import sortBookmarksByName from '../../modules/bookmarks/methods/sortBookmarksByName.js'
+import isMac from '../../utils/isMac.js'
+import { ClipboardAction, useClipboard } from '../clipboard/index.js'
+import { useEditorContext } from '../editor/index.js'
+import { FloatingWindow } from '../floatingWindow/index.js'
+import { KeyBindingsWindow, useKeyBindingsEvent } from '../keyBindings/index.js'
 import {
   ListNavigationProvider,
   useKeyboardNav,
   useListNavigationContext,
-} from '../listNavigation'
-import Menu from './Menu'
-import { useMenuContext } from './useMenu'
-import { getMenuPattern } from './utils'
+} from '../listNavigation/index.js'
+import Menu from './Menu.js'
+import { useMenuContext } from './useMenu.js'
+import { getMenuPattern } from './utils.js'
 
 const useClickMenuRow = (rowName?: string) => {
   const { close, state } = useMenuContext()

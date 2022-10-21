@@ -1,4 +1,4 @@
-export { default as DragAndDropConsumer } from './DragAndDropConsumer'
-export * from './DragAndDropContext'
-export * from './types'
-export { default as useDragAndDropContainerEvents } from './useDragAndDropContainerEvents'
+export { default as DragAndDropConsumer } from './DragAndDropConsumer.js'
+export * from './DragAndDropContext.js'
+export * from './types.js'
+export { default as useDragAndDropContainerEvents } from './useDragAndDropContainerEvents.js'

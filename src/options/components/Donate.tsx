@@ -1,7 +1,7 @@
-import LazyImage from '../../core/components/baseItems/LazyImage'
+import LazyImage from '../../core/components/baseItems/LazyImage.js'
 import donateIcon from '../images/btn_donateCC_LG.png'
 import classes from './donate.module.css'
-import ExternalLink from './ExternalLink'
+import ExternalLink from './ExternalLink/index.js'
 
 const paypalUrl =
   'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TP67BBZ7VK934'

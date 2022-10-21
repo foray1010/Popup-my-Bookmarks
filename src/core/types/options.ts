@@ -1,4 +1,4 @@
-import type { OPTIONS } from '../constants'
+import type { OPTIONS } from '../constants/index.js'
 
 export interface Options {
   readonly [OPTIONS.CLICK_BY_LEFT]: number

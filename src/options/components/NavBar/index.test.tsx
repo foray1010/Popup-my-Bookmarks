@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 
-import { NavigationProvider } from '../navigationContext'
-import NavBar from '.'
+import { NavigationProvider } from '../navigationContext.js'
+import NavBar from './index.js'
 
 describe('NavBar', () => {
   it('should render four items', () => {

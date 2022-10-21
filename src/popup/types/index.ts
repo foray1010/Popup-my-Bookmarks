@@ -1,4 +1,4 @@
-import type * as CST from '../constants'
+import type * as CST from '../constants/index.js'
 
 export interface BookmarkInfo {
   readonly iconUrl: string

@@ -1,7 +1,7 @@
-import { RoutePath } from '../constants'
-import Contributors from './Contributors'
-import { useNavigationContext } from './navigationContext'
-import OptionForm from './OptionForm'
+import { RoutePath } from '../constants/index.js'
+import Contributors from './Contributors.js'
+import { useNavigationContext } from './navigationContext.js'
+import OptionForm from './OptionForm/index.js'
 
 export default function Router() {
   const { currentPath } = useNavigationContext()

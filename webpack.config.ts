@@ -9,7 +9,8 @@ import path from 'path'
 import process from 'process'
 import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
-import webpack from 'webpack'
+import type { Configuration, WebpackPluginInstance } from 'webpack'
+import { ProgressPlugin } from 'webpack'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import ZipPlugin from 'zip-webpack-plugin'
 
@@ -24,7 +25,7 @@ const commonChunkName = 'common'
 const outputDir = path.join('build', process.env['NODE_ENV'] || 'development')
 const sourceDir = 'src'
 
-const webpackConfig: webpack.Configuration = {
+const webpackConfig: Configuration = {
   devtool: isDevelopmentBuild ? 'inline-source-map' : false,
   entry: Object.fromEntries(
     appNames.map((appName) => [appName, `./${sourceDir}/${appName}`]),
@@ -173,11 +174,13 @@ const webpackConfig: webpack.Configuration = {
     },
   },
   output: {
+    // this file will actually be compiled to a commonjs file
+    // eslint-disable-next-line no-undef
     path: path.resolve(__dirname, outputDir),
     filename: path.join('js', '[name].js'),
   },
   plugins: [
-    ...(!isCI ? [new webpack.ProgressPlugin({})] : []),
+    ...(!isCI ? [new ProgressPlugin({})] : []),
     new CleanWebpackPlugin({
       cleanStaleWebpackAssets: false,
     }),
@@ -195,7 +198,7 @@ const webpackConfig: webpack.Configuration = {
     new DuplicatePackageCheckerPlugin({
       emitError: true,
       strict: true,
-    }) as webpack.WebpackPluginInstance,
+    }) as WebpackPluginInstance,
     ...appNames.map((appName) => {
       return new HtmlWebpackPlugin({
         chunks: [commonChunkName, appName],
@@ -244,7 +247,22 @@ const webpackConfig: webpack.Configuration = {
       : []),
   ],
   resolve: {
-    extensions: ['.wasm', '.tsx', '.ts', '.mjs', '.js', '.json'],
+    extensionAlias: {
+      '.cjs': ['.cts', '.cjs'],
+      '.js': ['.tsx', '.ts', '.js'],
+      '.mjs': ['.mts', '.mjs'],
+    },
+    extensions: [
+      '.wasm',
+      '.tsx',
+      '.ts',
+      '.mts',
+      '.cts',
+      '.js',
+      '.mjs',
+      '.cjs',
+      '.json',
+    ],
   },
   watch: isDevelopmentBuild,
 }

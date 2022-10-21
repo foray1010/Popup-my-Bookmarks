@@ -1,12 +1,12 @@
 import { Controller, useForm } from 'react-hook-form'
 import webExtension from 'webextension-polyfill'
 
-import ActionlessForm from '../../../core/components/baseItems/ActionlessForm'
-import Button from '../../../core/components/baseItems/Button'
-import type { OPTIONS } from '../../../core/constants'
-import type { Options, OptionsConfig } from '../../../core/types/options'
+import ActionlessForm from '../../../core/components/baseItems/ActionlessForm/index.js'
+import Button from '../../../core/components/baseItems/Button/index.js'
+import type { OPTIONS } from '../../../core/constants/index.js'
+import type { Options, OptionsConfig } from '../../../core/types/options.js'
 import classes from './option-form.module.css'
-import OptionItem from './OptionItem'
+import OptionItem from './OptionItem/index.js'
 
 interface Props {
   readonly defaultValues: Partial<Options>

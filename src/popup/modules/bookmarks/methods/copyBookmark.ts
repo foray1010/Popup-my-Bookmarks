@@ -1,7 +1,7 @@
 import webExtension from 'webextension-polyfill'
 
-import { BOOKMARK_TYPES } from '../../../constants'
-import { getBookmarkInfo, getBookmarkTree } from './getBookmark'
+import { BOOKMARK_TYPES } from '../../../constants/index.js'
+import { getBookmarkInfo, getBookmarkTree } from './getBookmark.js'
 
 export async function recursiveCopyBookmarks(
   id: string,

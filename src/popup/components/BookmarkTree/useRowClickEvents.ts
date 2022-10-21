@@ -1,18 +1,22 @@
 import * as React from 'react'
 
-import { BOOKMARK_TYPES, OPEN_IN_TYPES, OPTIONS } from '../../constants'
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees'
+import {
+  BOOKMARK_TYPES,
+  OPEN_IN_TYPES,
+  OPTIONS,
+} from '../../constants/index.js'
+import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import {
   openBookmarksInBrowser,
   openFolderInBrowser,
-} from '../../modules/bookmarks/methods/openBookmark'
+} from '../../modules/bookmarks/methods/openBookmark.js'
 import {
   getClickOptionNameByEvent,
   mapOptionToOpenBookmarkProps,
-} from '../../modules/bookmarks/utils/clickBookmark'
-import { useOptions } from '../../modules/options'
-import type { BookmarkInfo, BookmarkTree } from '../../types'
-import { useMenuContext } from '../menu'
+} from '../../modules/bookmarks/utils/clickBookmark.js'
+import { useOptions } from '../../modules/options.js'
+import type { BookmarkInfo, BookmarkTree } from '../../types/index.js'
+import { useMenuContext } from '../menu/index.js'
 
 export default function useRowClickEvents({
   treeInfo,

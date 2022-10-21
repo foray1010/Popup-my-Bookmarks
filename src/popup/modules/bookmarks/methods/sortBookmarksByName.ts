@@ -1,9 +1,9 @@
 import webExtension from 'webextension-polyfill'
 
-import { BOOKMARK_TYPES } from '../../../constants'
-import type { BookmarkInfo } from '../../../types'
-import sortByTitle from '../../../utils/sortByTitle'
-import { getBookmarkInfo, getBookmarkTree } from './getBookmark'
+import { BOOKMARK_TYPES } from '../../../constants/index.js'
+import type { BookmarkInfo } from '../../../types/index.js'
+import sortByTitle from '../../../utils/sortByTitle.js'
+import { getBookmarkInfo, getBookmarkTree } from './getBookmark.js'
 
 const splitBySeparator = (
   bookmarkInfos: readonly BookmarkInfo[],

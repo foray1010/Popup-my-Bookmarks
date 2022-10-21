@@ -1,9 +1,9 @@
 import classNames from 'clsx'
 import webExtension from 'webextension-polyfill'
 
-import Button from '../../../core/components/baseItems/Button'
-import { RoutePath } from '../../constants'
-import { useNavigationContext } from '../navigationContext'
+import Button from '../../../core/components/baseItems/Button/index.js'
+import { RoutePath } from '../../constants/index.js'
+import { useNavigationContext } from '../navigationContext.js'
 import classes from './styles.module.css'
 
 const navBarItemInfos = [

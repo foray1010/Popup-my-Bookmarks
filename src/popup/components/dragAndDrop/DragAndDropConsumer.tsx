@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import StylelessElement from '../../../core/components/baseItems/StylelessElement'
-import { useDragAndDropContext } from './DragAndDropContext'
-import type { ResponseEvent } from './types'
+import StylelessElement from '../../../core/components/baseItems/StylelessElement/index.js'
+import { useDragAndDropContext } from './DragAndDropContext.js'
+import type { ResponseEvent } from './types.js'
 
 const useDragEvents = ({
   itemKey,

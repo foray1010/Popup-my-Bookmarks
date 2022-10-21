@@ -1,2 +1,2 @@
-export { default as createAndRenderRoot } from './createAndRenderRoot'
-export { default as getOptionsConfig } from './getOptionsConfig'
+export { default as createAndRenderRoot } from './createAndRenderRoot.js'
+export { default as getOptionsConfig } from './getOptionsConfig.js'

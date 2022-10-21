@@ -2,7 +2,7 @@ import classNames from 'clsx'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import Input from '../../../core/components/baseItems/Input'
+import Input from '../../../core/components/baseItems/Input/index.js'
 import Cross from '../../images/cross.svg?svgr'
 import Search from '../../images/search.svg?svgr'
 import classes from './search-input.module.css'

@@ -1,25 +1,25 @@
 import type * as React from 'react'
 
-import withProviders from '../../../core/utils/withProviders'
-import { BOOKMARK_TYPES } from '../../constants'
-import { BASE_WINDOW } from '../../constants/windows'
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees'
-import { openBookmarksInBrowser } from '../../modules/bookmarks/methods/openBookmark'
+import withProviders from '../../../core/utils/withProviders.js'
+import { BOOKMARK_TYPES } from '../../constants/index.js'
+import { BASE_WINDOW } from '../../constants/windows.js'
+import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { openBookmarksInBrowser } from '../../modules/bookmarks/methods/openBookmark.js'
 import {
   getClickOptionNameByEvent,
   mapOptionToOpenBookmarkProps,
-} from '../../modules/bookmarks/utils/clickBookmark'
-import { useOptions } from '../../modules/options'
-import type { BookmarkTree } from '../../types'
-import getLastMapKey from '../../utils/getLastMapKey'
-import isMac from '../../utils/isMac'
-import { useKeyBindingsEvent } from '../keyBindings'
+} from '../../modules/bookmarks/utils/clickBookmark.js'
+import { useOptions } from '../../modules/options.js'
+import type { BookmarkTree } from '../../types/index.js'
+import getLastMapKey from '../../utils/getLastMapKey.js'
+import isMac from '../../utils/isMac.js'
+import { useKeyBindingsEvent } from '../keyBindings/index.js'
 import {
   ListNavigationProvider,
   useKeyboardNav,
   useListNavigationContext,
-} from '../listNavigation'
-import { useMenuContext } from '../menu'
+} from '../listNavigation/index.js'
+import { useMenuContext } from '../menu/index.js'
 
 const useArrowKeysNav = () => {
   const {

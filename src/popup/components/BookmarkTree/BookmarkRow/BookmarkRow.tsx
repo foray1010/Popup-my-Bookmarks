@@ -1,7 +1,7 @@
 import classNames from 'clsx'
 import * as React from 'react'
 
-import LazyImage from '../../../../core/components/baseItems/LazyImage'
+import LazyImage from '../../../../core/components/baseItems/LazyImage.js'
 import classes from './bookmark-row.module.css'
 
 interface Props {

@@ -3,10 +3,10 @@ import '../manifest.yml'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import type { OPTIONS } from '../core/constants'
-import { createAndRenderRoot, getOptionsConfig } from '../core/utils'
-import App from './components/App'
-import { getOptions } from './modules/options'
+import type { OPTIONS } from '../core/constants/index.js'
+import { createAndRenderRoot, getOptionsConfig } from '../core/utils/index.js'
+import App from './components/App/index.js'
+import { getOptions } from './modules/options.js'
 
 async function main(): Promise<void> {
   const [options, optionsConfig] = await Promise.all([

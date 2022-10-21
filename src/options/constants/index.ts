@@ -1,4 +1,4 @@
-import * as CST from '../../core/constants'
+import * as CST from '../../core/constants/index.js'
 
 export enum RoutePath {
   Contributors,

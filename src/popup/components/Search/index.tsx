@@ -1,9 +1,9 @@
 import * as React from 'react'
 
-import { BASE_WINDOW } from '../../constants/windows'
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees'
-import { useKeyBindingsEvent } from '../keyBindings'
-import SearchInput from './SearchInput'
+import { BASE_WINDOW } from '../../constants/windows.js'
+import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { useKeyBindingsEvent } from '../keyBindings/index.js'
+import SearchInput from './SearchInput.js'
 
 export default function SearchContainer() {
   const [inputValue, setInputValue] = React.useState('')

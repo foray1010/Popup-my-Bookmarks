@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react-hooks'
 import webExtension from 'webextension-polyfill'
 
-import useRememberLastPositions from '../useRememberLastPositions'
+import useRememberLastPositions from '../useRememberLastPositions.js'
 
 describe('useRememberLastPositions', () => {
   beforeEach(async () => {

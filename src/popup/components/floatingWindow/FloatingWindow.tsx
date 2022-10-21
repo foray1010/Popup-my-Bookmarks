@@ -2,8 +2,8 @@ import { Portal } from '@reach/portal'
 import * as React from 'react'
 import useResizeObserver from 'use-resize-observer'
 
-import Mask from '../Mask'
-import useGlobalBodySize from './useGlobalBodySize'
+import Mask from '../Mask/index.js'
+import useGlobalBodySize from './useGlobalBodySize.js'
 
 interface Props {
   readonly children: React.ReactNode

@@ -1,5 +1,5 @@
-import { BOOKMARK_TYPES, MenuItem } from '../../constants'
-import type { BookmarkInfo, MenuPattern } from '../../types'
+import { BOOKMARK_TYPES, MenuItem } from '../../constants/index.js'
+import type { BookmarkInfo, MenuPattern } from '../../types/index.js'
 
 const getBookmarkManagePattern = (
   bookmarkInfo: BookmarkInfo,

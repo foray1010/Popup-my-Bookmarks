@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import { ROOT_ID } from '../../../constants'
-import { getBookmarkInfo } from '../../../modules/bookmarks/methods/getBookmark'
-import type { BookmarkInfo } from '../../../types'
+import { ROOT_ID } from '../../../constants/index.js'
+import { getBookmarkInfo } from '../../../modules/bookmarks/methods/getBookmark.js'
+import type { BookmarkInfo } from '../../../types/index.js'
 
 interface Arg {
   readonly isSearching: boolean

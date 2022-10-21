@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees'
-import { DragAndDropProvider } from '../dragAndDrop'
+import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { DragAndDropProvider } from '../dragAndDrop/index.js'
 
 export default function withDragAndDropEvents<P extends {}>(
   WrappedComponent: React.ComponentType<P>,

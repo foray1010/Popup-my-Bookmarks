@@ -2,9 +2,9 @@ import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import webExtension from 'webextension-polyfill'
 
-import ActionlessForm from '../../../core/components/baseItems/ActionlessForm'
-import Button from '../../../core/components/baseItems/Button'
-import Input from '../../../core/components/baseItems/Input'
+import ActionlessForm from '../../../core/components/baseItems/ActionlessForm/index.js'
+import Button from '../../../core/components/baseItems/Button/index.js'
+import Input from '../../../core/components/baseItems/Input/index.js'
 import classes from './editor-form.module.css'
 
 interface Props {

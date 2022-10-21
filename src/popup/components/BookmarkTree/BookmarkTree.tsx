@@ -2,16 +2,16 @@ import * as React from 'react'
 import { useVirtual } from 'react-virtual'
 import useEventListener from 'use-typed-event-listener'
 
-import PlainList from '../../../core/components/baseItems/PlainList'
-import * as CST from '../../constants'
+import PlainList from '../../../core/components/baseItems/PlainList/index.js'
+import * as CST from '../../constants/index.js'
 import type {
   BookmarkInfo,
   BookmarkTree as BookmarkTreeType,
-} from '../../types'
-import type { ResponseEvent } from '../dragAndDrop'
-import { useDragAndDropContainerEvents } from '../dragAndDrop'
+} from '../../types/index.js'
+import type { ResponseEvent } from '../dragAndDrop/index.js'
+import { useDragAndDropContainerEvents } from '../dragAndDrop/index.js'
 import classes from './bookmark-tree.module.css'
-import BookmarkRow from './BookmarkRow'
+import BookmarkRow from './BookmarkRow/index.js'
 
 interface ItemData {
   readonly draggingId: string | null

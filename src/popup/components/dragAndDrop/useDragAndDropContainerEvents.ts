@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { useDragAndDropContext } from './DragAndDropContext'
+import { useDragAndDropContext } from './DragAndDropContext.js'
 
 const useScroll = () => {
   const scrollingTimeoutRef = React.useRef<number>()

@@ -2,19 +2,22 @@ import './globals.module.css'
 
 import * as React from 'react'
 
-import { ReactQueryClientProvider } from '../../../core/utils/queryClient'
-import withProviders from '../../../core/utils/withProviders'
-import { OPTIONS } from '../../constants'
-import { BookmarkTreesProvider } from '../../modules/bookmarks/contexts/bookmarkTrees'
-import { useOptions, withOptions } from '../../modules/options'
-import BookmarkTrees from '../BookmarkTrees'
-import { ClipboardProvider } from '../clipboard'
-import { Editor, EditorProvider } from '../editor'
-import { FloatingWindowProvider, useGlobalBodySize } from '../floatingWindow'
-import { KeyBindingsProvider } from '../keyBindings'
-import { Menu, MenuProvider } from '../menu'
-import Search from '../Search'
-import useGlobalEvents from './useGlobalEvents'
+import { ReactQueryClientProvider } from '../../../core/utils/queryClient.js'
+import withProviders from '../../../core/utils/withProviders.js'
+import { OPTIONS } from '../../constants/index.js'
+import { BookmarkTreesProvider } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { useOptions, withOptions } from '../../modules/options.js'
+import BookmarkTrees from '../BookmarkTrees/index.js'
+import { ClipboardProvider } from '../clipboard/index.js'
+import { Editor, EditorProvider } from '../editor/index.js'
+import {
+  FloatingWindowProvider,
+  useGlobalBodySize,
+} from '../floatingWindow/index.js'
+import { KeyBindingsProvider } from '../keyBindings/index.js'
+import { Menu, MenuProvider } from '../menu/index.js'
+import Search from '../Search/index.js'
+import useGlobalEvents from './useGlobalEvents.js'
 
 function useSetBodyCss(bodyCss: Record<string, string | null>) {
   React.useEffect(() => {

@@ -1,7 +1,7 @@
 import classNames from 'clsx'
 import * as React from 'react'
 
-import { useKeyBindingsContext } from './KeyBindingsContext'
+import { useKeyBindingsContext } from './KeyBindingsContext.js'
 import classes from './KeyBindingsWindow.module.css'
 
 type Props = React.HTMLAttributes<Element> & {

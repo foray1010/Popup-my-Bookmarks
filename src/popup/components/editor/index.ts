@@ -1,2 +1,2 @@
-export { default as Editor } from './Editor'
-export * from './EditorContext'
+export { default as Editor } from './Editor.js'
+export * from './EditorContext.js'

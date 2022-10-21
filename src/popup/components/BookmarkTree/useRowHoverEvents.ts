@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { BOOKMARK_TYPES, OPTIONS } from '../../constants'
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees'
-import { useOptions } from '../../modules/options'
-import type { BookmarkInfo, BookmarkTree } from '../../types'
-import { useDragAndDropContext } from '../dragAndDrop'
-import { useListNavigationContext } from '../listNavigation'
+import { BOOKMARK_TYPES, OPTIONS } from '../../constants/index.js'
+import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { useOptions } from '../../modules/options.js'
+import type { BookmarkInfo, BookmarkTree } from '../../types/index.js'
+import { useDragAndDropContext } from '../dragAndDrop/index.js'
+import { useListNavigationContext } from '../listNavigation/index.js'
 
 export default function useRowHoverEvents({
   closeNextTrees,

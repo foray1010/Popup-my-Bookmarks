@@ -1,7 +1,7 @@
 import classNames from 'clsx'
 import * as React from 'react'
 
-import Button from '../../../../../../core/components/baseItems/Button'
+import Button from '../../../../../../core/components/baseItems/Button/index.js'
 import classes from './styles.module.css'
 
 type Props = Omit<

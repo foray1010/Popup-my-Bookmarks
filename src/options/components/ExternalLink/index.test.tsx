@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 
-import ExternalLink from '.'
+import ExternalLink from './index.js'
 
 describe('ExternalLink', () => {
   it('should have correct attributes', () => {

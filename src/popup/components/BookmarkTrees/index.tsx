@@ -1,12 +1,12 @@
 import * as React from 'react'
 
-import { BASE_WINDOW } from '../../constants/windows'
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees'
-import { useOptions } from '../../modules/options'
-import { KeyBindingsWindow } from '../keyBindings'
-import BookmarkTrees from './BookmarkTrees'
-import withDragAndDropEvents from './withDragAndDropEvents'
-import withKeyboardNav from './withKeyboardNav'
+import { BASE_WINDOW } from '../../constants/windows.js'
+import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { useOptions } from '../../modules/options.js'
+import { KeyBindingsWindow } from '../keyBindings/index.js'
+import BookmarkTrees from './BookmarkTrees.js'
+import withDragAndDropEvents from './withDragAndDropEvents.js'
+import withKeyboardNav from './withKeyboardNav.js'
 
 interface Props {
   readonly mainTreeHeader: React.ReactNode

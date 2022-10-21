@@ -3,15 +3,15 @@ import { produce } from 'immer'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import * as CST from '../../../constants'
-import type { BookmarkTree, LastPosition } from '../../../types'
-import { useOptions } from '../../options'
+import * as CST from '../../../constants/index.js'
+import type { BookmarkTree, LastPosition } from '../../../types/index.js'
+import { useOptions } from '../../options.js'
 import {
   getBookmarkTree,
   getBookmarkTreesFromRoot,
   getBookmarkTreesFromSearch,
-} from '../methods/getBookmark'
-import { generateDragIndicator } from '../utils/generators'
+} from '../methods/getBookmark.js'
+import { generateDragIndicator } from '../utils/generators.js'
 
 const useUtils = (
   setBookmarkTrees: React.Dispatch<

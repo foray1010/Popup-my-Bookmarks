@@ -1,6 +1,6 @@
-import * as CST from '../../../constants'
+import * as CST from '../../../constants/index.js'
 import folderIcon from '../../../images/folder.svg'
-import type { BookmarkInfo } from '../../../types'
+import type { BookmarkInfo } from '../../../types/index.js'
 
 const getIconUrl = (bookmarkInfo: BookmarkInfo): string => {
   if (bookmarkInfo.type === CST.BOOKMARK_TYPES.BOOKMARK)

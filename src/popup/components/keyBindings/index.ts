@@ -1,3 +1,3 @@
-export { KeyBindingsProvider } from './KeyBindingsContext'
-export { default as KeyBindingsWindow } from './KeyBindingsWindow'
-export { default as useKeyBindingsEvent } from './useKeyBindingsEvent'
+export { KeyBindingsProvider } from './KeyBindingsContext.js'
+export { default as KeyBindingsWindow } from './KeyBindingsWindow.js'
+export { default as useKeyBindingsEvent } from './useKeyBindingsEvent.js'

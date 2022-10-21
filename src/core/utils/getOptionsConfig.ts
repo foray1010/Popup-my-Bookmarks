@@ -1,7 +1,7 @@
 import webExtension from 'webextension-polyfill'
 
-import { OPTIONS, ROOT_ID } from '../constants'
-import type { OptionsConfig } from '../types/options'
+import { OPTIONS, ROOT_ID } from '../constants/index.js'
+import type { OptionsConfig } from '../types/options.js'
 
 const getMessages = (messageKeys: readonly string[]) => {
   return messageKeys.map((k) => webExtension.i18n.getMessage(k))

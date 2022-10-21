@@ -1,16 +1,16 @@
 import * as React from 'react'
 
-import type { OPTIONS } from '../../../core/constants'
-import type { OptionsConfig } from '../../../core/types/options'
-import { getOptionsConfig } from '../../../core/utils'
-import { OPTION_TABLE_MAP } from '../../constants'
+import type { OPTIONS } from '../../../core/constants/index.js'
+import type { OptionsConfig } from '../../../core/types/options.js'
+import { getOptionsConfig } from '../../../core/utils/index.js'
+import { OPTION_TABLE_MAP } from '../../constants/index.js'
 import {
   useDeleteOptions,
   useGetOptions,
   useUpdateOptions,
-} from '../../hooks/options'
-import { useNavigationContext } from '../navigationContext'
-import OptionForm from './OptionForm'
+} from '../../hooks/options.js'
+import { useNavigationContext } from '../navigationContext.js'
+import OptionForm from './OptionForm.js'
 
 function useGetOptionsWithDefaultValues({
   optionsConfig,

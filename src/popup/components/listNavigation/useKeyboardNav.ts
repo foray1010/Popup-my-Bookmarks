@@ -1,7 +1,7 @@
-import cycle from '../../utils/cycle'
-import getLastMapKey from '../../utils/getLastMapKey'
-import { useKeyBindingsEvent } from '../keyBindings'
-import { useListNavigationContext } from './ListNavigationContext'
+import cycle from '../../utils/cycle.js'
+import getLastMapKey from '../../utils/getLastMapKey.js'
+import { useKeyBindingsEvent } from '../keyBindings/index.js'
+import { useListNavigationContext } from './ListNavigationContext.js'
 
 export default function useKeyboardNav({
   windowId,

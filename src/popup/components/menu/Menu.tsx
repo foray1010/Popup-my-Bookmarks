@@ -1,9 +1,9 @@
 import type * as React from 'react'
 
-import PlainList from '../../../core/components/baseItems/PlainList'
-import type { MenuPattern } from '../../types'
+import PlainList from '../../../core/components/baseItems/PlainList/index.js'
+import type { MenuPattern } from '../../types/index.js'
 import classes from './menu.module.css'
-import MenuRow from './MenuRow'
+import MenuRow from './MenuRow.js'
 
 interface Props {
   readonly highlightedIndex?: number | undefined

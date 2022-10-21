@@ -1,7 +1,7 @@
 import classNames from 'clsx'
 import type * as React from 'react'
 
-import Select from '../../../../../core/components/baseItems/Select'
+import Select from '../../../../../core/components/baseItems/Select/index.js'
 import classes from './styles.module.css'
 
 interface Props extends React.ComponentProps<typeof Select> {

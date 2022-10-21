@@ -1,15 +1,15 @@
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import { OPTIONS } from '../../constants'
-import { EDITOR_WINDOW } from '../../constants/windows'
-import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo'
-import { createBookmarkAfterId } from '../../modules/bookmarks/methods/createBookmark'
-import { useOptions } from '../../modules/options'
-import { FloatingWindow } from '../floatingWindow'
-import { KeyBindingsWindow } from '../keyBindings'
-import { useEditorContext } from './EditorContext'
-import EditorForm from './EditorForm'
+import { OPTIONS } from '../../constants/index.js'
+import { EDITOR_WINDOW } from '../../constants/windows.js'
+import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo.js'
+import { createBookmarkAfterId } from '../../modules/bookmarks/methods/createBookmark.js'
+import { useOptions } from '../../modules/options.js'
+import { FloatingWindow } from '../floatingWindow/index.js'
+import { KeyBindingsWindow } from '../keyBindings/index.js'
+import { useEditorContext } from './EditorContext.js'
+import EditorForm from './EditorForm.js'
 
 type EditorFormProps = React.ComponentProps<typeof EditorForm>
 

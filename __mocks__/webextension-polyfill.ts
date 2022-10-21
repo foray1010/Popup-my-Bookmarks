@@ -1,1 +1,1 @@
-export { default } from './browserExtension'
+export { default } from './browserExtension/index.js'

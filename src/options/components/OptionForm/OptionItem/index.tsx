@@ -5,12 +5,12 @@
 */
 import type * as React from 'react'
 
-import type { OptionConfig } from '../../../../core/types/options'
-import InputNumber from './InputNumber'
-import InputSelect from './InputSelect'
-import SelectButton from './SelectButton'
-import SelectMultiple from './SelectMultiple'
-import SelectString from './SelectString'
+import type { OptionConfig } from '../../../../core/types/options.js'
+import InputNumber from './InputNumber/index.js'
+import InputSelect from './InputSelect/index.js'
+import SelectButton from './SelectButton/index.js'
+import SelectMultiple from './SelectMultiple/index.js'
+import SelectString from './SelectString/index.js'
 
 interface Props<T = any> {
   readonly name: string

@@ -1,7 +1,7 @@
 import webExtension from 'webextension-polyfill'
 
-import * as CST from '../../../constants'
-import type { BookmarkInfo } from '../../../types'
+import * as CST from '../../../constants/index.js'
+import type { BookmarkInfo } from '../../../types/index.js'
 
 const generateFakeBookmarkInfo = (
   partialBookmarkInfo: Partial<BookmarkInfo>,
