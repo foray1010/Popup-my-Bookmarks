@@ -49,7 +49,7 @@ const useClickMenuRow = (rowName?: string) => {
   )
 
   return React.useCallback(async () => {
-    if (!state.isOpen || !bookmarkInfo) return
+    if (!rowName || !state.isOpen || !bookmarkInfo) return
 
     switch (rowName) {
       case MenuItem.AddFolder:
@@ -157,7 +157,8 @@ const useClickMenuRow = (rowName?: string) => {
             })
             break
           }
-          default:
+          case ClipboardAction.None:
+            break
         }
         resetClipboard()
         break
@@ -165,8 +166,6 @@ const useClickMenuRow = (rowName?: string) => {
       case MenuItem.SortByName:
         await sortBookmarksByName(bookmarkInfo.parentId)
         break
-
-      default:
     }
 
     close()

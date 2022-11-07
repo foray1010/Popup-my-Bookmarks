@@ -92,9 +92,5 @@ export default function OptionItem({ optionConfig, ...inputProps }: Props) {
           onChange={onChange}
         />
       )
-
-    default:
   }
-
-  return null
 }

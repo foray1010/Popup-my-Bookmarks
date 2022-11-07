@@ -77,8 +77,6 @@ export async function openBookmarksInBrowser(
             openBookmarkProps.openIn === OPEN_IN_TYPES.INCOGNITO_WINDOW,
         })
         break
-
-      default:
     }
   }
 

@@ -3,14 +3,15 @@
   @typescript-eslint/no-unsafe-assignment,
   @typescript-eslint/no-unsafe-call,
 */
+import { promises as fsPromises } from 'node:fs'
+import path from 'node:path'
+import process from 'node:process'
+import * as readline from 'node:readline'
+import { promisify } from 'node:util'
+
 import type { Collection } from '@transifex/api'
 import { transifexApi } from '@transifex/api'
 import axios from 'axios'
-import { promises as fsPromises } from 'fs'
-import path from 'path'
-import process from 'process'
-import * as readline from 'readline'
-import { promisify } from 'util'
 
 const rl = readline.createInterface({
   input: process.stdin,

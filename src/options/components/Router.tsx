@@ -14,8 +14,5 @@ export default function Router() {
     case RoutePath.General:
     case RoutePath.UserInterface:
       return <OptionForm />
-
-    default:
-      return null
   }
 }
