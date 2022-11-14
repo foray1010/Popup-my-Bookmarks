@@ -39,7 +39,6 @@ async function main(): Promise<void> {
     auth: transifexApiKey,
   })
 
-  /* eslint-disable @typescript-eslint/await-thenable */
   const organization = await transifexApi.Organization.get({
     slug: organizationSlug,
   })
@@ -62,7 +61,6 @@ async function main(): Promise<void> {
     }>
   }
   await languages.fetch()
-  /* eslint-enable @typescript-eslint/await-thenable */
 
   await Promise.all(
     languages.data.map(async (language) => {
