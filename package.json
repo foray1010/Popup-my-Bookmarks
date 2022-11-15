@@ -40,7 +40,7 @@
     "nanoid": "4.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "7.39.3",
+    "react-hook-form": "7.39.4",
     "react-virtual": "2.10.4",
     "use-debounce": "8.0.4",
     "use-deep-compare": "1.1.0",
