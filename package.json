@@ -42,7 +42,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "7.39.7",
     "react-virtual": "2.10.4",
-    "use-debounce": "8.0.4",
+    "use-debounce": "9.0.2",
     "use-deep-compare": "1.1.0",
     "use-resize-observer": "9.1.0",
     "use-typed-event-listener": "4.0.2",
