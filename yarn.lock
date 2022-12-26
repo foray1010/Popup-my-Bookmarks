@@ -1215,10 +1215,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@fontsource/archivo-narrow@4.5.10":
-  version "4.5.10"
-  resolved "https://registry.yarnpkg.com/@fontsource/archivo-narrow/-/archivo-narrow-4.5.10.tgz#fd59e2ad9e60a8c16ac0d96001fd7ab9d21a4382"
-  integrity sha512-05Q0oCfYCt6wc74/n9amHriFHiPbQFJUqiQu9eZowNs4EaNypDCvqZf0jcZ0khihjd4/QBp6eCiMVbK8e/EI0w==
+"@fontsource/archivo-narrow@4.5.11":
+  version "4.5.11"
+  resolved "https://registry.yarnpkg.com/@fontsource/archivo-narrow/-/archivo-narrow-4.5.11.tgz#e07ed05d5f96d459e943f01a679bda6ad6b12ed5"
+  integrity sha512-96WTuvNDLHrsPcquq68sbUads4HwIhbP90cTHXARrtI23qibDIqcqRjVY9UGbC98RWhjdroV5LvvLktcUYcjUA==
 
 "@foray1010/common-presets-utils@^6.0.0":
   version "6.0.0"
