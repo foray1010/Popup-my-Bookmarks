@@ -109,7 +109,7 @@
     "sharp": "0.31.3",
     "size-limit": "8.1.0",
     "style-loader": "3.3.1",
-    "stylelint": "14.15.0",
+    "stylelint": "14.16.0",
     "swc-loader": "0.2.3",
     "terser-webpack-plugin": "5.3.6",
     "ts-node": "10.9.1",
