@@ -29,7 +29,7 @@
     "chrome >= 88"
   ],
   "dependencies": {
-    "@fontsource/archivo-narrow": "4.5.10",
+    "@fontsource/archivo-narrow": "4.5.11",
     "@reach/portal": "0.18.0",
     "@tanstack/react-query": "4.18.0",
     "@tanstack/react-query-devtools": "4.18.0",
