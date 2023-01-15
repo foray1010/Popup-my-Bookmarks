@@ -10,15 +10,18 @@ type Messages = Record<
 >
 
 const i18n: typeof browser.i18n = {
-  // @ts-expect-error: todo
-  detectLanguage() {},
-  // @ts-expect-error: todo
-  getAcceptLanguages() {},
+  detectLanguage() {
+    throw new Error('Not implemented')
+  },
+  getAcceptLanguages() {
+    throw new Error('Not implemented')
+  },
   getMessage(messageName) {
     return (messages as Messages)[messageName]?.message ?? ''
   },
-  // @ts-expect-error: todo
-  getUILanguage() {},
+  getUILanguage() {
+    throw new Error('Not implemented')
+  },
 }
 
 export default i18n

@@ -14,6 +14,7 @@ const Button = React.forwardRef<HTMLButtonElement, Props>(function InnerButton(
       {...props}
       ref={ref}
       className={classNames(classes['main'], className)}
+      // eslint-disable-next-line react/button-has-type
       type={type}
     />
   )

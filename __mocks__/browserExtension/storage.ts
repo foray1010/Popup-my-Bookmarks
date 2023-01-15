@@ -34,6 +34,18 @@ class StorageArea implements browser.storage.StorageArea {
   public async clear() {
     this.storage = {}
   }
+
+  public onChanged = {
+    addListener() {
+      throw new Error('Not implemented')
+    },
+    removeListener() {
+      throw new Error('Not implemented')
+    },
+    hasListener() {
+      throw new Error('Not implemented')
+    },
+  }
 }
 
 class StorageAreaSync
@@ -55,8 +67,17 @@ const storage: typeof browser.storage = {
   local: new StorageArea(),
   sync: new StorageAreaSync(),
   managed: new StorageArea(),
-  // @ts-expect-error: todo
-  onChanged() {},
+  onChanged: {
+    addListener() {
+      throw new Error('Not implemented')
+    },
+    removeListener() {
+      throw new Error('Not implemented')
+    },
+    hasListener() {
+      throw new Error('Not implemented')
+    },
+  },
 }
 
 export default storage
