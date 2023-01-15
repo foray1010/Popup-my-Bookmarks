@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import classes from './contributors.module.css'
 
-const contributors = {
+const contributors: Record<string, readonly string[]> = {
   Developer: ['foray1010'],
   Tester: ['David Bryant'],
   'Dutch Translator': ['Marzas'],

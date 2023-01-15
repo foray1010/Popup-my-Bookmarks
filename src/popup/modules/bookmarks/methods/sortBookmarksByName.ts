@@ -59,7 +59,7 @@ const sortGroupByPriority = (
     // shouldn't exist
     BOOKMARK_TYPES.DRAG_INDICATOR,
     BOOKMARK_TYPES.NO_BOOKMARK,
-  ] as const
+  ] as const satisfies readonly BOOKMARK_TYPES[]
   return Array.from(groups).sort((groupA, groupB) => {
     return priority.indexOf(groupA.type) - priority.indexOf(groupB.type)
   })

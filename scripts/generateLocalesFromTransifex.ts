@@ -108,7 +108,7 @@ async function main(): Promise<void> {
           })
           .filter(<T>(x: T | undefined): x is T => x !== undefined)
           .sort(([a], [b]) => a.localeCompare(b)),
-      )
+      ) satisfies typeof messagesJson
 
       await fsPromises.mkdir(path.join(localesPath, mappedLanguage), {
         recursive: true,
