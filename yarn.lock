@@ -1226,10 +1226,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@fontsource/archivo-narrow@4.5.11":
-  version "4.5.11"
-  resolved "https://registry.yarnpkg.com/@fontsource/archivo-narrow/-/archivo-narrow-4.5.11.tgz#e07ed05d5f96d459e943f01a679bda6ad6b12ed5"
-  integrity sha512-96WTuvNDLHrsPcquq68sbUads4HwIhbP90cTHXARrtI23qibDIqcqRjVY9UGbC98RWhjdroV5LvvLktcUYcjUA==
+"@fontsource/archivo-narrow@4.5.12":
+  version "4.5.12"
+  resolved "https://registry.yarnpkg.com/@fontsource/archivo-narrow/-/archivo-narrow-4.5.12.tgz#55e771735be8d9ebfe2981f0ea2b45e53504646d"
+  integrity sha512-xFv0s1PJFcna4e+ApdT0H9DdhJEKzsh6UAJlGXr3Mk1DBr5xri48PhdZDP0tK1ulK/ZpTwOBiEocCzaFJppWOw==
 
 "@foray1010/common-presets-utils@^6.0.0":
   version "6.0.0"
