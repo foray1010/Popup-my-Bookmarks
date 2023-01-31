@@ -66,7 +66,7 @@
     "@testing-library/react": "13.4.0",
     "@testing-library/react-hooks": "8.0.1",
     "@testing-library/user-event": "14.4.3",
-    "@transifex/api": "5.0.5",
+    "@transifex/api": "5.0.6",
     "@types/duplicate-package-checker-webpack-plugin": "2.1.2",
     "@types/firefox-webext-browser": "109.0.0",
     "@types/jest": "29.2.6",
