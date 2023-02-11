@@ -175,8 +175,6 @@ const webpackConfig: Configuration = {
     },
   },
   output: {
-    // this file will actually be compiled to a commonjs file
-    // eslint-disable-next-line no-undef
     path: path.resolve(__dirname, outputDir),
     filename: path.join('js', '[name].js'),
   },
