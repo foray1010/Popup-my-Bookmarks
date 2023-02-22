@@ -100,7 +100,7 @@
     "postcss": "8.4.21",
     "postcss-loader": "7.0.2",
     "postcss-normalize": "10.0.1",
-    "prettier": "2.8.3",
+    "prettier": "2.8.4",
     "react-test-renderer": "18.2.0",
     "remark-cli": "11.0.0",
     "remeda": "1.6.1",
