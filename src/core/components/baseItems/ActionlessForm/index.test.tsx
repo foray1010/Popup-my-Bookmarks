@@ -6,6 +6,7 @@ import ActionlessForm from './index.js'
 
 describe('ActionlessForm', () => {
   it('should prevent default form submit action', async () => {
+    const user = userEvent.setup()
     const handleSubmit = jest.fn<void, [React.FormEvent<HTMLFormElement>]>(
       (evt) => {
         evt.persist()
@@ -19,7 +20,7 @@ describe('ActionlessForm', () => {
       </ActionlessForm>,
     )
 
-    await userEvent.click(screen.getByRole('button', { name }))
+    await user.click(screen.getByRole('button', { name }))
 
     expect(handleSubmit).toHaveBeenCalledWith(
       expect.objectContaining({

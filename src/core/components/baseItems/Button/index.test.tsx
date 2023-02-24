@@ -6,6 +6,7 @@ import Button from './index.js'
 
 describe('Button', () => {
   it('should not fire form submit when clicked in form', async () => {
+    const user = userEvent.setup()
     const handleSubmit = jest.fn<void, [React.FormEvent<HTMLFormElement>]>()
     const name = 'click me'
 
@@ -15,12 +16,13 @@ describe('Button', () => {
       </form>,
     )
 
-    await userEvent.click(screen.getByRole('button', { name }))
+    await user.click(screen.getByRole('button', { name }))
 
     expect(handleSubmit).not.toHaveBeenCalled()
   })
 
   it('should fire form submit when type="submit"', async () => {
+    const user = userEvent.setup()
     const handleSubmit = jest.fn<void, [React.FormEvent<HTMLFormElement>]>(
       (evt) => {
         evt.preventDefault()
@@ -34,7 +36,7 @@ describe('Button', () => {
       </form>,
     )
 
-    await userEvent.click(screen.getByRole('button', { name }))
+    await user.click(screen.getByRole('button', { name }))
 
     expect(handleSubmit).toHaveBeenCalled()
   })
