@@ -1,7 +1,7 @@
 .main {
-  composes: focus from '../../../core/styles/composes.module.css';
-  color: var(--main-color1);
   text-decoration: none;
+  color: var(--main-color1);
+  composes: focus from '../../../core/styles/composes.module.css';
 
   &:hover {
     color: var(--main-color2);

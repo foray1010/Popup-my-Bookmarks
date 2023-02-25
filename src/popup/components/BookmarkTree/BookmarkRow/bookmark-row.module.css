@@ -1,12 +1,12 @@
 .main {
-  /* stylelint-disable-next-line value-keyword-case */
-  composes: listItem from '../../../../core/styles/composes.module.css';
-  display: flex;
   box-sizing: border-box;
+  display: flex;
+  gap: var(--golden-gap-2x);
   align-items: center;
   padding: var(--golden-gap);
   color: var(--main-font-color);
-  gap: var(--golden-gap-2x);
+  /* stylelint-disable-next-line value-keyword-case */
+  composes: listItem from '../../../../core/styles/composes.module.css';
 
   &.dragIndicator {
     border: 1px dashed var(--highlight-level5);
@@ -17,14 +17,14 @@
   }
 
   &.highlighted {
+    outline: 0;
     border-color: var(--highlight-level2);
     background-color: var(--highlight-level1);
-    outline: 0;
   }
 
   &.separator {
-    color: var(--highlight-level4);
     line-height: 0.5;
+    color: var(--highlight-level4);
 
     & > .title {
       text-overflow: clip;
@@ -41,9 +41,9 @@
 }
 
 .icon {
+  flex-shrink: 0;
   min-width: 16px;
   min-height: 16px;
-  flex-shrink: 0;
 }
 
 .title {

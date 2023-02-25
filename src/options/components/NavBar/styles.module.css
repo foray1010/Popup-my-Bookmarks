@@ -1,37 +1,36 @@
 .main {
-  display: flex;
-  min-width: 820px;
-  margin-bottom: var(--golden-gap-2x);
+  display: grid;
+  grid-auto-flow: column;
   background-color: var(--main-color5);
+  min-inline-size: calc(16rem * 4);
 }
 
 .button {
-  composes: focus from '../../../core/styles/composes.module.css';
-  flex: 1 0 0;
-  padding-top: var(--golden-gap-2x);
   border: 0;
-  border-bottom: var(--golden-gap-2x) solid transparent;
+  border-block-end: var(--golden-gap-2x) solid transparent;
   background-color: transparent;
-  color: var(--main-background-color);
   cursor: default;
-  font: 1.5em 'Archivo Narrow', sans-serif;
+  padding-block-start: var(--golden-gap-2x);
   text-align: center;
+  color: var(--main-background-color);
+  font: 1.5rem 'Archivo Narrow', sans-serif;
+  composes: focus from '../../../core/styles/composes.module.css';
 
   &:is(:hover, .active) {
     &:nth-of-type(1) {
-      border-bottom-color: var(--main-color1);
+      border-block-end-color: var(--main-color1);
     }
 
     &:nth-of-type(2) {
-      border-bottom-color: var(--main-color2);
+      border-block-end-color: var(--main-color2);
     }
 
     &:nth-of-type(3) {
-      border-bottom-color: var(--main-color3);
+      border-block-end-color: var(--main-color3);
     }
 
     &:nth-of-type(4) {
-      border-bottom-color: var(--main-color4);
+      border-block-end-color: var(--main-color4);
     }
   }
 }

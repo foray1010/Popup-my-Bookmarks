@@ -19,17 +19,17 @@ import { Menu, MenuProvider } from '../menu/index.js'
 import Search from '../Search/index.js'
 import useGlobalEvents from './useGlobalEvents.js'
 
-function useSetBodyCss(bodyCss: Record<string, string | null>) {
+function useRootCss(rootCss: Record<string, string | null>) {
   React.useEffect(() => {
-    Object.entries(bodyCss).map(([key, value]) => {
-      document.body.style.setProperty(key, value)
+    Object.entries(rootCss).map(([key, value]) => {
+      document.documentElement.style.setProperty(key, value)
     })
     return () => {
-      Object.keys(bodyCss).map((key) => {
-        document.body.style.removeProperty(key)
+      Object.keys(rootCss).map((key) => {
+        document.documentElement.style.removeProperty(key)
       })
     }
-  }, [bodyCss])
+  }, [rootCss])
 }
 
 const AppWithOptions = withOptions(function InnerApp() {
@@ -39,33 +39,33 @@ const AppWithOptions = withOptions(function InnerApp() {
 
   const { globalBodySize } = useGlobalBodySize()
 
-  const bodyCss = React.useMemo(
-    () => ({
-      'font-family': Array.from(
-        new Set([
-          ...(options[OPTIONS.FONT_FAMILY]
-            ?.split(',')
-            .map((x) => x.trim())
-            .filter(Boolean) ?? []),
-          'sans-serif',
-        ]),
-      ).join(','),
-      'font-size':
-        options[OPTIONS.FONT_SIZE] !== undefined
-          ? `${options[OPTIONS.FONT_SIZE]}px`
-          : null,
-      height:
-        globalBodySize?.height !== undefined
-          ? `${globalBodySize.height}px`
-          : null,
-      width:
-        globalBodySize?.width !== undefined
-          ? `${globalBodySize.width}px`
-          : null,
-    }),
-    [globalBodySize, options],
+  useRootCss(
+    React.useMemo(() => {
+      return {
+        'font-family': Array.from(
+          new Set([
+            ...(options[OPTIONS.FONT_FAMILY]
+              ?.split(',')
+              .map((x) => x.trim())
+              .filter(Boolean) ?? []),
+            'sans-serif',
+          ]),
+        ).join(','),
+        'font-size':
+          options[OPTIONS.FONT_SIZE] !== undefined
+            ? `${options[OPTIONS.FONT_SIZE]}px`
+            : null,
+        height:
+          globalBodySize?.height !== undefined
+            ? `${globalBodySize.height}px`
+            : null,
+        width:
+          globalBodySize?.width !== undefined
+            ? `${globalBodySize.width}px`
+            : null,
+      }
+    }, [globalBodySize, options]),
   )
-  useSetBodyCss(bodyCss)
 
   return (
     <BookmarkTreesProvider>

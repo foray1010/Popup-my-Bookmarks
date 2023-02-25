@@ -20,6 +20,7 @@ export default function OptionForm(props: Props) {
 
   return (
     <ActionlessForm
+      className={classes['form']}
       onReset={props.onReset}
       onSubmit={handleSubmit(props.onSubmit)}
     >
@@ -27,9 +28,7 @@ export default function OptionForm(props: Props) {
         <tbody>
           {props.selectedOptionFormMap.map((optionName) => (
             <tr key={optionName}>
-              <td className={classes['itemDesc']}>
-                {webExtension.i18n.getMessage(optionName)}
-              </td>
+              <td>{webExtension.i18n.getMessage(optionName)}</td>
               <td className={classes['itemInput']}>
                 <Controller
                   control={control}

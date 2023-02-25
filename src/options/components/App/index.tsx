@@ -8,16 +8,13 @@ import Donate from '../Donate.js'
 import NavBar from '../NavBar/index.js'
 import { NavigationProvider } from '../navigationContext.js'
 import Router from '../Router.js'
-import classes from './styles.module.css'
 
 function InnerApp() {
   return (
     <>
-      <div className={classes['main']}>
-        <NavBar />
-        <Router />
-        <Donate />
-      </div>
+      <NavBar />
+      <Router />
+      <Donate />
 
       {process.env['NODE_ENV'] === 'development' ? (
         <ReactQueryDevtools initialIsOpen={false} />

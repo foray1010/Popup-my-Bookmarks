@@ -1,9 +1,10 @@
 .main {
-  composes: focus from '../../../styles/composes.module.css';
-  padding: var(--golden-gap-2x) var(--golden-gap-4x);
   border: 1px solid var(--highlight-level2);
   background-color: transparent;
+  padding-block: var(--golden-gap-2x);
+  padding-inline: var(--golden-gap-4x);
   color: inherit;
   font-family: inherit;
   font-size: inherit;
+  composes: focus from '../../../styles/composes.module.css';
 }

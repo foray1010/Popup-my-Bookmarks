@@ -3,7 +3,7 @@
 
   &,
   & > dd {
-    margin: 0 4ch;
+    margin-inline-start: 4ch;
   }
 
   & > dt {

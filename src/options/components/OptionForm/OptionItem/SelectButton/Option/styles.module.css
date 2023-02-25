@@ -1,13 +1,14 @@
 .item {
-  width: 100%;
-  padding: var(--golden-gap-2x) var(--golden-gap-4x);
+  transition: color var(--transition-duration);
   border: 0;
   background-color: transparent;
+  padding-block: var(--golden-gap-2x);
+  padding-inline: var(--golden-gap-4x);
+  width: 100%;
   color: var(--frontground-color);
-  transition: color var(--transition-duration);
 }
 
 .itemActive {
-  color: var(--background-color);
   cursor: default;
+  color: var(--background-color);
 }

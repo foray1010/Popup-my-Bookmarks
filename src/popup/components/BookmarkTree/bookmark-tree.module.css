@@ -2,13 +2,13 @@
   box-sizing: border-box;
 
   &:last-child {
-    padding-bottom: var(--golden-gap);
-    border-bottom: currentcolor solid var(--golden-gap);
+    border-block-end: currentcolor solid var(--golden-gap);
+    padding-block-end: var(--golden-gap);
   }
 }
 
 .main {
   position: absolute;
-  width: 100%;
   background-color: var(--main-background-color);
+  width: 100%;
 }

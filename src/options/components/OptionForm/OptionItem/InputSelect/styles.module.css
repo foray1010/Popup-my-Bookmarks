@@ -1,25 +1,25 @@
 .main {
+  display: inline flow-root;
   position: relative;
-  display: inline-block;
   border: 1px solid var(--main-color1);
 }
 
 .input,
 .select {
-  height: 100%;
   border: 0 !important;
+  height: 100%;
 }
 
 .input {
+  box-sizing: border-box;
   position: absolute;
   top: 0;
   left: 0;
-  width: 85%;
-  box-sizing: border-box;
   background-color: var(--main-background-color);
+  width: 85%;
 }
 
 .select {
-  background-color: transparent;
   outline: 0;
+  background-color: transparent;
 }

@@ -5,13 +5,13 @@
 }
 
 ::-webkit-scrollbar {
+  background-color: transparent;
   width: calc(5px + var(--golden-gap));
   height: 5px;
-  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  border-left: var(--golden-gap) solid var(--main-background-color);
+  border-inline-start: var(--golden-gap) solid var(--main-background-color);
   background-color: var(--highlight-level3);
 
   &:hover {

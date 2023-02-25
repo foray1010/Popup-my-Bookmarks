@@ -25,6 +25,8 @@
 
   background-color: var(--main-background-color);
   color: var(--main-font-color);
+  font-family: sans-serif;
+  font-size: 75%;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -41,4 +43,6 @@
 
 body {
   margin: 0;
+  font-family: unset;
+  font-size: unset;
 }

@@ -10,11 +10,9 @@ export default function Donate() {
   return (
     <footer className={classes['main']}>
       <span className={classes['container']}>
-        <span className={classes['img']}>
-          <ExternalLink href={paypalUrl}>
-            <LazyImage alt='donate' src={donateIcon} />
-          </ExternalLink>
-        </span>
+        <ExternalLink href={paypalUrl}>
+          <LazyImage alt='donate' src={donateIcon} />
+        </ExternalLink>
         <span className={classes['desc']}>
           If you like Popup my Bookmarks, please consider to:
           <ol>

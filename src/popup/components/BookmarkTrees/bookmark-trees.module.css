@@ -1,22 +1,15 @@
-._panel {
-  position: relative;
-
-  &:not(:first-child) {
-    margin-right: var(--golden-gap);
-  }
-}
-
 .main {
   display: flex;
   flex-direction: row-reverse;
+  gap: var(--golden-gap);
 }
 
 .master {
-  composes: _panel;
+  position: relative;
   color: var(--main-color2);
 }
 
 .slave {
-  composes: _panel;
+  position: relative;
   color: var(--main-color1);
 }

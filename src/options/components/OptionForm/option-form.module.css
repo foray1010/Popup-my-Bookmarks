@@ -1,7 +1,14 @@
+.form {
+  display: flow-root;
+  margin-block: var(--golden-gap-4x);
+}
+
 .table {
+  /* unsetting the top and bottom spacing added by border-spacing as it does not support margin collapse */
+  margin-block: calc(var(--golden-gap-4x) * -1);
   width: 100%;
-  border-spacing: var(--golden-gap-4x);
   table-layout: fixed;
+  border-spacing: var(--golden-gap-4x);
 
   & > tbody,
   & > tfoot {
@@ -11,18 +18,13 @@
   }
 }
 
-.itemDesc {
-  overflow: hidden;
-  white-space: no-wrap;
-}
-
 .itemInput {
   & > input[type='number'],
   & > input[type='text'],
   & > select {
-    height: var(--input-height);
     box-sizing: border-box;
-    padding: var(--golden-gap-2x) var(--golden-gap-4x);
     border-color: var(--main-color1);
+    padding-block: var(--golden-gap-2x);
+    padding-inline: var(--golden-gap-4x);
   }
 }

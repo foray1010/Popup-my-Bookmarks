@@ -23,7 +23,7 @@ export default function SelectMultiple({
       {choices.map((optionChoice, optionChoiceIndex) => {
         if (optionChoice === undefined) return null
         return (
-          <li key={optionChoiceIndex}>
+          <li key={optionChoiceIndex} className={classes['list-item']}>
             <label>
               <Input
                 {...restProps}

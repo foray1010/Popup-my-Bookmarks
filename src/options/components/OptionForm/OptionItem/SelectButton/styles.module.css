@@ -1,9 +1,9 @@
 .cover {
   position: absolute;
+  transition: left var(--transition-duration);
+  background-color: var(--frontground-color);
   width: 50%;
   height: 100%;
-  background-color: var(--frontground-color);
-  transition: left var(--transition-duration);
 }
 
 .main {
@@ -11,15 +11,15 @@
   --background-color: var(--main-background-color);
   --transition-duration: 0.4s;
 
+  display: inline flow-root;
   position: relative;
-  display: inline-block;
   border: 1px solid var(--frontground-color);
   background-color: var(--background-color);
   text-align: center;
 }
 
 .options {
+  display: inline grid;
   position: relative;
-  display: inline-grid;
   grid-template-columns: 1fr 1fr;
 }

@@ -1,27 +1,25 @@
 .icon {
-  height: 100%;
   box-sizing: border-box;
-  flex-shrink: 0;
   padding: var(--golden-gap);
+  height: 100%;
   color: var(--highlight-level4);
 }
 
 .main {
-  --input-font-size: 1em;
-  --input-vertical-padding: var(--golden-gap-2x);
-
-  display: flex;
-  height: calc(var(--input-font-size) + var(--input-vertical-padding) * 2);
-  border: solid var(--highlight-level3);
-  border-width: 0 0 1px;
-  margin-bottom: var(--golden-gap);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  margin-block-end: var(--golden-gap);
+  border: 0;
+  border-block-end: 1px solid var(--highlight-level3);
 }
 
 .searchInput {
-  flex-grow: 1;
-  padding: var(--input-vertical-padding) var(--golden-gap);
-  border: 0;
-  color: var(--main-font-color);
-  font-size: var(--input-font-size);
   outline: 0;
+  border: 0;
+  padding-block: var(--golden-gap-2x);
+  padding-inline: var(--golden-gap);
+  /* without this, the UI will break when the height is too large, as it scales with font size. */
+  width: 100%;
+  height: 1em;
+  color: var(--main-font-color);
 }

@@ -1,29 +1,31 @@
+.button-group {
+  display: flex;
+  gap: var(--golden-gap-2x);
+  justify-content: end;
+  margin-block: var(--golden-gap-2x);
+}
+
 .header {
-  padding: var(--golden-gap) var(--golden-gap-4x);
-  background-color: var(--main-color2);
-  color: var(--main-background-color);
-  cursor: default;
   float: left;
+  margin-block: var(--golden-gap-2x);
+  background-color: var(--main-color2);
+  cursor: default;
+  padding-block: var(--golden-gap);
+  padding-inline: var(--golden-gap-4x);
+  color: var(--main-background-color);
 }
 
 .input {
-  width: 100%;
   box-sizing: border-box;
+  display: block;
+  margin-block: var(--golden-gap-2x);
+  width: 100%;
 }
 
 .main {
   box-sizing: border-box;
-  padding: var(--golden-gap-2x) var(--golden-gap);
-  border: solid var(--highlight-level3);
-  border-width: 1px 0;
+  border-block: 1px solid var(--highlight-level3);
   background-color: var(--main-background-color);
+  padding-inline: var(--golden-gap-2x);
   text-align: right;
-
-  & > *:not(:first-child) {
-    margin-top: var(--golden-gap-2x);
-  }
-
-  & > button + button {
-    margin-left: var(--golden-gap-2x);
-  }
 }

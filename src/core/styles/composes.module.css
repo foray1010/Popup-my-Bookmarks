@@ -1,6 +1,6 @@
 .focus {
-  outline-color: var(--highlight-level5);
   outline-width: 1px;
+  outline-color: var(--highlight-level5);
 
   &:focus {
     outline-style: solid;

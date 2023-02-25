@@ -1,7 +1,8 @@
 .main {
   /* stylelint-disable-next-line value-keyword-case */
   composes: listItem from '../../../core/styles/composes.module.css';
-  padding: var(--golden-gap) var(--golden-gap-4x);
+  padding-block: var(--golden-gap);
+  padding-inline: var(--golden-gap-4x);
   white-space: nowrap;
 
   &.unclickable {
@@ -9,8 +10,8 @@
   }
 
   &.focused:not(.unclickable) {
+    outline: 0;
     border-color: var(--highlight-level2);
     background-color: var(--highlight-level1);
-    outline: 0;
   }
 }

@@ -32,7 +32,7 @@ export default function Editor({ onConfirm, ...props }: Props) {
         })
       }, [handleSubmit, onConfirm])}
     >
-      <span className={classes['header']}>{props.header}</span>
+      <div className={classes['header']}>{props.header}</div>
 
       <Input
         {...register('title')}
@@ -40,17 +40,20 @@ export default function Editor({ onConfirm, ...props }: Props) {
         className={classes['input']}
         defaultValue={props.defaultTitle}
       />
-      <Input
-        {...register('url')}
-        className={classes['input']}
-        defaultValue={props.defaultUrl}
-        hidden={!props.isAllowedToEditUrl}
-      />
+      {props.isAllowedToEditUrl && (
+        <Input
+          {...register('url')}
+          className={classes['input']}
+          defaultValue={props.defaultUrl}
+        />
+      )}
 
-      <Button type='submit'>{webExtension.i18n.getMessage('confirm')}</Button>
-      <Button onClick={props.onCancel}>
-        {webExtension.i18n.getMessage('cancel')}
-      </Button>
+      <div className={classes['button-group']}>
+        <Button type='submit'>{webExtension.i18n.getMessage('confirm')}</Button>
+        <Button onClick={props.onCancel}>
+          {webExtension.i18n.getMessage('cancel')}
+        </Button>
+      </div>
     </ActionlessForm>
   )
 }

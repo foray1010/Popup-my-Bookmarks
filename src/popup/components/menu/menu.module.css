@@ -1,13 +1,13 @@
 .main {
-  padding: var(--golden-gap-2x);
   border: 1px solid var(--highlight-level3);
-  background-color: var(--main-background-color);
   box-shadow: 0 2px 4px rgba(0 0 0 20%);
+  background-color: var(--main-background-color);
+  padding: var(--golden-gap-2x);
 
   /* separator between menu fields */
   & > * + * {
-    padding-top: var(--golden-gap-2x);
-    border-top: 1px solid var(--highlight-level2);
-    margin-top: var(--golden-gap-2x);
+    margin-block-start: var(--golden-gap-2x);
+    border-block-start: 1px solid var(--highlight-level2);
+    padding-block-start: var(--golden-gap-2x);
   }
 }

@@ -1,8 +1,7 @@
 .close {
-  height: 100%;
   box-sizing: border-box;
-  flex-shrink: 0; /* don't push me out of view when title is too long */
   padding: 6px;
+  height: 100%;
   color: var(--main-background-color);
 
   &:hover {
@@ -11,23 +10,20 @@
 }
 
 .main {
-  --font-size: 1.75em;
-  --padding: var(--golden-gap-2x);
-
-  display: flex;
-  height: calc(var(--font-size) + var(--padding) * 2);
+  display: grid;
+  grid-auto-flow: column;
   justify-content: space-between;
-  margin-bottom: var(--golden-gap);
+  margin-block-end: var(--golden-gap);
   background-color: currentcolor;
 }
 
 .title {
+  margin: var(--golden-gap-2x);
+  cursor: default;
+  line-height: 1;
+  color: var(--main-background-color);
+  font-family: 'Archivo Narrow', simhei, sans-serif;
+  font-size: 1.75rem;
   /* stylelint-disable-next-line value-keyword-case */
   composes: noTextOverflow from '../../../core/styles/composes.module.css';
-  padding: var(--padding);
-  margin: 0;
-  color: var(--main-background-color);
-  cursor: default;
-  font: var(--font-size) 'Archivo Narrow', simhei, sans-serif;
-  line-height: 1;
 }

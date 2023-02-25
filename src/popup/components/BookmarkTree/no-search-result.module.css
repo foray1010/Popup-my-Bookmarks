@@ -1,10 +1,10 @@
 .main {
+  box-sizing: border-box;
+  margin: var(--golden-gap-2x);
+  cursor: default;
+  padding: var(--golden-gap);
+  text-align: center;
+  color: var(--main-font-color);
   /* stylelint-disable-next-line value-keyword-case */
   composes: noTextOverflow from '../../../core/styles/composes.module.css';
-  box-sizing: border-box;
-  padding: var(--golden-gap);
-  margin: var(--golden-gap-2x);
-  color: var(--main-font-color);
-  cursor: default;
-  text-align: center;
 }

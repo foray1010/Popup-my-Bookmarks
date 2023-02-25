@@ -1,8 +1,9 @@
 .container {
-  display: inline-flex;
+  display: inline flex;
+  gap: var(--golden-gap-4x);
   align-items: center;
-  padding: var(--golden-gap-4x);
   background-color: var(--highlight-level1);
+  padding: var(--golden-gap-4x);
 }
 
 .desc {
@@ -11,13 +12,8 @@
   & > ol {
     display: inline;
     padding: 0;
-    margin: 0;
     list-style-position: inside;
   }
-}
-
-.img {
-  padding-right: 20px;
 }
 
 .main {
