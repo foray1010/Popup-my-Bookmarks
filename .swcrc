@@ -15,7 +15,7 @@
   "env": {
     // `usage` mode is less efficient than `entry`
     "mode": "entry",
-    "coreJs": "3.27",
+    "coreJs": "3.28",
     "shippedProposals": true
   }
 }
