@@ -51,9 +51,9 @@
   "devDependencies": {
     "@commitlint/cli": "17.4.4",
     "@commitlint/config-conventional": "17.4.4",
-    "@foray1010/eslint-config": "9.1.0",
+    "@foray1010/eslint-config": "9.2.0",
     "@foray1010/jest-preset": "3.0.0",
-    "@foray1010/prettier-config": "8.0.0",
+    "@foray1010/prettier-config": "8.0.1",
     "@foray1010/remark-preset": "8.0.0",
     "@foray1010/stylelint-config": "10.1.1",
     "@foray1010/tsconfig": "10.0.0",
