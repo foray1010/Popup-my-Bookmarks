@@ -7,10 +7,10 @@
 
 .button {
   border: 0;
-  border-block-end: var(--golden-gap-2x) solid transparent;
+  border-block-end: var(--gap-px-2x) solid transparent;
   background-color: transparent;
   cursor: default;
-  padding-block-start: var(--golden-gap-2x);
+  padding-block-start: var(--gap-px-2x);
   text-align: center;
   color: var(--main-background-color);
   font: 1.5rem 'Archivo Narrow', sans-serif;

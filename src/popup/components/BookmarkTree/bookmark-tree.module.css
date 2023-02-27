@@ -2,8 +2,8 @@
   box-sizing: border-box;
 
   &:last-child {
-    border-block-end: currentcolor solid var(--golden-gap);
-    padding-block-end: var(--golden-gap);
+    border-block-end: currentcolor solid var(--gap-px);
+    padding-block-end: var(--gap-px);
   }
 }
 

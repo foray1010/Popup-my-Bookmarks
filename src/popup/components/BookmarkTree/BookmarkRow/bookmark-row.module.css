@@ -1,9 +1,9 @@
 .main {
   box-sizing: border-box;
   display: flex;
-  gap: var(--golden-gap-2x);
+  gap: var(--gap-px-2x);
   align-items: center;
-  padding: var(--golden-gap);
+  padding: var(--gap-px);
   color: var(--main-font-color);
   /* stylelint-disable-next-line value-keyword-case */
   composes: listItem from '../../../../core/styles/composes.module.css';

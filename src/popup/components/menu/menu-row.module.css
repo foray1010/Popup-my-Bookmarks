@@ -1,8 +1,8 @@
 .main {
   /* stylelint-disable-next-line value-keyword-case */
   composes: listItem from '../../../core/styles/composes.module.css';
-  padding-block: var(--golden-gap);
-  padding-inline: var(--golden-gap-4x);
+  padding-block: var(--gap-px);
+  padding-inline: var(--gap-px-4x);
   white-space: nowrap;
 
   &.unclickable {

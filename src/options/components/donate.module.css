@@ -1,9 +1,9 @@
 .container {
   display: inline flex;
-  gap: var(--golden-gap-4x);
+  gap: var(--gap-px-4x);
   align-items: center;
   background-color: var(--highlight-level1);
-  padding: var(--golden-gap-4x);
+  padding: var(--gap-px-4x);
 }
 
 .desc {
@@ -19,5 +19,5 @@
 .main {
   display: flex;
   justify-content: center;
-  margin: var(--golden-gap-4x);
+  margin: var(--gap-px-4x);
 }

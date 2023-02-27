@@ -1,7 +1,7 @@
 .main {
   display: flex;
   flex-direction: row-reverse;
-  gap: var(--golden-gap);
+  gap: var(--gap-px);
 }
 
 .master {

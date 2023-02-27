@@ -13,12 +13,12 @@
   display: grid;
   grid-auto-flow: column;
   justify-content: space-between;
-  margin-block-end: var(--golden-gap);
+  margin-block-end: var(--gap-px);
   background-color: currentcolor;
 }
 
 .title {
-  margin: var(--golden-gap-2x);
+  margin: var(--gap-px-2x);
   cursor: default;
   line-height: 1;
   color: var(--main-background-color);

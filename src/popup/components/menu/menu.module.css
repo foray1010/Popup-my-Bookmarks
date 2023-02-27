@@ -2,12 +2,12 @@
   border: 1px solid var(--highlight-level3);
   box-shadow: 0 2px 4px rgba(0 0 0 20%);
   background-color: var(--main-background-color);
-  padding: var(--golden-gap-2x);
+  padding: var(--gap-px-2x);
 
   /* separator between menu fields */
   & > * + * {
-    margin-block-start: var(--golden-gap-2x);
+    margin-block-start: var(--gap-px-2x);
     border-block-start: 1px solid var(--highlight-level2);
-    padding-block-start: var(--golden-gap-2x);
+    padding-block-start: var(--gap-px-2x);
   }
 }

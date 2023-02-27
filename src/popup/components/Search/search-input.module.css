@@ -1,6 +1,6 @@
 .icon {
   box-sizing: border-box;
-  padding: var(--golden-gap);
+  padding: var(--gap-px);
   height: 100%;
   color: var(--highlight-level4);
 }
@@ -8,7 +8,7 @@
 .main {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  margin-block-end: var(--golden-gap);
+  margin-block-end: var(--gap-px);
   border: 0;
   border-block-end: 1px solid var(--highlight-level3);
 }
@@ -16,8 +16,8 @@
 .searchInput {
   outline: 0;
   border: 0;
-  padding-block: var(--golden-gap-2x);
-  padding-inline: var(--golden-gap);
+  padding-block: var(--gap-px-2x);
+  padding-inline: var(--gap-px);
   /* without this, the UI will break when the height is too large, as it scales with font size. */
   width: 100%;
   height: 1em;

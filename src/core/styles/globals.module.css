@@ -7,9 +7,9 @@
 }
 
 :root {
-  --golden-gap: 2px;
-  --golden-gap-2x: calc(var(--golden-gap) * 2);
-  --golden-gap-4x: calc(var(--golden-gap) * 4);
+  --gap-px: 2px;
+  --gap-px-2x: calc(var(--gap-px) * 2);
+  --gap-px-4x: calc(var(--gap-px) * 4);
   --highlight-level1: #eee;
   --highlight-level2: #e0e0e0;
   --highlight-level3: #bdbdbd;

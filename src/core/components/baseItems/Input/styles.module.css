@@ -5,8 +5,8 @@
 .textInput {
   border: 1px solid var(--highlight-level2);
   background-color: transparent;
-  padding-block: var(--golden-gap-2x);
-  padding-inline: var(--golden-gap-4x);
+  padding-block: var(--gap-px-2x);
+  padding-inline: var(--gap-px-4x);
   color: inherit;
   font-family: inherit;
   font-size: inherit;
