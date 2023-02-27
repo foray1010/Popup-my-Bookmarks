@@ -25,9 +25,6 @@
     "type:coverage": "type-coverage --strict --at-least 99 --detail --ignore-catch",
     "webpack": "ts-node node_modules/.bin/webpack-cli"
   },
-  "browserslist": [
-    "chrome >= 88"
-  ],
   "dependencies": {
     "@fontsource/archivo-narrow": "4.5.12",
     "@reach/portal": "0.18.0",
