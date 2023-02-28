@@ -18,14 +18,15 @@ export default function SelectButton({
   value,
   ...restProps
 }: Props) {
-  const leftPercentage = choices.indexOf(value) * (100 / choices.length)
+  const insetInlineStartPercentage =
+    choices.indexOf(value) * (100 / choices.length)
 
   return (
     <span className={classes['main']}>
       <span
         className={classes['cover']}
         style={{
-          left: `${leftPercentage}%`,
+          insetInlineStart: `${insetInlineStartPercentage}%`,
         }}
       />
       <span className={classes['options']}>
