@@ -2,7 +2,7 @@
   box-sizing: border-box;
   padding: 6px;
   height: 100%;
-  color: var(--main-background-color);
+  color: rgb(var(--bg-color-rgb));
 
   &:hover {
     background-color: var(--main-color4);
@@ -21,7 +21,7 @@
   margin: var(--gap-px-2x);
   cursor: default;
   line-height: 1;
-  color: var(--main-background-color);
+  color: rgb(var(--bg-color-rgb));
   font-family: 'Archivo Narrow', simhei, sans-serif;
   font-size: 1.75rem;
   /* stylelint-disable-next-line value-keyword-case */

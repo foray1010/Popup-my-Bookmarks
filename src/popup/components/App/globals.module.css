@@ -11,7 +11,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  border-inline-start: var(--gap-px) solid var(--main-background-color);
+  border-inline-start: var(--gap-px) solid rgb(var(--bg-color-rgb));
   background-color: var(--highlight-level3);
 
   &:hover {

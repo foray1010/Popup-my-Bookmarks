@@ -8,7 +8,7 @@
 
 .main {
   --frontground-color: var(--main-color1);
-  --background-color: var(--main-background-color);
+  --background-color: rgb(var(--bg-color-rgb));
   --transition-duration: 0.4s;
 
   display: inline flow-root;

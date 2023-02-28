@@ -1,7 +1,7 @@
 .main {
   border: 1px solid var(--highlight-level3);
   box-shadow: 0 2px 4px rgba(0 0 0 20%);
-  background-color: var(--main-background-color);
+  background-color: rgb(var(--bg-color-rgb));
   padding: var(--gap-px-2x);
 
   /* separator between menu fields */

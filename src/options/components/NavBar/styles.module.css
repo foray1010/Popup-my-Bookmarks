@@ -12,7 +12,7 @@
   cursor: default;
   padding-block-start: var(--gap-px-2x);
   text-align: center;
-  color: var(--main-background-color);
+  color: rgb(var(--bg-color-rgb));
   font: 1.5rem 'Archivo Narrow', sans-serif;
   composes: focus from '../../../core/styles/composes.module.css';
 

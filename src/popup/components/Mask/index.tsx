@@ -14,7 +14,7 @@ export default function Mask({ opacity, ...props }: Props) {
       style={React.useMemo(
         () => ({
           ...props.style,
-          opacity,
+          backgroundColor: `rgba(var(--bg-color-rgb), ${opacity})`,
         }),
         [opacity, props.style],
       )}
