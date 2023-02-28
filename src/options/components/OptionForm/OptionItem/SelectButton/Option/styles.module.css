@@ -2,13 +2,16 @@
   transition: color var(--transition-duration);
   border: 0;
   background-color: transparent;
-  padding-block: var(--gap-px-2x);
-  padding-inline: var(--gap-px-4x);
-  width: 100%;
   color: var(--frontground-color);
+  /* stylelint-disable-next-line value-keyword-case */
+  composes: noTextOverflow from '../../../../../../core/styles/composes.module.css';
 }
 
 .itemActive {
   cursor: default;
   color: var(--background-color);
+}
+
+.main {
+  display: contents;
 }

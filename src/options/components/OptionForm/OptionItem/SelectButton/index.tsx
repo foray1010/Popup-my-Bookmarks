@@ -18,14 +18,17 @@ export default function SelectButton({
   value,
   ...restProps
 }: Props) {
-  const leftPercentage = choices.indexOf(value) * (100 / choices.length)
+  const coverInlineSizePercentage = 100 / choices.length
+  const coverInsetInlineStartPercentage =
+    choices.indexOf(value) * coverInlineSizePercentage
 
   return (
     <span className={classes['main']}>
       <span
         className={classes['cover']}
         style={{
-          left: `${leftPercentage}%`,
+          inlineSize: `${coverInlineSizePercentage}%`,
+          insetInlineStart: `${coverInsetInlineStartPercentage}%`,
         }}
       />
       <span className={classes['options']}>

@@ -13,13 +13,12 @@ export default function Option({ children, ...props }: Props) {
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   return (
-    <span>
+    <span className={classes['main']}>
       <input ref={inputRef} {...props} hidden type='radio' />
       <Button
         className={classNames(classes['item'], {
           [classes['itemActive'] ?? '']: props.checked,
         })}
-        disabled={props.checked}
         onClick={React.useCallback(() => {
           if (inputRef.current) inputRef.current.click()
         }, [])}

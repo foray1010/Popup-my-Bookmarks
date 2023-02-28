@@ -1,9 +1,8 @@
 .cover {
   position: absolute;
-  transition: left var(--transition-duration);
+  transition: inset-inline-start var(--transition-duration);
   background-color: var(--frontground-color);
-  width: 50%;
-  height: 100%;
+  block-size: 100%;
 }
 
 .main {
@@ -15,11 +14,12 @@
   position: relative;
   border: 1px solid var(--frontground-color);
   background-color: var(--background-color);
-  text-align: center;
 }
 
 .options {
   display: inline grid;
-  position: relative;
-  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  justify-content: stretch;
+  isolation: isolate;
 }
