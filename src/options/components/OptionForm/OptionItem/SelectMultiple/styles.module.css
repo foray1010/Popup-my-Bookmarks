@@ -8,6 +8,7 @@
   margin: 0;
   margin-inline-end: var(--gap-px-2x);
   vertical-align: middle;
+  accent-color: var(--main-color1);
 }
 
 .list-item {
