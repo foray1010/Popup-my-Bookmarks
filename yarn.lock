@@ -9868,10 +9868,10 @@ remark@^14.0.0:
     remark-stringify "^10.0.0"
     unified "^10.0.0"
 
-remeda@1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/remeda/-/remeda-1.6.2.tgz#daee8b4bf2ae4a863bfc3b3cb0a54c484cd74789"
-  integrity sha512-4/gci8Crgp6l0ATZEvu/FxHJPjDUMZZ1vhSIROHNNx/cXi77ar/7Cj2Z8Bysd0Vs824QFRfcIKqOxqH+pKDW1Q==
+remeda@1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/remeda/-/remeda-1.8.0.tgz#ba8d99026c3f3be6fd268bddb3ed06dddd8b0d05"
+  integrity sha512-zhrGQbeIVJhXArg8/USMkZQeD36rr62SAt96bw5aOBjo7V399rOn7FrgQRG5WfxO9zME09vOtOs5nx1UsZ/80A==
 
 remove-accents@0.4.2:
   version "0.4.2"
