@@ -4,6 +4,7 @@
   @typescript-eslint/no-unsafe-member-access,
 */
 import type * as React from 'react'
+import webExtension from 'webextension-polyfill'
 
 import type { OptionConfig } from '../../../../core/types/options.js'
 import InputNumber from './InputNumber/index.js'
@@ -44,6 +45,17 @@ export default function OptionItem({ optionConfig, ...inputProps }: Props) {
       return (
         <SelectButton
           {...inputProps}
+          choices={[
+            {
+              label: webExtension.i18n.getMessage('yes'),
+              value: 'true',
+            },
+            {
+              label: webExtension.i18n.getMessage('no'),
+              value: 'false',
+            },
+          ]}
+          value={value === true ? 'true' : 'false'}
           onChange={(evt) => {
             onChange(evt.currentTarget.value === 'true')
           }}

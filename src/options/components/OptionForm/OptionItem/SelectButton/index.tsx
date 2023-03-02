@@ -1,5 +1,4 @@
 import type * as React from 'react'
-import webExtension from 'webextension-polyfill'
 
 import Option from './Option/index.js'
 import classes from './styles.module.css'
@@ -9,18 +8,24 @@ type RestOptionProps = Omit<
   'checked' | 'value'
 >
 
-interface Props extends RestOptionProps {
-  readonly choices?: ReadonlyArray<boolean>
-  readonly value: boolean
+type Choice<T> = {
+  readonly label: string
+  readonly value: T
 }
-export default function SelectButton({
-  choices = [true, false],
+
+interface Props<T extends string | number> extends RestOptionProps {
+  readonly choices: readonly Choice<T>[]
+  readonly value: T
+}
+export default function SelectButton<T extends string | number>({
+  choices,
   value,
   ...restProps
-}: Props) {
+}: Props<T>) {
   const coverInlineSizePercentage = 100 / choices.length
   const coverInsetInlineStartPercentage =
-    choices.indexOf(value) * coverInlineSizePercentage
+    choices.findIndex((choice) => choice.value === value) *
+    coverInlineSizePercentage
 
   return (
     <span className={classes['main']}>
@@ -34,12 +39,12 @@ export default function SelectButton({
       <span className={classes['options']}>
         {choices.map((choice) => (
           <Option
-            key={String(choice)}
+            key={choice.value}
             {...restProps}
-            checked={value === choice}
-            value={String(choice)}
+            checked={value === choice.value}
+            value={choice.value}
           >
-            {webExtension.i18n.getMessage(choice ? 'yes' : 'no')}
+            {choice.label}
           </Option>
         ))}
       </span>
