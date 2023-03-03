@@ -78,6 +78,7 @@ export default function OptionItem(props: Props) {
           maximum={props.maximum}
           minimum={props.minimum}
           name={props.name}
+          required
           value={props.value}
           onBlur={props.onBlur}
           onChange={(evt) => {
@@ -93,6 +94,7 @@ export default function OptionItem(props: Props) {
         <SelectString
           choices={props.choices}
           name={props.name}
+          required
           value={props.value}
           onBlur={props.onBlur}
           onChange={(evt) => {
@@ -117,6 +119,7 @@ export default function OptionItem(props: Props) {
         <InputSelect
           choices={props.choices}
           name={props.name}
+          required
           value={props.value}
           onBlur={(evt) => {
             onChange(evt)
