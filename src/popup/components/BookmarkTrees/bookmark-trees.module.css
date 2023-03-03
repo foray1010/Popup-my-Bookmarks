@@ -1,6 +1,7 @@
 .main {
   display: flex;
   flex-direction: row-reverse;
+  /* do not use --gap-rem because the max-width is fixed (800px) */
   gap: var(--gap-px);
 }
 

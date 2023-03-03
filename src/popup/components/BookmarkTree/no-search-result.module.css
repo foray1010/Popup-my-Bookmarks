@@ -1,8 +1,8 @@
 .main {
   box-sizing: border-box;
-  margin: var(--gap-px-2x);
+  margin: var(--gap-rem-2x);
   cursor: default;
-  padding: var(--gap-px);
+  padding: var(--gap-rem);
   text-align: center;
   color: var(--main-font-color);
   /* stylelint-disable-next-line value-keyword-case */

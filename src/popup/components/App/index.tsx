@@ -53,7 +53,8 @@ const AppWithOptions = withOptions(function InnerApp() {
         ).join(','),
         'font-size':
           options[OPTIONS.FONT_SIZE] !== undefined
-            ? `${options[OPTIONS.FONT_SIZE]}px`
+            ? // revert the 75% font size in body
+              `${options[OPTIONS.FONT_SIZE] / 0.75}px`
             : null,
         height:
           globalBodySize?.height !== undefined

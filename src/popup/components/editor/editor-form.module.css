@@ -1,24 +1,24 @@
 .button-group {
   display: flex;
-  gap: var(--gap-px-2x);
+  gap: var(--gap-rem-2x);
   justify-content: end;
-  margin-block: var(--gap-px-2x);
+  margin-block: var(--gap-rem-2x);
 }
 
 .header {
   float: left;
-  margin-block: var(--gap-px-2x);
+  margin-block: var(--gap-rem-2x);
   background-color: var(--main-color2);
   cursor: default;
-  padding-block: var(--gap-px);
-  padding-inline: var(--gap-px-4x);
+  padding-block: var(--gap-rem);
+  padding-inline: var(--gap-rem-4x);
   color: rgb(var(--bg-color-rgb));
 }
 
 .input {
   box-sizing: border-box;
   display: block;
-  margin-block: var(--gap-px-2x);
+  margin-block: var(--gap-rem-2x);
   width: 100%;
 }
 
@@ -26,6 +26,6 @@
   box-sizing: border-box;
   border-block: 1px solid var(--highlight-level3);
   background-color: rgb(var(--bg-color-rgb));
-  padding-inline: var(--gap-px-2x);
+  padding-inline: var(--gap-rem-2x);
   text-align: right;
 }

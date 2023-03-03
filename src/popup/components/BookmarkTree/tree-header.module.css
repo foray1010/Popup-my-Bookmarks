@@ -1,6 +1,6 @@
 .close {
   box-sizing: border-box;
-  padding: 6px;
+  padding: var(--gap-rem-3x);
   height: 100%;
   color: rgb(var(--bg-color-rgb));
 
@@ -13,12 +13,13 @@
   display: grid;
   grid-auto-flow: column;
   justify-content: space-between;
-  margin-block-end: var(--gap-px);
+  margin-block-end: var(--gap-rem);
   background-color: currentcolor;
+  padding-inline-start: var(--gap-rem-2x);
 }
 
 .title {
-  margin: var(--gap-px-2x);
+  margin-block: var(--gap-rem-2x);
   cursor: default;
   line-height: 1;
   color: rgb(var(--bg-color-rgb));

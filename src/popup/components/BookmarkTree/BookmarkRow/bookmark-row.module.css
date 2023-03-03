@@ -1,8 +1,8 @@
 .main {
   display: flex;
-  gap: var(--gap-px-2x);
+  gap: var(--gap-rem-2x);
   align-items: center;
-  padding-inline: var(--gap-px);
+  padding-inline: var(--gap-rem);
   color: var(--main-font-color);
   /* stylelint-disable-next-line value-keyword-case */
   composes: listItem from '../../../../core/styles/composes.module.css';
@@ -25,7 +25,7 @@
     color: var(--highlight-level4);
 
     & > .title {
-      padding-block: var(--gap-px);
+      padding-block: var(--gap-rem);
       text-overflow: clip;
       line-height: 0.5;
     }
@@ -45,11 +45,11 @@
   aspect-ratio: 1;
   width: auto;
   height: 1em;
-  min-height: 16px;
+  min-height: 1rem;
 }
 
 .title {
-  padding-block: var(--gap-px-2x);
+  padding-block: var(--gap-rem-2x);
   line-height: 1;
   /* stylelint-disable-next-line value-keyword-case */
   composes: noTextOverflow from '../../../../core/styles/composes.module.css';

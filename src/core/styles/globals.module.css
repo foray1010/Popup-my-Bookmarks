@@ -8,8 +8,11 @@
 
 :root {
   --gap-px: 2px;
-  --gap-px-2x: calc(var(--gap-px) * 2);
-  --gap-px-4x: calc(var(--gap-px) * 4);
+  /* upper limit is 4px because the popup size is limited to 800x600, and we need to save space */
+  --gap-rem: min(0.125rem, 4px);
+  --gap-rem-2x: calc(var(--gap-rem) * 2);
+  --gap-rem-3x: calc(var(--gap-rem) * 3);
+  --gap-rem-4x: calc(var(--gap-rem) * 4);
   --highlight-level1: #eee;
   --highlight-level2: #e0e0e0;
   --highlight-level3: #bdbdbd;
@@ -26,7 +29,6 @@
   background-color: rgb(var(--bg-color-rgb));
   color: var(--main-font-color);
   font-family: sans-serif;
-  font-size: 75%;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -43,6 +45,4 @@
 
 body {
   margin: 0;
-  font-family: unset;
-  font-size: unset;
 }

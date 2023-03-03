@@ -79,7 +79,7 @@ export default function FloatingWindow({
         ref={ref}
         style={React.useMemo(
           () => ({
-            position: 'fixed',
+            position: 'absolute',
             left: `${calibratedPosition.left ?? 0}px`,
             top: `${calibratedPosition.top ?? 0}px`,
           }),

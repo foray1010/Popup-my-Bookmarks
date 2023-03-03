@@ -6,12 +6,11 @@
 
 ::-webkit-scrollbar {
   background-color: transparent;
-  width: calc(5px + var(--gap-px));
-  height: 5px;
+  width: var(--gap-rem-4x);
 }
 
 ::-webkit-scrollbar-thumb {
-  border-inline-start: var(--gap-px) solid rgb(var(--bg-color-rgb));
+  border-left: var(--gap-rem) solid rgb(var(--bg-color-rgb));
   background-color: var(--highlight-level3);
 
   &:hover {

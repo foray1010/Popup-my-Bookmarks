@@ -1,16 +1,16 @@
 .main {
   display: inline flow-root;
   border: 1px solid var(--main-color1);
-  padding-inline: var(--gap-px-4x);
+  padding-inline: var(--gap-rem-4x);
 }
 
 .checkbox {
   margin: 0;
-  margin-inline-end: var(--gap-px-2x);
+  margin-inline-end: var(--gap-rem-2x);
   vertical-align: middle;
   accent-color: var(--main-color1);
 }
 
 .list-item {
-  margin-block: var(--gap-px-4x);
+  margin-block: var(--gap-rem-4x);
 }

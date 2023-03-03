@@ -1,14 +1,14 @@
 .form {
   display: flow-root;
-  margin-block: var(--gap-px-4x);
+  margin-block: var(--gap-rem-4x);
 }
 
 .table {
   /* unsetting the top and bottom spacing added by border-spacing as it does not support margin collapse */
-  margin-block: calc(var(--gap-px-4x) * -1);
+  margin-block: calc(var(--gap-rem-4x) * -1);
   width: 100%;
   table-layout: fixed;
-  border-spacing: var(--gap-px-4x);
+  border-spacing: var(--gap-rem-4x);
 
   & > tbody,
   & > tfoot {
@@ -24,7 +24,7 @@
   & > select {
     box-sizing: border-box;
     border-color: var(--main-color1);
-    padding-block: var(--gap-px-2x);
-    padding-inline: var(--gap-px-4x);
+    padding-block: var(--gap-rem-2x);
+    padding-inline: var(--gap-rem-4x);
   }
 }
