@@ -69,7 +69,7 @@ const AppWithOptions = withOptions(function InnerApp() {
 
   return (
     <BookmarkTreesProvider>
-      <BookmarkTrees mainTreeHeader={<Search />} />
+      <BookmarkTrees firstTreeHeader={<Search />} />
       <Menu />
       <Editor />
     </BookmarkTreesProvider>

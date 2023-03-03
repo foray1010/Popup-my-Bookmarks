@@ -1,6 +1,4 @@
 .listItem {
-  box-sizing: border-box;
-
   &:last-child {
     border-block-end: currentcolor solid var(--gap-px);
     padding-block-end: var(--gap-px);
@@ -10,5 +8,12 @@
 .main {
   position: absolute;
   background-color: rgb(var(--bg-color-rgb));
+  width: 100%;
+}
+
+.react-virtual-row {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
 }

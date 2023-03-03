@@ -7,7 +7,7 @@ import classes from './bookmark-trees.module.css'
 import useRememberLastPositions from './useRememberLastPositions.js'
 
 interface Props {
-  readonly mainTreeHeader: React.ReactNode
+  readonly firstTreeHeader: React.ReactNode
   readonly options: Partial<Options>
   readonly treeIds: ReadonlyArray<string>
 }
@@ -32,8 +32,8 @@ export default function BookmarkTrees(props: Props) {
     />
   ))
 
-  const mainTree = trees.filter((_, index) => index % 2 === 0)
-  const subTree = trees.filter((_, index) => index % 2 !== 0)
+  const firstSectionItems = trees.filter((_, index) => index % 2 === 0)
+  const secondSectionItems = trees.filter((_, index) => index % 2 !== 0)
 
   const widthStyle = React.useMemo(
     () => ({
@@ -44,13 +44,13 @@ export default function BookmarkTrees(props: Props) {
 
   return (
     <main className={classes['main']}>
-      <section className={classes['master']} style={widthStyle}>
-        {props.mainTreeHeader}
-        {mainTree}
+      <section className={classes['first-section']} style={widthStyle}>
+        {props.firstTreeHeader}
+        {firstSectionItems}
       </section>
-      {subTree.length > 0 && (
-        <section className={classes['slave']} style={widthStyle}>
-          {subTree}
+      {secondSectionItems.length > 0 && (
+        <section className={classes['second-section']} style={widthStyle}>
+          {secondSectionItems}
         </section>
       )}
     </main>

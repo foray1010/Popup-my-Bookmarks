@@ -4,12 +4,12 @@
   gap: var(--gap-px);
 }
 
-.master {
+.first-section {
   position: relative;
   color: var(--main-color2);
 }
 
-.slave {
+.second-section {
   position: relative;
   color: var(--main-color1);
 }

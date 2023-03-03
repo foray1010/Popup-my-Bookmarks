@@ -2,7 +2,6 @@ import classNames from 'clsx'
 import * as React from 'react'
 
 import * as CST from '../../../constants/index.js'
-import { useOptions } from '../../../modules/options.js'
 import type { BookmarkInfo } from '../../../types/index.js'
 import type { ResponseEvent } from '../../dragAndDrop/index.js'
 import { DragAndDropConsumer } from '../../dragAndDrop/index.js'
@@ -42,8 +41,6 @@ const BookmarkRowContainer = React.forwardRef(
     }: Props,
     setRef: React.Ref<HTMLLIElement>,
   ) {
-    const options = useOptions()
-
     const tooltip = useTooltip({
       isSearching: restProps.isSearching,
       isShowTooltip: restProps.isShowTooltip,
@@ -97,7 +94,6 @@ const BookmarkRowContainer = React.forwardRef(
               [classes['separator'] ?? '']:
                 bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR,
             })}
-            iconSize={options.fontSize}
             iconUrl={bookmarkInfo.iconUrl}
             isHighlighted={isHighlighted}
             isUnclickable={restProps.isUnclickable}

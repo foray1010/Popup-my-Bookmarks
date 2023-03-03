@@ -1,3 +1,4 @@
+import classNames from 'clsx'
 import * as React from 'react'
 import { useVirtual } from 'react-virtual'
 import useEventListener from 'use-typed-event-listener'
@@ -38,7 +39,6 @@ interface ItemData {
 
 type Props = ItemData & {
   readonly lastScrollTop?: number | undefined
-  readonly listItemWidth: number | undefined
   noRowsRenderer(): React.ReactElement | null
   readonly onScroll?: React.UIEventHandler
   readonly scrollToIndex?: number | undefined
@@ -90,14 +90,13 @@ export default function BookmarkTree(props: Props) {
       ref={parentRef}
       style={{
         maxHeight: `${maxListHeight}px`,
-        width: `${props.listItemWidth}px`,
         overflow: 'auto',
       }}
     >
       <PlainList
         style={{
           height: `${rowVirtualizer.totalSize}px`,
-          position: 'relative',
+          contain: 'strict',
         }}
       >
         {rowVirtualizer.virtualItems.map((virtualItem) => {
@@ -111,7 +110,10 @@ export default function BookmarkTree(props: Props) {
               key={virtualItem.key}
               ref={virtualItem.measureRef}
               bookmarkInfo={bookmarkInfo}
-              className={classes['listItem']}
+              className={classNames(
+                classes['listItem'],
+                classes['react-virtual-row'],
+              )}
               isDisableDragAndDrop={props.isDisableDragAndDrop}
               isHighlighted={
                 isDragging
@@ -122,10 +124,6 @@ export default function BookmarkTree(props: Props) {
               isShowTooltip={props.isShowTooltip}
               isUnclickable={isBeingDragged}
               style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
                 transform: `translateY(${virtualItem.start}px)`,
               }}
               onAuxClick={props.onRowAuxClick}

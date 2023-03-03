@@ -1,9 +1,8 @@
 .main {
-  box-sizing: border-box;
   display: flex;
   gap: var(--gap-px-2x);
   align-items: center;
-  padding: var(--gap-px);
+  padding-inline: var(--gap-px);
   color: var(--main-font-color);
   /* stylelint-disable-next-line value-keyword-case */
   composes: listItem from '../../../../core/styles/composes.module.css';
@@ -23,11 +22,12 @@
   }
 
   &.separator {
-    line-height: 0.5;
     color: var(--highlight-level4);
 
     & > .title {
+      padding-block: var(--gap-px);
       text-overflow: clip;
+      line-height: 0.5;
     }
   }
 
@@ -42,11 +42,15 @@
 
 .icon {
   flex-shrink: 0;
-  min-width: 16px;
+  aspect-ratio: 1;
+  width: auto;
+  height: 1em;
   min-height: 16px;
 }
 
 .title {
+  padding-block: var(--gap-px-2x);
+  line-height: 1;
   /* stylelint-disable-next-line value-keyword-case */
   composes: noTextOverflow from '../../../../core/styles/composes.module.css';
 }

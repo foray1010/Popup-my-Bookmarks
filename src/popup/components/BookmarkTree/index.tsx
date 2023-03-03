@@ -29,7 +29,6 @@ const useContextProps = ({ treeId }: { readonly treeId: string }) => {
     isShowCover: bookmarkTrees.length - treeIndex > 2,
     isShowHeader: treeIndex !== 0,
     isShowTooltip: Boolean(options[CST.OPTIONS.TOOLTIP]),
-    listItemWidth: options[CST.OPTIONS.SET_WIDTH] ?? 0,
     treeIndex,
     treeInfo,
   }
