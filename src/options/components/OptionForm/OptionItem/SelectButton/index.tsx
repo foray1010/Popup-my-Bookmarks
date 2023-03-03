@@ -5,7 +5,7 @@ import classes from './styles.module.css'
 
 type RestOptionProps = Omit<
   React.ComponentProps<typeof Option>,
-  'checked' | 'value'
+  'defaultChecked' | 'defaultValue' | 'checked' | 'value'
 >
 
 type Choice<T> = {

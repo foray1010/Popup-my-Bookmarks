@@ -26,6 +26,7 @@ export default function InputNumber({
       max={maximum}
       min={minimum}
       size={Math.floor(Math.log10(maximum)) + 1}
+      step={1}
       type='number'
     />
   )

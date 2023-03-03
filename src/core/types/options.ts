@@ -18,32 +18,32 @@ export interface Options {
   readonly [OPTIONS.WARN_OPEN_MANY]: boolean
 }
 
-interface ArrayOptionConfig {
+export type ArrayOptionConfig = {
   readonly type: 'array'
   readonly default: ReadonlyArray<number | undefined>
   readonly choices: ReadonlyArray<string | undefined>
 }
-interface BooleanOptionConfig {
+export type BooleanOptionConfig = {
   readonly type: 'boolean'
   readonly default: boolean
 }
-interface IntegerOptionConfig {
+export type IntegerOptionConfig = {
   readonly type: 'integer'
   readonly default: number
   readonly minimum: number
   readonly maximum: number
 }
-interface SelectOptionConfig {
+export type SelectOptionConfig = {
   readonly type: 'select'
   readonly default: number
   readonly choices: ReadonlyArray<string>
 }
-interface StringOptionConfig {
+export type StringOptionConfig = {
   readonly type: 'string'
   readonly default: string
   readonly choices: ReadonlyArray<string>
 }
-export type OptionConfig =
+type OptionConfig =
   | ArrayOptionConfig
   | BooleanOptionConfig
   | IntegerOptionConfig
