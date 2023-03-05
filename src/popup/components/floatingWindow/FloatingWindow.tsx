@@ -1,5 +1,5 @@
-import { Portal } from '@reach/portal'
 import * as React from 'react'
+import { createPortal } from 'react-dom'
 import useResizeObserver from 'use-resize-observer'
 
 import Mask from '../Mask/index.js'
@@ -72,8 +72,8 @@ export default function FloatingWindow({
     windowSize.width,
   ])
 
-  return (
-    <Portal>
+  return createPortal(
+    <>
       <Mask opacity={0.3} onClick={onClose} />
       <div
         ref={ref}
@@ -88,6 +88,7 @@ export default function FloatingWindow({
       >
         {children}
       </div>
-    </Portal>
+    </>,
+    document.body,
   )
 }

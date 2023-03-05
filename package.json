@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "@fontsource/archivo-narrow": "4.5.12",
-    "@reach/portal": "0.18.0",
     "@tanstack/react-query": "4.24.10",
     "@tanstack/react-query-devtools": "4.24.14",
     "clsx": "1.2.1",
