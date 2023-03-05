@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks'
+import { act, renderHook, waitFor } from '@testing-library/react'
 
 import { ReactQueryClientProvider } from '../../../core/utils/queryClient.js'
 import {
@@ -30,7 +30,7 @@ describe('options hooks', () => {
     it('should get options', async () => {
       await initTestData()
 
-      const { result, waitFor } = renderHook(useGetOptions, {
+      const { result } = renderHook(useGetOptions, {
         wrapper: ReactQueryClientProvider,
       })
 
@@ -44,10 +44,9 @@ describe('options hooks', () => {
     it('should delete all options and refetch in useGetOptions', async () => {
       await initTestData()
 
-      const { result: useGetOptionsResult, waitFor } = renderHook(
-        useGetOptions,
-        { wrapper: ReactQueryClientProvider },
-      )
+      const { result: useGetOptionsResult } = renderHook(useGetOptions, {
+        wrapper: ReactQueryClientProvider,
+      })
 
       await waitFor(() => {
         expect(useGetOptionsResult.current.isFetching).toBe(false)
@@ -73,10 +72,9 @@ describe('options hooks', () => {
     it('should insert option and refetch in useGetOptions', async () => {
       await initTestData()
 
-      const { result: useGetOptionsResult, waitFor } = renderHook(
-        useGetOptions,
-        { wrapper: ReactQueryClientProvider },
-      )
+      const { result: useGetOptionsResult } = renderHook(useGetOptions, {
+        wrapper: ReactQueryClientProvider,
+      })
 
       await waitFor(() => {
         expect(useGetOptionsResult.current.isFetching).toBe(false)

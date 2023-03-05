@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks'
+import { act, renderHook, waitFor } from '@testing-library/react'
 import webExtension from 'webextension-polyfill'
 
 import useRememberLastPositions from '../useRememberLastPositions.js'
@@ -12,7 +12,7 @@ describe('useRememberLastPositions', () => {
   })
 
   it('should fetch lastPosition when isEnabled changes from false to true', async () => {
-    const { result, rerender, waitFor } = renderHook(useRememberLastPositions, {
+    const { result, rerender } = renderHook(useRememberLastPositions, {
       initialProps: {
         isEnabled: false,
       },
@@ -33,7 +33,7 @@ describe('useRememberLastPositions', () => {
 
   describe('registerLastPosition', () => {
     it('should register new lastPosition', async () => {
-      const { result, waitFor } = renderHook(() =>
+      const { result } = renderHook(() =>
         useRememberLastPositions({
           isEnabled: true,
         }),
@@ -52,7 +52,7 @@ describe('useRememberLastPositions', () => {
     })
 
     it('should override existing index when registering lastPosition', async () => {
-      const { result, waitFor } = renderHook(() =>
+      const { result } = renderHook(() =>
         useRememberLastPositions({
           isEnabled: true,
         }),
@@ -70,7 +70,7 @@ describe('useRememberLastPositions', () => {
     })
 
     it('should not insert new index when previous index does not exist', async () => {
-      const { result, waitFor } = renderHook(() =>
+      const { result } = renderHook(() =>
         useRememberLastPositions({
           isEnabled: true,
         }),
@@ -88,7 +88,7 @@ describe('useRememberLastPositions', () => {
     })
 
     it('should not override existing index when registering the same id', async () => {
-      const { result, waitFor } = renderHook(() =>
+      const { result } = renderHook(() =>
         useRememberLastPositions({
           isEnabled: true,
         }),
@@ -106,7 +106,7 @@ describe('useRememberLastPositions', () => {
     })
 
     it('should not insert new index when registering the same id', async () => {
-      const { result, waitFor } = renderHook(() =>
+      const { result } = renderHook(() =>
         useRememberLastPositions({
           isEnabled: true,
         }),
@@ -126,7 +126,7 @@ describe('useRememberLastPositions', () => {
 
   describe('unregisterLastPosition', () => {
     it('should unregister existing lastPosition by id', async () => {
-      const { result, waitFor } = renderHook(() =>
+      const { result } = renderHook(() =>
         useRememberLastPositions({
           isEnabled: true,
         }),
@@ -142,7 +142,7 @@ describe('useRememberLastPositions', () => {
     })
 
     it('should skip when id is not registered', async () => {
-      const { result, waitFor } = renderHook(() =>
+      const { result } = renderHook(() =>
         useRememberLastPositions({
           isEnabled: true,
         }),
@@ -162,7 +162,7 @@ describe('useRememberLastPositions', () => {
 
   describe('updateLastPosition', () => {
     it('should update existing lastPosition by id', async () => {
-      const { result, waitFor } = renderHook(() =>
+      const { result } = renderHook(() =>
         useRememberLastPositions({
           isEnabled: true,
         }),
@@ -180,7 +180,7 @@ describe('useRememberLastPositions', () => {
     })
 
     it('should skip when id is not registered', async () => {
-      const { result, waitFor } = renderHook(() =>
+      const { result } = renderHook(() =>
         useRememberLastPositions({
           isEnabled: true,
         }),
