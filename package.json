@@ -64,7 +64,7 @@
     "@types/duplicate-package-checker-webpack-plugin": "2.1.2",
     "@types/firefox-webext-browser": "111.0.0",
     "@types/jest": "29.4.0",
-    "@types/node": "16.18.12",
+    "@types/node": "16.18.14",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "@types/script-ext-html-webpack-plugin": "2.1.3",
