@@ -29,10 +29,11 @@ export default function FloatingWindow({
   })
 
   const [calibratedPosition, setCalibratedPosition] = React.useState<{
-    left?: number | undefined
-    top?: number | undefined
-  }>({})
+    left: number
+    top: number
+  }>()
 
+  // make sure the floating window is within the body
   React.useEffect(() => {
     if (windowSize.width === undefined || windowSize.height === undefined) {
       return
@@ -77,14 +78,18 @@ export default function FloatingWindow({
       <Mask opacity={0.3} onClick={onClose} />
       <div
         ref={ref}
-        style={React.useMemo(
-          () => ({
-            position: 'absolute',
-            left: `${calibratedPosition.left ?? 0}px`,
-            top: `${calibratedPosition.top ?? 0}px`,
-          }),
-          [calibratedPosition.left, calibratedPosition.top],
-        )}
+        style={{
+          position: 'absolute',
+          ...(calibratedPosition
+            ? {
+                left: `${calibratedPosition.left}px`,
+                top: `${calibratedPosition.top}px`,
+              }
+            : {
+                // to avoid content jumping: hidden first to calculate the dimensions, then calibrate the position
+                visibility: 'hidden',
+              }),
+        }}
       >
         {children}
       </div>
