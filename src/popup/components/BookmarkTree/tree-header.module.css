@@ -23,8 +23,9 @@
   cursor: default;
   line-height: 1;
   color: rgb(var(--bg-color-rgb));
-  font-family: 'Archivo Narrow', simhei, sans-serif;
-  font-size: 1.75rem;
+  font-family: 'Archivo Narrow', system-ui, sans-serif;
+  font-size: 1.375rem;
+  font-weight: normal;
   /* stylelint-disable-next-line value-keyword-case */
   composes: noTextOverflow from '../../../core/styles/composes.module.css';
 }
