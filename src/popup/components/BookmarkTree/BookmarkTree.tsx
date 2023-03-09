@@ -57,7 +57,7 @@ export default function BookmarkTree(props: Props) {
   })
 
   const [maxListHeight, setMaxListHeight] = React.useState(0)
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (!parentRef.current) return
 
     setMaxListHeight(
