@@ -54,7 +54,6 @@ export async function openBookmarksInBrowser(
   const options = await getOptions()
 
   const allUrls = await getUrls(ids)
-  if (!allUrls.length) return
 
   const isJSProtocol = (url: string) => url.startsWith('javascript:')
 
