@@ -60,7 +60,9 @@ export async function openBookmarksInBrowser(
 
   const bookmarkletUrls = allUrls.filter(isJSProtocol)
   if (openBookmarkProps.isAllowBookmarklet) {
-    if (bookmarkletUrls[0]) await execInPage(bookmarkletUrls[0])
+    for (const bookmarkletUrl of bookmarkletUrls) {
+      await execInPage(bookmarkletUrl)
+    }
   }
 
   const urls = allUrls.filter((x) => !isJSProtocol(x))
