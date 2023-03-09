@@ -1,10 +1,11 @@
 import * as CST from '../../../constants/index.js'
 import folderIcon from '../../../images/folder.svg'
 import type { BookmarkInfo } from '../../../types/index.js'
+import { faviconUrl } from '../../../utils/faviconUrl.js'
 
 const getIconUrl = (bookmarkInfo: BookmarkInfo): string => {
   if (bookmarkInfo.type === CST.BOOKMARK_TYPES.BOOKMARK)
-    return `chrome://favicon/${bookmarkInfo.url}`
+    return faviconUrl(bookmarkInfo.url)
   if (bookmarkInfo.type === CST.BOOKMARK_TYPES.FOLDER) return folderIcon
   return ''
 }

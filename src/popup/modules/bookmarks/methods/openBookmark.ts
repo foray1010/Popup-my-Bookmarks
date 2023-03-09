@@ -19,6 +19,29 @@ async function getUrls(ids: readonly string[]): Promise<string[]> {
   return filteredBookmarkInfos.map((bookmarkInfo) => bookmarkInfo.url)
 }
 
+// suggested by https://groups.google.com/a/chromium.org/g/chromium-extensions/c/Inq88qfVoIs/m/gOeI5x2tBgAJ
+async function execInPage(code: string) {
+  const [currentTab] = await webExtension.tabs.query({
+    currentWindow: true,
+    active: true,
+  })
+  if (currentTab?.id === undefined) return
+
+  await webExtension.scripting.executeScript({
+    target: { tabId: currentTab.id },
+    // @ts-expect-error `func` actually takes the arguments from `args`, so it is not `() => void`
+    func: (code: string): void => {
+      const el = document.createElement('script')
+      el.textContent = code
+      document.body.appendChild(el)
+      el.remove()
+    },
+    args: [code],
+    // @ts-expect-error works fine in Chrome
+    world: 'MAIN',
+  })
+}
+
 type OpenBookmarkProps = {
   readonly openIn: OPEN_IN_TYPES
   readonly isAllowBookmarklet: boolean
@@ -36,10 +59,8 @@ export async function openBookmarksInBrowser(
   const isJSProtocol = (url: string) => url.startsWith('javascript:')
 
   const bookmarkletUrls = allUrls.filter(isJSProtocol)
-  if (openBookmarkProps.isAllowBookmarklet && bookmarkletUrls.length > 0) {
-    await webExtension.tabs.executeScript({
-      code: bookmarkletUrls[0],
-    })
+  if (openBookmarkProps.isAllowBookmarklet) {
+    if (bookmarkletUrls[0]) await execInPage(bookmarkletUrls[0])
   }
 
   const urls = allUrls.filter((x) => !isJSProtocol(x))
