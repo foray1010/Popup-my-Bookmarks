@@ -18,7 +18,7 @@
   --highlight-level3: #bdbdbd;
   --highlight-level4: #9e9e9e;
   --highlight-level5: #757575;
-  --bg-color-rgb: 255, 255, 255;
+  --bg-color-rgb: 255 255 255;
   --main-color1: #42a5f5;
   --main-color2: #ff9800;
   --main-color3: #26a69a;
@@ -38,7 +38,7 @@
     --highlight-level3: #757575;
     --highlight-level4: #9e9e9e;
     --highlight-level5: #bdbdbd;
-    --bg-color-rgb: 33, 33, 33;
+    --bg-color-rgb: 33 33 33;
     --main-font-color: #fff;
   }
 }
