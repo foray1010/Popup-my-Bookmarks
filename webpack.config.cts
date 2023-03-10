@@ -162,9 +162,10 @@ const webpackConfig: Configuration = {
             compress: {
               // arguments: true, // this breaks the build
               drop_console: true,
-              ecma: 2020 as const,
               reduce_vars: true,
             },
+            ecma: 2020 as const,
+            module: true,
           },
         }),
       ],
