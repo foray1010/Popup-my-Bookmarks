@@ -216,6 +216,7 @@ const webpackConfig: Configuration = {
           removeStyleLinkTypeAttributes: true,
           useShortDoctype: true,
         },
+        template: path.join(sourceDir, 'template.html'),
         title: pkg.name,
       })
     }),
