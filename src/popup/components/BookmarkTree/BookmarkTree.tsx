@@ -110,10 +110,10 @@ export default function BookmarkTree(props: Props) {
               key={virtualItem.key}
               ref={virtualItem.measureRef}
               bookmarkInfo={bookmarkInfo}
-              className={classNames(
-                classes['listItem'],
-                classes['react-virtual-row'],
-              )}
+              className={classNames(classes['react-virtual-row'], {
+                [classes['last-list-item'] as string]:
+                  virtualItem.index === itemCount - 1,
+              })}
               isDisableDragAndDrop={props.isDisableDragAndDrop}
               isHighlighted={
                 isDragging

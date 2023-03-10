@@ -1,8 +1,6 @@
-.listItem {
-  &:last-child {
-    border-block-end: currentcolor solid var(--gap-rem);
-    padding-block-end: var(--gap-rem);
-  }
+.last-list-item {
+  border-block-end: currentcolor solid var(--gap-rem);
+  padding-block-end: var(--gap-rem);
 }
 
 .main {
