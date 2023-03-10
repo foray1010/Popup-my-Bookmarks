@@ -160,7 +160,7 @@ const webpackConfig: Configuration = {
           minify: TerserPlugin.swcMinify,
           terserOptions: {
             compress: {
-              arguments: true,
+              // arguments: true, // this breaks the build
               drop_console: true,
               ecma: 2020 as const,
               reduce_vars: true,
