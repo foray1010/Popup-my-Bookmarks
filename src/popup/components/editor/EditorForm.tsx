@@ -19,7 +19,7 @@ interface Props {
 export default function Editor({ onConfirm, ...props }: Props) {
   const { register, handleSubmit } = useForm<{
     title: string
-    url: string
+    url?: string
   }>()
 
   return (

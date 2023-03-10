@@ -23,7 +23,7 @@ export default function FloatingWindow({
     height: number | undefined
     width: number | undefined
   }>()
-  const { ref } = useResizeObserver<HTMLDivElement>({
+  const { ref } = useResizeObserver({
     onResize: setWindowSize,
     round: Math.ceil,
   })
