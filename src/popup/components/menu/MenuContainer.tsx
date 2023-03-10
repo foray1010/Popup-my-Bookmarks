@@ -241,6 +241,8 @@ const InnerMenuContainer = () => {
   )
 
   if (!state.isOpen) return null
+  // Without this condition, it will cause content jumping after menu pattern is fetched
+  if (menuPattern.length === 0) return null
 
   return (
     <FloatingWindow

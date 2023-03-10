@@ -20,9 +20,9 @@ export default function FloatingWindow({
   const { insertBodySize } = useGlobalBodySize()
 
   const [windowSize, setWindowSize] = React.useState<{
-    height?: number | undefined
-    width?: number | undefined
-  }>({})
+    height: number | undefined
+    width: number | undefined
+  }>()
   const { ref } = useResizeObserver<HTMLDivElement>({
     onResize: setWindowSize,
     round: Math.ceil,
@@ -34,8 +34,8 @@ export default function FloatingWindow({
   }>()
 
   // make sure the floating window is within the body
-  React.useEffect(() => {
-    if (windowSize.width === undefined || windowSize.height === undefined) {
+  React.useLayoutEffect(() => {
+    if (windowSize?.height === undefined || windowSize?.width === undefined) {
       return
     }
 
@@ -69,8 +69,8 @@ export default function FloatingWindow({
     insertBodySize,
     positionLeft,
     positionTop,
-    windowSize.height,
-    windowSize.width,
+    windowSize?.height,
+    windowSize?.width,
   ])
 
   return createPortal(
@@ -85,10 +85,7 @@ export default function FloatingWindow({
                 left: `${calibratedPosition.left}px`,
                 top: `${calibratedPosition.top}px`,
               }
-            : {
-                // to avoid content jumping: hidden first to calculate the dimensions, then calibrate the position
-                visibility: 'hidden',
-              }),
+            : {}),
         }}
       >
         {children}
