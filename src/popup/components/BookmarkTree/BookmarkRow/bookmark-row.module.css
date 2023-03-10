@@ -8,6 +8,8 @@
 
   &.drag-indicator {
     border: 1px dashed var(--highlight-level5);
+    padding-block: var(--gap-rem-2x);
+    block-size: 1em;
   }
 
   &.root-folder {
