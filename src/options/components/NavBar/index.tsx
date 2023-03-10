@@ -37,7 +37,7 @@ export default function NavBar() {
         <Button
           key={path}
           className={classNames(classes['button'], {
-            [classes['active'] ?? '']: path === currentPath,
+            [classes['active'] as string]: path === currentPath,
           })}
           onClick={() => setCurrentPath(path)}
         >

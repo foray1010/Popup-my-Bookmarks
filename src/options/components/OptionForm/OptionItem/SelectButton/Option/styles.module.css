@@ -3,8 +3,7 @@
   border: 0;
   background-color: transparent;
   color: var(--frontground-color);
-  /* stylelint-disable-next-line value-keyword-case */
-  composes: noTextOverflow from '../../../../../../core/styles/composes.module.css';
+  composes: no-text-overflow from '../../../../../../core/styles/composes.module.css';
 }
 
 .itemActive {

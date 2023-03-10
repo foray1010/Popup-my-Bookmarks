@@ -20,7 +20,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, Props>(
           inputMode='search'
           placeholder={webExtension.i18n.getMessage('search')}
           {...inputProps}
-          className={classNames(classes['searchInput'], inputProps.className)}
+          className={classNames(classes['search-input'], inputProps.className)}
         />
         {inputProps.value ? (
           <Cross className={classes['icon']} onClick={onCancel} />

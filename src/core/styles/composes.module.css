@@ -7,12 +7,12 @@
   }
 }
 
-.listItem {
+.list-item {
   border: 1px solid transparent;
   cursor: default;
 }
 
-.noTextOverflow {
+.no-text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

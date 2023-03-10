@@ -2,7 +2,7 @@
   composes: focus from '../../../styles/composes.module.css';
 }
 
-.textInput {
+.text-input {
   border: 1px solid var(--highlight-level2);
   background-color: transparent;
   padding-block: var(--gap-rem-2x);

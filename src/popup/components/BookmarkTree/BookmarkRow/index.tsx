@@ -88,10 +88,10 @@ const BookmarkRowContainer = React.forwardRef(
         >
           <BookmarkRow
             className={classNames({
-              [classes['rootFolder'] ?? '']: bookmarkInfo.isRoot,
-              [classes['dragIndicator'] ?? '']:
+              [classes['root-folder'] as string]: bookmarkInfo.isRoot,
+              [classes['drag-indicator'] as string]:
                 bookmarkInfo.type === CST.BOOKMARK_TYPES.DRAG_INDICATOR,
-              [classes['separator'] ?? '']:
+              [classes['separator'] as string]:
                 bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR,
             })}
             iconUrl={bookmarkInfo.iconUrl}

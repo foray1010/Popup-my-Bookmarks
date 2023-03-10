@@ -29,7 +29,7 @@ export default function OptionForm(props: Props) {
           {props.selectedOptionFormMap.map((optionName) => (
             <tr key={optionName}>
               <td>{webExtension.i18n.getMessage(optionName)}</td>
-              <td className={classes['itemInput']}>
+              <td className={classes['item-input']}>
                 <Controller
                   control={control}
                   defaultValue={props.defaultValues[optionName]}

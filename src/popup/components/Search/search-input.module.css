@@ -13,7 +13,7 @@
   border-block-end: 1px solid var(--highlight-level3);
 }
 
-.searchInput {
+.search-input {
   outline: 0;
   border: 0;
   padding-block: var(--gap-rem-2x);

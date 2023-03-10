@@ -1,6 +1,5 @@
 .main {
-  /* stylelint-disable-next-line value-keyword-case */
-  composes: listItem from '../../../core/styles/composes.module.css';
+  composes: list-item from '../../../core/styles/composes.module.css';
   padding-block: var(--gap-rem);
   padding-inline: var(--gap-rem-4x);
   white-space: nowrap;

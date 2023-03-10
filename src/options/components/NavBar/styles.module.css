@@ -14,8 +14,7 @@
   text-align: center;
   color: rgb(var(--bg-color-rgb));
   font: 1.125rem 'Archivo Narrow', sans-serif;
-  /* stylelint-disable-next-line value-keyword-case */
-  composes: focus noTextOverflow from '../../../core/styles/composes.module.css';
+  composes: focus no-text-overflow from '../../../core/styles/composes.module.css';
 
   &:is(:hover, .active) {
     &:nth-of-type(1) {

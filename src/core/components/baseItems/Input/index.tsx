@@ -15,7 +15,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(function InnerInput(
       ref={ref}
       className={classNames(
         classes['main'],
-        ['number', 'text'].includes(type) ? classes['textInput'] : null,
+        ['number', 'text'].includes(type) ? classes['text-input'] : null,
         className,
       )}
       type={type}

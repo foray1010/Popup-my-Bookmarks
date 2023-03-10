@@ -4,14 +4,13 @@
   align-items: center;
   padding-inline: var(--gap-rem);
   color: var(--main-font-color);
-  /* stylelint-disable-next-line value-keyword-case */
-  composes: listItem from '../../../../core/styles/composes.module.css';
+  composes: list-item from '../../../../core/styles/composes.module.css';
 
-  &.dragIndicator {
+  &.drag-indicator {
     border: 1px dashed var(--highlight-level5);
   }
 
-  &.rootFolder {
+  &.root-folder {
     color: inherit !important;
   }
 
@@ -51,6 +50,5 @@
 .title {
   padding-block: var(--gap-rem-2x);
   line-height: 1;
-  /* stylelint-disable-next-line value-keyword-case */
-  composes: noTextOverflow from '../../../../core/styles/composes.module.css';
+  composes: no-text-overflow from '../../../../core/styles/composes.module.css';
 }

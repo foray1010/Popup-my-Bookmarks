@@ -26,8 +26,8 @@ const BookmarkRow = React.forwardRef(function InnerBookmarkRow(
       className={classNames(
         classes['main'],
         {
-          [classes['highlighted'] ?? '']: props.isHighlighted,
-          [classes['unclickable'] ?? '']: props.isUnclickable,
+          [classes['highlighted'] as string]: props.isHighlighted,
+          [classes['unclickable'] as string]: props.isUnclickable,
         },
         props.className,
       )}

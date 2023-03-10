@@ -5,6 +5,5 @@
   padding: var(--gap-rem);
   text-align: center;
   color: var(--main-font-color);
-  /* stylelint-disable-next-line value-keyword-case */
-  composes: noTextOverflow from '../../../core/styles/composes.module.css';
+  composes: no-text-overflow from '../../../core/styles/composes.module.css';
 }
