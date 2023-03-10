@@ -1,8 +1,11 @@
 .main {
+  box-sizing: border-box;
   border: 1px solid var(--highlight-level3);
   box-shadow: 0 var(--gap-rem) var(--gap-rem-2x) rgb(0 0 0 / 20%);
   background-color: rgb(var(--bg-color-rgb));
   padding: var(--gap-rem-2x);
+  max-block-size: 100dvb;
+  overflow: auto;
 
   /* separator between menu fields */
   & > * + * {
