@@ -85,7 +85,10 @@ export default function FloatingWindow({
                 left: `${calibratedPosition.left}px`,
                 top: `${calibratedPosition.top}px`,
               }
-            : {}),
+            : {
+                // to avoid content jumping: hidden first to calculate the dimensions, then calibrate the position
+                visibility: 'hidden',
+              }),
         }}
       >
         {children}
