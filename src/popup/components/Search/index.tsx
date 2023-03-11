@@ -22,7 +22,7 @@ export default function SearchContainer() {
     const isFocusedOnInput = document.activeElement instanceof HTMLInputElement
     if (isFocusedOnInput) return
 
-    if (inputRef.current) inputRef.current.focus()
+    inputRef.current?.focus()
   })
 
   return (

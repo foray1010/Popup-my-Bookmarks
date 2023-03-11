@@ -30,7 +30,7 @@ export default function InputSelect({
   > = React.useCallback(
     (evt) => {
       if (evt.currentTarget === selectRef.current) {
-        if (inputRef.current) inputRef.current.focus()
+        inputRef.current?.focus()
       }
 
       onChange(evt)

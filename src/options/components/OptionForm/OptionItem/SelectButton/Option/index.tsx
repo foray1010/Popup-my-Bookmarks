@@ -20,7 +20,7 @@ export default function Option({ children, ...props }: Props) {
           [classes['itemActive'] as string]: props.checked,
         })}
         onClick={React.useCallback(() => {
-          if (inputRef.current) inputRef.current.click()
+          inputRef.current?.click()
         }, [])}
       >
         {children}

@@ -26,7 +26,7 @@ export default function KeyBindingsWindow({
 
   const windowRef = React.useRef<HTMLDivElement>(null)
   React.useEffect(() => {
-    if (windowRef.current) windowRef.current.focus()
+    windowRef.current?.focus()
   }, [])
 
   return (
