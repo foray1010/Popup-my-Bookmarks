@@ -1,4 +1,4 @@
-import type * as CST from '../constants/index.js'
+import type { BOOKMARK_TYPES } from '../constants/index.js'
 
 export interface BookmarkInfo {
   readonly iconUrl: string
@@ -9,7 +9,7 @@ export interface BookmarkInfo {
   readonly parentId: string
   readonly storageIndex: number
   readonly title: string
-  readonly type: CST.BOOKMARK_TYPES
+  readonly type: BOOKMARK_TYPES
   readonly url: string
 }
 

@@ -1,6 +1,10 @@
 import webExtension from 'webextension-polyfill'
 
-import * as CST from '../../../constants/index.js'
+import {
+  BOOKMARK_TYPES,
+  NO_BOOKMARK_ID_PREFIX,
+  SEARCH_RESULT_ID,
+} from '../../../constants/index.js'
 import type { BookmarkInfo } from '../../../types/index.js'
 
 const generateFakeBookmarkInfo = (
@@ -9,7 +13,7 @@ const generateFakeBookmarkInfo = (
   id: '',
   parentId: '',
   title: '',
-  type: CST.BOOKMARK_TYPES.BOOKMARK,
+  type: BOOKMARK_TYPES.BOOKMARK,
   ...partialBookmarkInfo,
   iconUrl: '',
   isRoot: false,
@@ -21,7 +25,7 @@ const generateFakeBookmarkInfo = (
 
 export const generateDragIndicator = (): BookmarkInfo => {
   return generateFakeBookmarkInfo({
-    type: CST.BOOKMARK_TYPES.DRAG_INDICATOR,
+    type: BOOKMARK_TYPES.DRAG_INDICATOR,
   })
 }
 
@@ -29,16 +33,16 @@ export const generateNoBookmarkPlaceholder = (
   parentId: string,
 ): BookmarkInfo => {
   return generateFakeBookmarkInfo({
-    id: CST.NO_BOOKMARK_ID_PREFIX + parentId,
+    id: NO_BOOKMARK_ID_PREFIX + parentId,
     parentId,
     title: webExtension.i18n.getMessage('noBkmark'),
-    type: CST.BOOKMARK_TYPES.NO_BOOKMARK,
+    type: BOOKMARK_TYPES.NO_BOOKMARK,
   })
 }
 
 export const generateSearchResultParent = (): BookmarkInfo => {
   return generateFakeBookmarkInfo({
-    id: CST.SEARCH_RESULT_ID,
-    type: CST.BOOKMARK_TYPES.FOLDER,
+    id: SEARCH_RESULT_ID,
+    type: BOOKMARK_TYPES.FOLDER,
   })
 }

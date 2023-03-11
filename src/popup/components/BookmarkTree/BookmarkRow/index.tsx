@@ -1,7 +1,7 @@
 import classNames from 'clsx'
 import * as React from 'react'
 
-import * as CST from '../../../constants/index.js'
+import { BOOKMARK_TYPES } from '../../../constants/index.js'
 import type { BookmarkInfo } from '../../../types/index.js'
 import type { ResponseEvent } from '../../dragAndDrop/index.js'
 import { DragAndDropConsumer } from '../../dragAndDrop/index.js'
@@ -79,7 +79,7 @@ const BookmarkRowContainer = React.forwardRef(
           disableDrag={
             restProps.isDisableDragAndDrop ||
             bookmarkInfo.isRoot ||
-            bookmarkInfo.type === CST.BOOKMARK_TYPES.NO_BOOKMARK
+            bookmarkInfo.type === BOOKMARK_TYPES.NO_BOOKMARK
           }
           disableDrop={restProps.isDisableDragAndDrop}
           itemKey={bookmarkInfo.id}
@@ -90,9 +90,9 @@ const BookmarkRowContainer = React.forwardRef(
             className={classNames({
               [classes['root-folder'] as string]: bookmarkInfo.isRoot,
               [classes['drag-indicator'] as string]:
-                bookmarkInfo.type === CST.BOOKMARK_TYPES.DRAG_INDICATOR,
+                bookmarkInfo.type === BOOKMARK_TYPES.DRAG_INDICATOR,
               [classes['separator'] as string]:
-                bookmarkInfo.type === CST.BOOKMARK_TYPES.SEPARATOR,
+                bookmarkInfo.type === BOOKMARK_TYPES.SEPARATOR,
             })}
             iconUrl={bookmarkInfo.iconUrl}
             isHighlighted={isHighlighted}

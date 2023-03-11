@@ -1,7 +1,10 @@
 import webExtension from 'webextension-polyfill'
 
-import { NO_BOOKMARK_ID_PREFIX } from '../../../constants/index.js'
-import * as CST from '../../../constants/index.js'
+import {
+  BOOKMARK_TYPES,
+  NO_BOOKMARK_ID_PREFIX,
+  ROOT_ID,
+} from '../../../constants/index.js'
 import type { BookmarkInfo, BookmarkTree } from '../../../types/index.js'
 import sortByTitle from '../../../utils/sortByTitle.js'
 import {
@@ -48,7 +51,7 @@ async function getFirstBookmarkTree({
 }): Promise<BookmarkTree> {
   const [firstTree, rootFolders] = await Promise.all([
     getBookmarkTree(firstTreeId),
-    getBookmarkChildren(CST.ROOT_ID),
+    getBookmarkChildren(ROOT_ID),
   ])
   return {
     ...firstTree,
@@ -117,7 +120,7 @@ export async function getBookmarkTreesFromSearch({
   const searchResults = await searchBookmarks(searchQuery)
 
   let filteredSearchResults = searchResults.filter(
-    (bookmarkInfo) => bookmarkInfo.type === CST.BOOKMARK_TYPES.BOOKMARK,
+    (bookmarkInfo) => bookmarkInfo.type === BOOKMARK_TYPES.BOOKMARK,
   )
   if (isSearchTitleOnly) {
     filteredSearchResults = filteredSearchResults.filter((bookmarkInfo) => {

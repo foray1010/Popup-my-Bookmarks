@@ -1,4 +1,4 @@
-import * as CST from '../../core/constants/index.js'
+import { OPTIONS } from '../../core/constants/index.js'
 
 export enum RoutePath {
   Contributors,
@@ -10,24 +10,24 @@ export enum RoutePath {
 export const OPTION_TABLE_MAP = {
   [RoutePath.Contributors]: [],
   [RoutePath.Control]: [
-    CST.OPTIONS.CLICK_BY_LEFT,
-    CST.OPTIONS.CLICK_BY_LEFT_CTRL,
-    CST.OPTIONS.CLICK_BY_LEFT_SHIFT,
-    CST.OPTIONS.CLICK_BY_MIDDLE,
-    CST.OPTIONS.OP_FOLDER_BY,
+    OPTIONS.CLICK_BY_LEFT,
+    OPTIONS.CLICK_BY_LEFT_CTRL,
+    OPTIONS.CLICK_BY_LEFT_SHIFT,
+    OPTIONS.CLICK_BY_MIDDLE,
+    OPTIONS.OP_FOLDER_BY,
   ],
   [RoutePath.General]: [
-    CST.OPTIONS.DEF_EXPAND,
-    CST.OPTIONS.HIDE_ROOT_FOLDER,
-    CST.OPTIONS.SEARCH_TARGET,
-    CST.OPTIONS.MAX_RESULTS,
-    CST.OPTIONS.TOOLTIP,
-    CST.OPTIONS.WARN_OPEN_MANY,
-    CST.OPTIONS.REMEMBER_POS,
+    OPTIONS.DEF_EXPAND,
+    OPTIONS.HIDE_ROOT_FOLDER,
+    OPTIONS.SEARCH_TARGET,
+    OPTIONS.MAX_RESULTS,
+    OPTIONS.TOOLTIP,
+    OPTIONS.WARN_OPEN_MANY,
+    OPTIONS.REMEMBER_POS,
   ],
   [RoutePath.UserInterface]: [
-    CST.OPTIONS.SET_WIDTH,
-    CST.OPTIONS.FONT_SIZE,
-    CST.OPTIONS.FONT_FAMILY,
+    OPTIONS.SET_WIDTH,
+    OPTIONS.FONT_SIZE,
+    OPTIONS.FONT_FAMILY,
   ],
-} as const satisfies Record<RoutePath, readonly CST.OPTIONS[]>
+} as const satisfies Record<RoutePath, readonly OPTIONS[]>

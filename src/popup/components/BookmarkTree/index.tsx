@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import * as CST from '../../constants/index.js'
+import { OPTIONS } from '../../constants/index.js'
 import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import { useOptions } from '../../modules/options.js'
 import { useDragAndDropContext } from '../dragAndDrop/index.js'
@@ -28,7 +28,7 @@ const useContextProps = ({ treeId }: { readonly treeId: string }) => {
     // cover the folder if it is not the top two folder
     isShowCover: bookmarkTrees.length - treeIndex > 2,
     isShowHeader: treeIndex !== 0,
-    isShowTooltip: Boolean(options[CST.OPTIONS.TOOLTIP]),
+    isShowTooltip: Boolean(options[OPTIONS.TOOLTIP]),
     treeIndex,
     treeInfo,
   }

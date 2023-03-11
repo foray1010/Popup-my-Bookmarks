@@ -3,7 +3,7 @@ import { produce } from 'immer'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import * as CST from '../../../constants/index.js'
+import { BOOKMARK_TYPES, OPTIONS } from '../../../constants/index.js'
 import type { BookmarkTree, LastPosition } from '../../../types/index.js'
 import { useOptions } from '../../options.js'
 import {
@@ -42,7 +42,7 @@ const useUtils = (
       return trees.map((tree) => ({
         ...tree,
         children: tree.children.filter(
-          (child) => child.type !== CST.BOOKMARK_TYPES.DRAG_INDICATOR,
+          (child) => child.type !== BOOKMARK_TYPES.DRAG_INDICATOR,
         ),
       }))
     },
@@ -71,7 +71,7 @@ const useUtils = (
           const treeInfo = trees.find((tree: BookmarkTree) =>
             tree.children.some(
               (bookmarkInfo) =>
-                bookmarkInfo.type === CST.BOOKMARK_TYPES.DRAG_INDICATOR,
+                bookmarkInfo.type === BOOKMARK_TYPES.DRAG_INDICATOR,
             ),
           )
           if (!treeInfo) return trees
@@ -80,7 +80,7 @@ const useUtils = (
             (acc, bookmarkInfo) => {
               if (acc.isReduced) return acc
 
-              if (bookmarkInfo.type === CST.BOOKMARK_TYPES.DRAG_INDICATOR) {
+              if (bookmarkInfo.type === BOOKMARK_TYPES.DRAG_INDICATOR) {
                 return {
                   ...acc,
                   isCapture: true,
@@ -231,8 +231,8 @@ const useBookmarkTreesState = () => {
       if (searchQuery) {
         const bookmarkTrees = await getBookmarkTreesFromSearch({
           searchQuery,
-          isSearchTitleOnly: options[CST.OPTIONS.SEARCH_TARGET] === 1,
-          maxResults: options[CST.OPTIONS.MAX_RESULTS],
+          isSearchTitleOnly: options[OPTIONS.SEARCH_TARGET] === 1,
+          maxResults: options[OPTIONS.MAX_RESULTS],
         })
         startTransition(() => {
           setBookmarkTrees(bookmarkTrees)
@@ -243,11 +243,11 @@ const useBookmarkTreesState = () => {
             lastPositions?: LastPosition[]
           }
         const bookmarkTrees = await getBookmarkTreesFromRoot({
-          firstTreeId: String(options[CST.OPTIONS.DEF_EXPAND]),
-          childTreeIds: options[CST.OPTIONS.REMEMBER_POS]
+          firstTreeId: String(options[OPTIONS.DEF_EXPAND]),
+          childTreeIds: options[OPTIONS.REMEMBER_POS]
             ? lastPositions.map((x) => x.id)
             : [],
-          hideRootTreeIds: (options[CST.OPTIONS.HIDE_ROOT_FOLDER] ?? []).map(
+          hideRootTreeIds: (options[OPTIONS.HIDE_ROOT_FOLDER] ?? []).map(
             String,
           ),
         })

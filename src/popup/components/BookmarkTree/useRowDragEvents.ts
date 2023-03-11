@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import * as CST from '../../constants/index.js'
+import { BOOKMARK_TYPES } from '../../constants/index.js'
 import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import type { BookmarkInfo, BookmarkTree } from '../../types/index.js'
 import type { ResponseEvent } from '../dragAndDrop/index.js'
@@ -24,7 +24,7 @@ export default function useRowDragEvents({
             evt.clientY - targetOffset.top > targetOffset.height / 2
 
           const childrenWithoutDragIndicator = treeInfo.children.filter(
-            (child) => child.type !== CST.BOOKMARK_TYPES.DRAG_INDICATOR,
+            (child) => child.type !== BOOKMARK_TYPES.DRAG_INDICATOR,
           )
 
           const activeIndex = childrenWithoutDragIndicator.findIndex(
