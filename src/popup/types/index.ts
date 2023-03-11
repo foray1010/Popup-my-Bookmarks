@@ -22,5 +22,3 @@ export interface LastPosition {
   readonly id: string
   readonly scrollTop: number
 }
-
-export type MenuPattern = ReadonlyArray<ReadonlyArray<string>>

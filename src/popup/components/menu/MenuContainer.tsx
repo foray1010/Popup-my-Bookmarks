@@ -2,11 +2,7 @@ import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import withProviders from '../../../core/utils/withProviders.js'
-import {
-  BOOKMARK_TYPES,
-  MenuItem,
-  OPEN_IN_TYPES,
-} from '../../constants/index.js'
+import { BOOKMARK_TYPES, OPEN_IN_TYPES } from '../../constants/index.js'
 import { MENU_WINDOW } from '../../constants/windows.js'
 import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo.js'
@@ -30,11 +26,12 @@ import {
   useKeyboardNav,
   useListNavigationContext,
 } from '../listNavigation/index.js'
+import { MenuItem } from './constants.js'
 import Menu from './Menu.js'
 import { useMenuContext } from './useMenu.js'
 import { getMenuPattern } from './utils.js'
 
-const useClickMenuRow = (rowName?: string) => {
+const useClickMenuRow = (rowName?: MenuItem) => {
   const { close, state } = useMenuContext()
   const { open: openEditor } = useEditorContext()
 

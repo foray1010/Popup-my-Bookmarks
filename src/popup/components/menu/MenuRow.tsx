@@ -2,6 +2,7 @@ import classNames from 'clsx'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
+import type { MenuItem } from './constants.js'
 import classes from './menu-row.module.css'
 
 interface Props {
@@ -11,7 +12,7 @@ interface Props {
   readonly onMouseEnter: (index: number) => React.MouseEventHandler
   readonly onMouseLeave: (index: number) => React.MouseEventHandler
   readonly rowIndex: number
-  readonly rowName: string
+  readonly rowName: MenuItem
 }
 export default function MenuRow({
   onMouseEnter,
