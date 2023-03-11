@@ -9,7 +9,7 @@ import classes from './editor-form.module.css'
 
 interface Props {
   readonly defaultTitle?: string
-  readonly defaultUrl?: string
+  readonly defaultUrl?: string | undefined
   readonly header: string
   readonly isAllowedToEditUrl: boolean
   readonly onCancel: () => void

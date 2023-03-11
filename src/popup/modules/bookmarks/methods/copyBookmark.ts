@@ -6,7 +6,7 @@ import { getBookmarkInfo, getBookmarkTree } from './getBookmark.js'
 export async function recursiveCopyBookmarks(
   id: string,
   destination: {
-    readonly parentId: string
+    readonly parentId: string | undefined
     readonly index: number
   },
 ): Promise<void> {
@@ -15,10 +15,7 @@ export async function recursiveCopyBookmarks(
   const createdBookmarkNode = await webExtension.bookmarks.create({
     ...destination,
     title: bookmarkInfo.title,
-    // @TODO: directly use { url: bookmarkInfo.url }
-    ...(bookmarkInfo.type !== BOOKMARK_TYPES.FOLDER
-      ? { url: bookmarkInfo.url }
-      : null),
+    url: bookmarkInfo.url,
   })
 
   if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {

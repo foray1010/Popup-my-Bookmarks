@@ -19,6 +19,14 @@ export default function useRowDragEvents({
       handleRowDragOver:
         (bookmarkInfo: BookmarkInfo) =>
         (evt: React.MouseEvent, responseEvent: ResponseEvent) => {
+          if (
+            !bookmarkInfo.parentId ||
+            // avoid infinite loop
+            bookmarkInfo.type === BOOKMARK_TYPES.DRAG_INDICATOR
+          ) {
+            return
+          }
+
           const targetOffset = evt.currentTarget.getBoundingClientRect()
           const isOverBottomPart =
             evt.clientY - targetOffset.top > targetOffset.height / 2

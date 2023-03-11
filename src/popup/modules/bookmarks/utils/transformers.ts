@@ -7,21 +7,6 @@ import folderIcon from '../../../images/folder.svg'
 import type { BookmarkInfo } from '../../../types/index.js'
 import { faviconUrl } from '../../../utils/faviconUrl.js'
 
-const getIconUrl = (bookmarkInfo: BookmarkInfo): string => {
-  switch (bookmarkInfo.type) {
-    case BOOKMARK_TYPES.BOOKMARK:
-      return faviconUrl(bookmarkInfo.url)
-
-    case BOOKMARK_TYPES.FOLDER:
-      return folderIcon
-
-    case BOOKMARK_TYPES.DRAG_INDICATOR:
-    case BOOKMARK_TYPES.NO_BOOKMARK:
-    case BOOKMARK_TYPES.SEPARATOR:
-      return ''
-  }
-}
-
 const getType = (
   bookmarkNode: browser.bookmarks.BookmarkTreeNode,
 ): BOOKMARK_TYPES => {
@@ -39,21 +24,43 @@ export const toBookmarkInfo = (
   bookmarkNode: browser.bookmarks.BookmarkTreeNode,
 ): BookmarkInfo => {
   const bookmarkInfo = {
-    iconUrl: '',
     id: bookmarkNode.id,
     isRoot: isRoot(bookmarkNode),
     isSimulated: false,
     isUnmodifiable: isRoot(bookmarkNode) || Boolean(bookmarkNode.unmodifiable),
-    parentId: bookmarkNode.parentId ?? '',
+    parentId: bookmarkNode.parentId,
     storageIndex:
       typeof bookmarkNode.index === 'number' ? bookmarkNode.index : -1,
     title: bookmarkNode.title,
-    type: getType(bookmarkNode),
-    url: bookmarkNode.url ?? '',
   }
 
-  return {
-    ...bookmarkInfo,
-    iconUrl: getIconUrl(bookmarkInfo),
+  const type = getType(bookmarkNode)
+
+  switch (type) {
+    case BOOKMARK_TYPES.BOOKMARK:
+      return {
+        ...bookmarkInfo,
+        type,
+        iconUrl: faviconUrl(bookmarkNode.url!),
+        url: bookmarkNode.url!,
+      }
+
+    case BOOKMARK_TYPES.DRAG_INDICATOR:
+    case BOOKMARK_TYPES.NO_BOOKMARK:
+      throw new TypeError('Wrong bookmark type')
+
+    case BOOKMARK_TYPES.FOLDER:
+      return {
+        ...bookmarkInfo,
+        type,
+        iconUrl: folderIcon,
+      }
+
+    case BOOKMARK_TYPES.SEPARATOR:
+      return {
+        ...bookmarkInfo,
+        type,
+        url: bookmarkNode.url!,
+      }
   }
 }

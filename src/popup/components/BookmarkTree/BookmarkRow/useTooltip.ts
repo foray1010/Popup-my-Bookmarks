@@ -23,7 +23,7 @@ async function getTooltip({
   isShowTooltip,
   bookmarkInfo,
 }: Arg): Promise<string> {
-  const tooltipArr: Array<string> = []
+  const tooltipArr: Array<string | undefined> = []
 
   if (isShowTooltip) {
     tooltipArr.push(bookmarkInfo.title, bookmarkInfo.url)

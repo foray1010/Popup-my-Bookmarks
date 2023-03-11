@@ -21,7 +21,7 @@ const useUtils = (
   const insertBookmarkTree = React.useCallback(
     (
       trees: readonly BookmarkTree[],
-      parentId: string,
+      parentId: string | undefined,
       bookmarkTree: BookmarkTree,
     ): readonly BookmarkTree[] => {
       // if tree is already in view, no need to re-render
@@ -169,7 +169,7 @@ const useUtils = (
             newTrees[parentIndex]?.children.splice(
               index,
               0,
-              generateDragIndicator(),
+              generateDragIndicator(parentId),
             )
           })
         })

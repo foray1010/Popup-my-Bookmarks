@@ -161,7 +161,9 @@ const useClickMenuRow = (rowName?: MenuItem) => {
         break
 
       case MenuItem.SortByName:
-        await sortBookmarksByName(bookmarkInfo.parentId)
+        if (bookmarkInfo.parentId) {
+          await sortBookmarksByName(bookmarkInfo.parentId)
+        }
         break
     }
 

@@ -16,7 +16,9 @@ async function getUrls(ids: readonly string[]): Promise<string[]> {
       bookmarkInfo.isSimulated === false &&
       bookmarkInfo.type === BOOKMARK_TYPES.BOOKMARK,
   )
-  return filteredBookmarkInfos.map((bookmarkInfo) => bookmarkInfo.url)
+  return filteredBookmarkInfos
+    .map((bookmarkInfo) => bookmarkInfo.url)
+    .filter((url): url is string => Boolean(url))
 }
 
 // suggested by https://groups.google.com/a/chromium.org/g/chromium-extensions/c/Inq88qfVoIs/m/gOeI5x2tBgAJ

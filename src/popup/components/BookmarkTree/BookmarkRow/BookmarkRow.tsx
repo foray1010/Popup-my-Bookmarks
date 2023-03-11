@@ -6,7 +6,7 @@ import classes from './bookmark-row.module.css'
 
 interface Props {
   readonly className?: string | undefined
-  readonly iconUrl?: string
+  readonly iconUrl?: string | undefined
   readonly isHighlighted: boolean
   readonly isUnclickable: boolean
   readonly onAuxClick?: React.MouseEventHandler
