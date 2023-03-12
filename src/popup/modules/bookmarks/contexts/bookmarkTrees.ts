@@ -1,5 +1,4 @@
 import constate from 'constate'
-import { produce } from 'immer'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
@@ -160,17 +159,14 @@ const useUtils = (
     setDragIndicator: React.useCallback(
       (parentId: string, index: number) => {
         setBookmarkTrees((trees) => {
-          const parentIndex = trees.findIndex(
-            (tree) => tree.parent.id === parentId,
-          )
-          if (parentIndex === -1) return trees
+          return withoutDragIndicator(trees).map((tree) => {
+            if (tree.parent.id === parentId) {
+              const newChildren = Array.from(tree.children)
+              newChildren.splice(index, 0, generateDragIndicator(parentId))
+              return { ...tree, children: newChildren }
+            }
 
-          return produce(withoutDragIndicator(trees), (newTrees) => {
-            newTrees[parentIndex]?.children.splice(
-              index,
-              0,
-              generateDragIndicator(parentId),
-            )
+            return tree
           })
         })
       },
