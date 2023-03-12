@@ -10,6 +10,7 @@
 .list-item {
   border: 1px solid transparent;
   cursor: default;
+  line-height: 1;
 }
 
 .no-text-overflow {

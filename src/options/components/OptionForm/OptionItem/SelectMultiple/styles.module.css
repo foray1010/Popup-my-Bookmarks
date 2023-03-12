@@ -13,4 +13,5 @@
 
 .list-item {
   margin-block: var(--gap-rem-4x);
+  line-height: 1;
 }

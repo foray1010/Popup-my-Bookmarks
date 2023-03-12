@@ -1,6 +1,6 @@
 .main {
   composes: list-item from '../../../core/styles/composes.module.css';
-  padding-block: var(--gap-rem);
+  padding-block: var(--gap-rem-2x);
   padding-inline: var(--gap-rem-4x);
   white-space: nowrap;
 

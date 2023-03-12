@@ -51,6 +51,5 @@
 
 .title {
   padding-block: var(--gap-rem-2x);
-  line-height: 1;
   composes: no-text-overflow from '../../../../core/styles/composes.module.css';
 }
