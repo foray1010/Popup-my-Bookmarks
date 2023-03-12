@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid'
 import webExtension from 'webextension-polyfill'
 
 import { SEPARATE_THIS_URL } from '../../../constants/index.js'
@@ -52,6 +51,6 @@ export async function createSeparator(
     ...rest,
     title: '- '.repeat(54),
     // avoid duplicated URL which may be cleaned up by third-party tools
-    url: `${SEPARATE_THIS_URL}#${nanoid()}`,
+    url: `${SEPARATE_THIS_URL}#${crypto.randomUUID()}`,
   })
 }
