@@ -2035,10 +2035,10 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
   integrity sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==
 
-"@transifex/api@5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@transifex/api/-/api-5.1.0.tgz#2306c05cb0ded5b2bda7674ee3549f23bac8b147"
-  integrity sha512-WcTe+K/1mmwhTatfSDF4KgEZiu3nvZ/tm5f7XlKNqn8yV3hTAt0XCVkkCthVqla3fF+feAGMQ75yNiJhaSvhmA==
+"@transifex/api@5.1.1":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@transifex/api/-/api-5.1.1.tgz#99ddbf68d0c5d958572e03042eca136f5f570e7b"
+  integrity sha512-p2EILMKpNI+yndtdYicLerchFSYQw3VlAyyEWI4bRoeOMhDMs3VTxXJJmKDcZjK1j974gOOAGX5tNFR0hqhsWw==
   dependencies:
     core-js "^3.22.4"
 
