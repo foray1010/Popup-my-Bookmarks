@@ -7,7 +7,11 @@ import Button from './index.js'
 describe('Button', () => {
   it('should not fire form submit when clicked in form', async () => {
     const user = userEvent.setup()
-    const handleSubmit = jest.fn<void, [React.FormEvent<HTMLFormElement>]>()
+    const handleSubmit = jest.fn<
+      void,
+      [React.FormEvent<HTMLFormElement>],
+      void
+    >()
     const name = 'click me'
 
     render(
@@ -23,11 +27,13 @@ describe('Button', () => {
 
   it('should fire form submit when type="submit"', async () => {
     const user = userEvent.setup()
-    const handleSubmit = jest.fn<void, [React.FormEvent<HTMLFormElement>]>(
-      (evt) => {
-        evt.preventDefault()
-      },
-    )
+    const handleSubmit = jest.fn<
+      void,
+      [React.FormEvent<HTMLFormElement>],
+      void
+    >((evt) => {
+      evt.preventDefault()
+    })
     const name = 'click me'
 
     render(
