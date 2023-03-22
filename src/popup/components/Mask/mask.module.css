@@ -1,8 +1,5 @@
 .main {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   backdrop-filter: blur(1px);
-  width: 100%;
-  height: 100%;
 }
