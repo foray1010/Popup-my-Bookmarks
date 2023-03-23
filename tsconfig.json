@@ -1,4 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@foray1010/tsconfig"
+  "extends": "@foray1010/tsconfig/tsconfig.react.json",
+  "ts-node": {
+    "compilerOptions": {
+      // Fix `error TS5104: Option 'isolatedModules' is redundant and cannot be specified with option 'verbatimModuleSyntax'.`
+      "verbatimModuleSyntax": false
+    }
+  }
 }
