@@ -133,34 +133,34 @@ class StorageAreaSync
   }
 }
 
-type ListenerCallbacks = {
-  readonly local: StorageAreaListenerCallback
-  readonly sync: StorageAreaListenerCallback
-  readonly managed: StorageAreaListenerCallback
+enum AreaName {
+  Local = 'local',
+  Sync = 'sync',
+  Managed = 'managed',
 }
 
 type IStorage = typeof browser.storage
 class Storage implements IStorage {
-  public readonly local = new StorageArea()
-  public readonly sync = new StorageAreaSync()
-  public readonly managed = new StorageArea()
+  public readonly [AreaName.Local] = new StorageArea()
+  public readonly [AreaName.Sync] = new StorageAreaSync()
+  public readonly [AreaName.Managed] = new StorageArea()
 
   readonly #listenerWeakMap = new WeakMap<
     Parameters<(typeof browser.storage.onChanged)['addListener']>[0],
-    ListenerCallbacks
+    Record<AreaName, StorageAreaListenerCallback>
   >()
 
   public onChanged: typeof browser.storage.onChanged = {
     addListener: (cb) => {
-      const listenerCallbacks: ListenerCallbacks = {
-        local: (changes) => cb(changes, 'local'),
-        sync: (changes) => cb(changes, 'sync'),
-        managed: (changes) => cb(changes, 'managed'),
+      const listenerCallbacks: Record<AreaName, StorageAreaListenerCallback> = {
+        [AreaName.Local]: (changes) => cb(changes, AreaName.Local),
+        [AreaName.Sync]: (changes) => cb(changes, AreaName.Sync),
+        [AreaName.Managed]: (changes) => cb(changes, AreaName.Managed),
       }
 
-      this.local.onChanged.addListener(listenerCallbacks.local)
-      this.sync.onChanged.addListener(listenerCallbacks.sync)
-      this.managed.onChanged.addListener(listenerCallbacks.managed)
+      for (const areaName of Object.values(AreaName)) {
+        this[areaName].onChanged.addListener(listenerCallbacks[areaName])
+      }
 
       this.#listenerWeakMap.set(cb, listenerCallbacks)
     },
@@ -168,9 +168,9 @@ class Storage implements IStorage {
       const listenerCallbacks = this.#listenerWeakMap.get(cb)
       if (!listenerCallbacks) return
 
-      this.local.onChanged.removeListener(listenerCallbacks.local)
-      this.sync.onChanged.removeListener(listenerCallbacks.sync)
-      this.managed.onChanged.removeListener(listenerCallbacks.managed)
+      for (const areaName of Object.values(AreaName)) {
+        this[areaName].onChanged.removeListener(listenerCallbacks[areaName])
+      }
 
       this.#listenerWeakMap.delete(cb)
     },
