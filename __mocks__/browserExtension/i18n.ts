@@ -1,13 +1,11 @@
 import messages from '../../src/core/_locales/en/messages.json'
 
-type Messages = Record<
-  string,
-  | {
-      readonly message: string
-      readonly description: string
-    }
-  | undefined
->
+const hasOwn = <T extends string>(
+  object: Record<T, unknown>,
+  key: string,
+): key is T => {
+  return Object.prototype.hasOwnProperty.call(object, key)
+}
 
 const i18n: typeof browser.i18n = {
   detectLanguage() {
@@ -17,7 +15,8 @@ const i18n: typeof browser.i18n = {
     throw new Error('Not implemented')
   },
   getMessage(messageName) {
-    return (messages as Messages)[messageName]?.message ?? ''
+    if (!hasOwn(messages, messageName)) return ''
+    return messages[messageName].message
   },
   getUILanguage() {
     throw new Error('Not implemented')
