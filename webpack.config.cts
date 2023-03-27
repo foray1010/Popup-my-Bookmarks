@@ -10,8 +10,11 @@ import { LightningCssMinifyPlugin } from 'lightningcss-loader'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
-import type { Configuration, WebpackPluginInstance } from 'webpack'
-import { ProgressPlugin } from 'webpack'
+import {
+  type Configuration,
+  ProgressPlugin,
+  type WebpackPluginInstance,
+} from 'webpack'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import ZipPlugin from 'zip-webpack-plugin'
 

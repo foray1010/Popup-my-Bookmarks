@@ -9,8 +9,7 @@ import process from 'node:process'
 import * as readline from 'node:readline'
 import { promisify } from 'node:util'
 
-import type { Collection } from '@transifex/api'
-import { transifexApi } from '@transifex/api'
+import { type Collection, transifexApi } from '@transifex/api'
 import axios from 'axios'
 
 const rl = readline.createInterface({

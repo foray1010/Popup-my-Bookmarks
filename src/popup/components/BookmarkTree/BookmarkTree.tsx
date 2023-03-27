@@ -9,8 +9,10 @@ import type {
   BookmarkInfo,
   BookmarkTree as BookmarkTreeType,
 } from '../../types/index.js'
-import type { ResponseEvent } from '../dragAndDrop/index.js'
-import { useDragAndDropContainerEvents } from '../dragAndDrop/index.js'
+import {
+  type ResponseEvent,
+  useDragAndDropContainerEvents,
+} from '../dragAndDrop/index.js'
 import classes from './bookmark-tree.module.css'
 import BookmarkRow from './BookmarkRow/index.js'
 

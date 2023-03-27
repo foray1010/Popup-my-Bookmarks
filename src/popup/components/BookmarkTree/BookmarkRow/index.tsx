@@ -3,8 +3,10 @@ import * as React from 'react'
 
 import { BOOKMARK_TYPES } from '../../../constants/index.js'
 import type { BookmarkInfo } from '../../../types/index.js'
-import type { ResponseEvent } from '../../dragAndDrop/index.js'
-import { DragAndDropConsumer } from '../../dragAndDrop/index.js'
+import {
+  DragAndDropConsumer,
+  type ResponseEvent,
+} from '../../dragAndDrop/index.js'
 import classes from './bookmark-row.module.css'
 import BookmarkRow from './BookmarkRow.js'
 import useTooltip from './useTooltip.js'
