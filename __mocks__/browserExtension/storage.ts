@@ -1,6 +1,30 @@
 /* eslint-disable @typescript-eslint/require-await */
 
-import * as R from 'remeda'
+function omit<T extends Record<string, unknown>, U extends keyof T>(
+  object: T,
+  keys: readonly U[],
+): Omit<T, U> {
+  let acc = object as Omit<T, U>
+  for (const key of keys) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { [key]: _, ...rest } = acc
+    acc = rest as Omit<T, U>
+  }
+  return acc
+}
+
+function pick<T extends Record<string, unknown>, U extends keyof T>(
+  object: T,
+  keys: readonly U[],
+): Pick<T, U> {
+  const acc = {} as Pick<T, U>
+  for (const key of keys) {
+    if (Object.prototype.hasOwnProperty.call(object, key)) {
+      acc[key] = object[key]
+    }
+  }
+  return acc
+}
 
 class StorageArea implements browser.storage.StorageArea {
   protected storage: Record<string, unknown> = {}
@@ -11,12 +35,12 @@ class StorageArea implements browser.storage.StorageArea {
     if (keys === undefined) return this.storage
 
     if (typeof keys === 'string' || Array.isArray(keys)) {
-      return R.pick(this.storage, [keys].flat())
+      return pick(this.storage, [keys].flat())
     }
 
     return {
       ...keys,
-      ...R.pick(this.storage, Object.keys(keys)),
+      ...pick(this.storage, Object.keys(keys)),
     }
   }
 
@@ -28,7 +52,7 @@ class StorageArea implements browser.storage.StorageArea {
   }
 
   public async remove(keys: string | readonly string[]) {
-    this.storage = R.omit(this.storage, [keys].flat())
+    this.storage = omit(this.storage, [keys].flat())
   }
 
   public async clear() {
@@ -54,7 +78,7 @@ class StorageAreaSync
 {
   public async getBytesInUse(keys?: string | readonly string[]) {
     const storage =
-      keys === undefined ? this.storage : R.pick(this.storage, [keys].flat())
+      keys === undefined ? this.storage : pick(this.storage, [keys].flat())
 
     return Object.entries(storage).reduce((acc, [k, v]) => {
       // https://github.com/mozilla/gecko-dev/blob/0db73daa4b03ce7513a7dd5f31109143dc3b149e/third_party/rust/webext-storage/src/api.rs#L184-L188

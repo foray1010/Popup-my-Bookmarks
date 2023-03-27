@@ -9869,11 +9869,6 @@ remark@^14.0.0:
     remark-stringify "^10.0.0"
     unified "^10.0.0"
 
-remeda@1.9.1:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/remeda/-/remeda-1.9.1.tgz#e8321ccf579be33dd64eb7b569b5df89b7a6af85"
-  integrity sha512-n8vx5dg27jRCUYlM7RXQ9MbJCspb18/9wmrRTLKNNECivtAZBuxok0Ei6yV0jcFsnKLr8Y6oiuLyDXU1jt5UKw==
-
 remove-accents@0.4.2:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/remove-accents/-/remove-accents-0.4.2.tgz#0a43d3aaae1e80db919e07ae254b285d9e1c7bb5"
