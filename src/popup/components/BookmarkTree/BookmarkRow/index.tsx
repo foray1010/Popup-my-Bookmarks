@@ -70,6 +70,8 @@ const BookmarkRowContainer = React.forwardRef(
       [bookmarkInfo, onMouseLeave],
     )
 
+    const isSeparator = bookmarkInfo.type === BOOKMARK_TYPES.SEPARATOR
+
     return (
       <li
         ref={setRef}
@@ -93,12 +95,12 @@ const BookmarkRowContainer = React.forwardRef(
               [classes['root-folder'] as string]: bookmarkInfo.isRoot,
               [classes['drag-indicator'] as string]:
                 bookmarkInfo.type === BOOKMARK_TYPES.DRAG_INDICATOR,
-              [classes['separator'] as string]:
-                bookmarkInfo.type === BOOKMARK_TYPES.SEPARATOR,
+              [classes['separator'] as string]: isSeparator,
             })}
             iconUrl={bookmarkInfo.iconUrl}
             isHighlighted={isHighlighted}
             isUnclickable={restProps.isUnclickable}
+            role={isSeparator ? 'separator' : undefined}
             title={bookmarkInfo.title}
             tooltip={tooltip}
             onAuxClick={handleAuxClick}

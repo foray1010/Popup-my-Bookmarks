@@ -14,7 +14,11 @@ function InnerApp() {
   return (
     <div className={classes['main']}>
       <NavBar />
-      <Router />
+
+      <main>
+        <Router />
+      </main>
+
       <Donate />
 
       {process.env['NODE_ENV'] === 'development' ? (

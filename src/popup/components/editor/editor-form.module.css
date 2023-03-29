@@ -13,6 +13,7 @@
   padding-block: var(--gap-rem);
   padding-inline: var(--gap-rem-4x);
   color: rgb(var(--bg-color-rgb));
+  font: inherit;
 }
 
 .input {

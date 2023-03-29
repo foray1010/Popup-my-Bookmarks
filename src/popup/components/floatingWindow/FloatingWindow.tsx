@@ -78,6 +78,8 @@ export default function FloatingWindow({
       <Mask opacity={0.3} onClick={onClose} />
       <div
         ref={ref}
+        aria-modal
+        role='dialog'
         style={{
           position: 'absolute',
           ...(calibratedPosition

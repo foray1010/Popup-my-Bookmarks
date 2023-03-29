@@ -12,8 +12,10 @@ interface Props extends React.ComponentProps<typeof Input> {
 }
 const SearchInput = React.forwardRef<HTMLInputElement, Props>(
   function InnerSearchInput({ onCancel, ...inputProps }: Props, ref) {
+    const inputId = React.useId()
+
     return (
-      <div className={classes['main']}>
+      <div className={classes['main']} role='search'>
         <Search className={classes['icon']} />
         <Input
           ref={ref}
@@ -21,9 +23,16 @@ const SearchInput = React.forwardRef<HTMLInputElement, Props>(
           placeholder={webExtension.i18n.getMessage('search')}
           {...inputProps}
           className={classNames(classes['search-input'], inputProps.className)}
+          id={inputId}
         />
         {inputProps.value ? (
-          <Cross className={classes['icon']} onClick={onCancel} />
+          <Cross
+            aria-controls={inputId}
+            aria-label={webExtension.i18n.getMessage('cancel')}
+            className={classes['icon']}
+            role='button'
+            onClick={onCancel}
+          />
         ) : null}
       </div>
     )

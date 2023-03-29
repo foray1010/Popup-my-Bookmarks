@@ -7,7 +7,7 @@ type Props = Omit<
 
 const LazyImage = React.forwardRef<HTMLImageElement, Props>(
   function InnerLazyImage(props: Props, ref) {
-    return <img {...props} ref={ref} decoding='async' loading='lazy' />
+    return <img alt='' {...props} ref={ref} decoding='async' loading='lazy' />
   },
 )
 

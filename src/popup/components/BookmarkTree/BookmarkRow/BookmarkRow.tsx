@@ -13,6 +13,7 @@ interface Props {
   readonly onClick?: React.MouseEventHandler
   readonly onMouseEnter?: React.MouseEventHandler
   readonly onMouseLeave?: React.MouseEventHandler
+  readonly role?: React.AriaRole | undefined
   readonly title: string
   readonly tooltip?: string | undefined
 }
@@ -31,6 +32,7 @@ const BookmarkRow = React.forwardRef(function InnerBookmarkRow(
         },
         props.className,
       )}
+      role={props.role}
       title={props.tooltip}
       onAuxClick={props.isUnclickable ? undefined : props.onAuxClick}
       onClick={props.isUnclickable ? undefined : props.onClick}
@@ -38,11 +40,7 @@ const BookmarkRow = React.forwardRef(function InnerBookmarkRow(
       onMouseLeave={props.onMouseLeave}
     >
       {props.iconUrl && (
-        <LazyImage
-          alt={props.title}
-          className={classes['icon']}
-          src={props.iconUrl}
-        />
+        <LazyImage className={classes['icon']} src={props.iconUrl} />
       )}
       <div className={classes['title']}>{props.title}</div>
     </div>

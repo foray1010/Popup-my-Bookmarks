@@ -15,11 +15,13 @@ interface Props {
   readonly rowName: MenuItem
 }
 export default function MenuRow({
+  isFocused,
+  isUnclickable,
+  onClick,
   onMouseEnter,
   onMouseLeave,
   rowIndex,
   rowName,
-  ...restProps
 }: Props) {
   const handleMouseEnter = React.useMemo(
     () => onMouseEnter(rowIndex),
@@ -32,11 +34,13 @@ export default function MenuRow({
 
   return (
     <li
+      aria-disabled={isUnclickable}
       className={classNames(classes['main'], {
-        [classes['focused'] as string]: restProps.isFocused,
-        [classes['unclickable'] as string]: restProps.isUnclickable,
+        [classes['focused'] as string]: isFocused,
+        [classes['unclickable'] as string]: isUnclickable,
       })}
-      onClick={restProps.isUnclickable ? undefined : restProps.onClick}
+      role='menuitem'
+      onClick={isUnclickable ? undefined : onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

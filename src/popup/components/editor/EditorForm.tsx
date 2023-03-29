@@ -22,8 +22,11 @@ export default function Editor({ onConfirm, ...props }: Props) {
     url?: string
   }>()
 
+  const headerId = React.useId()
+
   return (
     <ActionlessForm
+      aria-labelledby={headerId}
       className={classes['main']}
       style={props.style}
       onSubmit={React.useMemo(() => {
@@ -32,7 +35,9 @@ export default function Editor({ onConfirm, ...props }: Props) {
         })
       }, [handleSubmit, onConfirm])}
     >
-      <div className={classes['header']}>{props.header}</div>
+      <h2 className={classes['header']} id={headerId}>
+        {props.header}
+      </h2>
 
       <Input
         {...register('title')}
