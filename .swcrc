@@ -13,6 +13,8 @@
     }
   },
   "env": {
+    // swc does not read from .browserslistrc: https://github.com/swc-project/swc/issues/3365
+    "targets": "chrome >= 104",
     // `usage` mode is less efficient than `entry`
     "mode": "entry",
     "coreJs": "3.29",
