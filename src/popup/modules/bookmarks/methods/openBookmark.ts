@@ -18,7 +18,7 @@ async function getUrls(ids: readonly string[]): Promise<string[]> {
   )
   return filteredBookmarkInfos
     .map((bookmarkInfo) => bookmarkInfo.url)
-    .filter((url): url is string => Boolean(url))
+    .filter(<T>(url: T | undefined): url is T => url !== undefined)
 }
 
 // suggested by https://groups.google.com/a/chromium.org/g/chromium-extensions/c/Inq88qfVoIs/m/gOeI5x2tBgAJ
@@ -35,7 +35,7 @@ async function execInPage(code: string) {
     func: (code: string): void => {
       const el = document.createElement('script')
       el.textContent = code
-      document.body.appendChild(el)
+      document.body.append(el)
       el.remove()
     },
     args: [code],

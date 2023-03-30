@@ -1278,10 +1278,10 @@
   dependencies:
     read-pkg-up "^9.1.0"
 
-"@foray1010/eslint-config@10.2.1":
-  version "10.2.1"
-  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-10.2.1.tgz#3e7f7397ea2cadde3a4bfd2b3dfd2c10c7577919"
-  integrity sha512-vXYzGHZcRQFYhMbglbGx80+xW7zeC9g3eIL7ika3JC/8LInsUm/mU22bfFjvrmsCLPTsdNl81j3iCQ+5NOo5GA==
+"@foray1010/eslint-config@10.4.2":
+  version "10.4.2"
+  resolved "https://registry.yarnpkg.com/@foray1010/eslint-config/-/eslint-config-10.4.2.tgz#817d007e22a61e5dbd7232072b5c974d3d1fe010"
+  integrity sha512-IJaufbFujggtt9QTrsur8JAMM8wKWJwilMUfTN4aG3pPYjwdkoJJvUBbwmn1R2NbaYpRVgoxYSqCKRzzWsAypw==
   dependencies:
     "@eslint-community/eslint-plugin-eslint-comments" "^3.2.1"
     "@eslint/js" "^8.36.0"

@@ -46,7 +46,7 @@ async function generateStoreDescription(): Promise<void> {
 
   fileData = fileData
     // remove style of subheader
-    .replace(/##### /g, '')
+    .replaceAll('##### ', '')
     .trim()
 
   await writeFile(fileName, fileData)

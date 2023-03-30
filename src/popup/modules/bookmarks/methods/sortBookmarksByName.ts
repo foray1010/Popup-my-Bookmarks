@@ -68,9 +68,9 @@ const sortGroupByPriority = (
 const mergeGroups = (
   nestedGroups: readonly (readonly BookmarkGroup[])[],
 ): BookmarkInfo[] => {
-  return nestedGroups
-    .map((nestedGroup) => nestedGroup.map((group) => group.members).flat())
-    .flat()
+  return nestedGroups.flatMap((nestedGroup) =>
+    nestedGroup.flatMap((group) => group.members),
+  )
 }
 
 const sortBookmarks = (

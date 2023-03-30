@@ -180,11 +180,9 @@ const useUtils = (
         setBookmarkTrees((trees) => {
           const isFolderOpened = trees.some((tree) => tree.parent.id === id)
 
-          if (isFolderOpened) {
-            return withoutNextBookmarkTrees(trees, parentId)
-          } else {
-            return insertBookmarkTree(trees, parentId, bookmarkTree)
-          }
+          return isFolderOpened
+            ? withoutNextBookmarkTrees(trees, parentId)
+            : insertBookmarkTree(trees, parentId, bookmarkTree)
         })
       },
       [insertBookmarkTree, setBookmarkTrees, withoutNextBookmarkTrees],

@@ -101,7 +101,7 @@ async function main(): Promise<void> {
         Object.entries(messagesJson)
           .map(([k, v]) => {
             const trimmedMessage = v.message.trim()
-            if (!trimmedMessage) return undefined
+            if (!trimmedMessage) return
 
             return [k, { ...v, message: trimmedMessage }] as const
           })

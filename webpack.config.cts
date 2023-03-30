@@ -100,28 +100,27 @@ const webpackConfig: Configuration = {
             },
           ]
         : []),
-      ...[
-        {
-          test: /\.svg$/,
-          resourceQuery: /svgr/,
-          issuer: /\.tsx?$/,
-          use: [
-            'swc-loader',
-            {
-              loader: '@svgr/webpack',
-              options: { babel: false },
-            },
-          ],
-        },
-        {
-          test: /\.svg$/,
-          resourceQuery: { not: [/svgr/] },
-          type: 'asset',
-          generator: {
-            filename: 'images/[name][ext]',
+
+      {
+        test: /\.svg$/,
+        resourceQuery: /svgr/,
+        issuer: /\.tsx?$/,
+        use: [
+          'swc-loader',
+          {
+            loader: '@svgr/webpack',
+            options: { babel: false },
           },
+        ],
+      },
+      {
+        test: /\.svg$/,
+        resourceQuery: { not: [/svgr/] },
+        type: 'asset',
+        generator: {
+          filename: 'images/[name][ext]',
         },
-      ],
+      },
       {
         test: /\/manifest\.yml$/,
         use: [
