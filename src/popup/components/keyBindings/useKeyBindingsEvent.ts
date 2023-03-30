@@ -1,6 +1,6 @@
-import * as React from 'react'
 import { useDeepCompareEffect } from 'use-deep-compare'
 
+import { useLatestRef } from '../../../core/hooks/useLatestRef.js'
 import { useKeyBindingsContext } from './KeyBindingsContext.js'
 import type { KeyBindingMeta } from './types.js'
 
@@ -10,8 +10,7 @@ export default function useKeyBindingsEvent(
 ) {
   const { addEventListener, removeEventListener } = useKeyBindingsContext()
 
-  const callbackRef = React.useRef(callback)
-  callbackRef.current = callback
+  const callbackRef = useLatestRef(callback)
 
   useDeepCompareEffect(() => {
     const wrappedCallback = (evt: KeyboardEvent) => {
@@ -26,5 +25,5 @@ export default function useKeyBindingsEvent(
     return () => {
       removeEventListener(meta, wrappedCallback)
     }
-  }, [addEventListener, meta, removeEventListener])
+  }, [addEventListener, callbackRef, meta, removeEventListener])
 }

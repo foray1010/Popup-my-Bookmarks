@@ -1,9 +1,12 @@
 import constate from 'constate'
 import * as React from 'react'
+import { useDebouncedCallback } from 'use-debounce'
 import webExtension from 'webextension-polyfill'
 
+import { useLatestRef } from '../../../../core/hooks/useLatestRef.js'
 import { BOOKMARK_TYPES, OPTIONS } from '../../../constants/index.js'
-import type { BookmarkTree, LastPosition } from '../../../types/index.js'
+import type { BookmarkTree } from '../../../types/index.js'
+import { getLocalStorage } from '../../localStorage.js'
 import { useOptions } from '../../options.js'
 import {
   getBookmarkTree,
@@ -190,12 +193,31 @@ const useUtils = (
   }
 }
 
-const useRefreshOnBookmarkEvent = (refresh: () => void) => {
-  // use ref to save refresh, otherwise the listener will keep remounting when typing in search bar
-  const refreshRef = React.useRef(refresh)
-  refreshRef.current = refresh
+const useRefreshOnBookmarkEvent = ({
+  bookmarkTrees,
+  setBookmarkTrees,
+  fetchBookmarkTrees,
+}: {
+  readonly bookmarkTrees: readonly BookmarkTree[]
+  readonly setBookmarkTrees: React.Dispatch<
+    React.SetStateAction<readonly BookmarkTree[]>
+  >
+  readonly fetchBookmarkTrees: (
+    childTreeIds?: readonly string[] | undefined,
+  ) => Promise<readonly BookmarkTree[]>
+}) => {
+  // use debounce to avoid frequent refresh, such as sort bookmarks by name
+  const refresh = useDebouncedCallback(() => {
+    const [, ...childTreeIds] = bookmarkTrees.map((tree) => tree.parent.id)
+    fetchBookmarkTrees(childTreeIds).then(setBookmarkTrees).catch(console.error)
+  }, 100)
+  const refreshRef = useLatestRef(refresh)
+
   React.useEffect(() => {
-    const refreshTrees = refreshRef.current
+    // create wrapper function to always point to the latest ref
+    const refreshTrees = () => {
+      refreshRef.current()
+    }
 
     webExtension.bookmarks.onChanged.addListener(refreshTrees)
     webExtension.bookmarks.onCreated.addListener(refreshTrees)
@@ -208,7 +230,7 @@ const useRefreshOnBookmarkEvent = (refresh: () => void) => {
       webExtension.bookmarks.onMoved.removeListener(refreshTrees)
       webExtension.bookmarks.onRemoved.removeListener(refreshTrees)
     }
-  }, [])
+  }, [refreshRef])
 }
 
 const useBookmarkTreesState = () => {
@@ -216,46 +238,59 @@ const useBookmarkTreesState = () => {
     readonly BookmarkTree[]
   >([])
   const [searchQuery, setSearchQuery] = React.useState('')
-  const [, startTransition] = React.useTransition()
 
   const options = useOptions()
 
-  const fetchBookmarkTrees = React.useCallback(() => {
-    async function main() {
-      if (searchQuery) {
-        const bookmarkTrees = await getBookmarkTreesFromSearch({
-          searchQuery,
-          isSearchTitleOnly: options[OPTIONS.SEARCH_TARGET] === 1,
-          maxResults: options[OPTIONS.MAX_RESULTS],
-        })
-        startTransition(() => {
-          setBookmarkTrees(bookmarkTrees)
-        })
-      } else {
-        const { lastPositions = [] } =
-          (await webExtension.storage.local.get()) as {
-            lastPositions?: LastPosition[]
-          }
-        const bookmarkTrees = await getBookmarkTreesFromRoot({
-          firstTreeId: String(options[OPTIONS.DEF_EXPAND]),
-          childTreeIds: options[OPTIONS.REMEMBER_POS]
-            ? lastPositions.map((x) => x.id)
-            : [],
-          hideRootTreeIds: (options[OPTIONS.HIDE_ROOT_FOLDER] ?? []).map(
-            String,
-          ),
-        })
-        startTransition(() => {
-          setBookmarkTrees(bookmarkTrees)
-        })
+  const fetchBookmarkTrees = React.useCallback(
+    async (
+      childTreeIds?: readonly string[] | undefined,
+    ): Promise<BookmarkTree[]> => {
+      return searchQuery
+        ? getBookmarkTreesFromSearch({
+            searchQuery,
+            isSearchTitleOnly: options[OPTIONS.SEARCH_TARGET] === 1,
+            maxResults: options[OPTIONS.MAX_RESULTS],
+          })
+        : getBookmarkTreesFromRoot({
+            firstTreeId: String(options[OPTIONS.DEF_EXPAND]),
+            childTreeIds,
+            hideRootTreeIds: options[OPTIONS.HIDE_ROOT_FOLDER]?.map(String),
+          })
+    },
+    [searchQuery, options],
+  )
+
+  React.useEffect(() => {
+    let ignore = false
+
+    async function run(): Promise<BookmarkTree[]> {
+      if (options[OPTIONS.REMEMBER_POS]) {
+        const localStorage = await getLocalStorage()
+        const [, ...childIds] =
+          localStorage?.lastPositions.map((x) => x.id) ?? []
+        return fetchBookmarkTrees(childIds)
       }
+
+      return fetchBookmarkTrees()
     }
-    main().catch(console.error)
-  }, [searchQuery, options])
+    run()
+      .then((trees) => {
+        if (ignore) return
 
-  React.useEffect(fetchBookmarkTrees, [fetchBookmarkTrees])
+        setBookmarkTrees(trees)
+      })
+      .catch(console.error)
 
-  useRefreshOnBookmarkEvent(fetchBookmarkTrees)
+    return () => {
+      ignore = true
+    }
+  }, [fetchBookmarkTrees, options])
+
+  useRefreshOnBookmarkEvent({
+    bookmarkTrees,
+    setBookmarkTrees,
+    fetchBookmarkTrees,
+  })
 
   const utils = useUtils(setBookmarkTrees)
 

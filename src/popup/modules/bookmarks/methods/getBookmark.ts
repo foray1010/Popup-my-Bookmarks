@@ -72,7 +72,7 @@ export async function getBookmarkTreesFromRoot({
   hideRootTreeIds = [],
 }: {
   readonly firstTreeId: string
-  readonly childTreeIds?: ReadonlyArray<string>
+  readonly childTreeIds?: readonly string[] | undefined
   readonly hideRootTreeIds?: readonly string[]
 }): Promise<Array<BookmarkTree>> {
   const [firstTree, childTreeResults] = await Promise.all([
