@@ -1771,9 +1771,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@foray1010/eslint-config@npm:10.4.2":
-  version: 10.4.2
-  resolution: "@foray1010/eslint-config@npm:10.4.2"
+"@foray1010/eslint-config@npm:10.4.3":
+  version: 10.4.3
+  resolution: "@foray1010/eslint-config@npm:10.4.3"
   dependencies:
     "@eslint-community/eslint-plugin-eslint-comments": ^3.2.1
     "@eslint/js": ^8.36.0
@@ -1805,7 +1805,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: eb686a4589dd5d5d0a9d5df6bf541a74a897bb649a1d9d1ae8ba9ec387e0df867ff2ebfebc4d2c450a6f1249f1847636eb246adf8d06d0c61e2c1729bc5f50b9
+  checksum: 7ff6b88f8853e9f073462edc6cb5e0639492f08616d1c6b431610aad8f8ba613127df8e5d5ecd2c6d88c1f15faac15be25e6db00e82a50b1728416a7de13932a
   languageName: node
   linkType: hard
 
@@ -3725,7 +3725,7 @@ __metadata:
     "@commitlint/cli": 17.5.1
     "@commitlint/config-conventional": 17.4.4
     "@fontsource/archivo-narrow": 4.5.12
-    "@foray1010/eslint-config": 10.4.2
+    "@foray1010/eslint-config": 10.4.3
     "@foray1010/jest-preset": 4.0.0
     "@foray1010/prettier-config": 9.0.0
     "@foray1010/remark-preset": 9.0.0
