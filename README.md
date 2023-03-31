@@ -38,10 +38,10 @@ Please visit following branches for the legacy versions that support older versi
 
 ### Before you start
 
-1. Install [yarn](https://github.com/yarnpkg/yarn)
+1. We are using [corepack](https://nodejs.org/api/corepack.html) to manage the `yarn` version
 
    ```sh
-   npm install -g yarn
+   corepack enable
    ```
 
 1. `cd` to your workspace and install all dependencies

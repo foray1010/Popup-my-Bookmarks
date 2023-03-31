@@ -5,11 +5,13 @@ jobs:
       - image: 'cimg/node:18.12'
     steps:
       - 'checkout'
+      # require `sudo`: https://github.com/CircleCI-Public/cimg-node/issues/277
+      - run: 'sudo corepack enable'
       - restore_cache:
           key: 'yarn-packages-{{ checksum "yarn.lock" }}'
-      - run: 'yarn install --frozen-lockfile'
+      - run: 'yarn install --immutable'
       - save_cache:
           key: 'yarn-packages-{{ checksum "yarn.lock" }}'
           paths:
-            - '~/.cache/yarn'
+            - '.yarn/cache'
       - run: 'yarn ci'
