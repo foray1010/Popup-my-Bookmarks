@@ -40,7 +40,7 @@ const webpackConfig: Configuration = {
       {
         test: /\.css$/,
         use: [
-          isDevelopmentBuild ? 'style-loader' : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -222,6 +222,9 @@ const webpackConfig: Configuration = {
         title: pkg.name,
       })
     }),
+    new MiniCssExtractPlugin({
+      filename: path.join('css', '[name].css'),
+    }),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'async',
     }),
@@ -235,9 +238,6 @@ const webpackConfig: Configuration = {
       : []),
     ...(isProductionBuild
       ? [
-          new MiniCssExtractPlugin({
-            filename: path.join('css', '[name].css'),
-          }),
           new ZipPlugin({
             filename: `${pkg.version}.zip`,
           }),

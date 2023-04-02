@@ -3787,7 +3787,6 @@ __metadata:
     script-ext-html-webpack-plugin: 2.1.5
     sharp: 0.32.0
     size-limit: 8.2.4
-    style-loader: 3.3.2
     stylelint: 15.3.0
     swc-loader: 0.2.3
     terser-webpack-plugin: 5.3.7
@@ -14505,15 +14504,6 @@ __metadata:
   version: 2.0.1
   resolution: "strip-json-comments@npm:2.0.1"
   checksum: 1074ccb63270d32ca28edfb0a281c96b94dc679077828135141f27d52a5a398ef5e78bcf22809d23cadc2b81dfbe345eb5fd8699b385c8b1128907dec4a7d1e1
-  languageName: node
-  linkType: hard
-
-"style-loader@npm:3.3.2":
-  version: 3.3.2
-  resolution: "style-loader@npm:3.3.2"
-  peerDependencies:
-    webpack: ^5.0.0
-  checksum: 5ee5ce2dc885369eccb55d429376e83d02570d473ac5edeb69fd65ee894847f1e51429cf078351f617bd04516ece8a1dd967f9f40464bd8fa76d903c6b2a6f08
   languageName: node
   linkType: hard
 
