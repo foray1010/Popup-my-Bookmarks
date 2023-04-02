@@ -1,4 +1,4 @@
-import classNames from 'clsx'
+import classNames from 'classix'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
@@ -35,10 +35,11 @@ export default function MenuRow({
   return (
     <li
       aria-disabled={isUnclickable}
-      className={classNames(classes['main'], {
-        [classes['focused'] as string]: isFocused,
-        [classes['unclickable'] as string]: isUnclickable,
-      })}
+      className={classNames(
+        classes['main'],
+        isFocused && classes['focused'],
+        isUnclickable && classes['unclickable'],
+      )}
       role='menuitem'
       onClick={isUnclickable ? undefined : onClick}
       onMouseEnter={handleMouseEnter}

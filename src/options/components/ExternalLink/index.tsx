@@ -1,4 +1,4 @@
-import classNames from 'clsx'
+import classNames from 'classix'
 import type * as React from 'react'
 
 import classes from './styles.module.css'

@@ -1,4 +1,4 @@
-import classNames from 'clsx'
+import classNames from 'classix'
 import * as React from 'react'
 
 import classes from './styles.module.css'
@@ -15,7 +15,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(function InnerInput(
       ref={ref}
       className={classNames(
         classes['main'],
-        ['number', 'text'].includes(type) ? classes['text-input'] : null,
+        ['number', 'text'].includes(type) && classes['text-input'],
         className,
       )}
       type={type}

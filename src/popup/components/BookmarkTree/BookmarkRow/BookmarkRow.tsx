@@ -1,4 +1,4 @@
-import classNames from 'clsx'
+import classNames from 'classix'
 import * as React from 'react'
 
 import LazyImage from '../../../../core/components/baseItems/LazyImage.js'
@@ -21,10 +21,8 @@ const BookmarkRow = React.forwardRef(function InnerBookmarkRow(
       {...divProps}
       className={classNames(
         classes['main'],
-        {
-          [classes['highlighted'] as string]: isHighlighted,
-          [classes['unclickable'] as string]: isUnclickable,
-        },
+        isHighlighted && classes['highlighted'],
+        isUnclickable && classes['unclickable'],
         divProps.className,
       )}
       title={tooltip}

@@ -1,4 +1,4 @@
-import classNames from 'clsx'
+import classNames from 'classix'
 import * as React from 'react'
 
 import classes from './mask.module.css'

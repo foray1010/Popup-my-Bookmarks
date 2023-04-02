@@ -1,4 +1,4 @@
-import classNames from 'clsx'
+import classNames from 'classix'
 import webExtension from 'webextension-polyfill'
 
 import Button from '../../../core/components/baseItems/Button/index.js'
@@ -36,9 +36,10 @@ export default function NavBar() {
       {navBarItemInfos.map(({ path, title }) => (
         <Button
           key={path}
-          className={classNames(classes['button'], {
-            [classes['active'] as string]: path === currentPath,
-          })}
+          className={classNames(
+            classes['button'],
+            path === currentPath && classes['active'],
+          )}
           onClick={() => setCurrentPath(path)}
         >
           {title}

@@ -1,4 +1,4 @@
-import classNames from 'clsx'
+import classNames from 'classix'
 import * as React from 'react'
 
 import Button from '../../../../../../core/components/baseItems/Button/index.js'
@@ -16,9 +16,10 @@ export default function Option({ children, ...props }: Props) {
     <span className={classes['main']}>
       <input ref={inputRef} {...props} hidden type='radio' />
       <Button
-        className={classNames(classes['item'], {
-          [classes['itemActive'] as string]: props.checked,
-        })}
+        className={classNames(
+          classes['item'],
+          props.checked && classes['itemActive'],
+        )}
         onClick={React.useCallback(() => {
           inputRef.current?.click()
         }, [])}

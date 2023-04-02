@@ -1,4 +1,4 @@
-import classNames from 'clsx'
+import classNames from 'classix'
 import * as React from 'react'
 import { useVirtual } from 'react-virtual'
 import useEventListener from 'use-typed-event-listener'
@@ -113,10 +113,11 @@ export default function BookmarkTree(props: Props) {
               key={virtualItem.key}
               ref={virtualItem.measureRef}
               bookmarkInfo={bookmarkInfo}
-              className={classNames(classes['react-virtual-row'], {
-                [classes['last-list-item'] as string]:
-                  virtualItem.index === itemCount - 1,
-              })}
+              className={classNames(
+                classes['react-virtual-row'],
+                virtualItem.index === itemCount - 1 &&
+                  classes['last-list-item'],
+              )}
               isDisableDragAndDrop={props.isDisableDragAndDrop}
               isHighlighted={
                 isDragging

@@ -1,4 +1,4 @@
-import classNames from 'clsx'
+import classNames from 'classix'
 import * as React from 'react'
 
 import { BOOKMARK_TYPES } from '../../../constants/index.js'
@@ -99,12 +99,12 @@ const BookmarkRowContainer = React.forwardRef(
           onDragStart={restProps.onDragStart}
         >
           <BookmarkRow
-            className={classNames({
-              [classes['root-folder'] as string]: bookmarkInfo.isRoot,
-              [classes['drag-indicator'] as string]:
-                bookmarkInfo.type === BOOKMARK_TYPES.DRAG_INDICATOR,
-              [classes['separator'] as string]: isSeparator,
-            })}
+            className={classNames(
+              bookmarkInfo.isRoot && classes['root-folder'],
+              bookmarkInfo.type === BOOKMARK_TYPES.DRAG_INDICATOR &&
+                classes['drag-indicator'],
+              isSeparator && classes['separator'],
+            )}
             iconUrl={bookmarkInfo.iconUrl}
             isHighlighted={isHighlighted}
             isUnclickable={restProps.isUnclickable}

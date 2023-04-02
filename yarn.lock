@@ -3752,8 +3752,8 @@ __metadata:
     "@types/zip-webpack-plugin": 3.0.3
     axios: 1.3.4
     chrome-manifest-loader: 0.3.0
+    classix: 2.1.24
     clean-webpack-plugin: 4.0.0
-    clsx: 1.2.1
     constate: 3.3.2
     copy-webpack-plugin: 11.0.0
     core-js: 3.29.1
@@ -5405,6 +5405,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"classix@npm:2.1.24":
+  version: 2.1.24
+  resolution: "classix@npm:2.1.24"
+  checksum: c130c416d77a071535294baabac45df11936127193b404e008cc59090133f2806e58da3d6afe95707e5cc7566bffac1ca24524c93ac6cfd7f7290486d6365225
+  languageName: node
+  linkType: hard
+
 "clean-css@npm:^5.2.2":
   version: 5.3.2
   resolution: "clean-css@npm:5.3.2"
@@ -5509,13 +5516,6 @@ __metadata:
   dependencies:
     mimic-response: ^1.0.0
   checksum: 4e671cac39b11c60aa8ba0a450657194a5d6504df51bca3fac5b3bd0145c4f8e8464898f87c8406b83232e3bc5cca555f51c1f9c8ac023969ebfbf7f6bdabb2e
-  languageName: node
-  linkType: hard
-
-"clsx@npm:1.2.1":
-  version: 1.2.1
-  resolution: "clsx@npm:1.2.1"
-  checksum: 30befca8019b2eb7dbad38cff6266cf543091dae2825c856a62a8ccf2c3ab9c2907c4d12b288b73101196767f66812365400a227581484a05f968b0307cfaf12
   languageName: node
   linkType: hard
 
