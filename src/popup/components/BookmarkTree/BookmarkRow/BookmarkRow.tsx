@@ -4,45 +4,36 @@ import * as React from 'react'
 import LazyImage from '../../../../core/components/baseItems/LazyImage.js'
 import classes from './bookmark-row.module.css'
 
-interface Props {
-  readonly className?: string | undefined
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   readonly iconUrl?: string | undefined
   readonly isHighlighted: boolean
   readonly isUnclickable: boolean
-  readonly onAuxClick?: React.MouseEventHandler
-  readonly onClick?: React.MouseEventHandler
-  readonly onMouseEnter?: React.MouseEventHandler
-  readonly onMouseLeave?: React.MouseEventHandler
-  readonly role?: React.AriaRole | undefined
   readonly title: string
   readonly tooltip?: string | undefined
 }
 const BookmarkRow = React.forwardRef(function InnerBookmarkRow(
-  props: Props,
+  { iconUrl, isHighlighted, isUnclickable, title, tooltip, ...divProps }: Props,
   setRef: React.Ref<HTMLDivElement>,
 ) {
   return (
     <div
       ref={setRef}
+      {...divProps}
       className={classNames(
         classes['main'],
         {
-          [classes['highlighted'] as string]: props.isHighlighted,
-          [classes['unclickable'] as string]: props.isUnclickable,
+          [classes['highlighted'] as string]: isHighlighted,
+          [classes['unclickable'] as string]: isUnclickable,
         },
-        props.className,
+        divProps.className,
       )}
-      role={props.role}
-      title={props.tooltip}
-      onAuxClick={props.isUnclickable ? undefined : props.onAuxClick}
-      onClick={props.isUnclickable ? undefined : props.onClick}
-      onMouseEnter={props.onMouseEnter}
-      onMouseLeave={props.onMouseLeave}
+      title={tooltip}
+      onAuxClick={isUnclickable ? undefined : divProps.onAuxClick}
+      onClick={isUnclickable ? undefined : divProps.onClick}
+      onContextMenu={isUnclickable ? undefined : divProps.onContextMenu}
     >
-      {props.iconUrl && (
-        <LazyImage className={classes['icon']} src={props.iconUrl} />
-      )}
-      <div className={classes['title']}>{props.title}</div>
+      {iconUrl && <LazyImage className={classes['icon']} src={iconUrl} />}
+      <div className={classes['title']}>{title}</div>
     </div>
   )
 })

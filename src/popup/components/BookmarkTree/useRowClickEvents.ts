@@ -73,10 +73,6 @@ export default function useRowClickEvents({
           if (evt.button === 1) {
             await handleRowMiddleClick(bookmarkInfo)
           }
-
-          if (evt.button === 2) {
-            handleRowRightClick(bookmarkInfo, evt)
-          }
         },
       handleRowClick:
         (bookmarkInfo: BookmarkInfo) => async (evt: React.MouseEvent) => {
@@ -92,6 +88,10 @@ export default function useRowClickEvents({
               isAllowBookmarklet: true,
             })
           }
+        },
+      handleRowContextMenu:
+        (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent) => {
+          handleRowRightClick(bookmarkInfo, evt)
         },
     }
   }, [openMenu, options, toggleBookmarkTree, treeInfo.parent.id])

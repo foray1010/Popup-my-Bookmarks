@@ -26,6 +26,9 @@ interface ItemData {
     bookmarkInfo: BookmarkInfo,
   ) => React.MouseEventHandler
   readonly onRowClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  readonly onRowContextMenu: (
+    bookmarkInfo: BookmarkInfo,
+  ) => React.MouseEventHandler
   readonly onRowDragOver: (
     bookmarkInfo: BookmarkInfo,
   ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
@@ -128,6 +131,7 @@ export default function BookmarkTree(props: Props) {
               }}
               onAuxClick={props.onRowAuxClick}
               onClick={props.onRowClick}
+              onContextMenu={props.onRowContextMenu}
               onDragOver={props.onRowDragOver}
               onDragStart={props.onRowDragStart}
               onMouseEnter={props.onRowMouseEnter}

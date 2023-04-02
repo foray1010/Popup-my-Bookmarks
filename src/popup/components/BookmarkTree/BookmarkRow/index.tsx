@@ -21,6 +21,9 @@ interface Props {
   readonly isUnclickable: boolean
   readonly onAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   readonly onClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  readonly onContextMenu: (
+    bookmarkInfo: BookmarkInfo,
+  ) => React.MouseEventHandler
   readonly onDragOver: (
     bookmarkInfo: BookmarkInfo,
   ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
@@ -36,6 +39,7 @@ const BookmarkRowContainer = React.forwardRef(
       isHighlighted,
       onAuxClick,
       onClick,
+      onContextMenu,
       onDragOver,
       onMouseEnter,
       onMouseLeave,
@@ -56,6 +60,10 @@ const BookmarkRowContainer = React.forwardRef(
     const handleClick = React.useMemo(
       () => onClick(bookmarkInfo),
       [bookmarkInfo, onClick],
+    )
+    const handleContextMenu = React.useMemo(
+      () => onContextMenu(bookmarkInfo),
+      [bookmarkInfo, onContextMenu],
     )
     const handleDragOver = React.useMemo(
       () => onDragOver(bookmarkInfo),
@@ -105,6 +113,7 @@ const BookmarkRowContainer = React.forwardRef(
             tooltip={tooltip}
             onAuxClick={handleAuxClick}
             onClick={handleClick}
+            onContextMenu={handleContextMenu}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           />

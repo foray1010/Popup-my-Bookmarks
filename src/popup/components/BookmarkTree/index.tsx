@@ -94,9 +94,10 @@ export default function BookmarkTreeContainer({
     removeNextBookmarkTrees(treeInfo.parent.id)
   }, [removeNextBookmarkTrees, treeInfo.parent.id])
 
-  const { handleRowAuxClick, handleRowClick } = useRowClickEvents({
-    treeInfo,
-  })
+  const { handleRowAuxClick, handleRowClick, handleRowContextMenu } =
+    useRowClickEvents({
+      treeInfo,
+    })
   const { handleRowDragOver, handleRowDragStart } = useRowDragEvents({
     closeNextTrees,
     treeInfo,
@@ -128,6 +129,7 @@ export default function BookmarkTreeContainer({
         treeInfo={treeInfo}
         onRowAuxClick={handleRowAuxClick}
         onRowClick={handleRowClick}
+        onRowContextMenu={handleRowContextMenu}
         onRowDragOver={handleRowDragOver}
         onRowDragStart={handleRowDragStart}
         onRowMouseEnter={handleRowMouseEnter}
