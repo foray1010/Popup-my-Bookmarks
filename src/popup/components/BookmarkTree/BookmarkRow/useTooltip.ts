@@ -4,51 +4,56 @@ import { ROOT_ID } from '../../../constants/index.js'
 import { getBookmarkInfo } from '../../../modules/bookmarks/methods/getBookmark.js'
 import type { BookmarkInfo } from '../../../types/index.js'
 
-interface Arg {
-  readonly isSearching: boolean
-  readonly isShowTooltip: boolean
-  readonly bookmarkInfo: BookmarkInfo
-}
-
-async function getBreadcrumbs(id?: string): Promise<Array<string>> {
+async function getBreadcrumbs(
+  id: string | undefined,
+): Promise<readonly string[]> {
   if (!id || id === ROOT_ID) return []
 
   const bookmarkInfo = await getBookmarkInfo(id)
 
-  return [...(await getBreadcrumbs(bookmarkInfo.parentId)), bookmarkInfo.title]
+  const parentBreadcrumbs = await getBreadcrumbs(bookmarkInfo.parentId)
+  return parentBreadcrumbs.concat(bookmarkInfo.title)
 }
 
-async function getTooltip({
-  isSearching,
-  isShowTooltip,
-  bookmarkInfo,
-}: Arg): Promise<string> {
-  const tooltipArr: Array<string | undefined> = []
-
-  if (isShowTooltip) {
-    tooltipArr.push(bookmarkInfo.title, bookmarkInfo.url)
-  }
-
-  if (isSearching) {
-    const breadcrumbs = await getBreadcrumbs(bookmarkInfo.parentId)
-    tooltipArr.unshift(`[${breadcrumbs.join(' > ')}]`)
-  }
-
-  return tooltipArr.filter(Boolean).join('\n')
-}
+const joinLines = (lines: ReadonlyArray<string | undefined>): string =>
+  lines.filter(Boolean).join('\n')
 
 export default function useTooltip({
+  bookmarkInfo,
   isSearching,
   isShowTooltip,
-  bookmarkInfo,
-}: Arg): string | undefined {
-  const [tooltip, setTooltip] = React.useState<string>()
+}: {
+  readonly bookmarkInfo: BookmarkInfo
+  readonly isSearching: boolean
+  readonly isShowTooltip: boolean
+}): string | undefined {
+  const tooltip = isShowTooltip
+    ? joinLines([bookmarkInfo.title, bookmarkInfo.url])
+    : undefined
+
+  const [breadcrumbs, setBreadcrumbs] = React.useState<readonly string[]>([])
 
   React.useEffect(() => {
-    getTooltip({ isSearching, isShowTooltip, bookmarkInfo })
-      .then(setTooltip)
+    let ignore = false
+
+    if (!isSearching) return
+
+    getBreadcrumbs(bookmarkInfo.parentId)
+      .then((tooltip) => {
+        if (ignore) return true
+
+        setBreadcrumbs(tooltip)
+      })
       .catch(console.error)
-  }, [bookmarkInfo, isSearching, isShowTooltip])
+
+    return () => {
+      ignore = true
+    }
+  }, [bookmarkInfo, isSearching])
+
+  if (isSearching && breadcrumbs.length > 0) {
+    return joinLines([tooltip, `[${breadcrumbs.join(' > ')}]`])
+  }
 
   return tooltip
 }
