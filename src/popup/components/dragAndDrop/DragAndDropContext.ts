@@ -2,42 +2,15 @@ import constate from 'constate'
 import * as React from 'react'
 import useEventListener from 'use-typed-event-listener'
 
-type MouseCoordinate = {
-  readonly x: number
-  readonly y: number
-}
-
 const useDragAndDropState = () => {
-  const [activeKey, setActiveKeyState] = React.useState<string | null>(null)
-  const [mouseCoordinate, setMouseCoordinate] = React.useState<MouseCoordinate>(
-    {
-      x: 0,
-      y: 0,
-    },
-  )
-  const [pendingKey, setPendingKeyState] = React.useState<string | null>(null)
+  const [activeKey, setActiveKey] = React.useState<string | null>(null)
 
   return React.useMemo(
     () => ({
       activeKey,
-      pendingKey,
-      setActiveKey: (key: string) => {
-        setActiveKeyState(key)
-        setPendingKeyState(null)
-      },
-      setPendingKey: (key: string) => {
-        setPendingKeyState(key)
-        setActiveKeyState(null)
-      },
-      unsetAllKeys: () => {
-        setPendingKeyState(null)
-        setActiveKeyState(null)
-      },
-
-      mouseCoordinate,
-      setMouseCoordinate,
+      setActiveKey,
     }),
-    [activeKey, mouseCoordinate, pendingKey],
+    [activeKey],
   )
 }
 
@@ -50,21 +23,20 @@ const useDragAndDrop = ({
 }) => {
   const state = useDragAndDropState()
 
-  const { activeKey, unsetAllKeys } = state
+  const { activeKey, setActiveKey } = state
 
-  const isDragging = activeKey !== null
+  // use window.mouseup to handle drop events because we are not using native drag, and it can support drop outside of the document.body
+  useEventListener(window, 'mouseup', (evt) => {
+    // ignore as user is not dragging
+    if (activeKey === null) return
 
-  const handleDrop = (evt: MouseEvent) => {
-    if (!isDragging) return
-
-    if (evt.buttons !== 1) {
-      unsetAllKeys()
-      if (activeKey !== null) onDrop(evt, activeKey)
+    if (evt.buttons === 0) {
+      onDrop(evt, activeKey)
       onDragEnd(evt)
+
+      setActiveKey(null)
     }
-  }
-  useEventListener(document.body, 'mouseenter', handleDrop)
-  useEventListener(window, 'mouseup', handleDrop)
+  })
 
   return state
 }

@@ -32,7 +32,7 @@ interface ItemData {
   readonly onRowDragOver: (
     bookmarkInfo: BookmarkInfo,
   ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
-  readonly onRowDragStart: React.MouseEventHandler
+  readonly onRowDragStart: React.DragEventHandler
   readonly onRowMouseEnter: (
     bookmarkInfo: BookmarkInfo,
   ) => React.MouseEventHandler

@@ -27,7 +27,7 @@ interface Props {
   readonly onDragOver: (
     bookmarkInfo: BookmarkInfo,
   ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
-  readonly onDragStart: React.MouseEventHandler
+  readonly onDragStart: React.DragEventHandler
   readonly onMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   readonly onMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   readonly style?: React.CSSProperties
