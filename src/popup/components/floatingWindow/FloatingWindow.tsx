@@ -5,12 +5,11 @@ import useResizeObserver from 'use-resize-observer'
 import Mask from '../Mask/index.js'
 import useGlobalBodySize from './useGlobalBodySize.js'
 
-interface Props {
-  readonly children: React.ReactNode
+type Props = React.PropsWithChildren<{
   readonly positionLeft: number
   readonly positionTop: number
   readonly onClose: () => void
-}
+}>
 export default function FloatingWindow({
   children,
   positionLeft,

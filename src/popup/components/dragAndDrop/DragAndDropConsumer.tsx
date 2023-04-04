@@ -3,8 +3,7 @@ import * as React from 'react'
 import { useDragAndDropContext } from './DragAndDropContext.js'
 import type { ResponseEvent } from './types.js'
 
-type Props = {
-  readonly children: React.ReactNode
+type Props = React.PropsWithChildren<{
   readonly disableDrag?: boolean
   readonly disableDrop?: boolean
   readonly itemKey: string
@@ -16,7 +15,7 @@ type Props = {
     evt: React.DragEvent,
     responseEvent: ResponseEvent,
   ) => void
-}
+}>
 
 const useDragEvents = ({ itemKey, onDragOver, onDragStart }: Props) => {
   const { activeKey, setActiveKey } = useDragAndDropContext()
