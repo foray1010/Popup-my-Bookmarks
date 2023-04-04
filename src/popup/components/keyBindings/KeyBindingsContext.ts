@@ -97,7 +97,7 @@ const useKeyBindingsState = () => {
 const useKeyBindings = () => {
   const state = useKeyBindingsState()
 
-  useEventListener(window, 'keydown', (evt) => {
+  useEventListener(document, 'keydown', (evt) => {
     const { keyBindingsPerWindow, activeWindowId } = state
     if (!activeWindowId) return
 

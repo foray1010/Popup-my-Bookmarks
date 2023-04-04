@@ -25,8 +25,8 @@ const useDragAndDrop = ({
 
   const { activeKey, setActiveKey } = state
 
-  // use window.mouseup to handle drop events because we are not using native drag, and it can support drop outside of the document.body
-  useEventListener(window, 'mouseup', (evt) => {
+  // use document.mouseup to handle drop events because we are not using native drag, and it can support drop outside of the document.body
+  useEventListener(document, 'mouseup', (evt) => {
     // ignore as user is not dragging
     if (activeKey === null) return
 
