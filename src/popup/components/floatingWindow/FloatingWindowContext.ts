@@ -10,13 +10,10 @@ type BodySizeStack = ReadonlyArray<BodySize>
 const useFloatingWindow = () => {
   const [bodySizeStack, setBodySizeStack] = React.useState<BodySizeStack>([])
 
-  return React.useMemo(
-    () => ({
-      bodySizeStack,
-      setBodySizeStack,
-    }),
-    [bodySizeStack],
-  )
+  return {
+    bodySizeStack,
+    setBodySizeStack,
+  }
 }
 
 export const [FloatingWindowProvider, useFloatingWindowContext] =

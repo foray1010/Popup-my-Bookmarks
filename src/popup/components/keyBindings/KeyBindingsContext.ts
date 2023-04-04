@@ -1,6 +1,5 @@
 import constate from 'constate'
 import * as React from 'react'
-import { useDeepCompareMemo } from 'use-deep-compare'
 import useEventListener from 'use-typed-event-listener'
 
 import type { KeyBindingEventCallback, KeyDefinition } from './types.js'
@@ -86,12 +85,10 @@ const useKeyBindingsState = () => {
 
   const keyBindingsPerWindowState = useKeyBindingsPerWindowState()
 
-  return useDeepCompareMemo(() => {
-    return {
-      ...activeWindowState,
-      ...keyBindingsPerWindowState,
-    }
-  }, [activeWindowState, keyBindingsPerWindowState])
+  return {
+    ...activeWindowState,
+    ...keyBindingsPerWindowState,
+  }
 }
 
 const useKeyBindings = () => {

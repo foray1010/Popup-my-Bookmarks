@@ -42,23 +42,13 @@ const useListNavigation = () => {
     setItemCounts((prevState) => deleteFromMap(prevState, listIndex))
   }, [])
 
-  return React.useMemo(
-    () => ({
-      listNavigation: { highlightedIndices, itemCounts },
-      setHighlightedIndex,
-      unsetHighlightedIndex,
-      setItemCount,
-      removeList,
-    }),
-    [
-      highlightedIndices,
-      itemCounts,
-      removeList,
-      setHighlightedIndex,
-      setItemCount,
-      unsetHighlightedIndex,
-    ],
-  )
+  return {
+    listNavigation: { highlightedIndices, itemCounts },
+    setHighlightedIndex,
+    unsetHighlightedIndex,
+    setItemCount,
+    removeList,
+  }
 }
 
 export const [ListNavigationProvider, useListNavigationContext] =

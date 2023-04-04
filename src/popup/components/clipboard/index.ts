@@ -33,13 +33,11 @@ const useClipboardState = () => {
     setState(newState)
   }, [])
 
-  return React.useMemo(() => {
-    return {
-      state,
-      reset,
-      set,
-    }
-  }, [state, reset, set])
+  return {
+    state,
+    reset,
+    set,
+  }
 }
 
 export const [ClipboardProvider, useClipboard] = constate(useClipboardState)

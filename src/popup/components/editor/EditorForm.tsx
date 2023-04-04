@@ -29,11 +29,9 @@ export default function Editor({ onConfirm, ...props }: Props) {
       aria-labelledby={headerId}
       className={classes['main']}
       style={props.style}
-      onSubmit={React.useMemo(() => {
-        return handleSubmit(async (variables) => {
-          await onConfirm(variables.title, variables.url)
-        })
-      }, [handleSubmit, onConfirm])}
+      onSubmit={handleSubmit(async (variables) => {
+        await onConfirm(variables.title, variables.url)
+      })}
     >
       <h2 className={classes['header']} id={headerId}>
         {props.header}

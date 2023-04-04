@@ -33,13 +33,11 @@ const useMenu = () => {
     setState(initialState)
   }, [])
 
-  return React.useMemo(() => {
-    return {
-      close,
-      open,
-      state,
-    }
-  }, [close, open, state])
+  return {
+    close,
+    open,
+    state,
+  }
 }
 
 export const [MenuProvider, useMenuContext] = constate(useMenu)

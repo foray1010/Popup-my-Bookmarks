@@ -42,13 +42,11 @@ const useEditor = () => {
     setState(initialState)
   }, [])
 
-  return React.useMemo(() => {
-    return {
-      close,
-      open,
-      state,
-    }
-  }, [close, open, state])
+  return {
+    close,
+    open,
+    state,
+  }
 }
 
 export const [EditorProvider, useEditorContext] = constate(useEditor)

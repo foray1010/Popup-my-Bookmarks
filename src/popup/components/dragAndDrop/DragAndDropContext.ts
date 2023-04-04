@@ -2,18 +2,6 @@ import constate from 'constate'
 import * as React from 'react'
 import useEventListener from 'use-typed-event-listener'
 
-const useDragAndDropState = () => {
-  const [activeKey, setActiveKey] = React.useState<string | null>(null)
-
-  return React.useMemo(
-    () => ({
-      activeKey,
-      setActiveKey,
-    }),
-    [activeKey],
-  )
-}
-
 const useDragAndDrop = ({
   onDragEnd,
   onDrop,
@@ -21,9 +9,7 @@ const useDragAndDrop = ({
   readonly onDragEnd: (evt: MouseEvent) => void
   readonly onDrop: (evt: MouseEvent, activeKey: string) => void
 }) => {
-  const state = useDragAndDropState()
-
-  const { activeKey, setActiveKey } = state
+  const [activeKey, setActiveKey] = React.useState<string | null>(null)
 
   // use document.mouseup to handle drop events because we are not using native drag, and it can support drop outside of the document.body
   useEventListener(document, 'mouseup', (evt) => {
@@ -38,7 +24,10 @@ const useDragAndDrop = ({
     }
   })
 
-  return state
+  return {
+    activeKey,
+    setActiveKey,
+  }
 }
 
 export const [DragAndDropProvider, useDragAndDropContext] =
