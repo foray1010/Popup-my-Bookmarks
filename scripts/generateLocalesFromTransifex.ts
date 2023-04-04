@@ -53,7 +53,7 @@ async function main(): Promise<void> {
   })
 
   const languages = (await project.fetch('languages', false)) as Collection & {
-    data: ReadonlyArray<{
+    readonly data: ReadonlyArray<{
       readonly attributes: {
         readonly code: string
       }

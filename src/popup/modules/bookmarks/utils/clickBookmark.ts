@@ -19,8 +19,8 @@ export const getClickOptionNameByEvent = (
 export const mapOptionToOpenBookmarkProps = (
   option?: number | undefined,
 ): {
-  openIn: OPEN_IN_TYPES
-  isCloseThisExtension: boolean
+  readonly openIn: OPEN_IN_TYPES
+  readonly isCloseThisExtension: boolean
 } => {
   switch (option) {
     case 0: // current tab

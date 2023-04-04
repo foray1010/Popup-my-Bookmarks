@@ -18,8 +18,8 @@ interface Props {
 }
 export default function Editor({ onConfirm, ...props }: Props) {
   const { register, handleSubmit } = useForm<{
-    title: string
-    url?: string
+    readonly title: string
+    readonly url?: string
   }>()
 
   const headerId = React.useId()

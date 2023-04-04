@@ -7,7 +7,7 @@ import { getBookmarkInfo, getBookmarkTree } from './getBookmark.js'
 
 const splitBySeparator = (
   bookmarkInfos: readonly BookmarkInfo[],
-): BookmarkInfo[][] => {
+): readonly (readonly BookmarkInfo[])[] => {
   return bookmarkInfos.reduce<BookmarkInfo[][]>(
     (acc, bookmarkInfo) => {
       if (acc.length === 0 || bookmarkInfo.type === BOOKMARK_TYPES.SEPARATOR) {
@@ -22,15 +22,19 @@ const splitBySeparator = (
   )
 }
 
-interface BookmarkGroup {
+type BookmarkGroup = {
   readonly type: BOOKMARK_TYPES
-  // eslint-disable-next-line functional/prefer-readonly-type
-  readonly members: BookmarkInfo[]
+  readonly members: readonly BookmarkInfo[]
 }
 const groupByType = (
   bookmarkInfos: readonly BookmarkInfo[],
-): BookmarkGroup[] => {
-  return bookmarkInfos.reduce<BookmarkGroup[]>((acc, bookmarkInfo) => {
+): readonly BookmarkGroup[] => {
+  return bookmarkInfos.reduce<
+    Array<{
+      readonly type: BOOKMARK_TYPES
+      readonly members: BookmarkInfo[]
+    }>
+  >((acc, bookmarkInfo) => {
     const matchType = (group: BookmarkGroup) => group.type === bookmarkInfo.type
 
     if (!acc.some(matchType)) {
@@ -51,7 +55,7 @@ const groupByType = (
 
 const sortGroupByPriority = (
   groups: readonly BookmarkGroup[],
-): BookmarkGroup[] => {
+): readonly BookmarkGroup[] => {
   const priority = [
     BOOKMARK_TYPES.SEPARATOR,
     BOOKMARK_TYPES.FOLDER,
@@ -67,7 +71,7 @@ const sortGroupByPriority = (
 
 const mergeGroups = (
   nestedGroups: readonly (readonly BookmarkGroup[])[],
-): BookmarkInfo[] => {
+): readonly BookmarkInfo[] => {
   return nestedGroups.flatMap((nestedGroup) =>
     nestedGroup.flatMap((group) => group.members),
   )
@@ -75,14 +79,16 @@ const mergeGroups = (
 
 const sortBookmarks = (
   bookmarkInfos: readonly BookmarkInfo[],
-): BookmarkInfo[] => {
+): readonly BookmarkInfo[] => {
   const nestedGroups = splitBySeparator(bookmarkInfos)
     .map(groupByType)
     .map((groups) => {
-      return groups.map((group) => ({
-        ...group,
-        members: sortByTitle(group.members),
-      }))
+      return groups.map((group) => {
+        return {
+          ...group,
+          members: sortByTitle(group.members),
+        } as const
+      })
     })
     .map(sortGroupByPriority)
   return mergeGroups(nestedGroups)

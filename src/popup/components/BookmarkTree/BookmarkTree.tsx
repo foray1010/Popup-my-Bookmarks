@@ -44,7 +44,7 @@ interface ItemData {
 
 type Props = ItemData & {
   readonly lastScrollTop?: number | undefined
-  noRowsRenderer(): React.ReactElement | null
+  readonly noRowsRenderer: () => React.ReactElement | null
   readonly onScroll?: React.UIEventHandler
   readonly scrollToIndex?: number | undefined
 }

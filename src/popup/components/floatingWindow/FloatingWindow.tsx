@@ -19,8 +19,8 @@ export default function FloatingWindow({
   const { insertBodySize } = useGlobalBodySize()
 
   const [windowSize, setWindowSize] = React.useState<{
-    height: number | undefined
-    width: number | undefined
+    readonly height: number | undefined
+    readonly width: number | undefined
   }>()
   const { ref } = useResizeObserver({
     onResize: setWindowSize,
@@ -28,8 +28,8 @@ export default function FloatingWindow({
   })
 
   const [calibratedPosition, setCalibratedPosition] = React.useState<{
-    left: number
-    top: number
+    readonly left: number
+    readonly top: number
   }>()
 
   // make sure the floating window is within the body

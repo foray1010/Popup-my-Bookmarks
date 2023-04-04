@@ -23,7 +23,9 @@ export async function getBookmarkInfo(id: string): Promise<BookmarkInfo> {
   return toBookmarkInfo(bookmarkNode)
 }
 
-async function getBookmarkChildren(id: string): Promise<BookmarkInfo[]> {
+async function getBookmarkChildren(
+  id: string,
+): Promise<readonly BookmarkInfo[]> {
   const bookmarkNodes = await webExtension.bookmarks.getChildren(id)
   return bookmarkNodes.map(toBookmarkInfo)
 }
@@ -74,7 +76,7 @@ export async function getBookmarkTreesFromRoot({
   readonly firstTreeId: string
   readonly childTreeIds?: readonly string[] | undefined
   readonly hideRootTreeIds?: readonly string[]
-}): Promise<Array<BookmarkTree>> {
+}): Promise<ReadonlyArray<BookmarkTree>> {
   const [firstTree, childTreeResults] = await Promise.all([
     getFirstBookmarkTree({ firstTreeId, hideRootTreeIds }),
     Promise.allSettled(childTreeIds.map(getBookmarkTree)),
@@ -102,7 +104,7 @@ export async function getBookmarkTreesFromRoot({
 
 async function searchBookmarks(
   searchQuery: string,
-): Promise<Array<BookmarkInfo>> {
+): Promise<ReadonlyArray<BookmarkInfo>> {
   const searchResultNodes = await webExtension.bookmarks.search({
     query: searchQuery,
   })

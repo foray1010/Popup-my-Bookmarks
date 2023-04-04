@@ -13,7 +13,7 @@ export default function useRowHoverEvents({
   treeIndex,
   treeInfo,
 }: {
-  closeNextTrees(): void
+  readonly closeNextTrees: () => void
   readonly treeIndex: number
   readonly treeInfo: BookmarkTree
 }) {

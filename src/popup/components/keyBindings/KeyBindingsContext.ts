@@ -5,7 +5,9 @@ import useEventListener from 'use-typed-event-listener'
 import type { KeyBindingEventCallback, KeyDefinition } from './types.js'
 
 const useActiveWindowState = () => {
-  const [activeWindowQueue, setActiveWindowQueue] = React.useState<string[]>([])
+  const [activeWindowQueue, setActiveWindowQueue] = React.useState<
+    readonly string[]
+  >([])
 
   const appendActiveWindowId = React.useCallback((windowId: string) => {
     setActiveWindowQueue((prevState) => [
@@ -27,17 +29,20 @@ const useActiveWindowState = () => {
 
 const useKeyBindingsPerWindowState = () => {
   const [keyBindingsPerWindow, setKeyBindingsPerWindow] = React.useState<
-    Map<
+    ReadonlyMap<
       string,
       ReadonlyArray<{
-        key: KeyDefinition
-        callback: KeyBindingEventCallback
+        readonly key: KeyDefinition
+        readonly callback: KeyBindingEventCallback
       }>
     >
   >(new Map())
 
   type AddOrRemoveEventListener = (
-    meta: { key: KeyDefinition; windowId: string },
+    meta: {
+      readonly key: KeyDefinition
+      readonly windowId: string
+    },
     callback: KeyBindingEventCallback,
   ) => void
 

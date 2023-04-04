@@ -8,7 +8,7 @@ import {
 import { getOptions } from '../../options.js'
 import { getBookmarkInfo, getBookmarkTree } from './getBookmark.js'
 
-async function getUrls(ids: readonly string[]): Promise<string[]> {
+async function getUrls(ids: readonly string[]): Promise<readonly string[]> {
   const bookmarkInfos = await Promise.all(ids.map(getBookmarkInfo))
 
   const filteredBookmarkInfos = bookmarkInfos.filter(

@@ -2,7 +2,7 @@ import type { BookmarkInfo } from '../types/index.js'
 
 export default function sortByTitle(
   bookmarkInfos: readonly BookmarkInfo[],
-): BookmarkInfo[] {
+): readonly BookmarkInfo[] {
   const collator = new Intl.Collator(undefined, {
     numeric: true,
     sensitivity: 'base',

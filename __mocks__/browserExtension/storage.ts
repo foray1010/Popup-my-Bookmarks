@@ -7,7 +7,7 @@ type StorageAreaListenerCallback = Parameters<
 >[0]
 
 class Changes {
-  #map = new Map<string, browser.storage.StorageChange>()
+  readonly #map = new Map<string, browser.storage.StorageChange>()
 
   public get size(): number {
     return this.#map.size
@@ -95,7 +95,9 @@ class StorageArea implements browser.storage.StorageArea {
     this.#broadcastChanges(changes)
   }
 
-  public onChanged: browser.storage.StorageArea['onChanged'] = {
+  public readonly onChanged: Readonly<
+    browser.storage.StorageArea['onChanged']
+  > = {
     addListener: (cb) => {
       this.#listenerCallbacks.add(cb)
     },
@@ -150,7 +152,7 @@ class Storage implements IStorage {
     Record<AreaName, StorageAreaListenerCallback>
   >()
 
-  public onChanged: typeof browser.storage.onChanged = {
+  public readonly onChanged: Readonly<typeof browser.storage.onChanged> = {
     addListener: (cb) => {
       const listenerCallbacks: Record<AreaName, StorageAreaListenerCallback> = {
         [AreaName.Local]: (changes) => cb(changes, AreaName.Local),

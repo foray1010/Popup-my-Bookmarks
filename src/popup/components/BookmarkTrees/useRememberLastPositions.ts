@@ -8,12 +8,14 @@ export default function useRememberLastPositions({
 }: {
   readonly isEnabled: boolean
 }) {
-  const [lastPositions, setLastPositions] = React.useState<LastPosition[]>([])
+  const [lastPositions, setLastPositions] = React.useState<
+    readonly LastPosition[]
+  >([])
   const [isInitialized, setIsInitialized] = React.useState(false)
   React.useEffect(() => {
     if (isEnabled) {
-      interface LocaleStorage {
-        lastPositions?: LastPosition[]
+      type LocaleStorage = {
+        readonly lastPositions?: readonly LastPosition[]
       }
       webExtension.storage.local
         .get()

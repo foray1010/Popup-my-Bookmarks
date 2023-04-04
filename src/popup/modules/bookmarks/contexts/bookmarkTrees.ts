@@ -40,7 +40,7 @@ const useUtils = (
   )
 
   const withoutDragIndicator = React.useCallback(
-    (trees: readonly BookmarkTree[]): BookmarkTree[] => {
+    (trees: readonly BookmarkTree[]): readonly BookmarkTree[] => {
       return trees.map((tree) => ({
         ...tree,
         children: tree.children.filter(
@@ -244,7 +244,7 @@ const useBookmarkTreesState = () => {
   const fetchBookmarkTrees = React.useCallback(
     async (
       childTreeIds?: readonly string[] | undefined,
-    ): Promise<BookmarkTree[]> => {
+    ): Promise<readonly BookmarkTree[]> => {
       return searchQuery
         ? getBookmarkTreesFromSearch({
             searchQuery,
@@ -263,7 +263,7 @@ const useBookmarkTreesState = () => {
   React.useEffect(() => {
     let ignore = false
 
-    async function run(): Promise<BookmarkTree[]> {
+    async function run(): Promise<readonly BookmarkTree[]> {
       if (options[OPTIONS.REMEMBER_POS]) {
         const localStorage = await getLocalStorage()
         const [, ...childIds] =

@@ -15,9 +15,9 @@ async function main(): Promise<void> {
   ])
 
   // if missing option, open options page to init options
-  const missingOptionNames = (Object.keys(optionsConfig) as OPTIONS[]).filter(
-    (optionName) => options[optionName] === undefined,
-  )
+  const missingOptionNames = (
+    Object.keys(optionsConfig) as readonly OPTIONS[]
+  ).filter((optionName) => options[optionName] === undefined)
   if (missingOptionNames.length > 0) {
     await webExtension.runtime.openOptionsPage()
     return

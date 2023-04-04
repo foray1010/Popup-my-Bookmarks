@@ -26,9 +26,9 @@ function useGetOptionsWithDefaultValues({
   React.useEffect(() => {
     if (!options || !optionsConfig) return
 
-    const missingOptionNames = (Object.keys(optionsConfig) as OPTIONS[]).filter(
-      (optionName) => options[optionName] === undefined,
-    )
+    const missingOptionNames = (
+      Object.keys(optionsConfig) as readonly OPTIONS[]
+    ).filter((optionName) => options[optionName] === undefined)
 
     if (missingOptionNames.length > 0) {
       const missingOptions = Object.fromEntries(

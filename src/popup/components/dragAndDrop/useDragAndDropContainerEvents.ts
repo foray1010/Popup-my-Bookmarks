@@ -13,7 +13,10 @@ const useScroll = () => {
   }, [])
 
   const scroll = React.useCallback(
-    (containerElement: Element, { isUpward }: { isUpward: boolean }) => {
+    (
+      containerElement: Element,
+      { isUpward }: { readonly isUpward: boolean },
+    ) => {
       clearScroll()
 
       scrollingTimeoutRef.current = window.setInterval(() => {

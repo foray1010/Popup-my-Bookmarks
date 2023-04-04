@@ -4,9 +4,9 @@ import * as React from 'react'
 import deleteFromMap from '../../utils/deleteFromMap.js'
 
 const useListNavigation = () => {
-  const [highlightedIndices, setHighlightedIndices] = React.useState(
-    new Map<number, number>(),
-  )
+  const [highlightedIndices, setHighlightedIndices] = React.useState<
+    ReadonlyMap<number, number>
+  >(new Map())
 
   const setHighlightedIndex = React.useCallback(
     (listIndex: number, itemIndex: number) => {
@@ -28,7 +28,9 @@ const useListNavigation = () => {
     [],
   )
 
-  const [itemCounts, setItemCounts] = React.useState(new Map<number, number>())
+  const [itemCounts, setItemCounts] = React.useState<
+    ReadonlyMap<number, number>
+  >(new Map())
 
   const setItemCount = React.useCallback(
     (listIndex: number, itemCount: number) => {
