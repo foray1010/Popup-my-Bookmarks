@@ -81,4 +81,24 @@ describe('browser.storage', () => {
 
     expect(testCallback).not.toHaveBeenCalled()
   })
+
+  it('should fire callback for all listeners', async () => {
+    const testCallback1 = jest.fn()
+    storage.onChanged.addListener(testCallback1)
+
+    const testCallback2 = jest.fn()
+    storage.onChanged.addListener(testCallback2)
+
+    await storage.local.set({ where: 'local' })
+
+    expect(testCallback1).toHaveBeenLastCalledWith(
+      { where: { newValue: 'local' } },
+      'local',
+    )
+
+    expect(testCallback2).toHaveBeenLastCalledWith(
+      { where: { newValue: 'local' } },
+      'local',
+    )
+  })
 })

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 
 import messages from '../../src/core/_locales/en/messages.json'
-import { hasOwn } from './utils.js'
+import { hasOwn } from './utils/object.js'
 
 type II18n = typeof browser.i18n
 class I18n implements II18n {

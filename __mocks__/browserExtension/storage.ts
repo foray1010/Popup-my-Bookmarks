@@ -1,10 +1,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 
-import { pick } from './utils.js'
-
-type StorageAreaListenerCallback = Parameters<
-  browser.storage.StorageArea['onChanged']['addListener']
->[0]
+import { pick } from './utils/object.js'
+import { WebExtEventEmitter } from './utils/WebExtEventEmitter.js'
 
 class Changes {
   readonly #map = new Map<string, browser.storage.StorageChange>()
@@ -35,8 +32,6 @@ class StorageArea implements browser.storage.StorageArea {
   protected get storageObject() {
     return Object.fromEntries(this.storage)
   }
-
-  readonly #listenerCallbacks = new Set<StorageAreaListenerCallback>()
 
   public async get(
     keys?: string | readonly string[] | Record<string, unknown>,
@@ -95,25 +90,13 @@ class StorageArea implements browser.storage.StorageArea {
     this.#broadcastChanges(changes)
   }
 
-  public readonly onChanged: Readonly<
-    browser.storage.StorageArea['onChanged']
-  > = {
-    addListener: (cb) => {
-      this.#listenerCallbacks.add(cb)
-    },
-    removeListener: (cb) => {
-      this.#listenerCallbacks.delete(cb)
-    },
-    hasListener: (cb) => {
-      return this.#listenerCallbacks.has(cb)
-    },
-  }
+  public readonly onChanged = new WebExtEventEmitter<
+    readonly [Record<string, browser.storage.StorageChange>]
+  >()
 
   #broadcastChanges(changes: Changes) {
     if (changes.size > 0) {
-      for (const listenerCallback of this.#listenerCallbacks) {
-        listenerCallback(changes.toObject())
-      }
+      this.onChanged.dispatchEvent([changes.toObject()])
     }
   }
 }
@@ -140,6 +123,10 @@ enum AreaName {
   Sync = 'sync',
   Managed = 'managed',
 }
+
+type StorageAreaListenerCallback = Parameters<
+  browser.storage.StorageArea['onChanged']['addListener']
+>[0]
 
 type IStorage = typeof browser.storage
 class Storage implements IStorage {
