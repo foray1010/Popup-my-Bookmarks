@@ -3,7 +3,7 @@ const config = {
   moduleNameMapper: {
     '\\.css$': '<rootDir>/__mocks__/fileMock.ts',
     '\\.png$': '<rootDir>/__mocks__/fileMock.ts',
-    '\\.svg$': '<rootDir>/__mocks__/fileMock.ts',
+    '\\.svg(\\?svgr)*$': '<rootDir>/__mocks__/fileMock.ts',
   },
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   testEnvironment: 'jest-environment-jsdom',
