@@ -22,7 +22,7 @@
     "stylelint": "stylelint --ignore-path=node_modules/@foray1010/stylelint-config/stylelintignore",
     "test": "cross-env NODE_ENV=test jest",
     "type:check": "tsc",
-    "type:coverage": "type-coverage --strict --at-least 99 --detail --ignore-catch",
+    "type:coverage": "type-coverage --strict --at-least 99 --detail --ignore-catch -- src/**",
     "webpack": "ts-node node_modules/.bin/webpack-cli"
   },
   "dependencies": {
