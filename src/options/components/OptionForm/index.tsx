@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import type { OPTIONS } from '../../../core/constants/index.js'
 import type { OptionsConfig } from '../../../core/types/options.js'
-import { getOptionsConfig } from '../../../core/utils/index.js'
+import getOptionsConfig from '../../../core/utils/getOptionsConfig.js'
 import { OPTION_TABLE_MAP } from '../../constants/index.js'
 import {
   useDeleteOptions,
