@@ -45,6 +45,7 @@
 
 body {
   margin: 0;
+  font-family: inherit; /* use the font-family set from :root or html tag */
 }
 
 [hidden] {
