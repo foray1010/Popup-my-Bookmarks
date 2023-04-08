@@ -1,5 +1,6 @@
 import type * as React from 'react'
 
+import isMac from '../../../core/utils/isMac.js'
 import withProviders from '../../../core/utils/withProviders.js'
 import { BOOKMARK_TYPES } from '../../constants/index.js'
 import { BASE_WINDOW } from '../../constants/windows.js'
@@ -11,7 +12,6 @@ import {
 } from '../../modules/bookmarks/utils/clickBookmark.js'
 import { useOptions } from '../../modules/options.js'
 import getLastMapKey from '../../utils/getLastMapKey.js'
-import isMac from '../../utils/isMac.js'
 import { useKeyBindingsEvent } from '../keyBindings/index.js'
 import {
   ListNavigationProvider,

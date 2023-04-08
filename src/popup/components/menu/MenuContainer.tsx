@@ -1,6 +1,7 @@
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
+import isMac from '../../../core/utils/isMac.js'
 import withProviders from '../../../core/utils/withProviders.js'
 import { BOOKMARK_TYPES, OPEN_IN_TYPES } from '../../constants/index.js'
 import { MENU_WINDOW } from '../../constants/windows.js'
@@ -16,7 +17,6 @@ import {
   openFolderInBrowser,
 } from '../../modules/bookmarks/methods/openBookmark.js'
 import sortBookmarksByName from '../../modules/bookmarks/methods/sortBookmarksByName.js'
-import isMac from '../../utils/isMac.js'
 import { ClipboardAction, useClipboard } from '../clipboard/index.js'
 import { useEditorContext } from '../editor/index.js'
 import { FloatingWindow } from '../floatingWindow/index.js'

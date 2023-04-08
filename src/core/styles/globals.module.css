@@ -28,7 +28,7 @@
 
   background-color: rgb(var(--bg-color-rgb));
   color: var(--main-font-color);
-  font-family: sans-serif;
+  font-family: system-ui, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {

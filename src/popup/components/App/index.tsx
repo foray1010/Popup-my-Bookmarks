@@ -46,6 +46,7 @@ const AppWithOptions = withOptions(function InnerApp() {
           ?.split(',')
           .map((x) => x.trim())
           .filter(Boolean) ?? []),
+        'system-ui',
         'sans-serif',
       ]),
     ).join(','),

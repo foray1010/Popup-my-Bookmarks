@@ -2,6 +2,7 @@ import webExtension from 'webextension-polyfill'
 
 import { OPTIONS, ROOT_ID } from '../constants/index.js'
 import type { OptionsConfig } from '../types/options.js'
+import isMac from './isMac.js'
 
 const getMessages = (messageKeys: readonly string[]) => {
   return messageKeys.map((k) => webExtension.i18n.getMessage(k))
@@ -54,11 +55,14 @@ export default async function getOptionsConfig(): Promise<OptionsConfig> {
     },
     [OPTIONS.FONT_FAMILY]: {
       type: 'string',
-      default: 'sans-serif',
+      // `system-ui` may not work well on some OS/language combinations, but macOS is fine
+      // see https://github.com/w3c/csswg-drafts/issues/3658
+      default: isMac() ? 'system-ui' : 'sans-serif',
       choices: [
-        'monospace',
+        'system-ui',
         'sans-serif',
         'serif',
+        'monospace',
         'Archivo Narrow',
         'Arial',
         'Comic Sans MS',
