@@ -4,7 +4,7 @@ import { useDebouncedCallback } from 'use-debounce'
 import { BOOKMARK_TYPES, OPTIONS } from '../../constants/index.js'
 import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import { useOptions } from '../../modules/options.js'
-import type { BookmarkInfo, BookmarkTree } from '../../types/index.js'
+import type { BookmarkInfo, BookmarkTreeInfo } from '../../types/index.js'
 import { useDragAndDropContext } from '../dragAndDrop/index.js'
 import { useListNavigationContext } from '../listNavigation/index.js'
 
@@ -15,7 +15,7 @@ export default function useRowHoverEvents({
 }: {
   readonly closeNextTrees: () => void
   readonly treeIndex: number
-  readonly treeInfo: BookmarkTree
+  readonly treeInfo: BookmarkTreeInfo
 }) {
   const options = useOptions()
 

@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { BOOKMARK_TYPES } from '../../constants/index.js'
 import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
-import type { BookmarkInfo, BookmarkTree } from '../../types/index.js'
+import type { BookmarkInfo, BookmarkTreeInfo } from '../../types/index.js'
 import type { ResponseEvent } from '../dragAndDrop/index.js'
 
 export default function useRowDragEvents({
@@ -10,7 +10,7 @@ export default function useRowDragEvents({
   treeInfo,
 }: {
   readonly closeNextTrees: () => void
-  readonly treeInfo: BookmarkTree
+  readonly treeInfo: BookmarkTreeInfo
 }) {
   const { removeDragIndicator, setDragIndicator } = useBookmarkTrees()
 

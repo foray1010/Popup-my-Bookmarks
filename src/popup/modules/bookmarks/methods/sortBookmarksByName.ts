@@ -3,7 +3,7 @@ import webExtension from 'webextension-polyfill'
 import { BOOKMARK_TYPES } from '../../../constants/index.js'
 import type { BookmarkInfo } from '../../../types/index.js'
 import sortByTitle from '../../../utils/sortByTitle.js'
-import { getBookmarkInfo, getBookmarkTree } from './getBookmark.js'
+import { getBookmarkInfo, getBookmarkTreeInfo } from './getBookmark.js'
 
 const splitBySeparator = (
   bookmarkInfos: readonly BookmarkInfo[],
@@ -87,7 +87,7 @@ const sortBookmarks = (
         return {
           ...group,
           members: sortByTitle(group.members),
-        } as const
+        }
       })
     })
     .map(sortGroupByPriority)
@@ -95,15 +95,13 @@ const sortBookmarks = (
 }
 
 export default async function sortBookmarksByName(parentId: string) {
-  const bookmarkTree = await getBookmarkTree(parentId)
+  const bookmarkTree = await getBookmarkTreeInfo(parentId)
 
   const sortedBookmarkInfos = sortBookmarks(bookmarkTree.children)
 
   // Moving bookmarks to sorted index
   for (const [index, bookmarkInfo] of sortedBookmarkInfos.entries()) {
-    const currentBookmarkInfo: BookmarkInfo = await getBookmarkInfo(
-      bookmarkInfo.id,
-    )
+    const currentBookmarkInfo = await getBookmarkInfo(bookmarkInfo.id)
     const currentIndex = currentBookmarkInfo.storageIndex
     if (currentIndex !== index) {
       await webExtension.bookmarks.move(bookmarkInfo.id, {

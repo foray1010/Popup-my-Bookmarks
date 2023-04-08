@@ -6,7 +6,7 @@ import {
   OPTIONS,
 } from '../../../constants/index.js'
 import { getOptions } from '../../options.js'
-import { getBookmarkInfo, getBookmarkTree } from './getBookmark.js'
+import { getBookmarkInfo, getBookmarkTreeInfo } from './getBookmark.js'
 
 async function getUrls(ids: readonly string[]): Promise<readonly string[]> {
   const bookmarkInfos = await Promise.all(ids.map(getBookmarkInfo))
@@ -111,7 +111,7 @@ export async function openFolderInBrowser(
   id: string,
   openBookmarkProps: OpenBookmarkProps,
 ) {
-  const bookmarkTree = await getBookmarkTree(id)
+  const bookmarkTree = await getBookmarkTreeInfo(id)
 
   const bookmarkIds = bookmarkTree.children.map((x) => x.id)
 

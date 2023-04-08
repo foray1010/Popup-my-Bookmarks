@@ -5,11 +5,11 @@ import webExtension from 'webextension-polyfill'
 
 import { useLatestRef } from '../../../../core/hooks/useLatestRef.js'
 import { BOOKMARK_TYPES, OPTIONS } from '../../../constants/index.js'
-import type { BookmarkTree } from '../../../types/index.js'
+import type { BookmarkTreeInfo } from '../../../types/index.js'
 import { getLocalStorage } from '../../localStorage.js'
 import { useOptions } from '../../options.js'
 import {
-  getBookmarkTree,
+  getBookmarkTreeInfo,
   getBookmarkTreesFromRoot,
   getBookmarkTreesFromSearch,
 } from '../methods/getBookmark.js'
@@ -17,15 +17,15 @@ import { generateDragIndicator } from '../utils/generators.js'
 
 const useUtils = (
   setBookmarkTrees: React.Dispatch<
-    React.SetStateAction<readonly BookmarkTree[]>
+    React.SetStateAction<readonly BookmarkTreeInfo[]>
   >,
 ) => {
   const insertBookmarkTree = React.useCallback(
     (
-      trees: readonly BookmarkTree[],
+      trees: readonly BookmarkTreeInfo[],
       parentId: string | undefined,
-      bookmarkTree: BookmarkTree,
-    ): readonly BookmarkTree[] => {
+      bookmarkTree: BookmarkTreeInfo,
+    ): readonly BookmarkTreeInfo[] => {
       // if tree is already in view, no need to re-render
       if (trees.some((tree) => tree.parent.id === bookmarkTree.parent.id))
         return trees
@@ -40,7 +40,7 @@ const useUtils = (
   )
 
   const withoutDragIndicator = React.useCallback(
-    (trees: readonly BookmarkTree[]): readonly BookmarkTree[] => {
+    (trees: readonly BookmarkTreeInfo[]): readonly BookmarkTreeInfo[] => {
       return trees.map((tree) => ({
         ...tree,
         children: tree.children.filter(
@@ -53,9 +53,9 @@ const useUtils = (
 
   const withoutNextBookmarkTrees = React.useCallback(
     (
-      trees: readonly BookmarkTree[],
+      trees: readonly BookmarkTreeInfo[],
       removeAfterId: string,
-    ): readonly BookmarkTree[] => {
+    ): readonly BookmarkTreeInfo[] => {
       const removeAfterIndex = trees.findIndex(
         (tree) => tree.parent.id === removeAfterId,
       )
@@ -70,7 +70,7 @@ const useUtils = (
     moveBookmarkToDragIndicator: React.useCallback(
       (id: string) => {
         setBookmarkTrees((trees) => {
-          const treeInfo = trees.find((tree: BookmarkTree) =>
+          const treeInfo = trees.find((tree: BookmarkTreeInfo) =>
             tree.children.some(
               (bookmarkInfo) =>
                 bookmarkInfo.type === BOOKMARK_TYPES.DRAG_INDICATOR,
@@ -123,7 +123,7 @@ const useUtils = (
 
     openBookmarkTree: React.useCallback(
       async (id: string, parentId: string) => {
-        const bookmarkTree = await getBookmarkTree(id)
+        const bookmarkTree = await getBookmarkTreeInfo(id)
 
         setBookmarkTrees((trees) => {
           return insertBookmarkTree(trees, parentId, bookmarkTree)
@@ -178,7 +178,7 @@ const useUtils = (
 
     toggleBookmarkTree: React.useCallback(
       async (id: string, parentId: string) => {
-        const bookmarkTree = await getBookmarkTree(id)
+        const bookmarkTree = await getBookmarkTreeInfo(id)
 
         setBookmarkTrees((trees) => {
           const isFolderOpened = trees.some((tree) => tree.parent.id === id)
@@ -198,13 +198,13 @@ const useRefreshOnBookmarkEvent = ({
   setBookmarkTrees,
   fetchBookmarkTrees,
 }: {
-  readonly bookmarkTrees: readonly BookmarkTree[]
+  readonly bookmarkTrees: readonly BookmarkTreeInfo[]
   readonly setBookmarkTrees: React.Dispatch<
-    React.SetStateAction<readonly BookmarkTree[]>
+    React.SetStateAction<readonly BookmarkTreeInfo[]>
   >
   readonly fetchBookmarkTrees: (
     childTreeIds?: readonly string[] | undefined,
-  ) => Promise<readonly BookmarkTree[]>
+  ) => Promise<readonly BookmarkTreeInfo[]>
 }) => {
   // use debounce to avoid frequent refresh, such as sort bookmarks by name
   const refresh = useDebouncedCallback(() => {
@@ -235,7 +235,7 @@ const useRefreshOnBookmarkEvent = ({
 
 const useBookmarkTreesState = () => {
   const [bookmarkTrees, setBookmarkTrees] = React.useState<
-    readonly BookmarkTree[]
+    readonly BookmarkTreeInfo[]
   >([])
   const [searchQuery, setSearchQuery] = React.useState('')
 
@@ -244,7 +244,7 @@ const useBookmarkTreesState = () => {
   const fetchBookmarkTrees = React.useCallback(
     async (
       childTreeIds?: readonly string[] | undefined,
-    ): Promise<readonly BookmarkTree[]> => {
+    ): Promise<readonly BookmarkTreeInfo[]> => {
       return searchQuery
         ? getBookmarkTreesFromSearch({
             searchQuery,
@@ -263,7 +263,7 @@ const useBookmarkTreesState = () => {
   React.useEffect(() => {
     let ignore = false
 
-    async function run(): Promise<readonly BookmarkTree[]> {
+    async function run(): Promise<readonly BookmarkTreeInfo[]> {
       if (options[OPTIONS.REMEMBER_POS]) {
         const localStorage = await getLocalStorage()
         const [, ...childIds] =

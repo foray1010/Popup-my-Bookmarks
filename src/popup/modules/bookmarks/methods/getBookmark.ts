@@ -5,7 +5,7 @@ import {
   NO_BOOKMARK_ID_PREFIX,
   ROOT_ID,
 } from '../../../constants/index.js'
-import type { BookmarkInfo, BookmarkTree } from '../../../types/index.js'
+import type { BookmarkInfo, BookmarkTreeInfo } from '../../../types/index.js'
 import sortByTitle from '../../../utils/sortByTitle.js'
 import {
   generateNoBookmarkPlaceholder,
@@ -30,11 +30,16 @@ async function getBookmarkChildren(
   return bookmarkNodes.map(toBookmarkInfo)
 }
 
-export async function getBookmarkTree(id: string): Promise<BookmarkTree> {
+export async function getBookmarkTreeInfo(
+  id: string,
+): Promise<BookmarkTreeInfo> {
   const [parent, children] = await Promise.all([
     getBookmarkInfo(id),
     getBookmarkChildren(id),
   ])
+  if (parent.type !== BOOKMARK_TYPES.FOLDER) {
+    throw new TypeError('not a bookmark folder')
+  }
   return {
     children:
       children.length > 0
@@ -50,9 +55,9 @@ async function getFirstBookmarkTree({
 }: {
   readonly firstTreeId: string
   readonly hideRootTreeIds?: readonly string[]
-}): Promise<BookmarkTree> {
+}): Promise<BookmarkTreeInfo> {
   const [firstTree, rootFolders] = await Promise.all([
-    getBookmarkTree(firstTreeId),
+    getBookmarkTreeInfo(firstTreeId),
     getBookmarkChildren(ROOT_ID),
   ])
   return {
@@ -76,10 +81,10 @@ export async function getBookmarkTreesFromRoot({
   readonly firstTreeId: string
   readonly childTreeIds?: readonly string[] | undefined
   readonly hideRootTreeIds?: readonly string[]
-}): Promise<ReadonlyArray<BookmarkTree>> {
+}): Promise<ReadonlyArray<BookmarkTreeInfo>> {
   const [firstTree, childTreeResults] = await Promise.all([
     getFirstBookmarkTree({ firstTreeId, hideRootTreeIds }),
-    Promise.allSettled(childTreeIds.map(getBookmarkTree)),
+    Promise.allSettled(childTreeIds.map(getBookmarkTreeInfo)),
   ])
 
   let acc = [firstTree]
@@ -140,5 +145,5 @@ export async function getBookmarkTreesFromSearch({
       children: sortByTitle(filteredSearchResults.slice(0, maxResults)),
       parent: generateSearchResultParent(),
     },
-  ]
+  ] as const satisfies readonly BookmarkTreeInfo[]
 }

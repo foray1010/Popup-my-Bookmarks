@@ -17,32 +17,30 @@ const simulatedBookmarkInfo = {
   title: '',
 } as const
 
-export const generateDragIndicator = (parentId: string): BookmarkInfo => {
+export const generateDragIndicator = (parentId: string) => {
   return {
     ...simulatedBookmarkInfo,
     id: DRAG_INDICATOR_ID,
     parentId,
     type: BOOKMARK_TYPES.DRAG_INDICATOR,
-  }
+  } as const satisfies BookmarkInfo
 }
 
-export const generateNoBookmarkPlaceholder = (
-  parentId: string,
-): BookmarkInfo => {
+export const generateNoBookmarkPlaceholder = (parentId: string) => {
   return {
     ...simulatedBookmarkInfo,
-    id: NO_BOOKMARK_ID_PREFIX + parentId,
+    id: `${NO_BOOKMARK_ID_PREFIX}${parentId}`,
     parentId,
     title: webExtension.i18n.getMessage('noBkmark'),
     type: BOOKMARK_TYPES.NO_BOOKMARK,
-  }
+  } as const satisfies BookmarkInfo
 }
 
-export const generateSearchResultParent = (): BookmarkInfo => {
+export const generateSearchResultParent = () => {
   return {
     ...simulatedBookmarkInfo,
     id: SEARCH_RESULT_ID,
     type: BOOKMARK_TYPES.FOLDER,
     iconUrl: folderIcon,
-  }
+  } as const satisfies BookmarkInfo
 }

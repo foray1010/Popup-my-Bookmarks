@@ -1,7 +1,7 @@
 import webExtension from 'webextension-polyfill'
 
 import { BOOKMARK_TYPES } from '../../../constants/index.js'
-import { getBookmarkInfo, getBookmarkTree } from './getBookmark.js'
+import { getBookmarkInfo, getBookmarkTreeInfo } from './getBookmark.js'
 
 export async function recursiveCopyBookmarks(
   id: string,
@@ -19,7 +19,7 @@ export async function recursiveCopyBookmarks(
   })
 
   if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
-    const bookmarkTree = await getBookmarkTree(id)
+    const bookmarkTree = await getBookmarkTreeInfo(id)
 
     for (const [index, child] of bookmarkTree.children.entries()) {
       await recursiveCopyBookmarks(child.id, {

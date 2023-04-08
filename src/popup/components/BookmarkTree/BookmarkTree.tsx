@@ -5,10 +5,7 @@ import useEventListener from 'use-typed-event-listener'
 
 import PlainList from '../../../core/components/baseItems/PlainList/index.js'
 import { MAX_HEIGHT } from '../../constants/index.js'
-import type {
-  BookmarkInfo,
-  BookmarkTree as BookmarkTreeType,
-} from '../../types/index.js'
+import type { BookmarkInfo, BookmarkTreeInfo } from '../../types/index.js'
 import {
   type ResponseEvent,
   useDragAndDropContainerEvents,
@@ -39,7 +36,7 @@ interface ItemData {
   readonly onRowMouseLeave: (
     bookmarkInfo: BookmarkInfo,
   ) => React.MouseEventHandler
-  readonly treeInfo: BookmarkTreeType
+  readonly treeInfo: BookmarkTreeInfo
 }
 
 type Props = ItemData & {

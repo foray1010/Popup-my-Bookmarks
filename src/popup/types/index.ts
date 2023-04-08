@@ -36,12 +36,12 @@ export type BookmarkInfo = {
     }
 )
 
-export interface BookmarkTree {
+export type BookmarkTreeInfo = {
   readonly children: ReadonlyArray<BookmarkInfo>
-  readonly parent: BookmarkInfo
+  readonly parent: BookmarkInfo & { readonly type: BOOKMARK_TYPES.FOLDER }
 }
 
-export interface LastPosition {
+export type LastPosition = {
   readonly id: string
   readonly scrollTop: number
 }

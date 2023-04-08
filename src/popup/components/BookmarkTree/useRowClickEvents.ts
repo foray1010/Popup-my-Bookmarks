@@ -15,13 +15,13 @@ import {
   mapOptionToOpenBookmarkProps,
 } from '../../modules/bookmarks/utils/clickBookmark.js'
 import { useOptions } from '../../modules/options.js'
-import type { BookmarkInfo, BookmarkTree } from '../../types/index.js'
+import type { BookmarkInfo, BookmarkTreeInfo } from '../../types/index.js'
 import { useMenuContext } from '../menu/index.js'
 
 export default function useRowClickEvents({
   treeInfo,
 }: {
-  readonly treeInfo: BookmarkTree
+  readonly treeInfo: BookmarkTreeInfo
 }) {
   const options = useOptions()
 
