@@ -36,20 +36,25 @@ const BookmarkRowContainer = React.forwardRef(
   function InnerBookmarkRowContainer(
     {
       bookmarkInfo,
+      isDisableDragAndDrop,
       isHighlighted,
+      isSearching,
+      isShowTooltip,
+      isUnclickable,
       onAuxClick,
       onClick,
       onContextMenu,
       onDragOver,
+      onDragStart,
       onMouseEnter,
       onMouseLeave,
-      ...restProps
+      ...liProps
     }: Props,
     setRef: React.Ref<HTMLLIElement>,
   ) {
     const tooltip = useTooltip({
-      isSearching: restProps.isSearching,
-      isShowTooltip: restProps.isShowTooltip,
+      isSearching,
+      isShowTooltip,
       bookmarkInfo,
     })
 
@@ -81,22 +86,17 @@ const BookmarkRowContainer = React.forwardRef(
     const isSeparator = bookmarkInfo.type === BOOKMARK_TYPES.SEPARATOR
 
     return (
-      <li
-        ref={setRef}
-        className={restProps.className}
-        data-bookmarkid={bookmarkInfo.id}
-        style={restProps.style}
-      >
+      <li ref={setRef} data-bookmarkid={bookmarkInfo.id} {...liProps}>
         <DragAndDropConsumer
           disableDrag={
-            restProps.isDisableDragAndDrop ||
+            isDisableDragAndDrop ||
             bookmarkInfo.isRoot ||
             bookmarkInfo.type === BOOKMARK_TYPES.NO_BOOKMARK
           }
-          disableDrop={restProps.isDisableDragAndDrop}
+          disableDrop={isDisableDragAndDrop}
           itemKey={bookmarkInfo.id}
           onDragOver={handleDragOver}
-          onDragStart={restProps.onDragStart}
+          onDragStart={onDragStart}
         >
           <BookmarkRow
             className={classNames(
@@ -107,7 +107,7 @@ const BookmarkRowContainer = React.forwardRef(
             )}
             iconUrl={bookmarkInfo.iconUrl}
             isHighlighted={isHighlighted}
-            isUnclickable={restProps.isUnclickable}
+            isUnclickable={isUnclickable}
             role={isSeparator ? 'separator' : undefined}
             title={bookmarkInfo.title}
             tooltip={tooltip}
