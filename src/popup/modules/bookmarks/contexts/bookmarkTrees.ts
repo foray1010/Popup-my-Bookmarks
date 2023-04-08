@@ -254,7 +254,7 @@ const useBookmarkTreesState = () => {
         : getBookmarkTreesFromRoot({
             firstTreeId: String(options[OPTIONS.DEF_EXPAND]),
             childTreeIds,
-            hideRootTreeIds: options[OPTIONS.HIDE_ROOT_FOLDER]?.map(String),
+            hideRootTreeIds: options[OPTIONS.HIDE_ROOT_FOLDER].map(String),
           })
     },
     [searchQuery, options],

@@ -28,7 +28,7 @@ const useContextProps = ({ treeId }: { readonly treeId: string }) => {
     // cover the folder if it is not the top two folder
     isShowCover: bookmarkTrees.length - treeIndex > 2,
     isShowHeader: treeIndex !== 0,
-    isShowTooltip: Boolean(options[OPTIONS.TOOLTIP]),
+    isShowTooltip: options[OPTIONS.TOOLTIP],
     treeIndex,
     treeInfo,
   }

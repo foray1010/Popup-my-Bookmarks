@@ -73,13 +73,11 @@ export default function Editor() {
 
   const options = useOptions()
 
-  const width = options[OPTIONS.SET_WIDTH]
-
   const style = React.useMemo(
     () => ({
-      width: `${width ?? 0}px`,
+      width: `${options[OPTIONS.SET_WIDTH]}px`,
     }),
-    [width],
+    [options],
   )
 
   if (!state.isOpen) return null

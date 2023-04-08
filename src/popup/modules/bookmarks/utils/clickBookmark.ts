@@ -17,7 +17,7 @@ export const getClickOptionNameByEvent = (
 }
 
 export const mapOptionToOpenBookmarkProps = (
-  option?: number | undefined,
+  option: number,
 ): {
   readonly openIn: OPEN_IN_TYPES
   readonly isCloseThisExtension: boolean

@@ -37,7 +37,7 @@ export default function BookmarkTrees(props: Props) {
 
   const widthStyle = React.useMemo(
     () => ({
-      width: `${props.options[OPTIONS.SET_WIDTH] ?? 0}px`,
+      width: `${props.options[OPTIONS.SET_WIDTH]}px`,
     }),
     [props.options],
   )
