@@ -4,6 +4,7 @@ import process from 'node:process'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin'
+import HTMLInlineCSSWebpackPlugin from 'html-inline-css-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import lightningCss from 'lightningcss'
 import { LightningCssMinifyPlugin } from 'lightningcss-loader'
@@ -208,23 +209,18 @@ const webpackConfig: Configuration = {
         inject: 'head',
         minify: {
           collapseWhitespace: true,
-          keepClosingSlash: true,
-          minifyCSS: true,
-          minifyJS: true,
-          minifyURLs: true,
           removeAttributeQuotes: true,
           removeComments: true,
-          removeScriptTypeAttributes: true,
-          removeStyleLinkTypeAttributes: true,
           useShortDoctype: true,
         },
         template: path.join(sourceDir, 'template.html'),
         title: pkg.name,
       })
     }),
-    new MiniCssExtractPlugin({
-      filename: path.join('css', '[name].css'),
+    new HTMLInlineCSSWebpackPlugin({
+      styleTagFactory: ({ style }) => `<style>${style}</style>`,
     }),
+    new MiniCssExtractPlugin(),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'async',
     }),
