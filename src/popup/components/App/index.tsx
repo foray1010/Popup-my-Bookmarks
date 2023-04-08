@@ -1,6 +1,7 @@
 import './globals.module.css'
 
-import { useDeepCompareEffect } from 'use-deep-compare'
+import type { PropertiesHyphen } from 'csstype'
+import * as React from 'react'
 
 import { ReactQueryClientProvider } from '../../../core/utils/queryClient.js'
 import withProviders from '../../../core/utils/withProviders.js'
@@ -19,17 +20,14 @@ import { Menu, MenuProvider } from '../menu/index.js'
 import Search from '../Search/index.js'
 import useGlobalEvents from './useGlobalEvents.js'
 
-function useRootCss(rootCss: Record<string, string | null>) {
-  useDeepCompareEffect(() => {
-    Object.entries(rootCss).map(([key, value]) => {
-      document.documentElement.style.setProperty(key, value)
-    })
+function useRootCss(key: keyof PropertiesHyphen, value: string | null) {
+  React.useEffect(() => {
+    document.documentElement.style.setProperty(key, value)
+
     return () => {
-      Object.keys(rootCss).map((key) => {
-        document.documentElement.style.removeProperty(key)
-      })
+      document.documentElement.style.removeProperty(key)
     }
-  }, [rootCss])
+  }, [key, value])
 }
 
 const AppWithOptions = withOptions(function InnerApp() {
@@ -39,33 +37,33 @@ const AppWithOptions = withOptions(function InnerApp() {
 
   const { globalBodySize } = useGlobalBodySize()
 
-  useRootCss({
-    'font-family': Array.from(
+  useRootCss(
+    'font-family',
+    Array.from(
       new Set([
-        ...(options[OPTIONS.FONT_FAMILY]
-          ?.split(',')
+        ...options[OPTIONS.FONT_FAMILY]
+          .split(',')
           .map((x) => x.trim())
-          .filter(Boolean) ?? []),
+          .filter(Boolean),
         'system-ui',
         'sans-serif',
       ]),
     ).join(','),
-    'font-size':
-      options[OPTIONS.FONT_SIZE] !== undefined
-        ? // revert the 75% font size in body
-          `${options[OPTIONS.FONT_SIZE] / 0.75}px`
-        : null,
-  })
+  )
+  useRootCss(
+    'font-size',
+    // revert the 75% font size in body
+    `${options[OPTIONS.FONT_SIZE] / 0.75}px`,
+  )
 
-  // as this part will update frequently, so use another useRootCss to avoid resetting all styles
-  useRootCss({
-    height:
-      globalBodySize?.height !== undefined
-        ? `${globalBodySize.height}px`
-        : null,
-    width:
-      globalBodySize?.width !== undefined ? `${globalBodySize.width}px` : null,
-  })
+  useRootCss(
+    'height',
+    globalBodySize?.height !== undefined ? `${globalBodySize.height}px` : null,
+  )
+  useRootCss(
+    'width',
+    globalBodySize?.width !== undefined ? `${globalBodySize.width}px` : null,
+  )
 
   return (
     <BookmarkTreesProvider>
