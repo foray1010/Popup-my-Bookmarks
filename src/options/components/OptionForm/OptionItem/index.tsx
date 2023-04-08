@@ -21,7 +21,7 @@ type PropsFromOptionConfig<OC extends Record<string, unknown>> = OC & {
 
 type Props = {
   readonly name: string
-  readonly onBlur: (event?: React.FocusEvent) => void
+  readonly onBlur: React.FocusEventHandler
 } & (
   | PropsFromOptionConfig<ArrayOptionConfig>
   | PropsFromOptionConfig<BooleanOptionConfig>
@@ -123,7 +123,7 @@ export default function OptionItem(props: Props) {
           value={props.value}
           onBlur={(evt) => {
             onChange(evt)
-            props.onBlur()
+            props.onBlur(evt)
           }}
           onChange={onChange}
         />

@@ -1,6 +1,6 @@
 import type { OPTIONS } from '../constants/index.js'
 
-export interface Options {
+export type Options = {
   readonly [OPTIONS.CLICK_BY_LEFT]: number
   readonly [OPTIONS.CLICK_BY_LEFT_CTRL]: number
   readonly [OPTIONS.CLICK_BY_LEFT_SHIFT]: number
@@ -17,6 +17,8 @@ export interface Options {
   readonly [OPTIONS.TOOLTIP]: boolean
   readonly [OPTIONS.WARN_OPEN_MANY]: boolean
 }
+// check if all OPTIONS are handled in Options, will be removed by minifier so won't affect bundle size
+;({}) as Options satisfies Record<OPTIONS, unknown>
 
 export type ArrayOptionConfig = {
   readonly type: 'array'
@@ -43,10 +45,22 @@ export type StringOptionConfig = {
   readonly default: string
   readonly choices: ReadonlyArray<string>
 }
-type OptionConfig =
-  | ArrayOptionConfig
-  | BooleanOptionConfig
-  | IntegerOptionConfig
-  | SelectOptionConfig
-  | StringOptionConfig
-export type OptionsConfig = { readonly [K in keyof Options]: OptionConfig }
+export type OptionsConfig = {
+  readonly [OPTIONS.CLICK_BY_LEFT]: SelectOptionConfig
+  readonly [OPTIONS.CLICK_BY_LEFT_CTRL]: SelectOptionConfig
+  readonly [OPTIONS.CLICK_BY_LEFT_SHIFT]: SelectOptionConfig
+  readonly [OPTIONS.CLICK_BY_MIDDLE]: SelectOptionConfig
+  readonly [OPTIONS.DEF_EXPAND]: SelectOptionConfig
+  readonly [OPTIONS.FONT_FAMILY]: StringOptionConfig
+  readonly [OPTIONS.FONT_SIZE]: IntegerOptionConfig
+  readonly [OPTIONS.HIDE_ROOT_FOLDER]: ArrayOptionConfig
+  readonly [OPTIONS.MAX_RESULTS]: IntegerOptionConfig
+  readonly [OPTIONS.OP_FOLDER_BY]: BooleanOptionConfig
+  readonly [OPTIONS.REMEMBER_POS]: BooleanOptionConfig
+  readonly [OPTIONS.SEARCH_TARGET]: SelectOptionConfig
+  readonly [OPTIONS.SET_WIDTH]: IntegerOptionConfig
+  readonly [OPTIONS.TOOLTIP]: BooleanOptionConfig
+  readonly [OPTIONS.WARN_OPEN_MANY]: BooleanOptionConfig
+}
+// check if all OPTIONS are handled in OptionsConfig, will be removed by minifier so won't affect bundle size
+;({}) as OptionsConfig satisfies Record<OPTIONS, unknown>

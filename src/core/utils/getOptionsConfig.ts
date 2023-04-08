@@ -117,5 +117,5 @@ export default async function getOptionsConfig(): Promise<OptionsConfig> {
       type: 'boolean',
       default: true,
     },
-  }
+  } as const
 }
