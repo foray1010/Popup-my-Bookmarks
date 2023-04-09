@@ -217,10 +217,15 @@ const webpackConfig: Configuration = {
         title: pkg.name,
       })
     }),
-    new HTMLInlineCSSWebpackPlugin({
-      styleTagFactory: ({ style }) => `<style>${style}</style>`,
-    }),
     new MiniCssExtractPlugin(),
+    ...(isProductionBuild
+      ? [
+          // this plugin does not update the inline css on watch mode
+          new HTMLInlineCSSWebpackPlugin({
+            styleTagFactory: ({ style }) => `<style>${style}</style>`,
+          }),
+        ]
+      : []),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'async',
     }),
