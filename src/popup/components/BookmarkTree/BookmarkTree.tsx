@@ -1,10 +1,11 @@
+import { useVirtualizer } from '@tanstack/react-virtual'
 import classNames from 'classix'
 import * as React from 'react'
-import { useVirtual } from 'react-virtual'
 import useEventListener from 'use-typed-event-listener'
 
 import PlainList from '../../../core/components/baseItems/PlainList/index.js'
-import { MAX_HEIGHT } from '../../constants/index.js'
+import { MAX_HEIGHT, OPTIONS } from '../../constants/index.js'
+import { useOptions } from '../../modules/options.js'
 import type { BookmarkInfo, BookmarkTreeInfo } from '../../types/index.js'
 import {
   type ResponseEvent,
@@ -43,16 +44,16 @@ type Props = {
   readonly treeInfo: BookmarkTreeInfo
 }
 export default function BookmarkTree(props: Props) {
+  const options = useOptions()
+
   const parentRef = React.useRef<HTMLDivElement>(null)
 
-  const keyExtractor = React.useCallback(
-    (index: number): string => props.treeInfo.children[index]!.id,
-    [props.treeInfo.children],
-  )
-  const rowVirtualizer = useVirtual({
-    size: props.treeInfo.children.length,
-    parentRef,
-    keyExtractor,
+  const virtualizer = useVirtualizer({
+    count: props.treeInfo.children.length,
+    getItemKey: (index) => props.treeInfo.children[index]!.id,
+    getScrollElement: () => parentRef.current,
+    // rough row height
+    estimateSize: () => options[OPTIONS.FONT_SIZE] / 0.6,
   })
 
   const [maxListHeight, setMaxListHeight] = React.useState(0)
@@ -62,7 +63,7 @@ export default function BookmarkTree(props: Props) {
     setMaxListHeight(MAX_HEIGHT - parentRef.current.getBoundingClientRect().top)
   }, [])
 
-  const { scrollToIndex, scrollToOffset } = rowVirtualizer
+  const { scrollToIndex, scrollToOffset } = virtualizer
   React.useEffect(() => {
     if (props.lastScrollTop) {
       scrollToOffset(props.lastScrollTop)
@@ -93,11 +94,11 @@ export default function BookmarkTree(props: Props) {
     >
       <PlainList
         style={{
-          height: `${rowVirtualizer.totalSize}px`,
+          height: `${virtualizer.getTotalSize()}px`,
           contain: 'strict',
         }}
       >
-        {rowVirtualizer.virtualItems.map((virtualItem) => {
+        {virtualizer.getVirtualItems().map((virtualItem) => {
           const bookmarkInfo = props.treeInfo.children[virtualItem.index]
           if (!bookmarkInfo) return null
 
@@ -106,13 +107,14 @@ export default function BookmarkTree(props: Props) {
           return (
             <BookmarkRow
               key={virtualItem.key}
-              ref={virtualItem.measureRef}
+              ref={virtualizer.measureElement}
               bookmarkInfo={bookmarkInfo}
               className={classNames(
                 classes['react-virtual-row'],
                 virtualItem.index === itemCount - 1 &&
                   classes['last-list-item'],
               )}
+              data-index={virtualItem.index} // used by @tanstack/react-virtual to measure the height
               isDisableDragAndDrop={props.isDisableDragAndDrop}
               isHighlighted={
                 isDragging
