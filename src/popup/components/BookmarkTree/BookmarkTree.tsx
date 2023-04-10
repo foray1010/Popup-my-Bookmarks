@@ -1,16 +1,16 @@
 import { useVirtualizer } from '@tanstack/react-virtual'
 import classNames from 'classix'
 import * as React from 'react'
-import useEventListener from 'use-typed-event-listener'
 
 import PlainList from '../../../core/components/baseItems/PlainList/index.js'
-import { MAX_HEIGHT, OPTIONS } from '../../constants/index.js'
+import { OPTIONS } from '../../../core/constants/index.js'
+import { MAX_POPUP_HEIGHT } from '../../constants/ui.js'
+import type {
+  BookmarkInfo,
+  BookmarkTreeInfo,
+} from '../../modules/bookmarks/types.js'
 import { useOptions } from '../../modules/options.js'
-import type { BookmarkInfo, BookmarkTreeInfo } from '../../types/index.js'
-import {
-  type ResponseEvent,
-  useDragAndDropContainerEvents,
-} from '../dragAndDrop/index.js'
+import { type ResponseEvent, useDragZoneEvents } from '../dragAndDrop/index.js'
 import classes from './bookmark-tree.module.css'
 import BookmarkRow from './BookmarkRow/index.js'
 
@@ -60,7 +60,9 @@ export default function BookmarkTree(props: Props) {
   React.useLayoutEffect(() => {
     if (!parentRef.current) return
 
-    setMaxListHeight(MAX_HEIGHT - parentRef.current.getBoundingClientRect().top)
+    setMaxListHeight(
+      MAX_POPUP_HEIGHT - parentRef.current.getBoundingClientRect().top,
+    )
   }, [])
 
   const { scrollToIndex, scrollToOffset } = virtualizer
@@ -75,8 +77,7 @@ export default function BookmarkTree(props: Props) {
     }
   }, [props.scrollToIndex, scrollToIndex])
 
-  const { onMouseMove } = useDragAndDropContainerEvents()
-  useEventListener(parentRef.current, 'mousemove', onMouseMove)
+  const { onMouseMove } = useDragZoneEvents()
 
   const itemCount = props.treeInfo.children.length
   if (itemCount === 0) {
@@ -90,6 +91,7 @@ export default function BookmarkTree(props: Props) {
         maxHeight: `${maxListHeight}px`,
         overflow: 'auto',
       }}
+      onMouseMove={onMouseMove}
       onScroll={props.onScroll}
     >
       <PlainList

@@ -1,6 +1,6 @@
 import webExtension from 'webextension-polyfill'
 
-import { SEPARATE_THIS_URL } from '../../../constants/index.js'
+import { SEPARATE_THIS_URL } from '../constants.js'
 import { toBookmarkInfo } from '../utils/transformers.js'
 import { getBookmarkInfo } from './getBookmark.js'
 

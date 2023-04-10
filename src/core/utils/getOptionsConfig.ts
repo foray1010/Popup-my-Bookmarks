@@ -4,7 +4,7 @@ import { OPTIONS, ROOT_ID } from '../constants/index.js'
 import type { OptionsConfig } from '../types/options.js'
 import isMac from './isMac.js'
 
-const getMessages = (messageKeys: readonly string[]) => {
+function getMessages(messageKeys: readonly string[]) {
   return messageKeys.map((k) => webExtension.i18n.getMessage(k))
 }
 

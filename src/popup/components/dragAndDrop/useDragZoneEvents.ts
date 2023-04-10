@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { useDragAndDropContext } from './DragAndDropContext.js'
 
-const useScroll = () => {
+function useScroll() {
   const scrollingTimeoutRef = React.useRef<number>()
 
   const clearScroll = React.useCallback(() => {
@@ -14,7 +14,7 @@ const useScroll = () => {
 
   const scroll = React.useCallback(
     (
-      containerElement: Element,
+      containerElement: HTMLElement,
       { isUpward }: { readonly isUpward: boolean },
     ) => {
       clearScroll()
@@ -31,7 +31,7 @@ const useScroll = () => {
   return { clearScroll, scroll }
 }
 
-export default function useDragAndDropContainerEvents({
+export default function useDragZoneEvents({
   margin = 20,
 }: {
   readonly margin?: number
@@ -47,9 +47,9 @@ export default function useDragAndDropContainerEvents({
     }
   }, [clearScroll, isDragging])
 
-  const onMouseMove = React.useCallback(
-    (evt: MouseEvent | React.MouseEvent) => {
-      if (!(evt.currentTarget instanceof Element)) return
+  const onMouseMove = React.useCallback<React.MouseEventHandler>(
+    (evt) => {
+      if (!(evt.currentTarget instanceof HTMLElement)) return
 
       if (!isDragging) return
 
@@ -73,5 +73,8 @@ export default function useDragAndDropContainerEvents({
     [clearScroll, isDragging, margin, scroll],
   )
 
-  return { onMouseMove }
+  return {
+    /** when the mouse is on top/bottom of the drag zone, scroll the zone */
+    onMouseMove,
+  }
 }

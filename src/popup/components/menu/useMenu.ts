@@ -19,7 +19,7 @@ const initialState: State = {
   isOpen: false,
 }
 
-const useMenu = () => {
+function useMenu() {
   const [state, setState] = React.useState<State>(initialState)
 
   const open = React.useCallback((openState: OpenState) => {

@@ -1,6 +1,6 @@
 import webExtension from 'webextension-polyfill'
 
-import type { LastPosition } from '../types/index.js'
+import type { LastPosition } from './lastPositions/types.js'
 
 export type LocalStorage = {
   readonly lastPositions: readonly LastPosition[]

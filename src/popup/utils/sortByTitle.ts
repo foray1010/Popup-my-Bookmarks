@@ -1,4 +1,4 @@
-import type { BookmarkInfo } from '../types/index.js'
+import type { BookmarkInfo } from '../modules/bookmarks/types.js'
 
 export default function sortByTitle(
   bookmarkInfos: readonly BookmarkInfo[],

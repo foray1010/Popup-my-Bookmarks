@@ -13,31 +13,23 @@ type ClipboardState =
     }
   | {
       readonly action: ClipboardAction.Copy | ClipboardAction.Cut
-      readonly items: ReadonlyArray<{
-        readonly id: string
-      }>
+      readonly items: ReadonlySet<string>
     }
 
-const initialState: ClipboardState = {
+const initialState = {
   action: ClipboardAction.None,
-}
+} as const satisfies ClipboardState
 
-const useClipboardState = () => {
+function useClipboard() {
   const [state, setState] = React.useState<ClipboardState>(initialState)
 
-  const reset = React.useCallback(() => {
-    setState(initialState)
-  }, [])
-
-  const set = React.useCallback((newState: ClipboardState) => {
-    setState(newState)
-  }, [])
+  const reset = React.useCallback(() => setState(initialState), [])
 
   return {
     state,
     reset,
-    set,
+    set: setState,
   }
 }
 
-export const [ClipboardProvider, useClipboard] = constate(useClipboardState)
+export const [ClipboardProvider, useClipboardContext] = constate(useClipboard)

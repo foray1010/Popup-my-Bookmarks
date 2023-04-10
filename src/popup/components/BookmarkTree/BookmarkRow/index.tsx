@@ -1,8 +1,8 @@
 import classNames from 'classix'
 import * as React from 'react'
 
-import { BOOKMARK_TYPES } from '../../../constants/index.js'
-import type { BookmarkInfo } from '../../../types/index.js'
+import { BOOKMARK_TYPES } from '../../../modules/bookmarks/constants.js'
+import type { BookmarkInfo } from '../../../modules/bookmarks/types.js'
 import {
   DragAndDropConsumer,
   type ResponseEvent,
@@ -11,7 +11,7 @@ import classes from './bookmark-row.module.css'
 import BookmarkRow from './BookmarkRow.js'
 import useTooltip from './useTooltip.js'
 
-interface Props {
+type Props = {
   readonly bookmarkInfo: BookmarkInfo
   readonly className?: string | undefined
   readonly isDisableDragAndDrop: boolean

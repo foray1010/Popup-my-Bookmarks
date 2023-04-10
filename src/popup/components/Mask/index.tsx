@@ -1,20 +1,19 @@
-import classNames from 'classix'
 import type * as React from 'react'
 
 import classes from './mask.module.css'
 
-type Props = React.HTMLAttributes<Element> & {
+type Props = {
   readonly opacity: number
+  readonly onClick: React.MouseEventHandler
 }
-export default function Mask({ opacity, ...props }: Props) {
+export default function Mask({ opacity, onClick }: Props) {
   return (
     <div
-      {...props}
-      className={classNames(classes['main'], props.className)}
+      className={classes['main']}
       style={{
-        ...props.style,
         backgroundColor: `rgb(var(--bg-color-rgb) / ${opacity})`,
       }}
+      onClick={onClick}
     />
   )
 }

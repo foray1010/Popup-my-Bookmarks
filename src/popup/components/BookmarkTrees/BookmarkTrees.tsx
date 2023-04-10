@@ -1,14 +1,12 @@
 import * as React from 'react'
 
-import type { Options } from '../../../core/types/options.js'
-import { OPTIONS } from '../../constants/index.js'
 import BookmarkTree from '../BookmarkTree/index.js'
 import classes from './bookmark-trees.module.css'
 
 type Props = {
   readonly firstTreeHeader: React.ReactNode
-  readonly options: Options
   readonly treeIds: ReadonlyArray<string>
+  readonly width: number
 }
 export default function BookmarkTrees(props: Props) {
   const trees = props.treeIds.map((treeId) => (
@@ -20,9 +18,9 @@ export default function BookmarkTrees(props: Props) {
 
   const widthStyle = React.useMemo(
     () => ({
-      width: `${props.options[OPTIONS.SET_WIDTH]}px`,
+      width: `${props.width}px`,
     }),
-    [props.options],
+    [props.width],
   )
 
   return (

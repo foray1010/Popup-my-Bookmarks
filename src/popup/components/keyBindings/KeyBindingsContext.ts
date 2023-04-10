@@ -4,7 +4,7 @@ import useEventListener from 'use-typed-event-listener'
 
 import type { KeyBindingEventCallback, KeyDefinition } from './types.js'
 
-const useActiveWindowState = () => {
+function useActiveWindowState() {
   const [activeWindowQueue, setActiveWindowQueue] = React.useState<
     readonly string[]
   >([])
@@ -27,7 +27,7 @@ const useActiveWindowState = () => {
   }
 }
 
-const useKeyBindingsPerWindowState = () => {
+function useKeyBindingsPerWindowState() {
   const [keyBindingsPerWindow, setKeyBindingsPerWindow] = React.useState<
     ReadonlyMap<
       string,
@@ -85,7 +85,7 @@ const useKeyBindingsPerWindowState = () => {
   }
 }
 
-const useKeyBindingsState = () => {
+function useKeyBindingsState() {
   const activeWindowState = useActiveWindowState()
 
   const keyBindingsPerWindowState = useKeyBindingsPerWindowState()
@@ -96,7 +96,7 @@ const useKeyBindingsState = () => {
   }
 }
 
-const useKeyBindings = () => {
+function useKeyBindings() {
   const state = useKeyBindingsState()
 
   useEventListener(document, 'keydown', (evt) => {

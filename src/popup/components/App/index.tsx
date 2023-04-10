@@ -3,20 +3,19 @@ import './globals.module.css'
 import type { PropertiesHyphen } from 'csstype'
 import * as React from 'react'
 
+import { OPTIONS } from '../../../core/constants/index.js'
 import { ReactQueryClientProvider } from '../../../core/utils/queryClient.js'
 import withProviders from '../../../core/utils/withProviders.js'
-import { OPTIONS } from '../../constants/index.js'
 import { BookmarkTreesProvider } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { ClipboardProvider } from '../../modules/clipboard.js'
 import { useOptions, withOptions } from '../../modules/options.js'
 import BookmarkTrees from '../BookmarkTrees/index.js'
-import { ClipboardProvider } from '../clipboard/index.js'
 import { Editor, EditorProvider } from '../editor/index.js'
 import {
   FloatingWindowProvider,
   useGlobalBodySize,
 } from '../floatingWindow/index.js'
 import { KeyBindingsProvider } from '../keyBindings/index.js'
-import { LastPositionsProvider } from '../lastPositions/index.js'
 import { Menu, MenuProvider } from '../menu/index.js'
 import Search from '../Search/index.js'
 import useGlobalEvents from './useGlobalEvents.js'
@@ -68,9 +67,7 @@ const AppWithOptions = withOptions(function InnerApp() {
 
   return (
     <BookmarkTreesProvider>
-      <LastPositionsProvider isEnabled={options[OPTIONS.REMEMBER_POS]}>
-        <BookmarkTrees firstTreeHeader={<Search />} />
-      </LastPositionsProvider>
+      <BookmarkTrees firstTreeHeader={<Search />} />
       <Menu />
       <Editor />
     </BookmarkTreesProvider>

@@ -1,12 +1,9 @@
 import webExtension from 'webextension-polyfill'
 
-import {
-  BOOKMARK_TYPES,
-  NO_BOOKMARK_ID_PREFIX,
-  ROOT_ID,
-} from '../../../constants/index.js'
-import type { BookmarkInfo, BookmarkTreeInfo } from '../../../types/index.js'
+import { ROOT_ID } from '../../../../core/constants/index.js'
 import sortByTitle from '../../../utils/sortByTitle.js'
+import { BOOKMARK_TYPES, NO_BOOKMARK_ID_PREFIX } from '../constants.js'
+import type { BookmarkInfo, BookmarkTreeInfo } from '../types.js'
 import {
   generateNoBookmarkPlaceholder,
   generateSearchResultParent,

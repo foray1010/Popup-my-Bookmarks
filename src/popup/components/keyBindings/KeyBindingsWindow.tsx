@@ -1,19 +1,12 @@
-import classNames from 'classix'
 import * as React from 'react'
 
 import { useKeyBindingsContext } from './KeyBindingsContext.js'
 import classes from './KeyBindingsWindow.module.css'
 
-type Props = React.HTMLAttributes<Element> & {
+type Props = React.PropsWithChildren<{
   readonly windowId: string
-}
-export default function KeyBindingsWindow({
-  children,
-  className,
-  onFocus,
-  windowId,
-  ...props
-}: Props) {
+}>
+export default function KeyBindingsWindow({ children, windowId }: Props) {
   const { appendActiveWindowId, removeActiveWindowId } = useKeyBindingsContext()
 
   React.useEffect(() => {
@@ -32,18 +25,15 @@ export default function KeyBindingsWindow({
   return (
     <div
       ref={windowRef}
+      className={classes['wrapper']}
       tabIndex={-1}
-      {...props}
-      className={classNames(classes['wrapper'], className)}
       onFocus={React.useCallback<React.FocusEventHandler>(
         (evt) => {
           evt.stopPropagation()
 
-          if (onFocus) onFocus(evt)
-
           appendActiveWindowId(windowId)
         },
-        [onFocus, appendActiveWindowId, windowId],
+        [appendActiveWindowId, windowId],
       )}
     >
       {children}

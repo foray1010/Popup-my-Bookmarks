@@ -1,11 +1,9 @@
 import webExtension from 'webextension-polyfill'
 
-import {
-  BOOKMARK_TYPES,
-  OPEN_IN_TYPES,
-  OPTIONS,
-} from '../../../constants/index.js'
+import { OPTIONS } from '../../../../core/constants/index.js'
+import { OPEN_IN_TYPES } from '../../../constants/menu.js'
 import { getOptions } from '../../options.js'
+import { BOOKMARK_TYPES } from '../constants.js'
 import { getBookmarkInfo, getBookmarkTreeInfo } from './getBookmark.js'
 
 async function getUrls(ids: readonly string[]): Promise<readonly string[]> {

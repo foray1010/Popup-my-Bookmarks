@@ -1,10 +1,11 @@
 import type * as React from 'react'
 
-import { OPEN_IN_TYPES, OPTIONS } from '../../../constants/index.js'
+import { OPTIONS } from '../../../../core/constants/index.js'
+import { OPEN_IN_TYPES } from '../../../constants/menu.js'
 
-export const getClickOptionNameByEvent = (
+export function getClickOptionNameByEvent(
   evt: KeyboardEvent | MouseEvent | React.KeyboardEvent | React.MouseEvent,
-) => {
+) {
   if (evt.ctrlKey || evt.metaKey) {
     return OPTIONS.CLICK_BY_LEFT_CTRL
   }
@@ -16,12 +17,10 @@ export const getClickOptionNameByEvent = (
   return OPTIONS.CLICK_BY_LEFT
 }
 
-export const mapOptionToOpenBookmarkProps = (
-  option: number,
-): {
+export function mapOptionToOpenBookmarkProps(option: number): {
   readonly openIn: OPEN_IN_TYPES
   readonly isCloseThisExtension: boolean
-} => {
+} {
   switch (option) {
     case 0: // current tab
     case 1: // current tab (without closing PmB)

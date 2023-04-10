@@ -2,7 +2,7 @@ import constate from 'constate'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import type { LastPosition } from '../../types/index.js'
+import type { LastPosition } from './types.js'
 
 function useLastPositions({ isEnabled }: { readonly isEnabled: boolean }) {
   const [lastPositions, setLastPositions] = React.useState<

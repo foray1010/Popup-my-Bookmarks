@@ -8,7 +8,7 @@ import type { Options, OptionsConfig } from '../../../core/types/options.js'
 import classes from './option-form.module.css'
 import OptionItem from './OptionItem/index.js'
 
-interface Props {
+type Props = {
   readonly defaultValues: Partial<Options>
   readonly onReset: () => void
   readonly onSubmit: (variables: Partial<Options>) => void

@@ -1,8 +1,11 @@
 import * as React from 'react'
 
-import { BOOKMARK_TYPES } from '../../constants/index.js'
+import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
 import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
-import type { BookmarkInfo, BookmarkTreeInfo } from '../../types/index.js'
+import type {
+  BookmarkInfo,
+  BookmarkTreeInfo,
+} from '../../modules/bookmarks/types.js'
 import type { ResponseEvent } from '../dragAndDrop/index.js'
 
 export default function useRowDragEvents({

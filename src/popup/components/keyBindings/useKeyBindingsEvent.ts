@@ -13,7 +13,7 @@ export default function useKeyBindingsEvent(
   const callbackRef = useLatestRef(callback)
 
   useDeepCompareEffect(() => {
-    const wrappedCallback = (evt: KeyboardEvent) => {
+    function wrappedCallback(evt: KeyboardEvent) {
       const maybePromise = callbackRef.current(evt)
       if (maybePromise !== undefined) {
         maybePromise.catch(console.error)

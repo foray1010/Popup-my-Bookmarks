@@ -17,7 +17,7 @@ type Props = React.PropsWithChildren<{
   ) => void
 }>
 
-const useDragEvents = ({ itemKey, onDragOver, onDragStart }: Props) => {
+function useDragEvents({ itemKey, onDragOver, onDragStart }: Props) {
   const { activeKey, setActiveKey } = useDragAndDropContext()
 
   return {
@@ -49,7 +49,7 @@ const useDragEvents = ({ itemKey, onDragOver, onDragStart }: Props) => {
   }
 }
 
-const useMouseEvents = () => {
+function useMouseEvents() {
   const { activeKey } = useDragAndDropContext()
 
   const isDragging = activeKey !== null

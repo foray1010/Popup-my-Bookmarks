@@ -1,13 +1,13 @@
 import webExtension from 'webextension-polyfill'
 
-import { BOOKMARK_TYPES } from '../../../constants/index.js'
-import type { BookmarkInfo } from '../../../types/index.js'
 import sortByTitle from '../../../utils/sortByTitle.js'
+import { BOOKMARK_TYPES } from '../constants.js'
+import type { BookmarkInfo } from '../types.js'
 import { getBookmarkInfo, getBookmarkTreeInfo } from './getBookmark.js'
 
-const splitBySeparator = (
+function splitBySeparator(
   bookmarkInfos: readonly BookmarkInfo[],
-): readonly (readonly BookmarkInfo[])[] => {
+): readonly (readonly BookmarkInfo[])[] {
   return bookmarkInfos.reduce<BookmarkInfo[][]>(
     (acc, bookmarkInfo) => {
       if (acc.length === 0 || bookmarkInfo.type === BOOKMARK_TYPES.SEPARATOR) {
@@ -26,9 +26,9 @@ type BookmarkGroup = {
   readonly type: BOOKMARK_TYPES
   readonly members: readonly BookmarkInfo[]
 }
-const groupByType = (
+function groupByType(
   bookmarkInfos: readonly BookmarkInfo[],
-): readonly BookmarkGroup[] => {
+): readonly BookmarkGroup[] {
   return bookmarkInfos.reduce<
     Array<{
       readonly type: BOOKMARK_TYPES
@@ -53,9 +53,9 @@ const groupByType = (
   }, [])
 }
 
-const sortGroupByPriority = (
+function sortGroupByPriority(
   groups: readonly BookmarkGroup[],
-): readonly BookmarkGroup[] => {
+): readonly BookmarkGroup[] {
   const priority = [
     BOOKMARK_TYPES.SEPARATOR,
     BOOKMARK_TYPES.FOLDER,
@@ -69,17 +69,17 @@ const sortGroupByPriority = (
   })
 }
 
-const mergeGroups = (
+function mergeGroups(
   nestedGroups: readonly (readonly BookmarkGroup[])[],
-): readonly BookmarkInfo[] => {
+): readonly BookmarkInfo[] {
   return nestedGroups.flatMap((nestedGroup) =>
     nestedGroup.flatMap((group) => group.members),
   )
 }
 
-const sortBookmarks = (
+function sortBookmarks(
   bookmarkInfos: readonly BookmarkInfo[],
-): readonly BookmarkInfo[] => {
+): readonly BookmarkInfo[] {
   const nestedGroups = splitBySeparator(bookmarkInfos)
     .map(groupByType)
     .map((groups) => {

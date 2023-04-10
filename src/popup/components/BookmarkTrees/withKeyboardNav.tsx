@@ -2,8 +2,8 @@ import type * as React from 'react'
 
 import isMac from '../../../core/utils/isMac.js'
 import withProviders from '../../../core/utils/withProviders.js'
-import { BOOKMARK_TYPES } from '../../constants/index.js'
-import { BASE_WINDOW } from '../../constants/windows.js'
+import { WindowId } from '../../constants/windows.js'
+import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
 import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import { openBookmarksInBrowser } from '../../modules/bookmarks/methods/openBookmark.js'
 import {
@@ -20,7 +20,7 @@ import {
 } from '../listNavigation/index.js'
 import { useMenuContext } from '../menu/index.js'
 
-const useArrowKeysNav = () => {
+function useArrowKeysNav() {
   const {
     bookmarkTrees: trees,
     openBookmarkTree,
@@ -30,7 +30,7 @@ const useArrowKeysNav = () => {
   const { listNavigation } = useListNavigationContext()
 
   useKeyboardNav({
-    windowId: BASE_WINDOW,
+    windowId: WindowId.Base,
     onPressArrowLeft() {
       const secondLastTree = trees.at(-2)
       if (secondLastTree) {
@@ -57,36 +57,39 @@ const useArrowKeysNav = () => {
   })
 }
 
-const useEnterKeyNav = () => {
+function useEnterKeyNav() {
   const options = useOptions()
 
   const { bookmarkTrees: trees } = useBookmarkTrees()
 
   const { listNavigation } = useListNavigationContext()
 
-  useKeyBindingsEvent({ key: 'Enter', windowId: BASE_WINDOW }, async (evt) => {
-    const { highlightedIndices, itemCounts } = listNavigation
+  useKeyBindingsEvent(
+    { key: 'Enter', windowId: WindowId.Base },
+    async (evt) => {
+      const { highlightedIndices, itemCounts } = listNavigation
 
-    const lastListIndex = getLastMapKey(itemCounts)
-    if (lastListIndex === undefined) return
-    const treeInfo = trees[lastListIndex]
-    if (!treeInfo) return
+      const lastListIndex = getLastMapKey(itemCounts)
+      if (lastListIndex === undefined) return
+      const treeInfo = trees[lastListIndex]
+      if (!treeInfo) return
 
-    // default open first bookmark in last tree
-    const highlightedIndex = highlightedIndices.get(lastListIndex) ?? 0
-    const bookmarkInfo = treeInfo.children[highlightedIndex]
-    if (!bookmarkInfo) return
+      // default open first bookmark in last tree
+      const highlightedIndex = highlightedIndices.get(lastListIndex) ?? 0
+      const bookmarkInfo = treeInfo.children[highlightedIndex]
+      if (!bookmarkInfo) return
 
-    const option = options[getClickOptionNameByEvent(evt)]
-    const openBookmarkProps = mapOptionToOpenBookmarkProps(option)
-    await openBookmarksInBrowser([bookmarkInfo.id], {
-      ...openBookmarkProps,
-      isAllowBookmarklet: true,
-    })
-  })
+      const option = options[getClickOptionNameByEvent(evt)]
+      const openBookmarkProps = mapOptionToOpenBookmarkProps(option)
+      await openBookmarksInBrowser([bookmarkInfo.id], {
+        ...openBookmarkProps,
+        isAllowBookmarklet: true,
+      })
+    },
+  )
 }
 
-const useMenuKeyNav = () => {
+function useMenuKeyNav() {
   const { bookmarkTrees: trees } = useBookmarkTrees()
 
   const { open: openMenu } = useMenuContext()
@@ -96,7 +99,7 @@ const useMenuKeyNav = () => {
   useKeyBindingsEvent(
     {
       key: isMac() ? 'Control' : 'ContextMenu',
-      windowId: BASE_WINDOW,
+      windowId: WindowId.Base,
     },
     () => {
       const { highlightedIndices, itemCounts } = listNavigation
@@ -130,7 +133,7 @@ const useMenuKeyNav = () => {
 export default function withKeyboardNav<P extends {}>(
   WrappedComponent: React.ComponentType<P>,
 ) {
-  const InnerComponent = (props: P) => {
+  function InnerComponent(props: P) {
     useArrowKeysNav()
     useEnterKeyNav()
     useMenuKeyNav()
@@ -138,5 +141,5 @@ export default function withKeyboardNav<P extends {}>(
     return <WrappedComponent {...props} />
   }
 
-  return withProviders<P>(InnerComponent, [ListNavigationProvider])
+  return withProviders(InnerComponent, [ListNavigationProvider])
 }

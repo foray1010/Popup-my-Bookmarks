@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { BASE_WINDOW } from '../../constants/windows.js'
+import { WindowId } from '../../constants/windows.js'
 import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import { useKeyBindingsEvent } from '../keyBindings/index.js'
 import SearchInput from './SearchInput.js'
@@ -18,7 +18,7 @@ export default function SearchContainer() {
   }, [setSearchQuery, inputValue])
 
   const inputRef = React.useRef<HTMLInputElement>(null)
-  useKeyBindingsEvent({ key: /^.$/, windowId: BASE_WINDOW }, () => {
+  useKeyBindingsEvent({ key: /^.$/, windowId: WindowId.Base }, () => {
     const isFocusedOnInput = document.activeElement instanceof HTMLInputElement
     if (isFocusedOnInput) return
 

@@ -1,8 +1,8 @@
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
-import { OPTIONS } from '../../constants/index.js'
-import { EDITOR_WINDOW } from '../../constants/windows.js'
+import { OPTIONS } from '../../../core/constants/index.js'
+import { WindowId } from '../../constants/windows.js'
 import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo.js'
 import { createBookmarkAfterId } from '../../modules/bookmarks/methods/createBookmark.js'
 import { useOptions } from '../../modules/options.js'
@@ -16,11 +16,11 @@ type EditorFormProps = React.ComponentProps<typeof EditorForm>
 interface CreateEditorFormProps extends EditorFormProps {
   readonly createAfterId: string
 }
-const CreateEditorForm = ({
+function CreateEditorForm({
   createAfterId,
   onConfirm,
   ...editorFormProps
-}: CreateEditorFormProps) => {
+}: CreateEditorFormProps) {
   return (
     <EditorForm
       {...editorFormProps}
@@ -40,11 +40,11 @@ const CreateEditorForm = ({
 interface UpdateEditorFormProps extends EditorFormProps {
   readonly editTargetId: string
 }
-const UpdateEditorForm = ({
+function UpdateEditorForm({
   editTargetId,
   onConfirm,
   ...editorFormProps
-}: UpdateEditorFormProps) => {
+}: UpdateEditorFormProps) {
   const { data: bookmarkInfo } = useGetBookmarkInfo(editTargetId)
 
   const handleConfirm = React.useCallback(
@@ -97,7 +97,7 @@ export default function Editor() {
       positionTop={state.positions.top}
       onClose={close}
     >
-      <KeyBindingsWindow windowId={EDITOR_WINDOW}>
+      <KeyBindingsWindow windowId={WindowId.Editor}>
         {state.isCreating ? (
           <CreateEditorForm
             {...commonProps}

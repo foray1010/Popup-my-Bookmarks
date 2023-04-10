@@ -7,14 +7,14 @@ import Button from '../../../core/components/baseItems/Button/index.js'
 import Input from '../../../core/components/baseItems/Input/index.js'
 import classes from './editor-form.module.css'
 
-interface Props {
+type Props = {
   readonly defaultTitle?: string
   readonly defaultUrl?: string | undefined
   readonly header: string
   readonly isAllowedToEditUrl: boolean
   readonly onCancel: () => void
   readonly onConfirm: (title: string, url?: string) => void | Promise<void>
-  readonly style: React.CSSProperties
+  readonly style?: React.CSSProperties
 }
 export default function Editor({ onConfirm, ...props }: Props) {
   const { register, handleSubmit } = useForm<{

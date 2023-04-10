@@ -5,7 +5,7 @@ import webExtension from 'webextension-polyfill'
 import type { MenuItem } from './constants.js'
 import classes from './menu-row.module.css'
 
-interface Props {
+type Props = {
   readonly isFocused: boolean
   readonly isUnclickable: boolean
   readonly onClick: React.MouseEventHandler

@@ -1,4 +1,4 @@
-import type { BOOKMARK_TYPES } from '../constants/index.js'
+import type { BOOKMARK_TYPES } from './constants.js'
 
 export type BookmarkInfo = {
   readonly id: string
@@ -39,9 +39,4 @@ export type BookmarkInfo = {
 export type BookmarkTreeInfo = {
   readonly children: ReadonlyArray<BookmarkInfo>
   readonly parent: BookmarkInfo & { readonly type: BOOKMARK_TYPES.FOLDER }
-}
-
-export type LastPosition = {
-  readonly id: string
-  readonly scrollTop: number
 }

@@ -5,7 +5,7 @@ import classes from './menu.module.css'
 import MenuRow from './MenuRow.js'
 import type { MenuPattern } from './types.js'
 
-interface Props {
+type Props = {
   readonly highlightedIndex?: number | undefined
   readonly menuPattern: MenuPattern
   readonly onRowClick: React.MouseEventHandler

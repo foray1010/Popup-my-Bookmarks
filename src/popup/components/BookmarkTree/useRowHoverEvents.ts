@@ -1,10 +1,14 @@
 import * as React from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { BOOKMARK_TYPES, OPTIONS } from '../../constants/index.js'
+import { OPTIONS } from '../../../core/constants/index.js'
+import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
 import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import type {
+  BookmarkInfo,
+  BookmarkTreeInfo,
+} from '../../modules/bookmarks/types.js'
 import { useOptions } from '../../modules/options.js'
-import type { BookmarkInfo, BookmarkTreeInfo } from '../../types/index.js'
 import { useDragAndDropContext } from '../dragAndDrop/index.js'
 import { useListNavigationContext } from '../listNavigation/index.js'
 

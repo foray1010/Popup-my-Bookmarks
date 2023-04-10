@@ -1,12 +1,12 @@
-import { BOOKMARK_TYPES } from '../../constants/index.js'
-import type { BookmarkInfo } from '../../types/index.js'
+import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
+import type { BookmarkInfo } from '../../modules/bookmarks/types.js'
 import { MenuItem } from './constants.js'
 import type { MenuPattern } from './types.js'
 
-const getBookmarkManagePattern = (
+function getBookmarkManagePattern(
   bookmarkInfo: BookmarkInfo,
   isSearching: boolean,
-): MenuPattern => {
+): MenuPattern {
   if (bookmarkInfo.isRoot) return []
 
   if (isSearching) return [[MenuItem.Cut, MenuItem.Copy]]
@@ -24,7 +24,7 @@ const getBookmarkManagePattern = (
   ].filter((x) => x.length)
 }
 
-const getMutatePattern = (bookmarkInfo: BookmarkInfo): MenuPattern => {
+function getMutatePattern(bookmarkInfo: BookmarkInfo): MenuPattern {
   if (bookmarkInfo.isSimulated || bookmarkInfo.isUnmodifiable) return []
 
   return [
@@ -37,7 +37,7 @@ const getMutatePattern = (bookmarkInfo: BookmarkInfo): MenuPattern => {
   ]
 }
 
-const getOpenByPattern = (bookmarkInfo: BookmarkInfo): MenuPattern => {
+function getOpenByPattern(bookmarkInfo: BookmarkInfo): MenuPattern {
   if (bookmarkInfo.isSimulated) return []
 
   if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
@@ -59,11 +59,13 @@ const getOpenByPattern = (bookmarkInfo: BookmarkInfo): MenuPattern => {
   ]
 }
 
-export const getMenuPattern = (
+export function getMenuPattern(
   bookmarkInfo: BookmarkInfo,
   isSearching: boolean,
-): MenuPattern => [
-  ...getOpenByPattern(bookmarkInfo),
-  ...getMutatePattern(bookmarkInfo),
-  ...getBookmarkManagePattern(bookmarkInfo, isSearching),
-]
+): MenuPattern {
+  return [
+    ...getOpenByPattern(bookmarkInfo),
+    ...getMutatePattern(bookmarkInfo),
+    ...getBookmarkManagePattern(bookmarkInfo, isSearching),
+  ]
+}

@@ -27,7 +27,7 @@ const initialState: State = {
   isOpen: false,
 }
 
-const useEditor = () => {
+function useEditor() {
   const [state, setState] = React.useState<State>(initialState)
 
   const open = React.useCallback((openParams: OpenParams) => {

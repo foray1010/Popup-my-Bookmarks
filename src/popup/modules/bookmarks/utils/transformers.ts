@@ -1,13 +1,10 @@
-import {
-  BOOKMARK_TYPES,
-  ROOT_ID,
-  SEPARATE_THIS_URL,
-} from '../../../constants/index.js'
+import { ROOT_ID } from '../../../../core/constants/index.js'
 import folderIcon from '../../../images/folder.svg'
-import type { BookmarkInfo } from '../../../types/index.js'
 import { faviconUrl } from '../../../utils/faviconUrl.js'
+import { BOOKMARK_TYPES, SEPARATE_THIS_URL } from '../constants.js'
+import type { BookmarkInfo } from '../types.js'
 
-const getType = (bookmarkNode: browser.bookmarks.BookmarkTreeNode) => {
+function getType(bookmarkNode: browser.bookmarks.BookmarkTreeNode) {
   if (bookmarkNode.url == null) return BOOKMARK_TYPES.FOLDER
   if (bookmarkNode.url.startsWith(SEPARATE_THIS_URL)) {
     return BOOKMARK_TYPES.SEPARATOR
@@ -15,12 +12,13 @@ const getType = (bookmarkNode: browser.bookmarks.BookmarkTreeNode) => {
   return BOOKMARK_TYPES.BOOKMARK
 }
 
-const isRoot = (bookmarkNode: browser.bookmarks.BookmarkTreeNode): boolean =>
-  bookmarkNode.id === ROOT_ID || bookmarkNode.parentId === ROOT_ID
+function isRoot(bookmarkNode: browser.bookmarks.BookmarkTreeNode): boolean {
+  return bookmarkNode.id === ROOT_ID || bookmarkNode.parentId === ROOT_ID
+}
 
-export const toBookmarkInfo = (
+export function toBookmarkInfo(
   bookmarkNode: browser.bookmarks.BookmarkTreeNode,
-) => {
+) {
   const bookmarkInfo = {
     id: bookmarkNode.id,
     isRoot: isRoot(bookmarkNode),

@@ -19,7 +19,7 @@ export default function useKeyboardNav({
   const { listNavigation, removeList, setHighlightedIndex } =
     useListNavigationContext()
 
-  const handlePressArrowVertical = (offset: number) => {
+  function handlePressArrowVertical(offset: number) {
     const { highlightedIndices, itemCounts } = listNavigation
 
     const lastListIndex = getLastMapKey(itemCounts)
@@ -37,14 +37,14 @@ export default function useKeyboardNav({
     setHighlightedIndex(lastListIndex, nextItemIndex)
   }
 
-  const handlePressArrowDown = (evt: KeyboardEvent) => {
+  function handlePressArrowDown(evt: KeyboardEvent) {
     if (onPressArrowDown) onPressArrowDown(evt)
 
     handlePressArrowVertical(1)
   }
   useKeyBindingsEvent({ key: 'ArrowDown', windowId }, handlePressArrowDown)
 
-  const handlePressArrowUp = (evt: KeyboardEvent) => {
+  function handlePressArrowUp(evt: KeyboardEvent) {
     if (onPressArrowUp) onPressArrowUp(evt)
 
     handlePressArrowVertical(-1)

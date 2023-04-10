@@ -1,13 +1,13 @@
 import webExtension from 'webextension-polyfill'
 
+import folderIcon from '../../../images/folder.svg'
 import {
   BOOKMARK_TYPES,
   DRAG_INDICATOR_ID,
   NO_BOOKMARK_ID_PREFIX,
   SEARCH_RESULT_ID,
-} from '../../../constants/index.js'
-import folderIcon from '../../../images/folder.svg'
-import type { BookmarkInfo } from '../../../types/index.js'
+} from '../constants.js'
+import type { BookmarkInfo } from '../types.js'
 
 const simulatedBookmarkInfo = {
   isRoot: false,
@@ -17,7 +17,7 @@ const simulatedBookmarkInfo = {
   title: '',
 } as const
 
-export const generateDragIndicator = (parentId: string) => {
+export function generateDragIndicator(parentId: string) {
   return {
     ...simulatedBookmarkInfo,
     id: DRAG_INDICATOR_ID,
@@ -26,7 +26,7 @@ export const generateDragIndicator = (parentId: string) => {
   } as const satisfies BookmarkInfo
 }
 
-export const generateNoBookmarkPlaceholder = (parentId: string) => {
+export function generateNoBookmarkPlaceholder(parentId: string) {
   return {
     ...simulatedBookmarkInfo,
     id: `${NO_BOOKMARK_ID_PREFIX}${parentId}`,
@@ -36,7 +36,7 @@ export const generateNoBookmarkPlaceholder = (parentId: string) => {
   } as const satisfies BookmarkInfo
 }
 
-export const generateSearchResultParent = () => {
+export function generateSearchResultParent() {
   return {
     ...simulatedBookmarkInfo,
     id: SEARCH_RESULT_ID,

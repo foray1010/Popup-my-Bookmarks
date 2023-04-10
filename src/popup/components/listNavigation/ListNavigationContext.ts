@@ -3,7 +3,7 @@ import * as React from 'react'
 
 import deleteFromMap from '../../utils/deleteFromMap.js'
 
-const useListNavigation = () => {
+function useListNavigation() {
   const [highlightedIndices, setHighlightedIndices] = React.useState<
     ReadonlyMap<number, number>
   >(new Map())

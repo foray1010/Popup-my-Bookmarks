@@ -3,23 +3,24 @@ import * as React from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import webExtension from 'webextension-polyfill'
 
+import { OPTIONS } from '../../../../core/constants/index.js'
 import { useLatestRef } from '../../../../core/hooks/useLatestRef.js'
-import { BOOKMARK_TYPES, OPTIONS } from '../../../constants/index.js'
-import type { BookmarkTreeInfo } from '../../../types/index.js'
 import { getLocalStorage } from '../../localStorage.js'
 import { useOptions } from '../../options.js'
+import { BOOKMARK_TYPES } from '../constants.js'
 import {
   getBookmarkTreeInfo,
   getBookmarkTreesFromRoot,
   getBookmarkTreesFromSearch,
 } from '../methods/getBookmark.js'
+import type { BookmarkTreeInfo } from '../types.js'
 import { generateDragIndicator } from '../utils/generators.js'
 
-const useUtils = (
+function useUtils(
   setBookmarkTrees: React.Dispatch<
     React.SetStateAction<readonly BookmarkTreeInfo[]>
   >,
-) => {
+) {
   const insertBookmarkTree = React.useCallback(
     (
       trees: readonly BookmarkTreeInfo[],
@@ -193,7 +194,7 @@ const useUtils = (
   }
 }
 
-const useRefreshOnBookmarkEvent = ({
+function useRefreshOnBookmarkEvent({
   bookmarkTrees,
   setBookmarkTrees,
   fetchBookmarkTrees,
@@ -205,7 +206,7 @@ const useRefreshOnBookmarkEvent = ({
   readonly fetchBookmarkTrees: (
     childTreeIds?: readonly string[] | undefined,
   ) => Promise<readonly BookmarkTreeInfo[]>
-}) => {
+}) {
   // use debounce to avoid frequent refresh, such as sort bookmarks by name
   const refresh = useDebouncedCallback(() => {
     const [, ...childTreeIds] = bookmarkTrees.map((tree) => tree.parent.id)
@@ -215,7 +216,7 @@ const useRefreshOnBookmarkEvent = ({
 
   React.useEffect(() => {
     // create wrapper function to always point to the latest ref
-    const refreshTrees = () => {
+    function refreshTrees() {
       refreshRef.current()
     }
 
@@ -233,7 +234,7 @@ const useRefreshOnBookmarkEvent = ({
   }, [refreshRef])
 }
 
-const useBookmarkTreesState = () => {
+function useBookmarkTreesState() {
   const [bookmarkTrees, setBookmarkTrees] = React.useState<
     readonly BookmarkTreeInfo[]
   >([])

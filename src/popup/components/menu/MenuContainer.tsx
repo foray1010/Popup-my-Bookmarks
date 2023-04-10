@@ -3,8 +3,9 @@ import webExtension from 'webextension-polyfill'
 
 import isMac from '../../../core/utils/isMac.js'
 import withProviders from '../../../core/utils/withProviders.js'
-import { BOOKMARK_TYPES, OPEN_IN_TYPES } from '../../constants/index.js'
-import { MENU_WINDOW } from '../../constants/windows.js'
+import { OPEN_IN_TYPES } from '../../constants/menu.js'
+import { WindowId } from '../../constants/windows.js'
+import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
 import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo.js'
 import { recursiveCopyBookmarks } from '../../modules/bookmarks/methods/copyBookmark.js'
@@ -17,7 +18,10 @@ import {
   openFolderInBrowser,
 } from '../../modules/bookmarks/methods/openBookmark.js'
 import sortBookmarksByName from '../../modules/bookmarks/methods/sortBookmarksByName.js'
-import { ClipboardAction, useClipboard } from '../clipboard/index.js'
+import {
+  ClipboardAction,
+  useClipboardContext,
+} from '../../modules/clipboard.js'
 import { useEditorContext } from '../editor/index.js'
 import { FloatingWindow } from '../floatingWindow/index.js'
 import { KeyBindingsWindow, useKeyBindingsEvent } from '../keyBindings/index.js'
@@ -31,7 +35,7 @@ import Menu from './Menu.js'
 import { useMenuContext } from './useMenu.js'
 import { getMenuPattern } from './utils.js'
 
-const useClickMenuRow = (rowName?: MenuItem) => {
+function useClickMenuRow(rowName?: MenuItem) {
   const { close, state } = useMenuContext()
   const { open: openEditor } = useEditorContext()
 
@@ -39,7 +43,7 @@ const useClickMenuRow = (rowName?: MenuItem) => {
     reset: resetClipboard,
     set: setClipboard,
     state: clipboardState,
-  } = useClipboard()
+  } = useClipboardContext()
 
   const { data: bookmarkInfo } = useGetBookmarkInfo(
     state.isOpen ? state.targetId : undefined,
@@ -75,14 +79,14 @@ const useClickMenuRow = (rowName?: MenuItem) => {
       case MenuItem.Copy:
         setClipboard({
           action: ClipboardAction.Copy,
-          items: [{ id: bookmarkInfo.id }],
+          items: new Set([bookmarkInfo.id]),
         })
         break
 
       case MenuItem.Cut:
         setClipboard({
           action: ClipboardAction.Cut,
-          items: [{ id: bookmarkInfo.id }],
+          items: new Set([bookmarkInfo.id]),
         })
         break
 
@@ -134,26 +138,24 @@ const useClickMenuRow = (rowName?: MenuItem) => {
 
       case MenuItem.Paste:
         switch (clipboardState.action) {
-          case ClipboardAction.Copy: {
-            const clipboardItem = clipboardState.items[0]
-            if (!clipboardItem) throw new Error('no clipboard item')
-
-            await recursiveCopyBookmarks(clipboardItem.id, {
-              parentId: bookmarkInfo.parentId,
-              index: bookmarkInfo.storageIndex + 1,
-            })
+          case ClipboardAction.Copy:
+            for (const id of clipboardState.items.values()) {
+              await recursiveCopyBookmarks(id, {
+                parentId: bookmarkInfo.parentId,
+                index: bookmarkInfo.storageIndex + 1,
+              })
+            }
             break
-          }
-          case ClipboardAction.Cut: {
-            const clipboardItem = clipboardState.items[0]
-            if (!clipboardItem) throw new Error('no clipboard item')
 
-            await webExtension.bookmarks.move(clipboardItem.id, {
-              parentId: bookmarkInfo.parentId,
-              index: bookmarkInfo.storageIndex + 1,
-            })
+          case ClipboardAction.Cut:
+            for (const id of clipboardState.items.values()) {
+              await webExtension.bookmarks.move(id, {
+                parentId: bookmarkInfo.parentId,
+                index: bookmarkInfo.storageIndex + 1,
+              })
+            }
             break
-          }
+
           case ClipboardAction.None:
             break
         }
@@ -180,13 +182,13 @@ const useClickMenuRow = (rowName?: MenuItem) => {
   ])
 }
 
-const InnerMenuContainer = () => {
+function InnerMenuContainer() {
   const { close, state } = useMenuContext()
 
-  const { state: clipboardState } = useClipboard()
+  const { state: clipboardState } = useClipboardContext()
   const unclickableRows =
     clipboardState.action !== ClipboardAction.None &&
-    clipboardState.items.length > 0
+    clipboardState.items.size > 0
       ? []
       : [MenuItem.Paste]
 
@@ -213,15 +215,15 @@ const InnerMenuContainer = () => {
     setItemCount(0, allRowNames.length)
   }, [allRowNames.length, setItemCount])
 
-  useKeyboardNav({ windowId: MENU_WINDOW })
+  useKeyboardNav({ windowId: WindowId.Menu })
 
   const handleRowClick = useClickMenuRow(
     highlightedIndex !== undefined ? allRowNames[highlightedIndex] : undefined,
   )
 
-  useKeyBindingsEvent({ key: 'Enter', windowId: MENU_WINDOW }, handleRowClick)
+  useKeyBindingsEvent({ key: 'Enter', windowId: WindowId.Menu }, handleRowClick)
   useKeyBindingsEvent(
-    { key: isMac() ? 'Control' : 'ContextMenu', windowId: MENU_WINDOW },
+    { key: isMac() ? 'Control' : 'ContextMenu', windowId: WindowId.Menu },
     close,
   )
 
@@ -249,7 +251,7 @@ const InnerMenuContainer = () => {
       positionTop={state.displayPositions.top}
       onClose={close}
     >
-      <KeyBindingsWindow windowId={MENU_WINDOW}>
+      <KeyBindingsWindow windowId={WindowId.Menu}>
         <Menu
           highlightedIndex={highlightedIndex}
           menuPattern={menuPattern}

@@ -1,21 +1,22 @@
 import * as React from 'react'
 
-import {
-  BOOKMARK_TYPES,
-  OPEN_IN_TYPES,
-  OPTIONS,
-} from '../../constants/index.js'
+import { OPTIONS } from '../../../core/constants/index.js'
+import { OPEN_IN_TYPES } from '../../constants/menu.js'
+import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
 import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import {
   openBookmarksInBrowser,
   openFolderInBrowser,
 } from '../../modules/bookmarks/methods/openBookmark.js'
+import type {
+  BookmarkInfo,
+  BookmarkTreeInfo,
+} from '../../modules/bookmarks/types.js'
 import {
   getClickOptionNameByEvent,
   mapOptionToOpenBookmarkProps,
 } from '../../modules/bookmarks/utils/clickBookmark.js'
 import { useOptions } from '../../modules/options.js'
-import type { BookmarkInfo, BookmarkTreeInfo } from '../../types/index.js'
 import { useMenuContext } from '../menu/index.js'
 
 export default function useRowClickEvents({
@@ -30,7 +31,7 @@ export default function useRowClickEvents({
   const { open: openMenu } = useMenuContext()
 
   return React.useMemo(() => {
-    const handleRowMiddleClick = async (bookmarkInfo: BookmarkInfo) => {
+    async function handleRowMiddleClick(bookmarkInfo: BookmarkInfo) {
       if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
         await openFolderInBrowser(bookmarkInfo.id, {
           openIn: OPEN_IN_TYPES.NEW_TAB,
@@ -47,10 +48,10 @@ export default function useRowClickEvents({
         })
       }
     }
-    const handleRowRightClick = (
+    function handleRowRightClick(
       bookmarkInfo: BookmarkInfo,
       evt: React.MouseEvent,
-    ) => {
+    ) {
       const offset = document
         .querySelector(`[data-bookmarkid="${bookmarkInfo.id}"`)
         ?.getBoundingClientRect()

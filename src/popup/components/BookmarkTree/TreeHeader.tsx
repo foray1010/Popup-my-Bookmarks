@@ -1,7 +1,7 @@
 import Cross from '../../images/cross.svg?svgr'
 import classes from './tree-header.module.css'
 
-interface Props {
+type Props = {
   readonly onClose: () => void
   readonly title: string
 }
