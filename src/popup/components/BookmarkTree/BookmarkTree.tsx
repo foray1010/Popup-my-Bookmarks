@@ -13,12 +13,14 @@ import {
 import classes from './bookmark-tree.module.css'
 import BookmarkRow from './BookmarkRow/index.js'
 
-interface ItemData {
+type Props = {
   readonly draggingId: string | null
   readonly highlightedId?: string | undefined
   readonly isDisableDragAndDrop: boolean
   readonly isSearching: boolean
   readonly isShowTooltip: boolean
+  readonly lastScrollTop?: number | undefined
+  readonly noRowsRenderer: () => React.ReactElement | null
   readonly onRowAuxClick: (
     bookmarkInfo: BookmarkInfo,
   ) => React.MouseEventHandler
@@ -36,14 +38,9 @@ interface ItemData {
   readonly onRowMouseLeave: (
     bookmarkInfo: BookmarkInfo,
   ) => React.MouseEventHandler
-  readonly treeInfo: BookmarkTreeInfo
-}
-
-type Props = ItemData & {
-  readonly lastScrollTop?: number | undefined
-  readonly noRowsRenderer: () => React.ReactElement | null
   readonly onScroll?: React.UIEventHandler
   readonly scrollToIndex?: number | undefined
+  readonly treeInfo: BookmarkTreeInfo
 }
 export default function BookmarkTree(props: Props) {
   const parentRef = React.useRef<HTMLDivElement>(null)
@@ -92,6 +89,7 @@ export default function BookmarkTree(props: Props) {
         maxHeight: `${maxListHeight}px`,
         overflow: 'auto',
       }}
+      onScroll={props.onScroll}
     >
       <PlainList
         style={{

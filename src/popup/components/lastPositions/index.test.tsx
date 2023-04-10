@@ -1,9 +1,9 @@
 import { act, renderHook, waitFor } from '@testing-library/react'
 import webExtension from 'webextension-polyfill'
 
-import useRememberLastPositions from '../useRememberLastPositions.js'
+import { LastPositionsProvider, useLastPositionsContext } from './index.js'
 
-describe('useRememberLastPositions', () => {
+describe('LastPositionsProvider + useLastPositionsContext', () => {
   beforeEach(async () => {
     await webExtension.storage.local.clear()
     await webExtension.storage.local.set({
@@ -12,17 +12,23 @@ describe('useRememberLastPositions', () => {
   })
 
   it('should fetch lastPosition when isEnabled changes from false to true', async () => {
-    const { result, rerender } = renderHook(useRememberLastPositions, {
-      initialProps: {
-        isEnabled: false,
+    let isEnabled = false
+
+    const { result, rerender } = renderHook(
+      () => {
+        return useLastPositionsContext()
       },
-    })
+      {
+        wrapper: (props) => (
+          <LastPositionsProvider {...props} isEnabled={isEnabled} />
+        ),
+      },
+    )
 
     expect(result.current.lastPositions).toBeUndefined()
 
-    rerender({
-      isEnabled: true,
-    })
+    isEnabled = true
+    rerender()
 
     await waitFor(() => expect(result.current.isInitialized).toBe(true))
 
@@ -33,10 +39,15 @@ describe('useRememberLastPositions', () => {
 
   describe('registerLastPosition', () => {
     it('should register new lastPosition', async () => {
-      const { result } = renderHook(() =>
-        useRememberLastPositions({
-          isEnabled: true,
-        }),
+      const { result } = renderHook(
+        () => {
+          return useLastPositionsContext()
+        },
+        {
+          wrapper: (props) => (
+            <LastPositionsProvider {...props} isEnabled={true} />
+          ),
+        },
       )
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
@@ -52,10 +63,15 @@ describe('useRememberLastPositions', () => {
     })
 
     it('should override existing index when registering lastPosition', async () => {
-      const { result } = renderHook(() =>
-        useRememberLastPositions({
-          isEnabled: true,
-        }),
+      const { result } = renderHook(
+        () => {
+          return useLastPositionsContext()
+        },
+        {
+          wrapper: (props) => (
+            <LastPositionsProvider {...props} isEnabled={true} />
+          ),
+        },
       )
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
@@ -70,10 +86,15 @@ describe('useRememberLastPositions', () => {
     })
 
     it('should not insert new index when previous index does not exist', async () => {
-      const { result } = renderHook(() =>
-        useRememberLastPositions({
-          isEnabled: true,
-        }),
+      const { result } = renderHook(
+        () => {
+          return useLastPositionsContext()
+        },
+        {
+          wrapper: (props) => (
+            <LastPositionsProvider {...props} isEnabled={true} />
+          ),
+        },
       )
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
@@ -88,10 +109,15 @@ describe('useRememberLastPositions', () => {
     })
 
     it('should not override existing index when registering the same id', async () => {
-      const { result } = renderHook(() =>
-        useRememberLastPositions({
-          isEnabled: true,
-        }),
+      const { result } = renderHook(
+        () => {
+          return useLastPositionsContext()
+        },
+        {
+          wrapper: (props) => (
+            <LastPositionsProvider {...props} isEnabled={true} />
+          ),
+        },
       )
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
@@ -106,10 +132,15 @@ describe('useRememberLastPositions', () => {
     })
 
     it('should not insert new index when registering the same id', async () => {
-      const { result } = renderHook(() =>
-        useRememberLastPositions({
-          isEnabled: true,
-        }),
+      const { result } = renderHook(
+        () => {
+          return useLastPositionsContext()
+        },
+        {
+          wrapper: (props) => (
+            <LastPositionsProvider {...props} isEnabled={true} />
+          ),
+        },
       )
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
@@ -126,10 +157,15 @@ describe('useRememberLastPositions', () => {
 
   describe('unregisterLastPosition', () => {
     it('should unregister existing lastPosition by id', async () => {
-      const { result } = renderHook(() =>
-        useRememberLastPositions({
-          isEnabled: true,
-        }),
+      const { result } = renderHook(
+        () => {
+          return useLastPositionsContext()
+        },
+        {
+          wrapper: (props) => (
+            <LastPositionsProvider {...props} isEnabled={true} />
+          ),
+        },
       )
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
@@ -142,10 +178,15 @@ describe('useRememberLastPositions', () => {
     })
 
     it('should skip when id is not registered', async () => {
-      const { result } = renderHook(() =>
-        useRememberLastPositions({
-          isEnabled: true,
-        }),
+      const { result } = renderHook(
+        () => {
+          return useLastPositionsContext()
+        },
+        {
+          wrapper: (props) => (
+            <LastPositionsProvider {...props} isEnabled={true} />
+          ),
+        },
       )
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
@@ -162,10 +203,15 @@ describe('useRememberLastPositions', () => {
 
   describe('updateLastPosition', () => {
     it('should update existing lastPosition by id', async () => {
-      const { result } = renderHook(() =>
-        useRememberLastPositions({
-          isEnabled: true,
-        }),
+      const { result } = renderHook(
+        () => {
+          return useLastPositionsContext()
+        },
+        {
+          wrapper: (props) => (
+            <LastPositionsProvider {...props} isEnabled={true} />
+          ),
+        },
       )
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
@@ -180,10 +226,15 @@ describe('useRememberLastPositions', () => {
     })
 
     it('should skip when id is not registered', async () => {
-      const { result } = renderHook(() =>
-        useRememberLastPositions({
-          isEnabled: true,
-        }),
+      const { result } = renderHook(
+        () => {
+          return useLastPositionsContext()
+        },
+        {
+          wrapper: (props) => (
+            <LastPositionsProvider {...props} isEnabled={true} />
+          ),
+        },
       )
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))

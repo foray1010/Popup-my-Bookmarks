@@ -1,5 +1,5 @@
 import classNames from 'classix'
-import * as React from 'react'
+import type * as React from 'react'
 
 import LazyImage from '../../../../core/components/baseItems/LazyImage.js'
 import classes from './bookmark-row.module.css'
@@ -11,13 +11,16 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   readonly title: string
   readonly tooltip?: string | undefined
 }
-const BookmarkRow = React.forwardRef(function InnerBookmarkRow(
-  { iconUrl, isHighlighted, isUnclickable, title, tooltip, ...divProps }: Props,
-  setRef: React.Ref<HTMLDivElement>,
-) {
+function BookmarkRow({
+  iconUrl,
+  isHighlighted,
+  isUnclickable,
+  title,
+  tooltip,
+  ...divProps
+}: Props) {
   return (
     <div
-      ref={setRef}
       {...divProps}
       className={classNames(
         classes['main'],
@@ -34,6 +37,6 @@ const BookmarkRow = React.forwardRef(function InnerBookmarkRow(
       <div className={classes['title']}>{title}</div>
     </div>
   )
-})
+}
 
 export default BookmarkRow

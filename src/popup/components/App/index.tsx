@@ -16,6 +16,7 @@ import {
   useGlobalBodySize,
 } from '../floatingWindow/index.js'
 import { KeyBindingsProvider } from '../keyBindings/index.js'
+import { LastPositionsProvider } from '../lastPositions/index.js'
 import { Menu, MenuProvider } from '../menu/index.js'
 import Search from '../Search/index.js'
 import useGlobalEvents from './useGlobalEvents.js'
@@ -67,7 +68,9 @@ const AppWithOptions = withOptions(function InnerApp() {
 
   return (
     <BookmarkTreesProvider>
-      <BookmarkTrees firstTreeHeader={<Search />} />
+      <LastPositionsProvider isEnabled={options[OPTIONS.REMEMBER_POS]}>
+        <BookmarkTrees firstTreeHeader={<Search />} />
+      </LastPositionsProvider>
       <Menu />
       <Editor />
     </BookmarkTreesProvider>

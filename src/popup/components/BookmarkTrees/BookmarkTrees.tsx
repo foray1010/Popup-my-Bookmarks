@@ -4,32 +4,15 @@ import type { Options } from '../../../core/types/options.js'
 import { OPTIONS } from '../../constants/index.js'
 import BookmarkTree from '../BookmarkTree/index.js'
 import classes from './bookmark-trees.module.css'
-import useRememberLastPositions from './useRememberLastPositions.js'
 
-interface Props {
+type Props = {
   readonly firstTreeHeader: React.ReactNode
-  readonly options: Partial<Options>
+  readonly options: Options
   readonly treeIds: ReadonlyArray<string>
 }
 export default function BookmarkTrees(props: Props) {
-  const {
-    lastPositions,
-    registerLastPosition,
-    unregisterLastPosition,
-    updateLastPosition,
-  } = useRememberLastPositions({
-    isEnabled: props.options.rememberPos ?? false,
-  })
-
   const trees = props.treeIds.map((treeId) => (
-    <BookmarkTree
-      key={treeId}
-      registerLastPosition={registerLastPosition}
-      scrollTop={lastPositions?.find((x) => x.id === treeId)?.scrollTop}
-      treeId={treeId}
-      unregisterLastPosition={unregisterLastPosition}
-      updateLastPosition={updateLastPosition}
-    />
+    <BookmarkTree key={treeId} treeId={treeId} />
   ))
 
   const firstSectionItems = trees.filter((_, index) => index % 2 === 0)

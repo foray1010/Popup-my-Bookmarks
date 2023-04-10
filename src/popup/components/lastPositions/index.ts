@@ -1,13 +1,10 @@
+import constate from 'constate'
 import * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import type { LastPosition } from '../../types/index.js'
 
-export default function useRememberLastPositions({
-  isEnabled,
-}: {
-  readonly isEnabled: boolean
-}) {
+function useLastPositions({ isEnabled }: { readonly isEnabled: boolean }) {
   const [lastPositions, setLastPositions] = React.useState<
     readonly LastPosition[]
   >([])
@@ -83,6 +80,40 @@ export default function useRememberLastPositions({
         })
       },
       [isInitialized],
+    ),
+  }
+}
+
+export const [LastPositionsProvider, useLastPositionsContext] =
+  constate(useLastPositions)
+
+export function useRememberLastPosition({
+  treeIndex,
+  treeId,
+}: {
+  readonly treeIndex: number
+  readonly treeId: string
+}) {
+  const {
+    lastPositions,
+    registerLastPosition,
+    unregisterLastPosition,
+    updateLastPosition,
+  } = useLastPositionsContext()
+
+  React.useEffect(() => {
+    registerLastPosition(treeIndex, treeId)
+
+    return () => {
+      unregisterLastPosition(treeId)
+    }
+  }, [registerLastPosition, treeId, treeIndex, unregisterLastPosition])
+
+  return {
+    lastScrollTop: lastPositions?.find((x) => x.id === treeId)?.scrollTop,
+    onScroll: React.useCallback<React.UIEventHandler>(
+      (evt) => updateLastPosition(treeId, evt.currentTarget.scrollTop),
+      [treeId, updateLastPosition],
     ),
   }
 }
