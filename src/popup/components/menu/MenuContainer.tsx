@@ -6,7 +6,7 @@ import withProviders from '../../../core/utils/withProviders.js'
 import { OPEN_IN_TYPES } from '../../constants/menu.js'
 import { WindowId } from '../../constants/windows.js'
 import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo.js'
 import { recursiveCopyBookmarks } from '../../modules/bookmarks/methods/copyBookmark.js'
 import {
@@ -192,7 +192,7 @@ function InnerMenuContainer() {
       ? []
       : [MenuItem.Paste]
 
-  const { searchQuery } = useBookmarkTrees()
+  const { searchQuery } = useBookmarkTreesContext()
   const isSearching = Boolean(searchQuery)
   const { data: bookmarkInfo } = useGetBookmarkInfo(
     state.isOpen ? state.targetId : undefined,

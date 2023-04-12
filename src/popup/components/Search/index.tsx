@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { WindowId } from '../../constants/windows.js'
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import { useKeyBindingsEvent } from '../keyBindings/index.js'
 import SearchInput from './SearchInput.js'
 
@@ -9,7 +9,7 @@ export default function SearchContainer() {
   const [inputValue, setInputValue] = React.useState('')
   const [, startTransition] = React.useTransition()
 
-  const { setSearchQuery } = useBookmarkTrees()
+  const { setSearchQuery } = useBookmarkTreesContext()
 
   React.useEffect(() => {
     startTransition(() => {

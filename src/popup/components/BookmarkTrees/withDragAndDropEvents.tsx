@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import { DragAndDropProvider } from '../dragAndDrop/index.js'
 
 export default function withDragAndDropEvents<P extends {}>(
@@ -8,7 +8,7 @@ export default function withDragAndDropEvents<P extends {}>(
 ) {
   return function ComponentWithDragAndDropEvents(props: P) {
     const { moveBookmarkToDragIndicator, removeDragIndicator } =
-      useBookmarkTrees()
+      useBookmarkTreesContext()
 
     return (
       <DragAndDropProvider

@@ -3,7 +3,7 @@ import { useDebouncedCallback } from 'use-debounce'
 
 import { OPTIONS } from '../../../core/constants/index.js'
 import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import type {
   BookmarkInfo,
   BookmarkTreeInfo,
@@ -23,7 +23,7 @@ export default function useRowHoverEvents({
 }) {
   const options = useOptions()
 
-  const { openBookmarkTree } = useBookmarkTrees()
+  const { openBookmarkTree } = useBookmarkTreesContext()
 
   const { activeKey } = useDragAndDropContext()
   const { setHighlightedIndex, unsetHighlightedIndex } =

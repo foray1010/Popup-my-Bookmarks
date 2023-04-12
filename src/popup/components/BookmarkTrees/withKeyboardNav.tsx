@@ -4,7 +4,7 @@ import isMac from '../../../core/utils/isMac.js'
 import withProviders from '../../../core/utils/withProviders.js'
 import { WindowId } from '../../constants/windows.js'
 import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import { openBookmarksInBrowser } from '../../modules/bookmarks/methods/openBookmark.js'
 import {
   getClickOptionNameByEvent,
@@ -25,7 +25,7 @@ function useArrowKeysNav() {
     bookmarkTrees: trees,
     openBookmarkTree,
     removeNextBookmarkTrees,
-  } = useBookmarkTrees()
+  } = useBookmarkTreesContext()
 
   const { listNavigation } = useListNavigationContext()
 
@@ -60,7 +60,7 @@ function useArrowKeysNav() {
 function useEnterKeyNav() {
   const options = useOptions()
 
-  const { bookmarkTrees: trees } = useBookmarkTrees()
+  const { bookmarkTrees: trees } = useBookmarkTreesContext()
 
   const { listNavigation } = useListNavigationContext()
 
@@ -90,7 +90,7 @@ function useEnterKeyNav() {
 }
 
 function useMenuKeyNav() {
-  const { bookmarkTrees: trees } = useBookmarkTrees()
+  const { bookmarkTrees: trees } = useBookmarkTreesContext()
 
   const { open: openMenu } = useMenuContext()
 

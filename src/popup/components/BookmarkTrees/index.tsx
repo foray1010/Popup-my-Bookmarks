@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { OPTIONS } from '../../../core/constants/index.js'
 import { WindowId } from '../../constants/windows.js'
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import { LastPositionsProvider } from '../../modules/lastPositions/index.js'
 import { useOptions } from '../../modules/options.js'
 import { KeyBindingsWindow } from '../keyBindings/index.js'
@@ -16,7 +16,7 @@ type Props = {
 function InnerBookmarkTreesContainer(props: Props) {
   const options = useOptions()
 
-  const { bookmarkTrees } = useBookmarkTrees()
+  const { bookmarkTrees } = useBookmarkTreesContext()
   const treeIds = React.useMemo(
     () => bookmarkTrees.map((tree) => tree.parent.id),
     [bookmarkTrees],

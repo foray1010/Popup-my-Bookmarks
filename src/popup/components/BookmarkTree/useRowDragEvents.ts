@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import type {
   BookmarkInfo,
   BookmarkTreeInfo,
@@ -15,7 +15,7 @@ export default function useRowDragEvents({
   readonly closeNextTrees: () => void
   readonly treeInfo: BookmarkTreeInfo
 }) {
-  const { removeDragIndicator, setDragIndicator } = useBookmarkTrees()
+  const { removeDragIndicator, setDragIndicator } = useBookmarkTreesContext()
 
   return React.useMemo(() => {
     return {

@@ -234,7 +234,7 @@ function useRefreshOnBookmarkEvent({
   }, [refreshRef])
 }
 
-function useBookmarkTreesState() {
+function useBookmarkTrees() {
   const [bookmarkTrees, setBookmarkTrees] = React.useState<
     readonly BookmarkTreeInfo[]
   >([])
@@ -304,6 +304,5 @@ function useBookmarkTreesState() {
   }
 }
 
-export const [BookmarkTreesProvider, useBookmarkTrees] = constate(
-  useBookmarkTreesState,
-)
+export const [BookmarkTreesProvider, useBookmarkTreesContext] =
+  constate(useBookmarkTrees)

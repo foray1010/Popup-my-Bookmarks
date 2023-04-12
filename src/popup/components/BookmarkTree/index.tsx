@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { OPTIONS } from '../../../core/constants/index.js'
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import type { BookmarkTreeInfo } from '../../modules/bookmarks/types.js'
 import { useRememberLastPosition } from '../../modules/lastPositions/index.js'
 import { useOptions } from '../../modules/options.js'
@@ -17,7 +17,7 @@ import useRowDragEvents from './useRowDragEvents.js'
 import useRowHoverEvents from './useRowHoverEvents.js'
 
 function useBookmarkContextProps({ treeId }: { readonly treeId: string }) {
-  const { bookmarkTrees, searchQuery } = useBookmarkTrees()
+  const { bookmarkTrees, searchQuery } = useBookmarkTreesContext()
 
   const treeIndex = bookmarkTrees.findIndex((tree) => tree.parent.id === treeId)
   const treeInfo = bookmarkTrees[treeIndex]
@@ -72,7 +72,8 @@ export default function BookmarkTreeContainer({ treeId }: Props) {
   const { isSearching, isShowCover, isShowHeader, treeIndex, treeInfo } =
     useBookmarkContextProps({ treeId })
 
-  const { removeBookmarkTree, removeNextBookmarkTrees } = useBookmarkTrees()
+  const { removeBookmarkTree, removeNextBookmarkTrees } =
+    useBookmarkTreesContext()
   const closeCurrentTree = React.useCallback(() => {
     removeBookmarkTree(treeInfo.parent.id)
   }, [removeBookmarkTree, treeInfo.parent.id])

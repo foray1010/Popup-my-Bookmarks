@@ -3,7 +3,7 @@ import * as React from 'react'
 import { OPTIONS } from '../../../core/constants/index.js'
 import { OPEN_IN_TYPES } from '../../constants/menu.js'
 import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
-import { useBookmarkTrees } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import {
   openBookmarksInBrowser,
   openFolderInBrowser,
@@ -26,7 +26,7 @@ export default function useRowClickEvents({
 }) {
   const options = useOptions()
 
-  const { toggleBookmarkTree } = useBookmarkTrees()
+  const { toggleBookmarkTree } = useBookmarkTreesContext()
 
   const { open: openMenu } = useMenuContext()
 
