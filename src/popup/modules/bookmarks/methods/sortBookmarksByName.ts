@@ -1,8 +1,8 @@
 import webExtension from 'webextension-polyfill'
 
-import sortByTitle from '../../../utils/sortByTitle.js'
 import { BOOKMARK_TYPES } from '../constants.js'
 import type { BookmarkInfo } from '../types.js'
+import sortByTitle from '../utils/sortByTitle.js'
 import { getBookmarkInfo, getBookmarkTreeInfo } from './getBookmark.js'
 
 function splitBySeparator(

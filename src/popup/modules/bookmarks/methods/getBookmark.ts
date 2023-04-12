@@ -1,13 +1,13 @@
 import webExtension from 'webextension-polyfill'
 
 import { ROOT_ID } from '../../../../core/constants/index.js'
-import sortByTitle from '../../../utils/sortByTitle.js'
 import { BOOKMARK_TYPES, NO_BOOKMARK_ID_PREFIX } from '../constants.js'
 import type { BookmarkInfo, BookmarkTreeInfo } from '../types.js'
 import {
   generateNoBookmarkPlaceholder,
   generateSearchResultParent,
 } from '../utils/generators.js'
+import sortByTitle from '../utils/sortByTitle.js'
 import { toBookmarkInfo } from '../utils/transformers.js'
 
 export async function getBookmarkInfo(id: string): Promise<BookmarkInfo> {

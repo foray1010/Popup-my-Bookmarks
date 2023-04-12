@@ -1,8 +1,8 @@
 import { ROOT_ID } from '../../../../core/constants/index.js'
 import folderIcon from '../../../images/folder.svg'
-import { faviconUrl } from '../../../utils/faviconUrl.js'
 import { BOOKMARK_TYPES, SEPARATE_THIS_URL } from '../constants.js'
 import type { BookmarkInfo } from '../types.js'
+import { faviconUrl } from './faviconUrl.js'
 
 function getType(bookmarkNode: browser.bookmarks.BookmarkTreeNode) {
   if (bookmarkNode.url == null) return BOOKMARK_TYPES.FOLDER
