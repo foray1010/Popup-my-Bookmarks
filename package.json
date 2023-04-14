@@ -52,7 +52,7 @@
     "@foray1010/tsconfig": "11.0.1",
     "@size-limit/file": "8.2.4",
     "@svgr/webpack": "7.0.0",
-    "@swc/core": "1.3.46",
+    "@swc/core": "1.3.49",
     "@swc/jest": "0.2.24",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "14.0.0",
