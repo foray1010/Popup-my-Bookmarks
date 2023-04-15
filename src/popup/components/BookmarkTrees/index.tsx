@@ -10,9 +10,9 @@ import BookmarkTrees from './BookmarkTrees.js'
 import withDragAndDropEvents from './withDragAndDropEvents.js'
 import withKeyboardNav from './withKeyboardNav.js'
 
-type Props = {
-  readonly firstTreeHeader: React.ReactNode
-}
+type Props = Readonly<{
+  firstTreeHeader: React.ReactNode
+}>
 function InnerBookmarkTreesContainer(props: Props) {
   const options = useOptions()
 

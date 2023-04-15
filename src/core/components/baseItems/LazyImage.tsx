@@ -1,8 +1,7 @@
 import * as React from 'react'
 
-type Props = Omit<
-  React.ImgHTMLAttributes<HTMLImageElement>,
-  'decoding' | 'loading'
+type Props = Readonly<
+  Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'decoding' | 'loading'>
 >
 
 const LazyImage = React.forwardRef<HTMLImageElement, Props>(

@@ -2,7 +2,7 @@
 
 import path from 'node:path'
 
-type IRuntime = Partial<typeof browser.runtime>
+type IRuntime = Readonly<Partial<typeof browser.runtime>>
 class Runtime implements IRuntime {
   public getURL(subPath: string) {
     return path.join(

@@ -4,16 +4,16 @@ import webExtension from 'webextension-polyfill'
 
 import type { LastPosition } from './types.js'
 
-function useLastPositions({ isEnabled }: { readonly isEnabled: boolean }) {
+function useLastPositions({ isEnabled }: Readonly<{ isEnabled: boolean }>) {
   const [lastPositions, setLastPositions] = React.useState<
     readonly LastPosition[]
   >([])
   const [isInitialized, setIsInitialized] = React.useState(false)
   React.useEffect(() => {
     if (isEnabled) {
-      type LocaleStorage = {
-        readonly lastPositions?: readonly LastPosition[]
-      }
+      type LocaleStorage = Readonly<{
+        lastPositions?: readonly LastPosition[]
+      }>
       webExtension.storage.local
         .get()
         .then((localStorage: LocaleStorage) => {
@@ -90,10 +90,7 @@ export const [LastPositionsProvider, useLastPositionsContext] =
 export function useRememberLastPosition({
   treeIndex,
   treeId,
-}: {
-  readonly treeIndex: number
-  readonly treeId: string
-}) {
+}: Readonly<{ treeIndex: number; treeId: string }>) {
   const {
     lastPositions,
     registerLastPosition,

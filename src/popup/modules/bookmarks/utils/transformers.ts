@@ -4,7 +4,7 @@ import { BOOKMARK_TYPES, SEPARATE_THIS_URL } from '../constants.js'
 import type { BookmarkInfo } from '../types.js'
 import { faviconUrl } from './faviconUrl.js'
 
-function getType(bookmarkNode: browser.bookmarks.BookmarkTreeNode) {
+function getType(bookmarkNode: Readonly<browser.bookmarks.BookmarkTreeNode>) {
   if (bookmarkNode.url == null) return BOOKMARK_TYPES.FOLDER
   if (bookmarkNode.url.startsWith(SEPARATE_THIS_URL)) {
     return BOOKMARK_TYPES.SEPARATOR
@@ -12,12 +12,14 @@ function getType(bookmarkNode: browser.bookmarks.BookmarkTreeNode) {
   return BOOKMARK_TYPES.BOOKMARK
 }
 
-function isRoot(bookmarkNode: browser.bookmarks.BookmarkTreeNode): boolean {
+function isRoot(
+  bookmarkNode: Readonly<browser.bookmarks.BookmarkTreeNode>,
+): boolean {
   return bookmarkNode.id === ROOT_ID || bookmarkNode.parentId === ROOT_ID
 }
 
 export function toBookmarkInfo(
-  bookmarkNode: browser.bookmarks.BookmarkTreeNode,
+  bookmarkNode: Readonly<browser.bookmarks.BookmarkTreeNode>,
 ) {
   const bookmarkInfo = {
     id: bookmarkNode.id,

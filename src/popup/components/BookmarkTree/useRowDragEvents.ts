@@ -11,10 +11,7 @@ import type { ResponseEvent } from '../dragAndDrop/index.js'
 export default function useRowDragEvents({
   closeNextTrees,
   treeInfo,
-}: {
-  readonly closeNextTrees: () => void
-  readonly treeInfo: BookmarkTreeInfo
-}) {
+}: Readonly<{ closeNextTrees: () => void; treeInfo: BookmarkTreeInfo }>) {
   const { removeDragIndicator, setDragIndicator } = useBookmarkTreesContext()
 
   return React.useMemo(() => {

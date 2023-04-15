@@ -10,9 +10,8 @@ const queryClient = new QueryClient({
   },
 })
 
-type Props = Omit<
-  React.ComponentProps<typeof QueryClientProvider>,
-  'client' | 'context'
+type Props = Readonly<
+  Omit<React.ComponentProps<typeof QueryClientProvider>, 'client' | 'context'>
 >
 
 export function ReactQueryClientProvider(props: Props) {

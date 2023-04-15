@@ -3,7 +3,7 @@ import * as React from 'react'
 
 import classes from './styles.module.css'
 
-type Props = React.ButtonHTMLAttributes<HTMLButtonElement>
+type Props = Readonly<React.ButtonHTMLAttributes<HTMLButtonElement>>
 
 const Button = React.forwardRef<HTMLButtonElement, Props>(function InnerButton(
   { className, type = 'button', ...props }: Props,

@@ -3,7 +3,7 @@ import * as React from 'react'
 
 import classes from './styles.module.css'
 
-type Props = React.InputHTMLAttributes<HTMLInputElement>
+type Props = Readonly<React.InputHTMLAttributes<HTMLInputElement>>
 
 const Input = React.forwardRef<HTMLInputElement, Props>(function InnerInput(
   { className, type = 'text', ...props }: Props,

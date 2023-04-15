@@ -4,7 +4,9 @@ import { SEPARATE_THIS_URL } from '../constants.js'
 import { toBookmarkInfo } from '../utils/transformers.js'
 import { getBookmarkInfo } from './getBookmark.js'
 
-async function createBookmark(bookmark: browser.bookmarks.CreateDetails) {
+async function createBookmark(
+  bookmark: Readonly<browser.bookmarks.CreateDetails>,
+) {
   const bookmarkNode = await webExtension.bookmarks.create({
     ...bookmark,
     title: bookmark.title?.trim(),
@@ -16,9 +18,11 @@ async function createBookmark(bookmark: browser.bookmarks.CreateDetails) {
 export async function createBookmarkAfterId({
   createAfterId,
   ...rest
-}: Omit<browser.bookmarks.CreateDetails, 'index' | 'parentId'> & {
-  readonly createAfterId: string
-}) {
+}: Readonly<
+  Omit<browser.bookmarks.CreateDetails, 'index' | 'parentId'> & {
+    createAfterId: string
+  }
+>) {
   const bookmarkInfo = await getBookmarkInfo(createAfterId)
 
   return await createBookmark({
@@ -29,7 +33,7 @@ export async function createBookmarkAfterId({
 }
 
 export async function bookmarkCurrentPage(
-  rest: Omit<browser.bookmarks.CreateDetails, 'title' | 'url'>,
+  rest: Readonly<Omit<browser.bookmarks.CreateDetails, 'title' | 'url'>>,
 ) {
   const [currentTab] = await webExtension.tabs.query({
     currentWindow: true,
@@ -45,7 +49,7 @@ export async function bookmarkCurrentPage(
 }
 
 export async function createSeparator(
-  rest: Omit<browser.bookmarks.CreateDetails, 'title' | 'url'>,
+  rest: Readonly<Omit<browser.bookmarks.CreateDetails, 'title' | 'url'>>,
 ) {
   return await createBookmark({
     ...rest,

@@ -5,52 +5,54 @@ import 'core-js/stable/structured-clone.js'
 
 import { WebExtEventEmitter } from './utils/WebExtEventEmitter.js'
 
-type IBookmarks = typeof browser.bookmarks
+type IBookmarks = Readonly<typeof browser.bookmarks>
 // @TODO: handle `dateGroupModified` updates
 class Bookmarks implements IBookmarks {
   readonly #rootId = '0' // Chrome's root node id
   readonly #defaultParentId = '2' // Chrome's `Other Bookmarks` node id
-  // eslint-disable-next-line functional/prefer-readonly-type
-  readonly #initialRootTreeNodes: browser.bookmarks.BookmarkTreeNode[] = [
-    {
-      id: this.#rootId,
-      title: '',
-      children: [
-        {
-          id: '1',
-          parentId: this.#rootId,
-          index: 0,
-          title: 'Bookmarks Bar',
-          children: [],
-          dateAdded: Date.now(),
-          dateGroupModified: Date.now(),
-        },
-        {
-          id: this.#defaultParentId,
-          parentId: this.#rootId,
-          index: 1,
-          title: 'Other Bookmarks',
-          children: [],
-          dateAdded: Date.now(),
-          dateGroupModified: Date.now(),
-        },
-      ],
-      dateAdded: Date.now(),
-    },
-  ]
-  #rootTreeNodes = structuredClone(this.#initialRootTreeNodes)
+  readonly #initialRootTreeNodesMutable: browser.bookmarks.BookmarkTreeNode[] =
+    [
+      {
+        id: this.#rootId,
+        title: '',
+        children: [
+          {
+            id: '1',
+            parentId: this.#rootId,
+            index: 0,
+            title: 'Bookmarks Bar',
+            children: [],
+            dateAdded: Date.now(),
+            dateGroupModified: Date.now(),
+          },
+          {
+            id: this.#defaultParentId,
+            parentId: this.#rootId,
+            index: 1,
+            title: 'Other Bookmarks',
+            children: [],
+            dateAdded: Date.now(),
+            dateGroupModified: Date.now(),
+          },
+        ],
+        dateAdded: Date.now(),
+      },
+    ]
+  #rootTreeNodesMutable = structuredClone(this.#initialRootTreeNodesMutable)
 
   // non-standard methods for testing
   public _resetRootTreeNodes() {
-    this.#rootTreeNodes = structuredClone(this.#initialRootTreeNodes)
+    this.#rootTreeNodesMutable = structuredClone(
+      this.#initialRootTreeNodesMutable,
+    )
   }
 
   #queryBookmarkTreeNodes(
     trees: readonly browser.bookmarks.BookmarkTreeNode[],
     condition: (
-      bookmarkTreeNode: browser.bookmarks.BookmarkTreeNode,
+      bookmarkTreeNode: Readonly<browser.bookmarks.BookmarkTreeNode>,
     ) => boolean,
-  ): browser.bookmarks.BookmarkTreeNode[] {
+  ): readonly browser.bookmarks.BookmarkTreeNode[] {
     return trees.reduce<browser.bookmarks.BookmarkTreeNode[]>((acc, tree) => {
       return acc
         .concat(condition(tree) ? [tree] : [])
@@ -58,9 +60,10 @@ class Bookmarks implements IBookmarks {
     }, [])
   }
 
+  // eslint-disable-next-line functional/prefer-immutable-types
   #getOne(id: string): browser.bookmarks.BookmarkTreeNode {
     const [bookmarkTreeNode] = this.#queryBookmarkTreeNodes(
-      this.#rootTreeNodes,
+      this.#rootTreeNodesMutable,
       (node) => node.id === id,
     )
     if (!bookmarkTreeNode) {
@@ -73,12 +76,13 @@ class Bookmarks implements IBookmarks {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     children,
     ...node
-  }: browser.bookmarks.BookmarkTreeNode): Omit<
-    browser.bookmarks.BookmarkTreeNode,
-    'children'
+  }: Readonly<browser.bookmarks.BookmarkTreeNode>): Readonly<
+    Omit<browser.bookmarks.BookmarkTreeNode, 'children'>
   > => node
 
-  #isRootFolder(bookmarkTreeNode: browser.bookmarks.BookmarkTreeNode): boolean {
+  #isRootFolder(
+    bookmarkTreeNode: Readonly<browser.bookmarks.BookmarkTreeNode>,
+  ): boolean {
     return (
       bookmarkTreeNode.id === this.#rootId ||
       bookmarkTreeNode.parentId === this.#rootId
@@ -87,8 +91,9 @@ class Bookmarks implements IBookmarks {
 
   public async get(idOrIdList: string | readonly string[]) {
     const idList = [idOrIdList].flat()
-    const result = this.#queryBookmarkTreeNodes(this.#rootTreeNodes, (node) =>
-      idList.includes(node.id),
+    const result = this.#queryBookmarkTreeNodes(
+      this.#rootTreeNodesMutable,
+      (node) => idList.includes(node.id),
     )
     if (result.length !== idList.length) {
       throw new Error("Can't find bookmark for id.")
@@ -104,7 +109,7 @@ class Bookmarks implements IBookmarks {
 
   public async getRecent(numberOfItems: number) {
     return this.#queryBookmarkTreeNodes(
-      this.#rootTreeNodes,
+      this.#rootTreeNodesMutable,
       // exclude folders
       (node) => node.url !== undefined,
     )
@@ -114,7 +119,7 @@ class Bookmarks implements IBookmarks {
   }
 
   public async getTree() {
-    return this.#rootTreeNodes
+    return this.#rootTreeNodesMutable
   }
 
   public async getSubTree(id: string) {
@@ -125,18 +130,18 @@ class Bookmarks implements IBookmarks {
   public async search(
     query:
       | string
-      | {
-          readonly query?: string | undefined
-          readonly url?: string | undefined
-          readonly title?: string | undefined
-        },
+      | Readonly<{
+          query?: string | undefined
+          url?: string | undefined
+          title?: string | undefined
+        }>,
   ) {
     const queryObject = typeof query === 'string' ? { query } : query
 
     if (queryObject.query === '') return []
 
     // May not be the same as the real one because of not sure how Chrome sorts the results
-    return this.#queryBookmarkTreeNodes(this.#rootTreeNodes, (node) => {
+    return this.#queryBookmarkTreeNodes(this.#rootTreeNodesMutable, (node) => {
       if (this.#isRootFolder(node)) return false
 
       if (queryObject.query !== undefined) {
@@ -160,7 +165,7 @@ class Bookmarks implements IBookmarks {
   }
 
   #modifyValidation(
-    bookmarkTreeNode: browser.bookmarks.BookmarkTreeNode,
+    bookmarkTreeNode: Readonly<browser.bookmarks.BookmarkTreeNode>,
   ): void {
     if (this.#isRootFolder(bookmarkTreeNode)) {
       throw new Error("Can't modify the root bookmark folders.")
@@ -170,10 +175,7 @@ class Bookmarks implements IBookmarks {
   #calculateNewIndex(
     parentIdOrOption:
       | string
-      | {
-          readonly oldParentId: string | undefined
-          readonly newParentId: string
-        },
+      | Readonly<{ oldParentId: string | undefined; newParentId: string }>,
     index: number | undefined,
   ): number {
     const parentOption =
@@ -202,7 +204,7 @@ class Bookmarks implements IBookmarks {
   }
 
   public async create(
-    bookmark: browser.bookmarks.CreateDetails,
+    bookmark: Readonly<browser.bookmarks.CreateDetails>,
   ): Promise<browser.bookmarks.BookmarkTreeNode> {
     const numberId = crypto.getRandomValues(new Uint32Array(1))[0]
     if (numberId === undefined) throw new TypeError('Failed to generate id')
@@ -244,7 +246,7 @@ class Bookmarks implements IBookmarks {
 
   public async move(
     id: string,
-    destination: browser.bookmarks._MoveDestination,
+    destination: Readonly<browser.bookmarks._MoveDestination>,
   ) {
     const bookmarkTreeNode = this.#getOne(id)
     this.#modifyValidation(bookmarkTreeNode)
@@ -288,7 +290,10 @@ class Bookmarks implements IBookmarks {
     return this.#toBookmarkNode(bookmarkTreeNode)
   }
 
-  public async update(id: string, changes: browser.bookmarks._UpdateChanges) {
+  public async update(
+    id: string,
+    changes: Readonly<browser.bookmarks._UpdateChanges>,
+  ) {
     const bookmarkTreeNode = this.#getOne(id)
     this.#modifyValidation(bookmarkTreeNode)
 

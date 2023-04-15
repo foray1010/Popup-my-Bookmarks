@@ -30,7 +30,7 @@ const commonChunkName = 'common'
 const outputDir = path.join('build', process.env['NODE_ENV'] || 'development')
 const sourceDir = 'src'
 
-const webpackConfig: Configuration = {
+const webpackConfig: Readonly<Configuration> = {
   devtool: isDevelopmentBuild ? 'inline-source-map' : false,
   entry: Object.fromEntries(
     appNames.map((appName) => [appName, `./${sourceDir}/${appName}`]),

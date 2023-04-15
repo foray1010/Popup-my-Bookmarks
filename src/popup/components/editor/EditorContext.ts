@@ -1,27 +1,30 @@
 import constate from 'constate'
 import * as React from 'react'
 
-type OpenParams = (
-  | {
-      readonly isCreating: true
-      readonly createAfterId: string
-    }
-  | {
-      readonly isCreating: false
-      readonly editTargetId: string
-    }
-) & {
-  readonly isAllowedToEditUrl: boolean
-  readonly positions?: { readonly top: number; readonly left: number }
-}
+type OpenParams = Readonly<
+  (
+    | {
+        isCreating: true
+        createAfterId: string
+      }
+    | {
+        isCreating: false
+        editTargetId: string
+      }
+  ) & {
+    isAllowedToEditUrl: boolean
+    positions?: { top: number; left: number }
+  }
+>
 
-type State =
+type State = Readonly<
   | {
-      readonly isOpen: false
+      isOpen: false
     }
   | ({
-      readonly isOpen: true
+      isOpen: true
     } & Required<OpenParams>)
+>
 
 const initialState: State = {
   isOpen: false,

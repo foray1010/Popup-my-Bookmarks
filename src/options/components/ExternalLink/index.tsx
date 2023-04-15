@@ -3,9 +3,8 @@ import type * as React from 'react'
 
 import classes from './styles.module.css'
 
-type Props = Omit<
-  React.AnchorHTMLAttributes<HTMLAnchorElement>,
-  'rel' | 'target'
+type Props = Readonly<
+  Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'rel' | 'target'>
 >
 export default function ExternalLink(props: Props) {
   return (

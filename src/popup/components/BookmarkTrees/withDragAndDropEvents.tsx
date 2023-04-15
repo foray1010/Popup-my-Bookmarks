@@ -14,7 +14,7 @@ export default function withDragAndDropEvents<P extends {}>(
       <DragAndDropProvider
         onDragEnd={removeDragIndicator}
         onDrop={React.useCallback(
-          (evt: MouseEvent, activeKey: string) => {
+          (evt: Readonly<MouseEvent>, activeKey: string) => {
             moveBookmarkToDragIndicator(activeKey)
           },
           [moveBookmarkToDragIndicator],

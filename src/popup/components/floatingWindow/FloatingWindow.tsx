@@ -5,11 +5,13 @@ import useResizeObserver from 'use-resize-observer'
 import Mask from '../Mask/index.js'
 import useGlobalBodySize from './useGlobalBodySize.js'
 
-type Props = React.PropsWithChildren<{
-  readonly positionLeft: number
-  readonly positionTop: number
-  readonly onClose: () => void
-}>
+type Props = Readonly<
+  React.PropsWithChildren<{
+    positionLeft: number
+    positionTop: number
+    onClose: () => void
+  }>
+>
 export default function FloatingWindow({
   children,
   positionLeft,
@@ -18,19 +20,23 @@ export default function FloatingWindow({
 }: Props) {
   const { insertBodySize } = useGlobalBodySize()
 
-  const [windowSize, setWindowSize] = React.useState<{
-    readonly height: number | undefined
-    readonly width: number | undefined
-  }>()
+  const [windowSize, setWindowSize] = React.useState<
+    Readonly<{
+      height: number | undefined
+      width: number | undefined
+    }>
+  >()
   const { ref } = useResizeObserver({
     onResize: setWindowSize,
     round: Math.ceil,
   })
 
-  const [calibratedPosition, setCalibratedPosition] = React.useState<{
-    readonly left: number
-    readonly top: number
-  }>()
+  const [calibratedPosition, setCalibratedPosition] = React.useState<
+    Readonly<{
+      left: number
+      top: number
+    }>
+  >()
 
   // make sure the floating window is within the body
   React.useLayoutEffect(() => {

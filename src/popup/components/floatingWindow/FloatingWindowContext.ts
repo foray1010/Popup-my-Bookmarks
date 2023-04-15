@@ -1,10 +1,10 @@
 import constate from 'constate'
 import * as React from 'react'
 
-export type BodySize = {
-  readonly height: number | undefined
-  readonly width: number | undefined
-}
+export type BodySize = Readonly<{
+  height: number | undefined
+  width: number | undefined
+}>
 type BodySizeStack = ReadonlyArray<BodySize>
 
 function useFloatingWindow() {

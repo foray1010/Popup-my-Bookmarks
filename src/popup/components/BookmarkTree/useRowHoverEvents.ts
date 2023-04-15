@@ -16,11 +16,11 @@ export default function useRowHoverEvents({
   closeNextTrees,
   treeIndex,
   treeInfo,
-}: {
-  readonly closeNextTrees: () => void
-  readonly treeIndex: number
-  readonly treeInfo: BookmarkTreeInfo
-}) {
+}: Readonly<{
+  closeNextTrees: () => void
+  treeIndex: number
+  treeInfo: BookmarkTreeInfo
+}>) {
   const options = useOptions()
 
   const { openBookmarkTree } = useBookmarkTreesContext()

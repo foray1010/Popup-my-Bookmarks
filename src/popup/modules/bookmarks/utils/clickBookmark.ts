@@ -4,7 +4,9 @@ import { OPTIONS } from '../../../../core/constants/index.js'
 import { OPEN_IN_TYPES } from '../../../constants/menu.js'
 
 export function getClickOptionNameByEvent(
-  evt: KeyboardEvent | MouseEvent | React.KeyboardEvent | React.MouseEvent,
+  evt: Readonly<
+    KeyboardEvent | MouseEvent | React.KeyboardEvent | React.MouseEvent
+  >,
 ) {
   if (evt.ctrlKey || evt.metaKey) {
     return OPTIONS.CLICK_BY_LEFT_CTRL
@@ -17,10 +19,9 @@ export function getClickOptionNameByEvent(
   return OPTIONS.CLICK_BY_LEFT
 }
 
-export function mapOptionToOpenBookmarkProps(option: number): {
-  readonly openIn: OPEN_IN_TYPES
-  readonly isCloseThisExtension: boolean
-} {
+export function mapOptionToOpenBookmarkProps(
+  option: number,
+): Readonly<{ openIn: OPEN_IN_TYPES; isCloseThisExtension: boolean }> {
   switch (option) {
     case 0: // current tab
     case 1: // current tab (without closing PmB)

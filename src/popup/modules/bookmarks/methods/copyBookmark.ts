@@ -5,10 +5,7 @@ import { getBookmarkInfo, getBookmarkTreeInfo } from './getBookmark.js'
 
 export async function recursiveCopyBookmarks(
   id: string,
-  destination: {
-    readonly parentId: string | undefined
-    readonly index: number
-  },
+  destination: Readonly<{ parentId: string | undefined; index: number }>,
 ): Promise<void> {
   const bookmarkInfo = await getBookmarkInfo(id)
 

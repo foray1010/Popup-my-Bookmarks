@@ -42,14 +42,14 @@ async function execInPage(code: string) {
   })
 }
 
-type OpenBookmarkProps = {
-  readonly openIn: OPEN_IN_TYPES
-  readonly isAllowBookmarklet: boolean
-  readonly isCloseThisExtension: boolean
-}
+type OpenBookmarkProps = Readonly<{
+  openIn: OPEN_IN_TYPES
+  isAllowBookmarklet: boolean
+  isCloseThisExtension: boolean
+}>
 export async function openBookmarksInBrowser(
   ids: readonly string[],
-  openBookmarkProps: OpenBookmarkProps,
+  openBookmarkProps: Readonly<OpenBookmarkProps>,
 ) {
   const options = await getOptions()
 
@@ -107,7 +107,7 @@ export async function openBookmarksInBrowser(
 
 export async function openFolderInBrowser(
   id: string,
-  openBookmarkProps: OpenBookmarkProps,
+  openBookmarkProps: Readonly<OpenBookmarkProps>,
 ) {
   const bookmarkTree = await getBookmarkTreeInfo(id)
 

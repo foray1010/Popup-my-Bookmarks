@@ -4,15 +4,16 @@ import type * as React from 'react'
 import Input from '../../../../../core/components/baseItems/Input/index.js'
 import classes from './styles.module.css'
 
-type RestInputProps = Omit<
-  React.ComponentProps<typeof Input>,
-  'max' | 'min' | 'size' | 'type'
+type RestInputProps = Readonly<
+  Omit<React.ComponentProps<typeof Input>, 'max' | 'min' | 'size' | 'type'>
 >
 
-interface Props extends RestInputProps {
-  readonly maximum: number
-  readonly minimum: number
-}
+type Props = Readonly<
+  RestInputProps & {
+    maximum: number
+    minimum: number
+  }
+>
 export default function InputNumber({
   className,
   maximum,

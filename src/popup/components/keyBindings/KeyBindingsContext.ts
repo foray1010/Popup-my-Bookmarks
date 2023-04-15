@@ -31,18 +31,17 @@ function useKeyBindingsPerWindowState() {
   const [keyBindingsPerWindow, setKeyBindingsPerWindow] = React.useState<
     ReadonlyMap<
       string,
-      ReadonlyArray<{
-        readonly key: KeyDefinition
-        readonly callback: KeyBindingEventCallback
-      }>
+      ReadonlyArray<
+        Readonly<{
+          key: KeyDefinition
+          callback: KeyBindingEventCallback
+        }>
+      >
     >
   >(new Map())
 
   type AddOrRemoveEventListener = (
-    meta: {
-      readonly key: KeyDefinition
-      readonly windowId: string
-    },
+    meta: Readonly<{ key: KeyDefinition; windowId: string }>,
     callback: KeyBindingEventCallback,
   ) => void
 

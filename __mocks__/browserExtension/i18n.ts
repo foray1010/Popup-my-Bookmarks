@@ -3,7 +3,7 @@
 import messages from '../../src/core/_locales/en/messages.json'
 import { hasOwn } from './utils/object.js'
 
-type II18n = typeof browser.i18n
+type II18n = Readonly<typeof browser.i18n>
 class I18n implements II18n {
   public async detectLanguage(): Promise<never> {
     throw new Error('Not implemented')

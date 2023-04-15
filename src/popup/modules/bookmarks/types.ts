@@ -1,42 +1,44 @@
 import type { BOOKMARK_TYPES } from './constants.js'
 
-export type BookmarkInfo = {
-  readonly id: string
-  readonly isRoot: boolean
-  readonly isSimulated: boolean
-  readonly isUnmodifiable: boolean
-  readonly parentId?: string | undefined
-  readonly storageIndex: number
-  readonly title: string
-} & (
-  | {
-      readonly type: BOOKMARK_TYPES.BOOKMARK
-      readonly iconUrl: string
-      readonly url: string
-    }
-  | {
-      readonly type: BOOKMARK_TYPES.DRAG_INDICATOR
-      readonly iconUrl?: never
-      readonly url?: never
-    }
-  | {
-      readonly type: BOOKMARK_TYPES.FOLDER
-      readonly iconUrl: string
-      readonly url?: never
-    }
-  | {
-      readonly type: BOOKMARK_TYPES.NO_BOOKMARK
-      readonly iconUrl?: never
-      readonly url?: never
-    }
-  | {
-      readonly type: BOOKMARK_TYPES.SEPARATOR
-      readonly iconUrl?: never
-      readonly url: string
-    }
-)
+export type BookmarkInfo = Readonly<
+  {
+    id: string
+    isRoot: boolean
+    isSimulated: boolean
+    isUnmodifiable: boolean
+    parentId?: string | undefined
+    storageIndex: number
+    title: string
+  } & (
+    | {
+        type: BOOKMARK_TYPES.BOOKMARK
+        iconUrl: string
+        url: string
+      }
+    | {
+        type: BOOKMARK_TYPES.DRAG_INDICATOR
+        iconUrl?: never
+        url?: never
+      }
+    | {
+        type: BOOKMARK_TYPES.FOLDER
+        iconUrl: string
+        url?: never
+      }
+    | {
+        type: BOOKMARK_TYPES.NO_BOOKMARK
+        iconUrl?: never
+        url?: never
+      }
+    | {
+        type: BOOKMARK_TYPES.SEPARATOR
+        iconUrl?: never
+        url: string
+      }
+  )
+>
 
-export type BookmarkTreeInfo = {
-  readonly children: ReadonlyArray<BookmarkInfo>
-  readonly parent: BookmarkInfo & { readonly type: BOOKMARK_TYPES.FOLDER }
-}
+export type BookmarkTreeInfo = Readonly<{
+  children: ReadonlyArray<BookmarkInfo>
+  parent: BookmarkInfo & { type: BOOKMARK_TYPES.FOLDER }
+}>

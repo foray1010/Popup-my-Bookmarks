@@ -4,13 +4,15 @@ import type * as React from 'react'
 import LazyImage from '../../../../core/components/baseItems/LazyImage.js'
 import classes from './bookmark-row.module.css'
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  readonly iconUrl?: string | undefined
-  readonly isHighlighted: boolean
-  readonly isUnclickable: boolean
-  readonly title: string
-  readonly tooltip?: string | undefined
-}
+type Props = Readonly<
+  React.HTMLAttributes<HTMLDivElement> & {
+    iconUrl?: string | undefined
+    isHighlighted: boolean
+    isUnclickable: boolean
+    title: string
+    tooltip?: string | undefined
+  }
+>
 function BookmarkRow({
   iconUrl,
   isHighlighted,

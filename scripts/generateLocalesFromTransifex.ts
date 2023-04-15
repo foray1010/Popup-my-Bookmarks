@@ -52,13 +52,16 @@ async function main(): Promise<void> {
     slug: resourceSlug,
   })
 
-  const languages = (await project.fetch('languages', false)) as Collection & {
-    readonly data: ReadonlyArray<{
-      readonly attributes: {
-        readonly code: string
-      }
+  const languages = (await project.fetch('languages', false)) as Collection &
+    Readonly<{
+      data: ReadonlyArray<
+        Readonly<{
+          attributes: Readonly<{
+            code: string
+          }>
+        }>
+      >
     }>
-  }
   await languages.fetch()
 
   await Promise.all(
@@ -90,10 +93,10 @@ async function main(): Promise<void> {
       const { data: messagesJson } = await axios.get<
         Record<
           string,
-          {
-            readonly message: string
-            readonly description?: string
-          }
+          Readonly<{
+            message: string
+            description?: string
+          }>
         >
       >(url)
 
@@ -127,7 +130,7 @@ main()
   .then(() => {
     rl.close()
   })
-  .catch((err: Error) => {
+  .catch((err: Readonly<Error>) => {
     console.error(err)
     process.exitCode = 1
   })

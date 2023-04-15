@@ -14,7 +14,7 @@ class Changes {
     return Object.fromEntries(this.#map)
   }
 
-  public add(key: string, change: browser.storage.StorageChange) {
+  public add(key: string, change: Readonly<browser.storage.StorageChange>) {
     // item with same value is ignored by onChange API
     if (change.newValue === change.oldValue) return
 

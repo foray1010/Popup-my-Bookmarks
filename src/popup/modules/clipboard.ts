@@ -7,14 +7,15 @@ export enum ClipboardAction {
   None = 'none',
 }
 
-type ClipboardState =
+type ClipboardState = Readonly<
   | {
-      readonly action: ClipboardAction.None
+      action: ClipboardAction.None
     }
   | {
-      readonly action: ClipboardAction.Copy | ClipboardAction.Cut
-      readonly items: ReadonlySet<string>
+      action: ClipboardAction.Copy | ClipboardAction.Cut
+      items: ReadonlySet<string>
     }
+>
 
 const initialState = {
   action: ClipboardAction.None,

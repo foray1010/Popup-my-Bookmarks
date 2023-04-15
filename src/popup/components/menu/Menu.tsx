@@ -5,14 +5,14 @@ import classes from './menu.module.css'
 import MenuRow from './MenuRow.js'
 import type { MenuPattern } from './types.js'
 
-type Props = {
-  readonly highlightedIndex?: number | undefined
-  readonly menuPattern: MenuPattern
-  readonly onRowClick: React.MouseEventHandler
-  readonly onRowMouseEnter: (index: number) => React.MouseEventHandler
-  readonly onRowMouseLeave: (index: number) => React.MouseEventHandler
-  readonly unclickableRows: ReadonlyArray<string>
-}
+type Props = Readonly<{
+  highlightedIndex?: number | undefined
+  menuPattern: MenuPattern
+  onRowClick: React.MouseEventHandler
+  onRowMouseEnter: (index: number) => React.MouseEventHandler
+  onRowMouseLeave: (index: number) => React.MouseEventHandler
+  unclickableRows: ReadonlyArray<string>
+}>
 export default function Menu(props: Props) {
   const allRowNames = props.menuPattern.flat()
 

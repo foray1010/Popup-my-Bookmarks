@@ -5,15 +5,15 @@ import webExtension from 'webextension-polyfill'
 import type { MenuItem } from './constants.js'
 import classes from './menu-row.module.css'
 
-type Props = {
-  readonly isFocused: boolean
-  readonly isUnclickable: boolean
-  readonly onClick: React.MouseEventHandler
-  readonly onMouseEnter: (index: number) => React.MouseEventHandler
-  readonly onMouseLeave: (index: number) => React.MouseEventHandler
-  readonly rowIndex: number
-  readonly rowName: MenuItem
-}
+type Props = Readonly<{
+  isFocused: boolean
+  isUnclickable: boolean
+  onClick: React.MouseEventHandler
+  onMouseEnter: (index: number) => React.MouseEventHandler
+  onMouseLeave: (index: number) => React.MouseEventHandler
+  rowIndex: number
+  rowName: MenuItem
+}>
 export default function MenuRow({
   isFocused,
   isUnclickable,

@@ -4,9 +4,11 @@ import * as React from 'react'
 import Button from '../../../../../../core/components/baseItems/Button/index.js'
 import classes from './styles.module.css'
 
-type Props = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  'className' | 'hidden' | 'type'
+type Props = Readonly<
+  Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    'className' | 'hidden' | 'type'
+  >
 >
 
 export default function Option({ children, ...props }: Props) {

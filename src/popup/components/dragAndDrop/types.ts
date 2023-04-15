@@ -1,4 +1,4 @@
-export type ResponseEvent = {
-  readonly activeKey: string | null
-  readonly itemKey: string
-}
+export type ResponseEvent = Readonly<{
+  activeKey: string | null
+  itemKey: string
+}>

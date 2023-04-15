@@ -7,9 +7,11 @@ import Cross from '../../images/cross.svg?svgr'
 import Search from '../../images/search.svg?svgr'
 import classes from './search-input.module.css'
 
-interface Props extends React.ComponentProps<typeof Input> {
-  onCancel(): void
-}
+type Props = Readonly<
+  React.ComponentProps<typeof Input> & {
+    onCancel(): void
+  }
+>
 const SearchInput = React.forwardRef<HTMLInputElement, Props>(
   function InnerSearchInput({ onCancel, ...inputProps }: Props, ref) {
     const inputId = React.useId()

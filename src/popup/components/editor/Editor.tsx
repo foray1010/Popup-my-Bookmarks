@@ -11,11 +11,13 @@ import { KeyBindingsWindow } from '../keyBindings/index.js'
 import { useEditorContext } from './EditorContext.js'
 import EditorForm from './EditorForm.js'
 
-type EditorFormProps = React.ComponentProps<typeof EditorForm>
+type EditorFormProps = Readonly<React.ComponentProps<typeof EditorForm>>
 
-interface CreateEditorFormProps extends EditorFormProps {
-  readonly createAfterId: string
-}
+type CreateEditorFormProps = Readonly<
+  EditorFormProps & {
+    createAfterId: string
+  }
+>
 function CreateEditorForm({
   createAfterId,
   onConfirm,
@@ -37,9 +39,11 @@ function CreateEditorForm({
   )
 }
 
-interface UpdateEditorFormProps extends EditorFormProps {
-  readonly editTargetId: string
-}
+type UpdateEditorFormProps = Readonly<
+  EditorFormProps & {
+    editTargetId: string
+  }
+>
 function UpdateEditorForm({
   editTargetId,
   onConfirm,

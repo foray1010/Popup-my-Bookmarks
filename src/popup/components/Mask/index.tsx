@@ -2,10 +2,10 @@ import type * as React from 'react'
 
 import classes from './mask.module.css'
 
-type Props = {
-  readonly opacity: number
-  readonly onClick: React.MouseEventHandler
-}
+type Props = Readonly<{
+  opacity: number
+  onClick: React.MouseEventHandler
+}>
 export default function Mask({ opacity, onClick }: Props) {
   return (
     <div

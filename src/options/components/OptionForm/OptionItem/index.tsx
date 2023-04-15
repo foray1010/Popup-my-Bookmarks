@@ -14,21 +14,25 @@ import SelectButton from './SelectButton/index.js'
 import SelectMultiple from './SelectMultiple/index.js'
 import SelectString from './SelectString/index.js'
 
-type PropsFromOptionConfig<OC extends Record<string, unknown>> = OC & {
-  readonly onChange: (value: OC['default']) => void
-  readonly value: OC['default']
-}
+type PropsFromOptionConfig<OC extends Record<string, unknown>> = Readonly<
+  OC & {
+    onChange: (value: OC['default']) => void
+    value: OC['default']
+  }
+>
 
-type Props = {
-  readonly name: string
-  readonly onBlur: React.FocusEventHandler
-} & (
-  | PropsFromOptionConfig<ArrayOptionConfig>
-  | PropsFromOptionConfig<BooleanOptionConfig>
-  | PropsFromOptionConfig<IntegerOptionConfig>
-  | PropsFromOptionConfig<SelectOptionConfig>
-  | PropsFromOptionConfig<StringOptionConfig>
-)
+type Props = Readonly<
+  {
+    name: string
+    onBlur: React.FocusEventHandler
+  } & (
+    | PropsFromOptionConfig<ArrayOptionConfig>
+    | PropsFromOptionConfig<BooleanOptionConfig>
+    | PropsFromOptionConfig<IntegerOptionConfig>
+    | PropsFromOptionConfig<SelectOptionConfig>
+    | PropsFromOptionConfig<StringOptionConfig>
+  )
+>
 
 export default function OptionItem(props: Props) {
   switch (props.type) {

@@ -8,13 +8,13 @@ import type { Options, OptionsConfig } from '../../../core/types/options.js'
 import classes from './option-form.module.css'
 import OptionItem from './OptionItem/index.js'
 
-type Props = {
-  readonly defaultValues: Partial<Options>
-  readonly onReset: () => void
-  readonly onSubmit: (variables: Partial<Options>) => void
-  readonly optionsConfig: OptionsConfig
-  readonly selectedOptionFormMap: ReadonlyArray<OPTIONS>
-}
+type Props = Readonly<{
+  defaultValues: Partial<Options>
+  onReset: () => void
+  onSubmit: (variables: Readonly<Partial<Options>>) => void
+  optionsConfig: OptionsConfig
+  selectedOptionFormMap: ReadonlyArray<OPTIONS>
+}>
 export default function OptionForm(props: Props) {
   const { control, handleSubmit } = useForm()
 

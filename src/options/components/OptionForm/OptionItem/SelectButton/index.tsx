@@ -3,20 +3,24 @@ import type * as React from 'react'
 import Option from './Option/index.js'
 import classes from './styles.module.css'
 
-type RestOptionProps = Omit<
-  React.ComponentProps<typeof Option>,
-  'defaultChecked' | 'defaultValue' | 'checked' | 'value'
+type RestOptionProps = Readonly<
+  Omit<
+    React.ComponentProps<typeof Option>,
+    'defaultChecked' | 'defaultValue' | 'checked' | 'value'
+  >
 >
 
-type Choice<T> = {
-  readonly label: string
-  readonly value: T
-}
+type Choice<T> = Readonly<{
+  label: string
+  value: T
+}>
 
-interface Props<T extends string | number> extends RestOptionProps {
-  readonly choices: readonly Choice<T>[]
-  readonly value: T
-}
+type Props<T extends string | number> = Readonly<
+  RestOptionProps & {
+    choices: readonly Choice<T>[]
+    value: T
+  }
+>
 export default function SelectButton<T extends string | number>({
   choices,
   value,

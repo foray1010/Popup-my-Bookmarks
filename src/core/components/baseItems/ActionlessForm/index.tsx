@@ -1,8 +1,10 @@
 import * as React from 'react'
 
-type Props = Omit<
-  React.FormHTMLAttributes<HTMLFormElement>,
-  'action' | 'enctype' | 'method' | 'target'
+type Props = Readonly<
+  Omit<
+    React.FormHTMLAttributes<HTMLFormElement>,
+    'action' | 'enctype' | 'method' | 'target'
+  >
 >
 
 const ActionlessForm = React.forwardRef<HTMLFormElement, Props>(

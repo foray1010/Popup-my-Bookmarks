@@ -14,8 +14,8 @@ function useScroll() {
 
   const scroll = React.useCallback(
     (
-      containerElement: HTMLElement,
-      { isUpward }: { readonly isUpward: boolean },
+      containerElement: Readonly<HTMLElement>,
+      { isUpward }: Readonly<{ isUpward: boolean }>,
     ) => {
       clearScroll()
 
@@ -33,9 +33,9 @@ function useScroll() {
 
 export default function useDragZoneEvents({
   margin = 20,
-}: {
-  readonly margin?: number
-} = {}) {
+}: Readonly<{
+  margin?: number
+}> = {}) {
   const { activeKey } = useDragAndDropContext()
   const isDragging = activeKey !== null
 

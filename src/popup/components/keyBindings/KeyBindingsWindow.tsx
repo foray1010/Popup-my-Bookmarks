@@ -3,9 +3,11 @@ import * as React from 'react'
 import { useKeyBindingsContext } from './KeyBindingsContext.js'
 import classes from './KeyBindingsWindow.module.css'
 
-type Props = React.PropsWithChildren<{
-  readonly windowId: string
-}>
+type Props = Readonly<
+  React.PropsWithChildren<{
+    windowId: string
+  }>
+>
 export default function KeyBindingsWindow({ children, windowId }: Props) {
   const { appendActiveWindowId, removeActiveWindowId } = useKeyBindingsContext()
 

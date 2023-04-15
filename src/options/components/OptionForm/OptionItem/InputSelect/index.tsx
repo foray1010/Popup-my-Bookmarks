@@ -4,18 +4,17 @@ import Input from '../../../../../core/components/baseItems/Input/index.js'
 import Select from '../../../../../core/components/baseItems/Select/index.js'
 import classes from './styles.module.css'
 
-type RestInputProps = Omit<
-  React.ComponentProps<typeof Input>,
-  'className' | 'onChange' | 'value'
+type RestInputProps = Readonly<
+  Omit<React.ComponentProps<typeof Input>, 'className' | 'onChange' | 'value'>
 >
 
-interface Props extends RestInputProps {
-  readonly choices: ReadonlyArray<string>
-  readonly onChange: React.ChangeEventHandler<
-    HTMLInputElement | HTMLSelectElement
-  >
-  readonly value: string
-}
+type Props = Readonly<
+  RestInputProps & {
+    choices: ReadonlyArray<string>
+    onChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>
+    value: string
+  }
+>
 export default function InputSelect({
   choices,
   value,

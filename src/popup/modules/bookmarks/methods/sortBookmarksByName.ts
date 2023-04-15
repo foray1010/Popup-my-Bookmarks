@@ -22,18 +22,20 @@ function splitBySeparator(
   )
 }
 
-type BookmarkGroup = {
-  readonly type: BOOKMARK_TYPES
-  readonly members: readonly BookmarkInfo[]
-}
+type BookmarkGroup = Readonly<{
+  type: BOOKMARK_TYPES
+  members: readonly BookmarkInfo[]
+}>
 function groupByType(
   bookmarkInfos: readonly BookmarkInfo[],
 ): readonly BookmarkGroup[] {
   return bookmarkInfos.reduce<
-    Array<{
-      readonly type: BOOKMARK_TYPES
-      readonly members: BookmarkInfo[]
-    }>
+    Array<
+      Readonly<{
+        type: BOOKMARK_TYPES
+        members: BookmarkInfo[]
+      }>
+    >
   >((acc, bookmarkInfo) => {
     const matchType = (group: BookmarkGroup) => group.type === bookmarkInfo.type
 

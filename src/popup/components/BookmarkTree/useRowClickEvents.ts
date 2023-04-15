@@ -21,9 +21,7 @@ import { useMenuContext } from '../menu/index.js'
 
 export default function useRowClickEvents({
   treeInfo,
-}: {
-  readonly treeInfo: BookmarkTreeInfo
-}) {
+}: Readonly<{ treeInfo: BookmarkTreeInfo }>) {
   const options = useOptions()
 
   const { toggleBookmarkTree } = useBookmarkTreesContext()

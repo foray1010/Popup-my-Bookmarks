@@ -23,11 +23,11 @@ export default function useTooltip({
   bookmarkInfo,
   isSearching,
   isShowTooltip,
-}: {
-  readonly bookmarkInfo: BookmarkInfo
-  readonly isSearching: boolean
-  readonly isShowTooltip: boolean
-}): string | undefined {
+}: Readonly<{
+  bookmarkInfo: BookmarkInfo
+  isSearching: boolean
+  isShowTooltip: boolean
+}>): string | undefined {
   const tooltip = isShowTooltip
     ? joinLines([bookmarkInfo.title, bookmarkInfo.url])
     : undefined

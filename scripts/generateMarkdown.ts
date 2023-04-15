@@ -56,7 +56,7 @@ async function main(): Promise<void> {
   await Promise.all([generateReadme(), generateStoreDescription()])
 }
 
-main().catch((err: Error) => {
+main().catch((err: Readonly<Error>) => {
   console.error(err)
   process.exitCode = 1
 })

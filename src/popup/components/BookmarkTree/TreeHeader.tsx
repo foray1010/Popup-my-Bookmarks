@@ -1,10 +1,10 @@
 import Cross from '../../images/cross.svg?svgr'
 import classes from './tree-header.module.css'
 
-type Props = {
-  readonly onClose: () => void
-  readonly title: string
-}
+type Props = Readonly<{
+  onClose: () => void
+  title: string
+}>
 export default function TreeHeader(props: Props) {
   return (
     <header className={classes['main']}>

@@ -198,15 +198,15 @@ function useRefreshOnBookmarkEvent({
   bookmarkTrees,
   setBookmarkTrees,
   fetchBookmarkTrees,
-}: {
-  readonly bookmarkTrees: readonly BookmarkTreeInfo[]
-  readonly setBookmarkTrees: React.Dispatch<
+}: Readonly<{
+  bookmarkTrees: readonly BookmarkTreeInfo[]
+  setBookmarkTrees: React.Dispatch<
     React.SetStateAction<readonly BookmarkTreeInfo[]>
   >
-  readonly fetchBookmarkTrees: (
+  fetchBookmarkTrees: (
     childTreeIds?: readonly string[] | undefined,
   ) => Promise<readonly BookmarkTreeInfo[]>
-}) {
+}>) {
   // use debounce to avoid frequent refresh, such as sort bookmarks by name
   const refresh = useDebouncedCallback(() => {
     const [, ...childTreeIds] = bookmarkTrees.map((tree) => tree.parent.id)

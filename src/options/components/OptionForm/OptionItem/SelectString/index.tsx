@@ -4,9 +4,11 @@ import type * as React from 'react'
 import Select from '../../../../../core/components/baseItems/Select/index.js'
 import classes from './styles.module.css'
 
-interface Props extends React.ComponentProps<typeof Select> {
-  readonly choices: ReadonlyArray<string>
-}
+type Props = Readonly<
+  React.ComponentProps<typeof Select> & {
+    choices: ReadonlyArray<string>
+  }
+>
 export default function SelectString({
   choices,
   className,

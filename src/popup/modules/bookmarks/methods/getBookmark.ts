@@ -49,10 +49,10 @@ export async function getBookmarkTreeInfo(
 async function getFirstBookmarkTree({
   firstTreeId,
   hideRootTreeIds = [],
-}: {
-  readonly firstTreeId: string
-  readonly hideRootTreeIds?: readonly string[]
-}): Promise<BookmarkTreeInfo> {
+}: Readonly<{
+  firstTreeId: string
+  hideRootTreeIds?: readonly string[]
+}>): Promise<BookmarkTreeInfo> {
   const [firstTree, rootFolders] = await Promise.all([
     getBookmarkTreeInfo(firstTreeId),
     getBookmarkChildren(ROOT_ID),
@@ -74,11 +74,11 @@ export async function getBookmarkTreesFromRoot({
   firstTreeId,
   childTreeIds = [],
   hideRootTreeIds = [],
-}: {
-  readonly firstTreeId: string
-  readonly childTreeIds?: readonly string[] | undefined
-  readonly hideRootTreeIds?: readonly string[]
-}): Promise<ReadonlyArray<BookmarkTreeInfo>> {
+}: Readonly<{
+  firstTreeId: string
+  childTreeIds?: readonly string[] | undefined
+  hideRootTreeIds?: readonly string[]
+}>): Promise<ReadonlyArray<BookmarkTreeInfo>> {
   const [firstTree, childTreeResults] = await Promise.all([
     getFirstBookmarkTree({ firstTreeId, hideRootTreeIds }),
     Promise.allSettled(childTreeIds.map(getBookmarkTreeInfo)),
@@ -116,11 +116,11 @@ export async function getBookmarkTreesFromSearch({
   searchQuery,
   isSearchTitleOnly = false,
   maxResults = 50,
-}: {
-  readonly searchQuery: string
-  readonly isSearchTitleOnly?: boolean
-  readonly maxResults?: number
-}) {
+}: Readonly<{
+  searchQuery: string
+  isSearchTitleOnly?: boolean
+  maxResults?: number
+}>) {
   const searchResults = await searchBookmarks(searchQuery)
 
   let filteredSearchResults = searchResults.filter(

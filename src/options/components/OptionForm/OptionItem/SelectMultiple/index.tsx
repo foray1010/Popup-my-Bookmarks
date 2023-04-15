@@ -4,15 +4,19 @@ import Input from '../../../../../core/components/baseItems/Input/index.js'
 import PlainList from '../../../../../core/components/baseItems/PlainList/index.js'
 import classes from './styles.module.css'
 
-type RestInputProps = Omit<
-  React.ComponentProps<typeof Input>,
-  'checked' | 'className' | 'type' | 'value'
+type RestInputProps = Readonly<
+  Omit<
+    React.ComponentProps<typeof Input>,
+    'checked' | 'className' | 'type' | 'value'
+  >
 >
 
-interface Props extends RestInputProps {
-  readonly choices: ReadonlyArray<string | undefined>
-  readonly value: ReadonlyArray<number | undefined>
-}
+type Props = Readonly<
+  RestInputProps & {
+    choices: ReadonlyArray<string | undefined>
+    value: ReadonlyArray<number | undefined>
+  }
+>
 export default function SelectMultiple({
   choices,
   value,

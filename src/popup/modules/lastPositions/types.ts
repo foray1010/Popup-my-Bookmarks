@@ -1,4 +1,4 @@
-export type LastPosition = {
-  readonly id: string
-  readonly scrollTop: number
-}
+export type LastPosition = Readonly<{
+  id: string
+  scrollTop: number
+}>

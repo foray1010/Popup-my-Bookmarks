@@ -9,13 +9,13 @@ export default function useKeyboardNav({
   onPressArrowLeft,
   onPressArrowRight,
   onPressArrowUp,
-}: {
-  readonly windowId: string
-  readonly onPressArrowDown?: (evt: KeyboardEvent) => void
-  readonly onPressArrowLeft?: (evt: KeyboardEvent) => void
-  readonly onPressArrowRight?: (evt: KeyboardEvent) => void
-  readonly onPressArrowUp?: (evt: KeyboardEvent) => void
-}): void {
+}: Readonly<{
+  windowId: string
+  onPressArrowDown?: (evt: Readonly<KeyboardEvent>) => void
+  onPressArrowLeft?: (evt: Readonly<KeyboardEvent>) => void
+  onPressArrowRight?: (evt: Readonly<KeyboardEvent>) => void
+  onPressArrowUp?: (evt: Readonly<KeyboardEvent>) => void
+}>): void {
   const { listNavigation, removeList, setHighlightedIndex } =
     useListNavigationContext()
 
@@ -37,14 +37,14 @@ export default function useKeyboardNav({
     setHighlightedIndex(lastListIndex, nextItemIndex)
   }
 
-  function handlePressArrowDown(evt: KeyboardEvent) {
+  function handlePressArrowDown(evt: Readonly<KeyboardEvent>) {
     if (onPressArrowDown) onPressArrowDown(evt)
 
     handlePressArrowVertical(1)
   }
   useKeyBindingsEvent({ key: 'ArrowDown', windowId }, handlePressArrowDown)
 
-  function handlePressArrowUp(evt: KeyboardEvent) {
+  function handlePressArrowUp(evt: Readonly<KeyboardEvent>) {
     if (onPressArrowUp) onPressArrowUp(evt)
 
     handlePressArrowVertical(-1)

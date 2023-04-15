@@ -23,10 +23,12 @@ const navBarItemInfos = [
     path: RoutePath.Contributors,
     title: webExtension.i18n.getMessage('contributors'),
   },
-] as const satisfies readonly {
-  readonly path: RoutePath
-  readonly title: string
-}[]
+] as const satisfies ReadonlyArray<
+  Readonly<{
+    path: RoutePath
+    title: string
+  }>
+>
 
 export default function NavBar() {
   const { currentPath, setCurrentPath } = useNavigationContext()

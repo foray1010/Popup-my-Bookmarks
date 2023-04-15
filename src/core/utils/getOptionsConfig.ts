@@ -19,12 +19,12 @@ export default async function getOptionsConfig(): Promise<OptionsConfig> {
     'clickOption7',
   ])
 
-  const rootFolderChoices: string[] = []
+  const rootFolderChoicesMutable: string[] = []
   // get the root folders' title and set as the choices of 'defExpand'
   const rootFolders = await webExtension.bookmarks.getChildren(ROOT_ID)
   for (const rootFolder of rootFolders) {
     const rootFolderIdNum = Number(rootFolder.id)
-    rootFolderChoices[rootFolderIdNum] = rootFolder.title
+    rootFolderChoicesMutable[rootFolderIdNum] = rootFolder.title
   }
 
   return {
@@ -51,7 +51,7 @@ export default async function getOptionsConfig(): Promise<OptionsConfig> {
     [OPTIONS.DEF_EXPAND]: {
       type: 'select',
       default: 1,
-      choices: rootFolderChoices,
+      choices: rootFolderChoicesMutable,
     },
     [OPTIONS.FONT_FAMILY]: {
       type: 'string',
@@ -82,7 +82,7 @@ export default async function getOptionsConfig(): Promise<OptionsConfig> {
     [OPTIONS.HIDE_ROOT_FOLDER]: {
       type: 'array',
       default: [],
-      choices: rootFolderChoices,
+      choices: rootFolderChoicesMutable,
     },
     [OPTIONS.MAX_RESULTS]: {
       type: 'integer',

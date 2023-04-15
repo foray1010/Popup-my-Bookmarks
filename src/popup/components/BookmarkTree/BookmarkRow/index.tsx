@@ -11,27 +11,25 @@ import classes from './bookmark-row.module.css'
 import BookmarkRow from './BookmarkRow.js'
 import useTooltip from './useTooltip.js'
 
-type Props = {
-  readonly bookmarkInfo: BookmarkInfo
-  readonly className?: string | undefined
-  readonly isDisableDragAndDrop: boolean
-  readonly isHighlighted: boolean
-  readonly isSearching: boolean
-  readonly isShowTooltip: boolean
-  readonly isUnclickable: boolean
-  readonly onAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  readonly onClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  readonly onContextMenu: (
-    bookmarkInfo: BookmarkInfo,
-  ) => React.MouseEventHandler
-  readonly onDragOver: (
+type Props = Readonly<{
+  bookmarkInfo: BookmarkInfo
+  className?: string | undefined
+  isDisableDragAndDrop: boolean
+  isHighlighted: boolean
+  isSearching: boolean
+  isShowTooltip: boolean
+  isUnclickable: boolean
+  onAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onContextMenu: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onDragOver: (
     bookmarkInfo: BookmarkInfo,
   ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
-  readonly onDragStart: React.DragEventHandler
-  readonly onMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  readonly onMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  readonly style?: React.CSSProperties
-}
+  onDragStart: React.DragEventHandler
+  onMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  style?: React.CSSProperties
+}>
 const BookmarkRowContainer = React.forwardRef(
   function InnerBookmarkRowContainer(
     {

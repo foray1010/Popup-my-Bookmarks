@@ -16,7 +16,7 @@ import useRowClickEvents from './useRowClickEvents.js'
 import useRowDragEvents from './useRowDragEvents.js'
 import useRowHoverEvents from './useRowHoverEvents.js'
 
-function useBookmarkContextProps({ treeId }: { readonly treeId: string }) {
+function useBookmarkContextProps({ treeId }: Readonly<{ treeId: string }>) {
   const { bookmarkTrees, searchQuery } = useBookmarkTreesContext()
 
   const treeIndex = bookmarkTrees.findIndex((tree) => tree.parent.id === treeId)
@@ -36,10 +36,7 @@ function useBookmarkContextProps({ treeId }: { readonly treeId: string }) {
 function useListNavigation({
   treeIndex,
   treeInfo,
-}: {
-  readonly treeIndex: number
-  readonly treeInfo: BookmarkTreeInfo
-}) {
+}: Readonly<{ treeIndex: number; treeInfo: BookmarkTreeInfo }>) {
   const { listNavigation, setItemCount, removeList } =
     useListNavigationContext()
 
@@ -63,9 +60,9 @@ function useListNavigation({
   }
 }
 
-type Props = {
-  readonly treeId: string
-}
+type Props = Readonly<{
+  treeId: string
+}>
 export default function BookmarkTreeContainer({ treeId }: Props) {
   const options = useOptions()
 

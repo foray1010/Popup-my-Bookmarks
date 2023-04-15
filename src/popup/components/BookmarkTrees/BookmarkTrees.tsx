@@ -3,11 +3,11 @@ import * as React from 'react'
 import BookmarkTree from '../BookmarkTree/index.js'
 import classes from './bookmark-trees.module.css'
 
-type Props = {
-  readonly firstTreeHeader: React.ReactNode
-  readonly treeIds: ReadonlyArray<string>
-  readonly width: number
-}
+type Props = Readonly<{
+  firstTreeHeader: React.ReactNode
+  treeIds: ReadonlyArray<string>
+  width: number
+}>
 export default function BookmarkTrees(props: Props) {
   const trees = props.treeIds.map((treeId) => (
     <BookmarkTree key={treeId} treeId={treeId} />

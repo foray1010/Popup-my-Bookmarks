@@ -2,9 +2,9 @@ import webExtension from 'webextension-polyfill'
 
 import type { LastPosition } from './lastPositions/types.js'
 
-export type LocalStorage = {
-  readonly lastPositions: readonly LastPosition[]
-}
+export type LocalStorage = Readonly<{
+  lastPositions: readonly LastPosition[]
+}>
 
 export async function getLocalStorage(): Promise<LocalStorage> {
   return {

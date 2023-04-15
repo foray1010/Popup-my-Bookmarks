@@ -3,7 +3,7 @@ import * as React from 'react'
 
 import classes from './styles.module.css'
 
-type Props = React.SelectHTMLAttributes<HTMLSelectElement>
+type Props = Readonly<React.SelectHTMLAttributes<HTMLSelectElement>>
 
 const Select = React.forwardRef<HTMLSelectElement, Props>(function InnerSelect(
   { className, ...props }: Props,

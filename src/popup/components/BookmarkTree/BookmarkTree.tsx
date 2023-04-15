@@ -14,35 +14,27 @@ import { type ResponseEvent, useDragZoneEvents } from '../dragAndDrop/index.js'
 import classes from './bookmark-tree.module.css'
 import BookmarkRow from './BookmarkRow/index.js'
 
-type Props = {
-  readonly draggingId: string | null
-  readonly highlightedId?: string | undefined
-  readonly isDisableDragAndDrop: boolean
-  readonly isSearching: boolean
-  readonly isShowTooltip: boolean
-  readonly lastScrollTop?: number | undefined
-  readonly noRowsRenderer: () => React.ReactElement | null
-  readonly onRowAuxClick: (
-    bookmarkInfo: BookmarkInfo,
-  ) => React.MouseEventHandler
-  readonly onRowClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  readonly onRowContextMenu: (
-    bookmarkInfo: BookmarkInfo,
-  ) => React.MouseEventHandler
-  readonly onRowDragOver: (
+type Props = Readonly<{
+  draggingId: string | null
+  highlightedId?: string | undefined
+  isDisableDragAndDrop: boolean
+  isSearching: boolean
+  isShowTooltip: boolean
+  lastScrollTop?: number | undefined
+  noRowsRenderer: () => React.ReactElement | null
+  onRowAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onRowClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onRowContextMenu: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onRowDragOver: (
     bookmarkInfo: BookmarkInfo,
   ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
-  readonly onRowDragStart: React.DragEventHandler
-  readonly onRowMouseEnter: (
-    bookmarkInfo: BookmarkInfo,
-  ) => React.MouseEventHandler
-  readonly onRowMouseLeave: (
-    bookmarkInfo: BookmarkInfo,
-  ) => React.MouseEventHandler
-  readonly onScroll?: React.UIEventHandler
-  readonly scrollToIndex?: number | undefined
-  readonly treeInfo: BookmarkTreeInfo
-}
+  onRowDragStart: React.DragEventHandler
+  onRowMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onRowMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onScroll?: React.UIEventHandler
+  scrollToIndex?: number | undefined
+  treeInfo: BookmarkTreeInfo
+}>
 export default function BookmarkTree(props: Props) {
   const options = useOptions()
 
