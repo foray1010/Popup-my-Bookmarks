@@ -1,27 +1,33 @@
 import constate from 'constate'
 import * as React from 'react'
-import useEventListener from 'use-typed-event-listener'
+import useListener from 'use-typed-event-listener'
 
+import type { WindowId } from '../../constants/windows.js'
 import type { KeyBindingEventCallback, KeyDefinition } from './types.js'
 
 function useActiveWindowState() {
   const [activeWindowQueue, setActiveWindowQueue] = React.useState<
-    readonly string[]
-  >([])
+    ReadonlySet<WindowId>
+  >(new Set())
 
-  const appendActiveWindowId = React.useCallback((windowId: string) => {
-    setActiveWindowQueue((prevState) => [
-      ...prevState.filter((x) => x !== windowId),
-      windowId,
-    ])
+  const appendActiveWindowId = React.useCallback((windowId: WindowId) => {
+    setActiveWindowQueue((prevState) => {
+      const newState = new Set(prevState)
+      newState.add(windowId)
+      return newState
+    })
   }, [])
 
-  const removeActiveWindowId = React.useCallback((windowId: string) => {
-    setActiveWindowQueue((prevState) => prevState.filter((x) => x !== windowId))
+  const removeActiveWindowId = React.useCallback((windowId: WindowId) => {
+    setActiveWindowQueue((prevState) => {
+      const newState = new Set(prevState)
+      newState.delete(windowId)
+      return newState
+    })
   }, [])
 
   return {
-    activeWindowId: activeWindowQueue.at(-1),
+    activeWindowId: Array.from(activeWindowQueue).at(-1),
     appendActiveWindowId,
     removeActiveWindowId,
   }
@@ -30,7 +36,7 @@ function useActiveWindowState() {
 function useKeyBindingsPerWindowState() {
   const [keyBindingsPerWindow, setKeyBindingsPerWindow] = React.useState<
     ReadonlyMap<
-      string,
+      WindowId,
       ReadonlyArray<
         Readonly<{
           key: KeyDefinition
@@ -40,12 +46,12 @@ function useKeyBindingsPerWindowState() {
     >
   >(new Map())
 
-  type AddOrRemoveEventListener = (
-    meta: Readonly<{ key: KeyDefinition; windowId: string }>,
+  type AddOrRemoveListener = (
+    meta: Readonly<{ key: KeyDefinition; windowId: WindowId }>,
     callback: KeyBindingEventCallback,
   ) => void
 
-  const addEventListener: AddOrRemoveEventListener = React.useCallback(
+  const addListener: AddOrRemoveListener = React.useCallback(
     ({ key, windowId }, callback) => {
       setKeyBindingsPerWindow((prevState) => {
         const keyBindings = prevState.get(windowId)
@@ -58,7 +64,7 @@ function useKeyBindingsPerWindowState() {
     [],
   )
 
-  const removeEventListener: AddOrRemoveEventListener = React.useCallback(
+  const removeListener: AddOrRemoveListener = React.useCallback(
     ({ key, windowId }, callback) => {
       setKeyBindingsPerWindow((prevState) => {
         const keyBindings = prevState.get(windowId)
@@ -79,8 +85,8 @@ function useKeyBindingsPerWindowState() {
 
   return {
     keyBindingsPerWindow,
-    addEventListener,
-    removeEventListener,
+    addListener,
+    removeListener,
   }
 }
 
@@ -98,20 +104,20 @@ function useKeyBindingsState() {
 function useKeyBindings() {
   const state = useKeyBindingsState()
 
-  useEventListener(document, 'keydown', (evt) => {
+  useListener(document, 'keydown', (evt) => {
     const { keyBindingsPerWindow, activeWindowId } = state
     if (!activeWindowId) return
 
     const keyBindings = keyBindingsPerWindow.get(activeWindowId)
     if (!keyBindings) return
 
-    const matchedKeyBindings = Array.from(keyBindings)
-      .reverse()
+    const matchedKeyBindings = keyBindings
       .filter((keyBinding) => {
         return keyBinding.key instanceof RegExp
           ? keyBinding.key.test(evt.key)
           : keyBinding.key === evt.key
       })
+      .reverse()
 
     matchedKeyBindings.forEach((keyBinding) => {
       keyBinding.callback(evt)

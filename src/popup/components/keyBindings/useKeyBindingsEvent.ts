@@ -8,7 +8,7 @@ export default function useKeyBindingsEvent(
   meta: Readonly<KeyBindingMeta>,
   callback: (evt: Readonly<KeyboardEvent>) => void | Promise<void>,
 ) {
-  const { addEventListener, removeEventListener } = useKeyBindingsContext()
+  const { addListener, removeListener } = useKeyBindingsContext()
 
   const callbackRef = useLatestRef(callback)
 
@@ -20,10 +20,10 @@ export default function useKeyBindingsEvent(
       }
     }
 
-    addEventListener(meta, wrappedCallback)
+    addListener(meta, wrappedCallback)
 
     return () => {
-      removeEventListener(meta, wrappedCallback)
+      removeListener(meta, wrappedCallback)
     }
-  }, [addEventListener, callbackRef, meta, removeEventListener])
+  }, [addListener, callbackRef, meta, removeListener])
 }

@@ -1,3 +1,4 @@
+import type { WindowId } from '../../constants/windows.js'
 import cycle from '../../utils/cycle.js'
 import getLastMapKey from '../../utils/getLastMapKey.js'
 import { useKeyBindingsEvent } from '../keyBindings/index.js'
@@ -10,7 +11,7 @@ export default function useKeyboardNav({
   onPressArrowRight,
   onPressArrowUp,
 }: Readonly<{
-  windowId: string
+  windowId: WindowId
   onPressArrowDown?: (evt: Readonly<KeyboardEvent>) => void
   onPressArrowLeft?: (evt: Readonly<KeyboardEvent>) => void
   onPressArrowRight?: (evt: Readonly<KeyboardEvent>) => void
