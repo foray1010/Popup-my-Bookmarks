@@ -49,7 +49,7 @@ type OpenBookmarkProps = Readonly<{
 }>
 export async function openBookmarksInBrowser(
   ids: readonly string[],
-  openBookmarkProps: Readonly<OpenBookmarkProps>,
+  openBookmarkProps: OpenBookmarkProps,
 ) {
   const options = await getOptions()
 
@@ -107,7 +107,7 @@ export async function openBookmarksInBrowser(
 
 export async function openFolderInBrowser(
   id: string,
-  openBookmarkProps: Readonly<OpenBookmarkProps>,
+  openBookmarkProps: OpenBookmarkProps,
 ) {
   const bookmarkTree = await getBookmarkTreeInfo(id)
 

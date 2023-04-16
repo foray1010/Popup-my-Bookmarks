@@ -26,8 +26,7 @@ export function useUpdateOptions() {
   const queryClient = useQueryClient()
 
   return useMutation(
-    async (options: Readonly<Partial<Options>>) =>
-      webExtension.storage.sync.set(options),
+    async (options: Partial<Options>) => webExtension.storage.sync.set(options),
     {
       async onSuccess() {
         await queryClient.invalidateQueries([queryKey])

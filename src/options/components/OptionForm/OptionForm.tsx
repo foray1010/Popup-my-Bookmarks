@@ -11,7 +11,7 @@ import OptionItem from './OptionItem/index.js'
 type Props = Readonly<{
   defaultValues: Partial<Options>
   onReset: () => void
-  onSubmit: (variables: Readonly<Partial<Options>>) => void
+  onSubmit: (variables: Partial<Options>) => void
   optionsConfig: OptionsConfig
   selectedOptionFormMap: ReadonlyArray<OPTIONS>
 }>

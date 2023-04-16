@@ -5,7 +5,7 @@ import { useKeyBindingsContext } from './KeyBindingsContext.js'
 import type { KeyBindingMeta } from './types.js'
 
 export default function useKeyBindingsEvent(
-  meta: Readonly<KeyBindingMeta>,
+  meta: KeyBindingMeta,
   callback: (evt: Readonly<KeyboardEvent>) => void | Promise<void>,
 ) {
   const { addListener, removeListener } = useKeyBindingsContext()
