@@ -10,7 +10,8 @@ type Props = Readonly<
   }>
 >
 export default function KeyBindingsWindow({ children, windowId }: Props) {
-  const { appendActiveWindowId, removeActiveWindowId } = useKeyBindingsContext()
+  const { activeWindowId, appendActiveWindowId, removeActiveWindowId } =
+    useKeyBindingsContext()
 
   React.useEffect(() => {
     appendActiveWindowId(windowId)
@@ -20,14 +21,28 @@ export default function KeyBindingsWindow({ children, windowId }: Props) {
     }
   }, [appendActiveWindowId, removeActiveWindowId, windowId])
 
+  const isInert = activeWindowId !== windowId
+
   const windowRef = React.useRef<HTMLDivElement>(null)
   React.useEffect(() => {
-    // when right clicking an bookmark to open menu, then pressing arrow up/down key, the bookmark tree will scroll together. We need to focus to the window to prevent this.
-    windowRef.current?.focus()
-  }, [])
+    // this element is `inert` at the beginning and it is not focusable
+    if (!isInert) {
+      // this function must run after other window is set to `inert`, because whenever that happens, the `document.activeElement` will be reset to the `document.body` in Chrome 102. The hacky way to fix it is to wrap it within `requestAnimationFrame`.
+      requestAnimationFrame(() => {
+        // when right clicking an bookmark to open menu, then pressing arrow up/down key, the bookmark tree will scroll together. We need to focus to the window to prevent this.
+        windowRef.current?.focus()
+      })
+    }
+  }, [isInert])
 
   return (
-    <div ref={windowRef} className={classes['window']} tabIndex={-1}>
+    <div
+      ref={windowRef}
+      className={classes['window']}
+      // @ts-expect-error not officially supported by React: https://github.com/facebook/react/pull/24730
+      inert={isInert ? '' : undefined}
+      tabIndex={-1}
+    >
       {children}
     </div>
   )
