@@ -27,11 +27,10 @@ export default function Menu(props: Props) {
                 key={rowName}
                 isFocused={rowIndex === props.highlightedIndex}
                 isUnclickable={props.unclickableRows.includes(rowName)}
-                rowIndex={rowIndex}
                 rowName={rowName}
                 onClick={props.onRowClick}
-                onMouseEnter={props.onRowMouseEnter}
-                onMouseLeave={props.onRowMouseLeave}
+                onMouseEnter={props.onRowMouseEnter(rowIndex)}
+                onMouseLeave={props.onRowMouseLeave(rowIndex)}
               />
             )
           })}

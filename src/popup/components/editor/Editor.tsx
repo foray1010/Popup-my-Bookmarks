@@ -27,14 +27,11 @@ function CreateEditorForm({
     <EditorForm
       {...editorFormProps}
       defaultTitle={webExtension.i18n.getMessage('newFolder')}
-      onConfirm={React.useCallback(
-        async (title: string, url?: string) => {
-          await createBookmarkAfterId({ createAfterId, title, url })
+      onConfirm={async (title: string, url?: string) => {
+        await createBookmarkAfterId({ createAfterId, title, url })
 
-          await onConfirm(title, url)
-        },
-        [createAfterId, onConfirm],
-      )}
+        await onConfirm(title, url)
+      }}
     />
   )
 }
@@ -51,15 +48,6 @@ function UpdateEditorForm({
 }: UpdateEditorFormProps) {
   const { data: bookmarkInfo } = useGetBookmarkInfo(editTargetId)
 
-  const handleConfirm = React.useCallback(
-    async (title: string, url?: string) => {
-      await webExtension.bookmarks.update(editTargetId, { title, url })
-
-      await onConfirm(title, url)
-    },
-    [editTargetId, onConfirm],
-  )
-
   if (!bookmarkInfo) return null
 
   return (
@@ -67,7 +55,11 @@ function UpdateEditorForm({
       {...editorFormProps}
       defaultTitle={bookmarkInfo.title}
       defaultUrl={bookmarkInfo.url}
-      onConfirm={handleConfirm}
+      onConfirm={async (title: string, url?: string) => {
+        await webExtension.bookmarks.update(editTargetId, { title, url })
+
+        await onConfirm(title, url)
+      }}
     />
   )
 }

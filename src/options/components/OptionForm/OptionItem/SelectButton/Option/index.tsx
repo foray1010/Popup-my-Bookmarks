@@ -22,9 +22,7 @@ export default function Option({ children, ...props }: Props) {
           classes['item'],
           props.checked && classes['itemActive'],
         )}
-        onClick={React.useCallback(() => {
-          inputRef.current?.click()
-        }, [])}
+        onClick={() => inputRef.current?.click()}
       >
         {children}
       </Button>

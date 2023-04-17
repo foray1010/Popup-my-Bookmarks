@@ -227,20 +227,6 @@ function InnerMenuContainer() {
     close,
   )
 
-  const handleRowMouseEnter = React.useCallback(
-    (index: number) => () => {
-      setHighlightedIndex(0, index)
-    },
-    [setHighlightedIndex],
-  )
-
-  const handleRowMouseLeave = React.useCallback(
-    (index: number) => () => {
-      unsetHighlightedIndex(0, index)
-    },
-    [unsetHighlightedIndex],
-  )
-
   if (!state.isOpen) return null
   // Without this condition, it will cause content jumping after menu pattern is fetched
   if (menuPattern.length === 0) return null
@@ -257,8 +243,12 @@ function InnerMenuContainer() {
           menuPattern={menuPattern}
           unclickableRows={unclickableRows}
           onRowClick={handleRowClick}
-          onRowMouseEnter={handleRowMouseEnter}
-          onRowMouseLeave={handleRowMouseLeave}
+          onRowMouseEnter={(index: number) => () => {
+            setHighlightedIndex(0, index)
+          }}
+          onRowMouseLeave={(index: number) => () => {
+            unsetHighlightedIndex(0, index)
+          }}
         />
       </KeyBindingsWindow>
     </FloatingWindow>

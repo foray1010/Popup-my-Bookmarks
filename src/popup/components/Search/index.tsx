@@ -29,11 +29,8 @@ export default function SearchContainer() {
     <SearchInput
       ref={inputRef}
       value={inputValue}
-      onCancel={React.useCallback(() => setInputValue(''), [])}
-      onChange={React.useCallback<React.ChangeEventHandler<HTMLInputElement>>(
-        (evt) => setInputValue(evt.currentTarget.value),
-        [],
-      )}
+      onCancel={() => setInputValue('')}
+      onChange={(evt) => setInputValue(evt.currentTarget.value)}
     />
   )
 }

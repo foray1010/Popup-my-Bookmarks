@@ -1,5 +1,5 @@
 import classNames from 'classix'
-import * as React from 'react'
+import type * as React from 'react'
 import webExtension from 'webextension-polyfill'
 
 import type { MenuItem } from './constants.js'
@@ -9,9 +9,8 @@ type Props = Readonly<{
   isFocused: boolean
   isUnclickable: boolean
   onClick: React.MouseEventHandler
-  onMouseEnter: (index: number) => React.MouseEventHandler
-  onMouseLeave: (index: number) => React.MouseEventHandler
-  rowIndex: number
+  onMouseEnter: React.MouseEventHandler
+  onMouseLeave: React.MouseEventHandler
   rowName: MenuItem
 }>
 export default function MenuRow({
@@ -20,18 +19,8 @@ export default function MenuRow({
   onClick,
   onMouseEnter,
   onMouseLeave,
-  rowIndex,
   rowName,
 }: Props) {
-  const handleMouseEnter = React.useMemo(
-    () => onMouseEnter(rowIndex),
-    [onMouseEnter, rowIndex],
-  )
-  const handleMouseLeave = React.useMemo(
-    () => onMouseLeave(rowIndex),
-    [onMouseLeave, rowIndex],
-  )
-
   return (
     <li
       aria-disabled={isUnclickable}
@@ -43,8 +32,8 @@ export default function MenuRow({
       role='menuitem'
       tabIndex={0}
       onClick={isUnclickable ? undefined : onClick}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {webExtension.i18n.getMessage(rowName)}
     </li>
