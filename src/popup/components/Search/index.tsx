@@ -28,7 +28,6 @@ export default function SearchContainer() {
   return (
     <SearchInput
       ref={inputRef}
-      tabIndex={-1}
       value={inputValue}
       onCancel={React.useCallback(() => setInputValue(''), [])}
       onChange={React.useCallback<React.ChangeEventHandler<HTMLInputElement>>(

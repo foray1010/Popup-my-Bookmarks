@@ -53,6 +53,9 @@ export default function useKeyboardNav({
   useKeyBindingsEvent({ key: 'ArrowUp', windowId }, handlePressArrowUp)
 
   useKeyBindingsEvent({ key: 'Tab', windowId }, (evt) => {
+    // do not use default focusable orders for now, as it does not work with virtualized lists
+    evt.preventDefault()
+
     if (evt.shiftKey) {
       handlePressArrowUp(evt)
     } else {

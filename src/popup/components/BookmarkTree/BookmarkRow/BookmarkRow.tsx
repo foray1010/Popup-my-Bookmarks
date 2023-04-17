@@ -30,6 +30,7 @@ function BookmarkRow({
         isUnclickable && classes['unclickable'],
         divProps.className,
       )}
+      tabIndex={0}
       title={tooltip}
       onAuxClick={isUnclickable ? undefined : divProps.onAuxClick}
       onClick={isUnclickable ? undefined : divProps.onClick}

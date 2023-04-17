@@ -41,6 +41,7 @@ export default function MenuRow({
         isUnclickable && classes['unclickable'],
       )}
       role='menuitem'
+      tabIndex={0}
       onClick={isUnclickable ? undefined : onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
