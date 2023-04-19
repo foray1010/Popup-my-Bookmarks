@@ -6,6 +6,7 @@ import { useKeyBindingsEvent } from '../keyBindings/index.js'
 import SearchInput from './SearchInput.js'
 
 export default function SearchContainer() {
+  const [isComposing, setIsComposing] = React.useState(false)
   const [inputValue, setInputValue] = React.useState('')
   const [, startTransition] = React.useTransition()
 
@@ -13,9 +14,12 @@ export default function SearchContainer() {
 
   React.useEffect(() => {
     startTransition(() => {
+      // do not search during IME composition
+      if (isComposing) return
+
       setSearchQuery(inputValue)
     })
-  }, [setSearchQuery, inputValue])
+  }, [setSearchQuery, inputValue, isComposing])
 
   const inputRef = React.useRef<HTMLInputElement>(null)
   useKeyBindingsEvent({ key: /^.$/, windowId: WindowId.Base }, () => {
@@ -31,6 +35,8 @@ export default function SearchContainer() {
       value={inputValue}
       onCancel={() => setInputValue('')}
       onChange={(evt) => setInputValue(evt.currentTarget.value)}
+      onCompositionEnd={() => setIsComposing(false)}
+      onCompositionStart={() => setIsComposing(true)}
     />
   )
 }
