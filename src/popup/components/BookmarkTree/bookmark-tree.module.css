@@ -1,5 +1,5 @@
 .last-list-item {
-  border-block-end: currentcolor solid var(--gap-rem);
+  border-block-end: var(--section-color) solid var(--gap-rem);
   padding-block-end: var(--gap-rem);
 }
 

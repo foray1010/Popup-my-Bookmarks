@@ -21,5 +21,4 @@
   /* without this, the UI will break when the height is too large, as it scales with font size. */
   width: 100%;
   height: 1em;
-  color: var(--main-font-color);
 }

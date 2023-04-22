@@ -6,11 +6,13 @@
 }
 
 .first-section {
+  --section-color: var(--main-color2);
+
   position: relative;
-  color: var(--main-color2);
 }
 
 .second-section {
+  --section-color: var(--main-color1);
+
   position: relative;
-  color: var(--main-color1);
 }

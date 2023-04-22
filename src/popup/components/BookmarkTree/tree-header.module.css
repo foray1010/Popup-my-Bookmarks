@@ -14,7 +14,7 @@
   grid-auto-flow: column;
   justify-content: space-between;
   margin-block-end: var(--gap-rem);
-  background-color: currentcolor;
+  background-color: var(--section-color);
   padding-inline-start: var(--gap-rem-2x);
 }
 

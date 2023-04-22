@@ -4,6 +4,5 @@
   cursor: default;
   padding: var(--gap-rem);
   text-align: center;
-  color: var(--main-font-color);
   composes: no-text-overflow from '../../../core/styles/composes.module.css';
 }

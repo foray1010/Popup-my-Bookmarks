@@ -3,7 +3,6 @@
   gap: var(--gap-rem-2x);
   align-items: center;
   padding-inline: var(--gap-rem);
-  color: var(--main-font-color);
   composes: list-item from '../../../../core/styles/composes.module.css';
 
   &.drag-indicator {
@@ -13,7 +12,7 @@
   }
 
   &.root-folder {
-    color: inherit !important;
+    color: var(--section-color);
   }
 
   &.highlighted {
