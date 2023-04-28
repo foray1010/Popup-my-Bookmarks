@@ -1,5 +1,4 @@
 # editorconfig.org
-# define and maintain consistent coding styles between different editors and IDEs
 
 root = true
 
@@ -13,3 +12,6 @@ insert_final_newline = true
 
 [*.md]
 indent_size = 4
+
+[Makefile]
+indent_style = tab
