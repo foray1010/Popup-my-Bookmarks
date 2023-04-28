@@ -99,7 +99,7 @@
     "script-ext-html-webpack-plugin": "2.1.5",
     "sharp": "0.32.0",
     "size-limit": "8.2.4",
-    "stylelint": "15.5.0",
+    "stylelint": "15.6.0",
     "swc-loader": "0.2.3",
     "terser-webpack-plugin": "5.3.7",
     "ts-node": "10.9.1",
