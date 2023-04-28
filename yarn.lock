@@ -3156,10 +3156,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:18.15.13, @types/node@npm:^18.0.0":
+"@types/node@npm:*, @types/node@npm:^18.0.0":
   version: 18.15.13
   resolution: "@types/node@npm:18.15.13"
   checksum: 79cc5a2b5f98e8973061a4260a781425efd39161a0e117a69cd089603964816c1a14025e1387b4590c8e82d05133b7b4154fa53a7dffb3877890a66145e76515
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:18.16.1":
+  version: 18.16.1
+  resolution: "@types/node@npm:18.16.1"
+  checksum: 799026b949a48993cba7c9b81b2eabfdfb34c880744cb44c1c990fbedc9e315f3634d126eb2cf9a6e0795577c01016e2326d98565bef695ada9d363fadeb6946
   languageName: node
   linkType: hard
 
@@ -3731,7 +3738,7 @@ __metadata:
     "@types/duplicate-package-checker-webpack-plugin": 2.1.2
     "@types/firefox-webext-browser": 111.0.1
     "@types/jest": 29.5.1
-    "@types/node": 18.15.13
+    "@types/node": 18.16.1
     "@types/react": 18.0.38
     "@types/react-dom": 18.0.11
     "@types/script-ext-html-webpack-plugin": 2.1.3
