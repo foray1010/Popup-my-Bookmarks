@@ -3746,7 +3746,7 @@ __metadata:
     "@types/zip-webpack-plugin": 3.0.3
     axios: 1.3.6
     chrome-manifest-loader: 0.3.0
-    classix: 2.1.30
+    classix: 2.1.32
     clean-webpack-plugin: 4.0.0
     constate: 3.3.2
     copy-webpack-plugin: 11.0.0
@@ -5407,10 +5407,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classix@npm:2.1.30":
-  version: 2.1.30
-  resolution: "classix@npm:2.1.30"
-  checksum: 8cf5471e1a989b44d2ee6a6cbd791562f4e8dedba61dc96821ab3b1ab948749d4ba3d382bc68a81915812638205c0443eb45f819b0e954035a21409ad51cc1e2
+"classix@npm:2.1.32":
+  version: 2.1.32
+  resolution: "classix@npm:2.1.32"
+  checksum: 1864cbd9d3018b3888549b4f1e24bd5a1edb0c27487827a2d38998b6057003ae4c429bbc0ae5ac6dbeab786022ff19f9880c91d55c089449fd76364125cb2b95
   languageName: node
   linkType: hard
 
