@@ -7,9 +7,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "cross-env NODE_ENV=production yarn webpack",
+    "build": "NODE_ENV=production yarn webpack",
     "ci": "npm-run-all -p 'lint:*' 'type:*' && yarn test && yarn build && size-limit",
-    "dev": "cross-env NODE_ENV=development yarn webpack",
+    "dev": "NODE_ENV=development yarn webpack",
     "postinstall": "husky install",
     "lint:css": "yarn stylelint '**/*.css'",
     "lint:js": "eslint .",
@@ -19,7 +19,7 @@
     "prettier": "prettier --ignore-path=node_modules/@foray1010/prettier-config/prettierignore",
     "remark": "remark --frail --ignore-path=node_modules/@foray1010/remark-preset/remarkignore --ignore-path-resolve-from=cwd --silently-ignore",
     "stylelint": "stylelint --ignore-path=node_modules/@foray1010/stylelint-config/stylelintignore",
-    "test": "cross-env NODE_ENV=test jest",
+    "test": "jest",
     "type:check": "tsc",
     "type:coverage": "type-coverage --strict --at-least 99 --detail --ignore-catch -- src/**",
     "webpack": "ts-node node_modules/.bin/webpack-cli"
@@ -71,7 +71,6 @@
     "chrome-manifest-loader": "0.3.0",
     "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "11.0.0",
-    "cross-env": "7.0.3",
     "css-loader": "6.7.3",
     "csstype": "3.1.2",
     "duplicate-package-checker-webpack-plugin": "3.0.0",
