@@ -1,5 +1,4 @@
 /* eslint-disable
-  @typescript-eslint/no-unsafe-argument,
   @typescript-eslint/no-unsafe-assignment,
   @typescript-eslint/no-unsafe-call,
 */
@@ -10,7 +9,6 @@ import * as readline from 'node:readline'
 import { promisify } from 'node:util'
 
 import { type Collection, transifexApi } from '@transifex/api'
-import axios from 'axios'
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -82,23 +80,20 @@ async function main(): Promise<void> {
 
       console.log(`processing "${mappedLanguage}"...`)
 
-      // @ts-expect-error missing this type
-      const url = await transifexApi.ResourceTranslationsAsyncDownload.download(
-        {
+      const url: string =
+        // @ts-expect-error missing this type
+        await transifexApi.ResourceTranslationsAsyncDownload.download({
           resource,
           language,
           mode: 'onlytranslated',
-        },
-      )
-      const { data: messagesJson } = await axios.get<
-        Record<
-          string,
-          Readonly<{
-            message: string
-            description?: string
-          }>
-        >
-      >(url)
+        })
+      const messagesJson: Record<
+        string,
+        Readonly<{
+          message: string
+          description?: string
+        }>
+      > = await (await fetch(url)).json()
 
       const sortedMessagesJson = Object.fromEntries(
         Object.entries(messagesJson)
