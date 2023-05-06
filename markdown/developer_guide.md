@@ -19,7 +19,7 @@
 1. build
 
    ```sh
-   yarn build
+   make build
    ```
 
    To build the whole extension and output a zip file (./build/production/{version_in_package.json}.zip) for uploading to Chrome Web Store
@@ -27,7 +27,7 @@
 1. dev
 
    ```sh
-   yarn dev
+   make dev
    ```
 
    To build a temporary folder `build/development` for loading unpacked extension
@@ -35,15 +35,26 @@
 1. lint
 
    ```sh
-   yarn lint
+   make lint
    ```
 
    To lint if all files follow our linter config
 
+1. locales
+
+   ```sh
+   make locales
+   ```
+
+   To download the latest locale files from transifex
+
+   - `build/store.md` - Description for Chrome Web Store
+   - `README.md` - Description for GitHub
+
 1. md
 
    ```sh
-   yarn md
+   make md
    ```
 
    To generate markdown files

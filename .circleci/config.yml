@@ -14,4 +14,4 @@ jobs:
           key: 'yarn-packages-{{ checksum "yarn.lock" }}'
           paths:
             - '.yarn/cache'
-      - run: 'yarn ci'
+      - run: 'make ci'

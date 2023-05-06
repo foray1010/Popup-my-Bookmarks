@@ -7,22 +7,10 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "NODE_ENV=production yarn webpack",
-    "ci": "npm-run-all -p 'lint:*' 'type:*' && yarn test && yarn build && size-limit",
-    "dev": "NODE_ENV=development yarn webpack",
     "postinstall": "husky install",
-    "lint:css": "yarn stylelint '**/*.css'",
-    "lint:js": "eslint .",
-    "lint:md": "yarn remark .",
-    "locales": "ts-node scripts/generateLocalesFromTransifex.ts",
-    "md": "ts-node scripts/generateMarkdown.ts",
     "prettier": "prettier --ignore-path=node_modules/@foray1010/prettier-config/prettierignore",
     "remark": "remark --frail --ignore-path=node_modules/@foray1010/remark-preset/remarkignore --ignore-path-resolve-from=cwd --silently-ignore",
-    "stylelint": "stylelint --ignore-path=node_modules/@foray1010/stylelint-config/stylelintignore",
-    "test": "jest",
-    "type:check": "tsc",
-    "type:coverage": "type-coverage --strict --at-least 99 --detail --ignore-catch -- src/**",
-    "webpack": "ts-node node_modules/.bin/webpack-cli"
+    "stylelint": "stylelint --ignore-path=node_modules/@foray1010/stylelint-config/stylelintignore"
   },
   "dependencies": {
     "@fontsource/archivo-narrow": "4.5.12",
@@ -89,7 +77,6 @@
     "lint-staged": "13.2.2",
     "mini-css-extract-plugin": "2.7.5",
     "node-notifier": "10.0.1",
-    "npm-run-all": "4.1.5",
     "postcss": "8.4.23",
     "postcss-loader": "7.3.0",
     "postcss-normalize": "10.0.1",

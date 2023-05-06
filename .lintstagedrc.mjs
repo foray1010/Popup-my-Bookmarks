@@ -2,7 +2,7 @@ const config = {
   '*.{cjs,cts,js,mjs,mts,ts,tsx}': [
     'yarn prettier --write',
     'eslint --fix',
-    'yarn test --findRelatedTests --passWithNoTests',
+    'jest --findRelatedTests --passWithNoTests',
   ],
   '*.css': ['yarn prettier --write', 'yarn stylelint --fix'],
   '*.{json,yaml,yml}': 'yarn prettier --write',
