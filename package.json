@@ -86,7 +86,7 @@
     "size-limit": "8.2.4",
     "stylelint": "15.6.1",
     "swc-loader": "0.2.3",
-    "terser-webpack-plugin": "5.3.7",
+    "terser-webpack-plugin": "5.3.8",
     "ts-node": "10.9.1",
     "type-coverage": "2.25.2",
     "typescript": "5.0.4",
