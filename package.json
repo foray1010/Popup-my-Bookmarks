@@ -88,7 +88,7 @@
     "swc-loader": "0.2.3",
     "terser-webpack-plugin": "5.3.8",
     "ts-node": "10.9.1",
-    "type-coverage": "2.25.2",
+    "type-coverage": "2.25.3",
     "typescript": "5.0.4",
     "webpack": "5.82.0",
     "webpack-bundle-analyzer": "4.8.0",
