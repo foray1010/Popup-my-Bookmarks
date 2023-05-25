@@ -3794,7 +3794,7 @@ __metadata:
     html-inline-css-webpack-plugin: 1.11.1
     html-webpack-plugin: 5.5.1
     husky: 8.0.3
-    ignore-sync: 7.0.0
+    ignore-sync: 7.0.1
     image-process-loader: 1.1.1
     jest: 29.5.0
     jest-environment-jsdom: 29.5.0
@@ -8379,9 +8379,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore-sync@npm:7.0.0":
-  version: 7.0.0
-  resolution: "ignore-sync@npm:7.0.0"
+"ignore-sync@npm:7.0.1":
+  version: 7.0.1
+  resolution: "ignore-sync@npm:7.0.1"
   dependencies:
     axios: ^1.4.0
     fast-glob: ^3.2.12
@@ -8389,7 +8389,7 @@ __metadata:
     ramda: ^0.29.0
   bin:
     ignore-sync: src/bin.js
-  checksum: 75f47ced761d4de3bc738754bc13c2a994308d87db7a4fbf8cc23388d4bcd9d74dbb0120c4b06856aa7104bdf89eca2c6644dd7981195829698d2b9858fc4d92
+  checksum: c41fb2a936f16b8462a8725331327c44709b2cbcd4154a6b3e0c6a5cfccb0cd490825a6d70266982fc84ce4928bf6fa24daa8209b2cc968385ee4051d16a6e67
   languageName: node
   linkType: hard
 
