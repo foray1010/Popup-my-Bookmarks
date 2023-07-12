@@ -2768,33 +2768,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:4.29.17":
-  version: 4.29.17
-  resolution: "@tanstack/query-core@npm:4.29.17"
-  checksum: 0440d58a566fc3d6791a27eae439f497acc0142cb629ca0fb6e536f9c0a29d150b816ae33c9375411582da0b849a2ef141ef3b2284b8b313d5a4d6671b2548a3
+"@tanstack/query-core@npm:4.29.19":
+  version: 4.29.19
+  resolution: "@tanstack/query-core@npm:4.29.19"
+  checksum: 91a79dbebebc139d118542a5fe83fb54a6f6448bbe1563db1a0bed0c6d44e1d023613efde3c4ac747c72d067110013ac56f90611bf8affc390eda1ac3f99066e
   languageName: node
   linkType: hard
 
-"@tanstack/react-query-devtools@npm:4.29.18":
-  version: 4.29.18
-  resolution: "@tanstack/react-query-devtools@npm:4.29.18"
+"@tanstack/react-query-devtools@npm:4.29.19":
+  version: 4.29.19
+  resolution: "@tanstack/react-query-devtools@npm:4.29.19"
   dependencies:
     "@tanstack/match-sorter-utils": ^8.7.0
     superjson: ^1.10.0
     use-sync-external-store: ^1.2.0
   peerDependencies:
-    "@tanstack/react-query": 4.29.18
+    "@tanstack/react-query": 4.29.19
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: ea3a691cd4b24d143098802ded1bd2dbb9088da7bc7d6e81446219e768a951ac110dc5ead820c696183ed5f94ea7bbb18f51adaf9d7146a6a628479873a9d25f
+  checksum: f077028c109da225b8e8e907a8fb4ad47d3049f6f5d16e5613adb135c531abf62c8975384edbb4d502bb064c98c3c513ee4f3df7c686198e644808311145e79c
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:4.29.18":
-  version: 4.29.18
-  resolution: "@tanstack/react-query@npm:4.29.18"
+"@tanstack/react-query@npm:4.29.19":
+  version: 4.29.19
+  resolution: "@tanstack/react-query@npm:4.29.19"
   dependencies:
-    "@tanstack/query-core": 4.29.17
+    "@tanstack/query-core": 4.29.19
     use-sync-external-store: ^1.2.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -2805,7 +2805,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 6b585569e695c074f722f03db636299f82495a893206923329ddbc74a9f273b0cf0e10b9e560dc15dcd5927c4259b57db6a79173880ed7f29688bbdda5368b9e
+  checksum: 2780ac35b4d1dabcd3e708b95891376e7e609109270d40442b33f4747c508c23e46bcadc692f997f81d38f62b5ab31f8e42bc9a785dfa4afe0c390adb6f37e52
   languageName: node
   linkType: hard
 
@@ -3795,8 +3795,8 @@ __metadata:
     "@svgr/webpack": 8.0.1
     "@swc/core": 1.3.68
     "@swc/jest": 0.2.26
-    "@tanstack/react-query": 4.29.18
-    "@tanstack/react-query-devtools": 4.29.18
+    "@tanstack/react-query": 4.29.19
+    "@tanstack/react-query-devtools": 4.29.19
     "@tanstack/react-virtual": 3.0.0-beta.54
     "@testing-library/jest-dom": 5.16.5
     "@testing-library/react": 14.0.0
