@@ -3906,7 +3906,7 @@ __metadata:
     eslint: 8.45.0
     extract-loader: 5.1.0
     file-loader: 6.2.0
-    html-inline-css-webpack-plugin: 1.11.1
+    html-inline-css-webpack-plugin: 1.11.2
     html-webpack-plugin: 5.5.3
     husky: 8.0.3
     ignore-sync: 7.0.1
@@ -8442,15 +8442,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-inline-css-webpack-plugin@npm:1.11.1":
-  version: 1.11.1
-  resolution: "html-inline-css-webpack-plugin@npm:1.11.1"
+"html-inline-css-webpack-plugin@npm:1.11.2":
+  version: 1.11.2
+  resolution: "html-inline-css-webpack-plugin@npm:1.11.2"
   dependencies:
-    lodash: ^4.17.15
-    tslib: ^1.9.3
+    lodash: ^4.17.21
+    tslib: ^2.6.0
   peerDependencies:
     html-webpack-plugin: ^3.0.0 || ^4.0.0 || ^5.0.0
-  checksum: a234f455bab6886136ba04c532481b57303edd2ebd70eaf30d902882420f8acd3f5726a1885e31ac50c802182daac0c67051b76fd5fa939e6481b4de36e6f7a9
+  checksum: 82ecd02991099724bf3ff6d7d966022f11da89d1294d232d73a2a3f46410c4ba07584114e09f500fa9d4b541d3b9b3e3e26a16ed1b3850906584d4f2d67aaad7
   languageName: node
   linkType: hard
 
@@ -15557,10 +15557,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^1.8.1, tslib@npm:^1.9.3":
+"tslib@npm:^1.8.1":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: dbe628ef87f66691d5d2959b3e41b9ca0045c3ee3c7c7b906cc1e328b39f199bb1ad9e671c39025bd56122ac57dfbf7385a94843b1cc07c60a4db74795829acd
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.6.0":
+  version: 2.6.1
+  resolution: "tslib@npm:2.6.1"
+  checksum: b0d176d176487905b66ae4d5856647df50e37beea7571c53b8d10ba9222c074b81f1410fb91da13debaf2cbc970663609068bdebafa844ea9d69b146527c38fe
   languageName: node
   linkType: hard
 
