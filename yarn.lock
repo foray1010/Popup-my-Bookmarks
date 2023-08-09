@@ -3286,10 +3286,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.17.1":
-  version: 18.17.1
-  resolution: "@types/node@npm:18.17.1"
-  checksum: 56201bda9a2d05d68602df63b4e67b0545ac8c6d0280bd5fb31701350a978a577a027501fbf49db99bf177f2242ebd1244896bfd35e89042d5bd7dfebff28d4e
+"@types/node@npm:18.17.3":
+  version: 18.17.3
+  resolution: "@types/node@npm:18.17.3"
+  checksum: 884fb68936b2b0ff90863fcf80610dd2f3d9fe1947897248b0138df05fe41ee6ce62941b37b565e3b3fd77601cd3977a64de858654c6ab9064413b171740d6ba
   languageName: node
   linkType: hard
 
@@ -3881,7 +3881,7 @@ __metadata:
     "@types/duplicate-package-checker-webpack-plugin": 2.1.2
     "@types/firefox-webext-browser": 111.0.1
     "@types/jest": 29.5.3
-    "@types/node": 18.17.1
+    "@types/node": 18.17.3
     "@types/react": 18.2.18
     "@types/react-dom": 18.2.7
     "@types/script-ext-html-webpack-plugin": 2.1.3
