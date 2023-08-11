@@ -5,7 +5,7 @@ const config = {
     '\\.png$': '<rootDir>/__mocks__/fileMock.ts',
     '\\.svg(\\?svgr)*$': '<rootDir>/__mocks__/fileMock.ts',
   },
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+  setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
   testEnvironment: 'jest-environment-jsdom',
   transform: {
     '\\.tsx?$': '@swc/jest',
