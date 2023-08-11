@@ -1,8 +1,4 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@foray1010/tsconfig/tsconfig.react.json",
-  "ts-node": {
-    // https://github.com/TypeStrong/ts-node/issues/1971#issuecomment-1474312008
-    "ignoreDiagnostics": [5104]
-  }
+  "extends": "@foray1010/tsconfig/tsconfig.react.json"
 }
