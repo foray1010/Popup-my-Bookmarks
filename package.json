@@ -71,7 +71,7 @@
     "image-process-loader": "1.1.1",
     "jest": "29.6.2",
     "jest-environment-jsdom": "29.6.2",
-    "lightningcss": "1.21.1",
+    "lightningcss": "1.21.5",
     "lightningcss-loader": "2.1.0",
     "lint-staged": "13.2.3",
     "mini-css-extract-plugin": "2.7.6",

@@ -3906,7 +3906,7 @@ __metadata:
     image-process-loader: 1.1.1
     jest: 29.6.2
     jest-environment-jsdom: 29.6.2
-    lightningcss: 1.21.1
+    lightningcss: 1.21.5
     lightningcss-loader: 2.1.0
     lint-staged: 13.2.3
     mini-css-extract-plugin: 2.7.6
@@ -10242,9 +10242,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lightningcss-darwin-arm64@npm:1.21.5":
+  version: 1.21.5
+  resolution: "lightningcss-darwin-arm64@npm:1.21.5"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "lightningcss-darwin-x64@npm:1.21.1":
   version: 1.21.1
   resolution: "lightningcss-darwin-x64@npm:1.21.1"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"lightningcss-darwin-x64@npm:1.21.5":
+  version: 1.21.5
+  resolution: "lightningcss-darwin-x64@npm:1.21.5"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
@@ -10256,9 +10270,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lightningcss-linux-arm-gnueabihf@npm:1.21.5":
+  version: 1.21.5
+  resolution: "lightningcss-linux-arm-gnueabihf@npm:1.21.5"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
 "lightningcss-linux-arm64-gnu@npm:1.21.1":
   version: 1.21.1
   resolution: "lightningcss-linux-arm64-gnu@npm:1.21.1"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"lightningcss-linux-arm64-gnu@npm:1.21.5":
+  version: 1.21.5
+  resolution: "lightningcss-linux-arm64-gnu@npm:1.21.5"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
@@ -10270,6 +10298,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lightningcss-linux-arm64-musl@npm:1.21.5":
+  version: 1.21.5
+  resolution: "lightningcss-linux-arm64-musl@npm:1.21.5"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
 "lightningcss-linux-x64-gnu@npm:1.21.1":
   version: 1.21.1
   resolution: "lightningcss-linux-x64-gnu@npm:1.21.1"
@@ -10277,9 +10312,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lightningcss-linux-x64-gnu@npm:1.21.5":
+  version: 1.21.5
+  resolution: "lightningcss-linux-x64-gnu@npm:1.21.5"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "lightningcss-linux-x64-musl@npm:1.21.1":
   version: 1.21.1
   resolution: "lightningcss-linux-x64-musl@npm:1.21.1"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"lightningcss-linux-x64-musl@npm:1.21.5":
+  version: 1.21.5
+  resolution: "lightningcss-linux-x64-musl@npm:1.21.5"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
@@ -10304,7 +10353,48 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lightningcss@npm:1.21.1, lightningcss@npm:^1.16.0":
+"lightningcss-win32-x64-msvc@npm:1.21.5":
+  version: 1.21.5
+  resolution: "lightningcss-win32-x64-msvc@npm:1.21.5"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"lightningcss@npm:1.21.5":
+  version: 1.21.5
+  resolution: "lightningcss@npm:1.21.5"
+  dependencies:
+    detect-libc: ^1.0.3
+    lightningcss-darwin-arm64: 1.21.5
+    lightningcss-darwin-x64: 1.21.5
+    lightningcss-linux-arm-gnueabihf: 1.21.5
+    lightningcss-linux-arm64-gnu: 1.21.5
+    lightningcss-linux-arm64-musl: 1.21.5
+    lightningcss-linux-x64-gnu: 1.21.5
+    lightningcss-linux-x64-musl: 1.21.5
+    lightningcss-win32-x64-msvc: 1.21.5
+  dependenciesMeta:
+    lightningcss-darwin-arm64:
+      optional: true
+    lightningcss-darwin-x64:
+      optional: true
+    lightningcss-linux-arm-gnueabihf:
+      optional: true
+    lightningcss-linux-arm64-gnu:
+      optional: true
+    lightningcss-linux-arm64-musl:
+      optional: true
+    lightningcss-linux-x64-gnu:
+      optional: true
+    lightningcss-linux-x64-musl:
+      optional: true
+    lightningcss-win32-x64-msvc:
+      optional: true
+  checksum: fcfb80302740c275fea8dc6ebc1a31da681321d92f0ddb33deb71037bb3dee08b8143ee03ddad8cef39c7ba4000447b362c9295d264deec124c9a206a848fef4
+  languageName: node
+  linkType: hard
+
+"lightningcss@npm:^1.16.0":
   version: 1.21.1
   resolution: "lightningcss@npm:1.21.1"
   dependencies:
