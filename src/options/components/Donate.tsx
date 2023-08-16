@@ -1,5 +1,5 @@
 import LazyImage from '../../core/components/baseItems/LazyImage.js'
-import donateIcon from '../images/btn_donateCC_LG.png'
+import donateIcon from '../images/btn_donateCC_LG.webp'
 import classes from './donate.module.css'
 import ExternalLink from './ExternalLink/index.js'
 

@@ -84,7 +84,7 @@ const webpackConfig: Readonly<Configuration> = {
         },
       },
       {
-        test: /\.png$/,
+        test: /\.(png|webp)$/,
         loader: 'file-loader',
         options: {
           name: 'images/[name].[ext]',
@@ -93,7 +93,7 @@ const webpackConfig: Readonly<Configuration> = {
       ...(isDevelopmentBuild
         ? [
             {
-              test: /\/core\/.+\.png$/,
+              test: /icon\d+\.png$/,
               loader: 'image-process-loader',
               options: {
                 greyscale: true,
