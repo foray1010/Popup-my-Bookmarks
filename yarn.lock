@@ -3786,7 +3786,7 @@ __metadata:
     clean-webpack-plugin: 4.0.0
     constate: 3.3.2
     copy-webpack-plugin: 11.0.0
-    core-js: 3.32.0
+    core-js: 3.32.1
     css-loader: 6.8.1
     csstype: 3.1.2
     duplicate-package-checker-webpack-plugin: 3.0.0
@@ -5914,10 +5914,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:3.32.0, core-js@npm:^3.22.4":
-  version: 3.32.0
-  resolution: "core-js@npm:3.32.0"
-  checksum: 52921395028550e4c9d21d47b9836439bb5b6b9eefc34d45a3948a68d81fdd093acc0fadf69f9cf632b82f01f95f22f484408a93dd9e940b19119ac204cd2925
+"core-js@npm:3.32.1":
+  version: 3.32.1
+  resolution: "core-js@npm:3.32.1"
+  checksum: e4af91d9c6be7b59235feb3f273d16705126ce09a0b4a787144d131d874f0cd10be3c24fc52e5eea7d7cb03ceabe4be7b255abcd9474b5eb1ff365d2c5611f9a
   languageName: node
   linkType: hard
 
@@ -5925,6 +5925,13 @@ __metadata:
   version: 2.6.12
   resolution: "core-js@npm:2.6.12"
   checksum: 44fa9934a85f8c78d61e0c8b7b22436330471ffe59ec5076fe7f324d6e8cf7f824b14b1c81ca73608b13bdb0fef035bd820989bf059767ad6fa13123bb8bd016
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^3.22.4":
+  version: 3.32.0
+  resolution: "core-js@npm:3.32.0"
+  checksum: 52921395028550e4c9d21d47b9836439bb5b6b9eefc34d45a3948a68d81fdd093acc0fadf69f9cf632b82f01f95f22f484408a93dd9e940b19119ac204cd2925
   languageName: node
   linkType: hard
 
