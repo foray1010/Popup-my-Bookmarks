@@ -3863,7 +3863,7 @@ __metadata:
     swc-loader: 0.2.3
     terser-webpack-plugin: 5.3.9
     ts-node: 10.9.1
-    type-coverage: 2.26.0
+    type-coverage: 2.26.1
     typescript: 5.1.6
     use-debounce: 9.0.4
     use-deep-compare: 1.1.0
@@ -15618,9 +15618,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-coverage-core@npm:^2.26.0":
-  version: 2.26.0
-  resolution: "type-coverage-core@npm:2.26.0"
+"type-coverage-core@npm:^2.26.1":
+  version: 2.26.2
+  resolution: "type-coverage-core@npm:2.26.2"
   dependencies:
     fast-glob: 3
     minimatch: 6 || 7 || 8 || 9
@@ -15629,19 +15629,19 @@ __metadata:
     tsutils: 3
   peerDependencies:
     typescript: 2 || 3 || 4 || 5
-  checksum: 3036fe47d10c38faaffe3961da4f0d20aca8e570f465eb13215f7031120087df51aaa523aa0742c0d0860c04191df3b0a102a65c7e14245fbd13bff58817e07c
+  checksum: 657a1abb2b894f7032ef5c8e90eabf37a2f733db175fe313cb6913f6883c07dc08a8702dd9aa92bc766eb4f97bfa14c3cbd40d591cfb82a52e73b97b1bafccfe
   languageName: node
   linkType: hard
 
-"type-coverage@npm:2.26.0":
-  version: 2.26.0
-  resolution: "type-coverage@npm:2.26.0"
+"type-coverage@npm:2.26.1":
+  version: 2.26.1
+  resolution: "type-coverage@npm:2.26.1"
   dependencies:
     minimist: 1
-    type-coverage-core: ^2.26.0
+    type-coverage-core: ^2.26.1
   bin:
     type-coverage: bin/type-coverage
-  checksum: a635e3144eed389eb08dea6c0f0bb20d25895c17085a1d6f68959b82debd76454871bc4460b27ead7426e8d1e2e7c6d23278de7f1cc6fd71e1a9853d282fb954
+  checksum: 2bd36c69e7ccc19a648805ca64e04459e08bbb4d0ccaa3d2bd9f47f4f10e499569fb34e4a3a765b71a18e9765cf671523a575ed63c5ffe61df35cf622f6a0fcc
   languageName: node
   linkType: hard
 
