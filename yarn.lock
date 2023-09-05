@@ -3451,12 +3451,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/zip-webpack-plugin@npm:3.0.3":
-  version: 3.0.3
-  resolution: "@types/zip-webpack-plugin@npm:3.0.3"
+"@types/zip-webpack-plugin@npm:3.0.4":
+  version: 3.0.4
+  resolution: "@types/zip-webpack-plugin@npm:3.0.4"
   dependencies:
     "@types/webpack": ^4
-  checksum: f43ded94a8c0b2f1e416fda557c87cd098aa2e7f804d90db0441265568302c4cbf6b932181e3b9dede00e6113789f75d53c33d0eef828e2d8d2f15d60ff989f1
+  checksum: e4b30ddfb4218b750857684d130f1cc3f08648006eb850363c57f2ce6cd29a1bfc4bd52e7c12af7c02a5af2ff473eb638a170d8d6ce444945001b32743357614
   languageName: node
   linkType: hard
 
@@ -3823,7 +3823,7 @@ __metadata:
     "@types/react-dom": 18.2.7
     "@types/script-ext-html-webpack-plugin": 2.1.3
     "@types/webpack-bundle-analyzer": 4.6.0
-    "@types/zip-webpack-plugin": 3.0.3
+    "@types/zip-webpack-plugin": 3.0.4
     chrome-manifest-loader: 0.3.0
     classix: 2.1.34
     clean-webpack-plugin: 4.0.0
