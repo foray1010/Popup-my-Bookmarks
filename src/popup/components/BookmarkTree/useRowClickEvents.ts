@@ -75,17 +75,27 @@ export default function useRowClickEvents({
         },
       handleRowClick:
         (bookmarkInfo: BookmarkInfo) => async (evt: React.MouseEvent) => {
-          if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
-            if (options[OPTIONS.OP_FOLDER_BY]) {
-              await toggleBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
+          switch (bookmarkInfo.type) {
+            case BOOKMARK_TYPES.FOLDER:
+              if (options[OPTIONS.OP_FOLDER_BY]) {
+                await toggleBookmarkTree(bookmarkInfo.id, treeInfo.parent.id)
+              }
+              break
+
+            case BOOKMARK_TYPES.BOOKMARK: {
+              const option = options[getClickOptionNameByEvent(evt)]
+              const openBookmarkProps = mapOptionToOpenBookmarkProps(option)
+              await openBookmarksInBrowser([bookmarkInfo.id], {
+                ...openBookmarkProps,
+                isAllowBookmarklet: true,
+              })
+              break
             }
-          } else {
-            const option = options[getClickOptionNameByEvent(evt)]
-            const openBookmarkProps = mapOptionToOpenBookmarkProps(option)
-            await openBookmarksInBrowser([bookmarkInfo.id], {
-              ...openBookmarkProps,
-              isAllowBookmarklet: true,
-            })
+
+            case BOOKMARK_TYPES.DRAG_INDICATOR:
+            case BOOKMARK_TYPES.NO_BOOKMARK:
+            case BOOKMARK_TYPES.SEPARATOR:
+              break
           }
         },
       handleRowContextMenu:
