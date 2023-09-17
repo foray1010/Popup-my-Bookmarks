@@ -30,5 +30,12 @@ const config = [
       },
     ],
   ),
+  {
+    rules: {
+      // Bug: `RangeError: Maximum call stack size exceeded`
+      'functional/prefer-immutable-types': 'off',
+      'functional/type-declaration-immutability': 'off',
+    },
+  },
 ]
 export default config

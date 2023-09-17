@@ -5,8 +5,11 @@ export default function withProviders<P extends {}>(
   Providers: readonly React.ComponentType<React.PropsWithChildren>[],
 ) {
   return function ComponentWithProviders(props: P) {
-    return Providers.reduceRight((acc, Provider) => {
-      return <Provider>{acc}</Provider>
-    }, <InnerComponent {...props} />)
+    return Providers.reduceRight(
+      (acc, Provider) => {
+        return <Provider>{acc}</Provider>
+      },
+      <InnerComponent {...props} />,
+    )
   }
 }

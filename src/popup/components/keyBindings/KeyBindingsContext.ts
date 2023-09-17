@@ -73,7 +73,7 @@ function useKeyBindingsPerWindowState() {
         const updatedKeyBindings = keyBindings.filter((keyBinding) => {
           return (
             keyBinding.callback !== callback ||
-            keyBinding.key.toString() !== key.toString()
+            String(keyBinding.key) !== String(key)
           )
         })
 

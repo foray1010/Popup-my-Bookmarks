@@ -13,7 +13,9 @@
   padding-block-start: var(--gap-rem-2x);
   text-align: center;
   color: rgb(var(--bg-color-rgb));
-  font: 1.125rem 'Archivo Narrow', sans-serif;
+  font:
+    1.125rem 'Archivo Narrow',
+    sans-serif;
   composes: focus no-text-overflow from '../../../core/styles/composes.module.css';
 
   &:is(:hover, .active) {
