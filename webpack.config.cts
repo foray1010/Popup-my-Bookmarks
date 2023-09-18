@@ -55,9 +55,6 @@ const webpackConfig: Readonly<Configuration> = {
             loader: 'lightningcss-loader',
             options: {
               implementation: lightningCss,
-              drafts: {
-                nesting: true,
-              },
               // ignore css modules syntax as it is handled by css-loader
               errorRecovery: true,
             },
