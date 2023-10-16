@@ -3898,7 +3898,7 @@ __metadata:
     swc-loader: 0.2.3
     terser-webpack-plugin: 5.3.9
     ts-node: 10.9.1
-    type-coverage: 2.26.3
+    type-coverage: 2.27.0
     typescript: 5.2.2
     use-debounce: 9.0.4
     use-deep-compare: 1.1.0
@@ -15829,15 +15829,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-coverage@npm:2.26.3":
-  version: 2.26.3
-  resolution: "type-coverage@npm:2.26.3"
+"type-coverage@npm:2.27.0":
+  version: 2.27.0
+  resolution: "type-coverage@npm:2.27.0"
   dependencies:
     minimist: 1
     type-coverage-core: ^2.26.3
   bin:
     type-coverage: bin/type-coverage
-  checksum: c37ceb66cb69fbc46de9a2c923e9dcdb8c6ffac9340a4d67efd1151f5cf7584f3d7c6070c2b887fbba1ccaac8b04f94fd1d37307f6e4902c09dd68c7bca9a6ee
+  checksum: aa3fb086a2fe530939613dbf9e9eefbf1344c0eda7d9b599b4d59ec875694bc2a2a74749d9635f8f7d7ded42b15fcff9f803938054386080517e789ffe383512
   languageName: node
   linkType: hard
 
