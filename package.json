@@ -73,7 +73,7 @@
     "jest-environment-jsdom": "29.7.0",
     "lightningcss": "1.22.0",
     "lightningcss-loader": "2.1.0",
-    "lint-staged": "14.0.1",
+    "lint-staged": "15.0.1",
     "mini-css-extract-plugin": "2.7.6",
     "node-notifier": "10.0.1",
     "postcss": "8.4.31",
