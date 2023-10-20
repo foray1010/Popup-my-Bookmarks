@@ -3889,7 +3889,7 @@ __metadata:
     prettier: 3.0.3
     react: 18.2.0
     react-dom: 18.2.0
-    react-hook-form: 7.46.2
+    react-hook-form: 7.47.0
     remark-cli: 12.0.0
     script-ext-html-webpack-plugin: 2.1.5
     sharp: 0.32.6
@@ -12922,12 +12922,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:7.46.2":
-  version: 7.46.2
-  resolution: "react-hook-form@npm:7.46.2"
+"react-hook-form@npm:7.47.0":
+  version: 7.47.0
+  resolution: "react-hook-form@npm:7.47.0"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18
-  checksum: 5ad2b478337fed3ab1a7bee79844d89a85485626fb1afd4acba54e28adb8f6663d37efefa9000b6ddb33f7de23b765bfac9a1d12e10c63e71463317a307134cf
+  checksum: dec192fec9c54e436f9e47008635dd7849b6b119ed477a9b0cd491367a0b2ced3427cd937febfb245e1cb7578c863917181d903eff4519c2787bf713ec7d3426
   languageName: node
   linkType: hard
 
