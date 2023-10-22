@@ -2984,12 +2984,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/duplicate-package-checker-webpack-plugin@npm:2.1.3":
-  version: 2.1.3
-  resolution: "@types/duplicate-package-checker-webpack-plugin@npm:2.1.3"
+"@types/duplicate-package-checker-webpack-plugin@npm:2.1.4":
+  version: 2.1.4
+  resolution: "@types/duplicate-package-checker-webpack-plugin@npm:2.1.4"
   dependencies:
     "@types/webpack": ^4
-  checksum: 4fd0cd0d0ab383598bbab3f2c16db50e848a48ea10f804729b3d4a741e8df3f57145ea5435e8cdc01d0721821f6e3cbcc0e3733d5f0543aeee72210c83673b18
+  checksum: 51467155c0cb86fd005b07479bc0fb1b2c7b09e7570b768e25a2f665bd0505eddbe486b793ada42ea681d7ce86df3b6dced6f847c1db4d89a95df81c95a7fcb0
   languageName: node
   linkType: hard
 
@@ -3850,7 +3850,7 @@ __metadata:
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.5.1
     "@transifex/api": 6.0.1
-    "@types/duplicate-package-checker-webpack-plugin": 2.1.3
+    "@types/duplicate-package-checker-webpack-plugin": 2.1.4
     "@types/firefox-webext-browser": 111.0.2
     "@types/jest": 29.5.5
     "@types/node": 18.18.5
