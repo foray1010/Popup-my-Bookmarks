@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: 'cimg/node:18.12'
+      - image: 'cimg/node:20.9'
     steps:
       - 'checkout'
       # require `sudo`: https://github.com/CircleCI-Public/cimg-node/issues/277
