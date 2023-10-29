@@ -55,7 +55,7 @@
     "@types/react-dom": "18.2.8",
     "@types/script-ext-html-webpack-plugin": "2.1.5",
     "@types/webpack-bundle-analyzer": "4.6.2",
-    "@types/zip-webpack-plugin": "3.0.4",
+    "@types/zip-webpack-plugin": "3.0.5",
     "chrome-manifest-loader": "0.3.0",
     "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "11.0.0",
