@@ -14,7 +14,10 @@ export async function getOptions() {
 
 const [OptionsProvider, useInternalOptions] = constate(
   function useOptionsState() {
-    const { data: options } = useQuery([queryKey], getOptions)
+    const { data: options } = useQuery({
+      queryKey: [queryKey],
+      queryFn: getOptions,
+    })
 
     return options
   },
