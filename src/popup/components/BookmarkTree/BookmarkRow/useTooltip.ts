@@ -35,20 +35,20 @@ export default function useTooltip({
   const [breadcrumbs, setBreadcrumbs] = React.useState<readonly string[]>([])
 
   React.useEffect(() => {
-    let ignore = false
-
     if (!isSearching) return
+
+    const abortController = new AbortController()
 
     getBreadcrumbs(bookmarkInfo.parentId)
       .then((tooltip) => {
-        if (ignore) return true
+        if (abortController.signal.aborted) return true
 
         setBreadcrumbs(tooltip)
       })
       .catch(console.error)
 
     return () => {
-      ignore = true
+      abortController.abort()
     }
   }, [bookmarkInfo, isSearching])
 

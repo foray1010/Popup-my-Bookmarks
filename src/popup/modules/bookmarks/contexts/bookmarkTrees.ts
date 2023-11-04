@@ -262,7 +262,7 @@ function useBookmarkTrees() {
   )
 
   React.useEffect(() => {
-    let ignore = false
+    const abortController = new AbortController()
 
     async function run(): Promise<readonly BookmarkTreeInfo[]> {
       if (options[OPTIONS.REMEMBER_POS]) {
@@ -276,14 +276,14 @@ function useBookmarkTrees() {
     }
     run()
       .then((trees) => {
-        if (ignore) return
+        if (abortController.signal.aborted) return
 
         setBookmarkTrees(trees)
       })
       .catch(console.error)
 
     return () => {
-      ignore = true
+      abortController.abort()
     }
   }, [fetchBookmarkTrees, options])
 
