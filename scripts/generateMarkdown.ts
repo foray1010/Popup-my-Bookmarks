@@ -34,7 +34,7 @@ async function generateReadme(): Promise<void> {
   ])
 
   // enlarge first header
-  fileData = fileData.replace(/^##/, '#')
+  fileData = fileData.replace(/^##/u, '#')
 
   await writeFile(fileName, fileData)
 }

@@ -13,11 +13,11 @@ describe('ExternalLink', () => {
 
     expect(anchorElement).toHaveAttribute(
       'rel',
-      expect.stringMatching(/noopener/),
+      expect.stringMatching(/noopener/u),
     )
     expect(anchorElement).toHaveAttribute(
       'rel',
-      expect.stringMatching(/noreferrer/),
+      expect.stringMatching(/noreferrer/u),
     )
     expect(anchorElement).toHaveAttribute('target', '_blank')
   })

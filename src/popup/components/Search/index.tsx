@@ -22,7 +22,7 @@ export default function SearchContainer() {
   }, [setSearchQuery, inputValue, isComposing])
 
   const inputRef = React.useRef<HTMLInputElement>(null)
-  useKeyBindingsEvent({ key: /^.$/, windowId: WindowId.Base }, () => {
+  useKeyBindingsEvent({ key: /^.$/u, windowId: WindowId.Base }, () => {
     const isFocusedOnInput = document.activeElement instanceof HTMLInputElement
     if (isFocusedOnInput) return
 

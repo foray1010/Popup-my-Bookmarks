@@ -39,7 +39,7 @@ const webpackConfig: Readonly<Configuration> = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.css$/u,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -70,18 +70,18 @@ const webpackConfig: Readonly<Configuration> = {
         ],
       },
       {
-        test: /\.tsx?$/,
+        test: /\.tsx?$/u,
         loader: 'swc-loader',
       },
       {
-        test: /\.woff2$/,
+        test: /\.woff2$/u,
         type: 'asset/resource',
         generator: {
           filename: 'fonts/[name][ext]',
         },
       },
       {
-        test: /\.(png|webp)$/,
+        test: /\.(png|webp)$/u,
         loader: 'file-loader',
         options: {
           name: 'images/[name].[ext]',
@@ -90,7 +90,7 @@ const webpackConfig: Readonly<Configuration> = {
       ...(isDevelopmentBuild
         ? [
             {
-              test: /icon\d+\.png$/,
+              test: /icon\d+\.png$/u,
               loader: 'image-process-loader',
               options: {
                 greyscale: true,
@@ -100,9 +100,9 @@ const webpackConfig: Readonly<Configuration> = {
         : []),
 
       {
-        test: /\.svg$/,
-        resourceQuery: /svgr/,
-        issuer: /\.tsx?$/,
+        test: /\.svg$/u,
+        resourceQuery: /svgr/u,
+        issuer: /\.tsx?$/u,
         use: [
           'swc-loader',
           {
@@ -112,15 +112,15 @@ const webpackConfig: Readonly<Configuration> = {
         ],
       },
       {
-        test: /\.svg$/,
-        resourceQuery: { not: [/svgr/] },
+        test: /\.svg$/u,
+        resourceQuery: { not: [/svgr/u] },
         type: 'asset',
         generator: {
           filename: 'images/[name][ext]',
         },
       },
       {
-        test: /\/manifest\.yml$/,
+        test: /\/manifest\.yml$/u,
         use: [
           {
             loader: 'file-loader',

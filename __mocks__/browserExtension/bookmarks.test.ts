@@ -143,7 +143,7 @@ describe('browser.bookmarks', () => {
       })
 
       // make sure the dateAdded is not the same
-      await sleep(1)
+      await sleep(10)
 
       const bookmark2 = await bookmarks.create({
         title: 'test2',
