@@ -32,15 +32,15 @@ export default function SelectButton<T extends string | number>({
     coverInlineSizePercentage
 
   return (
-    <span className={classes['main']}>
+    <span className={classes.main}>
       <span
-        className={classes['cover']}
+        className={classes.cover}
         style={{
           inlineSize: `${coverInlineSizePercentage}%`,
           insetInlineStart: `${coverInsetInlineStartPercentage}%`,
         }}
       />
-      <span className={classes['options']}>
+      <span className={classes.options}>
         {choices.map((choice) => (
           <Option
             key={choice.value}

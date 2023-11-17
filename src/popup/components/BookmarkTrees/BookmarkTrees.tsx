@@ -24,7 +24,7 @@ export default function BookmarkTrees(props: Props) {
   )
 
   return (
-    <main className={classes['main']}>
+    <main className={classes.main}>
       <section className={classes['first-section']} style={widthStyle}>
         {props.firstTreeHeader}
         {firstSectionItems}

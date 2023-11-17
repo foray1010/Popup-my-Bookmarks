@@ -38,7 +38,7 @@ export default function KeyBindingsWindow({ children, windowId }: Props) {
   return (
     <div
       ref={windowRef}
-      className={classes['window']}
+      className={classes.window}
       // @ts-expect-error not officially supported by React: https://github.com/facebook/react/pull/24730
       inert={isInert ? '' : undefined}
       tabIndex={-1}

@@ -25,9 +25,9 @@ export default function MenuRow({
     <li
       aria-disabled={isUnclickable}
       className={classNames(
-        classes['main'],
-        isFocused && classes['focused'],
-        isUnclickable && classes['unclickable'],
+        classes.main,
+        isFocused && classes.focused,
+        isUnclickable && classes.unclickable,
       )}
       role='menuitem'
       tabIndex={0}

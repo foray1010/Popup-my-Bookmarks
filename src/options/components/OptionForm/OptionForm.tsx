@@ -20,11 +20,11 @@ export default function OptionForm(props: Props) {
 
   return (
     <ActionlessForm
-      className={classes['form']}
+      className={classes.form}
       onReset={props.onReset}
       onSubmit={handleSubmit(props.onSubmit)}
     >
-      <table className={classes['table']}>
+      <table className={classes.table}>
         <tbody>
           {props.selectedOptionFormMap.map((optionName) => (
             <tr key={optionName}>

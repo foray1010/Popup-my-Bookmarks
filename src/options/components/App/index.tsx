@@ -12,7 +12,7 @@ import classes from './styles.module.css'
 
 function InnerApp() {
   return (
-    <div className={classes['main']}>
+    <div className={classes.main}>
       <NavBar />
 
       <main>

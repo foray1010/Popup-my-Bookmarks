@@ -10,6 +10,9 @@ const reactDirs = ['__mocks__', 'src']
 
 const config = [
   ...eslintIgnoresConfig,
+  {
+    ignores: ['**/*.css.d.ts'],
+  },
   ...applyConfig(
     {
       filePrefixes: '.',

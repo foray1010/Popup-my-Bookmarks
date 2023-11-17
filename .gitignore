@@ -201,3 +201,4 @@ $RECYCLE.BIN/
 *.lnk
 
 build/
+*.css.d.ts

@@ -15,12 +15,12 @@ export default function Option({ children, ...props }: Props) {
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   return (
-    <span className={classes['main']}>
+    <span className={classes.main}>
       <input ref={inputRef} {...props} hidden type='radio' />
       <Button
         className={classNames(
-          classes['item'],
-          props.checked && classes['itemActive'],
+          classes.item,
+          props.checked && classes.itemActive,
         )}
         onClick={() => inputRef.current?.click()}
       >

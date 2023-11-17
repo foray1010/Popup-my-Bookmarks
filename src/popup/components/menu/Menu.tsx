@@ -17,7 +17,7 @@ export default function Menu(props: Props) {
   const allRowNames = props.menuPattern.flat()
 
   return (
-    <div className={classes['main']} role='menu'>
+    <div className={classes.main} role='menu'>
       {props.menuPattern.map((rowNames) => (
         <PlainList key={rowNames.join()} role='group'>
           {rowNames.map((rowName) => {

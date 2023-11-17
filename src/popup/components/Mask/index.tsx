@@ -9,7 +9,7 @@ type Props = Readonly<{
 export default function Mask({ opacity, onClick }: Props) {
   return (
     <div
-      className={classes['main']}
+      className={classes.main}
       style={{
         backgroundColor: `rgb(var(--bg-color-rgb) / ${opacity})`,
       }}

@@ -29,26 +29,26 @@ export default function Editor({ onConfirm, ...props }: Props) {
   return (
     <ActionlessForm
       aria-labelledby={headerId}
-      className={classes['main']}
+      className={classes.main}
       style={props.style}
       onSubmit={handleSubmit(async (variables) => {
         await onConfirm(variables.title, variables.url)
       })}
     >
-      <h2 className={classes['header']} id={headerId}>
+      <h2 className={classes.header} id={headerId}>
         {props.header}
       </h2>
 
       <Input
         {...register('title')}
         autoFocus
-        className={classes['input']}
+        className={classes.input}
         defaultValue={props.defaultTitle}
       />
       {props.isAllowedToEditUrl && (
         <Input
           {...register('url')}
-          className={classes['input']}
+          className={classes.input}
           defaultValue={props.defaultUrl}
         />
       )}

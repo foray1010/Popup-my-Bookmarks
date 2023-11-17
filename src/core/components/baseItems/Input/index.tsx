@@ -14,7 +14,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(function InnerInput(
       {...props}
       ref={ref}
       className={classNames(
-        classes['main'],
+        classes.main,
         ['number', 'text'].includes(type) && classes['text-input'],
         className,
       )}

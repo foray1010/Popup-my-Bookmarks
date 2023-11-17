@@ -15,7 +15,7 @@ export default function SelectString({
   ...restProps
 }: Props) {
   return (
-    <Select className={classNames(classes['main'], className)} {...restProps}>
+    <Select className={classNames(classes.main, className)} {...restProps}>
       {choices.map((optionChoice, optionChoiceIndex) => {
         return (
           <option key={optionChoiceIndex} value={optionChoiceIndex}>

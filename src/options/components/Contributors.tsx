@@ -31,7 +31,7 @@ const contributors: Record<string, readonly string[]> = {
 
 export default function Contributors() {
   return (
-    <dl className={classes['main']}>
+    <dl className={classes.main}>
       {Object.entries(contributors).map(
         ([contributeType, contributorsOfType]) => (
           <React.Fragment key={contributeType}>

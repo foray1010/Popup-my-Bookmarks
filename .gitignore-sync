@@ -6,3 +6,4 @@ Global/Windows.gitignore
 
 [inline]
 build/
+*.css.d.ts

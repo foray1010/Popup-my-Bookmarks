@@ -24,14 +24,18 @@ size-limit: build-prod # limit build size
 	$(bin_dir)/size-limit
 .PHONY: size-limit
 
+tcm := $(bin_dir)/tcm
 webpack := $(bin_dir)/ts-node $(bin_dir)/webpack-cli
 
-build-prod:
+build-css-types:
+	$(tcm) $(src_dir)
+build-prod: build-css-types
 	NODE_ENV=production $(webpack)
 build: build-prod size-limit # build production extension
 .PHONY: build-prod build
 
 dev: # build development extension in watch mode
+	$(tcm) $(src_dir) --watch &
 	NODE_ENV=development $(webpack)
 .PHONY: dev
 
@@ -54,7 +58,7 @@ lint-format: md # check if files follow prettier formatting
 	yarn prettier --check .
 lint-md: md # lint by remark
 	yarn remark .
-lint-js: # lint by eslint
+lint-js: build-css-types # lint by eslint
 	$(bin_dir)/eslint .
 lint: lint-css lint-format lint-md lint-js # run all lint tasks
 .PHONY: lint-css lint-format lint-md lint-js lint
@@ -63,9 +67,9 @@ test: # run tests
 	$(bin_dir)/jest
 .PHONY: test
 
-type-check: # type check by tsc
+type-check: build-css-types # type check by tsc
 	$(bin_dir)/tsc
-type-coverage: # check type coverage
+type-coverage: build-css-types # check type coverage
 	$(bin_dir)/type-coverage --strict --at-least 99 --detail --ignore-catch -- $(src_dir)/**
 type: type-check type-coverage # run all type tasks
 .PHONY: type-check type-coverage type

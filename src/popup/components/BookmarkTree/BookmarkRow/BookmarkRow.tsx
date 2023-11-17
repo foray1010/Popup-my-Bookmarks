@@ -25,9 +25,9 @@ function BookmarkRow({
     <div
       {...divProps}
       className={classNames(
-        classes['main'],
-        isHighlighted && classes['highlighted'],
-        isUnclickable && classes['unclickable'],
+        classes.main,
+        isHighlighted && classes.highlighted,
+        isUnclickable && classes.unclickable,
         divProps.className,
       )}
       tabIndex={0}
@@ -36,8 +36,8 @@ function BookmarkRow({
       onClick={isUnclickable ? undefined : divProps.onClick}
       onContextMenu={isUnclickable ? undefined : divProps.onContextMenu}
     >
-      {iconUrl && <LazyImage className={classes['icon']} src={iconUrl} />}
-      <div className={classes['title']}>{title}</div>
+      {iconUrl && <LazyImage className={classes.icon} src={iconUrl} />}
+      <div className={classes.title}>{title}</div>
     </div>
   )
 }

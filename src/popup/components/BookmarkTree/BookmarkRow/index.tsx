@@ -101,7 +101,7 @@ const BookmarkRowContainer = React.forwardRef(
               bookmarkInfo.isRoot && classes['root-folder'],
               bookmarkInfo.type === BOOKMARK_TYPES.DRAG_INDICATOR &&
                 classes['drag-indicator'],
-              isSeparator && classes['separator'],
+              isSeparator && classes.separator,
             )}
             iconUrl={bookmarkInfo.iconUrl}
             isHighlighted={isHighlighted}

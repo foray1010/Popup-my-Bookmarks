@@ -10,7 +10,7 @@ export default function ExternalLink(props: Props) {
   return (
     <a
       {...props}
-      className={classNames(classes['main'], props.className)}
+      className={classNames(classes.main, props.className)}
       rel='noopener noreferrer'
       target='_blank'
     />

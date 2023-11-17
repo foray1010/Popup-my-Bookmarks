@@ -105,7 +105,7 @@ export default function BookmarkTreeContainer({ treeId }: Props) {
   })
 
   return (
-    <section className={classes['main']}>
+    <section className={classes.main}>
       {isShowHeader && (
         <TreeHeader title={treeInfo.parent.title} onClose={closeCurrentTree} />
       )}

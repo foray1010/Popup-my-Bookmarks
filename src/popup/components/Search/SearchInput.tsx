@@ -17,8 +17,8 @@ const SearchInput = React.forwardRef<HTMLInputElement, Props>(
     const inputId = React.useId()
 
     return (
-      <div className={classes['main']} role='search'>
-        <Search className={classes['icon']} />
+      <div className={classes.main} role='search'>
+        <Search className={classes.icon} />
         <Input
           ref={ref}
           inputMode='search'
@@ -31,7 +31,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, Props>(
           <Cross
             aria-controls={inputId}
             aria-label={webExtension.i18n.getMessage('cancel')}
-            className={classes['icon']}
+            className={classes.icon}
             role='button'
             onClick={onCancel}
           />

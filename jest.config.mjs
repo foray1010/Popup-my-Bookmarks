@@ -1,3 +1,4 @@
+/** @type {import('jest').Config} */
 const config = {
   preset: '@foray1010',
   moduleNameMapper: {

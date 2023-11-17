@@ -38,17 +38,17 @@ export default function InputSelect({
   )
 
   return (
-    <div className={classes['main']}>
+    <div className={classes.main}>
       <Input
         ref={inputRef}
         {...restProps}
-        className={classes['input']}
+        className={classes.input}
         value={value}
         onChange={handleChange}
       />
       <Select
         ref={selectRef}
-        className={classes['select']}
+        className={classes.select}
         defaultValue={value}
         onChange={handleChange}
       >

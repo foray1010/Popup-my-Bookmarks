@@ -11,7 +11,7 @@ const PlainList = React.forwardRef<HTMLUListElement, Props>(
       <ul
         {...props}
         ref={ref}
-        className={classNames(classes['main'], className)}
+        className={classNames(classes.main, className)}
       />
     )
   },
