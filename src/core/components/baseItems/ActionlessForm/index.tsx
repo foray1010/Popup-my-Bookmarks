@@ -2,13 +2,13 @@ import * as React from 'react'
 
 type Props = Readonly<
   Omit<
-    React.FormHTMLAttributes<HTMLFormElement>,
+    React.JSX.IntrinsicElements['form'],
     'action' | 'enctype' | 'method' | 'target'
   >
 >
 
 const ActionlessForm = React.forwardRef<HTMLFormElement, Props>(
-  function InnerActionlessForm({ onSubmit, ...props }: Props, ref) {
+  function InnerActionlessForm({ onSubmit, ...props }, ref) {
     return (
       <form
         // `<form>` is not considered as role='form' when no accessible name, such as `aria-label`

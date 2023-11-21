@@ -5,10 +5,7 @@ import Button from '../../../../../../core/components/baseItems/Button/index.js'
 import classes from './styles.module.css'
 
 type Props = Readonly<
-  Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    'className' | 'hidden' | 'type'
-  >
+  Omit<React.JSX.IntrinsicElements['input'], 'className' | 'hidden' | 'type'>
 >
 
 export default function Option({ children, ...props }: Props) {

@@ -1,8 +1,8 @@
 import type * as React from 'react'
 import * as ReactDom from 'react-dom/client'
 
-export default function createAndRenderRoot<P>(
-  app: React.ReactElement<P>,
+export default function createAndRenderRoot(
+  app: React.ReactElement,
 ): ReactDom.Root {
   const rootEl = document.getElementById('root')
   if (!rootEl) throw new TypeError('#root not found')

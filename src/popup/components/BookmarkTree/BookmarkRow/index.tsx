@@ -30,7 +30,7 @@ type Props = Readonly<{
   onMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
   style?: React.CSSProperties
 }>
-const BookmarkRowContainer = React.forwardRef(
+const BookmarkRowContainer = React.forwardRef<HTMLLIElement, Props>(
   function InnerBookmarkRowContainer(
     {
       bookmarkInfo,
@@ -47,8 +47,8 @@ const BookmarkRowContainer = React.forwardRef(
       onMouseEnter,
       onMouseLeave,
       ...liProps
-    }: Props,
-    setRef: React.Ref<HTMLLIElement>,
+    },
+    setRef,
   ) {
     const tooltip = useTooltip({
       isSearching,

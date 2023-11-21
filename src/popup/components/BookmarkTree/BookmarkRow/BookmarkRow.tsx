@@ -5,7 +5,7 @@ import LazyImage from '../../../../core/components/baseItems/LazyImage.js'
 import classes from './bookmark-row.module.css'
 
 type Props = Readonly<
-  React.HTMLAttributes<HTMLDivElement> & {
+  React.JSX.IntrinsicElements['div'] & {
     iconUrl?: string | undefined
     isHighlighted: boolean
     isUnclickable: boolean

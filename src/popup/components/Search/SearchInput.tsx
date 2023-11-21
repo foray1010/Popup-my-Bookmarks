@@ -13,7 +13,7 @@ type Props = Readonly<
   }
 >
 const SearchInput = React.forwardRef<HTMLInputElement, Props>(
-  function InnerSearchInput({ onCancel, ...inputProps }: Props, ref) {
+  function InnerSearchInput({ onCancel, ...inputProps }, ref) {
     const inputId = React.useId()
 
     return (
