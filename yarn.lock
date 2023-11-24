@@ -3141,13 +3141,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:29.5.8":
-  version: 29.5.8
-  resolution: "@types/jest@npm:29.5.8"
+"@types/jest@npm:29.5.9":
+  version: 29.5.9
+  resolution: "@types/jest@npm:29.5.9"
   dependencies:
     expect: "npm:^29.0.0"
     pretty-format: "npm:^29.0.0"
-  checksum: a28e7827ea7e1a2aace6a386868fa6b8402c162d6c71570aed2c29d3745ddc22ceef6899a20643071817905d3c57b670a7992fc8760bff65939351fd4dc481cf
+  checksum: 66fe6b9b1c72739d02edaf1c98468aec84c700d841376afab9321b5268cb7b656a00a3561408b6c37f8619fffa7902e2ef29357fbc355e3e641c18b254899e49
   languageName: node
   linkType: hard
 
@@ -3879,7 +3879,7 @@ __metadata:
     "@transifex/api": "npm:6.0.1"
     "@types/duplicate-package-checker-webpack-plugin": "npm:2.1.5"
     "@types/firefox-webext-browser": "npm:111.0.4"
-    "@types/jest": "npm:29.5.8"
+    "@types/jest": "npm:29.5.9"
     "@types/node": "npm:20.9.1"
     "@types/react": "npm:18.2.37"
     "@types/react-dom": "npm:18.2.15"
