@@ -17,7 +17,7 @@
     "targets": "chrome >= 104",
     // `usage` mode is less efficient than `entry`
     "mode": "entry",
-    "coreJs": "3.32",
+    "coreJs": "3.33",
     "shippedProposals": true
   }
 }

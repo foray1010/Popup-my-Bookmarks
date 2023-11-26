@@ -120,8 +120,9 @@ class StorageAreaSync
 
 enum AreaName {
   Local = 'local',
-  Sync = 'sync',
   Managed = 'managed',
+  Session = 'session',
+  Sync = 'sync',
 }
 
 type StorageAreaListenerCallback = Parameters<
@@ -131,8 +132,9 @@ type StorageAreaListenerCallback = Parameters<
 type IStorage = typeof browser.storage
 class Storage implements IStorage {
   public readonly [AreaName.Local] = new StorageArea()
-  public readonly [AreaName.Sync] = new StorageAreaSync()
   public readonly [AreaName.Managed] = new StorageArea()
+  public readonly [AreaName.Session] = new StorageArea()
+  public readonly [AreaName.Sync] = new StorageAreaSync()
 
   readonly #listenerWeakMap = new WeakMap<
     Parameters<(typeof browser.storage.onChanged)['addListener']>[0],
@@ -143,8 +145,9 @@ class Storage implements IStorage {
     addListener: (cb) => {
       const listenerCallbacks: Record<AreaName, StorageAreaListenerCallback> = {
         [AreaName.Local]: (changes) => cb(changes, AreaName.Local),
-        [AreaName.Sync]: (changes) => cb(changes, AreaName.Sync),
         [AreaName.Managed]: (changes) => cb(changes, AreaName.Managed),
+        [AreaName.Session]: (changes) => cb(changes, AreaName.Session),
+        [AreaName.Sync]: (changes) => cb(changes, AreaName.Sync),
       }
 
       for (const areaName of Object.values(AreaName)) {
