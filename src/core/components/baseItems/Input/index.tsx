@@ -1,11 +1,10 @@
 import classNames from 'classix'
-import * as React from 'react'
+import { forwardRef, type JSX } from 'react'
 
 import classes from './styles.module.css'
 
-type Props = Readonly<React.JSX.IntrinsicElements['input']>
-
-const Input = React.forwardRef<HTMLInputElement, Props>(function InnerInput(
+type Props = Readonly<JSX.IntrinsicElements['input']>
+const Input = forwardRef<HTMLInputElement, Props>(function InnerInput(
   { className, type = 'text', ...props },
   ref,
 ) {

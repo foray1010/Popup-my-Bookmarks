@@ -1,18 +1,18 @@
-import * as React from 'react'
+import { type MouseEventHandler, useCallback, useEffect, useRef } from 'react'
 
 import { useDragAndDropContext } from './DragAndDropContext.js'
 
 function useScroll() {
-  const scrollingTimeoutRef = React.useRef<number>()
+  const scrollingTimeoutRef = useRef<number>()
 
-  const clearScroll = React.useCallback(() => {
+  const clearScroll = useCallback(() => {
     if (scrollingTimeoutRef.current !== undefined) {
       clearInterval(scrollingTimeoutRef.current)
       scrollingTimeoutRef.current = undefined
     }
   }, [])
 
-  const scroll = React.useCallback(
+  const scroll = useCallback(
     (
       containerElement: Readonly<HTMLElement>,
       { isUpward }: Readonly<{ isUpward: boolean }>,
@@ -41,13 +41,13 @@ export default function useDragZoneEvents({
 
   const { clearScroll, scroll } = useScroll()
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isDragging) {
       clearScroll()
     }
   }, [clearScroll, isDragging])
 
-  const onMouseMove = React.useCallback<React.MouseEventHandler>(
+  const onMouseMove = useCallback<MouseEventHandler>(
     (evt) => {
       if (!(evt.currentTarget instanceof HTMLElement)) return
 

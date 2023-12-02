@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { type MouseEvent, useMemo } from 'react'
 
 import { OPTIONS } from '../../../core/constants/index.js'
 import { OPEN_IN_TYPES } from '../../constants/menu.js'
@@ -28,7 +28,7 @@ export default function useRowClickEvents({
 
   const { open: openMenu } = useMenuContext()
 
-  return React.useMemo(() => {
+  return useMemo(() => {
     async function handleRowMiddleClick(bookmarkInfo: BookmarkInfo) {
       if (bookmarkInfo.type === BOOKMARK_TYPES.FOLDER) {
         await openFolderInBrowser(bookmarkInfo.id, {
@@ -46,10 +46,7 @@ export default function useRowClickEvents({
         })
       }
     }
-    function handleRowRightClick(
-      bookmarkInfo: BookmarkInfo,
-      evt: React.MouseEvent,
-    ) {
+    function handleRowRightClick(bookmarkInfo: BookmarkInfo, evt: MouseEvent) {
       const offset = document
         .querySelector(`[data-bookmarkid="${bookmarkInfo.id}"`)
         ?.getBoundingClientRect()
@@ -68,13 +65,13 @@ export default function useRowClickEvents({
 
     return {
       handleRowAuxClick:
-        (bookmarkInfo: BookmarkInfo) => async (evt: React.MouseEvent) => {
+        (bookmarkInfo: BookmarkInfo) => async (evt: MouseEvent) => {
           if (evt.button === 1) {
             await handleRowMiddleClick(bookmarkInfo)
           }
         },
       handleRowClick:
-        (bookmarkInfo: BookmarkInfo) => async (evt: React.MouseEvent) => {
+        (bookmarkInfo: BookmarkInfo) => async (evt: MouseEvent) => {
           switch (bookmarkInfo.type) {
             case BOOKMARK_TYPES.FOLDER:
               if (options[OPTIONS.OP_FOLDER_BY]) {
@@ -99,7 +96,7 @@ export default function useRowClickEvents({
           }
         },
       handleRowContextMenu:
-        (bookmarkInfo: BookmarkInfo) => (evt: React.MouseEvent) => {
+        (bookmarkInfo: BookmarkInfo) => (evt: MouseEvent) => {
           handleRowRightClick(bookmarkInfo, evt)
         },
     }

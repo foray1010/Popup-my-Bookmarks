@@ -1,10 +1,10 @@
-import * as React from 'react'
+import { type ComponentType, useCallback } from 'react'
 
 import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import { DragAndDropProvider } from '../dragAndDrop/index.js'
 
 export default function withDragAndDropEvents<P extends {}>(
-  WrappedComponent: React.ComponentType<P>,
+  WrappedComponent: ComponentType<P>,
 ) {
   return function ComponentWithDragAndDropEvents(props: P) {
     const { moveBookmarkToDragIndicator, removeDragIndicator } =
@@ -13,7 +13,7 @@ export default function withDragAndDropEvents<P extends {}>(
     return (
       <DragAndDropProvider
         onDragEnd={removeDragIndicator}
-        onDrop={React.useCallback(
+        onDrop={useCallback(
           (evt: Readonly<MouseEvent>, activeKey: string) => {
             moveBookmarkToDragIndicator(activeKey)
           },

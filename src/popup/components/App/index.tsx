@@ -1,7 +1,7 @@
 import './globals.module.css'
 
 import type { PropertiesHyphen } from 'csstype'
-import * as React from 'react'
+import { useEffect } from 'react'
 
 import { OPTIONS } from '../../../core/constants/index.js'
 import { ReactQueryClientProvider } from '../../../core/utils/queryClient.js'
@@ -21,7 +21,7 @@ import Search from '../Search/index.js'
 import useGlobalEvents from './useGlobalEvents.js'
 
 function useRootCss(key: keyof PropertiesHyphen, value: string | null) {
-  React.useEffect(() => {
+  useEffect(() => {
     document.documentElement.style.setProperty(key, value)
 
     return () => {

@@ -1,11 +1,11 @@
 import classNames from 'classix'
-import * as React from 'react'
+import { forwardRef, type JSX } from 'react'
 
 import classes from './styles.module.css'
 
-type Props = Readonly<React.JSX.IntrinsicElements['button']>
+type Props = Readonly<JSX.IntrinsicElements['button']>
 
-const Button = React.forwardRef<HTMLButtonElement, Props>(function InnerButton(
+const Button = forwardRef<HTMLButtonElement, Props>(function InnerButton(
   { className, type = 'button', ...props },
   ref,
 ) {

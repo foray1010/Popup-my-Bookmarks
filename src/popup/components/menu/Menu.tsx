@@ -1,4 +1,4 @@
-import type * as React from 'react'
+import type { MouseEventHandler } from 'react'
 
 import PlainList from '../../../core/components/baseItems/PlainList/index.js'
 import classes from './menu.module.css'
@@ -8,9 +8,9 @@ import type { MenuPattern } from './types.js'
 type Props = Readonly<{
   highlightedIndex?: number | undefined
   menuPattern: MenuPattern
-  onRowClick: React.MouseEventHandler
-  onRowMouseEnter: (index: number) => React.MouseEventHandler
-  onRowMouseLeave: (index: number) => React.MouseEventHandler
+  onRowClick: MouseEventHandler
+  onRowMouseEnter: (index: number) => MouseEventHandler
+  onRowMouseLeave: (index: number) => MouseEventHandler
   unclickableRows: ReadonlyArray<string>
 }>
 export default function Menu(props: Props) {

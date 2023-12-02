@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { type ComponentProps, useMemo } from 'react'
 import webExtension from 'webextension-polyfill'
 
 import { OPTIONS } from '../../../core/constants/index.js'
@@ -11,7 +11,7 @@ import { KeyBindingsWindow } from '../keyBindings/index.js'
 import { useEditorContext } from './EditorContext.js'
 import EditorForm from './EditorForm.js'
 
-type EditorFormProps = Readonly<React.ComponentProps<typeof EditorForm>>
+type EditorFormProps = Readonly<ComponentProps<typeof EditorForm>>
 
 type CreateEditorFormProps = Readonly<
   EditorFormProps & {
@@ -69,7 +69,7 @@ export default function Editor() {
 
   const options = useOptions()
 
-  const style = React.useMemo(
+  const style = useMemo(
     () => ({
       width: `${options[OPTIONS.SET_WIDTH]}px`,
     }),

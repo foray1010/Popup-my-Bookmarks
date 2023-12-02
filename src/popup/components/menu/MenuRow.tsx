@@ -1,5 +1,5 @@
 import classNames from 'classix'
-import type * as React from 'react'
+import type { MouseEventHandler } from 'react'
 import webExtension from 'webextension-polyfill'
 
 import type { MenuItem } from './constants.js'
@@ -8,9 +8,9 @@ import classes from './menu-row.module.css'
 type Props = Readonly<{
   isFocused: boolean
   isUnclickable: boolean
-  onClick: React.MouseEventHandler
-  onMouseEnter: React.MouseEventHandler
-  onMouseLeave: React.MouseEventHandler
+  onClick: MouseEventHandler
+  onMouseEnter: MouseEventHandler
+  onMouseLeave: MouseEventHandler
   rowName: MenuItem
 }>
 export default function MenuRow({

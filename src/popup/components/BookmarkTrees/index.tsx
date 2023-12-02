@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { type ReactNode, useMemo } from 'react'
 
 import { OPTIONS } from '../../../core/constants/index.js'
 import { WindowId } from '../../constants/windows.js'
@@ -11,13 +11,13 @@ import withDragAndDropEvents from './withDragAndDropEvents.js'
 import withKeyboardNav from './withKeyboardNav.js'
 
 type Props = Readonly<{
-  firstTreeHeader: React.ReactNode
+  firstTreeHeader: ReactNode
 }>
 function InnerBookmarkTreesContainer(props: Props) {
   const options = useOptions()
 
   const { bookmarkTrees } = useBookmarkTreesContext()
-  const treeIds = React.useMemo(
+  const treeIds = useMemo(
     () => bookmarkTrees.map((tree) => tree.parent.id),
     [bookmarkTrees],
   )

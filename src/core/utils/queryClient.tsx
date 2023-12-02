@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import type * as React from 'react'
+import type { ComponentProps } from 'react'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -11,7 +11,7 @@ const queryClient = new QueryClient({
 })
 
 type Props = Readonly<
-  Omit<React.ComponentProps<typeof QueryClientProvider>, 'client' | 'context'>
+  Omit<ComponentProps<typeof QueryClientProvider>, 'client' | 'context'>
 >
 
 export function ReactQueryClientProvider(props: Props) {

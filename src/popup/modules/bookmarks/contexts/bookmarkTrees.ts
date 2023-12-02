@@ -1,5 +1,11 @@
 import constate from 'constate'
-import * as React from 'react'
+import {
+  type Dispatch,
+  type SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import webExtension from 'webextension-polyfill'
 
@@ -17,11 +23,9 @@ import type { BookmarkTreeInfo } from '../types.js'
 import { generateDragIndicator } from '../utils/generators.js'
 
 function useUtils(
-  setBookmarkTrees: React.Dispatch<
-    React.SetStateAction<readonly BookmarkTreeInfo[]>
-  >,
+  setBookmarkTrees: Dispatch<SetStateAction<readonly BookmarkTreeInfo[]>>,
 ) {
-  const insertBookmarkTree = React.useCallback(
+  const insertBookmarkTree = useCallback(
     (
       trees: readonly BookmarkTreeInfo[],
       parentId: string | undefined,
@@ -40,7 +44,7 @@ function useUtils(
     [],
   )
 
-  const withoutDragIndicator = React.useCallback(
+  const withoutDragIndicator = useCallback(
     (trees: readonly BookmarkTreeInfo[]): readonly BookmarkTreeInfo[] => {
       return trees.map((tree) => ({
         ...tree,
@@ -52,7 +56,7 @@ function useUtils(
     [],
   )
 
-  const withoutNextBookmarkTrees = React.useCallback(
+  const withoutNextBookmarkTrees = useCallback(
     (
       trees: readonly BookmarkTreeInfo[],
       removeAfterId: string,
@@ -68,7 +72,7 @@ function useUtils(
   )
 
   return {
-    moveBookmarkToDragIndicator: React.useCallback(
+    moveBookmarkToDragIndicator: useCallback(
       (id: string) => {
         setBookmarkTrees((trees) => {
           const treeInfo = trees.find((tree: BookmarkTreeInfo) =>
@@ -122,7 +126,7 @@ function useUtils(
       [setBookmarkTrees, withoutDragIndicator],
     ),
 
-    openBookmarkTree: React.useCallback(
+    openBookmarkTree: useCallback(
       async (id: string, parentId: string) => {
         const bookmarkTree = await getBookmarkTreeInfo(id)
 
@@ -133,7 +137,7 @@ function useUtils(
       [insertBookmarkTree, setBookmarkTrees],
     ),
 
-    removeBookmarkTree: React.useCallback(
+    removeBookmarkTree: useCallback(
       (id: string) => {
         setBookmarkTrees((trees) => {
           const removeFromIndex = trees.findIndex(
@@ -147,11 +151,11 @@ function useUtils(
       [setBookmarkTrees],
     ),
 
-    removeDragIndicator: React.useCallback(() => {
+    removeDragIndicator: useCallback(() => {
       setBookmarkTrees(withoutDragIndicator)
     }, [setBookmarkTrees, withoutDragIndicator]),
 
-    removeNextBookmarkTrees: React.useCallback(
+    removeNextBookmarkTrees: useCallback(
       (removeAfterId: string) => {
         setBookmarkTrees((trees) => {
           return withoutNextBookmarkTrees(trees, removeAfterId)
@@ -160,7 +164,7 @@ function useUtils(
       [setBookmarkTrees, withoutNextBookmarkTrees],
     ),
 
-    setDragIndicator: React.useCallback(
+    setDragIndicator: useCallback(
       (parentId: string, index: number) => {
         setBookmarkTrees((trees) => {
           return withoutDragIndicator(trees).map((tree) => {
@@ -177,7 +181,7 @@ function useUtils(
       [setBookmarkTrees, withoutDragIndicator],
     ),
 
-    toggleBookmarkTree: React.useCallback(
+    toggleBookmarkTree: useCallback(
       async (id: string, parentId: string) => {
         const bookmarkTree = await getBookmarkTreeInfo(id)
 
@@ -200,9 +204,7 @@ function useRefreshOnBookmarkEvent({
   fetchBookmarkTrees,
 }: Readonly<{
   bookmarkTrees: readonly BookmarkTreeInfo[]
-  setBookmarkTrees: React.Dispatch<
-    React.SetStateAction<readonly BookmarkTreeInfo[]>
-  >
+  setBookmarkTrees: Dispatch<SetStateAction<readonly BookmarkTreeInfo[]>>
   fetchBookmarkTrees: (
     childTreeIds?: readonly string[] | undefined,
   ) => Promise<readonly BookmarkTreeInfo[]>
@@ -214,7 +216,7 @@ function useRefreshOnBookmarkEvent({
   }, 100)
   const refreshRef = useLatestRef(refresh)
 
-  React.useEffect(() => {
+  useEffect(() => {
     // create wrapper function to always point to the latest ref
     function refreshTrees() {
       refreshRef.current()
@@ -235,14 +237,14 @@ function useRefreshOnBookmarkEvent({
 }
 
 function useBookmarkTrees() {
-  const [bookmarkTrees, setBookmarkTrees] = React.useState<
+  const [bookmarkTrees, setBookmarkTrees] = useState<
     readonly BookmarkTreeInfo[]
   >([])
-  const [searchQuery, setSearchQuery] = React.useState('')
+  const [searchQuery, setSearchQuery] = useState('')
 
   const options = useOptions()
 
-  const fetchBookmarkTrees = React.useCallback(
+  const fetchBookmarkTrees = useCallback(
     async (
       childTreeIds?: readonly string[] | undefined,
     ): Promise<readonly BookmarkTreeInfo[]> => {
@@ -261,7 +263,7 @@ function useBookmarkTrees() {
     [searchQuery, options],
   )
 
-  React.useEffect(() => {
+  useEffect(() => {
     const abortController = new AbortController()
 
     async function run(): Promise<readonly BookmarkTreeInfo[]> {

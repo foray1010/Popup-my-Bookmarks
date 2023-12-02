@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import webExtension from 'webextension-polyfill'
 
 import isMac from '../../../core/utils/isMac.js'
@@ -49,7 +49,7 @@ function useClickMenuRow(rowName?: MenuItem) {
     state.isOpen ? state.targetId : undefined,
   )
 
-  return React.useCallback(async () => {
+  return useCallback(async () => {
     if (!rowName || !state.isOpen || !bookmarkInfo) return
 
     switch (rowName) {
@@ -197,7 +197,7 @@ function InnerMenuContainer() {
   const { data: bookmarkInfo } = useGetBookmarkInfo(
     state.isOpen ? state.targetId : undefined,
   )
-  const menuPattern = React.useMemo(() => {
+  const menuPattern = useMemo(() => {
     return bookmarkInfo ? getMenuPattern(bookmarkInfo, isSearching) : []
   }, [bookmarkInfo, isSearching])
 
@@ -208,10 +208,10 @@ function InnerMenuContainer() {
     setItemCount,
   } = useListNavigationContext()
 
-  const allRowNames = React.useMemo(() => menuPattern.flat(), [menuPattern])
+  const allRowNames = useMemo(() => menuPattern.flat(), [menuPattern])
   const highlightedIndex = listNavigation.highlightedIndices.get(0)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setItemCount(0, allRowNames.length)
   }, [allRowNames.length, setItemCount])
 

@@ -1,5 +1,5 @@
 import constate from 'constate'
-import * as React from 'react'
+import { useCallback, useState } from 'react'
 
 export enum ClipboardAction {
   Copy = 'copy',
@@ -22,9 +22,9 @@ const initialState = {
 } as const satisfies ClipboardState
 
 function useClipboard() {
-  const [state, setState] = React.useState<ClipboardState>(initialState)
+  const [state, setState] = useState<ClipboardState>(initialState)
 
-  const reset = React.useCallback(() => setState(initialState), [])
+  const reset = useCallback(() => setState(initialState), [])
 
   return {
     state,

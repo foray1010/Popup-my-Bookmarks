@@ -1,11 +1,11 @@
 import classNames from 'classix'
-import type * as React from 'react'
+import type { ComponentProps } from 'react'
 
 import Input from '../../../../../core/components/baseItems/Input/index.js'
 import classes from './styles.module.css'
 
 type RestInputProps = Readonly<
-  Omit<React.ComponentProps<typeof Input>, 'max' | 'min' | 'size' | 'type'>
+  Omit<ComponentProps<typeof Input>, 'max' | 'min' | 'size' | 'type'>
 >
 
 type Props = Readonly<

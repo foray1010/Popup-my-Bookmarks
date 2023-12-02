@@ -1,17 +1,22 @@
-import * as React from 'react'
+import {
+  type ChangeEventHandler,
+  type ComponentProps,
+  useCallback,
+  useRef,
+} from 'react'
 
 import Input from '../../../../../core/components/baseItems/Input/index.js'
 import Select from '../../../../../core/components/baseItems/Select/index.js'
 import classes from './styles.module.css'
 
 type RestInputProps = Readonly<
-  Omit<React.ComponentProps<typeof Input>, 'className' | 'onChange' | 'value'>
+  Omit<ComponentProps<typeof Input>, 'className' | 'onChange' | 'value'>
 >
 
 type Props = Readonly<
   RestInputProps & {
     choices: ReadonlyArray<string>
-    onChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>
+    onChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>
     value: string
   }
 >
@@ -21,21 +26,20 @@ export default function InputSelect({
   onChange,
   ...restProps
 }: Props) {
-  const inputRef = React.useRef<HTMLInputElement>(null)
-  const selectRef = React.useRef<HTMLSelectElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const selectRef = useRef<HTMLSelectElement>(null)
 
-  const handleChange: React.ChangeEventHandler<
-    HTMLInputElement | HTMLSelectElement
-  > = React.useCallback(
-    (evt) => {
-      if (evt.currentTarget === selectRef.current) {
-        inputRef.current?.focus()
-      }
+  const handleChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement> =
+    useCallback(
+      (evt) => {
+        if (evt.currentTarget === selectRef.current) {
+          inputRef.current?.focus()
+        }
 
-      onChange(evt)
-    },
-    [onChange],
-  )
+        onChange(evt)
+      },
+      [onChange],
+    )
 
   return (
     <div className={classes.main}>

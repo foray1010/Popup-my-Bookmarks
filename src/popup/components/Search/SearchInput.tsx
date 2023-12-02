@@ -1,5 +1,5 @@
 import classNames from 'classix'
-import * as React from 'react'
+import { type ComponentProps, forwardRef, useId } from 'react'
 import webExtension from 'webextension-polyfill'
 
 import Input from '../../../core/components/baseItems/Input/index.js'
@@ -8,13 +8,13 @@ import Search from '../../images/search.svg?svgr'
 import classes from './search-input.module.css'
 
 type Props = Readonly<
-  React.ComponentProps<typeof Input> & {
+  ComponentProps<typeof Input> & {
     onCancel(): void
   }
 >
-const SearchInput = React.forwardRef<HTMLInputElement, Props>(
+const SearchInput = forwardRef<HTMLInputElement, Props>(
   function InnerSearchInput({ onCancel, ...inputProps }, ref) {
-    const inputId = React.useId()
+    const inputId = useId()
 
     return (
       <div className={classes.main} role='search'>

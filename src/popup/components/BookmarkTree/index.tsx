@@ -1,13 +1,13 @@
-import * as React from 'react'
+import { useCallback, useEffect } from 'react'
 
 import { OPTIONS } from '../../../core/constants/index.js'
 import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
 import type { BookmarkTreeInfo } from '../../modules/bookmarks/types.js'
 import { useRememberLastPosition } from '../../modules/lastPositions/index.js'
 import { useOptions } from '../../modules/options.js'
+import Backdrop from '../Backdrop/index.js'
 import { useDragAndDropContext } from '../dragAndDrop/index.js'
 import { useListNavigationContext } from '../listNavigation/index.js'
-import Mask from '../Mask/index.js'
 import classes from './bookmark-tree.module.css'
 import BookmarkTree from './BookmarkTree.js'
 import NoSearchResult from './NoSearchResult.js'
@@ -40,7 +40,7 @@ function useListNavigation({
   const { listNavigation, setItemCount, removeList } =
     useListNavigationContext()
 
-  React.useEffect(() => {
+  useEffect(() => {
     setItemCount(treeIndex, treeInfo.children.length)
 
     return () => {
@@ -71,10 +71,10 @@ export default function BookmarkTreeContainer({ treeId }: Props) {
 
   const { removeBookmarkTree, removeNextBookmarkTrees } =
     useBookmarkTreesContext()
-  const closeCurrentTree = React.useCallback(() => {
+  const closeCurrentTree = useCallback(() => {
     removeBookmarkTree(treeInfo.parent.id)
   }, [removeBookmarkTree, treeInfo.parent.id])
-  const closeNextTrees = React.useCallback(() => {
+  const closeNextTrees = useCallback(() => {
     removeNextBookmarkTrees(treeInfo.parent.id)
   }, [removeNextBookmarkTrees, treeInfo.parent.id])
 
@@ -117,7 +117,7 @@ export default function BookmarkTreeContainer({ treeId }: Props) {
         isSearching={isSearching}
         isShowTooltip={options[OPTIONS.TOOLTIP]}
         lastScrollTop={lastScrollTop}
-        noRowsRenderer={React.useCallback(
+        noRowsRenderer={useCallback(
           () => (isSearching ? <NoSearchResult /> : null),
           [isSearching],
         )}
@@ -133,7 +133,7 @@ export default function BookmarkTreeContainer({ treeId }: Props) {
         onScroll={onScroll}
       />
 
-      {isShowCover && <Mask opacity={0.7} onClick={closeNextTrees} />}
+      {isShowCover && <Backdrop opacity={0.7} onClick={closeNextTrees} />}
     </section>
   )
 }

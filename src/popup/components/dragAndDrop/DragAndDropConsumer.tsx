@@ -1,15 +1,23 @@
-import * as React from 'react'
+import {
+  type DragEvent,
+  type DragEventHandler,
+  type MouseEvent,
+  type MouseEventHandler,
+  type PropsWithChildren,
+  useCallback,
+  useState,
+} from 'react'
 
 import { useDragAndDropContext } from './DragAndDropContext.js'
 import type { ResponseEvent } from './types.js'
 
 type Props = Readonly<
-  React.PropsWithChildren<{
+  PropsWithChildren<{
     disableDrag?: boolean
     disableDrop?: boolean
     itemKey: string
-    onDragOver: (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
-    onDragStart: (evt: React.DragEvent, responseEvent: ResponseEvent) => void
+    onDragOver: (evt: MouseEvent, responseEvent: ResponseEvent) => void
+    onDragStart: (evt: DragEvent, responseEvent: ResponseEvent) => void
   }>
 >
 
@@ -17,7 +25,7 @@ function useDragEvents({ itemKey, onDragOver, onDragStart }: Props) {
   const { activeKey, setActiveKey } = useDragAndDropContext()
 
   return {
-    handleDragOver: React.useCallback<React.MouseEventHandler>(
+    handleDragOver: useCallback<MouseEventHandler>(
       (evt) => {
         if (activeKey === null) return
 
@@ -28,7 +36,7 @@ function useDragEvents({ itemKey, onDragOver, onDragStart }: Props) {
       },
       [activeKey, itemKey, onDragOver],
     ),
-    handleDragStart: React.useCallback<React.DragEventHandler>(
+    handleDragStart: useCallback<DragEventHandler>(
       (evt) => {
         // not using native drag because it does not work when the element is removed from the DOM
         evt.preventDefault()
@@ -50,13 +58,12 @@ function useMouseEvents() {
 
   const isDragging = activeKey !== null
 
-  const [shouldDisableNextClick, setShouldDisableNextClick] =
-    React.useState(false)
+  const [shouldDisableNextClick, setShouldDisableNextClick] = useState(false)
 
   return {
     // avoid the user to open the bookmark after dragging is started and user drops on the original bookmark
     // have to use with mouseupcapture event because the mouseup event is fired before `activeKey` is reset to null
-    handleClickCapture: React.useCallback<React.MouseEventHandler>(
+    handleClickCapture: useCallback<MouseEventHandler>(
       (evt) => {
         if (shouldDisableNextClick) {
           evt.stopPropagation()
@@ -65,7 +72,7 @@ function useMouseEvents() {
       },
       [shouldDisableNextClick],
     ),
-    handleMouseUpCapture: React.useCallback<React.MouseEventHandler>(() => {
+    handleMouseUpCapture: useCallback<MouseEventHandler>(() => {
       if (isDragging) {
         setShouldDisableNextClick(true)
       }

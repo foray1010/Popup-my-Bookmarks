@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { type CSSProperties, useId } from 'react'
 import { useForm } from 'react-hook-form'
 import webExtension from 'webextension-polyfill'
 
@@ -14,7 +14,7 @@ type Props = Readonly<{
   isAllowedToEditUrl: boolean
   onCancel: () => void
   onConfirm: (title: string, url?: string) => void | Promise<void>
-  style?: React.CSSProperties
+  style?: CSSProperties
 }>
 export default function Editor({ onConfirm, ...props }: Props) {
   const { register, handleSubmit } = useForm<
@@ -24,7 +24,7 @@ export default function Editor({ onConfirm, ...props }: Props) {
     }>
   >()
 
-  const headerId = React.useId()
+  const headerId = useId()
 
   return (
     <ActionlessForm

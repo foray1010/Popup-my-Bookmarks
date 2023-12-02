@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useMemo } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { OPTIONS } from '../../../core/constants/index.js'
@@ -43,7 +43,7 @@ export default function useRowHoverEvents({
     300,
   )
 
-  return React.useMemo(() => {
+  return useMemo(() => {
     return {
       handleRowMouseEnter: (bookmarkInfo: BookmarkInfo) => async () => {
         const index = treeInfo.children.findIndex(

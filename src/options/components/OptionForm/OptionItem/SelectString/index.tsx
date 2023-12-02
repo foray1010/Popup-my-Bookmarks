@@ -1,11 +1,11 @@
 import classNames from 'classix'
-import type * as React from 'react'
+import type { ComponentProps } from 'react'
 
 import Select from '../../../../../core/components/baseItems/Select/index.js'
 import classes from './styles.module.css'
 
 type Props = Readonly<
-  React.ComponentProps<typeof Select> & {
+  ComponentProps<typeof Select> & {
     choices: ReadonlyArray<string>
   }
 >

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { type MouseEvent, useMemo } from 'react'
 
 import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
 import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
@@ -14,11 +14,11 @@ export default function useRowDragEvents({
 }: Readonly<{ closeNextTrees: () => void; treeInfo: BookmarkTreeInfo }>) {
   const { removeDragIndicator, setDragIndicator } = useBookmarkTreesContext()
 
-  return React.useMemo(() => {
+  return useMemo(() => {
     return {
       handleRowDragOver:
         (bookmarkInfo: BookmarkInfo) =>
-        (evt: React.MouseEvent, responseEvent: ResponseEvent) => {
+        (evt: MouseEvent, responseEvent: ResponseEvent) => {
           if (
             !bookmarkInfo.parentId ||
             // avoid infinite loop

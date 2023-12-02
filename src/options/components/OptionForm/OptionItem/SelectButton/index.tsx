@@ -1,11 +1,11 @@
-import type * as React from 'react'
+import type { ComponentProps } from 'react'
 
 import Option from './Option/index.js'
 import classes from './styles.module.css'
 
 type RestOptionProps = Readonly<
   Omit<
-    React.ComponentProps<typeof Option>,
+    ComponentProps<typeof Option>,
     'defaultChecked' | 'defaultValue' | 'checked' | 'value'
   >
 >

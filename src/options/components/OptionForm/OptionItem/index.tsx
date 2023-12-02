@@ -1,4 +1,4 @@
-import type * as React from 'react'
+import type { ChangeEventHandler, FocusEventHandler } from 'react'
 import webExtension from 'webextension-polyfill'
 
 import type {
@@ -24,7 +24,7 @@ type PropsFromOptionConfig<OC extends Record<string, unknown>> = Readonly<
 type Props = Readonly<
   {
     name: string
-    onBlur: React.FocusEventHandler
+    onBlur: FocusEventHandler
   } & (
     | PropsFromOptionConfig<ArrayOptionConfig>
     | PropsFromOptionConfig<BooleanOptionConfig>
@@ -108,7 +108,7 @@ export default function OptionItem(props: Props) {
       )
 
     case 'string': {
-      const onChange: React.ChangeEventHandler<
+      const onChange: ChangeEventHandler<
         HTMLInputElement | HTMLSelectElement
       > = (evt) => {
         props.onChange(

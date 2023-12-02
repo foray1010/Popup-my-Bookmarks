@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import constate from 'constate'
-import type * as React from 'react'
+import type { ComponentType } from 'react'
 import webExtension from 'webextension-polyfill'
 
 import type { Options } from '../../core/types/options.js'
@@ -23,9 +23,7 @@ const [OptionsProvider, useInternalOptions] = constate(
   },
 )
 
-export function withOptions<P extends {}>(
-  WrappedComponent: React.ComponentType<P>,
-) {
+export function withOptions<P extends {}>(WrappedComponent: ComponentType<P>) {
   function InnerComponent(props: P) {
     const options = useInternalOptions()
     if (!options) return null

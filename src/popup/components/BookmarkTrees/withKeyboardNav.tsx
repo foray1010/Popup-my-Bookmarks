@@ -1,4 +1,4 @@
-import type * as React from 'react'
+import type { ComponentType } from 'react'
 
 import isMac from '../../../core/utils/isMac.js'
 import withProviders from '../../../core/utils/withProviders.js'
@@ -131,7 +131,7 @@ function useMenuKeyNav() {
 }
 
 export default function withKeyboardNav<P extends {}>(
-  WrappedComponent: React.ComponentType<P>,
+  WrappedComponent: ComponentType<P>,
 ) {
   function InnerComponent(props: P) {
     useArrowKeysNav()

@@ -1,11 +1,11 @@
 import classNames from 'classix'
-import type * as React from 'react'
+import type { JSX } from 'react'
 
 import LazyImage from '../../../../core/components/baseItems/LazyImage.js'
 import classes from './bookmark-row.module.css'
 
 type Props = Readonly<
-  React.JSX.IntrinsicElements['div'] & {
+  JSX.IntrinsicElements['div'] & {
     iconUrl?: string | undefined
     isHighlighted: boolean
     isUnclickable: boolean

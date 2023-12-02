@@ -1,5 +1,5 @@
 import constate from 'constate'
-import * as React from 'react'
+import { useCallback, useState } from 'react'
 
 type OpenState = Readonly<{
   targetId: string
@@ -21,16 +21,16 @@ const initialState: State = {
 }
 
 function useMenu() {
-  const [state, setState] = React.useState<State>(initialState)
+  const [state, setState] = useState<State>(initialState)
 
-  const open = React.useCallback((openState: OpenState) => {
+  const open = useCallback((openState: OpenState) => {
     setState({
       ...openState,
       isOpen: true,
     })
   }, [])
 
-  const close = React.useCallback(() => {
+  const close = useCallback(() => {
     setState(initialState)
   }, [])
 

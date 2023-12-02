@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useEffect, useState } from 'react'
 
 import { ROOT_ID } from '../../../../core/constants/index.js'
 import { getBookmarkInfo } from '../../../modules/bookmarks/methods/getBookmark.js'
@@ -32,9 +32,9 @@ export default function useTooltip({
     ? joinLines([bookmarkInfo.title, bookmarkInfo.url])
     : undefined
 
-  const [breadcrumbs, setBreadcrumbs] = React.useState<readonly string[]>([])
+  const [breadcrumbs, setBreadcrumbs] = useState<readonly string[]>([])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isSearching) return
 
     const abortController = new AbortController()

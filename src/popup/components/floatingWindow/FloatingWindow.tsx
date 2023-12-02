@@ -1,12 +1,12 @@
-import * as React from 'react'
+import { type PropsWithChildren, useLayoutEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import useResizeObserver from 'use-resize-observer'
 
-import Mask from '../Mask/index.js'
+import Backdrop from '../Backdrop/index.js'
 import useGlobalBodySize from './useGlobalBodySize.js'
 
 type Props = Readonly<
-  React.PropsWithChildren<{
+  PropsWithChildren<{
     positionLeft: number
     positionTop: number
     onClose: () => void
@@ -20,7 +20,7 @@ export default function FloatingWindow({
 }: Props) {
   const { insertBodySize } = useGlobalBodySize()
 
-  const [windowSize, setWindowSize] = React.useState<
+  const [windowSize, setWindowSize] = useState<
     Readonly<{
       height: number | undefined
       width: number | undefined
@@ -31,7 +31,7 @@ export default function FloatingWindow({
     round: Math.ceil,
   })
 
-  const [calibratedPosition, setCalibratedPosition] = React.useState<
+  const [calibratedPosition, setCalibratedPosition] = useState<
     Readonly<{
       left: number
       top: number
@@ -39,7 +39,7 @@ export default function FloatingWindow({
   >()
 
   // make sure the floating window is within the body
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (windowSize?.height === undefined || windowSize?.width === undefined) {
       return
     }
@@ -80,7 +80,7 @@ export default function FloatingWindow({
 
   return createPortal(
     <>
-      <Mask opacity={0.3} onClick={onClose} />
+      <Backdrop opacity={0.3} onClick={onClose} />
       <div
         ref={ref}
         aria-modal

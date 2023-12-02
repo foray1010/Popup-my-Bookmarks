@@ -1,5 +1,5 @@
 import constate from 'constate'
-import * as React from 'react'
+import { useCallback, useState } from 'react'
 
 type OpenParams = Readonly<
   (
@@ -31,9 +31,9 @@ const initialState: State = {
 }
 
 function useEditor() {
-  const [state, setState] = React.useState<State>(initialState)
+  const [state, setState] = useState<State>(initialState)
 
-  const open = React.useCallback((openParams: OpenParams) => {
+  const open = useCallback((openParams: OpenParams) => {
     setState({
       positions: { top: 0, left: 0 },
       ...openParams,
@@ -41,7 +41,7 @@ function useEditor() {
     })
   }, [])
 
-  const close = React.useCallback(() => {
+  const close = useCallback(() => {
     setState(initialState)
   }, [])
 

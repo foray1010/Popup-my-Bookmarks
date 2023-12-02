@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { Fragment } from 'react'
 
 import classes from './contributors.module.css'
 
@@ -34,12 +34,12 @@ export default function Contributors() {
     <dl className={classes.main}>
       {Object.entries(contributors).map(
         ([contributeType, contributorsOfType]) => (
-          <React.Fragment key={contributeType}>
+          <Fragment key={contributeType}>
             <dt>{contributeType}</dt>
             {contributorsOfType.map((contributor) => (
               <dd key={contributor}>{contributor}</dd>
             ))}
-          </React.Fragment>
+          </Fragment>
         ),
       )}
     </dl>

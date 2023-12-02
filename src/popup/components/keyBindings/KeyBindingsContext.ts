@@ -1,16 +1,16 @@
 import constate from 'constate'
-import * as React from 'react'
+import { useCallback, useState } from 'react'
 import useListener from 'use-typed-event-listener'
 
 import type { WindowId } from '../../constants/windows.js'
 import type { KeyBindingEventCallback, KeyDefinition } from './types.js'
 
 function useActiveWindowState() {
-  const [activeWindowQueue, setActiveWindowQueue] = React.useState<
+  const [activeWindowQueue, setActiveWindowQueue] = useState<
     ReadonlySet<WindowId>
   >(new Set())
 
-  const appendActiveWindowId = React.useCallback((windowId: WindowId) => {
+  const appendActiveWindowId = useCallback((windowId: WindowId) => {
     setActiveWindowQueue((prevState) => {
       const newState = new Set(prevState)
       newState.add(windowId)
@@ -18,7 +18,7 @@ function useActiveWindowState() {
     })
   }, [])
 
-  const removeActiveWindowId = React.useCallback((windowId: WindowId) => {
+  const removeActiveWindowId = useCallback((windowId: WindowId) => {
     setActiveWindowQueue((prevState) => {
       const newState = new Set(prevState)
       newState.delete(windowId)
@@ -34,7 +34,7 @@ function useActiveWindowState() {
 }
 
 function useKeyBindingsPerWindowState() {
-  const [keyBindingsPerWindow, setKeyBindingsPerWindow] = React.useState<
+  const [keyBindingsPerWindow, setKeyBindingsPerWindow] = useState<
     ReadonlyMap<
       WindowId,
       ReadonlyArray<
@@ -51,7 +51,7 @@ function useKeyBindingsPerWindowState() {
     callback: KeyBindingEventCallback,
   ) => void
 
-  const addListener: AddOrRemoveListener = React.useCallback(
+  const addListener: AddOrRemoveListener = useCallback(
     ({ key, windowId }, callback) => {
       setKeyBindingsPerWindow((prevState) => {
         const keyBindings = prevState.get(windowId)
@@ -64,7 +64,7 @@ function useKeyBindingsPerWindowState() {
     [],
   )
 
-  const removeListener: AddOrRemoveListener = React.useCallback(
+  const removeListener: AddOrRemoveListener = useCallback(
     ({ key, windowId }, callback) => {
       setKeyBindingsPerWindow((prevState) => {
         const keyBindings = prevState.get(windowId)

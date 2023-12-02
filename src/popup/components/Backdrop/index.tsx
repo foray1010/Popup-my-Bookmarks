@@ -1,12 +1,12 @@
-import type * as React from 'react'
+import type { MouseEventHandler } from 'react'
 
-import classes from './mask.module.css'
+import classes from './backdrop.module.css'
 
 type Props = Readonly<{
   opacity: number
-  onClick: React.MouseEventHandler
+  onClick: MouseEventHandler
 }>
-export default function Mask({ opacity, onClick }: Props) {
+export default function Backdrop({ opacity, onClick }: Props) {
   return (
     <div
       className={classes.main}

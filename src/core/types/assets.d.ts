@@ -9,9 +9,9 @@ declare module '*.svg' {
 }
 
 declare module '*.svg?svgr' {
-  import type * as React from 'react'
+  import type { ComponentType, JSX } from 'react'
 
-  const ReactComponent: React.ComponentType<React.JSX.IntrinsicElements['svg']>
+  const ReactComponent: ComponentType<JSX.IntrinsicElements['svg']>
   export default ReactComponent
 }
 

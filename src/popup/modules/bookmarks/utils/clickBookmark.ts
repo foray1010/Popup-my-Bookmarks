@@ -1,11 +1,14 @@
-import type * as React from 'react'
+import type {
+  KeyboardEvent as ReactKeyboardEvent,
+  MouseEvent as ReactMouseEvent,
+} from 'react'
 
 import { OPTIONS } from '../../../../core/constants/index.js'
 import { OPEN_IN_TYPES } from '../../../constants/menu.js'
 
 export function getClickOptionNameByEvent(
   evt: Readonly<
-    KeyboardEvent | MouseEvent | React.KeyboardEvent | React.MouseEvent
+    KeyboardEvent | MouseEvent | ReactKeyboardEvent | ReactMouseEvent
   >,
 ) {
   if (evt.ctrlKey || evt.metaKey) {

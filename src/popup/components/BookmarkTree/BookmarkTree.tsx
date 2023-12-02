@@ -1,6 +1,16 @@
 import { useVirtualizer } from '@tanstack/react-virtual'
 import classNames from 'classix'
-import * as React from 'react'
+import {
+  type DragEventHandler,
+  type MouseEvent,
+  type MouseEventHandler,
+  type ReactElement,
+  type UIEventHandler,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react'
 
 import PlainList from '../../../core/components/baseItems/PlainList/index.js'
 import { OPTIONS } from '../../../core/constants/index.js'
@@ -21,24 +31,24 @@ type Props = Readonly<{
   isSearching: boolean
   isShowTooltip: boolean
   lastScrollTop?: number | undefined
-  noRowsRenderer: () => React.ReactElement | null
-  onRowAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onRowClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onRowContextMenu: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  noRowsRenderer: () => ReactElement | null
+  onRowAuxClick: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
+  onRowClick: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
+  onRowContextMenu: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
   onRowDragOver: (
     bookmarkInfo: BookmarkInfo,
-  ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
-  onRowDragStart: React.DragEventHandler
-  onRowMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onRowMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onScroll?: React.UIEventHandler
+  ) => (evt: MouseEvent, responseEvent: ResponseEvent) => void
+  onRowDragStart: DragEventHandler
+  onRowMouseEnter: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
+  onRowMouseLeave: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
+  onScroll?: UIEventHandler
   scrollToIndex?: number | undefined
   treeInfo: BookmarkTreeInfo
 }>
 export default function BookmarkTree(props: Props) {
   const options = useOptions()
 
-  const parentRef = React.useRef<HTMLDivElement>(null)
+  const parentRef = useRef<HTMLDivElement>(null)
 
   const virtualizer = useVirtualizer({
     count: props.treeInfo.children.length,
@@ -48,8 +58,8 @@ export default function BookmarkTree(props: Props) {
     estimateSize: () => options[OPTIONS.FONT_SIZE] / 0.6,
   })
 
-  const [maxListHeight, setMaxListHeight] = React.useState(0)
-  React.useLayoutEffect(() => {
+  const [maxListHeight, setMaxListHeight] = useState(0)
+  useLayoutEffect(() => {
     if (!parentRef.current) return
 
     setMaxListHeight(
@@ -58,12 +68,12 @@ export default function BookmarkTree(props: Props) {
   }, [])
 
   const { scrollToIndex, scrollToOffset } = virtualizer
-  React.useEffect(() => {
+  useEffect(() => {
     if (props.lastScrollTop) {
       scrollToOffset(props.lastScrollTop)
     }
   }, [props.lastScrollTop, scrollToOffset])
-  React.useEffect(() => {
+  useEffect(() => {
     if (props.scrollToIndex !== undefined) {
       scrollToIndex(props.scrollToIndex)
     }

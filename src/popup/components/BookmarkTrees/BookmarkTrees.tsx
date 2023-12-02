@@ -1,10 +1,10 @@
-import * as React from 'react'
+import { type ReactNode, useMemo } from 'react'
 
 import BookmarkTree from '../BookmarkTree/index.js'
 import classes from './bookmark-trees.module.css'
 
 type Props = Readonly<{
-  firstTreeHeader: React.ReactNode
+  firstTreeHeader: ReactNode
   treeIds: ReadonlyArray<string>
   width: number
 }>
@@ -16,7 +16,7 @@ export default function BookmarkTrees(props: Props) {
   const firstSectionItems = trees.filter((_, index) => index % 2 === 0)
   const secondSectionItems = trees.filter((_, index) => index % 2 !== 0)
 
-  const widthStyle = React.useMemo(
+  const widthStyle = useMemo(
     () => ({
       width: `${props.width}px`,
     }),

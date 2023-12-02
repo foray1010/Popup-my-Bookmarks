@@ -1,5 +1,12 @@
 import classNames from 'classix'
-import * as React from 'react'
+import {
+  type CSSProperties,
+  type DragEventHandler,
+  forwardRef,
+  type MouseEvent,
+  type MouseEventHandler,
+  useMemo,
+} from 'react'
 
 import { BOOKMARK_TYPES } from '../../../modules/bookmarks/constants.js'
 import type { BookmarkInfo } from '../../../modules/bookmarks/types.js'
@@ -19,18 +26,18 @@ type Props = Readonly<{
   isSearching: boolean
   isShowTooltip: boolean
   isUnclickable: boolean
-  onAuxClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onClick: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onContextMenu: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
+  onAuxClick: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
+  onClick: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
+  onContextMenu: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
   onDragOver: (
     bookmarkInfo: BookmarkInfo,
-  ) => (evt: React.MouseEvent, responseEvent: ResponseEvent) => void
-  onDragStart: React.DragEventHandler
-  onMouseEnter: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  onMouseLeave: (bookmarkInfo: BookmarkInfo) => React.MouseEventHandler
-  style?: React.CSSProperties
+  ) => (evt: MouseEvent, responseEvent: ResponseEvent) => void
+  onDragStart: DragEventHandler
+  onMouseEnter: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
+  onMouseLeave: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
+  style?: CSSProperties
 }>
-const BookmarkRowContainer = React.forwardRef<HTMLLIElement, Props>(
+const BookmarkRowContainer = forwardRef<HTMLLIElement, Props>(
   function InnerBookmarkRowContainer(
     {
       bookmarkInfo,
@@ -56,27 +63,27 @@ const BookmarkRowContainer = React.forwardRef<HTMLLIElement, Props>(
       bookmarkInfo,
     })
 
-    const handleAuxClick = React.useMemo(
+    const handleAuxClick = useMemo(
       () => onAuxClick(bookmarkInfo),
       [bookmarkInfo, onAuxClick],
     )
-    const handleClick = React.useMemo(
+    const handleClick = useMemo(
       () => onClick(bookmarkInfo),
       [bookmarkInfo, onClick],
     )
-    const handleContextMenu = React.useMemo(
+    const handleContextMenu = useMemo(
       () => onContextMenu(bookmarkInfo),
       [bookmarkInfo, onContextMenu],
     )
-    const handleDragOver = React.useMemo(
+    const handleDragOver = useMemo(
       () => onDragOver(bookmarkInfo),
       [bookmarkInfo, onDragOver],
     )
-    const handleMouseEnter = React.useMemo(
+    const handleMouseEnter = useMemo(
       () => onMouseEnter(bookmarkInfo),
       [bookmarkInfo, onMouseEnter],
     )
-    const handleMouseLeave = React.useMemo(
+    const handleMouseLeave = useMemo(
       () => onMouseLeave(bookmarkInfo),
       [bookmarkInfo, onMouseLeave],
     )

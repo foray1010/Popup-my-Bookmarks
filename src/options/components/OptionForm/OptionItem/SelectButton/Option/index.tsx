@@ -1,15 +1,14 @@
 import classNames from 'classix'
-import * as React from 'react'
+import { type JSX, useRef } from 'react'
 
 import Button from '../../../../../../core/components/baseItems/Button/index.js'
 import classes from './styles.module.css'
 
 type Props = Readonly<
-  Omit<React.JSX.IntrinsicElements['input'], 'className' | 'hidden' | 'type'>
+  Omit<JSX.IntrinsicElements['input'], 'className' | 'hidden' | 'type'>
 >
-
 export default function Option({ children, ...props }: Props) {
-  const inputRef = React.useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   return (
     <span className={classes.main}>

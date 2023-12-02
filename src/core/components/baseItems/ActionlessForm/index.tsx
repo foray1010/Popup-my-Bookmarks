@@ -1,13 +1,12 @@
-import * as React from 'react'
+import { forwardRef, type JSX } from 'react'
 
 type Props = Readonly<
   Omit<
-    React.JSX.IntrinsicElements['form'],
+    JSX.IntrinsicElements['form'],
     'action' | 'enctype' | 'method' | 'target'
   >
 >
-
-const ActionlessForm = React.forwardRef<HTMLFormElement, Props>(
+const ActionlessForm = forwardRef<HTMLFormElement, Props>(
   function InnerActionlessForm({ onSubmit, ...props }, ref) {
     return (
       <form

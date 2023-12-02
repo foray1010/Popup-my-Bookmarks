@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useEffect, useState } from 'react'
 
 import type { OPTIONS } from '../../../core/constants/index.js'
 import type { OptionsConfig } from '../../../core/types/options.js'
@@ -15,13 +15,12 @@ import OptionForm from './OptionForm.js'
 function useGetOptionsWithDefaultValues({
   optionsConfig,
 }: Readonly<{ optionsConfig: OptionsConfig | undefined }>) {
-  const [isFilledDefaultValues, setIsFilledDefaultValues] =
-    React.useState(false)
+  const [isFilledDefaultValues, setIsFilledDefaultValues] = useState(false)
 
   const { data: options } = useGetOptions()
   const { mutateAsync: setOptions } = useUpdateOptions()
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!options || !optionsConfig) return
 
     const missingOptionNames = (
@@ -51,8 +50,8 @@ function useGetOptionsWithDefaultValues({
 export default function OptionFormContainer() {
   const { currentPath } = useNavigationContext()
 
-  const [optionsConfig, setOptionsConfig] = React.useState<OptionsConfig>()
-  React.useEffect(() => {
+  const [optionsConfig, setOptionsConfig] = useState<OptionsConfig>()
+  useEffect(() => {
     getOptionsConfig().then(setOptionsConfig).catch(console.error)
   }, [])
 

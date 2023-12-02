@@ -1,11 +1,11 @@
-import * as React from 'react'
+import { type PropsWithChildren, useEffect, useRef } from 'react'
 
 import type { WindowId } from '../../constants/windows.js'
 import { useKeyBindingsContext } from './KeyBindingsContext.js'
 import classes from './KeyBindingsWindow.module.css'
 
 type Props = Readonly<
-  React.PropsWithChildren<{
+  PropsWithChildren<{
     windowId: WindowId
   }>
 >
@@ -13,7 +13,7 @@ export default function KeyBindingsWindow({ children, windowId }: Props) {
   const { activeWindowId, appendActiveWindowId, removeActiveWindowId } =
     useKeyBindingsContext()
 
-  React.useEffect(() => {
+  useEffect(() => {
     appendActiveWindowId(windowId)
 
     return () => {
@@ -23,8 +23,8 @@ export default function KeyBindingsWindow({ children, windowId }: Props) {
 
   const isInert = activeWindowId !== windowId
 
-  const windowRef = React.useRef<HTMLDivElement>(null)
-  React.useEffect(() => {
+  const windowRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
     // this element is `inert` at the beginning and it is not focusable
     if (!isInert) {
       // this function must run after other window is set to `inert`, because whenever that happens, the `document.activeElement` will be reset to the `document.body` in Chrome 102. The hacky way to fix it is to wrap it within `requestAnimationFrame`.

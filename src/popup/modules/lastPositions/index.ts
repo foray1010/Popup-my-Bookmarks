@@ -1,15 +1,15 @@
 import constate from 'constate'
-import * as React from 'react'
+import { type UIEventHandler, useCallback, useEffect, useState } from 'react'
 import webExtension from 'webextension-polyfill'
 
 import type { LastPosition } from './types.js'
 
 function useLastPositions({ isEnabled }: Readonly<{ isEnabled: boolean }>) {
-  const [lastPositions, setLastPositions] = React.useState<
-    readonly LastPosition[]
-  >([])
-  const [isInitialized, setIsInitialized] = React.useState(false)
-  React.useEffect(() => {
+  const [lastPositions, setLastPositions] = useState<readonly LastPosition[]>(
+    [],
+  )
+  const [isInitialized, setIsInitialized] = useState(false)
+  useEffect(() => {
     if (isEnabled) {
       type LocaleStorage = Readonly<{
         lastPositions?: readonly LastPosition[]
@@ -26,7 +26,7 @@ function useLastPositions({ isEnabled }: Readonly<{ isEnabled: boolean }>) {
       setIsInitialized(false)
     }
   }, [isEnabled])
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isInitialized) return
 
     webExtension.storage.local.set({ lastPositions }).catch(console.error)
@@ -36,7 +36,7 @@ function useLastPositions({ isEnabled }: Readonly<{ isEnabled: boolean }>) {
     isInitialized,
     lastPositions: isEnabled ? lastPositions : undefined,
 
-    registerLastPosition: React.useCallback(
+    registerLastPosition: useCallback(
       (index: number, id: string) => {
         if (!isInitialized) return
 
@@ -54,7 +54,7 @@ function useLastPositions({ isEnabled }: Readonly<{ isEnabled: boolean }>) {
       [isInitialized],
     ),
 
-    unregisterLastPosition: React.useCallback(
+    unregisterLastPosition: useCallback(
       (id: string) => {
         if (!isInitialized) return
 
@@ -68,7 +68,7 @@ function useLastPositions({ isEnabled }: Readonly<{ isEnabled: boolean }>) {
       [isInitialized],
     ),
 
-    updateLastPosition: React.useCallback(
+    updateLastPosition: useCallback(
       (id: string, scrollTop: number) => {
         if (!isInitialized) return
 
@@ -98,7 +98,7 @@ export function useRememberLastPosition({
     updateLastPosition,
   } = useLastPositionsContext()
 
-  React.useEffect(() => {
+  useEffect(() => {
     registerLastPosition(treeIndex, treeId)
 
     return () => {
@@ -108,7 +108,7 @@ export function useRememberLastPosition({
 
   return {
     lastScrollTop: lastPositions?.find((x) => x.id === treeId)?.scrollTop,
-    onScroll: React.useCallback<React.UIEventHandler>(
+    onScroll: useCallback<UIEventHandler>(
       (evt) => updateLastPosition(treeId, evt.currentTarget.scrollTop),
       [treeId, updateLastPosition],
     ),

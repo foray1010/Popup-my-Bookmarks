@@ -1,8 +1,8 @@
-import type * as React from 'react'
+import type { ComponentType, PropsWithChildren } from 'react'
 
 export default function withProviders<P extends {}>(
-  InnerComponent: React.ComponentType<P>,
-  Providers: readonly React.ComponentType<React.PropsWithChildren>[],
+  InnerComponent: ComponentType<P>,
+  Providers: readonly ComponentType<PropsWithChildren>[],
 ) {
   return function ComponentWithProviders(props: P) {
     return Providers.reduceRight(

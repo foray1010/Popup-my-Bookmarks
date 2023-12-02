@@ -1,6 +1,6 @@
 import '../manifest.yml'
 
-import * as React from 'react'
+import { StrictMode } from 'react'
 import webExtension from 'webextension-polyfill'
 
 import type { OPTIONS } from '../core/constants/index.js'
@@ -25,9 +25,9 @@ async function main(): Promise<void> {
   }
 
   createAndRenderRoot(
-    <React.StrictMode>
+    <StrictMode>
       <App />
-    </React.StrictMode>,
+    </StrictMode>,
   )
 }
 

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useCallback, useMemo } from 'react'
 
 import {
   type BodySize,
@@ -8,7 +8,7 @@ import {
 export default function useGlobalBodySize() {
   const { bodySizeStack, setBodySizeStack } = useFloatingWindowContext()
 
-  const globalBodySize = React.useMemo(() => {
+  const globalBodySize = useMemo(() => {
     const notUndefined = <T>(x?: T): x is T => x !== undefined
 
     const heights = bodySizeStack.map((x) => x.height).filter(notUndefined)
@@ -23,7 +23,7 @@ export default function useGlobalBodySize() {
     }
   }, [bodySizeStack])
 
-  const insertBodySize = React.useCallback(
+  const insertBodySize = useCallback(
     (newBodySize: BodySize) => {
       setBodySizeStack((prevBodySize) => [...prevBodySize, newBodySize])
 

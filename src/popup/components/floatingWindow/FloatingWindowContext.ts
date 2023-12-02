@@ -1,5 +1,5 @@
 import constate from 'constate'
-import * as React from 'react'
+import { useState } from 'react'
 
 export type BodySize = Readonly<{
   height: number | undefined
@@ -8,7 +8,7 @@ export type BodySize = Readonly<{
 type BodySizeStack = ReadonlyArray<BodySize>
 
 function useFloatingWindow() {
-  const [bodySizeStack, setBodySizeStack] = React.useState<BodySizeStack>([])
+  const [bodySizeStack, setBodySizeStack] = useState<BodySizeStack>([])
 
   return {
     bodySizeStack,

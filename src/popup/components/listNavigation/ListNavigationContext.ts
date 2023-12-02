@@ -1,14 +1,14 @@
 import constate from 'constate'
-import * as React from 'react'
+import { useCallback, useState } from 'react'
 
 import deleteFromMap from '../../utils/deleteFromMap.js'
 
 function useListNavigation() {
-  const [highlightedIndices, setHighlightedIndices] = React.useState<
+  const [highlightedIndices, setHighlightedIndices] = useState<
     ReadonlyMap<number, number>
   >(new Map())
 
-  const setHighlightedIndex = React.useCallback(
+  const setHighlightedIndex = useCallback(
     (listIndex: number, itemIndex: number) => {
       setHighlightedIndices((prevState) =>
         new Map(prevState).set(listIndex, itemIndex),
@@ -17,7 +17,7 @@ function useListNavigation() {
     [],
   )
 
-  const unsetHighlightedIndex = React.useCallback(
+  const unsetHighlightedIndex = useCallback(
     (listIndex: number, itemIndex: number) => {
       setHighlightedIndices((prevState) => {
         if (prevState.get(listIndex) !== itemIndex) return prevState
@@ -28,18 +28,15 @@ function useListNavigation() {
     [],
   )
 
-  const [itemCounts, setItemCounts] = React.useState<
-    ReadonlyMap<number, number>
-  >(new Map())
-
-  const setItemCount = React.useCallback(
-    (listIndex: number, itemCount: number) => {
-      setItemCounts((prevState) => new Map(prevState).set(listIndex, itemCount))
-    },
-    [],
+  const [itemCounts, setItemCounts] = useState<ReadonlyMap<number, number>>(
+    new Map(),
   )
 
-  const removeList = React.useCallback((listIndex: number) => {
+  const setItemCount = useCallback((listIndex: number, itemCount: number) => {
+    setItemCounts((prevState) => new Map(prevState).set(listIndex, itemCount))
+  }, [])
+
+  const removeList = useCallback((listIndex: number) => {
     setHighlightedIndices((prevState) => deleteFromMap(prevState, listIndex))
     setItemCounts((prevState) => deleteFromMap(prevState, listIndex))
   }, [])
