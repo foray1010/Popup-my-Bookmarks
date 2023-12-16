@@ -3079,12 +3079,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@transifex/api@npm:6.0.1":
-  version: 6.0.1
-  resolution: "@transifex/api@npm:6.0.1"
+"@transifex/api@npm:6.0.2":
+  version: 6.0.2
+  resolution: "@transifex/api@npm:6.0.2"
   dependencies:
     core-js: "npm:^3.22.4"
-  checksum: 47aa90eb017dfa53e22f05057ea42b79b10ff0376e93a201881abcd3304eb2e35d479621dfc68dc9f71156ff312bf704943d241abcd8a4f342dec615a4eee704
+  checksum: 1fee0cf4bd10403a813fe456873395cd028b3032b9fa12b249b6953e6f8d3ae47767884b5a9f32b3203a7252f11abeb6dc1bc6a83b4b2f9c18fa4ede6cf5f6a4
   languageName: node
   linkType: hard
 
@@ -4052,7 +4052,7 @@ __metadata:
     "@testing-library/jest-dom": "npm:6.1.5"
     "@testing-library/react": "npm:14.1.2"
     "@testing-library/user-event": "npm:14.5.1"
-    "@transifex/api": "npm:6.0.1"
+    "@transifex/api": "npm:6.0.2"
     "@types/duplicate-package-checker-webpack-plugin": "npm:2.1.5"
     "@types/firefox-webext-browser": "npm:120.0.0"
     "@types/jest": "npm:29.5.11"
