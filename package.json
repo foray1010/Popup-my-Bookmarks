@@ -51,7 +51,7 @@
     "@types/firefox-webext-browser": "120.0.0",
     "@types/jest": "29.5.11",
     "@types/node": "20.10.4",
-    "@types/react": "18.2.43",
+    "@types/react": "18.2.45",
     "@types/react-dom": "18.2.17",
     "@types/script-ext-html-webpack-plugin": "2.1.6",
     "@types/webpack-bundle-analyzer": "4.6.3",
