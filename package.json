@@ -78,7 +78,7 @@
     "mini-css-extract-plugin": "2.7.6",
     "node-notifier": "10.0.1",
     "postcss": "8.4.32",
-    "postcss-loader": "7.3.3",
+    "postcss-loader": "7.3.4",
     "postcss-normalize": "10.0.1",
     "prettier": "3.1.1",
     "remark-cli": "12.0.0",
