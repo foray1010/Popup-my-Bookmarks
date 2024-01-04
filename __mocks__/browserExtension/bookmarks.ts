@@ -5,9 +5,8 @@ import 'core-js/stable/structured-clone.js'
 
 import { WebExtEventEmitter } from './utils/WebExtEventEmitter.js'
 
-type IBookmarks = Readonly<typeof browser.bookmarks>
 // @TODO: handle `dateGroupModified` updates
-class Bookmarks implements IBookmarks {
+class Bookmarks implements Readonly<typeof browser.bookmarks> {
   readonly #rootId = '0' // Chrome's root node id
   readonly #defaultParentId = '2' // Chrome's `Other Bookmarks` node id
   readonly #initialRootTreeNodesMutable: browser.bookmarks.BookmarkTreeNode[] =
@@ -234,7 +233,7 @@ class Bookmarks implements IBookmarks {
     parentTreeNode.children.splice(
       bookmarkTreeNode.index,
       0,
-      Object.prototype.hasOwnProperty.call(bookmarkTreeNode, 'url')
+      Object.hasOwn(bookmarkTreeNode, 'url')
         ? bookmarkTreeNode
         : { ...bookmarkTreeNode, children: [] },
     )

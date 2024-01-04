@@ -5,7 +5,7 @@ type Props = Readonly<
 >
 const LazyImage = forwardRef<HTMLImageElement, Props>(
   function InnerLazyImage(props, ref) {
-    return <img alt='' {...props} ref={ref} decoding='async' loading='lazy' />
+    return <img alt='' {...props} ref={ref} loading='lazy' />
   },
 )
 

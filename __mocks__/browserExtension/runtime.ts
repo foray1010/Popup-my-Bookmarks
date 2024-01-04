@@ -2,8 +2,7 @@
 
 import path from 'node:path'
 
-type IRuntime = Readonly<Partial<typeof browser.runtime>>
-class Runtime implements IRuntime {
+class Runtime implements Readonly<Partial<typeof browser.runtime>> {
   public getURL(subPath: string) {
     return path.join(
       'chrome-extension://apidhijjdkkimhbifblnemkcnmhellkf',
