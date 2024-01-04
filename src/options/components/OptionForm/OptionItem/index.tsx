@@ -86,7 +86,7 @@ export default function OptionItem(props: Props) {
           value={props.value}
           onBlur={props.onBlur}
           onChange={(evt) => {
-            const newValue = Number.parseInt(evt.currentTarget.value, 10)
+            const newValue = evt.currentTarget.valueAsNumber
             // @ts-expect-error empty string is valid for UI
             props.onChange(!Number.isNaN(newValue) ? newValue : '')
           }}

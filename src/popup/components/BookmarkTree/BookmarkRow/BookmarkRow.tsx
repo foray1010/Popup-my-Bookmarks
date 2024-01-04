@@ -1,7 +1,6 @@
 import classNames from 'classix'
 import type { JSX } from 'react'
 
-import LazyImage from '../../../../core/components/baseItems/LazyImage.js'
 import classes from './bookmark-row.module.css'
 
 type Props = Readonly<
@@ -36,7 +35,7 @@ function BookmarkRow({
       onClick={isUnclickable ? undefined : divProps.onClick}
       onContextMenu={isUnclickable ? undefined : divProps.onContextMenu}
     >
-      {iconUrl && <LazyImage className={classes.icon} src={iconUrl} />}
+      {iconUrl && <img className={classes.icon} src={iconUrl} />}
       <div className={classes.title}>{title}</div>
     </div>
   )

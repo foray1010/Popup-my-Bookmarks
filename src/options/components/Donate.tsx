@@ -1,4 +1,3 @@
-import LazyImage from '../../core/components/baseItems/LazyImage.js'
 import donateIcon from '../images/btn_donateCC_LG.webp'
 import classes from './donate.module.css'
 import ExternalLink from './ExternalLink/index.js'
@@ -11,7 +10,7 @@ export default function Donate() {
     <footer className={classes.main}>
       <span className={classes.container}>
         <ExternalLink href={paypalUrl}>
-          <LazyImage alt='donate' src={donateIcon} />
+          <img alt='donate' src={donateIcon} />
         </ExternalLink>
         <span className={classes.desc}>
           If you like Popup my Bookmarks, please consider to:

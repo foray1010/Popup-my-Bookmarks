@@ -129,8 +129,7 @@ type StorageAreaListenerCallback = Parameters<
   browser.storage.StorageArea['onChanged']['addListener']
 >[0]
 
-type IStorage = typeof browser.storage
-class Storage implements IStorage {
+class Storage implements Readonly<typeof browser.storage> {
   public readonly [AreaName.Local] = new StorageArea()
   public readonly [AreaName.Managed] = new StorageArea()
   public readonly [AreaName.Session] = new StorageArea()
