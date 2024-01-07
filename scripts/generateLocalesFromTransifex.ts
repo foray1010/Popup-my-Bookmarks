@@ -5,8 +5,7 @@
 import { promises as fsPromises } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
-import * as readline from 'node:readline'
-import { promisify } from 'node:util'
+import * as readline from 'node:readline/promises'
 
 import { type Collection, transifexApi } from '@transifex/api'
 
@@ -15,9 +14,6 @@ const rl = readline.createInterface({
   output: process.stdout,
 })
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
-const question = promisify(rl.question).bind(rl)
-
 const organizationSlug = 'foray1010'
 const projectSlug = 'popup-my-bookmarks'
 const resourceSlug = 'messagesjson-1'
@@ -25,8 +21,7 @@ const resourceSlug = 'messagesjson-1'
 const localesPath = path.join('src', 'core', '_locales')
 
 async function main(): Promise<void> {
-  // @ts-expect-error somehow promisify does not work correctly with readline.question
-  const transifexApiKey: string = await question(
+  const transifexApiKey: string = await rl.question(
     'transifex api key (get from https://www.transifex.com/user/settings/api/): ',
   )
   if (!transifexApiKey) throw new Error('transifexApiKey is required')
@@ -122,10 +117,10 @@ async function main(): Promise<void> {
 }
 
 main()
-  .then(() => {
-    rl.close()
-  })
   .catch((err: Readonly<Error>) => {
     console.error(err)
     process.exitCode = 1
+  })
+  .finally(() => {
+    rl.close()
   })
