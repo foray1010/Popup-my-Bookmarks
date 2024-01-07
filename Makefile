@@ -14,10 +14,12 @@ help: # get all command options
 
 bin_dir := node_modules/.bin
 
+ts-node := node --loader ts-node/esm
+
 src_dir := src
 
 locales: # download the latest locale files from transifex
-	$(bin_dir)/ts-node scripts/generateLocalesFromTransifex.ts
+	$(ts-node) scripts/generateLocalesFromTransifex.ts
 .PHONY: locales
 
 size-limit: build-prod # limit build size
@@ -25,7 +27,7 @@ size-limit: build-prod # limit build size
 .PHONY: size-limit
 
 tcm := $(bin_dir)/tcm
-webpack := $(bin_dir)/ts-node $(bin_dir)/webpack-cli
+webpack := $(ts-node) $(bin_dir)/webpack-cli
 
 build-css-types:
 	$(tcm) $(src_dir)
