@@ -50,7 +50,7 @@
     "@types/duplicate-package-checker-webpack-plugin": "2.1.5",
     "@types/firefox-webext-browser": "120.0.0",
     "@types/jest": "29.5.11",
-    "@types/node": "20.10.6",
+    "@types/node": "20.10.7",
     "@types/react": "18.2.47",
     "@types/react-dom": "18.2.18",
     "@types/script-ext-html-webpack-plugin": "2.1.6",
