@@ -8,7 +8,7 @@ import Donate from '../Donate.js'
 import NavBar from '../NavBar/index.js'
 import { NavigationProvider } from '../navigationContext.js'
 import Router from '../Router.js'
-import classes from './styles.module.css'
+import * as classes from './styles.module.css'
 
 function InnerApp() {
   return (

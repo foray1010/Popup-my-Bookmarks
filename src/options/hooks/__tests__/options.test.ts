@@ -1,4 +1,5 @@
-import { act, renderHook, waitFor } from '@testing-library/react'
+import { renderHook, waitFor } from '@testing-library/react'
+import { act } from 'react'
 
 import { ReactQueryClientProvider } from '../../../core/utils/queryClient.js'
 import {

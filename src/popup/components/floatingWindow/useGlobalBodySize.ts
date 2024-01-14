@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from 'react'
 
+import { notNullish } from '../../../core/utils/array.js'
 import {
   type BodySize,
   useFloatingWindowContext,
@@ -9,12 +10,10 @@ export default function useGlobalBodySize() {
   const { bodySizeStack, setBodySizeStack } = useFloatingWindowContext()
 
   const globalBodySize = useMemo(() => {
-    const notUndefined = <T>(x?: T): x is T => x !== undefined
-
-    const heights = bodySizeStack.map((x) => x.height).filter(notUndefined)
+    const heights = bodySizeStack.map((x) => x.height).filter(notNullish)
     const maxHeight = heights.length > 0 ? Math.max(...heights) : undefined
 
-    const widths = bodySizeStack.map((x) => x.width).filter(notUndefined)
+    const widths = bodySizeStack.map((x) => x.width).filter(notNullish)
     const maxWidth = widths.length > 0 ? Math.max(...widths) : undefined
 
     return {

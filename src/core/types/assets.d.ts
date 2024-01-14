@@ -11,6 +11,7 @@ declare module '*.svg' {
 declare module '*.svg?svgr' {
   import type { ComponentType, JSX } from 'react'
 
+  // eslint-disable-next-line functional/prefer-immutable-types
   const ReactComponent: ComponentType<JSX.IntrinsicElements['svg']>
   export default ReactComponent
 }

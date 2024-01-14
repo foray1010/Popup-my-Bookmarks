@@ -46,7 +46,10 @@ export default function useRowClickEvents({
         })
       }
     }
-    function handleRowRightClick(bookmarkInfo: BookmarkInfo, evt: MouseEvent) {
+    function handleRowRightClick(
+      bookmarkInfo: BookmarkInfo,
+      evt: Readonly<MouseEvent>,
+    ) {
       const offset = document
         .querySelector(`[data-bookmarkid="${bookmarkInfo.id}"`)
         ?.getBoundingClientRect()
@@ -65,13 +68,13 @@ export default function useRowClickEvents({
 
     return {
       handleRowAuxClick:
-        (bookmarkInfo: BookmarkInfo) => async (evt: MouseEvent) => {
+        (bookmarkInfo: BookmarkInfo) => async (evt: Readonly<MouseEvent>) => {
           if (evt.button === 1) {
             await handleRowMiddleClick(bookmarkInfo)
           }
         },
       handleRowClick:
-        (bookmarkInfo: BookmarkInfo) => async (evt: MouseEvent) => {
+        (bookmarkInfo: BookmarkInfo) => async (evt: Readonly<MouseEvent>) => {
           switch (bookmarkInfo.type) {
             case BOOKMARK_TYPES.FOLDER:
               if (options[OPTIONS.OP_FOLDER_BY]) {
@@ -96,7 +99,7 @@ export default function useRowClickEvents({
           }
         },
       handleRowContextMenu:
-        (bookmarkInfo: BookmarkInfo) => (evt: MouseEvent) => {
+        (bookmarkInfo: BookmarkInfo) => (evt: Readonly<MouseEvent>) => {
           handleRowRightClick(bookmarkInfo, evt)
         },
     }

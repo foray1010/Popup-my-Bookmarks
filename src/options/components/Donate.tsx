@@ -1,5 +1,5 @@
 import donateIcon from '../images/btn_donateCC_LG.webp'
-import classes from './donate.module.css'
+import * as classes from './donate.module.css'
 import ExternalLink from './ExternalLink/index.js'
 
 const paypalUrl =

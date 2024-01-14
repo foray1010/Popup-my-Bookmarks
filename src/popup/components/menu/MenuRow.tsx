@@ -3,7 +3,7 @@ import type { MouseEventHandler } from 'react'
 import webExtension from 'webextension-polyfill'
 
 import type { MenuItem } from './constants.js'
-import classes from './menu-row.module.css'
+import * as classes from './menu-row.module.css'
 
 type Props = Readonly<{
   isFocused: boolean

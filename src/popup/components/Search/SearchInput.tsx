@@ -5,7 +5,7 @@ import webExtension from 'webextension-polyfill'
 import Input from '../../../core/components/baseItems/Input/index.js'
 import Cross from '../../images/cross.svg?svgr'
 import Search from '../../images/search.svg?svgr'
-import classes from './search-input.module.css'
+import * as classes from './search-input.module.css'
 
 type Props = Readonly<
   ComponentProps<typeof Input> & {

@@ -5,7 +5,7 @@ import webExtension from 'webextension-polyfill'
 import ActionlessForm from '../../../core/components/baseItems/ActionlessForm/index.js'
 import Button from '../../../core/components/baseItems/Button/index.js'
 import Input from '../../../core/components/baseItems/Input/index.js'
-import classes from './editor-form.module.css'
+import * as classes from './editor-form.module.css'
 
 type Props = Readonly<{
   defaultTitle?: string

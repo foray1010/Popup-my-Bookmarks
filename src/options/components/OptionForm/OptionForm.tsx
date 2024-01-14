@@ -5,7 +5,7 @@ import ActionlessForm from '../../../core/components/baseItems/ActionlessForm/in
 import Button from '../../../core/components/baseItems/Button/index.js'
 import type { OPTIONS } from '../../../core/constants/index.js'
 import type { Options, OptionsConfig } from '../../../core/types/options.js'
-import classes from './option-form.module.css'
+import * as classes from './option-form.module.css'
 import OptionItem from './OptionItem/index.js'
 
 type Props = Readonly<{
