@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/require-await */
 
+import { notNullish } from '../../src/core/utils/array.js'
 import { pick } from './utils/object.js'
 import { WebExtEventEmitter } from './utils/WebExtEventEmitter.js'
 
@@ -105,11 +106,13 @@ class StorageAreaSync
   extends StorageArea
   implements browser.storage.StorageAreaSync
 {
-  public async getBytesInUse(keys?: string | readonly string[]) {
+  public async getBytesInUse(
+    keys?: string | readonly string[] | null | undefined,
+  ) {
     const storage =
       keys === undefined
         ? this.storageObject
-        : pick(this.storageObject, [keys].flat())
+        : pick(this.storageObject, [keys].flat().filter(notNullish))
 
     return Object.entries(storage).reduce((acc, [k, v]) => {
       // https://github.com/mozilla/gecko-dev/blob/0db73daa4b03ce7513a7dd5f31109143dc3b149e/third_party/rust/webext-storage/src/api.rs#L184-L188
