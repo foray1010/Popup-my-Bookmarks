@@ -1,15 +1,15 @@
 [
   {
     "path": "build/production/js/common.js",
-    "limit": "61.49 kB"
+    "limit": "61.2 kB"
   },
   {
     "path": "build/production/js/options.js",
-    "limit": "4.7 kB"
+    "limit": "4.67 kB"
   },
   {
     "path": "build/production/js/popup.js",
-    "limit": "12.31 kB"
+    "limit": "12.25 kB"
   },
   {
     "path": "build/production/options.html",

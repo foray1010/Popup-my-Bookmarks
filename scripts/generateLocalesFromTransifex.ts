@@ -27,7 +27,6 @@ async function main(): Promise<void> {
   if (!transifexApiKey) throw new Error('transifexApiKey is required')
 
   transifexApi.setup({
-    host: undefined, // use default host
     auth: transifexApiKey,
   })
 
@@ -76,7 +75,6 @@ async function main(): Promise<void> {
       console.log(`processing "${mappedLanguage}"...`)
 
       const url: string =
-        // @ts-expect-error missing this type
         await transifexApi.ResourceTranslationsAsyncDownload.download({
           resource,
           language,
