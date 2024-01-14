@@ -1,7 +1,7 @@
 import classNames from 'classix'
 import type { JSX } from 'react'
 
-import classes from './bookmark-row.module.css'
+import * as classes from './bookmark-row.module.css'
 
 type Props = Readonly<
   JSX.IntrinsicElements['div'] & {

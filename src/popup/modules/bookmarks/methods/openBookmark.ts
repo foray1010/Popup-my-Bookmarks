@@ -1,6 +1,7 @@
 import webExtension from 'webextension-polyfill'
 
 import { OPTIONS } from '../../../../core/constants/index.js'
+import { notNullish } from '../../../../core/utils/array.js'
 import { OPEN_IN_TYPES } from '../../../constants/menu.js'
 import { getOptions } from '../../options.js'
 import { BOOKMARK_TYPES } from '../constants.js'
@@ -16,7 +17,7 @@ async function getUrls(ids: readonly string[]): Promise<readonly string[]> {
   )
   return filteredBookmarkInfos
     .map((bookmarkInfo) => bookmarkInfo.url)
-    .filter(<T>(url: T | undefined): url is T => url !== undefined)
+    .filter(notNullish)
 }
 
 // suggested by https://groups.google.com/a/chromium.org/g/chromium-extensions/c/Inq88qfVoIs/m/gOeI5x2tBgAJ

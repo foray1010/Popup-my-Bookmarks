@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 
 import Option from './Option/index.js'
-import classes from './styles.module.css'
+import * as classes from './styles.module.css'
 
 type RestOptionProps = Readonly<
   Omit<

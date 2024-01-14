@@ -16,8 +16,14 @@ type Props = Readonly<
     disableDrag?: boolean
     disableDrop?: boolean
     itemKey: string
-    onDragOver: (evt: MouseEvent, responseEvent: ResponseEvent) => void
-    onDragStart: (evt: DragEvent, responseEvent: ResponseEvent) => void
+    onDragOver: (
+      evt: Readonly<MouseEvent>,
+      responseEvent: ResponseEvent,
+    ) => void
+    onDragStart: (
+      evt: Readonly<DragEvent>,
+      responseEvent: ResponseEvent,
+    ) => void
   }>
 >
 

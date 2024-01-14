@@ -1,6 +1,6 @@
 import type { MouseEventHandler } from 'react'
 
-import classes from './backdrop.module.css'
+import * as classes from './backdrop.module.css'
 
 type Props = Readonly<{
   opacity: number

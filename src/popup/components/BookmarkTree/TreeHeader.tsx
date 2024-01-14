@@ -1,5 +1,5 @@
 import Cross from '../../images/cross.svg?svgr'
-import classes from './tree-header.module.css'
+import * as classes from './tree-header.module.css'
 
 type Props = Readonly<{
   onClose: () => void

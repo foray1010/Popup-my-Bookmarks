@@ -7,7 +7,7 @@ import {
 
 import Input from '../../../../../core/components/baseItems/Input/index.js'
 import Select from '../../../../../core/components/baseItems/Select/index.js'
-import classes from './styles.module.css'
+import * as classes from './styles.module.css'
 
 type RestInputProps = Readonly<
   Omit<ComponentProps<typeof Input>, 'className' | 'onChange' | 'value'>

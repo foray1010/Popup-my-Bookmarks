@@ -2,7 +2,7 @@ import { type PropsWithChildren, useEffect, useRef } from 'react'
 
 import type { WindowId } from '../../constants/windows.js'
 import { useKeyBindingsContext } from './KeyBindingsContext.js'
-import classes from './KeyBindingsWindow.module.css'
+import * as classes from './KeyBindingsWindow.module.css'
 
 type Props = Readonly<
   PropsWithChildren<{

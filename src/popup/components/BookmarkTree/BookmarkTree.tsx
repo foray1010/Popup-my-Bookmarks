@@ -21,7 +21,7 @@ import type {
 } from '../../modules/bookmarks/types.js'
 import { useOptions } from '../../modules/options.js'
 import { type ResponseEvent, useDragZoneEvents } from '../dragAndDrop/index.js'
-import classes from './bookmark-tree.module.css'
+import * as classes from './bookmark-tree.module.css'
 import BookmarkRow from './BookmarkRow/index.js'
 
 type Props = Readonly<{
@@ -31,13 +31,13 @@ type Props = Readonly<{
   isSearching: boolean
   isShowTooltip: boolean
   lastScrollTop?: number | undefined
-  noRowsRenderer: () => ReactElement | null
+  noRowsRenderer: () => Readonly<ReactElement> | null
   onRowAuxClick: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
   onRowClick: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
   onRowContextMenu: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
   onRowDragOver: (
     bookmarkInfo: BookmarkInfo,
-  ) => (evt: MouseEvent, responseEvent: ResponseEvent) => void
+  ) => (evt: Readonly<MouseEvent>, responseEvent: ResponseEvent) => void
   onRowDragStart: DragEventHandler
   onRowMouseEnter: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
   onRowMouseLeave: (bookmarkInfo: BookmarkInfo) => MouseEventHandler

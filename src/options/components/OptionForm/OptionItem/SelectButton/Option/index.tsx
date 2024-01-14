@@ -2,7 +2,7 @@ import classNames from 'classix'
 import { type JSX, useRef } from 'react'
 
 import Button from '../../../../../../core/components/baseItems/Button/index.js'
-import classes from './styles.module.css'
+import * as classes from './styles.module.css'
 
 type Props = Readonly<
   Omit<JSX.IntrinsicElements['input'], 'className' | 'hidden' | 'type'>

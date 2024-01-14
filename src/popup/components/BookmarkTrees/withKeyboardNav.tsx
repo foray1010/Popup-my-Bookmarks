@@ -131,6 +131,7 @@ function useMenuKeyNav() {
 }
 
 export default function withKeyboardNav<P extends {}>(
+  // eslint-disable-next-line functional/prefer-immutable-types
   WrappedComponent: ComponentType<P>,
 ) {
   function InnerComponent(props: P) {
