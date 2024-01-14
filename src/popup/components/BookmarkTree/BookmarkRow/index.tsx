@@ -14,7 +14,7 @@ import {
   DragAndDropConsumer,
   type ResponseEvent,
 } from '../../dragAndDrop/index.js'
-import classes from './bookmark-row.module.css'
+import * as classes from './bookmark-row.module.css'
 import BookmarkRow from './BookmarkRow.js'
 import useTooltip from './useTooltip.js'
 
@@ -31,7 +31,7 @@ type Props = Readonly<{
   onContextMenu: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
   onDragOver: (
     bookmarkInfo: BookmarkInfo,
-  ) => (evt: MouseEvent, responseEvent: ResponseEvent) => void
+  ) => (evt: Readonly<MouseEvent>, responseEvent: ResponseEvent) => void
   onDragStart: DragEventHandler
   onMouseEnter: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
   onMouseLeave: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
