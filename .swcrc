@@ -3,14 +3,14 @@
   "jsc": {
     "parser": {
       "syntax": "typescript",
-      "tsx": true
+      "tsx": true,
     },
     "transform": {
       "react": {
         "runtime": "automatic",
-        "useBuiltins": true
-      }
-    }
+        "useBuiltins": true,
+      },
+    },
   },
   "env": {
     // swc does not read from .browserslistrc: https://github.com/swc-project/swc/issues/3365
@@ -18,6 +18,6 @@
     // `usage` mode is less efficient than `entry`
     "mode": "entry",
     "coreJs": "3.35",
-    "shippedProposals": true
-  }
+    "shippedProposals": true,
+  },
 }
