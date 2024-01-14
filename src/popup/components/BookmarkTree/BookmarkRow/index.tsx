@@ -31,7 +31,7 @@ type Props = Readonly<{
   onContextMenu: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
   onDragOver: (
     bookmarkInfo: BookmarkInfo,
-  ) => (evt: MouseEvent, responseEvent: ResponseEvent) => void
+  ) => (evt: Readonly<MouseEvent>, responseEvent: ResponseEvent) => void
   onDragStart: DragEventHandler
   onMouseEnter: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
   onMouseLeave: (bookmarkInfo: BookmarkInfo) => MouseEventHandler

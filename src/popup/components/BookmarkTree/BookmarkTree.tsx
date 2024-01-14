@@ -31,13 +31,13 @@ type Props = Readonly<{
   isSearching: boolean
   isShowTooltip: boolean
   lastScrollTop?: number | undefined
-  noRowsRenderer: () => ReactElement | null
+  noRowsRenderer: () => Readonly<ReactElement> | null
   onRowAuxClick: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
   onRowClick: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
   onRowContextMenu: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
   onRowDragOver: (
     bookmarkInfo: BookmarkInfo,
-  ) => (evt: MouseEvent, responseEvent: ResponseEvent) => void
+  ) => (evt: Readonly<MouseEvent>, responseEvent: ResponseEvent) => void
   onRowDragStart: DragEventHandler
   onRowMouseEnter: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
   onRowMouseLeave: (bookmarkInfo: BookmarkInfo) => MouseEventHandler
