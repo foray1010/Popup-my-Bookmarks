@@ -98,7 +98,6 @@ const webpackConfig: Readonly<Configuration> = {
             },
           ]
         : []),
-
       {
         test: /\.svg$/u,
         resourceQuery: /svgr/u,
@@ -121,13 +120,8 @@ const webpackConfig: Readonly<Configuration> = {
       },
       {
         test: /\/manifest\.yml$/u,
+        type: 'asset/resource',
         use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].json',
-            },
-          },
           {
             loader: 'extract-loader',
             options: {
@@ -146,6 +140,9 @@ const webpackConfig: Readonly<Configuration> = {
             options: { asJSON: true },
           },
         ],
+        generator: {
+          filename: '[name].json',
+        },
       },
     ],
   },
