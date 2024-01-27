@@ -4097,7 +4097,7 @@ __metadata:
     terser-webpack-plugin: "npm:5.3.10"
     ts-node: "npm:10.9.2"
     type-coverage: "npm:2.27.1"
-    typed-css-modules: "npm:0.8.1"
+    typed-css-modules: "npm:0.9.0"
     typescript: "npm:5.3.3"
     use-debounce: "npm:10.0.0"
     use-deep-compare: "npm:1.2.1"
@@ -15804,9 +15804,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typed-css-modules@npm:0.8.1":
-  version: 0.8.1
-  resolution: "typed-css-modules@npm:0.8.1"
+"typed-css-modules@npm:0.9.0":
+  version: 0.9.0
+  resolution: "typed-css-modules@npm:0.9.0"
   dependencies:
     camelcase: "npm:^6.0.0"
     chalk: "npm:^4.0.0"
@@ -15823,7 +15823,7 @@ __metadata:
     yargs: "npm:^17.7.2"
   bin:
     tcm: lib/cli.js
-  checksum: 6e9380a0517cf3d51971b216c398be092b202c2c3097e31841e30102e518fe90c3c4127b1c8bf863d110fd1a874749e0aef7775cc83bc56284c7d6e15754e928
+  checksum: b7e780a61a1d341a16540bc9fc2d9868d4efbb2950016e01b8b8f2421ec56de0bf757880b04c82636842195c1cf51d05aa10c221aff7618a884faeadf1ff2adc
   languageName: node
   linkType: hard
 
