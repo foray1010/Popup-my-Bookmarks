@@ -4058,7 +4058,7 @@ __metadata:
     "@types/webpack-bundle-analyzer": "npm:4.6.3"
     "@types/zip-webpack-plugin": "npm:3.0.6"
     chrome-manifest-loader: "npm:0.3.0"
-    classix: "npm:2.1.35"
+    classix: "npm:2.1.36"
     clean-webpack-plugin: "npm:4.0.0"
     constate: "npm:3.3.2"
     copy-webpack-plugin: "npm:12.0.2"
@@ -5700,10 +5700,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classix@npm:2.1.35":
-  version: 2.1.35
-  resolution: "classix@npm:2.1.35"
-  checksum: 1e35c3e968e7ea951ebb8ff368871d296a8ca5ccd970263413103c6bd3c880787bf1e13db002cda9464bb0c8a5b4ff411f85200868f95061642b4908a5429e0f
+"classix@npm:2.1.36":
+  version: 2.1.36
+  resolution: "classix@npm:2.1.36"
+  checksum: 2ac8be3f2df398d7a120651ad1894e297a20be1491d49942f29d565d6e1e5f44656a25b6ecad21d0095bcbd9bf28e93b79cbb98c251f8151dc56b94e53184b2b
   languageName: node
   linkType: hard
 
