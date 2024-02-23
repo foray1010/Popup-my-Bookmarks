@@ -54,7 +54,7 @@
     "@types/react": "18.2.57",
     "@types/react-dom": "18.2.19",
     "@types/script-ext-html-webpack-plugin": "2.1.6",
-    "@types/webpack-bundle-analyzer": "4.6.3",
+    "@types/webpack-bundle-analyzer": "4.7.0",
     "@types/zip-webpack-plugin": "3.0.6",
     "chrome-manifest-loader": "0.3.0",
     "clean-webpack-plugin": "4.0.0",

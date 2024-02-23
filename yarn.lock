@@ -3574,14 +3574,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack-bundle-analyzer@npm:4.6.3":
-  version: 4.6.3
-  resolution: "@types/webpack-bundle-analyzer@npm:4.6.3"
+"@types/webpack-bundle-analyzer@npm:4.7.0":
+  version: 4.7.0
+  resolution: "@types/webpack-bundle-analyzer@npm:4.7.0"
   dependencies:
     "@types/node": "npm:*"
     tapable: "npm:^2.2.0"
     webpack: "npm:^5"
-  checksum: 10c0/ba15d240e330b4d3fda3d39cb5eebd3902e2032dc4c366eb524dbed1c543245db89aa93f7e541152f2ce692fcfeaba370397df1b32fb0dcd68b8904a45f5e482
+  checksum: 10c0/dd5294ab9654081848066b14b8f01fcabb61b0e3ed4975f1613cc5da0f473b4496164a3fce3ac63027a15bb2f27d9442562f5099e764d6c03f72fe5a69fcc9bc
   languageName: node
   linkType: hard
 
@@ -4070,7 +4070,7 @@ __metadata:
     "@types/react": "npm:18.2.57"
     "@types/react-dom": "npm:18.2.19"
     "@types/script-ext-html-webpack-plugin": "npm:2.1.6"
-    "@types/webpack-bundle-analyzer": "npm:4.6.3"
+    "@types/webpack-bundle-analyzer": "npm:4.7.0"
     "@types/zip-webpack-plugin": "npm:3.0.6"
     chrome-manifest-loader: "npm:0.3.0"
     classix: "npm:2.1.36"
