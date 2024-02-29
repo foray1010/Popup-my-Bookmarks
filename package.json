@@ -16,7 +16,7 @@
     "@fontsource/archivo-narrow": "5.0.18",
     "@tanstack/react-query": "5.24.1",
     "@tanstack/react-query-devtools": "5.24.1",
-    "@tanstack/react-virtual": "3.1.2",
+    "@tanstack/react-virtual": "3.1.3",
     "classix": "2.1.36",
     "constate": "3.3.2",
     "core-js": "3.36.0",
