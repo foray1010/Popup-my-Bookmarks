@@ -2627,12 +2627,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@size-limit/file@npm:11.1.1":
-  version: 11.1.1
-  resolution: "@size-limit/file@npm:11.1.1"
+"@size-limit/file@npm:11.1.2":
+  version: 11.1.2
+  resolution: "@size-limit/file@npm:11.1.2"
   peerDependencies:
-    size-limit: 11.1.1
-  checksum: 10c0/9bb309e66735c392b4a8671f2f27a1b254a0a44bd225fa48ecb27ab6f4759f7125de19f61a4a82eae15d39912bfa1bdf422adb86112d44358ece9d1632e3027c
+    size-limit: 11.1.2
+  checksum: 10c0/a21a08e24ceb8aca0521ab916ac9c7c90bd927b39b949c4869ad31027cd55f42ab87920558525bce195f35ac81641bac34ac3bea57e5e5d08b1303a0ec2ad470
   languageName: node
   linkType: hard
 
@@ -4137,7 +4137,7 @@ __metadata:
     "@foray1010/remark-preset": "npm:10.0.0"
     "@foray1010/stylelint-config": "npm:15.0.0"
     "@foray1010/tsconfig": "npm:12.0.0"
-    "@size-limit/file": "npm:11.1.1"
+    "@size-limit/file": "npm:11.1.2"
     "@svgr/webpack": "npm:8.1.0"
     "@swc/core": "npm:1.4.8"
     "@swc/jest": "npm:0.2.36"
@@ -4192,7 +4192,7 @@ __metadata:
     remark-cli: "npm:12.0.0"
     script-ext-html-webpack-plugin: "npm:2.1.5"
     sharp: "npm:0.33.3"
-    size-limit: "npm:11.1.1"
+    size-limit: "npm:11.1.2"
     stylelint: "npm:16.2.1"
     swc-loader: "npm:0.2.6"
     terser-webpack-plugin: "npm:5.3.10"
@@ -14857,9 +14857,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"size-limit@npm:11.1.1":
-  version: 11.1.1
-  resolution: "size-limit@npm:11.1.1"
+"size-limit@npm:11.1.2":
+  version: 11.1.2
+  resolution: "size-limit@npm:11.1.2"
   dependencies:
     bytes-iec: "npm:^3.1.1"
     chokidar: "npm:^3.6.0"
@@ -14870,7 +14870,7 @@ __metadata:
     picocolors: "npm:^1.0.0"
   bin:
     size-limit: bin.js
-  checksum: 10c0/506fd993d11b95ec69d942873adae83c0b75cba2242948a7ed23fff23a5a1c13d011565cffcd281a6a9d98329feb87d1fc9df3f72ba3730f6828bfaf2e985891
+  checksum: 10c0/5fa72499674c6f693055c30cbc22433f940a5d5b05152c32d0094b19a7a40930ba75da8345c7357e8c72a895e8aee1d8974fb28ce3368329ba83214aa9b5466e
   languageName: node
   linkType: hard
 
