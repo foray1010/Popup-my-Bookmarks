@@ -22,7 +22,7 @@
     "core-js": "3.36.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "7.51.0",
+    "react-hook-form": "7.51.1",
     "use-debounce": "10.0.0",
     "use-deep-compare": "1.2.1",
     "use-resize-observer": "9.1.0",
