@@ -4166,7 +4166,7 @@ __metadata:
     swc-loader: "npm:0.2.6"
     terser-webpack-plugin: "npm:5.3.10"
     ts-node: "npm:10.9.2"
-    type-coverage: "npm:2.27.1"
+    type-coverage: "npm:2.27.2"
     typed-css-modules: "npm:0.9.1"
     typescript: "npm:5.4.3"
     use-debounce: "npm:10.0.0"
@@ -15788,7 +15788,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-coverage-core@npm:^2.27.1":
+"type-coverage-core@npm:^2.27.2":
   version: 2.27.2
   resolution: "type-coverage-core@npm:2.27.2"
   dependencies:
@@ -15803,15 +15803,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-coverage@npm:2.27.1":
-  version: 2.27.1
-  resolution: "type-coverage@npm:2.27.1"
+"type-coverage@npm:2.27.2":
+  version: 2.27.2
+  resolution: "type-coverage@npm:2.27.2"
   dependencies:
     minimist: "npm:1"
-    type-coverage-core: "npm:^2.27.1"
+    type-coverage-core: "npm:^2.27.2"
   bin:
     type-coverage: bin/type-coverage
-  checksum: 10c0/3652416f2785375e395919763404314d507e43bbf7c28f5faec74be6ca762823082fa0723de68111a5b227b433f161cdc7472d906bb709870c205640ace91192
+  checksum: 10c0/6db5c9eace86236b2ceafb851e678747edc1d96af8163c3dde94df79dd46a0166f517f1d9e4c8505825c2e07af062eac50889539f6e1936cb5b8eb80ba3842b1
   languageName: node
   linkType: hard
 
