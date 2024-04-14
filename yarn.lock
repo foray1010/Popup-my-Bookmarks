@@ -3469,13 +3469,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:18.2.74":
+"@types/react@npm:*":
   version: 18.2.74
   resolution: "@types/react@npm:18.2.74"
   dependencies:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
   checksum: 10c0/347e38b4c5dc20d50ff71bf04b7caaef490e5ff695e74a0088a13fbb2a0c5d125a5ecfd142adfa30f0176da0e2734942c91ba61d95ce269c43b3265bd7379361
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:18.2.75":
+  version: 18.2.75
+  resolution: "@types/react@npm:18.2.75"
+  dependencies:
+    "@types/prop-types": "npm:*"
+    csstype: "npm:^3.0.2"
+  checksum: 10c0/3c0d035d64007d38cf1b682108de8c5f042452025899280c5d2c040b9f53b1f81482d0d57fd93e6687c2c619f3b605d33a01569b1fbbbdeec7fb3a56c7a72af8
   languageName: node
   linkType: hard
 
@@ -4125,7 +4135,7 @@ __metadata:
     "@types/firefox-webext-browser": "npm:120.0.3"
     "@types/jest": "npm:29.5.12"
     "@types/node": "npm:20.12.6"
-    "@types/react": "npm:18.2.74"
+    "@types/react": "npm:18.2.75"
     "@types/react-dom": "npm:18.2.24"
     "@types/script-ext-html-webpack-plugin": "npm:2.1.6"
     "@types/webpack-bundle-analyzer": "npm:4.7.0"
