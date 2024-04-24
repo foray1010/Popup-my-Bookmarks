@@ -1811,10 +1811,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/archivo-narrow@npm:5.0.19":
-  version: 5.0.19
-  resolution: "@fontsource/archivo-narrow@npm:5.0.19"
-  checksum: 10c0/3519b26599d21f62e0ac41f0ab5e63066b1f876404675b094055573fbe94985c8c78e16e7b64b835cbb797fe94b52363309d6ed902c3a87158223f6ac549d23d
+"@fontsource/archivo-narrow@npm:5.0.20":
+  version: 5.0.20
+  resolution: "@fontsource/archivo-narrow@npm:5.0.20"
+  checksum: 10c0/0a28ad1290eff85dc9c139b41b95b24123a4123daa04a926d52427aef3bc31b55f44d68402db7c36f29d251a210a794b40b37e097ea758d7dcdf4f120a6269c3
   languageName: node
   linkType: hard
 
@@ -4092,7 +4092,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": "npm:19.2.2"
     "@commitlint/config-conventional": "npm:19.2.2"
-    "@fontsource/archivo-narrow": "npm:5.0.19"
+    "@fontsource/archivo-narrow": "npm:5.0.20"
     "@foray1010/eslint-config": "npm:12.2.2"
     "@foray1010/jest-preset": "npm:5.1.0"
     "@foray1010/prettier-config": "npm:11.0.1"
