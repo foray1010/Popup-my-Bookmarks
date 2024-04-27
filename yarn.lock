@@ -4166,7 +4166,7 @@ __metadata:
     use-deep-compare: "npm:1.2.1"
     use-resize-observer: "npm:9.1.0"
     use-typed-event-listener: "npm:4.0.2"
-    webextension-polyfill: "npm:0.10.0"
+    webextension-polyfill: "npm:0.11.0"
     webpack: "npm:5.91.0"
     webpack-bundle-analyzer: "npm:4.10.2"
     webpack-cli: "npm:5.1.4"
@@ -16242,10 +16242,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webextension-polyfill@npm:0.10.0":
-  version: 0.10.0
-  resolution: "webextension-polyfill@npm:0.10.0"
-  checksum: 10c0/6a45278f1fed8fbd5355f9b19a7b0b3fadc91fa3a6eef69125a1706bb3efa2181235eefbfb3f538443bb396cfcb97512361551888ce8465c08914431cb2d5b6d
+"webextension-polyfill@npm:0.11.0":
+  version: 0.11.0
+  resolution: "webextension-polyfill@npm:0.11.0"
+  dependencies:
+    webpack: "npm:^5.91.0"
+    webpack-cli: "npm:^5.1.4"
+  checksum: 10c0/f56fa11b90b42fc8c6d176237452d8431a53230be7011b201e8b869c008a94bcc3700c703384ba9a549949482255cc6e84d502b28a5f4fe170b3be5c73f2d4dc
   languageName: node
   linkType: hard
 
@@ -16278,7 +16281,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack-cli@npm:5.1.4":
+"webpack-cli@npm:5.1.4, webpack-cli@npm:^5.1.4":
   version: 5.1.4
   resolution: "webpack-cli@npm:5.1.4"
   dependencies:
@@ -16328,7 +16331,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:5.91.0, webpack@npm:^5":
+"webpack@npm:5.91.0, webpack@npm:^5, webpack@npm:^5.91.0":
   version: 5.91.0
   resolution: "webpack@npm:5.91.0"
   dependencies:
