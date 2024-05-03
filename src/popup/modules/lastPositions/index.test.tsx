@@ -14,16 +14,11 @@ describe('LastPositionsProvider + useLastPositionsContext', () => {
   it('should fetch lastPosition when isEnabled changes from false to true', async () => {
     let isEnabled = false
 
-    const { result, rerender } = renderHook(
-      () => {
-        return useLastPositionsContext()
-      },
-      {
-        wrapper: (props) => (
-          <LastPositionsProvider {...props} isEnabled={isEnabled} />
-        ),
-      },
-    )
+    const { result, rerender } = renderHook(useLastPositionsContext, {
+      wrapper: (props) => (
+        <LastPositionsProvider {...props} isEnabled={isEnabled} />
+      ),
+    })
 
     expect(result.current.lastPositions).toBeUndefined()
 
@@ -39,16 +34,11 @@ describe('LastPositionsProvider + useLastPositionsContext', () => {
 
   describe('registerLastPosition', () => {
     it('should register new lastPosition', async () => {
-      const { result } = renderHook(
-        () => {
-          return useLastPositionsContext()
-        },
-        {
-          wrapper: (props) => (
-            <LastPositionsProvider {...props} isEnabled={true} />
-          ),
-        },
-      )
+      const { result } = renderHook(useLastPositionsContext, {
+        wrapper: (props) => (
+          <LastPositionsProvider {...props} isEnabled={true} />
+        ),
+      })
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
 
@@ -63,16 +53,11 @@ describe('LastPositionsProvider + useLastPositionsContext', () => {
     })
 
     it('should override existing index when registering lastPosition', async () => {
-      const { result } = renderHook(
-        () => {
-          return useLastPositionsContext()
-        },
-        {
-          wrapper: (props) => (
-            <LastPositionsProvider {...props} isEnabled={true} />
-          ),
-        },
-      )
+      const { result } = renderHook(useLastPositionsContext, {
+        wrapper: (props) => (
+          <LastPositionsProvider {...props} isEnabled={true} />
+        ),
+      })
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
 
@@ -86,16 +71,11 @@ describe('LastPositionsProvider + useLastPositionsContext', () => {
     })
 
     it('should not insert new index when previous index does not exist', async () => {
-      const { result } = renderHook(
-        () => {
-          return useLastPositionsContext()
-        },
-        {
-          wrapper: (props) => (
-            <LastPositionsProvider {...props} isEnabled={true} />
-          ),
-        },
-      )
+      const { result } = renderHook(useLastPositionsContext, {
+        wrapper: (props) => (
+          <LastPositionsProvider {...props} isEnabled={true} />
+        ),
+      })
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
 
@@ -109,16 +89,11 @@ describe('LastPositionsProvider + useLastPositionsContext', () => {
     })
 
     it('should not override existing index when registering the same id', async () => {
-      const { result } = renderHook(
-        () => {
-          return useLastPositionsContext()
-        },
-        {
-          wrapper: (props) => (
-            <LastPositionsProvider {...props} isEnabled={true} />
-          ),
-        },
-      )
+      const { result } = renderHook(useLastPositionsContext, {
+        wrapper: (props) => (
+          <LastPositionsProvider {...props} isEnabled={true} />
+        ),
+      })
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
 
@@ -132,16 +107,11 @@ describe('LastPositionsProvider + useLastPositionsContext', () => {
     })
 
     it('should not insert new index when registering the same id', async () => {
-      const { result } = renderHook(
-        () => {
-          return useLastPositionsContext()
-        },
-        {
-          wrapper: (props) => (
-            <LastPositionsProvider {...props} isEnabled={true} />
-          ),
-        },
-      )
+      const { result } = renderHook(useLastPositionsContext, {
+        wrapper: (props) => (
+          <LastPositionsProvider {...props} isEnabled={true} />
+        ),
+      })
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
 
@@ -157,16 +127,11 @@ describe('LastPositionsProvider + useLastPositionsContext', () => {
 
   describe('unregisterLastPosition', () => {
     it('should unregister existing lastPosition by id', async () => {
-      const { result } = renderHook(
-        () => {
-          return useLastPositionsContext()
-        },
-        {
-          wrapper: (props) => (
-            <LastPositionsProvider {...props} isEnabled={true} />
-          ),
-        },
-      )
+      const { result } = renderHook(useLastPositionsContext, {
+        wrapper: (props) => (
+          <LastPositionsProvider {...props} isEnabled={true} />
+        ),
+      })
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
 
@@ -178,16 +143,11 @@ describe('LastPositionsProvider + useLastPositionsContext', () => {
     })
 
     it('should skip when id is not registered', async () => {
-      const { result } = renderHook(
-        () => {
-          return useLastPositionsContext()
-        },
-        {
-          wrapper: (props) => (
-            <LastPositionsProvider {...props} isEnabled={true} />
-          ),
-        },
-      )
+      const { result } = renderHook(useLastPositionsContext, {
+        wrapper: (props) => (
+          <LastPositionsProvider {...props} isEnabled={true} />
+        ),
+      })
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
 
@@ -203,16 +163,11 @@ describe('LastPositionsProvider + useLastPositionsContext', () => {
 
   describe('updateLastPosition', () => {
     it('should update existing lastPosition by id', async () => {
-      const { result } = renderHook(
-        () => {
-          return useLastPositionsContext()
-        },
-        {
-          wrapper: (props) => (
-            <LastPositionsProvider {...props} isEnabled={true} />
-          ),
-        },
-      )
+      const { result } = renderHook(useLastPositionsContext, {
+        wrapper: (props) => (
+          <LastPositionsProvider {...props} isEnabled={true} />
+        ),
+      })
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
 
@@ -226,16 +181,11 @@ describe('LastPositionsProvider + useLastPositionsContext', () => {
     })
 
     it('should skip when id is not registered', async () => {
-      const { result } = renderHook(
-        () => {
-          return useLastPositionsContext()
-        },
-        {
-          wrapper: (props) => (
-            <LastPositionsProvider {...props} isEnabled={true} />
-          ),
-        },
-      )
+      const { result } = renderHook(useLastPositionsContext, {
+        wrapper: (props) => (
+          <LastPositionsProvider {...props} isEnabled={true} />
+        ),
+      })
 
       await waitFor(() => expect(result.current.isInitialized).toBe(true))
 

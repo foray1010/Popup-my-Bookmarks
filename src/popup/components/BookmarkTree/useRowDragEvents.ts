@@ -18,7 +18,7 @@ export default function useRowDragEvents({
     return {
       handleRowDragOver:
         (bookmarkInfo: BookmarkInfo) =>
-        (evt: MouseEvent, responseEvent: ResponseEvent) => {
+        (evt: Readonly<MouseEvent>, responseEvent: ResponseEvent) => {
           if (
             !bookmarkInfo.parentId ||
             // avoid infinite loop

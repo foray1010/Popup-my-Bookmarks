@@ -5,9 +5,12 @@
 import { promises as fsPromises } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
+// eslint-disable-next-line n/no-unsupported-features/node-builtins
 import * as readline from 'node:readline/promises'
 
 import { type Collection, transifexApi } from '@transifex/api'
+
+import { notNullish } from '../src/core/utils/array.js'
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -27,7 +30,6 @@ async function main(): Promise<void> {
   if (!transifexApiKey) throw new Error('transifexApiKey is required')
 
   transifexApi.setup({
-    host: undefined, // use default host
     auth: transifexApiKey,
   })
 
@@ -76,7 +78,6 @@ async function main(): Promise<void> {
       console.log(`processing "${mappedLanguage}"...`)
 
       const url: string =
-        // @ts-expect-error missing this type
         await transifexApi.ResourceTranslationsAsyncDownload.download({
           resource,
           language,
@@ -98,7 +99,7 @@ async function main(): Promise<void> {
 
             return [k, { ...v, message: trimmedMessage }] as const
           })
-          .filter(<T>(x: T | undefined): x is T => x !== undefined)
+          .filter(notNullish)
           .sort(([a], [b]) => a.localeCompare(b)),
       ) satisfies typeof messagesJson
 

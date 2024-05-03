@@ -14,7 +14,7 @@ help: # get all command options
 
 bin_dir := node_modules/.bin
 
-ts-node := node --loader ts-node/esm
+ts-node := node --import=./register-ts-node.js
 
 src_dir := src
 

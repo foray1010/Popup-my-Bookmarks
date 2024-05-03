@@ -1,7 +1,7 @@
 import { type ReactNode, useMemo } from 'react'
 
 import BookmarkTree from '../BookmarkTree/index.js'
-import classes from './bookmark-trees.module.css'
+import * as classes from './bookmark-trees.module.css'
 
 type Props = Readonly<{
   firstTreeHeader: ReactNode

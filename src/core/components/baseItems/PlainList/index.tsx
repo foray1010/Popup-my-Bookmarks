@@ -1,7 +1,7 @@
 import classNames from 'classix'
 import { forwardRef, type JSX } from 'react'
 
-import classes from './styles.module.css'
+import * as classes from './styles.module.css'
 
 type Props = Readonly<JSX.IntrinsicElements['ul']>
 

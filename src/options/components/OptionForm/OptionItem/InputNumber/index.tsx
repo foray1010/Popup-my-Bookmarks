@@ -2,7 +2,7 @@ import classNames from 'classix'
 import type { ComponentProps } from 'react'
 
 import Input from '../../../../../core/components/baseItems/Input/index.js'
-import classes from './styles.module.css'
+import * as classes from './styles.module.css'
 
 type RestInputProps = Readonly<
   Omit<ComponentProps<typeof Input>, 'max' | 'min' | 'size' | 'type'>

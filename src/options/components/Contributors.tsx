@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 
-import classes from './contributors.module.css'
+import * as classes from './contributors.module.css'
 
 const contributors: Record<string, readonly string[]> = {
   Developer: ['foray1010'],

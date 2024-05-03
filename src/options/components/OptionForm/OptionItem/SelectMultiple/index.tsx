@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react'
 
 import Input from '../../../../../core/components/baseItems/Input/index.js'
 import PlainList from '../../../../../core/components/baseItems/PlainList/index.js'
-import classes from './styles.module.css'
+import * as classes from './styles.module.css'
 
 type RestInputProps = Readonly<
   Omit<ComponentProps<typeof Input>, 'checked' | 'className' | 'type' | 'value'>
