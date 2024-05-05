@@ -217,10 +217,7 @@ function useRefreshOnBookmarkEvent({
   const refreshRef = useLatestRef(refresh)
 
   useEffect(() => {
-    // create wrapper function to always point to the latest ref
-    function refreshTrees() {
-      refreshRef.current()
-    }
+    const refreshTrees = refreshRef.current
 
     webExtension.bookmarks.onChanged.addListener(refreshTrees)
     webExtension.bookmarks.onCreated.addListener(refreshTrees)
