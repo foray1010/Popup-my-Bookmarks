@@ -4130,6 +4130,7 @@ __metadata:
     sharp: "npm:0.33.4"
     size-limit: "npm:11.1.4"
     stylelint: "npm:16.6.1"
+    svgo: "npm:3.3.2"
     swc-loader: "npm:0.2.6"
     terser-webpack-plugin: "npm:5.3.10"
     ts-node: "npm:10.9.2"
@@ -15097,7 +15098,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svgo@npm:^3.0.2":
+"svgo@npm:3.3.2, svgo@npm:^3.0.2":
   version: 3.3.2
   resolution: "svgo@npm:3.3.2"
   dependencies:

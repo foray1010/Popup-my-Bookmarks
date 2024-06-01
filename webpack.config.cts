@@ -106,7 +106,7 @@ const webpackConfig: Readonly<Configuration> = {
           'swc-loader',
           {
             loader: '@svgr/webpack',
-            options: { babel: false },
+            options: { babel: false, svgo: false },
           },
         ],
       },

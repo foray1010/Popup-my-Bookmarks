@@ -7,6 +7,7 @@ const config = {
   '*.css': ['yarn prettier --write', 'yarn stylelint --fix'],
   '*.{json,yaml,yml}': 'yarn prettier --write',
   '*.{markdown,md}': ['yarn prettier --write', 'yarn remark'],
+  '*.svg': 'svgo',
   '*ignore-sync': 'ignore-sync',
 }
 export default config
