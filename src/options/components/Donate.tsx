@@ -17,7 +17,7 @@ export default function Donate() {
           <ol>
             <li>
               rate it on&nbsp;
-              <ExternalLink href='https://chrome.google.com/webstore/detail/popup-my-bookmarks/mppflflkbbafeopeoeigkbbdjdbeifni/reviews'>
+              <ExternalLink href='https://chromewebstore.google.com/detail/popup-my-bookmarks/mppflflkbbafeopeoeigkbbdjdbeifni/reviews'>
                 Chrome Web Store
               </ExternalLink>
             </li>
