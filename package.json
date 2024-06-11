@@ -47,7 +47,7 @@
     "@testing-library/jest-dom": "6.4.5",
     "@testing-library/react": "16.0.0",
     "@testing-library/user-event": "14.5.2",
-    "@transifex/api": "7.1.0",
+    "@transifex/api": "7.1.1",
     "@types/duplicate-package-checker-webpack-plugin": "2.1.5",
     "@types/firefox-webext-browser": "120.0.3",
     "@types/jest": "29.5.12",
