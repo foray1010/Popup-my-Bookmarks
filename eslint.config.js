@@ -4,7 +4,7 @@ import {
   eslintNodeConfig,
   eslintReactConfig,
 } from '@foray1010/eslint-config'
-import * as eslintPluginTanstackQuery from '@tanstack/eslint-plugin-query'
+import eslintPluginTanstackQuery from '@tanstack/eslint-plugin-query'
 
 const reactDirs = ['__mocks__', 'src']
 
@@ -26,14 +26,11 @@ const config = [
     },
     [
       ...eslintReactConfig,
+      ...eslintPluginTanstackQuery.configs['flat/recommended'],
       {
-        plugins: {
-          '@tanstack/query': eslintPluginTanstackQuery,
-        },
         rules: {
-          ...eslintPluginTanstackQuery.configs.recommended.rules,
           // https://github.com/import-js/eslint-plugin-import/issues/1739
-          'import/no-unresolved': ['error', { ignore: ['\\?'] }],
+          'import/no-unresolved': ['error', { ignore: [String.raw`\?`] }],
         },
       },
     ],
