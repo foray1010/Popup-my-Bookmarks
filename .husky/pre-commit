@@ -1,2 +1,2 @@
 make build-css-types
-yarn lint-staged
+lint-staged
