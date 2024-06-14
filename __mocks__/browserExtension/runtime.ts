@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/require-await, import/no-nodejs-modules */
+/* eslint-disable @typescript-eslint/require-await, import-x/no-nodejs-modules */
 
 import path from 'node:path'
 
