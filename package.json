@@ -32,7 +32,7 @@
   "devDependencies": {
     "@commitlint/cli": "19.3.0",
     "@commitlint/config-conventional": "19.2.2",
-    "@foray1010/eslint-config": "12.2.2",
+    "@foray1010/eslint-config": "12.2.3",
     "@foray1010/jest-preset": "5.1.0",
     "@foray1010/prettier-config": "11.0.1",
     "@foray1010/remark-preset": "10.0.1",
