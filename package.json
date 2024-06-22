@@ -49,7 +49,7 @@
     "@testing-library/user-event": "14.5.2",
     "@transifex/api": "7.1.1",
     "@types/duplicate-package-checker-webpack-plugin": "2.1.5",
-    "@types/firefox-webext-browser": "120.0.3",
+    "@types/firefox-webext-browser": "120.0.4",
     "@types/jest": "29.5.12",
     "@types/node": "20.14.2",
     "@types/react": "18.3.3",
