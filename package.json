@@ -40,7 +40,7 @@
     "@foray1010/tsconfig": "12.0.0",
     "@size-limit/file": "11.1.4",
     "@svgr/webpack": "8.1.0",
-    "@swc/core": "1.6.5",
+    "@swc/core": "1.6.6",
     "@swc/jest": "0.2.36",
     "@tanstack/eslint-plugin-query": "5.47.0",
     "@testing-library/dom": "10.2.0",
