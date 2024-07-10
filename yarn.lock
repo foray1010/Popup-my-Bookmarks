@@ -3036,9 +3036,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:10.3.0":
-  version: 10.3.0
-  resolution: "@testing-library/dom@npm:10.3.0"
+"@testing-library/dom@npm:10.3.1":
+  version: 10.3.1
+  resolution: "@testing-library/dom@npm:10.3.1"
   dependencies:
     "@babel/code-frame": "npm:^7.10.4"
     "@babel/runtime": "npm:^7.12.5"
@@ -3048,7 +3048,7 @@ __metadata:
     dom-accessibility-api: "npm:^0.5.9"
     lz-string: "npm:^1.5.0"
     pretty-format: "npm:^27.0.2"
-  checksum: 10c0/7aef66dad0f80b03278ab03c58c13d6c2ddbf995febb70d9004e768d3cefa28ced0bb0b35724fbd4be06ec8f276e6170c4baf4d705c4819007e4d42ffa48b2ae
+  checksum: 10c0/e898475cd4932225c2962bf9f94353d7d88462c8912881af8e9866cee714c967b21badb0895ec8626123759cddc6663bc40300b1d1bf789957a603086eda6329
   languageName: node
   linkType: hard
 
@@ -4105,7 +4105,7 @@ __metadata:
     "@tanstack/react-query": "npm:5.49.2"
     "@tanstack/react-query-devtools": "npm:5.49.2"
     "@tanstack/react-virtual": "npm:3.8.1"
-    "@testing-library/dom": "npm:10.3.0"
+    "@testing-library/dom": "npm:10.3.1"
     "@testing-library/jest-dom": "npm:6.4.6"
     "@testing-library/react": "npm:16.0.0"
     "@testing-library/user-event": "npm:14.5.2"
