@@ -4168,7 +4168,7 @@ __metadata:
     swc-loader: "npm:0.2.6"
     terser-webpack-plugin: "npm:5.3.10"
     ts-node: "npm:10.9.2"
-    type-coverage: "npm:2.29.0"
+    type-coverage: "npm:2.29.1"
     typed-css-modules: "npm:0.9.1"
     typescript: "npm:5.5.3"
     use-debounce: "npm:10.0.1"
@@ -15518,9 +15518,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-coverage-core@npm:^2.28.1":
-  version: 2.28.1
-  resolution: "type-coverage-core@npm:2.28.1"
+"type-coverage-core@npm:^2.29.1":
+  version: 2.29.1
+  resolution: "type-coverage-core@npm:2.29.1"
   dependencies:
     fast-glob: "npm:3"
     minimatch: "npm:6 || 7 || 8 || 9"
@@ -15529,20 +15529,20 @@ __metadata:
     tsutils: "npm:3"
   peerDependencies:
     typescript: 2 || 3 || 4 || 5
-  checksum: 10c0/b4a90e401be263d426d03b7b95173f3554a6bfdcb8bf098a66d31f94637ee2988db56ffbb50a81e61b3741ea3d43ac2ba6698499efb8679a913d7924308c5e88
+  checksum: 10c0/ec48cacda64766894d17523733d1fd5376079090a0febd0a1eb7d444ef030468ec767bc3ffaa26c0841575d8d3f1391fcd7df22e8784f39a260bcc0b89fcb785
   languageName: node
   linkType: hard
 
-"type-coverage@npm:2.29.0":
-  version: 2.29.0
-  resolution: "type-coverage@npm:2.29.0"
+"type-coverage@npm:2.29.1":
+  version: 2.29.1
+  resolution: "type-coverage@npm:2.29.1"
   dependencies:
     chalk: "npm:4.1.2"
     minimist: "npm:1"
-    type-coverage-core: "npm:^2.28.1"
+    type-coverage-core: "npm:^2.29.1"
   bin:
     type-coverage: bin/type-coverage
-  checksum: 10c0/75f0d63571bb5157876ea947cc09c2e5ad14a5e44f1d2d8430f61137b24618feb2519060d01dfae89dbc39caf82bb2e65b66ea186ddbb788c20d5ea1cc5e1d10
+  checksum: 10c0/51b88cdefb404ea9dcdd0a50a798cbbd2611deeba1d415dadc3d65d482c71b3b68f2daa1a2d368c62c21a44d5fa9a85a203ffbbfc200a5a1e74c73b068698860
   languageName: node
   linkType: hard
 
