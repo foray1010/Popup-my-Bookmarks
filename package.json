@@ -42,7 +42,7 @@
     "@svgr/webpack": "8.1.0",
     "@swc/core": "1.7.0",
     "@swc/jest": "0.2.36",
-    "@tanstack/eslint-plugin-query": "5.51.12",
+    "@tanstack/eslint-plugin-query": "5.51.13",
     "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "6.4.6",
     "@testing-library/react": "16.0.0",

@@ -3016,14 +3016,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/eslint-plugin-query@npm:5.51.12":
-  version: 5.51.12
-  resolution: "@tanstack/eslint-plugin-query@npm:5.51.12"
+"@tanstack/eslint-plugin-query@npm:5.51.13":
+  version: 5.51.13
+  resolution: "@tanstack/eslint-plugin-query@npm:5.51.13"
   dependencies:
     "@typescript-eslint/utils": "npm:8.0.0-alpha.30"
   peerDependencies:
     eslint: ^8 || ^9
-  checksum: 10c0/9cb013f1dc77f2e7146a2bb96940b4f8732a5af7738c706cd508b828a801ac6a10c26831a8b95532e81c949369af96a33e6c6894fe662494acd1d47285a8906f
+  checksum: 10c0/fa9145842201fc3d922740b62af4dda8e6b59404979176e483279f57d58f86a6be0304225996cf41798132cfa1df4af05d10a7e9e32a54a3fdfb79f4eebeadd9
   languageName: node
   linkType: hard
 
@@ -4150,7 +4150,7 @@ __metadata:
     "@svgr/webpack": "npm:8.1.0"
     "@swc/core": "npm:1.7.0"
     "@swc/jest": "npm:0.2.36"
-    "@tanstack/eslint-plugin-query": "npm:5.51.12"
+    "@tanstack/eslint-plugin-query": "npm:5.51.13"
     "@tanstack/react-query": "npm:5.51.11"
     "@tanstack/react-query-devtools": "npm:5.51.11"
     "@tanstack/react-virtual": "npm:3.8.3"
