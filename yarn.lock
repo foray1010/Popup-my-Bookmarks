@@ -4177,7 +4177,7 @@ __metadata:
     type-coverage: "npm:2.29.1"
     typed-css-modules: "npm:0.9.1"
     typescript: "npm:5.5.4"
-    use-debounce: "npm:10.0.1"
+    use-debounce: "npm:10.0.2"
     use-deep-compare: "npm:1.3.0"
     use-resize-observer: "npm:9.1.0"
     use-typed-event-listener: "npm:4.0.2"
@@ -16003,12 +16003,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-debounce@npm:10.0.1":
-  version: 10.0.1
-  resolution: "use-debounce@npm:10.0.1"
+"use-debounce@npm:10.0.2":
+  version: 10.0.2
+  resolution: "use-debounce@npm:10.0.2"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: 10c0/377a11814a708f5c392f465cbbe2d119a8a2635c8226cc5e30eba397c4436f8e8234385d069467b369d105ed0d3be733c6a08d8ae1004017c6d6f58f4d4c24d8
+  checksum: 10c0/2d992108557a0ad3e59bc35028c0dbc6ad12088a08d992fd52aad3881dd24663606fe71f7fd925327fb98599c6252bfa4c143649351d48e6243d7a3332594fd6
   languageName: node
   linkType: hard
 
