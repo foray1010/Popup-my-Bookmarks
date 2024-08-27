@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion, @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/require-await */
 
 // as structuredClone is not supported in `jsdom`
 import 'core-js/stable/structured-clone.js'

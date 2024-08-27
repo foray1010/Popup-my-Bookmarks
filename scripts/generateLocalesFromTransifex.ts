@@ -1,7 +1,5 @@
-/* eslint-disable
-  @typescript-eslint/no-unsafe-assignment,
-  @typescript-eslint/no-unsafe-call,
-*/
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import { promises as fsPromises } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
