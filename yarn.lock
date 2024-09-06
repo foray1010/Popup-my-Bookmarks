@@ -3043,22 +3043,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-virtual@npm:3.10.5":
-  version: 3.10.5
-  resolution: "@tanstack/react-virtual@npm:3.10.5"
+"@tanstack/react-virtual@npm:3.10.6":
+  version: 3.10.6
+  resolution: "@tanstack/react-virtual@npm:3.10.6"
   dependencies:
-    "@tanstack/virtual-core": "npm:3.10.5"
+    "@tanstack/virtual-core": "npm:3.10.6"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/e1407b6b53abed97376fb3b30fa706bbb5797da0ad34f7c13182f808ff63a04add7f4b5001e85e3a33302a12823752c1cb4f40d166b2ee808bcaa3329201c50e
+  checksum: 10c0/6a162bade4ec00780405abf160cd4046e3346afcbbe07f8a64e86453f13902028d35cca417708daaf92262e3335ba72e1ec85be19f91b064173dd83bfb324cad
   languageName: node
   linkType: hard
 
-"@tanstack/virtual-core@npm:3.10.5":
-  version: 3.10.5
-  resolution: "@tanstack/virtual-core@npm:3.10.5"
-  checksum: 10c0/844d0a30923636b8fd454688eaf4714375d6fa252baaf5494ec5fd6786183cae6267861b54ca693284c1ab935e2cc142d8f3684e89316dfe0472c5b8c3bf71c8
+"@tanstack/virtual-core@npm:3.10.6":
+  version: 3.10.6
+  resolution: "@tanstack/virtual-core@npm:3.10.6"
+  checksum: 10c0/841540cd1e616dbe8074486213ec1f2c3a20e2b0fc1b50bc704861d05a3603810e1505bbb432ef62b900e32f355d046759d22bf707d661a57d62177e5508f399
   languageName: node
   linkType: hard
 
@@ -4084,7 +4084,7 @@ __metadata:
     "@tanstack/eslint-plugin-query": "npm:5.52.0"
     "@tanstack/react-query": "npm:5.52.2"
     "@tanstack/react-query-devtools": "npm:5.52.2"
-    "@tanstack/react-virtual": "npm:3.10.5"
+    "@tanstack/react-virtual": "npm:3.10.6"
     "@testing-library/dom": "npm:10.4.0"
     "@testing-library/jest-dom": "npm:6.5.0"
     "@testing-library/react": "npm:16.0.0"
