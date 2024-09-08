@@ -206,7 +206,7 @@ function useRefreshOnBookmarkEvent({
   bookmarkTrees: readonly BookmarkTreeInfo[]
   setBookmarkTrees: Dispatch<SetStateAction<readonly BookmarkTreeInfo[]>>
   fetchBookmarkTrees: (
-    childTreeIds?: readonly string[] | undefined,
+    childTreeIds?: readonly string[],
   ) => Promise<readonly BookmarkTreeInfo[]>
 }>) {
   // use debounce to avoid frequent refresh, such as sort bookmarks by name
@@ -243,7 +243,7 @@ function useBookmarkTrees() {
 
   const fetchBookmarkTrees = useCallback(
     async (
-      childTreeIds?: readonly string[] | undefined,
+      childTreeIds?: readonly string[],
     ): Promise<readonly BookmarkTreeInfo[]> => {
       return searchQuery
         ? getBookmarkTreesFromSearch({

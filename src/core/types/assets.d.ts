@@ -20,3 +20,8 @@ declare module '*.webp' {
   const imagePath: string
   export default imagePath
 }
+
+declare module '*.yml' {
+  const data: never
+  export default data
+}
