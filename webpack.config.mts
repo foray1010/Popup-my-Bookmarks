@@ -4,22 +4,26 @@ import process from 'node:process'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin'
-import HTMLInlineCSSWebpackPlugin from 'html-inline-css-webpack-plugin'
+import HTMLInlineCSSWebpackPluginModule from 'html-inline-css-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import lightningCss from 'lightningcss'
+import * as lightningCss from 'lightningcss'
 import { LightningCssMinifyPlugin } from 'lightningcss-loader'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
-import {
+import webpack, {
   type Configuration,
-  ProgressPlugin,
   type WebpackPluginInstance,
 } from 'webpack'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import ZipPlugin from 'zip-webpack-plugin'
 
-import pkg from './package.json'
+import pkg from './package.json' with { type: 'json' }
+
+const HTMLInlineCSSWebpackPlugin =
+  // @ts-expect-error Hack to import default module directly
+  HTMLInlineCSSWebpackPluginModule.default as typeof HTMLInlineCSSWebpackPluginModule
+const { ProgressPlugin } = webpack
 
 const isCI = process.env['CI'] === 'true'
 const isProductionBuild = process.env['NODE_ENV'] === 'production'
@@ -173,7 +177,7 @@ const webpackConfig: Readonly<Configuration> = {
     },
   },
   output: {
-    path: path.resolve(__dirname, outputDir),
+    path: path.resolve(import.meta.dirname, outputDir),
     filename: path.join('js', '[name].js'),
   },
   plugins: [

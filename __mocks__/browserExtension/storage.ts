@@ -106,9 +106,7 @@ class StorageAreaSync
   extends StorageArea
   implements browser.storage.StorageAreaSync
 {
-  public async getBytesInUse(
-    keys?: string | readonly string[] | null | undefined,
-  ) {
+  public async getBytesInUse(keys?: string | readonly string[] | null) {
     const storage =
       keys === undefined
         ? this.storageObject
