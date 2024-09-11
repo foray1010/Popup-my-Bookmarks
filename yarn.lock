@@ -1700,7 +1700,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@csstools/normalize.css@npm:*":
+"@csstools/normalize.css@npm:12.1.1":
   version: 12.1.1
   resolution: "@csstools/normalize.css@npm:12.1.1"
   checksum: 10c0/28fbba6cfd9aa71252001800decfd0f2dc4116fe57b52a2adcbe40733ada36fffc676a768a67fd9865d7b5b17d3e8456de1e642c3c5c9e06526fa3fe8ab5fec4
@@ -4135,7 +4135,7 @@ __metadata:
     node-notifier: "npm:10.0.1"
     postcss: "npm:8.4.45"
     postcss-loader: "npm:8.1.1"
-    postcss-normalize: "npm:10.0.1"
+    postcss-normalize: "npm:13.0.0"
     prettier: "npm:3.3.3"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
@@ -12365,17 +12365,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-normalize@npm:10.0.1":
-  version: 10.0.1
-  resolution: "postcss-normalize@npm:10.0.1"
+"postcss-normalize@npm:13.0.0":
+  version: 13.0.0
+  resolution: "postcss-normalize@npm:13.0.0"
   dependencies:
-    "@csstools/normalize.css": "npm:*"
+    "@csstools/normalize.css": "npm:12.1.1"
     postcss-browser-comments: "npm:^4"
-    sanitize.css: "npm:*"
+    sanitize.css: "npm:13.0.0"
   peerDependencies:
     browserslist: ">= 4"
     postcss: ">= 8"
-  checksum: 10c0/632f24f5e8cb436f975892221ae1818794053c2a50ef8f51af2a964f88c5e3a4df4a703b882592d9d06c59bf19af69011dfa88a85771119e26ebc616ef9cf2cd
+  checksum: 10c0/2b0578625861e59df4cfbcc4de72c5554077e873ae4070f0848a84f06b3fefd82aac89d237fbe73b32ac3a545c5f6f89e7b07abbd5ea079ceb8b9c412e3107bd
   languageName: node
   linkType: hard
 
@@ -14133,7 +14133,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sanitize.css@npm:*":
+"sanitize.css@npm:13.0.0":
   version: 13.0.0
   resolution: "sanitize.css@npm:13.0.0"
   checksum: 10c0/0c1eb61ff26d8f764593772c9f2af68ef5490cd9c7199ff387138412e8e658a0ee715bf176e0a2569872fc9c277f9342cf1235a9274da7a63aaaf0043747260d
