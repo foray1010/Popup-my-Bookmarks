@@ -1946,12 +1946,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@foray1010/tsconfig@npm:12.1.0":
-  version: 12.1.0
-  resolution: "@foray1010/tsconfig@npm:12.1.0"
+"@foray1010/tsconfig@npm:13.0.0":
+  version: 13.0.0
+  resolution: "@foray1010/tsconfig@npm:13.0.0"
   peerDependencies:
-    typescript: ^5.0.2
-  checksum: 10c0/9b19d52f22a82df9718cf333f7f117cd03e4c65f1dfe8231e5d3077aaa498d0dae7365748e2f0ab048127a303cffd376804f994523802c9cd5516f68004cb32b
+    typescript: ^5.6.2
+  checksum: 10c0/ef66d667e8a3a594d2567386e5b5406306e7ff47467ef9cd0e4e0b0826378d37f364c43d88616b977bfd9ba1cf1d7f47690e967d8b450b47b7ec3d7196561361
   languageName: node
   linkType: hard
 
@@ -4102,7 +4102,7 @@ __metadata:
     "@foray1010/prettier-config": "npm:11.0.1"
     "@foray1010/remark-preset": "npm:10.0.1"
     "@foray1010/stylelint-config": "npm:15.0.0"
-    "@foray1010/tsconfig": "npm:12.1.0"
+    "@foray1010/tsconfig": "npm:13.0.0"
     "@size-limit/file": "npm:11.1.5"
     "@svgr/webpack": "npm:8.1.0"
     "@swc/core": "npm:1.7.23"
