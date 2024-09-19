@@ -11,6 +11,7 @@ const contributors: Record<string, readonly string[]> = {
   'Italian Translator': ['Giacomo Fabio Leone'],
   'Korean Translator': ['zenyr'],
   'Norwegian Bokmål Translator': ['Bjorn Tore Asheim'],
+  'Portuguese Translator': ['Ubelloch'],
   'Russian Translators': ['kameo', 'Oleg K,'],
   'Spanish Translator': ['cyanine'],
   'Vietnamese Translator': ['Anh Phan'],

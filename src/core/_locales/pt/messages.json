@@ -1,0 +1,234 @@
+{
+  "addFolder": {
+    "message": "Adicionar pasta",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "addPage": {
+    "message": "Adicionar pasta atual",
+    "description": "2013.01.23"
+  },
+  "addSeparator": {
+    "message": "Adicionar separador",
+    "description": "2013.07.26 | Refer to Firefox Bookmark menu"
+  },
+  "askOpenAll": {
+    "message": "Está prestes a abrir os favoritos de %bkmarkCount%. Tem a certeza de que pretende continuar?",
+    "description": "2013.01.29 | Refer to Firefox Bookmark menu"
+  },
+  "cancel": {
+    "message": "Cancelar",
+    "description": "2013.01.30"
+  },
+  "clickByLeft": {
+    "message": "Clique com o botão esquerdo para abrir os favoritos em",
+    "description": "2013.06.01"
+  },
+  "clickByLeftCtrl": {
+    "message": "Ctrl / CMD + Clique Esquerdo para abrir os favoritos em",
+    "description": "2013.06.01 | 'CMD' is the command(meta) key of Mac OSX"
+  },
+  "clickByLeftShift": {
+    "message": "Shift + Clique Esquerdo para abrir os favoritos em",
+    "description": "2013.06.01"
+  },
+  "clickByMiddle": {
+    "message": "Clique com o botão do meio para abrir os favoritos em",
+    "description": "2013.06.01"
+  },
+  "clickOption1": {
+    "message": "aba atual",
+    "description": "2017.03.29"
+  },
+  "clickOption2": {
+    "message": "separador atual (sem fechar o PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption3": {
+    "message": "nova aba",
+    "description": "2017.03.29"
+  },
+  "clickOption4": {
+    "message": "aba de fundo",
+    "description": "2017.03.29"
+  },
+  "clickOption5": {
+    "message": "aba de fundo atual (sem fechar o PmB)",
+    "description": "2017.03.29"
+  },
+  "clickOption6": {
+    "message": "nova janela",
+    "description": "2017.03.29"
+  },
+  "clickOption7": {
+    "message": "janela anónima",
+    "description": "2017.03.29"
+  },
+  "confirm": {
+    "message": "Confirmar",
+    "description": "2013.01.30"
+  },
+  "contributors": {
+    "message": "Colaboradores",
+    "description": "2015.08.22"
+  },
+  "control": {
+    "message": "Controle",
+    "description": "2015.08.22"
+  },
+  "copy": {
+    "message": "Copiar",
+    "description": "2013.07.07 | Refer to Chrome Bookmark manager"
+  },
+  "cut": {
+    "message": "Cortar",
+    "description": "2013.07.07 | Refer to Chrome Bookmark manager"
+  },
+  "default": {
+    "message": "Padrão",
+    "description": "2013.03.26"
+  },
+  "defExpand": {
+    "message": "Pasta padrão expandida",
+    "description": "2013.07.30"
+  },
+  "del": {
+    "message": "Remover",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "edit": {
+    "message": "Editar",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "extDesc": {
+    "message": "A maneira mais eficiente de ver e administrar o seu menu de favoritos.",
+    "description": "2013.01.21"
+  },
+  "fontFamily": {
+    "message": "Família de fontes",
+    "description": "2015.01.11"
+  },
+  "fontSize": {
+    "message": "Tamanho da fonte",
+    "description": "2013.07.26"
+  },
+  "general": {
+    "message": "Geral",
+    "description": "2015.08.22"
+  },
+  "hideRootFolder": {
+    "message": "Ocultar pasta raiz",
+    "description": "2015.02.18 | Root folder means the top level folder"
+  },
+  "maxResults": {
+    "message": "Número máximo de resultados de pesquisa",
+    "description": "2013.03.24"
+  },
+  "newFolder": {
+    "message": "Nova pasta",
+    "description": "2013.01.28 | Refer to Chrome Bookmark manager"
+  },
+  "no": {
+    "message": "Não",
+    "description": "2013.03.27"
+  },
+  "noBkmark": {
+    "message": "Clique aqui com o botão direito para adicionar favoritos :-)",
+    "description": "2013.01.22"
+  },
+  "noResult": {
+    "message": "Nenhum favorito corresponde",
+    "description": "2013.01.27"
+  },
+  "openAll": {
+    "message": "Abrir todos os favoritos",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openAllInI": {
+    "message": "Abra todos os favoritos em janelas anónimas",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openAllInN": {
+    "message": "Abra todos os favoritos na janela anónima",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openInB": {
+    "message": "Abrir no separador em segundo plano",
+    "description": "2013.01.23"
+  },
+  "openInI": {
+    "message": "Abrir em janela anónima",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "openInN": {
+    "message": "Abrir em uma nova janela",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "opFolderBy": {
+    "message": "Abra as pastas com o botão esquerdo",
+    "description": "2013.06.29"
+  },
+  "options": {
+    "message": "Opções",
+    "description": "2013.01.23 | Refer to Tools -> Extensions -> PmB -> Options"
+  },
+  "paste": {
+    "message": "Colar",
+    "description": "2013.07.7 | Refer to Chrome Bookmark manager"
+  },
+  "rememberPos": {
+    "message": "Lembre-se da última posição",
+    "description": "2014.02.24"
+  },
+  "rename": {
+    "message": "Renomear...",
+    "description": "2013.01.23 | Refer to Chrome Bookmark manager"
+  },
+  "saved": {
+    "message": "Guardado",
+    "description": "2013.03.27"
+  },
+  "search": {
+    "message": "Pesquisa",
+    "description": "2013.01.10"
+  },
+  "searchTarget": {
+    "message": "Consultas de pesquisa permitidas",
+    "description": "2013.09.11"
+  },
+  "searchTargetOption1": {
+    "message": "título e URL",
+    "description": "2013.09.11"
+  },
+  "searchTargetOption2": {
+    "message": "apenas título",
+    "description": "2013.09.11"
+  },
+  "setWidth": {
+    "message": "Largura do painel",
+    "description": "2013.03.24"
+  },
+  "showInFolder": {
+    "message": "Mostrar na pasta",
+    "description": "2014.03.21 | Refer to Chrome Bookmark manager"
+  },
+  "sortByName": {
+    "message": "Ordenar por nome",
+    "description": "2013.09.17 | Refer to Firefox Bookmark menu"
+  },
+  "tooltip": {
+    "message": "Mostrar dica com informação detalhada dos favoritos",
+    "description": "2013.03.24"
+  },
+  "userInterface": {
+    "message": "Interface do utilizador",
+    "description": "2015.08.22"
+  },
+  "warnOpenMany": {
+    "message": "Avise-me quando for abrir várias abas (pode tornar o navegador lento)",
+    "description": "2013.04.26 | Refer to Firefox -> Options -> Tabs"
+  },
+  "yes": {
+    "message": "Sim",
+    "description": "2013.03.27"
+  }
+}
