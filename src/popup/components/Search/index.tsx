@@ -6,19 +6,27 @@ import { useKeyBindingsEvent } from '../keyBindings/index.js'
 import SearchInput from './SearchInput.js'
 
 export default function SearchContainer() {
-  const [isComposing, setIsComposing] = useState(false)
   const [inputValue, setInputValue] = useState('')
 
   const { setSearchQuery } = useBookmarkTreesContext()
+  const executeSearch = (value: string) => {
+    startTransition(() => {
+      setSearchQuery(value)
+    })
+  }
 
-  const updateInputValue = (value: string): void => {
+  const updateInputValue = ({
+    value,
+    isComposing,
+  }: Readonly<{
+    value: string
+    isComposing: boolean
+  }>): void => {
     setInputValue(value)
 
     // do not search during IME composition
     if (!isComposing) {
-      startTransition(() => {
-        setSearchQuery(value)
-      })
+      executeSearch(value)
     }
   }
 
@@ -34,10 +42,14 @@ export default function SearchContainer() {
     <SearchInput
       ref={inputRef}
       value={inputValue}
-      onCancel={() => updateInputValue('')}
-      onChange={(evt) => updateInputValue(evt.currentTarget.value)}
-      onCompositionEnd={() => setIsComposing(false)}
-      onCompositionStart={() => setIsComposing(true)}
+      onCancel={() => updateInputValue({ value: '', isComposing: false })}
+      onChange={(evt) => {
+        updateInputValue({
+          value: evt.currentTarget.value,
+          isComposing: (evt.nativeEvent as InputEvent).isComposing,
+        })
+      }}
+      onCompositionEnd={() => executeSearch(inputValue)}
     />
   )
 }
