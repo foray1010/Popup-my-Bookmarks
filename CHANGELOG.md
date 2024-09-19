@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.1.1](https://github.com/foray1010/Popup-my-Bookmarks/compare/v8.1.0...v8.1.1) (2024-09-19)
+
+### Bug Fixes
+
+- cannot search during IME composition ([e048ea3](https://github.com/foray1010/Popup-my-Bookmarks/commit/e048ea3bef8335cc1b539eda4f765d9c73414f5c))
+
 ## [8.1.0](https://github.com/foray1010/Popup-my-Bookmarks/compare/v8.0.0...v8.1.0) (2024-09-19)
 
 ### Features
