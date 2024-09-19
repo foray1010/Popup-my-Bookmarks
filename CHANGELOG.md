@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.1.0](https://github.com/foray1010/Popup-my-Bookmarks/compare/v8.0.0...v8.1.0) (2024-09-19)
+
+### Features
+
+- increase search input height ([993cef4](https://github.com/foray1010/Popup-my-Bookmarks/commit/993cef40b965e77a38dbf47fdb27bad7148f974a))
+- support Portuguese locale (thanks Ubelloch) ([c00c1a6](https://github.com/foray1010/Popup-my-Bookmarks/commit/c00c1a66d7a2ab21efdeb967431cb5fddfcaafee))
+
 ## [8.0.0](https://github.com/foray1010/Popup-my-Bookmarks/compare/v7.1.1...v8.0.0) (2024-01-07)
 
 ### ⚠ BREAKING CHANGES
