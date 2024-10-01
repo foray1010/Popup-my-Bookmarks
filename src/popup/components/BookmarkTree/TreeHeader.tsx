@@ -1,4 +1,4 @@
-import Cross from '../../images/cross.svg?svgr'
+import { Component as Cross } from '../../images/cross.svg?svgUse'
 import * as classes from './tree-header.module.css'
 
 type Props = Readonly<{

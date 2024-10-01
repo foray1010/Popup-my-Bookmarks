@@ -104,19 +104,14 @@ const webpackConfig: Readonly<Configuration> = {
         : []),
       {
         test: /\.svg$/u,
-        resourceQuery: /svgr/u,
+        resourceQuery: /svgUse/u,
         issuer: /\.tsx?$/u,
-        use: [
-          'swc-loader',
-          {
-            loader: '@svgr/webpack',
-            options: { babel: false, svgo: false },
-          },
-        ],
+        type: 'javascript/auto',
+        use: '@svg-use/webpack',
       },
       {
         test: /\.svg$/u,
-        resourceQuery: { not: [/svgr/u] },
+        resourceQuery: { not: [/svgUse/u] },
         type: 'asset',
         generator: {
           filename: 'images/[name][ext]',

@@ -3,8 +3,8 @@ import { type ComponentProps, forwardRef, useId } from 'react'
 import webExtension from 'webextension-polyfill'
 
 import Input from '../../../core/components/baseItems/Input/index.js'
-import Cross from '../../images/cross.svg?svgr'
-import Search from '../../images/search.svg?svgr'
+import { Component as Cross } from '../../images/cross.svg?svgUse'
+import { Component as Search } from '../../images/search.svg?svgUse'
 import * as classes from './search-input.module.css'
 
 type Props = Readonly<
