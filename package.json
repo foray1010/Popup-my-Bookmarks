@@ -13,7 +13,7 @@
     "stylelint": "stylelint --ignore-path=node_modules/@foray1010/stylelint-config/stylelintignore"
   },
   "resolutions": {
-    "caniuse-lite": "1.0.30001653"
+    "caniuse-lite": "1.0.30001664"
   },
   "dependencies": {
     "@fontsource/archivo-narrow": "5.1.0",
