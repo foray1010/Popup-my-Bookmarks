@@ -1857,21 +1857,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/eslint-plugin-query@npm:5.58.1":
-  version: 5.58.1
-  resolution: "@tanstack/eslint-plugin-query@npm:5.58.1"
+"@tanstack/eslint-plugin-query@npm:5.59.1":
+  version: 5.59.1
+  resolution: "@tanstack/eslint-plugin-query@npm:5.59.1"
   dependencies:
     "@typescript-eslint/utils": "npm:^8.3.0"
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
-  checksum: 10c0/81300bf159aaafe778d61dd06e294cd6b4121d1107bb5691f6ea8e4551c3dc7c371064fa220c2895f658a9f69b5951db1ebb24a6f4806f5fd6eefa53f80fb8bd
+  checksum: 10c0/98b2b0992391fd69e3447c7405e00efa66f26470c3f2a60c73bf1407a9747160f51c0c63d41eee84762308991572d19bdd8c016944c8f85ba1142041771feaad
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.56.2":
-  version: 5.56.2
-  resolution: "@tanstack/query-core@npm:5.56.2"
-  checksum: 10c0/54ff55f02b01f6ba089f4965bfd46f430c18ce7e11d874de04c4d58cc8f698598b41e1c017ba029d08ae75e321e546b26f1ea7f788474db265eeba46e780f2f6
+"@tanstack/query-core@npm:5.59.0":
+  version: 5.59.0
+  resolution: "@tanstack/query-core@npm:5.59.0"
+  checksum: 10c0/c6b5c935670ea0b4ba1e3936d9f319cae5ba098d82863115546d43d45e9e171b9fce990aecd56cd7ef9a8b1de64cb4f74f6c8f83cc1e61cd62ee99d2c34fbefc
   languageName: node
   linkType: hard
 
@@ -1882,26 +1882,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query-devtools@npm:5.58.0":
-  version: 5.58.0
-  resolution: "@tanstack/react-query-devtools@npm:5.58.0"
+"@tanstack/react-query-devtools@npm:5.59.0":
+  version: 5.59.0
+  resolution: "@tanstack/react-query-devtools@npm:5.59.0"
   dependencies:
     "@tanstack/query-devtools": "npm:5.58.0"
   peerDependencies:
-    "@tanstack/react-query": ^5.56.2
+    "@tanstack/react-query": ^5.59.0
     react: ^18 || ^19
-  checksum: 10c0/6a3ad499380907764f793a964861418bf658d9b5e1b2fbdd410368b04b9bd7334a20ffd8eace8d83341c6441eccb79c73616f0ddd05d6e964ea1520b3c46e324
+  checksum: 10c0/19e186faa6cf33e656985be5279317af211a038177862f90dce38564d9f406e92b2ba276f750cea779983b95e3ef70f924928362e8987b0c4419c17b19d3669f
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:5.56.2":
-  version: 5.56.2
-  resolution: "@tanstack/react-query@npm:5.56.2"
+"@tanstack/react-query@npm:5.59.0":
+  version: 5.59.0
+  resolution: "@tanstack/react-query@npm:5.59.0"
   dependencies:
-    "@tanstack/query-core": "npm:5.56.2"
+    "@tanstack/query-core": "npm:5.59.0"
   peerDependencies:
     react: ^18 || ^19
-  checksum: 10c0/6e883b4ca1948f990215b7bce194251faf13a79c6ecf3f3c660af6c6788ed113ab629cefdafb496dfb04866f12dd48d7314e936b75c881b6749127b6496ac8fd
+  checksum: 10c0/035f1039a84cdfa90332c63780894c7b01f3024d17e82a7eb0c148912c6e4913bd5c56897698f3ac7cc5057710895932d45085c447a9d3dda88cf05f8ea7d226
   languageName: node
   linkType: hard
 
@@ -2897,9 +2897,9 @@ __metadata:
     "@svg-use/webpack": "npm:0.3.1"
     "@swc/core": "npm:1.7.26"
     "@swc/jest": "npm:0.2.36"
-    "@tanstack/eslint-plugin-query": "npm:5.58.1"
-    "@tanstack/react-query": "npm:5.56.2"
-    "@tanstack/react-query-devtools": "npm:5.58.0"
+    "@tanstack/eslint-plugin-query": "npm:5.59.1"
+    "@tanstack/react-query": "npm:5.59.0"
+    "@tanstack/react-query-devtools": "npm:5.59.0"
     "@tanstack/react-virtual": "npm:3.10.8"
     "@testing-library/dom": "npm:10.4.0"
     "@testing-library/jest-dom": "npm:6.5.0"
