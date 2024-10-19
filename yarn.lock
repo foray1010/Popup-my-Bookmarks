@@ -2965,7 +2965,7 @@ __metadata:
     swc-loader: "npm:0.2.6"
     terser-webpack-plugin: "npm:5.3.10"
     ts-node: "npm:10.9.2"
-    type-coverage: "npm:2.29.1"
+    type-coverage: "npm:2.29.7"
     typed-css-modules: "npm:0.9.1"
     typescript: "npm:5.6.3"
     use-debounce: "npm:10.0.3"
@@ -10280,16 +10280,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:6 || 7 || 8 || 9, minimatch@npm:^9.0.0, minimatch@npm:^9.0.3, minimatch@npm:^9.0.4, minimatch@npm:^9.0.5":
-  version: 9.0.5
-  resolution: "minimatch@npm:9.0.5"
-  dependencies:
-    brace-expansion: "npm:^2.0.1"
-  checksum: 10c0/de96cf5e35bdf0eab3e2c853522f98ffbe9a36c37797778d2665231ec1f20a9447a7e567cb640901f89e4daaa95ae5d70c65a9e8aa2bb0019b6facbc3c0575ed
-  languageName: node
-  linkType: hard
-
-"minimatch@npm:^10.0.0":
+"minimatch@npm:6 || 7 || 8 || 9 || 10, minimatch@npm:^10.0.0":
   version: 10.0.1
   resolution: "minimatch@npm:10.0.1"
   dependencies:
@@ -10304,6 +10295,15 @@ __metadata:
   dependencies:
     brace-expansion: "npm:^1.1.7"
   checksum: 10c0/0262810a8fc2e72cca45d6fd86bd349eee435eb95ac6aa45c9ea2180e7ee875ef44c32b55b5973ceabe95ea12682f6e3725cbb63d7a2d1da3ae1163c8b210311
+  languageName: node
+  linkType: hard
+
+"minimatch@npm:^9.0.0, minimatch@npm:^9.0.3, minimatch@npm:^9.0.4, minimatch@npm:^9.0.5":
+  version: 9.0.5
+  resolution: "minimatch@npm:9.0.5"
+  dependencies:
+    brace-expansion: "npm:^2.0.1"
+  checksum: 10c0/de96cf5e35bdf0eab3e2c853522f98ffbe9a36c37797778d2665231ec1f20a9447a7e567cb640901f89e4daaa95ae5d70c65a9e8aa2bb0019b6facbc3c0575ed
   languageName: node
   linkType: hard
 
@@ -14365,31 +14365,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-coverage-core@npm:^2.29.1":
-  version: 2.29.1
-  resolution: "type-coverage-core@npm:2.29.1"
+"type-coverage-core@npm:^2.29.7":
+  version: 2.29.7
+  resolution: "type-coverage-core@npm:2.29.7"
   dependencies:
     fast-glob: "npm:3"
-    minimatch: "npm:6 || 7 || 8 || 9"
+    minimatch: "npm:6 || 7 || 8 || 9 || 10"
     normalize-path: "npm:3"
     tslib: "npm:1 || 2"
     tsutils: "npm:3"
   peerDependencies:
     typescript: 2 || 3 || 4 || 5
-  checksum: 10c0/ec48cacda64766894d17523733d1fd5376079090a0febd0a1eb7d444ef030468ec767bc3ffaa26c0841575d8d3f1391fcd7df22e8784f39a260bcc0b89fcb785
+  checksum: 10c0/bc13f773b1931fe5afde432c9531d6a0cad3a26fad2c3f4765cf975f1f286b8130e7dffc7dfc2a819d91f7f8238370d5e75dc64d5e94d4804d0119b050e35aad
   languageName: node
   linkType: hard
 
-"type-coverage@npm:2.29.1":
-  version: 2.29.1
-  resolution: "type-coverage@npm:2.29.1"
+"type-coverage@npm:2.29.7":
+  version: 2.29.7
+  resolution: "type-coverage@npm:2.29.7"
   dependencies:
     chalk: "npm:4.1.2"
     minimist: "npm:1"
-    type-coverage-core: "npm:^2.29.1"
+    type-coverage-core: "npm:^2.29.7"
   bin:
     type-coverage: bin/type-coverage
-  checksum: 10c0/51b88cdefb404ea9dcdd0a50a798cbbd2611deeba1d415dadc3d65d482c71b3b68f2daa1a2d368c62c21a44d5fa9a85a203ffbbfc200a5a1e74c73b068698860
+  checksum: 10c0/96f701bad0c48f40cc8f976327de047823be9a72f6340def0347fbbdecc1ca497586f04b016cf14a30e22927c4a74ee98c536007f59eb855968e54de42458be5
   languageName: node
   linkType: hard
 
