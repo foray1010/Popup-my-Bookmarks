@@ -73,7 +73,7 @@ export async function openBookmarksInBrowser(
         '%bkmarkCount%',
         String(urls.length),
       )
-      if (options[OPTIONS.WARN_OPEN_MANY] && !window.confirm(msgAskOpenAll))
+      if (options[OPTIONS.WARN_OPEN_MANY] && !globalThis.confirm(msgAskOpenAll))
         return
     }
 

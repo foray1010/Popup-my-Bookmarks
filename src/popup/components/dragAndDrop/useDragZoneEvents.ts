@@ -3,7 +3,7 @@ import { type MouseEventHandler, useCallback, useEffect, useRef } from 'react'
 import { useDragAndDropContext } from './DragAndDropContext.js'
 
 function useScroll() {
-  const scrollingTimeoutRef = useRef<number>()
+  const scrollingTimeoutRef = useRef<ReturnType<typeof setInterval>>()
 
   const clearScroll = useCallback(() => {
     if (scrollingTimeoutRef.current !== undefined) {
@@ -19,7 +19,7 @@ function useScroll() {
     ) => {
       clearScroll()
 
-      scrollingTimeoutRef.current = window.setInterval(() => {
+      scrollingTimeoutRef.current = setInterval(() => {
         containerElement.scrollTo({
           top: containerElement.scrollTop + (isUpward ? -1 : 1) * 20,
         })

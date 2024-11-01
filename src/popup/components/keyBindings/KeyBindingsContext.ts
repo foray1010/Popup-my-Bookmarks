@@ -73,6 +73,7 @@ function useKeyBindingsPerWindowState() {
         const updatedKeyBindings = keyBindings.filter((keyBinding) => {
           return (
             keyBinding.callback !== callback ||
+            // eslint-disable-next-line @typescript-eslint/no-base-to-string
             String(keyBinding.key) !== String(key)
           )
         })
