@@ -14,7 +14,7 @@ help: # get all command options
 
 bin_dir := node_modules/.bin
 
-ts-node := node --import=./register-ts-node.js
+ts-node := node --experimental-strip-types
 
 src_dir := src
 

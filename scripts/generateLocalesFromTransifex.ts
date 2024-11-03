@@ -8,8 +8,6 @@ import * as readline from 'node:readline/promises'
 
 import { type Collection, transifexApi } from '@transifex/api'
 
-import { notNullish } from '../src/core/utils/array.js'
-
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -98,7 +96,7 @@ async function main(): Promise<void> {
 
             return [k, { ...v, message: trimmedMessage }] as const
           })
-          .filter(notNullish)
+          .filter((x) => x != null)
           .sort(([a], [b]) => a.localeCompare(b)),
       ) satisfies typeof messagesJson
 
