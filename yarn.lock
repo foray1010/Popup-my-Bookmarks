@@ -686,7 +686,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/compat@npm:1.2.2, @eslint/compat@npm:^1.1.1":
+"@eslint/compat@npm:1.2.3":
+  version: 1.2.3
+  resolution: "@eslint/compat@npm:1.2.3"
+  peerDependencies:
+    eslint: ^9.10.0
+  peerDependenciesMeta:
+    eslint:
+      optional: true
+  checksum: 10c0/b7439e62f73b9a05abea3b54ad8edc171e299171fc4673fc5a2c84d97a584bb9487a7f0bee397342f6574bd53597819a8abe52f1ca72184378cf387275b84e32
+  languageName: node
+  linkType: hard
+
+"@eslint/compat@npm:^1.1.1":
   version: 1.2.2
   resolution: "@eslint/compat@npm:1.2.2"
   peerDependencies:
@@ -2853,7 +2865,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": "npm:19.5.0"
     "@commitlint/config-conventional": "npm:19.5.0"
-    "@eslint/compat": "npm:1.2.2"
+    "@eslint/compat": "npm:1.2.3"
     "@fontsource/archivo-narrow": "npm:5.1.0"
     "@foray1010/eslint-config": "npm:13.0.2"
     "@foray1010/jest-preset": "npm:5.1.0"
