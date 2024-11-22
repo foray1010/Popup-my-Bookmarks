@@ -79,7 +79,7 @@
     "lint-staged": "15.2.10",
     "mini-css-extract-plugin": "2.9.2",
     "node-notifier": "10.0.1",
-    "postcss": "8.4.47",
+    "postcss": "8.4.49",
     "postcss-loader": "8.1.1",
     "postcss-normalize": "13.0.1",
     "prettier": "3.3.3",
