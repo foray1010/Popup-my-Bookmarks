@@ -1,4 +1,10 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["@foray1010/renovate-config"]
+  "extends": ["@foray1010/renovate-config"],
+  "packageRules": [
+    {
+      "matchPackageNames": ["eslint"],
+      "enabled": false
+    }
+  ]
 }
