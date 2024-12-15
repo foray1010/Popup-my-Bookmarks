@@ -1866,15 +1866,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-virtual@npm:3.11.0":
-  version: 3.11.0
-  resolution: "@tanstack/react-virtual@npm:3.11.0"
+"@tanstack/react-virtual@npm:3.11.1":
+  version: 3.11.1
+  resolution: "@tanstack/react-virtual@npm:3.11.1"
   dependencies:
     "@tanstack/virtual-core": "npm:3.10.9"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/8ee14e46ad58af9f628ad89ae24fa47511c0d83d56b01b0339e1b2952a7169b40a6a65c1534003023cefd28cf5ae819070c3c78ceeedb6a18d16f8f5b7d8f675
+  checksum: 10c0/5eafab335de0c65daa8ad8fe732c506bea922861032aad35732ca65ff16fdbb111bd4e72fafc0d3f4449a793ceba4ed0fcadb27390bda6f5c8ba4a55737d556d
   languageName: node
   linkType: hard
 
@@ -2841,7 +2841,7 @@ __metadata:
     "@tanstack/eslint-plugin-query": "npm:5.62.1"
     "@tanstack/react-query": "npm:5.62.3"
     "@tanstack/react-query-devtools": "npm:5.62.3"
-    "@tanstack/react-virtual": "npm:3.11.0"
+    "@tanstack/react-virtual": "npm:3.11.1"
     "@testing-library/dom": "npm:10.4.0"
     "@testing-library/jest-dom": "npm:6.6.3"
     "@testing-library/react": "npm:16.1.0"
