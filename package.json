@@ -97,7 +97,7 @@
     "webpack-bundle-analyzer": "4.10.2",
     "webpack-cli": "6.0.1",
     "yaml-loader": "0.8.1",
-    "zip-webpack-plugin": "4.0.2"
+    "zip-webpack-plugin": "4.0.3"
   },
   "packageManager": "yarn@4.6.0",
   "engines": {
