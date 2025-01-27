@@ -737,10 +737,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:9.11.1, @eslint/js@npm:^9.9.1":
+"@eslint/js@npm:9.11.1":
   version: 9.11.1
   resolution: "@eslint/js@npm:9.11.1"
   checksum: 10c0/22916ef7b09c6f60c62635d897c66e1e3e38d90b5a5cf5e62769033472ecbcfb6ec7c886090a4b32fe65d6ce371da54384e46c26a899e38184dfc152c6152f7b
+  languageName: node
+  linkType: hard
+
+"@eslint/js@npm:^9.9.1":
+  version: 9.18.0
+  resolution: "@eslint/js@npm:9.18.0"
+  checksum: 10c0/3938344c5ac7feef4b73fcb30f3c3e753570cea74c24904bb5d07e9c42fcd34fcbc40f545b081356a299e11f360c9c274b348c05fb0113fc3d492e5175eee140
   languageName: node
   linkType: hard
 
@@ -2233,7 +2240,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/minimatch@npm:*, @types/minimatch@npm:^3.0.3":
+"@types/minimatch@npm:*":
+  version: 5.1.2
+  resolution: "@types/minimatch@npm:5.1.2"
+  checksum: 10c0/83cf1c11748891b714e129de0585af4c55dd4c2cafb1f1d5233d79246e5e1e19d1b5ad9e8db449667b3ffa2b6c80125c429dbee1054e9efb45758dbc4e118562
+  languageName: node
+  linkType: hard
+
+"@types/minimatch@npm:^3.0.3":
   version: 3.0.5
   resolution: "@types/minimatch@npm:3.0.5"
   checksum: 10c0/a1a19ba342d6f39b569510f621ae4bbe972dc9378d15e9a5e47904c440ee60744f5b09225bc73be1c6490e3a9c938eee69eb53debf55ce1f15761201aa965f97
@@ -3091,12 +3105,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aria-query@npm:5.3.0, aria-query@npm:^5.0.0":
+"aria-query@npm:5.3.0":
   version: 5.3.0
   resolution: "aria-query@npm:5.3.0"
   dependencies:
     dequal: "npm:^2.0.3"
   checksum: 10c0/2bff0d4eba5852a9dd578ecf47eaef0e82cc52569b48469b0aac2db5145db0b17b7a58d9e01237706d1e14b7a1b0ac9b78e9c97027ad97679dd8f91b85da1469
+  languageName: node
+  linkType: hard
+
+"aria-query@npm:^5.0.0":
+  version: 5.3.2
+  resolution: "aria-query@npm:5.3.2"
+  checksum: 10c0/003c7e3e2cff5540bf7a7893775fc614de82b0c5dde8ae823d47b7a28a9d4da1f7ed85f340bdb93d5649caa927755f0e31ecc7ab63edfdfc00c8ef07e505e03e
   languageName: node
   linkType: hard
 
@@ -15415,7 +15436,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:^2.0.0, yaml@npm:~2.6.1":
+"yaml@npm:^2.0.0":
+  version: 2.7.0
+  resolution: "yaml@npm:2.7.0"
+  bin:
+    yaml: bin.mjs
+  checksum: 10c0/886a7d2abbd70704b79f1d2d05fe9fb0aa63aefb86e1cb9991837dced65193d300f5554747a872b4b10ae9a12bc5d5327e4d04205f70336e863e35e89d8f4ea9
+  languageName: node
+  linkType: hard
+
+"yaml@npm:~2.6.1":
   version: 2.6.1
   resolution: "yaml@npm:2.6.1"
   bin:
