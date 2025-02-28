@@ -81,7 +81,7 @@
     "postcss": "8.5.1",
     "postcss-loader": "8.1.1",
     "postcss-normalize": "13.0.1",
-    "prettier": "3.5.1",
+    "prettier": "3.5.2",
     "remark-cli": "12.0.1",
     "script-ext-html-webpack-plugin": "2.1.5",
     "sharp": "0.33.5",
