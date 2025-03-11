@@ -1,5 +1,6 @@
 import classNames from 'classix'
 import type { MouseEventHandler } from 'react'
+import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'
 
 import type { MenuItem } from './constants.js'
@@ -11,7 +12,7 @@ type Props = Readonly<{
   onClick: MouseEventHandler
   onMouseEnter: MouseEventHandler
   onMouseLeave: MouseEventHandler
-  rowName: MenuItem
+  rowName: ValueOf<typeof MenuItem>
 }>
 export default function MenuRow({
   isFocused,

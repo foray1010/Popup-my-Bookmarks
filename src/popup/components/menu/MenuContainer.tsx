@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo } from 'react'
+import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'
 
 import isMac from '../../../core/utils/isMac.js'
@@ -35,7 +36,7 @@ import Menu from './Menu.js'
 import { useMenuContext } from './useMenu.js'
 import { getMenuPattern } from './utils.js'
 
-function useClickMenuRow(rowName?: MenuItem) {
+function useClickMenuRow(rowName?: ValueOf<typeof MenuItem>) {
   const { close, state } = useMenuContext()
   const { open: openEditor } = useEditorContext()
 

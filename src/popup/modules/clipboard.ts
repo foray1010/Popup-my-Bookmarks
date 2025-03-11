@@ -1,18 +1,18 @@
 import constate from 'constate'
 import { useCallback, useState } from 'react'
 
-export enum ClipboardAction {
-  Copy = 'copy',
-  Cut = 'cut',
-  None = 'none',
-}
+export const ClipboardAction = {
+  Copy: 'copy',
+  Cut: 'cut',
+  None: 'none',
+} as const
 
 type ClipboardState = Readonly<
   | {
-      action: ClipboardAction.None
+      action: (typeof ClipboardAction)['None']
     }
   | {
-      action: ClipboardAction.Copy | ClipboardAction.Cut
+      action: (typeof ClipboardAction)['Copy'] | (typeof ClipboardAction)['Cut']
       items: ReadonlySet<string>
     }
 >

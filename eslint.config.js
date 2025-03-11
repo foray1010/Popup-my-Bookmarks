@@ -1,39 +1,31 @@
 import {
-  applyConfig,
   eslintIgnoresConfig,
   eslintNodeConfig,
   eslintReactConfig,
 } from '@foray1010/eslint-config'
 import eslintPluginTanstackQuery from '@tanstack/eslint-plugin-query'
+// eslint-disable-next-line import-x/extensions, import-x/no-unresolved
+import { defineConfig, globalIgnores } from 'eslint/config'
 
-const reactDirs = ['__mocks__', 'src']
+const reactFiles = ['__mocks__/**', 'src/**']
 
-const config = [
-  ...eslintIgnoresConfig,
+const config = defineConfig(
+  eslintIgnoresConfig,
+  globalIgnores(['**/*.css.d.ts']),
   {
-    ignores: ['**/*.css.d.ts'],
+    ignores: reactFiles,
+    extends: [eslintNodeConfig],
   },
-  ...applyConfig(
-    {
-      filePrefixes: '.',
-      ignores: reactDirs.map((dir) => `${dir}/**`),
-    },
-    eslintNodeConfig,
-  ),
-  ...applyConfig(
-    {
-      filePrefixes: reactDirs,
-    },
-    [
-      ...eslintReactConfig,
-      ...eslintPluginTanstackQuery.configs['flat/recommended'],
-      {
-        rules: {
-          // https://github.com/import-js/eslint-plugin-import/issues/1739
-          'import-x/no-unresolved': ['error', { ignore: [String.raw`\?`] }],
-        },
-      },
+  {
+    files: reactFiles,
+    extends: [
+      eslintReactConfig,
+      eslintPluginTanstackQuery.configs['flat/recommended'],
     ],
-  ),
-]
+    rules: {
+      // https://github.com/import-js/eslint-plugin-import/issues/1739
+      'import-x/no-unresolved': ['error', { ignore: [String.raw`\?`] }],
+    },
+  },
+)
 export default config

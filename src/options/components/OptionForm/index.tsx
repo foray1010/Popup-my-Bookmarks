@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import type { ValueOf } from 'type-fest'
 
 import type { OPTIONS } from '../../../core/constants/index.js'
 import type { OptionsConfig } from '../../../core/types/options.js'
@@ -24,7 +25,7 @@ function useGetOptionsWithDefaultValues({
     if (!options || !optionsConfig) return
 
     const missingOptionNames = (
-      Object.keys(optionsConfig) as readonly OPTIONS[]
+      Object.keys(optionsConfig) as readonly ValueOf<typeof OPTIONS>[]
     ).filter((optionName) => options[optionName] === undefined)
 
     if (missingOptionNames.length > 0) {

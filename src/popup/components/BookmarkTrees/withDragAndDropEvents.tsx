@@ -4,7 +4,6 @@ import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookma
 import { DragAndDropProvider } from '../dragAndDrop/index.js'
 
 export default function withDragAndDropEvents<P extends {}>(
-  // eslint-disable-next-line functional/prefer-immutable-types
   WrappedComponent: ComponentType<P>,
 ) {
   return function ComponentWithDragAndDropEvents(props: P) {

@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 
+import type { ValueOf } from 'type-fest'
+
 import { notNullish } from '../../src/core/utils/array.js'
 import { pick } from './utils/object.js'
 import { WebExtEventEmitter } from './utils/WebExtEventEmitter.js'
@@ -119,12 +121,12 @@ class StorageAreaSync
   }
 }
 
-enum AreaName {
-  Local = 'local',
-  Managed = 'managed',
-  Session = 'session',
-  Sync = 'sync',
-}
+const AreaName = {
+  Local: 'local',
+  Managed: 'managed',
+  Session: 'session',
+  Sync: 'sync',
+} as const
 
 type StorageAreaListenerCallback = Parameters<
   browser.storage.StorageArea['onChanged']['addListener']
@@ -138,13 +140,13 @@ class Storage implements Readonly<typeof browser.storage> {
 
   readonly #listenerWeakMap = new WeakMap<
     Parameters<(typeof browser.storage.onChanged)['addListener']>[0],
-    Record<AreaName, StorageAreaListenerCallback>
+    Record<ValueOf<typeof AreaName>, StorageAreaListenerCallback>
   >()
 
   public readonly onChanged: Readonly<typeof browser.storage.onChanged> = {
     addListener: (cb) => {
       const listenerCallbacks: Readonly<
-        Record<AreaName, StorageAreaListenerCallback>
+        Record<ValueOf<typeof AreaName>, StorageAreaListenerCallback>
       > = {
         [AreaName.Local]: (changes) => cb(changes, AreaName.Local),
         [AreaName.Managed]: (changes) => cb(changes, AreaName.Managed),

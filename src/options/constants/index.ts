@@ -1,11 +1,13 @@
+import type { ValueOf } from 'type-fest'
+
 import { OPTIONS } from '../../core/constants/index.js'
 
-export enum RoutePath {
-  Contributors,
-  Control,
-  General,
-  UserInterface,
-}
+export const RoutePath = {
+  Contributors: 'contributors',
+  Control: 'control',
+  General: 'general',
+  UserInterface: 'user-interface',
+} as const
 
 export const OPTION_TABLE_MAP = {
   [RoutePath.Contributors]: [],
@@ -30,4 +32,7 @@ export const OPTION_TABLE_MAP = {
     OPTIONS.FONT_SIZE,
     OPTIONS.FONT_FAMILY,
   ],
-} as const satisfies Record<RoutePath, readonly OPTIONS[]>
+} as const satisfies Record<
+  ValueOf<typeof RoutePath>,
+  readonly ValueOf<typeof OPTIONS>[]
+>

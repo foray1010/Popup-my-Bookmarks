@@ -11,27 +11,27 @@ export type BookmarkInfo = Readonly<
     title: string
   } & (
     | {
-        type: BOOKMARK_TYPES.BOOKMARK
+        type: (typeof BOOKMARK_TYPES)['BOOKMARK']
         iconUrl: string
         url: string
       }
     | {
-        type: BOOKMARK_TYPES.DRAG_INDICATOR
+        type: (typeof BOOKMARK_TYPES)['DRAG_INDICATOR']
         iconUrl?: never
         url?: never
       }
     | {
-        type: BOOKMARK_TYPES.FOLDER
+        type: (typeof BOOKMARK_TYPES)['FOLDER']
         iconUrl: string
         url?: never
       }
     | {
-        type: BOOKMARK_TYPES.NO_BOOKMARK
+        type: (typeof BOOKMARK_TYPES)['NO_BOOKMARK']
         iconUrl?: never
         url?: never
       }
     | {
-        type: BOOKMARK_TYPES.SEPARATOR
+        type: (typeof BOOKMARK_TYPES)['SEPARATOR']
         iconUrl?: never
         url: string
       }
@@ -40,5 +40,5 @@ export type BookmarkInfo = Readonly<
 
 export type BookmarkTreeInfo = Readonly<{
   children: ReadonlyArray<BookmarkInfo>
-  parent: BookmarkInfo & { type: BOOKMARK_TYPES.FOLDER }
+  parent: BookmarkInfo & { type: (typeof BOOKMARK_TYPES)['FOLDER'] }
 }>

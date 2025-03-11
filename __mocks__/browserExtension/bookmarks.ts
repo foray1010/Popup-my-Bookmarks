@@ -59,7 +59,6 @@ class Bookmarks implements Readonly<typeof browser.bookmarks> {
     }, [])
   }
 
-  // eslint-disable-next-line functional/prefer-immutable-types
   #getOne(id: string): browser.bookmarks.BookmarkTreeNode {
     const [bookmarkTreeNode] = this.#queryBookmarkTreeNodes(
       this.#rootTreeNodesMutable,

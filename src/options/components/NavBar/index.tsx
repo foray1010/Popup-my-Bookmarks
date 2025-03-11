@@ -1,4 +1,5 @@
 import classNames from 'classix'
+import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'
 
 import Button from '../../../core/components/baseItems/Button/index.js'
@@ -25,7 +26,7 @@ const navBarItemInfos = [
   },
 ] as const satisfies ReadonlyArray<
   Readonly<{
-    path: RoutePath
+    path: ValueOf<typeof RoutePath>
     title: string
   }>
 >

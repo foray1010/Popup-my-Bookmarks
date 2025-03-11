@@ -1,6 +1,7 @@
 import '../manifest.yml'
 
 import { StrictMode } from 'react'
+import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'
 
 import type { OPTIONS } from '../core/constants/index.js'
@@ -17,7 +18,7 @@ async function main(): Promise<void> {
 
   // if missing option, open options page to init options
   const missingOptionNames = (
-    Object.keys(optionsConfig) as readonly OPTIONS[]
+    Object.keys(optionsConfig) as readonly ValueOf<typeof OPTIONS>[]
   ).filter((optionName) => options[optionName] === undefined)
   if (missingOptionNames.length > 0) {
     await webExtension.runtime.openOptionsPage()
