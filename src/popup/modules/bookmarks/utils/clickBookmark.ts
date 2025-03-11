@@ -2,6 +2,7 @@ import type {
   KeyboardEvent as ReactKeyboardEvent,
   MouseEvent as ReactMouseEvent,
 } from 'react'
+import type { ValueOf } from 'type-fest'
 
 import { OPTIONS } from '../../../../core/constants/index.js'
 import { OPEN_IN_TYPES } from '../../../constants/menu.js'
@@ -22,9 +23,10 @@ export function getClickOptionNameByEvent(
   return OPTIONS.CLICK_BY_LEFT
 }
 
-export function mapOptionToOpenBookmarkProps(
-  option: number,
-): Readonly<{ openIn: OPEN_IN_TYPES; isCloseThisExtension: boolean }> {
+export function mapOptionToOpenBookmarkProps(option: number): Readonly<{
+  openIn: ValueOf<typeof OPEN_IN_TYPES>
+  isCloseThisExtension: boolean
+}> {
   switch (option) {
     case 0: // current tab
     case 1: // current tab (without closing PmB)

@@ -1,4 +1,5 @@
 import { Controller, useForm } from 'react-hook-form'
+import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'
 
 import ActionlessForm from '../../../core/components/baseItems/ActionlessForm/index.js'
@@ -13,7 +14,7 @@ type Props = Readonly<{
   onReset: () => void
   onSubmit: (variables: Partial<Options>) => void
   optionsConfig: OptionsConfig
-  selectedOptionFormMap: ReadonlyArray<OPTIONS>
+  selectedOptionFormMap: ReadonlyArray<ValueOf<typeof OPTIONS>>
 }>
 export default function OptionForm(props: Props) {
   const { control, handleSubmit } = useForm()

@@ -1,5 +1,6 @@
 import constate from 'constate'
 import { useCallback, useState } from 'react'
+import type { ValueOf } from 'type-fest'
 import useListener from 'use-typed-event-listener'
 
 import type { WindowId } from '../../constants/windows.js'
@@ -7,24 +8,30 @@ import type { KeyBindingEventCallback, KeyDefinition } from './types.js'
 
 function useActiveWindowState() {
   const [activeWindowQueue, setActiveWindowQueue] = useState<
-    ReadonlySet<WindowId>
+    ReadonlySet<ValueOf<typeof WindowId>>
   >(new Set())
 
-  const appendActiveWindowId = useCallback((windowId: WindowId) => {
-    setActiveWindowQueue((prevState) => {
-      const newState = new Set(prevState)
-      newState.add(windowId)
-      return newState
-    })
-  }, [])
+  const appendActiveWindowId = useCallback(
+    (windowId: ValueOf<typeof WindowId>) => {
+      setActiveWindowQueue((prevState) => {
+        const newState = new Set(prevState)
+        newState.add(windowId)
+        return newState
+      })
+    },
+    [],
+  )
 
-  const removeActiveWindowId = useCallback((windowId: WindowId) => {
-    setActiveWindowQueue((prevState) => {
-      const newState = new Set(prevState)
-      newState.delete(windowId)
-      return newState
-    })
-  }, [])
+  const removeActiveWindowId = useCallback(
+    (windowId: ValueOf<typeof WindowId>) => {
+      setActiveWindowQueue((prevState) => {
+        const newState = new Set(prevState)
+        newState.delete(windowId)
+        return newState
+      })
+    },
+    [],
+  )
 
   return {
     activeWindowId: Array.from(activeWindowQueue).at(-1),
@@ -36,7 +43,7 @@ function useActiveWindowState() {
 function useKeyBindingsPerWindowState() {
   const [keyBindingsPerWindow, setKeyBindingsPerWindow] = useState<
     ReadonlyMap<
-      WindowId,
+      ValueOf<typeof WindowId>,
       ReadonlyArray<
         Readonly<{
           key: KeyDefinition
@@ -47,7 +54,7 @@ function useKeyBindingsPerWindowState() {
   >(new Map())
 
   type AddOrRemoveListener = (
-    meta: Readonly<{ key: KeyDefinition; windowId: WindowId }>,
+    meta: Readonly<{ key: KeyDefinition; windowId: ValueOf<typeof WindowId> }>,
     callback: KeyBindingEventCallback,
   ) => void
 

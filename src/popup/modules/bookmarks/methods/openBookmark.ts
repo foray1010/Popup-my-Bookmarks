@@ -1,3 +1,4 @@
+import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'
 
 import { OPTIONS } from '../../../../core/constants/index.js'
@@ -44,7 +45,7 @@ async function execInPage(code: string) {
 }
 
 type OpenBookmarkProps = Readonly<{
-  openIn: OPEN_IN_TYPES
+  openIn: ValueOf<typeof OPEN_IN_TYPES>
   isAllowBookmarklet: boolean
   isCloseThisExtension: boolean
 }>

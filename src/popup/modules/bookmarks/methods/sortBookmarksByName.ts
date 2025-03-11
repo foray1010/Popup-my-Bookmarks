@@ -1,3 +1,4 @@
+import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'
 
 import { BOOKMARK_TYPES } from '../constants.js'
@@ -23,7 +24,7 @@ function splitBySeparator(
 }
 
 type BookmarkGroup = Readonly<{
-  type: BOOKMARK_TYPES
+  type: ValueOf<typeof BOOKMARK_TYPES>
   members: readonly BookmarkInfo[]
 }>
 function groupByType(
@@ -32,7 +33,7 @@ function groupByType(
   return bookmarkInfos.reduce<
     Array<
       Readonly<{
-        type: BOOKMARK_TYPES
+        type: ValueOf<typeof BOOKMARK_TYPES>
         members: BookmarkInfo[]
       }>
     >
@@ -65,7 +66,7 @@ function sortGroupByPriority(
     // shouldn't exist
     BOOKMARK_TYPES.DRAG_INDICATOR,
     BOOKMARK_TYPES.NO_BOOKMARK,
-  ] as const satisfies readonly BOOKMARK_TYPES[]
+  ] as const satisfies readonly ValueOf<typeof BOOKMARK_TYPES>[]
   return Array.from(groups).sort((groupA, groupB) => {
     return priority.indexOf(groupA.type) - priority.indexOf(groupB.type)
   })

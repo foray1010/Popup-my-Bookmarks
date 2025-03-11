@@ -1,3 +1,5 @@
+import type { ValueOf } from 'type-fest'
+
 import type { OPTIONS } from '../constants/index.js'
 
 export type Options = Readonly<{
@@ -18,7 +20,7 @@ export type Options = Readonly<{
   [OPTIONS.WARN_OPEN_MANY]: boolean
 }>
 // check if all OPTIONS are handled in Options, will be removed by minifier so won't affect bundle size
-;({}) as Options satisfies Record<OPTIONS, unknown>
+;({}) as Options satisfies Record<ValueOf<typeof OPTIONS>, unknown>
 
 export type ArrayOptionConfig = Readonly<{
   type: 'array'
@@ -63,4 +65,4 @@ export type OptionsConfig = Readonly<{
   [OPTIONS.WARN_OPEN_MANY]: BooleanOptionConfig
 }>
 // check if all OPTIONS are handled in OptionsConfig, will be removed by minifier so won't affect bundle size
-;({}) as OptionsConfig satisfies Record<OPTIONS, unknown>
+;({}) as OptionsConfig satisfies Record<ValueOf<typeof OPTIONS>, unknown>

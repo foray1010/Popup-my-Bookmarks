@@ -23,10 +23,7 @@ const [OptionsProvider, useInternalOptions] = constate(
   },
 )
 
-export function withOptions<P extends {}>(
-  // eslint-disable-next-line functional/prefer-immutable-types
-  WrappedComponent: ComponentType<P>,
-) {
+export function withOptions<P extends {}>(WrappedComponent: ComponentType<P>) {
   function InnerComponent(props: P) {
     const options = useInternalOptions()
     if (!options) return null

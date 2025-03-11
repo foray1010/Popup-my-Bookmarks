@@ -1,5 +1,5 @@
-export enum WindowId {
-  Base = 'base',
-  Editor = 'editor',
-  Menu = 'menu',
-}
+export const WindowId = {
+  Base: 'base',
+  Editor: 'editor',
+  Menu: 'menu',
+} as const

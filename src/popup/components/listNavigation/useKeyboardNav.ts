@@ -1,3 +1,5 @@
+import type { ValueOf } from 'type-fest'
+
 import type { WindowId } from '../../constants/windows.js'
 import cycle from '../../utils/cycle.js'
 import getLastMapKey from '../../utils/getLastMapKey.js'
@@ -9,7 +11,7 @@ export default function useKeyboardNav({
   onPressArrowLeft,
   onPressArrowRight,
 }: Readonly<{
-  windowId: WindowId
+  windowId: ValueOf<typeof WindowId>
   onPressArrowLeft?: (evt: Readonly<KeyboardEvent>) => void
   onPressArrowRight?: (evt: Readonly<KeyboardEvent>) => void
 }>): void {
