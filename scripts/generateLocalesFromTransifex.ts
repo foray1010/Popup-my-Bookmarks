@@ -85,7 +85,6 @@ async function main(): Promise<void> {
           message: string
           description?: string
         }>
-        // eslint-disable-next-line n/no-unsupported-features/node-builtins
       > = await (await fetch(url)).json()
 
       const sortedMessagesJson = Object.fromEntries(
