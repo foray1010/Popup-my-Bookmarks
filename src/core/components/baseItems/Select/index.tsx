@@ -1,13 +1,10 @@
 import classNames from 'classix'
-import { forwardRef, type JSX } from 'react'
+import type { FC, JSX } from 'react'
 
 import * as classes from './styles.module.css'
 
 type Props = Readonly<JSX.IntrinsicElements['select']>
-const Select = forwardRef<HTMLSelectElement, Props>(function InnerSelect(
-  { className, ...props },
-  ref,
-) {
+const Select: FC<Props> = ({ className, ref, ...props }) => {
   return (
     <select
       {...props}
@@ -15,6 +12,6 @@ const Select = forwardRef<HTMLSelectElement, Props>(function InnerSelect(
       className={classNames(classes.main, className)}
     />
   )
-})
+}
 
 export default Select

@@ -1,14 +1,11 @@
 import classNames from 'classix'
-import { forwardRef, type JSX } from 'react'
+import type { FC, JSX } from 'react'
 
 import * as classes from './styles.module.css'
 
 type Props = Readonly<JSX.IntrinsicElements['button']>
 
-const Button = forwardRef<HTMLButtonElement, Props>(function InnerButton(
-  { className, type = 'button', ...props },
-  ref,
-) {
+const Button: FC<Props> = ({ className, ref, type = 'button', ...props }) => {
   return (
     <button
       {...props}
@@ -18,6 +15,6 @@ const Button = forwardRef<HTMLButtonElement, Props>(function InnerButton(
       type={type}
     />
   )
-})
+}
 
 export default Button

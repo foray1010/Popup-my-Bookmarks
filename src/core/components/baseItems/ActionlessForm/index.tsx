@@ -1,4 +1,4 @@
-import { forwardRef, type JSX } from 'react'
+import type { FC, JSX } from 'react'
 
 type Props = Readonly<
   Omit<
@@ -6,22 +6,20 @@ type Props = Readonly<
     'action' | 'enctype' | 'method' | 'target'
   >
 >
-const ActionlessForm = forwardRef<HTMLFormElement, Props>(
-  function InnerActionlessForm({ onSubmit, ...props }, ref) {
-    return (
-      <form
-        // `<form>` is not considered as role='form' when no accessible name, such as `aria-label`
-        role='form'
-        {...props}
-        ref={ref}
-        onSubmit={(evt) => {
-          evt.preventDefault()
+const ActionlessForm: FC<Props> = ({ onSubmit, ref, ...props }) => {
+  return (
+    <form
+      // `<form>` is not considered as role='form' when no accessible name, such as `aria-label`
+      role='form'
+      {...props}
+      ref={ref}
+      onSubmit={(evt) => {
+        evt.preventDefault()
 
-          onSubmit?.(evt)
-        }}
-      />
-    )
-  },
-)
+        onSubmit?.(evt)
+      }}
+    />
+  )
+}
 
 export default ActionlessForm

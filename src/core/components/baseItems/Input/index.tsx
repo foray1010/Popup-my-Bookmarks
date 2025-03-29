@@ -1,13 +1,10 @@
 import classNames from 'classix'
-import { forwardRef, type JSX } from 'react'
+import type { FC, JSX } from 'react'
 
 import * as classes from './styles.module.css'
 
 type Props = Readonly<JSX.IntrinsicElements['input']>
-const Input = forwardRef<HTMLInputElement, Props>(function InnerInput(
-  { className, type = 'text', ...props },
-  ref,
-) {
+const Input: FC<Props> = ({ className, ref, type = 'text', ...props }) => {
   return (
     <input
       {...props}
@@ -20,6 +17,6 @@ const Input = forwardRef<HTMLInputElement, Props>(function InnerInput(
       type={type}
     />
   )
-})
+}
 
 export default Input

@@ -1,5 +1,5 @@
 import classNames from 'classix'
-import { type ComponentProps, forwardRef, useId } from 'react'
+import { type ComponentProps, type FC, useId } from 'react'
 import webExtension from 'webextension-polyfill'
 
 import Input from '../../../core/components/baseItems/Input/index.js'
@@ -12,33 +12,31 @@ type Props = Readonly<
     onCancel(): void
   }
 >
-const SearchInput = forwardRef<HTMLInputElement, Props>(
-  function InnerSearchInput({ onCancel, ...inputProps }, ref) {
-    const inputId = useId()
+const SearchInput: FC<Props> = ({ onCancel, ref, ...inputProps }) => {
+  const inputId = useId()
 
-    return (
-      <div className={classes.main} role='search'>
-        <Search className={classes.icon} />
-        <Input
-          ref={ref}
-          inputMode='search'
-          placeholder={webExtension.i18n.getMessage('search')}
-          {...inputProps}
-          className={classNames(classes['search-input'], inputProps.className)}
-          id={inputId}
+  return (
+    <div className={classes.main} role='search'>
+      <Search className={classes.icon} />
+      <Input
+        ref={ref}
+        inputMode='search'
+        placeholder={webExtension.i18n.getMessage('search')}
+        {...inputProps}
+        className={classNames(classes['search-input'], inputProps.className)}
+        id={inputId}
+      />
+      {inputProps.value ? (
+        <Cross
+          aria-controls={inputId}
+          aria-label={webExtension.i18n.getMessage('cancel')}
+          className={classes.icon}
+          role='button'
+          onClick={onCancel}
         />
-        {inputProps.value ? (
-          <Cross
-            aria-controls={inputId}
-            aria-label={webExtension.i18n.getMessage('cancel')}
-            className={classes.icon}
-            role='button'
-            onClick={onCancel}
-          />
-        ) : null}
-      </div>
-    )
-  },
-)
+      ) : null}
+    </div>
+  )
+}
 
 export default SearchInput

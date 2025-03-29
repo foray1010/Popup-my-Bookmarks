@@ -3,12 +3,14 @@ import { type MouseEventHandler, useCallback, useEffect, useRef } from 'react'
 import { useDragAndDropContext } from './DragAndDropContext.js'
 
 function useScroll() {
-  const scrollingTimeoutRef = useRef<ReturnType<typeof setInterval>>()
+  const scrollingTimeoutRef = useRef<ReturnType<typeof setInterval> | null>(
+    null,
+  )
 
   const clearScroll = useCallback(() => {
-    if (scrollingTimeoutRef.current !== undefined) {
+    if (scrollingTimeoutRef.current !== null) {
       clearInterval(scrollingTimeoutRef.current)
-      scrollingTimeoutRef.current = undefined
+      scrollingTimeoutRef.current = null
     }
   }, [])
 

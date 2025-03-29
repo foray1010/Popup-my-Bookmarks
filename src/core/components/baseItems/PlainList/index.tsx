@@ -1,17 +1,14 @@
 import classNames from 'classix'
-import { forwardRef, type JSX } from 'react'
+import type { FC, JSX } from 'react'
 
 import * as classes from './styles.module.css'
 
 type Props = Readonly<JSX.IntrinsicElements['ul']>
 
-const PlainList = forwardRef<HTMLUListElement, Props>(function InnerPlainList(
-  { className, ...props },
-  ref,
-) {
+const PlainList: FC<Props> = ({ className, ref, ...props }) => {
   return (
     <ul {...props} ref={ref} className={classNames(classes.main, className)} />
   )
-})
+}
 
 export default PlainList
