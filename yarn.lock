@@ -1680,14 +1680,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@svg-use/core@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@svg-use/core@npm:0.4.0"
+"@svg-use/core@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@svg-use/core@npm:0.5.0"
   dependencies:
     svgo: "npm:^3.3.2"
     unist-util-visit: "npm:^5.0.0"
     xast-util-from-xml: "npm:^4.0.0"
-  checksum: 10c0/6b07f4ccfdcc9c38821974f52d979a5c5774eab765eca56b1b599515d3517e686170d86f5f9faa9b53744b0bb31b2def286a88bb77d043085bf661f05cc04664
+  checksum: 10c0/1cb2ba43d92ded86bb0c2cea8ea0c84fb24c671d4f4d7c52feb62e38675e9ae968133235826300a1b2f099ad8596ab07bc7272df7bbb8c74ead532fe4bd28d80
   languageName: node
   linkType: hard
 
@@ -1704,14 +1704,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@svg-use/webpack@npm:0.3.1":
-  version: 0.3.1
-  resolution: "@svg-use/webpack@npm:0.3.1"
+"@svg-use/webpack@npm:0.4.0":
+  version: 0.4.0
+  resolution: "@svg-use/webpack@npm:0.4.0"
   dependencies:
-    "@svg-use/core": "npm:^0.4.0"
+    "@svg-use/core": "npm:^0.5.0"
     "@svg-use/react": "npm:^0.4.0"
     loader-utils: "npm:^3.3.1"
-  checksum: 10c0/c8c2c0c82534a519e9f9a5191a0a66cdd686879764bd6cd52506ed1d508d464fcaa0c424ad92552aef3add990bcf0090d81fa96f1b78f420c2be8bde75a47a57
+  checksum: 10c0/e19acd3d54333e0f7ad04bd85ef898b5b35dc97c4b76b553cdb948b655451209581ccab1069c3dc841bac6f79835060293493676cb910fbfd75b0b151d8358f0
   languageName: node
   linkType: hard
 
@@ -2906,7 +2906,7 @@ __metadata:
     "@foray1010/stylelint-config": "npm:16.0.0"
     "@foray1010/tsconfig": "npm:14.0.0"
     "@size-limit/file": "npm:11.2.0"
-    "@svg-use/webpack": "npm:0.3.1"
+    "@svg-use/webpack": "npm:0.4.0"
     "@swc/core": "npm:1.11.13"
     "@swc/jest": "npm:0.2.37"
     "@tanstack/eslint-plugin-query": "npm:5.68.0"

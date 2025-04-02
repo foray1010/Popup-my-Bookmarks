@@ -39,7 +39,7 @@
     "@foray1010/stylelint-config": "16.0.0",
     "@foray1010/tsconfig": "14.0.0",
     "@size-limit/file": "11.2.0",
-    "@svg-use/webpack": "0.3.1",
+    "@svg-use/webpack": "0.4.0",
     "@swc/core": "1.11.13",
     "@swc/jest": "0.2.37",
     "@tanstack/eslint-plugin-query": "5.68.0",
