@@ -18,7 +18,7 @@
   --highlight-level3: #bdbdbd;
   --highlight-level4: #9e9e9e;
   --highlight-level5: #757575;
-  --bg-color-rgb: 255 255 255;
+  --bg-color: #fff;
   --main-color1: #42a5f5;
   --main-color2: #ff9800;
   --main-color3: #26a69a;
@@ -26,7 +26,7 @@
   --main-color5: #8d6e63;
   --main-font-color: #212121;
 
-  background-color: rgb(var(--bg-color-rgb));
+  background-color: var(--bg-color);
   color: var(--main-font-color);
   font-family: system-ui, sans-serif;
 }
@@ -38,7 +38,7 @@
     --highlight-level3: #757575;
     --highlight-level4: #9e9e9e;
     --highlight-level5: #bdbdbd;
-    --bg-color-rgb: 33 33 33;
+    --bg-color: #212121;
     --main-font-color: #fff;
   }
 }

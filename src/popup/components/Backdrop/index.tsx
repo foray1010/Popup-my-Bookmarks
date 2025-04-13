@@ -13,7 +13,8 @@ export default function Backdrop({ opacity, onClick }: Props) {
       className={classes.main}
       role='presentation'
       style={{
-        backgroundColor: `rgb(var(--bg-color-rgb) / ${opacity})`,
+        // @ts-expect-error css variable is not supported
+        '--opacity': `${opacity * 100}%`,
       }}
       onClick={onClick}
     />

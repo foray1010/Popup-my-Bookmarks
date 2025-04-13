@@ -2,4 +2,9 @@
   position: absolute;
   inset: 0;
   backdrop-filter: blur(1px);
+  background-color: color-mix(
+    in srgb,
+    var(--bg-color),
+    transparent calc(100% - var(--opacity))
+  );
 }

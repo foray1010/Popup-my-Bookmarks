@@ -12,7 +12,7 @@
   cursor: default;
   padding-block: var(--gap-rem);
   padding-inline: var(--gap-rem-4x);
-  color: rgb(var(--bg-color-rgb));
+  color: var(--bg-color);
   font: inherit;
 }
 
@@ -26,7 +26,7 @@
 .main {
   box-sizing: border-box;
   border-block: 1px solid var(--highlight-level3);
-  background-color: rgb(var(--bg-color-rgb));
+  background-color: var(--bg-color);
   padding-inline: var(--gap-rem-2x);
   text-align: right;
 }

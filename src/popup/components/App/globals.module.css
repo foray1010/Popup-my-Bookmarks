@@ -10,7 +10,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  border-left: var(--gap-rem) solid rgb(var(--bg-color-rgb));
+  border-left: var(--gap-rem) solid var(--bg-color);
   background-color: var(--highlight-level3);
 
   &:hover {

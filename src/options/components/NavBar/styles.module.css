@@ -12,7 +12,7 @@
   cursor: default;
   padding-block-start: var(--gap-rem-2x);
   text-align: center;
-  color: rgb(var(--bg-color-rgb));
+  color: var(--bg-color);
   font:
     1.125rem 'Archivo Narrow',
     sans-serif;

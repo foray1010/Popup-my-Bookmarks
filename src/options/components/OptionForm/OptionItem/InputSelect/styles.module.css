@@ -15,7 +15,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgb(var(--bg-color-rgb));
+  background-color: var(--bg-color);
   width: 85%;
 }
 

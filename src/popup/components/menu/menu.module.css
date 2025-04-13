@@ -2,7 +2,7 @@
   box-sizing: border-box;
   border: 1px solid var(--highlight-level3);
   box-shadow: 0 var(--gap-rem) var(--gap-rem-2x) rgb(0 0 0 / 20%);
-  background-color: rgb(var(--bg-color-rgb));
+  background-color: var(--bg-color);
   padding: var(--gap-rem-2x);
   max-block-size: 600px; /** Chrome restricted maximum popup height to be 600px */
   overflow: auto;
