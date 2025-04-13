@@ -9,7 +9,9 @@ type Props = Readonly<{
 export default function Backdrop({ opacity, onClick }: Props) {
   return (
     <div
+      aria-hidden='true'
       className={classes.main}
+      role='presentation'
       style={{
         backgroundColor: `rgb(var(--bg-color-rgb) / ${opacity})`,
       }}

@@ -1,14 +1,18 @@
 .main {
   composes: list-item from '../../../core/styles/composes.module.css';
+}
+
+.button {
   padding-block: var(--gap-rem-2x);
   padding-inline: var(--gap-rem-4x);
+  width: stretch;
   white-space: nowrap;
 
-  &.unclickable {
+  &:disabled {
     color: var(--highlight-level4);
   }
 
-  &.focused:not(.unclickable) {
+  &.focused:not(:disabled) {
     outline: 0;
     border-color: var(--highlight-level2);
     background-color: var(--highlight-level1);

@@ -1,7 +1,11 @@
-import { type RefObject, useRef } from 'react'
+import { type RefObject, useLayoutEffect, useRef } from 'react'
 
 export function useLatestRef<T>(value: T): Readonly<RefObject<T>> {
   const ref = useRef(value)
-  ref.current = value
+
+  useLayoutEffect(() => {
+    ref.current = value
+  }, [value])
+
   return ref
 }

@@ -21,6 +21,7 @@ export default function OptionForm(props: Props) {
 
   return (
     <ActionlessForm
+      aria-label='Options'
       className={classes.form}
       onReset={props.onReset}
       onSubmit={handleSubmit(props.onSubmit)}

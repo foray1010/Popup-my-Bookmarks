@@ -3,6 +3,7 @@
   gap: var(--gap-rem-2x);
   align-items: center;
   padding-inline: var(--gap-rem);
+  width: stretch;
   composes: list-item from '../../../../core/styles/composes.module.css';
 
   &.drag-indicator {

@@ -1,0 +1,8 @@
+:where(.unset-all) {
+  all: unset;
+  -webkit-user-drag: element; /* all: unset will disable user drag */
+}
+
+.main {
+  composes: focus from '../../../styles/composes.module.css';
+}

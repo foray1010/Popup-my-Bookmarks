@@ -7,4 +7,8 @@
   font-family: inherit;
   font-size: inherit;
   composes: focus from '../../../styles/composes.module.css';
+
+  &:is(:hover, :active) {
+    background-color: var(--highlight-level2);
+  }
 }

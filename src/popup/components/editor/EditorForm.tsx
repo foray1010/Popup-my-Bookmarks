@@ -41,6 +41,7 @@ export default function Editor({ onConfirm, ...props }: Props) {
 
       <Input
         {...register('title')}
+        // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus
         className={classes.input}
         defaultValue={props.defaultTitle}

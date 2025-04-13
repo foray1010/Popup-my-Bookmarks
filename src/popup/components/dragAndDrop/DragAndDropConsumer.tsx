@@ -93,6 +93,7 @@ export default function DragAndDropConsumer(props: Props) {
 
   return (
     <div
+      role='presentation'
       onClickCapture={handleClickCapture}
       onMouseUpCapture={handleMouseUpCapture}
       {...(props.disableDrag !== true && {

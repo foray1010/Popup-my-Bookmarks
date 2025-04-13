@@ -9,8 +9,6 @@ type Props = Readonly<
 const ActionlessForm: FC<Props> = ({ onSubmit, ref, ...props }) => {
   return (
     <form
-      // `<form>` is not considered as role='form' when no accessible name, such as `aria-label`
-      role='form'
       {...props}
       ref={ref}
       onSubmit={(evt) => {

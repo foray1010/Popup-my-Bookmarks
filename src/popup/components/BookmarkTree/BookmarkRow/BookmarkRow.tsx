@@ -1,10 +1,11 @@
 import classNames from 'classix'
 import type { JSX } from 'react'
 
+import StylelessButton from '../../../../core/components/baseItems/StylelessButton'
 import * as classes from './bookmark-row.module.css'
 
 type Props = Readonly<
-  JSX.IntrinsicElements['div'] & {
+  JSX.IntrinsicElements['button'] & {
     iconUrl?: string | undefined
     isHighlighted: boolean
     isUnclickable: boolean
@@ -18,26 +19,24 @@ function BookmarkRow({
   isUnclickable,
   title,
   tooltip,
-  ...divProps
+  ...buttonProps
 }: Props) {
   return (
-    <div
-      {...divProps}
+    <StylelessButton
+      {...buttonProps}
       className={classNames(
         classes.main,
         isHighlighted && classes.highlighted,
         isUnclickable && classes.unclickable,
-        divProps.className,
+        buttonProps.className,
       )}
-      tabIndex={0}
       title={tooltip}
-      onAuxClick={isUnclickable ? undefined : divProps.onAuxClick}
-      onClick={isUnclickable ? undefined : divProps.onClick}
-      onContextMenu={isUnclickable ? undefined : divProps.onContextMenu}
+      onAuxClick={isUnclickable ? undefined : buttonProps.onAuxClick}
+      onContextMenu={isUnclickable ? undefined : buttonProps.onContextMenu}
     >
-      {iconUrl && <img className={classes.icon} src={iconUrl} />}
+      {iconUrl && <img alt='' className={classes.icon} src={iconUrl} />}
       <div className={classes.title}>{title}</div>
-    </div>
+    </StylelessButton>
   )
 }
 

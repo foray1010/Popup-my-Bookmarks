@@ -3,6 +3,7 @@ import type { MouseEventHandler } from 'react'
 import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'
 
+import StylelessButton from '../../../core/components/baseItems/StylelessButton/index.js'
 import type { MenuItem } from './constants.js'
 import * as classes from './menu-row.module.css'
 
@@ -23,20 +24,16 @@ export default function MenuRow({
   rowName,
 }: Props) {
   return (
-    <li
-      aria-disabled={isUnclickable}
-      className={classNames(
-        classes.main,
-        isFocused && classes.focused,
-        isUnclickable && classes.unclickable,
-      )}
-      role='menuitem'
-      tabIndex={0}
-      onClick={isUnclickable ? undefined : onClick}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      {webExtension.i18n.getMessage(rowName)}
+    <li className={classes.main} role='menuitem'>
+      <StylelessButton
+        className={classNames(classes.button, isFocused && classes.focused)}
+        disabled={isUnclickable}
+        onClick={isUnclickable ? undefined : onClick}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
+        {webExtension.i18n.getMessage(rowName)}
+      </StylelessButton>
     </li>
   )
 }
