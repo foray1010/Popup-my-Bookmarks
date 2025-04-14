@@ -1,12 +1,16 @@
-.close {
-  box-sizing: border-box;
+.close-button {
   padding: var(--gap-rem-3x);
-  height: 100%;
+  width: fit-content;
+  height: stretch;
   color: var(--bg-color);
 
   &:hover {
     background-color: var(--main-color4);
   }
+}
+
+.close-icon {
+  height: 100%;
 }
 
 .main {

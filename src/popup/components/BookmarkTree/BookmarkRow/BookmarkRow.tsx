@@ -35,7 +35,7 @@ function BookmarkRow({
       onContextMenu={isUnclickable ? undefined : buttonProps.onContextMenu}
     >
       {iconUrl && <img alt='' className={classes.icon} src={iconUrl} />}
-      <div className={classes.title}>{title}</div>
+      <span className={classes.title}>{title}</span>
     </StylelessButton>
   )
 }

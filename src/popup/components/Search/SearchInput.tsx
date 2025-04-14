@@ -3,6 +3,7 @@ import { type ComponentProps, type FC, useId } from 'react'
 import webExtension from 'webextension-polyfill'
 
 import Input from '../../../core/components/baseItems/Input/index.js'
+import StylelessButton from '../../../core/components/baseItems/StylelessButton/index.js'
 import { Component as Cross } from '../../images/cross.svg?svgUse'
 import { Component as Search } from '../../images/search.svg?svgUse'
 import * as classes from './search-input.module.css'
@@ -17,7 +18,7 @@ const SearchInput: FC<Props> = ({ onCancel, ref, ...inputProps }) => {
 
   return (
     <div className={classes.main} role='search'>
-      <Search className={classes.icon} />
+      <Search aria-hidden className={classes['search-icon']} />
       <Input
         ref={ref}
         inputMode='search'
@@ -27,13 +28,14 @@ const SearchInput: FC<Props> = ({ onCancel, ref, ...inputProps }) => {
         id={inputId}
       />
       {inputProps.value ? (
-        <Cross
+        <StylelessButton
           aria-controls={inputId}
           aria-label={webExtension.i18n.getMessage('cancel')}
-          className={classes.icon}
-          role='button'
+          className={classes['cancel-button']}
           onClick={onCancel}
-        />
+        >
+          <Cross aria-hidden className={classes['cancel-icon']} />
+        </StylelessButton>
       ) : null}
     </div>
   )

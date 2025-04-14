@@ -1,7 +1,22 @@
-.icon {
+.search-icon {
   flex-shrink: 0;
   height: 100%;
   color: var(--highlight-level4);
+}
+
+.cancel-button {
+  flex-shrink: 0;
+  color: var(--highlight-level4);
+  composes: focus from '../../../core/styles/composes.module.css';
+
+  &:is(:hover, :active) {
+    color: var(--highlight-level5);
+  }
+}
+
+.cancel-icon {
+  flex-shrink: 0;
+  height: 100%;
 }
 
 .main {
@@ -19,5 +34,6 @@
   outline: 0;
   border: 0;
   padding: 0;
+  min-width: 0;
   height: 100%;
 }
