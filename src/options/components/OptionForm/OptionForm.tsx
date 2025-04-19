@@ -1,4 +1,4 @@
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from '@tanstack/react-form'
 import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'
 
@@ -17,14 +17,19 @@ type Props = Readonly<{
   selectedOptionFormMap: ReadonlyArray<ValueOf<typeof OPTIONS>>
 }>
 export default function OptionForm(props: Props) {
-  const { control, handleSubmit } = useForm()
+  const form = useForm({
+    defaultValues: props.defaultValues,
+    onSubmit({ value }) {
+      props.onSubmit(value)
+    },
+  })
 
   return (
     <ActionlessForm
       aria-label='Options'
       className={classes.form}
       onReset={props.onReset}
-      onSubmit={handleSubmit(props.onSubmit)}
+      onSubmit={async () => form.handleSubmit()}
     >
       <table className={classes.table}>
         <tbody>
@@ -32,18 +37,21 @@ export default function OptionForm(props: Props) {
             <tr key={optionName}>
               <td>{webExtension.i18n.getMessage(optionName)}</td>
               <td className={classes['item-input']}>
-                <Controller
-                  control={control}
-                  defaultValue={props.defaultValues[optionName]}
-                  name={optionName}
-                  render={({ field }) => {
-                    // do not pass ref as not all option items forward reference
-                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                    const { ref, ...rest } = field
+                <form.Field name={optionName}>
+                  {(field) => {
                     const optionConfig = props.optionsConfig[optionName]
-                    return <OptionItem {...rest} {...optionConfig} />
+                    return (
+                      <OptionItem
+                        {...optionConfig}
+                        name={field.name}
+                        // @ts-expect-error Cannot narrow down the union type
+                        value={field.state.value}
+                        onBlur={field.handleBlur}
+                        onChange={field.handleChange}
+                      />
+                    )
                   }}
-                />
+                </form.Field>
               </td>
             </tr>
           ))}
@@ -51,9 +59,17 @@ export default function OptionForm(props: Props) {
         <tfoot>
           <tr>
             <td>
-              <Button type='submit'>
-                {webExtension.i18n.getMessage('confirm')}
-              </Button>
+              <form.Subscribe
+                selector={(state) => !state.canSubmit || state.isSubmitting}
+              >
+                {(disabled) => {
+                  return (
+                    <Button disabled={disabled} type='submit'>
+                      {webExtension.i18n.getMessage('confirm')}
+                    </Button>
+                  )
+                }}
+              </form.Subscribe>
             </td>
             <td>
               <Button type='reset'>

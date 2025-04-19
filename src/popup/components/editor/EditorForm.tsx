@@ -1,5 +1,5 @@
+import { useForm } from '@tanstack/react-form'
 import { type CSSProperties, useId } from 'react'
-import { useForm } from 'react-hook-form'
 import webExtension from 'webextension-polyfill'
 
 import ActionlessForm from '../../../core/components/baseItems/ActionlessForm/index.js'
@@ -17,12 +17,15 @@ type Props = Readonly<{
   style?: CSSProperties
 }>
 export default function Editor({ onConfirm, ...props }: Props) {
-  const { register, handleSubmit } = useForm<
-    Readonly<{
-      title: string
-      url?: string
-    }>
-  >()
+  const form = useForm({
+    defaultValues: {
+      title: props.defaultTitle ?? '',
+      url: props.defaultUrl,
+    },
+    async onSubmit({ value }) {
+      await onConfirm(value.title, value.url)
+    },
+  })
 
   const headerId = useId()
 
@@ -31,31 +34,55 @@ export default function Editor({ onConfirm, ...props }: Props) {
       aria-labelledby={headerId}
       className={classes.main}
       style={props.style}
-      onSubmit={handleSubmit(async (variables) => {
-        await onConfirm(variables.title, variables.url)
-      })}
+      onSubmit={async () => form.handleSubmit()}
     >
       <h2 className={classes.header} id={headerId}>
         {props.header}
       </h2>
 
-      <Input
-        {...register('title')}
-        // eslint-disable-next-line jsx-a11y/no-autofocus
-        autoFocus
-        className={classes.input}
-        defaultValue={props.defaultTitle}
-      />
+      <form.Field name='title'>
+        {(field) => {
+          return (
+            <Input
+              // eslint-disable-next-line jsx-a11y/no-autofocus
+              autoFocus
+              className={classes.input}
+              name={field.name}
+              value={field.state.value}
+              onBlur={field.handleBlur}
+              onChange={(evt) => field.handleChange(evt.currentTarget.value)}
+            />
+          )
+        }}
+      </form.Field>
       {props.isAllowedToEditUrl && (
-        <Input
-          {...register('url')}
-          className={classes.input}
-          defaultValue={props.defaultUrl}
-        />
+        <form.Field name='url'>
+          {(field) => {
+            return (
+              <Input
+                className={classes.input}
+                name={field.name}
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChange={(evt) => field.handleChange(evt.currentTarget.value)}
+              />
+            )
+          }}
+        </form.Field>
       )}
 
       <div className={classes['button-group']}>
-        <Button type='submit'>{webExtension.i18n.getMessage('confirm')}</Button>
+        <form.Subscribe
+          selector={(state) => !state.canSubmit || state.isSubmitting}
+        >
+          {(disabled) => {
+            return (
+              <Button disabled={disabled} type='submit'>
+                {webExtension.i18n.getMessage('confirm')}
+              </Button>
+            )
+          }}
+        </form.Subscribe>
         <Button onClick={props.onCancel}>
           {webExtension.i18n.getMessage('cancel')}
         </Button>
