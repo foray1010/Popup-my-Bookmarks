@@ -1,6 +1,7 @@
 import { type ComponentType, useCallback } from 'react'
 
-import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { useBookmarkTreesContext } from '@/popup/modules/bookmarks/contexts/bookmarkTrees.js'
+
 import { DragAndDropProvider } from '../dragAndDrop/index.js'
 
 export default function withDragAndDropEvents<P extends {}>(

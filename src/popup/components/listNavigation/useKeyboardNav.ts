@@ -1,8 +1,9 @@
 import type { ValueOf } from 'type-fest'
 
-import type { WindowId } from '../../constants/windows.js'
-import cycle from '../../utils/cycle.js'
-import getLastMapKey from '../../utils/getLastMapKey.js'
+import type { WindowId } from '@/popup/constants/windows.js'
+import cycle from '@/popup/utils/cycle.js'
+import getLastMapKey from '@/popup/utils/getLastMapKey.js'
+
 import { useKeyBindingsEvent } from '../keyBindings/index.js'
 import { useListNavigationContext } from './ListNavigationContext.js'
 

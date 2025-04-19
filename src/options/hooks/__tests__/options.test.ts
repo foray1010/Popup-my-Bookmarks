@@ -1,6 +1,7 @@
 import { act, renderHook, waitFor } from '@testing-library/react'
 
-import { ReactQueryClientProvider } from '../../../core/utils/queryClient.js'
+import { ReactQueryClientProvider } from '@/core/utils/queryClient.js'
+
 import {
   useDeleteOptions,
   useGetOptions,

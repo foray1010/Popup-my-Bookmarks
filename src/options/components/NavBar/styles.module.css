@@ -16,7 +16,7 @@
   font:
     1.125rem 'Archivo Narrow',
     sans-serif;
-  composes: focus no-text-overflow from '../../../core/styles/composes.module.css';
+  composes: focus no-text-overflow from '@/core/styles/composes.module.css';
 
   &:is(:hover, .active) {
     &:nth-of-type(1) {

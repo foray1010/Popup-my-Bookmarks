@@ -255,6 +255,9 @@ const webpackConfig: Readonly<Configuration> = {
       '.cjs',
       '.json',
     ],
+    alias: {
+      '@': path.resolve(import.meta.dirname, 'src'),
+    },
   },
   watch: isDevelopmentBuild,
 }

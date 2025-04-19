@@ -1,14 +1,15 @@
 import { useMemo } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { OPTIONS } from '../../../core/constants/index.js'
-import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
-import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { OPTIONS } from '@/core/constants/index.js'
+import { BOOKMARK_TYPES } from '@/popup/modules/bookmarks/constants.js'
+import { useBookmarkTreesContext } from '@/popup/modules/bookmarks/contexts/bookmarkTrees.js'
 import type {
   BookmarkInfo,
   BookmarkTreeInfo,
-} from '../../modules/bookmarks/types.js'
-import { useOptions } from '../../modules/options.js'
+} from '@/popup/modules/bookmarks/types.js'
+import { useOptions } from '@/popup/modules/options.js'
+
 import { useDragAndDropContext } from '../dragAndDrop/index.js'
 import { useListNavigationContext } from '../listNavigation/index.js'
 

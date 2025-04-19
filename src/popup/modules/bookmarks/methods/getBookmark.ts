@@ -1,6 +1,7 @@
 import webExtension from 'webextension-polyfill'
 
-import { ROOT_ID } from '../../../../core/constants/index.js'
+import { ROOT_ID } from '@/core/constants/index.js'
+
 import { BOOKMARK_TYPES, NO_BOOKMARK_ID_PREFIX } from '../constants.js'
 import type { BookmarkInfo, BookmarkTreeInfo } from '../types.js'
 import {

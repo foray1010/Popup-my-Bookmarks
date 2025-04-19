@@ -3,8 +3,8 @@ import constate from 'constate'
 import type { ComponentType } from 'react'
 import webExtension from 'webextension-polyfill'
 
-import type { Options } from '../../core/types/options.js'
-import withProviders from '../../core/utils/withProviders.js'
+import type { Options } from '@/core/types/options.js'
+import withProviders from '@/core/utils/withProviders.js'
 
 const queryKey = 'options'
 

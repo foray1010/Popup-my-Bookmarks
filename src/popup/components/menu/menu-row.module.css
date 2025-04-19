@@ -1,5 +1,5 @@
 .main {
-  composes: list-item from '../../../core/styles/composes.module.css';
+  composes: list-item from '@/core/styles/composes.module.css';
 }
 
 .button {

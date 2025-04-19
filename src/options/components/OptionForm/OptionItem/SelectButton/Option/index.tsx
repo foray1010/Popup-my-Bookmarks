@@ -1,7 +1,8 @@
 import classNames from 'classix'
 import { type JSX, useRef } from 'react'
 
-import Button from '../../../../../../core/components/baseItems/Button/index.js'
+import Button from '@/core/components/baseItems/Button/index.js'
+
 import * as classes from './styles.module.css'
 
 type Props = Readonly<

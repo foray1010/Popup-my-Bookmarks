@@ -1,6 +1,6 @@
 import type { ValueOf } from 'type-fest'
 
-import { OPTIONS } from '../../core/constants/index.js'
+import { OPTIONS } from '@/core/constants/index.js'
 
 export const RoutePath = {
   Contributors: 'contributors',

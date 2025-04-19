@@ -1,7 +1,8 @@
 import classNames from 'classix'
 import type { ComponentProps } from 'react'
 
-import Input from '../../../../../core/components/baseItems/Input/index.js'
+import Input from '@/core/components/baseItems/Input/index.js'
+
 import * as classes from './styles.module.css'
 
 type RestInputProps = Readonly<

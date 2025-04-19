@@ -2,8 +2,9 @@ import classNames from 'classix'
 import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'
 
-import Button from '../../../core/components/baseItems/Button/index.js'
-import { RoutePath } from '../../constants/index.js'
+import Button from '@/core/components/baseItems/Button/index.js'
+import { RoutePath } from '@/options/constants/index.js'
+
 import { useNavigationContext } from '../navigationContext.js'
 import * as classes from './styles.module.css'
 

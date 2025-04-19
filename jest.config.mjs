@@ -5,6 +5,7 @@ const config = {
     '\\.css$': '<rootDir>/__mocks__/fileMock.ts',
     '\\.(png|webp)$': '<rootDir>/__mocks__/fileMock.ts',
     '\\.svg(\\?svgUse)*$': '<rootDir>/__mocks__/fileMock.ts',
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
   setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
   testEnvironment: 'jest-environment-jsdom',

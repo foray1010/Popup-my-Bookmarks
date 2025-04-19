@@ -7,7 +7,8 @@ import type {
   IntegerOptionConfig,
   SelectOptionConfig,
   StringOptionConfig,
-} from '../../../../core/types/options.js'
+} from '@/core/types/options.js'
+
 import InputNumber from './InputNumber/index.js'
 import InputSelect from './InputSelect/index.js'
 import SelectButton from './SelectButton/index.js'

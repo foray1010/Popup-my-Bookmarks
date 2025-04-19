@@ -1,11 +1,12 @@
 import { type ComponentProps, useMemo } from 'react'
 import webExtension from 'webextension-polyfill'
 
-import { OPTIONS } from '../../../core/constants/index.js'
-import { WindowId } from '../../constants/windows.js'
-import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo.js'
-import { createBookmarkAfterId } from '../../modules/bookmarks/methods/createBookmark.js'
-import { useOptions } from '../../modules/options.js'
+import { OPTIONS } from '@/core/constants/index.js'
+import { WindowId } from '@/popup/constants/windows.js'
+import useGetBookmarkInfo from '@/popup/modules/bookmarks/hooks/useGetBookmarkInfo.js'
+import { createBookmarkAfterId } from '@/popup/modules/bookmarks/methods/createBookmark.js'
+import { useOptions } from '@/popup/modules/options.js'
+
 import { FloatingWindow } from '../floatingWindow/index.js'
 import { KeyBindingsWindow } from '../keyBindings/index.js'
 import { useEditorContext } from './EditorContext.js'

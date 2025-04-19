@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react'
 import type { ValueOf } from 'type-fest'
 
-import type { OPTIONS } from '../../../core/constants/index.js'
-import type { OptionsConfig } from '../../../core/types/options.js'
-import getOptionsConfig from '../../../core/utils/getOptionsConfig.js'
-import { OPTION_TABLE_MAP } from '../../constants/index.js'
+import type { OPTIONS } from '@/core/constants/index.js'
+import type { OptionsConfig } from '@/core/types/options.js'
+import getOptionsConfig from '@/core/utils/getOptionsConfig.js'
+import { OPTION_TABLE_MAP } from '@/options/constants/index.js'
 import {
   useDeleteOptions,
   useGetOptions,
   useUpdateOptions,
-} from '../../hooks/options.js'
+} from '@/options/hooks/options.js'
+
 import { useNavigationContext } from '../navigationContext.js'
 import OptionForm from './OptionForm.js'
 

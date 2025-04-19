@@ -2,7 +2,8 @@
 
 import type { ValueOf } from 'type-fest'
 
-import { notNullish } from '../../src/core/utils/array.js'
+import { notNullish } from '@/core/utils/array.js'
+
 import { pick } from './utils/object.js'
 import { WebExtEventEmitter } from './utils/WebExtEventEmitter.js'
 

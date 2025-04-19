@@ -5,8 +5,9 @@ import {
   useRef,
 } from 'react'
 
-import Input from '../../../../../core/components/baseItems/Input/index.js'
-import Select from '../../../../../core/components/baseItems/Select/index.js'
+import Input from '@/core/components/baseItems/Input/index.js'
+import Select from '@/core/components/baseItems/Select/index.js'
+
 import * as classes from './styles.module.css'
 
 type RestInputProps = Readonly<

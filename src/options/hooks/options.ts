@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import webExtension from 'webextension-polyfill'
 
-import type { Options } from '../../core/types/options.js'
+import type { Options } from '@/core/types/options.js'
 
 const queryKey = 'options'
 

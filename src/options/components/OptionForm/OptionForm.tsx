@@ -2,10 +2,11 @@ import { useForm } from '@tanstack/react-form'
 import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'
 
-import ActionlessForm from '../../../core/components/baseItems/ActionlessForm/index.js'
-import Button from '../../../core/components/baseItems/Button/index.js'
-import type { OPTIONS } from '../../../core/constants/index.js'
-import type { Options, OptionsConfig } from '../../../core/types/options.js'
+import ActionlessForm from '@/core/components/baseItems/ActionlessForm/index.js'
+import Button from '@/core/components/baseItems/Button/index.js'
+import type { OPTIONS } from '@/core/constants/index.js'
+import type { Options, OptionsConfig } from '@/core/types/options.js'
+
 import * as classes from './option-form.module.css'
 import OptionItem from './OptionItem/index.js'
 

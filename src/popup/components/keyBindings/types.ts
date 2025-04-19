@@ -1,6 +1,6 @@
 import type { ValueOf } from 'type-fest'
 
-import type { WindowId } from '../../constants/windows.js'
+import type { WindowId } from '@/popup/constants/windows.js'
 
 export type KeyDefinition = string | Readonly<RegExp>
 

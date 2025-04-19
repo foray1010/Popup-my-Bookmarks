@@ -3,7 +3,8 @@ import { useCallback, useState } from 'react'
 import type { ValueOf } from 'type-fest'
 import useListener from 'use-typed-event-listener'
 
-import type { WindowId } from '../../constants/windows.js'
+import type { WindowId } from '@/popup/constants/windows.js'
+
 import type { KeyBindingEventCallback, KeyDefinition } from './types.js'
 
 function useActiveWindowState() {

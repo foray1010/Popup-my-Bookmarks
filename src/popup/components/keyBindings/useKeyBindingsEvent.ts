@@ -1,6 +1,7 @@
 import { useDeepCompareEffect } from 'use-deep-compare'
 
-import { useLatestRef } from '../../../core/hooks/useLatestRef.js'
+import { useLatestRef } from '@/core/hooks/useLatestRef.js'
+
 import { useKeyBindingsContext } from './KeyBindingsContext.js'
 import type { KeyBindingMeta } from './types.js'
 

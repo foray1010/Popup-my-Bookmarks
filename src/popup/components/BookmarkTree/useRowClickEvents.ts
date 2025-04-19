@@ -1,22 +1,23 @@
 import { type MouseEvent, useMemo } from 'react'
 
-import { OPTIONS } from '../../../core/constants/index.js'
-import { OPEN_IN_TYPES } from '../../constants/menu.js'
-import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
-import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { OPTIONS } from '@/core/constants/index.js'
+import { OPEN_IN_TYPES } from '@/popup/constants/menu.js'
+import { BOOKMARK_TYPES } from '@/popup/modules/bookmarks/constants.js'
+import { useBookmarkTreesContext } from '@/popup/modules/bookmarks/contexts/bookmarkTrees.js'
 import {
   openBookmarksInBrowser,
   openFolderInBrowser,
-} from '../../modules/bookmarks/methods/openBookmark.js'
+} from '@/popup/modules/bookmarks/methods/openBookmark.js'
 import type {
   BookmarkInfo,
   BookmarkTreeInfo,
-} from '../../modules/bookmarks/types.js'
+} from '@/popup/modules/bookmarks/types.js'
 import {
   getClickOptionNameByEvent,
   mapOptionToOpenBookmarkProps,
-} from '../../modules/bookmarks/utils/clickBookmark.js'
-import { useOptions } from '../../modules/options.js'
+} from '@/popup/modules/bookmarks/utils/clickBookmark.js'
+import { useOptions } from '@/popup/modules/options.js'
+
 import { useMenuContext } from '../menu/index.js'
 
 export default function useRowClickEvents({

@@ -4,8 +4,8 @@ import type {
 } from 'react'
 import type { ValueOf } from 'type-fest'
 
-import { OPTIONS } from '../../../../core/constants/index.js'
-import { OPEN_IN_TYPES } from '../../../constants/menu.js'
+import { OPTIONS } from '@/core/constants/index.js'
+import { OPEN_IN_TYPES } from '@/popup/constants/menu.js'
 
 export function getClickOptionNameByEvent(
   evt: Readonly<

@@ -1,10 +1,11 @@
 import { type ReactNode, useMemo } from 'react'
 
-import { OPTIONS } from '../../../core/constants/index.js'
-import { WindowId } from '../../constants/windows.js'
-import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
-import { LastPositionsProvider } from '../../modules/lastPositions/index.js'
-import { useOptions } from '../../modules/options.js'
+import { OPTIONS } from '@/core/constants/index.js'
+import { WindowId } from '@/popup/constants/windows.js'
+import { useBookmarkTreesContext } from '@/popup/modules/bookmarks/contexts/bookmarkTrees.js'
+import { LastPositionsProvider } from '@/popup/modules/lastPositions/index.js'
+import { useOptions } from '@/popup/modules/options.js'
+
 import { KeyBindingsWindow } from '../keyBindings/index.js'
 import BookmarkTrees from './BookmarkTrees.js'
 import withDragAndDropEvents from './withDragAndDropEvents.js'

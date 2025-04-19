@@ -1,7 +1,8 @@
 import { type PropsWithChildren, useEffect, useRef } from 'react'
 import type { ValueOf } from 'type-fest'
 
-import type { WindowId } from '../../constants/windows.js'
+import type { WindowId } from '@/popup/constants/windows.js'
+
 import { useKeyBindingsContext } from './KeyBindingsContext.js'
 import * as classes from './KeyBindingsWindow.module.css'
 

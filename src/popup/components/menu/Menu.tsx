@@ -1,6 +1,7 @@
 import type { MouseEventHandler } from 'react'
 
-import PlainList from '../../../core/components/baseItems/PlainList/index.js'
+import PlainList from '@/core/components/baseItems/PlainList/index.js'
+
 import * as classes from './menu.module.css'
 import MenuRow from './MenuRow.js'
 import type { MenuPattern } from './types.js'

@@ -12,14 +12,15 @@ import {
   useState,
 } from 'react'
 
-import PlainList from '../../../core/components/baseItems/PlainList/index.js'
-import { OPTIONS } from '../../../core/constants/index.js'
-import { MAX_POPUP_HEIGHT } from '../../constants/ui.js'
+import PlainList from '@/core/components/baseItems/PlainList/index.js'
+import { OPTIONS } from '@/core/constants/index.js'
+import { MAX_POPUP_HEIGHT } from '@/popup/constants/ui.js'
 import type {
   BookmarkInfo,
   BookmarkTreeInfo,
-} from '../../modules/bookmarks/types.js'
-import { useOptions } from '../../modules/options.js'
+} from '@/popup/modules/bookmarks/types.js'
+import { useOptions } from '@/popup/modules/options.js'
+
 import { type ResponseEvent, useDragZoneEvents } from '../dragAndDrop/index.js'
 import * as classes from './bookmark-tree.module.css'
 import BookmarkRow from './BookmarkRow/index.js'

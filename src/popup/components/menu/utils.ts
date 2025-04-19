@@ -1,5 +1,6 @@
-import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
-import type { BookmarkInfo } from '../../modules/bookmarks/types.js'
+import { BOOKMARK_TYPES } from '@/popup/modules/bookmarks/constants.js'
+import type { BookmarkInfo } from '@/popup/modules/bookmarks/types.js'
+
 import { MenuItem } from './constants.js'
 import type { MenuPattern } from './types.js'
 

@@ -2,9 +2,10 @@ import { useForm } from '@tanstack/react-form'
 import { type CSSProperties, useId } from 'react'
 import webExtension from 'webextension-polyfill'
 
-import ActionlessForm from '../../../core/components/baseItems/ActionlessForm/index.js'
-import Button from '../../../core/components/baseItems/Button/index.js'
-import Input from '../../../core/components/baseItems/Input/index.js'
+import ActionlessForm from '@/core/components/baseItems/ActionlessForm/index.js'
+import Button from '@/core/components/baseItems/Button/index.js'
+import Input from '@/core/components/baseItems/Input/index.js'
+
 import * as classes from './editor-form.module.css'
 
 type Props = Readonly<{

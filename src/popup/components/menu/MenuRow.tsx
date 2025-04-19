@@ -3,7 +3,8 @@ import type { MouseEventHandler } from 'react'
 import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'
 
-import StylelessButton from '../../../core/components/baseItems/StylelessButton/index.js'
+import StylelessButton from '@/core/components/baseItems/StylelessButton/index.js'
+
 import type { MenuItem } from './constants.js'
 import * as classes from './menu-row.module.css'
 

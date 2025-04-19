@@ -1,5 +1,6 @@
-import { ROOT_ID } from '../../../../core/constants/index.js'
-import folderIcon from '../../../images/folder.svg'
+import { ROOT_ID } from '@/core/constants/index.js'
+import folderIcon from '@/popup/images/folder.svg'
+
 import { BOOKMARK_TYPES, SEPARATE_THIS_URL } from '../constants.js'
 import type { BookmarkInfo } from '../types.js'
 import { faviconUrl } from './faviconUrl.js'

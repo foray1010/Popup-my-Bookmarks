@@ -7,7 +7,7 @@
 .cancel-button {
   flex-shrink: 0;
   color: var(--highlight-level4);
-  composes: focus from '../../../core/styles/composes.module.css';
+  composes: focus from '@/core/styles/composes.module.css';
 
   &:is(:hover, :active) {
     color: var(--highlight-level5);

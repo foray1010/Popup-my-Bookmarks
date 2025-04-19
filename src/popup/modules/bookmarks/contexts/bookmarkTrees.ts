@@ -9,8 +9,9 @@ import {
 import { useDebouncedCallback } from 'use-debounce'
 import webExtension from 'webextension-polyfill'
 
-import { OPTIONS } from '../../../../core/constants/index.js'
-import { useLatestRef } from '../../../../core/hooks/useLatestRef.js'
+import { OPTIONS } from '@/core/constants/index.js'
+import { useLatestRef } from '@/core/hooks/useLatestRef.js'
+
 import { getLocalStorage } from '../../localStorage.js'
 import { useOptions } from '../../options.js'
 import { BOOKMARK_TYPES } from '../constants.js'

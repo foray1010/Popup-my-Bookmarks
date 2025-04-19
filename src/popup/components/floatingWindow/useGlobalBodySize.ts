@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react'
 
-import { notNullish } from '../../../core/utils/array.js'
+import { notNullish } from '@/core/utils/array.js'
+
 import {
   type BodySize,
   useFloatingWindowContext,

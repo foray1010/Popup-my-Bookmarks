@@ -1,9 +1,10 @@
 import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'
 
-import { OPTIONS } from '../../../../core/constants/index.js'
-import { notNullish } from '../../../../core/utils/array.js'
-import { OPEN_IN_TYPES } from '../../../constants/menu.js'
+import { OPTIONS } from '@/core/constants/index.js'
+import { notNullish } from '@/core/utils/array.js'
+import { OPEN_IN_TYPES } from '@/popup/constants/menu.js'
+
 import { getOptions } from '../../options.js'
 import { BOOKMARK_TYPES } from '../constants.js'
 import { getBookmarkInfo, getBookmarkTreeInfo } from './getBookmark.js'

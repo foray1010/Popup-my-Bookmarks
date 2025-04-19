@@ -1,11 +1,12 @@
 import { type MouseEvent, useMemo } from 'react'
 
-import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
-import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { BOOKMARK_TYPES } from '@/popup/modules/bookmarks/constants.js'
+import { useBookmarkTreesContext } from '@/popup/modules/bookmarks/contexts/bookmarkTrees.js'
 import type {
   BookmarkInfo,
   BookmarkTreeInfo,
-} from '../../modules/bookmarks/types.js'
+} from '@/popup/modules/bookmarks/types.js'
+
 import type { ResponseEvent } from '../dragAndDrop/index.js'
 
 export default function useRowDragEvents({

@@ -1,17 +1,18 @@
 import type { ComponentType } from 'react'
 
-import isMac from '../../../core/utils/isMac.js'
-import withProviders from '../../../core/utils/withProviders.js'
-import { WindowId } from '../../constants/windows.js'
-import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
-import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
-import { openBookmarksInBrowser } from '../../modules/bookmarks/methods/openBookmark.js'
+import isMac from '@/core/utils/isMac.js'
+import withProviders from '@/core/utils/withProviders.js'
+import { WindowId } from '@/popup/constants/windows.js'
+import { BOOKMARK_TYPES } from '@/popup/modules/bookmarks/constants.js'
+import { useBookmarkTreesContext } from '@/popup/modules/bookmarks/contexts/bookmarkTrees.js'
+import { openBookmarksInBrowser } from '@/popup/modules/bookmarks/methods/openBookmark.js'
 import {
   getClickOptionNameByEvent,
   mapOptionToOpenBookmarkProps,
-} from '../../modules/bookmarks/utils/clickBookmark.js'
-import { useOptions } from '../../modules/options.js'
-import getLastMapKey from '../../utils/getLastMapKey.js'
+} from '@/popup/modules/bookmarks/utils/clickBookmark.js'
+import { useOptions } from '@/popup/modules/options.js'
+import getLastMapKey from '@/popup/utils/getLastMapKey.js'
+
 import { useKeyBindingsEvent } from '../keyBindings/index.js'
 import {
   ListNavigationProvider,

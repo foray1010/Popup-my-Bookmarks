@@ -30,5 +30,5 @@
   font-family: 'Archivo Narrow', system-ui, sans-serif;
   font-size: 1.375rem;
   font-weight: normal;
-  composes: no-text-overflow from '../../../core/styles/composes.module.css';
+  composes: no-text-overflow from '@/core/styles/composes.module.css';
 }

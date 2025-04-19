@@ -1,5 +1,5 @@
 .main {
-  composes: focus from '../../../styles/composes.module.css';
+  composes: focus from '@/core/styles/composes.module.css';
 }
 
 .text-input {

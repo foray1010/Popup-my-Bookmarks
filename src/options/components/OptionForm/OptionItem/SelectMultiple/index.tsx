@@ -1,7 +1,8 @@
 import type { ComponentProps } from 'react'
 
-import Input from '../../../../../core/components/baseItems/Input/index.js'
-import PlainList from '../../../../../core/components/baseItems/PlainList/index.js'
+import Input from '@/core/components/baseItems/Input/index.js'
+import PlainList from '@/core/components/baseItems/PlainList/index.js'
+
 import * as classes from './styles.module.css'
 
 type RestInputProps = Readonly<

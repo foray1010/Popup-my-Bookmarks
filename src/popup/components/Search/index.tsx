@@ -1,7 +1,8 @@
 import { startTransition, useRef, useState } from 'react'
 
-import { WindowId } from '../../constants/windows.js'
-import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
+import { WindowId } from '@/popup/constants/windows.js'
+import { useBookmarkTreesContext } from '@/popup/modules/bookmarks/contexts/bookmarkTrees.js'
+
 import { useKeyBindingsEvent } from '../keyBindings/index.js'
 import SearchInput from './SearchInput.js'
 

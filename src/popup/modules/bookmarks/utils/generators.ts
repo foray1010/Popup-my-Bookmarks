@@ -1,6 +1,7 @@
 import webExtension from 'webextension-polyfill'
 
-import folderIcon from '../../../images/folder.svg'
+import folderIcon from '@/popup/images/folder.svg'
+
 import {
   BOOKMARK_TYPES,
   DRAG_INDICATOR_ID,

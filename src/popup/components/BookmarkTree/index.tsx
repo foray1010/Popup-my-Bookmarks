@@ -1,10 +1,11 @@
 import { useCallback, useEffect } from 'react'
 
-import { OPTIONS } from '../../../core/constants/index.js'
-import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
-import type { BookmarkTreeInfo } from '../../modules/bookmarks/types.js'
-import { useRememberLastPosition } from '../../modules/lastPositions/index.js'
-import { useOptions } from '../../modules/options.js'
+import { OPTIONS } from '@/core/constants/index.js'
+import { useBookmarkTreesContext } from '@/popup/modules/bookmarks/contexts/bookmarkTrees.js'
+import type { BookmarkTreeInfo } from '@/popup/modules/bookmarks/types.js'
+import { useRememberLastPosition } from '@/popup/modules/lastPositions/index.js'
+import { useOptions } from '@/popup/modules/options.js'
+
 import Backdrop from '../Backdrop/index.js'
 import { useDragAndDropContext } from '../dragAndDrop/index.js'
 import { useListNavigationContext } from '../listNavigation/index.js'

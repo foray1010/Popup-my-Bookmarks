@@ -4,9 +4,10 @@ import { StrictMode } from 'react'
 import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'
 
-import type { OPTIONS } from '../core/constants/index.js'
-import createAndRenderRoot from '../core/utils/createAndRenderRoot.js'
-import getOptionsConfig from '../core/utils/getOptionsConfig.js'
+import type { OPTIONS } from '@/core/constants/index.js'
+import createAndRenderRoot from '@/core/utils/createAndRenderRoot.js'
+import getOptionsConfig from '@/core/utils/getOptionsConfig.js'
+
 import App from './components/App/index.js'
 import { getOptions } from './modules/options.js'
 

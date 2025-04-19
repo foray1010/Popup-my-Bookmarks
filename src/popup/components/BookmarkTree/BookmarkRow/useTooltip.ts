@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
-import { ROOT_ID } from '../../../../core/constants/index.js'
-import { getBookmarkInfo } from '../../../modules/bookmarks/methods/getBookmark.js'
-import type { BookmarkInfo } from '../../../modules/bookmarks/types.js'
+import { ROOT_ID } from '@/core/constants/index.js'
+import { getBookmarkInfo } from '@/popup/modules/bookmarks/methods/getBookmark.js'
+import type { BookmarkInfo } from '@/popup/modules/bookmarks/types.js'
 
 async function getBreadcrumbs(
   id: string | undefined,

@@ -2,27 +2,28 @@ import { useCallback, useEffect, useMemo } from 'react'
 import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'
 
-import isMac from '../../../core/utils/isMac.js'
-import withProviders from '../../../core/utils/withProviders.js'
-import { OPEN_IN_TYPES } from '../../constants/menu.js'
-import { WindowId } from '../../constants/windows.js'
-import { BOOKMARK_TYPES } from '../../modules/bookmarks/constants.js'
-import { useBookmarkTreesContext } from '../../modules/bookmarks/contexts/bookmarkTrees.js'
-import useGetBookmarkInfo from '../../modules/bookmarks/hooks/useGetBookmarkInfo.js'
-import { recursiveCopyBookmarks } from '../../modules/bookmarks/methods/copyBookmark.js'
+import isMac from '@/core/utils/isMac.js'
+import withProviders from '@/core/utils/withProviders.js'
+import { OPEN_IN_TYPES } from '@/popup/constants/menu.js'
+import { WindowId } from '@/popup/constants/windows.js'
+import { BOOKMARK_TYPES } from '@/popup/modules/bookmarks/constants.js'
+import { useBookmarkTreesContext } from '@/popup/modules/bookmarks/contexts/bookmarkTrees.js'
+import useGetBookmarkInfo from '@/popup/modules/bookmarks/hooks/useGetBookmarkInfo.js'
+import { recursiveCopyBookmarks } from '@/popup/modules/bookmarks/methods/copyBookmark.js'
 import {
   bookmarkCurrentPage,
   createSeparator,
-} from '../../modules/bookmarks/methods/createBookmark.js'
+} from '@/popup/modules/bookmarks/methods/createBookmark.js'
 import {
   openBookmarksInBrowser,
   openFolderInBrowser,
-} from '../../modules/bookmarks/methods/openBookmark.js'
-import sortBookmarksByName from '../../modules/bookmarks/methods/sortBookmarksByName.js'
+} from '@/popup/modules/bookmarks/methods/openBookmark.js'
+import sortBookmarksByName from '@/popup/modules/bookmarks/methods/sortBookmarksByName.js'
 import {
   ClipboardAction,
   useClipboardContext,
-} from '../../modules/clipboard.js'
+} from '@/popup/modules/clipboard.js'
+
 import { useEditorContext } from '../editor/index.js'
 import { FloatingWindow } from '../floatingWindow/index.js'
 import { KeyBindingsWindow, useKeyBindingsEvent } from '../keyBindings/index.js'

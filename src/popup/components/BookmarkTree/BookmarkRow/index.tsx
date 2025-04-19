@@ -9,8 +9,9 @@ import {
 } from 'react'
 import type { Merge } from 'type-fest'
 
-import { BOOKMARK_TYPES } from '../../../modules/bookmarks/constants.js'
-import type { BookmarkInfo } from '../../../modules/bookmarks/types.js'
+import { BOOKMARK_TYPES } from '@/popup/modules/bookmarks/constants.js'
+import type { BookmarkInfo } from '@/popup/modules/bookmarks/types.js'
+
 import {
   DragAndDropConsumer,
   type ResponseEvent,

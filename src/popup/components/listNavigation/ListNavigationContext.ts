@@ -1,7 +1,7 @@
 import constate from 'constate'
 import { useCallback, useState } from 'react'
 
-import deleteFromMap from '../../utils/deleteFromMap.js'
+import deleteFromMap from '@/popup/utils/deleteFromMap.js'
 
 function useListNavigation() {
   const [highlightedIndices, setHighlightedIndices] = useState<

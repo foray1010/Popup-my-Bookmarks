@@ -2,8 +2,9 @@ import './globals.module.css'
 
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-import { ReactQueryClientProvider } from '../../../core/utils/queryClient.js'
-import withProviders from '../../../core/utils/withProviders.js'
+import { ReactQueryClientProvider } from '@/core/utils/queryClient.js'
+import withProviders from '@/core/utils/withProviders.js'
+
 import Donate from '../Donate.js'
 import NavBar from '../NavBar/index.js'
 import { NavigationProvider } from '../navigationContext.js'
