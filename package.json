@@ -92,7 +92,7 @@
     "swc-loader": "0.2.6",
     "terser-webpack-plugin": "5.3.14",
     "type-coverage": "2.29.7",
-    "type-fest": "4.40.0",
+    "type-fest": "4.40.1",
     "typed-css-modules": "0.9.1",
     "typescript": "5.8.3",
     "webpack": "5.99.6",
