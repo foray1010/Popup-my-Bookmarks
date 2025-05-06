@@ -20,7 +20,7 @@
     "@tanstack/react-virtual": "3.13.6",
     "classix": "2.2.2",
     "constate": "3.3.3",
-    "core-js": "3.41.0",
+    "core-js": "3.42.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "use-debounce": "10.0.4",
