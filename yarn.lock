@@ -3116,7 +3116,7 @@ __metadata:
     lint-staged: "npm:15.5.2"
     mini-css-extract-plugin: "npm:2.9.2"
     node-notifier: "npm:10.0.1"
-    postcss: "npm:8.5.3"
+    postcss: "npm:8.5.4"
     postcss-loader: "npm:8.1.1"
     postcss-normalize: "npm:13.0.1"
     prettier: "npm:3.5.3"
@@ -10372,7 +10372,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.0.0, nanoid@npm:^3.3.8":
+"nanoid@npm:^3.0.0, nanoid@npm:^3.3.11, nanoid@npm:^3.3.8":
   version: 3.3.11
   resolution: "nanoid@npm:3.3.11"
   bin:
@@ -11211,7 +11211,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:8.5.3, postcss@npm:^8.0.0, postcss@npm:^8.4.32, postcss@npm:^8.4.33, postcss@npm:^8.4.47, postcss@npm:^8.5.3":
+"postcss@npm:8.5.4":
+  version: 8.5.4
+  resolution: "postcss@npm:8.5.4"
+  dependencies:
+    nanoid: "npm:^3.3.11"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10c0/0feff648614a834f7cd5396ea6b05b658ca0507e10a4eaad03b56c348f6aec93f42a885fc1b30522630c6a7e49ae53b38a061e3cba526f2d9857afbe095a22bb
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.0.0, postcss@npm:^8.4.32, postcss@npm:^8.4.33, postcss@npm:^8.4.47, postcss@npm:^8.5.3":
   version: 8.5.3
   resolution: "postcss@npm:8.5.3"
   dependencies:
