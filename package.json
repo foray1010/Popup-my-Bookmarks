@@ -101,7 +101,7 @@
     "yaml-loader": "0.8.1",
     "zip-webpack-plugin": "4.0.3"
   },
-  "packageManager": "yarn@4.9.1",
+  "packageManager": "yarn@4.9.2",
   "engines": {
     "node": ">=22.11.0"
   }
