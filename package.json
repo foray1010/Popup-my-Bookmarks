@@ -41,7 +41,7 @@
     "@size-limit/file": "11.2.0",
     "@svg-use/react": "1.0.0",
     "@svg-use/webpack": "1.0.0",
-    "@swc/core": "1.12.1",
+    "@swc/core": "1.12.5",
     "@swc/jest": "0.2.38",
     "@tanstack/eslint-plugin-query": "5.78.0",
     "@testing-library/dom": "10.4.0",
