@@ -23,7 +23,7 @@
     "core-js": "3.43.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "use-debounce": "10.0.4",
+    "use-debounce": "10.0.5",
     "use-deep-compare": "1.3.0",
     "use-resize-observer": "9.1.0",
     "use-typed-event-listener": "4.0.2",
