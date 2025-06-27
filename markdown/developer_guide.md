@@ -47,7 +47,6 @@
    ```
 
    To download the latest locale files from transifex
-
    - `build/store.md` - Description for Chrome Web Store
    - `README.md` - Description for GitHub
 
@@ -58,6 +57,5 @@
    ```
 
    To generate markdown files
-
    - `build/store.md` - Description for Chrome Web Store
    - `README.md` - Description for GitHub
