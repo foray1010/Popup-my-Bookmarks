@@ -83,7 +83,6 @@ Please visit following branches for the legacy versions that support older versi
    ```
 
    To download the latest locale files from transifex
-
    - `build/store.md` - Description for Chrome Web Store
    - `README.md` - Description for GitHub
 
@@ -94,7 +93,6 @@ Please visit following branches for the legacy versions that support older versi
    ```
 
    To generate markdown files
-
    - `build/store.md` - Description for Chrome Web Store
    - `README.md` - Description for GitHub
 
