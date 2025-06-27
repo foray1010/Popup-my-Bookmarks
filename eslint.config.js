@@ -4,7 +4,7 @@ import {
   eslintReactConfig,
 } from '@foray1010/eslint-config'
 import eslintPluginTanstackQuery from '@tanstack/eslint-plugin-query'
-// eslint-disable-next-line import-x/extensions, import-x/no-unresolved
+// eslint-disable-next-line import-x/extensions
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 const reactFiles = ['__mocks__/**', 'src/**']
