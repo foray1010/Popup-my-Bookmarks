@@ -15,8 +15,8 @@
   "dependencies": {
     "@fontsource/archivo-narrow": "5.2.6",
     "@tanstack/react-form": "1.12.4",
-    "@tanstack/react-query": "5.81.4",
-    "@tanstack/react-query-devtools": "5.81.4",
+    "@tanstack/react-query": "5.81.5",
+    "@tanstack/react-query-devtools": "5.81.5",
     "@tanstack/react-virtual": "3.13.12",
     "classix": "2.2.2",
     "constate": "3.3.3",
