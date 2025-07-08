@@ -88,7 +88,7 @@
     "sharp": "0.34.2",
     "size-limit": "11.2.0",
     "stylelint": "16.21.1",
-    "svgo": "3.3.2",
+    "svgo": "4.0.0",
     "swc-loader": "0.2.6",
     "terser-webpack-plugin": "5.3.14",
     "type-coverage": "2.29.7",
