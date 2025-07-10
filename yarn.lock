@@ -1980,12 +1980,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/form-core@npm:1.12.4":
-  version: 1.12.4
-  resolution: "@tanstack/form-core@npm:1.12.4"
+"@tanstack/form-core@npm:1.14.0":
+  version: 1.14.0
+  resolution: "@tanstack/form-core@npm:1.14.0"
   dependencies:
-    "@tanstack/store": "npm:^0.7.1"
-  checksum: 10c0/9569b786eb84caf7da3145126f7c08035c5f98c04420caecfa6b5de236b64553e34d8a96290e6371bd11bb9a9069dbd68af706342da5c14390d46d9606d893cd
+    "@tanstack/store": "npm:^0.7.2"
+  checksum: 10c0/6995af2324fe69f9b7cad1a81574c30af6eaeb7eafd0234dd985f1d27650b2c28c2bf95120f8fae738a8856382b1d1a3b5efdb0e9b6ced19e474ec2f96a1f44d
   languageName: node
   linkType: hard
 
@@ -2003,12 +2003,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-form@npm:1.12.4":
-  version: 1.12.4
-  resolution: "@tanstack/react-form@npm:1.12.4"
+"@tanstack/react-form@npm:1.14.0":
+  version: 1.14.0
+  resolution: "@tanstack/react-form@npm:1.14.0"
   dependencies:
-    "@tanstack/form-core": "npm:1.12.4"
-    "@tanstack/react-store": "npm:^0.7.1"
+    "@tanstack/form-core": "npm:1.14.0"
+    "@tanstack/react-store": "npm:^0.7.3"
     decode-formdata: "npm:^0.9.0"
     devalue: "npm:^5.1.1"
   peerDependencies:
@@ -2020,7 +2020,7 @@ __metadata:
       optional: true
     vinxi:
       optional: true
-  checksum: 10c0/9197e8227d3b43abbf1e760d3f443c5abedaa31319b171644e4e9bd99f93774eb4c48deb902f6664b23613c1efb5541e8f7da2dc5b342fb9216c2c0b24e2db6e
+  checksum: 10c0/6547118e4ee695ab569d037732fec041f45d0e0f8a89d21eee9a9f3d97742222e8ff0ae3877b5eecf123050cc2e663414c9eb36c3a30f95ec772c8b8cba4940e
   languageName: node
   linkType: hard
 
@@ -2047,16 +2047,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-store@npm:^0.7.1":
-  version: 0.7.1
-  resolution: "@tanstack/react-store@npm:0.7.1"
+"@tanstack/react-store@npm:^0.7.3":
+  version: 0.7.3
+  resolution: "@tanstack/react-store@npm:0.7.3"
   dependencies:
-    "@tanstack/store": "npm:0.7.1"
+    "@tanstack/store": "npm:0.7.2"
     use-sync-external-store: "npm:^1.5.0"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/50a64f615f448fd323eb968237c91faae1a3c3cb0ed4b52d3b6a620723dab10437ae99d94bd9e1ff03bd3ad1d4d75cadc5fee042ab6d9b3c47f5972716cac680
+  checksum: 10c0/3487bdf25d43e52f2230f195c4e9266c270af44acbaa7665b87d7d1d809560aa1e84cef8065b0acbe3ca5745a616cd2be3d7bab69c06de6ff57e8eef88ee8499
   languageName: node
   linkType: hard
 
@@ -2072,10 +2072,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/store@npm:0.7.1, @tanstack/store@npm:^0.7.1":
-  version: 0.7.1
-  resolution: "@tanstack/store@npm:0.7.1"
-  checksum: 10c0/bc1ebf0e8ced2717ec89b7bfac94da436fd23b0ea485b7805b594bee6c6870d67e1184efd5f140cd8d64d9192ee09adad155abea9a2f5bc1ba96f21645299cd8
+"@tanstack/store@npm:0.7.2, @tanstack/store@npm:^0.7.2":
+  version: 0.7.2
+  resolution: "@tanstack/store@npm:0.7.2"
+  checksum: 10c0/7b9764d156365d0a65b8be87fc67dcad16a45dd260b43e7c90162b39a940a1c764701e6b5f9e5e1e34ec77c86348332db343c658901f67972119d6f1ddf58f1f
   languageName: node
   linkType: hard
 
@@ -3124,7 +3124,7 @@ __metadata:
     "@swc/core": "npm:1.12.7"
     "@swc/jest": "npm:0.2.38"
     "@tanstack/eslint-plugin-query": "npm:5.81.2"
-    "@tanstack/react-form": "npm:1.12.4"
+    "@tanstack/react-form": "npm:1.14.0"
     "@tanstack/react-query": "npm:5.81.5"
     "@tanstack/react-query-devtools": "npm:5.81.5"
     "@tanstack/react-virtual": "npm:3.13.12"
