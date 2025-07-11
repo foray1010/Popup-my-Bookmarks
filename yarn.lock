@@ -2003,9 +2003,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-form@npm:1.14.0":
-  version: 1.14.0
-  resolution: "@tanstack/react-form@npm:1.14.0"
+"@tanstack/react-form@npm:1.14.1":
+  version: 1.14.1
+  resolution: "@tanstack/react-form@npm:1.14.1"
   dependencies:
     "@tanstack/form-core": "npm:1.14.0"
     "@tanstack/react-store": "npm:^0.7.3"
@@ -2020,7 +2020,7 @@ __metadata:
       optional: true
     vinxi:
       optional: true
-  checksum: 10c0/6547118e4ee695ab569d037732fec041f45d0e0f8a89d21eee9a9f3d97742222e8ff0ae3877b5eecf123050cc2e663414c9eb36c3a30f95ec772c8b8cba4940e
+  checksum: 10c0/aba9dc9cc24feb437eecdf076ab9073cee7bb2bfb304097e678b66ded46918c8b6adbe5f1e40a56c388da92893d76d97b8b401911376eff6288a2115fbae887c
   languageName: node
   linkType: hard
 
@@ -3124,7 +3124,7 @@ __metadata:
     "@swc/core": "npm:1.12.7"
     "@swc/jest": "npm:0.2.38"
     "@tanstack/eslint-plugin-query": "npm:5.81.2"
-    "@tanstack/react-form": "npm:1.14.0"
+    "@tanstack/react-form": "npm:1.14.1"
     "@tanstack/react-query": "npm:5.81.5"
     "@tanstack/react-query-devtools": "npm:5.81.5"
     "@tanstack/react-virtual": "npm:3.13.12"
