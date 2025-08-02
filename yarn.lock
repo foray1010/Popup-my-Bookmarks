@@ -2023,12 +2023,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/form-core@npm:1.14.0":
-  version: 1.14.0
-  resolution: "@tanstack/form-core@npm:1.14.0"
+"@tanstack/form-core@npm:1.15.1":
+  version: 1.15.1
+  resolution: "@tanstack/form-core@npm:1.15.1"
   dependencies:
     "@tanstack/store": "npm:^0.7.2"
-  checksum: 10c0/6995af2324fe69f9b7cad1a81574c30af6eaeb7eafd0234dd985f1d27650b2c28c2bf95120f8fae738a8856382b1d1a3b5efdb0e9b6ced19e474ec2f96a1f44d
+  checksum: 10c0/775a7bab73b4fc70a7680ed4f199f7f7eeeeab5a253887426a9459a4640b6184212c29cb37fb09c834bf1b2558db22e8c3b048ef14f02047e6d8d6c28d1041b7
   languageName: node
   linkType: hard
 
@@ -2046,11 +2046,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-form@npm:1.14.1":
-  version: 1.14.1
-  resolution: "@tanstack/react-form@npm:1.14.1"
+"@tanstack/react-form@npm:1.15.1":
+  version: 1.15.1
+  resolution: "@tanstack/react-form@npm:1.15.1"
   dependencies:
-    "@tanstack/form-core": "npm:1.14.0"
+    "@tanstack/form-core": "npm:1.15.1"
     "@tanstack/react-store": "npm:^0.7.3"
     decode-formdata: "npm:^0.9.0"
     devalue: "npm:^5.1.1"
@@ -2063,7 +2063,7 @@ __metadata:
       optional: true
     vinxi:
       optional: true
-  checksum: 10c0/aba9dc9cc24feb437eecdf076ab9073cee7bb2bfb304097e678b66ded46918c8b6adbe5f1e40a56c388da92893d76d97b8b401911376eff6288a2115fbae887c
+  checksum: 10c0/30f3c3373e25526d4749ef51db88a47b65263f9d129d102042583f9d863818751b17118f4cb79234df434aab1b6aedd57c51855dd7d39fcb49d559779d9e5776
   languageName: node
   linkType: hard
 
@@ -3168,7 +3168,7 @@ __metadata:
     "@swc/core": "npm:1.12.14"
     "@swc/jest": "npm:0.2.39"
     "@tanstack/eslint-plugin-query": "npm:5.81.2"
-    "@tanstack/react-form": "npm:1.14.1"
+    "@tanstack/react-form": "npm:1.15.1"
     "@tanstack/react-query": "npm:5.83.0"
     "@tanstack/react-query-devtools": "npm:5.83.0"
     "@tanstack/react-virtual": "npm:3.13.12"
