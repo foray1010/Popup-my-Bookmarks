@@ -28,7 +28,7 @@ tcm := $(bin_dir)/tcm
 rspack := node $(bin_dir)/rspack
 
 build-css-types:
-	$(tcm) $(src_dir)
+	$(tcm) $(src_dir) --color | sed "s|$(CURDIR)/||g"
 .PHONY: build-css-types
 
 build-prod: build-css-types
@@ -84,7 +84,7 @@ type-check: build-css-types # type check by tsc
 .PHONY: type-check
 
 type-coverage: build-css-types # check type coverage
-	$(bin_dir)/type-coverage --strict --at-least 99 --detail -- $$(find $(src_dir) -name "*.ts" -o -name "*.tsx")
+	$(bin_dir)/type-coverage --strict --at-least 99 --detail --color -- $$(find $(src_dir) -name "*.ts" -o -name "*.tsx") | sed "s|$(CURDIR)/||g"
 .PHONY: type-coverage
 
 type: type-check type-coverage # run all type tasks
