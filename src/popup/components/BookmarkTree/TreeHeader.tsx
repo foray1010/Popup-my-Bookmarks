@@ -1,6 +1,6 @@
 import webExtension from 'webextension-polyfill'
 
-import StylelessButton from '@/core/components/baseItems/StylelessButton'
+import StylelessButton from '@/core/components/baseItems/StylelessButton/index.js'
 import { Component as Cross } from '@/popup/images/cross.svg?svgUse'
 
 import * as classes from './tree-header.module.css'

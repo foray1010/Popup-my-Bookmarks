@@ -1,29 +1,37 @@
+import fs from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
 
-import { CleanWebpackPlugin } from 'clean-webpack-plugin'
-import CopyWebpackPlugin from 'copy-webpack-plugin'
+import { defineConfig } from '@rspack/cli'
+import {
+  CircularDependencyRspackPlugin,
+  CopyRspackPlugin,
+  CssExtractRspackPlugin,
+  type LightningcssLoaderOptions,
+  LightningCssMinimizerRspackPlugin,
+  SwcJsMinimizerRspackPlugin,
+  type SwcLoaderOptions,
+  type WebpackPluginInstance,
+} from '@rspack/core'
+import browserslist from 'browserslist'
 import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin'
 import HTMLInlineCSSWebpackPluginModule from 'html-inline-css-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import * as lightningCss from 'lightningcss'
-import { LightningCssMinifyPlugin } from 'lightningcss-loader'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import { parse as parseJsonc } from 'jsonc-parser'
 import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin'
-import TerserPlugin from 'terser-webpack-plugin'
-import webpack, {
-  type Configuration,
-  type WebpackPluginInstance,
-} from 'webpack'
+import sharp from 'sharp'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import ZipPlugin from 'zip-webpack-plugin'
 
+// eslint-disable-next-line import-x/extensions
+import { manifest } from './manifest.ts'
 import pkg from './package.json' with { type: 'json' }
+// eslint-disable-next-line import-x/extensions
+import { GenerateJsonPlugin } from './plugins/GenerateJsonPlugin.ts'
 
 const HTMLInlineCSSWebpackPlugin =
   // @ts-expect-error Hack to import default module directly
   HTMLInlineCSSWebpackPluginModule.default as typeof HTMLInlineCSSWebpackPluginModule
-const { ProgressPlugin } = webpack
 
 const isCI = process.env['CI'] === 'true'
 const isProductionBuild = process.env['NODE_ENV'] === 'production'
@@ -34,18 +42,19 @@ const commonChunkName = 'common'
 const outputDir = path.join('build', process.env['NODE_ENV'] || 'development')
 const sourceDir = 'src'
 
-const webpackConfig: Readonly<Configuration> = {
+const rspackConfig = defineConfig({
   devtool: isDevelopmentBuild ? 'inline-source-map' : false,
   entry: Object.fromEntries(
-    appNames.map((appName) => [appName, `./${sourceDir}/${appName}`]),
+    appNames.map((appName) => [appName, `./${sourceDir}/${appName}/index.tsx`]),
   ),
   mode: isDevelopmentBuild ? 'development' : 'production',
   module: {
     rules: [
       {
         test: /\.css$/u,
+        type: 'javascript/auto',
         use: [
-          MiniCssExtractPlugin.loader,
+          CssExtractRspackPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -56,12 +65,10 @@ const webpackConfig: Readonly<Configuration> = {
             },
           },
           {
-            loader: 'lightningcss-loader',
+            loader: 'builtin:lightningcss-loader',
             options: {
-              implementation: lightningCss,
-              // ignore css modules syntax as it is handled by css-loader
-              errorRecovery: true,
-            },
+              targets: browserslist(),
+            } satisfies LightningcssLoaderOptions,
           },
           {
             loader: 'postcss-loader',
@@ -75,7 +82,10 @@ const webpackConfig: Readonly<Configuration> = {
       },
       {
         test: /\.tsx?$/u,
-        loader: 'swc-loader',
+        loader: 'builtin:swc-loader',
+        options: parseJsonc(
+          await fs.readFile(path.join(import.meta.dirname, '.swcrc'), 'utf-8'),
+        ) as SwcLoaderOptions,
       },
       {
         test: /\.woff2$/u,
@@ -86,28 +96,22 @@ const webpackConfig: Readonly<Configuration> = {
       },
       {
         test: /\.(png|webp)$/u,
-        loader: 'file-loader',
-        options: {
-          name: 'images/[name].[ext]',
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name][ext]',
         },
       },
-      ...(isDevelopmentBuild
-        ? [
-            {
-              test: /icon\d+\.png$/u,
-              loader: 'image-process-loader',
-              options: {
-                greyscale: true,
-              },
-            },
-          ]
-        : []),
       {
         test: /\.svg$/u,
         resourceQuery: /svgUse/u,
         issuer: /\.tsx?$/u,
         type: 'javascript/auto',
-        use: '@svg-use/webpack',
+        use: {
+          loader: '@svg-use/webpack',
+          options: {
+            svgAssetFilename: 'images/[name].[ext]',
+          },
+        },
       },
       {
         test: /\.svg$/u,
@@ -117,51 +121,26 @@ const webpackConfig: Readonly<Configuration> = {
           filename: 'images/[name][ext]',
         },
       },
-      {
-        test: /\/manifest\.yml$/u,
-        type: 'asset/resource',
-        use: [
-          {
-            loader: 'extract-loader',
-            options: {
-              publicPath: './',
-            },
-          },
-          {
-            loader: 'chrome-manifest-loader',
-            options: {
-              mapMinimumChromeVersion: true,
-              mapVersion: true,
-            },
-          },
-          {
-            loader: 'yaml-loader',
-            options: { asJSON: true },
-          },
-        ],
-        generator: {
-          filename: '[name].json',
-        },
-      },
     ],
   },
   optimization: {
     ...(isProductionBuild && {
       minimize: true,
       minimizer: [
-        new LightningCssMinifyPlugin({
-          implementation: lightningCss,
-        }),
-        new TerserPlugin({
-          minify: TerserPlugin.swcMinify,
-          terserOptions: {
+        new SwcJsMinimizerRspackPlugin({
+          minimizerOptions: {
             compress: {
-              // arguments: true, // this breaks the build
+              // arguments: true, // this breaks the build in webpack
               drop_console: true,
               reduce_vars: true,
             },
             ecma: 2020 as const,
             module: true,
+          },
+        }),
+        new LightningCssMinimizerRspackPlugin({
+          minimizerOptions: {
+            targets: browserslist(),
           },
         }),
       ],
@@ -172,29 +151,43 @@ const webpackConfig: Readonly<Configuration> = {
     },
   },
   output: {
+    clean: true,
     path: path.resolve(import.meta.dirname, outputDir),
     filename: path.join('js', '[name].js'),
   },
   plugins: [
-    ...(!isCI ? [new ProgressPlugin({})] : []),
-    new CleanWebpackPlugin({
-      cleanStaleWebpackAssets: false,
+    new CircularDependencyRspackPlugin({
+      failOnError: true,
+      exclude: /node_modules/u,
     }),
-    new CopyWebpackPlugin({
+    new DuplicatePackageCheckerPlugin({
+      emitError: true,
+      strict: true,
+    }) as WebpackPluginInstance,
+    new CopyRspackPlugin({
       patterns: [
         {
-          context: path.join(sourceDir, 'core'),
-          from: path.join('_locales', '**', 'messages.json'),
+          context: sourceDir,
+          from: 'public',
+          ...(isDevelopmentBuild
+            ? {
+                transform: async (content, absoluteFrom) => {
+                  const fileName = path.basename(absoluteFrom)
+
+                  if (/^icon\d+\.png$/u.test(fileName)) {
+                    return await sharp(content).greyscale().png().toBuffer()
+                  }
+
+                  return content
+                },
+              }
+            : null),
         },
         {
           from: 'LICENSE',
         },
       ],
     }),
-    new DuplicatePackageCheckerPlugin({
-      emitError: true,
-      strict: true,
-    }) as WebpackPluginInstance,
     ...appNames.map((appName) => {
       return new HtmlWebpackPlugin({
         chunks: [commonChunkName, appName],
@@ -210,7 +203,7 @@ const webpackConfig: Readonly<Configuration> = {
         title: pkg.name,
       })
     }),
-    new MiniCssExtractPlugin(),
+    new CssExtractRspackPlugin(),
     ...(isProductionBuild
       ? [
           // this plugin does not update the inline css on watch mode
@@ -221,6 +214,10 @@ const webpackConfig: Readonly<Configuration> = {
       : []),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'async',
+    }),
+    new GenerateJsonPlugin({
+      json: manifest,
+      filename: 'manifest.json',
     }),
     ...(isProductionBuild && !isCI
       ? [
@@ -244,22 +241,9 @@ const webpackConfig: Readonly<Configuration> = {
       '.js': ['.tsx', '.ts', '.js'],
       '.mjs': ['.mts', '.mjs'],
     },
-    extensions: [
-      '.wasm',
-      '.tsx',
-      '.ts',
-      '.mts',
-      '.cts',
-      '.js',
-      '.mjs',
-      '.cjs',
-      '.json',
-    ],
-    alias: {
-      '@': path.resolve(import.meta.dirname, 'src'),
-    },
+    tsConfig: path.resolve(import.meta.dirname, './tsconfig.json'),
   },
   watch: isDevelopmentBuild,
-}
+})
 
-export default webpackConfig
+export default rspackConfig

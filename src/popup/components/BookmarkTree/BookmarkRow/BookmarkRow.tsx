@@ -1,7 +1,7 @@
 import classNames from 'classix'
 import type { JSX } from 'react'
 
-import StylelessButton from '@/core/components/baseItems/StylelessButton'
+import StylelessButton from '@/core/components/baseItems/StylelessButton/index.js'
 
 import * as classes from './bookmark-row.module.css'
 

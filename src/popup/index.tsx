@@ -1,5 +1,3 @@
-import '../manifest.yml'
-
 import { StrictMode } from 'react'
 import type { ValueOf } from 'type-fest'
 import webExtension from 'webextension-polyfill'

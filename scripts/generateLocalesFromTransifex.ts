@@ -17,7 +17,7 @@ const organizationSlug = 'foray1010'
 const projectSlug = 'popup-my-bookmarks'
 const resourceSlug = 'messagesjson-1'
 
-const localesPath = path.join('src', 'core', '_locales')
+const localesPath = path.join('src', 'public', '_locales')
 
 async function main(): Promise<void> {
   const transifexApiKey: string = await rl.question(

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/require-await */
 
-import messages from '@/core/_locales/en/messages.json'
+import messages from '@/public/_locales/en/messages.json'
 
 class I18n implements Readonly<typeof browser.i18n> {
   public async detectLanguage(): Promise<never> {

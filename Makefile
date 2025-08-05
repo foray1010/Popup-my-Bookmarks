@@ -27,18 +27,18 @@ size-limit: build-prod # limit build size
 .PHONY: size-limit
 
 tcm := $(bin_dir)/tcm
-webpack := $(ts-node) $(bin_dir)/webpack-cli
+rspack := $(ts-node) $(bin_dir)/rspack
 
 build-css-types:
 	$(tcm) $(src_dir)
 build-prod: build-css-types
-	NODE_ENV=production $(webpack)
+	NODE_ENV=production $(rspack)
 build: build-prod size-limit # build production extension
 .PHONY: build-prod build
 
 dev: # build development extension in watch mode
 	$(tcm) $(src_dir) --watch &
-	NODE_ENV=development $(webpack)
+	NODE_ENV=development $(rspack)
 .PHONY: dev
 
 markdown_dir := markdown

@@ -1,5 +1,3 @@
-import '../manifest.yml'
-
 import { StrictMode } from 'react'
 
 import createAndRenderRoot from '@/core/utils/createAndRenderRoot.js'
