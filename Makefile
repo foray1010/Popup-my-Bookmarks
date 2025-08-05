@@ -84,7 +84,7 @@ type-check: build-css-types # type check by tsc
 .PHONY: type-check
 
 type-coverage: build-css-types # check type coverage
-	$(bin_dir)/type-coverage --strict --at-least 99 --detail --ignore-catch -- $(src_dir)/**
+	$(bin_dir)/type-coverage --strict --at-least 99 --detail -- $$(find $(src_dir) -name "*.ts" -o -name "*.tsx")
 .PHONY: type-coverage
 
 type: type-check type-coverage # run all type tasks
