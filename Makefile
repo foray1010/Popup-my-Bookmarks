@@ -14,12 +14,10 @@ help: # get all command options
 
 bin_dir := node_modules/.bin
 
-ts-node := node --experimental-strip-types
-
 src_dir := src
 
 locales: # download the latest locale files from transifex
-	$(ts-node) scripts/generateLocalesFromTransifex.ts
+	node scripts/generateLocalesFromTransifex.ts
 .PHONY: locales
 
 size-limit: build-prod # limit build size
@@ -27,7 +25,7 @@ size-limit: build-prod # limit build size
 .PHONY: size-limit
 
 tcm := $(bin_dir)/tcm
-rspack := $(ts-node) $(bin_dir)/rspack
+rspack := node $(bin_dir)/rspack
 
 build-css-types:
 	$(tcm) $(src_dir)
