@@ -20,7 +20,6 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { parse as parseJsonc } from 'jsonc-parser'
 import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin'
 import sharp from 'sharp'
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import ZipPlugin from 'zip-webpack-plugin'
 
 // eslint-disable-next-line import-x/extensions
@@ -33,7 +32,6 @@ const HTMLInlineCSSWebpackPlugin =
   // @ts-expect-error Hack to import default module directly
   HTMLInlineCSSWebpackPluginModule.default as typeof HTMLInlineCSSWebpackPluginModule
 
-const isCI = process.env['CI'] === 'true'
 const isProductionBuild = process.env['NODE_ENV'] === 'production'
 const isDevelopmentBuild = !isProductionBuild
 
@@ -219,14 +217,6 @@ const rspackConfig = defineConfig({
       json: manifest,
       filename: 'manifest.json',
     }),
-    ...(isProductionBuild && !isCI
-      ? [
-          new BundleAnalyzerPlugin({
-            analyzerMode: 'static',
-            reportFilename: path.join('..', 'report.html'),
-          }),
-        ]
-      : []),
     ...(isProductionBuild
       ? [
           new ZipPlugin({

@@ -3049,17 +3049,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack-bundle-analyzer@npm:4.7.0":
-  version: 4.7.0
-  resolution: "@types/webpack-bundle-analyzer@npm:4.7.0"
-  dependencies:
-    "@types/node": "npm:*"
-    tapable: "npm:^2.2.0"
-    webpack: "npm:^5"
-  checksum: 10c0/dd5294ab9654081848066b14b8f01fcabb61b0e3ed4975f1613cc5da0f473b4496164a3fce3ac63027a15bb2f27d9442562f5099e764d6c03f72fe5a69fcc9bc
-  languageName: node
-  linkType: hard
-
 "@types/webpack-sources@npm:*":
   version: 3.2.3
   resolution: "@types/webpack-sources@npm:3.2.3"
@@ -3622,7 +3611,6 @@ __metadata:
     "@types/react": "npm:19.1.9"
     "@types/react-dom": "npm:19.1.7"
     "@types/script-ext-html-webpack-plugin": "npm:2.1.6"
-    "@types/webpack-bundle-analyzer": "npm:4.7.0"
     "@types/zip-webpack-plugin": "npm:3.0.6"
     browserslist: "npm:4.25.1"
     classix: "npm:2.2.2"
@@ -3662,7 +3650,7 @@ __metadata:
     use-resize-observer: "npm:9.1.0"
     use-typed-event-listener: "npm:4.0.2"
     webextension-polyfill: "npm:0.12.0"
-    webpack-bundle-analyzer: "npm:4.10.2"
+    webpack: "npm:5.101.0"
     zip-webpack-plugin: "npm:4.0.3"
   languageName: unknown
   linkType: soft
@@ -14956,7 +14944,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5":
+"webpack@npm:5.101.0":
   version: 5.101.0
   resolution: "webpack@npm:5.101.0"
   dependencies:
