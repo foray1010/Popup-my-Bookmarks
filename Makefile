@@ -9,8 +9,8 @@ help: # get all command options
 		| while read -r l; do \
 				printf "\033[1;32m$$(echo $$l | cut -f 1 -d':')\033[00m:$$(echo $$l | cut -f 2- -d'#')\n"; \
 			done
-.DEFAULT_GOAL := help
 .PHONY: help
+.DEFAULT_GOAL := help
 
 bin_dir := node_modules/.bin
 
@@ -29,10 +29,14 @@ rspack := node $(bin_dir)/rspack
 
 build-css-types:
 	$(tcm) $(src_dir)
+.PHONY: build-css-types
+
 build-prod: build-css-types
 	NODE_ENV=production $(rspack)
+.PHONY: build-prod
+
 build: build-prod size-limit # build production extension
-.PHONY: build-prod build
+.PHONY: build
 
 dev: # build development extension in watch mode
 	$(tcm) $(src_dir) --watch &
@@ -54,14 +58,22 @@ md: build/store.md README.md # generate markdown files
 
 lint-css: # lint by stylelint
 	yarn stylelint '**/*.css'
+.PHONY: lint-css
+
 lint-format: md # check if files follow prettier formatting
 	yarn prettier --check .
+.PHONY: lint-format
+
 lint-md: md # lint by remark
 	yarn remark .
+.PHONY: lint-md
+
 lint-js: build-css-types # lint by eslint
 	$(bin_dir)/eslint .
+.PHONY: lint-js
+
 lint: lint-css lint-format lint-md lint-js # run all lint tasks
-.PHONY: lint-css lint-format lint-md lint-js lint
+.PHONY: lint
 
 test: # run tests
 	$(bin_dir)/jest
@@ -69,10 +81,14 @@ test: # run tests
 
 type-check: build-css-types # type check by tsc
 	$(bin_dir)/tsc
+.PHONY: type-check
+
 type-coverage: build-css-types # check type coverage
 	$(bin_dir)/type-coverage --strict --at-least 99 --detail --ignore-catch -- $(src_dir)/**
+.PHONY: type-coverage
+
 type: type-check type-coverage # run all type tasks
-.PHONY: type-check type-coverage type
+.PHONY: type
 
 ci: build md lint test type # run all checkings on CI
 .PHONY: ci
