@@ -2,6 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
 
+import { RsdoctorRspackPlugin } from '@rsdoctor/rspack-plugin'
 import { defineConfig } from '@rspack/cli'
 import {
   CircularDependencyRspackPlugin,
@@ -11,10 +12,8 @@ import {
   LightningCssMinimizerRspackPlugin,
   SwcJsMinimizerRspackPlugin,
   type SwcLoaderOptions,
-  type WebpackPluginInstance,
 } from '@rspack/core'
 import browserslist from 'browserslist'
-import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin'
 import HTMLInlineCSSWebpackPluginModule from 'html-inline-css-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { parse as parseJsonc } from 'jsonc-parser'
@@ -32,6 +31,7 @@ const HTMLInlineCSSWebpackPlugin =
   // @ts-expect-error Hack to import default module directly
   HTMLInlineCSSWebpackPluginModule.default as typeof HTMLInlineCSSWebpackPluginModule
 
+const isCI = process.env['CI'] === 'true'
 const isProductionBuild = process.env['NODE_ENV'] === 'production'
 const isDevelopmentBuild = !isProductionBuild
 
@@ -158,10 +158,21 @@ const rspackConfig = defineConfig({
       failOnError: true,
       exclude: /node_modules/u,
     }),
-    new DuplicatePackageCheckerPlugin({
-      emitError: true,
-      strict: true,
-    }) as WebpackPluginInstance,
+    new RsdoctorRspackPlugin({
+      linter: {
+        level: 'Error',
+        rules: {
+          'duplicate-package': [
+            'Error',
+            {
+              checkVersion: 'major',
+              ignore: [],
+            },
+          ],
+        },
+      },
+      disableClientServer: isCI,
+    }),
     new CopyRspackPlugin({
       patterns: [
         {
