@@ -1,22 +1,30 @@
 [
   {
-    "path": "build/production/js/common.js",
+    "path": "build/production/common.js",
     "limit": "73.06 kB"
   },
   {
-    "path": "build/production/js/options.js",
-    "limit": "4.56 kB"
-  },
-  {
-    "path": "build/production/js/popup.js",
-    "limit": "11.61 kB"
+    "path": "build/production/options.css",
+    "limit": "1.61 kB"
   },
   {
     "path": "build/production/options.html",
-    "limit": "1.71 kB"
+    "limit": "112 B"
+  },
+  {
+    "path": "build/production/options.js",
+    "limit": "4.53 kB"
+  },
+  {
+    "path": "build/production/popup.css",
+    "limit": "1.85 kB"
   },
   {
     "path": "build/production/popup.html",
-    "limit": "1.96 kB"
+    "limit": "113 B"
+  },
+  {
+    "path": "build/production/popup.js",
+    "limit": "11.61 kB"
   }
 ]

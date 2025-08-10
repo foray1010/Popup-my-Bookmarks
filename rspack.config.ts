@@ -7,6 +7,7 @@ import {
   CircularDependencyRspackPlugin,
   CopyRspackPlugin,
   CssExtractRspackPlugin,
+  HtmlRspackPlugin,
   type LightningcssLoaderOptions,
   LightningCssMinimizerRspackPlugin,
   SwcJsMinimizerRspackPlugin,
@@ -15,10 +16,7 @@ import {
 } from '@rspack/core'
 import browserslist from 'browserslist'
 import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin'
-import HTMLInlineCSSWebpackPluginModule from 'html-inline-css-webpack-plugin'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { parse as parseJsonc } from 'jsonc-parser'
-import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin'
 import sharp from 'sharp'
 import ZipPlugin from 'zip-webpack-plugin'
 
@@ -27,10 +25,6 @@ import { manifest } from './manifest.ts'
 import pkg from './package.json' with { type: 'json' }
 // eslint-disable-next-line import-x/extensions
 import { GenerateJsonPlugin } from './plugins/GenerateJsonPlugin.ts'
-
-const HTMLInlineCSSWebpackPlugin =
-  // @ts-expect-error Hack to import default module directly
-  HTMLInlineCSSWebpackPluginModule.default as typeof HTMLInlineCSSWebpackPluginModule
 
 const isProductionBuild = process.env['NODE_ENV'] === 'production'
 const isDevelopmentBuild = !isProductionBuild
@@ -151,7 +145,7 @@ const rspackConfig = defineConfig({
   output: {
     clean: true,
     path: path.resolve(import.meta.dirname, outputDir),
-    filename: path.join('js', '[name].js'),
+    filename: '[name].js',
   },
   plugins: [
     new CircularDependencyRspackPlugin({
@@ -187,32 +181,16 @@ const rspackConfig = defineConfig({
       ],
     }),
     ...appNames.map((appName) => {
-      return new HtmlWebpackPlugin({
+      return new HtmlRspackPlugin({
         chunks: [commonChunkName, appName],
         filename: `${appName}.html`,
         inject: 'head',
-        minify: {
-          collapseWhitespace: true,
-          removeAttributeQuotes: true,
-          removeComments: true,
-          useShortDoctype: true,
-        },
+        minify: true,
         template: path.join(sourceDir, 'template.html'),
         title: pkg.name,
       })
     }),
     new CssExtractRspackPlugin(),
-    ...(isProductionBuild
-      ? [
-          // this plugin does not update the inline css on watch mode
-          new HTMLInlineCSSWebpackPlugin({
-            styleTagFactory: ({ style }) => `<style>${style}</style>`,
-          }),
-        ]
-      : []),
-    new ScriptExtHtmlWebpackPlugin({
-      defaultAttribute: 'async',
-    }),
     new GenerateJsonPlugin({
       json: manifest,
       filename: 'manifest.json',
