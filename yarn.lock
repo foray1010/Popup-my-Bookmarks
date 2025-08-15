@@ -3583,7 +3583,7 @@ __metadata:
     "@types/react": "npm:19.1.9"
     "@types/react-dom": "npm:19.1.7"
     "@types/zip-webpack-plugin": "npm:3.0.6"
-    browserslist: "npm:4.25.1"
+    browserslist: "npm:4.25.2"
     classix: "npm:2.2.2"
     constate: "npm:3.3.3"
     core-js: "npm:3.45.0"
@@ -4257,7 +4257,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:4.25.1, browserslist@npm:^4.24.0, browserslist@npm:^4.24.2, browserslist@npm:^4.25.1":
+"browserslist@npm:4.25.2":
+  version: 4.25.2
+  resolution: "browserslist@npm:4.25.2"
+  dependencies:
+    caniuse-lite: "npm:^1.0.30001733"
+    electron-to-chromium: "npm:^1.5.199"
+    node-releases: "npm:^2.0.19"
+    update-browserslist-db: "npm:^1.1.3"
+  bin:
+    browserslist: cli.js
+  checksum: 10c0/3fd27c6d569125e08b476d0ded78232c756bffeb79f29cfa548961dfd62fa560f8bf60fdb52d496ba276aea0c843968dd38ed4138a724277715be3b41dac8861
+  languageName: node
+  linkType: hard
+
+"browserslist@npm:^4.24.0, browserslist@npm:^4.24.2, browserslist@npm:^4.25.1":
   version: 4.25.1
   resolution: "browserslist@npm:4.25.1"
   dependencies:
@@ -4411,6 +4425,13 @@ __metadata:
   version: 1.0.30001731
   resolution: "caniuse-lite@npm:1.0.30001731"
   checksum: 10c0/d8cddf817d5bec8e7c2106affdbf1bfc3923463ca16697c992b2efeb043e6a5d9dcb70cda913bc6acf9112fd66f9e80279316c08e7800359116925066a63fdfa
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001733":
+  version: 1.0.30001735
+  resolution: "caniuse-lite@npm:1.0.30001735"
+  checksum: 10c0/1cb74221f16f8835c903770c1cf88fb73a07298b8398396a2b97570136e8f691053ee5840eb589fe34b4ede14ab828c9421d893a67e43c26ef91ab052813cb8c
   languageName: node
   linkType: hard
 
@@ -5559,6 +5580,13 @@ __metadata:
   version: 1.5.195
   resolution: "electron-to-chromium@npm:1.5.195"
   checksum: 10c0/48309745f0f222b18160176361c7e87d2e7ecb531e9a8cda688d4ef9d6a1caaa43373b9e48f78857d537f0a6e7826a65f8b2b0e758de166c8d16279477cfc6d2
+  languageName: node
+  linkType: hard
+
+"electron-to-chromium@npm:^1.5.199":
+  version: 1.5.201
+  resolution: "electron-to-chromium@npm:1.5.201"
+  checksum: 10c0/83f415506e4f79ebe3bcf311526823fe73cd9d54938eff6d98504d222d7c1f7db21acbe98b30394349b1dc973ac85123f1afb5f2b495e166885e5ddd7cf086e6
   languageName: node
   linkType: hard
 
