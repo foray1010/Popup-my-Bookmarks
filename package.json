@@ -55,7 +55,7 @@
     "@types/duplicate-package-checker-webpack-plugin": "2.1.5",
     "@types/firefox-webext-browser": "120.0.4",
     "@types/jest": "29.5.14",
-    "@types/node": "22.17.1",
+    "@types/node": "22.17.2",
     "@types/react": "19.1.10",
     "@types/react-dom": "19.1.7",
     "@types/zip-webpack-plugin": "3.0.6",
