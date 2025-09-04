@@ -32,7 +32,6 @@ async function execInPage(code: string) {
 
   await webExtension.scripting.executeScript({
     target: { tabId: currentTab.id },
-    // @ts-expect-error `func` actually takes the arguments from `args`, so it is not `() => void`
     func: (code: string): void => {
       const el = document.createElement('script')
       el.textContent = code
