@@ -2302,12 +2302,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/form-core@npm:1.17.0":
-  version: 1.17.0
-  resolution: "@tanstack/form-core@npm:1.17.0"
+"@tanstack/form-core@npm:1.19.3":
+  version: 1.19.3
+  resolution: "@tanstack/form-core@npm:1.19.3"
   dependencies:
-    "@tanstack/store": "npm:^0.7.2"
-  checksum: 10c0/4a8653f93efecfa128677ffa26f085d95ddc582b2a642259312fcca634f8b54cae36682431ff8210aa3f9c7cceee7f79fbfb7b39549048f135007c84d22305c4
+    "@tanstack/store": "npm:^0.7.4"
+  checksum: 10c0/e56a82ad59679d02bb0f3a0e3a4f95296edf1d71949b77c6b7ae07cb64fc709fd5b9edda9a6648af6acb06f57aaa6a8d62ee0940db44cffe4bfaaa7a62ee89f5
   languageName: node
   linkType: hard
 
@@ -2325,24 +2325,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-form@npm:1.17.0":
-  version: 1.17.0
-  resolution: "@tanstack/react-form@npm:1.17.0"
+"@tanstack/react-form@npm:1.19.3":
+  version: 1.19.3
+  resolution: "@tanstack/react-form@npm:1.19.3"
   dependencies:
-    "@tanstack/form-core": "npm:1.17.0"
-    "@tanstack/react-store": "npm:^0.7.3"
+    "@tanstack/form-core": "npm:1.19.3"
+    "@tanstack/react-store": "npm:^0.7.4"
     decode-formdata: "npm:^0.9.0"
-    devalue: "npm:^5.1.1"
+    devalue: "npm:^5.3.2"
   peerDependencies:
-    "@tanstack/react-start": ^1.112.0
+    "@tanstack/react-start": ^1.130.10
     react: ^17.0.0 || ^18.0.0 || ^19.0.0
-    vinxi: ^0.5.0
   peerDependenciesMeta:
     "@tanstack/react-start":
       optional: true
-    vinxi:
-      optional: true
-  checksum: 10c0/090c58dab4b09da3b6cea4816441f98bb9150fe2283a43117d47b9e7fad1b0cad2313a3e98dba1995eec5dd82810fcf4907a137a16657d48209a646c1322ca64
+  checksum: 10c0/d7c71fd919adeea9bb17cef9492103dd23ce5ee367ff0967fb02ba1816bad2dab0a8c52d22d22688bcc2de17fc170ca32f723f9b3a72d520b2de3f1340033c92
   languageName: node
   linkType: hard
 
@@ -2369,16 +2366,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-store@npm:^0.7.3":
-  version: 0.7.3
-  resolution: "@tanstack/react-store@npm:0.7.3"
+"@tanstack/react-store@npm:^0.7.4":
+  version: 0.7.4
+  resolution: "@tanstack/react-store@npm:0.7.4"
   dependencies:
-    "@tanstack/store": "npm:0.7.2"
+    "@tanstack/store": "npm:0.7.4"
     use-sync-external-store: "npm:^1.5.0"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/3487bdf25d43e52f2230f195c4e9266c270af44acbaa7665b87d7d1d809560aa1e84cef8065b0acbe3ca5745a616cd2be3d7bab69c06de6ff57e8eef88ee8499
+  checksum: 10c0/2f99b6f28377e7ef403761e29c7a3f9a0a132b101560c53ade1ae63cc966b4711e7aa613217adda7060f6fb152901674f2e5885096bceede7fa5e52eeb6f772f
   languageName: node
   linkType: hard
 
@@ -2394,10 +2391,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/store@npm:0.7.2, @tanstack/store@npm:^0.7.2":
-  version: 0.7.2
-  resolution: "@tanstack/store@npm:0.7.2"
-  checksum: 10c0/7b9764d156365d0a65b8be87fc67dcad16a45dd260b43e7c90162b39a940a1c764701e6b5f9e5e1e34ec77c86348332db343c658901f67972119d6f1ddf58f1f
+"@tanstack/store@npm:0.7.4, @tanstack/store@npm:^0.7.4":
+  version: 0.7.4
+  resolution: "@tanstack/store@npm:0.7.4"
+  checksum: 10c0/084aa3cf9a2b49bf9b1fb44872cb6fe4a05f8e6fc1bf584f1f30e6e0d89558b9003830562ece7794df85e1fc106542f3f50d71f0ea682deb11846576c1d33595
   languageName: node
   linkType: hard
 
@@ -3574,7 +3571,7 @@ __metadata:
     "@swc/core": "npm:1.13.3"
     "@swc/jest": "npm:0.2.39"
     "@tanstack/eslint-plugin-query": "npm:5.83.1"
-    "@tanstack/react-form": "npm:1.17.0"
+    "@tanstack/react-form": "npm:1.19.3"
     "@tanstack/react-query": "npm:5.84.1"
     "@tanstack/react-query-devtools": "npm:5.84.1"
     "@tanstack/react-virtual": "npm:3.13.12"
@@ -5404,10 +5401,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"devalue@npm:^5.1.1":
-  version: 5.1.1
-  resolution: "devalue@npm:5.1.1"
-  checksum: 10c0/f6717a856fd54216959abd341cb189e47a9b37d72d8419e055ae77567ff4ed0fb683b1ffb6a71067f645adae5991bffabe6468a3e2385937bff49273e71c1f51
+"devalue@npm:^5.3.2":
+  version: 5.3.2
+  resolution: "devalue@npm:5.3.2"
+  checksum: 10c0/2dab403779233224285afe4b30eaded038df10cb89b8f2c1e41dd855a8e6b634aa24175b87f64df665204bb9a6a6e7758d172682719b9c5cf3cef336ff9fa507
   languageName: node
   linkType: hard
 
