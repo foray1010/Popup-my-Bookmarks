@@ -3,7 +3,6 @@
 import { promises as fsPromises } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
-// eslint-disable-next-line n/no-unsupported-features/node-builtins
 import * as readline from 'node:readline/promises'
 
 import { type Collection, transifexApi } from '@transifex/api'

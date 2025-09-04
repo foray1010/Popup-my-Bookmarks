@@ -31,8 +31,11 @@ class Changes {
   }
 }
 
-class StorageArea implements browser.storage.StorageArea {
+class StorageArea implements browser.storage._LocalStorageArea {
   protected readonly storage = new Map<string, unknown>()
+
+  public readonly QUOTA_BYTES = 1024 * 1024 * 1024 // 1GB
+
   protected get storageObject() {
     return Object.fromEntries(this.storage)
   }
@@ -50,6 +53,10 @@ class StorageArea implements browser.storage.StorageArea {
       ...keys,
       ...pick(this.storageObject, Object.keys(keys)),
     }
+  }
+
+  public async getKeys() {
+    return Object.keys(this.storageObject)
   }
 
   public async set(items: Record<string, unknown>) {
@@ -107,8 +114,14 @@ class StorageArea implements browser.storage.StorageArea {
 
 class StorageAreaSync
   extends StorageArea
-  implements browser.storage.StorageAreaSync
+  implements browser.storage._SyncStorageAreaWithUsage
 {
+  public readonly QUOTA_BYTES_PER_ITEM = 1024 * 1024 // 1MB
+  public readonly MAX_ITEMS = 50000
+  public readonly MAX_WRITE_OPERATIONS_PER_HOUR = 1000
+  public readonly MAX_WRITE_OPERATIONS_PER_MINUTE = 100
+  public readonly MAX_SUSTAINED_WRITE_OPERATIONS_PER_MINUTE = 10
+
   public async getBytesInUse(keys?: string | readonly string[] | null) {
     const storage =
       keys === undefined
@@ -136,7 +149,7 @@ type StorageAreaListenerCallback = Parameters<
 class Storage implements Readonly<typeof browser.storage> {
   public readonly [AreaName.Local] = new StorageArea()
   public readonly [AreaName.Managed] = new StorageArea()
-  public readonly [AreaName.Session] = new StorageArea()
+  public readonly [AreaName.Session] = new StorageAreaSync()
   public readonly [AreaName.Sync] = new StorageAreaSync()
 
   readonly #listenerWeakMap = new WeakMap<

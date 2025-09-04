@@ -16,6 +16,10 @@ class I18n implements Readonly<typeof browser.i18n> {
     return messages[messageName as keyof typeof messages].message
   }
 
+  public async getPreferredSystemLanguages() {
+    return Array.from(['en-US'])
+  }
+
   public getUILanguage() {
     return navigator.language
   }
