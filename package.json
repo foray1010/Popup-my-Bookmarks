@@ -18,7 +18,7 @@
     "@tanstack/react-query": "5.86.0",
     "@tanstack/react-query-devtools": "5.86.0",
     "@tanstack/react-virtual": "3.13.12",
-    "classix": "2.2.2",
+    "classix": "2.2.4",
     "constate": "3.3.3",
     "core-js": "3.45.1",
     "react": "19.1.1",
