@@ -2297,12 +2297,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/form-core@npm:1.19.3":
-  version: 1.19.3
-  resolution: "@tanstack/form-core@npm:1.19.3"
+"@tanstack/form-core@npm:1.20.0":
+  version: 1.20.0
+  resolution: "@tanstack/form-core@npm:1.20.0"
   dependencies:
     "@tanstack/store": "npm:^0.7.4"
-  checksum: 10c0/e56a82ad59679d02bb0f3a0e3a4f95296edf1d71949b77c6b7ae07cb64fc709fd5b9edda9a6648af6acb06f57aaa6a8d62ee0940db44cffe4bfaaa7a62ee89f5
+  checksum: 10c0/2cdd25098852faa20ec9ccdcac946bf777738318e3b9e7fe43ee08b30397b2d65bb02a203ecac307de7023762d84b31ab96f13bb6ce1bcb0999bc48a6f65c7c4
   languageName: node
   linkType: hard
 
@@ -2320,11 +2320,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-form@npm:1.19.3":
-  version: 1.19.3
-  resolution: "@tanstack/react-form@npm:1.19.3"
+"@tanstack/react-form@npm:1.20.0":
+  version: 1.20.0
+  resolution: "@tanstack/react-form@npm:1.20.0"
   dependencies:
-    "@tanstack/form-core": "npm:1.19.3"
+    "@tanstack/form-core": "npm:1.20.0"
     "@tanstack/react-store": "npm:^0.7.4"
     decode-formdata: "npm:^0.9.0"
     devalue: "npm:^5.3.2"
@@ -2334,7 +2334,7 @@ __metadata:
   peerDependenciesMeta:
     "@tanstack/react-start":
       optional: true
-  checksum: 10c0/d7c71fd919adeea9bb17cef9492103dd23ce5ee367ff0967fb02ba1816bad2dab0a8c52d22d22688bcc2de17fc170ca32f723f9b3a72d520b2de3f1340033c92
+  checksum: 10c0/0b802eba5e96d88fba9f4de51c062926f33e4513a3f18a78252f99edd40f01132fb2d7c15b8960abb06c7a4bc1cb64a89243115847222222f69eb3434d4b3128
   languageName: node
   linkType: hard
 
@@ -3569,7 +3569,7 @@ __metadata:
     "@swc/core": "npm:1.13.5"
     "@swc/jest": "npm:0.2.39"
     "@tanstack/eslint-plugin-query": "npm:5.86.0"
-    "@tanstack/react-form": "npm:1.19.3"
+    "@tanstack/react-form": "npm:1.20.0"
     "@tanstack/react-query": "npm:5.86.0"
     "@tanstack/react-query-devtools": "npm:5.86.0"
     "@tanstack/react-virtual": "npm:3.13.12"
