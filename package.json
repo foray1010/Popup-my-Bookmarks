@@ -13,7 +13,7 @@
     "stylelint": "stylelint --ignore-path=node_modules/@foray1010/stylelint-config/stylelintignore"
   },
   "dependencies": {
-    "@fontsource/archivo-narrow": "5.2.6",
+    "@fontsource/archivo-narrow": "5.2.8",
     "@tanstack/react-form": "1.19.3",
     "@tanstack/react-query": "5.86.0",
     "@tanstack/react-query-devtools": "5.86.0",
