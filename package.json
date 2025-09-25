@@ -87,7 +87,7 @@
     "webpack": "5.101.3",
     "zip-webpack-plugin": "4.0.3"
   },
-  "packageManager": "yarn@4.9.4",
+  "packageManager": "yarn@4.10.2",
   "engines": {
     "node": "22.19.0"
   }
