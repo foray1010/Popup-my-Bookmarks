@@ -2718,10 +2718,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/firefox-webext-browser@npm:120.0.4":
-  version: 120.0.4
-  resolution: "@types/firefox-webext-browser@npm:120.0.4"
-  checksum: 10c0/75982a9c2dfdec8808a5a2356ff11e221d7891aebdb8e5c74cfcf6ac2ccd260dfd4b6b79ec99c214e17d1e6b1a6ff391a8dd0b569ba822c22246b4e6b5aaea34
+"@types/firefox-webext-browser@npm:120.0.5":
+  version: 120.0.5
+  resolution: "@types/firefox-webext-browser@npm:120.0.5"
+  checksum: 10c0/77338ed752351f74d72142c6399e6f5bb3a34acb5d3f559c0e9179fb271272de6ce514827afe6d99c798a42109bbc64d442cf8d999cf486e668dd933722fcb73
   languageName: node
   linkType: hard
 
@@ -3596,7 +3596,7 @@ __metadata:
     "@transifex/api": "npm:7.1.4"
     "@types/chrome": "npm:0.1.22"
     "@types/duplicate-package-checker-webpack-plugin": "npm:2.1.5"
-    "@types/firefox-webext-browser": "npm:120.0.4"
+    "@types/firefox-webext-browser": "npm:120.0.5"
     "@types/jest": "npm:29.5.14"
     "@types/node": "npm:22.18.8"
     "@types/react": "npm:19.1.15"
