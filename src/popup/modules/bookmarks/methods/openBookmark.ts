@@ -39,7 +39,6 @@ async function execInPage(code: string) {
       el.remove()
     },
     args: [code],
-    // @ts-expect-error works fine in Chrome
     world: 'MAIN',
   })
 }
