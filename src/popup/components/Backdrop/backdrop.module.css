@@ -3,7 +3,7 @@
   inset: 0;
   backdrop-filter: blur(1px);
   background-color: color-mix(
-    in srgb,
+    in oklch,
     var(--bg-color),
     transparent calc(100% - var(--opacity))
   );

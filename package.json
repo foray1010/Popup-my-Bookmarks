@@ -36,7 +36,7 @@
     "@foray1010/jest-preset": "6.0.0",
     "@foray1010/prettier-config": "12.0.0",
     "@foray1010/remark-preset": "11.0.0",
-    "@foray1010/stylelint-config": "16.0.0",
+    "@foray1010/stylelint-config": "17.0.0",
     "@foray1010/tsconfig": "15.0.0",
     "@rspack/cli": "1.6.0",
     "@rspack/core": "1.6.0",
