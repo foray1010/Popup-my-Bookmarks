@@ -13,11 +13,11 @@
   --gap-rem-2x: calc(var(--gap-rem) * 2);
   --gap-rem-3x: calc(var(--gap-rem) * 3);
   --gap-rem-4x: calc(var(--gap-rem) * 4);
-  --highlight-level1: oklch(94.9% 0 0deg);
-  --highlight-level2: oklch(90.6% 0 0deg);
-  --highlight-level3: oklch(79.8% 0 0deg);
-  --highlight-level4: oklch(69.9% 0 0deg);
-  --highlight-level5: oklch(56.2% 0 0deg);
+  --highlight-level1: oklch(95% 0 0deg);
+  --highlight-level2: oklch(85% 0 0deg);
+  --highlight-level3: oklch(75% 0 0deg);
+  --highlight-level4: oklch(65% 0 0deg);
+  --highlight-level5: oklch(55% 0 0deg);
   --bg-color: oklch(100% 0 0deg);
   --main-color1: oklch(70% 0.1488 246.66deg);
   --main-color2: oklch(77.03% 0.1741 64.05deg);
@@ -33,11 +33,11 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --highlight-level1: oklch(37.9% 0 0deg);
-    --highlight-level2: oklch(49.2% 0 0deg);
-    --highlight-level3: oklch(56.2% 0 0deg);
-    --highlight-level4: oklch(69.9% 0 0deg);
-    --highlight-level5: oklch(79.8% 0 0deg);
+    --highlight-level1: oklch(35% 0 0deg);
+    --highlight-level2: oklch(45% 0 0deg);
+    --highlight-level3: oklch(55% 0 0deg);
+    --highlight-level4: oklch(65% 0 0deg);
+    --highlight-level5: oklch(75% 0 0deg);
     --bg-color: oklch(24.7% 0 0deg);
     --main-font-color: oklch(100% 0 0deg);
   }
