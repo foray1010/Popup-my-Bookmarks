@@ -2732,13 +2732,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/chrome@npm:0.1.31":
-  version: 0.1.31
-  resolution: "@types/chrome@npm:0.1.31"
+"@types/chrome@npm:0.1.32":
+  version: 0.1.32
+  resolution: "@types/chrome@npm:0.1.32"
   dependencies:
     "@types/filesystem": "npm:*"
     "@types/har-format": "npm:*"
-  checksum: 10c0/b222b93ba957fedc2032f104c9eebca0008b134b8e2969313a6d9542a775336766ee0e67c616c7b9d132f615507baf0b4c44bb1e9459daafcf9a51966ef83d39
+  checksum: 10c0/97fd765b291c711c43037876248d8827958c6cbce375b608bd4cd6206bfb824e82839baf12fd8a69ee0df37b7f63da6485716116517069f6dacdc8944cc2b7b5
   languageName: node
   linkType: hard
 
@@ -3752,7 +3752,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.0"
     "@testing-library/user-event": "npm:14.6.1"
     "@transifex/api": "npm:7.1.5"
-    "@types/chrome": "npm:0.1.31"
+    "@types/chrome": "npm:0.1.32"
     "@types/duplicate-package-checker-webpack-plugin": "npm:2.1.5"
     "@types/firefox-webext-browser": "npm:143.0.0"
     "@types/jest": "npm:30.0.0"
