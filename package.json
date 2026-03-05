@@ -79,7 +79,7 @@
     "sharp": "0.34.5",
     "size-limit": "11.2.0",
     "stylelint": "16.25.0",
-    "svgo": "4.0.0",
+    "svgo": "4.0.1",
     "type-coverage": "2.29.7",
     "type-fest": "5.2.0",
     "typed-css-modules": "0.9.1",
