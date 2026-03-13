@@ -2441,10 +2441,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/devtools-event-client@npm:^0.3.5":
-  version: 0.3.5
-  resolution: "@tanstack/devtools-event-client@npm:0.3.5"
-  checksum: 10c0/10e4feec2cd346cd47adf94889f3f12d8662fb291d0d17fbf2a2f9c643f083a70d081b0fb104c2f54c0bd89dcfb1e31942dc959b74592fce9a7b9d55ed233220
+"@tanstack/devtools-event-client@npm:^0.4.0":
+  version: 0.4.3
+  resolution: "@tanstack/devtools-event-client@npm:0.4.3"
+  bin:
+    intent: bin/intent.js
+  checksum: 10c0/e49eb4b884e20de655a7cf463898bf6eba7e7470ed65b32f4079c886d700500078a9d6deac47dbf799f83500c7e14ae140e304eb840fe11ae7f255932c4f600b
   languageName: node
   linkType: hard
 
@@ -2459,14 +2461,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/form-core@npm:1.27.3":
-  version: 1.27.3
-  resolution: "@tanstack/form-core@npm:1.27.3"
+"@tanstack/form-core@npm:1.28.4":
+  version: 1.28.4
+  resolution: "@tanstack/form-core@npm:1.28.4"
   dependencies:
-    "@tanstack/devtools-event-client": "npm:^0.3.5"
+    "@tanstack/devtools-event-client": "npm:^0.4.0"
     "@tanstack/pacer-lite": "npm:^0.1.1"
-    "@tanstack/store": "npm:^0.7.7"
-  checksum: 10c0/92aea31174df2f8aadbd7c9c63fa9354784d4dd013c2345b34a2e299294c10cbd6b116daf424bac6f9688b9c94fdc4e8b7ac19a8eb994e2d4bca0ed858b92f5d
+    "@tanstack/store": "npm:^0.9.1"
+  checksum: 10c0/2b155f6c1af8e68fbacf72413f84e7fdbafedad988c5ada006012a900646a14340ac21ea3f30179f56d5b3e31d5474d5ff21fc9d8053ac4813f49da39ece4142
   languageName: node
   linkType: hard
 
@@ -2491,18 +2493,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-form@npm:1.27.3":
-  version: 1.27.3
-  resolution: "@tanstack/react-form@npm:1.27.3"
+"@tanstack/react-form@npm:1.28.4":
+  version: 1.28.4
+  resolution: "@tanstack/react-form@npm:1.28.4"
   dependencies:
-    "@tanstack/form-core": "npm:1.27.3"
-    "@tanstack/react-store": "npm:^0.8.0"
+    "@tanstack/form-core": "npm:1.28.4"
+    "@tanstack/react-store": "npm:^0.9.1"
   peerDependencies:
     react: ^17.0.0 || ^18.0.0 || ^19.0.0
   peerDependenciesMeta:
     "@tanstack/react-start":
       optional: true
-  checksum: 10c0/aa3a94cb231f1f2158bd27d06826a8e4b3bb61752c23c08bf678be4f22e6d925efa3318337c89921ec572b711576c75cf9a827048349a7af21b2fcd4c35d5b08
+  checksum: 10c0/ee37858c7f3f0d36e19f97789722172289fd7c9e58b3b9e7bc809abc84ddaddfaafce7f554d993bbd42e3cc531bc0bfde1d121d40182d9632df205fff4501a32
   languageName: node
   linkType: hard
 
@@ -2529,16 +2531,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-store@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "@tanstack/react-store@npm:0.8.0"
+"@tanstack/react-store@npm:^0.9.1":
+  version: 0.9.2
+  resolution: "@tanstack/react-store@npm:0.9.2"
   dependencies:
-    "@tanstack/store": "npm:0.8.0"
+    "@tanstack/store": "npm:0.9.2"
     use-sync-external-store: "npm:^1.6.0"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/ecf7ad81d97810336d0a808a41442f235a444e98599c6e7e026efd3c4360548b84af9a23612f1d0da85e32a4d9e207632b2ee2cec6f635109a256209caa3bc59
+  checksum: 10c0/54c00bcfe7563ea7d8ed1c7cd7290172b6381952b8756faeac8e4f22c31c431e5c38b5c105053be629672e371b1dde17e7b9b81d4f2ab274e601507e1cc3c018
   languageName: node
   linkType: hard
 
@@ -2554,17 +2556,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/store@npm:0.8.0":
-  version: 0.8.0
-  resolution: "@tanstack/store@npm:0.8.0"
-  checksum: 10c0/71841a7a7653f744bdea457d2c41768b8d5e5aed1d5ff22bd068e28ced9bf658208c730963809c2223b26b753e19da987c0d98acb7c543abd97de14e0d58991f
-  languageName: node
-  linkType: hard
-
-"@tanstack/store@npm:^0.7.7":
-  version: 0.7.7
-  resolution: "@tanstack/store@npm:0.7.7"
-  checksum: 10c0/bf90fa957bd97336d7dbc0d7b87379b5fe4baea030efef8a93fe4e49ac1c8bc929247d1a9f84b16a1642e386b67fe53be14df8d5415efdf85f83733ccdf8877a
+"@tanstack/store@npm:0.9.2, @tanstack/store@npm:^0.9.1":
+  version: 0.9.2
+  resolution: "@tanstack/store@npm:0.9.2"
+  checksum: 10c0/62e0c6ed2d437d7e2f54a2c9793c7f0c469779d48bc1e502af3e6151c30fdfdc1ec222ed2c42472edce56cfab5ee99db496ced59ba1ec760b814375a1db0a60f
   languageName: node
   linkType: hard
 
@@ -3744,7 +3739,7 @@ __metadata:
     "@swc/core": "npm:1.14.0"
     "@swc/jest": "npm:0.2.39"
     "@tanstack/eslint-plugin-query": "npm:5.91.2"
-    "@tanstack/react-form": "npm:1.27.3"
+    "@tanstack/react-form": "npm:1.28.4"
     "@tanstack/react-query": "npm:5.90.5"
     "@tanstack/react-query-devtools": "npm:5.90.2"
     "@tanstack/react-virtual": "npm:3.13.12"
