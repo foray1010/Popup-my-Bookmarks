@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import type { FormEvent } from 'react'
+import type { SubmitEvent } from 'react'
 
 import Button from './index.js'
 
 describe('Button', () => {
   it('should not fire form submit when clicked in form', async () => {
     const user = userEvent.setup()
-    const handleSubmit = jest.fn<void, [FormEvent<HTMLFormElement>], void>()
+    const handleSubmit = jest.fn<void, [SubmitEvent<HTMLFormElement>], void>()
     const name = 'click me'
 
     render(
@@ -23,7 +23,7 @@ describe('Button', () => {
 
   it('should fire form submit when type="submit"', async () => {
     const user = userEvent.setup()
-    const handleSubmit = jest.fn<void, [FormEvent<HTMLFormElement>], void>(
+    const handleSubmit = jest.fn<void, [SubmitEvent<HTMLFormElement>], void>(
       (evt) => {
         evt.preventDefault()
       },
