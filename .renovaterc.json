@@ -4,7 +4,7 @@
   "packageRules": [
     {
       "matchPackageNames": ["eslint"],
-      "enabled": false
-    }
-  ]
+      "enabled": false,
+    },
+  ],
 }

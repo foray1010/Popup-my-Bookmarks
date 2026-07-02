@@ -9,13 +9,13 @@
   border: 0;
   border-block-end: var(--gap-rem-2x) solid transparent;
   background-color: transparent;
-  cursor: default;
   padding-block-start: var(--gap-rem-2x);
   text-align: center;
   color: var(--bg-color);
   font:
     1.125rem 'Archivo Narrow',
     sans-serif;
+  cursor: default;
   composes: focus no-text-overflow from '@/core/styles/composes.module.css';
 
   &:is(:hover, .active) {

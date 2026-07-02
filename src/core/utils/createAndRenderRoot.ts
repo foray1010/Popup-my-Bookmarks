@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react'
+// eslint-disable-next-line import-x/extensions
 import * as ReactDom from 'react-dom/client'
 
 export default function createAndRenderRoot(

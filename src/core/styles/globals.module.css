@@ -1,8 +1,8 @@
 @import-normalize;
 
 @font-face {
-  font-display: fallback;
   font-family: 'Archivo Narrow';
+  font-display: fallback;
   src: url('@fontsource/archivo-narrow/files/archivo-narrow-latin-400-normal.woff2');
 }
 

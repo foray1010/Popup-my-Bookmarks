@@ -2,9 +2,10 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@foray1010/tsconfig/tsconfig.react.json",
   "compilerOptions": {
+    "types": ["chrome", "firefox-webext-browser", "node"],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
     },
-    "allowImportingTsExtensions": true
-  }
+    "allowImportingTsExtensions": true,
+  },
 }

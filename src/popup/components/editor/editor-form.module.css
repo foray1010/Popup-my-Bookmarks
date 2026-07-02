@@ -9,11 +9,11 @@
   float: left;
   margin-block: var(--gap-rem-2x);
   background-color: var(--main-color2);
-  cursor: default;
   padding-block: var(--gap-rem);
   padding-inline: var(--gap-rem-4x);
   color: var(--bg-color);
   font: inherit;
+  cursor: default;
 }
 
 .input {
