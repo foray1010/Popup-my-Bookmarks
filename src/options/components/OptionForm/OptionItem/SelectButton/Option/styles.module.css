@@ -7,8 +7,8 @@
 }
 
 .itemActive {
-  cursor: default;
   color: var(--background-color);
+  cursor: default;
 }
 
 .main {

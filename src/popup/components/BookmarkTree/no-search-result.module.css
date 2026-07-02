@@ -1,8 +1,8 @@
 .main {
   box-sizing: border-box;
   margin: var(--gap-rem-2x);
-  cursor: default;
   padding: var(--gap-rem);
   text-align: center;
+  cursor: default;
   composes: no-text-overflow from '@/core/styles/composes.module.css';
 }

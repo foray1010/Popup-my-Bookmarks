@@ -40,61 +40,61 @@ Please visit following branches for the legacy versions that support older versi
 
 1. We are using [corepack](https://nodejs.org/api/corepack.html) to manage the `yarn` version
 
-   ```sh
-   corepack enable
-   ```
+    ```sh
+    corepack enable
+    ```
 
 1. `cd` to your workspace and install all dependencies
 
-   ```sh
-   yarn install
-   ```
+    ```sh
+    yarn install
+    ```
 
 ### Commands
 
 1. build
 
-   ```sh
-   make build
-   ```
+    ```sh
+    make build
+    ```
 
-   To build the whole extension and output a zip file (./build/production/{version_in_package.json}.zip) for uploading to Chrome Web Store
+    To build the whole extension and output a zip file (./build/production/{version_in_package.json}.zip) for uploading to Chrome Web Store
 
 1. dev
 
-   ```sh
-   make dev
-   ```
+    ```sh
+    make dev
+    ```
 
-   To build a temporary folder `build/development` for loading unpacked extension
+    To build a temporary folder `build/development` for loading unpacked extension
 
 1. lint
 
-   ```sh
-   make lint
-   ```
+    ```sh
+    make lint
+    ```
 
-   To lint if all files follow our linter config
+    To lint if all files follow our linter config
 
 1. locales
 
-   ```sh
-   make locales
-   ```
+    ```sh
+    make locales
+    ```
 
-   To download the latest locale files from transifex
-   - `build/store.md` - Description for Chrome Web Store
-   - `README.md` - Description for GitHub
+    To download the latest locale files from transifex
+    - `build/store.md` - Description for Chrome Web Store
+    - `README.md` - Description for GitHub
 
 1. md
 
-   ```sh
-   make md
-   ```
+    ```sh
+    make md
+    ```
 
-   To generate markdown files
-   - `build/store.md` - Description for Chrome Web Store
-   - `README.md` - Description for GitHub
+    To generate markdown files
+    - `build/store.md` - Description for Chrome Web Store
+    - `README.md` - Description for GitHub
 
 ## Todo & Working Progress
 
@@ -104,8 +104,8 @@ See <https://trello.com/b/bREPCfDk/popup-my-bookmarks>
 
 - Translate to other languages. It's all depended on volunteers as I am not a linguist. ;-)
 
-  Please join our translation team on <https://explore.transifex.com/foray1010/popup-my-bookmarks/>
+    Please join our translation team on <https://explore.transifex.com/foray1010/popup-my-bookmarks/>
 
 - Fork me on GitHub, join our development!
 
-  Repo: <https://github.com/foray1010/Popup-my-Bookmarks>
+    Repo: <https://github.com/foray1010/Popup-my-Bookmarks>

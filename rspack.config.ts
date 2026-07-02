@@ -4,7 +4,7 @@ import process from 'node:process'
 
 import { defineConfig } from '@rspack/cli'
 import {
-  CircularDependencyRspackPlugin,
+  CircularCheckRspackPlugin,
   CopyRspackPlugin,
   CssExtractRspackPlugin,
   HtmlRspackPlugin,
@@ -148,7 +148,7 @@ const rspackConfig = defineConfig({
     filename: '[name].js',
   },
   plugins: [
-    new CircularDependencyRspackPlugin({
+    new CircularCheckRspackPlugin({
       failOnError: true,
       exclude: /node_modules/u,
     }),

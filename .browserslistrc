@@ -1,1 +1,1 @@
-chrome >= 111
+chrome >= 111 and chrome <= 141
