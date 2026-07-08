@@ -7,7 +7,7 @@ import StylelessButton from './index.js'
 describe('StylelessButton', () => {
   it('should not fire form submit when clicked in form', async () => {
     const user = userEvent.setup()
-    const handleSubmit = jest.fn<void, [SubmitEvent<HTMLFormElement>], void>()
+    const handleSubmit = rs.fn<(evt: SubmitEvent<HTMLFormElement>) => void>()
     const name = 'click me'
 
     render(
@@ -23,7 +23,7 @@ describe('StylelessButton', () => {
 
   it('should fire form submit when type="submit"', async () => {
     const user = userEvent.setup()
-    const handleSubmit = jest.fn<void, [SubmitEvent<HTMLFormElement>], void>(
+    const handleSubmit = rs.fn<(evt: SubmitEvent<HTMLFormElement>) => void>(
       (evt) => {
         evt.preventDefault()
       },

@@ -2,7 +2,7 @@ import storage from './storage.js'
 
 describe('browser.storage', () => {
   it('should fire callback for listeners', async () => {
-    const testCallback = jest.fn()
+    const testCallback = rs.fn()
 
     storage.onChanged.addListener(testCallback)
     expect(storage.onChanged.hasListener(testCallback)).toBe(true)
@@ -62,7 +62,7 @@ describe('browser.storage', () => {
   })
 
   it('should not fire callback after removing listeners', async () => {
-    const testCallback = jest.fn()
+    const testCallback = rs.fn()
 
     storage.onChanged.addListener(testCallback)
     expect(storage.onChanged.hasListener(testCallback)).toBe(true)
@@ -83,10 +83,10 @@ describe('browser.storage', () => {
   })
 
   it('should fire callback for all listeners', async () => {
-    const testCallback1 = jest.fn()
+    const testCallback1 = rs.fn()
     storage.onChanged.addListener(testCallback1)
 
-    const testCallback2 = jest.fn()
+    const testCallback2 = rs.fn()
     storage.onChanged.addListener(testCallback2)
 
     await storage.local.set({ where: 'local' })

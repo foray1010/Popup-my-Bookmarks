@@ -76,7 +76,7 @@ lint: lint-css lint-format lint-md lint-js # run all lint tasks
 .PHONY: lint
 
 test: # run tests
-	$(bin_dir)/jest
+	$(bin_dir)/rstest run
 .PHONY: test
 
 type-check: build-css-types # type check by tsc

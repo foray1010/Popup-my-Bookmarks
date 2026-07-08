@@ -423,17 +423,17 @@ describe('browser.bookmarks', () => {
     })
 
     it('should fire onCreated callbacks', async () => {
-      const testCallback1 = jest.fn()
+      const testCallback1 = rs.fn()
       bookmarks.onCreated.addListener(testCallback1)
       expect(bookmarks.onCreated.hasListener(testCallback1)).toBe(true)
 
       // should fire on multiple listeners
-      const testCallback2 = jest.fn()
+      const testCallback2 = rs.fn()
       bookmarks.onCreated.addListener(testCallback2)
       expect(bookmarks.onCreated.hasListener(testCallback2)).toBe(true)
 
       // should not fire on removed listener
-      const testCallback3 = jest.fn()
+      const testCallback3 = rs.fn()
       bookmarks.onCreated.addListener(testCallback3)
       expect(bookmarks.onCreated.hasListener(testCallback3)).toBe(true)
       bookmarks.onCreated.removeListener(testCallback3)
@@ -569,17 +569,17 @@ describe('browser.bookmarks', () => {
         url: 'https://duckduckgo.com',
       })
 
-      const testCallback1 = jest.fn()
+      const testCallback1 = rs.fn()
       bookmarks.onMoved.addListener(testCallback1)
       expect(bookmarks.onMoved.hasListener(testCallback1)).toBe(true)
 
       // should fire on multiple listeners
-      const testCallback2 = jest.fn()
+      const testCallback2 = rs.fn()
       bookmarks.onMoved.addListener(testCallback2)
       expect(bookmarks.onMoved.hasListener(testCallback2)).toBe(true)
 
       // should not fire on removed listener
-      const testCallback3 = jest.fn()
+      const testCallback3 = rs.fn()
       bookmarks.onMoved.addListener(testCallback3)
       expect(bookmarks.onMoved.hasListener(testCallback3)).toBe(true)
       bookmarks.onMoved.removeListener(testCallback3)
@@ -612,7 +612,7 @@ describe('browser.bookmarks', () => {
         url: 'https://duckduckgo.com',
       })
 
-      const testCallback = jest.fn()
+      const testCallback = rs.fn()
       bookmarks.onMoved.addListener(testCallback)
 
       await bookmarks.move(bookmark1.id, {
@@ -693,17 +693,17 @@ describe('browser.bookmarks', () => {
         url: 'https://duckduckgo.com',
       })
 
-      const testCallback1 = jest.fn()
+      const testCallback1 = rs.fn()
       bookmarks.onChanged.addListener(testCallback1)
       expect(bookmarks.onChanged.hasListener(testCallback1)).toBe(true)
 
       // should fire on multiple listeners
-      const testCallback2 = jest.fn()
+      const testCallback2 = rs.fn()
       bookmarks.onChanged.addListener(testCallback2)
       expect(bookmarks.onChanged.hasListener(testCallback2)).toBe(true)
 
       // should not fire on removed listener
-      const testCallback3 = jest.fn()
+      const testCallback3 = rs.fn()
       bookmarks.onChanged.addListener(testCallback3)
       expect(bookmarks.onChanged.hasListener(testCallback3)).toBe(true)
       bookmarks.onChanged.removeListener(testCallback3)
@@ -731,7 +731,7 @@ describe('browser.bookmarks', () => {
         url: 'https://duckduckgo.com',
       })
 
-      const testCallback = jest.fn()
+      const testCallback = rs.fn()
       bookmarks.onMoved.addListener(testCallback)
 
       await bookmarks.update(bookmark.id, {
@@ -791,17 +791,17 @@ describe('browser.bookmarks', () => {
         url: 'https://duckduckgo.com',
       })
 
-      const testCallback1 = jest.fn()
+      const testCallback1 = rs.fn()
       bookmarks.onRemoved.addListener(testCallback1)
       expect(bookmarks.onRemoved.hasListener(testCallback1)).toBe(true)
 
       // should fire on multiple listeners
-      const testCallback2 = jest.fn()
+      const testCallback2 = rs.fn()
       bookmarks.onRemoved.addListener(testCallback2)
       expect(bookmarks.onRemoved.hasListener(testCallback2)).toBe(true)
 
       // should not fire on removed listener
-      const testCallback3 = jest.fn()
+      const testCallback3 = rs.fn()
       bookmarks.onRemoved.addListener(testCallback3)
       expect(bookmarks.onRemoved.hasListener(testCallback3)).toBe(true)
       bookmarks.onRemoved.removeListener(testCallback3)
@@ -877,17 +877,17 @@ describe('browser.bookmarks', () => {
         parentId: folder.id,
       })
 
-      const testCallback1 = jest.fn()
+      const testCallback1 = rs.fn()
       bookmarks.onRemoved.addListener(testCallback1)
       expect(bookmarks.onRemoved.hasListener(testCallback1)).toBe(true)
 
       // should fire on multiple listeners
-      const testCallback2 = jest.fn()
+      const testCallback2 = rs.fn()
       bookmarks.onRemoved.addListener(testCallback2)
       expect(bookmarks.onRemoved.hasListener(testCallback2)).toBe(true)
 
       // should not fire on removed listener
-      const testCallback3 = jest.fn()
+      const testCallback3 = rs.fn()
       bookmarks.onRemoved.addListener(testCallback3)
       expect(bookmarks.onRemoved.hasListener(testCallback3)).toBe(true)
       bookmarks.onRemoved.removeListener(testCallback3)
