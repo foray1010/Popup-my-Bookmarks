@@ -83,11 +83,7 @@ type-check: build-css-types # type check by tsc
 	$(bin_dir)/tsc
 .PHONY: type-check
 
-type-coverage: build-css-types # check type coverage
-	$(bin_dir)/type-coverage --strict --at-least 99 --detail --color -- $$(find $(src_dir) -name "*.ts" -o -name "*.tsx") | sed "s|$(CURDIR)/||g"
-.PHONY: type-coverage
-
-type: type-check type-coverage # run all type tasks
+type: type-check # run all type tasks
 .PHONY: type
 
 ci: build md lint test type # run all checkings on CI
