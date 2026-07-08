@@ -2977,7 +2977,7 @@ __metadata:
     "@types/zip-webpack-plugin": "npm:3.0.6"
     browserslist: "npm:4.28.4"
     classix: "npm:2.2.16"
-    constate: "npm:3.3.3"
+    constate: "npm:4.0.0"
     core-js: "npm:3.49.0"
     css-loader: "npm:7.1.4"
     csstype: "npm:3.2.3"
@@ -3898,12 +3898,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"constate@npm:3.3.3":
-  version: 3.3.3
-  resolution: "constate@npm:3.3.3"
+"constate@npm:4.0.0":
+  version: 4.0.0
+  resolution: "constate@npm:4.0.0"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/adcb59b509f41eee68132628de61b86f3ff1e5a1859b96a3c651c608d916cdd6a50edd1e3299021d422684b589c1ff49c786954cced5817bca5a996b0a39fc8e
+  checksum: 10c0/bc3d12bbb2150b112c453a3293ac43e468d0b0ddc1290fefadf8eab03a90cf63e2541395aeab59cab7568ed9c15a784b9137e73d4d0fbdd00fa1f3ec680f3f89
   languageName: node
   linkType: hard
 
