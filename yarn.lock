@@ -1524,21 +1524,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rsbuild/plugin-react@npm:2.1.0":
-  version: 2.1.0
-  resolution: "@rsbuild/plugin-react@npm:2.1.0"
-  dependencies:
-    "@rspack/plugin-react-refresh": "npm:^2.0.2"
-    react-refresh: "npm:^0.18.0"
-  peerDependencies:
-    "@rsbuild/core": ^2.0.0
-  peerDependenciesMeta:
-    "@rsbuild/core":
-      optional: true
-  checksum: 10c0/8f50c1d1554a09835f8bf9bb30c72f5373314a5158cdc4c5e7314791877a71fad2ff1b75f3327c10e7c4a4ec3ec4c80a45afd7c16460653192f8e185aac2d166
-  languageName: node
-  linkType: hard
-
 "@rspack/binding-darwin-arm64@npm:2.0.8":
   version: 2.0.8
   resolution: "@rspack/binding-darwin-arm64@npm:2.0.8"
@@ -1834,16 +1819,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rspack/plugin-react-refresh@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "@rspack/plugin-react-refresh@npm:2.0.2"
+"@rstest/adapter-rspack@npm:0.10.6":
+  version: 0.10.6
+  resolution: "@rstest/adapter-rspack@npm:0.10.6"
   peerDependencies:
-    "@rspack/core": ^2.0.0
-    react-refresh: ">=0.10.0 <1.0.0"
-  peerDependenciesMeta:
-    "@rspack/core":
-      optional: true
-  checksum: 10c0/1291689c3fcdfc4bc62e9fd032786d0f72a24b8e3c844974367a54b9b640534836f1ac945b1f1342f877332a584440a71631761a3569dad3e76c30655f20b9bb
+    "@rspack/cli": ">=2.0.0-0"
+    "@rspack/core": ">=2.0.0-0"
+    "@rstest/core": ^0.10.6
+  checksum: 10c0/ed4f3d58817f2ef71595991f1a45dfa43e0b2bb7670cf0ea8eebd9a6a3df18e3cdd4863c0b1e2524493e8e8af391e9e8aa543036decb2820f8ddd7f043f5de8c
   languageName: node
   linkType: hard
 
@@ -2967,9 +2950,9 @@ __metadata:
     "@foray1010/remark-preset": "npm:12.0.0"
     "@foray1010/stylelint-config": "npm:18.0.0"
     "@foray1010/tsconfig": "npm:16.0.0"
-    "@rsbuild/plugin-react": "npm:2.1.0"
     "@rspack/cli": "npm:2.1.2"
     "@rspack/core": "npm:2.1.2"
+    "@rstest/adapter-rspack": "npm:0.10.6"
     "@rstest/core": "npm:0.10.6"
     "@rstest/coverage-v8": "npm:0.10.6"
     "@size-limit/file": "npm:12.1.0"
@@ -8334,13 +8317,6 @@ __metadata:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 10c0/2bdb6b93fbb1820b024b496042cce405c57e2f85e777c9aabd55f9b26d145408f9f74f5934676ffdc46f3dcff656d78413a6e43968e7b3f92eea35b3052e9053
-  languageName: node
-  linkType: hard
-
-"react-refresh@npm:^0.18.0":
-  version: 0.18.0
-  resolution: "react-refresh@npm:0.18.0"
-  checksum: 10c0/34a262f7fd803433a534f50deb27a148112a81adcae440c7d1cbae7ef14d21ea8f2b3d783e858cb7698968183b77755a38b4d4b5b1d79b4f4689c2f6d358fff2
   languageName: node
   linkType: hard
 
