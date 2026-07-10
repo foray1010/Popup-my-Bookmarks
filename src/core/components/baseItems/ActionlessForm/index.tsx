@@ -6,11 +6,10 @@ type Props = Readonly<
     'action' | 'enctype' | 'method' | 'target'
   >
 >
-const ActionlessForm: FC<Props> = ({ onSubmit, ref, ...props }) => {
+const ActionlessForm: FC<Props> = ({ onSubmit, ...props }) => {
   return (
     <form
       {...props}
-      ref={ref}
       onSubmit={(evt) => {
         evt.preventDefault()
 

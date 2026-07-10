@@ -5,10 +5,8 @@ import * as classes from './styles.module.css'
 
 type Props = Readonly<JSX.IntrinsicElements['ul']>
 
-const PlainList: FC<Props> = ({ className, ref, ...props }) => {
-  return (
-    <ul {...props} ref={ref} className={classNames(classes.main, className)} />
-  )
+const PlainList: FC<Props> = ({ className, ...props }) => {
+  return <ul {...props} className={classNames(classes.main, className)} />
 }
 
 export default PlainList

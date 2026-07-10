@@ -14,14 +14,13 @@ type Props = Readonly<
     onCancel(): void
   }
 >
-const SearchInput: FC<Props> = ({ onCancel, ref, ...inputProps }) => {
+const SearchInput: FC<Props> = ({ onCancel, ...inputProps }) => {
   const inputId = useId()
 
   return (
     <div className={classes.main} role='search'>
       <Search aria-hidden className={classes['search-icon']} />
       <Input
-        ref={ref}
         inputMode='search'
         placeholder={webExtension.i18n.getMessage('search')}
         {...inputProps}

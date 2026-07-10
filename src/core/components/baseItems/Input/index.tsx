@@ -4,11 +4,10 @@ import type { FC, JSX } from 'react'
 import * as classes from './styles.module.css'
 
 type Props = Readonly<JSX.IntrinsicElements['input']>
-const Input: FC<Props> = ({ className, ref, type = 'text', ...props }) => {
+const Input: FC<Props> = ({ className, type = 'text', ...props }) => {
   return (
     <input
       {...props}
-      ref={ref}
       className={classNames(
         classes.main,
         ['number', 'text'].includes(type) && classes['text-input'],

@@ -6,11 +6,10 @@ import * as classes from './styles.module.css'
 
 type Props = Readonly<JSX.IntrinsicElements['button']>
 
-const Button: FC<Props> = ({ className, ref, ...props }) => {
+const Button: FC<Props> = ({ className, ...props }) => {
   return (
     <StylelessButton
       {...props}
-      ref={ref}
       className={classNames(classes.main, className)}
     />
   )
