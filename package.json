@@ -51,7 +51,7 @@
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
     "@transifex/api": "8.0.1",
-    "@types/chrome": "0.2.1",
+    "@types/chrome": "0.2.2",
     "@types/duplicate-package-checker-webpack-plugin": "2.1.5",
     "@types/firefox-webext-browser": "143.0.0",
     "@types/node": "24.13.2",
