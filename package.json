@@ -39,7 +39,7 @@
     "@foray1010/tsconfig": "16.0.0",
     "@rspack/cli": "2.1.2",
     "@rspack/core": "2.1.2",
-    "@rstest/adapter-rspack": "0.10.6",
+    "@rstest/adapter-rspack": "0.11.3",
     "@rstest/core": "0.10.6",
     "@rstest/coverage-v8": "0.10.6",
     "@size-limit/file": "12.1.0",
