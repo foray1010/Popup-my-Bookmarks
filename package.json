@@ -76,7 +76,7 @@
     "sharp": "0.35.2",
     "size-limit": "12.1.0",
     "stylelint": "17.14.0",
-    "svgo": "4.0.1",
+    "svgo": "4.0.2",
     "type-fest": "5.7.0",
     "typed-css-modules": "0.9.1",
     "typescript": "6.0.3",
