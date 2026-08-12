@@ -1835,14 +1835,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rstest/adapter-rspack@npm:0.10.6":
-  version: 0.10.6
-  resolution: "@rstest/adapter-rspack@npm:0.10.6"
+"@rstest/adapter-rspack@npm:0.11.6":
+  version: 0.11.6
+  resolution: "@rstest/adapter-rspack@npm:0.11.6"
   peerDependencies:
-    "@rspack/cli": ">=2.0.0-0"
-    "@rspack/core": ">=2.0.0-0"
-    "@rstest/core": ^0.10.6
-  checksum: 10c0/ed4f3d58817f2ef71595991f1a45dfa43e0b2bb7670cf0ea8eebd9a6a3df18e3cdd4863c0b1e2524493e8e8af391e9e8aa543036decb2820f8ddd7f043f5de8c
+    "@rspack/cli": ^2.0.0
+    "@rspack/core": ^2.0.0
+    "@rstest/core": ^0.11.0
+  checksum: 10c0/c97dfe1cb27001cb44294717e73fc1bc84a089565c4aab63f3c07fd364d7a878be004e5ed9aa834bb726851a89248c9ba96c7e1a48d2fc1d8470f1bc04d956bf
   languageName: node
   linkType: hard
 
@@ -2970,7 +2970,7 @@ __metadata:
     "@foray1010/tsconfig": "npm:16.0.0"
     "@rspack/cli": "npm:2.1.2"
     "@rspack/core": "npm:2.1.2"
-    "@rstest/adapter-rspack": "npm:0.10.6"
+    "@rstest/adapter-rspack": "npm:0.11.6"
     "@rstest/core": "npm:0.10.6"
     "@rstest/coverage-v8": "npm:0.10.6"
     "@size-limit/file": "npm:12.1.0"
