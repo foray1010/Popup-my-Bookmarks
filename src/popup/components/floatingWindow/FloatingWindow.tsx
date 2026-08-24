@@ -1,6 +1,6 @@
 import { type PropsWithChildren, useLayoutEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import useResizeObserver from 'use-resize-observer'
+import { useResizeObserver } from 'use-resize-observer'
 
 import Backdrop from '../Backdrop/index.js'
 import useGlobalBodySize from './useGlobalBodySize.js'
