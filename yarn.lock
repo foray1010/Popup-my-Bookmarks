@@ -1746,12 +1746,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@size-limit/file@npm:13.0.3":
-  version: 13.0.3
-  resolution: "@size-limit/file@npm:13.0.3"
+"@size-limit/file@npm:13.1.1":
+  version: 13.1.1
+  resolution: "@size-limit/file@npm:13.1.1"
   peerDependencies:
-    size-limit: 13.0.3
-  checksum: 10c0/840414b8558064b967b92a2618f2a3387c96bedc2cfdb85459cc0fcb4548b2e2aac0b2b388256b705a0aa3897b97e089c45f0bb74fae5e3a8b3592c9c3eafaa0
+    size-limit: 13.1.1
+  checksum: 10c0/1b20b95b4a8a5e11f58df637e6c1a164b6924b3cc5f18ca5a8dea72734fc8e58e22c1dc2d35ec54f04c9d75fd8d9e988cd45b4ad23d02b2f0f2bd26525e62300
   languageName: node
   linkType: hard
 
@@ -2894,7 +2894,7 @@ __metadata:
     "@rstest/adapter-rspack": "npm:0.11.12"
     "@rstest/core": "npm:0.11.12"
     "@rstest/coverage-v8": "npm:0.11.12"
-    "@size-limit/file": "npm:13.0.3"
+    "@size-limit/file": "npm:13.1.1"
     "@svg-use/react": "npm:1.1.0"
     "@svg-use/webpack": "npm:1.1.0"
     "@tanstack/eslint-plugin-query": "npm:5.102.8"
@@ -2935,7 +2935,7 @@ __metadata:
     react-dom: "npm:19.2.8"
     remark-cli: "npm:12.0.1"
     sharp: "npm:0.35.4"
-    size-limit: "npm:13.0.3"
+    size-limit: "npm:13.1.1"
     stylelint: "npm:17.15.0"
     svgo: "npm:4.1.0"
     type-fest: "npm:5.9.0"
@@ -9562,16 +9562,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"size-limit@npm:13.0.3":
-  version: 13.0.3
-  resolution: "size-limit@npm:13.0.3"
+"size-limit@npm:13.1.1":
+  version: 13.1.1
+  resolution: "size-limit@npm:13.1.1"
   dependencies:
     bytes-iec: "npm:^3.1.1"
     lilconfig: "npm:^3.1.3"
     nanospinner: "npm:^1.2.2"
   bin:
     size-limit: bin.js
-  checksum: 10c0/fff22b2f5ebb4b411e47ce7a80fdebc73326c40e4dd8d8cb59be72d149112389dbf393b7593c883280ca27197da9f2ac0d83e76fef16b7ba7d33ac4826411257
+  checksum: 10c0/7b7b5663e304f32791fbc03ef357232eb3117092608068bfeb52f1ff15b6f55d9f87942f3fd6ecf0d08ee1cd8a7ffeeb2a7ee8d0411d5742d5a583b5ad6c8339
   languageName: node
   linkType: hard
 
