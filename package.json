@@ -54,7 +54,7 @@
     "@types/chrome": "0.2.9",
     "@types/duplicate-package-checker-webpack-plugin": "2.1.5",
     "@types/firefox-webext-browser": "143.0.1",
-    "@types/node": "24.13.3",
+    "@types/node": "24.19.2",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.7",
     "@types/zip-webpack-plugin": "3.0.6",
@@ -85,6 +85,6 @@
   },
   "packageManager": "yarn@4.18.0",
   "engines": {
-    "node": "24.21.0"
+    "node": "24.22.0"
   }
 }
