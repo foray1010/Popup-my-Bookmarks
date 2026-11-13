@@ -6,6 +6,7 @@
   padding: var(--gap-rem-2x);
   max-block-size: 600px; /** Chrome restricted maximum popup height to be 600px */
   overflow: auto;
+  overscroll-behavior: contain;
 
   /* separator between menu fields */
   & > * + * {

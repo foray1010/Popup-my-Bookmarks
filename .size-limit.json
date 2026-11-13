@@ -9,7 +9,7 @@
   },
   {
     "path": "build/production/options.html",
-    "limit": "112 B"
+    "limit": "125 B"
   },
   {
     "path": "build/production/options.js",
@@ -17,14 +17,14 @@
   },
   {
     "path": "build/production/popup.css",
-    "limit": "1.9 kB"
+    "limit": "2.06 kB"
   },
   {
     "path": "build/production/popup.html",
-    "limit": "113 B"
+    "limit": "125 B"
   },
   {
     "path": "build/production/popup.js",
-    "limit": "11.78 kB"
+    "limit": "11.83 kB"
   }
 ]

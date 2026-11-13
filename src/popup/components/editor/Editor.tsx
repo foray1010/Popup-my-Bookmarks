@@ -90,6 +90,7 @@ export default function Editor() {
   }
   return (
     <FloatingWindow
+      aria-label={commonProps.header}
       positionLeft={state.positions.left}
       positionTop={state.positions.top}
       onClose={close}

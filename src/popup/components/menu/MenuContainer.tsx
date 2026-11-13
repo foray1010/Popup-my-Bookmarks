@@ -231,10 +231,15 @@ function InnerMenuContainer() {
 
   if (!state.isOpen) return null
   // Without this condition, it will cause content jumping after menu pattern is fetched
-  if (menuPattern.length === 0) return null
+  if (!bookmarkInfo || menuPattern.length === 0) return null
 
   return (
     <FloatingWindow
+      aria-label={
+        bookmarkInfo.type === BOOKMARK_TYPES.SEPARATOR
+          ? ''
+          : bookmarkInfo.title || (bookmarkInfo.url ?? '')
+      }
       positionLeft={state.displayPositions.left}
       positionTop={state.displayPositions.top}
       onClose={close}

@@ -2,23 +2,10 @@
 
 :root {
   user-select: none;
+  /* inherited by all scroll containers */
+  scrollbar-color: var(--highlight-level4) transparent;
 }
 
-::-webkit-scrollbar {
-  background-color: transparent;
-  width: var(--gap-rem-4x);
-}
-
-::-webkit-scrollbar-thumb {
-  border-left: var(--gap-rem) solid var(--bg-color);
-  background-color: var(--highlight-level3);
-
-  &:hover {
-    border: 0;
-    background-color: var(--highlight-level4);
-  }
-
-  &:active {
-    background-color: var(--highlight-level5);
-  }
+* {
+  scrollbar-width: thin;
 }

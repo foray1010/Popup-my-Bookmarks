@@ -1,0 +1,52 @@
+.anchor {
+  position: fixed;
+}
+
+.window {
+  position-area: block-end span-inline-end;
+  position-try-fallbacks:
+    flip-block,
+    flip-inline,
+    flip-block flip-inline,
+    --floating-window-pin-inline,
+    --floating-window-pin-inline flip-block,
+    --floating-window-pin-block,
+    --floating-window-pin-block flip-inline,
+    --floating-window-pin-all;
+  inset: auto;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+  max-block-size: none;
+  max-inline-size: none;
+  /* do not clip the shadow of the content */
+  overflow: visible;
+  color: inherit;
+
+  &::backdrop {
+    backdrop-filter: blur(1px);
+    background-color: color-mix(in oklch, var(--bg-color), transparent 70%);
+    /* `overscroll-behavior` only works on scroll containers */
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
+}
+
+/* when neither side of the anchor has enough space, stick to the far edge of the popup instead */
+@position-try --floating-window-pin-inline {
+  position-area: block-end span-all;
+  justify-self: end;
+}
+
+@position-try --floating-window-pin-block {
+  position-area: span-all span-inline-end;
+  align-self: end;
+}
+
+@position-try --floating-window-pin-all {
+  position-area: span-all;
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties -- `place-self` is not recognized in `@position-try` yet */
+  align-self: end;
+  justify-self: end;
+}

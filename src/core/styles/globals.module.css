@@ -13,34 +13,23 @@
   --gap-rem-2x: calc(var(--gap-rem) * 2);
   --gap-rem-3x: calc(var(--gap-rem) * 3);
   --gap-rem-4x: calc(var(--gap-rem) * 4);
-  --highlight-level1: oklch(95% 0 0deg);
-  --highlight-level2: oklch(85% 0 0deg);
-  --highlight-level3: oklch(75% 0 0deg);
+  --highlight-level1: light-dark(oklch(95% 0 0deg), oklch(35% 0 0deg));
+  --highlight-level2: light-dark(oklch(85% 0 0deg), oklch(45% 0 0deg));
+  --highlight-level3: light-dark(oklch(75% 0 0deg), oklch(55% 0 0deg));
   --highlight-level4: oklch(65% 0 0deg);
-  --highlight-level5: oklch(55% 0 0deg);
-  --bg-color: oklch(100% 0 0deg);
+  --highlight-level5: light-dark(oklch(55% 0 0deg), oklch(75% 0 0deg));
+  --bg-color: light-dark(oklch(100% 0 0deg), oklch(24.7% 0 0deg));
   --main-color1: oklch(70% 0.1488 246.66deg);
   --main-color2: oklch(77.03% 0.1741 64.05deg);
   --main-color3: oklch(65.6% 0.1071 185.34deg);
   --main-color4: oklch(64.2% 0.215 28.8deg);
   --main-color5: oklch(56.5% 0.043 40deg);
-  --main-font-color: oklch(24.7% 0 0deg);
+  --main-font-color: light-dark(oklch(24.7% 0 0deg), oklch(100% 0 0deg));
 
+  color-scheme: light dark;
   background-color: var(--bg-color);
   color: var(--main-font-color);
   font-family: system-ui, sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --highlight-level1: oklch(35% 0 0deg);
-    --highlight-level2: oklch(45% 0 0deg);
-    --highlight-level3: oklch(55% 0 0deg);
-    --highlight-level4: oklch(65% 0 0deg);
-    --highlight-level5: oklch(75% 0 0deg);
-    --bg-color: oklch(24.7% 0 0deg);
-    --main-font-color: oklch(100% 0 0deg);
-  }
 }
 
 body {
