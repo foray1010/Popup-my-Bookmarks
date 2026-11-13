@@ -11,10 +11,10 @@ const minimumChromeVersion = browserslist()
   .filter(Boolean)
   .toSorted((a, b) => Number(a) - Number(b))[0]
 
-export const manifest:
-  | browser._manifest.WebExtensionManifest
-  // eslint-disable-next-line no-undef
-  | chrome.runtime.ManifestV3 = {
+export const manifest: browser._manifest.WebExtensionManifest & {
+  // chrome only
+  offline_enabled?: boolean
+} = {
   name: 'Popup my Bookmarks',
   short_name: 'PmB',
   version: pkg.version,
