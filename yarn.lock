@@ -10279,13 +10279,13 @@ __metadata:
   linkType: hard
 
 "stylelint-gamut@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "stylelint-gamut@npm:2.0.1"
+  version: 2.0.2
+  resolution: "stylelint-gamut@npm:2.0.2"
   dependencies:
     colorjs.io: "npm:^0.6.1"
   peerDependencies:
-    stylelint: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 10c0/d9f224c45060ff4513c97b44e19b3fb0389721e6947811dd1e56dc199378b67f9b90804a212b88cada73e6d0c2ad265a3b4a66c33d9bc68b02be399bb6670312
+    stylelint: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 10c0/3aa3d07bd20189fe7697049d8e7d6ed71bc999efc83810c20e9b675326c7d6ae23f882e5ddebcb4ead0603c07edce58e6df26ad6941552d2bacc32f375ae82aa
   languageName: node
   linkType: hard
 
@@ -10615,11 +10615,11 @@ __metadata:
   linkType: hard
 
 "tough-cookie@npm:^6.0.2":
-  version: 6.0.2
-  resolution: "tough-cookie@npm:6.0.2"
+  version: 6.1.0
+  resolution: "tough-cookie@npm:6.1.0"
   dependencies:
     tldts: "npm:^7.0.5"
-  checksum: 10c0/5ff521a476a3c540821352125a5d481c8d2fe16035de7e0efda4df120f290c95500a0e9b51ea0aa56343955be482e014c30f5ba73e04b93ba138e4e855cb9e89
+  checksum: 10c0/704607363dcf905301048f3412afe17e05c5e8e1c377e6b22ebc96d3d5a7f1727992677ff1c05fa2d411d580ccf9ddbd2ed62c1cab44ef06fdd4026fedc8b896
   languageName: node
   linkType: hard
 
@@ -11197,22 +11197,22 @@ __metadata:
   linkType: hard
 
 "vfile-location@npm:^5.0.0":
-  version: 5.0.3
-  resolution: "vfile-location@npm:5.0.3"
+  version: 5.0.4
+  resolution: "vfile-location@npm:5.0.4"
   dependencies:
     "@types/unist": "npm:^3.0.0"
     vfile: "npm:^6.0.0"
-  checksum: 10c0/1711f67802a5bc175ea69750d59863343ed43d1b1bb25c0a9063e4c70595e673e53e2ed5cdbb6dcdc370059b31605144d95e8c061b9361bcc2b036b8f63a4966
+  checksum: 10c0/45937195f2c801d91a5bcb00197611befd7313e941f9b41ec3b3c19ed041abaeda772a42a0e7706bd82843dd2f60ec55e2f9809dde04d5033fb1a14453860808
   languageName: node
   linkType: hard
 
 "vfile-message@npm:^4.0.0":
-  version: 4.0.3
-  resolution: "vfile-message@npm:4.0.3"
+  version: 4.0.4
+  resolution: "vfile-message@npm:4.0.4"
   dependencies:
     "@types/unist": "npm:^3.0.0"
     unist-util-stringify-position: "npm:^4.0.0"
-  checksum: 10c0/33d9f219610d27987689bb14fa5573d2daa146941d1a05416dd7702c4215b23f44ed81d059e70d0e4e24f9a57d5f4dc9f18d35a993f04cf9446a7abe6d72d0c0
+  checksum: 10c0/fc2309db7c09ef693d6e47b7bdac5ce9802509f7b8e9c87a709e04d1786d8aaf3ae3aa5ee9c5db8f3cf60de708dc254a39574a5a014defc5829a67d27ebadf8c
   languageName: node
   linkType: hard
 
