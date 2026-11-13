@@ -10,7 +10,7 @@ const Input: FC<Props> = ({ className, type = 'text', ...props }) => {
       {...props}
       className={classNames(
         classes.main,
-        ['number', 'text'].includes(type) && classes['text-input'],
+        ['number', 'text', 'url'].includes(type) && classes['text-input'],
         className,
       )}
       type={type}

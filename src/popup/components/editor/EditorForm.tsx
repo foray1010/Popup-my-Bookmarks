@@ -61,8 +61,12 @@ export default function Editor({ onConfirm, ...props }: Props) {
           {(field) => {
             return (
               <Input
+                autoCapitalize='none'
+                autoCorrect='off'
                 className={classes.input}
                 name={field.name}
+                spellCheck={false}
+                type='url'
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 onChange={(evt) => field.handleChange(evt.currentTarget.value)}
