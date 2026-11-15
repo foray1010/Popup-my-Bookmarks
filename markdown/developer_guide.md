@@ -5,6 +5,7 @@
 1. We are using [corepack](https://nodejs.org/api/corepack.html) to manage the `yarn` version
 
     ```sh
+    npm install --global corepack
     corepack enable
     ```
 

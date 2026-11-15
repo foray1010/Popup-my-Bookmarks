@@ -6,6 +6,8 @@ jobs:
     steps:
       - 'checkout'
       # require `sudo`: https://github.com/CircleCI-Public/cimg-node/issues/277
+      # `--force` to overwrite the preinstalled `pnpm` and `yarn` binaries with corepack shims
+      - run: 'sudo npm install --global --force corepack'
       - run: 'sudo corepack enable'
       - restore_cache:
           key: 'yarn-packages-{{ checksum "yarn.lock" }}'
