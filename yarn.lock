@@ -3141,7 +3141,7 @@ __metadata:
     "@types/react-dom": "npm:19.3.0"
     "@types/zip-webpack-plugin": "npm:3.0.6"
     browserslist: "npm:4.29.5"
-    classix: "npm:2.2.27"
+    classix: "npm:2.2.28"
     constate: "npm:4.0.0"
     core-js: "npm:3.51.0"
     css-loader: "npm:7.1.5"
@@ -3870,10 +3870,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classix@npm:2.2.27":
-  version: 2.2.27
-  resolution: "classix@npm:2.2.27"
-  checksum: 10c0/2f68a882574d9f3218f6048bcf9b5b2fe9b41c2329d87f68fbf688b32619b30caa5b63386826e57927f9a41771841c947223f4bd308ebc59ff7cc3e8707d2e66
+"classix@npm:2.2.28":
+  version: 2.2.28
+  resolution: "classix@npm:2.2.28"
+  checksum: 10c0/5c1077d040c9e70da2b14d3648043e55bdcf1a99c1cfbbc99930971013917be860ebc86581806aa3ec0c6369697efa5323ae95c94397eb9bfc269adc7aa92ecf
   languageName: node
   linkType: hard
 
