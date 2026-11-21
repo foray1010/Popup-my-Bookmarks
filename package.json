@@ -67,7 +67,7 @@
     "jsdom": "31.0.1",
     "jsonc-parser": "3.3.1",
     "lint-staged": "17.6.0",
-    "postcss": "8.5.32",
+    "postcss": "8.5.33",
     "postcss-loader": "8.2.1",
     "postcss-normalize": "13.0.1",
     "prettier": "3.10.1",
