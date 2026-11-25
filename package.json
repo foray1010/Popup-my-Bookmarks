@@ -59,7 +59,7 @@
     "@types/zip-webpack-plugin": "3.0.6",
     "browserslist": "4.29.5",
     "css-loader": "7.1.5",
-    "csstype": "3.2.3",
+    "csstype": "3.2.4",
     "duplicate-package-checker-webpack-plugin": "3.0.0",
     "eslint": "9.39.5",
     "husky": "9.1.7",

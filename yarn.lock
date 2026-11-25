@@ -3145,7 +3145,7 @@ __metadata:
     constate: "npm:4.0.0"
     core-js: "npm:3.51.0"
     css-loader: "npm:7.1.5"
-    csstype: "npm:3.2.3"
+    csstype: "npm:3.2.4"
     duplicate-package-checker-webpack-plugin: "npm:3.0.0"
     eslint: "npm:9.39.5"
     husky: "npm:9.1.7"
@@ -4278,7 +4278,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csstype@npm:3.2.3, csstype@npm:^3.1.0, csstype@npm:^3.2.2":
+"csstype@npm:3.2.4":
+  version: 3.2.4
+  resolution: "csstype@npm:3.2.4"
+  checksum: 10c0/29568f520e1e47b2e6e88e2cffe3b5369f08c1245c73e69595623cafb38816bd353387e0d665ce4330cfe2c9244f2a4671abe761cbd0b535bc27fab12b6b8a25
+  languageName: node
+  linkType: hard
+
+"csstype@npm:^3.1.0, csstype@npm:^3.2.2":
   version: 3.2.3
   resolution: "csstype@npm:3.2.3"
   checksum: 10c0/cd29c51e70fa822f1cecd8641a1445bed7063697469d35633b516e60fe8c1bde04b08f6c5b6022136bb669b64c63d4173af54864510fbb4ee23281801841a3ce
